@@ -176341,6 +176341,3508 @@
           "automatic_implementation_queue": false
         }
       ]
+    },
+    {
+      "schema_version": 1,
+      "batch": "2026-11-15-selection-review-closeout",
+      "date": "2026-11-18",
+      "window": {
+        "start": "2026-11-10",
+        "end": "2026-11-15"
+      },
+      "scope_kind": "bounded-review-reconciliation",
+      "source_artifact": "research-audits/nov15-review-closure/README.md",
+      "delivery_status": "review_complete_implementation_separate",
+      "selected_scope_complete": true,
+      "all_sources_exhaustive": false,
+      "review_watermark_advanced": true,
+      "review_watermark": {
+        "before": "2026-11-09",
+        "after": "2026-11-15"
+      },
+      "review_semantics": "selection-screening-with-protected-primary-review",
+      "counts": {
+        "raw_unique_identities": 9178,
+        "outside_window_date_only": 7922,
+        "registered_unique_identities": 1256,
+        "primary_decisions": 72,
+        "p2_selection_only_closed": 1138,
+        "inherited_terminal": 46,
+        "high_cost_review_done": 24,
+        "accepted_low_cost_not_implemented": 14,
+        "protected_pending": 0,
+        "implementations": 0,
+        "gpu_runs": 0
+      },
+      "candidates": [
+        {
+          "id": "2610.00890",
+          "revision": 2,
+          "title": "Cross-Benchmark Transfer from RL on Agentic Coding Tasks",
+          "published": "2026-10-01T01:12:24Z",
+          "updated": "2026-11-13T05:52:24Z",
+          "metadata_sha256": "b677c5adf35cab538ad6ac9cf911a40ab19d642a4f86afb30b9226c4ce27e23a",
+          "source_url": "https://arxiv.org/html/2610.00890v2",
+          "source_sha256": "ddc419ff2da234034683371dc74076691d68005d40647b4e2be3ef760d07f2d6",
+          "track": "agent",
+          "priority": "P1",
+          "review_scope": "bounded-original-method-production-and-resource-sections",
+          "fulltext_review_completed": true,
+          "method_review_completed": true,
+          "review_done": true,
+          "production_gate_passed": false,
+          "production_evidence_boundary": "Real use or production-origin data is separated from randomized online A/B; no industrial A/B acceptance inferred.",
+          "implementation_status": "not_implemented_by_review",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "locations": [
+            "§3 Training Data",
+            "§4.1 Reward",
+            "§4.2 Policy optimization",
+            "§4.3 Rollouts and infrastructure",
+            "§5 Evaluation Protocol",
+            "§8 limitations"
+          ],
+          "mechanism": "目标检查部分分数乘既有行为pass-to-pass硬门，GSPO序列比率和组标准化优势，rank32 LoRA且工具输出不计入似然。",
+          "evidence": "v2固定原文：1T总参数/32B active Kimi K2.7 Code，在1700专家任务上一轮RL；64张H200共置rollout/update，108 rollout steps、216优化更新及多小时外部任务。",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查DONE）：v2确认64×H200与1T模型配置，远超单卡A100/A30；仅完成修订方法/资源审查，不改变历史状态或启动训练。",
+          "cost_assessment": {
+            "basis": "§4.3明列64 NVIDIA H200、262144上下文和65536生成token/turn；§4记录1700任务与108 rollout steps。",
+            "scale": "Kimi K2.7 Code 1T总参数、32B active；64H200，G=8，rank32 LoRA，1700专家Agent任务。",
+            "available_resource": "单卡A100或A30，或本地Mac",
+            "cost_type": "published_training_configuration_not_local_measurement",
+            "source_url": "https://arxiv.org/html/2610.00890v2"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": true,
+          "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§3 Training Data",
+              "§4.1 Reward",
+              "§4.2 Policy optimization",
+              "§4.3 Rollouts and infrastructure",
+              "§5 Evaluation Protocol",
+              "§8 limitations"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2610.00890v2"
+            }
+          ]
+        },
+        {
+          "id": "2610.03713",
+          "revision": 2,
+          "title": "What Should World Models Forget? Stratified Retention for Continual Adaptation",
+          "published": "2026-10-02T17:58:14Z",
+          "updated": "2026-11-12T21:35:23Z",
+          "metadata_sha256": "0735c58a852f4e9aaedb7d74f38f81a81c722d61faaa637b19c5d403e69d7673",
+          "source_url": "https://arxiv.org/html/2610.03713v2",
+          "source_sha256": "d1bb92c4fe02525b0d32d883217af944049fa01a9c0e61184b0fadc6777170ab",
+          "track": "agent",
+          "priority": "P1",
+          "review_scope": "bounded-original-method-production-and-resource-sections",
+          "fulltext_review_completed": true,
+          "method_review_completed": true,
+          "review_done": true,
+          "production_gate_passed": false,
+          "production_evidence_boundary": "Real use or production-origin data is separated from randomized online A/B; no industrial A/B acceptance inferred.",
+          "implementation_status": "not_implemented_by_review",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "locations": [
+            "§3 Stratification by invariance timescale",
+            "§5 Differential retention",
+            "§6 Limitations and open questions"
+          ],
+          "mechanism": "依环境知识不变时标分层；每次适配重测不变量探针，把不变量保持与变化事实修订延迟分别报告，拒绝单一遗忘分数。",
+          "evidence": "v2的§6明确只贡献framing和评测协议而非实验结果；部署时估计时标、几何/因果探针仍开放，图示不当模型实测。",
+          "decision": "accepted",
+          "resolution": "bounded_conceptual_evaluation_protocol_accepted",
+          "reason": "接受差分保持的有界评测协议审查；原文没有可照跑的完整实证，不编造高成本实验，也不把其方案当已验证能力。",
+          "status": "deferred",
+          "review_decision": "accepted",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§3 Stratification by invariance timescale",
+              "§5 Differential retention",
+              "§6 Limitations and open questions"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2610.03713v2"
+            }
+          ]
+        },
+        {
+          "id": "2610.13672",
+          "revision": 2,
+          "title": "Inject a Turn, Not a Token: Learning Where to Redirect LLM Reasoning for Self-Correction",
+          "published": "2026-10-09T14:37:51Z",
+          "updated": "2026-11-13T06:05:58Z",
+          "metadata_sha256": "dcf85e2fe1172dd34f7655958ccd0639f8344dd65bd6253908f6fd57351c0c2e",
+          "source_url": "https://arxiv.org/html/2610.13672v2",
+          "source_sha256": "151d42ba56888e86bf0b6941aed6681bd81fcc06495eee4b84d91172dea1551f",
+          "track": "agent",
+          "priority": "P1",
+          "review_scope": "bounded-original-method-production-and-resource-sections",
+          "fulltext_review_completed": true,
+          "method_review_completed": true,
+          "review_done": true,
+          "production_gate_passed": false,
+          "production_evidence_boundary": "Real use or production-origin data is separated from randomized online A/B; no industrial A/B acceptance inferred.",
+          "implementation_status": "not_implemented_by_review",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "locations": [
+            "§5 Method",
+            "§6.1 Experimental Setup",
+            "Appendix implementation details and training configuration",
+            "Appendices M/N robustness and reasoners"
+          ],
+          "mechanism": "冻结0.6B encoder上的约130K位置头选择失败rollout截断点，独立约66K gate；保留prefix，将固定修正指令作为新user turn再生成suffix。",
+          "evidence": "v2使用DAPO17K训练位置策略30步，主表四种4B至32B reasoner×六数学基准，与32-rollout预算对照；配置明确B200，补充三seed/跨reasoner。",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查DONE）：完整修订实验含4B—32B长推理、多模型六基准与32-rollout对照；保留既有v1有界组件与测量，不升级或降级其实现证据。",
+          "cost_assessment": {
+            "basis": "§6固定四reasoner/六benchmarks、Base@32；Appendix实现配置固定B200、冻结0.6B encoder和位置/门头；Appendix M增加三seed。",
+            "scale": "DAPO17K、30步位置策略训练；Qwen3-4B/8B、DeepSeek-R1-Qwen3-8B、QwQ-32B，六数学基准与多rollout修正。",
+            "available_resource": "单卡A100或A30，或本地Mac",
+            "cost_type": "published_training_and_evaluation_configuration_not_local_measurement",
+            "source_url": "https://arxiv.org/html/2610.13672v2"
+          },
+          "does_not_change_existing_implementation": true,
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": true,
+          "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§5 Method",
+              "§6.1 Experimental Setup",
+              "Appendix implementation details and training configuration",
+              "Appendices M/N robustness and reasoners"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2610.13672v2"
+            }
+          ]
+        },
+        {
+          "id": "2610.20579",
+          "revision": 2,
+          "title": "PingpongDuo: Agile Humanoid Table Tennis Doubles with Safe Team Coordination",
+          "published": "2026-10-14T17:56:27Z",
+          "updated": "2026-11-13T05:01:50Z",
+          "metadata_sha256": "4eada63d475e80b851b780899b80c0b94bfafcf5938aeeda1c520e0aa23de8e7",
+          "source_url": "https://arxiv.org/html/2610.20579v2",
+          "source_sha256": "39c9cb9e56e62b6ab3accb56f9c0a4db8ecf8cbc03d7de7399af003b6648a427",
+          "track": "agent",
+          "priority": "P2",
+          "review_scope": "bounded-original-method-production-and-resource-sections",
+          "fulltext_review_completed": true,
+          "method_review_completed": true,
+          "review_done": true,
+          "production_gate_passed": false,
+          "production_evidence_boundary": "Real use or production-origin data is separated from randomized online A/B; no industrial A/B acceptance inferred.",
+          "implementation_status": "not_implemented_by_review",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "locations": [
+            "§III System Overview",
+            "§IV Safety-Aware Team Coordination",
+            "§V skills and arm refinement",
+            "§VI-A Experimental Setup"
+          ],
+          "mechanism": "双人形乒乓球的风险过滤联合站位、交替脚步/击球skill和球拍臂残差；非语言或世界模型Agent。",
+          "evidence": "v2真机为两台29DoF Unitree G1加外部MoCap，Isaac Lab物理200Hz/控制50Hz；五seed各100球与实机交替击球。",
+          "decision": "out_of_scope",
+          "resolution": "specialist_robot_control_without_general_llm_agent_method",
+          "reason": "必要原文复核确认是专项运动机器人安全控制，不属于本窗口LLM/通用Agent或基础世界模型方法；不因已有账本known而跳过此次修订核对。",
+          "status": "rejected",
+          "review_decision": "out_of_scope",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§III System Overview",
+              "§IV Safety-Aware Team Coordination",
+              "§V skills and arm refinement",
+              "§VI-A Experimental Setup"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2610.20579v2"
+            }
+          ]
+        },
+        {
+          "id": "2610.19095",
+          "revision": 3,
+          "title": "Similar Models, Broken Odds: Where Luce's Axiom Fails in Chatbot Arena",
+          "published": "2026-10-13T19:33:25Z",
+          "updated": "2026-11-13T04:17:37Z",
+          "metadata_sha256": "cf25494954f46130ef486b4086b0606eccc412704571cc79c337772e300ab2db",
+          "source_url": "https://arxiv.org/html/2610.19095v3",
+          "source_sha256": "85344bbc7e80ada21d486f1af82e61863ad4ef58a728009bafe08e7e9af41ef8",
+          "track": "agent",
+          "priority": "P1",
+          "review_scope": "bounded-original-method-production-and-resource-sections",
+          "fulltext_review_completed": true,
+          "method_review_completed": true,
+          "review_done": true,
+          "production_gate_passed": false,
+          "production_evidence_boundary": "Real use or production-origin data is separated from randomized online A/B; no industrial A/B acceptance inferred.",
+          "implementation_status": "not_implemented_by_review",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "locations": [
+            "§3 Setup: Decisiveness and the Product Rule",
+            "§4 Data and Similarity Measures",
+            "§6 Similarity-Aware Corrections and Their Limits",
+            "§8 Discussion and Limitations",
+            "Software and Data"
+          ],
+          "mechanism": "把模型谱系或回答相似度与pairwise spread关联，以4—6额外参数修正Bradley–Terry对近亲模型的赔率和tie概率，而非简单改排行榜名次。",
+          "evidence": "v3核对180万Arena票及后续发布集，随机票/留出模型对/时间切分分离；主要增益来自tie建模，冻结迁到新release的head-to-head改进未被检验确认。",
+          "decision": "accepted",
+          "resolution": "bounded_pairwise_evaluation_correction_accepted",
+          "reason": "接受低成本统计校准/评测算术审查；保留修订版的负结果和迁移限制，不把更好拟合既有票写成新模型能力提升，本轮不执行拟合。",
+          "status": "deferred",
+          "review_decision": "accepted",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§3 Setup: Decisiveness and the Product Rule",
+              "§4 Data and Similarity Measures",
+              "§6 Similarity-Aware Corrections and Their Limits",
+              "§8 Discussion and Limitations",
+              "Software and Data"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2610.19095v3"
+            }
+          ]
+        },
+        {
+          "id": "2610.32955",
+          "revision": 4,
+          "title": "Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox",
+          "published": "2026-10-23T17:49:43Z",
+          "updated": "2026-11-12T07:31:11Z",
+          "metadata_sha256": "e28b445321e892350d1634506a49997ca22b0305455976d51eb3d169234a9070",
+          "source_url": "https://arxiv.org/html/2610.32955v4",
+          "source_sha256": "b853f2c0743cbcb06593ea3261dc3c8b862f16f6b64e96bc6af5e2ae7443a868",
+          "track": "agent",
+          "priority": "P1",
+          "review_scope": "bounded-original-method-production-and-resource-sections",
+          "fulltext_review_completed": true,
+          "method_review_completed": true,
+          "review_done": true,
+          "production_gate_passed": false,
+          "production_evidence_boundary": "Real use or production-origin data is separated from randomized online A/B; no industrial A/B acceptance inferred.",
+          "implementation_status": "not_implemented_by_review",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "locations": [
+            "§3 The System",
+            "§4 Measurement Protocol",
+            "§5 Experimental Setup",
+            "§9 Limitations",
+            "§10 corrections after v2.1"
+          ],
+          "mechanism": "冻结输入快照、按邮件线程分组切分、秘密脱敏和人审标签，将每字段准确率与动作级误判成本分开。",
+          "evidence": "个人Foyer确实日常使用；231封邮件/207线程为小样本比较，v4修正了以截断邮件计算的阈值结果。§9明确邮件不能公开；不是商业随机A/B。",
+          "decision": "accepted",
+          "resolution": "bounded_measurement_protocol_accepted",
+          "reason": "接受可独立检查的分组切分/动作成本评测协议；原始私有邮箱和单用户结果不当公共能力基准，本轮不实现。",
+          "status": "deferred",
+          "review_decision": "accepted",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§3 The System",
+              "§4 Measurement Protocol",
+              "§5 Experimental Setup",
+              "§9 Limitations",
+              "§10 corrections after v2.1"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2610.32955v4"
+            }
+          ]
+        },
+        {
+          "id": "2611.15700",
+          "revision": 1,
+          "title": "AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support",
+          "published": "2026-11-11T16:38:54Z",
+          "updated": "2026-11-11T16:38:54Z",
+          "metadata_sha256": "be3a767a4c8c010bed77b24815bc450ea51d4eb90ffac8ea2f7cf5241e6e8019",
+          "source_url": "https://arxiv.org/html/2611.15700v1",
+          "source_sha256": "6bccd63ae328991fc0fab63f8aee8a72df4ef37c44b1098d6f22c21529c58bf3",
+          "track": "agent",
+          "priority": "P1",
+          "review_scope": "bounded-original-method-production-and-resource-sections",
+          "fulltext_review_completed": true,
+          "method_review_completed": true,
+          "review_done": true,
+          "production_gate_passed": false,
+          "production_evidence_boundary": "Real use or production-origin data is separated from randomized online A/B; no industrial A/B acceptance inferred.",
+          "implementation_status": "not_implemented_by_review",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "locations": [
+            "§III-B Log Analysis and Failure Attribution",
+            "§III-B5 Reproducibility Controls",
+            "§IV-C Expert Reference and Data Split",
+            "§V-A–V-C",
+            "§VI Discussion and Limitations"
+          ],
+          "mechanism": "双层材料充分性检查区分未检索到与语料未包含，确定性规则树归因，独立Agent审计及human ship/revert/decline门。",
+          "evidence": "2174个真实支持turn，150个人工参考按session分为98/52；16个harness arms中3接受，留出一致率35/52到40/52。系同输入诊断对照，不是线上随机用户A/B。",
+          "decision": "accepted",
+          "resolution": "bounded_agent_diagnostic_protocol_accepted",
+          "reason": "原文确认真实支持日志及可独立表达的诊断/缓存协议，接受协议层审查；不把日志归因提升等同终端回答能力提升，本轮未实现。",
+          "status": "deferred",
+          "review_decision": "accepted",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§III-B Log Analysis and Failure Attribution",
+              "§III-B5 Reproducibility Controls",
+              "§IV-C Expert Reference and Data Split",
+              "§V-A–V-C",
+              "§VI Discussion and Limitations"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.15700v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.16293",
+          "revision": 1,
+          "title": "Rasoi: Visual Diffs for Evaluating Structural Changes Made by Coding Agents",
+          "published": "2026-11-12T04:47:39Z",
+          "updated": "2026-11-12T04:47:39Z",
+          "metadata_sha256": "1e345096a31d4f29c7f8f08d465cb8269b0c8fd5d46dd925444abe5faece0646",
+          "source_url": "https://arxiv.org/html/2611.16293v1",
+          "source_sha256": "ccb3c2891d99b4046e93d7e4cf6b1b3dfb07332d0f5e0c05967658aaeea25b0f",
+          "track": "agent",
+          "priority": "P2",
+          "review_scope": "bounded-original-method-production-and-resource-sections",
+          "fulltext_review_completed": true,
+          "method_review_completed": true,
+          "review_done": true,
+          "production_gate_passed": false,
+          "production_evidence_boundary": "Real use or production-origin data is separated from randomized online A/B; no industrial A/B acceptance inferred.",
+          "implementation_status": "not_implemented_by_review",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "locations": [
+            "§III Rasoi: Design Probe",
+            "§IV Longitudinal Probe Deployment",
+            "§V Findings",
+            "§VII Limitations and Future Work"
+          ],
+          "mechanism": "对代码库快照建立多层架构差分视图，供人类开发者在修改后定位结构漂移。",
+          "evidence": "12位开发者各在自己的代码库使用7天，证据是访谈、检查点和可视化使用；尚计划录用后开源，不是新Agent训练或执行基准。",
+          "decision": "rejected",
+          "resolution": "developer_visualization_user_study_not_selected",
+          "reason": "确认是真实用户研究而非虚构部署；本窗口模型/Agent算法重点不纳入以人类理解和设计启示为终点的可视化设计probe。",
+          "status": "rejected",
+          "review_decision": "rejected",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§III Rasoi: Design Probe",
+              "§IV Longitudinal Probe Deployment",
+              "§V Findings",
+              "§VII Limitations and Future Work"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.16293v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.17220",
+          "revision": 1,
+          "title": "Scalable Conversational Assessment: Chat-Based Exams with a Two-Agent LLM Pipeline",
+          "published": "2026-11-12T18:16:37Z",
+          "updated": "2026-11-12T18:16:37Z",
+          "metadata_sha256": "1ea7c2dde9e5dc097826ae23490deec92a920d691b1ad2c2c22b20559fef7b92",
+          "source_url": "https://arxiv.org/html/2611.17220v1",
+          "source_sha256": "d21dc0df4fd3ed2d0253333342095489b366e054e7edc0cb9bf89a64cc43964c",
+          "track": "agent",
+          "priority": "P2",
+          "review_scope": "bounded-original-method-production-and-resource-sections",
+          "fulltext_review_completed": true,
+          "method_review_completed": true,
+          "review_done": true,
+          "production_gate_passed": false,
+          "production_evidence_boundary": "Real use or production-origin data is separated from randomized online A/B; no industrial A/B acceptance inferred.",
+          "implementation_status": "not_implemented_by_review",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "locations": [
+            "§3 System Design",
+            "§4 Validating Before Deployment",
+            "§5 Deployment",
+            "§6 Discussion and Lessons Learned"
+          ],
+          "mechanism": "隐藏rubric评价Agent仅向采访Agent给下一问题指导，分离学生接触面与评分材料；用虚构主题persona验证防知识泄漏。",
+          "evidence": "真实小型课程N=11、41次尝试；文中称形成性、自愿而非高风险评分验证。19次有token遥测的attempt中位20次调用约80k token。",
+          "decision": "rejected",
+          "resolution": "single_course_application_report_not_selected",
+          "reason": "已核对真实课程部署，不把intro措辞当生产A/B；本文为具体课程应用及双Agent工程经验，未作为本窗口通用算法/公开能力基准收录。",
+          "status": "rejected",
+          "review_decision": "rejected",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§3 System Design",
+              "§4 Validating Before Deployment",
+              "§5 Deployment",
+              "§6 Discussion and Lessons Learned"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.17220v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.17304",
+          "revision": 1,
+          "title": "Where LLM Agents Get Stuck Debugging Databases: Access More Than Reasoning",
+          "published": "2026-11-12T18:56:22Z",
+          "updated": "2026-11-12T18:56:22Z",
+          "metadata_sha256": "035a9f08b24075865127d9861a6767e386804b749d0a705c0a5a1dc839220627",
+          "source_url": "https://arxiv.org/html/2611.17304v1",
+          "source_sha256": "af1bb7de86019a7a45f7a34a52c920dab9b9cd563600e7a0fb97b639cf82f0fd",
+          "track": "agent",
+          "priority": "P2",
+          "review_scope": "bounded-original-method-production-and-resource-sections",
+          "fulltext_review_completed": true,
+          "method_review_completed": true,
+          "review_done": true,
+          "production_gate_passed": false,
+          "production_evidence_boundary": "Real use or production-origin data is separated from randomized online A/B; no industrial A/B acceptance inferred.",
+          "implementation_status": "not_implemented_by_review",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "locations": [
+            "§3 Method",
+            "§4 Database Incidents and the Agent’s False Starts",
+            "§7 Limitations",
+            "§9 Future work",
+            "Data Availability"
+          ],
+          "mechanism": "以会话、commit和部署记录交叉验证，对故障做reasoning×access事后分类；只提出未来只读取证接口和锁记录器。",
+          "evidence": "单公司10天8个incident、27个session，累计约410小时是会话首末时间之差而非连续模型运行；无受控comparison，生产原始资料不能公开。",
+          "decision": "rejected",
+          "resolution": "observational_field_report_without_new_executable_method",
+          "reason": "生产线索真实，但原文是回顾性单点田野观察；因果比较、forensics layer和replay harness均为未来工作，不假造已可复现新算法。",
+          "status": "rejected",
+          "review_decision": "rejected",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§3 Method",
+              "§4 Database Incidents and the Agent’s False Starts",
+              "§7 Limitations",
+              "§9 Future work",
+              "Data Availability"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.17304v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.17381",
+          "revision": 1,
+          "title": "ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects",
+          "published": "2026-11-11T11:36:45Z",
+          "updated": "2026-11-11T11:36:45Z",
+          "metadata_sha256": "ab5f1a94c499c32e4ddb09f331b3c9833a574b6c39b1620c37cc0795083175a4",
+          "source_url": "https://arxiv.org/pdf/2611.17381v1",
+          "source_sha256": "7bce2d6c62085f8024f5af9f548789ab82c3ee5982c84df19ddde586e9adedfa",
+          "track": "agent",
+          "priority": "P1",
+          "review_scope": "bounded-original-method-production-and-resource-sections",
+          "fulltext_review_completed": true,
+          "method_review_completed": true,
+          "review_done": true,
+          "production_gate_passed": false,
+          "production_evidence_boundary": "Real use or production-origin data is separated from randomized online A/B; no industrial A/B acceptance inferred.",
+          "implementation_status": "not_implemented_by_review",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "locations": [
+            "PDF pp.3–10 system/rule contracts",
+            "PDF pp.11–12 evaluation setup and Table VII",
+            "PDF p.13 delegated fixes",
+            "PDF p.17 Table XIII",
+            "PDF p.18 threats to validity"
+          ],
+          "mechanism": "50条规则拆为28模板/16参数抽取/6模型委托，check-after-fix、幂等与回归撤销，评分与部署估计分离。",
+          "evidence": "499仓库审计和684次Render部署数据；23样本全链外部API用脚本替身，十次live-agent委托与一次82秒真实Express上线单列，不是生产随机A/B。",
+          "decision": "accepted",
+          "resolution": "bounded_mcp_contract_protocol_accepted",
+          "reason": "可低成本表达审计/修复/验证接口，接受该有界协议；未复做约35小时684次外部云部署，也不把mock外部服务写成真实上线。",
+          "retrieval_attempts": [
+            {
+              "url": "https://arxiv.org/html/2611.17381v1",
+              "result": "unavailable",
+              "error": "HTTP 404"
+            },
+            {
+              "url": "https://arxiv.org/pdf/2611.17381v1",
+              "result": "retrieved",
+              "verification": "19-page official PDF; pages1 and12 visually inspected"
+            }
+          ],
+          "status": "deferred",
+          "review_decision": "accepted",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "PDF pp.3–10 system/rule contracts",
+              "PDF pp.11–12 evaluation setup and Table VII",
+              "PDF p.13 delegated fixes",
+              "PDF p.17 Table XIII",
+              "PDF p.18 threats to validity"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/pdf/2611.17381v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.17696",
+          "revision": 1,
+          "title": "Co-Sight Harness: Externalized Control Assets and Deterministic Enforcement for Long-Horizon Business Agents",
+          "published": "2026-11-13T03:21:33Z",
+          "updated": "2026-11-13T03:21:33Z",
+          "metadata_sha256": "3e9a9a471c60cb78fa208991f7067a23f8c2accc4e4a120a2d41c0614d4bbf4f",
+          "source_url": "https://arxiv.org/html/2611.17696v1",
+          "source_sha256": "6c316fcfc91d61c58d9512fc5bcebf600827e5bbe9ce7c5bdcc04c630142190c",
+          "track": "agent",
+          "priority": "P1",
+          "review_scope": "bounded-original-method-production-and-resource-sections",
+          "fulltext_review_completed": true,
+          "method_review_completed": true,
+          "review_done": true,
+          "production_gate_passed": false,
+          "production_evidence_boundary": "Real use or production-origin data is separated from randomized online A/B; no industrial A/B acceptance inferred.",
+          "implementation_status": "not_implemented_by_review",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "locations": [
+            "§3 Problem Setting",
+            "§4 deterministic enforcement",
+            "§5.1 measurement conditions",
+            "§5.2 main results",
+            "Appendix G Data Card",
+            "Reproducibility Statement"
+          ],
+          "mechanism": "冻结backbone，将控制资产版本化；状态机/DoD门确定性执行，生成与只读审计隔离，回归门和人审后才更新资产。",
+          "evidence": "三个200+步workflow、120个端到端case；Domain A耗时440到159分钟；通过外部API调用backbone/embedding/reranker，需部署侧金标与规则；不是量化随机生产A/B。",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查DONE）：120个长程端到端case、重复测量和多领域门控超过单卡/本地合理预算；不为证明成本试跑。",
+          "cost_assessment": {
+            "basis": "§5.1、§5.2与Appendix G：120 end-to-end cases，每条200+步骤；Domain A平均159分钟，原基线440分钟，外部API服务与分离能力/回归集。",
+            "scale": "三领域，120条端到端case及逐slice重复；200+活动/任务，159分钟/需求的论文测量。",
+            "available_resource": "单卡A100或A30，或本地Mac",
+            "cost_type": "published_configuration_and_runtime_not_local_measurement",
+            "source_url": "https://arxiv.org/html/2611.17696v1"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": true,
+          "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§3 Problem Setting",
+              "§4 deterministic enforcement",
+              "§5.1 measurement conditions",
+              "§5.2 main results",
+              "Appendix G Data Card",
+              "Reproducibility Statement"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.17696v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.17814",
+          "revision": 1,
+          "title": "G-CAST: Governed Continual Self-Training for E-Commerce Agents under Evolving Demands",
+          "published": "2026-11-13T06:53:56Z",
+          "updated": "2026-11-13T06:53:56Z",
+          "metadata_sha256": "bede61fbba278681399cb6ec1443d8192cb085c7b5d6ae937d5a31e7fd4949ec",
+          "source_url": "https://arxiv.org/html/2611.17814v1",
+          "source_sha256": "a64cde9e170da2452ec8f792a08337081a5e2e8ced4e00cb63abf302d439b6e6",
+          "track": "agent",
+          "priority": "P1",
+          "review_scope": "bounded-original-method-production-and-resource-sections",
+          "fulltext_review_completed": true,
+          "method_review_completed": true,
+          "review_done": true,
+          "production_gate_passed": false,
+          "production_evidence_boundary": "Real use or production-origin data is separated from randomized online A/B; no industrial A/B acceptance inferred.",
+          "implementation_status": "not_implemented_by_review",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "locations": [
+            "§3 Application",
+            "§4 Method",
+            "§5 Experimental Setup",
+            "§5 Tables2–4",
+            "§6 Operational Impact and Limitations"
+          ],
+          "mechanism": "8轨迹奖励模式路由SFT/RL/回归，池内熵排序；合同驱动奖励更新先过target/regression/rescore/replay，再累计评估接纳checkpoint。",
+          "evidence": "1688元采真实上线，四时期各2000-query pool×8 rollouts；Qwen3-4B，分离100-query eval/时期。主指标是冻结累积离线reward，正文未给随机生产流量A/B。",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查DONE）：真实生产轨迹、多轮4B训练及多臂累计回归需远超单卡轻量预算，且依赖当前harness/reward合同；不启动试训。",
+          "cost_assessment": {
+            "basis": "§5 Experimental Setup：四个冻结2000-query池，每query八条rollout，四次时序适配；Tables2–4另有baseline、路由与奖励消融。",
+            "scale": "Qwen3-4B-Thinking-2507；每时期16000条轨迹，四时期、SFT/RL和多臂对照，400-query累计评估。",
+            "available_resource": "单卡A100或A30，或本地Mac",
+            "cost_type": "published_training_and_rollout_configuration_not_local_measurement",
+            "source_url": "https://arxiv.org/html/2611.17814v1"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": true,
+          "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§3 Application",
+              "§4 Method",
+              "§5 Experimental Setup",
+              "§5 Tables2–4",
+              "§6 Operational Impact and Limitations"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.17814v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.18050",
+          "revision": 1,
+          "title": "FEND: Far-End Detection in Outbound Voice AI Calls",
+          "published": "2026-11-13T11:25:42Z",
+          "updated": "2026-11-13T11:25:42Z",
+          "metadata_sha256": "af5df797077dc7cd01b3b9f5b84176a6d9cbafe1f21ae81e2560dee249c1148d",
+          "source_url": "https://arxiv.org/html/2611.18050v1",
+          "source_sha256": "31c9a7974cf86f93881acf38c7e6e973fda47fc21fd9bbbb3a3db7f083eafab8",
+          "track": "agent",
+          "priority": "P1",
+          "review_scope": "bounded-original-method-production-and-resource-sections",
+          "fulltext_review_completed": true,
+          "method_review_completed": true,
+          "review_done": true,
+          "production_gate_passed": false,
+          "production_evidence_boundary": "Real use or production-origin data is separated from randomized online A/B; no industrial A/B acceptance inferred.",
+          "implementation_status": "not_implemented_by_review",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "locations": [
+            "§3 Methodology",
+            "§4 Experiments",
+            "§5 Results",
+            "Limitations",
+            "Appendices G/H/K"
+          ],
+          "mechanism": "beep、短语、LLM voicemail/IVR检测并行，期限内按证据优先级汇合；词间时间七特征逻辑回归受真人误报预算约束。",
+          "evidence": "400段公开AMD剪辑按119/281冻结切分；1000条真实呼出半训练半评估但客户音频不公开，商业ASR不披露。GPT-4o探测与0.952 AUC不等于可公开复做。",
+          "decision": "accepted",
+          "resolution": "bounded_streaming_detector_protocol_accepted",
+          "reason": "确认生产调用与离线检测评估，接受可独立描述的期限/优先级和HFPR协议；不把单部署F1当随机A/B，不声称重现私有商业ASR结果。",
+          "status": "deferred",
+          "review_decision": "accepted",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§3 Methodology",
+              "§4 Experiments",
+              "§5 Results",
+              "Limitations",
+              "Appendices G/H/K"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.18050v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.18284",
+          "revision": 1,
+          "title": "Clean Tickets, Wrong Orders: Catching Silent Errors with a Language Model in Your Browser Tab",
+          "published": "2026-11-13T15:13:47Z",
+          "updated": "2026-11-13T15:13:47Z",
+          "metadata_sha256": "deddc6dd583ff00a09b321f9cf2d13440f778220e5288c56c1dfed488967f4da",
+          "source_url": "https://arxiv.org/html/2611.18284v1",
+          "source_sha256": "e3edd989be9729fc6d9beb4ea8cdbb411fd09f9bd2022ce7bab6d79fa143720b",
+          "track": "agent",
+          "priority": "P2",
+          "review_scope": "bounded-original-method-production-and-resource-sections",
+          "fulltext_review_completed": true,
+          "method_review_completed": true,
+          "review_done": true,
+          "production_gate_passed": false,
+          "production_evidence_boundary": "Real use or production-origin data is separated from randomized online A/B; no industrial A/B acceptance inferred.",
+          "implementation_status": "not_implemented_by_review",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "locations": [
+            "§3 A kitchen in a browser tab",
+            "§5 Does the tab keep its promises?",
+            "§7 Demonstration plan",
+            "§8 Ethics and data use"
+          ],
+          "mechanism": "将已有PIZZA微调0.8B模型合并量化为834MB GGUF，浏览器WASM运行，并以matcher逐单比较合法结构与真实订单语义。",
+          "evidence": "1357条PIZZA测试输入验证浏览器/服务端99%输出一致，exact match0.882；研究demo不用于真实下单、没有visitor telemetry，训练来自companion study。",
+          "decision": "rejected",
+          "resolution": "companion_browser_demo_not_selected_as_independent_method",
+          "reason": "部署一词确指可公开访问的浏览器demo，但本篇是已有模型/benchmark matcher的端侧演示与性能检查，不计本窗口新增独立训练算法或真实交易部署。",
+          "status": "rejected",
+          "review_decision": "rejected",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§3 A kitchen in a browser tab",
+              "§5 Does the tab keep its promises?",
+              "§7 Demonstration plan",
+              "§8 Ethics and data use"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.18284v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.24161",
+          "revision": 5,
+          "metadata_sha256": "e53c29f90aca948391f8dcd5cf977cf2a2488cb7b06c1f74c98ca29d05c7676b",
+          "title": "TorchTPU - A Hybrid Eager/Compiled Architecture for Native PyTorch Execution on TPU",
+          "track": "foundation-model",
+          "priority": "P0",
+          "published": "2026-10-16T19:38:17Z",
+          "updated": "2026-11-12T21:38:37Z",
+          "source_url": "https://arxiv.org/html/2610.24161v5",
+          "source_sha256": "2142a87f5265785a545ee1fe313ad02e46e65c0b70197e30db7e275005fb2959",
+          "verified_priority_organizations": [
+            "Google",
+            "Meta"
+          ],
+          "affiliation_evidence": "Fixed-v5 author block identifies Google; abstract and Introduction explicitly describe collaboration with Meta's PyTorch team. This is collaboration evidence, not a claim that every listed author has the same institution.",
+          "locations": [
+            "author block",
+            "Introduction",
+            "II-D eager/JIT and II-J bounded dynamism",
+            "III-A model coverage",
+            "III-B to III-F device and model configurations"
+          ],
+          "method_summary": "Native PrivateUse1 eager execution lowers live deferred operations to StableHLO, caches compiled graphs and preserves side effects; compiled mode uses Dynamo and bounded dynamism, with TPU-native collectives, device mesh mappings and Pallas kernels.",
+          "production_evidence": "Introduction states production use by Google Cloud customers. III-D reports serving benchmark audits, not randomized recommendation CTR A/B. TPU vendor throughput cannot be reproduced by renaming a CUDA device.",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）：定义性路径依赖TPU/PjRT/XLA硬件和完整框架实现，原实验覆盖4917个模型并包括235B MoE的64至8192个TPUv7芯片配置；单卡A100/A30不能忠实验收TPU后端。不下载模型、不安装该后端、不启动试跑。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.24161v5",
+            "basis": "III-A TableV; III-B 30B inference/training; III-C TableVI; III-D serving and III-F recommendation kernels",
+            "scale": "4917 model compatibility corpus; 30B workloads on1–4 TPUv7 chips; Qwen3 MoE235B on64-chip smoke and1024–8192-chip scaling; TPU-specific SparseCore/Pallas",
+            "available_resource": "one NVIDIA A100 or A30, or local Mac; no TPU",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "code_url": "https://github.com/google-pytorch/torch_tpu",
+          "code_status": "Fixed-v5 Introduction links this open-source backend; no installation or execution is claimed by this review.",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "full_article_read": false,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "implementation_status": "not_implemented_by_review",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "review_artifact": "research-audits/nov15-review-closure/google-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "author block",
+              "Introduction",
+              "II-D eager/JIT and II-J bounded dynamism",
+              "III-A model coverage",
+              "III-B to III-F device and model configurations"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2610.24161v5"
+            }
+          ]
+        },
+        {
+          "id": "2611.16028",
+          "revision": 1,
+          "metadata_sha256": "04799abf1ff664274e5996fb98220a5efc76b5e6d3ebf3a54262da9261c0668e",
+          "title": "Scaling public input on AI policy with pluralistic agents",
+          "track": "agent",
+          "priority": "P0",
+          "published": "2026-11-11T21:35:06Z",
+          "updated": "2026-11-11T21:35:06Z",
+          "source_url": "https://arxiv.org/html/2611.16028v1",
+          "source_sha256": "06350e47b49bf3a935b51f6d7a6cdfb54175f0c20703339399b2ad8c8446b941",
+          "verified_priority_organizations": [
+            "Google DeepMind"
+          ],
+          "affiliation_evidence": "Fixed-v1 byline: Jacy Reese Anthis has University of Chicago and Google DeepMind; Ken Burke, David Madras, Crystal Qian, Meredith Ringel Morris, Logan Cross, Caroline Pantofaru and Utsav Prabhu are Google DeepMind.",
+          "locations": [
+            "author block",
+            "3.1–3.2 interview and policy-writer protocol",
+            "4.1 five-model influence experiment",
+            "5.1 human-participant protocol",
+            "AppendicesB,C,F prompts and variants"
+          ],
+          "method_summary": "Interview a represented person/persona, then rotate representative agents through a discussion. A separate PolicyWriter revises a common policy after each round. Budget allocation creates a zero-sum task where prompt verbosity, cooperation and speaking order can change influence; this is not a new model-training optimizer.",
+          "production_evidence": "The deployment wording motivates future deliberation use and cites other systems. The paper's evidence is simulated deliberation plus a preregistered participant experiment, not a production recommendation A/B or a claim of deployed policy governance.",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）：完整研究含1000次开放式讨论、5947次有效多模型预算讨论和746位人类参与者，依赖多家闭源LLM、Prolific招募和伦理审批。单卡或Mac不能以廉价固定persona脚本替代这些核心证据；本轮不发API、不招募参与者、不实施完整实验。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.16028v1",
+            "basis": "3.2 1000deliberations;4.1 six random factors/five providers/6000 launched and5947 retained;5.1 human study and code/data release statement",
+            "scale": "Five heterogeneous LLM representative models plus Gemini3.6Flash PolicyWriter;1000open-ended+5947budget deliberations;746retained human participants and model-family sensitivity variants",
+            "available_resource": "one NVIDIA A100 or A30, or local Mac; no approved paid multi-provider/human-study campaign",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "code_url": "https://github.com/google-deepmind/pluralistic_agents",
+          "upstream_revision": "35d332f9ccf16f4cdf28211b563e539319ad5d44",
+          "upstream_readme_sha256": "91e25adfae5a5b25b423ac52cd09e2b6f202d9ccbb76e9e9da13bebebe7da00f",
+          "code_status": "The fixed-v1 section5.1 promises release, but the official repository at the pinned current revision now provides analysis/experiment scripts and public synthetic deliberation data under Apache2.0/CC-BY. Its README explicitly withholds individual human-participant data and requires multiple provider API keys for fresh runs. This resolves the old no-paper identity exception without claiming the human study is fully reproducible.",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "full_article_read": false,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "implementation_status": "not_implemented_by_review",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "review_artifact": "research-audits/nov15-review-closure/google-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "author block",
+              "3.1–3.2 interview and policy-writer protocol",
+              "4.1 five-model influence experiment",
+              "5.1 human-participant protocol",
+              "AppendicesB,C,F prompts and variants"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.16028v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.12805",
+          "revision": 1,
+          "title": "2D Gum-Net: Unsupervised Dense Elastic Image Registration via Symmetric Correlation and Spectral Pooling",
+          "track": "foundation-model",
+          "priority": "P0",
+          "published": "2026-11-09T18:11:45Z",
+          "updated": "2026-11-09T18:11:45Z",
+          "source_url": "https://arxiv.org/html/2611.12805v1",
+          "source_sha256": "2efd6e5bc90881cc9f30335aed25ac8cdc028af1f3f8a84313ebbed1a6c1e1a9",
+          "verified_priority_organizations": [
+            "Google"
+          ],
+          "affiliation_evidence": "Fixed-v1 byline explicitly identifies both Aarya Bhave and Anushka Ajay Bhave as Google; official directory title/Download match the manuscript.",
+          "locations": [
+            "author block",
+            "Abstract",
+            "1 Introduction and Figure1"
+          ],
+          "decision": "out_of_scope",
+          "resolution": "specialized_image_registration_outside_current_tracks",
+          "reason": "Shanghai首发为11月10日，不能继续沿用旧窗口的after_window标签。原文主贡献是指纹图像的稠密非刚性配准、DCT池化和控制点形变场，不是当前LLM/多模态基础模型、后训练、LLM-Agent或搜广推模型研究。保留其原创性和Google身份，仅按当前选题范围不收录；不伪造高成本理由。",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "full_article_read": false,
+          "implementation_status": "not_implemented_by_review",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "metadata_sha256": "fd36edae89481cc44931de2f61ea5d0a82c7cbb684528e56655dcd2f91d918f3",
+          "status": "rejected",
+          "review_decision": "out_of_scope",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/google-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "author block",
+              "Abstract",
+              "1 Introduction and Figure1"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.12805v1"
+            }
+          ]
+        },
+        {
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "full_article_read": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "source_review_scope": "Fixed-version byline, defining method and relevant evaluation/resource sections only; not a claim that every passage was read.",
+          "reviewed_on": "2026-11-18",
+          "id": "2611.13442",
+          "revision": 2,
+          "title": "ForeSpark: Joint Draft and Verification Budget Scheduling for Parallel Speculative Decoding",
+          "published": "2026-11-10T01:37:38Z",
+          "updated": "2026-11-13T01:33:53Z",
+          "metadata_sha256": "5d4b67b7f127ddc94c0e7ae76416489f005b32c39dff8dda76c18da5b8d837ef",
+          "track": "foundation-model",
+          "priority": "P1",
+          "organization": "Meta / Seoul National University",
+          "verified_priority_organizations": [
+            "Meta"
+          ],
+          "source_url": "https://arxiv.org/html/2611.13442v2",
+          "source_sha256": "4df503f7852d256545b7baf26f8a9130d0a6fb97f559c8c8c871952cdbe80a38",
+          "locations": [
+            "v2 byline and internship footnote",
+            "§5.2–5.5",
+            "§6",
+            "§7.1–7.4",
+            "Appendix A / Table 1",
+            "Appendix B–C"
+          ],
+          "reason": "Meta 署名已由原文确认。ForeSpark 在生成草稿前预测每个长度的接受曲线，用上凹包络和全局边际排序联合分配草稿长度及验证预算，随后按真实草稿再分配验证量；不是只截短已生成草稿。v1 和窗口内 v2 均核对，原始首发日不改成代码公布日。完整训练与服务矩阵超出单卡预算，成本过高，不复现（审查 DONE）。",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.13442v2#A1",
+            "basis": "Appendix A / Table 1 and Appendix B–C; official pinned README corroborates training/serving matrix, not local timing",
+            "scale": "958K regenerated turns, 8,192-token sequences, three epochs, 112K–162K steps; all drafters train on eight B200 GPUs; serving uses eight H100 or eight B200 with TP8, plus three target-model and multiple-load/arm calibrations.",
+            "available_resource": "one NVIDIA A100 or A30, or local Mac; no experiment was launched",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "upstream_release": {
+            "url": "https://github.com/facebookresearch/ForeSpark",
+            "commit": "5d457ddab73a76f28db34acc577abfbd9e7c6eee",
+            "readme_url": "https://raw.githubusercontent.com/facebookresearch/ForeSpark/5d457ddab73a76f28db34acc577abfbd9e7c6eee/README.md",
+            "readme_sha256": "de80a57ee37d6d3cf7dd6273a6b92edda6d826d13417117b07e088db6de22ac1",
+            "created_at": "2026-11-11T23:57:30Z",
+            "license": "CC BY-NC 4.0 for most code, with MIT/Apache-2.0 portions; not a blanket Apache release"
+          },
+          "production_gate_passed": false,
+          "production_evidence_note": "This is LLM serving algorithm selection, not an industrial recommendation A/B acceptance. The reported load tests are controlled benchmarks.",
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "review_artifact": "research-audits/nov15-review-closure/meta-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "v2 byline and internship footnote",
+              "§5.2–5.5",
+              "§6",
+              "§7.1–7.4",
+              "Appendix A / Table 1",
+              "Appendix B–C"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.13442v2"
+            }
+          ]
+        },
+        {
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "full_article_read": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "source_review_scope": "Fixed-version byline, defining method and relevant evaluation/resource sections only; not a claim that every passage was read.",
+          "reviewed_on": "2026-11-18",
+          "id": "2611.17501",
+          "revision": 1,
+          "title": "Advancing Quantization for R&R Models with Microscaling Formats",
+          "published": "2026-11-12T20:46:31Z",
+          "updated": "2026-11-12T20:46:31Z",
+          "metadata_sha256": "052d3beffe985f056b0b219dfa2157c4fe411f5932ba10931e939f5c92237811",
+          "track": "recommendation",
+          "priority": "P0",
+          "organization": "Meta Platforms / Advanced Micro Devices",
+          "verified_priority_organizations": [
+            "Meta"
+          ],
+          "source_url": "https://arxiv.org/html/2611.17501v1",
+          "source_sha256": "026facb252b68064ee52029f168fc91533eb30e6213d4a8d70ffa0dd07060606",
+          "locations": [
+            "byline / affiliation footnote",
+            "§2.4",
+            "§5.1–5.4",
+            "Appendix A.5–A.6"
+          ],
+          "reason": "原文确认为 Meta/AMD 合作。§5.1 的真实生产模型和输入捕获不等于线上随机试验；§5.4/A.5 的 QPS 是 MI350X 上 AOTInductor 完整模型七组配对计时，NE 与输出数值一致性也单独定义。A.6 明确部分融合仍待集成以支持广泛部署。正文未建立本方法真实生产随机 A/B，亦未建立用户认可的量化全流量部署证据，按既有工业门槛不收录；不是凭摘要缺关键词拒绝。",
+          "decision": "rejected",
+          "resolution": "industrial_online_evidence_not_established",
+          "production_gate_passed": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "byline / affiliation footnote",
+              "§2.4",
+              "§5.1–5.4",
+              "Appendix A.5–A.6"
+            ]
+          },
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.17501v1#A1.SS5",
+            "basis": "§5.1 and Appendix A.5–A.6 establish private production models/inputs and native MI350X kernel/compiler dependency; this is a separate feasibility observation, not an acceptance reason",
+            "scale": "Two undisclosed production ads models, 313/202 linear call sites, native AMD MI350X MXFP6/MXFP8 kernels and fused compiler path; available A100/A30 does not provide the studied native hardware. No experiment was attempted.",
+            "available_resource": "one NVIDIA A100 or A30, or local Mac; no experiment was launched",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "status": "rejected",
+          "review_decision": "rejected",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/meta-primary-reviews.json",
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.17501v1"
+            }
+          ]
+        },
+        {
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "full_article_read": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "source_review_scope": "Fixed-version byline, defining method and relevant evaluation/resource sections only; not a claim that every passage was read.",
+          "reviewed_on": "2026-11-18",
+          "id": "2505.18934",
+          "revision": 3,
+          "title": "Chi-Square Wavelet Graph Neural Networks for Heterogeneous Graph Anomaly Detection",
+          "published": "2025-05-25T01:58:02Z",
+          "updated": "2026-11-13T15:35:29Z",
+          "metadata_sha256": "01694ac4567d1fc5f02f7f52f75b7d3aa6b36e5fa57f8e01f5d54167ed44ac14",
+          "track": "recommendation",
+          "priority": "P1",
+          "organization": "The Chinese University of Hong Kong / Tencent WeChat Pay / MBZUAI",
+          "verified_priority_organizations": [],
+          "source_url": "https://arxiv.org/html/2505.18934v3",
+          "source_sha256": "c81c3544067532837abf4a2d827e043f292af3933460b28857bc8f674c63876d",
+          "locations": [
+            "author affiliations",
+            "§3.2 Meta-Path Graphs",
+            "§4.2–4.4",
+            "§5.1–5.2",
+            "Appendix B.1–B.2"
+          ],
+          "reason": "Meta 命中指 heterogeneous meta-path / meta-graph，不是 Meta 公司；原文单位为 CUHK、腾讯微信支付及 MBZUAI。ChiGAD 的多图卡方滤波、对齐和贡献交叉熵在公开及两个微信支付区域图上做监督留出评测；Operational-Model 是离线对照中的既有业务模型，不是新方法的随机流量试验。§5.1–5.2 与 Appendix B 未建立量化线上 A/B 或合格全流量证据，因此当前工业审核风控门槛不通过。保留 2025 首发与 2026 v3 修订的区别。",
+          "decision": "rejected",
+          "resolution": "industrial_online_evidence_not_established",
+          "production_gate_passed": false,
+          "priority_signal_clarification": {
+            "signal": "text_organization_mention",
+            "matched": "Meta",
+            "meaning": "meta-path graph and interactive meta-graph terminology, not company affiliation"
+          },
+          "status": "rejected",
+          "review_decision": "rejected",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/meta-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "author affiliations",
+              "§3.2 Meta-Path Graphs",
+              "§4.2–4.4",
+              "§5.1–5.2",
+              "Appendix B.1–B.2"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2505.18934v3"
+            }
+          ]
+        },
+        {
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "full_article_read": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "source_review_scope": "Fixed-version byline, defining method and relevant evaluation/resource sections only; not a claim that every passage was read.",
+          "reviewed_on": "2026-11-18",
+          "id": "2605.05623",
+          "revision": 4,
+          "title": "Retrieval of Coastal Biogeochemical Parameters From Near-Surface Hyperspectral Remote Sensing Reflectance Using Physics-Aware Meta-Learning",
+          "published": "2026-05-07T03:22:12Z",
+          "updated": "2026-11-13T04:53:18Z",
+          "metadata_sha256": "e20e9deb4f1a6295832235fda1e83ab99be006e1fc9c5d8159bc9f66145de944",
+          "track": "foundation-model",
+          "priority": "P2",
+          "organization": "CSIRO / South Australian Research and Development Institute",
+          "verified_priority_organizations": [],
+          "source_url": "https://arxiv.org/html/2605.05623v4",
+          "source_sha256": "0283195f9400861895a0b74e1dad8ebd56fe7e6e83750b01ae7126b3bac316f9",
+          "locations": [
+            "author affiliations",
+            "§II Study sites and datasets",
+            "§III-A Overview",
+            "§III-D Pretraining of the base model"
+          ],
+          "reason": "Meta-learning 是 MAML 学习机制，不是 Meta 公司。原文为 CSIRO/SARDI 海岸水质遥感：生物光学合成任务预训练 301→1024×3→3 回归网络，再按五个水域调整；参数检索是从光谱反演水质，并非信息检索排序、LLM 基础模型、后训练或 Agent 算法。本窗口主题外，未否认其领域方法创新，也没有编造高成本理由。",
+          "decision": "out_of_scope",
+          "resolution": "outside_research_library_scope",
+          "priority_signal_clarification": {
+            "signal": "text_organization_mention",
+            "matched": "Meta",
+            "meaning": "physics-aware MAML meta-learning rather than Meta affiliation"
+          },
+          "status": "rejected",
+          "review_decision": "out_of_scope",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/meta-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "author affiliations",
+              "§II Study sites and datasets",
+              "§III-A Overview",
+              "§III-D Pretraining of the base model"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2605.05623v4"
+            }
+          ]
+        },
+        {
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "full_article_read": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "source_review_scope": "Fixed-version byline, defining method and relevant evaluation/resource sections only; not a claim that every passage was read.",
+          "reviewed_on": "2026-11-18",
+          "id": "2610.11963",
+          "revision": 2,
+          "title": "Can LLMs Fix It Without Code? Toward Automated Verification of No-Code Bug Fixes",
+          "published": "2026-10-08T13:44:53Z",
+          "updated": "2026-11-12T11:04:46Z",
+          "metadata_sha256": "2e0d0a2fc99f1548170665398b524d0ab5c168c0af83a4d3d6bf6281b42bf439",
+          "track": "agent",
+          "priority": "P1",
+          "organization": "Bilkent University",
+          "verified_priority_organizations": [],
+          "source_url": "https://arxiv.org/html/2610.11963v2",
+          "source_sha256": "3f357107c9a9f96604bf931ceacdefe82b27a9da0a4988119803a910a24740e9",
+          "locations": [
+            "author affiliations",
+            "§3.1–3.4",
+            "§4.2",
+            "§8 Data Availability"
+          ],
+          "reason": "Meta 只指被测 Muse Glimmer 执行器，三位作者均为 Bilkent；这不是 Meta 署名。v2 将已发布的322个修复逐个放入经过固定/缺陷双门核验的真实 Brave 环境，由独立 checker 判决，再比较三个执行器；sanity gate 的维护者真值不等于执行器可以读答案。窗口内新修订的真实浏览器、多模型多次执行完整实验成本高，不复现（审查 DONE），不会把旧延期状态当成此版本已读。",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.11963v2#S3.SS4",
+            "basis": "§3.1–3.4 and §8 pinned build/setup package; published workload, not local timing",
+            "scale": "51 issue environments with only nine passing both sanity gates; 322 fixes × three executors × three executions (up to 20 action steps), OpenCUA-72B / Muse Glimmer-30B plus paid Sonnet5, pinned Brave/Docker states and issue checkers.",
+            "available_resource": "one NVIDIA A100 or A30, or local Mac; no experiment was launched",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "priority_signal_clarification": {
+            "signal": "text_organization_mention",
+            "matched": "Meta",
+            "meaning": "provider of an evaluated executor, not author affiliation"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "review_artifact": "research-audits/nov15-review-closure/meta-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "author affiliations",
+              "§3.1–3.4",
+              "§4.2",
+              "§8 Data Availability"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2610.11963v2"
+            }
+          ]
+        },
+        {
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "full_article_read": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "source_review_scope": "Fixed-version byline, defining method and relevant evaluation/resource sections only; not a claim that every passage was read.",
+          "reviewed_on": "2026-11-18",
+          "id": "2611.14365",
+          "revision": 1,
+          "title": "From Video Frames to Robot Meta-Frames: A Unified Latent Interface for World Action Models",
+          "published": "2026-11-10T17:21:37Z",
+          "updated": "2026-11-10T17:21:37Z",
+          "metadata_sha256": "449364acccd51fcbf34614bbad99a89256cb2b2f059e207e2c53bfde5b34daad",
+          "track": "foundation-model",
+          "priority": "P1",
+          "organization": "National University of Singapore / NUS Guangzhou Research Translation and Innovation Institute",
+          "verified_priority_organizations": [],
+          "source_url": "https://arxiv.org/html/2611.14365v1",
+          "source_sha256": "0c2df246ae92da7b5b2bc1bb02523f86cf4290491ca339bafb1b320135f6efb7",
+          "locations": [
+            "author affiliations",
+            "§4.1–4.5",
+            "§5.1–5.2",
+            "Appendix B.2"
+          ],
+          "reason": "Meta-frame 是把机器人信号按不交叠 DCT 频带打包进统一潜在帧的术语，不是 Meta 机构；原文作者为 NUS。MetaWAM 的模块自由接口仍依赖真实 Cosmos-Predict2 去噪器、完整微调和动作/世界/值路由。完整模拟和 Franka 真机矩阵成本过高，不复现（审查 DONE），不拿 DCT 算术替代整体能力。",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.14365v1#A2.SS2",
+            "basis": "Appendix B.2 training and real-robot setup; published wall-clock, not local measurement",
+            "scale": "RoboCasa full fine-tuning on four H200 for 64h (12K steps, global batch1024); Franka full fine-tuning on four H200 for about47h (8K steps), plus physical Franka platform and multi-view RGB-D demonstrations.",
+            "available_resource": "one NVIDIA A100 or A30, or local Mac; no experiment was launched",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "priority_signal_clarification": {
+            "signal": "text_organization_mention",
+            "matched": "Meta",
+            "meaning": "unified meta-frame / MetaWAM method name, not Meta affiliation"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "review_artifact": "research-audits/nov15-review-closure/meta-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "author affiliations",
+              "§4.1–4.5",
+              "§5.1–5.2",
+              "Appendix B.2"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.14365v1"
+            }
+          ]
+        },
+        {
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "full_article_read": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "source_review_scope": "Fixed-version byline, defining method and relevant evaluation/resource sections only; not a claim that every passage was read.",
+          "reviewed_on": "2026-11-18",
+          "id": "2611.18438",
+          "revision": 1,
+          "title": "Toward On-Device Markerless 6DoF Tracking of a Physical Manipulative on a Mixed-Reality Headset: A Preliminary Study",
+          "published": "2026-11-13T17:13:56Z",
+          "updated": "2026-11-13T17:13:56Z",
+          "metadata_sha256": "510a6a59b4a04bdb8afeb102b367f24ac4fab06fc38767b1c5aabd73de58f060",
+          "track": "foundation-model",
+          "priority": "P2",
+          "organization": "Texas A&M University",
+          "verified_priority_organizations": [],
+          "source_url": "https://arxiv.org/html/2611.18438v1",
+          "source_sha256": "1a633eeef87b2e45e8dfff82707ae3bab3b026818d460e4a80bd27773b0fe827",
+          "locations": [
+            "author affiliations",
+            "§III System Design",
+            "§IV Preliminary Evaluation",
+            "§V Discussion and Limitations"
+          ],
+          "reason": "Meta 只指 Quest3 头显产品；三位作者均为 Texas A&M。方法是单个教学 LEGO 物体的轻量 YOLO 二十关键点和 PnP，量化结果主要来自1000张合成图，真实位姿误差评测仍为后续计划。不是本库通用多模态/基础模型、LLM训练或Agent新算法；按专用应用选题排除，不把没有完整真实精度评估写成高成本。",
+          "decision": "out_of_scope",
+          "resolution": "outside_research_library_scope",
+          "priority_signal_clarification": {
+            "signal": "text_organization_mention",
+            "matched": "Meta",
+            "meaning": "Quest3 hardware brand, not author institution"
+          },
+          "status": "rejected",
+          "review_decision": "out_of_scope",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/meta-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "author affiliations",
+              "§III System Design",
+              "§IV Preliminary Evaluation",
+              "§V Discussion and Limitations"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.18438v1"
+            }
+          ]
+        },
+        {
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "full_article_read": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "source_review_scope": "Fixed-version byline, defining method and relevant evaluation/resource sections only; not a claim that every passage was read.",
+          "reviewed_on": "2026-11-18",
+          "id": "2611.17394",
+          "revision": 1,
+          "title": "Agentic-Teacher: An Agentic Data Engine for Failure-Driven VLA Post-Training",
+          "published": "2026-11-12T15:43:14Z",
+          "updated": "2026-11-12T15:43:14Z",
+          "metadata_sha256": "cdacf055521496fc9e9d98f878563aa6cc81937c494db014bf14d0a3b659c339",
+          "track": "agent",
+          "priority": "P1",
+          "organization": "Tsinghua University / Striding AI / AGIBot",
+          "verified_priority_organizations": [],
+          "source_url": "https://arxiv.org/html/2611.17394v1",
+          "source_sha256": "6b25e195d6e31dd40d974de885691a1c41a531742df7a00ce8bd7c43e2277809",
+          "locations": [
+            "byline",
+            "§3.1–3.3",
+            "§4.1",
+            "Appendix D / Table2"
+          ],
+          "reason": "Xinlei Chen 姓名交叠仅用于补召回，原文列清华/StridingAI/AGIBot，MetaWorld 是基准而非 Meta 署名。算法由编码 Agent 定位失败、构造并验证修复程序，经过动作噪声、静止帧清理及冻结VLA流匹配损失过滤后回灌训练。完整修复/多任务VLA微调/执行矩阵成本过高，不复现（审查 DONE）；不把轨迹清理或虚构环境当成闭环实现。",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.17394v1#A4",
+            "basis": "§4.1 and AppendixD/Table2 describe the actual full campaign; published configuration, no local estimate of hours",
+            "scale": "π0 VLA, paid GPT-5.6 Sol coding-agent exploration, LIBERO10/MetaWorld10/three RoboCasa tasks with50 base and50 evaluation rollouts per task; four-GPU FSDP/DDP post-training for5K–20Ksteps and multiple trajectory-processing ablations.",
+            "available_resource": "one NVIDIA A100 or A30, or local Mac; no experiment was launched",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "review_artifact": "research-audits/nov15-review-closure/meta-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "byline",
+              "§3.1–3.3",
+              "§4.1",
+              "Appendix D / Table2"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.17394v1"
+            }
+          ]
+        },
+        {
+          "id": "2604.01171",
+          "revision": 3,
+          "title": "Open-Set Supervised 3D Anomaly Detection: An Industrial Dataset and a Generalisable Framework for Unknown Defects",
+          "published": "2026-04-01T17:23:23Z",
+          "metadata_sha256": "089bef2e054677ee43c352864aa31f966022c216f5cb4b97a34f4bf2eb8d8c8b",
+          "source_url": "https://arxiv.org/html/2604.01171v3",
+          "source_sha256": "700f99912d53bbafd056722bcaecb99d7d5bf7a66382d302c651d8c6d949ffea",
+          "track": "foundation-model",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "out_of_scope",
+          "resolution": "outside_current_topic_scope",
+          "reason": "Open-Industry 的20类工业点云与正常/已知/未知缺陷实验；production指采集产线，不是本库搜广推线上或通用基础模型。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "out_of_scope",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2604.01171v3"
+            }
+          ]
+        },
+        {
+          "id": "2604.14586",
+          "revision": 5,
+          "title": "CPGRec+: A Balance-oriented Framework for Personalized Video Game Recommendations",
+          "published": "2026-04-16T03:25:18Z",
+          "metadata_sha256": "fcf559ec481529caedb6b497fd0288876d564bb7e8606701be6755968e5f6d5b",
+          "source_url": "https://arxiv.org/html/2604.14586v5",
+          "source_sha256": "0c13fb3f54a17775e064bf35b15ca198c74b177b56f4526314841f3daf91b9d4",
+          "track": "recommendation",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "rejected",
+          "resolution": "industrial_online_gate_not_met",
+          "reason": "CPGRec+的PER/PRG模块在Steam I/II离线比较准确性与多样性；实验和附录未建立真实生产随机A/B。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "rejected",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2604.14586v5"
+            }
+          ]
+        },
+        {
+          "id": "2604.14833",
+          "revision": 2,
+          "title": "Federated User Behavior Modeling for Privacy-Preserving LLM Recommendation",
+          "published": "2026-04-16T10:10:16Z",
+          "metadata_sha256": "fa87545499cc860da7d70aad61e64a38d570e6d9e1c3694a7fbd81263b2c120a",
+          "source_url": "https://arxiv.org/html/2604.14833v2",
+          "source_sha256": "9293b71210250c74765ce9866ce8b197062605f7a2f78ccb2a89779c7f27ab27",
+          "track": "recommendation",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "rejected",
+          "resolution": "industrial_online_gate_not_met",
+          "reason": "SF-UBM使用三个跨域公开数据对、软prompt与事实/反事实蒸馏；正文实验为离线HR/Valid Ratio，不是隐私生产A/B。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "rejected",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2604.14833v2"
+            }
+          ]
+        },
+        {
+          "id": "2609.35075",
+          "revision": 2,
+          "title": "ReCo: When to Relocate Sensor Kits under Deployment Constraints -- A NILM Case Study",
+          "published": "2026-09-28T13:00:40Z",
+          "metadata_sha256": "cca5fa8d8bf2b7e18026c96bdcbb66163f84ee6eccc14cb686b1f1c7189dbdc3",
+          "source_url": "https://arxiv.org/html/2609.35075v2",
+          "source_sha256": "491cbd7ea6127c139d2857ea35c6e108ea838766d7a59787982f2ed1eb32bb48",
+          "track": "foundation-model",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "out_of_scope",
+          "resolution": "outside_current_topic_scope",
+          "reason": "ReCo在Plegma上回放传感器套件重定位，部署是NILM仪表采集计划，不是LLM Agent或推荐生产实验。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "out_of_scope",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2609.35075v2"
+            }
+          ]
+        },
+        {
+          "id": "2610.15020",
+          "revision": 2,
+          "title": "PATTERN Can Be Solved from Memory: Testing Graph Neural Networks on Unseen Patterns",
+          "published": "2026-10-10T15:54:55Z",
+          "metadata_sha256": "a2087c80fee127bf352543f9e40b422658eb9e0e0cc44cf48c3f16e274fb6db6",
+          "source_url": "https://arxiv.org/html/2610.15020v2",
+          "source_sha256": "4e4926817bb488f883f80386968d1a8c3b3cbd20403b10775dad05862f456096",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "PATTERN记忆泄漏与未见图模式的修订结果，不把官方高分当泛化。 成本过高，完整实验不复现（审查DONE）。",
+          "locations": [
+            "实验与复现说明、训练配置"
+          ],
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.15020v2",
+            "basis": "实验与复现说明、训练配置",
+            "scale": "原文GRASS/PPGT为200 epochs、3 seeds、每seed约20小时T4，另多模型对照",
+            "available_resource": "one A100 or A30, or local Mac",
+            "cost_type": "published_configuration_and_resource_based_estimate_not_local_measurement"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": true,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "实验与复现说明、训练配置"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2610.15020v2"
+            }
+          ]
+        },
+        {
+          "id": "2610.24122",
+          "revision": 2,
+          "title": "HAVANA: A Hierarchical Video-Action Model for Vision-Language Navigation",
+          "published": "2026-10-16T18:48:16Z",
+          "metadata_sha256": "5d1987205deff46d4bba010a43c160c45dfca8dcacc5cf0af62e78d85edda569",
+          "source_url": "https://arxiv.org/html/2610.24122v2",
+          "source_sha256": "529a4de2e2243145d4fd67f7c8f291fbf36baea4a2168b642ac3b340e0be059c",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "HAVANA双系统未来隐计划/局部反应路径及三种机器人迁移与真实机器人验证。 成本过高，完整实验不复现（审查DONE）。",
+          "locations": [
+            "§3方法、§4.1设置与§4.4真实导航"
+          ],
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.24122v2",
+            "basis": "§3方法、§4.1设置与§4.4真实导航",
+            "scale": "未来视觉监督世界模型、多embodiment导航与真机；完整链路超出一次单卡廉价诊断",
+            "available_resource": "one A100 or A30, or local Mac",
+            "cost_type": "published_configuration_and_resource_based_estimate_not_local_measurement"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": true,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§3方法、§4.1设置与§4.4真实导航"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2610.24122v2"
+            }
+          ]
+        },
+        {
+          "id": "2610.29922",
+          "revision": 2,
+          "title": "Unintended Side Effects of Value Training in LLMs",
+          "published": "2026-10-21T15:58:53Z",
+          "metadata_sha256": "c76f251fe224854cfe17151f3f8e6c56d0c058965c6c7c2d5d0823ea0415c80e",
+          "source_url": "https://arxiv.org/html/2610.29922v2",
+          "source_sha256": "7393af912a4101fdd0bfcf0ea3cf30c51280c482b90687445d9062feb3598228",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "四个8B/12B骨干的48个价值适配器及跨价值行为审计。 成本过高，完整实验不复现（审查DONE）。",
+          "locations": [
+            "Appendix B训练及末尾资源披露"
+          ],
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.29922v2",
+            "basis": "Appendix B训练及末尾资源披露",
+            "scale": "原文8H100；训练120 GPU小时、评估400 GPU小时",
+            "available_resource": "one A100 or A30, or local Mac",
+            "cost_type": "published_configuration_and_resource_based_estimate_not_local_measurement"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": true,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "Appendix B训练及末尾资源披露"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2610.29922v2"
+            }
+          ]
+        },
+        {
+          "id": "2610.40658",
+          "revision": 2,
+          "title": "Explain, Then Forget: Recommendation Unlearning under Asymmetric Access Constraint",
+          "published": "2026-08-27T11:06:18Z",
+          "metadata_sha256": "fa9c890715417c0d29e23e9d778fd559d8adacf9cf430b2d7bfcd05de67d46f8",
+          "source_url": "https://arxiv.org/html/2610.40658v2",
+          "source_sha256": "389590e7113d3ff43521908ff1e386b854bf434269af6bf634e7d92b9c3ca3c0",
+          "track": "recommendation",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "rejected",
+          "resolution": "industrial_online_gate_not_met",
+          "reason": "CEU用因果解释在输出分数层做遗忘；三个公开数据集的离线遗忘/推荐效用不能替代真实线上实验。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "rejected",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2610.40658v2"
+            }
+          ]
+        },
+        {
+          "id": "2611.01514",
+          "revision": 2,
+          "title": "Federated Vector Retrieval across Heterogeneous VectorDBs",
+          "published": "2026-11-01T03:47:55Z",
+          "metadata_sha256": "66ac1cf29f1163f25efc8c426c58217f3ad085afcc0475bcd94220cb35d63d79",
+          "source_url": "https://arxiv.org/html/2611.01514v2",
+          "source_sha256": "0f32fcc6330a8e321ebaf25d89c4814004d6f6e92f5ac5633144b13bf59e41c5",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "accepted",
+          "resolution": "affordable_core_review_candidate",
+          "reason": "HVMap跨嵌入空间模糊对比映射与公开异构向量库协议可作为后续低成本组件候选；2.5M样本及1TB内存全评测不在本轮运行，QPS基准不是线上A/B。",
+          "locations": [
+            "原文方法/协议",
+            "实验与局限"
+          ],
+          "full_campaign_executed": false,
+          "status": "deferred",
+          "review_decision": "accepted",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法/协议",
+              "实验与局限"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.01514v2"
+            }
+          ]
+        },
+        {
+          "id": "2611.07854",
+          "revision": 2,
+          "title": "Towards Foundation Decision Models: Drex",
+          "published": "2026-11-05T11:31:13Z",
+          "metadata_sha256": "8a72bab200b0a84c9d26d06d94bf9480a35de4b8bd2263d7f23b551be1bec467",
+          "source_url": "https://arxiv.org/html/2611.07854v2",
+          "source_sha256": "80e49e9afeddc1c0a89447279c04b92bdc9955da33bbebe882a1502afb75bd0f",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "Drex四种typed decision模型、选项置换稳定性与RLAF。 成本过高，完整实验不复现（审查DONE）。",
+          "locations": [
+            "§3—6模型/数据、§9及附录推理优化"
+          ],
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.07854v2",
+            "basis": "§3—6模型/数据、§9及附录推理优化",
+            "scale": "8B/9B/35B/27B四模型、1150460决策训练记录、多套公开/私有决策评测与B200/B300服务",
+            "available_resource": "one A100 or A30, or local Mac",
+            "cost_type": "published_configuration_and_resource_based_estimate_not_local_measurement"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": true,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§3—6模型/数据、§9及附录推理优化"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.07854v2"
+            }
+          ]
+        },
+        {
+          "id": "2611.08577",
+          "revision": 3,
+          "title": "Meituan-Robotics-0: A Vision-Language-Action Foundation Model for Desktop Manipulation",
+          "published": "2026-11-05T18:55:42Z",
+          "metadata_sha256": "f47e5202176799b87f1734a8e67c4938b52d6e126a89b5eb25dedca077b9531f",
+          "source_url": "https://arxiv.org/html/2611.08577v3",
+          "source_sha256": "d6fb77611097ffbcfc313b86f2f4f45e4968e71767738d46970e02f092b3c69c",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "MR0三阶段VLA及Rollback/CFG-DAgger，保留真机与仿真证据区别。 成本过高，完整实验不复现（审查DONE）。",
+          "locations": [
+            "§2数据、训练阶段及真实机器人结果"
+          ],
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.08577v3",
+            "basis": "§2数据、训练阶段及真实机器人结果",
+            "scale": "147M图文样本、15060小时机器人轨迹、12 embodiments与真实硬件",
+            "available_resource": "one A100 or A30, or local Mac",
+            "cost_type": "published_configuration_and_resource_based_estimate_not_local_measurement"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": true,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§2数据、训练阶段及真实机器人结果"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.08577v3"
+            }
+          ]
+        },
+        {
+          "id": "2611.09949",
+          "revision": 2,
+          "title": "Counting Events, Not Seeing Them: Diagnosing and Repairing the Readout Failure in Video LLMs",
+          "published": "2026-10-21T15:29:00Z",
+          "metadata_sha256": "24ed9ec61036e5afcb1ba41d20556055e03c90143289ebd04f762797111aa8ff",
+          "source_url": "https://arxiv.org/html/2611.09949v2",
+          "source_sha256": "23982f11307bfbf2473ee1517a70db43b635665ecb178c63c65a3b5e4f82fdc4",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "区分视频计数的表征/读出失败、oracle符号与实际检测头。 成本过高，完整实验不复现（审查DONE）。",
+          "locations": [
+            "§4—6结果、REALCOUNT与训练控制"
+          ],
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.09949v2",
+            "basis": "§4—6结果、REALCOUNT与训练控制",
+            "scale": "7B—30B多骨干、多干预训练、人工盲审视频与跨种子对照；完整campaign预计小时级",
+            "available_resource": "one A100 or A30, or local Mac",
+            "cost_type": "published_configuration_and_resource_based_estimate_not_local_measurement"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": true,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§4—6结果、REALCOUNT与训练控制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.09949v2"
+            }
+          ]
+        },
+        {
+          "id": "2611.09964",
+          "revision": 2,
+          "title": "How Many Demonstrations Does a VLA Need? On the Sample Efficiency of VLA Finetuning",
+          "published": "2026-10-28T10:26:53Z",
+          "metadata_sha256": "a21f6e948562ba0c281079967ddfd8991b09010e77d236c8b951a35551648587",
+          "source_url": "https://arxiv.org/html/2611.09964v2",
+          "source_sha256": "5756285316ad6102891a9137eb57b5c36ec0cf7dfa8a1fbb977aeb2b08e3deab",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "六个VLA在四个LIBERO套件上比较示范数/训练步数，不将零样本优劣等同适配效率。 成本过高，完整实验不复现（审查DONE）。",
+          "locations": [
+            "实验设置与Appendix C各预算结果"
+          ],
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.09964v2",
+            "basis": "实验设置与Appendix C各预算结果",
+            "scale": "6骨干×4套件×多示范预算与训练检查点、闭环评估",
+            "available_resource": "one A100 or A30, or local Mac",
+            "cost_type": "published_configuration_and_resource_based_estimate_not_local_measurement"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": true,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "实验设置与Appendix C各预算结果"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.09964v2"
+            }
+          ]
+        },
+        {
+          "id": "2611.12727",
+          "revision": 1,
+          "title": "OptiCover: A Scalable and Multi-Surface Framework for Cold-Start Visual Optimization under Semantic Constraints",
+          "published": "2026-11-09T17:12:09Z",
+          "metadata_sha256": "7a8e9694ae68ba63d392150b107e572320a0785ce48bf6c98c511d241696ac4e",
+          "source_url": "https://arxiv.org/html/2611.12727v1",
+          "source_sha256": "2c346416d0d1a18d504c9bcf32162c825f6ba21bac9002fd2e47b42d864bae65",
+          "track": "recommendation",
+          "priority": "P0",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_private_data",
+          "reason": "Airbnb OptiCover通过生产门槛：表4明确访客级随机分配，以当前房东封面为对照；首页CTR+1.5%，搜索bookers+0.35%，后者95%CI[0.01%,0.69%]；另一CTR增益不显著，不能混报。 私有数据/真实生产资源不可得，完整实验不复现（审查DONE）。",
+          "locations": [
+            "§4.3/4.7训练、§4.8及Table4线上对照"
+          ],
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.12727v1",
+            "basis": "§4.3/4.7训练、§4.8及Table4线上对照",
+            "scale": "数亿私有图片、5周探索训练与2—6周百万/千万访客三项独立两臂A/B实验",
+            "available_resource": "one A100 or A30, or local Mac",
+            "cost_type": "published_configuration_and_resource_based_estimate_not_local_measurement"
+          },
+          "production_gate_passed": true,
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§4.3/4.7训练、§4.8及Table4线上对照"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.12727v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.12737",
+          "revision": 2,
+          "title": "Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving",
+          "published": "2026-11-09T17:21:17Z",
+          "metadata_sha256": "93a453826b529b25347ec513d41706e8effab6b0368a890c42a285cf24e7e809",
+          "source_url": "https://arxiv.org/html/2611.12737v2",
+          "source_sha256": "179662ea372bcf7b3917f5aa63ec0d47e89a91a21d5aad31be737b9d4fd39c67",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "accepted",
+          "resolution": "affordable_core_review_candidate",
+          "reason": "Runway的SLA声明、不可变结果缓存和可追溯决策协议可独立实现；本文是引擎/实例压测与治理经验，不能转成线上收益。",
+          "locations": [
+            "原文方法/协议",
+            "实验与局限"
+          ],
+          "full_campaign_executed": false,
+          "status": "deferred",
+          "review_decision": "accepted",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法/协议",
+              "实验与局限"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.12737v2"
+            }
+          ]
+        },
+        {
+          "id": "2611.13203",
+          "revision": 1,
+          "title": "Audited Gradients, Anchored Policies: Model-Based Reinforcement Learning for Efficient Flow Control",
+          "published": "2026-11-09T20:28:10Z",
+          "metadata_sha256": "4e1ea06b375287e793fb29cb0db48a001d09b5400c9ab60d56033deede8aefbd",
+          "source_url": "https://arxiv.org/html/2611.13203v1",
+          "source_sha256": "de65fcd800a582906cafaea0361cc72453693eea20450821a6dd7c095c0ae6e5",
+          "track": "foundation-model",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "out_of_scope",
+          "resolution": "outside_current_topic_scope",
+          "reason": "贡献是流体控制的模型式RL与审计梯度；对象为物理流场，而非语言后训练、通用VLA或搜广推。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "out_of_scope",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.13203v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.13378",
+          "revision": 1,
+          "title": "Looping Deeper Without Growing the KV Cache: Recurrent Depth for Causal Encoder-Decoders",
+          "published": "2026-11-09T23:55:02Z",
+          "metadata_sha256": "3f382c0ed74d9dceadc30d854200126c671c940d9b374d6082f12745881d8f19",
+          "source_url": "https://arxiv.org/html/2611.13378v1",
+          "source_sha256": "3ae48c3c61055aab8a3fc96f903e1be179c414df20f7bd7ce4d79b0b35ba349e",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "Looped CED以递归深度和末轮KV控制内存，保留训练与服务压测区别。 成本过高，完整实验不复现（审查DONE）。",
+          "locations": [
+            "§5.5、§6与Appendix I"
+          ],
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.13378v1",
+            "basis": "§5.5、§6与Appendix I",
+            "scale": "29.6B-token训练；552B DeepSeek骨干在4GB200/8H200节点压测",
+            "available_resource": "one A100 or A30, or local Mac",
+            "cost_type": "published_configuration_and_resource_based_estimate_not_local_measurement"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": true,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§5.5、§6与Appendix I"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.13378v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.13393",
+          "revision": 1,
+          "title": "Plumbline: When the Loss Lies, Validating LLM Training Correctly",
+          "published": "2026-11-10T00:13:56Z",
+          "metadata_sha256": "e0c75a2cfa33965001e50e99eec08c073d283fa2d7b86120b051390d3cbda04b",
+          "source_url": "https://arxiv.org/html/2611.13393v1",
+          "source_sha256": "f8b162f0b559c66048d6cab1bc40a015878d09aab0e421f2d98b8c1179e58146",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "Plumbline用生命周期检查和诊断规则追根，Amazon真实使用不是搜广推随机A/B。 成本过高，完整实验不复现（审查DONE）。",
+          "locations": [
+            "系统设计、生产使用案例与实验配置"
+          ],
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.13393v1",
+            "basis": "系统设计、生产使用案例与实验配置",
+            "scale": "13框架—模型组合、3框架5模型Day-0及分布式生产训练故障复核",
+            "available_resource": "one A100 or A30, or local Mac",
+            "cost_type": "published_configuration_and_resource_based_estimate_not_local_measurement"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": true,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "系统设计、生产使用案例与实验配置"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.13393v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.13441",
+          "revision": 1,
+          "title": "Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South",
+          "published": "2026-11-10T01:32:16Z",
+          "metadata_sha256": "4e7f3afbedf6a3204aea00f19465f3a3159b7bc8a3d4aacd7165a68e5e85e0f5",
+          "source_url": "https://arxiv.org/pdf/2611.13441v1",
+          "source_sha256": "02fabbe9f6a65e756f76db235fc8bc0250d89049621c8ada1644bd90ead55f3f",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "accepted",
+          "resolution": "affordable_core_review_candidate",
+          "reason": "tokenization premium/sovereignty cost是可复用测量定义；实际语言样本与模型对照未在本轮重跑，不从部署动机推导生产证据。",
+          "locations": [
+            "原文方法/协议",
+            "实验与局限"
+          ],
+          "full_campaign_executed": false,
+          "status": "deferred",
+          "review_decision": "accepted",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法/协议",
+              "实验与局限"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/pdf/2611.13441v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.13758",
+          "revision": 1,
+          "title": "Mixed Signals: Weight-Space Programming for EEG and ECG",
+          "published": "2026-11-10T08:59:09Z",
+          "metadata_sha256": "6a9eaa13ae5cc1ab4e16b5e72d09e85fec264a4858ee68379588bc26e5ef46fc",
+          "source_url": "https://arxiv.org/html/2611.13758v1",
+          "source_sha256": "6e70594ee34771edb4b8c0e9c0ff43151c63b3c9c6e094ecc23c6f7bbfb7dba1",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "accepted",
+          "resolution": "affordable_core_review_candidate",
+          "reason": "EEG/ECG weight-space programming比较LLM直接写权重与同架构梯度训练；可审查小网络接口，不能把API写权重当作反向传播训练复现。",
+          "locations": [
+            "原文方法/协议",
+            "实验与局限"
+          ],
+          "full_campaign_executed": false,
+          "status": "deferred",
+          "review_decision": "accepted",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法/协议",
+              "实验与局限"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.13758v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.13914",
+          "revision": 1,
+          "title": "From Counterfactual Edits to Human Narratives: LLM-Driven Interpretations for Recommender System Explanations",
+          "published": "2026-11-10T11:05:19Z",
+          "metadata_sha256": "6a88e0f89160a0af3314d9ccf16c6b6b51c1dd62b1d4547f186fadcb8b387f71",
+          "source_url": "https://arxiv.org/html/2611.13914v1",
+          "source_sha256": "6207188ece57815a104472de7f4433f5aaeda080017a88ffe381c1dfe7ee2a2d",
+          "track": "recommendation",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "rejected",
+          "resolution": "industrial_online_gate_not_met",
+          "reason": "将反事实推荐编辑转成LLM解释的人类叙述研究；用户解释评估不是生产推荐效果A/B。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "rejected",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.13914v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.13972",
+          "revision": 1,
+          "title": "Data Quality Challenges in Multimodal Tourism Recommender Systems",
+          "published": "2026-11-10T12:08:40Z",
+          "metadata_sha256": "61619a252c32b0d1e471d7b8c5f963b5bc222f14d3a98cccf414f045f1644460",
+          "source_url": "https://arxiv.org/html/2611.13972v1",
+          "source_sha256": "82d5b648ba73b16f9d2e1e80874fc19527d957723e25984af429a37ccf4b1b0c",
+          "track": "foundation-model",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "out_of_scope",
+          "resolution": "outside_current_topic_scope",
+          "reason": "旅游多模态推荐的数据质量问题讨论与领域数据描述，没有通过工业生产线上门槛的算法对照。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "out_of_scope",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.13972v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.14004",
+          "revision": 1,
+          "title": "LUMIR: Decoupled Multimodal Representation Learning from Heterogeneous Data for Next-POI Recommendation",
+          "published": "2026-11-10T12:45:09Z",
+          "metadata_sha256": "5bfe01614f69df11fc32dbb88babb1bf52ba0596c61c95b56d55d10c6a7c7b60",
+          "source_url": "https://arxiv.org/html/2611.14004v1",
+          "source_sha256": "9c616a1d79f477d8d25a512f3e015969cec8b80ec614a6ebab095781a493c8cf",
+          "track": "recommendation",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "rejected",
+          "resolution": "industrial_online_gate_not_met",
+          "reason": "LUMIR对异构模态做解耦表示并在下一POI任务离线评估；未报告真实产品流量随机实验。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "rejected",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.14004v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.14100",
+          "revision": 1,
+          "title": "Sckwoky at SHROOM-Visions: Character-Level Hallucination-Span Detection in Image-Conditioned VLMs via Dual-Prompted LoRA Decoders",
+          "published": "2026-11-10T13:55:52Z",
+          "metadata_sha256": "bc12ba03d7d15f788c87f855b5a50c0ab466f19fb688efd410f089bb82f43b35",
+          "source_url": "https://arxiv.org/html/2611.14100v1",
+          "source_sha256": "40465e31d1a0ead05d9bfc72c59964fe2b3fc28712dd5d3d198984d63e53a87b",
+          "track": "foundation-model",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "out_of_scope",
+          "resolution": "outside_current_topic_scope",
+          "reason": "SHROOM-Visions共享任务的字符级幻觉跨度检测系统；deployed仅推理配置，未作为本窗口重点通用方法收录。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "out_of_scope",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.14100v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.14834",
+          "revision": 1,
+          "title": "Learning Low-Latency Action Verification for Frozen Vision-Language-Action Models",
+          "published": "2026-11-10T23:32:12Z",
+          "metadata_sha256": "761fee8269ea5f035315ae9724fea4724cda8f116759ef2da98da87d3b64e814",
+          "source_url": "https://arxiv.org/html/2611.14834v1",
+          "source_sha256": "6421e90689dff672847a45c9021eea3baed18501ee40e9208e94210d186ba95a",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "冻结VLA上学习低时延动作验证，不能把真机器人评估用mock替代。 成本过高，完整实验不复现（审查DONE）。",
+          "locations": [
+            "实验设置、Appendices B—D"
+          ],
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.14834v1",
+            "basis": "实验设置、Appendices B—D",
+            "scale": "H100 80GB策略服务、40-epoch验证器、多任务闭环及真实机器人",
+            "available_resource": "one A100 or A30, or local Mac",
+            "cost_type": "published_configuration_and_resource_based_estimate_not_local_measurement"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": true,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "实验设置、Appendices B—D"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.14834v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.14938",
+          "revision": 1,
+          "title": "When Does a Recommendation Spark Curiosity? Theory, Measurement, and Field Evidence",
+          "published": "2026-11-11T02:39:23Z",
+          "metadata_sha256": "80a7f5530fcb8fca2fc4531a3bb5b1fdec72774f9e6bde90229ee2d2b075d697",
+          "source_url": "https://arxiv.org/html/2611.14938v1",
+          "source_sha256": "5f8e608523c8338b95a790b77bd9d572603d817b8d7e5626b3c9308e33a87128",
+          "track": "recommendation",
+          "priority": "P0",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_private_data",
+          "reason": "好奇心推荐在§7与附录D给出真实在线对照及生产近似计算；不是仅把问卷次序随机当A/B。完整私有平台实验不复现。 私有数据/真实生产资源不可得，完整实验不复现（审查DONE）。",
+          "locations": [
+            "§7在线控制实验、Appendix D"
+          ],
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.14938v1",
+            "basis": "§7在线控制实验、Appendix D",
+            "scale": "私有生产用户/物品向量、消费状态与在线流量，另含人类问卷及线下对照",
+            "available_resource": "one A100 or A30, or local Mac",
+            "cost_type": "published_configuration_and_resource_based_estimate_not_local_measurement"
+          },
+          "production_gate_passed": true,
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "§7在线控制实验、Appendix D"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.14938v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.14953",
+          "revision": 1,
+          "title": "RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence",
+          "published": "2026-11-11T02:59:53Z",
+          "metadata_sha256": "8064c95147b11f9c988519277d5d36fb36edf7ab46ea4c5f06db49925430804b",
+          "source_url": "https://arxiv.org/html/2611.14953v1",
+          "source_sha256": "69048f43b46185d460e48dda9f4206c9c85a6292983e90f96b67e1d21f9dcd0f",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "accepted",
+          "resolution": "affordable_core_review_candidate",
+          "reason": "RSLiveBench-UAV的时间窗、实体关联和确定性计分可作协议候选；production为数据答案生产，真实无人机采集与人工标注不在本轮实施。",
+          "locations": [
+            "原文方法/协议",
+            "实验与局限"
+          ],
+          "full_campaign_executed": false,
+          "status": "deferred",
+          "review_decision": "accepted",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法/协议",
+              "实验与局限"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.14953v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.15160",
+          "revision": 1,
+          "title": "Measuring, Revealing and Mitigating Harmful Content Propagation in Recommender Systems",
+          "published": "2026-11-11T07:57:00Z",
+          "metadata_sha256": "9b750ed8c6d6a76c62ffcb28fa2fa9cd0b600ed5a2577e09710d732d285e3a2c",
+          "source_url": "https://arxiv.org/html/2611.15160v1",
+          "source_sha256": "cd6fda7e16664e266ff07c4a29e4ef6b1e4d48b95d30bff9f0ec39055a141a76",
+          "track": "recommendation",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "rejected",
+          "resolution": "industrial_online_gate_not_met",
+          "reason": "在TN/QB/EB-NeRD上审计13类推荐模型的有害内容传播；离线交互和安全指标不等于生产A/B。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "rejected",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.15160v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.15162",
+          "revision": 2,
+          "title": "Stealthy, High-Impact False Data Injection Attacks in Smart Grid Using Physics-Constrained GAN with Limited System Knowledge",
+          "published": "2026-11-11T07:58:54Z",
+          "metadata_sha256": "144e39fa0487557948956bb4c0340de891ee8856e0835942d652577ff1f3b4fe",
+          "source_url": "https://arxiv.org/html/2611.15162v2",
+          "source_sha256": "1db7d68eb4003f27e8f259b22b7fcc16122647151914cd4c9a31b11303d9760f",
+          "track": "foundation-model",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "out_of_scope",
+          "resolution": "outside_current_topic_scope",
+          "reason": "智能电网GAN攻击在冻结的离线72小时块上评测；不是线上A/B，也非本库LLM/Agent后训练。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "out_of_scope",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.15162v2"
+            }
+          ]
+        },
+        {
+          "id": "2611.15250",
+          "revision": 1,
+          "title": "Multi-head Quantum Neural Networks: Replacing Transformer Blocks with NISQ Modules inside a 30-Billion-Parameter LLM",
+          "published": "2026-11-11T09:39:14Z",
+          "metadata_sha256": "a17a08a981ed18538ed44a0448733cae1ba7a0cecce3fe311ceedfc02937bb5b",
+          "source_url": "https://arxiv.org/html/2611.15250v1",
+          "source_sha256": "41fd822b0aacfde43185f69fbdd88a294d3b8abd6cfd127bba4c4171a4246945",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "QNN多头替换Qwen3层，原文纠缠/冻结控制还限制其特异优势结论。 成本过高，完整实验不复现（审查DONE）。",
+          "locations": [
+            "模型手术、消融及硬件实验"
+          ],
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.15250v1",
+            "basis": "模型手术、消融及硬件实验",
+            "scale": "Qwen3-30B-A3B、精确量子态训练及156-qubit IBM Heron硬件",
+            "available_resource": "one A100 or A30, or local Mac",
+            "cost_type": "published_configuration_and_resource_based_estimate_not_local_measurement"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": true,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "模型手术、消融及硬件实验"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.15250v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.15911",
+          "revision": 1,
+          "title": "Smart Model Routing for Order-of-Magnitude LLM Cost Reduction",
+          "published": "2026-11-11T19:13:21Z",
+          "metadata_sha256": "df7c1c5ab3771fb953e59366e612920374f2a059a657447d54ce748377342df2",
+          "source_url": "https://arxiv.org/pdf/2611.15911v1",
+          "source_sha256": "9e79637de2d0b6c0e5050ac48e437e0c77bbb8f889073b3270e7b792f2024918",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "accepted",
+          "resolution": "affordable_core_review_candidate",
+          "reason": "路由成本阈值、校准与级联盈亏条件可做算术接口；§5/5.2的GSM8K分析与价格假设不是实际生产收益保证。",
+          "locations": [
+            "原文方法/协议",
+            "实验与局限"
+          ],
+          "full_campaign_executed": false,
+          "status": "deferred",
+          "review_decision": "accepted",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法/协议",
+              "实验与局限"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/pdf/2611.15911v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.16139",
+          "revision": 1,
+          "title": "Temporal Context-Aware Spam Detection Using Transformer-Based NLP Models",
+          "published": "2026-11-12T01:04:07Z",
+          "metadata_sha256": "e945a274c3fb6d9963d77751fe8b70d709fa80953c82190c221998641d79df20",
+          "source_url": "https://arxiv.org/html/2611.16139v1",
+          "source_sha256": "8aa34e972e172629922ce03143bb1634ae42b0f45593da0589b7fb14d3087618",
+          "track": "recommendation",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "rejected",
+          "resolution": "industrial_online_gate_not_met",
+          "reason": "短信风控有真实私有日志及已部署DistilBERT，但8749条留出集与2万条平衡生产评估并不同切分；新TemporalBertSpam的公平对照尚列未来工作，无生产对照A/B。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "rejected",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.16139v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.16159",
+          "revision": 1,
+          "title": "From Tokens to Behaviors: Rethinking Generative Recommendation for User Trajectory Prediction",
+          "published": "2026-11-12T01:42:27Z",
+          "metadata_sha256": "704ceab4055974f3d01fd44c9f2a9baa82c747a931f7f04ffe24913617b2a111",
+          "source_url": "https://arxiv.org/html/2611.16159v1",
+          "source_sha256": "a67a5c93c05c2fec8e7f0e8d393d63c8e62bce986ba0b3ada0aff1fcf923004b",
+          "track": "recommendation",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "rejected",
+          "resolution": "industrial_online_gate_not_met",
+          "reason": "TraGR并行SID、概率反馈和轨迹关系学习在四个公开数据集验证，没有正文生产流量实验。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "rejected",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.16159v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.17463",
+          "revision": 1,
+          "title": "Availability-Aware Historical Feedback Learning for Electric Arc Furnace Temperature and Chemical Composition Prediction",
+          "published": "2026-11-12T19:45:40Z",
+          "metadata_sha256": "d527c59a79f862c2e2bbbe235fea1703d77cc0185d4bc838b9862d0bf194fc86",
+          "source_url": "https://arxiv.org/html/2611.17463v1",
+          "source_sha256": "03a4c2f020d25a9b190fac491857ea63a978dd4849077690a899ed89eaee003b",
+          "track": "foundation-model",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "out_of_scope",
+          "resolution": "outside_current_topic_scope",
+          "reason": "电弧炉温度及12种成分的历史反馈回归，production为炼钢时间记录，非本库广告/审核/推荐决策。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "out_of_scope",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.17463v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.17560",
+          "revision": 1,
+          "title": "Generative Design with Real-time Physics Explainability: Towards Product Definition in the Age of AI",
+          "published": "2026-11-12T22:30:21Z",
+          "metadata_sha256": "327aa176dba259740ec2624ab905edd0742287ec0e3cf33028041430ada2d7ea",
+          "source_url": "https://arxiv.org/html/2611.17560v1",
+          "source_sha256": "e138835c52842cbbb9add87d3fe765a899cddd4d4c7e66d6224adc4b173be752",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "可解释物理生成设计，完整空气动力学及燃烧室campaign不复现。 成本过高，完整实验不复现（审查DONE）。",
+          "locations": [
+            "训练超参表与生成设计实验"
+          ],
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.17560v1",
+            "basis": "训练超参表与生成设计实验",
+            "scale": "原文空气动力代理A100 80GB训练190小时，燃烧室另74分钟及实测数据",
+            "available_resource": "one A100 or A30, or local Mac",
+            "cost_type": "published_configuration_and_resource_based_estimate_not_local_measurement"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": true,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "训练超参表与生成设计实验"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.17560v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.17726",
+          "revision": 1,
+          "title": "Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries",
+          "published": "2026-11-13T04:16:25Z",
+          "metadata_sha256": "7396bb27b71c1e054fa5dc8afb169946e89aca81cff6b69e423e4708b214c753",
+          "source_url": "https://arxiv.org/html/2611.17726v1",
+          "source_sha256": "50e486fc9cfab069edcdfe3f7ad260bdfbc6cc72bfca0c88e1d92e331033a64b",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "accepted",
+          "resolution": "affordable_core_review_candidate",
+          "reason": "多模态数字图书馆嵌入与向量库扩展评测可作协议候选；十亿页规模为外推讨论，现有查询测试不证明生产随机A/B。",
+          "locations": [
+            "原文方法/协议",
+            "实验与局限"
+          ],
+          "full_campaign_executed": false,
+          "status": "deferred",
+          "review_decision": "accepted",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法/协议",
+              "实验与局限"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.17726v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.17921",
+          "revision": 1,
+          "title": "RecMem: Recurrent Memory Compression for Long-Sequence Generative Recommendation",
+          "published": "2026-11-13T08:59:44Z",
+          "metadata_sha256": "34d328abf7cb22aef05057f22e5afb3174f846508f358a296acbb45e8211a9dd",
+          "source_url": "https://arxiv.org/html/2611.17921v1",
+          "source_sha256": "64db504b80a2157599ea9a7d4cc05070db8adb6c7227f0fc1cb1c1b50bb44317",
+          "track": "recommendation",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "rejected",
+          "resolution": "industrial_online_gate_not_met",
+          "reason": "RecMem在MerRec上比较16记忆槽与HSTU历史，明确说明系统结果不是端到端生产服务，故不能因推荐/效率题目进入工业P0。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "rejected",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.17921v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.18027",
+          "revision": 1,
+          "title": "Beyond Bot Labels: Retrospective Consequence-Grounded Ranking of Attributed Cache Harm in E-Commerce Logs",
+          "published": "2026-11-13T10:53:23Z",
+          "metadata_sha256": "1abca2db7847d93aa08c38e585b866646fc7b9102eb7d6cf54a8c242bc3768c6",
+          "source_url": "https://arxiv.org/html/2611.18027v1",
+          "source_sha256": "af314fe7b23c90d674092761034b2bdcfaab13c2b8fb441538980cdd25ec6d3a",
+          "track": "recommendation",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "rejected",
+          "resolution": "industrial_online_gate_not_met",
+          "reason": "电商缓存危害排序在1270万请求实迹做因果归属和回放；是回顾性干预设计，不是真实生产随机分流A/B。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "rejected",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.18027v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.18189",
+          "revision": 1,
+          "title": "SemRAG: Semantic-Guided Sentence-Level Retrieval-Augmented Sign Language Production",
+          "published": "2026-11-13T13:58:22Z",
+          "metadata_sha256": "c50815a8ae005e0ac12ed2c9df26ac74f889f7378574e2389e48a05d5357a53e",
+          "source_url": "https://arxiv.org/html/2611.18189v1",
+          "source_sha256": "2787a6e1d99a4f551db6c4da2c61148320d6e0c2837e2fce11104e5057b4b4cb",
+          "track": "foundation-model",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "out_of_scope",
+          "resolution": "outside_current_topic_scope",
+          "reason": "句子级手语模板检索与姿态生成，production指手语产出；本轮不选择这一专用姿态生成方向。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "out_of_scope",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.18189v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.18244",
+          "revision": 1,
+          "title": "RACE: Ranking-Uncertainty Aware Capacity-Adaptive Customization for Efficient Sequential Recommendation",
+          "published": "2026-11-13T14:40:26Z",
+          "metadata_sha256": "d78902a7af3c0e44aa5d4e16896a6ea94d2b0b11d617e00b9706871dd2899dc6",
+          "source_url": "https://arxiv.org/html/2611.18244v1",
+          "source_sha256": "75f70e5bfedcb0d6d98bc062e17ab74ada4e33972f389c338ed44b1119d42173",
+          "track": "recommendation",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "rejected",
+          "resolution": "industrial_online_gate_not_met",
+          "reason": "RACE为不确定性感知容量定制的序列推荐，正文公共数据离线精度/资源评估，没有真实用户生产对照。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "rejected",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.18244v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.18253",
+          "revision": 1,
+          "title": "Pose-based Neural Clothing for Animated Characters",
+          "published": "2026-11-13T14:49:52Z",
+          "metadata_sha256": "aa34690e2803101311ae4265ee680afe17ac31af846429bf8f17aacec42807ed",
+          "source_url": "https://arxiv.org/html/2611.18253v1",
+          "source_sha256": "fb8d964cd7a0b4108b0fddf34cf1c999e546de60bb942eb76c4059ae6731a04b",
+          "track": "foundation-model",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "out_of_scope",
+          "resolution": "outside_current_topic_scope",
+          "reason": "单服装准静态神经形变及局部梯度直方图损失，production指动画资产生产，不是通用基础模型。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "out_of_scope",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.18253v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.18908",
+          "revision": 1,
+          "title": "MemeEconomy: Do LLM Agents Trade Ethics for Survival?",
+          "published": "2026-11-13T20:12:24Z",
+          "metadata_sha256": "e127d1a42f3ba1a104f0bf911f4f2f1857d85a457cd49781160b45b99f981b0d",
+          "source_url": "https://arxiv.org/html/2611.18908v1",
+          "source_sha256": "41e5a207ce2f2a8ba168e5f139fccc3229c143aec30d001cc963234350f2f25b",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "MemeEconomy在模拟经济压力下审计BDI与有害内容选择，不是真实金融/用户生产A/B。 成本过高，完整实验不复现（审查DONE）。",
+          "locations": [
+            "方法、单/多Agent实验与模型表"
+          ],
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.18908v1",
+            "basis": "方法、单/多Agent实验与模型表",
+            "scale": "10个模型、四个frontier家族、多轮市场及32B/27B等评估；完整API/推理campaign高成本",
+            "available_resource": "one A100 or A30, or local Mac",
+            "cost_type": "published_configuration_and_resource_based_estimate_not_local_measurement"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": true,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "方法、单/多Agent实验与模型表"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.18908v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.19061",
+          "revision": 1,
+          "title": "Large Language Models for AI Infrastructure",
+          "published": "2026-11-14T01:12:36Z",
+          "metadata_sha256": "e65be8570defb13a3f46f2650504c443a10da23a812c78c7a0867d22801c2b49",
+          "source_url": "https://arxiv.org/html/2611.19061v1",
+          "source_sha256": "b7f74a1aebebffc46246293979b2bd61502908a126657a5193a7fa7de95a4860",
+          "track": "foundation-model",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "out_of_scope",
+          "resolution": "outside_current_topic_scope",
+          "reason": "LLM用于AI基础设施的分类综述和异质结果综合，不是新可独立复现算法或统一公开基准；本窗口不收录。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "out_of_scope",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.19061v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.19525",
+          "revision": 1,
+          "title": "Objectify, Don't Delete: Complaint-Derived Evaluation of Ambient Clinical Notes",
+          "published": "2026-11-14T17:44:04Z",
+          "metadata_sha256": "d2712b7ea7595e261115d4c968b6ba6b0b2eccebb7702ab52ffefea288352be1",
+          "source_url": "https://arxiv.org/html/2611.19525v1",
+          "source_sha256": "e6a6d8da46aa4e3ee20f3e669b3a8c50dcadea0b0766c52296941172282fdef4",
+          "track": "foundation-model",
+          "priority": "P2",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "out_of_scope",
+          "resolution": "outside_current_topic_scope",
+          "reason": "将临床投诉拆成可判定判断并审计1446份医疗笔记，属于专用临床评测；production notes不是搜广推流量A/B。",
+          "locations": [
+            "原文方法",
+            "实验设置/结果及限制"
+          ],
+          "status": "rejected",
+          "review_decision": "out_of_scope",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法",
+              "实验设置/结果及限制"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.19525v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.19840",
+          "revision": 1,
+          "title": "Grounding Language Models in Speech Does Not Fix \"AI Flavor\": Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix",
+          "published": "2026-11-15T06:42:48Z",
+          "metadata_sha256": "2058755ff8c090998f9c461021d6ba4d5c2e52cd1987eb404e211ed0366ec90d",
+          "source_url": "https://arxiv.org/html/2611.19840v1",
+          "source_sha256": "4eee386d41452bb194dba59fbc3a390ef0f588e20ae452ae71941e0509a5ede3",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "accepted",
+          "resolution": "affordable_core_review_candidate",
+          "reason": "双judge/顺序交换/已知答案catch trials的协议与0.6B偏好训练是可审查候选；A/B swap为盲评顺序控制，不是生产A/B，负结果必须保留。",
+          "locations": [
+            "原文方法/协议",
+            "实验与局限"
+          ],
+          "full_campaign_executed": false,
+          "status": "deferred",
+          "review_decision": "accepted",
+          "full_experiment_review_done": false,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "原文方法/协议",
+              "实验与局限"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.19840v1"
+            }
+          ]
+        },
+        {
+          "id": "2611.19858",
+          "revision": 1,
+          "title": "Bridging the Terminology Gap: A Data-Centric Alignment Framework for Multilingual Translation in Cross-Border Corporation",
+          "published": "2026-11-15T07:52:57Z",
+          "metadata_sha256": "36ae26e2bb27381df3165dfe3012dabf35b552182d8d4e2471adffae9f6f62e2",
+          "source_url": "https://arxiv.org/html/2611.19858v1",
+          "source_sha256": "c22f09e2698574131486dccd1b00711914c6eb77f7f19a4ef42759005a576118",
+          "track": "foundation-model",
+          "priority": "P1",
+          "review_done": true,
+          "fulltext_review_completed": true,
+          "review_scope": "bounded-original-method-experiment-sections",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "implementation_status": "not_implemented_by_review",
+          "decision": "reviewed_deferred",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "BTG领域术语挖掘、过滤与SFT/RL，线上人工译文打分不等于生产流量A/B。 成本过高，完整实验不复现（审查DONE）。",
+          "locations": [
+            "数据构造、训练范式与实验表"
+          ],
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.19858v1",
+            "basis": "数据构造、训练范式与实验表",
+            "scale": "5M样本、30K例10指标、Qwen3-8B SFT/RL及多frontier对照",
+            "available_resource": "one A100 or A30, or local Mac",
+            "cost_type": "published_configuration_and_resource_based_estimate_not_local_measurement"
+          },
+          "status": "deferred",
+          "review_decision": "reviewed_deferred",
+          "full_experiment_review_done": true,
+          "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "数据构造、训练范式与实验表"
+            ]
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-source",
+              "source_url": "https://arxiv.org/html/2611.19858v1"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

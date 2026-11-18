@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "window": {
+    "start": "2026-11-10",
+    "end": "2026-11-15"
+  },
+  "input_sha256": "c026296246f5615ff95bd690716b13b340c420214138d7dca56862cdff50ac0e",
+  "scope": "Six individual brand/tool/input-source or hypothetical-configuration clarifications; not proof of affiliation absence, originality rejection, cost or method verification.",
+  "clarifications": [
+    {
+      "id": "2606.30237",
+      "revision": 2,
+      "metadata_sha256": "435947519dd94c4f32f25a79a53365787da367eab43452af4d906a9e8edff45b",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "abstract_witness": "Whisper-large-V3, Google Chirp 3, and Omnilingual",
+      "reason": "Google Chirp3 is one of three off-the-shelf ASR systems compared on one speaker's Dutch dysarthric speech. The mention describes the evaluated model, not author affiliation; this does not prove absence of Google authors. No production A/B is asserted.",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.13550",
+      "revision": 1,
+      "metadata_sha256": "7727555cbf2e626e334d79d6c8abe0dde1f261325811b66fdadff2c699f46517",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "abstract_witness": "Google Research's TabFM",
+      "reason": "Google Research's TabFM is the compared pretrained model. The note applies existing tabular models to next-year earnings prediction; this is a model-use mention, not institutional evidence. P2 nonselection does not reject the empirical result or its originality.",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.14935",
+      "revision": 1,
+      "metadata_sha256": "4750dd40132c8cd0787937e9343c391fa10add6156f9466f5f5fa0c921014eed",
+      "cleared_protection_rules": [
+        "text_organization_mention",
+        "deployment_signal"
+      ],
+      "abstract_witness": "test each deployed configuration",
+      "reason": "Google Gemini and Meta Llama identify evaluated models. The phrase test each deployed configuration is an evaluation recommendation following vignette/Q-Pain experiments, not a report of live clinical deployment or production traffic A/B. This clears only these textual signals, not a full-paper affiliation/capability determination.",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.17713",
+      "revision": 1,
+      "metadata_sha256": "b5d4be88b84c170850f61feb05626b5ddc10025465525886f8b4ede9c8bdf113",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "abstract_witness": "Google's AI design tool Stitch",
+      "reason": "Google's Stitch is the origin of the DESIGN.md format used to collect a new third-party dataset. That is tool provenance, not author affiliation. The new dataset's originality is retained; this window may leave a nonpriority dataset unselected under the approved P2 selection policy.",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.17766",
+      "revision": 1,
+      "metadata_sha256": "5a2c540df9c13752d30867bd458201aec158a919fc3f35a1df8623c1fbd9fcda",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "abstract_witness": "including frontier models from Google, Anthropic, and OpenAI",
+      "reason": "Google is one of the providers whose frontier models the spreadsheet benchmark evaluates. The abstract does not use it as an author institution. The new benchmark is not dismissed as lacking originality; P2 nonselection is a window-level priority choice, not method verification.",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.18371",
+      "revision": 1,
+      "metadata_sha256": "dcdbccebd24cb19692226baf67ce1d58c7b5509d39b5c2ee8a77cfd4412f5b77",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "abstract_witness": "derived from Google's autocomplete function",
+      "reason": "Google autocomplete supplies the biased statements evaluated by human participants. It is the input source, not an author-affiliation claim or production evaluation of a new recommendation model.",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    }
+  ]
+}

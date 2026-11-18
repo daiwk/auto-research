@@ -1,8 +1,16 @@
 # Paper discovery and coverage audit
 
-<!-- source-sha256: 9884ab3ad5725b5098b40f5d18652f0055058774c371d485aa0a6d75e710b345 -->
+<!-- source-sha256: 89e0f9901e062de487b2e44110d369a52bb0c9c288b7e35c745f15fc9ae476a0 -->
 
 [简体中文](../paper-discovery-audit.md)
+
+## November 18: close the November 10–15 review window
+
+The latest unified review watermark is **November 15, 2026**; see the [window closeout](research-audits/nov15-review-closure/README.md) and [canonical state](../paper-discovery-watermark.json). Actual four-track/two-mode captures, split replacements for the capped query, Google/Meta priority primary checks and per-identity selection terminals are reconciled. Costly full experiments are explicitly not reproduced and review DONE.
+
+The 1,256 registered identities comprise 72 necessary original-source decisions, 1,138 authorized P2 selection closures and 46 inherited terminals, with zero protected pending items. Twenty-four costly full campaigns are not reproduced. This is selection screening and protected source review, not verification or implementation of every method. Historical snapshots below retain the watermark stated when they were written.
+
+The scanner now retains hash-linked, independently validated historical selection baselines, so advancing the watermark does not reopen old P2 papers merely by losing their previous window. Changed versions, metadata or independent priority/production evidence still reopen them. The next overlap starts November 14.
 
 ## November 13: ScientistTwo and historical institutional reconciliation
 
@@ -24,7 +32,7 @@ Seven full systems or experimental studies are explicitly **too costly and not r
 
 **The review watermark stays November 9, 2026**; this does not close the entire November 10–12 window. The eight source listings contain **956 deduplicated identities**, including cross-listings and replacements. This bounded source index is not a count of new qualifying papers, undelivered items, or automatic tasks. Unselected identities have not thereby received method review. The earlier closeouts and batch accounts below remain historical records.
 
-The review watermark is now **November 9, 2026**; see the [window closeout](research-audits/nov09-review-closure/README.md)
+The November 11 closeout's watermark was **November 9, 2026**; see that [historical window closeout](research-audits/nov09-review-closure/README.md)
 and [unified state](../paper-discovery-watermark.json). First releases, older discoveries, and revisions remain separate.
 Full experiments with evidenced prohibitive cost are not reproduced and are review DONE.
 

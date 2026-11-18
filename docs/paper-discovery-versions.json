@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "status": "partial_verified_version_baseline",
-  "reviewed_at": "2026-11-10",
-  "coverage": "Only 434 explicitly observed/reviewed version baselines. October15 additions distinguish bounded method/cost/correction, historical metadata triage and attempted-source exceptions. The November continuation updates 17 of those baselines with pinned original revision evidence. None implies whole-article or implementation acceptance. Missing versions are never assumed v1.",
+  "reviewed_at": "2026-11-18",
+  "coverage": "Only 505 explicitly observed/reviewed version baselines. Historical scopes and source evidence remain in the referenced review artifacts and Git history. The Nov15 closeout pins 72 necessary original-source decisions, including six explicitly protected revisions. None implies whole-article verification, implementation or GPU acceptance. Missing versions are never assumed v1.",
   "limitations": [
     "Read the per-record scope: full-text, bounded method/cost, historical metadata and source-exception dispositions are different; no baseline implies implementation or GPU acceptance.",
     "HTML author strings are not used to fabricate an Atom-compatible metadata fingerprint.",
@@ -249,18 +249,17 @@
     },
     {
       "arxiv_id": "2610.13672",
-      "revision": 1,
-      "reviewed_at": "2026-10-13",
-      "review_scope": "algorithm_and_source_evidence",
-      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "revision": 2,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "dcf85e2fe1172dd34f7655958ccd0639f8344dd65bd6253908f6fd57351c0c2e",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
       "source_evidence": [
         {
-          "url": "https://arxiv.org/abs/2610.13672v1",
-          "sha256": "34b415b7dc8b2d9eecc3abadb58b745098a971dd08df7cd1f4d84ec2f3aab2de"
-        },
-        {
-          "url": "https://arxiv.org/html/2610.13672v1",
-          "sha256": "56ae1afa9358c70e86988f45a097d95e1453b8489fb11edc7c1b8b032f33d0a4"
+          "url": "https://arxiv.org/html/2610.13672v2",
+          "sha256": "151d42ba56888e86bf0b6941aed6681bd81fcc06495eee4b84d91172dea1551f"
         }
       ]
     },
@@ -6596,6 +6595,1142 @@
       "source_evidence": [
         {
           "url": "https://arxiv.org/abs/2509.09498v4"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.00890",
+      "revision": 2,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "b677c5adf35cab538ad6ac9cf911a40ab19d642a4f86afb30b9226c4ce27e23a",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.00890v2",
+          "sha256": "ddc419ff2da234034683371dc74076691d68005d40647b4e2be3ef760d07f2d6"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.03713",
+      "revision": 2,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "0735c58a852f4e9aaedb7d74f38f81a81c722d61faaa637b19c5d403e69d7673",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.03713v2",
+          "sha256": "d1bb92c4fe02525b0d32d883217af944049fa01a9c0e61184b0fadc6777170ab"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.20579",
+      "revision": 2,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "4eada63d475e80b851b780899b80c0b94bfafcf5938aeeda1c520e0aa23de8e7",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.20579v2",
+          "sha256": "39c9cb9e56e62b6ab3accb56f9c0a4db8ecf8cbc03d7de7399af003b6648a427"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.19095",
+      "revision": 3,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "cf25494954f46130ef486b4086b0606eccc412704571cc79c337772e300ab2db",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.19095v3",
+          "sha256": "85344bbc7e80ada21d486f1af82e61863ad4ef58a728009bafe08e7e9af41ef8"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.32955",
+      "revision": 4,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "e28b445321e892350d1634506a49997ca22b0305455976d51eb3d169234a9070",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.32955v4",
+          "sha256": "b853f2c0743cbcb06593ea3261dc3c8b862f16f6b64e96bc6af5e2ae7443a868"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.15700",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "be3a767a4c8c010bed77b24815bc450ea51d4eb90ffac8ea2f7cf5241e6e8019",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.15700v1",
+          "sha256": "6bccd63ae328991fc0fab63f8aee8a72df4ef37c44b1098d6f22c21529c58bf3"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.16293",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "1e345096a31d4f29c7f8f08d465cb8269b0c8fd5d46dd925444abe5faece0646",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.16293v1",
+          "sha256": "ccb3c2891d99b4046e93d7e4cf6b1b3dfb07332d0f5e0c05967658aaeea25b0f"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.17220",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "1ea7c2dde9e5dc097826ae23490deec92a920d691b1ad2c2c22b20559fef7b92",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.17220v1",
+          "sha256": "d21dc0df4fd3ed2d0253333342095489b366e054e7edc0cb9bf89a64cc43964c"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.17304",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "035a9f08b24075865127d9861a6767e386804b749d0a705c0a5a1dc839220627",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.17304v1",
+          "sha256": "af1bb7de86019a7a45f7a34a52c920dab9b9cd563600e7a0fb97b639cf82f0fd"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.17381",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "ab5f1a94c499c32e4ddb09f331b3c9833a574b6c39b1620c37cc0795083175a4",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/pdf/2611.17381v1",
+          "sha256": "7bce2d6c62085f8024f5af9f548789ab82c3ee5982c84df19ddde586e9adedfa"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.17696",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "3e9a9a471c60cb78fa208991f7067a23f8c2accc4e4a120a2d41c0614d4bbf4f",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.17696v1",
+          "sha256": "6c316fcfc91d61c58d9512fc5bcebf600827e5bbe9ce7c5bdcc04c630142190c"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.17814",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "bede61fbba278681399cb6ec1443d8192cb085c7b5d6ae937d5a31e7fd4949ec",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.17814v1",
+          "sha256": "a64cde9e170da2452ec8f792a08337081a5e2e8ced4e00cb63abf302d439b6e6"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.18050",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "af5df797077dc7cd01b3b9f5b84176a6d9cbafe1f21ae81e2560dee249c1148d",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.18050v1",
+          "sha256": "31c9a7974cf86f93881acf38c7e6e973fda47fc21fd9bbbb3a3db7f083eafab8"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.18284",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "deddc6dd583ff00a09b321f9cf2d13440f778220e5288c56c1dfed488967f4da",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/agent-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.18284v1",
+          "sha256": "e3edd989be9729fc6d9beb4ea8cdbb411fd09f9bd2022ce7bab6d79fa143720b"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.24161",
+      "revision": 5,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "e53c29f90aca948391f8dcd5cf977cf2a2488cb7b06c1f74c98ca29d05c7676b",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/google-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.24161v5",
+          "sha256": "2142a87f5265785a545ee1fe313ad02e46e65c0b70197e30db7e275005fb2959"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.16028",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "04799abf1ff664274e5996fb98220a5efc76b5e6d3ebf3a54262da9261c0668e",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/google-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.16028v1",
+          "sha256": "06350e47b49bf3a935b51f6d7a6cdfb54175f0c20703339399b2ad8c8446b941"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.12805",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "fd36edae89481cc44931de2f61ea5d0a82c7cbb684528e56655dcd2f91d918f3",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/google-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.12805v1",
+          "sha256": "2efd6e5bc90881cc9f30335aed25ac8cdc028af1f3f8a84313ebbed1a6c1e1a9"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.13442",
+      "revision": 2,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "5d4b67b7f127ddc94c0e7ae76416489f005b32c39dff8dda76c18da5b8d837ef",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/meta-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.13442v2",
+          "sha256": "4df503f7852d256545b7baf26f8a9130d0a6fb97f559c8c8c871952cdbe80a38"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.17501",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "052d3beffe985f056b0b219dfa2157c4fe411f5932ba10931e939f5c92237811",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/meta-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.17501v1",
+          "sha256": "026facb252b68064ee52029f168fc91533eb30e6213d4a8d70ffa0dd07060606"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2505.18934",
+      "revision": 3,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "01694ac4567d1fc5f02f7f52f75b7d3aa6b36e5fa57f8e01f5d54167ed44ac14",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/meta-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2505.18934v3",
+          "sha256": "c81c3544067532837abf4a2d827e043f292af3933460b28857bc8f674c63876d"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2605.05623",
+      "revision": 4,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "e20e9deb4f1a6295832235fda1e83ab99be006e1fc9c5d8159bc9f66145de944",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/meta-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2605.05623v4",
+          "sha256": "0283195f9400861895a0b74e1dad8ebd56fe7e6e83750b01ae7126b3bac316f9"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.11963",
+      "revision": 2,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "2e0d0a2fc99f1548170665398b524d0ab5c168c0af83a4d3d6bf6281b42bf439",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/meta-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.11963v2",
+          "sha256": "3f357107c9a9f96604bf931ceacdefe82b27a9da0a4988119803a910a24740e9"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.14365",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "449364acccd51fcbf34614bbad99a89256cb2b2f059e207e2c53bfde5b34daad",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/meta-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.14365v1",
+          "sha256": "0c2df246ae92da7b5b2bc1bb02523f86cf4290491ca339bafb1b320135f6efb7"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.18438",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "510a6a59b4a04bdb8afeb102b367f24ac4fab06fc38767b1c5aabd73de58f060",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/meta-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.18438v1",
+          "sha256": "1a633eeef87b2e45e8dfff82707ae3bab3b026818d460e4a80bd27773b0fe827"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.17394",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "cdacf055521496fc9e9d98f878563aa6cc81937c494db014bf14d0a3b659c339",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/meta-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.17394v1",
+          "sha256": "6b25e195d6e31dd40d974de885691a1c41a531742df7a00ce8bd7c43e2277809"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2604.01171",
+      "revision": 3,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "089bef2e054677ee43c352864aa31f966022c216f5cb4b97a34f4bf2eb8d8c8b",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2604.01171v3",
+          "sha256": "700f99912d53bbafd056722bcaecb99d7d5bf7a66382d302c651d8c6d949ffea"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2604.14586",
+      "revision": 5,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "fcf559ec481529caedb6b497fd0288876d564bb7e8606701be6755968e5f6d5b",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2604.14586v5",
+          "sha256": "0c13fb3f54a17775e064bf35b15ca198c74b177b56f4526314841f3daf91b9d4"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2604.14833",
+      "revision": 2,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "fa87545499cc860da7d70aad61e64a38d570e6d9e1c3694a7fbd81263b2c120a",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2604.14833v2",
+          "sha256": "9293b71210250c74765ce9866ce8b197062605f7a2f78ccb2a89779c7f27ab27"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2609.35075",
+      "revision": 2,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "cca5fa8d8bf2b7e18026c96bdcbb66163f84ee6eccc14cb686b1f1c7189dbdc3",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2609.35075v2",
+          "sha256": "491cbd7ea6127c139d2857ea35c6e108ea838766d7a59787982f2ed1eb32bb48"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.15020",
+      "revision": 2,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "a2087c80fee127bf352543f9e40b422658eb9e0e0cc44cf48c3f16e274fb6db6",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.15020v2",
+          "sha256": "4e4926817bb488f883f80386968d1a8c3b3cbd20403b10775dad05862f456096"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.24122",
+      "revision": 2,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "5d1987205deff46d4bba010a43c160c45dfca8dcacc5cf0af62e78d85edda569",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.24122v2",
+          "sha256": "529a4de2e2243145d4fd67f7c8f291fbf36baea4a2168b642ac3b340e0be059c"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.29922",
+      "revision": 2,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "c76f251fe224854cfe17151f3f8e6c56d0c058965c6c7c2d5d0823ea0415c80e",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.29922v2",
+          "sha256": "7393af912a4101fdd0bfcf0ea3cf30c51280c482b90687445d9062feb3598228"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.40658",
+      "revision": 2,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "fa9c890715417c0d29e23e9d778fd559d8adacf9cf430b2d7bfcd05de67d46f8",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.40658v2",
+          "sha256": "389590e7113d3ff43521908ff1e386b854bf434269af6bf634e7d92b9c3ca3c0"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.01514",
+      "revision": 2,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "66ac1cf29f1163f25efc8c426c58217f3ad085afcc0475bcd94220cb35d63d79",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.01514v2",
+          "sha256": "0f32fcc6330a8e321ebaf25d89c4814004d6f6e92f5ac5633144b13bf59e41c5"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.07854",
+      "revision": 2,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "8a72bab200b0a84c9d26d06d94bf9480a35de4b8bd2263d7f23b551be1bec467",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.07854v2",
+          "sha256": "80e49e9afeddc1c0a89447279c04b92bdc9955da33bbebe882a1502afb75bd0f"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.08577",
+      "revision": 3,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "f47e5202176799b87f1734a8e67c4938b52d6e126a89b5eb25dedca077b9531f",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.08577v3",
+          "sha256": "d6fb77611097ffbcfc313b86f2f4f45e4968e71767738d46970e02f092b3c69c"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.09949",
+      "revision": 2,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "24ed9ec61036e5afcb1ba41d20556055e03c90143289ebd04f762797111aa8ff",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.09949v2",
+          "sha256": "23982f11307bfbf2473ee1517a70db43b635665ecb178c63c65a3b5e4f82fdc4"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.09964",
+      "revision": 2,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "a21f6e948562ba0c281079967ddfd8991b09010e77d236c8b951a35551648587",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.09964v2",
+          "sha256": "5756285316ad6102891a9137eb57b5c36ec0cf7dfa8a1fbb977aeb2b08e3deab"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.12727",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "7a8e9694ae68ba63d392150b107e572320a0785ce48bf6c98c511d241696ac4e",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.12727v1",
+          "sha256": "2c346416d0d1a18d504c9bcf32162c825f6ba21bac9002fd2e47b42d864bae65"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.12737",
+      "revision": 2,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "93a453826b529b25347ec513d41706e8effab6b0368a890c42a285cf24e7e809",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.12737v2",
+          "sha256": "179662ea372bcf7b3917f5aa63ec0d47e89a91a21d5aad31be737b9d4fd39c67"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.13203",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "4e1ea06b375287e793fb29cb0db48a001d09b5400c9ab60d56033deede8aefbd",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.13203v1",
+          "sha256": "de65fcd800a582906cafaea0361cc72453693eea20450821a6dd7c095c0ae6e5"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.13378",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "3f382c0ed74d9dceadc30d854200126c671c940d9b374d6082f12745881d8f19",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.13378v1",
+          "sha256": "3ae48c3c61055aab8a3fc96f903e1be179c414df20f7bd7ce4d79b0b35ba349e"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.13393",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "e0c75a2cfa33965001e50e99eec08c073d283fa2d7b86120b051390d3cbda04b",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.13393v1",
+          "sha256": "f8b162f0b559c66048d6cab1bc40a015878d09aab0e421f2d98b8c1179e58146"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.13441",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "4e7f3afbedf6a3204aea00f19465f3a3159b7bc8a3d4aacd7165a68e5e85e0f5",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/pdf/2611.13441v1",
+          "sha256": "02fabbe9f6a65e756f76db235fc8bc0250d89049621c8ada1644bd90ead55f3f"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.13758",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "6a9eaa13ae5cc1ab4e16b5e72d09e85fec264a4858ee68379588bc26e5ef46fc",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.13758v1",
+          "sha256": "6e70594ee34771edb4b8c0e9c0ff43151c63b3c9c6e094ecc23c6f7bbfb7dba1"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.13914",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "6a88e0f89160a0af3314d9ccf16c6b6b51c1dd62b1d4547f186fadcb8b387f71",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.13914v1",
+          "sha256": "6207188ece57815a104472de7f4433f5aaeda080017a88ffe381c1dfe7ee2a2d"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.13972",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "61619a252c32b0d1e471d7b8c5f963b5bc222f14d3a98cccf414f045f1644460",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.13972v1",
+          "sha256": "82d5b648ba73b16f9d2e1e80874fc19527d957723e25984af429a37ccf4b1b0c"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.14004",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "5bfe01614f69df11fc32dbb88babb1bf52ba0596c61c95b56d55d10c6a7c7b60",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.14004v1",
+          "sha256": "9c616a1d79f477d8d25a512f3e015969cec8b80ec614a6ebab095781a493c8cf"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.14100",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "bc12ba03d7d15f788c87f855b5a50c0ab466f19fb688efd410f089bb82f43b35",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.14100v1",
+          "sha256": "40465e31d1a0ead05d9bfc72c59964fe2b3fc28712dd5d3d198984d63e53a87b"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.14834",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "761fee8269ea5f035315ae9724fea4724cda8f116759ef2da98da87d3b64e814",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.14834v1",
+          "sha256": "6421e90689dff672847a45c9021eea3baed18501ee40e9208e94210d186ba95a"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.14938",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "80a7f5530fcb8fca2fc4531a3bb5b1fdec72774f9e6bde90229ee2d2b075d697",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.14938v1",
+          "sha256": "5f8e608523c8338b95a790b77bd9d572603d817b8d7e5626b3c9308e33a87128"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.14953",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "8064c95147b11f9c988519277d5d36fb36edf7ab46ea4c5f06db49925430804b",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.14953v1",
+          "sha256": "69048f43b46185d460e48dda9f4206c9c85a6292983e90f96b67e1d21f9dcd0f"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.15160",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "9b750ed8c6d6a76c62ffcb28fa2fa9cd0b600ed5a2577e09710d732d285e3a2c",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.15160v1",
+          "sha256": "cd6fda7e16664e266ff07c4a29e4ef6b1e4d48b95d30bff9f0ec39055a141a76"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.15162",
+      "revision": 2,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "144e39fa0487557948956bb4c0340de891ee8856e0835942d652577ff1f3b4fe",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.15162v2",
+          "sha256": "1db7d68eb4003f27e8f259b22b7fcc16122647151914cd4c9a31b11303d9760f"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.15250",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "a17a08a981ed18538ed44a0448733cae1ba7a0cecce3fe311ceedfc02937bb5b",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.15250v1",
+          "sha256": "41fd822b0aacfde43185f69fbdd88a294d3b8abd6cfd127bba4c4171a4246945"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.15911",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "df7c1c5ab3771fb953e59366e612920374f2a059a657447d54ce748377342df2",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/pdf/2611.15911v1",
+          "sha256": "9e79637de2d0b6c0e5050ac48e437e0c77bbb8f889073b3270e7b792f2024918"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.16139",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "e945a274c3fb6d9963d77751fe8b70d709fa80953c82190c221998641d79df20",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.16139v1",
+          "sha256": "8aa34e972e172629922ce03143bb1634ae42b0f45593da0589b7fb14d3087618"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.16159",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "704ceab4055974f3d01fd44c9f2a9baa82c747a931f7f04ffe24913617b2a111",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.16159v1",
+          "sha256": "a67a5c93c05c2fec8e7f0e8d393d63c8e62bce986ba0b3ada0aff1fcf923004b"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.17463",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "d527c59a79f862c2e2bbbe235fea1703d77cc0185d4bc838b9862d0bf194fc86",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.17463v1",
+          "sha256": "03a4c2f020d25a9b190fac491857ea63a978dd4849077690a899ed89eaee003b"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.17560",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "327aa176dba259740ec2624ab905edd0742287ec0e3cf33028041430ada2d7ea",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.17560v1",
+          "sha256": "e138835c52842cbbb9add87d3fe765a899cddd4d4c7e66d6224adc4b173be752"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.17726",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "7396bb27b71c1e054fa5dc8afb169946e89aca81cff6b69e423e4708b214c753",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.17726v1",
+          "sha256": "50e486fc9cfab069edcdfe3f7ad260bdfbc6cc72bfca0c88e1d92e331033a64b"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.17921",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "34d328abf7cb22aef05057f22e5afb3174f846508f358a296acbb45e8211a9dd",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.17921v1",
+          "sha256": "64db504b80a2157599ea9a7d4cc05070db8adb6c7227f0fc1cb1c1b50bb44317"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.18027",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "1abca2db7847d93aa08c38e585b866646fc7b9102eb7d6cf54a8c242bc3768c6",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.18027v1",
+          "sha256": "af314fe7b23c90d674092761034b2bdcfaab13c2b8fb441538980cdd25ec6d3a"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.18189",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "c50815a8ae005e0ac12ed2c9df26ac74f889f7378574e2389e48a05d5357a53e",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.18189v1",
+          "sha256": "2787a6e1d99a4f551db6c4da2c61148320d6e0c2837e2fce11104e5057b4b4cb"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.18244",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "d78902a7af3c0e44aa5d4e16896a6ea94d2b0b11d617e00b9706871dd2899dc6",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.18244v1",
+          "sha256": "75f70e5bfedcb0d6d98bc062e17ab74ada4e33972f389c338ed44b1119d42173"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.18253",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "aa34690e2803101311ae4265ee680afe17ac31af846429bf8f17aacec42807ed",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.18253v1",
+          "sha256": "fb8d964cd7a0b4108b0fddf34cf1c999e546de60bb942eb76c4059ae6731a04b"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.18908",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "e127d1a42f3ba1a104f0bf911f4f2f1857d85a457cd49781160b45b99f981b0d",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.18908v1",
+          "sha256": "41e5a207ce2f2a8ba168e5f139fccc3229c143aec30d001cc963234350f2f25b"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.19061",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "e65be8570defb13a3f46f2650504c443a10da23a812c78c7a0867d22801c2b49",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.19061v1",
+          "sha256": "b7f74a1aebebffc46246293979b2bd61502908a126657a5193a7fa7de95a4860"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.19525",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "d2712b7ea7595e261115d4c968b6ba6b0b2eccebb7702ab52ffefea288352be1",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.19525v1",
+          "sha256": "e6a6d8da46aa4e3ee20f3e669b3a8c50dcadea0b0766c52296941172282fdef4"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.19840",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "2058755ff8c090998f9c461021d6ba4d5c2e52cd1987eb404e211ed0366ec90d",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.19840v1",
+          "sha256": "4eee386d41452bb194dba59fbc3a390ef0f588e20ae452ae71941e0509a5ede3"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2611.19858",
+      "revision": 1,
+      "reviewed_at": "2026-11-18",
+      "metadata_sha256": "36ae26e2bb27381df3165dfe3012dabf35b552182d8d4e2471adffae9f6f62e2",
+      "review_scope": "bounded_original_revision_evidence",
+      "review_artifact": "research-audits/nov15-review-closure/root-primary-reviews.json",
+      "algorithm_acceptance_inferred": false,
+      "implementation_acceptance": "not_upgraded_by_review",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/html/2611.19858v1",
+          "sha256": "c22f09e2698574131486dccd1b00711914c6eb77f7f19a4ef42759005a576118"
         }
       ]
     }

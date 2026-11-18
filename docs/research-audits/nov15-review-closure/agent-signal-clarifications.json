@@ -1,0 +1,559 @@
+{
+  "schema_version": 1,
+  "window": {
+    "start": "2026-11-10",
+    "end": "2026-11-15"
+  },
+  "input_sha256": "29bb5653883dc2191a1ebb1d3f86a7517643a45b144bc633dad564f46e70d98a",
+  "scope": "34 individual metadata semantic clarifications only; no affiliation absence, originality rejection, cost or method verification inferred.",
+  "clarifications": [
+    {
+      "id": "2606.16490",
+      "revision": 3,
+      "metadata_sha256": "4bd95f8ab227b1c1f360722df14fbd2e9298cff297f73933ccc4ce69409af561",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "against the deployed Robot A policy",
+      "reason": "deployed 指双机器人研究课程中已经训练的伙伴策略；不是语言 Agent 面向用户的生产上线，保留其机器人方法原创性。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2608.15138",
+      "revision": 2,
+      "metadata_sha256": "a253c94273b847cfb755769c6372ba335adc7230649a66ef66bee5b546f59303",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "only if a replay in simulation",
+      "reason": "这里把修订部署定义为通过仿真回放后更换 ABR 选择规则；九组网络数据及播放器实验不声称商业用户流量或生产 A/B。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2608.18389",
+      "revision": 2,
+      "metadata_sha256": "219e302b0cac6d4a108a1b8b1cf76fc53ff4befc3ea78116896db25336b7ca10",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "SWE-bench Verified and SWE-bench Pro",
+      "reason": "开头 deployed 泛指 coding agent 的应用趋势；本文实测是语义等价仓库变体上的两个 scaffold 与 SWE-bench，不是线上用户实验。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2609.37670",
+      "revision": 2,
+      "metadata_sha256": "adb3c268e3b6800f7bc6e7df8748ec1e0714ad7995bfdaffb0c862a09b9e1e46",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "average-velocity network deployed at inference",
+      "reason": "deployed 指生成器实际推理时使用的平均速度网络，与训练正则目标一致性有关，不指商业部署或生产流量。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2610.38610",
+      "revision": 2,
+      "metadata_sha256": "3b36627e7b918be7c764430ffef96582f6afe528e3c4e621d3ddc0a809a489b4",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "the deployed agent's own rollouts",
+      "reason": "deployed 指给定执行策略/模型版本，实验比较 ALFWorld、WebShop 和 tau2-bench 上的独立重放，不是线上流量实验。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.07342",
+      "revision": 2,
+      "metadata_sha256": "8fe853245a516efb2f89afeedab457212f0c4e2303a369cbc6b1fa31f2e29775",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "two building-automation datasets",
+      "reason": "deployments 指两个楼宇自动化数据集所对应的路由配置；摘要研究的是注入违规后的修复套件，不报告生产用户 A/B。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.09326",
+      "revision": 2,
+      "metadata_sha256": "6e13e5cffebed016b9b20d9e9c2fab3c75494f68e09659ccd53f9535b765ce50",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "an interactive narrative game",
+      "reason": "deployed 是引言中基础模型成为 Agent 的一般背景；实际评测是 Detroit 游戏中的分支情节与十二模型对照。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.10602",
+      "revision": 2,
+      "metadata_sha256": "ee68e6d1605c74c094b714d1ac5449c05cd52622691338d63a3aa16235dd59d8",
+      "cleared_protection_rules": [
+        "text_production_mention"
+      ],
+      "abstract_witness": "published production lines",
+      "reason": "production 指制造生产线；平台评测为十八项仿真建模任务与已发表焊接车间案例，不是 LLM 线上生产对照。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.11342",
+      "revision": 2,
+      "metadata_sha256": "8d6bfb4f367f602df2ad378972ce06ae922f05996bcaeaffbd4344663babc0ea",
+      "cleared_protection_rules": [
+        "text_production_mention"
+      ],
+      "abstract_witness": "On generated customer-service decisions",
+      "reason": "customer-service 是生成的客服决策和模拟完整对话任务；摘要明确样本构造与冻结权重模型，不提供真实客户部署信号。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.11985",
+      "revision": 2,
+      "metadata_sha256": "4934fe1ac76e73220647de5b3b0320755b0848511efe95b38c1d60e09cf4a7e9",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "This survey organizes the field",
+      "reason": "deployed agent 出现在跨科学轨迹密度比的动机列举中；本文是 weak-support 综述，不是新的 Agent 部署或生产实验。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.12856",
+      "revision": 1,
+      "metadata_sha256": "0f5805d347e252f65ea34feb3d89bfa910cb2691e2c44a3f1a78cacfa974ea1a",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "abstract_witness": "3D production",
+      "reason": "production 在职业任务列表中指三维内容制作；deployed 为多 Agent 系统的一般背景，实际是145项任务的隐藏验证器基准。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.14581",
+      "revision": 1,
+      "metadata_sha256": "5e385ac2273d01b9dec638c84f1aaeb5cb840c8976b0ed63a4ba93c34441556d",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "abstract_witness": "tau2-bench's airline and retail domains",
+      "reason": "customer 是 tau2-bench 的模拟用户身份/认证字段；Deployed services 是用来说明无金标准情境的一般对比，本文实测2160条基准episode。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.14808",
+      "revision": 1,
+      "metadata_sha256": "255d59f478c32092a718492b4441d1d0ebf19d5c7a620adcc60cb15d43750cfc",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "abstract_witness": "selected tasks from nine benchmarks",
+      "reason": "SaaS deployment/customer payment 定义资源放大攻击的威胁模型；实测来自九个基准的选定任务，不是对外 SaaS 用户流量实验。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.14925",
+      "revision": 1,
+      "metadata_sha256": "086b7ef72008d81e6586288328b58c7f383279be299e19e56a116c54b496068b",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "2,620 problems spanning 1,827 tools",
+      "reason": "deployed 为会话工具 Agent 的背景句；本文给出多轮问题集、用户模拟器和checker-fixer，不声称生产部署结果。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.15102",
+      "revision": 1,
+      "metadata_sha256": "19e9203e79e49fadefa659c0ab3ed391bc8ac75dd24f95f612f56122cf985eb2",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "the architectures of two leading deployed forecasting systems",
+      "reason": "摘要测试两种既有预测系统的检索架构及受控伪造文章影响，不是已部署服务的线上 A/B 或真实用户干预；此澄清不否定安全基准价值。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.15268",
+      "revision": 1,
+      "metadata_sha256": "e55fefad38a1b6d502c399560706f6cb7362463d9c6bccf7d8a19837b1101c22",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "abstract_witness": "retail and airline domains of $τ^2$-bench",
+      "reason": "customer-service deployments 是动机，所谓 serving fresh tasks 和 deployment logs 在本文摘要的明确实验环境是 tau2-bench；不据此认定真实客户部署。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.15460",
+      "revision": 1,
+      "metadata_sha256": "a0963c9b67910610f49a0b7f2bb76eb06cbb1829f8276989b4dc541e00146a00",
+      "cleared_protection_rules": [
+        "text_production_mention"
+      ],
+      "abstract_witness": "production ranking of the models",
+      "reason": "production 指 Agent 产出文件/自主任务的频率排名；四种公共服务情境与context-free sandbox 对照不是生产流量。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.16588",
+      "revision": 1,
+      "metadata_sha256": "40db08307252b5bb505bded067c50c0bdc59a979a154722254c4ec347b9868ec",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "Affected-version ranges in vulnerability databases",
+      "reason": "deployments 指受 CVE 影响的软件版本部署，而非本文 Agent 上线；实测是版本固定容器中的127项PoC迁移基准。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.16693",
+      "revision": 1,
+      "metadata_sha256": "662f4a3e25a146833678bd0ba27b6ea2bc69d87effc8d08758e07a9ba60d5b8c",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "83 long-horizon attack instances",
+      "reason": "deployed mobile agents 是安全动机；实际构建83个注入测试，末句明言 pre-deployment auditing，不提供线上流量证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.16937",
+      "revision": 2,
+      "metadata_sha256": "8d9a1a3f2fc6e238697bdc4bbb9cd3b69ca12f246cbd35f7c7fec8c16111f1ef",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "Across four benchmarks and three S1 models",
+      "reason": "deployed 为 typed S1 在路由/审核中的一般背景；实测四个基准、三模型和离线经验卡攻击，不是用户生产干预。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.17052",
+      "revision": 1,
+      "metadata_sha256": "26dc5566b16c67c57f7ae89c57751c4529595a5210019d74f53f801a6ca1a40e",
+      "cleared_protection_rules": [
+        "text_production_mention"
+      ],
+      "abstract_witness": "two corpora of 15 recent arXiv preprints each",
+      "reason": "production scale 是开篇同行评审普及背景；本研究向两个15篇语料注入357个错误，比较受控审稿器，不是生产论文审稿 A/B。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.17108",
+      "revision": 2,
+      "metadata_sha256": "df5b3c9705382c82bd4d493569b685d708105db4df10d01e5a2cf14b1ef62767",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "Deployed formats",
+      "reason": "Deployed 修饰 GPTQ/AWQ/llama.cpp 已有权重格式；本文主要是字节压缩、ASIC/FPGA 解码与边缘硬件测量，不是 Agent 生产部署。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.17524",
+      "revision": 1,
+      "metadata_sha256": "e7be9fd50af4c94d071c3a7b925c39ae67ca9cc4b8480d5a5124399fedc67cc3",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "the deployed network is the last student",
+      "reason": "deployed network 指训练结束保留最后一个学生网络以免增加推理开销；实测是图像分类数据与架构，不是生产服务流量。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.17556",
+      "revision": 1,
+      "metadata_sha256": "ad7a87a37157fb3e48ae725ee6870a42df53d519d9d85cbb57b84ee3d2f19482",
+      "cleared_protection_rules": [
+        "text_production_mention"
+      ],
+      "abstract_witness": "inspired by batch production",
+      "reason": "production 指因果结构模型所模拟的批次制造过程；合成生成器和八方法比较不构成 LLM 生产部署。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.17598",
+      "revision": 1,
+      "metadata_sha256": "63568799307917099bb408781a28c2a7485af2e7bb1a6103988e601124eec239",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "on the Lingxi X2",
+      "reason": "deployed 是具身导航模型在灵犀X2和数字孪生场地上的研究性执行，保留真实机器人结果，但不把硬件实验误当语言Agent线上A/B。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.17639",
+      "revision": 1,
+      "metadata_sha256": "ec2210d4994798920b2279dd0cb716a302f91efb9b45ad9672cb43576ce5cc90",
+      "cleared_protection_rules": [
+        "text_production_mention"
+      ],
+      "abstract_witness": "a retail benchmark",
+      "reason": "customer 是零售基准加入的同名同邮编模拟账户，用来测试错误写入；不是真实客户流量对照。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.17910",
+      "revision": 1,
+      "metadata_sha256": "d0fa44c7f8e07e82277b2eb65652fdbab01510fd9533984966031b99f8fae828",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "automated planning tasks",
+      "reason": "deployed 是自主Agent普及背景；Symbolic Swapper 在符号规划域中改写词汇并攻击模型，不报告真实服务用户。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.17929",
+      "revision": 1,
+      "metadata_sha256": "81d3039905a0c1dd716ebe3f0dfd02dab81935646f036593000c2c1e28c529f9",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "locally deployed LLM assistants",
+      "reason": "deployed 指研究团队本地运行开源模型；八模型检索70篇论文与Mac/A100延迟测量不是线上用户实验。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.18030",
+      "revision": 1,
+      "metadata_sha256": "bf31a0aa353379473af9564fdbeb35f42fcceec9a388853e84e173c61c403067",
+      "cleared_protection_rules": [
+        "text_production_mention"
+      ],
+      "abstract_witness": "production code",
+      "reason": "production code 是代码性能重要性的动机；PERFARENA 实际执行公开编程竞赛解答并测时间/内存/能耗，不是线上生产系统A/B。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.18104",
+      "revision": 1,
+      "metadata_sha256": "10d465aca7ca6b364b89680e8d747731f72f7d97ee60a018ff664a22621497b8",
+      "cleared_protection_rules": [
+        "text_production_mention"
+      ],
+      "abstract_witness": "model a customer pays for",
+      "reason": "customer 属 API 中途换模型的审计威胁模型；实验是在构造的对话历史与替代模型配对上测检测，不声称真实付费客户线上实验。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.18272",
+      "revision": 1,
+      "metadata_sha256": "15a5caa530e3c7fb610046abc72c38b46830061bbaf51fed905f75350004f6ae",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "validate this acquisition on 33 open-source decoder-only models",
+      "reason": "deployed AI systems 是活体取证的目标背景；实测为33个公开模型的字节级捕获/线性探针，不是生产用户比较。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.18298",
+      "revision": 1,
+      "metadata_sha256": "15332bd920762b70760d18fab4244d2961ca4ace636dec887844cd3591025480",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "executed by the MPC in the simulation",
+      "reason": "deployed 指机器人研究 real-to-sim 后的真实桌面执行；四项操作任务的仿真/实机比较不构成语言Agent线上流量实验。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.18471",
+      "revision": 1,
+      "metadata_sha256": "444350ab6ebd21d8186794522e4c205e0322a66ffb11cd6d5f5783cea0e4ca2e",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "four agent-evaluation benchmarks",
+      "reason": "deployed agent systems 解释验证可观测性问题；本文冻结轨迹并改变native/abstracted/restored视图，属于四基准协议研究。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.18501",
+      "revision": 1,
+      "metadata_sha256": "106327c852766810044711d1f660911ab1f332ede5749c9649c35562dc3ec459",
+      "cleared_protection_rules": [
+        "deployment_signal"
+      ],
+      "abstract_witness": "Field deployments were conducted in Lake Pontchartrain",
+      "reason": "deployments 指水体监测船现场采样，后接藻华分类；不是通用语言Agent方法或生产A/B，本文方法原创性不由此否定。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_review_completed": false,
+      "scope": "individual-pinned-abstract-semantic-clarification",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    }
+  ]
+}

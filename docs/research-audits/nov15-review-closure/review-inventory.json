@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "window": {
+    "start": "2026-11-10",
+    "end": "2026-11-15"
+  },
+  "counts": {
+    "raw_unique_identities": 9178,
+    "outside_window_date_only": 7922,
+    "registered_unique_identities": 1256,
+    "primary_decisions": 72,
+    "p2_selection_only_closed": 1138,
+    "inherited_terminal": 46,
+    "high_cost_review_done": 24,
+    "accepted_low_cost_not_implemented": 14,
+    "protected_pending": 0,
+    "implementations": 0,
+    "gpu_runs": 0
+  },
+  "candidate_review_complete": true,
+  "review_watermark_advanced": true,
+  "all_sources_exhaustive": false
+}

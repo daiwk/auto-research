@@ -1,0 +1,361 @@
+{
+  "schema_version": 1,
+  "organization": "Google DeepMind",
+  "checked_on": "2026-11-18",
+  "window": {
+    "start": "2026-11-10",
+    "end": "2026-11-15"
+  },
+  "scope": "Current selected-publication landing, news landing and five window-dated official product/science articles, plus exact inherited and resolved records; not a whole-site census.",
+  "all_sources_exhaustive": false,
+  "expected_records": 10,
+  "expected_pages": 7,
+  "pages": [
+    {
+      "url": "https://deepmind.google/research/publications/",
+      "status": "retrieved",
+      "retrieved_at": "2026-11-18",
+      "sha256": "a6be5d0a497298244e01a9a495d564d238063c7aae7af318b24f79d1bd16c077",
+      "bytes": 143304
+    },
+    {
+      "name": "deepmind-blog",
+      "url": "https://deepmind.google/blog/",
+      "status": "retrieved",
+      "sha256": "f456b933de3e5b836db5c5e7a75522eb195e1870196e3aa7e5d2a827aa5264cd",
+      "bytes": 29843,
+      "retrieved_at": "2026-11-18T04:31:52.047554+00:00"
+    },
+    {
+      "name": "weather",
+      "url": "https://deepmind.google/blog/opening-the-datasets-behind-our-ai-weather-models/",
+      "status": "retrieved",
+      "sha256": "1e8df67ea570640f7525700cabffdeae99e9002a523b0701f72ac03999257325",
+      "bytes": 29460,
+      "retrieved_at": "2026-11-18T04:31:52.046443+00:00"
+    },
+    {
+      "name": "alphagenome",
+      "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+      "status": "retrieved",
+      "sha256": "52599f231fcb245230bfbd9ca1aae638e32a499e2a2d350a6a1716c34afda4fa",
+      "bytes": 158198,
+      "retrieved_at": "2026-11-18T04:31:52.413678+00:00"
+    },
+    {
+      "name": "robotics",
+      "url": "https://deepmind.google/blog/gemini-robotics-2-5-accelerates-real-world-physical-intelligence/",
+      "status": "retrieved",
+      "sha256": "9cd5b5362b631a41a5debc55fd2084f7f0409f621b5e69489a51675e26e939b2",
+      "bytes": 35658,
+      "retrieved_at": "2026-11-18T04:31:52.691561+00:00"
+    },
+    {
+      "name": "hydrogen",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+      "status": "retrieved",
+      "sha256": "32279662dd20162b15e0f9b1f5f2a577d9271e757457d95e76ecb72d74776629",
+      "bytes": 418532,
+      "retrieved_at": "2026-11-18T04:31:53.245120+00:00"
+    },
+    {
+      "name": "carbon",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/",
+      "status": "retrieved",
+      "sha256": "4d1ca0fe4ec1984cf9bf116726aaecfca4d823015545f1d74147e26feae50cc8",
+      "bytes": 399872,
+      "retrieved_at": "2026-11-18T04:31:53.184274+00:00"
+    }
+  ],
+  "records": [
+    {
+      "url": "https://deepmind.google/blog/agentic-cheminformatics-with-google-antigravity/",
+      "title": "Agentic cheminformatics with Google Antigravity",
+      "organization": "Google DeepMind",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "other_official_observations",
+      "arxiv_ids": [],
+      "date_evidence": [
+        {
+          "url": "https://deepmind.google/blog/agentic-cheminformatics-with-google-antigravity/",
+          "date": "2026-11-03",
+          "kind": "official page date"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "review_status": "out_of_scope",
+      "reason": "工具工作流介绍，不等同于新的论文实验。",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/google-deepmind-source-review.json",
+      "inherited_reference_sha256": "c99e93deb3661363a9e7f687b425c7f58725cdaf1fb7b50b6bcd997b0160faf7"
+    },
+    {
+      "url": "https://deepmind.google/research/publications/279443/",
+      "title": "EmbeddingGemma 2: Unified and Efficient Multimodal Representations",
+      "organization": "Google DeepMind",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-manifest.json",
+      "reference_sha256": "1c5153870636ca5917e6292a2b553c9850de6fd742619f2d4da4c138c8b83edf",
+      "reference_section": "official_directory.visible_dated_records",
+      "arxiv_ids": [
+        "2610.37364"
+      ],
+      "date_evidence": [
+        {
+          "url": "https://deepmind.google/research/publications/279443/",
+          "date": "2026-10-27",
+          "kind": "directory display"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "body_sha256": "0e9e26deaa7e3ffd3f9dd39916586db5cd6eda2b8eb180e11db5bc4ad7fddb91",
+      "retrieved_at": "2026-11-09T10:12:22.978130+00:00",
+      "primary_source_url": "https://arxiv.org/abs/2610.37364",
+      "reason": "Known catalog identity 2610.37364/embeddinggemma2; inherited prior official link check; directory day is not first publication.",
+      "captured_disposition": "prior_catalogued",
+      "review_status": "known",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/google-deepmind-source-review.json",
+      "corroborating_evidence": [
+        {
+          "reference": "docs/research-manifest.json",
+          "reference_sha256": "1c5153870636ca5917e6292a2b553c9850de6fd742619f2d4da4c138c8b83edf",
+          "reference_section": "official_directory.added_detail_checks",
+          "review_status": "known",
+          "reason": "EmbeddingGemma 2 已入库。"
+        }
+      ],
+      "inherited_reference_sha256": "c99e93deb3661363a9e7f687b425c7f58725cdaf1fb7b50b6bcd997b0160faf7"
+    },
+    {
+      "url": "https://github.com/google-deepmind/pluralistic_agents",
+      "title": "Scaling Public Input on AI Policy with Pluralistic Agents",
+      "organization": "Google DeepMind",
+      "review_status": "reviewed",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": true,
+      "reason": "旧记录缺原稿身份的例外已由确切arXiv2611.16028v1和八位作者对齐解决；原文方法/成本现已读，官方仓库当前commit公开分析/实验代码及合成数据但不公开人类个体数据。完整实验不复现，审查DONE。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "arxiv_ids": [
+        "2611.16028"
+      ],
+      "review_artifact": "research-audits/nov15-review-closure/google-primary-reviews.json",
+      "source_url": "https://arxiv.org/html/2611.16028v1",
+      "upstream_revision": "35d332f9ccf16f4cdf28211b563e539319ad5d44",
+      "upstream_readme_sha256": "91e25adfae5a5b25b423ac52cd09e2b6f202d9ccbb76e9e9da13bebebe7da00f"
+    },
+    {
+      "organization": "Google DeepMind",
+      "url": "https://deepmind.google/research/publications/250558/",
+      "title": "Reasoning or Rationalization? Moral Robustness as a Frontier for Non-Verifiable Reasoning in LLMs",
+      "review_status": "historical",
+      "reason": "实际当前首页30条与旧Oct29全9页266URL比较，准确新增URL仅此条和已知EmbeddingGemma2；本条官方detail明确June10,2026，View publication和Download均指向arXiv2606.12731，早于本次10/16窗口。这里不推断全网最早首发、不声称方法/实现已经核验。",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "method_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "arxiv_ids": [
+        "2606.12731"
+      ],
+      "primary_source_url": "https://arxiv.org/abs/2606.12731",
+      "date_evidence": [
+        {
+          "url": "https://deepmind.google/research/publications/250558/",
+          "date": "2026-06-10",
+          "kind": "official detail date; establishes publication before the requested window, not a claim of globally earliest date"
+        }
+      ],
+      "body_sha256": "a6fb3cddab3fb15af88f597fc4089ce081e06b069da8233bd015f88e5cef2cc2",
+      "retrieved_at": "2026-11-11T05:40:16.616937+00:00",
+      "attempts": [
+        {
+          "url": "https://deepmind.google/research/publications/250558/",
+          "result": "retrieved; explicit June10,2026 and exact arXiv2606.12731 links",
+          "http_status": 200,
+          "body_sha256": "a6fb3cddab3fb15af88f597fc4089ce081e06b069da8233bd015f88e5cef2cc2",
+          "bytes": 135851
+        }
+      ],
+      "source_review_scope": "official exact detail identity/date and outgoing primary links only",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/google-deepmind-source-review.json",
+      "inherited_reference_sha256": "c99e93deb3661363a9e7f687b425c7f58725cdaf1fb7b50b6bcd997b0160faf7"
+    },
+    {
+      "url": "https://deepmind.google/blog/opening-the-datasets-behind-our-ai-weather-models/",
+      "title": "Opening the datasets behind our AI weather models",
+      "organization": "Google DeepMind",
+      "review_status": "out_of_scope",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "11月13日官方发布为SatWeave卫星拼接和PARDIG降水数据；范围是气象/水文/气候，不是本轮通用LLM、Agent或JEPA/推荐评测。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "date_evidence": [
+        {
+          "date": "2026-11-13",
+          "url": "https://deepmind.google/blog/opening-the-datasets-behind-our-ai-weather-models/",
+          "location": "official article date"
+        }
+      ],
+      "source_receipt": {
+        "name": "weather",
+        "url": "https://deepmind.google/blog/opening-the-datasets-behind-our-ai-weather-models/",
+        "status": "retrieved",
+        "sha256": "1e8df67ea570640f7525700cabffdeae99e9002a523b0701f72ac03999257325",
+        "bytes": 29460,
+        "retrieved_at": "2026-11-18T04:31:52.046443+00:00"
+      }
+    },
+    {
+      "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+      "title": "AlphaGenome2",
+      "organization": "Google DeepMind",
+      "review_status": "out_of_scope",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "11月11日DNA条件模型与生物细胞变异预测；该选题不扩张到专用基因组学模型，不能因Google就把生物任务当通用LLM方法。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "date_evidence": [
+        {
+          "date": "2026-11-11",
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+          "location": "official article date"
+        }
+      ],
+      "source_receipt": {
+        "name": "alphagenome",
+        "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+        "status": "retrieved",
+        "sha256": "52599f231fcb245230bfbd9ca1aae638e32a499e2a2d350a6a1716c34afda4fa",
+        "bytes": 158198,
+        "retrieved_at": "2026-11-18T04:31:52.413678+00:00"
+      }
+    },
+    {
+      "url": "https://deepmind.google/blog/gemini-robotics-2-5-accelerates-real-world-physical-intelligence/",
+      "title": "Gemini Robotics2.5",
+      "organization": "Google DeepMind",
+      "review_status": "out_of_scope",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "11月10日为VLA产品/合作伙伴能力公告与工厂概念验证；本篇入口未提供可独立核对的训练算法论文，能力和benchmark宣传不等于本地方法复现，不据此制造可执行算子。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "date_evidence": [
+        {
+          "date": "2026-11-10",
+          "url": "https://deepmind.google/blog/gemini-robotics-2-5-accelerates-real-world-physical-intelligence/",
+          "location": "official article date"
+        }
+      ],
+      "source_receipt": {
+        "name": "robotics",
+        "url": "https://deepmind.google/blog/gemini-robotics-2-5-accelerates-real-world-physical-intelligence/",
+        "status": "retrieved",
+        "sha256": "9cd5b5362b631a41a5debc55fd2084f7f0409f621b5e69489a51675e26e939b2",
+        "bytes": 35658,
+        "retrieved_at": "2026-11-18T04:31:52.691561+00:00"
+      }
+    },
+    {
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+      "title": "Introducing Gemini4Hydrogen",
+      "organization": "Google DeepMind",
+      "review_status": "out_of_scope",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "11月12日产品模型/托管服务发布，文章另标11月16日更新；不是可复现训练算法稿。本轮不将模型品牌、价格或产品benchmark结果编成新算法。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "date_evidence": [
+        {
+          "date": "2026-11-12",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+          "location": "official article date"
+        }
+      ],
+      "source_receipt": {
+        "name": "hydrogen",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+        "status": "retrieved",
+        "sha256": "32279662dd20162b15e0f9b1f5f2a577d9271e757457d95e76ecb72d74776629",
+        "bytes": 418532,
+        "retrieved_at": "2026-11-18T04:31:53.245120+00:00"
+      }
+    },
+    {
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/",
+      "title": "Gemini4Carbon is now available",
+      "organization": "Google DeepMind",
+      "review_status": "out_of_scope",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "11月10日既有模型的可用性/产品发布，非独立新算法论文；不把托管模型对比或商业上线当生产搜广推A/B。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "date_evidence": [
+        {
+          "date": "2026-11-10",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/",
+          "location": "official article date"
+        }
+      ],
+      "source_receipt": {
+        "name": "carbon",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/",
+        "status": "retrieved",
+        "sha256": "4d1ca0fe4ec1984cf9bf116726aaecfca4d823015545f1d74147e26feae50cc8",
+        "bytes": 399872,
+        "retrieved_at": "2026-11-18T04:31:53.184274+00:00"
+      }
+    },
+    {
+      "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+      "title": "Introducing AlphaProof Code",
+      "organization": "Google DeepMind",
+      "review_status": "known",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "11月10日正式技术报告已在nov11组件批次读原文与公开仓库，完整Lean证明/构建活动已标高成本不复现；本轮不重开或声称GPU实验。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "reference": "research-audits/nov11-components/priority-review.json",
+      "inherited_not_new_fulltext_review": true
+    }
+  ],
+  "directory_exceptions": [],
+  "counts": {
+    "out_of_scope": 6,
+    "known": 2,
+    "reviewed": 1,
+    "historical": 1
+  },
+  "resolved_previous_exceptions": [
+    {
+      "url": "https://github.com/google-deepmind/pluralistic_agents",
+      "old_reference": "research-audits/nov09-review-closure/google-deepmind-source-review.json",
+      "old_exception_type": "date_or_identity_unresolved",
+      "resolution": "Exact arXiv2611.16028v1, authors and current official repository verified; original-method/cost decision retained in google-primary-reviews.json. No human-study or API campaign was run."
+    }
+  ],
+  "limitations": [
+    "The selected bibliography still reports268 publications and latest visible entryOctober27; a selected bibliography is not the complete institution output.",
+    "Current November articles were read for identity, date and scope, not to infer an unseen technical paper or unpublished training recipe.",
+    "Google/Meta priority clearance requires the protected manuscript review, not a model-name mention in another author abstract.",
+    "No code, training, GPU experiment or global watermark change is performed by these source files."
+  ]
+}

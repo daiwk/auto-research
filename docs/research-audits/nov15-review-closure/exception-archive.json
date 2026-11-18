@@ -1,0 +1,1905 @@
+{
+  "schema_version": 1,
+  "archived_on": "2026-11-18",
+  "blocking": false,
+  "retry_policy": "on-new-evidence-only",
+  "record_count": 53,
+  "previous_archive": "../nov09-review-closure/exception-archive.json",
+  "entries": [
+    {
+      "url": "https://research.google/pubs/a-correlation-analysis-approach-to-finding-interpretable-latent-representations-via-conditional-generative-models/",
+      "title": "A Correlation Analysis Approach to Finding Interpretable Latent Representations via Conditional Generative Models",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/a-correlation-analysis-approach-to-finding-interpretable-latent-representations-via-conditional-generative-models/",
+          "result": "retrieved",
+          "sha256": "701c14379e2105cb41f5f05ba59efd58ab324b94c84f0a5359706853de64b840",
+          "bytes": 143166,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://openreview.net/forum?id=RDEIyjDBOC"
+      ],
+      "abstract_scope_witness": "Supervised disentanglement, that is, learning interpretable nonlinear latent representations of a target data view informed by an auxiliary data view, is a central challenge in interpretable machine learning. We formulate this problem as a partially linear invertible canonical correlation analysis (PLiCCA). Specifically, given two data views, (i) complex data lying near a potentially high-dimensional manifold, and (ii) auxiliar",
+      "body_sha256": "701c14379e2105cb41f5f05ba59efd58ab324b94c84f0a5359706853de64b840",
+      "retrieved_at": "2026-11-18T04:24:20.079771+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/a-generative-ai-and-rag-driven-framework-for-zero-touch-gate-level-simulations-and-timing-debug/",
+      "title": "A Generative AI and RAG-Driven Framework for Zero-Touch Gate level simulations and Timing Debug",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/a-generative-ai-and-rag-driven-framework-for-zero-touch-gate-level-simulations-and-timing-debug/",
+          "result": "retrieved",
+          "sha256": "28b56aa55f239fc1e98dd159c518e9e59f94a6b74a08c0b824ba580188eee5f7",
+          "bytes": 143676,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [],
+      "abstract_scope_witness": "Abstract—Gate-Level Simulation (GLS) remains a critical gatekeeper in the semiconductor industry for catching elusive clock-domain crossing (CDC) issues, power-up initialization anomalies, and post-layout timing violations. However, it is universally acknowledged as a major bottleneck in the ASIC tape-out cycle. Malformed netlist collaterals, divergent netlist-to-RTL hierarchies, brittle testbench migration loops, and prolonged",
+      "body_sha256": "28b56aa55f239fc1e98dd159c518e9e59f94a6b74a08c0b824ba580188eee5f7",
+      "retrieved_at": "2026-11-18T04:24:21.073156+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/a-graph-based-infrastructure-change-modeling-system-with-dependency-aware-risk-propagation-for-pre-deployment-failure-prediction/",
+      "title": "A Graph-Based Infrastructure Change Modeling System with Dependency-Aware Risk Propagation for Pre-Deployment Failure Prediction",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/a-graph-based-infrastructure-change-modeling-system-with-dependency-aware-risk-propagation-for-pre-deployment-failure-prediction/",
+          "result": "retrieved",
+          "sha256": "b3426e7e4066c2d40de19375a68c4438703af48b916f012be2ef9d65375e1aa7",
+          "bytes": 143222,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://www.tdcommons.org/dpubs_series/11784/"
+      ],
+      "abstract_scope_witness": "Modern Continuous Integration and Continuous Deployment (CI/CD) systems rely predominantly on static analysis and deterministic rules, rendering them incapable of forecasting emergent risks arising from complex infrastructure interactions. This reactive approach frequently fails to prevent production incidents caused by non-obvious dependencies between code, configuration, and infrastructure. This paper proposes a novel Artific",
+      "body_sha256": "b3426e7e4066c2d40de19375a68c4438703af48b916f012be2ef9d65375e1aa7",
+      "retrieved_at": "2026-11-18T04:24:20.063183+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/accelerating-full-cycle-verification-with-verisium-simai-ai-driven-methodologies-for-regression-compression-coverage-closure-and-bug-hunting/",
+      "title": "Accelerating Full-Cycle Verification With Verisium SimAI: AI-Driven Methodologies for Regression Compression, Coverage Closure, and Bug Hunting",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/accelerating-full-cycle-verification-with-verisium-simai-ai-driven-methodologies-for-regression-compression-coverage-closure-and-bug-hunting/",
+          "result": "retrieved",
+          "sha256": "a236aaab5149f3466321b57524d0da2bf503fd50213b2e71cc50969a861d8b9a",
+          "bytes": 142214,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [],
+      "abstract_scope_witness": "Abstract Link: https://docs.google.com/document/d/1heUixXVgAvMuFtjGIEEzsv9VaiXXFvBRJB2IjLWScT4/edit?resourcekey=0-AVq_DoqQLtyeSaT_ZJt0JA&tab=t.0 Meet the teams driving innovation Our teams advance the state of the art through research, systems engineering, and collaboration across Google. See our teams Follow us Explore our other initiatives Google AI Discover how Google AI is committed to enriching knowledge and solving comple",
+      "body_sha256": "a236aaab5149f3466321b57524d0da2bf503fd50213b2e71cc50969a861d8b9a",
+      "retrieved_at": "2026-11-18T04:24:21.800066+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/agentic-knowledge-graphs-recursive-crawling-and-graph-construction-in-enterprise-documents/",
+      "title": "Agentic Knowledge Graphs: Recursive Crawling and Graph Construction in Enterprise Documents",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/agentic-knowledge-graphs-recursive-crawling-and-graph-construction-in-enterprise-documents/",
+          "result": "retrieved",
+          "sha256": "1e8d0726291e960d955ae9d14079e859b3caea2a9af96ce10ebe06bea86cd293",
+          "bytes": 143585,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [],
+      "abstract_scope_witness": "This research paper addresses the limitations of semantic search in complex enterprise document ecosystems. Traditional RAG pipelines often fail to capture hierarchical and interconnected information, leading to retrieval inaccuracies. We propose Agentic Knowledge Graphs featuring Recursive Crawling as a robust solution for navigating superseding logic and multi-hop references. Our benchmark evaluation using the Code of Federal",
+      "body_sha256": "1e8d0726291e960d955ae9d14079e859b3caea2a9af96ce10ebe06bea86cd293",
+      "retrieved_at": "2026-11-18T04:24:22.121677+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/ai-assisted-test-point-insertion-for-test-time-reduction/",
+      "title": "AI-Assisted Test Point Insertion for Test Time Reduction",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/ai-assisted-test-point-insertion-for-test-time-reduction/",
+          "result": "retrieved",
+          "sha256": "25baefb5b56b6b9e3a3d11777716a9753beb41f46c735d12ab606609f94a24f2",
+          "bytes": 142645,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [],
+      "abstract_scope_witness": "In modern deep-submicron System-on-Chip (SoC) designs, achieving late-stage transition fault coverage (the final 2–3%) requires a disproportionately high volume of Automatic Test Pattern Generation (ATPG) patterns, creating a severe bottleneck in test time and manufacturing costs. Traditional Test Point Insertion (TPI) flows rely on generic, uniform EDA distributions and length-prone iterative ATPG regressions requiring 3 to 5",
+      "body_sha256": "25baefb5b56b6b9e3a3d11777716a9753beb41f46c735d12ab606609f94a24f2",
+      "retrieved_at": "2026-11-18T04:24:21.666868+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/android-bench-measuring-frontier-coding-agents-on-long-horizon-mobile-engineering/",
+      "title": "Android Bench: Measuring Frontier Coding Agents on Long-Horizon Mobile Engineering",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "AndroidBench2.0官方详情只列2026，PDF首页只列November2026。已核对官方作者页、题名与PDF首页，未找到精确首发日；PDF创建11月13日仅为文件元数据，不替代发布证据。保留高成本边界：30个长程Android任务、真实模拟器、闭源Agent/API；没有运行或以固定UI脚本冒充能力。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/android-bench-measuring-frontier-coding-agents-on-long-horizon-mobile-engineering/",
+          "result": "retrieved",
+          "sha256": "9f7c16512ce5f1048f334d6ca46c2b779c73580335c435007da5721dbe357434",
+          "bytes": 144743,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        },
+        {
+          "url": "https://storage.googleapis.com/gweb-research2023-media/pubtools/1050702.pdf",
+          "result": "retrieved",
+          "sha256": "5d08094b40be5f5f6e06564d79d8286e397a29af112bb63e09e22eedef7a5c78",
+          "observation": "PDF page1 visually checked: November2026, exact title and3authors; §4–5 has long real emulator tasks, not a precise release date"
+        },
+        {
+          "url": "https://research.google/people/bentrengrove/",
+          "result": "retrieved-via-web",
+          "observation": "exact author/paper link; year2026 only"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://storage.googleapis.com/gweb-research2023-media/pubtools/1050702.pdf"
+      ],
+      "abstract_scope_witness": "Android Bench 2.0 measures coding agents on long Android engineering tasks. It has 30 tasks written by Android developers: new app development from design mocks, library migrations in open-source apps, new features in existing apps, and conversions of Flutter and React Native apps to Jetpack Compose. The human-written solutions change a median of 2,336 lines across 42 files. Each task runs against a live Android emulator. Deter",
+      "body_sha256": "9f7c16512ce5f1048f334d6ca46c2b779c73580335c435007da5721dbe357434",
+      "retrieved_at": "2026-11-18T04:24:22.378532+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/atlas-automated-tco-oriented-llm-migration-with-agentic-systems/",
+      "title": "ATLAS: Automated TCO-Oriented LLM Migration with Agentic Systems",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/atlas-automated-tco-oriented-llm-migration-with-agentic-systems/",
+          "result": "retrieved",
+          "sha256": "1c3f3fd45e3385847115206d9a573e9137df02441d6ceaf5c8fb8a7a452271ab",
+          "bytes": 145639,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://openreview.net/pdf?id=belb8ACgYV"
+      ],
+      "abstract_scope_witness": "Rapid AI accelerator development drives Large Language Model(LLM) owners to migrate models to new hardware to optimize Total Cost of Ownership (TCO). However, this migration is complex, involving model analysis, profiling, compilation and run-time validation---a multi-step workflow often error-prone, requiring weeks of senior engineer effort. This paper introduces ATLAS, an agentic system enabling TCO- and performance-driven wo",
+      "body_sha256": "1c3f3fd45e3385847115206d9a573e9137df02441d6ceaf5c8fb8a7a452271ab",
+      "retrieved_at": "2026-11-18T04:24:22.383124+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/auditoryhum-auditory-scene-label-generation-and-clustering-using-human-mllm-collaboration/",
+      "title": "AuditoryHuM: Auditory Scene Label Generation and Clustering using Human-MLLM Collaboration",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/auditoryhum-auditory-scene-label-generation-and-clustering-using-human-mllm-collaboration/",
+          "result": "retrieved",
+          "sha256": "ac04516f5b6d2fd6c9dbdac83bacd2fabfcd3a2a32d4ffbff10cd18542384497",
+          "bytes": 143881,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [],
+      "abstract_scope_witness": "Manual annotation of audio datasets is labour intensive, and it is challenging to balance label granularity with acoustic separability. We introduce AuditoryHuM, a novel framework for the unsupervised discovery and clustering of auditory scene labels using a collaborative Human-Multimodal Large Language Model (MLLM) approach. By leveraging MLLMs (Gemma and Qwen) the framework generates contextually relevant labels for audio dat",
+      "body_sha256": "ac04516f5b6d2fd6c9dbdac83bacd2fabfcd3a2a32d4ffbff10cd18542384497",
+      "retrieved_at": "2026-11-18T04:24:20.082717+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/beyond-perplexity-utf-8-validity-in-byte-aware-language-models/",
+      "title": "Beyond Perplexity: UTF-8 Validity in Byte-aware Language Models",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/beyond-perplexity-utf-8-validity-in-byte-aware-language-models/",
+          "result": "retrieved",
+          "sha256": "8d2c137213bd15b81dec61a778c7db8fab723d34a920e3c08bad9be4e33051a5",
+          "bytes": 142695,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://icml.cc/virtual/2026/poster/61790"
+      ],
+      "abstract_scope_witness": "Meet the teams driving innovation Our teams advance the state of the art through research, systems engineering, and collaboration across Google. See our teams Follow us Explore our other initiatives Google AI Discover how Google AI is committed to enriching knowledge and solving complex challenges Products Build Research Responsibility Societal Impact About Google Cloud High-performance infrastructure for cloud computing, data",
+      "body_sha256": "8d2c137213bd15b81dec61a778c7db8fab723d34a920e3c08bad9be4e33051a5",
+      "retrieved_at": "2026-11-18T04:24:21.126184+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/beyond-the-emulator-bridging-the-sim-to-real-gap-in-mobile-agent-benchmarking/",
+      "title": "Beyond the Emulator: Bridging the Sim-to-Real Gap in Mobile Agent Benchmarking",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "source_exceptions",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "archive_source_exception",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/google-source-review.json",
+      "review_status": "explicit_exception",
+      "exception_type": "document_unavailable",
+      "reason": "Google 条目链接 OpenReview 0rA1AvKI8I，但论坛、PDF 和 API 路径遇验证拦截或 HTTP 403。无法确认首公开日或论文正文；官方条目可用于记录研究方向，不能据此排期。",
+      "attempts": [
+        "Google Research detail retrieved with OpenReview identifier",
+        "https://openreview.net/forum?id=0rA1AvKI8I",
+        "https://openreview.net/pdf?id=0rA1AvKI8I",
+        "https://api2.openreview.net/notes?id=0rA1AvKI8I",
+        "https://api.openreview.net/notes?id=0rA1AvKI8I"
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "OpenReview 恢复可读，或作者发布有日期的同版原稿。",
+      "corroborating_evidence": [
+        {
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+          "reference_section": "ci_priority_official_review.records",
+          "review_status": "explicit_exception",
+          "reason": "Google lists the paper, but the linked OpenReview forum, PDF and API could not establish an accessible, dated manuscript. See source exceptions."
+        }
+      ],
+      "inherited_reference_sha256": "68666d1d794078d4489c79bf070480bde93d4bcd7d8196e097bdadd6b6666220",
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/breaking-the-io-crisis-an-ai-driven-selective-emulation-framework-for-500x-data-reduction-in-gpu-verification/",
+      "title": "Breaking the I/O Crisis: An AI-Driven Selective Emulation Framework for 500x Data Reduction in GPU Verification",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/breaking-the-io-crisis-an-ai-driven-selective-emulation-framework-for-500x-data-reduction-in-gpu-verification/",
+          "result": "retrieved",
+          "sha256": "63dcc88bc34f034d748fe395b691129b5809086d02099c639edf771910c3a0ec",
+          "bytes": 142760,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://www.dvcon-jpn.org/program/proceedings-document/"
+      ],
+      "abstract_scope_witness": "Modern GPU subsystem verification is severely bottlenecked by the latency of hardware emulation, where full-frame benchmark simulations generate waveform data in order of terabytes and require hours of wall time to render the whole frame. This paper proposes a tool-agnostic AI framework designed to decouple predictive accuracy from raw data volume. By intelligently identifying critical temporal windows and spatial hotspots, the",
+      "body_sha256": "63dcc88bc34f034d748fe395b691129b5809086d02099c639edf771910c3a0ec",
+      "retrieved_at": "2026-11-18T04:24:19.677111+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/breaking-the-on2-barrier-ai-assisted-linear-time-formal-verification-of-deep-pipeline-buffers/",
+      "title": "Breaking the O(N^2) Barrier: AI-Assisted Linear-Time Formal Verification of Deep Pipeline Buffers",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/breaking-the-on2-barrier-ai-assisted-linear-time-formal-verification-of-deep-pipeline-buffers/",
+          "result": "retrieved",
+          "sha256": "3e1c78b1e7dd85cc80e1708486a75aa761cc5be1b077be1804c7a3aba5f214af",
+          "bytes": 142393,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [],
+      "abstract_scope_witness": "Formal verification of deep tracking buffers (64+ stages) in AI and networking SoCs frequently hits a \"Complexity Wall,\" where traditional Bounded Model Checking (BMC) scales quadratically (O(N2xW)) relative to pipeline depth. As sequential unrolling depth increases, the resulting state space explosion leads to inconclusive timeouts that prevent full architectural sign-off. This paper introduces an AI-assisted framework that sh",
+      "body_sha256": "3e1c78b1e7dd85cc80e1708486a75aa761cc5be1b077be1804c7a3aba5f214af",
+      "retrieved_at": "2026-11-18T04:24:21.434903+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/bug-hunting-on-gemini-spark/",
+      "title": "Bug Hunting on Gemini Spark",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/bug-hunting-on-gemini-spark/",
+          "result": "retrieved",
+          "sha256": "ca7293b39388c52ab05da6df38443a87e2d9cc17dea18d7f2c1725e3080054c6",
+          "bytes": 141341,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://bughunters.google.com/blog/spark-release"
+      ],
+      "abstract_scope_witness": "Gemini Spark brings persistent, autonomous agenets to the Gemini App. Learn how to approach security testing for this new paradigm and focus on high-impact bugs. Meet the teams driving innovation Our teams advance the state of the art through research, systems engineering, and collaboration across Google. See our teams Follow us Explore our other initiatives Google AI Discover how Google AI is committed to enriching knowledge a",
+      "body_sha256": "ca7293b39388c52ab05da6df38443a87e2d9cc17dea18d7f2c1725e3080054c6",
+      "retrieved_at": "2026-11-18T04:24:21.191292+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/building-the-global-backbone-of-the-agentic-web/",
+      "title": "Building the Global Backbone of the Agentic Web",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/building-the-global-backbone-of-the-agentic-web/",
+          "result": "retrieved",
+          "sha256": "3fa607c1246c922c3a68fa65df0c18f95994b2ca61bb5187461bca829dd3bd96",
+          "bytes": 141561,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [],
+      "abstract_scope_witness": "We have reached the \"Wild West\" era of artificial intelligence. While the world is mesmerized by the latest LLM benchmarks, a much more profound shift is happening beneath the surface: the transition from writing explicit code to orchestrating autonomous intent. However, we have a massive infrastructure problem. We are currently building millions of specialized agents, yet we have no global address book to find them, no shared",
+      "body_sha256": "3fa607c1246c922c3a68fa65df0c18f95994b2ca61bb5187461bca829dd3bd96",
+      "retrieved_at": "2026-11-18T04:24:19.554716+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/cached-summary-embeddings-for-memory-efficient-ehr-inference-2/",
+      "title": "Cached Summary Embeddings for Memory-Efficient EHR Inference",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/cached-summary-embeddings-for-memory-efficient-ehr-inference-2/",
+          "result": "retrieved",
+          "sha256": "efbd62476d3e190029e5fac6c79a2ee0fc14bcdbf41b949ed287a874715d5428",
+          "bytes": 144425,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://proceedings.mlr.press/v333/al-attrach26a.html"
+      ],
+      "abstract_scope_witness": "Transformer-based clinical prediction models face a deployment challenge: processing long patient histories can require memory that exceeds available resources in resource-constrained settings. We propose a deployment architecture that separates expensive historical encoding from lightweight inference. In an offline preprocessing phase, a clinical language model compresses each patient's historical events into a fixed-size vect",
+      "body_sha256": "efbd62476d3e190029e5fac6c79a2ee0fc14bcdbf41b949ed287a874715d5428",
+      "retrieved_at": "2026-11-18T04:24:21.469072+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/claim-gated-source-risk-auditing-for-generative-search-2/",
+      "title": "Claim-Gated Source-Risk Auditing for Generative Search",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "pre_window_research_line_no_production_evidence",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/google-source-review.json",
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "The title, author identities/email aliases and method tie the official variant to this September v1/October 9 v2 research line. The abstract variants report different conformance workloads, so do not identify the exact version or date of the -2 variant. Neither reports production A/B or full rollout. Research-line continuity is not exact-version/date identity.",
+      "attempts": [
+        {
+          "kind": "frozen_official_source_review",
+          "url": "https://research.google/pubs/claim-gated-source-risk-auditing-for-generative-search-2/",
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "result": "Retain unresolved identity/date/access rather than promote a title match"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "related_research_line_ids": [
+        "2609.29145"
+      ],
+      "inherited_reference_sha256": "68666d1d794078d4489c79bf070480bde93d4bcd7d8196e097bdadd6b6666220",
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/closing-the-dft-loop-correlating-testability-challenges-to-rtl-constructs-for-precision-test-point-insertion/",
+      "title": "Closing the DFT Loop: Correlating Testability challenges to  RTL Constructs for Precision Test Point Insertion",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/closing-the-dft-loop-correlating-testability-challenges-to-rtl-constructs-for-precision-test-point-insertion/",
+          "result": "retrieved",
+          "sha256": "96247149f88e6e907dfa880825cf3920f00d3f49be5c798334e6fd21c4b27c09",
+          "bytes": 142289,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [],
+      "abstract_scope_witness": "The \"Shift-Left\" strategy in Design for Testability (DFT) aims to move test insertion to the Register Transfer Level (RTL) to fix testability challenges early in the design cycle. It reduces overall time-to-market as it is less expensive to fix testability problems in pre-synthesized design than during physical implementation. However, traditional RTL test point insertion (TPI) often lacks the design understanding required to a",
+      "body_sha256": "96247149f88e6e907dfa880825cf3920f00d3f49be5c798334e6fd21c4b27c09",
+      "retrieved_at": "2026-11-18T04:24:21.793609+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/co-redteam-orchestrated-security-discovery-and-exploitation-with-llm-agents/",
+      "title": "Co-RedTeam: Orchestrated Security Discovery and Exploitation with LLM Agents",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "title_match_terminal_ledger",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/google-source-review.json",
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "Normalized title matches terminal ledger; not newly read in this check. 题名对应只作召回；本次未从官方页确认版本/身份，归档不阻塞而不伪造 known。",
+      "attempts": [
+        {
+          "kind": "frozen_official_source_review",
+          "url": "https://research.google/pubs/co-redteam-orchestrated-security-discovery-and-exploitation-with-llm-agents/",
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "result": "Retain unresolved identity/date/access rather than promote a title match"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "possible_arxiv_ids": [
+        "2602.02164"
+      ],
+      "inherited_reference_sha256": "68666d1d794078d4489c79bf070480bde93d4bcd7d8196e097bdadd6b6666220",
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/craft-clustered-regression-for-adaptive-filtering-of-training-data/",
+      "title": "CRAFT: Clustered Regression for Adaptive Filtering of Training data",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/craft-clustered-regression-for-adaptive-filtering-of-training-data/",
+          "result": "retrieved",
+          "sha256": "5ca7891b4f1cb056665553b094c04dd3a1ce365a7e266ff134ab12006419e10b",
+          "bytes": 143397,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://www.scitepress.org/Papers/2026/151852/151852.pdf"
+      ],
+      "abstract_scope_witness": "Selecting a small, high-quality subset from a large corpus for fine-tuning is increasingly important as corpora grow to tens of millions of datapoints, making full fine-tuning expensive and often unnecessary. We propose CRAFT (Clustered Regression for Adaptive Filtering of Training data), a vectorization-agnostic selection method for training sequence-to-sequence models. CRAFT decomposes the joint source-target distribution and",
+      "body_sha256": "5ca7891b4f1cb056665553b094c04dd3a1ce365a7e266ff134ab12006419e10b",
+      "retrieved_at": "2026-11-18T04:24:20.616651+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/crop-token-efficient-reasoning-in-large-language-models-via-regularized-prompt-optimization/",
+      "title": "CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "title_match_catalog_identity",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/google-source-review.json",
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "Normalized title matches canonical catalog; not newly read in this check. 题名对应只作召回；本次未从官方页确认版本/身份，归档不阻塞而不伪造 known。",
+      "attempts": [
+        {
+          "kind": "frozen_official_source_review",
+          "url": "https://research.google/pubs/crop-token-efficient-reasoning-in-large-language-models-via-regularized-prompt-optimization/",
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "result": "Retain unresolved identity/date/access rather than promote a title match"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "possible_arxiv_ids": [
+        "2604.14214"
+      ],
+      "inherited_reference_sha256": "68666d1d794078d4489c79bf070480bde93d4bcd7d8196e097bdadd6b6666220",
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/depth-cot-tradeoffs-in-transformers-a-look-at-path-following/",
+      "title": "Depth-CoT Tradeoffs in Transformers: A Look at Path Following",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "source_exceptions",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "archive_source_exception",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/google-source-review.json",
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "Google 详情只列 2027 年，未提供原稿，精确题名检索未找到可证实首公开的同篇全文。理论与最多五层 Transformer 的路径跟随是目录摘要，尚不能作全文证据。",
+      "attempts": [
+        "Google Research detail retrieved; displayed year 2027",
+        "Exact-title search found no verified manuscript"
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "作者发布带日期的同篇原稿、正式论文链接或 DOI。",
+      "corroborating_evidence": [
+        {
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+          "reference_section": "ci_priority_official_review.records",
+          "review_status": "explicit_exception",
+          "reason": "Directory only reports year 2027; no dated, readable manuscript found. See source exceptions."
+        }
+      ],
+      "inherited_reference_sha256": "68666d1d794078d4489c79bf070480bde93d4bcd7d8196e097bdadd6b6666220",
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/distributional-alignment-games-for-answer-level-fine-tuning-2/",
+      "title": "Distributional Alignment Games for Answer-Level Fine-Tuning",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/distributional-alignment-games-for-answer-level-fine-tuning-2/",
+          "result": "retrieved",
+          "sha256": "0174f4e7a41e56d48b2f33822efaeb9e3e5747802fcad1d0f4ad8ab2e1b8e030",
+          "bytes": 145444,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "http://www.cs.nyu.edu/~mohri/pub/alft.pdf"
+      ],
+      "abstract_scope_witness": "We focus on the problem of \\emph{Answer-Level Fine-Tuning} (ALFT), where the goal is to optimize a language model based on the correctness or properties of its final answers, rather than the specific reasoning traces used to produce them. Directly optimizing answer-level objectives is computationally intractable due to the need to marginalize over the vast space of latent reasoning paths. To overcome this, we propose a general",
+      "body_sha256": "0174f4e7a41e56d48b2f33822efaeb9e3e5747802fcad1d0f4ad8ab2e1b8e030",
+      "retrieved_at": "2026-11-18T04:24:22.065120+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/egodg-bench-egocentric-video-domain-generalization-in-the-era-of-vlms/",
+      "title": "EgoDG-Bench: Egocentric Video Domain Generalization in the Era of VLMs",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/egodg-bench-egocentric-video-domain-generalization-in-the-era-of-vlms/",
+          "result": "retrieved",
+          "sha256": "2fb364137be44d9fd04aca8201d3b5618e9698f6fa991410118e9389e1d4aeb5",
+          "bytes": 144211,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7225576"
+      ],
+      "abstract_scope_witness": "Domain shifts in egocentric videos, due to factors such as changes in environment, scenario, or geography, remain an under-explored challenge. Although a few methods for video domain generalization (DG) exist, a comprehensive analysis of their effective- ness on these factors of domain shifts in egocentric videos is lacking, primarily owing to the absence of a unified evaluation benchmark. Thus, we propose Egocentric video Doma",
+      "body_sha256": "2fb364137be44d9fd04aca8201d3b5618e9698f6fa991410118e9389e1d4aeb5",
+      "retrieved_at": "2026-11-18T04:24:22.044614+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/fabscore-fine-grained-evaluation-of-fabrications-in-automated-ai-research/",
+      "title": "FabScore: Fine-Grained Evaluation of Fabrications in Automated AI Research",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+      "reference_sha256": "b76c355f12c861b513190c3f8ad9e1c64f4b5e63e39431562465ec262f47dde3",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "inherits_official_review",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/google-source-review.json",
+      "status": "archived",
+      "review_status": "explicit_exception",
+      "sha256": "18c2e57954598dd936aff6d0ed5d9e13805da9e8a310e7f28f83bd60eb89d040",
+      "exception_type": "date_or_identity_unresolved",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "reason": "FabScore 通过结果抽取、静态分析、执行和判决审计科研 Agent；OpenReview 论坛/PDF 验证挑战及 ICML 页面错误导致日期未核实。",
+      "attempts": [
+        {
+          "kind": "official_detail",
+          "url": "https://research.google/pubs/fabscore-fine-grained-evaluation-of-fabrications-in-automated-ai-research/",
+          "result": "cached_official_detail_read"
+        },
+        {
+          "kind": "local_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "本次审查本地缓存：*review*.json"
+          ],
+          "result": []
+        },
+        {
+          "kind": "frozen_register_and_worktree_manifest_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": []
+        },
+        {
+          "kind": "official_download",
+          "url": "https://research.google/pubs/fabscore-fine-grained-evaluation-of-fabrications-in-automated-ai-research/",
+          "result": "no_download_link_in_cached_detail"
+        },
+        {
+          "kind": "primary_web_identity_search",
+          "query": "FabScore: Fine-Grained Evaluation of Fabrications in Automated AI Research",
+          "result": "官方/arXiv/出版方交叉核对；未采用第三方爬取时间为首次日期"
+        },
+        {
+          "kind": "openreview_forum",
+          "url": "https://openreview.net/forum?id=6gYWcYQcWM",
+          "result": "browser_verification_challenge"
+        },
+        {
+          "kind": "openreview_pdf",
+          "url": "https://openreview.net/attachment?id=6gYWcYQcWM&name=pdf",
+          "result": "browser_verification_challenge"
+        },
+        {
+          "kind": "icml_poster",
+          "url": "https://icml.cc/virtual/2026/73595",
+          "result": "internal_error"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "inherited_reference_sha256": "68666d1d794078d4489c79bf070480bde93d4bcd7d8196e097bdadd6b6666220"
+    },
+    {
+      "url": "https://research.google/pubs/google-earth-ai-geospatial-reasoning-agent-capabilities-and-a-systematic-evaluation/",
+      "title": "Google Earth AI Geospatial Reasoning Agent: Capabilities and a Systematic Evaluation",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "title_match_terminal_ledger",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/google-source-review.json",
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "Normalized title matches terminal ledger; not newly read in this check. 题名对应只作召回；本次未从官方页确认版本/身份，归档不阻塞而不伪造 known。",
+      "attempts": [
+        {
+          "kind": "frozen_official_source_review",
+          "url": "https://research.google/pubs/google-earth-ai-geospatial-reasoning-agent-capabilities-and-a-systematic-evaluation/",
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "result": "Retain unresolved identity/date/access rather than promote a title match"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "possible_arxiv_ids": [
+        "2610.15750"
+      ],
+      "inherited_reference_sha256": "68666d1d794078d4489c79bf070480bde93d4bcd7d8196e097bdadd6b6666220",
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/groupdpo-memory-efficient-group-wise-direct-preference-optimization/",
+      "title": "GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "title_match_catalog_identity",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/google-source-review.json",
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "Normalized title matches canonical catalog; not newly read in this check. 题名对应只作召回；本次未从官方页确认版本/身份，归档不阻塞而不伪造 known。",
+      "attempts": [
+        {
+          "kind": "frozen_official_source_review",
+          "url": "https://research.google/pubs/groupdpo-memory-efficient-group-wise-direct-preference-optimization/",
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "result": "Retain unresolved identity/date/access rather than promote a title match"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "possible_arxiv_ids": [
+        "2604.15602"
+      ],
+      "inherited_reference_sha256": "68666d1d794078d4489c79bf070480bde93d4bcd7d8196e097bdadd6b6666220",
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/high-fidelity-benchmark-replay-a-cross-platform-methodology-for-accelerating-gpu-subsystem-verification/",
+      "title": "High-Fidelity Benchmark Replay: A Cross-Platform Methodology for Accelerating GPU Subsystem Verification",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/high-fidelity-benchmark-replay-a-cross-platform-methodology-for-accelerating-gpu-subsystem-verification/",
+          "result": "retrieved",
+          "sha256": "da3a208e35d028dd59726c8b14e8d2adadb5e1dbd158fb4d26f6c3fde3a52fd1",
+          "bytes": 143941,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://www.synopsys.com/news/pubs/snug/2026/india/publish-only-252-pisal-mundada.pdf"
+      ],
+      "abstract_scope_witness": "The verification of modern GPU subsystems—encompassing high-speed interconnects, external MMUs, and security firewalls—against real-world gaming workloads poses a significant scheduling challenge. Achieving steady-state execution for benchmarks like Manhattan 3.1 or Honkai Rail in an RTL simulation environment typically requires over 20 days, creating a prohibitive bottleneck for iterative performance and power optimization. To",
+      "body_sha256": "da3a208e35d028dd59726c8b14e8d2adadb5e1dbd158fb4d26f6c3fde3a52fd1",
+      "retrieved_at": "2026-11-18T04:24:19.830623+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/how-to-build-cloud-administration-tools-for-20-million-users/",
+      "title": "How to Build Cloud Administration Tools for 20 Million Users",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/how-to-build-cloud-administration-tools-for-20-million-users/",
+          "result": "retrieved",
+          "sha256": "1bd4c2b4a7dbfa867903333c29455d01a74f329406701be153ccc600dabb37fe",
+          "bytes": 142717,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://techbullion.com/how-to-build-cloud-administration-tools-for-20-million-users/"
+      ],
+      "abstract_scope_witness": "Over 150 million students and educators worldwide now use Google Workspace for Education across 230 countries and territories, according to data published by AboutChromebooks. But here's the problem nobody talks about: formal training programs for managing these massive cloud deployments lag years behind what's actually happening in schools and universities. IT administrators get stuck doing bulk operations manually, generating",
+      "body_sha256": "1bd4c2b4a7dbfa867903333c29455d01a74f329406701be153ccc600dabb37fe",
+      "retrieved_at": "2026-11-18T04:24:20.868823+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/immutable-truths-as-simulation-drivers-an-ai-powered-workflow-for-translating-architectural-formal-specifications-into-c-based-simulation-components-3/",
+      "title": "Immutable Truths as Simulation Drivers An AI-Powered Workflow for Translating Architectural Formal Specifications into C-Based Simulation Components",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/immutable-truths-as-simulation-drivers-an-ai-powered-workflow-for-translating-architectural-formal-specifications-into-c-based-simulation-components-3/",
+          "result": "retrieved",
+          "sha256": "e2e0398aab6d8485c41d5c3a0658a15af66d330b1cbb4972b99ca2348b56641e",
+          "bytes": 144609,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [],
+      "abstract_scope_witness": "Modern System-on-Chip (SoC) complexity necessitates rigorous pre-RTL architectural formal verification to eliminate critical bugs early, as flaws discovered late in the design cycle are orders of magnitude more costly to fix, triggering expensive RTL rewrites or silicon respins. In this flow, architectural formal verification engineers construct high-level behavioral models using the Murphi description language and use the Murp",
+      "body_sha256": "e2e0398aab6d8485c41d5c3a0658a15af66d330b1cbb4972b99ca2348b56641e",
+      "retrieved_at": "2026-11-18T04:24:20.966641+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/inceptive-rag-a-rigorous-gradient-based-attribution-metric-for-programmatic-data-monetization/",
+      "title": "Inceptive RAG: A Rigorous Gradient-Based Attribution Metric for Programmatic Data Monetization",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/inceptive-rag-a-rigorous-gradient-based-attribution-metric-for-programmatic-data-monetization/",
+          "result": "retrieved",
+          "sha256": "72ba6e6c2998fec74302d179454fc629205ef8d917b66612610fda1ef3ce595a",
+          "bytes": 142569,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [],
+      "abstract_scope_witness": "As Retrieval-Augmented Generation (RAG) systems increasingly mediate access to expert knowledge, a critical “Inceptive Gap” has emerged: data creators remain uncompensated because current systems lack a rigorous mechanism to measure the utility of re- trieved context. Existing attribution methods rely on heuristic prox- ies like attention weights, which often fail to capture true causal influence, misattributing credit to super",
+      "body_sha256": "72ba6e6c2998fec74302d179454fc629205ef8d917b66612610fda1ef3ce595a",
+      "retrieved_at": "2026-11-18T04:24:19.987554+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/intelligent-data-pipeline-orchestration-combining-predictive-modeling-llms-and-rl-for-autonomous-data-engineering-systems/",
+      "title": "Intelligent Data Pipeline Orchestration: Combining Predictive Modeling, LLMs, and RL for Autonomous Data Engineering Systems",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/intelligent-data-pipeline-orchestration-combining-predictive-modeling-llms-and-rl-for-autonomous-data-engineering-systems/",
+          "result": "retrieved",
+          "sha256": "4e9c49d530b69800d0c874b30cbe9c0d75f6e0eda71c36ad6033c3de18873daa",
+          "bytes": 143090,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://ieeexplore.ieee.org/abstract/document/11634139/"
+      ],
+      "abstract_scope_witness": "The contemporary data engineering systems face challenges of operational complexity, such as unpredictable system failures, resource competition, and inadequate automation. This paper suggests a framework for intelligent orchestration of data processing pipelines through using machine learning for predicting system failure, reinforcement learning for scheduling tasks, and large language models for interpreting and automating co",
+      "body_sha256": "4e9c49d530b69800d0c874b30cbe9c0d75f6e0eda71c36ad6033c3de18873daa",
+      "retrieved_at": "2026-11-18T04:24:18.833285+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/lessons-from-mitigating-false-positives-in-googles-oss-fuzz-gen/",
+      "title": "Lessons from Mitigating False Positives in Google's OSS-Fuzz-Gen",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/lessons-from-mitigating-false-positives-in-googles-oss-fuzz-gen/",
+          "result": "retrieved",
+          "sha256": "db86d99e921f1d0c8b53994e0e18b12d1911c75c24e95cfa1f0673ec6ea5defd",
+          "bytes": 144222,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://dl.acm.org/doi/10.1145/3803437.3805205"
+      ],
+      "abstract_scope_witness": "Fuzz testing is widely used in industry and open-source ecosystems, but its effectiveness depends on the quality of fuzz drivers that translate raw fuzzer input into valid function arguments. Automated fuzz driver generation reduces manual effort, but in practice often produces false positive crashes, especially for complex functions. We introduce OSS-Fuzz-Gen, an experimental system for agentbased fuzz driver generation. This",
+      "body_sha256": "db86d99e921f1d0c8b53994e0e18b12d1911c75c24e95cfa1f0673ec6ea5defd",
+      "retrieved_at": "2026-11-18T04:24:20.223247+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/manifest-assisted-retrieval-in-artificial-intelligence-search-evidence-gaps-and-a-security-evaluation-framework-for-llmstxt/",
+      "title": "Manifest-Assisted Retrieval in Artificial Intelligence Search: Evidence Gaps and a Security Evaluation Framework for llms.txt",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/manifest-assisted-retrieval-in-artificial-intelligence-search-evidence-gaps-and-a-security-evaluation-framework-for-llmstxt/",
+          "result": "retrieved",
+          "sha256": "bff4c21ac9a8c92d0fb05ff19f9a0e870ae3e1e2810969937b950dab230fccef",
+          "bytes": 146395,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [],
+      "abstract_scope_witness": "No study identified in our audit measured the incremental security or utility effect of consuming /llms.txt while ordinary web or sitemap retrieval remained fixed. We audited 39 research papers, standards, specifications, product documents, and operational studies available through August 5, 2026. Direct evidence stops at publication and Hypertext Transfer Protocol request behavior: a purposive 15-tool study observed no automat",
+      "body_sha256": "bff4c21ac9a8c92d0fb05ff19f9a0e870ae3e1e2810969937b950dab230fccef",
+      "retrieved_at": "2026-11-18T04:24:22.375010+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/meet-the-ai-moment-using-afrofuturism-and-technowomanism-together-as-technological-practice/",
+      "title": "Meet the AI Moment: Using Afrofuturism and Technowomanism Together as Technological Practice",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/meet-the-ai-moment-using-afrofuturism-and-technowomanism-together-as-technological-practice/",
+          "result": "retrieved",
+          "sha256": "8bc85244cba790717125b41caf3a41b3e47366a37455a8805069ac20d4846e9a",
+          "bytes": 145000,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://doi.org/10.1145/3802974.3808007"
+      ],
+      "abstract_scope_witness": "Much ink has been spilled writing about the capabilities, advancements, and ails of artificial intelligence. Our workshop endeavors to bring together each of these discussions under a framing that centers People of the Global Majority and their concerns and hopes for AI. The lenses through which we will discuss and discern are Afrofuturism, a centering of the African diaspora in a multifaceted praxis of futuring across genres,",
+      "body_sha256": "8bc85244cba790717125b41caf3a41b3e47366a37455a8805069ac20d4846e9a",
+      "retrieved_at": "2026-11-18T04:24:21.943941+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/multi-agentic-framework-for-developing-and-evaluating-biometric-based-multimodal-synthetic-personas-a-case-study-on-pregnancy-and-postpartum-users/",
+      "title": "Multi-agentic framework for developing and evaluating biometric-based multimodal synthetic personas: A case study on pregnancy and postpartum users",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/multi-agentic-framework-for-developing-and-evaluating-biometric-based-multimodal-synthetic-personas-a-case-study-on-pregnancy-and-postpartum-users/",
+          "result": "retrieved",
+          "sha256": "228e0463d786c0661e7849bee8064d28127ca406c111216d11183f0294041071",
+          "bytes": 147180,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://openreview.net/forum?id=aosInyDetZ"
+      ],
+      "abstract_scope_witness": "The use of Large language models (LLM)- based persona health agents for conversational health insights with wearable-based applications  is seeing high interest and adoption. These allow users to interact with their wearable biometric data, and ask an agent about their biometrics such as sleep, activity, and heart rate. However, there are limited pipelines for robustly evaluating these agentic frameworks that utilize multimodal",
+      "body_sha256": "228e0463d786c0661e7849bee8064d28127ca406c111216d11183f0294041071",
+      "retrieved_at": "2026-11-18T04:24:21.843325+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/optimal-learning-from-label-proportions-with-general-loss-functions/",
+      "title": "Optimal Learning from Label Proportions with General Loss Functions",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/optimal-learning-from-label-proportions-with-general-loss-functions/",
+          "result": "retrieved",
+          "sha256": "001ba809b6e7a97b5dc0f3ecfee5940f72d5837678bfe26a2a8e905568f66a8c",
+          "bytes": 143155,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [],
+      "abstract_scope_witness": "Motivated by problems in online advertising, we address the task of Learning from Label Proportions (LLP). We introduce a novel and versatile low-variance debiasing methodology to learn from aggregate label information, significantly advancing the state of the art in LLP. Our debiasing approach exhibits remarkable flexibility, seamlessly accommodating a broad spectrum of practically relevant loss functions across both binary an",
+      "body_sha256": "001ba809b6e7a97b5dc0f3ecfee5940f72d5837678bfe26a2a8e905568f66a8c",
+      "retrieved_at": "2026-11-18T04:24:19.238988+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/optimizing-small-language-models-for-nl2sql-via-chain-of-thought-fine-tuning/",
+      "title": "Optimizing Small Language Models for NL2SQL via Chain-of-Thought Fine-Tuning",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/optimizing-small-language-models-for-nl2sql-via-chain-of-thought-fine-tuning/",
+          "result": "retrieved",
+          "sha256": "30cc4b8bc4f102a75a5f2612d4b1862717e7a44142a3db7cb32591659617c078",
+          "bytes": 142938,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [],
+      "abstract_scope_witness": "Translating Natural Language to SQL (NL2SQL) remains a critical bottleneck for enterprise democratization of data. While Large Language Models (LLMs) like Gemini 2.5 have demonstrated impressive zero-shot capabilities, their high inference costs limit deployment at scale. This paper explores the efficacy of fine-tuning both large-scale and small-scale language models on NL2SQL tasks. Our research reveals a counter-intuitive sca",
+      "body_sha256": "30cc4b8bc4f102a75a5f2612d4b1862717e7a44142a3db7cb32591659617c078",
+      "retrieved_at": "2026-11-18T04:24:20.287883+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/prism-navigating-costaccuracy-trade-offs-for-nl2sql/",
+      "title": "PRISM: Navigating Cost–Accuracy Trade-offs for NL2SQL",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/prism-navigating-costaccuracy-trade-offs-for-nl2sql/",
+          "result": "retrieved",
+          "sha256": "c5ea12637b6affb61b31af3fa761a208ec5c7e53f1d842fde91004c099d1d579",
+          "bytes": 143574,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://dl.acm.org/doi/abs/10.1145/3786679"
+      ],
+      "abstract_scope_witness": "Large language models (LLMs) have achieved strong performance on natural language to SQL (NL2SQL) tasks, but their effectiveness depends heavily on system configuration. Real-world deployments involve tuning a complex pipeline of components, including LLM choice, prompting strategy, schema linking, and example selection, while navigating trade-offs between accuracy and monetary cost. Critically, the optimal configuration varies",
+      "body_sha256": "c5ea12637b6affb61b31af3fa761a208ec5c7e53f1d842fde91004c099d1d579",
+      "retrieved_at": "2026-11-18T04:24:18.729949+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/prompts-performance-optimization-via-multi-agent-planning-for-llm-training-and-serving/",
+      "title": "PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "title_match_catalog_identity",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/google-source-review.json",
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "Normalized title matches canonical catalog; not newly read in this check. 题名对应只作召回；本次未从官方页确认版本/身份，归档不阻塞而不伪造 known。",
+      "attempts": [
+        {
+          "kind": "frozen_official_source_review",
+          "url": "https://research.google/pubs/prompts-performance-optimization-via-multi-agent-planning-for-llm-training-and-serving/",
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "result": "Retain unresolved identity/date/access rather than promote a title match"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "possible_arxiv_ids": [],
+      "inherited_reference_sha256": "68666d1d794078d4489c79bf070480bde93d4bcd7d8196e097bdadd6b6666220",
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/responsible-health-ai-psychometric-validation-of-a-novel-health-information-quality-assessment-tool-for-genai/",
+      "title": "Responsible Health AI: Psychometric Validation of a Novel Health Information Quality Assessment Tool for GenAI",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/responsible-health-ai-psychometric-validation-of-a-novel-health-information-quality-assessment-tool-for-genai/",
+          "result": "retrieved",
+          "sha256": "f449976c6d8b44698811823b7102a6d335929432d9e63c348968a28ee67820c8",
+          "bytes": 144217,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [],
+      "abstract_scope_witness": "Background: Users increasingly turning to consumer GenAI platforms for health-related information and guidance necessitates validated instruments to safeguard clinical accuracy and user trust.nThis study introduces the Health Information Quality (HIQ) tool, a psychometric instrument designed to operationalize Responsible AI and establish transparent benchmarking methods for foundational models. Methods: Validity was assessed vi",
+      "body_sha256": "f449976c6d8b44698811823b7102a6d335929432d9e63c348968a28ee67820c8",
+      "retrieved_at": "2026-11-18T04:24:21.788440+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/scientist-one-verifiable-autonomous-research-via-chain-of-evidence/",
+      "title": "Scientist-One: Verifiable Autonomous Research via Chain-of-Evidence",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "title_match_terminal_ledger",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/google-source-review.json",
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "Normalized title matches terminal ledger; not newly read in this check. 题名对应只作召回；本次未从官方页确认版本/身份，归档不阻塞而不伪造 known。",
+      "attempts": [
+        {
+          "kind": "frozen_official_source_review",
+          "url": "https://research.google/pubs/scientist-one-verifiable-autonomous-research-via-chain-of-evidence/",
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "result": "Retain unresolved identity/date/access rather than promote a title match"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "possible_arxiv_ids": [
+        "2605.26340"
+      ],
+      "inherited_reference_sha256": "68666d1d794078d4489c79bf070480bde93d4bcd7d8196e097bdadd6b6666220",
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/search-intermediaries-subscriptions-and-advertising/",
+      "title": "Search Intermediaries, Subscriptions, and Advertising",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/search-intermediaries-subscriptions-and-advertising/",
+          "result": "retrieved",
+          "sha256": "e64868cb2f39b5cf68789f213e769695321ffef3b99c4dc5a4c4b9e24a6cc33f",
+          "bytes": 141148,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [],
+      "abstract_scope_witness": "Some search intermediaries rely on advertising revenue, monetizing the market power that search frictions confer on firms. Others charge consumers a participation (subscription) fee, monetizing the search improvement they provide to consumers. I endogenize the choice of monetization channel of a platform by embedding it into a sequential search model with differentiated products. The platform reduces search frictions for its us",
+      "body_sha256": "e64868cb2f39b5cf68789f213e769695321ffef3b99c4dc5a4c4b9e24a6cc33f",
+      "retrieved_at": "2026-11-18T04:24:21.702778+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/semantic-recall-for-vector-search/",
+      "title": "Semantic Recall for Vector Search",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/semantic-recall-for-vector-search/",
+          "result": "retrieved",
+          "sha256": "9d5a76a018322c2969b116cb48789c919275c1b3fa894e7235c1367c4b047ca1",
+          "bytes": 143928,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://dl.acm.org/doi/10.1145/3805712.3809894"
+      ],
+      "abstract_scope_witness": "We introduce semantic recall, a novel metric that evaluates the quality of embedding-based retrieval by considering only semantically relevant objects. We empirically show the advantages of semantic recall as a proxy for search quality, especially for queries with only a few relevant results among their nearest neighbors. Unlike traditional recall, semantic recall does not penalize algorithms for failing to retrieve objects tha",
+      "body_sha256": "9d5a76a018322c2969b116cb48789c919275c1b3fa894e7235c1367c4b047ca1",
+      "retrieved_at": "2026-11-18T04:24:19.564893+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/sok-security-vulnerabilities-in-agentic-ai-systems/",
+      "title": "SoK: Security Vulnerabilities in Agentic AI Systems",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/sok-security-vulnerabilities-in-agentic-ai-systems/",
+          "result": "retrieved",
+          "sha256": "335b1f20d5b3809d36fb57f8914ae7767de3ff15b1be72836a98b667564e6ece",
+          "bytes": 142703,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://www.researchgate.net/publication/412340066_SoK_Security_Vulnerabilities_in_Agentic_AI_Systems"
+      ],
+      "abstract_scope_witness": "Agentic AI systems extend large language models with tools, retrieval, persistent memory, and multi-agent coordination, enabling autonomous, long-horizon execution of complex tasks. However, these capabilities introduce new attack surfaces that existing LLM security frameworks do not capture systematically. We survey 71 papers (2022–2026) and three production CVEs, organizing prior work into a five-layer taxonomy structured by",
+      "body_sha256": "335b1f20d5b3809d36fb57f8914ae7767de3ff15b1be72836a98b667564e6ece",
+      "retrieved_at": "2026-11-18T04:24:18.875599+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/spatial-multiverse-analysis-genai-as-an-automated-critic-for-robustness-in-spatial-analysis/",
+      "title": "Spatial Multiverse Analysis: GenAI as an Automated Critic for Robustness in Spatial Analysis",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/spatial-multiverse-analysis-genai-as-an-automated-critic-for-robustness-in-spatial-analysis/",
+          "result": "retrieved",
+          "sha256": "cb5ace21c9ad995340575a67da8f5732d17d6d387116e3ebd929d560282dc93e",
+          "bytes": 141758,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://docs.google.com/presentation/d/1sm-wD7H2VFOcDSI_6gAbXszkbeC7xOuGXATMFxPFVDA/edit?usp=sharing"
+      ],
+      "abstract_scope_witness": "Does your map hold up under different defensible choices? The most important role for generative AI in GIScience isn't automating boring workflow parts— it's helping us stress-test them. I want to talk about robustness, about why it matters more than reproducibility alone, and about a concept I'm calling spatial multiverse analysis. Meet the teams driving innovation Our teams advance the state of the art through research, syste",
+      "body_sha256": "cb5ace21c9ad995340575a67da8f5732d17d6d387116e3ebd929d560282dc93e",
+      "retrieved_at": "2026-11-18T04:24:19.734427+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/stakes-adaptive-verification-and-origin-traced-rollback-in-autonomous-agent-workflows/",
+      "title": "Stakes-Adaptive Verification and Origin-Traced Rollback in Autonomous Agent Workflows",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "inherits_prior_source_exception",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/google-source-review.json",
+      "review_status": "explicit_exception",
+      "exception_type": "document_unavailable",
+      "reason": "TDC 12058 was recorded as public October 8, before this window. Prior source exception retained; not counted as full-text reviewed.",
+      "attempts": [
+        {
+          "kind": "frozen_official_source_review",
+          "url": "https://research.google/pubs/stakes-adaptive-verification-and-origin-traced-rollback-in-autonomous-agent-workflows/",
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "result": "Retain unresolved identity/date/access rather than promote a title match"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "inherited_reference_sha256": "68666d1d794078d4489c79bf070480bde93d4bcd7d8196e097bdadd6b6666220",
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/the-acute-protocol-operationalizing-language-model-activations-for-better-calibration-utility-and-trust/",
+      "title": "The ACUTE Protocol: Operationalizing Language Model Activations for Better Calibration, Utility, and Trust",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/the-acute-protocol-operationalizing-language-model-activations-for-better-calibration-utility-and-trust/",
+          "result": "retrieved",
+          "sha256": "bf7836af8d28f038b161b6de2447f0763d8ac2bd07285cda71dd46057b64b2bc",
+          "bytes": 145376,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://icml.cc/virtual/2026/poster/66172"
+      ],
+      "abstract_scope_witness": "As language models improve and become increasingly deployed to solve a variety of tasks, trustworthiness becomes essential. Calibration is a good proxy for trust: well-calibrated confidence estimates help inform the risk versus reward tradeoff when trusting a specific model output. Unfortunately, even as models improve, they remain poorly calibrated, often biasing towards overconfidence. Additionally, calibration can be gamed:",
+      "body_sha256": "bf7836af8d28f038b161b6de2447f0763d8ac2bd07285cda71dd46057b64b2bc",
+      "retrieved_at": "2026-11-18T04:24:19.092442+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/tool-mcot-tool-augmented-multimodal-chain-of-thought-for-content-safety-moderation/",
+      "title": "Tool-MCoT: Tool Augmented Multimodal Chain-of-Thought for Content Safety Moderation",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/tool-mcot-tool-augmented-multimodal-chain-of-thought-for-content-safety-moderation/",
+          "result": "retrieved",
+          "sha256": "8e07b6fba49762365c8027deb518c8ab0f67ec5b034f6147cb23c3bac6322c7e",
+          "bytes": 143678,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [],
+      "abstract_scope_witness": "The growth of online platforms and user content requires strong content moderation systems that can handle complex inputs from various media types. While large language models (LLMs) are effective, their high computational cost and latency present significant challenges for scalable deployment. To address this, we introduce Tool-MCoT, a small language model (SLM) fine-tuned for content safety moderation leveraging external fram",
+      "body_sha256": "8e07b6fba49762365c8027deb518c8ab0f67ec5b034f6147cb23c3bac6322c7e",
+      "retrieved_at": "2026-11-18T04:24:21.301882+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/vip-mingle-a-corpus-for-videoconference-and-in-person-multimodal-interaction-in-group-language-engagement/",
+      "title": "VIP-MINGLE: A Corpus for Videoconference and In-Person Multimodal Interaction in Group Language Engagement",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "title_match_terminal_ledger",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/google-source-review.json",
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "Normalized title matches terminal ledger; not newly read in this check. 题名对应只作召回；本次未从官方页确认版本/身份，归档不阻塞而不伪造 known。",
+      "attempts": [
+        {
+          "kind": "frozen_official_source_review",
+          "url": "https://research.google/pubs/vip-mingle-a-corpus-for-videoconference-and-in-person-multimodal-interaction-in-group-language-engagement/",
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "result": "Retain unresolved identity/date/access rather than promote a title match"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "possible_arxiv_ids": [
+        "2607.13614"
+      ],
+      "inherited_reference_sha256": "68666d1d794078d4489c79bf070480bde93d4bcd7d8196e097bdadd6b6666220",
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/za-slam-leveraging-vision-language-model-for-zero-shot-acoustic-slam/",
+      "title": "ZA-SLAM: Leveraging Vision-Language Model for  Zero-Shot Acoustic SLAM",
+      "organization": "Google",
+      "review_status": "explicit_exception",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "reason": "官方详情已实际读取，但日期仅为2026年，未给出可直接固定的arXiv身份或精确首公开日。当前目录捕获时间不是首发时间；无法确定属于11月10—15日，不用未读方法或高成本标签掩盖这个边界。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "exception_type": "date_or_identity_unresolved",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/za-slam-leveraging-vision-language-model-for-zero-shot-acoustic-slam/",
+          "result": "retrieved",
+          "sha256": "9c92737b523f9cd926789b0cf91fe0e8a82abf6689d4db7263b85e85ad1a5c83",
+          "bytes": 144655,
+          "observation": "citation_publication_date=2026; title, authors, abstract and outbound links checked; no exact first-publication date in this bounded source"
+        }
+      ],
+      "reopen_when": "作者/出版方给出精确公开日期或可唯一匹配的有日期原稿，或明确的新版本/独立来源证明窗口归属时再重开；不自动重试。",
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "observed_source_published": null,
+      "download_links": [
+        "https://dl.acm.org/doi/10.1145/3745756.3809218"
+      ],
+      "abstract_scope_witness": "Existing acoustic indoor location sensing systems are limited by the need for extensive data collection and model retraining in unseen environments. This paper introduces ZA-SLAM, a novel zero-shot acoustic Simultaneous Localization and Mapping (SLAM) system that can be deployed in unseen environments without model retraining. Our core idea is to train an acoustic encoder that inherits the generalization capabilities of pre-tra",
+      "body_sha256": "9c92737b523f9cd926789b0cf91fe0e8a82abf6689d4db7263b85e85ad1a5c83",
+      "retrieved_at": "2026-11-18T04:24:18.984708+00:00",
+      "source_review_scope": "official detail title, year, abstract and exact outbound identity links; not method verification",
+      "arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "organization": "Meta",
+      "url": "https://ai.meta.com/research/publications/",
+      "title": "Meta AI publications landing entry",
+      "review_status": "explicit_exception",
+      "exception_type": "document_unavailable",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "status": "archived",
+      "blocking": false,
+      "reason": "HTTP200 returns a45-byte unavailable message. Alternate results pages and research homepage were actually read; this failed entry is not evidence of zero new papers.",
+      "attempts": [
+        {
+          "url": "https://ai.meta.com/research/publications/",
+          "result": "unavailable_despite_http200",
+          "http_status": 200,
+          "bytes": 45,
+          "sha256": "de23e0c264ff944ee66adb95a36d8b8613ad646ba1147b3f87d843d0d73f88a0",
+          "retrieved_at": "2026-11-18T04:15:54.656047+00:00"
+        },
+        {
+          "url": "https://research.facebook.com/publications/",
+          "result": "redirected_to_facebook_login_temporary_block",
+          "observation": "Read-only request observed login/block page, not a publication list"
+        }
+      ],
+      "reopen_when": "The official entry serves publications again, or an independent new Meta identity/changed official source supplies new evidence."
+    },
+    {
+      "organization": "Meta",
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=6",
+      "title": "Meta configured six-page publication directory coverage",
+      "review_status": "explicit_exception",
+      "exception_type": "pagination_unproven",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "status": "archived",
+      "blocking": false,
+      "reason": "Six configured pages yield144 distinct publication links and match the inherited November9 finite inventory. The mixed historical listing and visible Next links do not establish a whole-site or complete date-ordered census. Unvisited pages are not described as failed requests.",
+      "attempts": [
+        {
+          "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1",
+          "result": "retrieved_finite_directory_page",
+          "http_status": 200,
+          "parsed_links": 24,
+          "sha256": "a996304f9392a61c7a40212cd317f3b21d4046f8d1094babfd41c1b223361708",
+          "retrieved_at": "2026-11-18T04:15:33.519552+00:00"
+        },
+        {
+          "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=2",
+          "result": "retrieved_finite_directory_page",
+          "http_status": 200,
+          "parsed_links": 24,
+          "sha256": "e49098c7df42a54d539844c4b46ab5955a99c32756b9755f2c85793ae6c5047f",
+          "retrieved_at": "2026-11-18T04:15:37.478914+00:00"
+        },
+        {
+          "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=3",
+          "result": "retrieved_finite_directory_page",
+          "http_status": 200,
+          "parsed_links": 24,
+          "sha256": "91fe3cc7d2ce26f49fd74cdc016dc8b9f8a5d2d3b3168a8082ba610cebcd4a9c",
+          "retrieved_at": "2026-11-18T04:15:41.540555+00:00"
+        },
+        {
+          "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=4",
+          "result": "retrieved_finite_directory_page",
+          "http_status": 200,
+          "parsed_links": 24,
+          "sha256": "041daf3e6f0809cedadf271651970a3fbe6d6d2f48c9f88a9087eb6317207c1e",
+          "retrieved_at": "2026-11-18T04:15:45.211308+00:00"
+        },
+        {
+          "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=5",
+          "result": "retrieved_finite_directory_page",
+          "http_status": 200,
+          "parsed_links": 24,
+          "sha256": "ddc9138fa27489a97b0610a814692d75f68f691fde291a01e4b9dee95dbce920",
+          "retrieved_at": "2026-11-18T04:15:48.928782+00:00"
+        },
+        {
+          "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=6",
+          "result": "retrieved_finite_directory_page",
+          "http_status": 200,
+          "parsed_links": 24,
+          "sha256": "9b4d9adc7107be4adcbf50f5bf4a8ffdcd7d359eb10242f8b79b1337a7114b87",
+          "retrieved_at": "2026-11-18T04:15:53.191111+00:00"
+        }
+      ],
+      "reopen_when": "Changed links/dates, a proven ordered pagination contract or an independently found missing Meta manuscript changes this finite inventory."
+    }
+  ]
+}

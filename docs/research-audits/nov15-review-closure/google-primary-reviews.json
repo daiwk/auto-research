@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-18",
+  "window": {
+    "start": "2026-11-10",
+    "end": "2026-11-15"
+  },
+  "scope": "Two protected Google/Meta collaboration manuscripts, one Google scope check, and six title/abstract semantic clarifications. No new implementation or experiment.",
+  "all_sources_exhaustive": false,
+  "reviews": [
+    {
+      "id": "2610.24161",
+      "revision": 5,
+      "metadata_sha256": "e53c29f90aca948391f8dcd5cf977cf2a2488cb7b06c1f74c98ca29d05c7676b",
+      "title": "TorchTPU - A Hybrid Eager/Compiled Architecture for Native PyTorch Execution on TPU",
+      "track": "foundation-model",
+      "priority": "P0",
+      "published": "2026-10-16T19:38:17Z",
+      "updated": "2026-11-12T21:38:37Z",
+      "source_url": "https://arxiv.org/html/2610.24161v5",
+      "source_sha256": "2142a87f5265785a545ee1fe313ad02e46e65c0b70197e30db7e275005fb2959",
+      "verified_priority_organizations": [
+        "Google",
+        "Meta"
+      ],
+      "affiliation_evidence": "Fixed-v5 author block identifies Google; abstract and Introduction explicitly describe collaboration with Meta's PyTorch team. This is collaboration evidence, not a claim that every listed author has the same institution.",
+      "locations": [
+        "author block",
+        "Introduction",
+        "II-D eager/JIT and II-J bounded dynamism",
+        "III-A model coverage",
+        "III-B to III-F device and model configurations"
+      ],
+      "method_summary": "Native PrivateUse1 eager execution lowers live deferred operations to StableHLO, caches compiled graphs and preserves side effects; compiled mode uses Dynamo and bounded dynamism, with TPU-native collectives, device mesh mappings and Pallas kernels.",
+      "production_evidence": "Introduction states production use by Google Cloud customers. III-D reports serving benchmark audits, not randomized recommendation CTR A/B. TPU vendor throughput cannot be reproduced by renaming a CUDA device.",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "reason": "成本过高，不复现（审查 DONE）：定义性路径依赖TPU/PjRT/XLA硬件和完整框架实现，原实验覆盖4917个模型并包括235B MoE的64至8192个TPUv7芯片配置；单卡A100/A30不能忠实验收TPU后端。不下载模型、不安装该后端、不启动试跑。",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.24161v5",
+        "basis": "III-A TableV; III-B 30B inference/training; III-C TableVI; III-D serving and III-F recommendation kernels",
+        "scale": "4917 model compatibility corpus; 30B workloads on1–4 TPUv7 chips; Qwen3 MoE235B on64-chip smoke and1024–8192-chip scaling; TPU-specific SparseCore/Pallas",
+        "available_resource": "one NVIDIA A100 or A30, or local Mac; no TPU",
+        "cost_type": "published_configuration_not_local_measurement"
+      },
+      "code_url": "https://github.com/google-pytorch/torch_tpu",
+      "code_status": "Fixed-v5 Introduction links this open-source backend; no installation or execution is claimed by this review.",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "implementation_status": "not_implemented_by_review",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.16028",
+      "revision": 1,
+      "metadata_sha256": "04799abf1ff664274e5996fb98220a5efc76b5e6d3ebf3a54262da9261c0668e",
+      "title": "Scaling public input on AI policy with pluralistic agents",
+      "track": "agent",
+      "priority": "P0",
+      "published": "2026-11-11T21:35:06Z",
+      "updated": "2026-11-11T21:35:06Z",
+      "source_url": "https://arxiv.org/html/2611.16028v1",
+      "source_sha256": "06350e47b49bf3a935b51f6d7a6cdfb54175f0c20703339399b2ad8c8446b941",
+      "verified_priority_organizations": [
+        "Google DeepMind"
+      ],
+      "affiliation_evidence": "Fixed-v1 byline: Jacy Reese Anthis has University of Chicago and Google DeepMind; Ken Burke, David Madras, Crystal Qian, Meredith Ringel Morris, Logan Cross, Caroline Pantofaru and Utsav Prabhu are Google DeepMind.",
+      "locations": [
+        "author block",
+        "3.1–3.2 interview and policy-writer protocol",
+        "4.1 five-model influence experiment",
+        "5.1 human-participant protocol",
+        "AppendicesB,C,F prompts and variants"
+      ],
+      "method_summary": "Interview a represented person/persona, then rotate representative agents through a discussion. A separate PolicyWriter revises a common policy after each round. Budget allocation creates a zero-sum task where prompt verbosity, cooperation and speaking order can change influence; this is not a new model-training optimizer.",
+      "production_evidence": "The deployment wording motivates future deliberation use and cites other systems. The paper's evidence is simulated deliberation plus a preregistered participant experiment, not a production recommendation A/B or a claim of deployed policy governance.",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "reason": "成本过高，不复现（审查 DONE）：完整研究含1000次开放式讨论、5947次有效多模型预算讨论和746位人类参与者，依赖多家闭源LLM、Prolific招募和伦理审批。单卡或Mac不能以廉价固定persona脚本替代这些核心证据；本轮不发API、不招募参与者、不实施完整实验。",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.16028v1",
+        "basis": "3.2 1000deliberations;4.1 six random factors/five providers/6000 launched and5947 retained;5.1 human study and code/data release statement",
+        "scale": "Five heterogeneous LLM representative models plus Gemini3.6Flash PolicyWriter;1000open-ended+5947budget deliberations;746retained human participants and model-family sensitivity variants",
+        "available_resource": "one NVIDIA A100 or A30, or local Mac; no approved paid multi-provider/human-study campaign",
+        "cost_type": "published_configuration_not_local_measurement"
+      },
+      "code_url": "https://github.com/google-deepmind/pluralistic_agents",
+      "upstream_revision": "35d332f9ccf16f4cdf28211b563e539319ad5d44",
+      "upstream_readme_sha256": "91e25adfae5a5b25b423ac52cd09e2b6f202d9ccbb76e9e9da13bebebe7da00f",
+      "code_status": "The fixed-v1 section5.1 promises release, but the official repository at the pinned current revision now provides analysis/experiment scripts and public synthetic deliberation data under Apache2.0/CC-BY. Its README explicitly withholds individual human-participant data and requires multiple provider API keys for fresh runs. This resolves the old no-paper identity exception without claiming the human study is fully reproducible.",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "implementation_status": "not_implemented_by_review",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.12805",
+      "revision": 1,
+      "title": "2D Gum-Net: Unsupervised Dense Elastic Image Registration via Symmetric Correlation and Spectral Pooling",
+      "track": "foundation-model",
+      "priority": "P0",
+      "published": "2026-11-09T18:11:45Z",
+      "updated": "2026-11-09T18:11:45Z",
+      "source_url": "https://arxiv.org/html/2611.12805v1",
+      "source_sha256": "2efd6e5bc90881cc9f30335aed25ac8cdc028af1f3f8a84313ebbed1a6c1e1a9",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "affiliation_evidence": "Fixed-v1 byline explicitly identifies both Aarya Bhave and Anushka Ajay Bhave as Google; official directory title/Download match the manuscript.",
+      "locations": [
+        "author block",
+        "Abstract",
+        "1 Introduction and Figure1"
+      ],
+      "decision": "out_of_scope",
+      "resolution": "specialized_image_registration_outside_current_tracks",
+      "reason": "Shanghai首发为11月10日，不能继续沿用旧窗口的after_window标签。原文主贡献是指纹图像的稠密非刚性配准、DCT池化和控制点形变场，不是当前LLM/多模态基础模型、后训练、LLM-Agent或搜广推模型研究。保留其原创性和Google身份，仅按当前选题范围不收录；不伪造高成本理由。",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "implementation_status": "not_implemented_by_review",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "metadata_sha256": "fd36edae89481cc44931de2f61ea5d0a82c7cbb684528e56655dcd2f91d918f3"
+    }
+  ],
+  "scope_clarifications": [
+    {
+      "id": "2606.30237",
+      "revision": 2,
+      "signal": "text_organization_mention",
+      "clearance": "Google Chirp3 is one of three off-the-shelf ASR systems compared on one speaker's Dutch dysarthric speech. The mention describes the evaluated model, not author affiliation; this does not prove absence of Google authors. No production A/B is asserted.",
+      "source_scope": "captured title and abstract only",
+      "fulltext_review_completed": false
+    },
+    {
+      "id": "2611.13550",
+      "revision": 1,
+      "signal": "text_organization_mention",
+      "clearance": "Google Research's TabFM is the compared pretrained model. The note applies existing tabular models to next-year earnings prediction; this is a model-use mention, not institutional evidence. P2 nonselection does not reject the empirical result or its originality.",
+      "source_scope": "captured title and abstract only",
+      "fulltext_review_completed": false
+    },
+    {
+      "id": "2611.14935",
+      "revision": 1,
+      "signal": "text_organization_mention, deployment_signal",
+      "clearance": "Google Gemini and Meta Llama identify evaluated models. The phrase test each deployed configuration is an evaluation recommendation following vignette/Q-Pain experiments, not a report of live clinical deployment or production traffic A/B. This clears only these textual signals, not a full-paper affiliation/capability determination.",
+      "source_scope": "captured title and abstract only",
+      "fulltext_review_completed": false
+    },
+    {
+      "id": "2611.17713",
+      "revision": 1,
+      "signal": "text_organization_mention",
+      "clearance": "Google's Stitch is the origin of the DESIGN.md format used to collect a new third-party dataset. That is tool provenance, not author affiliation. The new dataset's originality is retained; this window may leave a nonpriority dataset unselected under the approved P2 selection policy.",
+      "source_scope": "captured title and abstract only",
+      "fulltext_review_completed": false
+    },
+    {
+      "id": "2611.17766",
+      "revision": 1,
+      "signal": "text_organization_mention",
+      "clearance": "Google is one of the providers whose frontier models the spreadsheet benchmark evaluates. The abstract does not use it as an author institution. The new benchmark is not dismissed as lacking originality; P2 nonselection is a window-level priority choice, not method verification.",
+      "source_scope": "captured title and abstract only",
+      "fulltext_review_completed": false
+    },
+    {
+      "id": "2611.18371",
+      "revision": 1,
+      "signal": "text_organization_mention",
+      "clearance": "Google autocomplete supplies the biased statements evaluated by human participants. It is the input source, not an author-affiliation claim or production evaluation of a new recommendation model.",
+      "source_scope": "captured title and abstract only",
+      "fulltext_review_completed": false
+    }
+  ],
+  "limitations": [
+    "Primary review covers the named sections, not every page or every Google/Meta paper.",
+    "Semantic clarifications only remove the specific brand/tool or hypothetical-deployment text signal; they never prove the absence of an institutional affiliation.",
+    "No code, benchmark integration, training, GPU run, model quality gain or executable evolve operator is delivered by this review."
+  ]
+}

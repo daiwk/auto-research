@@ -4,7 +4,7 @@
 
 [English home](index.md) · [Paper catalog](papers/index.md)
 
-**1455 of 1455** Chinese site pages have a corresponding English page.
+**1457 of 1457** Chinese site pages have a corresponding English page.
 The table counts document pairs, not English catalog entries that link to Chinese text.
 
 | Source section | Pages | English counterparts | Still untranslated |
@@ -22,5 +22,5 @@ The table counts document pairs, not English catalog entries that link to Chines
 | post-training | 261 | 261 | 0 |
 | recommendation-components | 26 | 26 | 0 |
 | reproductions | 430 | 430 | 0 |
-| research-audits | 67 | 67 | 0 |
+| research-audits | 69 | 69 | 0 |
 | system-one | 17 | 17 | 0 |

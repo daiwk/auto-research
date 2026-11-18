@@ -1,0 +1,565 @@
+{
+  "schema_version": 1,
+  "organization": "Meta",
+  "window": {
+    "start": "2026-11-10",
+    "end": "2026-11-15"
+  },
+  "checked_on": "2026-11-18",
+  "scope": "Bounded official-source/original-manuscript reconciliation; listing coverage is not institution exhaustion or full-text method review.",
+  "all_sources_exhaustive": false,
+  "expected_records": 7,
+  "pages": [
+    {
+      "organization": "Meta",
+      "page": 1,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1",
+      "status": "retrieved",
+      "http_status": 200,
+      "capture": ".cache/nov15-closure/meta/publications-page-1.html",
+      "bytes": 285215,
+      "sha256": "a996304f9392a61c7a40212cd317f3b21d4046f8d1094babfd41c1b223361708",
+      "retrieved_at": "2026-11-18T04:15:33.519552+00:00",
+      "parsed_publication_links": 24
+    },
+    {
+      "organization": "Meta",
+      "page": 2,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=2",
+      "status": "retrieved",
+      "http_status": 200,
+      "capture": ".cache/nov15-closure/meta/publications-page-2.html",
+      "bytes": 276824,
+      "sha256": "e49098c7df42a54d539844c4b46ab5955a99c32756b9755f2c85793ae6c5047f",
+      "retrieved_at": "2026-11-18T04:15:37.478914+00:00",
+      "parsed_publication_links": 24
+    },
+    {
+      "organization": "Meta",
+      "page": 3,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=3",
+      "status": "retrieved",
+      "http_status": 200,
+      "capture": ".cache/nov15-closure/meta/publications-page-3.html",
+      "bytes": 277617,
+      "sha256": "91fe3cc7d2ce26f49fd74cdc016dc8b9f8a5d2d3b3168a8082ba610cebcd4a9c",
+      "retrieved_at": "2026-11-18T04:15:41.540555+00:00",
+      "parsed_publication_links": 24
+    },
+    {
+      "organization": "Meta",
+      "page": 4,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=4",
+      "status": "retrieved",
+      "http_status": 200,
+      "capture": ".cache/nov15-closure/meta/publications-page-4.html",
+      "bytes": 282673,
+      "sha256": "041daf3e6f0809cedadf271651970a3fbe6d6d2f48c9f88a9087eb6317207c1e",
+      "retrieved_at": "2026-11-18T04:15:45.211308+00:00",
+      "parsed_publication_links": 24
+    },
+    {
+      "organization": "Meta",
+      "page": 5,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=5",
+      "status": "retrieved",
+      "http_status": 200,
+      "capture": ".cache/nov15-closure/meta/publications-page-5.html",
+      "bytes": 275752,
+      "sha256": "ddc9138fa27489a97b0610a814692d75f68f691fde291a01e4b9dee95dbce920",
+      "retrieved_at": "2026-11-18T04:15:48.928782+00:00",
+      "parsed_publication_links": 24
+    },
+    {
+      "organization": "Meta",
+      "page": 6,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=6",
+      "status": "retrieved",
+      "http_status": 200,
+      "capture": ".cache/nov15-closure/meta/publications-page-6.html",
+      "bytes": 278520,
+      "sha256": "9b4d9adc7107be4adcbf50f5bf4a8ffdcd7d359eb10242f8b79b1337a7114b87",
+      "retrieved_at": "2026-11-18T04:15:53.191111+00:00",
+      "parsed_publication_links": 24
+    },
+    {
+      "organization": "Meta",
+      "url": "https://research.meta.ai/",
+      "status": "retrieved",
+      "http_status": 200,
+      "capture": ".cache/nov15-closure/meta/research-home.html",
+      "bytes": 338010,
+      "sha256": "15312f5d6a2401ce81966a8273a2a167311ba62a6541535d95f72082080bd80e",
+      "retrieved_at": "2026-11-18T04:15:54.019749+00:00",
+      "observation_scope": "Curated research homepage; latest visible entry is November9, not a publication census"
+    },
+    {
+      "organization": "Meta",
+      "url": "https://ai.meta.com/research/publications/",
+      "status": "document_unavailable",
+      "http_status": 200,
+      "capture": ".cache/nov15-closure/meta/unavailable-entry.html",
+      "bytes": 45,
+      "sha256": "de23e0c264ff944ee66adb95a36d8b8613ad646ba1147b3f87d843d0d73f88a0",
+      "retrieved_at": "2026-11-18T04:15:54.656047+00:00",
+      "response_text": "Sorry, this content isn't available right now",
+      "content_status": "unavailable_despite_http200"
+    },
+    {
+      "organization": "Meta",
+      "url": "https://api.github.com/search/repositories?q=org%3Afacebookresearch%20created%3A2026-11-09T16%3A00%3A00Z..2026-11-15T15%3A59%3A59Z&per_page=100",
+      "status": "retrieved",
+      "http_status": 200,
+      "capture": ".cache/nov15-closure/meta/repos-created-local-window.json",
+      "bytes": 6642,
+      "sha256": "b221436cb629c14e808a7347f497dd1856da758241f4fbf525ac7b090fd2df5b",
+      "retrieved_at": "2026-11-18T04:22:33.789066+00:00",
+      "returned_repositories": 1,
+      "incomplete_results": false,
+      "observation_scope": "Exact Shanghai-day UTC bounds. Repository events are recall, not original paper dates or method review."
+    },
+    {
+      "organization": "Meta",
+      "url": "https://api.github.com/search/repositories?q=org%3Afacebookresearch%20pushed%3A2026-11-09T16%3A00%3A00Z..2026-11-15T15%3A59%3A59Z&per_page=100",
+      "status": "retrieved",
+      "http_status": 200,
+      "capture": ".cache/nov15-closure/meta/repos-pushed-local-window.json",
+      "bytes": 152774,
+      "sha256": "1dab7fef4db893b0db4f7cf69d34773529dc59b3b9039e68b134c2e2e0d0ffd2",
+      "retrieved_at": "2026-11-18T04:22:35.312312+00:00",
+      "returned_repositories": 23,
+      "incomplete_results": false,
+      "observation_scope": "Exact Shanghai-day UTC bounds. Repository events are recall, not original paper dates or method review."
+    },
+    {
+      "organization": "Meta",
+      "url": "https://raw.githubusercontent.com/facebookresearch/ForeSpark/5d457ddab73a76f28db34acc577abfbd9e7c6eee/README.md",
+      "status": "retrieved",
+      "http_status": 200,
+      "capture": ".cache/nov15-closure/meta/forespark-readme-pinned.md",
+      "bytes": 10896,
+      "sha256": "de80a57ee37d6d3cf7dd6273a6b92edda6d826d13417117b07e088db6de22ac1",
+      "retrieved_at": "2026-11-18T04:18:14.748070+00:00",
+      "observation_scope": "Pinned official README, method/configuration/license corroboration, no execution"
+    }
+  ],
+  "records": [
+    {
+      "url": "https://github.com/facebookresearch/ForeSpark",
+      "title": "ForeSpark: Joint Draft and Verification Budget Scheduling for Parallel Speculative Decoding",
+      "organization": "Meta",
+      "arxiv_ids": [
+        "2611.13442"
+      ],
+      "review_status": "reviewed",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "date_evidence": [
+        {
+          "date": "2026-11-10",
+          "url": "https://arxiv.org/abs/2611.13442v1",
+          "location": "v1 history,01:37:38UTC"
+        },
+        {
+          "date": "2026-11-13",
+          "url": "https://arxiv.org/abs/2611.13442v2",
+          "location": "v2 history,01:33:53UTC"
+        }
+      ],
+      "reason": "The new official repository links the exact identity; fixed v2 Meta/SNU byline, defining method and eight-GPU resource matrix reviewed. Full campaign not reproduced due high cost, review DONE; no runtime or catalog intake is delivered.",
+      "reference": "docs/research-audits/nov15-review-closure/meta-primary-reviews.json",
+      "fulltext_review_completed": true
+    },
+    {
+      "url": "https://arxiv.org/html/2611.17501v1",
+      "title": "Advancing Quantization for R&R Models with Microscaling Formats",
+      "organization": "Meta",
+      "arxiv_ids": [
+        "2611.17501"
+      ],
+      "review_status": "reviewed",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "date_evidence": [
+        {
+          "date": "2026-11-13",
+          "url": "https://arxiv.org/abs/2611.17501v1",
+          "location": "v1 2026-11-12T20:46:31UTC is November13 Shanghai"
+        }
+      ],
+      "reason": "Meta/AMD byline confirmed. §5.4/A.5–A.6 establish native-MI350X benchmarks and captured production inputs, not new-method randomized production A/B or qualifying full-traffic evidence; industrial gate rejected only after this original check.",
+      "reference": "docs/research-audits/nov15-review-closure/meta-primary-reviews.json",
+      "fulltext_review_completed": true
+    },
+    {
+      "url": "https://arxiv.org/html/2611.17334v1",
+      "title": "Unbundling Multimodal Vision Encoding",
+      "organization": "Meta",
+      "arxiv_ids": [
+        "2611.17334"
+      ],
+      "review_status": "known",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "date_evidence": [
+        {
+          "date": "2026-11-13",
+          "url": "https://arxiv.org/html/2611.17334v1",
+          "location": "fixed submission record or dated official listing, not current capture date"
+        }
+      ],
+      "reason": "Inherit exact-v1 #252 primary review and existing catalog: MetaFAIR/NYU attribution, high-cost full-campaign decision and component-only evidence retained. Not a fresh full-text review here.",
+      "reference": "docs/research-audits/nov15-refresh/foundation-review.json",
+      "inherited_not_new_fulltext_review": true,
+      "fulltext_review_completed": false
+    },
+    {
+      "url": "https://arxiv.org/html/2611.13539v1",
+      "title": "Exploiting Feature-invariant Scaling Laws for Efficient A/B Experimentation in Recommendation Systems",
+      "organization": "Meta",
+      "arxiv_ids": [
+        "2611.13539"
+      ],
+      "review_status": "known",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "date_evidence": [
+        {
+          "date": "2026-11-10",
+          "url": "https://arxiv.org/html/2611.13539v1",
+          "location": "fixed submission record or dated official listing, not current capture date"
+        }
+      ],
+      "reason": "Inherit original exact-v1 review: Meta/NUS affiliation; reported model/feature comparisons do not establish production randomized traffic. Title A/B alone does not satisfy the industrial gate.",
+      "reference": "docs/research-audits/nov11-components/priority-review.json",
+      "inherited_not_new_fulltext_review": true,
+      "fulltext_review_completed": false
+    },
+    {
+      "url": "https://ai.meta.com/research/publications/gslm2-multi-stream-speech-representation-learning-and-generative-spoken-language-modeling/",
+      "title": "GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling",
+      "organization": "Meta",
+      "arxiv_ids": [
+        "2611.01143"
+      ],
+      "review_status": "known",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "date_evidence": [
+        {
+          "date": "2026-11-04",
+          "url": "https://ai.meta.com/research/publications/gslm2-multi-stream-speech-representation-learning-and-generative-spoken-language-modeling/",
+          "location": "fixed submission record or dated official listing, not current capture date"
+        }
+      ],
+      "reason": "Already catalogued. The directory November4 date is distinct from October31UTC first submission. The exact finite six-page URL set matches the inherited November9 snapshot.",
+      "reference": "docs/research-audits/nov09-review-closure/meta-source-review.json",
+      "inherited_not_new_fulltext_review": true,
+      "fulltext_review_completed": false
+    },
+    {
+      "url": "https://research.meta.ai/blog/muse-ember",
+      "title": "Introducing Our Smallest, Most Efficient Model: Muse Ember",
+      "organization": "Meta",
+      "arxiv_ids": [],
+      "review_status": "historical",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "date_evidence": [
+        {
+          "date": "2026-11-09",
+          "url": "https://research.meta.ai/",
+          "location": "latest visible post date on current curated homepage"
+        }
+      ],
+      "reason": "Pre-window product post remains latest visible homepage item. Source/date triage only, not a fresh technical-report review or proof of no other Meta papers.",
+      "fulltext_review_completed": false
+    },
+    {
+      "url": "https://research.meta.ai/blog/specialized-models-for-muse-and-metaai",
+      "title": "Bringing Specialized Models to Muse and Meta AI",
+      "organization": "Meta",
+      "arxiv_ids": [],
+      "review_status": "historical",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "date_evidence": [
+        {
+          "date": "2026-11-06",
+          "url": "https://research.meta.ai/",
+          "location": "current curated homepage visible date"
+        }
+      ],
+      "reason": "Pre-window product post, separate from November10–15 paper events. No new paper identity or algorithm inferred from a product brand.",
+      "fulltext_review_completed": false
+    }
+  ],
+  "directory_inventory": {
+    "baseline": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json#official_directory",
+    "baseline_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+    "prior_exact_urls": 144,
+    "current_exact_urls": 144,
+    "added": [],
+    "removed": [],
+    "current_sorted_urls_sha256": "3b51a46196fbf4cdfc57f73ae03ae09ed118aa7f74daae4c2bc3d8af930b9e88"
+  },
+  "directory_exceptions": [
+    {
+      "organization": "Meta",
+      "url": "https://ai.meta.com/research/publications/",
+      "title": "Meta AI publications landing entry",
+      "review_status": "explicit_exception",
+      "exception_type": "document_unavailable",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "status": "archived",
+      "blocking": false,
+      "reason": "HTTP200 returns a45-byte unavailable message. Alternate results pages and research homepage were actually read; this failed entry is not evidence of zero new papers.",
+      "attempts": [
+        {
+          "url": "https://ai.meta.com/research/publications/",
+          "result": "unavailable_despite_http200",
+          "http_status": 200,
+          "bytes": 45,
+          "sha256": "de23e0c264ff944ee66adb95a36d8b8613ad646ba1147b3f87d843d0d73f88a0",
+          "retrieved_at": "2026-11-18T04:15:54.656047+00:00"
+        },
+        {
+          "url": "https://research.facebook.com/publications/",
+          "result": "redirected_to_facebook_login_temporary_block",
+          "observation": "Read-only request observed login/block page, not a publication list"
+        }
+      ],
+      "reopen_when": "The official entry serves publications again, or an independent new Meta identity/changed official source supplies new evidence."
+    },
+    {
+      "organization": "Meta",
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=6",
+      "title": "Meta configured six-page publication directory coverage",
+      "review_status": "explicit_exception",
+      "exception_type": "pagination_unproven",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "status": "archived",
+      "blocking": false,
+      "reason": "Six configured pages yield144 distinct publication links and match the inherited November9 finite inventory. The mixed historical listing and visible Next links do not establish a whole-site or complete date-ordered census. Unvisited pages are not described as failed requests.",
+      "attempts": [
+        {
+          "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1",
+          "result": "retrieved_finite_directory_page",
+          "http_status": 200,
+          "parsed_links": 24,
+          "sha256": "a996304f9392a61c7a40212cd317f3b21d4046f8d1094babfd41c1b223361708",
+          "retrieved_at": "2026-11-18T04:15:33.519552+00:00"
+        },
+        {
+          "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=2",
+          "result": "retrieved_finite_directory_page",
+          "http_status": 200,
+          "parsed_links": 24,
+          "sha256": "e49098c7df42a54d539844c4b46ab5955a99c32756b9755f2c85793ae6c5047f",
+          "retrieved_at": "2026-11-18T04:15:37.478914+00:00"
+        },
+        {
+          "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=3",
+          "result": "retrieved_finite_directory_page",
+          "http_status": 200,
+          "parsed_links": 24,
+          "sha256": "91fe3cc7d2ce26f49fd74cdc016dc8b9f8a5d2d3b3168a8082ba610cebcd4a9c",
+          "retrieved_at": "2026-11-18T04:15:41.540555+00:00"
+        },
+        {
+          "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=4",
+          "result": "retrieved_finite_directory_page",
+          "http_status": 200,
+          "parsed_links": 24,
+          "sha256": "041daf3e6f0809cedadf271651970a3fbe6d6d2f48c9f88a9087eb6317207c1e",
+          "retrieved_at": "2026-11-18T04:15:45.211308+00:00"
+        },
+        {
+          "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=5",
+          "result": "retrieved_finite_directory_page",
+          "http_status": 200,
+          "parsed_links": 24,
+          "sha256": "ddc9138fa27489a97b0610a814692d75f68f691fde291a01e4b9dee95dbce920",
+          "retrieved_at": "2026-11-18T04:15:48.928782+00:00"
+        },
+        {
+          "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=6",
+          "result": "retrieved_finite_directory_page",
+          "http_status": 200,
+          "parsed_links": 24,
+          "sha256": "9b4d9adc7107be4adcbf50f5bf4a8ffdcd7d359eb10242f8b79b1337a7114b87",
+          "retrieved_at": "2026-11-18T04:15:53.191111+00:00"
+        }
+      ],
+      "reopen_when": "Changed links/dates, a proven ordered pagination contract or an independently found missing Meta manuscript changes this finite inventory."
+    }
+  ],
+  "repository_event_inventory": {
+    "created": {
+      "total_count": 1,
+      "incomplete_results": false,
+      "items": [
+        {
+          "html_url": "https://github.com/facebookresearch/ForeSpark",
+          "full_name": "facebookresearch/ForeSpark",
+          "created_at": "2026-11-11T23:57:30Z",
+          "pushed_at": "2026-11-11T23:59:42Z"
+        }
+      ]
+    },
+    "pushed": {
+      "total_count": 23,
+      "incomplete_results": false,
+      "items": [
+        {
+          "html_url": "https://github.com/facebookresearch/xformers",
+          "full_name": "facebookresearch/xformers",
+          "created_at": "2021-10-13T18:08:50Z",
+          "pushed_at": "2026-11-13T15:49:08Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/Kats",
+          "full_name": "facebookresearch/Kats",
+          "created_at": "2021-02-25T21:51:06Z",
+          "pushed_at": "2026-11-13T10:49:12Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/multimodal",
+          "full_name": "facebookresearch/multimodal",
+          "created_at": "2022-01-27T20:01:00Z",
+          "pushed_at": "2026-11-16T16:16:31Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/ProgramBench",
+          "full_name": "facebookresearch/ProgramBench",
+          "created_at": "2026-05-03T17:26:54Z",
+          "pushed_at": "2026-11-11T06:58:01Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/MHR",
+          "full_name": "facebookresearch/MHR",
+          "created_at": "2025-09-07T22:12:57Z",
+          "pushed_at": "2026-11-11T15:53:05Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/videoseal",
+          "full_name": "facebookresearch/videoseal",
+          "created_at": "2024-11-27T20:49:30Z",
+          "pushed_at": "2026-11-10T14:27:28Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/mvdust3r",
+          "full_name": "facebookresearch/mvdust3r",
+          "created_at": "2024-12-19T22:32:50Z",
+          "pushed_at": "2026-11-16T16:16:30Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/scenescript",
+          "full_name": "facebookresearch/scenescript",
+          "created_at": "2024-09-17T21:10:39Z",
+          "pushed_at": "2026-11-10T00:55:05Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/recipes",
+          "full_name": "facebookresearch/recipes",
+          "created_at": "2021-10-11T21:24:05Z",
+          "pushed_at": "2026-11-16T16:16:31Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/EgoBlur",
+          "full_name": "facebookresearch/EgoBlur",
+          "created_at": "2023-08-11T18:11:51Z",
+          "pushed_at": "2026-11-14T18:15:09Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/swe-sweep",
+          "full_name": "facebookresearch/swe-sweep",
+          "created_at": "2026-10-01T04:59:29Z",
+          "pushed_at": "2026-11-12T14:37:33Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/DRTK",
+          "full_name": "facebookresearch/DRTK",
+          "created_at": "2024-03-08T17:27:57Z",
+          "pushed_at": "2026-11-14T01:11:05Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/pyvrs",
+          "full_name": "facebookresearch/pyvrs",
+          "created_at": "2023-03-06T16:40:04Z",
+          "pushed_at": "2026-11-15T02:59:00Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/mosaic",
+          "full_name": "facebookresearch/mosaic",
+          "created_at": "2025-10-24T16:30:32Z",
+          "pushed_at": "2026-11-14T02:32:54Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/moodist",
+          "full_name": "facebookresearch/moodist",
+          "created_at": "2025-06-16T13:50:41Z",
+          "pushed_at": "2026-11-09T16:29:55Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/sgl-muse-mega",
+          "full_name": "facebookresearch/sgl-muse-mega",
+          "created_at": "2026-11-05T19:49:51Z",
+          "pushed_at": "2026-11-12T17:50:43Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/autoformbench",
+          "full_name": "facebookresearch/autoformbench",
+          "created_at": "2026-09-29T17:34:32Z",
+          "pushed_at": "2026-11-15T05:30:27Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/stereo-splat",
+          "full_name": "facebookresearch/stereo-splat",
+          "created_at": "2026-09-29T09:22:22Z",
+          "pushed_at": "2026-11-11T21:54:08Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/ForeSpark",
+          "full_name": "facebookresearch/ForeSpark",
+          "created_at": "2026-11-11T23:57:30Z",
+          "pushed_at": "2026-11-11T23:59:42Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/bites",
+          "full_name": "facebookresearch/bites",
+          "created_at": "2026-01-29T19:04:49Z",
+          "pushed_at": "2026-11-13T19:36:32Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/omnifacerig",
+          "full_name": "facebookresearch/omnifacerig",
+          "created_at": "2026-08-04T09:58:42Z",
+          "pushed_at": "2026-11-13T17:04:45Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/Free-Range-Gaussians",
+          "full_name": "facebookresearch/Free-Range-Gaussians",
+          "created_at": "2026-10-27T11:20:09Z",
+          "pushed_at": "2026-11-13T17:15:19Z"
+        },
+        {
+          "html_url": "https://github.com/facebookresearch/bel-female-talker",
+          "full_name": "facebookresearch/bel-female-talker",
+          "created_at": "2026-11-07T05:44:25Z",
+          "pushed_at": "2026-11-10T18:50:01Z"
+        }
+      ]
+    },
+    "limitation": "Repository activity is not a paper disposition. Search returns a mutable current repository view: three returned latest pushed_at fields are after the target window despite the fixed query. Such rows are not converted to in-window paper events or counted as new papers."
+  },
+  "limitations": [
+    "No whole-Meta or whole-web exhaustion claim; six directory pages are only configured finite coverage.",
+    "Newly original-reviewed Meta manuscripts are ForeSpark and MX R&R; Unbundling/feature-scaling dispositions are inherited, not re-counted as fresh reviews.",
+    "Repository creation/update, original paper submission, version revision, official listing and capture dates remain separate.",
+    "Eight pinned manuscripts were checked for actual affiliations, method, evaluation and cost; Meta-learning, method names, hardware brands and familiar author names do not prove Meta participation.",
+    "No implementation, catalog intake, training, GPU use, model/data download, paid API call or capability comparison occurred."
+  ]
+}
