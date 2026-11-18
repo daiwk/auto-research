@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-11-18 · 64 篇主题资料 / 27 篇重点对照
+[Agent](../index.md) · 更新 2026-11-18 · 73 篇主题资料 / 36 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
@@ -52,6 +52,15 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science](../../../agent-research/2609.15983-stellar-colosseum/README.md) · [原始来源](https://arxiv.org/abs/2609.15983v1)<br>章节：背景与主要改动、核心公式 | 策略readiness门后分解证明依赖，带反驳的重叠树综合与全局验证指导局部修订／重新探索，结果grader与候选选择隔离。 | ScientistTwo控制子集到全量实验和review闭环；Colosseum核查数学假设与跨节论证。共同的多阶段形态不使语义judge或证据充分性可互换。 |
 | [AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support](../../../agent-research/2611.15700-askalcf-protocol/README.md) · [原始来源](https://arxiv.org/abs/2611.15700v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 回答盲的生产／全库充分性pivot、独立质量信号、revision缓存与受人审动作控制的修复协议。 | Harness²不依赖答案rubric，按开放执行对照选择并积累经验；AskALCF有冻结专家归因和target/control，不能用文本偏好选择替代充分性探针。局部七路不是原文28规则。 |
 | [ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects](../../../agent-research/2611.17381-prodpilot-protocol/README.md) · [原始来源](https://arxiv.org/abs/2611.17381v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 按修复类型分层，真实checker接受修改、全量审计回滚回归，再按规则和概率顺序门控；本地仅文件映射回调。 | ProdPilot依特定生产规则，Harness²比较开放任务行为且无gold rubric。规则通过不等于通用安全；handle返回不是smoke成功，外部调用异常还需记未知副作用。 |
+| [DetourBench: Trajectory-Level Evaluation of Interactive Agents with Exact Minimum-Action Bounds](../../../agent-research/2611.20844-detourbench/README.md) · [原始来源](https://arxiv.org/abs/2611.20844v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 只看最终成功会把最短路线、绕路成功和接近完成的失败混成同一结果。DetourBench把环境限制为有限、确定、部分可观察的资源／凭证状态机，资源标识发现后全局可寻址，没有当前位置或回退路费。离线评测器知道全图，用BFS给出最少收费访问数和可回放见证；这不是部分可观察条件下的最优策略。 | 负控覆盖重复／无效都收费、batch终态截断、部分进展、不可逆失败的null指标与状态上限。三seed是同一确定性边界测试的重复，不是三次独立能力实验。与Harness²相比，这里有全信息exact evaluator；Harness²是无rubric的执行对照改进，不能把其选择器当最短路oracle。 |
+| [SciResearch-Eval: Evaluating Scientific Judgment in Autonomous Experimental Agents](../../../agent-research/2611.21541-sciresearch-eval/README.md) · [原始来源](https://arxiv.org/abs/2611.21541v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | Agent需要给未知材料设计加热实验，用可能粗糙或缺物理项的热传导模拟器估计物性，再报告95%区间与隐藏实验的预测。拟合残差小不代表模型正确：错误物理可给出看似精确但偏置的参数。环境让“真实样品”由更丰富模拟器生成，评测器有精确truth，Agent只得到工具、初始测量和预算。 | 负控验证过窄错误区间代价、区间加宽不免费、单位倍数变换不改log区间评分，以及非正值／NaN／漏参数拒绝。AskALCF用回答盲的两范围证据定位检索责任；本篇用独立物理truth评分置信区间。二者都要求评测参考不能进入被评Agent，但不能互换judgment。 |
+| [Invariant-Aware Harness Enforcement to Protect LLM Agents from Silent API Failures](../../../agent-research/2611.20595-silentguard/README.md) · [原始来源](https://arxiv.org/abs/2611.20595v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | API返回HTTP200并不保证按请求过滤，静默忽略字段、把AND变OR或截断total都可能让Agent相信错误数据。SilentGuard把检查从提示中的建议移到执行harness：结果过确定性不变量才放行，失败真实重试一次，仍失败时按检查可信度隐藏值或警告，不自动生成“修复值”。 | 负控包含一致谎言确实放行、97/98个clean样本的阈值边界、documented参数拒绝、原API error透传、宽松count不能背书严格请求，以及两次拒绝后弃答。与Harness²改进执行策略不同，这里只限制结果能否被使用；判定“可验证”不等于开放任务能力。 |
+| [MetaAct: Self-Evolving Executable Action Constraints for Embodied Language Agents](../../../agent-research/2611.20655-metaact/README.md) · [原始来源](https://arxiv.org/abs/2611.20655v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 自然语言教训改变偏好，却不能保证不可逆动作不执行。MetaAct让LLM输出类型化GEAR规格，由固定编译器转成确定性guard；运行时拒绝违反约束的动作并返触发消息，模型需要重新规划。保证只覆盖规格表达的局部规则，不是全任务安全证明。 | 合成日志验证观察变化后动作恢复可用、已生效选项被拦、有效动作误拦和成功轨迹误拦会拒绝、缺正负参考时不打虚假零率。成功和score标签只供离线evaluator，guard只能见动作前View。与Harness²基于开放执行对照组合不同，这里选择有明确作用域的可执行约束，回放通过并不证明真实环境收益。 |
+| [Evaluation-Free Recursive Self-Improvement for Coding Agents](../../../agent-research/2611.21056-elite-eval-free/README.md) · [原始来源](https://arxiv.org/abs/2611.21056v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | ELITE质疑反复在固定下游任务上evaluate-and-select的成本与适应偏差。冻结模型，演化可执行scaffold代码：同一parent先给出多个聚焦改进假设，每条假设独立实现，经过确定性有效性检查后交给LLM integrator。它不是从得分最高子代里挑一个。 | 负控验证两次explorer确实看到相同parent、integrator收到独立子代、严格范围拒绝、acceptance失败回滚和无效gate不被truthiness放行。与Harness²相比，两者都不依赖任务rubric，但Harness²按任务执行对照改框架，ELITE刻意不看下游执行结局，不能把普通validation elitism写成ELITE。 |
+| [The Resolution Hypothesis: Agent Evolution&#x27;s Key Is Identifying Improvements](../../../agent-research/2611.23068-resolution-hypothesis/README.md) · [原始来源](https://arxiv.org/abs/2611.23068v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 自进化停滞不一定是提案不够好，可能是一次嘈杂评分分不清候选改进。本文把“同一artifact反复测”的评测噪声与“不同演化run产出不同artifact”的真实质量波动分开。固定artifact的对照只受前者限制，方法排名同时受两者限制。 | 负控用相同行的嘈杂数据得到负tau²、无行内噪声但均值不同得到正tau²，并检验整体平移不改变方差、ragged/NaN/bool拒绝。Harness²的执行对照也会有随机性；本估计器只是诊断测量分辨率，不把其输出直接变成自动晋级门。 |
+| [SkillBuffBench: Measuring What Agent Skills Contribute across Harnesses, Models, Skill Access Modes and Memory](../../../agent-research/2611.22017-skillbuffbench/README.md) · [原始来源](https://arxiv.org/abs/2611.22017v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 手工给Agent正确skill测的是精选上界，不等于部署时能从库里找到它。SkillBuffBench在同一任务／模型／harness下交叉三种skill访问（无、精选、自动）与两种memory模式，单独测内容收益、发现损失和记忆交互。模型池和harness版本应固定到每次结果，不能把更新后版本混进同一格。 | Harness²会产生与改进执行框架；SkillBuffBench评估框架、模型、skill access和memory条件的配对差异。让改进过程看测试任务的verifier会同时改变二者的信息边界。精选skill不应被写成自动发现能力。 |
+| [Verifying Agents in Rubric-Graded Environments](../../../agent-research/2611.22841-gandalf-bvb/README.md) · [原始来源](https://arxiv.org/abs/2611.22841v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 复杂任务产物可能是Excel、PowerPoint或应用状态，单纯把文件转成文本会丢公式、布局与跨文件关系。本文不是新做任务的Agent，而是研究判断Agent产物的verifier：BVB包含24投资银行任务、2464个人工判定criteria，用来评测验证器的判断。 | AskALCF把回答质量与检索充分性分开归因，Gandalf检查已完成工作是否满足rubric；二者都依赖独立证据但不能互换。judge拥有的固定workspace和文件权限不能泄漏给actor作为gold，judge也不能有写权限。完整API／多任务评测成本过高，不复现（审查DONE）。 |
+| [Do LLM Agents Still Need to Be Told How to Self-Improve?](../../../agent-research/2611.23219-self-organized-learning/README.md) · [原始来源](https://arxiv.org/abs/2611.23219v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 本文不先指定GEPA式优化循环，而是给冻结teacher通用自改进目标、文件读写／Bash／gameplay原语与资源预算。teacher可自己造游戏、观察短生命周期player、编辑文本产物，自行决定何时探索、比较和更新。真实游戏与外部benchmark不在teacher训练访问范围。 | ELITE预设explore-then-integrate程序且不读下游任务结果，本篇刻意不给外部优化loop、让teacher自行选择学习动作；Harness²又有预定义Propose–Probe–Compose。固定脚手架协议可支持研究，但不等于复现自发学习能力。完整多模型多benchmark长rollout成本过高，不复现（审查DONE）。 |
 
 </div>
 
@@ -164,6 +173,60 @@ Harness²先提出并真实执行不同harness，再组合和反思；AskALCF先
 Harness²保留真实候选执行与采用依据，不把“提案”当“执行”。ProdPilot在结构化修复域进一步把每个fix的接受交给原checker，回归即回滚，关键P0不能被高模型概率覆盖。局部回调能验证这些控制流，但没有50条规则、概率模型或实际云环境，因此不能宣称应用已生产就绪。
 
 对照来源：[prodpilot-protocol](../../../agent-research/2611.17381-prodpilot-protocol/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### DetourBench：把成功、绕路和不可逆失败分开
+
+每次真正送达dispatcher的访问都收费，包括无效、禁用和重复动作；不产生访问的模型回复不收费，另有turn上限。batch按顺序执行，达到终态或固定预算便停止。活跃状态下资源与凭证只增不减，错误承诺是吸收终态，不给它编造一个有限剩余距离。成功率必须与条件attainment一起报告，不能用只在成功子集上定义的效率排整个模型名次。 负控覆盖重复／无效都收费、batch终态截断、部分进展、不可逆失败的null指标与状态上限。三seed是同一确定性边界测试的重复，不是三次独立能力实验。与Harness²相比，这里有全信息exact evaluator；Harness²是无rubric的执行对照改进，不能把其选择器当最短路oracle。
+
+对照来源：[detourbench](../../../agent-research/2611.20844-detourbench/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### SciResearch-Eval：用正确区间评分检验科学判断
+
+物性区间在log10尺度上使用proper interval score：区间越宽承担宽度代价，错过truth另以40倍距离处罚。隐藏温度预测另按传感噪声sigma及真实温升归一化，不能和物性log评分混成一个accuracy。无提交单独保存，论文覆盖率把它算miss；不能只统计按时提交的成功子集。 负控验证过窄错误区间代价、区间加宽不免费、单位倍数变换不改log区间评分，以及非正值／NaN／漏参数拒绝。AskALCF用回答盲的两范围证据定位检索责任；本篇用独立物理truth评分置信区间。二者都要求评测参考不能进入被评Agent，但不能互换judgment。
+
+对照来源：[sciresearch-eval](../../../agent-research/2611.21541-sciresearch-eval/README.md) · [askalcf-protocol](../../../agent-research/2611.15700-askalcf-protocol/README.md)
+
+### SilentGuard：把API一致性检查变成强制执行门
+
+计数查询对每个条件i执行N(F)+N(F不含i且非Ci)=N(F不含i)，每次最多2k额外API查询。文档外参数可在执行前拒绝。精确检查误报估计0；learned contract从n条clean样本估1/(n+2)，不大于1%才强制隐藏。最终count必须来自足够严格且已通过检查的查询，否则拒绝最多两次再弃答。 负控包含一致谎言确实放行、97/98个clean样本的阈值边界、documented参数拒绝、原API error透传、宽松count不能背书严格请求，以及两次拒绝后弃答。与Harness²改进执行策略不同，这里只限制结果能否被使用；判定“可验证”不等于开放任务能力。
+
+对照来源：[silentguard](../../../agent-research/2611.20595-silentguard/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### MetaAct：类型化动作约束与离线回放验证
+
+v1提出ordered_once、no_op_repeat、idempotence_block、revisit_block、generic_deref、relevance_filter六类primitive及固定extractor菜单。候选用训练日志反事实回放，要求失败轨迹覆盖至少0.3、有效动作误拦不高于0.15、成功轨迹被拦不高于0.10。有效动作分母来自成功及高分失败的安全参考，不把本来无效的重复动作充成误拦。 合成日志验证观察变化后动作恢复可用、已生效选项被拦、有效动作误拦和成功轨迹误拦会拒绝、缺正负参考时不打虚假零率。成功和score标签只供离线evaluator，guard只能见动作前View。与Harness²基于开放执行对照组合不同，这里选择有明确作用域的可执行约束，回放通过并不证明真实环境收益。
+
+对照来源：[metaact](../../../agent-research/2611.20655-metaact/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### ELITE：同父探索后按实现证据整合，不做任务分数选择
+
+integrator查看实现、hypothesis与gate结果，推理互补、冗余、冲突、复杂度或缺失，再对原parent重新实现一个组合patch。不能简单拼接所有patch，也不能把已串联修改的子代当共同起点。compile/import/tool-load/scope等exploration gate与更严格call-return/message-order/main-flow acceptance gate只验证操作有效性；下游解题轨迹和benchmark结果都不进入演化。 负控验证两次explorer确实看到相同parent、integrator收到独立子代、严格范围拒绝、acceptance失败回滚和无效gate不被truthiness放行。与Harness²相比，两者都不依赖任务rubric，但Harness²按任务执行对照改框架，ELITE刻意不看下游执行结局，不能把普通validation elitism写成ELITE。
+
+对照来源：[elite-eval-free](../../../agent-research/2611.21056-elite-eval-free/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### Resolution Hypothesis：区分评测噪声与演化run方差
+
+在R个独立artifact、每个M次重复评测的平衡矩阵中，sigma²用每行sample variance再平均，tau²用行均值sample variance减sigma²/M。tau²的无偏矩估计可以为负；不能删掉负结果，论文只在显示标准差时截成0。把所有RM项拉平会破坏层级，不能用更多同artifact重复代替更多独立演化run。 负控用相同行的嘈杂数据得到负tau²、无行内噪声但均值不同得到正tau²，并检验整体平移不改变方差、ragged/NaN/bool拒绝。Harness²的执行对照也会有随机性；本估计器只是诊断测量分辨率，不把其输出直接变成自动晋级门。
+
+对照来源：[resolution-hypothesis](../../../agent-research/2611.23068-resolution-hypothesis/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### SkillBuffBench：把精选技能、自动发现与记忆分开评测
+
+M0每轮新workspace、session和memory namespace，缓存／历史不跨轮；只有API凭据可复用。任务prompt不点名skill，golden值、reference solution和verifier不给Agent。网络默认只开模型API，必要外部工具逐任务allowlist；私有技能正文不能靠摘要重写成声称同等的benchmark。 Harness²会产生与改进执行框架；SkillBuffBench评估框架、模型、skill access和memory条件的配对差异。让改进过程看测试任务的verifier会同时改变二者的信息边界。精选skill不应被写成自动发现能力。
+
+对照来源：[skillbuffbench](../../../agent-research/2611.22017-skillbuffbench/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### Gandalf / BVB：检验rubric验证器本身是否可靠
+
+Gandalf把rubric转成reactive检查任务，自行决定读什么原生文件／工具，直到得出布尔verdict；环境对齐让judge使用只读固定快照工具，domain guidance给全语料通用银行惯例，不含任务答案。mutation权限不交给judge，不能让评测器修好产物后再判它通过。 AskALCF把回答质量与检索充分性分开归因，Gandalf检查已完成工作是否满足rubric；二者都依赖独立证据但不能互换。judge拥有的固定workspace和文件权限不能泄漏给actor作为gold，judge也不能有写权限。完整API／多任务评测成本过高，不复现（审查DONE）。
+
+对照来源：[gandalf-bvb](../../../agent-research/2611.22841-gandalf-bvb/README.md) · [askalcf-protocol](../../../agent-research/2611.15700-askalcf-protocol/README.md)
+
+### Self-Organized Learning：只给原语，观察Agent如何设计自学过程
+
+teacher在持久session内组织算法，player每次新session只读取当前文本产物；权重不变。论文分析自发课程、难度选择和A/B测试行为，并在不同游戏horizon／机制／3D导航上检验迁移。teacher看到自己生成任务的结果不等于能看最终外部测试标签。 ELITE预设explore-then-integrate程序且不读下游任务结果，本篇刻意不给外部优化loop、让teacher自行选择学习动作；Harness²又有预定义Propose–Probe–Compose。固定脚手架协议可支持研究，但不等于复现自发学习能力。完整多模型多benchmark长rollout成本过高，不复现（审查DONE）。
+
+对照来源：[self-organized-learning](../../../agent-research/2611.23219-self-organized-learning/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -359,9 +422,135 @@ Harness²保留真实候选执行与采用依据，不把“提案”当“执�
 
     对照来源：[prodpilot-protocol](../../../agent-research/2611.17381-prodpilot-protocol/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
 
+### 它与Harness²的执行比较有什么不同？ {#cross-cross-nov18-latest-detourbench}
+
+??? note "展开答案与例子"
+
+    **答案：** DetourBench评价固定轨迹与可证明离线最短路；Harness²通过真实执行对照改harness，选择不依赖gold或rubric。两者评价对象和信息权限不同。
+
+    **教学例子：** 教学例：匿名选产物不能证明该产物花的访问数最少。
+
+    对照来源：[detourbench](../../../agent-research/2611.20844-detourbench/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### 它与AskALCF回答盲探针的参考信息一样吗？ {#cross-cross-nov18-latest-sciresearch-eval}
+
+??? note "展开答案与例子"
+
+    **答案：** 不一样。本篇evaluator有精确物理truth，AskALCF充分性探针只看问题和文档，不能看生成答案。参考对象和权限必须分别隔离。
+
+    **教学例子：** 教学例：热物性真值可以供评分器用，但不能传给实验设计Agent。
+
+    对照来源：[sciresearch-eval](../../../agent-research/2611.21541-sciresearch-eval/README.md) · [askalcf-protocol](../../../agent-research/2611.15700-askalcf-protocol/README.md)
+
+### 为什么不把这个当Harness²式自改进？ {#cross-cross-nov18-latest-silentguard}
+
+??? note "展开答案与例子"
+
+    **答案：** SilentGuard按固定不变量执行放行／隐藏，不提出或整合harness改动；Harness²需要执行对照和经验积累。两者可组合但不互相替代。
+
+    **教学例子：** 教学例：重发一次API不是生成一个新的工具策略候选。
+
+    对照来源：[silentguard](../../../agent-research/2611.20595-silentguard/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### 与Harness²组合候选相比，GEAR union能直接采用吗？ {#cross-cross-nov18-latest-metaact}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。GEAR union是guard合取，拦截更多动作也可能误伤成功轨迹，必须重新回放；Harness²也要求实际执行组合结果，证据类型不同。
+
+    **教学例子：** 教学例：两个各自安全的约束合并后仍需算eff和ok。
+
+    对照来源：[metaact](../../../agent-research/2611.20655-metaact/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### ELITE与Harness²都无rubric，差别在哪里？ {#cross-cross-nov18-latest-elite-eval-free}
+
+??? note "展开答案与例子"
+
+    **答案：** Harness²会运行任务并比较行为来组合；ELITE用实现级证据且排除下游任务结果。二者“无rubric”不意味着相同信息边界。
+
+    **教学例子：** 教学例：给ELITE integrator一张候选成功率表已经改变算法。
+
+    对照来源：[elite-eval-free](../../../agent-research/2611.21056-elite-eval-free/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### 它能取代Harness²的selector吗？ {#cross-cross-nov18-latest-resolution-hypothesis}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。它估测量波动，不判断哪条机制互补或哪个产物更符合任务。候选质量、选择能力与分辨率是不同对象。
+
+    **教学例子：** 教学例：低方差的错误答案也不会因为稳定就变正确。
+
+    对照来源：[resolution-hypothesis](../../../agent-research/2611.23068-resolution-hypothesis/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### 为什么它不能直接等同Harness²实验？ {#cross-cross-nov18-latest-skillbuffbench}
+
+??? note "展开答案与例子"
+
+    **答案：** 这里固定配置比较skill access与memory条件，Harness²主动修改harness并积累经验。演化产物与评测条件必须分开。
+
+    **教学例子：** 教学例：自动安装新skill会改变一个原定固定的benchmark格子。
+
+    对照来源：[skillbuffbench](../../../agent-research/2611.22017-skillbuffbench/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### 它与AskALCF的独立探针能共用标签吗？ {#cross-cross-nov18-latest-gandalf-bvb}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能直接共用。前者判断交付物criteria，后者先问文档是否足够回答并隔离生成答案。问题、参照和权限不相同。
+
+    **教学例子：** 教学例：引用页存在不证明PowerPoint里实际画了正确图。
+
+    对照来源：[gandalf-bvb](../../../agent-research/2611.22841-gandalf-bvb/README.md) · [askalcf-protocol](../../../agent-research/2611.15700-askalcf-protocol/README.md)
+
+### 它与ELITE的无评测演化是一回事吗？ {#cross-cross-nov18-latest-self-organized-learning}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是。ELITE规定同父探索和代码整合，排除下游结果；本篇让teacher在自造游戏反馈下自主设计学习循环。干预和反馈权限不同。
+
+    **教学例子：** 教学例：强行按7子代整合运行就不再是自由自组织设定。
+
+    对照来源：[self-organized-learning](../../../agent-research/2611.23219-self-organized-learning/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 本轮review-only，不用预写课程／固定答案脚本替代自组织行为，不启动Bash工具Agent或付费gameplay。保留官方project入口和固定v1方法、预算及允许权限，未验证作者源仓库时明确记未核实。 完整实验高成本不复现，不作能力证据。
+
+涉及：[self-organized-learning](../../../agent-research/2611.23219-self-organized-learning/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+**2026-11-18** · 本轮review-only，不提供一个空JSON接口冒充reactive verifier，不调用付费模型，也不重建native banking环境。官方Gandalf与BVBv1.0仓库可供后续显式预算实验，但本轮没有运行或审计其全部运行权限。 完整实验高成本不复现，不作能力证据。
+
+涉及：[gandalf-bvb](../../../agent-research/2611.22841-gandalf-bvb/README.md) · [askalcf-protocol](../../../agent-research/2611.15700-askalcf-protocol/README.md)
+
+**2026-11-18** · 本轮review-only，无模型矩阵／task复刻／metrics。完整3168轮API执行及部分未公开collaborator技能不适合低成本忠实复现；保留协议与资产可用边界为审查DONE，不把私有skill目的描述冒充技能实现。 完整实验高成本不复现，不作能力证据。
+
+涉及：[skillbuffbench](../../../agent-research/2611.22017-skillbuffbench/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+**2026-11-18** · variance_components执行附录B.2的两个估计，返回负的run_variance_unbiased与仅截断的run_sd，要求至少2×2平衡有限数值矩阵。输入必须是已经测量且来源明确的结果；模块不生成agent轨迹、不选择候选，也不伪造方差置信区间或powered superiority。 完整实验高成本不复现，不作能力证据。
+
+涉及：[resolution-hypothesis](../../../agent-research/2611.23068-resolution-hypothesis/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+**2026-11-18** · 本地L0 generation真实调用独立explore、exploration_gate、integrate、acceptance_gate；共同parent映射不可变，越界／空patch和非bool门结果拒绝。IntegrationRequest只有parent与有效children，不接收任务成绩／轨迹。失败acceptance或无有效子代保留原parent，不选择“次优分数”。回调可编译示例源码但没有LLM、SWE容器或安全沙箱。 完整实验高成本不复现，不作能力证据。
+
+涉及：[elite-eval-free](../../../agent-research/2611.21056-elite-eval-free/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+**2026-11-18** · 本地独立实现已核的no_op_repeat和idempotence_block两种guard，以及Eq2–5回放评分／union选择；明确不含其余四primitive、goal extractor、LLM综合和在线retirement。安全参考score阈值必须显式提供，不把教学0.5当论文统一常数。未知primitive严格拒绝，不静默跳过；上游当前repo比v1多primitive，不能据此改写原论文事实。 完整实验高成本不复现，不作能力证据。
+
+涉及：[metaact](../../../agent-research/2611.20655-metaact/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+**2026-11-18** · 本地guarded_count实际调用API回调及辅助查询，失败真实重发原调用一次；无效count删去而不是返回0。action_for_checks实现learned/exact阈值；AnswerGate跟踪查询条件数，防止用宽松查询的verified count替代更严格请求。只支持计数切片，未实现列表验证、contract miner、值交换检查、模型或训练。 完整实验高成本不复现，不作能力证据。
+
+涉及：[silentguard](../../../agent-research/2611.20595-silentguard/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+**2026-11-18** · 本地只执行interval_score与parameter_score：正值物性先取log10，检查端点有序、有限与key完全一致。evaluator_truth没有Actor回调入口；它是评分器专用参数，不是给被评策略的信息。未实现热求解器、实验选择、拟合、科学家LLM或无提交聚合，不据此宣称科学任务复现。 完整实验高成本不复现，不作能力证据。
+
+涉及：[sciresearch-eval](../../../agent-research/2611.21541-sciresearch-eval/README.md) · [askalcf-protocol](../../../agent-research/2611.15700-askalcf-protocol/README.md)
+
+**2026-11-18** · FiniteTask执行资源／凭证前置条件、收费batch和BFS精确见证；metrics分别保留成功、错误终态、剩余距离和效率。合成图只验证算子，不运行LLM，也不把BFS答案喂给策略。100,000状态上限触发时明确报错，绝不退成近似下界冒充exact。未实现官方任务源语料、远程端点或哈希冻结全链。 完整实验高成本不复现，不作能力证据。
+
+涉及：[detourbench](../../../agent-research/2611.20844-detourbench/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
 
 **2026-11-18** · 按修复类型分层，真实checker接受修改、全量审计回滚回归，再按规则和概率顺序门控；本地仅文件映射回调。 完整实验高成本不复现，局部协议不作能力或Evolve证据。
 
@@ -435,7 +624,7 @@ Harness²保留真实候选执行与采用依据，不把“提案”当“执�
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 64 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 73 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -503,6 +692,15 @@ Harness²保留真实候选执行与采用依据，不把“提案”当“执�
 - [Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science](../../../agent-research/2609.15983-stellar-colosseum/README.md)
 - [AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support](../../../agent-research/2611.15700-askalcf-protocol/README.md)
 - [ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects](../../../agent-research/2611.17381-prodpilot-protocol/README.md)
+- [DetourBench: Trajectory-Level Evaluation of Interactive Agents with Exact Minimum-Action Bounds](../../../agent-research/2611.20844-detourbench/README.md)
+- [SciResearch-Eval: Evaluating Scientific Judgment in Autonomous Experimental Agents](../../../agent-research/2611.21541-sciresearch-eval/README.md)
+- [Invariant-Aware Harness Enforcement to Protect LLM Agents from Silent API Failures](../../../agent-research/2611.20595-silentguard/README.md)
+- [MetaAct: Self-Evolving Executable Action Constraints for Embodied Language Agents](../../../agent-research/2611.20655-metaact/README.md)
+- [Evaluation-Free Recursive Self-Improvement for Coding Agents](../../../agent-research/2611.21056-elite-eval-free/README.md)
+- [The Resolution Hypothesis: Agent Evolution&#x27;s Key Is Identifying Improvements](../../../agent-research/2611.23068-resolution-hypothesis/README.md)
+- [SkillBuffBench: Measuring What Agent Skills Contribute across Harnesses, Models, Skill Access Modes and Memory](../../../agent-research/2611.22017-skillbuffbench/README.md)
+- [Verifying Agents in Rubric-Graded Environments](../../../agent-research/2611.22841-gandalf-bvb/README.md)
+- [Do LLM Agents Still Need to Be Told How to Self-Improve?](../../../agent-research/2611.23219-self-organized-learning/README.md)
 
 </details>
 

@@ -1,0 +1,19 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.20404v1",
+  "page": 1,
+  "figure": "Figure 1",
+  "original_sha256": "6bd797e130a1d105c6127018bd4c513215fc0048ee4616c7b925ce95785e2860",
+  "extraction": "Unmodified original-page crop rendered at2x",
+  "crop_pdf_points": [
+    50.0,
+    520.0,
+    572.0,
+    740.0
+  ],
+  "paper_url": "https://arxiv.org/html/2611.20404v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-18",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result.",
+  "source_html_sha256": "459a12b6b0bcf769dd949fb6cdafceacac3b8fbd4978ce3d625eedfd37878f24",
+  "asset_sha256": "f82dee8ccb73ceb4489236f8131ef9992526c47a8e44c52ef8a7cf2221f41a64"
+}

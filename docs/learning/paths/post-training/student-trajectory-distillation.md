@@ -7,7 +7,7 @@ hide:
 
 # 轨迹蒸馏：学生、提案与前缀分布
 
-[LLM 后训练](index.md) / 180 个问题 · 45 篇论文
+[LLM 后训练](index.md) / 184 个问题 · 46 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">180 个问题 · 45 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">184 个问题 · 46 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:streaming-opd" data-paper-title="Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption LLM 后训练 Independent Researcher, China 2026-11-17 token局部teacher监督只依赖已生成prefix，不依赖未来token。片段可先进入candidate pool，等监督预算凑齐才更新，而不必每片段一次更新或等整答案结束。实现只在teacher选的top-k上求和，保留完整词表概率不重新归一化；这不是完整KL，部分和可为负，原文用log floor和[0,C]截断。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。保留完整因果prefix的新片段loss mask/version记录、teacher top-k不重归一化截断clip损失、按监督权重归约。  student-trajectory-distillation 后训练算法组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 completion、delivery、update为何可以分开？ token局部teacher监督只依赖已生成prefix，不依赖未来token。片段可先进入candidate pool，等监督预算凑齐才更新，而不必每片段一次更新或等整答案结束。 教学例：第2片段训练输入仍含第1片段，但第1片段mask为0。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<span id="paper-post-training-streaming-opd-a2591da7" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-e8342058caec98a0">completion、delivery、update为何可以分开？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Astreaming-opd">Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent Researcher, China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>token局部teacher监督只依赖已生成prefix，不依赖未来token。片段可先进入candidate pool，等监督预算凑齐才更新，而不必每片段一次更新或等整答案结束。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第2片段训练输入仍含第1片段，但第1片段mask为0。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22298v1">原论文</a> · <a href="../../../../post-training/2611.22298-streaming-opd/">实现解读</a> · <a href="#qa-e8342058caec98a0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:streaming-opd" data-paper-title="Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption LLM 后训练 Independent Researcher, China 2026-11-17 token局部teacher监督只依赖已生成prefix，不依赖未来token。片段可先进入candidate pool，等监督预算凑齐才更新，而不必每片段一次更新或等整答案结束。实现只在teacher选的top-k上求和，保留完整词表概率不重新归一化；这不是完整KL，部分和可为负，原文用log floor和[0,C]截断。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。保留完整因果prefix的新片段loss mask/version记录、teacher top-k不重归一化截断clip损失、按监督权重归约。  student-trajectory-distillation 后训练算法组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 top-k损失为什么可能为负再clip到0？ 实现只在teacher选的top-k上求和，保留完整词表概率不重新归一化；这不是完整KL，部分和可为负，原文用log floor和[0,C]截断。 教学例：teacher某top1概率.6、student该项.9，.6log(.6/.9)&lt;0，应clip为0而非重算top1softmax。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-e342ee013f57fd37">top-k损失为什么可能为负再clip到0？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Astreaming-opd">Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent Researcher, China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>实现只在teacher选的top-k上求和，保留完整词表概率不重新归一化；这不是完整KL，部分和可为负，原文用log floor和[0,C]截断。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：teacher某top1概率.6、student该项.9，.6log(.6/.9)&lt;0，应clip为0而非重算top1softmax。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22298v1">原论文</a> · <a href="../../../../post-training/2611.22298-streaming-opd/">实现解读</a> · <a href="#qa-e342ee013f57fd37">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:streaming-opd" data-paper-title="Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption LLM 后训练 Independent Researcher, China 2026-11-17 token局部teacher监督只依赖已生成prefix，不依赖未来token。片段可先进入candidate pool，等监督预算凑齐才更新，而不必每片段一次更新或等整答案结束。实现只在teacher选的top-k上求和，保留完整词表概率不重新归一化；这不是完整KL，部分和可为负，原文用log floor和[0,C]截断。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。保留完整因果prefix的新片段loss mask/version记录、teacher top-k不重归一化截断clip损失、按监督权重归约。  student-trajectory-distillation 后训练算法组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 它与SH-OPD的长度变化有什么不同？ SH-OPD改变生成cap和各深度曝光；Streaming OPD保留继续生成的prefix，改变监督交付和消费时机。两者都要报告实际loss-bearing token，不能只数对象或raw token。 教学例：一个长回答拆成4段仍可能生成同样token，还多次重算prefix，并不自动节省生成成本。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-25241d2722db6c2f">它与SH-OPD的长度变化有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Astreaming-opd">Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent Researcher, China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>SH-OPD改变生成cap和各深度曝光；Streaming OPD保留继续生成的prefix，改变监督交付和消费时机。两者都要报告实际loss-bearing token，不能只数对象或raw token。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个长回答拆成4段仍可能生成同样token，还多次重算prefix，并不自动节省生成成本。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22298v1">原论文</a> · <a href="../../../../post-training/2611.22298-streaming-opd/">实现解读</a> · <a href="#qa-25241d2722db6c2f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:streaming-opd" data-paper-title="Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption LLM 后训练 Independent Researcher, China 2026-11-17 token局部teacher监督只依赖已生成prefix，不依赖未来token。片段可先进入candidate pool，等监督预算凑齐才更新，而不必每片段一次更新或等整答案结束。实现只在teacher选的top-k上求和，保留完整词表概率不重新归一化；这不是完整KL，部分和可为负，原文用log floor和[0,C]截断。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。保留完整因果prefix的新片段loss mask/version记录、teacher top-k不重归一化截断clip损失、按监督权重归约。  student-trajectory-distillation 后训练算法组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 为什么必须记录每token实际生成版本？ 途中权重更新后继续生成会形成混合版本prefix。version lag是分布漂移线索而非漂移大小，不能把全部token贴上最终版本以伪装fresh。 教学例：版本[0,0,1,1]在v2消费的lag是[2,2,1,1]；封段不等于注入EOS。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-94f63363bf41b5d7">为什么必须记录每token实际生成版本？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Astreaming-opd">Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent Researcher, China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>途中权重更新后继续生成会形成混合版本prefix。version lag是分布漂移线索而非漂移大小，不能把全部token贴上最终版本以伪装fresh。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：版本[0,0,1,1]在v2消费的lag是[2,2,1,1]；封段不等于注入EOS。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22298v1">原论文</a> · <a href="../../../../post-training/2611.22298-streaming-opd/">实现解读</a> · <a href="#qa-94f63363bf41b5d7">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:drd-mopd" data-paper-title="DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation LLM 后训练 Shanghai Jiao Tong University / Zhongguancun Academy 2026-11-09 多个教师可能提供冲突的领域更新，直接优化一个学生无法区分冲突来自哪一份参数方向。DRD-MOPD 保留冻结基座与多个全参数增量，以域标签选择哪些增量接受梯度，而不是在推理时选择哪个教师或专家。三个域的任何输入都经过同一个合成学生。 完整实验成本过高，不复现（审查 DONE）；L1 机制组件，diagnostic only。CPU 与真实 NVIDIA A100 三种子验证已通过；完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。route_matrix 明确给出域到增量的系数。DeltaAdamW.composed 始终加上所有增量；step_losses 在同一合成权重上执行真实 autograd，然后一次性路由；step 接收调用方已经从相同快照计算的梯度。冻结基座不参加更新。每个分量保留独立 AdamW 状态，纯小张量 CPU/CUDA 都可执行。  On-policy distillation 多教师参数增量与梯度路由 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 DRD-MOPD 的 domain routing 是推理时 MoE 吗？ 不是。所有输入都使用冻结基座加所有增量的同一个合成学生。域标签只决定当前梯度更新哪些增量；前向不屏蔽未选组件。 教学例：Code 域输入也读取 Math 增量；Own 模式下只是 Code 的梯度只更新 Code 对应增量。 2026-11-11">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
 <span id="paper-post-training-drd-mopd-33529371" class="ar-learning-paper-anchor"></span>

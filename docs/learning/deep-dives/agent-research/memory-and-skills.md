@@ -7,7 +7,7 @@ hide:
 
 # 经验进入长期系统前，要解决存取、价值与准入
 
-[Agent](../index.md) · 更新 2026-11-15 · 62 篇主题资料 / 13 篇重点对照
+[Agent](../index.md) · 更新 2026-11-18 · 63 篇主题资料 / 14 篇重点对照
 
 MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，CMP 管效用如何识别；Voyager 把成功程序变技能，VaG 管技能进入库的风险，SkillRise 用后续任务检验整理价值。存得下、相关、合法和能帮助未来，是四个不同问题。 EMMA再把结构化记忆分配给controller、agent与skill，按失败scope限制单次编辑及下一次实际使用义务。
 
@@ -38,6 +38,7 @@ MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，C
 | [LiSA: Lifelong Safety Adaptation via Conservative Policy Induction](../../../agent-research/2605.14454-lisa/README.md) · [原始来源](https://arxiv.org/abs/2605.14454)<br>章节：核心公式、数据协议与代码映射、本地结果与负控 | 以Beta后验下界门控广义策略，并用按领域的混合标签局部提示保留边界；跨日平均链接重聚类和同原句运行时统计继承均显式执行。 | 置信度度量反馈条件下的可复用可靠性，不是因果收益或token效用；本地策略草稿与embedding来自外层，未运行LLM归纳和guardrail。 |
 | [PolicyBank: Evolving Policy Understanding for LLM Agents](../../../agent-research/2604.15505-policybank/README.md) · [原始来源](https://arxiv.org/abs/2604.15505)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 按工具能力存半结构化授权解释，header→ID选择→全文检索，再据外部开发反馈Add/Revise/Omit。 | MemGPT解决有限上下文的分层容量与换入换出，PolicyBank解决spec与requirement差异。容量足够不代表规则正确；本地PolicyBank只有L0合同，语义修复仍缺失。 |
 | [CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation](../../../agent-research/2611.17316-coremem/README.md) · [原始来源](https://arxiv.org/abs/2611.17316v1)<br>章节：背景与主要改动、核心公式 | 在继承repo的后续任务上，以同状态有／无记忆rollout估计价值，并将整体价值通过可追踪首次锚点使用门控到步骤。 | MemPrice分配上下文容量与记忆保真；CoReMem优化未来编码解决率和工作量。token占用、行为步骤和语义效用不是同一目标，局部算子不产生记忆内容。 |
+| [Instant Weight-Space Consolidation for Long-Term Memory in LLMs](../../../agent-research/2611.20759-clam-memory/README.md) · [原始来源](https://arxiv.org/abs/2611.20759v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | CLAM把可积累的参数记忆与逐字检索缓冲分开：冻结LLM提供每层会话activation，hypernetwork在不做测试时梯度下降的情况下写出down_proj LoRA，查询时再配top5会话片段。没有提取调用不等于没有前置训练；能力来自离线context distillation。 | CoReMem通过未来同仓库任务的有／无记忆差估值并训练写入信用；CLAM通过全历史teacher蒸馏把history压进权重。前者是前瞻效用，后者是参数通道，两者都不能用静态摘要相似度冒充任务收益。完整实验成本过高，不复现（审查DONE）。 |
 
 </div>
 
@@ -96,6 +97,12 @@ MemGPT分层归档使长期信息可取回；PolicyBank则允许修正先前解�
 MemPrice的精确背包把外部估计效用与token大小在容量内折衷，压力队列调节长期保留。CoReMem则必须从相同继承repo比较未来任务，固定成功优先reward，再用锚点定位使用。二者的外部语义模块都没有由本地算子补齐：少存token不等于少做动作，锚点出现不等于因果效果。
 
 对照来源：[coremem](../../../agent-research/2611.17316-coremem/README.md) · [memprice](../../../agent-research/2610.24955-memprice/README.md)
+
+### CLAM：会话流压缩到固定大小的参数记忆
+
+Read用9层Perceiver cross-attention、每层8slots，slots只看当前会话。Carry先对slots做一次8头self-attention，再对每slot产生一个sigmoid门混合旧Q与新x，并LayerNorm。Decode用每层每rank一个query生成rank8 adapter，大小不随会话数增加；合成模型还含固定bias。顺序和门不能被普通均值池化替代。 CoReMem通过未来同仓库任务的有／无记忆差估值并训练写入信用；CLAM通过全历史teacher蒸馏把history压进权重。前者是前瞻效用，后者是参数通道，两者都不能用静态摘要相似度冒充任务收益。完整实验成本过高，不复现（审查DONE）。
+
+对照来源：[clam-memory](../../../agent-research/2611.20759-clam-memory/README.md) · [coremem](../../../agent-research/2611.17316-coremem/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -201,9 +208,23 @@ MemPrice的精确背包把外部估计效用与token大小在容量内折衷，�
 
     对照来源：[coremem](../../../agent-research/2611.17316-coremem/README.md) · [memprice](../../../agent-research/2610.24955-memprice/README.md)
 
+### CLAM与CoReMem都写memory，有何关键区别？ {#cross-cross-nov18-latest-clam-memory}
+
+??? note "展开答案与例子"
+
+    **答案：** CLAM蒸馏全历史答案生成参数；CoReMem以未来任务有无记忆差值训练信用。前者不是后者的低成本替身。
+
+    **教学例子：** 教学例：记住一个姓名不等于证明下一仓库任务节省步骤。
+
+    对照来源：[clam-memory](../../../agent-research/2611.20759-clam-memory/README.md) · [coremem](../../../agent-research/2611.17316-coremem/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 本轮review-only，不提供可执行adapter、metrics或GPU验证，不下载权重／合成语料。只把v1的read/carry/decode、两阶段训练、rank与检索协议记录为可核对方法；把随机初始化hypernetwork跑一次不能算完成记忆巩固。 完整实验高成本不复现，不作能力证据。
+
+涉及：[clam-memory](../../../agent-research/2611.20759-clam-memory/README.md) · [coremem](../../../agent-research/2611.17316-coremem/README.md)
 
 **2026-11-15** · 在继承repo的后续任务上，以同状态有／无记忆rollout估计价值，并将整体价值通过可追踪首次锚点使用门控到步骤。 MemPrice分配上下文容量与记忆保真；CoReMem优化未来编码解决率和工作量。token占用、行为步骤和语义效用不是同一目标，局部算子不产生记忆内容。
 
@@ -237,7 +258,7 @@ MemPrice的精确背包把外部估计效用与token大小在容量内折衷，�
 
 覆盖 55 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 62 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 63 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -303,6 +324,7 @@ MemPrice的精确背包把外部估计效用与token大小在容量内折衷，�
 - [Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents](../../../agent-research/2611.14320-wikitrace/README.md)
 - [PolicyBank: Evolving Policy Understanding for LLM Agents](../../../agent-research/2604.15505-policybank/README.md)
 - [CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation](../../../agent-research/2611.17316-coremem/README.md)
+- [Instant Weight-Space Consolidation for Long-Term Memory in LLMs](../../../agent-research/2611.20759-clam-memory/README.md)
 
 </details>
 

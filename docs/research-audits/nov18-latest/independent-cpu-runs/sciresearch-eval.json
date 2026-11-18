@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "paper": "agent-research:sciresearch-eval",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "execution_device": "cpu",
+  "execution_accelerator": "CPU",
+  "local_operator": "auto_research.agent_research.sciresearch_eval.diagnostic",
+  "source_sha256": {
+    "src/auto_research/agent_research/sciresearch_eval.py": "c369fb3b86454d6059823774da8711cae6f6da67692c0d9ca89166f07b0e3742"
+  },
+  "data_revision": "authored deterministic boundary controls v1; not official benchmark",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "miscoverage_penalty": true,
+        "log_unit_shift_invariant": true,
+        "exact_boundary_covered": true,
+        "wider_not_free": true
+      },
+      "metrics": {
+        "narrow_miss_score": 36.2,
+        "wide_cover_score": 3.0,
+        "parameter_score": 1.0
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "miscoverage_penalty": true,
+        "log_unit_shift_invariant": true,
+        "exact_boundary_covered": true,
+        "wider_not_free": true
+      },
+      "metrics": {
+        "narrow_miss_score": 36.2,
+        "wide_cover_score": 3.0,
+        "parameter_score": 1.0
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "miscoverage_penalty": true,
+        "log_unit_shift_invariant": true,
+        "exact_boundary_covered": true,
+        "wider_not_free": true
+      },
+      "metrics": {
+        "narrow_miss_score": 36.2,
+        "wide_cover_score": 3.0,
+        "parameter_score": 1.0
+      }
+    }
+  ],
+  "capability_claim": false,
+  "note": "All seeds repeat deterministic controls; no statistical robustness or task success claim."
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-18",
+  "requested_window": {
+    "start": "2026-11-16",
+    "end": "2026-11-18"
+  },
+  "reviewed_overlap_start_utc": "2026-11-13T00:00:00",
+  "metadata_only_inventory": "metadata-index.json",
+  "metadata_identities": 3369,
+  "announcement_identities": 1063,
+  "priority_source_captures": "priority-source-captures.json",
+  "priority_primary_selection": "priority-primary-selection.json",
+  "fixed_intake": "intake-scope.json",
+  "metadata_inventory_is_implementation_backlog": false,
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "coverage_limits": [
+    "Nine configured arXiv categories, updated-date API pages exhausted to Nov13 overlap boundary, plus current official bulletin pages; not every scholarly venue.",
+    "Full-text method review is limited to selected papers and explicitly listed sourceful exclusions. Unselected metadata is not described as full-text reviewed or as a delivery queue.",
+    "Announcement/publication/revision/new-code dates remain separate. Today bulletin may announce yesterday submissions.",
+    "Google/Meta official directory/repository deltas supplement arXiv; directories can be delayed or unavailable and do not establish institution-wide exhaustion."
+  ]
+}

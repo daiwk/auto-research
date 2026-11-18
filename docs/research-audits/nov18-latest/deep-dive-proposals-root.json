@@ -1,0 +1,487 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-18",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "recommendation:yuanbao-rubric",
+      "target_card": "recommendation/retrieval-matching",
+      "source_revisions": {
+        "recommendation:yuanbao-rubric": "f79f80548329a40d2bb20638f0df7929f1f9258ffd7ecdb5e03b3ea410abe7d1",
+        "recommendation:wesearch": "b9df98a4ba9bcd275dd5979b9457fb2370b15e4b9b01d2de83309c585075b933"
+      },
+      "comparison": {
+        "position": "传统逐文档相关性不等于给下游推理提供有用证据。元宝先生成查询特定的加权正向标准和扣分标准，用蒸馏标签统一训练召回与四头排序，再用集合奖励训练选择器。低于组均值的轨迹并不接受负优势惩罚，而是按奖励差蒸馏组内最佳轨迹。",
+        "tradeoff": "WeSearch用簇和原子文档匹配收缩候选空间；元宝用rubric统一上游标签和最终集合奖励。两者不是同一种SID/召回架构，局部ADC或双分支loss都不能替代端到端搜索验证。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题对照",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "元宝搜索：Rubric 对齐检索、排序与集合选择：区别机制与能力",
+        "body": "对应§2.1、Eq4–6。正向标准允许多文档共同覆盖，负向标准由任一文档触发扣分；focal pairwise 是标签差减分数差的 hinge，不是普通 CE。两分支分别求均值；较差轨迹的权重作用于同一个最佳轨迹的 token NLL，保留 padding mask、空分支和奖励并列时零更新。参考 KL 由调用者显式提供，不擅自选择估计器。 WeSearch用簇和原子文档匹配收缩候选空间；元宝用rubric统一上游标签和最终集合奖励。两者不是同一种SID/召回架构，局部ADC或双分支loss都不能替代端到端搜索验证。",
+        "papers": [
+          "recommendation:yuanbao-rubric",
+          "recommendation:wesearch"
+        ]
+      },
+      "question": {
+        "id": "cross-nov18-latest-yuanbao-rubric",
+        "question": "元宝和WeSearch改动的是同一层吗？",
+        "answer": "不是。前者统一效用监督并优化集合；后者主要改变簇内原子文档匹配。",
+        "example": "教学例：ADC距离正确不能证明最终三个证据文档没有重复、缺漏或过期信息。",
+        "papers": [
+          "recommendation:yuanbao-rubric",
+          "recommendation:wesearch"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "recommendation:yuanbao-rubric",
+          "recommendation:wesearch"
+        ],
+        "summary": "没有运行 rubric 生成、DeepSeek judge、Qwen 编码器或真实搜索。诊断检查最佳轨迹有蒸馏梯度、失败轨迹没有模仿梯度、奖励不反传、padding 梯度为零；它们不是答案准确率。 完整实验高成本不复现，未作能力或Evolve晋级证据。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Pointwise relevance need not supply useful evidence for downstream reasoning. Yuanbao builds query-specific weighted positive and negative rubrics, distills labels for retrieval and four-head ranking, and trains subset selection with set-level rewards. Below-mean rollouts imitate the best in-group trajectory with reward-gap weights instead of receiving negative-advantage suppression.",
+          "tradeoff": "WeSearch narrows candidates using clusters and atomic document matching; Yuanbao aligns upstream labels with final subset rewards. They are not the same SID/retrieval architecture, and neither local ADC nor the dual-branch loss replaces end-to-end search validation."
+        },
+        "analysis": {
+          "title": "yuanbao-rubric: distinguish mechanism from capability",
+          "body": "Sections2.1 and Eqs4–6 are implemented. Positive criteria can be covered collectively and any document can trigger a deduction. Focal pairwise ranking uses a label-gap minus score-gap hinge, not ordinary CE. Each selection branch has its own mean; poor-rollout weights multiply the same best-trajectory token NLL. Padding, empty branches and tied zero updates are preserved. Reference KL is an explicit caller input, not an invented estimator. WeSearch narrows candidates using clusters and atomic document matching; Yuanbao aligns upstream labels with final subset rewards. They are not the same SID/retrieval architecture, and neither local ADC nor the dual-branch loss replaces end-to-end search validation."
+        },
+        "question": {
+          "question": "Does Yuanbao change the same layer as WeSearch?",
+          "answer": "No. It aligns utility supervision and subset selection; WeSearch primarily changes atomic matching within cluster-constrained candidates.",
+          "example": "Teaching example: correct ADC distances do not prove a final evidence set is nonredundant, complete or current."
+        },
+        "update": "No rubric generator, DeepSeek judge, Qwen encoder or real search is run. Diagnostics check best-trajectory imitation gradients, absent poor-trajectory imitation gradients, detached rewards and zero padding gradients; these are not answer-accuracy scores. Full experiments are not reproduced due to high cost; no capability or Evolve-promotion claim."
+      }
+    },
+    {
+      "paper": "recommendation:cotti",
+      "target_card": "recommendation/feedback-multitask-causality",
+      "source_revisions": {
+        "recommendation:cotti": "98ca63f3d54543ec2dc479a6fd25bfefadfbe21f01c96dc95ca8bcc2f4b03abc",
+        "recommendation:baff": "83a73ccc9f890343e96da156362142298f47f0df4ae60892216503bfc311343f"
+      },
+      "comparison": {
+        "position": "COTTI把训练时历史偏好连续性和上线时促销概率修正分开。CPC比较同一用户常态/促销双视图并用可微门控调节一致性；RW按相对历史距离重加权但截断其梯度；ABA在冻结预测器的logit上添加事件强度与预测头方差决定的有界修正。",
+        "tradeoff": "BAFF按竞价策略干扰过滤日志，COTTI按用户历史距离改变促销样本影响；两种权重/过滤都不自动成为因果无偏估计，COTTI的校准也不能证明A/B日志无污染。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题对照",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "COTTI：促销漂移中的跨周期对比与时变校准：区别机制与能力",
+        "body": "严格保留Eq6–16：CPC门控用未归一化表示距离并参与反传；RW不裁剪、不均值归一化，权重是正影响量而非可靠性概率；ABA使用预测头多次dropout logit的总体方差，不是全编码器不确定性。事件中心须事先公告、宽度来自历史，幅度只在验证集选；修正只能向上，不能解决过预测。 BAFF按竞价策略干扰过滤日志，COTTI按用户历史距离改变促销样本影响；两种权重/过滤都不自动成为因果无偏估计，COTTI的校准也不能证明A/B日志无污染。",
+        "papers": [
+          "recommendation:cotti",
+          "recommendation:baff"
+        ]
+      },
+      "question": {
+        "id": "cross-nov18-latest-cotti",
+        "question": "COTTI能代替BAFF解决实验干扰吗？",
+        "answer": "不能。历史距离不是反事实曝光或竞价干扰证据，促销概率修正和实验日志污染是不同问题。",
+        "example": "教学例：HDR线上control与TEN离线control不能当成同一因果基线。",
+        "papers": [
+          "recommendation:cotti",
+          "recommendation:baff"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "recommendation:cotti",
+          "recommendation:baff"
+        ],
+        "summary": "本地只运行CPC/RW/ABA张量；没有历史构造、缺失常态视图回退或服务融合策略。保留paid-item新类目召回下降的作者负结果，不能拿整体AUC覆盖探索代价。 完整实验高成本不复现，未作能力或Evolve晋级证据。"
+      },
+      "english": {
+        "comparison": {
+          "position": "COTTI separates historical preference continuity during training from promotion-time probability correction. CPC uses a differentiable consistency gate on regular/promotion views, RW weights examples by standardized historical distance with stopped gradients, and ABA adds an event- and head-variance-dependent bounded correction to fixed predictor logits.",
+          "tradeoff": "BAFF filters logs for bidding-policy interference; COTTI changes promotion-example influence using historical distance. Neither weighting/filtering automatically yields causal unbiasedness, and COTTI calibration does not establish uncontaminated A/B logs."
+        },
+        "analysis": {
+          "title": "cotti: distinguish mechanism from capability",
+          "body": "Eqs6–16 are retained: CPC gates raw representation distances and remains differentiable. RW is neither clipped nor mean-normalized; weights are positive influence factors, not reliability probabilities. ABA uses population variance of repeated head-only dropout logits, not full-encoder uncertainty. The event center is announced beforehand, width comes from history and amplitude is selected on validation. The correction only increases scores and cannot fix overprediction. BAFF filters logs for bidding-policy interference; COTTI changes promotion-example influence using historical distance. Neither weighting/filtering automatically yields causal unbiasedness, and COTTI calibration does not establish uncontaminated A/B logs."
+        },
+        "question": {
+          "question": "Can COTTI replace BAFF interference handling?",
+          "answer": "No. Historical distance is not counterfactual exposure/interference evidence; promotion calibration and polluted experiment logs are different problems.",
+          "example": "Teaching example: online HDR and offline TEN are different controls, not interchangeable causal baselines."
+        },
+        "update": "Only CPC/RW/ABA tensors run locally, without history construction, missing-regular-view fallback or serving fusion. The author-reported decline in paid-item recall for novel categories is retained; aggregate AUC does not erase the discovery trade-off. Full experiments are not reproduced due to high cost; no capability or Evolve-promotion claim."
+      }
+    },
+    {
+      "paper": "recommendation:intentflow",
+      "target_card": "recommendation/retrieval-matching",
+      "source_revisions": {
+        "recommendation:intentflow": "6658557ea90280fdd772b0b094413b79e9554d36af3e4fc3e737902b4e1ebaad",
+        "recommendation:wesearch": "b9df98a4ba9bcd275dd5979b9457fb2370b15e4b9b01d2de83309c585075b933"
+      },
+      "comparison": {
+        "position": "相同图片上的找同款、找搭配和问使用信息需要不同证据，纯视觉相似性不足。IntentFlow将意图层级、可验证三档相关性、agentic数据构造、多模态检索和意图条件重排统一起来。索引固定后只在查询侧进行高层LoRA与六专家残差投影，避免全库重算。",
+        "tradeoff": "WeSearch用簇限制候选并原子匹配；IntentFlow先定义请求满足所需证据，再让查询编码适配固定文档空间。一个侧重候选组织，一个侧重意图监督与查询表示，均不能仅凭组件前后向推断线上收益。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题对照",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "IntentFlow：意图条件多模态搜索与固定索引适配：区别机制与能力",
+        "body": "实现Eq16、18–21、24：同一查询门控混合两个共享瓶颈分支（原设置rank8/64），保留冻结基础投影；蒸馏两方向使用相同合法候选并detach教师；CSLS只减去文档对训练query参考库的离线密度项。零初始化up projection是本地稳定初始化约定，原文未明确此初始化，不伪称完整模型配方。 WeSearch用簇限制候选并原子匹配；IntentFlow先定义请求满足所需证据，再让查询编码适配固定文档空间。一个侧重候选组织，一个侧重意图监督与查询表示，均不能仅凭组件前后向推断线上收益。",
+        "papers": [
+          "recommendation:intentflow",
+          "recommendation:wesearch"
+        ]
+      },
+      "question": {
+        "id": "cross-nov18-latest-intentflow",
+        "question": "它和WeSearch的簇约束有什么区别？",
+        "answer": "固定索引适配改变query如何落入已有文档空间；簇约束改变候选空间组织，两者可组合但不是相互替代。",
+        "example": "教学例：query残差改变而doc向量逐位不变，只证明固定索引接口成立。",
+        "papers": [
+          "recommendation:intentflow",
+          "recommendation:wesearch"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "recommendation:intentflow",
+          "recommendation:wesearch"
+        ],
+        "summary": "输入仅为外部融合特征和候选分数；没有用规则假装0.8B意图识别器，也未实现完整LoRA/VLM、agentic核验或NDCG权重训练链。文档输入在诊断中保持不变，不意味着语义召回已提升。 完整实验高成本不复现，未作能力或Evolve晋级证据。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Finding an exact item, styling an outfit and seeking usage information require different evidence even for the same image. IntentFlow unifies intent hierarchy, verified three-grade relevance, agentic data construction, multimodal retrieval and intent-conditioned reranking. After indexing, query-only upper-layer LoRA and six-expert residual projections avoid recomputing the document corpus.",
+          "tradeoff": "WeSearch constrains candidates by clusters and atomic matching; IntentFlow defines evidence required by the request and adapts query encoding to a fixed document space. Candidate organization and intent-supervised representations differ, and component gradients prove neither online lift."
+        },
+        "analysis": {
+          "title": "intentflow: distinguish mechanism from capability",
+          "body": "Eqs16,18–21 and24 are implemented: one query gate mixes two shared-bottleneck branches (paper ranks8/64), retaining a frozen base projection. Both distillation directions share valid candidate sets and detach the teacher. CSLS subtracts only offline document density relative to a training-query bank. Zero-initialized up projections are a local stability convention, not an initialization specified by the paper or a complete model recipe. WeSearch constrains candidates by clusters and atomic matching; IntentFlow defines evidence required by the request and adapts query encoding to a fixed document space. Candidate organization and intent-supervised representations differ, and component gradients prove neither online lift."
+        },
+        "question": {
+          "question": "How does it differ from WeSearch cluster constraints?",
+          "answer": "Fixed-index adaptation changes how a query maps into existing document space; cluster constraints organize candidates. They can combine but are not substitutes.",
+          "example": "Teaching example: changing query residuals with bitwise-unchanged documents proves only the fixed-index interface."
+        },
+        "update": "Inputs are externally supplied fused features and candidate scores. No rules impersonate the0.8B recognizer, and the full LoRA/VLM, agentic verification or NDCG-weighted training chain is absent. Unchanged document tensors in diagnostics do not establish improved semantic retrieval. Full experiments are not reproduced due to high cost; no capability or Evolve-promotion claim."
+      }
+    },
+    {
+      "paper": "foundation-models:simq",
+      "target_card": "foundation-models/context-and-state",
+      "source_revisions": {
+        "foundation-models:simq": "d1079071528e6e9031c91e00494bb762739e03efc292a27e23460b0c87a62b7c",
+        "foundation-models:hvmap": "34c0f79eee9d1fe6fbc2b41e76c1c4671ba6a2346e8a290b93efb9b9ae044d9b"
+      },
+      "comparison": {
+        "position": "ColBERT式MaxSim需要逐query token匹配文档token。SIMQ先均匀抽样token作初始聚合点，通过临时图分配剩余token，对过大cluster递归二分，归一化均值后建立一个质心图。查询只导航到少量质心，经质心到文档映射生成候选，最后才访问候选原始token精确重排，避免全query×centroid矩阵。",
+        "tradeoff": "HVMap解决不同编码器向量空间不能直接比较的问题，通过hub映射和双空间SCORE2联合重排；SIMQ假定同一规范化token空间，改变候选图组织和晚交互计算。前者的映射质量不由SIMQ的计数验证，后者的图效率也不由HVMap小张量loss证明。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题对照",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "SIMQ：单质心图上的多向量检索与计数候选选择：区别机制与能力",
+        "body": "§III/Alg1–2保留抽样、图引导分配、deferred二分、质心归一化、每token候选和精确MaxSim重排。§V/Alg3的SIMQ+在每token原始文档pool中按文档去重计数，不做TopDocs截断；边界count并列必须全部保留，候选数可以超过Nmin。当前Index用小型exact kNN邻接构图和有限Lloyd二分代替可扩展HNSW/VSAG后端，是明确的小数据后端差异，不复现工业build/QPS。 HVMap解决不同编码器向量空间不能直接比较的问题，通过hub映射和双空间SCORE2联合重排；SIMQ假定同一规范化token空间，改变候选图组织和晚交互计算。前者的映射质量不由SIMQ的计数验证，后者的图效率也不由HVMap小张量loss证明。",
+        "papers": [
+          "foundation-models:simq",
+          "foundation-models:hvmap"
+        ]
+      },
+      "question": {
+        "id": "cross-nov18-latest-simq",
+        "question": "SIMQ能代替HVMap做异构编码器对齐吗？",
+        "answer": "不能。SIMQ在同一token空间内改变候选索引，HVMap学习跨空间映射。",
+        "example": "教学例：不同编码器的同维向量也不能直接靠SIMQ内积变得可比。",
+        "papers": [
+          "foundation-models:simq",
+          "foundation-models:hvmap"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:simq",
+          "foundation-models:hvmap"
+        ],
+        "summary": "没有ColBERT编码、百万级token索引、残差压缩、完整HNSW或公平吞吐实验。重复seed不使随机向量变成语义能力评测；SIMQ+保留完整边界并列意味着rerank参数不是它的硬候选上限。完整五数据集矩阵成本过高，不复现（审查DONE）。 完整实验高成本不复现，未作能力或Evolve晋级证据。"
+      },
+      "english": {
+        "comparison": {
+          "position": "ColBERT-style MaxSim matches every query token to document tokens. SIMQ samples initial aggregation points, assigns residual tokens through a temporary graph, recursively splits oversized clusters, normalizes their means and builds one centroid graph. Queries navigate to a few centroids, collect documents through membership maps and access original tokens only for exact candidate reranking, avoiding a full query-by-centroid matrix.",
+          "tradeoff": "HVMap handles incompatible encoder spaces through hub mappings and native/mapped SCORE2 reranking. SIMQ assumes one normalized token space and changes graph organization and late-interaction computation. SIMQ hit counts do not validate mapping quality, and HVMap tensor losses do not establish graph efficiency."
+        },
+        "analysis": {
+          "title": "simq: distinguish mechanism from capability",
+          "body": "SectionIII/Algorithms1–2 retain sampling, graph-guided assignment, deferred splitting, normalized centroids, token-wise candidates and exact MaxSim reranking. SIMQ+ in SectionV/Algorithm3 counts distinct document membership in each raw token pool without TopDocs truncation. All boundary-count ties are retained, so the pool may exceedNmin. The local Index uses exact finite kNN graph construction and bounded Lloyd splitting instead of scalable HNSW/VSAG backends; this is an explicit small-data deviation, not an industrial build/QPS reproduction. HVMap handles incompatible encoder spaces through hub mappings and native/mapped SCORE2 reranking. SIMQ assumes one normalized token space and changes graph organization and late-interaction computation. SIMQ hit counts do not validate mapping quality, and HVMap tensor losses do not establish graph efficiency."
+        },
+        "question": {
+          "question": "Can SIMQ replace HVMap heterogeneous-space alignment?",
+          "answer": "No. SIMQ changes candidate indexing within one token space; HVMap learns cross-space mappings.",
+          "example": "Teaching example: equal vector dimensionality does not make two encoders comparable by SIMQ inner products."
+        },
+        "update": "No ColBERT encoder, million-token index, residual compression, full HNSW or fair throughput experiment is supplied. Repeated seeds do not turn random vectors into semantic evaluation. SIMQ+ preserves the complete boundary tie group, so the rerank argument is not its hard candidate cap. The full five-dataset campaign is not reproduced due to cost(reviewDONE). Full experiments are not reproduced due to high cost; no capability or Evolve-promotion claim."
+      }
+    },
+    {
+      "paper": "foundation-models:unigraph",
+      "target_card": "foundation-models/context-and-state",
+      "source_revisions": {
+        "foundation-models:unigraph": "8c9c0565a7f420f9ce25aa3c021b7896584157164d1d2aacf1d0110ae1727f3a",
+        "foundation-models:hvmap": "34c0f79eee9d1fe6fbc2b41e76c1c4671ba6a2346e8a290b93efb9b9ae044d9b"
+      },
+      "comparison": {
+        "position": "分别检索dense和sparse再合并可能过早漏掉仅在混合距离下优秀的向量。UniGraph在多个离散alpha下取近邻，按跨alpha入选频次合并成一个有界出度图；查询时不重构图，直接按自己的alpha遍历。稀疏或稠密guide给出入口，减少到目标区域的混合距离计算。",
+        "tradeoff": "HVMap学的是异构库之间的表示转换，UniGraph学不到新的向量映射，而是保留dense/sparse原分量并改变跨权重邻域组织。SCORE2的native/mapped双空间权重与UniGraph的语义／词汇alpha含义不同，不能共享一个未经验证的权重解释。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题对照",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "UniGraph：支持逐查询混合权重的统一稠密稀疏图：区别机制与能力",
+        "body": "Alg1先对每alpha取top-kg，按出现次数选M个邻居；Alg2维护candidate与ef-sized结果集，使用逐query混合距离。dense-first用Cauchy–Schwarz范数界决定是否需要sparse内积：gamma=1是安全下界，gamma<1只是不保证安全的更激进估计。原主实验gamma=0.3；本地诊断用gamma=1核对不改变未剪枝beam结果。guide在alpha>0.5时选dense，否则sparse，0.5是相近量纲下的原实验约定。 HVMap学的是异构库之间的表示转换，UniGraph学不到新的向量映射，而是保留dense/sparse原分量并改变跨权重邻域组织。SCORE2的native/mapped双空间权重与UniGraph的语义／词汇alpha含义不同，不能共享一个未经验证的权重解释。",
+        "papers": [
+          "foundation-models:unigraph",
+          "foundation-models:hvmap"
+        ]
+      },
+      "question": {
+        "id": "cross-nov18-latest-unigraph",
+        "question": "UniGraph的alpha等于HVMap的native权重吗？",
+        "answer": "不等于。前者混合dense和sparse距离，后者混合候选native与mapped空间分数。",
+        "example": "教学例：提高alpha不等于更相信候选所属数据库。",
+        "papers": [
+          "foundation-models:unigraph",
+          "foundation-models:hvmap"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:unigraph",
+          "foundation-models:hvmap"
+        ],
+        "summary": "本地exact all-pairs构图和exact guide查找是有限诊断后端，不是论文C++可扩展候选构造；没有BGE-M3编码、SINDI、百万级索引或QPS对照。安全剪枝只相对同一beam插入规则成立，不能推出全局ANN召回完备；gamma<1必须显式保留风险。完整矩阵高成本不复现。 完整实验高成本不复现，未作能力或Evolve晋级证据。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Separate dense/sparse retrieval can prematurely discard vectors that are strong only under their combined distance. UniGraph takes neighbors under multiple sampled alpha values and frequency-merges them into one bounded-degree graph. Queries traverse it with their own alpha without rebuilding. Sparse or dense guides supply entry points to reduce hybrid-distance work near the target region.",
+          "tradeoff": "HVMap learns representation mappings across heterogeneous databases. UniGraph does not learn a new mapping; it retains dense/sparse components and changes neighborhoods across weights. SCORE2 native/mapped weights and UniGraph semantic/lexical alpha have different meanings and are not interchangeable."
+        },
+        "analysis": {
+          "title": "unigraph: distinguish mechanism from capability",
+          "body": "Algorithm1 takes top-kg neighbors peralpha and retainsM by occurrence frequency. Algorithm2 maintains candidate and ef-sized result sets under query-specific hybrid distance. Dense-first pruning uses a Cauchy–Schwarz norm bound to avoid some sparse inner products: gamma=1 is a safe lower bound, while gamma<1 is a more aggressive estimate without that guarantee. Main experiments usegamma=0.3; local controls usegamma=1 against unpruned beam results. The guide is dense abovealpha0.5 and sparse otherwise;0.5 is the paper’s comparable-scale convention. HVMap learns representation mappings across heterogeneous databases. UniGraph does not learn a new mapping; it retains dense/sparse components and changes neighborhoods across weights. SCORE2 native/mapped weights and UniGraph semantic/lexical alpha have different meanings and are not interchangeable."
+        },
+        "question": {
+          "question": "Is UniGraph alpha the HVMap native weight?",
+          "answer": "No. It mixes dense/sparse distances, whereas HVMap weights native/mapped scores.",
+          "example": "Teaching example: raisingalpha does not mean trusting a candidate’s own database more."
+        },
+        "update": "Exact all-pairs construction and exact guide lookup are finite diagnostic backends, not the scalable C++ candidate builders. BGE-M3 encoding, SINDI, million-vector indexes and QPS comparisons are absent. Safe pruning is relative to the same beam insertion rule and does not imply globally complete ANN recall; gamma<1 retains explicit risk. The full campaign is not reproduced due to cost. Full experiments are not reproduced due to high cost; no capability or Evolve-promotion claim."
+      }
+    },
+    {
+      "paper": "foundation-models:dealrank",
+      "target_card": "foundation-models/context-and-state",
+      "source_revisions": {
+        "foundation-models:dealrank": "e6b22b311ed6d91aaf453381d4bf845828e2b8e35a61886e2c0b7e896e22fee3",
+        "foundation-models:hvmap": "34c0f79eee9d1fe6fbc2b41e76c1c4671ba6a2346e8a290b93efb9b9ae044d9b"
+      },
+      "comparison": {
+        "position": "并行listwise重排要把候选分组，每组只晋级固定配额。连续切块会把初始召回前部的好文档挤进同一组，越好的retriever越可能被配额误切。DealRank按retriever名次轮流发牌，使每个前缀在各组尽量平衡，再并行排序、按配额晋级并最终合并，不依赖补救认证轮。",
+        "tradeoff": "HVMap改变异构向量候选怎么映射和打分，DealRank不训练表示，而是安排已有候选进入ranker的组合。它们可串在同一检索流水线，但更少调用不是更好向量对齐，SCORE2正确也不能证明listwise配额无损。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题对照",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "DealRank：按召回名次轮发候选，减少配额切掉好文档：区别机制与能力",
+        "body": "§2.1的100候选配置是5组×20、每组留4、最后20再排，共6调用2轮。一致ranker只给最前q=4的最坏情况恢复保证，不是top10保证。500配置25组留3再4组留5，1000配置50组留2再5组留4，均三轮；被后轮淘汰的排在早轮前。调用回调必须返回原候选的一次排列，真正ThreadPool并发只验证调度，不产生LLM排序内容。 HVMap改变异构向量候选怎么映射和打分，DealRank不训练表示，而是安排已有候选进入ranker的组合。它们可串在同一检索流水线，但更少调用不是更好向量对齐，SCORE2正确也不能证明listwise配额无损。",
+        "papers": [
+          "foundation-models:dealrank",
+          "foundation-models:hvmap"
+        ]
+      },
+      "question": {
+        "id": "cross-nov18-latest-dealrank",
+        "question": "它能代替HVMap双空间重排吗？",
+        "answer": "不能。DealRank决定哪些候选同场比较，HVMap定义跨编码器的可比分数。",
+        "example": "教学例：轮流发牌不能修正未对齐的embedding。",
+        "papers": [
+          "foundation-models:dealrank",
+          "foundation-models:hvmap"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:dealrank",
+          "foundation-models:hvmap"
+        ],
+        "summary": "本地ranker是确定性一致排序回调，不是模型；true_top只给quota_cuts外层诊断，不进入schedule。没有RankGPT提示、token费用或真实API延迟，机制计数不作NDCG／速度证据。作者提供mixedbread-ai/dealrank链接，但2026-11-18仓库／main commit API返回404，未核实公开源码或许可，不执行外部代码。完整多模型及27B计时矩阵高成本不复现。分组和最后晋级排序必须按原文层级配置核对，不能把所有情况压成一个generic topk。 完整实验高成本不复现，未作能力或Evolve晋级证据。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Parallel listwise reranking splits candidates into groups with fixed advancement quotas. Contiguous chunks crowd strong retriever-prefix documents into one group, so a better retriever can suffer more quota cuts. DealRank deals candidates round-robin by retriever rank to balance every prefix, then ranks groups concurrently and advances quotas into a final merge without repair certification.",
+          "tradeoff": "HVMap changes cross-space candidate mapping/scoring. DealRank does not train representations; it schedules existing candidates into ranker calls. They can compose in a retrieval pipeline, but fewer calls do not establish better alignment, and correct SCORE2 does not prove lossless listwise quotas."
+        },
+        "analysis": {
+          "title": "dealrank: distinguish mechanism from capability",
+          "body": "For100 candidates, Section2.1 uses five hands of20, keeps four per hand and reranks the final20: six calls in two rounds. A consistent ranker guarantees only topq=4 recovery, not top10. The500 schedule is25 hands keeping three then four keeping five; the1,000 schedule is50 keeping two then five keeping four, both three rounds. Later eliminations precede earlier ones. Real ThreadPool calls must return an exact permutation of their input IDs; this tests schedules, not LLM ranking quality. HVMap changes cross-space candidate mapping/scoring. DealRank does not train representations; it schedules existing candidates into ranker calls. They can compose in a retrieval pipeline, but fewer calls do not establish better alignment, and correct SCORE2 does not prove lossless listwise quotas."
+        },
+        "question": {
+          "question": "Can it replace HVMap dual-space reranking?",
+          "answer": "No. DealRank determines which candidates share a comparison; HVMap defines comparable cross-encoder scores.",
+          "example": "Teaching example: dealing cannot align incompatible embeddings."
+        },
+        "update": "The local ranker is a deterministic consistent callback, not a model. true_top is evaluator-only in quota_cuts and never enters schedule. There is no RankGPT prompt, token-cost or API-latency measurement; call accounting proves neither NDCG nor speed. The author links mixedbread-ai/dealrank, but repository/main-commit API checks return404 on2026-11-18; public source and license are unverified and no external code is executed. Full multi-model/27B timing is not reproduced due to cost. Grouping and final survivor order must follow the paper’s hierarchical schedules rather than a generic top-k shortcut. Full experiments are not reproduced due to high cost; no capability or Evolve-promotion claim."
+      }
+    },
+    {
+      "paper": "foundation-models:efficient-evals-tensor",
+      "target_card": "foundation-models/evaluation-and-evidence",
+      "source_revisions": {
+        "foundation-models:efficient-evals-tensor": "10f8c79451154b1ea1ba119c7e34e291104f752ec5db55faa5f969a7c5a4bdfc",
+        "foundation-models:proeval": "cc148ceb5167cf0b909f04441d1ab4d47b382022debe81d65496c74d579492c9"
+      },
+      "comparison": {
+        "position": "本文将模型、prompt和rater三者的能力张量作低rank CP分解，先用大量廉价autorater评分学共享表示，再冻结表示、只拟合人类rater向量及有序cutoff。它保留prompt异质性和rater偏好差异，不把某个自动judge分数直接当人类真值。2026-11-16是Google官方代码新仓库，不是论文首发；v1首发为2026-03-02 16:12:46 UTC。",
+        "tradeoff": "ProEval用其他模型历史逐题分数建立GP先验并主动决定下一题；本篇用多rater廉价数据学prompt/model表示再做人类对齐。前者的采样后验不等于后者的rater偏差校准，条件置信界也不能无条件覆盖共享表示估计误差。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题对照",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "Efficient Evals：借廉价评分学能力张量，再用少量人类标签校准：区别机制与能力",
+        "body": "§3的ordinal likelihood支持单侧评分和成对能力差及平局；首尾类别用0/1 CDF边界。第二阶段只给human向量／cutoff梯度，模型和prompt因子冻结。条件Wald区间把第一阶段表示当高精度固定量，并用Bonferroni处理多比较；Sigma是渐近协方差，需除m。可选全参数human fine-tune可能改善点预测，却使这些条件区间失效，不能两种好处同时声称。 ProEval用其他模型历史逐题分数建立GP先验并主动决定下一题；本篇用多rater廉价数据学prompt/model表示再做人类对齐。前者的采样后验不等于后者的rater偏差校准，条件置信界也不能无条件覆盖共享表示估计误差。",
+        "papers": [
+          "foundation-models:efficient-evals-tensor",
+          "foundation-models:proeval"
+        ]
+      },
+      "question": {
+        "id": "cross-nov18-latest-efficient-evals-tensor",
+        "question": "它与ProEval都省评测费，方法是否相同？",
+        "answer": "不同。ProEval主动选目标问题并更新GP；本篇校准多个rater到人类尺度。",
+        "example": "教学例：多一个便宜judge评分不等于主动选了一道人类问题。",
+        "papers": [
+          "foundation-models:efficient-evals-tensor",
+          "foundation-models:proeval"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:efficient-evals-tensor",
+          "foundation-models:proeval"
+        ],
+        "summary": "官方google-research/efficient_evals固定b4421d929d1078631ee890f8e4a776442c816d36、Apache2.0。本地只执行CP、ordinal概率、冻结human NLL和外部Sigma的条件区间算术；不含完整Adam/BFGS拟合、30切分或真实评分重收集。上游CPU notebook估约1小时，完整多judge矩阵高成本不复现，CUDA只验算子。 完整实验高成本不复现，未作能力或Evolve晋级证据。"
+      },
+      "english": {
+        "comparison": {
+          "position": "A low-rank CP model factorizes capabilities across models, prompts and raters. Many cheap autorater labels learn shared representations; a small human calibration set then fits only the human rater vector and ordered cutoffs with those features frozen. This preserves prompt heterogeneity and rater differences rather than treating one automated judge as human truth. November16 is the new Google repository release, not first publication: arXivv1 was posted March2,2026 at16:12:46UTC.",
+          "tradeoff": "ProEval builds a GP prior from historical per-item scores and actively chooses the next evaluation. This paper learns model/prompt features from multiple cheap raters and aligns them to humans. Active posterior sampling is not rater-bias calibration, and conditional intervals do not automatically cover shared-feature estimation error."
+        },
+        "analysis": {
+          "title": "efficient-evals-tensor: distinguish mechanism from capability",
+          "body": "Section3 uses an ordinal likelihood for single-sided scores and paired capability differences, including ties; endpoint categories useCDF boundaries0/1. Stage2 sends gradients only to the human vector/cutoffs while model/prompt factors stay frozen. Conditional Wald intervals assume high-precision fixed stage1 features and use Bonferroni for multiple comparisons; asymptotic covarianceSigma is divided bym. Optional all-parameter human fine-tuning can help prediction but invalidates these intervals, so both claims cannot be combined. ProEval builds a GP prior from historical per-item scores and actively chooses the next evaluation. This paper learns model/prompt features from multiple cheap raters and aligns them to humans. Active posterior sampling is not rater-bias calibration, and conditional intervals do not automatically cover shared-feature estimation error."
+        },
+        "question": {
+          "question": "Is it the same method as cost-saving ProEval?",
+          "answer": "No. ProEval actively selects target items and updates a GP, while this model calibrates raters to human judgments.",
+          "example": "Teaching example: adding a cheap judge label is not selecting a human evaluation item."
+        },
+        "update": "The officialgoogle-research/efficient_evals release is pinned atb4421d929d1078631ee890f8e4a776442c816d36, Apache2.0. The local slice runsCP, ordinal probabilities, frozen-feature human NLL and conditional intervals from an externally suppliedSigma. It omits full Adam/BFGS fitting,30 splits and rating recollection. Upstream estimates about one hour for the full CPU notebook; the complete multi-judge campaign is not reproduced. CUDA validates operators only. Full experiments are not reproduced due to high cost; no capability or Evolve-promotion claim."
+      }
+    },
+    {
+      "paper": "recommendation:cutagent",
+      "target_card": "recommendation/research-serving-loop",
+      "source_revisions": {
+        "recommendation:cutagent": "b11b921cd5dee3b6454f0a0b56dffddb338bab85d7fe85e16b6ffc44f5defec6",
+        "recommendation:agentic-rec-tune": "577f19e686b62b5cff25150df3488cbb65835a454142de3a037fe66277fa7eae"
+      },
+      "comparison": {
+        "position": "CutAgent把多模态商品理解与可靠视频制作拆为GeneAgent和VideoAgent，以结构化creative gene连接。Gene规定narrative units和配音／音乐／脚本规则；前者经高CTR SFT和CTR-level GRPO学习规划，后者展开分镜并检索商品素材、做TTS/BGM和渲染，再只修复带时间证据的缺陷。",
+        "tradeoff": "AgenticRecTune把推荐系统配置方案经实验平台反馈沉淀到SkillHub，CutAgent把广告制作失败修复写成类目／gene条件经验。二者都复用执行经验，但优化对象、反馈和测试权限不同；本篇的LightGBM surrogate不是推荐实验平台，也不能替代真实线上随机分流证据。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题对照",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "CutAgent：以创意基因连接广告规划、制作与经验反思：区别机制与能力",
+        "body": "GeneAgent采用Qwen3-VL-8B，冻结视觉模块、仅语言LoRA；SFT取观测CTR前20%，GRPO每商品采8个gene。LightGBM按类目内Low/Mid/High预测CTR-level，仅是训练奖励，不充当线上CTR。VideoAgent先按43类目选memory shard，再用gene相似度取已验证failure-correction作为制作约束；memory不是商品clip pool，反思不能用固定模板成功代替。 AgenticRecTune把推荐系统配置方案经实验平台反馈沉淀到SkillHub，CutAgent把广告制作失败修复写成类目／gene条件经验。二者都复用执行经验，但优化对象、反馈和测试权限不同；本篇的LightGBM surrogate不是推荐实验平台，也不能替代真实线上随机分流证据。",
+        "papers": [
+          "recommendation:cutagent",
+          "recommendation:agentic-rec-tune"
+        ]
+      },
+      "question": {
+        "id": "cross-nov18-latest-cutagent",
+        "question": "CutAgent memory与AgenticRecTune SkillHub一样吗？",
+        "answer": "复用思路相近但前者保存类目／gene条件的制作缺陷修复，后者保存配置实验经验。",
+        "example": "教学例：减少开场重复近景不能直接变成推荐融合权重。",
+        "papers": [
+          "recommendation:cutagent",
+          "recommendation:agentic-rec-tune"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "recommendation:cutagent",
+          "recommendation:agentic-rec-tune"
+        ],
+        "summary": "本篇review-only，完整实验成本过高，不复现（审查DONE）。70K商品每件90–120clips、多模态teacher、8B训练／检索、TTS与渲染、397Bjudge及真实流量均未运行；不下载资源，不编造creative-gene规划器、素材检索或本地CTR。固定v1没有核实本篇作者仓库，FireRed等第三方baseline代码不算CutAgent开源。 完整实验高成本不复现，未作能力或Evolve晋级证据。"
+      },
+      "english": {
+        "comparison": {
+          "position": "CutAgent separates multimodal product planning from reliable video production into GeneAgent and VideoAgent, linked by a structured creative gene. Genes specify narrative units and voice/music/script rules. High-CTR SFT and CTR-level GRPO train planning; production expands storyboards, retrieves product clips, performsTTS/BGM/rendering and selectively repairs temporally grounded defects.",
+          "tradeoff": "AgenticRecTune stores experiment-backed recommendation-configuration insights in a SkillHub. CutAgent stores category/gene-conditioned video-production corrections. Both reuse experience, but optimization objects, feedback and test permissions differ. Its LightGBM surrogate is not a recommendation experiment platform and cannot replace randomized production evidence."
+        },
+        "analysis": {
+          "title": "cutagent: distinguish mechanism from capability",
+          "body": "GeneAgent uses Qwen3-VL-8B with visual modules frozen and language LoRA only. SFT uses the top20% observed-CTR samples; GRPO samples eight genes per product. A LightGBM category-relativeLow/Mid/High CTR-level predictor is a training reward, not onlineCTR. VideoAgent selects one of43 category memory shards then retrieves gene-similar verified failure/correction constraints. This memory is distinct from clip pools; scripted success cannot substitute for reflection. AgenticRecTune stores experiment-backed recommendation-configuration insights in a SkillHub. CutAgent stores category/gene-conditioned video-production corrections. Both reuse experience, but optimization objects, feedback and test permissions differ. Its LightGBM surrogate is not a recommendation experiment platform and cannot replace randomized production evidence."
+        },
+        "question": {
+          "question": "Is CutAgent memory the same as AgenticRecTune SkillHub?",
+          "answer": "Both reuse experience, but production-defect corrections conditioned on category/gene differ from recommendation-configuration experiments.",
+          "example": "Teaching example: avoiding repeated close-ups does not specify a recommendation fusion weight."
+        },
+        "update": "Review-only: full experiment not reproduced due to cost(reviewDONE). No70K-product corpus with90–120 clips each, multimodal teachers,8B training/retrieval,TTS/rendering,397B judge or production traffic is run. No downloads or mock gene planner/retriever/localCTR are supplied. No paper-specific author repository is verified in fixedv1; cited FireRed baseline code is not a CutAgent release. Full experiments are not reproduced due to high cost; no capability or Evolve-promotion claim."
+      }
+    }
+  ]
+}

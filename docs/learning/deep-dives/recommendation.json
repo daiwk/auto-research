@@ -5,7 +5,7 @@
     "retrieval-matching": {
       "title": "召回覆盖从哪里来：用户表示、正例组织与负例难度",
       "thesis": "候选生成先决定后续排序能看见什么。YouTube DNN说明单用户向量如何进入近邻检索，Airbnb EBR把监督放回搜索—浏览—预订旅程，MIMA让同请求多正例分配给互补兴趣，MDCNS改变负例的难度与多视角监督。这四种改动分别作用于表示、标签、兴趣分工和梯度，不能用召回数变大统一解释。",
-      "updated": "2026-11-06",
+      "updated": "2026-11-18",
       "axes": [
         "召回接口：单向量还是多兴趣通道",
         "正例来自下一行为、旅程还是同请求集合",
@@ -71,6 +71,28 @@
           ],
           "position": "从既有排序日志回收高分未展示项，按时间建用户池，再按曝光类目筛选。",
           "tradeoff": "只重用已经被打过分的候选，不创造语义索引里的新命中；依赖历史新鲜度和曝光记录。"
+        },
+        {
+          "paper": "recommendation:yuanbao-rubric",
+          "position": "传统逐文档相关性不等于给下游推理提供有用证据。元宝先生成查询特定的加权正向标准和扣分标准，用蒸馏标签统一训练召回与四头排序，再用集合奖励训练选择器。低于组均值的轨迹并不接受负优势惩罚，而是按奖励差蒸馏组内最佳轨迹。",
+          "tradeoff": "WeSearch用簇和原子文档匹配收缩候选空间；元宝用rubric统一上游标签和最终集合奖励。两者不是同一种SID/召回架构，局部ADC或双分支loss都不能替代端到端搜索验证。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题对照",
+            "高成本完整实验"
+          ]
+        },
+        {
+          "paper": "recommendation:intentflow",
+          "position": "相同图片上的找同款、找搭配和问使用信息需要不同证据，纯视觉相似性不足。IntentFlow将意图层级、可验证三档相关性、agentic数据构造、多模态检索和意图条件重排统一起来。索引固定后只在查询侧进行高层LoRA与六专家残差投影，避免全库重算。",
+          "tradeoff": "WeSearch用簇限制候选并原子匹配；IntentFlow先定义请求满足所需证据，再让查询编码适配固定文档空间。一个侧重候选组织，一个侧重意图监督与查询表示，均不能仅凭组件前后向推断线上收益。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题对照",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -107,6 +129,22 @@
           ],
           "title": "日志再利用不是新的匹配表征",
           "body": "WeSearch 先用簇收缩检索空间，再以 OPQ 和特征打分；URED 反过来依赖既有打分，把当时没展示的高分项积累成独立通道。比较应固定召回与展示配额，另检查去重、索引新鲜度和重复曝光。"
+        },
+        {
+          "title": "元宝搜索：Rubric 对齐检索、排序与集合选择：区别机制与能力",
+          "body": "对应§2.1、Eq4–6。正向标准允许多文档共同覆盖，负向标准由任一文档触发扣分；focal pairwise 是标签差减分数差的 hinge，不是普通 CE。两分支分别求均值；较差轨迹的权重作用于同一个最佳轨迹的 token NLL，保留 padding mask、空分支和奖励并列时零更新。参考 KL 由调用者显式提供，不擅自选择估计器。 WeSearch用簇和原子文档匹配收缩候选空间；元宝用rubric统一上游标签和最终集合奖励。两者不是同一种SID/召回架构，局部ADC或双分支loss都不能替代端到端搜索验证。",
+          "papers": [
+            "recommendation:yuanbao-rubric",
+            "recommendation:wesearch"
+          ]
+        },
+        {
+          "title": "IntentFlow：意图条件多模态搜索与固定索引适配：区别机制与能力",
+          "body": "实现Eq16、18–21、24：同一查询门控混合两个共享瓶颈分支（原设置rank8/64），保留冻结基础投影；蒸馏两方向使用相同合法候选并detach教师；CSLS只减去文档对训练query参考库的离线密度项。零初始化up projection是本地稳定初始化约定，原文未明确此初始化，不伪称完整模型配方。 WeSearch用簇限制候选并原子匹配；IntentFlow先定义请求满足所需证据，再让查询编码适配固定文档空间。一个侧重候选组织，一个侧重意图监督与查询表示，均不能仅凭组件前后向推断线上收益。",
+          "papers": [
+            "recommendation:intentflow",
+            "recommendation:wesearch"
+          ]
         }
       ],
       "questions": [
@@ -150,6 +188,26 @@
           "question": "URED 能找回从未进入任何历史排序候选池的文档吗？",
           "answer": "不能，它的输入来自历史排序器。WeSearch 的检索索引可以在其可用快照中为文档产生首次候选；两个入口不互相替代。",
           "example": "示意：刚上线的商品可进更新后的索引；在任何请求给它打分之前，它不会从 URED 日志池凭空出现。"
+        },
+        {
+          "id": "cross-nov18-latest-yuanbao-rubric",
+          "question": "元宝和WeSearch改动的是同一层吗？",
+          "answer": "不是。前者统一效用监督并优化集合；后者主要改变簇内原子文档匹配。",
+          "example": "教学例：ADC距离正确不能证明最终三个证据文档没有重复、缺漏或过期信息。",
+          "papers": [
+            "recommendation:yuanbao-rubric",
+            "recommendation:wesearch"
+          ]
+        },
+        {
+          "id": "cross-nov18-latest-intentflow",
+          "question": "它和WeSearch的簇约束有什么区别？",
+          "answer": "固定索引适配改变query如何落入已有文档空间；簇约束改变候选空间组织，两者可组合但不是相互替代。",
+          "example": "教学例：query残差改变而doc向量逐位不变，只证明固定索引接口成立。",
+          "papers": [
+            "recommendation:intentflow",
+            "recommendation:wesearch"
+          ]
         }
       ],
       "reviewed_papers": [
@@ -190,7 +248,9 @@
         "recommendation:youtube-dnn",
         "recommendation:zorro",
         "recommendation:wesearch",
-        "recommendation:ured"
+        "recommendation:ured",
+        "recommendation:yuanbao-rubric",
+        "recommendation:intentflow"
       ],
       "updates": [
         {
@@ -294,6 +354,30 @@
             "recommendation:wesearch": "b9df98a4ba9bcd275dd5979b9457fb2370b15e4b9b01d2de83309c585075b933"
           },
           "summary": "加入 URED，区分候选的日志回收与 WeSearch 的语义索引召回，记录时间截断和曝光去重边界。"
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "recommendation:yuanbao-rubric",
+            "recommendation:wesearch"
+          ],
+          "summary": "没有运行 rubric 生成、DeepSeek judge、Qwen 编码器或真实搜索。诊断检查最佳轨迹有蒸馏梯度、失败轨迹没有模仿梯度、奖励不反传、padding 梯度为零；它们不是答案准确率。 完整实验高成本不复现，未作能力或Evolve晋级证据。",
+          "source_revisions": {
+            "recommendation:yuanbao-rubric": "f79f80548329a40d2bb20638f0df7929f1f9258ffd7ecdb5e03b3ea410abe7d1",
+            "recommendation:wesearch": "b9df98a4ba9bcd275dd5979b9457fb2370b15e4b9b01d2de83309c585075b933"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "recommendation:intentflow",
+            "recommendation:wesearch"
+          ],
+          "summary": "输入仅为外部融合特征和候选分数；没有用规则假装0.8B意图识别器，也未实现完整LoRA/VLM、agentic核验或NDCG权重训练链。文档输入在诊断中保持不变，不意味着语义召回已提升。 完整实验高成本不复现，未作能力或Evolve晋级证据。",
+          "source_revisions": {
+            "recommendation:intentflow": "6658557ea90280fdd772b0b094413b79e9554d36af3e4fc3e737902b4e1ebaad",
+            "recommendation:wesearch": "b9df98a4ba9bcd275dd5979b9457fb2370b15e4b9b01d2de83309c585075b933"
+          }
         }
       ]
     },
@@ -1526,7 +1610,7 @@
     "feedback-multitask-causality": {
       "title": "从CTR到满意度与uplift：先定义监督对象，再决定怎样共享",
       "thesis": "ESMM约束点击—转化漏斗概率，MMoE和PLE安排不同任务怎样共享专家，FLVM尝试把消费、主动参与和正负方向分开，Incrementality则比较采取与不采取动作的潜在结果。预测更多头、共享更多参数或拆出潜因子，都不自动解决因果识别。",
-      "updated": "2026-10-29",
+      "updated": "2026-11-18",
       "axes": [
         "标签是条件事件、反馈测量还是潜在结果差",
         "任务共享发生在哪些参数和路由上",
@@ -1590,6 +1674,17 @@
             "背景与主要改动",
             "核心公式"
           ]
+        },
+        {
+          "paper": "recommendation:cotti",
+          "position": "COTTI把训练时历史偏好连续性和上线时促销概率修正分开。CPC比较同一用户常态/促销双视图并用可微门控调节一致性；RW按相对历史距离重加权但截断其梯度；ABA在冻结预测器的logit上添加事件强度与预测头方差决定的有界修正。",
+          "tradeoff": "BAFF按竞价策略干扰过滤日志，COTTI按用户历史距离改变促销样本影响；两种权重/过滤都不自动成为因果无偏估计，COTTI的校准也不能证明A/B日志无污染。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题对照",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -1617,6 +1712,14 @@
           "papers": [
             "recommendation:esmm",
             "recommendation:kl-mopd"
+          ]
+        },
+        {
+          "title": "COTTI：促销漂移中的跨周期对比与时变校准：区别机制与能力",
+          "body": "严格保留Eq6–16：CPC门控用未归一化表示距离并参与反传；RW不裁剪、不均值归一化，权重是正影响量而非可靠性概率；ABA使用预测头多次dropout logit的总体方差，不是全编码器不确定性。事件中心须事先公告、宽度来自历史，幅度只在验证集选；修正只能向上，不能解决过预测。 BAFF按竞价策略干扰过滤日志，COTTI按用户历史距离改变促销样本影响；两种权重/过滤都不自动成为因果无偏估计，COTTI的校准也不能证明A/B日志无污染。",
+          "papers": [
+            "recommendation:cotti",
+            "recommendation:baff"
           ]
         }
       ],
@@ -1661,6 +1764,16 @@
             "recommendation:esmm",
             "recommendation:kl-mopd"
           ]
+        },
+        {
+          "id": "cross-nov18-latest-cotti",
+          "question": "COTTI能代替BAFF解决实验干扰吗？",
+          "answer": "不能。历史距离不是反事实曝光或竞价干扰证据，促销概率修正和实验日志污染是不同问题。",
+          "example": "教学例：HDR线上control与TEN离线control不能当成同一因果基线。",
+          "papers": [
+            "recommendation:cotti",
+            "recommendation:baff"
+          ]
         }
       ],
       "reviewed_papers": [
@@ -1699,7 +1812,8 @@
         "recommendation:twice",
         "recommendation:twitch-mor",
         "recommendation:unimvt",
-        "recommendation:kl-mopd"
+        "recommendation:kl-mopd",
+        "recommendation:cotti"
       ],
       "updates": [
         {
@@ -1788,6 +1902,18 @@
           ],
           "source_revisions": {
             "recommendation:kl-mopd": "32d21d9bb6b5b4edd04ddc4866523e424f3a1b27fe9d109d610240bf4da3c672"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "recommendation:cotti",
+            "recommendation:baff"
+          ],
+          "summary": "本地只运行CPC/RW/ABA张量；没有历史构造、缺失常态视图回退或服务融合策略。保留paid-item新类目召回下降的作者负结果，不能拿整体AUC覆盖探索代价。 完整实验高成本不复现，未作能力或Evolve晋级证据。",
+          "source_revisions": {
+            "recommendation:cotti": "98ca63f3d54543ec2dc479a6fd25bfefadfbe21f01c96dc95ca8bcc2f4b03abc",
+            "recommendation:baff": "83a73ccc9f890343e96da156362142298f47f0df4ae60892216503bfc311343f"
           }
         }
       ]
@@ -2144,7 +2270,7 @@
     "research-serving-loop": {
       "title": "从更便宜的一次前向，到可验证的长期研究闭环",
       "thesis": "ROCS减少请求内重复计算，Rec-Distill将昂贵教师知识移到训练，Effective Training Time追踪训练生命周期损耗，FORTE控制特征退役风险，Self-Evolving RecSys把提案、实验和线上反馈接成长期循环。它们优化的时间尺度不同；省GPU、删特征和自动提出方案，都不能直接当作推荐效果提升。",
-      "updated": "2026-10-27",
+      "updated": "2026-11-18",
       "axes": [
         "成本属于训练、请求内推理还是长期研发生命周期",
         "复用与删除要求哪些依赖/消费者保持一致",
@@ -2201,6 +2327,17 @@
             "核心公式",
             "本地复现"
           ]
+        },
+        {
+          "paper": "recommendation:cutagent",
+          "position": "CutAgent把多模态商品理解与可靠视频制作拆为GeneAgent和VideoAgent，以结构化creative gene连接。Gene规定narrative units和配音／音乐／脚本规则；前者经高CTR SFT和CTR-level GRPO学习规划，后者展开分镜并检索商品素材、做TTS/BGM和渲染，再只修复带时间证据的缺陷。",
+          "tradeoff": "AgenticRecTune把推荐系统配置方案经实验平台反馈沉淀到SkillHub，CutAgent把广告制作失败修复写成类目／gene条件经验。二者都复用执行经验，但优化对象、反馈和测试权限不同；本篇的LightGBM surrogate不是推荐实验平台，也不能替代真实线上随机分流证据。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题对照",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -2220,6 +2357,14 @@
             "recommendation:forte",
             "recommendation:self-evolving-rec",
             "recommendation:effective-training-time"
+          ]
+        },
+        {
+          "title": "CutAgent：以创意基因连接广告规划、制作与经验反思：区别机制与能力",
+          "body": "GeneAgent采用Qwen3-VL-8B，冻结视觉模块、仅语言LoRA；SFT取观测CTR前20%，GRPO每商品采8个gene。LightGBM按类目内Low/Mid/High预测CTR-level，仅是训练奖励，不充当线上CTR。VideoAgent先按43类目选memory shard，再用gene相似度取已验证failure-correction作为制作约束；memory不是商品clip pool，反思不能用固定模板成功代替。 AgenticRecTune把推荐系统配置方案经实验平台反馈沉淀到SkillHub，CutAgent把广告制作失败修复写成类目／gene条件经验。二者都复用执行经验，但优化对象、反馈和测试权限不同；本篇的LightGBM surrogate不是推荐实验平台，也不能替代真实线上随机分流证据。",
+          "papers": [
+            "recommendation:cutagent",
+            "recommendation:agentic-rec-tune"
           ]
         }
       ],
@@ -2263,6 +2408,16 @@
             "recommendation:rec-distill",
             "recommendation:self-evolving-rec"
           ]
+        },
+        {
+          "id": "cross-nov18-latest-cutagent",
+          "question": "CutAgent memory与AgenticRecTune SkillHub一样吗？",
+          "answer": "复用思路相近但前者保存类目／gene条件的制作缺陷修复，后者保存配置实验经验。",
+          "example": "教学例：减少开场重复近景不能直接变成推荐融合权重。",
+          "papers": [
+            "recommendation:cutagent",
+            "recommendation:agentic-rec-tune"
+          ]
         }
       ],
       "reviewed_papers": [
@@ -2284,7 +2439,8 @@
         "recommendation:rocs",
         "recommendation:self-evolving-rec",
         "recommendation:solaris",
-        "recommendation:ug-sep"
+        "recommendation:ug-sep",
+        "recommendation:cutagent"
       ],
       "updates": [
         {
@@ -2331,6 +2487,18 @@
             "recommendation:self-evolving-rec": "34a4cf09ed06281af60e3c1a887adfb4ce9e69a3ee7f016d17c8b8b6fa1c8dbd",
             "recommendation:solaris": "f41b4a786874021a0b15f8e77949d8c3425410e9ac4e5d66fab55db24537ddda",
             "recommendation:ug-sep": "881e103296aaaab594e01b83a8079093fbb08244d2834742b307574c3943042e"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "recommendation:cutagent",
+            "recommendation:agentic-rec-tune"
+          ],
+          "summary": "本篇review-only，完整实验成本过高，不复现（审查DONE）。70K商品每件90–120clips、多模态teacher、8B训练／检索、TTS与渲染、397Bjudge及真实流量均未运行；不下载资源，不编造creative-gene规划器、素材检索或本地CTR。固定v1没有核实本篇作者仓库，FireRed等第三方baseline代码不算CutAgent开源。 完整实验高成本不复现，未作能力或Evolve晋级证据。",
+          "source_revisions": {
+            "recommendation:cutagent": "b11b921cd5dee3b6454f0a0b56dffddb338bab85d7fe85e16b6ffc44f5defec6",
+            "recommendation:agentic-rec-tune": "577f19e686b62b5cff25150df3488cbb65835a454142de3a037fe66277fa7eae"
           }
         }
       ]

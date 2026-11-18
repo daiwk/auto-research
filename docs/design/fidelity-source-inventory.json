@@ -10823,6 +10823,16 @@
         "fingerprint": "8d987e0eb2340b18942ecc484482fdc4b0d23d1c6aeb395750ad2483af0d39d6"
       }
     ],
+    "src/auto_research/agent_research/silentguard.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "submit",
+        "line": 104,
+        "qualified_name": "AnswerGate.submit",
+        "expression": "self.rejections += 1",
+        "fingerprint": "ebe15b2fb8db3e8b2d7f383cfa993c34657bf0ece9b1c66160d521f3fe9c8577"
+      }
+    ],
     "src/auto_research/agent_research/skill_state.py": [
       {
         "kind": "state_update_not_execution_evidence",
@@ -11503,6 +11513,24 @@
         "qualified_name": "ReplayBuffer.verify",
         "expression": "self.refreshes += 1",
         "fingerprint": "cdb3ffd258d51dff71f9a2a6723e78e27e55691e22259f3a77cbc19d8085f47f"
+      }
+    ],
+    "src/auto_research/foundation_models/spool.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "expire",
+        "line": 58,
+        "qualified_name": "WindowTree.expire",
+        "expression": "self.length -= count",
+        "fingerprint": "caaf62a33358f835460a423fdf94553a9f40ffba8ed292df5c5d76e15235401d"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "append",
+        "line": 68,
+        "qualified_name": "WindowTree.append",
+        "expression": "self.length += 1",
+        "fingerprint": "b29c52465342867a78796daa6a45e7b3ec88ef32a790b486695a203ce20b8560"
       }
     ],
     "src/auto_research/multimodal/benchmarks.py": [

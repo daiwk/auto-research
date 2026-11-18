@@ -1,0 +1,13 @@
+{
+  "source_url": "https://arxiv.org/html/2611.22686v1/fig/method.png",
+  "figure": "S3.F3",
+  "caption": "Figure 3 : (a) I-JEPA performs single-stage latent prediction using contextual representations encoded from visible patches. (b) CascadeJEPA introduces spatially coupled cascaded prediction, where the first stage learns spatially structured contextual representations through full-grid encoding, and the second stage uses them to guide latent prediction via cross-attention. This unidirectional coupling promotes richer patch-level interactions while largely preserving the original I-JEPA architecture.",
+  "original_sha256": "de2ea1f82031dbd1137a5d1a36c279322cd20b29c0afce25a382265477ca5c1e",
+  "extraction": "Author original raster image, or original SVG rasterized without semantic editing",
+  "paper_url": "https://arxiv.org/html/2611.22686v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-18",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result.",
+  "source_html_sha256": "f97f41b8106f60833e588a830727e814b18350d1ba52c00d4e7bba5d9d11fbee",
+  "asset_sha256": "51e57c6e57e57144fc98049734cc6f3b910b0b495728075e05c95d5dabf8f88f"
+}

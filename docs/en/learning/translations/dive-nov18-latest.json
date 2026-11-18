@@ -1,0 +1,1509 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/multimodal-models/alignment-interfaces/comparison/foundation-models:vishead-spec": {
+      "source_sha256": "9bf9205e74bc472fcf4fa65a931f74d689390597c2acaa5f97597adb94984f6c",
+      "reviewed": true,
+      "fields": {
+        "position": "Direct visual access is concentrated in selected drafter KV heads. Layer and head choices are calibrated offline, then fixed throughout finetuning and serving. Image rows use target layers25/33; text rows use1/9/17/25/33. Other heads still see text and within-block context rather than being disabled.",
+        "tradeoff": "Unbundling changes dedicated visual capacity placement; VisHead-Spec changes where a drafter directly reads images. Attention visibility is not the same intervention as gating vision-only projections."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/analysis/12": {
+      "source_sha256": "b8f5767770ed7e109cfea635e9819d2aa4172f41fce6c2bcfd8dc9b593fabfd4",
+      "reviewed": true,
+      "fields": {
+        "title": "VisHead-Spec: sparse direct visual access, shared text context",
+        "body": "Unbundling changes dedicated visual capacity placement; VisHead-Spec changes where a drafter directly reads images. Attention visibility is not the same intervention as gating vision-only projections. Routing follows the physical KV head to its entire GQA query group. Draft-position weights are normalized exp(-d/4). Confidence predicts detached distribution-overlap acceptance, not hard argmax agreement. The supplied base visibility preserves pre-anchor context and bidirectional block access."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/question/nov18-vishead-spec": {
+      "source_sha256": "9a866c829bb2b19206028678dca7d6eaa75b419b70620b0779c0021a0ffc4fd5",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from Unbundling visual masks?",
+        "answer": "VisHead-Spec restricts image-row visibility by head. Unbundling gates additional QKVO/FFN capacity while retaining joint attention.",
+        "example": "A text query without an extra visual projection can still read image KV."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/update/2026-11-18/11": {
+      "source_sha256": "f475dd5e71063d0e11b33793a7bd1049651c931bb5c75321bfedde78fc67852f",
+      "reviewed": true,
+      "fields": {
+        "summary": "Unbundling changes dedicated visual capacity placement; VisHead-Spec changes where a drafter directly reads images. Attention visibility is not the same intervention as gating vision-only projections. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:spool": {
+      "source_sha256": "81b54a30e3c64c86f93e5f152a1b30bdc664a4535f4f6f75c96ac4ff9e8fbd40",
+      "reviewed": true,
+      "fields": {
+        "position": "With recorded layer inputs fixed, GDN keys, values and gates make each update affine in prior state. Per-frame transitions compose chronologically in a segment tree. Expiry rebuilds state from the prefix anchor without replaying retained tokens through the backbone.",
+        "tradeoff": "DropKV selects attention KV entries for eviction. Spool reconstructs shared recurrent state after expiry. Layerwise recorded-input exactness does not establish full-network equivalence."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/analysis/7": {
+      "source_sha256": "7e7d62f2cd6e11b27e437bb4d7b45e73e82b25b377d206799459a6b5b1ba4323",
+      "reviewed": true,
+      "fields": {
+        "title": "Spool: affine summaries for sliding recurrent windows",
+        "body": "DropKV selects attention KV entries for eviction. Spool reconstructs shared recurrent state after expiry. Layerwise recorded-input exactness does not establish full-network equivalence. Storing D=A-I protects small deviations from identity in low precision. Composition is noncommutative. Exactness holds for recorded inputs within a layer, not whole-network recomputation: higher-layer cached features can retain expired-frame influence."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/question/nov18-spool": {
+      "source_sha256": "f823f11f6e88338967dd9349b7498bf9263035b71ec3f294d0eae1a3f03ba15d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does its exactness differ from KV eviction?",
+        "answer": "It exactly replays recorded layer transitions; DropKV estimates attention-output perturbations. Neither statement establishes full-backbone replay equivalence.",
+        "example": "A cached higher-layer feature can already encode an expired frame."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/update/2026-11-18/7": {
+      "source_sha256": "56dfe5ab6370ff607766673a073818345da7739dc16c96e2aec27e2e84ce00e0",
+      "reviewed": true,
+      "fields": {
+        "summary": "DropKV selects attention KV entries for eviction. Spool reconstructs shared recurrent state after expiry. Layerwise recorded-input exactness does not establish full-network equivalence. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:infuseloop": {
+      "source_sha256": "70ef15dce8d01de681d301d2df750006922419186653443b46a8874dbe4a21d3",
+      "reviewed": true,
+      "fields": {
+        "position": "Parallel loops advance several prediction trajectories in one execution cycle. Loop r aggregates completed previous-cycle states from shallower loops rather than only its own preceding state. A later trajectory position is not an unseen future token; legality follows the execution schedule.",
+        "tradeoff": "Anchor shares an external TTT state with learned read maps. InfuseLoop aggregates trajectory latents admitted by a parallel execution graph; arbitrary cross-layer averaging is not equivalent."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/9": {
+      "source_sha256": "fc44740713e26559c1382431c47ab385fae77c62012aa266debabc60b13439e2",
+      "reviewed": true,
+      "fields": {
+        "title": "InfuseLoop: causal cross-trajectory latent injection",
+        "body": "Anchor shares an external TTT state with learned read maps. InfuseLoop aggregates trajectory latents admitted by a parallel execution graph; arbitrary cross-layer averaging is not equivalent. Both keys and values use parameter-free RMS normalization. Document boundaries are masked before softmax. Every new state reads the same old buffer, with commit only after the cycle. The aggregate replaces the prior cross-loop input rather than being added twice."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/nov18-infuseloop": {
+      "source_sha256": "7b67735cc633c501d8e622fcc704d15578a15af89423c3f6aabc891aef648f98",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from Anchor?",
+        "answer": "Anchor reads external TTT memory alongside local attention. InfuseLoop aggregates trajectory hidden states according to cycle availability.",
+        "example": "Broadcasting one KV matrix across loops does not implement cross-trajectory indexing."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-11-18/8": {
+      "source_sha256": "16cfd2265e0bbd0f919623a9f06948601b62aff81224ee5d602f1661ea29e87e",
+      "reviewed": true,
+      "fields": {
+        "summary": "Anchor shares an external TTT state with learned read maps. InfuseLoop aggregates trajectory latents admitted by a parallel execution graph; arbitrary cross-layer averaging is not equivalent. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:echomoe": {
+      "source_sha256": "5aa274467202341a132dd4d2550f467c751cd99dc957c53ddcf1814461c02c98",
+      "reviewed": true,
+      "fields": {
+        "position": "A group first broadcasts reference z. Later layers send a compressed code for x-a⊙z, while routing still reads full x. Folding absorbs reference reconstruction and dispatch decoding into gate/up weights and combine compression into down weights.",
+        "tradeoff": "MoEZip protects routing-sensitive KV entries. EchoMoE compresses expert-parallel activation communication. Their different storage/traffic targets make compression ratios incomparable as throughput evidence."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/analysis/8": {
+      "source_sha256": "3c722e805c270894c9bbf353c287055d7b075b6d90c69ee8256888a3c6aa5898",
+      "reviewed": true,
+      "fields": {
+        "title": "EchoMoE: compressed changes around cached reference states",
+        "body": "MoEZip protects routing-sensitive KV entries. EchoMoE compresses expert-parallel activation communication. Their different storage/traffic targets make compression ratios incomparable as throughput evidence. Folding is algebraically equivalent to the compressed model, not lossless recovery of the original backbone. The paper also uses projection-weighted initialization followed by KL distillation and next-token adaptation. Analytic bytes are not measured RDMA traffic."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/question/nov18-echomoe": {
+      "source_sha256": "7386631c2503d1a8872fd839141e1a754a3746ab576209e5db2ad0b734c77635",
+      "reviewed": true,
+      "fields": {
+        "question": "Can compression ratios be compared directly with MoEZip?",
+        "answer": "No. KV row retention and expert-activation traffic have different denominators, reference overhead and quality errors.",
+        "example": "Saving50% of KV storage does not imply saving50% of RDMA bytes."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/update/2026-11-18/8": {
+      "source_sha256": "10acc91e0a1857ee58c57a18a37db2adc0584f7923a4fac94835342fde252879",
+      "reviewed": true,
+      "fields": {
+        "summary": "MoEZip protects routing-sensitive KV entries. EchoMoE compresses expert-parallel activation communication. Their different storage/traffic targets make compression ratios incomparable as throughput evidence. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/comparison/foundation-models:wm-quant": {
+      "source_sha256": "3c169b5ae961e111de9d0d80e497ae24ad77020d681a6b74056fb52c4fc33c1e",
+      "reviewed": true,
+      "fields": {
+        "position": "Continuous JEPA latents repeatedly enter the predictor, so quantization errors propagate rather than resetting through discrete tokens. WM-Quant keeps the first three encoder activation blocks at8bits, control inputs in floating point, and jointly calibrates encoder and step-specific predictor ranges.",
+        "tradeoff": "LeWAM jointly trains a visual encoder, latent dynamics and action flow, then refines policy candidates in latent space. WM-Quant studies quantization error and range calibration across continuous rollouts. Its evaluated models are LeWM/DINO-WM, not LeWAM; no local LeWAM quantization integration is claimed."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/analysis/10": {
+      "source_sha256": "cd490905725d57f819acfef3092044c881e76a82a9d42e19914ac5bc6931e674",
+      "reviewed": true,
+      "fields": {
+        "title": "Learning controllable dynamics and preserving numerical rollouts are different axes",
+        "body": "The reviewed LeWAM README specifies joint action-flow, latent-MSE and SIGReg training; planning updates actions only and selects by unpenalized goal cost. Its training-trajectory goals remain non-holdout diagnostics. WM-Quant instead freezes the backbone and calibrates encoder/step-specific predictor ranges, retains floating controls and uses the integer-zero-point lattice in Equations1–2. Shared action-conditioned rollouts do not make dynamics training, planning and PTQ calibration interchangeable evidence. The tiny local calibrator does not quantize LeWAM or compare robot success."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/question/nov18-wm-quant": {
+      "source_sha256": "c14fbfb15cc7429c71d77c05bc19859d15e0c076ed9222c1f089c4f41e39ba3d",
+      "reviewed": true,
+      "fields": {
+        "question": "Do shared JEPA rollouts mean LeWAM was quantized and validated here?",
+        "answer": "No. WM-Quant evaluates LeWM/DINO-WM; LeWAM is a different joint world-action model. Local checks cover the quantization lattice, multi-step range objective and control preservation, without LeWAM integration or robot evaluation.",
+        "example": "LeWAM three-arm robot results cannot substitute for low-bit WM-Quant planning, and one calibration loss does not establish LeWAM planning capability."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/update/2026-11-18/9": {
+      "source_sha256": "feca4d8d2244b5bcfdac40b87dcbc75961e30ae24910fa47c7e4d2362143d59b",
+      "reviewed": true,
+      "fields": {
+        "summary": "LeWAM jointly trains a visual encoder, latent dynamics and action flow, then refines policy candidates in latent space. WM-Quant studies quantization error and range calibration across continuous rollouts. Its evaluated models are LeWM/DINO-WM, not LeWAM; no local LeWAM quantization integration is claimed. The existing same-topic representative README was read; the comparison does not change the algorithm or claim cross-paper reproduction results."
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:fm-mamba": {
+      "source_sha256": "884cfbc682de3baf212cb6ae6e291ab230e152207af083af49abb0627eb1f3b5",
+      "reviewed": true,
+      "fields": {
+        "position": "The native2D FM recurrence reads upper, left and diagonal predecessors instead of flattening the grid into a chain. Two input-dependent steps control the axes separately, with a0/(a1a2) determining whether bounded steps are necessary.",
+        "tradeoff": "Mamba makes one-dimensional SSM steps and B/C input dependent, with causal convolution and gating. FM-Mamba uses upper, left and diagonal predecessors, two axis steps and ratio-dependent stability constraints. Flattened Mamba is not native FM-Mamba, and Python reference parity does not establish fused-scan or PSD speedups."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/10": {
+      "source_sha256": "59ee46defae395c310d5e7661943dff07a25232fe697c7dc81e954f7825aa6bb",
+      "reviewed": true,
+      "fields": {
+        "title": "Compare state dependency graphs before complexity labels",
+        "body": "The Mamba README gives h_t=exp(Delta_t A)h_(t-1)+Delta_t B_t x_t on a one-dimensional chain and notes that its short-budget WikiText negative result does not represent paper scale. FM-Mamba cross-couples two axis steps in ZOH coefficients and retains the diagonal predecessor; cells on one anti-diagonal can run together. Its frozen-position stability condition is not a global theorem for arbitrary changing coefficient fields. Input dependence alone does not equalize their topology, discretization or parallel execution."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/nov18-fm-mamba": {
+      "source_sha256": "c527478f3207c5e0d4142c99e601bf337d461c234bc59577055124a21261563a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is flattened-image Mamba not FM-Mamba?",
+        "answer": "It changes the dependency graph. Native FM-Mamba reads upper, left and diagonal predecessors using two axis steps and stability projection; a flattened scan follows one chosen chain.",
+        "example": "An upper-left impulse can reach the next diagonal cell through an explicit predecessor term; removing that term changes the recurrence."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-11-18/9": {
+      "source_sha256": "4e869cab832f138ed33730d4d78332930420545bcd3dbb05b574352d342dc22c",
+      "reviewed": true,
+      "fields": {
+        "summary": "Mamba makes one-dimensional SSM steps and B/C input dependent, with causal convolution and gating. FM-Mamba uses upper, left and diagonal predecessors, two axis steps and ratio-dependent stability constraints. Flattened Mamba is not native FM-Mamba, and Python reference parity does not establish fused-scan or PSD speedups. The existing same-topic representative README was read; the comparison does not change the algorithm or claim cross-paper reproduction results."
+      }
+    },
+    "dive/foundation-models/training-budget/comparison/foundation-models:lara-plus-plus": {
+      "source_sha256": "cf10c9474cccac4a7719e57d0347c7b61d655b563a3f9ba211f9cf39ec4b086b",
+      "reviewed": true,
+      "fields": {
+        "position": "The paper audits practical kernel-attention efficiency. Deterministic proposal means replace sampling, and similarity clusters replace contiguous chunks. When the number of clusters grows with sequence length, k-center costs are quadratic; near-softmax quality does not imply a FlashAttention speedup.",
+        "tradeoff": "LazyFlash keeps dense forward attention and sparsifies backward work. LARA++ approximates forward softmax and requires distillation. Their computation and error targets differ."
+      }
+    },
+    "dive/foundation-models/training-budget/analysis/7": {
+      "source_sha256": "cf10ca66432d1ac35f505b0ebc4a838e88c0071b30e8946fc7d5c2312791d86e",
+      "reviewed": true,
+      "fields": {
+        "title": "LARA++: deterministic clustered proposals for kernel attention",
+        "body": "LazyFlash keeps dense forward attention and sparsifies backward work. LARA++ approximates forward softmax and requires distillation. Their computation and error targets differ. The local operator follows the pinned author mis-opt path. Section7 describes query-only clustering and a random initial center, whereas released code uses normalized joint Q+K features, deterministic initialization and a separate CLS proposal. This difference is explicit. Proposal construction is detached; Q/K features and value aggregation remain differentiable."
+      }
+    },
+    "dive/foundation-models/training-budget/question/nov18-lara-plus-plus": {
+      "source_sha256": "19badae11b679e6ddb013f0546156f394f1acbadd7b6dbf08f5206603a3cdbcb",
+      "reviewed": true,
+      "fields": {
+        "question": "Are paper and released clustering identical?",
+        "answer": "No. The paper describes query similarity and random initialization. Pinned code uses joint normalized Q+K, deterministic initialization and a separate CLS proposal.",
+        "example": "Tokens with identical queries but different keys can separate under joint features."
+      }
+    },
+    "dive/foundation-models/training-budget/update/2026-11-18/6": {
+      "source_sha256": "703b7f76084b313a19dc6c1427c5a02e0bdbe97d071cd3c2a7439ed76ba5bebc",
+      "reviewed": true,
+      "fields": {
+        "summary": "LazyFlash keeps dense forward attention and sparsifies backward work. LARA++ approximates forward softmax and requires distillation. Their computation and error targets differ. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:gaugerope": {
+      "source_sha256": "1e66b2006ecad3da4687c338848fe33cff72d22ce0da3d4fa73b847ad7a6a9b9",
+      "reviewed": true,
+      "fields": {
+        "position": "Generic low-rank keys need not preserve rotary action and may require historical native reconstruction. GaugeRoPE fits complex carriers within equal-frequency blocks and jointly encodes residual keys/values with energy-balanced PCA. Decoder maps move to queries and post-aggregation output.",
+        "tradeoff": "Anchor shares TTT state across layers with learned read maps. GaugeRoPE retains per-layer token history in low-rank compatible coordinates. Cross-layer sharing and per-token latent compression are different interventions."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/11": {
+      "source_sha256": "d3da7c02583c377fbb24c7316b630b5c129b186a9cd7df8dc7279ce2418f9004",
+      "reviewed": true,
+      "fields": {
+        "title": "GaugeRoPE: executable rotary carriers plus residual KV codes",
+        "body": "Anchor shares TTT state across layers with learned read maps. GaugeRoPE retains per-layer token history in low-rank compatible coordinates. Cross-layer sharing and per-token latent compression are different interventions. The retained carrier executes RoPE exactly, but RKV replaces residual position-dependent scores with an unrotated correction. Overall attention remains approximate. PCA uses explicit calibration inputs and does not choose ranks from test answers."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/nov18-gaugerope": {
+      "source_sha256": "afffd7f8f98b7c3c63b7ed640c8cfae58f72ab51a5d0a33432fa56782fba7fea",
+      "reviewed": true,
+      "fields": {
+        "question": "How does it differ from Anchor state sharing?",
+        "answer": "It reduces per-token, per-layer dimensions with frequency structure. Anchor shares recurrent state across layers and needs writer/read-map semantics.",
+        "example": "Equal byte savings do not imply equal information or update behavior."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-11-18/10": {
+      "source_sha256": "efcd85834926978ea0c725f51a147f52a6acbc10202e4175f8d991871bbb3bf7",
+      "reviewed": true,
+      "fields": {
+        "summary": "Anchor shares TTT state across layers with learned read maps. GaugeRoPE retains per-layer token history in low-rank compatible coordinates. Cross-layer sharing and per-token latent compression are different interventions. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:risa": {
+      "source_sha256": "1bc21cd06960ab06d6522900e811f25908e5b78299f08fa6f882aecabeb41f54",
+      "reviewed": true,
+      "fields": {
+        "position": "RISA separates persistent HOT/COLD storage priority from a temporary denoising-block read plan. Unread pages remain stored and can be recovered later. Seed queries score page extrema while protecting initial/recent HOT pages and mandatory recent/current rows.",
+        "tradeoff": "DropKV evicts KV to reduce storage. RISA limits recurring reads while retaining COLD for recovery. Read and storage budgets cannot be exchanged as memory/latency conclusions."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/analysis/9": {
+      "source_sha256": "72e51f9f5ed86ce9c38ce1ccb0542b623da8ef6d1b27a681992a6fc5a2eeb218",
+      "reviewed": true,
+      "fields": {
+        "title": "RISA: recoverable storage and reusable sparse addresses",
+        "body": "DropKV evicts KV to reduce storage. RISA limits recurring reads while retaining COLD for recovery. Read and storage budgets cannot be exchanged as memory/latency conclusions. The maximum is taken after two complete dot products, not the coordinate-wise QUEST bound. Later steps reuse addresses, not attention outputs, and recompute one softmax with current queries/KV. Exact storage does not imply dense-equivalent decoding."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/question/nov18-risa": {
+      "source_sha256": "f4048a71609a48aba068c0f275055435d1c934e9a6b9fa693e765996a1cba3d0",
+      "reviewed": true,
+      "fields": {
+        "question": "Is its budget identical to DropKV eviction?",
+        "answer": "No. RISA retains unselected COLD pages. Its eligible-HOT cap excludes protected, recovered-COLD and mandatory rows.",
+        "example": "A512-page eligible cap does not bound total reads or total storage to512pages."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/update/2026-11-18/9": {
+      "source_sha256": "aefbbb757c240e865b1d9b01a916c23d95d2bfad69f5a75e6ac0b7ad30c22236",
+      "reviewed": true,
+      "fields": {
+        "summary": "DropKV evicts KV to reduce storage. RISA limits recurring reads while retaining COLD for recovery. Read and storage budgets cannot be exchanged as memory/latency conclusions. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/comparison/foundation-models:cascadejepa": {
+      "source_sha256": "aa9a0e82d22797adc4b34c2aceb46b33c26e3fabc772d555c45fe3497ab635c6",
+      "reviewed": true,
+      "fields": {
+        "position": "Better high-level semantics in I-JEPA need not improve geometric correspondence. Two crops share context and EMA target encoders. Stage1zeros masked patch embeddings before adding positions, retaining a full grid; stage2encodes visible patches and predicts with stage1full-grid KV.",
+        "tradeoff": "DuoJEPA translates into the other modality space with differentiable targets. CascadeJEPA uses two image crops and stopped EMA targets. Their target-gradient contracts differ despite the JEPA name."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/analysis/13": {
+      "source_sha256": "0032664dc40a1cbb551171c30706c9639e2f3b1ede48626e317af1c7b583e63b",
+      "reviewed": true,
+      "fields": {
+        "title": "CascadeJEPA: full-grid spatial context for two-stage prediction",
+        "body": "DuoJEPA translates into the other modality space with differentiable targets. CascadeJEPA uses two image crops and stopped EMA targets. Their target-gradient contracts differ despite the JEPA name. Spatial coupling is unidirectional from stage1to stage2. Targets are stop-gradient and updated by EMA; each crop has independent position coordinates. Full-grid encoding does not expose unmasked target pixels or erase positional information."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/question/nov18-cascadejepa": {
+      "source_sha256": "3e345ec34d0e2e6d51939cdf13bcf9a593dc7662e331120a1fcb69853e3dfda7",
+      "reviewed": true,
+      "fields": {
+        "question": "Can DuoJEPA target gradients be reused unchanged?",
+        "answer": "No. CascadeJEPA uses stopped EMA targets; DuoJEPA differentiates its target centroids. Copying that behavior changes the method.",
+        "example": "Target parameters should have no gradient but move through EMA."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/update/2026-11-18/12": {
+      "source_sha256": "ff97d81336b06daa80c6a1c3dd7a07a9d17190c19aa2e2226e67468e6e0e5119",
+      "reviewed": true,
+      "fields": {
+        "summary": "DuoJEPA translates into the other modality space with differentiable targets. CascadeJEPA uses two image crops and stopped EMA targets. Their target-gradient contracts differ despite the JEPA name. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/comparison/multimodal-models:dwd": {
+      "source_sha256": "1ba9a5ab9cfd28cd57756e0616b9635d676e15ca1c29f2f09664882e8c97db87",
+      "reviewed": true,
+      "fields": {
+        "position": "DWD adds a parallel linear pixel head to final DiT features. The original denoising head drives sampling; the pixel head runs only at the last nonzero timestep. Separate pixel-quality and trajectory-anchoring objectives avoid forcing both roles through one output.",
+        "tradeoff": "PixVid transfers a latent DiT to pixel-space inputs/generation with a detailer. DWD retains latent sampling and changes final readout. Pixel output does not mean pixel-space sampling."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/analysis/11": {
+      "source_sha256": "2f9a2c671a340fff6855b887644de8b20afde3ef47d3b74d627084cfbe9988e4",
+      "reviewed": true,
+      "fields": {
+        "title": "DWD: separate final pixel readout from denoising",
+        "body": "PixVid transfers a latent DiT to pixel-space inputs/generation with a detailer. DWD retains latent sampling and changes final readout. Pixel output does not mean pixel-space sampling. Pixel and trajectory terms sample different timestep distributions, accumulating gradients before one optimizer step. Final pixel readout omits CFG because it no longer advances the trajectory. Treating t0as a conventional decoder degrades quality in the paper."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/question/nov18-dwd": {
+      "source_sha256": "fbf64fe9fe90bf96f541123931dc0d50640b05f760d1297d807c305784450561",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from PixVid?",
+        "answer": "PixVid transfers inputs and the pixel generation path. DWD keeps latent denoising and adds a final output head.",
+        "example": "Removing a VAE and adding a linear layer does not supply PixVid timestep mapping or its detailer."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/update/2026-11-18/10": {
+      "source_sha256": "9fb5f3075e7e261189a70f6881ff1da9b92fea4d4b4074209e6d7b835fc362d7",
+      "reviewed": true,
+      "fields": {
+        "summary": "PixVid transfers a latent DiT to pixel-space inputs/generation with a detailer. DWD retains latent sampling and changes final readout. Pixel output does not mean pixel-space sampling. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:beyond-bitwidth": {
+      "source_sha256": "f0832d237a29b954562684810696b03c9b3803cce0ad141b5ff942fe4959aac3",
+      "reviewed": true,
+      "fields": {
+        "position": "A low-bit label establishes neither native execution nor multilingual quality. Separate diagnostic, selection and final sets are frozen. Every fused module is checked for stored weight type, activation policy, kernel, fallback and memory before service-quality gating.",
+        "tradeoff": "AWQ searches activation-aware equivalent channel scales before uniform low-bit weight-only quantization. Beyond Bitwidth studies native B200 formats, mixed-precision allocation and quality/memory/latency gates. Important-channel protection is not module-level format allocation, and a small AWQ output-MSE check is not Blackwell execution evidence."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/analysis/10": {
+      "source_sha256": "b0d52bf61e97fb5b8c3c41c6d46a23496b7ae6772e60c1ef8827cdae0ad2bba3",
+      "reviewed": true,
+      "fields": {
+        "title": "Protecting quantization-sensitive content is not verifying deployment execution",
+        "body": "The reviewed AWQ README uses XW=(XS^-1)(SW) and activation-driven scaling to reduce quantized output error. Its local implementation omits TinyChat kernels, so MSE is not end-to-end throughput. Beyond Bitwidth checks fused-module weight types, activation policies, kernels and fallbacks, then validates service gates on an independent final set. Restoration gains are nonadditive, and activation precision changes jointly with INT8 protection; allocation alone is not isolated. A100 numerical simulation cannot verify native B200 NVFP4 execution."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/question/nov18-beyond-bitwidth": {
+      "source_sha256": "1e9b0a40e100b114d051d11e7b54993767c4c2b23174116c85bc0720b791c304",
+      "reviewed": true,
+      "fields": {
+        "question": "Does lower AWQ output error satisfy Beyond Bitwidth deployment gates?",
+        "answer": "No. Local MSE checks quantization approximation; deployment also requires native packed formats, activation policy, no fallback, memory/latency and independently evaluated service quality.",
+        "example": "Lower W4 layer-output MSE does not establish native B200 execution or Korean quality retention for an8B model."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/update/2026-11-18/10": {
+      "source_sha256": "69b5997cdacf7acd517ddde644396174604fa805ab143c7ad60738ba7448696a",
+      "reviewed": true,
+      "fields": {
+        "summary": "AWQ searches activation-aware equivalent channel scales before uniform low-bit weight-only quantization. Beyond Bitwidth studies native B200 formats, mixed-precision allocation and quality/memory/latency gates. Important-channel protection is not module-level format allocation, and a small AWQ output-MSE check is not Blackwell execution evidence. The existing same-topic representative README was read; the comparison does not change the algorithm or claim cross-paper reproduction results."
+      }
+    },
+    "dive/foundation-models/training-budget/comparison/foundation-models:latent-feedback-scaling": {
+      "source_sha256": "e33d88f625dc1480f4486143fa402a7646dec9fd9c981cb91ecc7f4b58e96f39",
+      "reviewed": true,
+      "fields": {
+        "position": "Latent feedback passes the preceding token top-layer state into the next token input at additional per-token cost. The paper lets a plain Transformer spend the same FLOPs on more epochs, controlling unique data and model scale rather than matching token counts alone.",
+        "tradeoff": "ArchSpace compares architecture/hyperparameter budget surfaces. This paper studies repeated data and feedback compute. Coefficients are not interchangeable, and a predicted loss is not a trained candidate."
+      }
+    },
+    "dive/foundation-models/training-budget/analysis/8": {
+      "source_sha256": "033e35e0458a18b27221e4ef8f009208384308e33afbbf5a6341bccd3edddef3",
+      "reviewed": true,
+      "fields": {
+        "title": "Latent Feedback: matched-compute scaling with repeated data",
+        "body": "ArchSpace compares architecture/hyperparameter budget surfaces. This paper studies repeated data and feedback compute. Coefficients are not interchangeable, and a predicted loss is not a trained candidate. Below one epoch effective data is RU; later repeat value saturates. The capacity multiplier differs from per-token compute cost. Predictions depend on fitted laws and checked extrapolation, not an unconditional claim that more repetition always saves compute."
+      }
+    },
+    "dive/foundation-models/training-budget/question/nov18-latent-feedback-scaling": {
+      "source_sha256": "bc882afe4b3b6c5d639c27c1fee7d5f42a73148b5fee27028c5e8c5138123231",
+      "reviewed": true,
+      "fields": {
+        "question": "Can ArchSpace coefficients be inserted directly?",
+        "answer": "No. The interventions and functional form differ, including repeat saturation and feedback capacity.",
+        "example": "Predicting validation loss does not make parameter count N equal to FLOPs-per-token M."
+      }
+    },
+    "dive/foundation-models/training-budget/update/2026-11-18/7": {
+      "source_sha256": "d3844bc009059e151dedcc11c14db87a436728995d9cf90bf84484fdbf7a2d5e",
+      "reviewed": true,
+      "fields": {
+        "summary": "ArchSpace compares architecture/hyperparameter budget surfaces. This paper studies repeated data and feedback compute. Coefficients are not interchangeable, and a predicted loss is not a trained candidate. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    "dive/post-training/preference-and-alignment/comparison/post-training:ambient-sft": {
+      "source_sha256": "848e092baae16e8eda1f30c84b1576ac149a47d297324276e0a6b28fc7f4fc0e",
+      "reviewed": true,
+      "fields": {
+        "position": "Exact CE and same-position tempered forward KL, frozen teacher and stochastic clean/matching branches; no T-squared multiplier.",
+        "tradeoff": "DPO classifies chosen/rejected reference-relative log ratios. Ambient SFT matches full-vocabulary tempered base distributions on observed tokens; it needs neither preference pairs nor a reward optimization loop."
+      }
+    },
+    "dive/post-training/preference-and-alignment/analysis/4": {
+      "source_sha256": "20c1669e49c26957384128da865ab28152d2917a3d97f816572de9d7510fecb1",
+      "reviewed": true,
+      "fields": {
+        "title": "Why not add the common KD T-squared multiplier?",
+        "body": "The source has no T-squared factor: KL vanishes as temperature grows, recovering SFT. Adding it changes that limit and the temperature-controlled bias–variance trade-off. DPO classifies chosen/rejected reference-relative log ratios. Ambient SFT matches full-vocabulary tempered base distributions on observed tokens; it needs neither preference pairs nor a reward optimization loop. Local boundary: Exact CE and same-position tempered forward KL, frozen teacher and stochastic clean/matching branches; no T-squared multiplier."
+      }
+    },
+    "dive/post-training/preference-and-alignment/question/nov18-ambient-sft": {
+      "source_sha256": "a9643ba43f4f59f119bd29a90fc2b70ef318176024966e0d47480ec186db7189",
+      "reviewed": true,
+      "fields": {
+        "question": "How does its frozen-base constraint differ from DPO?",
+        "answer": "DPO classifies chosen/rejected reference-relative log ratios. Ambient SFT matches full-vocabulary tempered base distributions on observed tokens; it needs neither preference pairs nor a reward optimization loop.",
+        "example": "Teaching example: one SFT sequence without preference labels can define Ambient loss but not a DPO preference pair."
+      }
+    },
+    "dive/post-training/preference-and-alignment/update/2026-11-18/3": {
+      "source_sha256": "5bf97dbc809ab74b59ae3831ee3378d6466f39ac6a5699e9dd6f2d4ffe2aca4e",
+      "reviewed": true,
+      "fields": {
+        "summary": "Exact CE and same-position tempered forward KL, frozen teacher and stochastic clean/matching branches; no T-squared multiplier. The high-cost full experiment is not reproduced; component diagnostics are not capability comparisons."
+      }
+    },
+    "dive/post-training/data-and-budget/comparison/post-training:sh-opd": {
+      "source_sha256": "c9e6087ea63b1d5d28075850d32da0604ad91f49fbfec85a7f2e8210eed569a9",
+      "reviewed": true,
+      "fields": {
+        "position": "Power-survival distribution, one actual generation cap per batch, standard token-mean OPD and implicit position weights; no inverse-probability correction.",
+        "tradeoff": "GRPODropout filters completed rollouts by entropy contribution and does not save that round's generation. SH-OPD samples a shared cap before generation, changing depth exposure and actual budget. Existing Dropout checkpoint negative results also separate formula execution from capability gains."
+      }
+    },
+    "dive/post-training/data-and-budget/analysis/3": {
+      "source_sha256": "b920861de194fb7ccc95df70cf101be833ea7061367e8f93a0c175249bbaccc6",
+      "reviewed": true,
+      "fields": {
+        "title": "Why is inverse-probability debiasing absent?",
+        "body": "SH-OPD retains the original token-mean objective and accepts systematic depth reweighting. Inverse-probability compensation belongs to its comparison STOPD, not this algorithm. GRPODropout filters completed rollouts by entropy contribution and does not save that round's generation. SH-OPD samples a shared cap before generation, changing depth exposure and actual budget. Existing Dropout checkpoint negative results also separate formula execution from capability gains. Local boundary: Power-survival distribution, one actual generation cap per batch, standard token-mean OPD and implicit position weights; no inverse-probability correction."
+      }
+    },
+    "dive/post-training/data-and-budget/question/nov18-sh-opd": {
+      "source_sha256": "acd4f9f1b56b76a8e1db5650d3d7a3f12be974e4bd32ca74c2261d0f4433cb3a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not compare SH-OPD and GRPODropout only by retained sample count?",
+        "answer": "GRPODropout filters completed rollouts by entropy contribution and does not save that round's generation. SH-OPD samples a shared cap before generation, changing depth exposure and actual budget. Existing Dropout checkpoint negative results also separate formula execution from capability gains.",
+        "example": "Teaching example: capping generation at four tokens differs from generating eight then filtering responses; generation costs require separate accounting."
+      }
+    },
+    "dive/post-training/data-and-budget/update/2026-11-18/2": {
+      "source_sha256": "0591eda339cd697309ad78588083b62972cbafdb13aa6607ed5d30565aa97389",
+      "reviewed": true,
+      "fields": {
+        "summary": "Power-survival distribution, one actual generation cap per batch, standard token-mean OPD and implicit position weights; no inverse-probability correction. The high-cost full experiment is not reproduced; component diagnostics are not capability comparisons."
+      }
+    },
+    "dive/post-training/teacher-and-context/comparison/post-training:leaf-opd": {
+      "source_sha256": "0b7f3bbc480e0f4d54928e5a5be841320c9749998eeb6fc400fa22906cd9bf50",
+      "reviewed": true,
+      "fields": {
+        "position": "SS1/SS0.5 persistent-supervision diagnostics, teacher-only privileged-context boundary and separate forget/retain forward KL.",
+        "tradeoff": "Both isolate extra teacher context, but LCS supplies compatible success trajectories to correct failures. LEAF uses non-disclosure context to suppress target facts and a retain branch to preserve utility."
+      }
+    },
+    "dive/post-training/teacher-and-context/analysis/9": {
+      "source_sha256": "fae1a97ae5899163a1336debe08ff209a18ef3fc4a4fc02c41abf08582587688",
+      "reviewed": true,
+      "fields": {
+        "title": "May the privileged context also be given to the student?",
+        "body": "No. The forget teacher sees the non-disclosure instruction; the student only sees the question and its own prefix. The retain teacher is bare. Giving the instruction to the student changes the parameter-unlearning problem. Both isolate extra teacher context, but LCS supplies compatible success trajectories to correct failures. LEAF uses non-disclosure context to suppress target facts and a retain branch to preserve utility. Local boundary: SS1/SS0.5 persistent-supervision diagnostics, teacher-only privileged-context boundary and separate forget/retain forward KL."
+      }
+    },
+    "dive/post-training/teacher-and-context/question/nov18-leaf-opd": {
+      "source_sha256": "4e55cfaced65a269bf82b9e8367ab17193219783298dd2e690a06a8d9f0f0542",
+      "reviewed": true,
+      "fields": {
+        "question": "Is this the same as an LCS teacher-only reference?",
+        "answer": "Both isolate extra teacher context, but LCS supplies compatible success trajectories to correct failures. LEAF uses non-disclosure context to suppress target facts and a retain branch to preserve utility.",
+        "example": "Teaching example: one reference helps finish a task correctly; a forget context requests non-disclosure, so their target directions differ."
+      }
+    },
+    "dive/post-training/teacher-and-context/update/2026-11-18/7": {
+      "source_sha256": "36f1af4e3f055c0558637ce6601b20a52c438ba9a143b38d9b8365353a256e86",
+      "reviewed": true,
+      "fields": {
+        "summary": "SS1/SS0.5 persistent-supervision diagnostics, teacher-only privileged-context boundary and separate forget/retain forward KL. The high-cost full experiment is not reproduced; component diagnostics are not capability comparisons."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/comparison/post-training:streaming-opd": {
+      "source_sha256": "b5a377f2a31f558b60b07c11d47bbd895ca32ff3dd31d66a79a9d57d0abdd62c",
+      "reviewed": true,
+      "fields": {
+        "position": "Full causal prefixes with new-segment loss masks and version tags, unrenormalized teacher-top-k clipped loss and supervision-weighted reduction.",
+        "tradeoff": "OPDLM aligns AR-teacher targets with bidirectional diffusion-student states. Streaming OPD retains causal prefixes and changes delivery/consumption timing. The existing OPDLM candidate diagnostic is not a real diffusion decoder; the new prefix/loss kernel likewise is not asynchronous-service performance evidence."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/analysis/7": {
+      "source_sha256": "645dede71357ca94fb6f2f1c81089bdb3829f9385a786673d1137e21c7bc3683",
+      "reviewed": true,
+      "fields": {
+        "title": "Why can the top-k loss be negative before clipping?",
+        "body": "It sums only teacher-selected top-k entries without renormalizing full-vocabulary probabilities. This is not full KL; the partial sum may be negative, so the implementation floors logs and clips to [0,C]. OPDLM aligns AR-teacher targets with bidirectional diffusion-student states. Streaming OPD retains causal prefixes and changes delivery/consumption timing. The existing OPDLM candidate diagnostic is not a real diffusion decoder; the new prefix/loss kernel likewise is not asynchronous-service performance evidence. Local boundary: Full causal prefixes with new-segment loss masks and version tags, unrenormalized teacher-top-k clipped loss and supervision-weighted reduction."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/question/nov18-streaming-opd": {
+      "source_sha256": "0f1e1742b941f50407a14abe40fab76a07faa0361ef80cbc5bfdc35d89cd89de",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are Streaming OPD and OPDLM not the same state/efficiency optimization?",
+        "answer": "OPDLM aligns AR-teacher targets with bidirectional diffusion-student states. Streaming OPD retains causal prefixes and changes delivery/consumption timing. The existing OPDLM candidate diagnostic is not a real diffusion decoder; the new prefix/loss kernel likewise is not asynchronous-service performance evidence.",
+        "example": "Teaching example: one retains causal prefixes and changes consumption clocks; the other needs bidirectional denoising states. Neither small component establishes throughput or diffusion-generation capability."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/update/2026-11-18/6": {
+      "source_sha256": "d5d45e72cd6d5599ac7a4d5f9113733f38cf5500ab6aab4ad00b18500a873e94",
+      "reviewed": true,
+      "fields": {
+        "summary": "Full causal prefixes with new-segment loss masks and version tags, unrenormalized teacher-top-k clipped loss and supervision-weighted reduction. The high-cost full experiment is not reproduced; component diagnostics are not capability comparisons."
+      }
+    },
+    "dive/post-training/policy-optimization/comparison/post-training:specal": {
+      "source_sha256": "da01059ca92bd724183679e2e679c787d29b028adef9b7842f6bac18ea554e0d",
+      "reviewed": true,
+      "fields": {
+        "position": "Centered Gram spectrum of normalized response representations, mass times effective-rank band-pass, denoised LOO-SVD support and two-level RMS advantage calibration.",
+        "tradeoff": "GRPO uses group reward mean/variance. SpeCal additionally uses pooled hidden-state spectra and LOO support, with batch/group RMS calibration. Replacing a reward standard deviation cannot reproduce it."
+      }
+    },
+    "dive/post-training/policy-optimization/analysis/7": {
+      "source_sha256": "2b38ee908f2b7f92033849ac3834906fb4961fd9a0ccf66a80b5501b0e07d274",
+      "reviewed": true,
+      "fields": {
+        "title": "Why must a rollout not certify itself using a subspace containing itself?",
+        "body": "An outlier may create its own direction. LOO removes the row, centers the others and truncates their SVD using group effective rank before measuring held-out projected energy. GRPO uses group reward mean/variance. SpeCal additionally uses pooled hidden-state spectra and LOO support, with batch/group RMS calibration. Replacing a reward standard deviation cannot reproduce it. Local boundary: Centered Gram spectrum of normalized response representations, mass times effective-rank band-pass, denoised LOO-SVD support and two-level RMS advantage calibration."
+      }
+    },
+    "dive/post-training/policy-optimization/question/nov18-specal": {
+      "source_sha256": "b469053c778d4e8f39744905120821fb15b4acd4fda90291e54e16b83745dffc",
+      "reviewed": true,
+      "fields": {
+        "question": "What is added beyond GRPO group standardization?",
+        "answer": "GRPO uses group reward mean/variance. SpeCal additionally uses pooled hidden-state spectra and LOO support, with batch/group RMS calibration. Replacing a reward standard deviation cannot reproduce it.",
+        "example": "Teaching example: scaling one representation by seven is removed by L2 normalization; changing its direction changes the spectrum and support."
+      }
+    },
+    "dive/post-training/policy-optimization/update/2026-11-18/7": {
+      "source_sha256": "1f3c8ab1a0725b76dc6b06db8698e8be03514bfc54f4c76c27b5f3624f5e4e27",
+      "reviewed": true,
+      "fields": {
+        "summary": "Centered Gram spectrum of normalized response representations, mass times effective-rank band-pass, denoised LOO-SVD support and two-level RMS advantage calibration. The high-cost full experiment is not reproduced; component diagnostics are not capability comparisons."
+      }
+    },
+    "dive/post-training/policy-optimization/comparison/post-training:regularized-score-centering": {
+      "source_sha256": "fcf9ac7bbea4b7921d04f31404518f967e03b6ee13aa4344e0aa5fb58d6b5b53",
+      "reviewed": true,
+      "fields": {
+        "position": "Weighted score centers from independent auxiliary actions, detached TIS weights and reverse-KL gradient estimator with an independent KL cap; not reward centering.",
+        "tradeoff": "RSC uses reverse KL to the behavior distribution that generated the batch and refreshes this reference with the sampler. GRPO commonly uses a more fixed pretrained reference. Behavior probabilities cannot be replaced by another reference's probabilities in importance ratios."
+      }
+    },
+    "dive/post-training/policy-optimization/analysis/8": {
+      "source_sha256": "76b852a3d5510ee5b5e18139b11d2eaf62d152650e11f5c176f692c621ca2117",
+      "reviewed": true,
+      "fields": {
+        "title": "Can TIS and reverse-KL silently share an already clipped ratio?",
+        "body": "No. Sample and auxiliary reward ratios are independently computed and TIS-clipped. The KL term has its own cap. Coefficients are detached in the score surrogate and behavior remains fixed within an inner fit. RSC uses reverse KL to the behavior distribution that generated the batch and refreshes this reference with the sampler. GRPO commonly uses a more fixed pretrained reference. Behavior probabilities cannot be replaced by another reference's probabilities in importance ratios. Local boundary: Weighted score centers from independent auxiliary actions, detached TIS weights and reverse-KL gradient estimator with an independent KL cap; not reward centering."
+      }
+    },
+    "dive/post-training/policy-optimization/question/nov18-regularized-score-centering": {
+      "source_sha256": "af9ed25297278abded75436d198ede48bf9af8c8c21bd4238aaf61ad2c038c55",
+      "reviewed": true,
+      "fields": {
+        "question": "How does its KL differ from ordinary GRPO reference KL?",
+        "answer": "RSC uses reverse KL to the behavior distribution that generated the batch and refreshes this reference with the sampler. GRPO commonly uses a more fixed pretrained reference. Behavior probabilities cannot be replaced by another reference's probabilities in importance ratios.",
+        "example": "Teaching example: with behavior .2 and reference .1, the importance-ratio denominator remains .2."
+      }
+    },
+    "dive/post-training/policy-optimization/update/2026-11-18/8": {
+      "source_sha256": "729e2356fca4363f8812117d31ac9446eba5fa081be72db795906350a55bba57",
+      "reviewed": true,
+      "fields": {
+        "summary": "Weighted score centers from independent auxiliary actions, detached TIS weights and reverse-KL gradient estimator with an independent KL cap; not reward centering. The high-cost full experiment is not reproduced; component diagnostics are not capability comparisons."
+      }
+    },
+    "dive/post-training/preference-and-alignment/comparison/post-training:margin-dynamics-tpo": {
+      "source_sha256": "00335d614137241efff546d84e186ed87747652b73f716a470e59c1a8b127a6d",
+      "reviewed": true,
+      "fields": {
+        "position": "TPO-S label-smoothed sigmoid on length-normalized scores and Appendix-B normalized-Huber TPO-H; finite-attractor and bounded-gradient checks.",
+        "tradeoff": "Both may use label smoothing, but TPO-S uses reference-free length-normalized scores with a margin. DPO uses frozen-reference log ratios; comparing the same epsilon does not align the reference axis."
+      }
+    },
+    "dive/post-training/preference-and-alignment/analysis/5": {
+      "source_sha256": "ca2612b3f8db0c272338c7de61a1df5d3830a5f7b783a4cb42e44463636b7d57",
+      "reviewed": true,
+      "fields": {
+        "title": "What determines the TPO-S attractor?",
+        "body": "Label smoothing balances the two forces at delta*=log((1-epsilon)/epsilon). The original length-normalized score gap must divide by beta and add mu; the margin shift cannot be omitted. Both may use label smoothing, but TPO-S uses reference-free length-normalized scores with a margin. DPO uses frozen-reference log ratios; comparing the same epsilon does not align the reference axis. Local boundary: TPO-S label-smoothed sigmoid on length-normalized scores and Appendix-B normalized-Huber TPO-H; finite-attractor and bounded-gradient checks."
+      }
+    },
+    "dive/post-training/preference-and-alignment/question/nov18-margin-dynamics-tpo": {
+      "source_sha256": "52cc4c4ff3a9debe61421a7f383d9d5313aecc553b3bb18bf746ab55402a6ab6",
+      "reviewed": true,
+      "fields": {
+        "question": "Is TPO-S merely reference-based cDPO?",
+        "answer": "Both may use label smoothing, but TPO-S uses reference-free length-normalized scores with a margin. DPO uses frozen-reference log ratios; comparing the same epsilon does not align the reference axis.",
+        "example": "Teaching example: inserting a DPO reference correction changes the quantity whose TPO-S attractor is controlled."
+      }
+    },
+    "dive/post-training/preference-and-alignment/update/2026-11-18/4": {
+      "source_sha256": "bec27131e222483f58b897ed4bbf4473911873be85dd9e18b73f81c129a945b7",
+      "reviewed": true,
+      "fields": {
+        "summary": "TPO-S label-smoothed sigmoid on length-normalized scores and Appendix-B normalized-Huber TPO-H; finite-attractor and bounded-gradient checks. The high-cost full experiment is not reproduced; component diagnostics are not capability comparisons."
+      }
+    },
+    "dive/post-training/preference-and-alignment/comparison/post-training:ca-zodpo": {
+      "source_sha256": "c8f2beb04b13216de27bf2baa314a39495b49f1e6ce78612ef65eff3d34b54de",
+      "reviewed": true,
+      "fields": {
+        "position": "Power-iteration subspace of chosen/rejected activation differences, rank-normalized two-point finite differences and basis-transported low-rank momentum.",
+        "tradeoff": "No. Each step extracts an activation basis and evaluates positive/negative perturbations. It avoids backpropagation but adds forwards. Time-to-quality needs matched data and model evaluation, not this component check."
+      }
+    },
+    "dive/post-training/preference-and-alignment/analysis/6": {
+      "source_sha256": "1a8cd40519a9be270cb99c7cf3b6b550008fddfe898b81958e9a84acfafc93e1",
+      "reviewed": true,
+      "fields": {
+        "title": "Why divide R A-transpose by square root of rank?",
+        "body": "The factor keeps perturbation scale comparable across ranks. Removing it conflates a larger subspace with a larger search step and changes the source's comparison. No. Each step extracts an activation basis and evaluates positive/negative perturbations. It avoids backpropagation but adds forwards. Time-to-quality needs matched data and model evaluation, not this component check. Local boundary: Power-iteration subspace of chosen/rejected activation differences, rank-normalized two-point finite differences and basis-transported low-rank momentum."
+      }
+    },
+    "dive/post-training/preference-and-alignment/question/nov18-ca-zodpo": {
+      "source_sha256": "ec802665e551e157a80c8f5d569aaab1488a2ec00b2c36f50e879a36393be5b1",
+      "reviewed": true,
+      "fields": {
+        "question": "Does lower memory necessarily make it faster than DPO?",
+        "answer": "No. Each step extracts an activation basis and evaluates positive/negative perturbations. It avoids backpropagation but adds forwards. Time-to-quality needs matched data and model evaluation, not this component check.",
+        "example": "Teaching example: a two-point estimate matches a small quadratic's directional derivative without measuring 1.5B-model wall time."
+      }
+    },
+    "dive/post-training/preference-and-alignment/update/2026-11-18/5": {
+      "source_sha256": "ad06c2b21d6824c155fc62d0ff2519caedaa4b64527a1511d994a3b187041139",
+      "reviewed": true,
+      "fields": {
+        "summary": "Power-iteration subspace of chosen/rejected activation differences, rank-normalized two-point finite differences and basis-transported low-rank momentum. The high-cost full experiment is not reproduced; component diagnostics are not capability comparisons."
+      }
+    },
+    "dive/post-training/reward-and-credit/comparison/post-training:jev-safety-reward": {
+      "source_sha256": "8da2561988b8f9802c6fc166b3d5632e8b24cf2c854c63c1250e2eab6ae02562",
+      "reviewed": true,
+      "fields": {
+        "position": "Confidence gate, held-out calibration threshold, distinct PHR/GPR denominators, prompt-level bootstrap and judge-version revalidation; no commercial judge implementation.",
+        "tradeoff": "Bait transforms rewards from a private probe/policy reward gap. This protocol audits gated misses and temporal changes; it does not automatically flip rewards or treat one reference judge as absolute truth."
+      }
+    },
+    "dive/post-training/reward-and-credit/analysis/8": {
+      "source_sha256": "c35f33e0d8714c5adcc9e283d518ae15b83c882b4850c3e984d4aae37cd55e63",
+      "reviewed": true,
+      "fields": {
+        "title": "Why is rising GPR not sufficient evidence of reward escape?",
+        "body": "GPR divides by remaining harm, whereas PHR divides by all harmful-prompt responses. Known harm can fall faster, increasing the blind-spot share while its amount declines. Escape requires significantly rising PHR and external audit. Bait transforms rewards from a private probe/policy reward gap. This protocol audits gated misses and temporal changes; it does not automatically flip rewards or treat one reference judge as absolute truth. Local boundary: Confidence gate, held-out calibration threshold, distinct PHR/GPR denominators, prompt-level bootstrap and judge-version revalidation; no commercial judge implementation."
+      }
+    },
+    "dive/post-training/reward-and-credit/question/nov18-jev-safety-reward": {
+      "source_sha256": "87caa6f2dbc54e5fd19ef4c6c67ee2ef91e5c677fab0af6945c2370d9f3da094",
+      "reviewed": true,
+      "fields": {
+        "question": "How does it relate to Bait reward-sign flipping?",
+        "answer": "Bait transforms rewards from a private probe/policy reward gap. This protocol audits gated misses and temporal changes; it does not automatically flip rewards or treat one reference judge as absolute truth.",
+        "example": "Teaching example: a PHR interval containing zero calls for S3, not negation of every training reward."
+      }
+    },
+    "dive/post-training/reward-and-credit/update/2026-11-18/7": {
+      "source_sha256": "946be51f9f410a8e566be46d111fe654bd4943bd9add444f9a2ad922c34426ed",
+      "reviewed": true,
+      "fields": {
+        "summary": "Confidence gate, held-out calibration threshold, distinct PHR/GPR denominators, prompt-level bootstrap and judge-version revalidation; no commercial judge implementation. The high-cost full experiment is not reproduced; component diagnostics are not capability comparisons."
+      }
+    },
+    "dive/post-training/reward-and-credit/comparison/post-training:optimistic-verifier-audit": {
+      "source_sha256": "2f44ca5a911d88531888fad195b3911ca9677da38ed38ebcb9166ac675cd5e16",
+      "reviewed": true,
+      "fields": {
+        "position": "Exact MSR antichains on small finite state spaces, causal precision/recall/F1 and proxy selection-error/signed/absolute gaps; no simulated LLM damage claims.",
+        "tradeoff": "No. It audits proxy selection error and reward gaps where truth is enumerable; Bait applies a probe-based defense. Such exact oracles are domain-limited and do not solve general agent truth."
+      }
+    },
+    "dive/post-training/reward-and-credit/analysis/9": {
+      "source_sha256": "f81e86b9a781d4a5e59244dfc13738791b7e5a2505ac3a45421d6ff862155d62",
+      "reviewed": true,
+      "fields": {
+        "title": "Why can sufficiency-only rewards encourage padding?",
+        "body": "Citing every feature may be sufficient while including irrelevant material. The exact reward uses the MSR union for precision and the best individual MSR for recall, so padding lowers precision. No. It audits proxy selection error and reward gaps where truth is enumerable; Bait applies a probe-based defense. Such exact oracles are domain-limited and do not solve general agent truth. Local boundary: Exact MSR antichains on small finite state spaces, causal precision/recall/F1 and proxy selection-error/signed/absolute gaps; no simulated LLM damage claims."
+      }
+    },
+    "dive/post-training/reward-and-credit/question/nov18-optimistic-verifier-audit": {
+      "source_sha256": "9eccd7543ac382e5980927dcc41fd23b5fbfb944ba91b7ce5528f78284da7ace",
+      "reviewed": true,
+      "fields": {
+        "question": "Does it repair rewards like Bait?",
+        "answer": "No. It audits proxy selection error and reward gaps where truth is enumerable; Bait applies a probe-based defense. Such exact oracles are domain-limited and do not solve general agent truth.",
+        "example": "Teaching example: a proxy tie between unequal true rewards contributes .5 selection error, which diagnoses selection distortion rather than observed training damage."
+      }
+    },
+    "dive/post-training/reward-and-credit/update/2026-11-18/8": {
+      "source_sha256": "0795c77b6666a4b844166dd0aa701b233cbe64f01524d9d8b50154055ab8c8b6",
+      "reviewed": true,
+      "fields": {
+        "summary": "Exact MSR antichains on small finite state spaces, causal precision/recall/F1 and proxy selection-error/signed/absolute gaps; no simulated LLM damage claims. The high-cost full experiment is not reproduced; component diagnostics are not capability comparisons."
+      }
+    },
+    "dive/post-training/preference-and-alignment/comparison/post-training:confidence-adaptive-granularity": {
+      "source_sha256": "a6ebaf0be93d07ee1fb506ac1ebe10bd68bb43755f25f5c13144d1ea3342809f",
+      "reviewed": true,
+      "fields": {
+        "position": "20-sample/16-vote consensus on externally verified hierarchies, recognition requiring every coarser level to pass and normalized information utility; no gold-driven consensus target selection.",
+        "tradeoff": "It self-trains granularity from demonstrated knowledge without a chosen/rejected loss. Granola-EQ separately uses mean-token-log-probability recognition against level-matched distractors. A DPO margin cannot replace hierarchical knowledge probing."
+      }
+    },
+    "dive/post-training/preference-and-alignment/analysis/7": {
+      "source_sha256": "0ce9bf5d32f15edb574c9cdd6dd6143a8852f9cea8196e1e4f63aaef26fb95e5",
+      "reviewed": true,
+      "fields": {
+        "title": "Why must the consensus target not be selected from gold?",
+        "body": "Vital Persons chooses the finest value shared by at least sixteen of twenty model responses using agreement, not gold correctness. Fewer than sixteen usable parses are excluded; enough usable responses without consensus yield IDK. It self-trains granularity from demonstrated knowledge without a chosen/rejected loss. Granola-EQ separately uses mean-token-log-probability recognition against level-matched distractors. A DPO margin cannot replace hierarchical knowledge probing. Local boundary: 20-sample/16-vote consensus on externally verified hierarchies, recognition requiring every coarser level to pass and normalized information utility; no gold-driven consensus target selection."
+      }
+    },
+    "dive/post-training/preference-and-alignment/question/nov18-confidence-adaptive-granularity": {
+      "source_sha256": "bc70f32a58bd5100f64b1265b2a5884bcf6959492712f4d56e61e0f523b70ab6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from DPO response-preference alignment?",
+        "answer": "It self-trains granularity from demonstrated knowledge without a chosen/rejected loss. Granola-EQ separately uses mean-token-log-probability recognition against level-matched distractors. A DPO margin cannot replace hierarchical knowledge probing.",
+        "example": "Teaching example: a high-scoring finest answer is not selected if an intermediate coarser level loses to a distractor."
+      }
+    },
+    "dive/post-training/preference-and-alignment/update/2026-11-18/6": {
+      "source_sha256": "d966536992423a7fcd4a0ea2d13983ab7aaf5d98e24d8afc37cc81414f5fa82b",
+      "reviewed": true,
+      "fields": {
+        "summary": "20-sample/16-vote consensus on externally verified hierarchies, recognition requiring every coarser level to pass and normalized information utility; no gold-driven consensus target selection. The high-cost full experiment is not reproduced; component diagnostics are not capability comparisons."
+      }
+    },
+    "dive/post-training/reward-and-credit/comparison/post-training:design-taste-admission": {
+      "source_sha256": "db5732ad844a853dfbcd33e6d6503e3488867668b90ba04feb6330013896a3e8",
+      "reviewed": true,
+      "fields": {
+        "position": "Four admission tests for expert agreement, causal sensitivity, hack resistance and stability; multiplicative V0 hard gates and admitted-score composite reward, not a browser or design judge.",
+        "tradeoff": "Bait detects private-probe reward preferences and flips rewards. This method admits and revalidates candidate judging signals. Probe coverage and expert golden/trap coverage are different assumptions, neither a universal guarantee."
+      }
+    },
+    "dive/post-training/reward-and-credit/analysis/10": {
+      "source_sha256": "a88b0bddc3ef631fa456655cd21378f109f733b133de3e043ed68184a204f92c",
+      "reviewed": true,
+      "fields": {
+        "title": "May the V4 expert panel be added directly to composite reward?",
+        "body": "No. Experts determine signal admission and score blinded canaries. Reward aggregates only function/design/rubric/preference channels, while build/render/anticheat and other V0 gates multiply it. Bait detects private-probe reward preferences and flips rewards. This method admits and revalidates candidate judging signals. Probe coverage and expert golden/trap coverage are different assumptions, neither a universal guarantee. Local boundary: Four admission tests for expert agreement, causal sensitivity, hack resistance and stability; multiplicative V0 hard gates and admitted-score composite reward, not a browser or design judge."
+      }
+    },
+    "dive/post-training/reward-and-credit/question/nov18-design-taste-admission": {
+      "source_sha256": "aa5b0f92f32da8ad92a0f531c64d5d192fcc9c597d389c3c12a31383f68d2ce9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is this distinct from Bait despite both addressing reward hacking?",
+        "answer": "Bait detects private-probe reward preferences and flips rewards. This method admits and revalidates candidate judging signals. Probe coverage and expert golden/trap coverage are different assumptions, neither a universal guarantee.",
+        "example": "Teaching example: expert agreement .99 but trap-failure .21 rejects admission rather than negating the metric."
+      }
+    },
+    "dive/post-training/reward-and-credit/update/2026-11-18/9": {
+      "source_sha256": "6c238182f946636d634029a3fec0854f789e261de8e5cabd74b35665b9df1d62",
+      "reviewed": true,
+      "fields": {
+        "summary": "Four admission tests for expert agreement, causal sensitivity, hack resistance and stability; multiplicative V0 hard gates and admitted-score composite reward, not a browser or design judge. The high-cost full experiment is not reproduced; component diagnostics are not capability comparisons."
+      }
+    },
+    "dive/post-training/reward-and-credit/comparison/post-training:gprm": {
+      "source_sha256": "5773064a4393f4e7153dede2b3a2fe7e678b3f1f085746c18fc0d7f80b772cc3",
+      "reviewed": true,
+      "fields": {
+        "position": "Method and cost review only; no string parser or fixed rule replaces the four-dimensional global PRM.",
+        "tradeoff": "Bait defensively transforms an external probe/policy reward gap, not reasoning-step correctness. GPRM learns a four-axis process model with predicted history and future trajectories. Both require scorer isolation, but neither Bait algebra nor a label parser substitutes for a PRM."
+      }
+    },
+    "dive/post-training/reward-and-credit/analysis/11": {
+      "source_sha256": "e4561d2e287ad0bc65a11c41686c11d2d5ee2f98f70d9d4ac3a3ad0ab57708e8",
+      "reviewed": true,
+      "fields": {
+        "title": "Why is full-trajectory scoring cheaper offline than online?",
+        "body": "Offline diagnosis and best-of-N already have completed candidates. Step-wise search must generate continuations before judging the current step; cost cannot be estimated as ordinary prefix-only PRM scoring. Bait defensively transforms an external probe/policy reward gap, not reasoning-step correctness. GPRM learns a four-axis process model with predicted history and future trajectories. Both require scorer isolation, but neither Bait algebra nor a label parser substitutes for a PRM. Local boundary: Method and cost review only; no string parser or fixed rule replaces the four-dimensional global PRM."
+      }
+    },
+    "dive/post-training/reward-and-credit/question/nov18-gprm": {
+      "source_sha256": "68d2264285fb7099fd6814cde89cedef4de06607a092e8daf48cda4ed95a162b",
+      "reviewed": true,
+      "fields": {
+        "question": "Can GPRM be obtained by adding a label parser to the existing Bait reward-defense component?",
+        "answer": "Bait defensively transforms an external probe/policy reward gap, not reasoning-step correctness. GPRM learns a four-axis process model with predicted history and future trajectories. Both require scorer isolation, but neither Bait algebra nor a label parser substitutes for a PRM.",
+        "example": "Teaching example: Bait reward flipping does not assess consistency of a reasoning step with later derivation; parsing [CORRECT] is not judging it correctly."
+      }
+    },
+    "dive/post-training/reward-and-credit/update/2026-11-18/10": {
+      "source_sha256": "c3eda46b5b5ea60ef228db20822416a7e45cd2638013a7c315415ad0a94648ab",
+      "reviewed": true,
+      "fields": {
+        "summary": "Method and cost review only; no string parser or fixed rule replaces the four-dimensional global PRM. The high-cost full experiment is not reproduced; component diagnostics are not capability comparisons."
+      }
+    },
+    "dive/post-training/preference-and-alignment/comparison/post-training:mpg-dpo": {
+      "source_sha256": "f14b363aaaea1ec74afa0191bd3333f3e17d7b8cbe8d979f5ebb648c56929d9c",
+      "reviewed": true,
+      "fields": {
+        "position": "Review the complete cone, ridge-confidence and nondominated trade-off selection algorithm; a pair selector is not advertised as personalized DPO.",
+        "tradeoff": "No. It is active pair selection with ridge confidence bounds and online cone updates, followed by online DPO. A DPO loss or a heuristic pair picker does not reproduce MPG-DPO."
+      }
+    },
+    "dive/post-training/preference-and-alignment/analysis/8": {
+      "source_sha256": "47f7d22f32d74b2f0bffe92b584ad45a8f345dfcc3c4c8fdef0d276b0d71aeda",
+      "reviewed": true,
+      "fields": {
+        "title": "Is every conflicting new preference discarded?",
+        "body": "Only when every old rule supports the opposite direction beyond tau is it discarded. Zero differences, trivial duals and insufficient survivors also need handling. One opposing rule does not mean unanimous opposition. No. It is active pair selection with ridge confidence bounds and online cone updates, followed by online DPO. A DPO loss or a heuristic pair picker does not reproduce MPG-DPO. Local boundary: Review the complete cone, ridge-confidence and nondominated trade-off selection algorithm; a pair selector is not advertised as personalized DPO."
+      }
+    },
+    "dive/post-training/preference-and-alignment/question/nov18-mpg-dpo": {
+      "source_sha256": "7155e811470412f0314d69b8f49a13117d37b65b8c1fc1fa42a8b9dedebe757a",
+      "reviewed": true,
+      "fields": {
+        "question": "Is the main novelty a new DPO loss?",
+        "answer": "No. It is active pair selection with ridge confidence bounds and online cone updates, followed by online DPO. A DPO loss or a heuristic pair picker does not reproduce MPG-DPO.",
+        "example": "Teaching example: unqueried candidates cannot read oracle scores for filtering; a predictor fitted on historical queried scores must estimate them."
+      }
+    },
+    "dive/post-training/preference-and-alignment/update/2026-11-18/7": {
+      "source_sha256": "79369f4678f486703d27275e00760911085266b0192218805c21dd56ebd5ac77",
+      "reviewed": true,
+      "fields": {
+        "summary": "Review the complete cone, ridge-confidence and nondominated trade-off selection algorithm; a pair selector is not advertised as personalized DPO. The high-cost full experiment is not reproduced; component diagnostics are not capability comparisons."
+      }
+    },
+    "dive/post-training/policy-optimization/comparison/post-training:ash-hint-steering": {
+      "source_sha256": "f775d6071349a2d7d3e33602944ccb6b920933958a82489272db30e3b7b7aaf8",
+      "reviewed": true,
+      "fields": {
+        "position": "Review steering-before-GRPO order, separately normalized hint/plain advantages and final-step no-model-update rule; a DPO formula alone is not an implementation.",
+        "tradeoff": "GRPO removes the critic but still relies on relative rewards within a group. ASH normalizes hinted/plain groups separately, trains activation steering before GRPO and skips the final model update to avoid a stale vector. Existing candidate GRPO success is not hint-free generation capability."
+      }
+    },
+    "dive/post-training/policy-optimization/analysis/9": {
+      "source_sha256": "fb85da930ea65942c632041c28d29391aa80ebb6e0acd0a32c420752994ef11c",
+      "reviewed": true,
+      "fields": {
+        "title": "Why update steering before the model each step?",
+        "body": "The steering loss must fit the model that generated the current hinted/plain samples. Updating the model first makes that relation stale. The final step updates steering only, avoiding a stale returned vector. GRPO removes the critic but still relies on relative rewards within a group. ASH normalizes hinted/plain groups separately, trains activation steering before GRPO and skips the final model update to avoid a stale vector. Existing candidate GRPO success is not hint-free generation capability. Local boundary: Review steering-before-GRPO order, separately normalized hint/plain advantages and final-step no-model-update rule; a DPO formula alone is not an implementation."
+      }
+    },
+    "dive/post-training/policy-optimization/question/nov18-ash-hint-steering": {
+      "source_sha256": "77edc42792e5fccdd742aa3015560ecbd3a3f71054d5711379349d0ffae8d635",
+      "reviewed": true,
+      "fields": {
+        "question": "Does an existing GRPO implementation establish ASH hint-free behavior transfer?",
+        "answer": "GRPO removes the critic but still relies on relative rewards within a group. ASH normalizes hinted/plain groups separately, trains activation steering before GRPO and skips the final model update to avoid a stale vector. Existing candidate GRPO success is not hint-free generation capability.",
+        "example": "Teaching example: separately normalizing hinted/plain groups still requires actual activation-vector training before the model and no model update on the final step."
+      }
+    },
+    "dive/post-training/policy-optimization/update/2026-11-18/9": {
+      "source_sha256": "f5869264b4fb8881555c2d06cde34d2e5a0d42cf890b08458715529d4939e340",
+      "reviewed": true,
+      "fields": {
+        "summary": "Review steering-before-GRPO order, separately normalized hint/plain advantages and final-step no-model-update rule; a DPO formula alone is not an implementation. The high-cost full experiment is not reproduced; component diagnostics are not capability comparisons."
+      }
+    },
+    "dive/post-training/data-and-budget/comparison/post-training:tailroll": {
+      "source_sha256": "440bf3826641b51a5b5f3fbf22e3d5adff6dcde4b980903c3bbf0716749b55c1",
+      "reviewed": true,
+      "fields": {
+        "position": "Review actual multi-engine in-flight migration, one-time re-prefill and partial-output loss masking; no offline scheduler simulation claims system speedups.",
+        "tradeoff": "GRPODropout filters responses after generation using entropy contribution and generally does not save generation. TailRoll may stop a tail response early and mask its partial loss, changing completed samples and system timing."
+      }
+    },
+    "dive/post-training/data-and-budget/analysis/4": {
+      "source_sha256": "29c7a12bb64f6714e3322f32735590c14e76f60266c8e5466c3bc6c7eb229113",
+      "reviewed": true,
+      "fields": {
+        "title": "Does migration simply copy the KV cache?",
+        "body": "It uses stateless in-flight migration: the destination reconstructs state from prompt/generated tokens and resumes after one re-prefill, guarded by costs, reservations, hop limits and post-migration checks. GRPODropout filters responses after generation using entropy contribution and generally does not save generation. TailRoll may stop a tail response early and mask its partial loss, changing completed samples and system timing. Local boundary: Review actual multi-engine in-flight migration, one-time re-prefill and partial-output loss masking; no offline scheduler simulation claims system speedups."
+      }
+    },
+    "dive/post-training/data-and-budget/question/nov18-tailroll": {
+      "source_sha256": "3c5a1f8008d35055dfa076dc41fb155b9e561b602bf3536cbbdaf83b67afc3d4",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from GRPODropout?",
+        "answer": "GRPODropout filters responses after generation using entropy contribution and generally does not save generation. TailRoll may stop a tail response early and mask its partial loss, changing completed samples and system timing.",
+        "example": "Teaching example: a half-finished answer cannot be inserted as a completed incorrect sample while claiming an unchanged GRPO group."
+      }
+    },
+    "dive/post-training/data-and-budget/update/2026-11-18/3": {
+      "source_sha256": "d1f6c7b2c5837098c772cc7cef9ae36696e9e2dbd7b817a5800a5c31a03b3c2a",
+      "reviewed": true,
+      "fields": {
+        "summary": "Review actual multi-engine in-flight migration, one-time re-prefill and partial-output loss masking; no offline scheduler simulation claims system speedups. The high-cost full experiment is not reproduced; component diagnostics are not capability comparisons."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:detourbench": {
+      "source_sha256": "b868d2d85cd11651446bff582bacd672b7ffd8e90d2529dff8299a29bbac0d36",
+      "reviewed": true,
+      "fields": {
+        "position": "Endpoint success conflates direct execution, circuitous success and recoverable near misses. DetourBench restricts tasks to finite deterministic partially observed resource/credential systems. Discovered identifiers remain globally addressable, with no current-location or backtracking charge. An evaluator with the complete graph uses BFS to compute a minimum charged-access reference and replayable witness. This is not the optimal partially observed policy.",
+        "tradeoff": "Controls cover charged invalid/duplicate accesses, terminal batch truncation, partial progress, undefined wrong-terminal measures and the search cap. Three seeds repeat deterministic boundary checks, not independent capability trials. Unlike Harness², this uses a full-information exact evaluator; Harness² performs rubric-free execution contrasts and its selector is not a shortest-path oracle."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/18": {
+      "source_sha256": "c0570422e7d32e83f42b10e52f00d09c0c673494c6d941bbacdee053a3797cbe",
+      "reviewed": true,
+      "fields": {
+        "title": "detourbench: distinguish mechanism from capability",
+        "body": "Every access dispatched to the environment costs one, including invalid, disabled and duplicate calls. Model replies without accesses are free but bounded separately by a turn cap. Batches stop at a terminal state or the fixed budget. Resources and credentials grow monotonically while active. Wrong commitment is absorbing and has no finite residual distance. Conditional attainment must accompany success; successful-subset efficiency alone cannot rank models. Controls cover charged invalid/duplicate accesses, terminal batch truncation, partial progress, undefined wrong-terminal measures and the search cap. Three seeds repeat deterministic boundary checks, not independent capability trials. Unlike Harness², this uses a full-information exact evaluator; Harness² performs rubric-free execution contrasts and its selector is not a shortest-path oracle."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov18-latest-detourbench": {
+      "source_sha256": "d7a2fd01d6b5294432bbfe4989c0cb8ed60997ea0075a703828d452c2366fb4d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from Harness² execution comparison?",
+        "answer": "DetourBench measures a fixed trajectory against a provable offline minimum. Harness² changes a harness through execution contrasts without gold or rubrics. Their objects and information privileges differ.",
+        "example": "Teaching example: choosing an anonymous artifact does not prove its access count was minimal."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-18/18": {
+      "source_sha256": "9666981e047fc732891e1c0cc63a34b0e5e89c7449f6215143b0446e3627f909",
+      "reviewed": true,
+      "fields": {
+        "summary": "FiniteTask executes resource/credential prerequisites, charged batches and exact BFS witnesses. Metrics retain success, wrong terminals, residual distance and efficiency separately. Synthetic graphs test the mechanism, not an LLM; BFS answers are not passed to any policy. Exceeding100,000 states raises an error rather than returning an approximate bound labeled exact. Official source corpora, endpoints and the complete hash-freeze pipeline are absent. Full campaign not reproduced; no capability claim."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:sciresearch-eval": {
+      "source_sha256": "e0f3638958568852ce92843d40a72af3debfe30185537f605db1b3a504b5b2fe",
+      "reviewed": true,
+      "fields": {
+        "position": "An agent designs heating experiments for an unknown material, fits a supplied heat-conduction simulator that may be under-resolved or physically incomplete, and submits95% property intervals plus a hidden-experiment prediction. Small residuals need not imply a correct model: missing physics can yield precise but biased estimates. A richer hidden simulator supplies exact evaluator truth; the actor receives tools, measurements and budgets only.",
+        "tradeoff": "Controls verify the narrow-miss penalty, nonfree widening, invariance to multiplicative unit changes, and rejection of nonpositive/NaN/missing parameters. AskALCF uses answer-blind evidence scopes for attribution; this benchmark scores uncertainty against independent physical truth. Both isolate evaluation references, but their judgments are not interchangeable."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/19": {
+      "source_sha256": "56157da22deb720abf8cadd9fd3ee87f42d363ed0af0f4627407f37af7b1038c",
+      "reviewed": true,
+      "fields": {
+        "title": "sciresearch-eval: distinguish mechanism from capability",
+        "body": "Physical-property intervals use a proper interval score on log10 values: width is penalized and miscoverage adds40 times the missed distance. Hidden temperature predictions are separately normalized by sensor sigma and true temperature rise. These are not one accuracy metric. Missing submissions remain explicit and count as coverage misses in the paper; dropping them would bias evaluation. Controls verify the narrow-miss penalty, nonfree widening, invariance to multiplicative unit changes, and rejection of nonpositive/NaN/missing parameters. AskALCF uses answer-blind evidence scopes for attribution; this benchmark scores uncertainty against independent physical truth. Both isolate evaluation references, but their judgments are not interchangeable."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov18-latest-sciresearch-eval": {
+      "source_sha256": "5f2e5c31747deb461a171bc8d3740b256df3f537baa6dd1a84db503122004afc",
+      "reviewed": true,
+      "fields": {
+        "question": "Is its reference information the same as an AskALCF sufficiency probe?",
+        "answer": "No. This evaluator has exact physical truth. AskALCF sufficiency sees only question and documents, not generation. Each reference and permission boundary must remain separate.",
+        "example": "Teaching example: a scorer may use conductivity truth; the experiment-design actor may not."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-18/19": {
+      "source_sha256": "4411c87fe8038fe9027e6c52914f9f210bd2065ab5bb5440ef08d1aca0182935",
+      "reviewed": true,
+      "fields": {
+        "summary": "The local slice runs interval_score and parameter_score. Positive physical quantities are converted to log10; endpoints, finiteness and exact parameter keys are checked. evaluator_truth has no actor callback path and belongs only to the scorer. No thermal solver, design selection, fitting, scientist LLM or missing-submission aggregation is implemented. This is not a scientific-capability reproduction. Full campaign not reproduced; no capability claim."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:silentguard": {
+      "source_sha256": "840c3f4697759035ab2848a2c9e754311db1ab7b047aee401032eabb02f2ea3d",
+      "reviewed": true,
+      "fields": {
+        "position": "HTTP200 does not establish that an API applied the requested filters. SilentGuard moves checks from optional prompt advice into the execution harness. Results must satisfy invariants, a failing request is actually retried once, and repeated failures lead to withholding or warning according to check reliability. It never invents a repaired value.",
+        "tradeoff": "Controls include a consistent lie that correctly remains undetected, the97/98 clean-example cutoff, unknown-parameter rejection, API-error passthrough, loose-query provenance and bounded rejection. Unlike Harness² policy improvement, this component controls whether evidence may be used; verifiability is not an open-task capability score."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/20": {
+      "source_sha256": "cddcdb9ad4fb9e9be1f8f28399fd3842eab85404f4fe911bd7d5db0add1553cb",
+      "reviewed": true,
+      "fields": {
+        "title": "silentguard: distinguish mechanism from capability",
+        "body": "For every conditioni, count checks testN(F)+N(F without i and not Ci)=N(F without i), requiring up to2k additional queries. Undocumented parameters can be rejected before execution. Exact checks have zero false-alarm estimate; learned contracts use1/(n+2) fromn clean examples and withhold only at a cutoff of1%. Final counts must originate from a sufficiently restrictive checked query; two rejected submissions are followed by abstention. Controls include a consistent lie that correctly remains undetected, the97/98 clean-example cutoff, unknown-parameter rejection, API-error passthrough, loose-query provenance and bounded rejection. Unlike Harness² policy improvement, this component controls whether evidence may be used; verifiability is not an open-task capability score."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov18-latest-silentguard": {
+      "source_sha256": "fcb7873744292936329d5a97095c5ed321c87f3fc08068cf234d24eb6744bfbf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is this not Harness²-style self-improvement?",
+        "answer": "SilentGuard applies fixed release/withhold rules. It does not propose or integrate harness edits; Harness² requires execution contrasts and accumulated experience. They can compose but are not substitutes.",
+        "example": "Teaching example: retrying an API once is not proposing a new tool policy."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-18/20": {
+      "source_sha256": "88134789d2cb99ff0f2719450520366f837a2df2f5f0b2e06b4778935b3d0972",
+      "reviewed": true,
+      "fields": {
+        "summary": "guarded_count actually invokes the API and auxiliary queries, retries the original call once, and removes unverified counts rather than replacing them with zero. action_for_checks implements exact/learned cutoff decisions. AnswerGate tracks filter counts so a looser verified query cannot support a stricter request. The slice omits list checks, contract mining, value swaps, LLMs and training. Full campaign not reproduced; no capability claim."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:metaact": {
+      "source_sha256": "3e8292ed73a0209a3d7a2844c0d787b6850e9d409356beaf8aa04a9621873a6c",
+      "reviewed": true,
+      "fields": {
+        "position": "Natural-language lessons affect preference without guaranteeing that an irreversible action is blocked. MetaAct has an LLM write typed GEAR specifications, compiled by a fixed compiler into deterministic guards. Rejected actions return trigger messages for replanning. Guarantees are local to represented constraints, not full-task safety proofs.",
+        "tradeoff": "Synthetic logs verify restoration after observation changes, blocking already-effective options, rejection for harmful effective/success blocking and refusal to score without positive/negative references. Success and score labels belong only to the replay evaluator; guards receive pre-action View. Unlike Harness² open execution composition, this selects scoped executable constraints. Passing replay does not establish environment benefit."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/21": {
+      "source_sha256": "6f7cb2661f675a4ae4fbe6a744b59cdd75485215caefb7ab65e471ff004aa9f0",
+      "reviewed": true,
+      "fields": {
+        "title": "metaact: distinguish mechanism from capability",
+        "body": "Fixedv1 defines six primitives: ordered_once, no_op_repeat, idempotence_block, revisit_block, generic_deref and relevance_filter, with a fixed extractor menu. Offline training-log replay requires failure coverage≥0.3, effective-action blocking≤0.15 and successful-trajectory blocking≤0.10. The effective-action denominator uses successful and high-scoring failed safety references; intended no-op suppression is not counted as false blocking. Synthetic logs verify restoration after observation changes, blocking already-effective options, rejection for harmful effective/success blocking and refusal to score without positive/negative references. Success and score labels belong only to the replay evaluator; guards receive pre-action View. Unlike Harness² open execution composition, this selects scoped executable constraints. Passing replay does not establish environment benefit."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov18-latest-metaact": {
+      "source_sha256": "13cf533016a2879c66d8a897a8cc86093e8a2fcae0abec4422db84a4bc2b1b04",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a GEAR union be adopted without evaluation unlike Harness² composition?",
+        "answer": "No. Conjunction can block more actions and harm successful traces, so replay is repeated. Harness² likewise executes compositions, but uses a different evidence type.",
+        "example": "Teaching example: recompute eff and ok even when both separate guards passed."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-18/21": {
+      "source_sha256": "d2f6e69f53f29ea39ba7bc88dad6c0870293d9b61caa408a5f2bec01ef82ee48",
+      "reviewed": true,
+      "fields": {
+        "summary": "The local independent slice implements two verified guards, no_op_repeat and idempotence_block, plus Eq2–5 replay scoring and union selection. It omits four primitives, goal extractors, LLM synthesis and online retirement. The safety-reference score threshold must be supplied explicitly; a teaching value of0.5 is not a paper-wide constant. Unknown primitives raise errors. The pinned upstream repository already has more primitives thanv1 and does not redefine the paper. Full campaign not reproduced; no capability claim."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:elite-eval-free": {
+      "source_sha256": "6eaea78f3157d3f785a54b273f73a4778952e0c9f1958eb1db122829e7894233",
+      "reviewed": true,
+      "fields": {
+        "position": "ELITE questions the cost and adaptation bias of repeated downstream evaluate-and-select. With a frozen model, it evolves executable scaffold code: multiple focused hypotheses are independently implemented from one parent and deterministic-valid children are passed to an LLM integrator. It does not select the highest-scoring child.",
+        "tradeoff": "Controls verify identical parent inputs, independent children, edit-scope enforcement, acceptance rollback and strict gate types. Both ELITE and Harness² avoid task rubrics, but Harness² uses task-execution contrasts whereas ELITE excludes downstream outcomes. Ordinary validation elitism must not be relabeled ELITE."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/22": {
+      "source_sha256": "07ed1ddf550c662d3b84930dcac1a2806a2c0f8ca50f072ba89bff5a4e808168",
+      "reviewed": true,
+      "fields": {
+        "title": "elite-eval-free: distinguish mechanism from capability",
+        "body": "The integrator examines code, hypotheses and gate evidence, reasons about complementarity, redundancy, conflict, complexity and missing pieces, then reimplements a combined patch against the original parent. It neither concatenates patches nor uses an already sequentially modified child as the common root. Exploration and stricter acceptance gates check operational validity; downstream solving trajectories and benchmark results never guide evolution. Controls verify identical parent inputs, independent children, edit-scope enforcement, acceptance rollback and strict gate types. Both ELITE and Harness² avoid task rubrics, but Harness² uses task-execution contrasts whereas ELITE excludes downstream outcomes. Ordinary validation elitism must not be relabeled ELITE."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov18-latest-elite-eval-free": {
+      "source_sha256": "dbd95a5437d6370a0c228968fd82b248be80193769154ff1f24d2744ae043c70",
+      "reviewed": true,
+      "fields": {
+        "question": "How does ELITE differ from rubric-free Harness²?",
+        "answer": "Harness² runs tasks and compares behavior; ELITE integrates implementation-level evidence while excluding downstream task outcomes. Rubric-free does not imply identical information boundaries.",
+        "example": "Teaching example: handing ELITE an offspring success-rate table changes the algorithm."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-18/22": {
+      "source_sha256": "e340aa8693a44631ffde68828bb6fa3a61a28efb053f450c6035ea60739efc85",
+      "reviewed": true,
+      "fields": {
+        "summary": "The L0 generation protocol actually calls independent explorer, exploration gate, integrator and acceptance-gate callbacks. A shared parent is immutable; empty/out-of-scope patches and non-Boolean gates are rejected. IntegrationRequest contains only parent and valid children, not scores or solving traces. Failed acceptance or no valid children retains the original parent. Compilation of teaching code is not an LLM, SWE container or security sandbox. Full campaign not reproduced; no capability claim."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:resolution-hypothesis": {
+      "source_sha256": "c7734f7fedaa4f377f725900bafafe8e5e06d1b3975c0b1822484f24992d468c",
+      "reviewed": true,
+      "fields": {
+        "position": "Evolution can stall because a noisy evaluation cannot recognize useful candidates, not because proposals lack improvements. The paper separates repeated-evaluation noise for one artifact from true-quality variation across artifacts produced by independent evolution runs. Fixed-artifact comparisons face the former; method rankings face both.",
+        "tradeoff": "Controls cover noisy identical rows yielding negative tau², noiseless but different run means yielding positive tau², translation invariance and invalid ragged/NaN/Boolean data. Harness² execution contrasts can also be stochastic. These estimators diagnose resolution and are not an automatic promotion gate."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/23": {
+      "source_sha256": "af97b06d051b727c06811e1d9284c1950c77b120a0e66101f1ee36295ed9f2e8",
+      "reviewed": true,
+      "fields": {
+        "title": "resolution-hypothesis: distinguish mechanism from capability",
+        "body": "ForR independent artifacts evaluatedM times each, sigma² is the average within-row sample variance. The unbiased moment estimate of tau² subtracts sigma²/M from the sample variance of row means. It can be negative and must be retained; only the displayed run standard deviation clips to zero. Flattening allRM observations destroys the hierarchy, and more evaluations of one artifact do not replace independent evolution runs. Controls cover noisy identical rows yielding negative tau², noiseless but different run means yielding positive tau², translation invariance and invalid ragged/NaN/Boolean data. Harness² execution contrasts can also be stochastic. These estimators diagnose resolution and are not an automatic promotion gate."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov18-latest-resolution-hypothesis": {
+      "source_sha256": "7aa5bc52f3be209e52f123856fff37e9b22cf965ebe70fed6e7e8f2e76f4bad2",
+      "reviewed": true,
+      "fields": {
+        "question": "Can it replace the Harness² selector?",
+        "answer": "No. It estimates measurement variability, not mechanism compatibility or task fitness. Candidate quality, selection and evaluation resolution are distinct objects.",
+        "example": "Teaching example: a low-variance wrong answer remains wrong."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-18/23": {
+      "source_sha256": "b6ce59b7c926c3bc7bb03a495775d55de600462bd39b0690186b9fefe749e33a",
+      "reviewed": true,
+      "fields": {
+        "summary": "variance_components implements AppendixB.2, returning the negative unbiased run-variance estimate alongside a clipped run SD. It requires a balanced finite matrix of at least2×2. Inputs must be already measured and provenance-backed. The module neither creates agent trajectories, selects candidates, invents variance intervals nor establishes powered superiority. Full campaign not reproduced; no capability claim."
+      }
+    },
+    "dive/agent-research/memory-and-skills/comparison/agent-research:clam-memory": {
+      "source_sha256": "c9b05079a335577d30f2b72b1a363dc85d9f6175877e490a89a3bdcfdee9ef61",
+      "reviewed": true,
+      "fields": {
+        "position": "CLAM separates accumulative parametric memory from verbatim episodic retrieval. A frozen LLM supplies per-layer session activations; a hypernetwork emits down_proj LoRA weights without test-time gradient descent, supplemented by top-five session pieces at query time. No extraction calls does not mean no prior training: capability comes from offline context distillation.",
+        "tradeoff": "CoReMem values memory by future same-repository with/without-memory replay and trains provenance credit. CLAM distills full-history teacher behavior into weights. Prospective utility and a parametric memory channel are different; neither is validated by static summary similarity. Full experiment not reproduced due to cost(reviewDONE)."
+      }
+    },
+    "dive/agent-research/memory-and-skills/analysis/9": {
+      "source_sha256": "fef3ccf233e28d17ec84e5d1ff5f7e797cdbe122c3afd92857f95387e7ffcea2",
+      "reviewed": true,
+      "fields": {
+        "title": "clam-memory: distinguish mechanism from capability",
+        "body": "Read uses nine Perceiver cross-attention blocks with eight latent slots, each reading only session tokens. Carry applies one eight-head slot self-attention block, then one sigmoid gate per slot mixes oldQ with newx and LayerNorm stabilizes it. Decode uses one query per layer/rank pair to produce fixed rank-eight adapters plus a learned fixed bias. Adapter size does not grow with sessions; mean pooling is not a substitute. CoReMem values memory by future same-repository with/without-memory replay and trains provenance credit. CLAM distills full-history teacher behavior into weights. Prospective utility and a parametric memory channel are different; neither is validated by static summary similarity. Full experiment not reproduced due to cost(reviewDONE)."
+      }
+    },
+    "dive/agent-research/memory-and-skills/question/cross-nov18-latest-clam-memory": {
+      "source_sha256": "7c594958ee456e473c9303f29be7b377eaa5645307a130aabf43cddf89a64486",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CLAM differ from CoReMem?",
+        "answer": "CLAM distills full-history answers into parameters. CoReMem uses future-task with/without-memory value for credit. Neither is a cheap stand-in for the other.",
+        "example": "Teaching example: retaining a name does not prove fewer steps on the next repository task."
+      }
+    },
+    "dive/agent-research/memory-and-skills/update/2026-11-18/8": {
+      "source_sha256": "9e7381f95f48ae72b06e910a48e34bc72292660886544ac8501808af4f2a8c76",
+      "reviewed": true,
+      "fields": {
+        "summary": "This is review-only: no executable adapter, metrics or GPU receipt, and no weight/corpus downloads. The record preserves read/carry/decode, two-stage training, rank and retrieval protocols. A forward pass through an untrained random hypernetwork would not reproduce consolidation capability. Full campaign not reproduced; no capability claim."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:skillbuffbench": {
+      "source_sha256": "c179f1b8049d385eba0ccb7e91537aa166425d63494cc7a2005d4a1a8b3fba8a",
+      "reviewed": true,
+      "fields": {
+        "position": "Hand-picking the right skill measures a curated upper bound, not deployed discovery. SkillBuffBench crosses three access levels(none, curated, automatic) with two memory modes under fixed task/model/harness configurations, separating content benefit, discovery loss and memory interactions. Exact model and harness versions belong to each result cell.",
+        "tradeoff": "Harness² generates and improves execution harnesses. SkillBuffBench measures paired differences across harness, model, access and memory conditions. Exposing test verifiers to improvement changes their information boundaries. Curated access must not be advertised as automatic discovery capability."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/24": {
+      "source_sha256": "84b87bb77b89fe290d7da9f935f57bdf84336ba6409dbc3c41e81766113e2572",
+      "reviewed": true,
+      "fields": {
+        "title": "skillbuffbench: distinguish mechanism from capability",
+        "body": "M0 resets workspace, session and memory namespace for every run; caches and history are not shared. API credentials may be reused. Prompts do not name skills, and gold values, references and verifiers are withheld. Network access defaults to model APIs with task-specific service allowlists. Unreleased skill contents cannot be reconstructed from purpose descriptions and called equivalent. Harness² generates and improves execution harnesses. SkillBuffBench measures paired differences across harness, model, access and memory conditions. Exposing test verifiers to improvement changes their information boundaries. Curated access must not be advertised as automatic discovery capability."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov18-latest-skillbuffbench": {
+      "source_sha256": "b586ade55de4396315c66a14d40dc20dbd8079936781dcceb623f5c71513c768",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is it not the same experiment as Harness²?",
+        "answer": "It holds configuration fixed while varying access and memory; Harness² actively edits a harness and accumulates experience. Evolution artifacts and evaluation factors are distinct.",
+        "example": "Teaching example: installing new skills changes a supposedly fixed benchmark cell."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-18/24": {
+      "source_sha256": "fb6ac51135fde2c2cabbad74d19534b9da75ecab0d5c097d83d879f8582e15ba",
+      "reviewed": true,
+      "fields": {
+        "summary": "Review-only: no model matrix, task reconstruction or metrics. The full3,168 API runs and partly proprietary collaborator skills prevent cheap faithful reproduction. Protocol and availability limits are reviewDONE; skill-purpose descriptions are not skill implementations. Full campaign not reproduced; no capability claim."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:gandalf-bvb": {
+      "source_sha256": "1b233d5e0ca92187cf3aefe69141aa69884a78e0b49677c4443bce16400bea4d",
+      "reviewed": true,
+      "fields": {
+        "position": "Complex deliverables include spreadsheets, slides and application state. Flattening them loses formulas, layout and cross-file links. This paper studies verifiers rather than a new task-solving actor. BVB contains2,464 human-labeled criteria over24 investment-banking tasks to meta-evaluate verifier judgments.",
+        "tradeoff": "AskALCF separates answer quality from retrieval sufficiency for attribution. Gandalf judges completed deliverables against rubrics. Both need independent evidence but their roles differ. Judge snapshots must not become actor-visible gold, and judges must not write artifacts. Full multi-task/API evaluation is not reproduced due to cost(reviewDONE)."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/25": {
+      "source_sha256": "c93b7480b66bd83f4b9d3911892bc2dc580b797aac49419b02bd14d27bbdbca0",
+      "reviewed": true,
+      "fields": {
+        "title": "gandalf-bvb: distinguish mechanism from capability",
+        "body": "Gandalf reactively chooses native artifacts and tools needed for each rubric criterion until it returns a Boolean verdict. Environment alignment supplies read-only frozen-snapshot tools; corpus-wide domain guidance supplies banking conventions, not task answers. The judge must not mutate the artifact and then pass its own repaired result. AskALCF separates answer quality from retrieval sufficiency for attribution. Gandalf judges completed deliverables against rubrics. Both need independent evidence but their roles differ. Judge snapshots must not become actor-visible gold, and judges must not write artifacts. Full multi-task/API evaluation is not reproduced due to cost(reviewDONE)."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov18-latest-gandalf-bvb": {
+      "source_sha256": "b8e1dbe088aa7d6303936d6dfa30bfdf9ad620fdd128ae140e5b312d3f895aa6",
+      "reviewed": true,
+      "fields": {
+        "question": "Can it reuse AskALCF probe labels directly?",
+        "answer": "No. Deliverable criteria differ from answer-blind document sufficiency. Questions, references and permissions are different.",
+        "example": "Teaching example: an available citation does not prove the slide contains the correct chart."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-18/25": {
+      "source_sha256": "311dc23b51f1a76d3219c0fb02f612993559e964d4f38db04114547de7c3f0e4",
+      "reviewed": true,
+      "fields": {
+        "summary": "Review-only: no empty schema is offered as a reactive verifier, no paid model is called and no native banking environment is rebuilt. Official Gandalf and BVBv1.0 repositories support a future explicitly budgeted study, but their complete runtime permissions were not audited or executed here. Full campaign not reproduced; no capability claim."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:self-organized-learning": {
+      "source_sha256": "c7abc600ad36767796a83ccee5f5d76961542a198f15ceb4da57df17a86b5866",
+      "reviewed": true,
+      "fields": {
+        "position": "Instead of prescribing a GEPA-style optimization loop, this study gives a frozen teacher a general improvement goal, file/Bash/gameplay primitives and resource budgets. It may create games, inspect ephemeral players and edit text artifacts, choosing when to explore, compare and update. Real games and external benchmark labels are excluded from teacher training access.",
+        "tradeoff": "ELITE prescribes explore-then-integrate while excluding downstream outcomes; this study deliberately omits an imposed optimization loop and lets the teacher choose learning actions. Harness² has its own predefined Propose–Probe–Compose. A scaffold protocol can support research without reproducing emergent learning capability. Full multi-model long-rollout evaluation is not reproduced due to cost(reviewDONE)."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/26": {
+      "source_sha256": "dab717cd0860cb60fb53d907e6a237c2ee064696d2ee60d717a88c10909dfc17",
+      "reviewed": true,
+      "fields": {
+        "title": "self-organized-learning: distinguish mechanism from capability",
+        "body": "A teacher organizes learning within a persistent session; each player uses a fresh session and current text artifacts. Weights remain fixed. The paper analyzes emergent curricula, difficulty selection and A/B testing and tests transfer across game horizons, mechanics and3D navigation. Feedback on self-generated games is not access to final external test labels. ELITE prescribes explore-then-integrate while excluding downstream outcomes; this study deliberately omits an imposed optimization loop and lets the teacher choose learning actions. Harness² has its own predefined Propose–Probe–Compose. A scaffold protocol can support research without reproducing emergent learning capability. Full multi-model long-rollout evaluation is not reproduced due to cost(reviewDONE)."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov18-latest-self-organized-learning": {
+      "source_sha256": "1c1dc35c73c225faedf0e9a2e231a0232d2bf4cd634e80816954f162e921e5db",
+      "reviewed": true,
+      "fields": {
+        "question": "Is this the same as ELITE evaluation-free evolution?",
+        "answer": "No. ELITE prescribes same-parent exploration and code integration without downstream results. Here teachers organize learning from self-generated-game feedback. Interventions and feedback permissions differ.",
+        "example": "Teaching example: forcing seven-child integration changes the free self-organization setting."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-18/26": {
+      "source_sha256": "fbdaabbfacab7c9ff7878eee0f3d0f3c789d3e67677e5c462b59104e86892976",
+      "reviewed": true,
+      "fields": {
+        "summary": "Review-only. A scripted curriculum or fixed-answer game is not substituted for self-organized behavior; no Bash agent or paid gameplay is launched. The fixedv1 method, budgets, permissions and official project are recorded, while an unverified source repository remains explicitly unverified. Full campaign not reproduced; no capability claim."
+      }
+    },
+    "dive/recommendation/retrieval-matching/comparison/recommendation:yuanbao-rubric": {
+      "source_sha256": "a1d2975db0563f8cf0755d7b9f122618305066ae8395e1be5be4fa2237a1d347",
+      "reviewed": true,
+      "fields": {
+        "position": "Pointwise relevance need not supply useful evidence for downstream reasoning. Yuanbao builds query-specific weighted positive and negative rubrics, distills labels for retrieval and four-head ranking, and trains subset selection with set-level rewards. Below-mean rollouts imitate the best in-group trajectory with reward-gap weights instead of receiving negative-advantage suppression.",
+        "tradeoff": "WeSearch narrows candidates using clusters and atomic document matching; Yuanbao aligns upstream labels with final subset rewards. They are not the same SID/retrieval architecture, and neither local ADC nor the dual-branch loss replaces end-to-end search validation."
+      }
+    },
+    "dive/recommendation/retrieval-matching/analysis/4": {
+      "source_sha256": "22ae31c49ff0df224115a8b5d58699373e60d0832b66a397011da31a03687ea4",
+      "reviewed": true,
+      "fields": {
+        "title": "yuanbao-rubric: distinguish mechanism from capability",
+        "body": "Sections2.1 and Eqs4–6 are implemented. Positive criteria can be covered collectively and any document can trigger a deduction. Focal pairwise ranking uses a label-gap minus score-gap hinge, not ordinary CE. Each selection branch has its own mean; poor-rollout weights multiply the same best-trajectory token NLL. Padding, empty branches and tied zero updates are preserved. Reference KL is an explicit caller input, not an invented estimator. WeSearch narrows candidates using clusters and atomic document matching; Yuanbao aligns upstream labels with final subset rewards. They are not the same SID/retrieval architecture, and neither local ADC nor the dual-branch loss replaces end-to-end search validation."
+      }
+    },
+    "dive/recommendation/retrieval-matching/question/cross-nov18-latest-yuanbao-rubric": {
+      "source_sha256": "6ff576f3a3c1ca9f84066eed91d6ec8f0cba7e9e3c544ca606826872f1c63cef",
+      "reviewed": true,
+      "fields": {
+        "question": "Does Yuanbao change the same layer as WeSearch?",
+        "answer": "No. It aligns utility supervision and subset selection; WeSearch primarily changes atomic matching within cluster-constrained candidates.",
+        "example": "Teaching example: correct ADC distances do not prove a final evidence set is nonredundant, complete or current."
+      }
+    },
+    "dive/recommendation/retrieval-matching/update/2026-11-18/3": {
+      "source_sha256": "94794af706981a6529d877f333eedd35ad6fe972070473c8f0093e7f7f84fecf",
+      "reviewed": true,
+      "fields": {
+        "summary": "No rubric generator, DeepSeek judge, Qwen encoder or real search is run. Diagnostics check best-trajectory imitation gradients, absent poor-trajectory imitation gradients, detached rewards and zero padding gradients; these are not answer-accuracy scores. Full experiments are not reproduced due to high cost; no capability or Evolve-promotion claim."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/comparison/recommendation:cotti": {
+      "source_sha256": "1c423d02f81710a64354a169bfc49d2400b8a35245ea55fe4cc3793c13519cd6",
+      "reviewed": true,
+      "fields": {
+        "position": "COTTI separates historical preference continuity during training from promotion-time probability correction. CPC uses a differentiable consistency gate on regular/promotion views, RW weights examples by standardized historical distance with stopped gradients, and ABA adds an event- and head-variance-dependent bounded correction to fixed predictor logits.",
+        "tradeoff": "BAFF filters logs for bidding-policy interference; COTTI changes promotion-example influence using historical distance. Neither weighting/filtering automatically yields causal unbiasedness, and COTTI calibration does not establish uncontaminated A/B logs."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/analysis/3": {
+      "source_sha256": "d0bb42e74b6100206c205171740081386efbc2e1987af36e2c10b0f770ec156d",
+      "reviewed": true,
+      "fields": {
+        "title": "cotti: distinguish mechanism from capability",
+        "body": "Eqs6–16 are retained: CPC gates raw representation distances and remains differentiable. RW is neither clipped nor mean-normalized; weights are positive influence factors, not reliability probabilities. ABA uses population variance of repeated head-only dropout logits, not full-encoder uncertainty. The event center is announced beforehand, width comes from history and amplitude is selected on validation. The correction only increases scores and cannot fix overprediction. BAFF filters logs for bidding-policy interference; COTTI changes promotion-example influence using historical distance. Neither weighting/filtering automatically yields causal unbiasedness, and COTTI calibration does not establish uncontaminated A/B logs."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/question/cross-nov18-latest-cotti": {
+      "source_sha256": "d0e9871debc2ac61130e369e7c4e8671c3eda6949bf1ec5ca5a6f0517e83fca0",
+      "reviewed": true,
+      "fields": {
+        "question": "Can COTTI replace BAFF interference handling?",
+        "answer": "No. Historical distance is not counterfactual exposure/interference evidence; promotion calibration and polluted experiment logs are different problems.",
+        "example": "Teaching example: online HDR and offline TEN are different controls, not interchangeable causal baselines."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/update/2026-11-18/2": {
+      "source_sha256": "1347a62571e9810c7de9bab34784d346ef2f28f8369a08bd4f8c141857a75e2d",
+      "reviewed": true,
+      "fields": {
+        "summary": "Only CPC/RW/ABA tensors run locally, without history construction, missing-regular-view fallback or serving fusion. The author-reported decline in paid-item recall for novel categories is retained; aggregate AUC does not erase the discovery trade-off. Full experiments are not reproduced due to high cost; no capability or Evolve-promotion claim."
+      }
+    },
+    "dive/recommendation/retrieval-matching/comparison/recommendation:intentflow": {
+      "source_sha256": "27e3a254d2618b26c3b0458e0845a55bfa315c219260f17c10b16bedab46143e",
+      "reviewed": true,
+      "fields": {
+        "position": "Finding an exact item, styling an outfit and seeking usage information require different evidence even for the same image. IntentFlow unifies intent hierarchy, verified three-grade relevance, agentic data construction, multimodal retrieval and intent-conditioned reranking. After indexing, query-only upper-layer LoRA and six-expert residual projections avoid recomputing the document corpus.",
+        "tradeoff": "WeSearch constrains candidates by clusters and atomic matching; IntentFlow defines evidence required by the request and adapts query encoding to a fixed document space. Candidate organization and intent-supervised representations differ, and component gradients prove neither online lift."
+      }
+    },
+    "dive/recommendation/retrieval-matching/analysis/5": {
+      "source_sha256": "b4658d7294c5a1c9e3447d5f260d7f29f7445ee83e646cc06737569a017fefda",
+      "reviewed": true,
+      "fields": {
+        "title": "intentflow: distinguish mechanism from capability",
+        "body": "Eqs16,18–21 and24 are implemented: one query gate mixes two shared-bottleneck branches (paper ranks8/64), retaining a frozen base projection. Both distillation directions share valid candidate sets and detach the teacher. CSLS subtracts only offline document density relative to a training-query bank. Zero-initialized up projections are a local stability convention, not an initialization specified by the paper or a complete model recipe. WeSearch constrains candidates by clusters and atomic matching; IntentFlow defines evidence required by the request and adapts query encoding to a fixed document space. Candidate organization and intent-supervised representations differ, and component gradients prove neither online lift."
+      }
+    },
+    "dive/recommendation/retrieval-matching/question/cross-nov18-latest-intentflow": {
+      "source_sha256": "34926ed6e44159cf73b12ae4b16c121cce6a88ed43173297909f1d3eac1273b6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does it differ from WeSearch cluster constraints?",
+        "answer": "Fixed-index adaptation changes how a query maps into existing document space; cluster constraints organize candidates. They can combine but are not substitutes.",
+        "example": "Teaching example: changing query residuals with bitwise-unchanged documents proves only the fixed-index interface."
+      }
+    },
+    "dive/recommendation/retrieval-matching/update/2026-11-18/4": {
+      "source_sha256": "8d0a5eee560e263de4b8645424f2d330fee72f7cdecc077f058fd08b8cc6fd64",
+      "reviewed": true,
+      "fields": {
+        "summary": "Inputs are externally supplied fused features and candidate scores. No rules impersonate the0.8B recognizer, and the full LoRA/VLM, agentic verification or NDCG-weighted training chain is absent. Unchanged document tensors in diagnostics do not establish improved semantic retrieval. Full experiments are not reproduced due to high cost; no capability or Evolve-promotion claim."
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:simq": {
+      "source_sha256": "cc1022e1d1e04d3fd2ec81396c10fb6ca84400aa64d70ba4e0ac98b69fff774f",
+      "reviewed": true,
+      "fields": {
+        "position": "ColBERT-style MaxSim matches every query token to document tokens. SIMQ samples initial aggregation points, assigns residual tokens through a temporary graph, recursively splits oversized clusters, normalizes their means and builds one centroid graph. Queries navigate to a few centroids, collect documents through membership maps and access original tokens only for exact candidate reranking, avoiding a full query-by-centroid matrix.",
+        "tradeoff": "HVMap handles incompatible encoder spaces through hub mappings and native/mapped SCORE2 reranking. SIMQ assumes one normalized token space and changes graph organization and late-interaction computation. SIMQ hit counts do not validate mapping quality, and HVMap tensor losses do not establish graph efficiency."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/12": {
+      "source_sha256": "554f20278f6476e26f4241448e58b2af3938c2c194968ddf85638f07a3989eb2",
+      "reviewed": true,
+      "fields": {
+        "title": "simq: distinguish mechanism from capability",
+        "body": "SectionIII/Algorithms1–2 retain sampling, graph-guided assignment, deferred splitting, normalized centroids, token-wise candidates and exact MaxSim reranking. SIMQ+ in SectionV/Algorithm3 counts distinct document membership in each raw token pool without TopDocs truncation. All boundary-count ties are retained, so the pool may exceedNmin. The local Index uses exact finite kNN graph construction and bounded Lloyd splitting instead of scalable HNSW/VSAG backends; this is an explicit small-data deviation, not an industrial build/QPS reproduction. HVMap handles incompatible encoder spaces through hub mappings and native/mapped SCORE2 reranking. SIMQ assumes one normalized token space and changes graph organization and late-interaction computation. SIMQ hit counts do not validate mapping quality, and HVMap tensor losses do not establish graph efficiency."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/cross-nov18-latest-simq": {
+      "source_sha256": "f2c7f70059b2fc444fdca929fda156107b770a4ec096d03a2929bfddb2873fd1",
+      "reviewed": true,
+      "fields": {
+        "question": "Can SIMQ replace HVMap heterogeneous-space alignment?",
+        "answer": "No. SIMQ changes candidate indexing within one token space; HVMap learns cross-space mappings.",
+        "example": "Teaching example: equal vector dimensionality does not make two encoders comparable by SIMQ inner products."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-11-18/11": {
+      "source_sha256": "420e8e0bf01f58b55ca4e8d7f8554537bc4b9b2e9b5ec39522f25be40beec94d",
+      "reviewed": true,
+      "fields": {
+        "summary": "No ColBERT encoder, million-token index, residual compression, full HNSW or fair throughput experiment is supplied. Repeated seeds do not turn random vectors into semantic evaluation. SIMQ+ preserves the complete boundary tie group, so the rerank argument is not its hard candidate cap. The full five-dataset campaign is not reproduced due to cost(reviewDONE). Full experiments are not reproduced due to high cost; no capability or Evolve-promotion claim."
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:unigraph": {
+      "source_sha256": "b0dd0079d06017aeae18a911036cd5cde5ab50a8e846e540577210ca8d9f80ba",
+      "reviewed": true,
+      "fields": {
+        "position": "Separate dense/sparse retrieval can prematurely discard vectors that are strong only under their combined distance. UniGraph takes neighbors under multiple sampled alpha values and frequency-merges them into one bounded-degree graph. Queries traverse it with their own alpha without rebuilding. Sparse or dense guides supply entry points to reduce hybrid-distance work near the target region.",
+        "tradeoff": "HVMap learns representation mappings across heterogeneous databases. UniGraph does not learn a new mapping; it retains dense/sparse components and changes neighborhoods across weights. SCORE2 native/mapped weights and UniGraph semantic/lexical alpha have different meanings and are not interchangeable."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/13": {
+      "source_sha256": "a7fe661cbae457effddd026bb43e58a3449437e0817689bc34c3812b9b259381",
+      "reviewed": true,
+      "fields": {
+        "title": "unigraph: distinguish mechanism from capability",
+        "body": "Algorithm1 takes top-kg neighbors peralpha and retainsM by occurrence frequency. Algorithm2 maintains candidate and ef-sized result sets under query-specific hybrid distance. Dense-first pruning uses a Cauchy–Schwarz norm bound to avoid some sparse inner products: gamma=1 is a safe lower bound, while gamma<1 is a more aggressive estimate without that guarantee. Main experiments usegamma=0.3; local controls usegamma=1 against unpruned beam results. The guide is dense abovealpha0.5 and sparse otherwise;0.5 is the paper’s comparable-scale convention. HVMap learns representation mappings across heterogeneous databases. UniGraph does not learn a new mapping; it retains dense/sparse components and changes neighborhoods across weights. SCORE2 native/mapped weights and UniGraph semantic/lexical alpha have different meanings and are not interchangeable."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/cross-nov18-latest-unigraph": {
+      "source_sha256": "b3d07248ead0b1fbeb8e82cba2aaea7ae4051706f7133e38c3d7b8e3c696a530",
+      "reviewed": true,
+      "fields": {
+        "question": "Is UniGraph alpha the HVMap native weight?",
+        "answer": "No. It mixes dense/sparse distances, whereas HVMap weights native/mapped scores.",
+        "example": "Teaching example: raisingalpha does not mean trusting a candidate’s own database more."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-11-18/12": {
+      "source_sha256": "65cb50b035edcdaf5aca1f937dfcae3b5e28bead046012737371ad5455c55fcb",
+      "reviewed": true,
+      "fields": {
+        "summary": "Exact all-pairs construction and exact guide lookup are finite diagnostic backends, not the scalable C++ candidate builders. BGE-M3 encoding, SINDI, million-vector indexes and QPS comparisons are absent. Safe pruning is relative to the same beam insertion rule and does not imply globally complete ANN recall; gamma<1 retains explicit risk. The full campaign is not reproduced due to cost. Full experiments are not reproduced due to high cost; no capability or Evolve-promotion claim."
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:dealrank": {
+      "source_sha256": "79bb3418751e48fccdcdedeac96cce96c53ed25f96d3c1487cd19bfa903477b5",
+      "reviewed": true,
+      "fields": {
+        "position": "Parallel listwise reranking splits candidates into groups with fixed advancement quotas. Contiguous chunks crowd strong retriever-prefix documents into one group, so a better retriever can suffer more quota cuts. DealRank deals candidates round-robin by retriever rank to balance every prefix, then ranks groups concurrently and advances quotas into a final merge without repair certification.",
+        "tradeoff": "HVMap changes cross-space candidate mapping/scoring. DealRank does not train representations; it schedules existing candidates into ranker calls. They can compose in a retrieval pipeline, but fewer calls do not establish better alignment, and correct SCORE2 does not prove lossless listwise quotas."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/14": {
+      "source_sha256": "0d9e718a9dbc989b63da7ac48c6a2195f5fdc088b3583db1ccf0aaa54ac440f7",
+      "reviewed": true,
+      "fields": {
+        "title": "dealrank: distinguish mechanism from capability",
+        "body": "For100 candidates, Section2.1 uses five hands of20, keeps four per hand and reranks the final20: six calls in two rounds. A consistent ranker guarantees only topq=4 recovery, not top10. The500 schedule is25 hands keeping three then four keeping five; the1,000 schedule is50 keeping two then five keeping four, both three rounds. Later eliminations precede earlier ones. Real ThreadPool calls must return an exact permutation of their input IDs; this tests schedules, not LLM ranking quality. HVMap changes cross-space candidate mapping/scoring. DealRank does not train representations; it schedules existing candidates into ranker calls. They can compose in a retrieval pipeline, but fewer calls do not establish better alignment, and correct SCORE2 does not prove lossless listwise quotas."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/cross-nov18-latest-dealrank": {
+      "source_sha256": "18c5d2000223de1fc11d05be72a1d5148206991eadd0b182230d5013f36605aa",
+      "reviewed": true,
+      "fields": {
+        "question": "Can it replace HVMap dual-space reranking?",
+        "answer": "No. DealRank determines which candidates share a comparison; HVMap defines comparable cross-encoder scores.",
+        "example": "Teaching example: dealing cannot align incompatible embeddings."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-11-18/13": {
+      "source_sha256": "a16b8b11f69bbffe8f850533a542032f4083fc99cc1f830aed7604548cedaa17",
+      "reviewed": true,
+      "fields": {
+        "summary": "The local ranker is a deterministic consistent callback, not a model. true_top is evaluator-only in quota_cuts and never enters schedule. There is no RankGPT prompt, token-cost or API-latency measurement; call accounting proves neither NDCG nor speed. The author links mixedbread-ai/dealrank, but repository/main-commit API checks return404 on2026-11-18; public source and license are unverified and no external code is executed. Full multi-model/27B timing is not reproduced due to cost. Grouping and final survivor order must follow the paper’s hierarchical schedules rather than a generic top-k shortcut. Full experiments are not reproduced due to high cost; no capability or Evolve-promotion claim."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:efficient-evals-tensor": {
+      "source_sha256": "1b9a7cfdf5e6456941d431d62e008b4da94451c7d8fe0a7431c3a3be7f6a78e7",
+      "reviewed": true,
+      "fields": {
+        "position": "A low-rank CP model factorizes capabilities across models, prompts and raters. Many cheap autorater labels learn shared representations; a small human calibration set then fits only the human rater vector and ordered cutoffs with those features frozen. This preserves prompt heterogeneity and rater differences rather than treating one automated judge as human truth. November16 is the new Google repository release, not first publication: arXivv1 was posted March2,2026 at16:12:46UTC.",
+        "tradeoff": "ProEval builds a GP prior from historical per-item scores and actively chooses the next evaluation. This paper learns model/prompt features from multiple cheap raters and aligns them to humans. Active posterior sampling is not rater-bias calibration, and conditional intervals do not automatically cover shared-feature estimation error."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/analysis/14": {
+      "source_sha256": "6b82ca2a83667fb9eca5b9abad27144ab70c56cbdf676f1d9cd1193139d70980",
+      "reviewed": true,
+      "fields": {
+        "title": "efficient-evals-tensor: distinguish mechanism from capability",
+        "body": "Section3 uses an ordinal likelihood for single-sided scores and paired capability differences, including ties; endpoint categories useCDF boundaries0/1. Stage2 sends gradients only to the human vector/cutoffs while model/prompt factors stay frozen. Conditional Wald intervals assume high-precision fixed stage1 features and use Bonferroni for multiple comparisons; asymptotic covarianceSigma is divided bym. Optional all-parameter human fine-tuning can help prediction but invalidates these intervals, so both claims cannot be combined. ProEval builds a GP prior from historical per-item scores and actively chooses the next evaluation. This paper learns model/prompt features from multiple cheap raters and aligns them to humans. Active posterior sampling is not rater-bias calibration, and conditional intervals do not automatically cover shared-feature estimation error."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/cross-nov18-latest-efficient-evals-tensor": {
+      "source_sha256": "cceda1bba330c509a27e1f44e1ed5be16942c31c240832bc4329b868cd35d80b",
+      "reviewed": true,
+      "fields": {
+        "question": "Is it the same method as cost-saving ProEval?",
+        "answer": "No. ProEval actively selects target items and updates a GP, while this model calibrates raters to human judgments.",
+        "example": "Teaching example: adding a cheap judge label is not selecting a human evaluation item."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/update/2026-11-18/13": {
+      "source_sha256": "e32ba905b37b7abe7c5996da92c33860800b370884017cc7b76231d75b9ffda4",
+      "reviewed": true,
+      "fields": {
+        "summary": "The officialgoogle-research/efficient_evals release is pinned atb4421d929d1078631ee890f8e4a776442c816d36, Apache2.0. The local slice runsCP, ordinal probabilities, frozen-feature human NLL and conditional intervals from an externally suppliedSigma. It omits full Adam/BFGS fitting,30 splits and rating recollection. Upstream estimates about one hour for the full CPU notebook; the complete multi-judge campaign is not reproduced. CUDA validates operators only. Full experiments are not reproduced due to high cost; no capability or Evolve-promotion claim."
+      }
+    },
+    "dive/recommendation/research-serving-loop/comparison/recommendation:cutagent": {
+      "source_sha256": "5b8d460c4606db383c60e0f8beaf741339c8502a2a1a110f044f2d52ac9d8288",
+      "reviewed": true,
+      "fields": {
+        "position": "CutAgent separates multimodal product planning from reliable video production into GeneAgent and VideoAgent, linked by a structured creative gene. Genes specify narrative units and voice/music/script rules. High-CTR SFT and CTR-level GRPO train planning; production expands storyboards, retrieves product clips, performsTTS/BGM/rendering and selectively repairs temporally grounded defects.",
+        "tradeoff": "AgenticRecTune stores experiment-backed recommendation-configuration insights in a SkillHub. CutAgent stores category/gene-conditioned video-production corrections. Both reuse experience, but optimization objects, feedback and test permissions differ. Its LightGBM surrogate is not a recommendation experiment platform and cannot replace randomized production evidence."
+      }
+    },
+    "dive/recommendation/research-serving-loop/analysis/2": {
+      "source_sha256": "84c4693c7ef18e76c63cbfeb5a68e624084164215792080311186502b3c90eb0",
+      "reviewed": true,
+      "fields": {
+        "title": "cutagent: distinguish mechanism from capability",
+        "body": "GeneAgent uses Qwen3-VL-8B with visual modules frozen and language LoRA only. SFT uses the top20% observed-CTR samples; GRPO samples eight genes per product. A LightGBM category-relativeLow/Mid/High CTR-level predictor is a training reward, not onlineCTR. VideoAgent selects one of43 category memory shards then retrieves gene-similar verified failure/correction constraints. This memory is distinct from clip pools; scripted success cannot substitute for reflection. AgenticRecTune stores experiment-backed recommendation-configuration insights in a SkillHub. CutAgent stores category/gene-conditioned video-production corrections. Both reuse experience, but optimization objects, feedback and test permissions differ. Its LightGBM surrogate is not a recommendation experiment platform and cannot replace randomized production evidence."
+      }
+    },
+    "dive/recommendation/research-serving-loop/question/cross-nov18-latest-cutagent": {
+      "source_sha256": "50ae40dfc09111a4eb311094d2a7c3423b04ac983659180a94d56c051f1a405c",
+      "reviewed": true,
+      "fields": {
+        "question": "Is CutAgent memory the same as AgenticRecTune SkillHub?",
+        "answer": "Both reuse experience, but production-defect corrections conditioned on category/gene differ from recommendation-configuration experiments.",
+        "example": "Teaching example: avoiding repeated close-ups does not specify a recommendation fusion weight."
+      }
+    },
+    "dive/recommendation/research-serving-loop/update/2026-11-18/1": {
+      "source_sha256": "d4c95772184b027255d6c392e8da1dc5826b12c4d49e0988c29be77218295086",
+      "reviewed": true,
+      "fields": {
+        "summary": "Review-only: full experiment not reproduced due to cost(reviewDONE). No70K-product corpus with90–120 clips each, multimodal teachers,8B training/retrieval,TTS/rendering,397B judge or production traffic is run. No downloads or mock gene planner/retriever/localCTR are supplied. No paper-specific author repository is verified in fixedv1; cited FireRed baseline code is not a CutAgent release. Full experiments are not reproduced due to high cost; no capability or Evolve-promotion claim."
+      }
+    }
+  }
+}

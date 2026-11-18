@@ -7,7 +7,7 @@ hide:
 
 # 记忆与技能：让经验可取回、可失效
 
-[Agent](index.md) / 248 个问题 · 62 篇论文
+[Agent](index.md) / 252 个问题 · 63 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">248 个问题 · 62 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">252 个问题 · 63 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:clam-memory" data-paper-title="Instant Weight-Space Consolidation for Long-Term Memory in LLMs" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Instant Weight-Space Consolidation for Long-Term Memory in LLMs Agent University of Maryland, College Park 2026-11-16 CLAM把可积累的参数记忆与逐字检索缓冲分开：冻结LLM提供每层会话activation，hypernetwork在不做测试时梯度下降的情况下写出down_proj LoRA，查询时再配top5会话片段。没有提取调用不等于没有前置训练；能力来自离线context distillation。Read用9层Perceiver cross-attention、每层8slots，slots只看当前会话。 完整实验成本过高，不复现（审查 DONE）；review_only / deferred_high_cost；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本轮review-only，不提供可执行adapter、metrics或GPU验证，不下载权重／合成语料。只把v1的read/carry/decode、两阶段训练、rank与检索协议记录为可核对方法；把随机初始化hypernetwork跑一次不能算完成记忆巩固。  记忆与技能 clam-memory Agent 记忆与技能：让经验可取回、可失效 Instant表示无需训练吗？ 不是。只是不在每个新会话做梯度下降；hypernetwork需预训练初始化再做多会话蒸馏训练。 教学例：服务时一次forward不等于获得这个forward的训练成本为0。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<span id="paper-agent-research-clam-memory-3cee8389" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-ffcb64d73c53f9d0">Instant表示无需训练吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aclam-memory">Instant Weight-Space Consolidation for Long-Term Memory in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。只是不在每个新会话做梯度下降；hypernetwork需预训练初始化再做多会话蒸馏训练。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：服务时一次forward不等于获得这个forward的训练成本为0。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20759v1">原论文</a> · <a href="../../../../agent-research/2611.20759-clam-memory/">实现解读</a> · <a href="#qa-ffcb64d73c53f9d0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:clam-memory" data-paper-title="Instant Weight-Space Consolidation for Long-Term Memory in LLMs" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Instant Weight-Space Consolidation for Long-Term Memory in LLMs Agent University of Maryland, College Park 2026-11-16 CLAM把可积累的参数记忆与逐字检索缓冲分开：冻结LLM提供每层会话activation，hypernetwork在不做测试时梯度下降的情况下写出down_proj LoRA，查询时再配top5会话片段。没有提取调用不等于没有前置训练；能力来自离线context distillation。Read用9层Perceiver cross-attention、每层8slots，slots只看当前会话。 完整实验成本过高，不复现（审查 DONE）；review_only / deferred_high_cost；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本轮review-only，不提供可执行adapter、metrics或GPU验证，不下载权重／合成语料。只把v1的read/carry/decode、两阶段训练、rank与检索协议记录为可核对方法；把随机初始化hypernetwork跑一次不能算完成记忆巩固。  记忆与技能 clam-memory Agent 记忆与技能：让经验可取回、可失效 为什么不逐会话拼接LoRA rank？ CLAM在固定Q里递推累积，再解码固定rank8；rank拼接会随历史增长，改变容量和成本。 教学例：100会话也不是rank800。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-cb7d504a68ccc73d">为什么不逐会话拼接LoRA rank？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aclam-memory">Instant Weight-Space Consolidation for Long-Term Memory in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>CLAM在固定Q里递推累积，再解码固定rank8；rank拼接会随历史增长，改变容量和成本。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：100会话也不是rank800。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20759v1">原论文</a> · <a href="../../../../agent-research/2611.20759-clam-memory/">实现解读</a> · <a href="#qa-cb7d504a68ccc73d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:clam-memory" data-paper-title="Instant Weight-Space Consolidation for Long-Term Memory in LLMs" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Instant Weight-Space Consolidation for Long-Term Memory in LLMs Agent University of Maryland, College Park 2026-11-16 CLAM把可积累的参数记忆与逐字检索缓冲分开：冻结LLM提供每层会话activation，hypernetwork在不做测试时梯度下降的情况下写出down_proj LoRA，查询时再配top5会话片段。没有提取调用不等于没有前置训练；能力来自离线context distillation。Read用9层Perceiver cross-attention、每层8slots，slots只看当前会话。 完整实验成本过高，不复现（审查 DONE）；review_only / deferred_high_cost；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本轮review-only，不提供可执行adapter、metrics或GPU验证，不下载权重／合成语料。只把v1的read/carry/decode、两阶段训练、rank与检索协议记录为可核对方法；把随机初始化hypernetwork跑一次不能算完成记忆巩固。  记忆与技能 clam-memory Agent 记忆与技能：让经验可取回、可失效 CLAM与CoReMem都写memory，有何关键区别？ CLAM蒸馏全历史答案生成参数；CoReMem以未来任务有无记忆差值训练信用。前者不是后者的低成本替身。 教学例：记住一个姓名不等于证明下一仓库任务节省步骤。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-6cfb9a31403ed48d">CLAM与CoReMem都写memory，有何关键区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aclam-memory">Instant Weight-Space Consolidation for Long-Term Memory in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>CLAM蒸馏全历史答案生成参数；CoReMem以未来任务有无记忆差值训练信用。前者不是后者的低成本替身。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：记住一个姓名不等于证明下一仓库任务节省步骤。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20759v1">原论文</a> · <a href="../../../../agent-research/2611.20759-clam-memory/">实现解读</a> · <a href="#qa-6cfb9a31403ed48d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:clam-memory" data-paper-title="Instant Weight-Space Consolidation for Long-Term Memory in LLMs" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Instant Weight-Space Consolidation for Long-Term Memory in LLMs Agent University of Maryland, College Park 2026-11-16 CLAM把可积累的参数记忆与逐字检索缓冲分开：冻结LLM提供每层会话activation，hypernetwork在不做测试时梯度下降的情况下写出down_proj LoRA，查询时再配top5会话片段。没有提取调用不等于没有前置训练；能力来自离线context distillation。Read用9层Perceiver cross-attention、每层8slots，slots只看当前会话。 完整实验成本过高，不复现（审查 DONE）；review_only / deferred_high_cost；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本轮review-only，不提供可执行adapter、metrics或GPU验证，不下载权重／合成语料。只把v1的read/carry/decode、两阶段训练、rank与检索协议记录为可核对方法；把随机初始化hypernetwork跑一次不能算完成记忆巩固。  记忆与技能 clam-memory Agent 记忆与技能：让经验可取回、可失效 为什么本轮不跑一个小随机hypernetwork当复现？ 论文能力依赖900K合成轨迹、8K–25K训练步、2–7B基础模型与70B生成／评判。随机模块只能测shape，不验证巩固，完整实验明确高成本不复现。 教学例：零初始化adapter是no-op，输出正常不代表已记忆。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-038645fcb910328e">为什么本轮不跑一个小随机hypernetwork当复现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aclam-memory">Instant Weight-Space Consolidation for Long-Term Memory in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文能力依赖900K合成轨迹、8K–25K训练步、2–7B基础模型与70B生成／评判。随机模块只能测shape，不验证巩固，完整实验明确高成本不复现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：零初始化adapter是no-op，输出正常不代表已记忆。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20759v1">原论文</a> · <a href="../../../../agent-research/2611.20759-clam-memory/">实现解读</a> · <a href="#qa-038645fcb910328e">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:coremem" data-paper-title="CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation Agent Yale University 2026-11-12 连续编码任务不是把独立SWE问题逐题重置：前一任务写入的代码和文本记忆都会影响下一任务。CoReMem要求在下一任务出现前写记忆，再从完全相同的继承仓库状态运行有／无记忆分支，以未来任务的解决率与工作量评价记忆，而不是评价摘要“看起来是否有用”。训练把自己的记忆、无记忆与错配记忆放进同一边界组。成功优先reward防止模型只少做几步却不解决问题；首次使用的repo位置或可执行检查锚点，把记忆整体的价值差只归到可追踪使用的步骤。语义锚点抽取与真实coding rollout仍由外部模型和环境完成。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是编码Agent能力复现。component_only／L1机制诊断，不是编码Agent能力复现。完整实验成本过高，不复现（审查 DONE）；本地只实现reward、来源门控及真实小tensor训练目标。ReplayOutcome只供trainer/evaluator保存外部结果。paired_step_saving拒绝不同boundary或继承状态；provenance_gates接收外部精确锚点集合，不伪造语义抽取。step_advantages执行Eq7；  记忆与技能 连续编码任务与记忆信用 Agent 记忆与技能：让经验可取回、可失效 CoReMem为什么不能把每个任务都重置到标准repo再评记忆？ 论文研究前一任务写入后继repo的连续任务；仓库和记忆一起继承。重置或塞gold patch会改变后继任务难度，也破坏有／无记忆的同状态差值。 教学例：任务1改了接口名，任务2必须面对这次真实改动；不能偷偷恢复到已正确修复的repo。 2026-11-15">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-coremem-59ee9992" class="ar-learning-paper-anchor"></span>

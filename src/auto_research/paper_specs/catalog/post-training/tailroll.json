@@ -1,0 +1,56 @@
+{
+  "domain": "post-training",
+  "key": "tailroll",
+  "title": "TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training",
+  "paper_url": "https://arxiv.org/abs/2611.22206v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.22206v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.22206-tailroll/README.md",
+  "first_author": "Niloofar Gholipour",
+  "first_author_affiliation": "École de technologie supérieure, Canada",
+  "published": "2026-11-17",
+  "published_at": "2026-11-17T04:44:20Z",
+  "code": null,
+  "code_status": "固定v1及所核作者入口未找到可验证的本篇方法源码发布；引用的训练器、模型或库不算本篇开源。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "data-and-budget",
+    "后训练算法组件"
+  ],
+  "priority": "P1",
+  "intake_class": "new_submission_in_requested_window",
+  "implementation_status": "deferred_high_cost",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.22206v1",
+    "source_sections": [
+      "§V migration policy and sufficiency termination",
+      "§VI–VII Ascend setup and 300-step results"
+    ],
+    "basis": "§VI–VII在Ascend910C NPU上用Qwen3-14B/32B、多engine/KV迁移、10配置和300step真实RL；现有单卡A100/A30不具同构多engine硬件拓扑。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API call.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30,
+      "gpu_component_seconds_per_seed_cap": 0,
+      "cap_scope": "Tiny exact operator/negative-control checks only; not a training campaign."
+    }
+  },
+  "summary": "rollout step常被最长尾response决定，平均load无法反映尾长。TailRoll在chunk边界迁移在途请求，并用完成siblings足够后的终止处理straggler。 只收录多engine真实在途迁移/单次re-prefill与部分输出loss mask机制；不以离线调度模拟声称系统提速。",
+  "deferral_reason": "§VI–VII在Ascend910C NPU上用Qwen3-14B/32B、多engine/KV迁移、10配置和300step真实RL；现有单卡A100/A30不具同构多engine硬件拓扑。 完整实验成本过高，不复现（审查 DONE）；不以固定规则或公式占位冒充模型/系统实现。"
+}

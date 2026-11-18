@@ -7,7 +7,7 @@ hide:
 
 # 跨模态对齐：表征、连接器与监督
 
-[多模态](index.md) / 117 个问题 · 29 篇论文
+[多模态](index.md) / 125 个问题 · 31 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">117 个问题 · 29 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">125 个问题 · 31 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:cascadejepa" data-paper-title="CascadeJEPA: Enhancing 3D Geometric Representations via Spatially Coupled Cascaded Prediction" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="CascadeJEPA: Enhancing 3D Geometric Representations via Spatially Coupled Cascaded Prediction 基础模型 Nanyang Technological University 2026-11-17 I-JEPA的高层语义改善不保证几何对应更好。CascadeJEPA对同图两个crop共享context和EMA target；第一crop把masked patch embedding置零后加位置、保留完整网格，第二crop只编码visible patches，再通过第一阶段full-grid KV引导预测。已核方法位置：3.2.1–3.2.4, 4.1–4.2。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行小型共享token encoder、双predictor、residual cross-attention、zero-before-position、双L2与EMA。调用者提供patch特征和两个mask，不实现ImageNet图像pipeline、完整ViT、几何探针或规划器。  多模态基础模型 JEPA与几何表征 多模态 跨模态对齐：表征、连接器与监督 语义分类变好为什么还要看几何表征？ 同类对象的高层embedding可能接近而失去局部深度/对应区别。本文分析语义进步伴随几何下降，并用空间交互缓解。 教学例：两块同属汽车的patch可以语义相似，却处在不同深度位置。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-cascadejepa-32261c77" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-865626beccb29af9">语义分类变好为什么还要看几何表征？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acascadejepa">CascadeJEPA: Enhancing 3D Geometric Representations via Spatially Coupled Cascaded Prediction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Nanyang Technological University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>同类对象的高层embedding可能接近而失去局部深度/对应区别。本文分析语义进步伴随几何下降，并用空间交互缓解。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两块同属汽车的patch可以语义相似，却处在不同深度位置。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22686v1">原论文</a> · <a href="../../../../foundation-models/2611.22686-cascadejepa/">实现解读</a> · <a href="#qa-865626beccb29af9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:cascadejepa" data-paper-title="CascadeJEPA: Enhancing 3D Geometric Representations via Spatially Coupled Cascaded Prediction" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="CascadeJEPA: Enhancing 3D Geometric Representations via Spatially Coupled Cascaded Prediction 基础模型 Nanyang Technological University 2026-11-17 I-JEPA的高层语义改善不保证几何对应更好。CascadeJEPA对同图两个crop共享context和EMA target；第一crop把masked patch embedding置零后加位置、保留完整网格，第二crop只编码visible patches，再通过第一阶段full-grid KV引导预测。已核方法位置：3.2.1–3.2.4, 4.1–4.2。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行小型共享token encoder、双predictor、residual cross-attention、zero-before-position、双L2与EMA。调用者提供patch特征和两个mask，不实现ImageNet图像pipeline、完整ViT、几何探针或规划器。  多模态基础模型 JEPA与几何表征 多模态 跨模态对齐：表征、连接器与监督 第一阶段full-grid如何避免偷看masked patch？ 先把masked patch embedding置零，再加位置embedding，保留有位置但无原patch内容的token；第二阶段仍只编码visible patches。 教学例：masked位置输出输入等于pos，不等于零，也不等于原patch+pos。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-5fbd990b779f778f">第一阶段full-grid如何避免偷看masked patch？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acascadejepa">CascadeJEPA: Enhancing 3D Geometric Representations via Spatially Coupled Cascaded Prediction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Nanyang Technological University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先把masked patch embedding置零，再加位置embedding，保留有位置但无原patch内容的token；第二阶段仍只编码visible patches。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：masked位置输出输入等于pos，不等于零，也不等于原patch+pos。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22686v1">原论文</a> · <a href="../../../../foundation-models/2611.22686-cascadejepa/">实现解读</a> · <a href="#qa-5fbd990b779f778f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:cascadejepa" data-paper-title="CascadeJEPA: Enhancing 3D Geometric Representations via Spatially Coupled Cascaded Prediction" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="CascadeJEPA: Enhancing 3D Geometric Representations via Spatially Coupled Cascaded Prediction 基础模型 Nanyang Technological University 2026-11-17 I-JEPA的高层语义改善不保证几何对应更好。CascadeJEPA对同图两个crop共享context和EMA target；第一crop把masked patch embedding置零后加位置、保留完整网格，第二crop只编码visible patches，再通过第一阶段full-grid KV引导预测。已核方法位置：3.2.1–3.2.4, 4.1–4.2。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行小型共享token encoder、双predictor、residual cross-attention、zero-before-position、双L2与EMA。调用者提供patch特征和两个mask，不实现ImageNet图像pipeline、完整ViT、几何探针或规划器。  多模态基础模型 JEPA与几何表征 多模态 跨模态对齐：表征、连接器与监督 能沿用DuoJEPA的target双侧梯度吗？ 不能。CascadeJEPA target是stop-gradient EMA；DuoJEPA的目标centroid在主方法里反传，照搬会改写训练机制。 教学例：target参数应无grad，但每次EMA能跟随context更新。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-3bc416ce174c6826">能沿用DuoJEPA的target双侧梯度吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acascadejepa">CascadeJEPA: Enhancing 3D Geometric Representations via Spatially Coupled Cascaded Prediction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Nanyang Technological University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。CascadeJEPA target是stop-gradient EMA；DuoJEPA的目标centroid在主方法里反传，照搬会改写训练机制。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：target参数应无grad，但每次EMA能跟随context更新。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22686v1">原论文</a> · <a href="../../../../foundation-models/2611.22686-cascadejepa/">实现解读</a> · <a href="#qa-3bc416ce174c6826">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:cascadejepa" data-paper-title="CascadeJEPA: Enhancing 3D Geometric Representations via Spatially Coupled Cascaded Prediction" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="CascadeJEPA: Enhancing 3D Geometric Representations via Spatially Coupled Cascaded Prediction 基础模型 Nanyang Technological University 2026-11-17 I-JEPA的高层语义改善不保证几何对应更好。CascadeJEPA对同图两个crop共享context和EMA target；第一crop把masked patch embedding置零后加位置、保留完整网格，第二crop只编码visible patches，再通过第一阶段full-grid KV引导预测。已核方法位置：3.2.1–3.2.4, 4.1–4.2。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行小型共享token encoder、双predictor、residual cross-attention、zero-before-position、双L2与EMA。调用者提供patch特征和两个mask，不实现ImageNet图像pipeline、完整ViT、几何探针或规划器。  多模态基础模型 JEPA与几何表征 多模态 跨模态对齐：表征、连接器与监督 为何要测试改crop2不会改变stage1输出？ 论文的cross-attention是单向stage1到stage2，不是双向融合；这个负控排除意外反向依赖，仍不证明几何收益。 教学例：把crop2乘4，stage1预测应不变，但stage2可变化。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-ca5100071da30448">为何要测试改crop2不会改变stage1输出？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acascadejepa">CascadeJEPA: Enhancing 3D Geometric Representations via Spatially Coupled Cascaded Prediction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Nanyang Technological University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文的cross-attention是单向stage1到stage2，不是双向融合；这个负控排除意外反向依赖，仍不证明几何收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把crop2乘4，stage1预测应不变，但stage2可变化。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22686v1">原论文</a> · <a href="../../../../foundation-models/2611.22686-cascadejepa/">实现解读</a> · <a href="#qa-ca5100071da30448">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:vishead-spec" data-paper-title="VisHead-Spec: Head-Routed Visual Attention for Multimodal Speculative Decoding" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="VisHead-Spec: Head-Routed Visual Attention for Multimodal Speculative Decoding 基础模型 Meta Recommendation Systems (MRS) 2026-11-16 块状 drafter 的视觉注意力并非每层每头都同等重要。本文先在隔离校准集选择层，再选择少量 KV heads；仅目标层25/33的图像特征进入图像行，文本取1/9/17/25/33。非选中头仍看文本与块内位置，而不是被整个关闭。选择后固定路由并重新训练，不按测试样本动态选择。已核方法位置：3.1–3.3, 4.1, B.1–B.4。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。真实执行 grouped-query 路由注意力和三项 drafter loss；没有 Qwen3-VL、上下文特征提取、离线层/头搜索、Markov head、token verifier 或训练完成的 drafter。固定路由由调用者提供，不称完整推测解码。  多模态基础模型 视觉上下文与推测解码 多模态 跨模态对齐：表征、连接器与监督 只让8个头看图像，其他头是否没有作用？ 不是。8是40个物理KV heads中的图像读取预算，其余仍读取文本和块内上下文；GQA下每个KV head对应多个query heads。 教学例：四个query heads共享一个KV head时，路由应共同生效，不能只打开其中一个。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-vishead-spec-92e9f561" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-7c618bd59e8ecf01">只让8个头看图像，其他头是否没有作用？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Avishead-spec">VisHead-Spec: Head-Routed Visual Attention for Multimodal Speculative Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Meta Recommendation Systems (MRS)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。8是40个物理KV heads中的图像读取预算，其余仍读取文本和块内上下文；GQA下每个KV head对应多个query heads。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：四个query heads共享一个KV head时，路由应共同生效，不能只打开其中一个。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21839v1">原论文</a> · <a href="../../../../foundation-models/2611.21839-vishead-spec/">实现解读</a> · <a href="#qa-7c618bd59e8ecf01">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:vishead-spec" data-paper-title="VisHead-Spec: Head-Routed Visual Attention for Multimodal Speculative Decoding" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="VisHead-Spec: Head-Routed Visual Attention for Multimodal Speculative Decoding 基础模型 Meta Recommendation Systems (MRS) 2026-11-16 块状 drafter 的视觉注意力并非每层每头都同等重要。本文先在隔离校准集选择层，再选择少量 KV heads；仅目标层25/33的图像特征进入图像行，文本取1/9/17/25/33。非选中头仍看文本与块内位置，而不是被整个关闭。选择后固定路由并重新训练，不按测试样本动态选择。已核方法位置：3.1–3.3, 4.1, B.1–B.4。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。真实执行 grouped-query 路由注意力和三项 drafter loss；没有 Qwen3-VL、上下文特征提取、离线层/头搜索、Markov head、token verifier 或训练完成的 drafter。固定路由由调用者提供，不称完整推测解码。  多模态基础模型 视觉上下文与推测解码 多模态 跨模态对齐：表征、连接器与监督 confidence为什么不能监督成argmax是否相同？ 原目标是1减两分布L1距离的一半，且detach。argmax相同也可能分布差很大，硬标签会改写BCE目标。 教学例：p=(0.6,0.4)、q=(0.9,0.1)的argmax相同，但soft acceptance是0.7而非1。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-23ad981f53f81318">confidence为什么不能监督成argmax是否相同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Avishead-spec">VisHead-Spec: Head-Routed Visual Attention for Multimodal Speculative Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Meta Recommendation Systems (MRS)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原目标是1减两分布L1距离的一半，且detach。argmax相同也可能分布差很大，硬标签会改写BCE目标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：p=(0.6,0.4)、q=(0.9,0.1)的argmax相同，但soft acceptance是0.7而非1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21839v1">原论文</a> · <a href="../../../../foundation-models/2611.21839-vishead-spec/">实现解读</a> · <a href="#qa-23ad981f53f81318">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:vishead-spec" data-paper-title="VisHead-Spec: Head-Routed Visual Attention for Multimodal Speculative Decoding" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="VisHead-Spec: Head-Routed Visual Attention for Multimodal Speculative Decoding 基础模型 Meta Recommendation Systems (MRS) 2026-11-16 块状 drafter 的视觉注意力并非每层每头都同等重要。本文先在隔离校准集选择层，再选择少量 KV heads；仅目标层25/33的图像特征进入图像行，文本取1/9/17/25/33。非选中头仍看文本与块内位置，而不是被整个关闭。选择后固定路由并重新训练，不按测试样本动态选择。已核方法位置：3.1–3.3, 4.1, B.1–B.4。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。真实执行 grouped-query 路由注意力和三项 drafter loss；没有 Qwen3-VL、上下文特征提取、离线层/头搜索、Markov head、token verifier 或训练完成的 drafter。固定路由由调用者提供，不称完整推测解码。  多模态基础模型 视觉上下文与推测解码 多模态 跨模态对齐：表征、连接器与监督 这与Unbundling的vision-only mask有什么区别？ VisHead-Spec限制特定头读取图像行；Unbundling门控额外QKVO/FFN容量，仍是联合attention。二者作用对象不同。 教学例：一个文本query没有额外视觉投影，仍可能读取图像KV；这不是图像行被屏蔽。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-0aaf674907034127">这与Unbundling的vision-only mask有什么区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Avishead-spec">VisHead-Spec: Head-Routed Visual Attention for Multimodal Speculative Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Meta Recommendation Systems (MRS)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>VisHead-Spec限制特定头读取图像行；Unbundling门控额外QKVO/FFN容量，仍是联合attention。二者作用对象不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个文本query没有额外视觉投影，仍可能读取图像KV；这不是图像行被屏蔽。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21839v1">原论文</a> · <a href="../../../../foundation-models/2611.21839-vishead-spec/">实现解读</a> · <a href="#qa-0aaf674907034127">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:vishead-spec" data-paper-title="VisHead-Spec: Head-Routed Visual Attention for Multimodal Speculative Decoding" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="VisHead-Spec: Head-Routed Visual Attention for Multimodal Speculative Decoding 基础模型 Meta Recommendation Systems (MRS) 2026-11-16 块状 drafter 的视觉注意力并非每层每头都同等重要。本文先在隔离校准集选择层，再选择少量 KV heads；仅目标层25/33的图像特征进入图像行，文本取1/9/17/25/33。非选中头仍看文本与块内位置，而不是被整个关闭。选择后固定路由并重新训练，不按测试样本动态选择。已核方法位置：3.1–3.3, 4.1, B.1–B.4。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。真实执行 grouped-query 路由注意力和三项 drafter loss；没有 Qwen3-VL、上下文特征提取、离线层/头搜索、Markov head、token verifier 或训练完成的 drafter。固定路由由调用者提供，不称完整推测解码。  多模态基础模型 视觉上下文与推测解码 多模态 跨模态对齐：表征、连接器与监督 路由组件通过CUDA能证明16%吞吐收益吗？ 不能。原文还包括训练过的drafter、目标验证、服务并发和内核；本地只验证路由、损失与梯度，不报告生成速度或接受长度。 教学例：改变图像V只影响允许看图的query组，是机制负控，不是完整推理计时。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-1ca9aeebbdc0775e">路由组件通过CUDA能证明16%吞吐收益吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Avishead-spec">VisHead-Spec: Head-Routed Visual Attention for Multimodal Speculative Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Meta Recommendation Systems (MRS)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。原文还包括训练过的drafter、目标验证、服务并发和内核；本地只验证路由、损失与梯度，不报告生成速度或接受长度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：改变图像V只影响允许看图的query组，是机制负控，不是完整推理计时。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21839v1">原论文</a> · <a href="../../../../foundation-models/2611.21839-vishead-spec/">实现解读</a> · <a href="#qa-1ca9aeebbdc0775e">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:fend-protocol" data-paper-title="FEND: Far-End Detection in Outbound Voice AI Calls" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="FEND: Far-End Detection in Outbound Voice AI Calls 多模态大模型 Observe.AI, India 2026-11-13 外呼语音系统要区分真人、语音信箱、IVR和另一个AI。误把真人当自动系统会切断有效对话，因此不能只优化AI检测AUC。FEND并行读音频、流式ASR和既有对话模型的工具事件：STFT提示音、多语种关键词、LLM voicemail／IVR工具，以及依赖首轮词间时序的AI节奏分类。工具沿用运行中的对话模型，不等于这里已经实现了“零成本LLM检测”。检测事件累计到窗口，默认20秒。最后按voicemail &gt; IVR &gt; AI &gt; human选已触发的最高级；无事件才human。 完整私有通话实验高成本不复现（审查 DONE）。这些都是合成接口诊断，没有能力accuracy。component_only／L0语音检测协议接口。本地只处理外部检测事件与独立标签，未实现音频／ASR／LLM／AI节奏分类器；完整私有通话实验高成本不复现（审查 DONE）。DetectorEvent必须有有限非负时间、明确检测器和自动类别；arbitrate只接收事件，不接gold、音频或答案。被纳入，迟于窗口仅记ignored，不用真实墙钟sleep。检测器需要外部可信实现；手工注入的事件不是自动检测准确率。  音频与多模态接口 外呼检测与human FPR 多模态 跨模态对齐：表征、连接器与监督 AI检测AUC很高，就能放心中断被标为自动系统的电话吗？ 不能。误把真人判为任意自动类会伤害有效对话，必须看以真实human为分母的HFPR和固定工作点。AUC不能替代部署阈值下的真人误拒率。 教学例：100个真人中3个被标AI，HFPR是3%，不应除以包含900个语音信箱的全部1000通话。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
 <span id="paper-multimodal-models-fend-protocol-bd6df6f8" class="ar-learning-paper-anchor"></span>

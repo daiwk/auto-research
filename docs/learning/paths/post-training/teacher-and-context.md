@@ -7,7 +7,7 @@ hide:
 
 # 教师与纠错：额外信息何时能帮到学生
 
-[LLM 后训练](index.md) / 216 个问题 · 54 篇论文
+[LLM 后训练](index.md) / 220 个问题 · 55 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">216 个问题 · 54 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">220 个问题 · 55 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:leaf-opd" data-paper-title="LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation LLM 后训练 The Hong Kong University of Science and Technology (Guangzhou) 2026-11-16 教师独立解码的首token可能强烈拒答，但在学生已生成事实前缀上，后续token抑制可能迅速消失；需要按同一学生轨迹测监督强度和持续性。不能。forget teacher读取非披露指令，student始终只读原问题和自身生成prefix；retain teacher不带该指令。将指令给学生会改变所研究的参数遗忘问题。 完整实验成本过高，不复现（审查 DONE）；SS1/SS0.5教师持续监督诊断、teacher-only privileged-context边界、forget/retain分离forward-KL。l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。  teacher-and-context 后训练算法组件 LLM 后训练 教师与纠错：额外信息何时能帮到学生 为何看到teacher拒答仍可能是坏teacher？ 教师独立解码的首token可能强烈拒答，但在学生已生成事实前缀上，后续token抑制可能迅速消失；需要按同一学生轨迹测监督强度和持续性。 教学例：Δ=[-4,0,0,0]首步强，但后半SS=0，不能过good-teacher门槛。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<span id="paper-post-training-leaf-opd-018fab0c" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d78d28fd6fa3b151">为何看到teacher拒答仍可能是坏teacher？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aleaf-opd">LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · The Hong Kong University of Science and Technology (Guangzhou)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>教师独立解码的首token可能强烈拒答，但在学生已生成事实前缀上，后续token抑制可能迅速消失；需要按同一学生轨迹测监督强度和持续性。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Δ=[-4,0,0,0]首步强，但后半SS=0，不能过good-teacher门槛。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20674v1">原论文</a> · <a href="../../../../post-training/2611.20674-leaf-opd/">实现解读</a> · <a href="#qa-d78d28fd6fa3b151">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:leaf-opd" data-paper-title="LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation LLM 后训练 The Hong Kong University of Science and Technology (Guangzhou) 2026-11-16 教师独立解码的首token可能强烈拒答，但在学生已生成事实前缀上，后续token抑制可能迅速消失；需要按同一学生轨迹测监督强度和持续性。不能。forget teacher读取非披露指令，student始终只读原问题和自身生成prefix；retain teacher不带该指令。将指令给学生会改变所研究的参数遗忘问题。 完整实验成本过高，不复现（审查 DONE）；SS1/SS0.5教师持续监督诊断、teacher-only privileged-context边界、forget/retain分离forward-KL。l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。  teacher-and-context 后训练算法组件 LLM 后训练 教师与纠错：额外信息何时能帮到学生 privileged context能不能也交给student？ 不能。forget teacher读取非披露指令，student始终只读原问题和自身生成prefix；retain teacher不带该指令。将指令给学生会改变所研究的参数遗忘问题。 教学例：context路由返回student=&#x27;question&#x27;、teacher=&#x27;do not disclose\nquestion&#x27;，不接收gold答案字段。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-da4dd4342c96dc5e">privileged context能不能也交给student？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aleaf-opd">LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · The Hong Kong University of Science and Technology (Guangzhou)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。forget teacher读取非披露指令，student始终只读原问题和自身生成prefix；retain teacher不带该指令。将指令给学生会改变所研究的参数遗忘问题。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：context路由返回student=&#x27;question&#x27;、teacher=&#x27;do not disclose\nquestion&#x27;，不接收gold答案字段。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20674v1">原论文</a> · <a href="../../../../post-training/2611.20674-leaf-opd/">实现解读</a> · <a href="#qa-da4dd4342c96dc5e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:leaf-opd" data-paper-title="LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation LLM 后训练 The Hong Kong University of Science and Technology (Guangzhou) 2026-11-16 教师独立解码的首token可能强烈拒答，但在学生已生成事实前缀上，后续token抑制可能迅速消失；需要按同一学生轨迹测监督强度和持续性。不能。forget teacher读取非披露指令，student始终只读原问题和自身生成prefix；retain teacher不带该指令。将指令给学生会改变所研究的参数遗忘问题。 完整实验成本过高，不复现（审查 DONE）；SS1/SS0.5教师持续监督诊断、teacher-only privileged-context边界、forget/retain分离forward-KL。l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。  teacher-and-context 后训练算法组件 LLM 后训练 教师与纠错：额外信息何时能帮到学生 它与LCS的teacher-only reference相同吗？ 二者都隔离额外教师上下文，但LCS提供任务兼容成功轨迹纠正失败；LEAF用非披露上下文让teacher压低目标事实概率，并用retain支路保留效用。 教学例：一个reference帮助正确完成任务；一个forget context要求不披露事实，目标方向并不相同。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-fbbcb757ef10584a">它与LCS的teacher-only reference相同吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aleaf-opd">LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · The Hong Kong University of Science and Technology (Guangzhou)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>二者都隔离额外教师上下文，但LCS提供任务兼容成功轨迹纠正失败；LEAF用非披露上下文让teacher压低目标事实概率，并用retain支路保留效用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个reference帮助正确完成任务；一个forget context要求不披露事实，目标方向并不相同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20674v1">原论文</a> · <a href="../../../../post-training/2611.20674-leaf-opd/">实现解读</a> · <a href="#qa-fbbcb757ef10584a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:leaf-opd" data-paper-title="LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation LLM 后训练 The Hong Kong University of Science and Technology (Guangzhou) 2026-11-16 教师独立解码的首token可能强烈拒答，但在学生已生成事实前缀上，后续token抑制可能迅速消失；需要按同一学生轨迹测监督强度和持续性。不能。forget teacher读取非披露指令，student始终只读原问题和自身生成prefix；retain teacher不带该指令。将指令给学生会改变所研究的参数遗忘问题。 完整实验成本过高，不复现（审查 DONE）；SS1/SS0.5教师持续监督诊断、teacher-only privileged-context边界、forget/retain分离forward-KL。l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。  teacher-and-context 后训练算法组件 LLM 后训练 教师与纠错：额外信息何时能帮到学生 SS阈值通过就证明已经遗忘了吗？ 不。SS只诊断teacher对固定轨迹的反对强度；本地loss/梯度和上下文负控也不构成删除知识、抗攻击或保留效用的模型实测。 教学例：长度3的后半索引从floor(3/2)+1即第2token开始，不应只看最后一token。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-beb466928c56648d">SS阈值通过就证明已经遗忘了吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aleaf-opd">LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · The Hong Kong University of Science and Technology (Guangzhou)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不。SS只诊断teacher对固定轨迹的反对强度；本地loss/梯度和上下文负控也不构成删除知识、抗攻击或保留效用的模型实测。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：长度3的后半索引从floor(3/2)+1即第2token开始，不应只看最后一token。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20674v1">原论文</a> · <a href="../../../../post-training/2611.20674-leaf-opd/">实现解读</a> · <a href="#qa-beb466928c56648d">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:bopd" data-paper-title="Bootstrapped On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Bootstrapped On-Policy Distillation LLM 后训练 The Hong Kong Polytechnic University 2026-11-10 BOPD 先用带参考解答的冻结初始模型监督学生，构造中间模型 M1；再冻结 M1，将它当作不带参考的教师，蒸馏一个从原始 M0 精确重置的新学生。两阶段都在各自学生的轨迹前缀上评分，不能把 Stage I 的旧轨迹直接当作 Stage II 的新 on-policy 数据。这与“继续训练 Stage I 学生”不同：新学生的参数、持久 buffer 和 optimizer 状态都要恢复为初始/新建状态。参考解答只进入 Stage I 教师，不能让被评估学生读取；Stage II 连教师也不再接收参考。 完整实验成本过高，不复现（审查 DONE）。L1 机制组件，diagnostic only。CPU 与真实 A100 三种子验证通过；完整实验成本过高，不复现（审查 DONE）。本轮补审上批线索，不计为 11 月 12 日首发；未接入 Evolve。forward_kl 接收同历史对齐的全词表 logits 与有效 mask，detach 教师，低精度归约提升到 FP32，逐轨迹等权。stage_two_handoff 深拷贝真实 PyTorch module：teacher 来自 intermediate、冻结并 eval；student 来自保留的 initial checkpoint；  On-policy distillation 两阶段自蒸馏与学生重置 LLM 后训练 教师与纠错：额外信息何时能帮到学生 BOPD 的 Stage II 为什么不能继续训练 Stage I 学生？ 方法把教师构造与知识转移分开。Stage I 学生变成冻结的中间教师；Stage II 学生必须精确恢复原始 M0，并创建新 optimizer。继续保留 Stage I 参数或动量会变成另一条训练路径。 教学例：Stage I 某权重从1变为1.2，Stage II 教师保留1.2，而新学生回到1；不能两者都从1.2出发。 2026-11-12">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
 <span id="paper-post-training-bopd-82866624" class="ar-learning-paper-anchor"></span>

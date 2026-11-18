@@ -7,7 +7,7 @@ hide:
 
 # 候选生成与搜索匹配
 
-[搜广推](index.md) / 152 个问题 · 38 篇论文
+[搜广推](index.md) / 160 个问题 · 40 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">152 个问题 · 38 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">160 个问题 · 40 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:yuanbao-rubric" data-paper-title="From Relevance to Utility: Rubric Alignment in Yuanbao Search" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Relevance to Utility: Rubric Alignment in Yuanbao Search 搜广推与 LLM 应用 Tencent 2026-11-17 传统逐文档相关性不等于给下游推理提供有用证据。元宝先生成查询特定的加权正向标准和扣分标准，用蒸馏标签统一训练召回与四头排序，再用集合奖励训练选择器。低于组均值的轨迹并不接受负优势惩罚，而是按奖励差蒸馏组内最佳轨迹。 成本过高，不复现（审查DONE）；诊断检查最佳轨迹有蒸馏梯度、失败轨迹没有模仿梯度、奖励不反传、padding 梯度为零；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。没有运行 rubric 生成、DeepSeek judge、Qwen 编码器或真实搜索。诊断检查最佳轨迹有蒸馏梯度、失败轨迹没有模仿梯度、奖励不反传、padding 梯度为零；它们不是答案准确率。  检索与匹配 大模型与搜索融合 搜广推 候选生成与搜索匹配 为什么逐文档相关性不够？ 集合需要覆盖互补信息并避开任一有害证据，单文档高相关不能保证集合效用。 教学例：两篇分别覆盖价格与性能仍可共同满足正向标准，但其中任一含过期价格就触发扣分。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<span id="paper-recommendation-yuanbao-rubric-d17191c2" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-5658906ae048e4bb">为什么逐文档相关性不够？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Ayuanbao-rubric">From Relevance to Utility: Rubric Alignment in Yuanbao Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>集合需要覆盖互补信息并避开任一有害证据，单文档高相关不能保证集合效用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两篇分别覆盖价格与性能仍可共同满足正向标准，但其中任一含过期价格就触发扣分。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22503v1">原论文</a> · <a href="../../../../recommendation-components/2611.22503-yuanbao-rubric/">实现解读</a> · <a href="#qa-5658906ae048e4bb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:yuanbao-rubric" data-paper-title="From Relevance to Utility: Rubric Alignment in Yuanbao Search" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Relevance to Utility: Rubric Alignment in Yuanbao Search 搜广推与 LLM 应用 Tencent 2026-11-17 传统逐文档相关性不等于给下游推理提供有用证据。元宝先生成查询特定的加权正向标准和扣分标准，用蒸馏标签统一训练召回与四头排序，再用集合奖励训练选择器。低于组均值的轨迹并不接受负优势惩罚，而是按奖励差蒸馏组内最佳轨迹。 成本过高，不复现（审查DONE）；诊断检查最佳轨迹有蒸馏梯度、失败轨迹没有模仿梯度、奖励不反传、padding 梯度为零；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。没有运行 rubric 生成、DeepSeek judge、Qwen 编码器或真实搜索。诊断检查最佳轨迹有蒸馏梯度、失败轨迹没有模仿梯度、奖励不反传、padding 梯度为零；它们不是答案准确率。  检索与匹配 大模型与搜索融合 搜广推 候选生成与搜索匹配 较差轨迹在蒸馏分支学习什么？ 按最佳奖励与自身奖励之差，最大化组内最佳轨迹的概率，不是模仿自己的失败轨迹。 教学例：奖励0、1、3时，前两条都向奖励3的token序列蒸馏，权重分别3、2。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-8ef9301af437d10b">较差轨迹在蒸馏分支学习什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Ayuanbao-rubric">From Relevance to Utility: Rubric Alignment in Yuanbao Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>按最佳奖励与自身奖励之差，最大化组内最佳轨迹的概率，不是模仿自己的失败轨迹。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：奖励0、1、3时，前两条都向奖励3的token序列蒸馏，权重分别3、2。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22503v1">原论文</a> · <a href="../../../../recommendation-components/2611.22503-yuanbao-rubric/">实现解读</a> · <a href="#qa-8ef9301af437d10b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:yuanbao-rubric" data-paper-title="From Relevance to Utility: Rubric Alignment in Yuanbao Search" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Relevance to Utility: Rubric Alignment in Yuanbao Search 搜广推与 LLM 应用 Tencent 2026-11-17 传统逐文档相关性不等于给下游推理提供有用证据。元宝先生成查询特定的加权正向标准和扣分标准，用蒸馏标签统一训练召回与四头排序，再用集合奖励训练选择器。低于组均值的轨迹并不接受负优势惩罚，而是按奖励差蒸馏组内最佳轨迹。 成本过高，不复现（审查DONE）；诊断检查最佳轨迹有蒸馏梯度、失败轨迹没有模仿梯度、奖励不反传、padding 梯度为零；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。没有运行 rubric 生成、DeepSeek judge、Qwen 编码器或真实搜索。诊断检查最佳轨迹有蒸馏梯度、失败轨迹没有模仿梯度、奖励不反传、padding 梯度为零；它们不是答案准确率。  检索与匹配 大模型与搜索融合 搜广推 候选生成与搜索匹配 元宝和WeSearch改动的是同一层吗？ 不是。前者统一效用监督并优化集合；后者主要改变簇内原子文档匹配。 教学例：ADC距离正确不能证明最终三个证据文档没有重复、缺漏或过期信息。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-c5631a8c1f09a199">元宝和WeSearch改动的是同一层吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Ayuanbao-rubric">From Relevance to Utility: Rubric Alignment in Yuanbao Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。前者统一效用监督并优化集合；后者主要改变簇内原子文档匹配。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：ADC距离正确不能证明最终三个证据文档没有重复、缺漏或过期信息。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22503v1">原论文</a> · <a href="../../../../recommendation-components/2611.22503-yuanbao-rubric/">实现解读</a> · <a href="#qa-c5631a8c1f09a199">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:yuanbao-rubric" data-paper-title="From Relevance to Utility: Rubric Alignment in Yuanbao Search" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Relevance to Utility: Rubric Alignment in Yuanbao Search 搜广推与 LLM 应用 Tencent 2026-11-17 传统逐文档相关性不等于给下游推理提供有用证据。元宝先生成查询特定的加权正向标准和扣分标准，用蒸馏标签统一训练召回与四头排序，再用集合奖励训练选择器。低于组均值的轨迹并不接受负优势惩罚，而是按奖励差蒸馏组内最佳轨迹。 成本过高，不复现（审查DONE）；诊断检查最佳轨迹有蒸馏梯度、失败轨迹没有模仿梯度、奖励不反传、padding 梯度为零；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。没有运行 rubric 生成、DeepSeek judge、Qwen 编码器或真实搜索。诊断检查最佳轨迹有蒸馏梯度、失败轨迹没有模仿梯度、奖励不反传、padding 梯度为零；它们不是答案准确率。  检索与匹配 大模型与搜索融合 搜广推 候选生成与搜索匹配 组内奖励全部相同时该怎样？ 优势和最佳奖励差都为零；两分支不给虚假策略更新，且padding必须始终无梯度。 教学例：奖励全为2时应为零更新；把padding logp改成极小值也不改变loss。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-39194bd5fc629963">组内奖励全部相同时该怎样？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Ayuanbao-rubric">From Relevance to Utility: Rubric Alignment in Yuanbao Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>优势和最佳奖励差都为零；两分支不给虚假策略更新，且padding必须始终无梯度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：奖励全为2时应为零更新；把padding logp改成极小值也不改变loss。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22503v1">原论文</a> · <a href="../../../../recommendation-components/2611.22503-yuanbao-rubric/">实现解读</a> · <a href="#qa-39194bd5fc629963">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:intentflow" data-paper-title="IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu 搜广推与 LLM 应用 Xiaohongshu 2026-11-16 相同图片上的找同款、找搭配和问使用信息需要不同证据，纯视觉相似性不足。IntentFlow将意图层级、可验证三档相关性、agentic数据构造、多模态检索和意图条件重排统一起来。索引固定后只在查询侧进行高层LoRA与六专家残差投影，避免全库重算。 成本过高，不复现（审查DONE）；文档输入在诊断中保持不变，不意味着语义召回已提升。L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。输入仅为外部融合特征和候选分数；没有用规则假装0.8B意图识别器，也未实现完整LoRA/VLM、agentic核验或NDCG权重训练链。文档输入在诊断中保持不变，不意味着语义召回已提升。  检索与匹配 多模态搜索与意图 搜广推 候选生成与搜索匹配 同一块手表图片为什么能改变相关性标签？ 找同型号要求实体对应，问表带耐用性允许其他型号提供可迁移的材料/使用证据；标签由完整意图决定。 教学例：同一候选在找同型号时得0/1档，在问皮表带耐用时可得2档。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<span id="paper-recommendation-intentflow-8a4a6600" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a0226abc7cf15fa9">同一块手表图片为什么能改变相关性标签？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aintentflow">IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Xiaohongshu</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>找同型号要求实体对应，问表带耐用性允许其他型号提供可迁移的材料/使用证据；标签由完整意图决定。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一候选在找同型号时得0/1档，在问皮表带耐用时可得2档。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20448v1">原论文</a> · <a href="../../../../recommendation-components/2611.20448-intentflow/">实现解读</a> · <a href="#qa-a0226abc7cf15fa9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:intentflow" data-paper-title="IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu 搜广推与 LLM 应用 Xiaohongshu 2026-11-16 相同图片上的找同款、找搭配和问使用信息需要不同证据，纯视觉相似性不足。IntentFlow将意图层级、可验证三档相关性、agentic数据构造、多模态检索和意图条件重排统一起来。索引固定后只在查询侧进行高层LoRA与六专家残差投影，避免全库重算。 成本过高，不复现（审查DONE）；文档输入在诊断中保持不变，不意味着语义召回已提升。L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。输入仅为外部融合特征和候选分数；没有用规则假装0.8B意图识别器，也未实现完整LoRA/VLM、agentic核验或NDCG权重训练链。文档输入在诊断中保持不变，不意味着语义召回已提升。  检索与匹配 多模态搜索与意图 搜广推 候选生成与搜索匹配 残差专家是不是六套独立query encoder？ 不是。每个分支共享一个down瓶颈，六套up投影由同一query门控混合；基础投影和文档空间保留。 教学例：两个分支rank8/64，共享各自down矩阵；gate不是人工意图one-hot。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-967c7d4c05e2511a">残差专家是不是六套独立query encoder？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aintentflow">IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Xiaohongshu</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。每个分支共享一个down瓶颈，六套up投影由同一query门控混合；基础投影和文档空间保留。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个分支rank8/64，共享各自down矩阵；gate不是人工意图one-hot。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20448v1">原论文</a> · <a href="../../../../recommendation-components/2611.20448-intentflow/">实现解读</a> · <a href="#qa-967c7d4c05e2511a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:intentflow" data-paper-title="IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu 搜广推与 LLM 应用 Xiaohongshu 2026-11-16 相同图片上的找同款、找搭配和问使用信息需要不同证据，纯视觉相似性不足。IntentFlow将意图层级、可验证三档相关性、agentic数据构造、多模态检索和意图条件重排统一起来。索引固定后只在查询侧进行高层LoRA与六专家残差投影，避免全库重算。 成本过高，不复现（审查DONE）；文档输入在诊断中保持不变，不意味着语义召回已提升。L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。输入仅为外部融合特征和候选分数；没有用规则假装0.8B意图识别器，也未实现完整LoRA/VLM、agentic核验或NDCG权重训练链。文档输入在诊断中保持不变，不意味着语义召回已提升。  检索与匹配 多模态搜索与意图 搜广推 候选生成与搜索匹配 它和WeSearch的簇约束有什么区别？ 固定索引适配改变query如何落入已有文档空间；簇约束改变候选空间组织，两者可组合但不是相互替代。 教学例：query残差改变而doc向量逐位不变，只证明固定索引接口成立。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-b995492dddc5eef9">它和WeSearch的簇约束有什么区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aintentflow">IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Xiaohongshu</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>固定索引适配改变query如何落入已有文档空间；簇约束改变候选空间组织，两者可组合但不是相互替代。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：query残差改变而doc向量逐位不变，只证明固定索引接口成立。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20448v1">原论文</a> · <a href="../../../../recommendation-components/2611.20448-intentflow/">实现解读</a> · <a href="#qa-b995492dddc5eef9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:intentflow" data-paper-title="IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu 搜广推与 LLM 应用 Xiaohongshu 2026-11-16 相同图片上的找同款、找搭配和问使用信息需要不同证据，纯视觉相似性不足。IntentFlow将意图层级、可验证三档相关性、agentic数据构造、多模态检索和意图条件重排统一起来。索引固定后只在查询侧进行高层LoRA与六专家残差投影，避免全库重算。 成本过高，不复现（审查DONE）；文档输入在诊断中保持不变，不意味着语义召回已提升。L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。输入仅为外部融合特征和候选分数；没有用规则假装0.8B意图识别器，也未实现完整LoRA/VLM、agentic核验或NDCG权重训练链。文档输入在诊断中保持不变，不意味着语义召回已提升。  检索与匹配 多模态搜索与意图 搜广推 候选生成与搜索匹配 CSLS参考query能用测试查询吗？ 不能用测试分布或标签调参。原文参考库来自训练query，离线密度项随适配模型计算，线上仅校正候选分数。 教学例：热门文档对训练query平均相似度高，离线密度扣分较大；不能用测试命中率来选k。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-ba2d9fe94ff32647">CSLS参考query能用测试查询吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aintentflow">IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Xiaohongshu</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能用测试分布或标签调参。原文参考库来自训练query，离线密度项随适配模型计算，线上仅校正候选分数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：热门文档对训练query平均相似度高，离线密度扣分较大；不能用测试命中率来选k。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20448v1">原论文</a> · <a href="../../../../recommendation-components/2611.20448-intentflow/">实现解读</a> · <a href="#qa-ba2d9fe94ff32647">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ured" data-paper-title="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation 搜广推与 LLM 应用 Alibaba Taobao &amp; Tmall Group 2026-11-04 为了增加内容发现，直接给冷候选提权可能放大排序器已有的误差。URED 复用已经被排序器打高分、但当次没有展示的候选；先累积，再按用户近期曝光类目过滤，最后作为额外召回通道送回原排序链，不改原排序器参数。 完整生产实验成本过高，不复现（审查 DONE）；三种子诊断验证 30 天/1 天的候选保留、未来记录隔离和配额顺序；本地交付：L1 CPU 候选处理。完整生产实验成本过高，不复现（审查 DONE）；不把离线样例的候选数量当线上提升。mine_ured 接收带用户、时间和类目的排序器评分日志，以及独立的观察曝光历史。本地窗口为左闭右开；截止时刻和未来的记录不参与筛选。分数只用于会话 top-k 和同一时刻的确定性排序，不用最高历史分替换按时间选最新记录。观察到的已曝光商品排除仅覆盖调用者提供的历史。  召回 高分未曝光候选回收 搜广推 候选生成与搜索匹配 URED 为何回收高分未展示候选，而不是向排序器随机注入冷内容？ 先使用排序器已计算的相关性信号，再按用户近期未见类目找发现机会。它没有把未展示当点击正例，也不以随意扩大曝光替代质量筛选。 示意：一个评分较高的摄影视频上次因列表容量没展示；候选池可保留它，不能假定用户点击过它。 2026-11-06">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
 <span id="paper-recommendation-ured-eafbeee5" class="ar-learning-paper-anchor"></span>

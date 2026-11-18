@@ -1,0 +1,13 @@
+{
+  "source_url": "https://arxiv.org/html/2611.22215v1/echomoe_architecture.svg",
+  "figure": "S4.F2",
+  "caption": "Figure 2: EchoMoE. Left: The L L MoE layers are partitioned into L / s L/s groups of s s consecutive layers. The first layer in each group serves as a reference layer, broadcasting its full-width state x ℓ x_{\\ell} , which every rank caches as z z . The following s − 1 s-1 layers in each group reuse this reference z z . Right: At each non-reference layer, the owner rank compresses and dispatches only the difference x ℓ − a ⊙ z x_{\\ell}-a\\odot z as c d ∈ ℝ r d c_{d}\\in\\mathbb{R}^{r_{d}} . Each expert applies W ~ in , i \\widetilde{W}_{\\mathrm{in},i} to [ z c d ] \\left[\\begin{smallmatrix}z\\\\\nc_{d}\\end{smallmatrix}\\right] and W ~ out , i \\widetilde{W}_{\\mathrm{out},i} , without explicit full-width input reconstruction or output materialization. Each node returns a single compressed state of width r c r_{c} , which is combined before the owner rank decompresses with D c D_{c} . The router reads the full x ℓ x_{\\ell} .",
+  "original_sha256": "5e781e588fcca2728ebb827d84e021a3dffa47acdda08b262e12c79e5c2b7c7c",
+  "extraction": "Author original raster image, or original SVG rasterized without semantic editing",
+  "paper_url": "https://arxiv.org/html/2611.22215v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-18",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result.",
+  "source_html_sha256": "fea04aa4c880ddbd84b2c6e7a41090d69de7ab7d867c1666ad02ca8f8bbfce25",
+  "asset_sha256": "d5c1e7b44c725d30e8ecf89eb01f7cea92e2cf583554ef8ec3664a2ce9cb20d7"
+}

@@ -7,7 +7,7 @@ hide:
 
 # 训练预算：改数据、改更新方向，还是改比较口径
 
-[基础模型](../index.md) · 更新 2026-11-15 · 34 篇主题资料 / 12 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-18 · 36 篇主题资料 / 14 篇重点对照
 
 同一预算内训练得更好，可能来自更合适的数据、逐样本处理、更有效更新或更低状态开销。DoReMi、Mixing Laws、DataOrchestra、Muon 和 ECO 改动不同环节；Muon Paired Budget 则提醒先冻结选参规则，再分别回答等数据和等时间问题。ProLand改变LoRA乘积空间的更新几何，GAVAGAI则给captioning增加显式词区域对齐目标，二者不能仅因都改善训练就混为一类。
 
@@ -37,6 +37,8 @@ hide:
 | [Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis](../../../foundation-models/2512.08819-lidas/README.md) · [原始来源](https://arxiv.org/abs/2512.08819v1)<br>章节：背景与主要改动、核心机制与公式、原文结果与限制、本地复现 | 深层 Transformer 后半段可能对最终预测贡献很小。论文比较从浅到深逐步生长与固定深度预训练，并提出 LIDAS：以层而不是固定块的中点选择复制区域，使偶数块时的初始化区别于 MIDAS。 | LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32主权重进入低精度参数时的量化分布。两者的控制变量、预算和误差来源不同，需分别验证，再做同预算组合实验。 |
 | [ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities?](../../../foundation-models/2606.01849-continuousbench/README.md) · [原始来源](https://arxiv.org/abs/2606.01849v1)<br>章节：背景与主要改动、核心机制与公式、原文结果与限制、本地复现 | 若benchmark已经被基座模型做得很好，合成数据是否真正传递新知识就难以区分。ContinuousBench定期生成或整理未见知识语料及相应QA，统一训练/evaluator设置，并与未经该语料训练的同一基座比较；关注高重复公共事实的utility，不要求DP模型记住单条私有记录。 | 不说明。gain评估合成数据utility，ε/δ隐私来自明确DP机制和会计；不应混淆高重复事实可学与单条私有记录可记忆。本地没有DP训练/会计，也没有复现News的LLMjudge。 |
 | [ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research](../../../foundation-models/2611.17332-archspace/README.md) · [原始来源](https://arxiv.org/abs/2611.17332v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 固定数据和tokenizer，用FLOPs/token、训练token数及LR/BS耦合曲面比较架构；最终衰减checkpoint和11域等权validation是比较协议的一部分。 | Data Mixing Laws改变域比例并从pilot拟合配比；ArchSpace控制架构规模与LR/BS。两类曲面系数不能交换，公开算术复算也不等于重新拟合或执行自动架构搜索。 |
+| [The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale](../../../foundation-models/2611.22947-lara-plus-plus/README.md) · [原始来源](https://arxiv.org/abs/2611.22947v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 本文重新核查核化attention的真实效率，并用确定性proposal均值代替随机采样、相似性聚类代替连续切块改善LARA质量。与复杂度口号不同，cluster数量随序列增长时k-center成本为二次；近softmax质量不等于比FlashAttention快。 | LazyFlash保持前向dense而稀疏反向；LARA++近似前向softmax并需要蒸馏适配。两者改变的计算与误差对象不同，不能都归纳成“线性attention更快”。 |
+| [Latent Feedback Is a Compute and Data Amplifier](../../../foundation-models/2611.20404-latent-feedback-scaling/README.md) · [原始来源](https://arxiv.org/abs/2611.20404v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | latent feedback把上一token的顶层状态注入下一token输入，花更多每token计算。本文不只在相同token数比较，而让普通Transformer把相同FLOPs用于更多epoch，并同时控制unique数据和模型规模。 | ArchSpace比较架构/超参的匹配预算曲面；本篇专门研究重复数据及feedback的额外计算。两种拟合系数不可交换，单独输出预测loss不等于已训练候选。 |
 
 </div>
 
@@ -83,6 +85,18 @@ LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32�
 相同loss输出不意味着相同研究任务。Data Mixing Laws的输入有mixture simplex，ArchSpace把数据固定并用C=MD计训练FLOPs。M不是参数量，LR条件最优随batch平方根变化；未重跑新架构的pilot就不能用旧基线系数宣称收益。
 
 对照来源：[archspace](../../../foundation-models/2611.17332-archspace/README.md) · [data-mixing-laws](../../../reproductions/2403.16952-data-mixing-laws/README.md)
+
+### LARA++：确定性proposal与相似性分组的核注意力
+
+LazyFlash保持前向dense而稀疏反向；LARA++近似前向softmax并需要蒸馏适配。两者改变的计算与误差对象不同，不能都归纳成“线性attention更快”。 本地固定作者commit的mis-opt路径。论文§7描述query-only和随机首中心，而公开源码用归一化Q+K联合特征、确定性首中心，CLS单独保留。这里明确执行源码变体，不把差异消除：proposal生成不反传，当前Q/K特征与V聚合仍可微。
+
+对照来源：[lara-plus-plus](../../../foundation-models/2611.22947-lara-plus-plus/README.md) · [lazyflash](../../../foundation-models/2610.31911-lazyflash/README.md)
+
+### Latent Feedback：在重复数据下比较相同计算预算
+
+ArchSpace比较架构/超参的匹配预算曲面；本篇专门研究重复数据及feedback的额外计算。两种拟合系数不可交换，单独输出预测loss不等于已训练候选。 R<1时有效数据改为RU；R>=1时重复收益逐渐饱和。capacity multiplier与每token额外计算成本不同，loss预测依赖重新拟合和外推验证，不是重复token越多越省的无条件结论。
+
+对照来源：[latent-feedback-scaling](../../../foundation-models/2611.20404-latent-feedback-scaling/README.md) · [archspace](../../../foundation-models/2611.17332-archspace/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -168,9 +182,37 @@ LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32�
 
     对照来源：[archspace](../../../foundation-models/2611.17332-archspace/README.md) · [data-mixing-laws](../../../reproductions/2403.16952-data-mixing-laws/README.md)
 
+### 论文和当前作者实现的聚类是否完全相同？ {#cross-nov18-lara-plus-plus}
+
+??? note "展开答案与例子"
+
+    **答案：** 不完全。论文写query相似性与随机初始点，固定源码用归一化Q+K、确定性初始点并保留CLS。本地记录源码变体，不声称两者无差别。
+
+    **教学例子：** 两个query相同但key不同的token，在joint特征里可能分到不同簇。
+
+    对照来源：[lara-plus-plus](../../../foundation-models/2611.22947-lara-plus-plus/README.md) · [lazyflash](../../../foundation-models/2610.31911-lazyflash/README.md)
+
+### 能直接把ArchSpace的loss系数填进本篇吗？ {#cross-nov18-latent-feedback-scaling}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。两者控制变量和函数形式不同，本篇包含repeat saturation与feedback capacity factor；需要自己的拟合。
+
+    **教学例子：** 即使都预测validation loss，参数N与FLOPs/token M也不是相同量。
+
+    对照来源：[latent-feedback-scaling](../../../foundation-models/2611.20404-latent-feedback-scaling/README.md) · [archspace](../../../foundation-models/2611.17332-archspace/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · ArchSpace比较架构/超参的匹配预算曲面；本篇专门研究重复数据及feedback的额外计算。两种拟合系数不可交换，单独输出预测loss不等于已训练候选。 本地边界与完整高成本不复现分别记录。
+
+涉及：[latent-feedback-scaling](../../../foundation-models/2611.20404-latent-feedback-scaling/README.md) · [archspace](../../../foundation-models/2611.17332-archspace/README.md)
+
+**2026-11-18** · LazyFlash保持前向dense而稀疏反向；LARA++近似前向softmax并需要蒸馏适配。两者改变的计算与误差对象不同，不能都归纳成“线性attention更快”。 本地边界与完整高成本不复现分别记录。
+
+涉及：[lara-plus-plus](../../../foundation-models/2611.22947-lara-plus-plus/README.md) · [lazyflash](../../../foundation-models/2610.31911-lazyflash/README.md)
 
 **2026-11-15** · 补入固定版本方法、低成本组件或明确资料收录，分开原文结果、本地诊断及高成本不复现范围。
 
@@ -196,7 +238,7 @@ LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32�
 
 覆盖 28 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 34 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 36 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -234,6 +276,8 @@ LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32�
 - [Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis](../../../foundation-models/2512.08819-lidas/README.md)
 - [ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities?](../../../foundation-models/2606.01849-continuousbench/README.md)
 - [ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research](../../../foundation-models/2611.17332-archspace/README.md)
+- [The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale](../../../foundation-models/2611.22947-lara-plus-plus/README.md)
+- [Latent Feedback Is a Compute and Data Amplifier](../../../foundation-models/2611.20404-latent-feedback-scaling/README.md)
 
 </details>
 

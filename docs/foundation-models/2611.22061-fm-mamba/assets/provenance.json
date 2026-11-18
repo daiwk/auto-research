@@ -1,0 +1,13 @@
+{
+  "source_url": "https://arxiv.org/html/2611.22061v1/2D_Contribution_2.svg",
+  "figure": "S3.F1",
+  "caption": "Figure 1 : Dual-Diagonal Wavefront Scan: black marks the anti-diagonal i + j i{+}j on which h ⁡ ( i , j ) h(i,j) resides, red the anti-diagonal i + j − 1 i{+}j{-}1 read through A ~ 1 ​ ( i , j ) ​ h ​ ( i − 1 , j ) \\tilde{A}_{1}(i,j)h(i{-}1,j) and A ~ 2 ​ ( i , j ) ​ h ​ ( i , j − 1 ) \\tilde{A}_{2}(i,j)h(i,j{-}1) , and blue the anti-diagonal i + j − 2 i{+}j{-}2 read through A ~ 0 ​ ( i , j ) ​ h ​ ( i − 1 , j − 1 ) \\tilde{A}_{0}(i,j)h(i{-}1,j{-}1)",
+  "original_sha256": "9e4ebf9698463eb8bc09c32f7143cd585cb8e163f5b2cae4dcea26a3a4b8be4e",
+  "extraction": "Author original raster image, or original SVG rasterized without semantic editing",
+  "paper_url": "https://arxiv.org/html/2611.22061v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-18",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result.",
+  "source_html_sha256": "d56d4136101fa5f5e8522d79a84b95a4e2fe901399b52d4da1139968c7e224a1",
+  "asset_sha256": "9385e59fbfedaf6f700692bcea2d60f4390f2d7d3bd9a86930720a6937312f9a"
+}

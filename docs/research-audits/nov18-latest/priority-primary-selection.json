@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-18",
+  "reviews": [
+    {
+      "arxiv_id": "2611.21920",
+      "source_url": "https://arxiv.org/html/2611.21920v1",
+      "source_sha256": "d6588c8efaa776d3ff2ca997754985eedf4a6e562fd11bcc45c7b7ef46bc2f6c",
+      "source_locations": [
+        "v1 MRS author byline",
+        "§3.3 system design",
+        "§4.1 setup",
+        "§4.2–4.4 ranking/fidelity/serving",
+        "Appendix C/D limitations and gates"
+      ],
+      "review_scope": "primary-method/byline-and-production-evidence-selection",
+      "decision": "industrial_online_evidence_gate_not_met",
+      "reason": "KVUse is genuinely Meta Recommendation Systems, not inferred from familiar names. Fixed v1 reports memory-chain/profile/throughput experiments, but no quantified randomized production A/B or qualifying explicit full-traffic evaluation was found. Offline production-like serving is not the industrial intake gate. Not selected as a capability reproduction; do not route around the gate with a tiny cache mock.",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "arxiv_id": "2611.22309",
+      "source_url": "https://arxiv.org/pdf/2611.22309v1",
+      "source_sha256": "70e6a53cc5961ba2da5c3cff7746283fb02262e7faf2928280b5a151f96ac9a8",
+      "source_locations": [
+        "PDF p1 LinkedIn byline",
+        "§6.1 production-derived replay and output overlap",
+        "§6.2/6.5 H200 throughput",
+        "Appendix B validation and limitations"
+      ],
+      "review_scope": "primary-method/byline-and-production-evidence-selection",
+      "decision": "industrial_online_evidence_gate_not_met",
+      "reason": "LinkedIn, not Google/Meta. H200 production-derived replay is not live A/B; paper explicitly does not establish unchanged relevance or full pipeline reduction. Proposed SGLang contribution44349 and private checkpoints/catalogs are recorded without claiming an available complete reproduction.",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "arxiv_id": "2611.20721",
+      "source_url": "https://arxiv.org/html/2611.20721v1",
+      "source_sha256": "4f8d0619ee7b6239bfca788e360ad2b53606c62f1ed31fabc4f1fcd77f8cb2d5",
+      "source_locations": [
+        "§5 CARE-SID/R3-VAE",
+        "§6 CARE-LR",
+        "§7 experiments",
+        "§8 Deployment in Video Search"
+      ],
+      "review_scope": "primary-method/byline-and-production-evidence-selection",
+      "decision": "industrial_online_evidence_gate_not_met",
+      "reason": "Tencent authors and an actual deployment section verified. It explains generative SID serving and refreshing mappings but provides no quantified production A/B or explicit qualifying full-traffic outcome. Deployment wording alone does not satisfy the industrial evidence gate.",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "arxiv_id": "2611.22163",
+      "source_url": "https://arxiv.org/html/2611.22163v1",
+      "source_sha256": "bc3cee34e068bb679f2bd710600ee9cd20e9c0ae38dc0050071473d30e240c1c",
+      "source_locations": [
+        "method trust-region decoding",
+        "experiments including Efficiency and Production Deployment"
+      ],
+      "review_scope": "primary-method/byline-and-production-evidence-selection",
+      "decision": "industrial_online_evidence_gate_not_met",
+      "reason": "The production heading discusses deployment-friendly properties and local1.6–2.5ms inference, not a production randomized experiment; production conditions remain unevaluated.",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "arxiv_id": "2611.22410",
+      "source_url": "https://arxiv.org/html/2611.22410v1",
+      "source_sha256": "df48dc469b09a501fb21a6d399059f67f24013db66be32a4cf95f4401ec34911",
+      "source_locations": [
+        "verbal feedback and joint GRPO method",
+        "Amazon offline experimental setup/results",
+        "references"
+      ],
+      "review_scope": "primary-method/byline-and-production-evidence-selection",
+      "decision": "industrial_online_evidence_gate_not_met",
+      "reason": "VerRec reports offline public Amazon experiments; the A/B string occurs in cited prior work, not a new production experiment.",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    }
+  ],
+  "google_new_repository": {
+    "url": "https://github.com/google-deepmind/efficient_evals",
+    "created_at": "2026-11-16T14:47:11Z",
+    "paper": "2603.02029",
+    "published_at": "2026-03-02T16:12:46Z",
+    "resolution": "historical_new_code_accepted",
+    "first_author_affiliation": "University of Michigan",
+    "verified_collaborator": "Google DeepMind",
+    "revision": "b4421d929d1078631ee890f8e4a776442c816d36"
+  },
+  "google_tool_release": {
+    "url": "https://github.com/google-deepmind/robotics-antigravity-plugin",
+    "created_at": "2026-11-16T18:50:28Z",
+    "resolution": "not_a_separate_paper_method",
+    "reason": "Official README describes a robotics tool/skill release and examples; not a distinct specified research-paper algorithm. Nothing installed or executed."
+  },
+  "meta_new_paper": {
+    "id": "2611.21839",
+    "key": "vishead-spec",
+    "verified_byline": "Meta Recommendation Systems (MRS)",
+    "resolution": "bounded_component_accepted"
+  },
+  "limitations": [
+    "Familiar author names and official directory membership are recall signals, not affiliation proof.",
+    "Official Google directory URLs mix absolute and relative links; both are normalized and tested.",
+    "Meta publication entry can return45-byte unavailable content withHTTP200; this is an archived nonblocking exception, not evidence of no new Meta papers."
+  ]
+}

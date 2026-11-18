@@ -1,0 +1,13 @@
+{
+  "source_url": "https://arxiv.org/html/2611.20524v1/gauge_overview.svg",
+  "figure": "S4.F2",
+  "caption": "Figure 2: GaugeRoPE overview. GaugeRoPE represents each historical token with two latent\ncomponents: a RoPE-compatible carrier 𝐳 s \\mathbf{z}_{s} for the rotary key path\nand a position-independent RKV code 𝐛 s \\mathbf{b}_{s} for complementary residual-key\nand value information. The two paths produce complementary\nattention scores that are combined before softmax, while values are\naggregated in latent space and decoded once, avoiding per-token historical\nnative-K/V reconstruction.",
+  "original_sha256": "e2c19727591871a238ecd546e49ca93b23ef74a82e95b82369a0557483106bfc",
+  "extraction": "Author original raster image, or original SVG rasterized without semantic editing",
+  "paper_url": "https://arxiv.org/html/2611.20524v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-18",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result.",
+  "source_html_sha256": "536784d0103fc39546bc09b3f9254d151a9d6d75d735d44388c760b3ad019534",
+  "asset_sha256": "f3180f9eac5021cef0cac0c8422c8a09e13ae0d2f7db803d7735fc661fba855e"
+}

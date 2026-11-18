@@ -1,0 +1,104 @@
+{
+  "schema_version": 2,
+  "method": "cascadejepa",
+  "manifest_ref": "foundation-models:cascadejepa",
+  "dataset": {
+    "id": "synthetic:nov18-latest-cascadejepa-mechanism-v1",
+    "kind": "explicit_mechanism_or_protocol_fixtures",
+    "revision": "sha256:7c05666e8e7d19c1be2a6491f631ee7fee49c7c7aaf24630678998bf6dfec2df",
+    "public_capability_benchmark": false,
+    "source": "Seeded synthetic operator tensors; no pretrained model or capability dataset"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "two_stage_objective": 6.218898296356201
+      },
+      "checks": {
+        "masked_grid_keeps_positions": true,
+        "stage2_cannot_change_stage1": true,
+        "ema_target_has_no_gradients": true,
+        "spatial_cross_attention_trained": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "two_stage_objective": 7.0434651374816895
+      },
+      "checks": {
+        "masked_grid_keeps_positions": true,
+        "stage2_cannot_change_stage1": true,
+        "ema_target_has_no_gradients": true,
+        "spatial_cross_attention_trained": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "two_stage_objective": 5.376530170440674
+      },
+      "checks": {
+        "masked_grid_keeps_positions": true,
+        "stage2_cannot_change_stage1": true,
+        "ema_target_has_no_gradients": true,
+        "spatial_cross_attention_trained": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "two_stage_objective": 6.2129645347595215
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Bounded defining-operator arithmetic and negative controls, not complete model or benchmark capability"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "66cda00810da75bb8e3daa789c8d29b5b71b851d",
+    "source_state": "uncommitted working tree with exact executed-source fingerprints",
+    "accelerator": "CPU",
+    "artifact_path": "docs/foundation-models/2611.22686-cascadejepa/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "src/auto_research/foundation_models/cascadejepa.py": "7c05666e8e7d19c1be2a6491f631ee7fee49c7c7aaf24630678998bf6dfec2df"
+    }
+  }
+}

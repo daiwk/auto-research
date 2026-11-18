@@ -1,0 +1,108 @@
+{
+  "schema_version": 2,
+  "method": "vishead-spec",
+  "manifest_ref": "foundation-models:vishead-spec",
+  "dataset": {
+    "id": "synthetic:nov18-latest-vishead-spec-mechanism-v1",
+    "kind": "explicit_mechanism_or_protocol_fixtures",
+    "revision": "sha256:39dc64596fa557abbf600d4f5c5995f197c44442efd93c9dc1a6954b1fda535a",
+    "public_capability_benchmark": false,
+    "source": "Seeded synthetic operator tensors; no pretrained model or capability dataset"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "drafter_objective": 1.6123254299163818,
+        "routed_image_effect": 5.742213249206543
+      },
+      "checks": {
+        "text_only_group_ignores_image": true,
+        "routed_group_reads_image": true,
+        "loss_has_gradient": true,
+        "target_distribution_detached": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "drafter_objective": 1.4722317457199097,
+        "routed_image_effect": 5.781131267547607
+      },
+      "checks": {
+        "text_only_group_ignores_image": true,
+        "routed_group_reads_image": true,
+        "loss_has_gradient": true,
+        "target_distribution_detached": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "drafter_objective": 1.284252643585205,
+        "routed_image_effect": 5.946005344390869
+      },
+      "checks": {
+        "text_only_group_ignores_image": true,
+        "routed_group_reads_image": true,
+        "loss_has_gradient": true,
+        "target_distribution_detached": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "drafter_objective": 1.4562699397404988,
+    "routed_image_effect": 5.823116620381673
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Bounded defining-operator arithmetic and negative controls, not complete model or benchmark capability"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "66cda00810da75bb8e3daa789c8d29b5b71b851d",
+    "source_state": "uncommitted working tree with exact executed-source fingerprints",
+    "accelerator": "CPU",
+    "artifact_path": "docs/foundation-models/2611.21839-vishead-spec/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "src/auto_research/foundation_models/vishead_spec.py": "39dc64596fa557abbf600d4f5c5995f197c44442efd93c9dc1a6954b1fda535a"
+    }
+  }
+}

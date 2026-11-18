@@ -1,0 +1,59 @@
+{
+  "domain": "post-training",
+  "key": "ca-zodpo",
+  "title": "Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment",
+  "paper_url": "https://arxiv.org/abs/2611.20635v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.20635v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.20635-ca-zodpo/README.md",
+  "first_author": "Weiyun Huang",
+  "first_author_affiliation": "Uppsala University",
+  "published": "2026-11-16",
+  "published_at": "2026-11-16T06:55:27Z",
+  "code": null,
+  "code_status": "固定v1及所核作者入口未找到可验证的本篇方法源码发布；引用的训练器、模型或库不算本篇开源。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "preference-and-alignment",
+    "后训练算法组件"
+  ],
+  "priority": "P1",
+  "intake_class": "new_submission_in_requested_window",
+  "implementation_status": "component_only",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.20635v1",
+    "source_sections": [
+      "§2 Eq.1–5",
+      "§3 HH-RLHF setup"
+    ],
+    "basis": "§3 Qwen2.5-1.5B在HH-RLHF先SFT再多种ZO/FO-DPO对照，seq2048；每更新提取basis前向+两次损失前向，完整campaign需真实模型训练/评判。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API call.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30,
+      "gpu_component_seconds_per_seed_cap": 30,
+      "cap_scope": "Tiny exact operator/negative-control checks only; not a training campaign."
+    }
+  },
+  "summary": "偏好loss仍是policy/reference的chosen-rejected margin；改变的是无需反传的搜索方向，用chosen与rejected输入activation差提取低秩空间，而非全参数各向同性扰动。 chosen/rejected activation差的power-iteration子空间、rank归一化双点有限差分、换basis投影的低秩momentum更新。",
+  "evaluation_tier": "l1_mechanism",
+  "local_operator": "auto_research.post_training.ca_zodpo.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.ca_zodpo import diagnostic; print(diagnostic(42))'",
+  "gpu_validation_artifact": "docs/gpu-validations/ca-zodpo-a100-20261118-latest.json"
+}

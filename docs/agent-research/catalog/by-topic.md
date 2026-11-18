@@ -87,6 +87,10 @@
 - [TFRBench: A Reasoning Benchmark for Evaluating Forecasting Systems](../2604.05364-tfrbench/README.md)（`tfrbench`）：预测值接近真值不保证推理有根据，流畅推理也可能导致错误预测。论文联合 Search、Reason、Forecast、Verify、Summary 构建数值与推理同时合格的参考轨迹。
 - [ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders](../2602.16938-convapparel/README.md)（`convapparel`）：模拟用户能完成购物目标，不等于像真人。论文将验证拆成三条互补证据：PLSA 比较行为分布；HLS 检查训练过的真假对话判别器能否识别模拟；反事实验证把仅在一种推荐策略下训练的模拟器放到另一策略下。
 
+### 记忆与技能
+
+- [Instant Weight-Space Consolidation for Long-Term Memory in LLMs](../2611.20759-clam-memory/README.md)（`clam-memory`）：CLAM把可积累的参数记忆与逐字检索缓冲分开：冻结LLM提供每层会话activation，hypernetwork在不做测试时梯度下降的情况下写出down_proj LoRA，查询时再配top5会话片段。没有提取调用不等于没有前置训练；能力来自离线context distillation。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ### 技能进化
 
 - [COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization](../2609.11682-cobra-skills/README.md)（`cobra-skills`）：把技能优化视为动态候选空间中的预算化 contextual bandit，优先评估高收益或高信息量技能，再依据执行反馈演化。
@@ -119,6 +123,15 @@
 
 - [Dependency-Aware Trajectory Refinement for Efficient Multi-Turn Agent Fine-Tuning](../2609.18417-dependency-refinement/README.md)（`dependency-refinement`）：把多轮轨迹表示为轮级依赖 DAG，依次执行叶节点裁剪、严格合并和宽松合并，减少冗余消息同时保留最终答案依赖。
 
+### 评测与可靠性
+
+- [SkillBuffBench: Measuring What Agent Skills Contribute across Harnesses, Models, Skill Access Modes and Memory](../2611.22017-skillbuffbench/README.md)（`skillbuffbench`）：手工给Agent正确skill测的是精选上界，不等于部署时能从库里找到它。SkillBuffBench在同一任务／模型／harness下交叉三种skill访问（无、精选、自动）与两种memory模式，单独测内容收益、发现损失和记忆交互。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [The Resolution Hypothesis: Agent Evolution's Key Is Identifying Improvements](../2611.23068-resolution-hypothesis/README.md)（`resolution-hypothesis`）：自进化停滞不一定是提案不够好，可能是一次嘈杂评分分不清候选改进。本文把“同一artifact反复测”的评测噪声与“不同演化run产出不同artifact”的真实质量波动分开。
+- [Verifying Agents in Rubric-Graded Environments](../2611.22841-gandalf-bvb/README.md)（`gandalf-bvb`）：复杂任务产物可能是Excel、PowerPoint或应用状态，单纯把文件转成文本会丢公式、布局与跨文件关系。本文不是新做任务的Agent，而是研究判断Agent产物的verifier：BVB包含24投资银行任务、2464个人工判定criteria，用来评测验证器的判断。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [DetourBench: Trajectory-Level Evaluation of Interactive Agents with Exact Minimum-Action Bounds](../2611.20844-detourbench/README.md)（`detourbench`）：只看最终成功会把最短路线、绕路成功和接近完成的失败混成同一结果。DetourBench把环境限制为有限、确定、部分可观察的资源／凭证状态机，资源标识发现后全局可寻址，没有当前位置或回退路费。
+- [SciResearch-Eval: Evaluating Scientific Judgment in Autonomous Experimental Agents](../2611.21541-sciresearch-eval/README.md)（`sciresearch-eval`）：Agent需要给未知材料设计加热实验，用可能粗糙或缺物理项的热传导模拟器估计物性，再报告95%区间与隐藏实验的预测。拟合残差小不代表模型正确：错误物理可给出看似精确但偏置的参数。
+- [XStack: A Benchmark for ML Repo Migration](../2611.08472-xstack/README.md)（`xstack`）：局部张量变换正确不等于能迁移完整实验。XStack 固定 20 个真实 PyTorch 仓库的源提交，要求 Agent 在 TPU 上移植到 JAX，交付环境安装、训练/评测和 PyTorch 权重导出三个入口。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ### Agent记忆
 
 - [Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems](../2610.36652-discernmem/README.md)（`discernmem`）：团队失败不代表注入的每条记忆都有错。DiscernMem把“规则内容有缺陷”和“好规则用错场景”分开：以相同任务、seed和配置运行完整团队，仅向原拥有者注入一条记忆，再与所有角色都无记忆的执行比较。
@@ -137,6 +150,12 @@
 ### Harness 自进化
 
 - [Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents](../2609.11677-ecdysis/README.md)（`ecdysis`）：聚合跨任务重复失败以区分模型偶发错误和 harness 系统缺陷，再由 FDCR 多角色诊断形成修复规格。
+
+### 执行框架与自改进
+
+- [Do LLM Agents Still Need to Be Told How to Self-Improve?](../2611.23219-self-organized-learning/README.md)（`self-organized-learning`）：本文不先指定GEPA式优化循环，而是给冻结teacher通用自改进目标、文件读写／Bash／gameplay原语与资源预算。teacher可自己造游戏、观察短生命周期player、编辑文本产物，自行决定何时探索、比较和更新。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [Evaluation-Free Recursive Self-Improvement for Coding Agents](../2611.21056-elite-eval-free/README.md)（`elite-eval-free`）：ELITE质疑反复在固定下游任务上evaluate-and-select的成本与适应偏差。冻结模型，演化可执行scaffold代码：同一parent先给出多个聚焦改进假设，每条假设独立实现，经过确定性有效性检查后交给LLM integrator。
+- [MetaAct: Self-Evolving Executable Action Constraints for Embodied Language Agents](../2611.20655-metaact/README.md)（`metaact`）：自然语言教训改变偏好，却不能保证不可逆动作不执行。MetaAct让LLM输出类型化GEAR规格，由固定编译器转成确定性guard；运行时拒绝违反约束的动作并返触发消息，模型需要重新规划。
 
 ### 长期记忆与技能
 
@@ -265,6 +284,10 @@
 
 - [Sentry: Learning to Recover from LLM Agent Failures at Test Time](../2610.02994-sentry/README.md)（`sentry`）：Sentry 不把所有失败经验长期塞进 Agent 上下文，而是先识别当前行为失败，再按类别和标签检索相关恢复建议。外部验证器只看后续可观察进展、不看任务奖励，确认恢复后才把经验写入 playbook；动作格式错误走单独的硬修复路径。
 
+### 工具与协作
+
+- [Invariant-Aware Harness Enforcement to Protect LLM Agents from Silent API Failures](../2611.20595-silentguard/README.md)（`silentguard`）：API返回HTTP200并不保证按请求过滤，静默忽略字段、把AND变OR或截断total都可能让Agent相信错误数据。SilentGuard把检查从提示中的建议移到执行harness：结果过确定性不变量才放行，失败真实重试一次，仍失败时按检查可信度隐藏值或警告，不自动生成“修复值”。
+
 ### Agent 数据合成
 
 - [Reasoning-Driven Synthetic Data Generation and Evaluation](../2603.29791-simula/README.md)（`simula`）：单纯扩写种子容易遗漏概念或坍缩到相似样本。Simula 先按因素建立分类树，再控制全局节点组合与局部场景；独立批判过滤样本，并通过批内相对评分校准复杂度。
@@ -292,10 +315,6 @@
 ### 主动 / 长期记忆
 
 - [Don't Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents](../2611.14320-wikitrace/README.md)（`wikitrace`）：从一次成功或失败轨迹提炼出的洞见不一定正确，也可能被误用到不适用的任务。WikiTrace 不只保存一句经验，而是把洞见链接到该次执行的解释及未改写的原轨迹。
-
-### 评测与可靠性
-
-- [XStack: A Benchmark for ML Repo Migration](../2611.08472-xstack/README.md)（`xstack`）：局部张量变换正确不等于能迁移完整实验。XStack 固定 20 个真实 PyTorch 仓库的源提交，要求 Agent 在 TPU 上移植到 JAX，交付环境安装、训练/评测和 PyTorch 权重导出三个入口。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ## Agentic RL 与后训练
 

@@ -148,6 +148,69 @@
             "结果、负控与边界",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "foundation-models:infuseloop",
+          "position": "并行loop在同一执行周期同时推进多个预测轨迹。InfuseLoop让第r轮聚合上一周期已完成、但来自更浅loop的状态，而非仅传递本轨迹前一轮。未来轨迹位置不等于未来未生成token，合法性由执行周期决定。",
+          "tradeoff": "Anchor跨层共享外部TTT状态并学习read-map，InfuseLoop共享的是可用计算图中的轨迹latent；不能把任意跨层平均或持久缓存叫作InfuseLoop。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:fm-mamba",
+          "position": "原生2D FM状态同时接收上、左与左上三个前驱，不通过展平扫描把二维关系退化为一条链。两个输入相关步长分别控制两个轴；a0/(a1a2)决定是否需要给步长施加上界。",
+          "tradeoff": "Mamba的一维selective SSM让步长、B/C依赖当前token并配合因果卷积和门控；FM-Mamba原生二维递推同时读取上、左、左上三前驱，使用两个轴步长及ratio相关稳定约束。展平成一维Mamba不是FM-Mamba，Python参考一致也不等于融合scan或PSD提速。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:gaugerope",
+          "position": "任意低秩K在潜空间通常不保留RoPE作用，需要逐历史token重建。GaugeRoPE只在相同频率块内拟合复数carrier，另用能量平衡后的joint PCA存residual K与V；query吸收decoder，聚合后才解码输出。",
+          "tradeoff": "Anchor让多个层共享TTT状态并学习read-map；GaugeRoPE保留每层token历史但改变其坐标/低秩表示。跨层共享和每token潜缓存压缩不是同一个操作。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:simq",
+          "position": "ColBERT式MaxSim需要逐query token匹配文档token。SIMQ先均匀抽样token作初始聚合点，通过临时图分配剩余token，对过大cluster递归二分，归一化均值后建立一个质心图。查询只导航到少量质心，经质心到文档映射生成候选，最后才访问候选原始token精确重排，避免全query×centroid矩阵。",
+          "tradeoff": "HVMap解决不同编码器向量空间不能直接比较的问题，通过hub映射和双空间SCORE2联合重排；SIMQ假定同一规范化token空间，改变候选图组织和晚交互计算。前者的映射质量不由SIMQ的计数验证，后者的图效率也不由HVMap小张量loss证明。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题对照",
+            "高成本完整实验"
+          ]
+        },
+        {
+          "paper": "foundation-models:unigraph",
+          "position": "分别检索dense和sparse再合并可能过早漏掉仅在混合距离下优秀的向量。UniGraph在多个离散alpha下取近邻，按跨alpha入选频次合并成一个有界出度图；查询时不重构图，直接按自己的alpha遍历。稀疏或稠密guide给出入口，减少到目标区域的混合距离计算。",
+          "tradeoff": "HVMap学的是异构库之间的表示转换，UniGraph学不到新的向量映射，而是保留dense/sparse原分量并改变跨权重邻域组织。SCORE2的native/mapped双空间权重与UniGraph的语义／词汇alpha含义不同，不能共享一个未经验证的权重解释。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题对照",
+            "高成本完整实验"
+          ]
+        },
+        {
+          "paper": "foundation-models:dealrank",
+          "position": "并行listwise重排要把候选分组，每组只晋级固定配额。连续切块会把初始召回前部的好文档挤进同一组，越好的retriever越可能被配额误切。DealRank按retriever名次轮流发牌，使每个前缀在各组尽量平衡，再并行排序、按配额晋级并最终合并，不依赖补救认证轮。",
+          "tradeoff": "HVMap改变异构向量候选怎么映射和打分，DealRank不训练表示，而是安排已有候选进入ranker的组合。它们可串在同一检索流水线，但更少调用不是更好向量对齐，SCORE2正确也不能证明listwise配额无损。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题对照",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -225,6 +288,54 @@
           "papers": [
             "foundation-models:hvmap",
             "foundation-models:ecg-rag"
+          ]
+        },
+        {
+          "title": "InfuseLoop：在上一执行周期聚合跨轨迹潜状态",
+          "body": "Anchor跨层共享外部TTT状态并学习read-map，InfuseLoop共享的是可用计算图中的轨迹latent；不能把任意跨层平均或持久缓存叫作InfuseLoop。 keys和values都用无参数RMS归一化，文档边界在softmax前屏蔽。所有新状态读同一旧缓冲，完成整周期后再commit；聚合替换原跨loop输入，不能重复加上旧状态。",
+          "papers": [
+            "foundation-models:infuseloop",
+            "foundation-models:anchor-kv"
+          ]
+        },
+        {
+          "title": "先比较状态依赖图，再比较状态空间复杂度",
+          "body": "实读Mamba README的递推是h_t=exp(Delta_t A)h_(t-1)+Delta_t B_t x_t，一条一维历史链支持selective scan；本地短预算WikiText负结果不代表原论文规模。FM-Mamba的两个轴指数交叉进入ZOH状态系数，并保留可能非零的对角前驱；同一反对角才能并行。其冻结系数逐位置稳定条件不构成任意时变场的全局证明。两者的输入依赖性相似，但拓扑、离散化和并行实现不同。",
+          "papers": [
+            "foundation-models:fm-mamba",
+            "foundation-models:mamba"
+          ]
+        },
+        {
+          "title": "GaugeRoPE：可执行RoPE carrier与残余KV双支缓存",
+          "body": "Anchor让多个层共享TTT状态并学习read-map；GaugeRoPE保留每层token历史但改变其坐标/低秩表示。跨层共享和每token潜缓存压缩不是同一个操作。 carrier在保留子空间中精确保持RoPE，但RKV把残余位置相关分数近似为不旋转的校正。因此整体attention一般仍是近似；不能因为carrier兼容就宣称压缩无损。PCA只用显式校准输入，不借测试答案选秩。",
+          "papers": [
+            "foundation-models:gaugerope",
+            "foundation-models:anchor-kv"
+          ]
+        },
+        {
+          "title": "SIMQ：单质心图上的多向量检索与计数候选选择：区别机制与能力",
+          "body": "§III/Alg1–2保留抽样、图引导分配、deferred二分、质心归一化、每token候选和精确MaxSim重排。§V/Alg3的SIMQ+在每token原始文档pool中按文档去重计数，不做TopDocs截断；边界count并列必须全部保留，候选数可以超过Nmin。当前Index用小型exact kNN邻接构图和有限Lloyd二分代替可扩展HNSW/VSAG后端，是明确的小数据后端差异，不复现工业build/QPS。 HVMap解决不同编码器向量空间不能直接比较的问题，通过hub映射和双空间SCORE2联合重排；SIMQ假定同一规范化token空间，改变候选图组织和晚交互计算。前者的映射质量不由SIMQ的计数验证，后者的图效率也不由HVMap小张量loss证明。",
+          "papers": [
+            "foundation-models:simq",
+            "foundation-models:hvmap"
+          ]
+        },
+        {
+          "title": "UniGraph：支持逐查询混合权重的统一稠密稀疏图：区别机制与能力",
+          "body": "Alg1先对每alpha取top-kg，按出现次数选M个邻居；Alg2维护candidate与ef-sized结果集，使用逐query混合距离。dense-first用Cauchy–Schwarz范数界决定是否需要sparse内积：gamma=1是安全下界，gamma<1只是不保证安全的更激进估计。原主实验gamma=0.3；本地诊断用gamma=1核对不改变未剪枝beam结果。guide在alpha>0.5时选dense，否则sparse，0.5是相近量纲下的原实验约定。 HVMap学的是异构库之间的表示转换，UniGraph学不到新的向量映射，而是保留dense/sparse原分量并改变跨权重邻域组织。SCORE2的native/mapped双空间权重与UniGraph的语义／词汇alpha含义不同，不能共享一个未经验证的权重解释。",
+          "papers": [
+            "foundation-models:unigraph",
+            "foundation-models:hvmap"
+          ]
+        },
+        {
+          "title": "DealRank：按召回名次轮发候选，减少配额切掉好文档：区别机制与能力",
+          "body": "§2.1的100候选配置是5组×20、每组留4、最后20再排，共6调用2轮。一致ranker只给最前q=4的最坏情况恢复保证，不是top10保证。500配置25组留3再4组留5，1000配置50组留2再5组留4，均三轮；被后轮淘汰的排在早轮前。调用回调必须返回原候选的一次排列，真正ThreadPool并发只验证调度，不产生LLM排序内容。 HVMap改变异构向量候选怎么映射和打分，DealRank不训练表示，而是安排已有候选进入ranker的组合。它们可串在同一检索流水线，但更少调用不是更好向量对齐，SCORE2正确也不能证明listwise配额无损。",
+          "papers": [
+            "foundation-models:dealrank",
+            "foundation-models:hvmap"
           ]
         }
       ],
@@ -330,6 +441,66 @@
             "foundation-models:hvmap",
             "foundation-models:ecg-rag"
           ]
+        },
+        {
+          "id": "nov18-infuseloop",
+          "question": "与Anchor跨层共享状态有什么差别？",
+          "answer": "Anchor读外部TTT记忆并结合局部attention；InfuseLoop依执行周期聚合多个轨迹的hidden states，状态语义和写入时机都不同。",
+          "example": "把一份KV矩阵广播给所有loop，没有实现所需的跨轨迹索引。",
+          "papers": [
+            "foundation-models:infuseloop",
+            "foundation-models:anchor-kv"
+          ]
+        },
+        {
+          "id": "nov18-fm-mamba",
+          "question": "把图像展平后运行Mamba，为什么还不能叫FM-Mamba？",
+          "answer": "它改变了二维依赖图：FM-Mamba每个位置同时读取上、左、左上并使用两个轴步长和稳定投影，而展平scan只沿选定的一维顺序递推。",
+          "example": "教学例：左上脉冲可经显式对角前驱影响下一格；删去该项后即使仍称SSM，也不是同一递推。",
+          "papers": [
+            "foundation-models:fm-mamba",
+            "foundation-models:mamba"
+          ]
+        },
+        {
+          "id": "nov18-gaugerope",
+          "question": "GaugeRoPE与Anchor都减少状态，有何不同？",
+          "answer": "前者减少每token每层的坐标维数并保留频率结构；后者跨层共用递归状态，依赖外部writer和reader映射。",
+          "example": "同样减少一半字节，不代表历史信息或读写语义相同。",
+          "papers": [
+            "foundation-models:gaugerope",
+            "foundation-models:anchor-kv"
+          ]
+        },
+        {
+          "id": "cross-nov18-latest-simq",
+          "question": "SIMQ能代替HVMap做异构编码器对齐吗？",
+          "answer": "不能。SIMQ在同一token空间内改变候选索引，HVMap学习跨空间映射。",
+          "example": "教学例：不同编码器的同维向量也不能直接靠SIMQ内积变得可比。",
+          "papers": [
+            "foundation-models:simq",
+            "foundation-models:hvmap"
+          ]
+        },
+        {
+          "id": "cross-nov18-latest-unigraph",
+          "question": "UniGraph的alpha等于HVMap的native权重吗？",
+          "answer": "不等于。前者混合dense和sparse距离，后者混合候选native与mapped空间分数。",
+          "example": "教学例：提高alpha不等于更相信候选所属数据库。",
+          "papers": [
+            "foundation-models:unigraph",
+            "foundation-models:hvmap"
+          ]
+        },
+        {
+          "id": "cross-nov18-latest-dealrank",
+          "question": "它能代替HVMap双空间重排吗？",
+          "answer": "不能。DealRank决定哪些候选同场比较，HVMap定义跨编码器的可比分数。",
+          "example": "教学例：轮流发牌不能修正未对齐的embedding。",
+          "papers": [
+            "foundation-models:dealrank",
+            "foundation-models:hvmap"
+          ]
         }
       ],
       "updated": "2026-11-18",
@@ -373,7 +544,13 @@
         "foundation-models:convpe",
         "foundation-models:adindex",
         "foundation-models:ecg-rag",
-        "foundation-models:hvmap"
+        "foundation-models:hvmap",
+        "foundation-models:infuseloop",
+        "foundation-models:fm-mamba",
+        "foundation-models:gaugerope",
+        "foundation-models:simq",
+        "foundation-models:unigraph",
+        "foundation-models:dealrank"
       ],
       "updates": [
         {
@@ -526,6 +703,78 @@
           "source_revisions": {
             "foundation-models:hvmap": "34c0f79eee9d1fe6fbc2b41e76c1c4671ba6a2346e8a290b93efb9b9ae044d9b",
             "foundation-models:ecg-rag": "2d522783223ba0b570c26df2de796e7731ee037643b31cc39a0543368a720c7f"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:infuseloop",
+            "foundation-models:anchor-kv"
+          ],
+          "summary": "Anchor跨层共享外部TTT状态并学习read-map，InfuseLoop共享的是可用计算图中的轨迹latent；不能把任意跨层平均或持久缓存叫作InfuseLoop。 本地边界与完整高成本不复现分别记录。",
+          "source_revisions": {
+            "foundation-models:infuseloop": "2cd1aa9a88436942cee2079e916e08dd47334965e543ba9ae37d21e7fe6d93e8",
+            "foundation-models:anchor-kv": "5a703a2971010298f912f7228fdf5b41e8fb5603169bd8890a9fb2163f949422"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:fm-mamba",
+            "foundation-models:mamba"
+          ],
+          "summary": "Mamba的一维selective SSM让步长、B/C依赖当前token并配合因果卷积和门控；FM-Mamba原生二维递推同时读取上、左、左上三前驱，使用两个轴步长及ratio相关稳定约束。展平成一维Mamba不是FM-Mamba，Python参考一致也不等于融合scan或PSD提速。 本次实读已有同主题代表README，按真实研究轴比较，不借比较对象改变算法或宣称跨论文效果复现。",
+          "source_revisions": {
+            "foundation-models:fm-mamba": "47a758518f743965583000652d32148858f6f69728c230c13767f4b21917faf3",
+            "foundation-models:mamba": "cc8e64d103688cf6f1eb766728f173a4c9af31eca88def398193334b5ab90220"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:gaugerope",
+            "foundation-models:anchor-kv"
+          ],
+          "summary": "Anchor让多个层共享TTT状态并学习read-map；GaugeRoPE保留每层token历史但改变其坐标/低秩表示。跨层共享和每token潜缓存压缩不是同一个操作。 本地边界与完整高成本不复现分别记录。",
+          "source_revisions": {
+            "foundation-models:gaugerope": "80e414217915904b68baaf2cd6462409e4495af1670f3361b457a31f1cbaa7c9",
+            "foundation-models:anchor-kv": "5a703a2971010298f912f7228fdf5b41e8fb5603169bd8890a9fb2163f949422"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:simq",
+            "foundation-models:hvmap"
+          ],
+          "summary": "没有ColBERT编码、百万级token索引、残差压缩、完整HNSW或公平吞吐实验。重复seed不使随机向量变成语义能力评测；SIMQ+保留完整边界并列意味着rerank参数不是它的硬候选上限。完整五数据集矩阵成本过高，不复现（审查DONE）。 完整实验高成本不复现，未作能力或Evolve晋级证据。",
+          "source_revisions": {
+            "foundation-models:simq": "d1079071528e6e9031c91e00494bb762739e03efc292a27e23460b0c87a62b7c",
+            "foundation-models:hvmap": "34c0f79eee9d1fe6fbc2b41e76c1c4671ba6a2346e8a290b93efb9b9ae044d9b"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:unigraph",
+            "foundation-models:hvmap"
+          ],
+          "summary": "本地exact all-pairs构图和exact guide查找是有限诊断后端，不是论文C++可扩展候选构造；没有BGE-M3编码、SINDI、百万级索引或QPS对照。安全剪枝只相对同一beam插入规则成立，不能推出全局ANN召回完备；gamma<1必须显式保留风险。完整矩阵高成本不复现。 完整实验高成本不复现，未作能力或Evolve晋级证据。",
+          "source_revisions": {
+            "foundation-models:unigraph": "8c9c0565a7f420f9ce25aa3c021b7896584157164d1d2aacf1d0110ae1727f3a",
+            "foundation-models:hvmap": "34c0f79eee9d1fe6fbc2b41e76c1c4671ba6a2346e8a290b93efb9b9ae044d9b"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:dealrank",
+            "foundation-models:hvmap"
+          ],
+          "summary": "本地ranker是确定性一致排序回调，不是模型；true_top只给quota_cuts外层诊断，不进入schedule。没有RankGPT提示、token费用或真实API延迟，机制计数不作NDCG／速度证据。作者提供mixedbread-ai/dealrank链接，但2026-11-18仓库／main commit API返回404，未核实公开源码或许可，不执行外部代码。完整多模型及27B计时矩阵高成本不复现。分组和最后晋级排序必须按原文层级配置核对，不能把所有情况压成一个generic topk。 完整实验高成本不复现，未作能力或Evolve晋级证据。",
+          "source_revisions": {
+            "foundation-models:dealrank": "e6b22b311ed6d91aaf453381d4bf845828e2b8e35a61886e2c0b7e896e22fee3",
+            "foundation-models:hvmap": "34c0f79eee9d1fe6fbc2b41e76c1c4671ba6a2346e8a290b93efb9b9ae044d9b"
           }
         }
       ]
@@ -918,6 +1167,26 @@
             "核心公式",
             "论文离线与线上效果"
           ]
+        },
+        {
+          "paper": "foundation-models:lara-plus-plus",
+          "position": "本文重新核查核化attention的真实效率，并用确定性proposal均值代替随机采样、相似性聚类代替连续切块改善LARA质量。与复杂度口号不同，cluster数量随序列增长时k-center成本为二次；近softmax质量不等于比FlashAttention快。",
+          "tradeoff": "LazyFlash保持前向dense而稀疏反向；LARA++近似前向softmax并需要蒸馏适配。两者改变的计算与误差对象不同，不能都归纳成“线性attention更快”。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:latent-feedback-scaling",
+          "position": "latent feedback把上一token的顶层状态注入下一token输入，花更多每token计算。本文不只在相同token数比较，而让普通Transformer把相同FLOPs用于更多epoch，并同时控制unique数据和模型规模。",
+          "tradeoff": "ArchSpace比较架构/超参的匹配预算曲面；本篇专门研究重复数据及feedback的额外计算。两种拟合系数不可交换，单独输出预测loss不等于已训练候选。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -977,6 +1246,22 @@
           "papers": [
             "foundation-models:archspace",
             "foundation-models:data-mixing-laws"
+          ]
+        },
+        {
+          "title": "LARA++：确定性proposal与相似性分组的核注意力",
+          "body": "LazyFlash保持前向dense而稀疏反向；LARA++近似前向softmax并需要蒸馏适配。两者改变的计算与误差对象不同，不能都归纳成“线性attention更快”。 本地固定作者commit的mis-opt路径。论文§7描述query-only和随机首中心，而公开源码用归一化Q+K联合特征、确定性首中心，CLS单独保留。这里明确执行源码变体，不把差异消除：proposal生成不反传，当前Q/K特征与V聚合仍可微。",
+          "papers": [
+            "foundation-models:lara-plus-plus",
+            "foundation-models:lazyflash"
+          ]
+        },
+        {
+          "title": "Latent Feedback：在重复数据下比较相同计算预算",
+          "body": "ArchSpace比较架构/超参的匹配预算曲面；本篇专门研究重复数据及feedback的额外计算。两种拟合系数不可交换，单独输出预测loss不等于已训练候选。 R<1时有效数据改为RU；R>=1时重复收益逐渐饱和。capacity multiplier与每token额外计算成本不同，loss预测依赖重新拟合和外推验证，不是重复token越多越省的无条件结论。",
+          "papers": [
+            "foundation-models:latent-feedback-scaling",
+            "foundation-models:archspace"
           ]
         }
       ],
@@ -1061,9 +1346,29 @@
             "foundation-models:archspace",
             "foundation-models:data-mixing-laws"
           ]
+        },
+        {
+          "id": "nov18-lara-plus-plus",
+          "question": "论文和当前作者实现的聚类是否完全相同？",
+          "answer": "不完全。论文写query相似性与随机初始点，固定源码用归一化Q+K、确定性初始点并保留CLS。本地记录源码变体，不声称两者无差别。",
+          "example": "两个query相同但key不同的token，在joint特征里可能分到不同簇。",
+          "papers": [
+            "foundation-models:lara-plus-plus",
+            "foundation-models:lazyflash"
+          ]
+        },
+        {
+          "id": "nov18-latent-feedback-scaling",
+          "question": "能直接把ArchSpace的loss系数填进本篇吗？",
+          "answer": "不能。两者控制变量和函数形式不同，本篇包含repeat saturation与feedback capacity factor；需要自己的拟合。",
+          "example": "即使都预测validation loss，参数N与FLOPs/token M也不是相同量。",
+          "papers": [
+            "foundation-models:latent-feedback-scaling",
+            "foundation-models:archspace"
+          ]
         }
       ],
-      "updated": "2026-11-15",
+      "updated": "2026-11-18",
       "reviewed_papers": [
         "foundation-models:adamw4bit",
         "foundation-models:af-muon",
@@ -1098,7 +1403,9 @@
         "foundation-models:stochastic-rounding",
         "foundation-models:lidas",
         "foundation-models:continuousbench",
-        "foundation-models:archspace"
+        "foundation-models:archspace",
+        "foundation-models:lara-plus-plus",
+        "foundation-models:latent-feedback-scaling"
       ],
       "updates": [
         {
@@ -1223,6 +1530,30 @@
           "source_revisions": {
             "foundation-models:archspace": "f6418801859e15fc9ebdb43c23db9b1a13c3953d38e5a84b4af5d7e62e515cc6",
             "foundation-models:data-mixing-laws": "71c42d6af6dca0a2b11e5d2899b54695a5514a0b08de1d4fe694aa96b9fa42aa"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:lara-plus-plus",
+            "foundation-models:lazyflash"
+          ],
+          "summary": "LazyFlash保持前向dense而稀疏反向；LARA++近似前向softmax并需要蒸馏适配。两者改变的计算与误差对象不同，不能都归纳成“线性attention更快”。 本地边界与完整高成本不复现分别记录。",
+          "source_revisions": {
+            "foundation-models:lara-plus-plus": "8fdf31f0814b2a6d2df18592ab8aafa38710ec0dfdaf6fd1be9c166377192c65",
+            "foundation-models:lazyflash": "d8feab6aafa18c1b6952b2e3771eabc3cb4107fadc6d295fa59fbd9d1f9bb60a"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:latent-feedback-scaling",
+            "foundation-models:archspace"
+          ],
+          "summary": "ArchSpace比较架构/超参的匹配预算曲面；本篇专门研究重复数据及feedback的额外计算。两种拟合系数不可交换，单独输出预测loss不等于已训练候选。 本地边界与完整高成本不复现分别记录。",
+          "source_revisions": {
+            "foundation-models:latent-feedback-scaling": "3915bae6e2e1430176f83ab1893730466e686e758828fa01a27ff37ab5853113",
+            "foundation-models:archspace": "f6418801859e15fc9ebdb43c23db9b1a13c3953d38e5a84b4af5d7e62e515cc6"
           }
         }
       ]
@@ -1362,6 +1693,46 @@
             "核心公式",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:spool",
+          "position": "GDN的key/value/gates只依赖已记录的层输入，因此状态更新对旧状态是仿射的。每帧缓存一个变换，以非交换的时间顺序组成segment tree；窗口到期时从prefix anchor重放保留摘要，而非重跑所有视频token。",
+          "tradeoff": "DropKV直接挑选attention KV驱逐项，Spool处理递归共享状态的到期重建。后者的固定层输入精确性不能推导为保留视频内容的全网络精确性。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:echomoe",
+          "position": "每组MoE层先广播参考z，其余层只发送x-a⊙z的压缩code；router仍读取完整x。专家将reference gain和dispatch decoder折入gate/up权重，再将combine compressor折入down权重，避免完整重建或输出物化。",
+          "tradeoff": "MoEZip保护路由敏感KV token；EchoMoE压缩专家并行激活通信，两者不是同一缓存，也不能共享“压缩率”作为吞吐对照。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:risa",
+          "position": "RISA区分长期HOT/COLD存储优先级和当前denoising block的短期read plan。未读取页面不被删除，后续query可以恢复COLD。seed根据page min/max key摘要评分，保护初始/近期HOT并加入mandatory近期/current行。",
+          "tradeoff": "DropKV实际驱逐KV以缩减存储；RISA主要限制每步读取但保留COLD以便恢复。读得少与存得少是不同预算，不能互换显存/延迟结论。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:beyond-bitwidth",
+          "position": "低比特名称不保证GPU真的按该格式执行，也不保证多语种质量。本文用固定诊断/selection/final切分，逐fused-module核对weight类型、activation policy、kernel、fallback和显存，再按服务质量约束配置保护。",
+          "tradeoff": "AWQ用calibration activation搜索等价通道缩放后统一做低比特weight-only量化；Beyond Bitwidth研究B200原生format、mixed precision分配及质量/显存/延迟门槛。保护重要通道与给模块分配不同格式不是同一算法，AWQ的小型输出MSE不能充当Blackwell执行证据。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1425,6 +1796,38 @@
           "papers": [
             "foundation-models:ginger",
             "foundation-models:pipnn-ii",
+            "foundation-models:awq"
+          ]
+        },
+        {
+          "title": "Spool：用仿射摘要维护混合 VLM 的滑动窗口",
+          "body": "DropKV直接挑选attention KV驱逐项，Spool处理递归共享状态的到期重建。后者的固定层输入精确性不能推导为保留视频内容的全网络精确性。 摘要存D=A-I避免BF16把接近单位矩阵的小变化舍入掉；合并顺序不可交换。逐层、固定记录输入下精确，不等于整个多层网络重新处理剩余帧，因为高层缓存输入可能仍含已到期帧的影响。",
+          "papers": [
+            "foundation-models:spool",
+            "foundation-models:drop-kv"
+          ]
+        },
+        {
+          "title": "EchoMoE：复用跨层参考，只通信压缩变化量",
+          "body": "MoEZip保护路由敏感KV token；EchoMoE压缩专家并行激活通信，两者不是同一缓存，也不能共享“压缩率”作为吞吐对照。 相对于压缩后模型，折叠与未折叠线性代数等价；不等于压缩模型无损于原backbone。原文还以projection-weighted重建初始化，再执行KL蒸馏和少量next-token训练。通信公式是张量/路由字节计算，不是测得RDMA流量。",
+          "papers": [
+            "foundation-models:echomoe",
+            "foundation-models:moezip"
+          ]
+        },
+        {
+          "title": "RISA：保留可恢复KV存储，只缓存稀疏读取地址",
+          "body": "DropKV实际驱逐KV以缩减存储；RISA主要限制每步读取但保留COLD以便恢复。读得少与存得少是不同预算，不能互换显存/延迟结论。 max在两个完整dot之后进行，不是QUEST的逐坐标上界。后续步只重用地址，用新query/current KV重新计算同一个softmax；不能把history和current分别归一化后平均。精确存储不等于dense-equivalent解码。",
+          "papers": [
+            "foundation-models:risa",
+            "foundation-models:drop-kv"
+          ]
+        },
+        {
+          "title": "保护量化敏感内容，不等于验证部署格式",
+          "body": "实读AWQ的核心是XW=(XS^-1)(SW)，用激活统计搜索缩放以减少量化输出误差；本地未用TinyChat CUDA kernel，MSE不代表端到端吞吐。Beyond Bitwidth按fused module核weight type、activation policy、kernel及fallback，在独立final集合验证服务约束；单模块BF16恢复效应不可相加，最终activation精度与INT8保护共同改变，不能把全部收益归于allocation。原生NVFP4/B200路径也不能由A100上的模拟误差替代。",
+          "papers": [
+            "foundation-models:beyond-bitwidth",
             "foundation-models:awq"
           ]
         }
@@ -1511,9 +1914,49 @@
             "foundation-models:ginger",
             "foundation-models:pipnn-ii"
           ]
+        },
+        {
+          "id": "nov18-spool",
+          "question": "Spool的精确与DropKV的近似驱逐有何不同？",
+          "answer": "Spool精确重放固定记录层输入的状态变换；DropKV估计删除KV对attention输出的扰动。Spool也不保证整个多层网络重算等价。",
+          "example": "高层某帧特征已受旧帧影响，删除低层旧帧摘要不会改写那份缓存特征。",
+          "papers": [
+            "foundation-models:spool",
+            "foundation-models:drop-kv"
+          ]
+        },
+        {
+          "id": "nov18-echomoe",
+          "question": "与MoEZip的routing-aware压缩能直接比压缩率吗？",
+          "answer": "不能。MoEZip选择attention KV行，EchoMoE发送低维专家激活，分母、额外参考成本和质量误差都不同。",
+          "example": "少存50%KV不等于少发50%RDMA字节。",
+          "papers": [
+            "foundation-models:echomoe",
+            "foundation-models:moezip"
+          ]
+        },
+        {
+          "id": "nov18-risa",
+          "question": "与DropKV的驱逐是同一预算吗？",
+          "answer": "不是。DropKV删除存储条目，RISA保留未选COLD并减少循环读取；RISA的HOT cap还不包含protected、COLD和mandatory部分。",
+          "example": "512页cap并不意味着总共只读取或保存512页。",
+          "papers": [
+            "foundation-models:risa",
+            "foundation-models:drop-kv"
+          ]
+        },
+        {
+          "id": "nov18-beyond-bitwidth",
+          "question": "AWQ输出误差更小，是否已经满足Beyond Bitwidth的部署门槛？",
+          "answer": "没有。AWQ等价缩放的局部MSE只检验量化近似，部署门槛还要求真实packed格式、activation policy、无fallback、显存/延迟与独立服务质量评测。",
+          "example": "教学例：一层W4输出MSE降低，不说明整个8B模型在B200按目标格式执行，也不说明韩语保留率过门槛。",
+          "papers": [
+            "foundation-models:beyond-bitwidth",
+            "foundation-models:awq"
+          ]
         }
       ],
-      "updated": "2026-11-09",
+      "updated": "2026-11-18",
       "reviewed_papers": [
         "foundation-models:agentkv",
         "foundation-models:e-means",
@@ -1550,7 +1993,11 @@
         "foundation-models:fold-bias",
         "foundation-models:multi-layer-indexer",
         "foundation-models:pipnn-ii",
-        "foundation-models:ginger"
+        "foundation-models:ginger",
+        "foundation-models:spool",
+        "foundation-models:echomoe",
+        "foundation-models:risa",
+        "foundation-models:beyond-bitwidth"
       ],
       "updates": [
         {
@@ -1685,6 +2132,54 @@
           ],
           "source_revisions": {
             "foundation-models:e-means": "7c8f826171ba2a89e83fec48c10f3f73e5bfa9b84a1e46ead32d7f0d82b94478"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:spool",
+            "foundation-models:drop-kv"
+          ],
+          "summary": "DropKV直接挑选attention KV驱逐项，Spool处理递归共享状态的到期重建。后者的固定层输入精确性不能推导为保留视频内容的全网络精确性。 本地边界与完整高成本不复现分别记录。",
+          "source_revisions": {
+            "foundation-models:spool": "e1973cc17fa472fb3e50fc8b84d171d091b9814f2be479f2555760e6d4b6f092",
+            "foundation-models:drop-kv": "ae63dc1bfe00cb27d7b8d214da72e1a19f6d0eb1e68c9d17730c605428f6eef3"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:echomoe",
+            "foundation-models:moezip"
+          ],
+          "summary": "MoEZip保护路由敏感KV token；EchoMoE压缩专家并行激活通信，两者不是同一缓存，也不能共享“压缩率”作为吞吐对照。 本地边界与完整高成本不复现分别记录。",
+          "source_revisions": {
+            "foundation-models:echomoe": "a939116286b19789b759c661c55b55fd02d367f882fe538d9d11251e867f42b9",
+            "foundation-models:moezip": "32b4eced778461faca1ffabd18350744af6e57607401cb6549fec559819415f1"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:risa",
+            "foundation-models:drop-kv"
+          ],
+          "summary": "DropKV实际驱逐KV以缩减存储；RISA主要限制每步读取但保留COLD以便恢复。读得少与存得少是不同预算，不能互换显存/延迟结论。 本地边界与完整高成本不复现分别记录。",
+          "source_revisions": {
+            "foundation-models:risa": "41f070c246962e44f9ecd1b98c225126181fa84d444467ac666cb4ccb25334f4",
+            "foundation-models:drop-kv": "ae63dc1bfe00cb27d7b8d214da72e1a19f6d0eb1e68c9d17730c605428f6eef3"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:beyond-bitwidth",
+            "foundation-models:awq"
+          ],
+          "summary": "AWQ用calibration activation搜索等价通道缩放后统一做低比特weight-only量化；Beyond Bitwidth研究B200原生format、mixed precision分配及质量/显存/延迟门槛。保护重要通道与给模块分配不同格式不是同一算法，AWQ的小型输出MSE不能充当Blackwell执行证据。 本次实读已有同主题代表README，按真实研究轴比较，不借比较对象改变算法或宣称跨论文效果复现。",
+          "source_revisions": {
+            "foundation-models:beyond-bitwidth": "e4df76b4fddea7a84a9445f4c7be51963c453fabd12d351f0cd4291b11caeebb",
+            "foundation-models:awq": "70f5ef31bcba296079d2bce8e6321adfd8e208f6a58c042b6d691afb8adfc0ee"
           }
         }
       ]
@@ -2134,6 +2629,17 @@
             "结果、负控与边界",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "foundation-models:efficient-evals-tensor",
+          "position": "本文将模型、prompt和rater三者的能力张量作低rank CP分解，先用大量廉价autorater评分学共享表示，再冻结表示、只拟合人类rater向量及有序cutoff。它保留prompt异质性和rater偏好差异，不把某个自动judge分数直接当人类真值。2026-11-16是Google官方代码新仓库，不是论文首发；v1首发为2026-03-02 16:12:46 UTC。",
+          "tradeoff": "ProEval用其他模型历史逐题分数建立GP先验并主动决定下一题；本篇用多rater廉价数据学prompt/model表示再做人类对齐。前者的采样后验不等于后者的rater偏差校准，条件置信界也不能无条件覆盖共享表示估计误差。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题对照",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -2248,6 +2754,14 @@
           "papers": [
             "foundation-models:mixed-signals-weights",
             "foundation-models:activation-model-scanner"
+          ]
+        },
+        {
+          "title": "Efficient Evals：借廉价评分学能力张量，再用少量人类标签校准：区别机制与能力",
+          "body": "§3的ordinal likelihood支持单侧评分和成对能力差及平局；首尾类别用0/1 CDF边界。第二阶段只给human向量／cutoff梯度，模型和prompt因子冻结。条件Wald区间把第一阶段表示当高精度固定量，并用Bonferroni处理多比较；Sigma是渐近协方差，需除m。可选全参数human fine-tune可能改善点预测，却使这些条件区间失效，不能两种好处同时声称。 ProEval用其他模型历史逐题分数建立GP先验并主动决定下一题；本篇用多rater廉价数据学prompt/model表示再做人类对齐。前者的采样后验不等于后者的rater偏差校准，条件置信界也不能无条件覆盖共享表示估计误差。",
+          "papers": [
+            "foundation-models:efficient-evals-tensor",
+            "foundation-models:proeval"
           ]
         }
       ],
@@ -2401,6 +2915,16 @@
             "foundation-models:mixed-signals-weights",
             "foundation-models:activation-model-scanner"
           ]
+        },
+        {
+          "id": "cross-nov18-latest-efficient-evals-tensor",
+          "question": "它与ProEval都省评测费，方法是否相同？",
+          "answer": "不同。ProEval主动选目标问题并更新GP；本篇校准多个rater到人类尺度。",
+          "example": "教学例：多一个便宜judge评分不等于主动选了一道人类问题。",
+          "papers": [
+            "foundation-models:efficient-evals-tensor",
+            "foundation-models:proeval"
+          ]
         }
       ],
       "updated": "2026-11-18",
@@ -2429,7 +2953,8 @@
         "foundation-models:storyscope",
         "foundation-models:tokenization-premium",
         "foundation-models:runway-inference-protocol",
-        "foundation-models:mixed-signals-weights"
+        "foundation-models:mixed-signals-weights",
+        "foundation-models:efficient-evals-tensor"
       ],
       "updates": [
         {
@@ -2606,6 +3131,18 @@
           "source_revisions": {
             "foundation-models:mixed-signals-weights": "a445ef56e0412ba813230da9f50808a00063c16e12464d02e598ef333039beca",
             "foundation-models:activation-model-scanner": "9160cad6a859eb0edd5be4fdc3cb49cc0b6077d93f426931592b67298289ff73"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:efficient-evals-tensor",
+            "foundation-models:proeval"
+          ],
+          "summary": "官方google-research/efficient_evals固定b4421d929d1078631ee890f8e4a776442c816d36、Apache2.0。本地只执行CP、ordinal概率、冻结human NLL和外部Sigma的条件区间算术；不含完整Adam/BFGS拟合、30切分或真实评分重收集。上游CPU notebook估约1小时，完整多judge矩阵高成本不复现，CUDA只验算子。 完整实验高成本不复现，未作能力或Evolve晋级证据。",
+          "source_revisions": {
+            "foundation-models:efficient-evals-tensor": "10f8c79451154b1ea1ba119c7e34e291104f752ec5db55faa5f969a7c5a4bdfc",
+            "foundation-models:proeval": "cc148ceb5167cf0b909f04441d1ab4d47b382022debe81d65496c74d579492c9"
           }
         }
       ]

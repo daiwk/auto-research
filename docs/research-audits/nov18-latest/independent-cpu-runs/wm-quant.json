@@ -1,0 +1,108 @@
+{
+  "schema_version": 2,
+  "method": "wm-quant",
+  "manifest_ref": "foundation-models:wm-quant",
+  "dataset": {
+    "id": "synthetic:nov18-latest-wm-quant-mechanism-v1",
+    "kind": "explicit_mechanism_or_protocol_fixtures",
+    "revision": "sha256:6ea1ccfb4dab374c5b95d5a7af7d92ca7cdfaa27f2e490b2e70e150890f1b56a",
+    "public_capability_benchmark": false,
+    "source": "Seeded synthetic operator tensors; no pretrained model or capability dataset"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "rollout_calibration_before": 3.9491119384765625,
+        "rollout_calibration_after": 3.2111353874206543
+      },
+      "checks": {
+        "joint_ranges_optimized": true,
+        "control_path_preserved": true,
+        "step_ranges_not_shared": true,
+        "model_weights_frozen": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "rollout_calibration_before": 4.191939353942871,
+        "rollout_calibration_after": 2.8408501148223877
+      },
+      "checks": {
+        "joint_ranges_optimized": true,
+        "control_path_preserved": true,
+        "step_ranges_not_shared": true,
+        "model_weights_frozen": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "rollout_calibration_before": 2.977445602416992,
+        "rollout_calibration_after": 1.646226406097412
+      },
+      "checks": {
+        "joint_ranges_optimized": true,
+        "control_path_preserved": true,
+        "step_ranges_not_shared": true,
+        "model_weights_frozen": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "rollout_calibration_before": 3.706165631612142,
+    "rollout_calibration_after": 2.566070636113485
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Bounded defining-operator arithmetic and negative controls, not complete model or benchmark capability"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "66cda00810da75bb8e3daa789c8d29b5b71b851d",
+    "source_state": "uncommitted working tree with exact executed-source fingerprints",
+    "accelerator": "CPU",
+    "artifact_path": "docs/foundation-models/2611.21882-wm-quant/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "src/auto_research/foundation_models/wm_quant.py": "6ea1ccfb4dab374c5b95d5a7af7d92ca7cdfaa27f2e490b2e70e150890f1b56a"
+    }
+  }
+}

@@ -7,7 +7,7 @@ hide:
 
 # 学习信号、多任务与反馈偏差
 
-[搜广推](index.md) / 144 个问题 · 36 篇论文
+[搜广推](index.md) / 148 个问题 · 37 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">144 个问题 · 36 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">148 个问题 · 37 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:cotti" data-paper-title="COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift 搜广推与 LLM 应用 Alibaba Group 2026-11-17 COTTI把训练时历史偏好连续性和上线时促销概率修正分开。CPC比较同一用户常态/促销双视图并用可微门控调节一致性；RW按相对历史距离重加权但截断其梯度；ABA在冻结预测器的logit上添加事件强度与预测头方差决定的有界修正。 成本过高，不复现（审查DONE）；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。本地只运行CPC/RW/ABA张量；没有历史构造、缺失常态视图回退或服务融合策略。保留paid-item新类目召回下降的作者负结果，不能拿整体AUC覆盖探索代价。  训练目标与决策优化 分布漂移与校准 搜广推 学习信号、多任务与反馈偏差 为什么ABA不直接训练编码器？ 它是冻结预测器后的事件logit修正；训练表征由CPC和RW承担，避免把校准与表征学习混在一起。 教学例：促销高峰只改ABA的事件幅度，不因此更新历史编码器。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<span id="paper-recommendation-cotti-3f90410b" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-ae29de2b49b2eb40">为什么ABA不直接训练编码器？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Acotti">COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Alibaba Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它是冻结预测器后的事件logit修正；训练表征由CPC和RW承担，避免把校准与表征学习混在一起。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：促销高峰只改ABA的事件幅度，不因此更新历史编码器。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22597v1">原论文</a> · <a href="../../../../recommendation-components/2611.22597-cotti/">实现解读</a> · <a href="#qa-ae29de2b49b2eb40">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:cotti" data-paper-title="COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift 搜广推与 LLM 应用 Alibaba Group 2026-11-17 COTTI把训练时历史偏好连续性和上线时促销概率修正分开。CPC比较同一用户常态/促销双视图并用可微门控调节一致性；RW按相对历史距离重加权但截断其梯度；ABA在冻结预测器的logit上添加事件强度与预测头方差决定的有界修正。 成本过高，不复现（审查DONE）；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。本地只运行CPC/RW/ABA张量；没有历史构造、缺失常态视图回退或服务融合策略。保留paid-item新类目召回下降的作者负结果，不能拿整体AUC覆盖探索代价。  训练目标与决策优化 分布漂移与校准 搜广推 学习信号、多任务与反馈偏差 CPC和RW的门控梯度一样吗？ 不同。CPC的eta参与反传，RW的omega只控制监督梯度大小并detach；统一detach会改算法。 教学例：两视图相同的CPC gate为0.5；RW中低于均值距离的权重可以大于1。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-b5655b47f45d5ad2">CPC和RW的门控梯度一样吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Acotti">COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Alibaba Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同。CPC的eta参与反传，RW的omega只控制监督梯度大小并detach；统一detach会改算法。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两视图相同的CPC gate为0.5；RW中低于均值距离的权重可以大于1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22597v1">原论文</a> · <a href="../../../../recommendation-components/2611.22597-cotti/">实现解读</a> · <a href="#qa-b5655b47f45d5ad2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:cotti" data-paper-title="COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift 搜广推与 LLM 应用 Alibaba Group 2026-11-17 COTTI把训练时历史偏好连续性和上线时促销概率修正分开。CPC比较同一用户常态/促销双视图并用可微门控调节一致性；RW按相对历史距离重加权但截断其梯度；ABA在冻结预测器的logit上添加事件强度与预测头方差决定的有界修正。 成本过高，不复现（审查DONE）；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。本地只运行CPC/RW/ABA张量；没有历史构造、缺失常态视图回退或服务融合策略。保留paid-item新类目召回下降的作者负结果，不能拿整体AUC覆盖探索代价。  训练目标与决策优化 分布漂移与校准 搜广推 学习信号、多任务与反馈偏差 COTTI能代替BAFF解决实验干扰吗？ 不能。历史距离不是反事实曝光或竞价干扰证据，促销概率修正和实验日志污染是不同问题。 教学例：HDR线上control与TEN离线control不能当成同一因果基线。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-f686ad95deef33bb">COTTI能代替BAFF解决实验干扰吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Acotti">COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Alibaba Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。历史距离不是反事实曝光或竞价干扰证据，促销概率修正和实验日志污染是不同问题。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：HDR线上control与TEN离线control不能当成同一因果基线。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22597v1">原论文</a> · <a href="../../../../recommendation-components/2611.22597-cotti/">实现解读</a> · <a href="#qa-f686ad95deef33bb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:cotti" data-paper-title="COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift 搜广推与 LLM 应用 Alibaba Group 2026-11-17 COTTI把训练时历史偏好连续性和上线时促销概率修正分开。CPC比较同一用户常态/促销双视图并用可微门控调节一致性；RW按相对历史距离重加权但截断其梯度；ABA在冻结预测器的logit上添加事件强度与预测头方差决定的有界修正。 成本过高，不复现（审查DONE）；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。本地只运行CPC/RW/ABA张量；没有历史构造、缺失常态视图回退或服务融合策略。保留paid-item新类目召回下降的作者负结果，不能拿整体AUC覆盖探索代价。  训练目标与决策优化 分布漂移与校准 搜广推 学习信号、多任务与反馈偏差 为什么ABA有可能校准更差？ 非负事件幅度加tanh方差只能提高概率；某子群已经过预测时会继续推高，应独立看分组校准与新类目召回。 教学例：原概率0.8的过预测样本仍被非负ABA推高，应记录该负结果。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-8be4b51d751ab9cb">为什么ABA有可能校准更差？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Acotti">COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Alibaba Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>非负事件幅度加tanh方差只能提高概率；某子群已经过预测时会继续推高，应独立看分组校准与新类目召回。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：原概率0.8的过预测样本仍被非负ABA推高，应记录该负结果。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22597v1">原论文</a> · <a href="../../../../recommendation-components/2611.22597-cotti/">实现解读</a> · <a href="#qa-8be4b51d751ab9cb">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:kl-mopd" data-paper-title="KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation 搜广推与 LLM 应用 Zhejiang University 2026-10-27 生成式推荐必须连续生成一个商品的多个语义 token；某个位置没学到转化教师的偏好，就可能使整个商品无法召回。把点击教师和价值教师每一步都按一半融合，忽略了两者在不同位置的学习难度可能相反。KL-MOPD先在冻结的初始学生生成前缀上，按位置估计学生到两位教师的反向 KL。该差距只校准一次，归一化后作为固定教师权重；训练时在当前学生自己的前缀上计算加权反向 KL。不应改成逐步动态重算，也不是先平均教师概率再蒸馏。 完整训练与生产实验成本过高，不复现（审查 DONE）；本地为 L1 可微损失组件 / diagnostic only，不是完整推荐器或在线采样器。完整训练与生产实验成本过高，不复现（审查 DONE）；未接入 Evolve。calibrate_weights和kl_mopd_loss保留完整词表的KL方向、固定逐位置权重、教师冻结及两级聚合。独立概率域参考、反向/正向KL负控、动态重校准负控、padding零梯度与真实学生更新均可检查。  多目标蒸馏 生成式推荐 搜广推 学习信号、多任务与反馈偏差 KL-MOPD为什么在每个SID位置区分两位教师的学习难度？ 完整商品ID需要多个token都选对。点击教师在前几个位置容易模仿、价值教师在后几个位置容易模仿，不代表整条ID都学好了。固定一半权重忽略这种位置差异，方法用初始学生到各教师的KL差距为难学的一方加权。 教学例：三段商品码第一段区分类别、后两段区分属性。某教师只在类别段与学生差很远，不能把整条序列的同一个教师权重套到所有位置。 2026-10-29">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
 <span id="paper-recommendation-kl-mopd-35d8ffea" class="ar-learning-paper-anchor"></span>

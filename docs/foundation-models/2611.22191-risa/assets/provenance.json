@@ -1,0 +1,13 @@
+{
+  "source_url": "https://arxiv.org/html/2611.22191v1/RISA_Figure4_method.svg",
+  "figure": "S4.F4",
+  "caption": "Figure 4: Storage priority, read-plan composition, and execution. (a) Grace-window observations determine whether generated KV enters compact Hot or addressable Cold storage; both keep exact values. (b) Seed queries score page summaries, then protected HOT, selected HOT, recovered COLD, and mandatory recent rows form one read plan. (c) Later steps reuse the historical plan with new queries and current recent KV, combining all contributions under one softmax.",
+  "original_sha256": "9ab11e87e903f51ca65d90be5be131b878f23080b2dd2cc3fcf86611ec1e3cb8",
+  "extraction": "Author original raster image, or original SVG rasterized without semantic editing",
+  "paper_url": "https://arxiv.org/html/2611.22191v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-18",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result.",
+  "source_html_sha256": "765ee8dd1baecbdbc40fd4d17782c8190186a8d71080bb14375c6ba325641e2b",
+  "asset_sha256": "2810bfbdb2e1831d75c07dd5cb5e478109f41033f249e180a6ff4e2fda90fc8f"
+}

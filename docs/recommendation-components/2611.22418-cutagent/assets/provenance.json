@@ -1,0 +1,12 @@
+{
+  "figure": 2,
+  "caption": "CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation",
+  "source_url": "https://arxiv.org/pdf/2611.22418v1",
+  "source_version": "v1",
+  "source_sha256": "2123907562d453fb48916bb4bf0539bd2e34c7dcb1db3607edd631ca8b42910a",
+  "extraction": "fixed v1 PDF page4, crop[53, 40, 558, 313]; no redraw",
+  "file": "paper-figure-01.png",
+  "asset_sha256": "c03cc19791c87308e6f6eab7f7ef7da998c290334d4df56983b34be2b464e525",
+  "copyright": "Original paper authors; no claim of local generation",
+  "visual_review_done": true
+}

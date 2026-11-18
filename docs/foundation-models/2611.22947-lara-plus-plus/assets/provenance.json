@@ -1,0 +1,13 @@
+{
+  "source_url": "https://arxiv.org/html/2611.22947v1/lara_vs_larapp_paper.svg",
+  "figure": "S7.F3",
+  "caption": "Figure 3 : Standard LARA (top) vs. LARA++ (bottom). Same 16 query embeddings in both panels; colors mark proposal groups and ⋆ \\star the landmark (group mean) defining each proposal. LARA groups contiguous positions, so each group mixes dissimilar queries and the landmarks collapse toward the global mean. LARA++ groups queries by similarity via greedy k k -center clustering, giving tight groups with representative landmarks. The strip below each panel shows the group of each sequence position.",
+  "original_sha256": "fd167cfc21c0658308ab9b039035b61acabdd3a106d16e84e126620469477541",
+  "extraction": "Author original raster image, or original SVG rasterized without semantic editing",
+  "paper_url": "https://arxiv.org/html/2611.22947v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-18",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result.",
+  "source_html_sha256": "a69fab072d539aa2869046ffb8a8efdd3c17821e69f2074623d10b9699698acf",
+  "asset_sha256": "bdf5d3450ec1f96be5faf028e46b5e3354a7ad59a261259d2411da6f86e916f8"
+}

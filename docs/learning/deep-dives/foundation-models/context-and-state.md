@@ -7,7 +7,7 @@ hide:
 
 # 长上下文不是一条轴：位置、读取与状态压缩
 
-[基础模型](../index.md) · 更新 2026-11-18 · 40 篇主题资料 / 14 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-18 · 46 篇主题资料 / 20 篇重点对照
 
 先问历史以什么形式存在，再问当前 token 怎样读它。RoPE 改变相对位置关系，Mamba 把历史写入递归状态，NSA 在多条读取路径间分工，OpenAttention 为未精读部分保留代理，TTR 则为当前输入求一个压缩表示。这些方法不能只按“支持多长”排成一列。 MERLIN在多个压缩状态之外保留routing key矩统计，改变段间读取权重，而不替换每段内部的递归写入。
 
@@ -39,6 +39,12 @@ hide:
 | [ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation](../../../foundation-models/2611.12956-adindex/README.md) · [原始来源](https://arxiv.org/abs/2611.12956v1)<br>章节：核心公式、数据协议与代码映射、结果与复现边界 | 按层校准组大小与共享候选库，用逐query标准化softmax后逐token max/Top-P教师蒸馏组索引器；只扫描anchor历史，再补新可见token并保留逐query DSA精排。 | 共享候选不等于共享最终Top-K，也不提供OpenAttention的未读尾部代理；teacher运算顺序、anchor因果边界和最大并集容量不可替换。L1训练KL降低不证明长文质量或B300 serving加速。 |
 | [A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation](../../../foundation-models/2604.14403-ecg-rag/README.md) · [原始来源](https://arxiv.org/abs/2604.14403v1)<br>章节：背景与主要改动、核心机制与公式、原文结果与限制、本地复现 | 设备端RAG既要控制文档索引磁盘占用，也要限制生成时的上下文/KV开销。ECG不是简单把检索器输出拼进prompt，而是只存一份多向量检索表示，再经投影转成同一decoder可消费的压缩上下文，避免独立检索向量和压缩向量重复存储。 | 不是。ECG压缩文档为共享语义向量并生成；ADIndex在模型注意力内部共享候选库，再逐query精排并补新token。外部文档表示压缩与因果KV索引的可见性、精度和成本单位不同。 |
 | [Federated Vector Retrieval across Heterogeneous VectorDBs](../../../foundation-models/2611.01514-hvmap/README.md) · [原始来源](https://arxiv.org/abs/2611.01514v2)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 四层归一化映射用跨目标fuzzy loss锚定异构空间；native/mapped双分数联合取K，spoke最多经hub两次映射。 | ECG-RAG让检索与压缩生成共享表示，HVMap不生成答案而对齐已存在的异构库。局部fuzzy loss与ECG联合loss均不代表完整RAG效果。 |
+| [InfuseLoop: Cross-Trajectory Latent Injection for Scalable Parallel Looped Transformers](../../../foundation-models/2611.22426-infuseloop/README.md) · [原始来源](https://arxiv.org/abs/2611.22426v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 并行loop在同一执行周期同时推进多个预测轨迹。InfuseLoop让第r轮聚合上一周期已完成、但来自更浅loop的状态，而非仅传递本轨迹前一轮。未来轨迹位置不等于未来未生成token，合法性由执行周期决定。 | Anchor跨层共享外部TTT状态并学习read-map，InfuseLoop共享的是可用计算图中的轨迹latent；不能把任意跨层平均或持久缓存叫作InfuseLoop。 |
+| [FM-Mamba: An Efficient Native 2D Selective State Space Model with Stability-Aware Discretization](../../../foundation-models/2611.22061-fm-mamba/README.md) · [原始来源](https://arxiv.org/abs/2611.22061v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 原生2D FM状态同时接收上、左与左上三个前驱，不通过展平扫描把二维关系退化为一条链。两个输入相关步长分别控制两个轴；a0/(a1a2)决定是否需要给步长施加上界。 | Mamba的一维selective SSM让步长、B/C依赖当前token并配合因果卷积和门控；FM-Mamba原生二维递推同时读取上、左、左上三前驱，使用两个轴步长及ratio相关稳定约束。展平成一维Mamba不是FM-Mamba，Python参考一致也不等于融合scan或PSD提速。 |
+| [GaugeRoPE: RoPE-Compatible Executable Latent Attention](../../../foundation-models/2611.20524-gaugerope/README.md) · [原始来源](https://arxiv.org/abs/2611.20524v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 任意低秩K在潜空间通常不保留RoPE作用，需要逐历史token重建。GaugeRoPE只在相同频率块内拟合复数carrier，另用能量平衡后的joint PCA存residual K与V；query吸收decoder，聚合后才解码输出。 | Anchor让多个层共享TTT状态并学习read-map；GaugeRoPE保留每层token历史但改变其坐标/低秩表示。跨层共享和每token潜缓存压缩不是同一个操作。 |
+| [SIMQ: A Single Graph-based Index for Multi-Vector Query](../../../foundation-models/2611.22079-simq/README.md) · [原始来源](https://arxiv.org/abs/2611.22079v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | ColBERT式MaxSim需要逐query token匹配文档token。SIMQ先均匀抽样token作初始聚合点，通过临时图分配剩余token，对过大cluster递归二分，归一化均值后建立一个质心图。查询只导航到少量质心，经质心到文档映射生成候选，最后才访问候选原始token精确重排，避免全query×centroid矩阵。 | HVMap解决不同编码器向量空间不能直接比较的问题，通过hub映射和双空间SCORE2联合重排；SIMQ假定同一规范化token空间，改变候选图组织和晚交互计算。前者的映射质量不由SIMQ的计数验证，后者的图效率也不由HVMap小张量loss证明。 |
+| [UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval](../../../foundation-models/2611.20758-unigraph/README.md) · [原始来源](https://arxiv.org/abs/2611.20758v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | 分别检索dense和sparse再合并可能过早漏掉仅在混合距离下优秀的向量。UniGraph在多个离散alpha下取近邻，按跨alpha入选频次合并成一个有界出度图；查询时不重构图，直接按自己的alpha遍历。稀疏或稠密guide给出入口，减少到目标区域的混合距离计算。 | HVMap学的是异构库之间的表示转换，UniGraph学不到新的向量映射，而是保留dense/sparse原分量并改变跨权重邻域组织。SCORE2的native/mapped双空间权重与UniGraph的语义／词汇alpha含义不同，不能共享一个未经验证的权重解释。 |
+| [Deal With It: On Better Schedules for Listwise Reranking](../../../foundation-models/2611.22392-dealrank/README.md) · [原始来源](https://arxiv.org/abs/2611.22392v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | 并行listwise重排要把候选分组，每组只晋级固定配额。连续切块会把初始召回前部的好文档挤进同一组，越好的retriever越可能被配额误切。DealRank按retriever名次轮流发牌，使每个前缀在各组尽量平衡，再并行排序、按配额晋级并最终合并，不依赖补救认证轮。 | HVMap改变异构向量候选怎么映射和打分，DealRank不训练表示，而是安排已有候选进入ranker的组合。它们可串在同一检索流水线，但更少调用不是更好向量对齐，SCORE2正确也不能证明listwise配额无损。 |
 
 </div>
 
@@ -97,6 +103,42 @@ ADIndex复用相邻query的候选扫描，再由各query精排，共享库只可
 ECG-RAG为避免重复存储而联合学习检索与压缩表示，依赖decoder训练；HVMap接受库已由不同编码器生成，通过配对映射和候选双空间评分消除部分不兼容。fuzzy loss对角锚定绝对对应，RKD只保相对几何不够；SCORE2还要保留每库native向量而不是总偏hub。小张量梯度不证明跨模态召回或索引吞吐，不能将完整campaign的作者结果搬进本地看板。
 
 对照来源：[hvmap](../../../foundation-models/2611.01514-hvmap/README.md) · [ecg-rag](../../../foundation-models/2604.14403-ecg-rag/README.md)
+
+### InfuseLoop：在上一执行周期聚合跨轨迹潜状态
+
+Anchor跨层共享外部TTT状态并学习read-map，InfuseLoop共享的是可用计算图中的轨迹latent；不能把任意跨层平均或持久缓存叫作InfuseLoop。 keys和values都用无参数RMS归一化，文档边界在softmax前屏蔽。所有新状态读同一旧缓冲，完成整周期后再commit；聚合替换原跨loop输入，不能重复加上旧状态。
+
+对照来源：[infuseloop](../../../foundation-models/2611.22426-infuseloop/README.md) · [anchor-kv](../../../foundation-models/2611.04327-anchor-kv/README.md)
+
+### 先比较状态依赖图，再比较状态空间复杂度
+
+实读Mamba README的递推是h_t=exp(Delta_t A)h_(t-1)+Delta_t B_t x_t，一条一维历史链支持selective scan；本地短预算WikiText负结果不代表原论文规模。FM-Mamba的两个轴指数交叉进入ZOH状态系数，并保留可能非零的对角前驱；同一反对角才能并行。其冻结系数逐位置稳定条件不构成任意时变场的全局证明。两者的输入依赖性相似，但拓扑、离散化和并行实现不同。
+
+对照来源：[fm-mamba](../../../foundation-models/2611.22061-fm-mamba/README.md) · [mamba](../../../reproductions/2312.00752-mamba/README.md)
+
+### GaugeRoPE：可执行RoPE carrier与残余KV双支缓存
+
+Anchor让多个层共享TTT状态并学习read-map；GaugeRoPE保留每层token历史但改变其坐标/低秩表示。跨层共享和每token潜缓存压缩不是同一个操作。 carrier在保留子空间中精确保持RoPE，但RKV把残余位置相关分数近似为不旋转的校正。因此整体attention一般仍是近似；不能因为carrier兼容就宣称压缩无损。PCA只用显式校准输入，不借测试答案选秩。
+
+对照来源：[gaugerope](../../../foundation-models/2611.20524-gaugerope/README.md) · [anchor-kv](../../../foundation-models/2611.04327-anchor-kv/README.md)
+
+### SIMQ：单质心图上的多向量检索与计数候选选择：区别机制与能力
+
+§III/Alg1–2保留抽样、图引导分配、deferred二分、质心归一化、每token候选和精确MaxSim重排。§V/Alg3的SIMQ+在每token原始文档pool中按文档去重计数，不做TopDocs截断；边界count并列必须全部保留，候选数可以超过Nmin。当前Index用小型exact kNN邻接构图和有限Lloyd二分代替可扩展HNSW/VSAG后端，是明确的小数据后端差异，不复现工业build/QPS。 HVMap解决不同编码器向量空间不能直接比较的问题，通过hub映射和双空间SCORE2联合重排；SIMQ假定同一规范化token空间，改变候选图组织和晚交互计算。前者的映射质量不由SIMQ的计数验证，后者的图效率也不由HVMap小张量loss证明。
+
+对照来源：[simq](../../../foundation-models/2611.22079-simq/README.md) · [hvmap](../../../foundation-models/2611.01514-hvmap/README.md)
+
+### UniGraph：支持逐查询混合权重的统一稠密稀疏图：区别机制与能力
+
+Alg1先对每alpha取top-kg，按出现次数选M个邻居；Alg2维护candidate与ef-sized结果集，使用逐query混合距离。dense-first用Cauchy–Schwarz范数界决定是否需要sparse内积：gamma=1是安全下界，gamma<1只是不保证安全的更激进估计。原主实验gamma=0.3；本地诊断用gamma=1核对不改变未剪枝beam结果。guide在alpha>0.5时选dense，否则sparse，0.5是相近量纲下的原实验约定。 HVMap学的是异构库之间的表示转换，UniGraph学不到新的向量映射，而是保留dense/sparse原分量并改变跨权重邻域组织。SCORE2的native/mapped双空间权重与UniGraph的语义／词汇alpha含义不同，不能共享一个未经验证的权重解释。
+
+对照来源：[unigraph](../../../foundation-models/2611.20758-unigraph/README.md) · [hvmap](../../../foundation-models/2611.01514-hvmap/README.md)
+
+### DealRank：按召回名次轮发候选，减少配额切掉好文档：区别机制与能力
+
+§2.1的100候选配置是5组×20、每组留4、最后20再排，共6调用2轮。一致ranker只给最前q=4的最坏情况恢复保证，不是top10保证。500配置25组留3再4组留5，1000配置50组留2再5组留4，均三轮；被后轮淘汰的排在早轮前。调用回调必须返回原候选的一次排列，真正ThreadPool并发只验证调度，不产生LLM排序内容。 HVMap改变异构向量候选怎么映射和打分，DealRank不训练表示，而是安排已有候选进入ranker的组合。它们可串在同一检索流水线，但更少调用不是更好向量对齐，SCORE2正确也不能证明listwise配额无损。
+
+对照来源：[dealrank](../../../foundation-models/2611.22392-dealrank/README.md) · [hvmap](../../../foundation-models/2611.01514-hvmap/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -202,9 +244,93 @@ ECG-RAG为避免重复存储而联合学习检索与压缩表示，依赖decoder
 
     对照来源：[hvmap](../../../foundation-models/2611.01514-hvmap/README.md) · [ecg-rag](../../../foundation-models/2604.14403-ecg-rag/README.md)
 
+### 与Anchor跨层共享状态有什么差别？ {#cross-nov18-infuseloop}
+
+??? note "展开答案与例子"
+
+    **答案：** Anchor读外部TTT记忆并结合局部attention；InfuseLoop依执行周期聚合多个轨迹的hidden states，状态语义和写入时机都不同。
+
+    **教学例子：** 把一份KV矩阵广播给所有loop，没有实现所需的跨轨迹索引。
+
+    对照来源：[infuseloop](../../../foundation-models/2611.22426-infuseloop/README.md) · [anchor-kv](../../../foundation-models/2611.04327-anchor-kv/README.md)
+
+### 把图像展平后运行Mamba，为什么还不能叫FM-Mamba？ {#cross-nov18-fm-mamba}
+
+??? note "展开答案与例子"
+
+    **答案：** 它改变了二维依赖图：FM-Mamba每个位置同时读取上、左、左上并使用两个轴步长和稳定投影，而展平scan只沿选定的一维顺序递推。
+
+    **教学例子：** 教学例：左上脉冲可经显式对角前驱影响下一格；删去该项后即使仍称SSM，也不是同一递推。
+
+    对照来源：[fm-mamba](../../../foundation-models/2611.22061-fm-mamba/README.md) · [mamba](../../../reproductions/2312.00752-mamba/README.md)
+
+### GaugeRoPE与Anchor都减少状态，有何不同？ {#cross-nov18-gaugerope}
+
+??? note "展开答案与例子"
+
+    **答案：** 前者减少每token每层的坐标维数并保留频率结构；后者跨层共用递归状态，依赖外部writer和reader映射。
+
+    **教学例子：** 同样减少一半字节，不代表历史信息或读写语义相同。
+
+    对照来源：[gaugerope](../../../foundation-models/2611.20524-gaugerope/README.md) · [anchor-kv](../../../foundation-models/2611.04327-anchor-kv/README.md)
+
+### SIMQ能代替HVMap做异构编码器对齐吗？ {#cross-cross-nov18-latest-simq}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。SIMQ在同一token空间内改变候选索引，HVMap学习跨空间映射。
+
+    **教学例子：** 教学例：不同编码器的同维向量也不能直接靠SIMQ内积变得可比。
+
+    对照来源：[simq](../../../foundation-models/2611.22079-simq/README.md) · [hvmap](../../../foundation-models/2611.01514-hvmap/README.md)
+
+### UniGraph的alpha等于HVMap的native权重吗？ {#cross-cross-nov18-latest-unigraph}
+
+??? note "展开答案与例子"
+
+    **答案：** 不等于。前者混合dense和sparse距离，后者混合候选native与mapped空间分数。
+
+    **教学例子：** 教学例：提高alpha不等于更相信候选所属数据库。
+
+    对照来源：[unigraph](../../../foundation-models/2611.20758-unigraph/README.md) · [hvmap](../../../foundation-models/2611.01514-hvmap/README.md)
+
+### 它能代替HVMap双空间重排吗？ {#cross-cross-nov18-latest-dealrank}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。DealRank决定哪些候选同场比较，HVMap定义跨编码器的可比分数。
+
+    **教学例子：** 教学例：轮流发牌不能修正未对齐的embedding。
+
+    对照来源：[dealrank](../../../foundation-models/2611.22392-dealrank/README.md) · [hvmap](../../../foundation-models/2611.01514-hvmap/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 本地ranker是确定性一致排序回调，不是模型；true_top只给quota_cuts外层诊断，不进入schedule。没有RankGPT提示、token费用或真实API延迟，机制计数不作NDCG／速度证据。作者提供mixedbread-ai/dealrank链接，但2026-11-18仓库／main commit API返回404，未核实公开源码或许可，不执行外部代码。完整多模型及27B计时矩阵高成本不复现。分组和最后晋级排序必须按原文层级配置核对，不能把所有情况压成一个generic topk。 完整实验高成本不复现，未作能力或Evolve晋级证据。
+
+涉及：[dealrank](../../../foundation-models/2611.22392-dealrank/README.md) · [hvmap](../../../foundation-models/2611.01514-hvmap/README.md)
+
+**2026-11-18** · 本地exact all-pairs构图和exact guide查找是有限诊断后端，不是论文C++可扩展候选构造；没有BGE-M3编码、SINDI、百万级索引或QPS对照。安全剪枝只相对同一beam插入规则成立，不能推出全局ANN召回完备；gamma<1必须显式保留风险。完整矩阵高成本不复现。 完整实验高成本不复现，未作能力或Evolve晋级证据。
+
+涉及：[unigraph](../../../foundation-models/2611.20758-unigraph/README.md) · [hvmap](../../../foundation-models/2611.01514-hvmap/README.md)
+
+**2026-11-18** · 没有ColBERT编码、百万级token索引、残差压缩、完整HNSW或公平吞吐实验。重复seed不使随机向量变成语义能力评测；SIMQ+保留完整边界并列意味着rerank参数不是它的硬候选上限。完整五数据集矩阵成本过高，不复现（审查DONE）。 完整实验高成本不复现，未作能力或Evolve晋级证据。
+
+涉及：[simq](../../../foundation-models/2611.22079-simq/README.md) · [hvmap](../../../foundation-models/2611.01514-hvmap/README.md)
+
+**2026-11-18** · Anchor让多个层共享TTT状态并学习read-map；GaugeRoPE保留每层token历史但改变其坐标/低秩表示。跨层共享和每token潜缓存压缩不是同一个操作。 本地边界与完整高成本不复现分别记录。
+
+涉及：[gaugerope](../../../foundation-models/2611.20524-gaugerope/README.md) · [anchor-kv](../../../foundation-models/2611.04327-anchor-kv/README.md)
+
+**2026-11-18** · Mamba的一维selective SSM让步长、B/C依赖当前token并配合因果卷积和门控；FM-Mamba原生二维递推同时读取上、左、左上三前驱，使用两个轴步长及ratio相关稳定约束。展平成一维Mamba不是FM-Mamba，Python参考一致也不等于融合scan或PSD提速。 本次实读已有同主题代表README，按真实研究轴比较，不借比较对象改变算法或宣称跨论文效果复现。
+
+涉及：[fm-mamba](../../../foundation-models/2611.22061-fm-mamba/README.md) · [mamba](../../../reproductions/2312.00752-mamba/README.md)
+
+**2026-11-18** · Anchor跨层共享外部TTT状态并学习read-map，InfuseLoop共享的是可用计算图中的轨迹latent；不能把任意跨层平均或持久缓存叫作InfuseLoop。 本地边界与完整高成本不复现分别记录。
+
+涉及：[infuseloop](../../../foundation-models/2611.22426-infuseloop/README.md) · [anchor-kv](../../../foundation-models/2611.04327-anchor-kv/README.md)
 
 **2026-11-18** · 补HVMap跨空间fuzzy锚定、native权重与无配额联合检索；对照共享RAG表示，明确L1小张量与高成本完整实验的边界。
 
@@ -238,7 +364,7 @@ ECG-RAG为避免重复存储而联合学习检索与压缩表示，依赖decoder
 
 覆盖 31 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 40 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 46 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -282,6 +408,12 @@ ECG-RAG为避免重复存储而联合学习检索与压缩表示，依赖decoder
 - [ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation](../../../foundation-models/2611.12956-adindex/README.md)
 - [A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation](../../../foundation-models/2604.14403-ecg-rag/README.md)
 - [Federated Vector Retrieval across Heterogeneous VectorDBs](../../../foundation-models/2611.01514-hvmap/README.md)
+- [InfuseLoop: Cross-Trajectory Latent Injection for Scalable Parallel Looped Transformers](../../../foundation-models/2611.22426-infuseloop/README.md)
+- [FM-Mamba: An Efficient Native 2D Selective State Space Model with Stability-Aware Discretization](../../../foundation-models/2611.22061-fm-mamba/README.md)
+- [GaugeRoPE: RoPE-Compatible Executable Latent Attention](../../../foundation-models/2611.20524-gaugerope/README.md)
+- [SIMQ: A Single Graph-based Index for Multi-Vector Query](../../../foundation-models/2611.22079-simq/README.md)
+- [UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval](../../../foundation-models/2611.20758-unigraph/README.md)
+- [Deal With It: On Better Schedules for Listwise Reranking](../../../foundation-models/2611.22392-dealrank/README.md)
 
 </details>
 

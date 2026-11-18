@@ -33,7 +33,12 @@
         "post-training:rrhf",
         "post-training:constitutional-ai",
         "post-training:luce-similarity-audit",
-        "post-training:calibrated-judges-protocol"
+        "post-training:calibrated-judges-protocol",
+        "post-training:ambient-sft",
+        "post-training:margin-dynamics-tpo",
+        "post-training:ca-zodpo",
+        "post-training:confidence-adaptive-granularity",
+        "post-training:mpg-dpo"
       ],
       "axes": [
         "监督单位：同题偏好对、单条满意标签、带噪标签",
@@ -123,6 +128,56 @@
             "论文离线与线上效果",
             "数据协议与代码映射"
           ]
+        },
+        {
+          "paper": "post-training:ambient-sft",
+          "position": "原式CE与同位置温度forward-KL、冻结教师、随机clean/matching分支；不乘T²。",
+          "tradeoff": "DPO对chosen/rejected的reference-relative log-ratio分类；Ambient SFT在相同观察token的完整词表上匹配冻结base温度分布，既不需要偏好对，也不是奖励优化。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
+        },
+        {
+          "paper": "post-training:margin-dynamics-tpo",
+          "position": "长度归一化分数的TPO-S label-smoothed sigmoid与AppendixB精确归一化Huber TPO-H；验证有限吸引点和有界梯度。",
+          "tradeoff": "二者都可用label smoothing，但本式用reference-free长度归一化分数并带目标margin；DPO用相对冻结reference的log-ratio，参考轴不同，不能只比较同一个ε。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
+        },
+        {
+          "paper": "post-training:ca-zodpo",
+          "position": "chosen/rejected activation差的power-iteration子空间、rank归一化双点有限差分、换basis投影的低秩momentum更新。",
+          "tradeoff": "不一定。每步要提取activation basis并做正负两次损失前向，少了反传但增加前向；真实time-to-quality需同数据预算和模型评判，组件不报告该结论。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
+        },
+        {
+          "paper": "post-training:confidence-adaptive-granularity",
+          "position": "给定已核验hierarchy上的20采样/16共识规则、recognition的逐层全coarser通过规则与归一化information utility；不拿gold选训练共识。",
+          "tradeoff": "这里按模型展示的可辨识知识自训练粒度，不需要chosen/rejected偏好loss；Granola-EQ另用答案和同层distractor的mean-token-logp识别规则。DPO的pair margin不能替代层级知识探测。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
+        },
+        {
+          "paper": "post-training:mpg-dpo",
+          "position": "只收录cone+ridge confidence+非支配trade-off主动选对的完整算法；不将一个pair selector宣称完整个性化DPO。",
+          "tradeoff": "不是，核心在带ridge置信界的主动pair选择及cone在线更新，随后才用标准在线DPO。只调用DPO loss或从固定pair池挑最高差分不能冒充完整MPG-DPO。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
         }
       ],
       "analysis": [
@@ -158,6 +213,46 @@
           "papers": [
             "post-training:calibrated-judges-protocol",
             "post-training:probabilistic-autorater"
+          ]
+        },
+        {
+          "title": "为何这里不能套常见KD的T²缩放？",
+          "body": "原式没有T²，T趋无穷时KL项自然消失并还原SFT；乘T²会改变这个极限和温度控制的偏差—方差关系。 DPO对chosen/rejected的reference-relative log-ratio分类；Ambient SFT在相同观察token的完整词表上匹配冻结base温度分布，既不需要偏好对，也不是奖励优化。 本轮边界：原式CE与同位置温度forward-KL、冻结教师、随机clean/matching分支；不乘T²。",
+          "papers": [
+            "post-training:ambient-sft",
+            "post-training:dpo"
+          ]
+        },
+        {
+          "title": "TPO-S有限吸引点由什么决定？",
+          "body": "label smoothing让正负两侧力平衡，δ*=log((1-ε)/ε)，所以原始长度归一化分差还要加μ并除β；不能漏掉margin平移。 二者都可用label smoothing，但本式用reference-free长度归一化分数并带目标margin；DPO用相对冻结reference的log-ratio，参考轴不同，不能只比较同一个ε。 本轮边界：长度归一化分数的TPO-S label-smoothed sigmoid与AppendixB精确归一化Huber TPO-H；验证有限吸引点和有界梯度。",
+          "papers": [
+            "post-training:margin-dynamics-tpo",
+            "post-training:dpo"
+          ]
+        },
+        {
+          "title": "为何Δ=RAᵀ还需除sqrt(rank)？",
+          "body": "原式用该因子使不同rank的扰动规模可比。删掉会把增大rank与增大搜索步长混在一起，使算子和成本/质量对照失去原口径。 不一定。每步要提取activation basis并做正负两次损失前向，少了反传但增加前向；真实time-to-quality需同数据预算和模型评判，组件不报告该结论。 本轮边界：chosen/rejected activation差的power-iteration子空间、rank归一化双点有限差分、换basis投影的低秩momentum更新。",
+          "papers": [
+            "post-training:ca-zodpo",
+            "post-training:dpo"
+          ]
+        },
+        {
+          "title": "共识target为何不能从gold层级选？",
+          "body": "Vital Persons规则在20个模型回答中找至少16条共享的最细值，只依赖一致性而非gold正确性。usable不足16则排除；足够却无共识则训练IDK。 这里按模型展示的可辨识知识自训练粒度，不需要chosen/rejected偏好loss；Granola-EQ另用答案和同层distractor的mean-token-logp识别规则。DPO的pair margin不能替代层级知识探测。 本轮边界：给定已核验hierarchy上的20采样/16共识规则、recognition的逐层全coarser通过规则与归一化information utility；不拿gold选训练共识。",
+          "papers": [
+            "post-training:confidence-adaptive-granularity",
+            "post-training:dpo"
+          ]
+        },
+        {
+          "title": "新反馈与旧偏好冲突就全部丢弃吗？",
+          "body": "只有所有旧规则都以超过τ的margin支持相反方向才丢弃；还要处理零score差、dual trivial和候选不足等边界。不能把任一规则反对误读成全体反对。 不是，核心在带ridge置信界的主动pair选择及cone在线更新，随后才用标准在线DPO。只调用DPO loss或从固定pair池挑最高差分不能冒充完整MPG-DPO。 本轮边界：只收录cone+ridge confidence+非支配trade-off主动选对的完整算法；不将一个pair selector宣称完整个性化DPO。",
+          "papers": [
+            "post-training:mpg-dpo",
+            "post-training:dpo"
           ]
         }
       ],
@@ -212,6 +307,56 @@
           "papers": [
             "post-training:calibrated-judges-protocol",
             "post-training:probabilistic-autorater"
+          ]
+        },
+        {
+          "id": "nov18-ambient-sft",
+          "question": "它与DPO的reference约束有何不同？",
+          "answer": "DPO对chosen/rejected的reference-relative log-ratio分类；Ambient SFT在相同观察token的完整词表上匹配冻结base温度分布，既不需要偏好对，也不是奖励优化。",
+          "example": "教学例：一条无偏好标注的SFT序列足以算Ambient loss，却不足以构成DPO偏好对。",
+          "papers": [
+            "post-training:ambient-sft",
+            "post-training:dpo"
+          ]
+        },
+        {
+          "id": "nov18-margin-dynamics-tpo",
+          "question": "TPO-S就是带reference的cDPO吗？",
+          "answer": "二者都可用label smoothing，但本式用reference-free长度归一化分数并带目标margin；DPO用相对冻结reference的log-ratio，参考轴不同，不能只比较同一个ε。",
+          "example": "教学例：复制DPO的reference差分到TPO-S会改变原式吸引点所对应的量。",
+          "papers": [
+            "post-training:margin-dynamics-tpo",
+            "post-training:dpo"
+          ]
+        },
+        {
+          "id": "nov18-ca-zodpo",
+          "question": "与DPO相比，低显存是否一定更快？",
+          "answer": "不一定。每步要提取activation basis并做正负两次损失前向，少了反传但增加前向；真实time-to-quality需同数据预算和模型评判，组件不报告该结论。",
+          "example": "教学例：两点差分可在小二次loss上精确匹配方向导数，但没有测1.5B模型wall time。",
+          "papers": [
+            "post-training:ca-zodpo",
+            "post-training:dpo"
+          ]
+        },
+        {
+          "id": "nov18-confidence-adaptive-granularity",
+          "question": "它与DPO对齐回答偏好有什么不同？",
+          "answer": "这里按模型展示的可辨识知识自训练粒度，不需要chosen/rejected偏好loss；Granola-EQ另用答案和同层distractor的mean-token-logp识别规则。DPO的pair margin不能替代层级知识探测。",
+          "example": "教学例：最细答案分高但某coarser层败给distractor时，不允许直接选最细层。",
+          "papers": [
+            "post-training:confidence-adaptive-granularity",
+            "post-training:dpo"
+          ]
+        },
+        {
+          "id": "nov18-mpg-dpo",
+          "question": "与DPO相比，主要新意在loss吗？",
+          "answer": "不是，核心在带ridge置信界的主动pair选择及cone在线更新，随后才用标准在线DPO。只调用DPO loss或从固定pair池挑最高差分不能冒充完整MPG-DPO。",
+          "example": "教学例：还没查询的候选不能先读取oracle评分来筛选；应由历史拟合的score predictor估计。",
+          "papers": [
+            "post-training:mpg-dpo",
+            "post-training:dpo"
           ]
         }
       ],
@@ -297,13 +442,73 @@
             "post-training:calibrated-judges-protocol": "f2a3c82fd499c39d4a7d27d43cf996a9e98db6f4f2001ba5995f0a5a803aa340",
             "post-training:probabilistic-autorater": "fe6f7067f554183ee185f524f706a4377ac0b1bd4191c607c03acc6c3acd8057"
           }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "post-training:ambient-sft",
+            "post-training:dpo"
+          ],
+          "summary": "原式CE与同位置温度forward-KL、冻结教师、随机clean/matching分支；不乘T²。 完整实验高成本不复现；组件诊断不等于能力比较。",
+          "source_revisions": {
+            "post-training:ambient-sft": "122bffb005817572270b9840eef918640f086ca4a521a3714a47e7b3fe1aaa46",
+            "post-training:dpo": "a54594bea7a424401714d5eebff0524039aed35495680075243dab7355be9acd"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "post-training:margin-dynamics-tpo",
+            "post-training:dpo"
+          ],
+          "summary": "长度归一化分数的TPO-S label-smoothed sigmoid与AppendixB精确归一化Huber TPO-H；验证有限吸引点和有界梯度。 完整实验高成本不复现；组件诊断不等于能力比较。",
+          "source_revisions": {
+            "post-training:margin-dynamics-tpo": "743c21a049f60e0daea6cc17df0902f93f3c4b40ffb55adc8a809f92d25b5c1e",
+            "post-training:dpo": "a54594bea7a424401714d5eebff0524039aed35495680075243dab7355be9acd"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "post-training:ca-zodpo",
+            "post-training:dpo"
+          ],
+          "summary": "chosen/rejected activation差的power-iteration子空间、rank归一化双点有限差分、换basis投影的低秩momentum更新。 完整实验高成本不复现；组件诊断不等于能力比较。",
+          "source_revisions": {
+            "post-training:ca-zodpo": "587f021aebada884eb03e5ea45111edf4d7737efcbaef690486f0080de0d5210",
+            "post-training:dpo": "a54594bea7a424401714d5eebff0524039aed35495680075243dab7355be9acd"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "post-training:confidence-adaptive-granularity",
+            "post-training:dpo"
+          ],
+          "summary": "给定已核验hierarchy上的20采样/16共识规则、recognition的逐层全coarser通过规则与归一化information utility；不拿gold选训练共识。 完整实验高成本不复现；组件诊断不等于能力比较。",
+          "source_revisions": {
+            "post-training:confidence-adaptive-granularity": "d9e9657a1c43d036a0ad7e69d7c75616f80f1e0e78eb317f1d0541ec306c63b8",
+            "post-training:dpo": "a54594bea7a424401714d5eebff0524039aed35495680075243dab7355be9acd"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "post-training:mpg-dpo",
+            "post-training:dpo"
+          ],
+          "summary": "只收录cone+ridge confidence+非支配trade-off主动选对的完整算法；不将一个pair selector宣称完整个性化DPO。 完整实验高成本不复现；组件诊断不等于能力比较。",
+          "source_revisions": {
+            "post-training:mpg-dpo": "cf722f8c638aba9d3f193dc4f8919356a840e81179b2c0edc68f1bfc1f4d638c",
+            "post-training:dpo": "a54594bea7a424401714d5eebff0524039aed35495680075243dab7355be9acd"
+          }
         }
       ]
     },
     "policy-optimization": {
       "title": "同一个GRPO名字之外：优势尺度、裁剪单位与训推失配",
       "thesis": "GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。",
-      "updated": "2026-11-15",
+      "updated": "2026-11-18",
       "reviewed_papers": [
         "post-training:rcea",
         "post-training:rlid",
@@ -364,7 +569,10 @@
         "post-training:excursion-td",
         "post-training:apmd-reference-reset",
         "post-training:lgpo",
-        "post-training:safety-budget-cgrpo"
+        "post-training:safety-budget-cgrpo",
+        "post-training:specal",
+        "post-training:regularized-score-centering",
+        "post-training:ash-hint-steering"
       ],
       "axes": [
         "优势尺度：组均值、组标准差、长度归一化",
@@ -494,6 +702,36 @@
             "数据协议与代码映射",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "post-training:specal",
+          "position": "归一化response表示的中心Gram谱、质量×effective-rank带通、LOO去噪SVD条件支持及双层RMS advantage校准。",
+          "tradeoff": "GRPO使用组内reward均值/方差；SpeCal还依赖跨层token平均后的表示谱和LOO条件支持，并在batch/group两级RMS校准，不能只换一个reward标准差来冒充。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
+        },
+        {
+          "paper": "post-training:regularized-score-centering",
+          "position": "独立auxiliary actions的加权score center、detached TIS权重、独立KL cap的reverse-KL梯度估计；不是reward减均值。",
+          "tradeoff": "RSC专门惩罚learner相对产生本批数据的behavior分布的reverse KL，参考随sampler刷新；GRPO常以较固定pretrained reference约束。行为概率不能被另一个reference概率替换。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
+        },
+        {
+          "paper": "post-training:ash-hint-steering",
+          "position": "只收录每步先训练steering再GRPO、hint/plain独立归一化advantage及最后一步不更新model的完整顺序；不把DPO公式当实现。",
+          "tradeoff": "GRPO消除critic但仍依赖同组相对reward；ASH在hint/plain双组上分别标准化，在GRPO之前另训activation steering并在最终步停model更新，防止返回stale向量。旧GRPO候选成功率不能当无hint生成能力。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
         }
       ],
       "analysis": [
@@ -554,6 +792,30 @@
           "papers": [
             "post-training:safety-budget-cgrpo",
             "post-training:dr-grpo"
+          ]
+        },
+        {
+          "title": "为什么rollout不能用含自身的子空间证明自己？",
+          "body": "一个异常方向可能完全由该rollout创造。LOO先删去该行，中心化其余表示，用group有效秩截断SVD，才测被留出向量的投影能量比例。 GRPO使用组内reward均值/方差；SpeCal还依赖跨层token平均后的表示谱和LOO条件支持，并在batch/group两级RMS校准，不能只换一个reward标准差来冒充。 本轮边界：归一化response表示的中心Gram谱、质量×effective-rank带通、LOO去噪SVD条件支持及双层RMS advantage校准。",
+          "papers": [
+            "post-training:specal",
+            "post-training:grpo"
+          ]
+        },
+        {
+          "title": "TIS和reverse-KL cap能共用一个clip后的ratio吗？",
+          "body": "不能默默混用。reward项sample与aux各自计算原ratio后TIS clip；KL项可用独立cap，所有系数对score surrogate detach，behavior在内层固定。 RSC专门惩罚learner相对产生本批数据的behavior分布的reverse KL，参考随sampler刷新；GRPO常以较固定pretrained reference约束。行为概率不能被另一个reference概率替换。 本轮边界：独立auxiliary actions的加权score center、detached TIS权重、独立KL cap的reverse-KL梯度估计；不是reward减均值。",
+          "papers": [
+            "post-training:regularized-score-centering",
+            "post-training:grpo"
+          ]
+        },
+        {
+          "title": "为什么每步必须先更新steering再更新model？",
+          "body": "steering loss拟合产生当前hint/plain样本的同一模型。先改model再拟合会用stale对应关系；最后一步只更新steering不改model，避免返回过时向量。 GRPO消除critic但仍依赖同组相对reward；ASH在hint/plain双组上分别标准化，在GRPO之前另训activation steering并在最终步停model更新，防止返回stale向量。旧GRPO候选成功率不能当无hint生成能力。 本轮边界：只收录每步先训练steering再GRPO、hint/plain独立归一化advantage及最后一步不更新model的完整顺序；不把DPO公式当实现。",
+          "papers": [
+            "post-training:ash-hint-steering",
+            "post-training:grpo"
           ]
         }
       ],
@@ -639,6 +901,36 @@
           "papers": [
             "post-training:safety-budget-cgrpo",
             "post-training:dr-grpo"
+          ]
+        },
+        {
+          "id": "nov18-specal",
+          "question": "与GRPO组内标准化相比新增了什么？",
+          "answer": "GRPO使用组内reward均值/方差；SpeCal还依赖跨层token平均后的表示谱和LOO条件支持，并在batch/group两级RMS校准，不能只换一个reward标准差来冒充。",
+          "example": "教学例：整体乘某条表示7倍应被L2归一化抵消，但改变方向会改变谱和支持。",
+          "papers": [
+            "post-training:specal",
+            "post-training:grpo"
+          ]
+        },
+        {
+          "id": "nov18-regularized-score-centering",
+          "question": "它与普通GRPO的reference KL有什么区别？",
+          "answer": "RSC专门惩罚learner相对产生本批数据的behavior分布的reverse KL，参考随sampler刷新；GRPO常以较固定pretrained reference约束。行为概率不能被另一个reference概率替换。",
+          "example": "教学例：同token有behavior=.2、reference=.1时，importance ratio分母必须仍为.2。",
+          "papers": [
+            "post-training:regularized-score-centering",
+            "post-training:grpo"
+          ]
+        },
+        {
+          "id": "nov18-ash-hint-steering",
+          "question": "已有GRPO实现是否足以宣称ASH无hint行为迁移已接入？",
+          "answer": "GRPO消除critic但仍依赖同组相对reward；ASH在hint/plain双组上分别标准化，在GRPO之前另训activation steering并在最终步停model更新，防止返回stale向量。旧GRPO候选成功率不能当无hint生成能力。",
+          "example": "教学例：分别归一化hint/plain组后，还需先更新真实activation向量再更新model，并在最后一步停model更新。",
+          "papers": [
+            "post-training:ash-hint-steering",
+            "post-training:grpo"
           ]
         }
       ],
@@ -822,13 +1114,49 @@
             "post-training:safety-budget-cgrpo": "8d5cbc553888cba6c873ba73acab1ceb14912631efae56688d780e4300fe9abe",
             "post-training:dr-grpo": "604e3c3df040305405bda2166f684e95d0b0263b9fcee56bca0fbe8fc5f6c2fa"
           }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "post-training:specal",
+            "post-training:grpo"
+          ],
+          "summary": "归一化response表示的中心Gram谱、质量×effective-rank带通、LOO去噪SVD条件支持及双层RMS advantage校准。 完整实验高成本不复现；组件诊断不等于能力比较。",
+          "source_revisions": {
+            "post-training:specal": "b4ee8b5eb2c9f5e8fd654f5db0470b4b013febf8a2abe58abde1cea042d50708",
+            "post-training:grpo": "43d89e0ce5fb714a0bd1158c64f9d7410596997dae717a03ba3dcdd99f21b6e2"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "post-training:regularized-score-centering",
+            "post-training:grpo"
+          ],
+          "summary": "独立auxiliary actions的加权score center、detached TIS权重、独立KL cap的reverse-KL梯度估计；不是reward减均值。 完整实验高成本不复现；组件诊断不等于能力比较。",
+          "source_revisions": {
+            "post-training:regularized-score-centering": "19435f7b79d7e4ed8130b2b8f144410da32517d77ac78aff028ba1d87c77f3a2",
+            "post-training:grpo": "43d89e0ce5fb714a0bd1158c64f9d7410596997dae717a03ba3dcdd99f21b6e2"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "post-training:ash-hint-steering",
+            "post-training:grpo"
+          ],
+          "summary": "只收录每步先训练steering再GRPO、hint/plain独立归一化advantage及最后一步不更新model的完整顺序；不把DPO公式当实现。 完整实验高成本不复现；组件诊断不等于能力比较。",
+          "source_revisions": {
+            "post-training:ash-hint-steering": "0c3c951817ec17351eaa32a8274b61ad0607f5dbbeaedd32ff25c2c6292f2319",
+            "post-training:grpo": "43d89e0ce5fb714a0bd1158c64f9d7410596997dae717a03ba3dcdd99f21b6e2"
+          }
         }
       ]
     },
     "reward-and-credit": {
       "title": "奖励从哪里来，信用才该分到哪里",
       "thesis": "过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。 CONCUR另处理奖励维度之间的优先级，把门控辅助优势投影到主奖励保序锥；这不是沿时间轴分配token信用。",
-      "updated": "2026-11-15",
+      "updated": "2026-11-18",
       "reviewed_papers": [
         "post-training:emoreward",
         "post-training:dars-density",
@@ -872,7 +1200,11 @@
         "post-training:maxim",
         "post-training:mcpo",
         "post-training:rlmf",
-        "post-training:bait-reward-defense"
+        "post-training:bait-reward-defense",
+        "post-training:jev-safety-reward",
+        "post-training:optimistic-verifier-audit",
+        "post-training:design-taste-admission",
+        "post-training:gprm"
       ],
       "axes": [
         "证据来源：人工步骤、正确续写比例、verifier、内在分布",
@@ -1011,6 +1343,46 @@
             "结果、负控与边界",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "post-training:jev-safety-reward",
+          "position": "固定概率judge的confidence gate、校准集阈值、PHR/GPR分母区分、prompt级bootstrap和judge升级重审规则；不实现商业judge。",
+          "tradeoff": "Bait基于私有probe/policy reward差改变训练reward；本协议验证judge的门控漏报和时间变化，不自动翻转reward，也不把某个参考judge当绝对真值。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
+        },
+        {
+          "paper": "post-training:optimistic-verifier-audit",
+          "position": "小有限状态域的精确MSR antichain、因果precision/recall/F1、代理selection-error和signed/absolute gap；不伪造LLM训练伤害。",
+          "tradeoff": "不是。该论文先在可知真值域测proxy selection-error及gap，预测风险；Bait用probe差做防御变换。精确oracle通常只在特定小域可得，不能据此声称通用Agent真值已解决。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
+        },
+        {
+          "paper": "post-training:design-taste-admission",
+          "position": "expert agreement/causal sensitivity/hack resistance/stability四项admission、V0乘性hard gates与已admit分数composite reward；不造浏览器/设计judge能力。",
+          "tradeoff": "Bait看private probe奖励偏好并翻转reward；本方法在训练前后筛选和复核候选评判信号。前者依赖probe覆盖，后者依赖专家golden/trap覆盖，均非通用安全保证。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
+        },
+        {
+          "paper": "post-training:gprm",
+          "position": "只收录方法和成本；不以字符串parser或固定规则替代4维global PRM。",
+          "tradeoff": "Bait对外部reward的probe/policy差做防御变换，不判断推理step；GPRM学习带预测历史和未来trajectory的四维过程模型。二者都要隔离scorer信息，但不能用Bait数值核或标签parser替代PRM。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
         }
       ],
       "analysis": [
@@ -1079,6 +1451,38 @@
           "papers": [
             "post-training:bait-reward-defense",
             "post-training:tag-reward-gating"
+          ]
+        },
+        {
+          "title": "GPR升高为什么不能直接说reward被攻破？",
+          "body": "GPR分母是剩余harm，PHR分母是harmful-prompt全部回答。若已知harm消失更快，盲区绝对量仍下降而份额上升；escape要看PHR显著增加及外部人工审核。 Bait基于私有probe/policy reward差改变训练reward；本协议验证judge的门控漏报和时间变化，不自动翻转reward，也不把某个参考judge当绝对真值。 本轮边界：固定概率judge的confidence gate、校准集阈值、PHR/GPR分母区分、prompt级bootstrap和judge升级重审规则；不实现商业judge。",
+          "papers": [
+            "post-training:jev-safety-reward",
+            "post-training:bait-reward-defense"
+          ]
+        },
+        {
+          "title": "只测sufficiency为何奖励padding？",
+          "body": "引用所有特征通常充分，却夹带无因果作用内容。精确reward用MSR并集测precision、最佳单个MSR测recall，padding会降低precision而不因充分性拿满分。 不是。该论文先在可知真值域测proxy selection-error及gap，预测风险；Bait用probe差做防御变换。精确oracle通常只在特定小域可得，不能据此声称通用Agent真值已解决。 本轮边界：小有限状态域的精确MSR antichain、因果precision/recall/F1、代理selection-error和signed/absolute gap；不伪造LLM训练伤害。",
+          "papers": [
+            "post-training:optimistic-verifier-audit",
+            "post-training:bait-reward-defense"
+          ]
+        },
+        {
+          "title": "V4专家panel能否直接加入composite reward？",
+          "body": "不能。专家选择哪些低层信号可被准入并做盲评canary，reward只聚合func/design/rubric/pref；build/render/anticheat等是乘性V0门。 Bait看private probe奖励偏好并翻转reward；本方法在训练前后筛选和复核候选评判信号。前者依赖probe覆盖，后者依赖专家golden/trap覆盖，均非通用安全保证。 本轮边界：expert agreement/causal sensitivity/hack resistance/stability四项admission、V0乘性hard gates与已admit分数composite reward；不造浏览器/设计judge能力。",
+          "papers": [
+            "post-training:design-taste-admission",
+            "post-training:bait-reward-defense"
+          ]
+        },
+        {
+          "title": "为何完整trajectory评分可用于离线，却增加在线搜索成本？",
+          "body": "离线诊断和Best-of-N已有完整候选，未来信息免费可见；逐步搜索尚无未来，需要先生成continuation再判当前step，成本不能按普通prefix PRM估。 Bait对外部reward的probe/policy差做防御变换，不判断推理step；GPRM学习带预测历史和未来trajectory的四维过程模型。二者都要隔离scorer信息，但不能用Bait数值核或标签parser替代PRM。 本轮边界：只收录方法和成本；不以字符串parser或固定规则替代4维global PRM。",
+          "papers": [
+            "post-training:gprm",
+            "post-training:bait-reward-defense"
           ]
         }
       ],
@@ -1173,6 +1577,46 @@
           "papers": [
             "post-training:bait-reward-defense",
             "post-training:tag-reward-gating"
+          ]
+        },
+        {
+          "id": "nov18-jev-safety-reward",
+          "question": "它与Bait的reward符号翻转是什么关系？",
+          "answer": "Bait基于私有probe/policy reward差改变训练reward；本协议验证judge的门控漏报和时间变化，不自动翻转reward，也不把某个参考judge当绝对真值。",
+          "example": "教学例：PHR区间含0进入S3，不应直接触发所有训练reward取负。",
+          "papers": [
+            "post-training:jev-safety-reward",
+            "post-training:bait-reward-defense"
+          ]
+        },
+        {
+          "id": "nov18-optimistic-verifier-audit",
+          "question": "它与Bait一样直接修复reward吗？",
+          "answer": "不是。该论文先在可知真值域测proxy selection-error及gap，预测风险；Bait用probe差做防御变换。精确oracle通常只在特定小域可得，不能据此声称通用Agent真值已解决。",
+          "example": "教学例：两个true reward不同而proxy打平，selection error计.5，说明选择失真而非训练已发生伤害。",
+          "papers": [
+            "post-training:optimistic-verifier-audit",
+            "post-training:bait-reward-defense"
+          ]
+        },
+        {
+          "id": "nov18-design-taste-admission",
+          "question": "与Bait都防reward hacking，为何不是同一个机制？",
+          "answer": "Bait看private probe奖励偏好并翻转reward；本方法在训练前后筛选和复核候选评判信号。前者依赖probe覆盖，后者依赖专家golden/trap覆盖，均非通用安全保证。",
+          "example": "教学例：expert agreement=.99但hack trap失败率.21时仍拒绝admit，而不是翻转该项分数。",
+          "papers": [
+            "post-training:design-taste-admission",
+            "post-training:bait-reward-defense"
+          ]
+        },
+        {
+          "id": "nov18-gprm",
+          "question": "GPRM能否由现有Bait reward防御组件加一个标签parser得到？",
+          "answer": "Bait对外部reward的probe/policy差做防御变换，不判断推理step；GPRM学习带预测历史和未来trajectory的四维过程模型。二者都要隔离scorer信息，但不能用Bait数值核或标签parser替代PRM。",
+          "example": "教学例：Bait翻转reward不识别当前推理step是否与未来推导一致；[CORRECT]可解析也不代表判断正确。",
+          "papers": [
+            "post-training:gprm",
+            "post-training:bait-reward-defense"
           ]
         }
       ],
@@ -1330,13 +1774,61 @@
             "post-training:bait-reward-defense": "f0471f7c9153a3c97924eb7be4cab15943df6e0614ff809704877c66f8699492",
             "post-training:tag-reward-gating": "80ae87925ddaed87f00e62a49e40d87dda1e0d9fe9b35484f0e54b281712298b"
           }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "post-training:jev-safety-reward",
+            "post-training:bait-reward-defense"
+          ],
+          "summary": "固定概率judge的confidence gate、校准集阈值、PHR/GPR分母区分、prompt级bootstrap和judge升级重审规则；不实现商业judge。 完整实验高成本不复现；组件诊断不等于能力比较。",
+          "source_revisions": {
+            "post-training:jev-safety-reward": "2768af204524a5156e4177a90fb344bb2c186b61b28c8c03e6a02f2edd0d6554",
+            "post-training:bait-reward-defense": "f0471f7c9153a3c97924eb7be4cab15943df6e0614ff809704877c66f8699492"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "post-training:optimistic-verifier-audit",
+            "post-training:bait-reward-defense"
+          ],
+          "summary": "小有限状态域的精确MSR antichain、因果precision/recall/F1、代理selection-error和signed/absolute gap；不伪造LLM训练伤害。 完整实验高成本不复现；组件诊断不等于能力比较。",
+          "source_revisions": {
+            "post-training:optimistic-verifier-audit": "ab98d5f884a36017b5c67ee3bf437488563836616517e09567e1e5f7161e182c",
+            "post-training:bait-reward-defense": "f0471f7c9153a3c97924eb7be4cab15943df6e0614ff809704877c66f8699492"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "post-training:design-taste-admission",
+            "post-training:bait-reward-defense"
+          ],
+          "summary": "expert agreement/causal sensitivity/hack resistance/stability四项admission、V0乘性hard gates与已admit分数composite reward；不造浏览器/设计judge能力。 完整实验高成本不复现；组件诊断不等于能力比较。",
+          "source_revisions": {
+            "post-training:design-taste-admission": "3cf7bdff41d6d7cba1e0ecc0f68b8002e8eb7ef83cd0b7e47c21aa482d9c5e2d",
+            "post-training:bait-reward-defense": "f0471f7c9153a3c97924eb7be4cab15943df6e0614ff809704877c66f8699492"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "post-training:gprm",
+            "post-training:bait-reward-defense"
+          ],
+          "summary": "只收录方法和成本；不以字符串parser或固定规则替代4维global PRM。 完整实验高成本不复现；组件诊断不等于能力比较。",
+          "source_revisions": {
+            "post-training:gprm": "2a6bf88d82fd47d08bd0b4061e13274d6c188452a9ab9371ea0d3825a4bee86e",
+            "post-training:bait-reward-defense": "f0471f7c9153a3c97924eb7be4cab15943df6e0614ff809704877c66f8699492"
+          }
         }
       ]
     },
     "student-trajectory-distillation": {
       "title": "轨迹蒸馏：采样者、提案与散度方向分开看",
       "thesis": "“on-policy”描述监督发生在哪些状态，FKL/RKL/JSD描述在这些状态怎样比较分布。GKD和MiniLLM建立这两个轴，DrOPD、AP-OPD再调整纠错位置或强度，Semi-OPD与学习信号诊断则提醒：离线复用和残余损失各有不同含义。 MPOPD再把采样者变成可学习proposal：几何混合是提案target，学生仍向教师做RKL，二者不能混成同一个蒸馏分布。",
-      "updated": "2026-11-11",
+      "updated": "2026-11-18",
       "reviewed_papers": [
         "post-training:shuffled-opsd",
         "post-training:specopd",
@@ -1382,7 +1874,8 @@
         "post-training:minillm",
         "post-training:mpopd",
         "post-training:cord-rollout",
-        "post-training:drd-mopd"
+        "post-training:drd-mopd",
+        "post-training:streaming-opd"
       ],
       "axes": [
         "状态来源：教师示范、当前学生、初始学生固定轨迹",
@@ -1499,6 +1992,16 @@
             "数据协议与代码映射",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "post-training:streaming-opd",
+          "position": "保留完整因果prefix的新片段loss mask/version记录、teacher top-k不重归一化截断clip损失、按监督权重归约。",
+          "tradeoff": "OPDLM把AR教师与双向扩散学生的状态/目标对齐；Streaming OPD仍沿因果prefix计分，只改变交付和消费时序。旧OPDLM候选诊断不是实际扩散decoder，当前prefix/损失核也不是异步服务性能证据。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
         }
       ],
       "analysis": [
@@ -1560,6 +2063,14 @@
           "papers": [
             "post-training:drd-mopd",
             "post-training:divergence-routed-opd"
+          ]
+        },
+        {
+          "title": "top-k损失为什么可能为负再clip到0？",
+          "body": "实现只在teacher选的top-k上求和，保留完整词表概率不重新归一化；这不是完整KL，部分和可为负，原文用log floor和[0,C]截断。 OPDLM把AR教师与双向扩散学生的状态/目标对齐；Streaming OPD仍沿因果prefix计分，只改变交付和消费时序。旧OPDLM候选诊断不是实际扩散decoder，当前prefix/损失核也不是异步服务性能证据。 本轮边界：保留完整因果prefix的新片段loss mask/version记录、teacher top-k不重归一化截断clip损失、按监督权重归约。",
+          "papers": [
+            "post-training:streaming-opd",
+            "post-training:opd-lm"
           ]
         }
       ],
@@ -1646,6 +2157,16 @@
           "papers": [
             "post-training:drd-mopd",
             "post-training:divergence-routed-opd"
+          ]
+        },
+        {
+          "id": "nov18-streaming-opd",
+          "question": "Streaming OPD与OPDLM都改变蒸馏，为什么不是同一种状态/效率优化？",
+          "answer": "OPDLM把AR教师与双向扩散学生的状态/目标对齐；Streaming OPD仍沿因果prefix计分，只改变交付和消费时序。旧OPDLM候选诊断不是实际扩散decoder，当前prefix/损失核也不是异步服务性能证据。",
+          "example": "教学例：一个保留因果prefix改变消费时钟，另一个需双向去噪状态；两种小组件都不直接给出系统吞吐或扩散生成能力。",
+          "papers": [
+            "post-training:streaming-opd",
+            "post-training:opd-lm"
           ]
         }
       ],
@@ -1795,13 +2316,25 @@
           "source_revisions": {
             "post-training:drd-mopd": "3fb54a6a2d9501802204e106c8b89d010713c1da560da1cd77bcb54977862a05"
           }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "post-training:streaming-opd",
+            "post-training:opd-lm"
+          ],
+          "summary": "保留完整因果prefix的新片段loss mask/version记录、teacher top-k不重归一化截断clip损失、按监督权重归约。 完整实验高成本不复现；组件诊断不等于能力比较。",
+          "source_revisions": {
+            "post-training:streaming-opd": "d1d113d64cd6d0a49407520af48c62e17235118dcd1455cfd973ce328d260e24",
+            "post-training:opd-lm": "fd61f8e101ecfe187ac09038eb09aa5bb5f1cdcd881010354f2e6645904d45d8"
+          }
         }
       ]
     },
     "teacher-and-context": {
       "title": "教师更强仍可能教错：信息、兼容性与成功行为保护",
       "thesis": "教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。",
-      "updated": "2026-11-13",
+      "updated": "2026-11-18",
       "reviewed_papers": [
         "post-training:p2-mopd",
         "post-training:targeted-guidance",
@@ -1856,7 +2389,8 @@
         "post-training:bopd",
         "post-training:lcs-reference-opd",
         "post-training:social-meta-learning",
-        "post-training:behavioral-canaries"
+        "post-training:behavioral-canaries",
+        "post-training:leaf-opd"
       ],
       "axes": [
         "教师来源：同参数特权视图或独立领域专家",
@@ -1994,6 +2528,16 @@
             "核心公式",
             "数据协议与代码映射"
           ]
+        },
+        {
+          "paper": "post-training:leaf-opd",
+          "position": "SS1/SS0.5教师持续监督诊断、teacher-only privileged-context边界、forget/retain分离forward-KL。",
+          "tradeoff": "二者都隔离额外教师上下文，但LCS提供任务兼容成功轨迹纠正失败；LEAF用非披露上下文让teacher压低目标事实概率，并用retain支路保留效用。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
         }
       ],
       "analysis": [
@@ -2071,6 +2615,14 @@
           "papers": [
             "post-training:behavioral-canaries",
             "post-training:ragcompass"
+          ]
+        },
+        {
+          "title": "privileged context能不能也交给student？",
+          "body": "不能。forget teacher读取非披露指令，student始终只读原问题和自身生成prefix；retain teacher不带该指令。将指令给学生会改变所研究的参数遗忘问题。 二者都隔离额外教师上下文，但LCS提供任务兼容成功轨迹纠正失败；LEAF用非披露上下文让teacher压低目标事实概率，并用retain支路保留效用。 本轮边界：SS1/SS0.5教师持续监督诊断、teacher-only privileged-context边界、forget/retain分离forward-KL。",
+          "papers": [
+            "post-training:leaf-opd",
+            "post-training:lcs-reference-opd"
           ]
         }
       ],
@@ -2185,6 +2737,16 @@
           "papers": [
             "post-training:behavioral-canaries",
             "post-training:ragcompass"
+          ]
+        },
+        {
+          "id": "nov18-leaf-opd",
+          "question": "它与LCS的teacher-only reference相同吗？",
+          "answer": "二者都隔离额外教师上下文，但LCS提供任务兼容成功轨迹纠正失败；LEAF用非披露上下文让teacher压低目标事实概率，并用retain支路保留效用。",
+          "example": "教学例：一个reference帮助正确完成任务；一个forget context要求不披露事实，目标方向并不相同。",
+          "papers": [
+            "post-training:leaf-opd",
+            "post-training:lcs-reference-opd"
           ]
         }
       ],
@@ -2364,13 +2926,25 @@
             "post-training:behavioral-canaries": "1ed80d36470c224e7684a4da3a0cf834b3c66fadf4bf5166f63c16fb4c09a263",
             "post-training:ragcompass": "36cbf84b0c356d709501888ddd785daefddacac12e341663c3074987b07ba430"
           }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "post-training:leaf-opd",
+            "post-training:lcs-reference-opd"
+          ],
+          "summary": "SS1/SS0.5教师持续监督诊断、teacher-only privileged-context边界、forget/retain分离forward-KL。 完整实验高成本不复现；组件诊断不等于能力比较。",
+          "source_revisions": {
+            "post-training:leaf-opd": "673665a8332b9bca3c46bc81c1360b2a8e67040c712c9909fd831a9b21cb37f7",
+            "post-training:lcs-reference-opd": "92ff22ac54c37dbaec59f9b3dfa4fec26b54c656dae57dadb01bc6b0a4ed430b"
+          }
         }
       ]
     },
     "data-and-budget": {
       "title": "省掉哪一份算力：选问题、少生成、分枝与有条件重放",
       "thesis": "数据与预算方法改变的是训练链路的不同位置。课程重估当前难度，LESSER降低筛选特征成本，STOPD随机少生成并校正，BranchOPD增加关键分枝，Lightning缓存教师，TAR召回被压制的正确模式；少调用一次教师不等于整个训练更便宜。",
-      "updated": "2026-11-13",
+      "updated": "2026-11-18",
       "reviewed_papers": [
         "post-training:ask-to-distill",
         "post-training:tar-adaptive-replay",
@@ -2410,7 +2984,9 @@
         "post-training:spiral",
         "post-training:absolute-zero",
         "post-training:raft",
-        "post-training:maple-icl"
+        "post-training:maple-icl",
+        "post-training:sh-opd",
+        "post-training:tailroll"
       ],
       "axes": [
         "选择对象：问题、token位置、后缀、历史轨迹",
@@ -2489,6 +3065,26 @@
             "数据协议与代码映射",
             "复现边界"
           ]
+        },
+        {
+          "paper": "post-training:sh-opd",
+          "position": "power-survival离散分布、每批共享真实生成cap、标准token-mean OPD及隐式位置权重；不作逆概率去偏。",
+          "tradeoff": "GRPODropout先完成rollout再按熵贡献筛样本，不能节省同一轮生成；SH-OPD在生成前共享采样cap，改变深度曝光和实际生成预算。现有Dropout真实checkpoint的负结果也说明公式执行不等于能力收益。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
+        },
+        {
+          "paper": "post-training:tailroll",
+          "position": "只收录多engine真实在途迁移/单次re-prefill与部分输出loss mask机制；不以离线调度模拟声称系统提速。",
+          "tradeoff": "GRPODropout在完成生成后按响应熵贡献筛选，基本不省生成预算；TailRoll可提前终止尾response，并mask其partial loss，改变实际完成样本和系统时序。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
         }
       ],
       "analysis": [
@@ -2516,6 +3112,22 @@
           "papers": [
             "post-training:maple-icl",
             "post-training:lesser"
+          ]
+        },
+        {
+          "title": "为何不加入逆概率去偏？",
+          "body": "SH-OPD明确保留原token-mean目标，接受位置曝光频率的系统性重加权；逆概率补偿是其比较对象STOPD，不应混入本实现。 GRPODropout先完成rollout再按熵贡献筛样本，不能节省同一轮生成；SH-OPD在生成前共享采样cap，改变深度曝光和实际生成预算。现有Dropout真实checkpoint的负结果也说明公式执行不等于能力收益。 本轮边界：power-survival离散分布、每批共享真实生成cap、标准token-mean OPD及隐式位置权重；不作逆概率去偏。",
+          "papers": [
+            "post-training:sh-opd",
+            "post-training:grpo-dropout"
+          ]
+        },
+        {
+          "title": "迁移是不是直接复制KV cache？",
+          "body": "原方法用stateless in-flight migration，目标engine据prompt和已生成token重建状态，一次re-prefill后续写；有cost gate、reservation、hop limit和迁后核验。 GRPODropout在完成生成后按响应熵贡献筛选，基本不省生成预算；TailRoll可提前终止尾response，并mask其partial loss，改变实际完成样本和系统时序。 本轮边界：只收录多engine真实在途迁移/单次re-prefill与部分输出loss mask机制；不以离线调度模拟声称系统提速。",
+          "papers": [
+            "post-training:tailroll",
+            "post-training:grpo-dropout"
           ]
         }
       ],
@@ -2558,6 +3170,26 @@
           "papers": [
             "post-training:maple-icl",
             "post-training:lesser"
+          ]
+        },
+        {
+          "id": "nov18-sh-opd",
+          "question": "SH-OPD与GRPODropout都减少监督，为何不能只比较保留样本数？",
+          "answer": "GRPODropout先完成rollout再按熵贡献筛样本，不能节省同一轮生成；SH-OPD在生成前共享采样cap，改变深度曝光和实际生成预算。现有Dropout真实checkpoint的负结果也说明公式执行不等于能力收益。",
+          "example": "教学例：预先cap到4token不同于已生成8token后删除半数响应；生成成本必须分别统计。",
+          "papers": [
+            "post-training:sh-opd",
+            "post-training:grpo-dropout"
+          ]
+        },
+        {
+          "id": "nov18-tailroll",
+          "question": "与GRPODropout删除样本有什么不同？",
+          "answer": "GRPODropout在完成生成后按响应熵贡献筛选，基本不省生成预算；TailRoll可提前终止尾response，并mask其partial loss，改变实际完成样本和系统时序。",
+          "example": "教学例：不能把截断半答案当完成错误回答加入组advantage，又声称保留原GRPO组。",
+          "papers": [
+            "post-training:tailroll",
+            "post-training:grpo-dropout"
           ]
         }
       ],
@@ -2656,6 +3288,30 @@
           "source_revisions": {
             "post-training:maple-icl": "2762218a95bffd8819414d30cb486e7bcb699856a579f3309db608d99bb3524b",
             "post-training:lesser": "efd0a45a81ae7b58f504fed90763d336a2d67227271808055de87e951c19e804"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "post-training:sh-opd",
+            "post-training:grpo-dropout"
+          ],
+          "summary": "power-survival离散分布、每批共享真实生成cap、标准token-mean OPD及隐式位置权重；不作逆概率去偏。 完整实验高成本不复现；组件诊断不等于能力比较。",
+          "source_revisions": {
+            "post-training:sh-opd": "3ed65049e9cdc91d06809a0513c12ebec44fbe5c5c3e280dd06db416b7e5b6c7",
+            "post-training:grpo-dropout": "96dfa5ae23433d3e1908e36e95216f24e5f00e3b7fb391c4874f23c56864ca87"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "post-training:tailroll",
+            "post-training:grpo-dropout"
+          ],
+          "summary": "只收录多engine真实在途迁移/单次re-prefill与部分输出loss mask机制；不以离线调度模拟声称系统提速。 完整实验高成本不复现；组件诊断不等于能力比较。",
+          "source_revisions": {
+            "post-training:tailroll": "0394379a4f37669f80acf0ec4381d69ee3156f9908c85f38b2b0afda0c3857f7",
+            "post-training:grpo-dropout": "96dfa5ae23433d3e1908e36e95216f24e5f00e3b7fb391c4874f23c56864ca87"
           }
         }
       ]

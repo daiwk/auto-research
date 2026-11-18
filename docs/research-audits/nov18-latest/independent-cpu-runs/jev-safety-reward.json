@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "key": "jev-safety-reward",
+  "device": "cpu",
+  "diagnostic_only": true,
+  "evaluation_tier": "l0_interface",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l0_interface",
+      "checks": {
+        "share_can_rise_without_more_passed_harm": true,
+        "prompt_bootstrap_detects_decline": true,
+        "judge_change_requires_revalidation": true,
+        "replacement_requires_human_audit": true
+      },
+      "metrics": {
+        "early_phr": 0.25,
+        "late_phr": 0.25,
+        "early_gpr": 0.3333333333333333,
+        "late_gpr": 1.0,
+        "bootstrap_change": -1.0
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l0_interface",
+      "checks": {
+        "share_can_rise_without_more_passed_harm": true,
+        "prompt_bootstrap_detects_decline": true,
+        "judge_change_requires_revalidation": true,
+        "replacement_requires_human_audit": true
+      },
+      "metrics": {
+        "early_phr": 0.25,
+        "late_phr": 0.25,
+        "early_gpr": 0.3333333333333333,
+        "late_gpr": 1.0,
+        "bootstrap_change": -1.0
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l0_interface",
+      "checks": {
+        "share_can_rise_without_more_passed_harm": true,
+        "prompt_bootstrap_detects_decline": true,
+        "judge_change_requires_revalidation": true,
+        "replacement_requires_human_audit": true
+      },
+      "metrics": {
+        "early_phr": 0.25,
+        "late_phr": 0.25,
+        "early_gpr": 0.3333333333333333,
+        "late_gpr": 1.0,
+        "bootstrap_change": -1.0
+      }
+    }
+  ],
+  "capability_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "checkpoint_calls": 0,
+  "dataset_downloads": 0
+}

@@ -1,0 +1,56 @@
+{
+  "domain": "post-training",
+  "key": "ash-hint-steering",
+  "title": "Get Hint-Augmented GRPO Done Right Through Activation Steering",
+  "paper_url": "https://arxiv.org/abs/2611.23124v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.23124v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.23124-ash-hint-steering/README.md",
+  "first_author": "Khiem Le",
+  "first_author_affiliation": "University of Notre Dame",
+  "published": "2026-11-17",
+  "published_at": "2026-11-17T17:43:28Z",
+  "code": null,
+  "code_status": "固定v1及所核作者入口未找到可验证的本篇方法源码发布；引用的训练器、模型或库不算本篇开源。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "policy-optimization",
+    "后训练算法组件"
+  ],
+  "priority": "P1",
+  "intake_class": "new_submission_in_requested_window",
+  "implementation_status": "deferred_high_cost",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.23124v1",
+    "source_sections": [
+      "§4 Eq.4–5 and Algorithm1",
+      "§6 experimental settings"
+    ],
+    "basis": "§6及Table4/5明确全部实验使用2张NVIDIA A100 80GB、最大响应4096token；涵盖四个1B/1.7B/3B/4B模型，每步hint与plain双组在线生成、先steering再GRPO，以及多个竞赛/OOD与pass@8矩阵。当前单卡短时预算不覆盖原文双卡完整campaign。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API call.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30,
+      "gpu_component_seconds_per_seed_cap": 0,
+      "cap_scope": "Tiny exact operator/negative-control checks only; not a training campaign."
+    }
+  },
+  "summary": "训练问题附带reference solution前半hint更易有正reward，但推理没有该hint。ASH学习可注入activation的行为方向，在无hint输入上重现部分偏移。 只收录每步先训练steering再GRPO、hint/plain独立归一化advantage及最后一步不更新model的完整顺序；不把DPO公式当实现。",
+  "deferral_reason": "§6及Table4/5明确全部实验使用2张NVIDIA A100 80GB、最大响应4096token；涵盖四个1B/1.7B/3B/4B模型，每步hint与plain双组在线生成、先steering再GRPO，以及多个竞赛/OOD与pass@8矩阵。当前单卡短时预算不覆盖原文双卡完整campaign。 完整实验成本过高，不复现（审查 DONE）；不以固定规则或公式占位冒充模型/系统实现。"
+}

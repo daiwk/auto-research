@@ -7,7 +7,7 @@ hide:
 
 # 多模态对齐到底对齐什么：向量、视觉接口还是证据依赖
 
-[多模态](../index.md) · 更新 2026-11-18 · 29 篇主题资料 / 15 篇重点对照
+[多模态](../index.md) · 更新 2026-11-18 · 31 篇主题资料 / 17 篇重点对照
 
 CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条件生成，CV-OPD训练证据依赖，UMRM给回答评分。它们的输出合同和监督对象不同，不是同一条从小到大的能力排行榜。
 
@@ -40,6 +40,8 @@ CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条�
 | [Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning](../../../foundation-models/2601.20154-spectral-ghost/README.md) · [原始来源](https://arxiv.org/abs/2601.20154v4)<br>章节：背景与主要改动、核心机制与公式、论文结果与证据边界 | 以谱表示联系CLIP等SSL方法，区分无偏、固定负例surrogate和有偏plug-in，推导排除同样本项的U-statistic目标；固定v4仅理论收录。 | CLIP提供可执行图文对比模型；Spectral Ghost分析其参数化与目标估计，不能由无偏或一致性推出某任务准确率更高。v1 Google署名历史也不能替代v4机构。 |
 | [Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries](../../../multimodal-models/2611.17726-multimodal-library-protocol/README.md) · [原始来源](https://arxiv.org/abs/2611.17726v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 沿用ColPali页面多向量做query-token到page-token MaxSim，比较Qdrant距离与索引；本地仅向量/排名算术和带scope的计时读出。 | CLIP学习双塔全局归一化表示与对比目标，数字馆论文不新训练对齐模型而研究局部读出/数据库。CLIP真实图像小实验与人工token向量算术的证据等级不同，不能当视觉检索胜负。 |
 | [FEND: Far-End Detection in Outbound Voice AI Calls](../../../multimodal-models/2611.18050-fend-protocol/README.md) · [原始来源](https://arxiv.org/abs/2611.18050v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 外部事件在deadline内累计，以VM／IVR／AI优先级仲裁，human默认；独立HFPR和声学human-null接口。 | GSLM2学习多流语音单元、共享时序和生成分布；FEND是外呼风险检测。外部离散单元与检测事件都不是本地训练模型，二者不能共用能力排名。 |
+| [VisHead-Spec: Head-Routed Visual Attention for Multimodal Speculative Decoding](../../../foundation-models/2611.21839-vishead-spec/README.md) · [原始来源](https://arxiv.org/abs/2611.21839v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 块状 drafter 的视觉注意力并非每层每头都同等重要。本文先在隔离校准集选择层，再选择少量 KV heads；仅目标层25/33的图像特征进入图像行，文本取1/9/17/25/33。非选中头仍看文本与块内位置，而不是被整个关闭。选择后固定路由并重新训练，不按测试样本动态选择。 | Unbundling改变视觉专属容量放置；VisHead-Spec改变drafter的直接图像读取位置。二者都不能用“删除视觉模块”概括，且路由attention可见性不同于vision-only投影的token门控。 |
+| [CascadeJEPA: Enhancing 3D Geometric Representations via Spatially Coupled Cascaded Prediction](../../../foundation-models/2611.22686-cascadejepa/README.md) · [原始来源](https://arxiv.org/abs/2611.22686v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | I-JEPA的高层语义改善不保证几何对应更好。CascadeJEPA对同图两个crop共享context和EMA target；第一crop把masked patch embedding置零后加位置、保留完整网格，第二crop只编码visible patches，再通过第一阶段full-grid KV引导预测。 | DuoJEPA在对方模态own space做可微target translation；CascadeJEPA同图两crop并使用stop-gradient EMA target。都叫JEPA不代表目标是否detach相同。 |
 
 </div>
 
@@ -116,6 +118,18 @@ CLIP的相似度来自对比学习的全局图文表征；页面多向量late in
 GSLM2的局部切片按流变化联合去重并计算转移分数，源模型仍在外部。FEND的局部切片从外部带时间事件选类，同样没有音频检测器。最高优先级要等窗口结束，不能抢答；HFPR以真人为分母。原文0.979是human-versus-rest F1，AI类F1仅0.571，不能把二元高分写成四类全解决。
 
 对照来源：[fend-protocol](../../../multimodal-models/2611.18050-fend-protocol/README.md) · [gslm2](../../../multimodal-models/2611.01143-gslm2/README.md)
+
+### VisHead-Spec：少数 KV heads 读取图像，全部 heads 保留文本
+
+Unbundling改变视觉专属容量放置；VisHead-Spec改变drafter的直接图像读取位置。二者都不能用“删除视觉模块”概括，且路由attention可见性不同于vision-only投影的token门控。 GQA 的一个 KV head 映射到整组 query heads。loss 按草稿偏移 exp(-d/4) 归一化加权；confidence 的监督是分布重叠概率，不是 argmax 一致的硬标签。块内双向可见性和 anchor 前上下文由独立 visibility 输入保留。
+
+对照来源：[vishead-spec](../../../foundation-models/2611.21839-vishead-spec/README.md) · [unbundling-vision](../../../foundation-models/2611.17334-unbundling-vision/README.md)
+
+### CascadeJEPA：用完整空间网格单向耦合两级预测
+
+DuoJEPA在对方模态own space做可微target translation；CascadeJEPA同图两crop并使用stop-gradient EMA target。都叫JEPA不代表目标是否detach相同。 空间耦合单向从第一阶段到第二阶段，两阶段target stop-gradient并由EMA更新。两个crop的位置坐标分别定义。full-grid不是输入未mask图像，也不是先加位置再把masked位置一起清零。
+
+对照来源：[cascadejepa](../../../foundation-models/2611.22686-cascadejepa/README.md) · [duojepa](../../../foundation-models/2611.15968-duojepa/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -251,9 +265,37 @@ GSLM2的局部切片按流变化联合去重并计算转移分数，源模型仍
 
     对照来源：[fend-protocol](../../../multimodal-models/2611.18050-fend-protocol/README.md) · [gslm2](../../../multimodal-models/2611.01143-gslm2/README.md)
 
+### 这与Unbundling的vision-only mask有什么区别？ {#cross-nov18-vishead-spec}
+
+??? note "展开答案与例子"
+
+    **答案：** VisHead-Spec限制特定头读取图像行；Unbundling门控额外QKVO/FFN容量，仍是联合attention。二者作用对象不同。
+
+    **教学例子：** 一个文本query没有额外视觉投影，仍可能读取图像KV；这不是图像行被屏蔽。
+
+    对照来源：[vishead-spec](../../../foundation-models/2611.21839-vishead-spec/README.md) · [unbundling-vision](../../../foundation-models/2611.17334-unbundling-vision/README.md)
+
+### 能沿用DuoJEPA的target双侧梯度吗？ {#cross-nov18-cascadejepa}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。CascadeJEPA target是stop-gradient EMA；DuoJEPA的目标centroid在主方法里反传，照搬会改写训练机制。
+
+    **教学例子：** target参数应无grad，但每次EMA能跟随context更新。
+
+    对照来源：[cascadejepa](../../../foundation-models/2611.22686-cascadejepa/README.md) · [duojepa](../../../foundation-models/2611.15968-duojepa/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · DuoJEPA在对方模态own space做可微target translation；CascadeJEPA同图两crop并使用stop-gradient EMA target。都叫JEPA不代表目标是否detach相同。 本地边界与完整高成本不复现分别记录。
+
+涉及：[cascadejepa](../../../foundation-models/2611.22686-cascadejepa/README.md) · [duojepa](../../../foundation-models/2611.15968-duojepa/README.md)
+
+**2026-11-18** · Unbundling改变视觉专属容量放置；VisHead-Spec改变drafter的直接图像读取位置。二者都不能用“删除视觉模块”概括，且路由attention可见性不同于vision-only投影的token门控。 本地边界与完整高成本不复现分别记录。
+
+涉及：[vishead-spec](../../../foundation-models/2611.21839-vishead-spec/README.md) · [unbundling-vision](../../../foundation-models/2611.17334-unbundling-vision/README.md)
 
 **2026-11-18** · 外部事件在deadline内累计，以VM／IVR／AI优先级仲裁，human默认；独立HFPR和声学human-null接口。 完整实验高成本不复现，局部协议不作能力或Evolve证据。
 
@@ -299,7 +341,7 @@ GSLM2的局部切片按流变化联合去重并计算转移分数，源模型仍
 
 覆盖 20 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 29 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 31 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -332,6 +374,8 @@ GSLM2的局部切片按流变化联合去重并计算转移分数，源模型仍
 - [Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning](../../../foundation-models/2601.20154-spectral-ghost/README.md)
 - [Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries](../../../multimodal-models/2611.17726-multimodal-library-protocol/README.md)
 - [FEND: Far-End Detection in Outbound Voice AI Calls](../../../multimodal-models/2611.18050-fend-protocol/README.md)
+- [VisHead-Spec: Head-Routed Visual Attention for Multimodal Speculative Decoding](../../../foundation-models/2611.21839-vishead-spec/README.md)
+- [CascadeJEPA: Enhancing 3D Geometric Representations via Spatially Coupled Cascaded Prediction](../../../foundation-models/2611.22686-cascadejepa/README.md)
 
 </details>
 

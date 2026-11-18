@@ -1,0 +1,60 @@
+{
+  "domain": "post-training",
+  "key": "margin-dynamics-tpo",
+  "title": "Margin Dynamics for Large Language Model Alignment",
+  "paper_url": "https://arxiv.org/abs/2611.21766v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.21766v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.21766-margin-dynamics-tpo/README.md",
+  "first_author": "Xingzi Xu",
+  "first_author_affiliation": "Amazon",
+  "published": "2026-11-16",
+  "published_at": "2026-11-16T19:02:17Z",
+  "code": null,
+  "code_status": "固定v1及所核作者入口未找到可验证的本篇方法源码发布；引用的训练器、模型或库不算本篇开源。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "preference-and-alignment",
+    "后训练算法组件"
+  ],
+  "priority": "P1",
+  "intake_class": "new_submission_in_requested_window",
+  "implementation_status": "component_only",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.21766v1",
+    "source_sections": [
+      "§2.1 Eq.3",
+      "AppendixB Eq.25",
+      "§3 experimental setup"
+    ],
+    "basis": "§3与Appendix E：每个运行Qwen3-8B LoRA rank64、A100-40GB约24GB峰值，seq512。作者披露完整预算约153 GPU-hours、使用8张A100-40GB，预测/复刻/跨模型/补充实验分别约30/63/18/27小时；标准复刻还含UltraChat-200k一轮SFT、60K偏好对5000步及每方法5种子。不是单次标量loss验证。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API call.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30,
+      "gpu_component_seconds_per_seed_cap": 30,
+      "cap_scope": "Tiny exact operator/negative-control checks only; not a training campaign."
+    }
+  },
+  "summary": "普通sigmoid偏好loss的margin可持续增大；容易样本梯度饱和后，困难样本间干扰会集中。TPO希望保留目标附近恢复力并限制远端梯度。 长度归一化分数的TPO-S label-smoothed sigmoid与AppendixB精确归一化Huber TPO-H；验证有限吸引点和有界梯度。",
+  "evaluation_tier": "l1_mechanism",
+  "local_operator": "auto_research.post_training.margin_dynamics_tpo.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.margin_dynamics_tpo import diagnostic; print(diagnostic(42))'",
+  "gpu_validation_artifact": "docs/gpu-validations/margin-dynamics-tpo-a100-20261118-latest.json"
+}

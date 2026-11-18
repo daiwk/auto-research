@@ -7,7 +7,7 @@ hide:
 
 # 省掉哪一份算力：选问题、少生成、分枝与有条件重放
 
-[LLM 后训练](../index.md) · 更新 2026-11-13 · 39 篇主题资料 / 7 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-18 · 41 篇主题资料 / 9 篇重点对照
 
 数据与预算方法改变的是训练链路的不同位置。课程重估当前难度，LESSER降低筛选特征成本，STOPD随机少生成并校正，BranchOPD增加关键分枝，Lightning缓存教师，TAR召回被压制的正确模式；少调用一次教师不等于整个训练更便宜。
 
@@ -32,6 +32,8 @@ hide:
 | [Lightning OPD](../../../post-training/2604.13010-lightning-opd/README.md) · [原始来源](https://arxiv.org/abs/2604.13010)<br>章节：背景与主要改动、核心公式、复现边界 | 先采学生轨迹并由一致教师一次评分缓存，训练阶段只读取教师缓存。 | 将教师成本移到预填充，不等于无教师成本或轨迹持续刷新；本地候选缓存未复刻Qwen token分布训练。 |
 | [Preserving Reasoning Diversity in Reinforcement Learning with Verifiable Rewards via Adaptive Replay](../../../post-training/2610.24236-tar-adaptive-replay/README.md) · [原始来源](https://arxiv.org/abs/2610.24236v1)<br>章节：背景与主要改动、核心公式、结果、代码映射与边界 | 从base正确轨迹建分散原型bank，只重放当前策略相对base已压制的轨迹与token。 | 需计入bank生成和验证成本，且bank有限；完整实验未复现，当前随机模型L1诊断不证明语义多样性。 |
 | [MAPLE: Metadata Augmented Private Language Evolution](../../../post-training/2603.19258-maple-icl/README.md) · [原始来源](https://arxiv.org/abs/2603.19258)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 用DP metadata条件化初始化，并按分类Hamming选非私有已捐赠示例；局部仅实现后一个选择步骤。 | LESSER按模型梯度特征选训练数据，MAPLE按schema相似性选提示示例，选择单元与目标不同；近邻排序既不保证目标梯度价值，也不建立隐私。 |
+| [Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons](../../../post-training/2611.20687-sh-opd/README.md) · [原始来源](https://arxiv.org/abs/2611.20687v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | power-survival离散分布、每批共享真实生成cap、标准token-mean OPD及隐式位置权重；不作逆概率去偏。 | GRPODropout先完成rollout再按熵贡献筛样本，不能节省同一轮生成；SH-OPD在生成前共享采样cap，改变深度曝光和实际生成预算。现有Dropout真实checkpoint的负结果也说明公式执行不等于能力收益。 |
+| [TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training](../../../post-training/2611.22206-tailroll/README.md) · [原始来源](https://arxiv.org/abs/2611.22206v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 只收录多engine真实在途迁移/单次re-prefill与部分输出loss mask机制；不以离线调度模拟声称系统提速。 | GRPODropout在完成生成后按响应熵贡献筛选，基本不省生成预算；TailRoll可提前终止尾response，并mask其partial loss，改变实际完成样本和系统时序。 |
 
 </div>
 
@@ -54,6 +56,18 @@ STOPD在生成前随机截断，依赖保留概率校正；BranchOPD在已选for
 LESSER用固定模型输出层梯度特征近似目标任务相关性；MAPLE的Hamming只量化schema分类是否相同，用于初始化提示的捐赠示例。数值word-count桶也按类别比较，稳定tie是局部约定。MAPLE完整隐私来自外部AIM与PE预算，选择器本身不保护任意私有记录，也不生成高质量文本。
 
 对照来源：[maple-icl](../../../post-training/2603.19258-maple-icl/README.md) · [lesser](../../../post-training/2610.03702-lesser/README.md)
+
+### 为何不加入逆概率去偏？
+
+SH-OPD明确保留原token-mean目标，接受位置曝光频率的系统性重加权；逆概率补偿是其比较对象STOPD，不应混入本实现。 GRPODropout先完成rollout再按熵贡献筛样本，不能节省同一轮生成；SH-OPD在生成前共享采样cap，改变深度曝光和实际生成预算。现有Dropout真实checkpoint的负结果也说明公式执行不等于能力收益。 本轮边界：power-survival离散分布、每批共享真实生成cap、标准token-mean OPD及隐式位置权重；不作逆概率去偏。
+
+对照来源：[sh-opd](../../../post-training/2611.20687-sh-opd/README.md) · [grpo-dropout](../../../post-training/2610.11854-grpo-dropout/README.md)
+
+### 迁移是不是直接复制KV cache？
+
+原方法用stateless in-flight migration，目标engine据prompt和已生成token重建状态，一次re-prefill后续写；有cost gate、reservation、hop limit和迁后核验。 GRPODropout在完成生成后按响应熵贡献筛选，基本不省生成预算；TailRoll可提前终止尾response，并mask其partial loss，改变实际完成样本和系统时序。 本轮边界：只收录多engine真实在途迁移/单次re-prefill与部分输出loss mask机制；不以离线调度模拟声称系统提速。
+
+对照来源：[tailroll](../../../post-training/2611.22206-tailroll/README.md) · [grpo-dropout](../../../post-training/2610.11854-grpo-dropout/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -99,9 +113,37 @@ LESSER用固定模型输出层梯度特征近似目标任务相关性；MAPLE的
 
     对照来源：[maple-icl](../../../post-training/2603.19258-maple-icl/README.md) · [lesser](../../../post-training/2610.03702-lesser/README.md)
 
+### SH-OPD与GRPODropout都减少监督，为何不能只比较保留样本数？ {#cross-nov18-sh-opd}
+
+??? note "展开答案与例子"
+
+    **答案：** GRPODropout先完成rollout再按熵贡献筛样本，不能节省同一轮生成；SH-OPD在生成前共享采样cap，改变深度曝光和实际生成预算。现有Dropout真实checkpoint的负结果也说明公式执行不等于能力收益。
+
+    **教学例子：** 教学例：预先cap到4token不同于已生成8token后删除半数响应；生成成本必须分别统计。
+
+    对照来源：[sh-opd](../../../post-training/2611.20687-sh-opd/README.md) · [grpo-dropout](../../../post-training/2610.11854-grpo-dropout/README.md)
+
+### 与GRPODropout删除样本有什么不同？ {#cross-nov18-tailroll}
+
+??? note "展开答案与例子"
+
+    **答案：** GRPODropout在完成生成后按响应熵贡献筛选，基本不省生成预算；TailRoll可提前终止尾response，并mask其partial loss，改变实际完成样本和系统时序。
+
+    **教学例子：** 教学例：不能把截断半答案当完成错误回答加入组advantage，又声称保留原GRPO组。
+
+    对照来源：[tailroll](../../../post-training/2611.22206-tailroll/README.md) · [grpo-dropout](../../../post-training/2610.11854-grpo-dropout/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 只收录多engine真实在途迁移/单次re-prefill与部分输出loss mask机制；不以离线调度模拟声称系统提速。 完整实验高成本不复现；组件诊断不等于能力比较。
+
+涉及：[tailroll](../../../post-training/2611.22206-tailroll/README.md) · [grpo-dropout](../../../post-training/2610.11854-grpo-dropout/README.md)
+
+**2026-11-18** · power-survival离散分布、每批共享真实生成cap、标准token-mean OPD及隐式位置权重；不作逆概率去偏。 完整实验高成本不复现；组件诊断不等于能力比较。
+
+涉及：[sh-opd](../../../post-training/2611.20687-sh-opd/README.md) · [grpo-dropout](../../../post-training/2610.11854-grpo-dropout/README.md)
 
 **2026-11-13** · 补入maple-icl历史遗漏，用DP metadata条件化初始化，并按分类Hamming选非私有已捐赠示例；局部仅实现后一个选择步骤。 LESSER按模型梯度特征选训练数据，MAPLE按schema相似性选提示示例，选择单元与目标不同；近邻排序既不保证目标梯度价值，也不建立隐私。
 
@@ -111,7 +153,7 @@ LESSER用固定模型输出层梯度特征近似目标任务相关性；MAPLE的
 
 覆盖 38 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 39 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 41 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -154,6 +196,8 @@ LESSER用固定模型输出层梯度特征近似目标任务相关性；MAPLE的
 - [Absolute Zero](../../../post-training/2505.03335-absolute-zero/README.md)
 - [RAFT](../../../post-training/2304.06767-raft/README.md)
 - [MAPLE: Metadata Augmented Private Language Evolution](../../../post-training/2603.19258-maple-icl/README.md)
+- [Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons](../../../post-training/2611.20687-sh-opd/README.md)
+- [TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training](../../../post-training/2611.22206-tailroll/README.md)
 
 </details>
 

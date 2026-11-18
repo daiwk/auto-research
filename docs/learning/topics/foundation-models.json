@@ -59,7 +59,13 @@
         "foundation-models:convpe",
         "foundation-models:adindex",
         "foundation-models:ecg-rag",
-        "foundation-models:hvmap"
+        "foundation-models:hvmap",
+        "foundation-models:infuseloop",
+        "foundation-models:fm-mamba",
+        "foundation-models:gaugerope",
+        "foundation-models:simq",
+        "foundation-models:unigraph",
+        "foundation-models:dealrank"
       ]
     },
     {
@@ -158,7 +164,9 @@
         "foundation-models:stochastic-rounding",
         "foundation-models:lidas",
         "foundation-models:continuousbench",
-        "foundation-models:archspace"
+        "foundation-models:archspace",
+        "foundation-models:lara-plus-plus",
+        "foundation-models:latent-feedback-scaling"
       ]
     },
     {
@@ -213,7 +221,11 @@
         "foundation-models:multi-layer-indexer",
         "foundation-models:pipnn-ii",
         "foundation-models:ginger",
-        "foundation-models:e-means"
+        "foundation-models:e-means",
+        "foundation-models:spool",
+        "foundation-models:echomoe",
+        "foundation-models:risa",
+        "foundation-models:beyond-bitwidth"
       ]
     },
     {
@@ -293,7 +305,8 @@
         "foundation-models:storyscope",
         "foundation-models:tokenization-premium",
         "foundation-models:runway-inference-protocol",
-        "foundation-models:mixed-signals-weights"
+        "foundation-models:mixed-signals-weights",
+        "foundation-models:efficient-evals-tensor"
       ]
     }
   ]

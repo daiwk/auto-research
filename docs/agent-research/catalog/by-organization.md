@@ -135,6 +135,10 @@
 
 - 2026-10-08 · 一作：Babak Barazandeh · [OnTrack: Real-Time Monitoring and Intervention in LLM Agent Trajectories via Streaming Structure-Aware Optimal Transport](../2610.12375-ontrack/README.md)（`ontrack`）：Agent 最终失败时，单个答案分数解释不了中间发生了什么。OnTrack 把事件组织成带依赖边的图，将当前执行前缀和成功参考轨迹作非平衡结构化对齐；无参考时则明确退化为循环、重试和信息停滞检测。
 
+## Datagrids.ai
+
+- 2026-11-16 · 一作：Hanlin Tian · [DetourBench: Trajectory-Level Evaluation of Interactive Agents with Exact Minimum-Action Bounds](../2611.20844-detourbench/README.md)（`detourbench`）：只看最终成功会把最短路线、绕路成功和接近完成的失败混成同一结果。DetourBench把环境限制为有限、确定、部分可观察的资源／凭证状态机，资源标识发现后全局可寻址，没有当前位置或回退路费。
+
 ## DeepWisdom
 
 - 2023-08-01 · 一作：Sirui Hong · [MetaGPT](../2308.00352-metagpt/README.md)（`metagpt`）：简单串联多个聊天 Agent 容易让幻觉级联。MetaGPT 把人类软件团队的 SOP 编码成角色化消息流程，每个角色生产结构化中间物，由下游角色消费和验证。
@@ -267,6 +271,10 @@
 
 - 2025-04-04 · 一作：Yuxiang Zheng · [DeepResearcher](../2504.03160-deepresearcher/README.md)（`deepresearcher`）：把 search、browse、证据收集和带引用回答作为一条轨迹，用答案与引用联合奖励训练研究策略。
 
+## Handshake AI Research
+
+- 2026-11-17 · 一作：Markus Dücker · [Verifying Agents in Rubric-Graded Environments](../2611.22841-gandalf-bvb/README.md)（`gandalf-bvb`）：复杂任务产物可能是Excel、PowerPoint或应用状态，单纯把文件转成文本会丢公式、布局与跨文件关系。本文不是新做任务的Agent，而是研究判断Agent产物的verifier：BVB包含24投资银行任务、2464个人工判定criteria，用来评测验证器的判断。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## Harbin Institute of Technology
 
 - 2026-10-27 · 一作：Hao Chen · [When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement](../2610.36826-ruharness/README.md)（`ruharness`）：Agent解决早期缺陷后，固定rubric可能继续奖励已经会做的事，却遗漏后来出现的行为问题。RuHarness交替进化rubric与harness：从执行轨迹发现可检验的标准，先让看不到任务最终结果的judge判断Satisfied、Violated或N/A，再把这些行为判断与外部任务结果统计关联，找出仍能解释当前失败的标准。
@@ -337,6 +345,11 @@
 
 - 2026-09-03 · 一作：Chenyu Zhou · [SiLR: Structure-Preserving Admission and Process Reward for LLM Tool Agents](../2609.04629-silr/README.md)（`silr`）：系统已经违规时，安全门不能简单拒绝所有仍不安全的动作，而要允许逐步恢复。SiLR 先 shadow-execute 提案，再比较每个受约束分支的严重度；只有在乘积序上不恶化的动作可进入真实环境，同一结构信号还能作为 GRPO 过程奖励。
 
+## Jilin University
+
+- 2026-11-16 · 一作：Zhe Ren · [Evaluation-Free Recursive Self-Improvement for Coding Agents](../2611.21056-elite-eval-free/README.md)（`elite-eval-free`）：ELITE质疑反复在固定下游任务上evaluate-and-select的成本与适应偏差。冻结模型，演化可执行scaffold代码：同一parent先给出多个聚焦改进假设，每条假设独立实现，经过确定性有效性检查后交给LLM integrator。
+- 2026-11-16 · 一作：Jiaxing Zhao · [MetaAct: Self-Evolving Executable Action Constraints for Embodied Language Agents](../2611.20655-metaact/README.md)（`metaact`）：自然语言教训改变偏好，却不能保证不可逆动作不执行。MetaAct让LLM输出类型化GEAR规格，由固定编译器转成确定性guard；运行时拒绝违反约束的动作并返触发消息，模型需要重新规划。
+
 ## Jilin University / Ant Group
 
 - 2026-08-26 · 一作：Zhiyuan Li · [CaSKG: Counterfactual-Causal Skill Graphs for Scalable Agent Skill Retrieval](../2608.25500-caskg/README.md)（`caskg`）：先从语义、词法、I/O 和结构证据建高召回有向图，再以 remove、substitute、reorder 三类文本反事实探针校准边，Bayesian smoothing 后只发布可靠关系。
@@ -371,9 +384,17 @@
 
 - 2026-08-26 · 一作：Guibin Zhang · [JIT-Agent: Scaling Harness Intelligence via Just-in-Time Harness Evolution](../2608.25593-jit-agent/README.md)（`jit-agent`）：把 harness 形式化为 memory、planning、action protocol、tools/skills 四个可生成模块；模型按任务生成、失败后修复，并从历史配置 archive 蒸馏可迁移模式。
 
+## Lawrence Livermore National Laboratory
+
+- 2026-11-16 · 一作：Brian T. Weston · [SciResearch-Eval: Evaluating Scientific Judgment in Autonomous Experimental Agents](../2611.21541-sciresearch-eval/README.md)（`sciresearch-eval`）：Agent需要给未知材料设计加热实验，用可能粗糙或缺物理项的热传导模拟器估计物性，再报告95%区间与隐藏实验的预测。拟合残差小不代表模型正确：错误物理可给出看似精确但偏置的参数。
+
 ## MATS
 
 - 2026-10-06 · 一作：Param Biyani · [SpecGuard: Proving a Task Is Broken Before the Agent Cheats](../2610.09159-specguard/README.md)（`specguard`）：当测试意外或恶意违背任务描述，coding agent 可能修改测试或硬编码结果，而不是报告任务不可满足。SpecGuard 在编码前拆开两个信息来源：SpecAgent 只看描述 $D$ 与源码 $C$、完全不看测试 $T$；TestAgent 独立翻译测试；Certifier 对齐两侧语义，由 Lean kernel 核验冲突证明。
+
+## MIT CSAIL
+
+- 2026-11-17 · 一作：Shobhita Sundaram · [Do LLM Agents Still Need to Be Told How to Self-Improve?](../2611.23219-self-organized-learning/README.md)（`self-organized-learning`）：本文不先指定GEPA式优化循环，而是给冻结teacher通用自改进目标、文件读写／Bash／gameplay原语与资源预算。teacher可自己造游戏、观察短生命周期player、编辑文本产物，自行决定何时探索、比较和更新。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ## Manulife
 
@@ -571,6 +592,10 @@
 
 - 2026-09-16 · 一作：Zhuo Chen · [Dependency-Aware Trajectory Refinement for Efficient Multi-Turn Agent Fine-Tuning](../2609.18417-dependency-refinement/README.md)（`dependency-refinement`）：把多轮轨迹表示为轮级依赖 DAG，依次执行叶节点裁剪、严格合并和宽松合并，减少冗余消息同时保留最终答案依赖。
 
+## ShanghaiTech University / ByteDance / BIGAI
+
+- 2026-11-17 · 一作：Yuanhao Zeng · [The Resolution Hypothesis: Agent Evolution's Key Is Identifying Improvements](../2611.23068-resolution-hypothesis/README.md)（`resolution-hypothesis`）：自进化停滞不一定是提案不够好，可能是一次嘈杂评分分不清候选改进。本文把“同一artifact反复测”的评测噪声与“不同演化run产出不同artifact”的真实质量波动分开。
+
 ## Shenzhen Technology University
 
 - 2026-08-27 · 一作：Hanchong Chen · [When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems](../2608.26895-covemem/README.md)（`covemem`）：文本记忆要反复调用 LLM 重写，且丢掉全目录协同几何。CoVeMem 用冻结 LightGCN 状态构造 bank，由当前候选集检索相关历史，投影成 soft token，并通过语义对齐和 masked listwise 联训让 LLM 真正读取记忆。
@@ -745,6 +770,10 @@
 
 - 2026-05-18 · 一作：Yuran Ding · [PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving](../mlsys2026-prompts/README.md)（`prompts`）：Coordinator、Analyzer 和 Proposal Agent 联合读取 profiler 与知识库，诊断瓶颈并输出可解释的 sharding 候选。
 
+## University of Maryland, College Park
+
+- 2026-11-16 · 一作：Manan Suri · [Instant Weight-Space Consolidation for Long-Term Memory in LLMs](../2611.20759-clam-memory/README.md)（`clam-memory`）：CLAM把可积累的参数记忆与逐字检索缓冲分开：冻结LLM提供每层会话activation，hypernetwork在不做测试时梯度下降的情况下写出down_proj LoRA，查询时再配top5会话片段。没有提取调用不等于没有前置训练；能力来自离线context distillation。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## University of Maryland, College Park / The Chinese University of Hong Kong（PDF上标已核）
 
 - 2026-10-15 · 一作：Youran Sun / Xingyu Ren（共同一作） · [SciPIvot: Benchmarking Principal-Investigator Judgment at Pivotal Moments of Scientific AutoResearch Agents](../2610.21082-scipivot/README.md)（`scipivot`）：26 个跨六科学领域项目、六个月人类纠偏记录构成 248 个关键决策：一个选项是原 LLM 方案，另一个为人类纠正方案。评测器选择更适当的后续研究计划，不是预测项目最终成功。
@@ -774,6 +803,10 @@
 ## University of Oxford
 
 - 2026-10-15 · 一作：Giovanni Vaccarino · [Repairing LLM-Generated Specifications with Deterministic Diagnosis](../2610.22568-drago/README.md)（`drago`）：形式规格“能运行”不等于“忠实表达了题意”。DRAGO 将 SMT-LIB2、MiniZinc 和 PDDL 的契约、求解器探针及题意对齐检查转为可定位诊断，再要求模型定向修复。
+
+## University of Oxford, Department of Engineering Science
+
+- 2026-11-17 · 一作：Gengyue Dong · [SkillBuffBench: Measuring What Agent Skills Contribute across Harnesses, Models, Skill Access Modes and Memory](../2611.22017-skillbuffbench/README.md)（`skillbuffbench`）：手工给Agent正确skill测的是精选上界，不等于部署时能从库里找到它。SkillBuffBench在同一任务／模型／harness下交叉三种skill访问（无、精选、自动）与两种memory模式，单独测内容收益、发现损失和记忆交互。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ## University of Pennsylvania
 
@@ -826,6 +859,10 @@
 ## Vanderbilt University
 
 - 2026-08-07 · 一作：Jiahao Zhang · [Coupling Planning with Episodic Memory in LLM Agents for Software Issue Resolution](../2608.06811-pmcoder/README.md)（`pmcoder`）：用层级 phase planner 条件化 episodic retrieval，再用记忆轨迹统计检测 stuck 并重规划，以真实执行 verdict 验证。
+
+## Virginia Tech / Genentech
+
+- 2026-11-16 · 一作：Sajib Acharjee Dip · [Invariant-Aware Harness Enforcement to Protect LLM Agents from Silent API Failures](../2611.20595-silentguard/README.md)（`silentguard`）：API返回HTTP200并不保证按请求过滤，静默忽略字段、把AND变OR或截断total都可能让Agent相信错误数据。SilentGuard把检查从提示中的建议移到执行harness：结果过确定性不变量才放行，失败真实重试一次，仍失败时按检查可信度隐藏值或警告，不自动生成“修复值”。
 
 ## Washington University in St. Louis
 

@@ -7,7 +7,7 @@ hide:
 
 # 数据与预算：下一份算力花在哪里
 
-[LLM 后训练](index.md) / 156 个问题 · 39 篇论文
+[LLM 后训练](index.md) / 164 个问题 · 41 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">156 个问题 · 39 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">164 个问题 · 41 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:tailroll" data-paper-title="TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training LLM 后训练 École de technologie supérieure, Canada 2026-11-17 rollout step常被最长尾response决定，平均load无法反映尾长。TailRoll在chunk边界迁移在途请求，并用完成siblings足够后的终止处理straggler。原方法用stateless in-flight migration，目标engine据prompt和已生成token重建状态，一次re-prefill后续写；有cost gate、reservation、hop limit和迁后核验。 完整实验成本过高，不复现（审查 DONE）；仅方法与成本收录，无本地模型实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录多engine真实在途迁移/单次re-prefill与部分输出loss mask机制；不以离线调度模拟声称系统提速。  data-and-budget 后训练算法组件 LLM 后训练 数据与预算：下一份算力花在哪里 只均衡平均负载为何仍会等待很久？ rollout step常被最长尾response决定，平均load无法反映尾长。TailRoll在chunk边界迁移在途请求，并用完成siblings足够后的终止处理straggler。 教学例：三个engine都很快空闲，第四个只剩一个超长回答，平均负载低仍会阻塞step。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<span id="paper-post-training-tailroll-0bfd8822" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-656d75c5567590e9">只均衡平均负载为何仍会等待很久？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Atailroll">TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · École de technologie supérieure, Canada</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>rollout step常被最长尾response决定，平均load无法反映尾长。TailRoll在chunk边界迁移在途请求，并用完成siblings足够后的终止处理straggler。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：三个engine都很快空闲，第四个只剩一个超长回答，平均负载低仍会阻塞step。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22206v1">原论文</a> · <a href="../../../../post-training/2611.22206-tailroll/">实现解读</a> · <a href="#qa-656d75c5567590e9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:tailroll" data-paper-title="TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training LLM 后训练 École de technologie supérieure, Canada 2026-11-17 rollout step常被最长尾response决定，平均load无法反映尾长。TailRoll在chunk边界迁移在途请求，并用完成siblings足够后的终止处理straggler。原方法用stateless in-flight migration，目标engine据prompt和已生成token重建状态，一次re-prefill后续写；有cost gate、reservation、hop limit和迁后核验。 完整实验成本过高，不复现（审查 DONE）；仅方法与成本收录，无本地模型实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录多engine真实在途迁移/单次re-prefill与部分输出loss mask机制；不以离线调度模拟声称系统提速。  data-and-budget 后训练算法组件 LLM 后训练 数据与预算：下一份算力花在哪里 迁移是不是直接复制KV cache？ 原方法用stateless in-flight migration，目标engine据prompt和已生成token重建状态，一次re-prefill后续写；有cost gate、reservation、hop limit和迁后核验。 教学例：如果一次re-prefill比可节约尾时更贵，应拒绝迁移而非为均衡数字强迁。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-b9d61a2d90c09d35">迁移是不是直接复制KV cache？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Atailroll">TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · École de technologie supérieure, Canada</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原方法用stateless in-flight migration，目标engine据prompt和已生成token重建状态，一次re-prefill后续写；有cost gate、reservation、hop limit和迁后核验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：如果一次re-prefill比可节约尾时更贵，应拒绝迁移而非为均衡数字强迁。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22206v1">原论文</a> · <a href="../../../../post-training/2611.22206-tailroll/">实现解读</a> · <a href="#qa-b9d61a2d90c09d35">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:tailroll" data-paper-title="TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training LLM 后训练 École de technologie supérieure, Canada 2026-11-17 rollout step常被最长尾response决定，平均load无法反映尾长。TailRoll在chunk边界迁移在途请求，并用完成siblings足够后的终止处理straggler。原方法用stateless in-flight migration，目标engine据prompt和已生成token重建状态，一次re-prefill后续写；有cost gate、reservation、hop limit和迁后核验。 完整实验成本过高，不复现（审查 DONE）；仅方法与成本收录，无本地模型实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录多engine真实在途迁移/单次re-prefill与部分输出loss mask机制；不以离线调度模拟声称系统提速。  data-and-budget 后训练算法组件 LLM 后训练 数据与预算：下一份算力花在哪里 与GRPODropout删除样本有什么不同？ GRPODropout在完成生成后按响应熵贡献筛选，基本不省生成预算；TailRoll可提前终止尾response，并mask其partial loss，改变实际完成样本和系统时序。 教学例：不能把截断半答案当完成错误回答加入组advantage，又声称保留原GRPO组。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-9461489f7df90c7a">与GRPODropout删除样本有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Atailroll">TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · École de technologie supérieure, Canada</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>GRPODropout在完成生成后按响应熵贡献筛选，基本不省生成预算；TailRoll可提前终止尾response，并mask其partial loss，改变实际完成样本和系统时序。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：不能把截断半答案当完成错误回答加入组advantage，又声称保留原GRPO组。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22206v1">原论文</a> · <a href="../../../../post-training/2611.22206-tailroll/">实现解读</a> · <a href="#qa-9461489f7df90c7a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:tailroll" data-paper-title="TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training LLM 后训练 École de technologie supérieure, Canada 2026-11-17 rollout step常被最长尾response决定，平均load无法反映尾长。TailRoll在chunk边界迁移在途请求，并用完成siblings足够后的终止处理straggler。原方法用stateless in-flight migration，目标engine据prompt和已生成token重建状态，一次re-prefill后续写；有cost gate、reservation、hop limit和迁后核验。 完整实验成本过高，不复现（审查 DONE）；仅方法与成本收录，无本地模型实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录多engine真实在途迁移/单次re-prefill与部分输出loss mask机制；不以离线调度模拟声称系统提速。  data-and-budget 后训练算法组件 LLM 后训练 数据与预算：下一份算力花在哪里 为何单卡上离线调度模拟不能算系统复现？ 缺真实多engine请求恢复、decode contention、re-prefill成本和训练reward影响。论文硬件是多Ascend910C，当前单A100/A30只可做数值规则，无法支撑原系统结论，因此完整实验不复现。 教学例：把预设时长任务重新排序得到20%“提速”，不是实际LLM吞吐测量。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-8c4c6873635feed4">为何单卡上离线调度模拟不能算系统复现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Atailroll">TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · École de technologie supérieure, Canada</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>缺真实多engine请求恢复、decode contention、re-prefill成本和训练reward影响。论文硬件是多Ascend910C，当前单A100/A30只可做数值规则，无法支撑原系统结论，因此完整实验不复现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把预设时长任务重新排序得到20%“提速”，不是实际LLM吞吐测量。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22206v1">原论文</a> · <a href="../../../../post-training/2611.22206-tailroll/">实现解读</a> · <a href="#qa-8c4c6873635feed4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:sh-opd" data-paper-title="Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons LLM 后训练 Renmin University of China 2026-11-16 每个训练batch先抽一个共享生成长度上限，广播给所有rollout worker，生成在EOS或该上限结束；不是先生成完整长答案再裁loss。SH-OPD明确保留原token-mean目标，接受位置曝光频率的系统性重加权；逆概率补偿是其比较对象STOPD，不应混入本实现。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。power-survival离散分布、每批共享真实生成cap、标准token-mean OPD及隐式位置权重；不作逆概率去偏。  data-and-budget 后训练算法组件 LLM 后训练 数据与预算：下一份算力花在哪里 SH-OPD截掉的是什么？ 每个训练batch先抽一个共享生成长度上限，广播给所有rollout worker，生成在EOS或该上限结束；不是先生成完整长答案再裁loss。 教学例：H=4时callback必须收到max_new_tokens=4，返回8token会被拒绝。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<span id="paper-post-training-sh-opd-2ab22cc9" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-1b11b9a5880fd1e2">SH-OPD截掉的是什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ash-opd">Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Renmin University of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>每个训练batch先抽一个共享生成长度上限，广播给所有rollout worker，生成在EOS或该上限结束；不是先生成完整长答案再裁loss。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：H=4时callback必须收到max_new_tokens=4，返回8token会被拒绝。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20687v1">原论文</a> · <a href="../../../../post-training/2611.20687-sh-opd/">实现解读</a> · <a href="#qa-1b11b9a5880fd1e2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:sh-opd" data-paper-title="Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons LLM 后训练 Renmin University of China 2026-11-16 每个训练batch先抽一个共享生成长度上限，广播给所有rollout worker，生成在EOS或该上限结束；不是先生成完整长答案再裁loss。SH-OPD明确保留原token-mean目标，接受位置曝光频率的系统性重加权；逆概率补偿是其比较对象STOPD，不应混入本实现。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。power-survival离散分布、每批共享真实生成cap、标准token-mean OPD及隐式位置权重；不作逆概率去偏。  data-and-budget 后训练算法组件 LLM 后训练 数据与预算：下一份算力花在哪里 为何不加入逆概率去偏？ SH-OPD明确保留原token-mean目标，接受位置曝光频率的系统性重加权；逆概率补偿是其比较对象STOPD，不应混入本实现。 教学例：H0=2,Hmax=8,α=0时只选8；α&gt;0时早block平均权重大于末block。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-b8691f0e978e56c5">为何不加入逆概率去偏？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ash-opd">Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Renmin University of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>SH-OPD明确保留原token-mean目标，接受位置曝光频率的系统性重加权；逆概率补偿是其比较对象STOPD，不应混入本实现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：H0=2,Hmax=8,α=0时只选8；α&gt;0时早block平均权重大于末block。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20687v1">原论文</a> · <a href="../../../../post-training/2611.20687-sh-opd/">实现解读</a> · <a href="#qa-b8691f0e978e56c5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:sh-opd" data-paper-title="Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons LLM 后训练 Renmin University of China 2026-11-16 每个训练batch先抽一个共享生成长度上限，广播给所有rollout worker，生成在EOS或该上限结束；不是先生成完整长答案再裁loss。SH-OPD明确保留原token-mean目标，接受位置曝光频率的系统性重加权；逆概率补偿是其比较对象STOPD，不应混入本实现。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。power-survival离散分布、每批共享真实生成cap、标准token-mean OPD及隐式位置权重；不作逆概率去偏。  data-and-budget 后训练算法组件 LLM 后训练 数据与预算：下一份算力花在哪里 它和LCS reference选择在控制哪种预算？ LCS选择同任务兼容成功轨迹给失败学生的教师；SH-OPD改变学生每批实际生成深度。选更好reference不等于更少生成token，两者需分别记账。 教学例：相同reference下H从8减到4改变曝光深度，但LCS动作兼容分数不随该预算自动改善。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-664ca96b41a9ddc8">它和LCS reference选择在控制哪种预算？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ash-opd">Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Renmin University of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>LCS选择同任务兼容成功轨迹给失败学生的教师；SH-OPD改变学生每批实际生成深度。选更好reference不等于更少生成token，两者需分别记账。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：相同reference下H从8减到4改变曝光深度，但LCS动作兼容分数不随该预算自动改善。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20687v1">原论文</a> · <a href="../../../../post-training/2611.20687-sh-opd/">实现解读</a> · <a href="#qa-664ca96b41a9ddc8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:sh-opd" data-paper-title="Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons LLM 后训练 Renmin University of China 2026-11-16 每个训练batch先抽一个共享生成长度上限，广播给所有rollout worker，生成在EOS或该上限结束；不是先生成完整长答案再裁loss。SH-OPD明确保留原token-mean目标，接受位置曝光频率的系统性重加权；逆概率补偿是其比较对象STOPD，不应混入本实现。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。power-survival离散分布、每批共享真实生成cap、标准token-mean OPD及隐式位置权重；不作逆概率去偏。  data-and-budget 后训练算法组件 LLM 后训练 数据与预算：下一份算力花在哪里 为什么loss不是先逐答案取均值再平均？ 算法1对所有生成且监督的token一起求均值；不同EOS长度时，逐答案平均会改变token权重。组件检查cap、PMF和mask，但不宣称真实rollout吞吐提升。 教学例：一条loss[1]与另一条[3,5]应得3，不是(1+4)/2=2.5。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-02cbc9d369f3af9c">为什么loss不是先逐答案取均值再平均？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ash-opd">Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Renmin University of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>算法1对所有生成且监督的token一起求均值；不同EOS长度时，逐答案平均会改变token权重。组件检查cap、PMF和mask，但不宣称真实rollout吞吐提升。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一条loss[1]与另一条[3,5]应得3，不是(1+4)/2=2.5。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20687v1">原论文</a> · <a href="../../../../post-training/2611.20687-sh-opd/">实现解读</a> · <a href="#qa-02cbc9d369f3af9c">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ask-to-distill" data-paper-title="Ask to Distill: Learning to Synthesize Data for On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="Ask to Distill: Learning to Synthesize Data for On-Policy Distillation LLM 后训练 University of Illinois Urbana-Champaign 2026-10-20 问题决定学生会走到哪些前缀，因而决定教师能提供什么监督。A2D 冻结评分用的师生，训练独立的问题合成器；奖励同时要求“有差异”和“教师偏好的候选仍落在学生可达支持集”，然后筛选问题库，再从原始学生初始化执行 OPD。不是给每道问题做一次学生微调来估价。 完整实验成本过高，不复现（审查 DONE）。三 seed 仍只是机制诊断。仅实现 L1 奖励与更新公式组件，不是完整合成数据系统或能力复现。diagnostic_only=true；不可晋级、未接入 Evolve。完整实验成本过高，不复现（审查 DONE）。本页属于 10 月 21 日同一公告的补审，不是上一批之后的新首发。无下载、无预训练模型调用。随机生成的 logits、显式 mask 和外部 cluster share 只检查公式，不生成自然语言问题。CPU/CUDA 都运行同一算子；CUDA 不可用报错，不回退。输出不可覆盖，最多三个 seed；三 seed 仍只是机制诊断。  On-policy distillation 蒸馏数据合成与筛选 LLM 后训练 数据与预算：下一份算力花在哪里 A2D为什么训练问题合成器而非先直接训练学生？ 问题决定学生访问哪些前缀，也决定教师能提供什么帮助。先冻结评分师生、优化提问分布，再筛库并从原学生开始蒸馏，分开课程学习与学生更新。 例如先寻找学生有差距又能学的练习题，而非边改题边偷偷累计学生收益。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
 <span id="paper-post-training-ask-to-distill-6c38407f" class="ar-learning-paper-anchor"></span>

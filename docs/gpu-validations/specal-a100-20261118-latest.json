@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "adapter_key": "specal",
+  "validated_at": "2026-11-18",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB",
+    "count": 1
+  },
+  "command": [
+    "timeout",
+    "180",
+    "python3",
+    "scripts/run_nov18_latest_components.py",
+    "--device",
+    "cuda",
+    "--source-commit",
+    "7eef21ad7e094b61272302f30a6b05f7936f56c1",
+    "--output",
+    "raw-cuda.json"
+  ],
+  "dataset": {
+    "id": "synthetic:nov18-latest-specal-component-v1",
+    "revision": "sha256:9c7276c0287e0bf613b2b57f8ea9d48af8cb19a124a0485472cd46de5510181c",
+    "recipe": "Seeded small tensors or explicit deterministic evaluator/control cases; no pretrained output or public capability measurement",
+    "capability_benchmark": false
+  },
+  "checkpoint": {
+    "public_id": "none-seeded-component-initialization",
+    "revision": "7eef21ad7e094b61272302f30a6b05f7936f56c1",
+    "pretrained": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "metrics": {
+    "advantage_rms": 1.0,
+    "mean_group_weight": 0.2439183908596427,
+    "mean_support": 0.44029966996261755
+  },
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "provenance": {
+    "commit": "7eef21ad7e094b61272302f30a6b05f7936f56c1",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "artifact_path": "docs/gpu-validations/specal-a100-20261118-latest.json",
+    "executed_source_sha256": {
+      "scripts/run_nov18_latest_components.py": "0fe50e8e554f6663b3c8c179654400d10bfbb557ceb9cefb9880da78f164b7c1",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov18-latest/preflight.json": "e697a03c29777ed3ab594728fd62349cf5534d5a95183520df5a3fce5f3f5d6d",
+      "src/auto_research/post_training/_nov18_contracts.py": "103b12bbdcad9c18fab47f31f66e73a77564e4db05618aec5809658dfcfdf39e",
+      "src/auto_research/__init__.py": "ebea89760aafc6784a537e81317c59ccb75661b28340ddf3e788cd12f9ca43f7",
+      "src/auto_research/foundation_models/__init__.py": "a12e1b69e3ea2eed6e8c5a6551f7dc0b123c2fced9ed7d120d79132fb4806c03",
+      "src/auto_research/post_training/__init__.py": "35cf722f6d202f5f8bf52059cc355bf18dbf14381fac6abf4720e467ce64a11c",
+      "src/auto_research/agent_research/__init__.py": "f69fbc30eab75bfe746f8735d5c34ec7e6afab5d47f04fcae0fd540846620eea",
+      "src/auto_research/reproductions/__init__.py": "34c58dc0680ea7168bd0e6c5fc813c9c1cd97eed723cc836cc206670a638382e",
+      "src/auto_research/foundation_models/vishead_spec.py": "39dc64596fa557abbf600d4f5c5995f197c44442efd93c9dc1a6954b1fda535a",
+      "src/auto_research/foundation_models/spool.py": "d1427267ab117bb5179bab10e6ee052513acc9d49473368b18ce49277c6c881b",
+      "src/auto_research/foundation_models/infuseloop.py": "78ef29d122983b80d2c3654b949ef6ade7e341d4963515ad02afe053be691f3e",
+      "src/auto_research/foundation_models/echomoe.py": "7f1fb80ba2b99f659c9062782f50fd1b955c6b8f364128318e78ddf9a53ef4a9",
+      "src/auto_research/foundation_models/wm_quant.py": "013f49906528f972985f9880e74a4ac7628bad2cd156a470a5fad6c469e7ee9b",
+      "src/auto_research/foundation_models/fm_mamba.py": "163cd0caa0b08b54ce5cb866cc1ddd63c813f0b6535ed61c6e89d4971cb1bdf3",
+      "src/auto_research/foundation_models/lara_plus_plus.py": "20a9bbd2e8c6700751a9d33254a330b20aa2d475353469bd49afe3a925679a35",
+      "src/auto_research/foundation_models/gaugerope.py": "d2df34e846c4ca6bb4720080c1b11f03b43702f5d45026d18207b771db2387fd",
+      "src/auto_research/foundation_models/risa.py": "41a76b852b957c17a9a29fe732ba234ebff26e7f793db533f2f2d9c82e861548",
+      "src/auto_research/foundation_models/cascadejepa.py": "7c05666e8e7d19c1be2a6491f631ee7fee49c7c7aaf24630678998bf6dfec2df",
+      "src/auto_research/post_training/ambient_sft.py": "3445aeae39231f5901ceb8b0c74f5bc3b77725a63fe33a818da36c026fb1c0ed",
+      "src/auto_research/post_training/sh_opd.py": "23476614e03643ec9fd6e6a1b493295a4855b04401fa32c23b7400512cf8854f",
+      "src/auto_research/post_training/leaf_opd.py": "a980df126c96c4a5294432378729962afde135c3c7f716d00d93aa99c48d8931",
+      "src/auto_research/post_training/streaming_opd.py": "d6b2cdd39e64c1ef878f723c5c580a4f4fff248029a20085de8b96ad00cd5d95",
+      "src/auto_research/post_training/specal.py": "9c7276c0287e0bf613b2b57f8ea9d48af8cb19a124a0485472cd46de5510181c",
+      "src/auto_research/post_training/regularized_score_centering.py": "765e0ed7837bc5a177e72674db281009441927c597a444d6993106cea480c939",
+      "src/auto_research/post_training/margin_dynamics_tpo.py": "0d879ee4b7d0bd6b2463dcaea3a6387b08221462c191d726e5088d4ff9a268a5",
+      "src/auto_research/post_training/ca_zodpo.py": "d839c7ba327fb9c6c3e1ef2cde36a013229762b320c6de655651cd130b806541",
+      "src/auto_research/post_training/jev_safety_reward.py": "dfc3677ec6724d4db00aeaec87558bc6a1f192f42be8f1c3ffa469168d97e721",
+      "src/auto_research/post_training/optimistic_verifier_audit.py": "0dcabbd1462160d12fe03b1fcb88cbee43b1d69693f0cfc2bc282aa21df961cc",
+      "src/auto_research/post_training/confidence_adaptive_granularity.py": "ab0736a48aadb3ff285d27daae50ab54352e26a2d69b300d833f29e6624224a8",
+      "src/auto_research/post_training/design_taste_admission.py": "201118313be101a873074fdb1d8ef758045f2b2631c7afb28f8f118e4cc36643",
+      "src/auto_research/agent_research/detourbench.py": "490d7384aa61aaaa36045ec633ae76676de79167c7c3f240e1d18d244439d16d",
+      "src/auto_research/agent_research/sciresearch_eval.py": "06e293c8afb1f3132c2bd825d1e6815f278a9d3e3526d113cdbf0f686ae61c77",
+      "src/auto_research/agent_research/silentguard.py": "5f3262addd298f48a34b431067c3767fb2f792983a572c4fcd4c55c39643dd19",
+      "src/auto_research/agent_research/metaact.py": "4ac561f48dbe011e9831785a899eb443a06b08c24fc476378f645a0d8cb5a3a0",
+      "src/auto_research/agent_research/elite_eval_free.py": "3d3625635947d9abc5868e31d8cc2564d68857bd3b8f801fc945ffd9fd9a70ef",
+      "src/auto_research/agent_research/resolution_hypothesis.py": "c6c2a9faf703f14c8324c3b8944de5c267b9a92b1fda6ca81518151bf003c52f",
+      "src/auto_research/reproductions/yuanbao_rubric_components.py": "c797de053823993b9f074da80c8cbbba24722a3c3d29dc3b56e348d150209a6d",
+      "src/auto_research/reproductions/cotti_components.py": "db0ff5977e9919dbe48b5ab196ab6e30702f843d03b4e7bb9edc5b3fbb6b68d9",
+      "src/auto_research/reproductions/intentflow_components.py": "414a43a45754b4d6f5c2ee4277385da8628062b58e171907befc1053fae5c5dd",
+      "src/auto_research/foundation_models/simq.py": "d89da1942474235c7cf62a49c7a7f7eac1d9bbe867e6621f7f797d45d7affe12",
+      "src/auto_research/foundation_models/unigraph.py": "69e9b900e8a3d3854829ef365b7968ff35678930ffef9b1270a8acda1252052a",
+      "src/auto_research/foundation_models/dealrank.py": "aead689ccb2caabf48cd3b457c4be223f61666d636330a502120f9df18b839c2",
+      "src/auto_research/foundation_models/efficient_evals_tensor.py": "b23e9cec3b92eced6b3216b0423db79132d32ae1f1ab728b627ce47c4f0817e4"
+    },
+    "dataset_fingerprint": "sha256:2589eeeea195c7515ea31fce864c2f40540c8a3fe4f0ea2f5c23059451a579fd",
+    "raw_runner_artifact_sha256": "85ad41fab44ce87437b5cba8feaa4040a5416beb4dfafe16759974c1307896b1",
+    "metric_artifact_path": "docs/post-training/2611.20691-specal/metrics/component-cuda-seeds42-44.json"
+  }
+}

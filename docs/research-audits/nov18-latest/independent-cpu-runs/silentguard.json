@@ -1,0 +1,76 @@
+{
+  "schema_version": 2,
+  "paper": "agent-research:silentguard",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "execution_device": "cpu",
+  "execution_accelerator": "CPU",
+  "local_operator": "auto_research.agent_research.silentguard.diagnostic",
+  "source_sha256": {
+    "src/auto_research/agent_research/silentguard.py": "915e147feb06604504962d4a48b17ed9a984d3a3e4c5e33a17cde48d64b09b21"
+  },
+  "data_revision": "authored deterministic boundary controls v1; not official benchmark",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "clean_released": true,
+        "fault_retried_once": true,
+        "failed_count_unavailable": true,
+        "answer_gate_abstains": true,
+        "weak_learned_warns": true,
+        "cutoff_inclusive": true
+      },
+      "metrics": {
+        "actual_api_callbacks": 11,
+        "fault_attempts": 2,
+        "clean_count": 1
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "clean_released": true,
+        "fault_retried_once": true,
+        "failed_count_unavailable": true,
+        "answer_gate_abstains": true,
+        "weak_learned_warns": true,
+        "cutoff_inclusive": true
+      },
+      "metrics": {
+        "actual_api_callbacks": 11,
+        "fault_attempts": 2,
+        "clean_count": 1
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "clean_released": true,
+        "fault_retried_once": true,
+        "failed_count_unavailable": true,
+        "answer_gate_abstains": true,
+        "weak_learned_warns": true,
+        "cutoff_inclusive": true
+      },
+      "metrics": {
+        "actual_api_callbacks": 11,
+        "fault_attempts": 2,
+        "clean_count": 1
+      }
+    }
+  ],
+  "capability_claim": false,
+  "note": "All seeds repeat deterministic controls; no statistical robustness or task success claim."
+}

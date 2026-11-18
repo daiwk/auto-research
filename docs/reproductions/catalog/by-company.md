@@ -263,6 +263,7 @@
 - 2020-09 · [PLE](../recsys2020-ple-ple/README.md)：把共享 experts 与任务专属 experts 分组，通过 CGC gates 逐层分离共性和任务特性。
 
 ## Xiaohongshu
+- [IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu](../../recommendation-components/2611.20448-intentflow/README.md)：相同图片上的找同款、找搭配和问使用信息需要不同证据，纯视觉相似性不足。IntentFlow将意图层级、可验证三档相关性、agentic数据构造、多模态检索和意图条件重排统一起来。索引固定后只在查询侧进行高层LoRA与六专家残差投影，避免全库重算。 本地边界：输入仅为外部融合特征和候选分数；没有用规则假装0.8B意图识别器，也未实现完整LoRA/VLM、agentic核验或NDCG权重训练链。文档输入在诊断中保持不变，不意味着语义召回已提升。
 - 2026-10 · [CASI](../2610.20293-casi/README.md)：冻结一次检索的候选快照，重组子集并以 Shapley 分配动作信用，再通过有界零和投影生成优势。本地只执行 CPU 信用组件，私有拍卖与 LLM 策略训练不复现。
 - 2026-09 · [SIRF](../2609.11752-sirf/README.md)：把 trigger、exemption 与账户级规则关系合成为持续预训练数据，并以单次 verdict 和 P95 阈值服务工业内容风控。
 - 2026-08 · [OneModel](../2608.18606-onemodel/README.md)：以共享长序列 backbone、场景条件门控和全局/局部分层表征统一推荐、广告与商家排序。
@@ -406,6 +407,7 @@
 - 2026-02 · [CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer](../2602.11410-cadet/README.md)：以候选后上下文条件化的 Decoder-only Transformer 统一广告 CTR。
 
 ## Tencent
+- [From Relevance to Utility: Rubric Alignment in Yuanbao Search](../../recommendation-components/2611.22503-yuanbao-rubric/README.md)：传统逐文档相关性不等于给下游推理提供有用证据。元宝先生成查询特定的加权正向标准和扣分标准，用蒸馏标签统一训练召回与四头排序，再用集合奖励训练选择器。低于组均值的轨迹并不接受负优势惩罚，而是按奖励差蒸馏组内最佳轨迹。 本地边界：没有运行 rubric 生成、DeepSeek judge、Qwen 编码器或真实搜索。诊断检查最佳轨迹有蒸馏梯度、失败轨迹没有模仿梯度、奖励不反传、padding 梯度为零；它们不是答案准确率。
 - [WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search](../../recommendation-components/2611.00530-wesearch/README.md)：先检索粗粒度簇并合并其中的原子文档，再用OPQ查表粗排和特征FFN精排，避免固定SID的早期路径错误；固定簇与码本支持新文档滚动挂载。本地仅验证候选空间、量化距离恒等式与新旧快照隔离，不代表训练/生产质量复现。
 - 2026-09 · [KuaFu](../2609.31045-kuafu/README.md)：独立压缩每条行为并以双轴投影缓存低维记忆，按时间拼接供任务解码；本地公开 MRQA 仅验证小规模机制，未复现论文收益。
 - 2026-09 · [ANGLE](../2609.18296-angle/README.md)：以意图×摘要层次文本标识、三目标联合训练和动态约束 beam 实现一步广告检索。
@@ -497,3 +499,6 @@
 
 ## USTC
 - [KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation](../../recommendation-components/2611.16795-kuairec-v2-protocol/README.md)：明确按用户逐日leave-one-out为validation，FullMonth按每日验证实例数加权，并用每请求一份召回列表评价所有行为子集。本地只有有限协议接口，无官方数据、模型或多样性benchmark结果。
+
+## Alibaba Group
+- [COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift](../../recommendation-components/2611.22597-cotti/README.md)：COTTI把训练时历史偏好连续性和上线时促销概率修正分开。CPC比较同一用户常态/促销双视图并用可微门控调节一致性；RW按相对历史距离重加权但截断其梯度；ABA在冻结预测器的logit上添加事件强度与预测头方差决定的有界修正。 本地边界：本地只运行CPC/RW/ABA张量；没有历史构造、缺失常态视图回退或服务融合策略。保留paid-item新类目召回下降的作者负结果，不能拿整体AUC覆盖探索代价。

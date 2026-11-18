@@ -1,0 +1,12 @@
+{
+  "figure": 1,
+  "caption": "Figure 1: Expected (lines) and measured (points) cuts of the top ten under chunks and dealing.",
+  "source_url": "https://arxiv.org/pdf/2611.22392v1",
+  "source_version": "v1",
+  "source_sha256": "a0091d42b35cab79e583e9253fd95c1a6b4143302d1c8e84ff0e283d913518b1",
+  "extraction": "fixed v1 PDF page1, crop[48,490,612,647]; no redraw",
+  "file": "paper-figure-01.png",
+  "asset_sha256": "992f0233e7250181b243ce1a8a35523c028eedb08f0861d7d20d14109f3eb92e",
+  "copyright": "Original paper authors; no claim of local generation",
+  "visual_review_done": true
+}

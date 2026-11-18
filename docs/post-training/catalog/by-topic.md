@@ -157,10 +157,24 @@
 
 ## 其他
 
+### preference-and-alignment
+
+- [Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching](../2611.23229-ambient-sft/README.md)（`ambient-sft`）：目标不是复制base全部细节，而是在小数据SFT时保留其粗粒度分布；升温降低对错误细节的信任，clean CE仍提供新任务方向。
+- [Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data](../2611.22210-mpg-dpo/README.md)（`mpg-dpo`）：用户反馈保留的方向生成偏好cone，dual generators形成W；以偏序筛除确定被支配回答，再选择尚有规则trade-off的回答对，避免先拍定单一权重。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment](../2611.20635-ca-zodpo/README.md)（`ca-zodpo`）：偏好loss仍是policy/reference的chosen-rejected margin；改变的是无需反传的搜索方向，用chosen与rejected输入activation差提取低秩空间，而非全参数各向同性扰动。
+- [Margin Dynamics for Large Language Model Alignment](../2611.21766-margin-dynamics-tpo/README.md)（`margin-dynamics-tpo`）：普通sigmoid偏好loss的margin可持续增大；容易样本梯度饱和后，困难样本间干扰会集中。TPO希望保留目标附近恢复力并限制远端梯度。
+- [Teaching Language Models to Adapt Answer Granularity to Their Confidence](../2611.21211-confidence-adaptive-granularity/README.md)（`confidence-adaptive-granularity`）：在该任务定义中可以，但应返回模型可靠支持的最细层级，而不是无限泛化。utility按剩余不确定性衡量正确信息，错误记-1，拒答记0。
+
 ### 策略优化与稳定性
 
 - [A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets](../2611.14467-apmd-reference-reset/README.md)（`apmd-reference-reset`）：奖励上升不保证最优响应仍容易采到。本文给出固定 reference 下 REINFORCE 发生 coverage collapse 的构造，并用 APMD 将 KL reference 周期性重置到最新策略：每个内层子问题有较强局部约束，外层重置则允许持续前进。
 - [Off-policy Learning with Excursion Policies](../2611.13275-excursion-td/README.md)（`excursion-td`）：离策略多步 TD 面临收敛速度、偏差与方差的权衡。重要性比连乘可以恢复目标分布，却容易放大方差；逐动作混合目标/行为策略又改变了整个轨迹的含义。
+
+### policy-optimization
+
+- [Get Hint-Augmented GRPO Done Right Through Activation Steering](../2611.23124-ash-hint-steering/README.md)（`ash-hint-steering`）：训练问题附带reference solution前半hint更易有正reward，但推理没有该hint。ASH学习可注入activation的行为方向，在无hint输入上重现部分偏移。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [Regularized Score Centering](../2611.21791-regularized-score-centering/README.md)（`regularized-score-centering`）：不是。它减去同一history下behavior分布的加权log-policy梯度期望。
+- [SpeCal: Spectral Calibration for Unsupervised RLVR](../2611.20691-specal/README.md)（`specal`）：不是。它从response hidden-state几何生成group和rollout权重，重加权已有无监督advantage，再沿原GRPO目标更新；几何权重全部stop-gradient。
 
 ### LLM评估与校准
 
@@ -214,6 +228,13 @@
 
 - [Large Reasoning Models Struggle to Transfer Parametric Knowledge Across Scripts](../2603.17070-cross-script-knowledge-transfer/README.md)（`cross-script-knowledge-transfer`）：Sec.4–6与Appendix A/H：观察性回归、训练专用entity提示干预和真实LoRA是定义性路径。不能把正则音译、手工插提示或小分类器当成其LLM知识检索机制。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
+### reward-and-credit
+
+- [GPRM: Global Perspective Process Reward Model](../2611.20755-gprm/README.md)（`gprm`）：除问题和当前step，还读历史step与已预测judgment、当前候选的后续trajectory；四维分析是forward consistency、posterior verification、goal alignment、self validity。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning](../2611.20955-jev-safety-reward/README.md)（`jev-safety-reward`）：c=max(p,1-p)低于阈值才交强judge；高置信把有害判为安全的miss永远不会被委托，训练可能集中到这个区域。
+- [Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning](../2611.20612-design-taste-admission/README.md)（`design-taste-admission`）：spacing等指标也可被刷分；必须同时通过expert agreement、单原则扰动/修复因果敏感性、hack trap和重复稳定性。未通过的项只作evaluation，不进reward。
+- [Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle](../2611.21538-optimistic-verifier-audit/README.md)（`optimistic-verifier-audit`）：固定被引用特征后，所有其它特征补全都必须维持同一决策；再去掉任一特征就不充分才是minimal。可能存在多个替代充分理由，需保存antichain。
+
 ### RLHF / RLVR
 
 - [Each Reward to Its Relevant Tokens: Reward-Specific Token-Level Credit Assignment for Multi-Reward RL](../2610.21439-mrtpo/README.md)（`mrtpo`）：GDPO 虽然分别归一化多种奖励，但仍把每种奖励均摊到整条响应。SQL 可执行性、格式、执行结果可能只分别依赖少数 token。
@@ -241,6 +262,10 @@
 ### RL 训练加速
 
 - [GrowMTP: Can RL Grow Its Own Draft Head?](../2609.16648-growmtp/README.md)（`growmtp`）：在 RL rollout 内按被接受的草稿深度训练 MTP head，并与主干梯度解耦。
+
+### teacher-and-context
+
+- [LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation](../2611.20674-leaf-opd/README.md)（`leaf-opd`）：教师独立解码的首token可能强烈拒答，但在学生已生成事实前缀上，后续token抑制可能迅速消失；需要按同一学生轨迹测监督强度和持续性。
 
 ### 后训练数据选择
 
@@ -345,6 +370,11 @@
 
 - [SCAR: Shapley Credit Assignment for More Efficient RLHF](../2505.20417-scar-shapley-credit/README.md)（`scar-shapley-credit`）：原文Sec.3.2–3.4 Eq.3–6：外部冻结RM对原顺序、未入选位置填空格的文本coalition评分，v(empty)=0；Shapley必须保留负贡献，span credit只给该span末token。完整论文用自适应分段和SHAP/Owen近似。
 
+### data-and-budget
+
+- [TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training](../2611.22206-tailroll/README.md)（`tailroll`）：rollout step常被最长尾response决定，平均load无法反映尾长。TailRoll在chunk边界迁移在途请求，并用完成siblings足够后的终止处理straggler。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons](../2611.20687-sh-opd/README.md)（`sh-opd`）：每个训练batch先抽一个共享生成长度上限，广播给所有rollout worker，生成在EOS或该上限结束；不是先生成完整长答案再裁loss。
+
 ### RL 后训练
 
 - [Sharpening Tax in Post-Training](../2610.01509-sharpening-tax/README.md)（`sharpening-tax`）：比较 base 与后训练策略在固定采样预算下的任务覆盖；再用 posterior-tempered group sampling 按估计难度调温，兼顾 pass@1 与覆盖率。
@@ -352,6 +382,10 @@
 ### 训练流程与资源分配
 
 - [Beyond GRPO and On-Policy Distillation: An Empirical Sparse-to-Dense Reward Principle for Language-Model Post-Training](../2605.12483-sparse-to-dense-reward-principle/README.md)（`sparse-to-dense-reward-principle`）：Sec.2–3四阶段工作流和等标签预算经验对照是本论文核心；FKL在teacher occupancy、OPD在student occupancy，教师冻结且需共享tokenizer。库中已有GRPO/OPD/KL算子不等于本文完整流程；不重复包装通用KL或把四个状态标签称为复现。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
+### student-trajectory-distillation
+
+- [Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption](../2611.22298-streaming-opd/README.md)（`streaming-opd`）：token局部teacher监督只依赖已生成prefix，不依赖未来token。片段可先进入candidate pool，等监督预算凑齐才更新，而不必每片段一次更新或等整答案结束。
 
 ### 测试时适配
 

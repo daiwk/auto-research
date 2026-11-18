@@ -1,0 +1,12 @@
+{
+  "figure": 2,
+  "caption": "Fig. 2: Overview of the SIMQ framework. Given a document corpus, SIMQ\n(1) samples initial centroids, assigns token vectors, splits oversized clusters,\nand updates their centroids, (2) builds a single query graph index over the\nupdated centroids, and\n(3) at query time, performs per-token graph navigation to collect candidate\ndocuments and compute approximate MaxSim scores ℳ ~ ​ ( d , Q ) \\widetilde{\\mathcal{M}}(d,Q) .",
+  "source_url": "https://arxiv.org/html/2611.22079v1/SIMQ-framework.png",
+  "source_version": "v1",
+  "source_sha256": "3898544f1492364889a56ce2f6990fd92d20075e57e22b3fb9c232c735cc3fa8",
+  "extraction": "original HTML image, no redraw",
+  "file": "paper-figure-01.png",
+  "asset_sha256": "69d2560b1902ddad7381a235b34b4fc0e7bc3eea1d7e57b97dfa274632e9526b",
+  "copyright": "Original paper authors; no claim of local generation",
+  "visual_review_done": true
+}

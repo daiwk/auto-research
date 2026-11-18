@@ -1,0 +1,482 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:vishead-spec/why-head-routing": {
+      "source_sha256": "6775ef2938a8d7f97eddf34cc8a680d442c247c08ccc4c63d98604a6c340e142",
+      "reviewed": true,
+      "fields": {
+        "question": "Do the remaining heads become inactive?",
+        "answer": "No. Eight of forty physical KV heads read images; the others still read text and within-block context. GQA shares each KV head across a query group.",
+        "example": "Four query heads sharing one KV head must inherit the same routing permission."
+      }
+    },
+    "qa/foundation-models:vishead-spec/soft-acceptance-not-match": {
+      "source_sha256": "30213543d8ad5670540e2a94592d9ac6b185f5776be18649e4b4c9b7d285b68d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not supervise confidence with argmax agreement?",
+        "answer": "The detached target is one minus half the distribution L1 distance. Matching argmax does not imply identical distributions.",
+        "example": "Distributions (0.6,0.4) and (0.9,0.1) agree in argmax but have acceptance0.7."
+      }
+    },
+    "qa/foundation-models:vishead-spec/routing-versus-capacity": {
+      "source_sha256": "5bf107bad8179347979cd69493ede366fb0155048dcbaf1c6ae0c9fc4fd99edb",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from Unbundling visual masks?",
+        "answer": "VisHead-Spec restricts image-row visibility by head. Unbundling gates additional QKVO/FFN capacity while retaining joint attention.",
+        "example": "A text query without an extra visual projection can still read image KV."
+      }
+    },
+    "qa/foundation-models:vishead-spec/component-not-throughput": {
+      "source_sha256": "2fcf4a66a3085ee0b9fb93fda31d78047c026158ec7df85087eb9e7cb5ff1fd3",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a CUDA pass establish the reported16% throughput gain?",
+        "answer": "No. That result also depends on a trained drafter, target verification, concurrency and serving kernels. Local checks cover routing, losses and gradients.",
+        "example": "Changing image values should affect only permitted query groups; that is a mechanism control, not serving timing."
+      }
+    },
+    "qa/foundation-models:spool/why-affine": {
+      "source_sha256": "ec40ec9a69370f71804728e0fb3972e161ad22453bcf2e907ffced3e4267cc75",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can retained frames avoid backbone replay?",
+        "answer": "Fixed-input GDN updates have form SA+B, and a sequence remains affine, so its summary can act on a new anchor.",
+        "example": "B1 must propagate through A2 when two frame transitions are composed."
+      }
+    },
+    "qa/foundation-models:spool/ordered-monoid": {
+      "source_sha256": "4a16aca40ed03eaaaaa74f4261a3cf2d4e75164de60207c96512e698db31ac98",
+      "reviewed": true,
+      "fields": {
+        "question": "Does associativity allow reordering frames?",
+        "answer": "No. The monoid is noncommutative. Tree parenthesization may change, but chronological order must not.",
+        "example": "Composing2S then S+1 gives2S+1; reversing gives2S+2."
+      }
+    },
+    "qa/foundation-models:spool/layer-exactness-boundary": {
+      "source_sha256": "950629c8d570f766a5cc587a9c5914940a288e9df580b2d8fe3580384c8a9e0d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does its exactness differ from KV eviction?",
+        "answer": "It exactly replays recorded layer transitions; DropKV estimates attention-output perturbations. Neither statement establishes full-backbone replay equivalence.",
+        "example": "A cached higher-layer feature can already encode an expired frame."
+      }
+    },
+    "qa/foundation-models:spool/residual-storage": {
+      "source_sha256": "341c1359de838a4d51d23e5dd7307e5e7df8fcc0ae82cd1573754e4069f1ed86",
+      "reviewed": true,
+      "fields": {
+        "question": "Why store D=A-I?",
+        "answer": "Low precision can erase tiny diagonal deviations from identity. A separate residual preserves them; the local double-precision algebra test is not the author BF16 kernel.",
+        "example": "1.0001 may round to1 while a separately stored0.0001 remains representable."
+      }
+    },
+    "qa/foundation-models:infuseloop/trajectory-not-future-token": {
+      "source_sha256": "e0c82a22ab3794981d80e3458c6061aae5d29f86d8033b08643fec721cf97a5f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can trajectory t+1 be legal?",
+        "answer": "The source must be shallower and completed in the previous execution cycle. Trajectory position alone is not token availability.",
+        "example": "For r4, sources are h_t^3,h_(t+1)^2,h_(t+2)^1, all from the same previous cycle."
+      }
+    },
+    "qa/foundation-models:infuseloop/old-buffer-commit": {
+      "source_sha256": "b41c3c75083f5b6dac64ac126ea7fc86a13b3c9899cdaccbabdcf2c7f895516d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not update the buffer in place after each loop?",
+        "answer": "Later loops would consume newly computed current-cycle states, changing the graph. Outputs must read the old bank before joint commit.",
+        "example": "A serial r4 update could accidentally read the current-cycle r3 state."
+      }
+    },
+    "qa/foundation-models:infuseloop/anchor-versus-injection": {
+      "source_sha256": "19536dad6c3d0000c22d15d28630dcb09b7b95c6d82d943d3c5bc5e4ecff3b68",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from Anchor?",
+        "answer": "Anchor reads external TTT memory alongside local attention. InfuseLoop aggregates trajectory hidden states according to cycle availability.",
+        "example": "Broadcasting one KV matrix across loops does not implement cross-trajectory indexing."
+      }
+    },
+    "qa/foundation-models:infuseloop/mask-before-softmax": {
+      "source_sha256": "7780c73dbcdda7330a5f704ff034be890cdf7d13ec7f9aece0f968c8171a6ea6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why mask document boundaries before softmax?",
+        "answer": "Post-softmax masking leaves invalid sources in the denominator. Empty source sets need explicit zero output rather than NaN.",
+        "example": "With two equal scores and one invalid source, the legal source should receive weight1, not0.5."
+      }
+    },
+    "qa/foundation-models:echomoe/reference-difference": {
+      "source_sha256": "8826f8b0701189b9fbb3d66ff173e1750984de4194b835985f2eb6677dff7003",
+      "reviewed": true,
+      "fields": {
+        "question": "Does EchoMoE compress token KV cache?",
+        "answer": "No. It compresses expert-parallel dispatch/combine activations using cached cross-layer references.",
+        "example": "With z cached, dispatch sends C_d(x-a⊙z) rather than full x."
+      }
+    },
+    "qa/foundation-models:echomoe/folding-not-decompression": {
+      "source_sha256": "0f042210a333979cbdff4f9c001eeacca5a790eab2957d1df1976f2a8f735749",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can experts avoid materializing reconstructed x?",
+        "answer": "Linear reconstruction can fold into gate/up projections, and combine compression into down. SwiGLU remains between them and cannot be crossed arbitrarily.",
+        "example": "W_g(Gz+D_dc) equals [W_gG,W_gD_d][z;c]."
+      }
+    },
+    "qa/foundation-models:echomoe/moezip-not-same-compression": {
+      "source_sha256": "5b562c001aa564c4fdcfad7803c2cb61d965cc686b5114c6d6be1c18a914f74b",
+      "reviewed": true,
+      "fields": {
+        "question": "Can compression ratios be compared directly with MoEZip?",
+        "answer": "No. KV row retention and expert-activation traffic have different denominators, reference overhead and quality errors.",
+        "example": "Saving50% of KV storage does not imply saving50% of RDMA bytes."
+      }
+    },
+    "qa/foundation-models:echomoe/fold-parity-not-model-parity": {
+      "source_sha256": "0dad80ef43d1cdd4689a8411ee1ebbb1f5c8d6487fd73b9c40a23f7ca7753bb3",
+      "reviewed": true,
+      "fields": {
+        "question": "Does folding parity prove no capability loss?",
+        "answer": "It proves equivalent execution for fixed compression parameters, not accuracy of the compression or adapted model.",
+        "example": "With C_d zero, folded and unfolded paths still match despite losing the current-state difference."
+      }
+    },
+    "qa/foundation-models:wm-quant/continuous-error": {
+      "source_sha256": "7ce584335257fe5d4417bab2b4c70b9201b348408ea5f4ff8970eb9db3b6de4e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why calibrate beyond one step?",
+        "answer": "Predicted continuous latents reenter the model, propagating early errors and adding new ones. One-step optimal ranges need not optimize a rollout.",
+        "example": "With1.1state amplification per step, early error affects every later prediction."
+      }
+    },
+    "qa/foundation-models:wm-quant/protected-control": {
+      "source_sha256": "6292c4b00d9fc188dac28be4c2e0fe4049cace24a47ea7ad2303ef04fafb751f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not quantize actions with the state?",
+        "answer": "Small action differences distinguish plans and can disappear in a range dominated by large latent values. The control path remains floating point.",
+        "example": "States near10 can swamp a0.001action difference in3-bit quantization."
+      }
+    },
+    "qa/foundation-models:wm-quant/ranges-not-shared": {
+      "source_sha256": "dd4d09aee1eab1c2830b9fbea21ad2dfbed09a5c1628923e79feb724b563741b",
+      "reviewed": true,
+      "fields": {
+        "question": "Do per-step ranges require different predictor weights?",
+        "answer": "No. Weights, rotations and smoothing remain shared; only small activation-range parameters vary by step.",
+        "example": "One W can serve four steps with four distinct clipping ranges."
+      }
+    },
+    "qa/foundation-models:wm-quant/calibration-not-planning": {
+      "source_sha256": "09a0e5cfbd8da2cd1e534d40682a513407b0d7bd6426038ffdc723c39ace36c0",
+      "reviewed": true,
+      "fields": {
+        "question": "Does lower local calibration loss establish PushT gains?",
+        "answer": "No. Tiny recurrent tensors check range gradients, control preservation and the objective, without visual checkpoints, CEM or environment outcomes.",
+        "example": "Thirty range updates reduce a latent discrepancy, not a robot success-rate benchmark."
+      }
+    },
+    "qa/foundation-models:fm-mamba/three-predecessors": {
+      "source_sha256": "862c6973af558736cd1b021cbc0f73638fd80ae3d14e433e11dc9e877e45e19c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain the diagonal predecessor?",
+        "answer": "It arises from cross-axis discretization and can remain nonzero even when continuous A0 is zero. Dropping it changes propagation.",
+        "example": "An impulse at the upper-left can reach the next diagonal cell through this term."
+      }
+    },
+    "qa/foundation-models:fm-mamba/piecewise-step-bound": {
+      "source_sha256": "64f1804cd192afedee0bbf317e108b045bea72f1e0f1e25def8cab6d2dfdf864",
+      "reviewed": true,
+      "fields": {
+        "question": "Do all negative ratios need the same clipping?",
+        "answer": "No. Ratios(-2,0) permit positive steps without that bound. Ratios below-2 need the tightest component limit and margin. The critical-2 and nonnegative branch are rejected locally.",
+        "example": "Ratio-1 needs no clipping, while large steps at ratio-3 are projected."
+      }
+    },
+    "qa/foundation-models:fm-mamba/wavefront-not-prefix": {
+      "source_sha256": "2aa68725e02007f85b2318df0a5ea70ebf86066d857ced6830d948e48fa41df3",
+      "reviewed": true,
+      "fields": {
+        "question": "Can Spool associative scans parallelize the whole grid?",
+        "answer": "No. Multiple intersecting predecessor paths differ from a single chain. Cells sharing i+j can run together.",
+        "example": "A wavefront reads both the preceding and two-steps-old anti-diagonals."
+      }
+    },
+    "qa/foundation-models:fm-mamba/no-psd-throughput": {
+      "source_sha256": "e86ac221277c20d895c9707bdb10727e570a305982f34192a5287c2e2089aedf",
+      "reviewed": true,
+      "fields": {
+        "question": "Does scan parity establish the paper speedup?",
+        "answer": "No. It checks dependencies, boundaries and gradients without vision training, fused scans or PSD kernels.",
+        "example": "Zero error on a4×5grid is correctness evidence, not epoch timing."
+      }
+    },
+    "qa/foundation-models:lara-plus-plus/quality-versus-speed": {
+      "source_sha256": "5020ff7acd1282e519f5002548a5cfa341cee3a5e36f94bfae2e23519a5b0de0",
+      "reviewed": true,
+      "fields": {
+        "question": "Does near-softmax quality solve practical efficiency?",
+        "answer": "No. Importance weighting and clustering remain costly. Quality recovery and system speed require separate measurements.",
+        "example": "Choosing N/8clusters does not retain fixed-cluster linear complexity."
+      }
+    },
+    "qa/foundation-models:lara-plus-plus/proposal-not-random": {
+      "source_sha256": "31a2aeee39b47f40879e859845c005027ddfa328c97f42b195243857e76742da",
+      "reviewed": true,
+      "fields": {
+        "question": "What becomes deterministic?",
+        "answer": "Features use proposal-distribution means instead of Gaussian samples. Proposal densities and importance weights are still needed.",
+        "example": "Identical inputs avoid new Gaussian feature noise but still require self-normalized weights."
+      }
+    },
+    "qa/foundation-models:lara-plus-plus/paper-code-clustering": {
+      "source_sha256": "67b3f541b054167f54e16ed5af99603d572c3763c8bfd989d51a04aa5678aa5d",
+      "reviewed": true,
+      "fields": {
+        "question": "Are paper and released clustering identical?",
+        "answer": "No. The paper describes query similarity and random initialization. Pinned code uses joint normalized Q+K, deterministic initialization and a separate CLS proposal.",
+        "example": "Tokens with identical queries but different keys can separate under joint features."
+      }
+    },
+    "qa/foundation-models:lara-plus-plus/constant-value-control": {
+      "source_sha256": "1ea937f99e124e39ad3f9b3d47be97bd6f9b18ca5a10c93376046d5d2f357abc",
+      "reviewed": true,
+      "fields": {
+        "question": "What does the constant-value control establish?",
+        "answer": "It checks normalization denominators and dimensions, not general approximation accuracy or speed.",
+        "example": "All values equal to2must produce2; nonconstant values can still have approximation error."
+      }
+    },
+    "qa/foundation-models:gaugerope/same-frequency-only": {
+      "source_sha256": "18ff8073701556a3aba73ac4c08e9a55f0cfa759ade49cd71848fae92416cb77",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not mix arbitrary rotary frequencies?",
+        "answer": "Different frequencies rotate differently with position, so a shared latent rotation generally cannot represent their arbitrary mixture.",
+        "example": "Adding coordinates that rotate90and10degrees then applying one rotation is not generally equivalent."
+      }
+    },
+    "qa/foundation-models:gaugerope/rkv-not-rotated": {
+      "source_sha256": "83f76e7fa5dfb489ed43d5a3f7d40c44a91d94d25377aef3a0d81f7ec7d395fc",
+      "reviewed": true,
+      "fields": {
+        "question": "Should the RKV correction also be rotated?",
+        "answer": "That changes the specified executable approximation. RKV is position independent to permit query-side absorption; only the carrier carries explicit relative rotation.",
+        "example": "The explicit low-rank reference rotates the carrier but leaves residual-key correction unrotated."
+      }
+    },
+    "qa/foundation-models:gaugerope/cache-versus-state-sharing": {
+      "source_sha256": "2cfbc26f748c5fafea05412f6a2b326103bea333ca394d62628db98aafa12849",
+      "reviewed": true,
+      "fields": {
+        "question": "How does it differ from Anchor state sharing?",
+        "answer": "It reduces per-token, per-layer dimensions with frequency structure. Anchor shares recurrent state across layers and needs writer/read-map semantics.",
+        "example": "Equal byte savings do not imply equal information or update behavior."
+      }
+    },
+    "qa/foundation-models:gaugerope/full-rank-not-compressed-lossless": {
+      "source_sha256": "090e02e7021b6eb129111abd2a42b2f02b880e917224a276f5407f9fafc15c2e",
+      "reviewed": true,
+      "fields": {
+        "question": "Does near-zero full-rank error prove lossless compression?",
+        "answer": "No. Full rank is an exactness-limit control. Low-rank residual approximation generally changes attention and is compared only with its explicit approximate reference.",
+        "example": "Keeping a full two-dimensional basis says nothing about losslessness after retaining one dimension."
+      }
+    },
+    "qa/foundation-models:risa/cold-is-not-deleted": {
+      "source_sha256": "f83fe26b2cb6e0c3b109be47fbe8fc67d69de9b8e8cf310e12fc02bdc65e230f",
+      "reviewed": true,
+      "fields": {
+        "question": "Are COLD pages deleted from GPU storage?",
+        "answer": "No. Both stores retain exact KV; COLD pages remain addressable by later plans.",
+        "example": "A page omitted for the first query can be selected by the next one."
+      }
+    },
+    "qa/foundation-models:risa/addresses-not-outputs": {
+      "source_sha256": "603ea291ee4947e110228b03c9643b3f959a5b79f4d2e2eac31aca38d4d12399",
+      "reviewed": true,
+      "fields": {
+        "question": "Does plan reuse also reuse attention probabilities?",
+        "answer": "No. Only historical indices persist; fresh queries and current KV recompute scores, joint normalization and values.",
+        "example": "Reversing query direction can change output on the same addresses."
+      }
+    },
+    "qa/foundation-models:risa/reads-versus-storage": {
+      "source_sha256": "ff4ffee379d4dee658c1b1772e48d490beef1195168183589b3eab372f3c82ea",
+      "reviewed": true,
+      "fields": {
+        "question": "Is its budget identical to DropKV eviction?",
+        "answer": "No. RISA retains unselected COLD pages. Its eligible-HOT cap excludes protected, recovered-COLD and mandatory rows.",
+        "example": "A512-page eligible cap does not bound total reads or total storage to512pages."
+      }
+    },
+    "qa/foundation-models:risa/single-softmax": {
+      "source_sha256": "bed10bbde4054c1291ec83f13a9549171a40f168b67876436294ebd43a8cebd6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not average separate history/current softmax outputs?",
+        "answer": "Separate denominators change attention. All support must share a normalization.",
+        "example": "One low-scoring history row should not receive a fixed half-weight against a high-scoring current row."
+      }
+    },
+    "qa/foundation-models:cascadejepa/geometry-not-semantics": {
+      "source_sha256": "aef830e9c6e85b3172c40188ffb0f60ca90cf73c26ee80c1b95b09b14e4a1349",
+      "reviewed": true,
+      "fields": {
+        "question": "Why measure geometry separately from semantics?",
+        "answer": "Abstract same-object embeddings can lose local depth/correspondence differences. The paper studies this divergence and adds spatial interactions.",
+        "example": "Two car patches can share semantics while occupying different depths."
+      }
+    },
+    "qa/foundation-models:cascadejepa/zero-before-position": {
+      "source_sha256": "0a020496c3241d2e4264820bc3d5f6d8023524c460e0e738c7d7fa9040d1b70f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does full-grid encoding avoid exposing masked patches?",
+        "answer": "Masked patch embeddings become zero before position addition, retaining location without original patch content. Stage2still encodes visible patches only.",
+        "example": "A masked input equals its position vector, neither zero nor original patch plus position."
+      }
+    },
+    "qa/foundation-models:cascadejepa/target-gradient-difference": {
+      "source_sha256": "50f0777c1d6a0531512440354421c472155b06ef5383563a10976ae43b498fea",
+      "reviewed": true,
+      "fields": {
+        "question": "Can DuoJEPA target gradients be reused unchanged?",
+        "answer": "No. CascadeJEPA uses stopped EMA targets; DuoJEPA differentiates its target centroids. Copying that behavior changes the method.",
+        "example": "Target parameters should have no gradient but move through EMA."
+      }
+    },
+    "qa/foundation-models:cascadejepa/unidirectional-test": {
+      "source_sha256": "ea139f05934b79d5e4217f5c48b34addf3100aced398b6f05bb92e753b759647",
+      "reviewed": true,
+      "fields": {
+        "question": "Why test that crop2cannot change stage1?",
+        "answer": "The coupling is stage1-to-stage2only. The control detects accidental reverse dependencies, not geometry gains.",
+        "example": "Scaling crop2can change stage2but must leave stage1prediction unchanged."
+      }
+    },
+    "qa/multimodal-models:dwd/pixel-output-not-pixel-sampling": {
+      "source_sha256": "9e445e80d4819f89f25ac50771bc07be60fb8fac827f4f160e835789828b6442",
+      "reviewed": true,
+      "fields": {
+        "question": "Does pixel output mean pixel-space sampling?",
+        "answer": "No. The latent denoising head continues the trajectory; only final readout uses the pixel head.",
+        "example": "Twenty intermediate steps can update latents before the final hidden tokens map to pixel patches."
+      }
+    },
+    "qa/multimodal-models:dwd/two-time-distributions": {
+      "source_sha256": "10326ba777d6651c9593d3a87c939325eaa967dfab54d87c01e05de533e0d469",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use different timestep distributions?",
+        "answer": "Pixel supervision targets final small nonzero times; trajectory anchoring covers broader intermediate denoising.",
+        "example": "Typical preshift ranges are[0,0.1]for pixels and[0.04,1]for trajectory."
+      }
+    },
+    "qa/multimodal-models:dwd/pixvid-different-path": {
+      "source_sha256": "524a60779e069758c03f20095f3cc0633aec138513980a65604516dc81b9cb93",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from PixVid?",
+        "answer": "PixVid transfers inputs and the pixel generation path. DWD keeps latent denoising and adds a final output head.",
+        "example": "Removing a VAE and adding a linear layer does not supply PixVid timestep mapping or its detailer."
+      }
+    },
+    "qa/multimodal-models:dwd/no-shadow-head": {
+      "source_sha256": "325e5971d312ea6a1a48bb41123ca3ef45598be569125ad41516b3c246301ca1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not present a standalone linear pixel head as implementation?",
+        "answer": "It omits pretrained suffix adaptation, perceptual/adversarial training, trajectory anchoring and sampling. The full campaign is costly, so the paper is review only.",
+        "example": "A random hidden-to-RGB shape check is not decoder-free generation capability."
+      }
+    },
+    "qa/foundation-models:beyond-bitwidth/names-not-execution": {
+      "source_sha256": "ef1541c9cab27a568461c36a9ef05a811c3cc6e0e31b1195d65fb6118cf18341",
+      "reviewed": true,
+      "fields": {
+        "question": "Does an INT4 label prove native INT4 execution?",
+        "answer": "No. Packed weights, activation policy, selected kernels and absence of fallbacks must be checked.",
+        "example": "One Marlin kernel name alone does not distinguish INT4from INT8storage."
+      }
+    },
+    "qa/foundation-models:beyond-bitwidth/nonadditive-restoration": {
+      "source_sha256": "06f3020ea93ad420df5a3869a303a77de0eb108fa8084e079dc2302ba1bc6fd0",
+      "reviewed": true,
+      "fields": {
+        "question": "Can isolated restoration gains be added?",
+        "answer": "No. Interactions are strongly nonadditive. Restoration ranks modules but does not predict a combination.",
+        "example": "Two isolated one-point gains need not produce a joint two-point gain."
+      }
+    },
+    "qa/foundation-models:beyond-bitwidth/allocation-confounded": {
+      "source_sha256": "ca739411c800112e7b37212b2d2ce9267c79551d214bece4ae54f357ab519466",
+      "reviewed": true,
+      "fields": {
+        "question": "Does beating NVFP4isolate the allocation effect?",
+        "answer": "No. Activation precision and INT8 protection changed together.",
+        "example": "A gain from4-to16-bit activations cannot be attributed entirely to module ranking."
+      }
+    },
+    "qa/foundation-models:beyond-bitwidth/blackwell-only-evidence": {
+      "source_sha256": "0a429b555d5650bbf3e10155b0d084005dde9fff46050355d5f2ba71d44a0993",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not validate B200claims with an A100run?",
+        "answer": "Native formats/hardware differ, and no retained final checkpoint establishes rebuild parity. The costly B200campaign is not reproduced.",
+        "example": "FP16simulation of NVFP4error on A100is not Blackwell-native execution."
+      }
+    },
+    "qa/foundation-models:latent-feedback-scaling/same-tokens-not-compute": {
+      "source_sha256": "536f6bd355d0732acb36cbf15716569fed82c5dd1f7eebe6ef2ce3f86445070b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is matching training tokens insufficient?",
+        "answer": "Feedback costs more per token. A plain Transformer can spend that compute on more epochs, so equal FLOPs must be compared.",
+        "example": "A25%per-token overhead gives25%more compute at the same token count."
+      }
+    },
+    "qa/foundation-models:latent-feedback-scaling/effective-data-saturation": {
+      "source_sha256": "ec825e827accd8a1a7e720ce795d857e0027d0abd6d42e4e6eb0aa3b4898b896",
+      "reviewed": true,
+      "fields": {
+        "question": "Are four repeats equivalent to four times unique data?",
+        "answer": "No. Marginal value decays and effective data saturates; below one epoch it is RU.",
+        "example": "The twentieth pass through one document is not assumed as valuable as the first."
+      }
+    },
+    "qa/foundation-models:latent-feedback-scaling/archspace-laws": {
+      "source_sha256": "1e3a62f131049f3eba66b052ca2ae31b4e470e0940f207f9896b7dcf66e6ec0c",
+      "reviewed": true,
+      "fields": {
+        "question": "Can ArchSpace coefficients be inserted directly?",
+        "answer": "No. The interventions and functional form differ, including repeat saturation and feedback capacity.",
+        "example": "Predicting validation loss does not make parameter count N equal to FLOPs-per-token M."
+      }
+    },
+    "qa/foundation-models:latent-feedback-scaling/no-fake-refit": {
+      "source_sha256": "b5b0bb27b5ccfcbe132aee9d089c04eb1c87f659cf5718f25dee422a765001f6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are there no local scaling-fit metrics?",
+        "answer": "A real fit requires model-scale, unique-data and hyperparameter grids. The full campaign is too costly; formula substitution is not a new experiment.",
+        "example": "Regressing invented losses cannot validate held-out778Mpredictions or compute savings."
+      }
+    },
+    "qa/foundation-models:wm-quant/integer-zero-point-not-low-anchor": {
+      "source_sha256": "022ef887451c55bc28828f00f785dba991c29e1c75260b7cce6579a66513dca4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must fake quantization not anchor its lattice directly at continuous low?",
+        "answer": "Equations1–2first compute integer zero-point z=round(-low/s), quantize round(r/s)+z and dequantize s(q-z). The low+s*round((r-low)/s) lattice differs and can map zero to a nonzero value. An STE approximates gradients, not the forward integer grid.",
+        "example": "With3bits, low=-0.3and range width about0.693, the paper equations preserve zero exactly; the wrong low-anchored grid yields about-0.0029365."
+      }
+    }
+  }
+}

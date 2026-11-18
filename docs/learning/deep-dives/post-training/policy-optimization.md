@@ -7,7 +7,7 @@ hide:
 
 # 同一个GRPO名字之外：优势尺度、裁剪单位与训推失配
 
-[LLM 后训练](../index.md) · 更新 2026-11-15 · 60 篇主题资料 / 12 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-18 · 63 篇主题资料 / 15 篇重点对照
 
 GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。
 
@@ -37,6 +37,9 @@ GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比�
 | [A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets](../../../post-training/2611.14467-apmd-reference-reset/README.md) · [原始来源](https://arxiv.org/abs/2611.14467v1)<br>章节：核心公式、结果、负控与边界、理论与实验范围 | 每轮把KL reference更新为最新策略，再近似求解reference×exp(eta×reward)的镜像目标；有限核检查精确重置路径、Kimi均值baseline的平方KL偏差与Rebel=2×centered-MSE。 | 参考重置不等于刷新PPO/GRPO old policy，也不等于把学生退回base；保证依赖策略/reward可实现性及内层精度。纯理论无大型实证方案，不编高成本或把数值检查当完整证明。 |
 | [Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?](../../../post-training/2611.15404-lgpo/README.md) · [原始来源](https://arxiv.org/abs/2611.15404v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界、高成本完整实验 | 按当前策略响应平均logp作单侧stop-gradient门控，幸存token优势加权求和、对全部响应平均，不计算old-policy ratio。 | Dr.GRPO去组std/长度归一化，LGPO改变梯度响应集合；两者不是同一归一化开关。高似然负优势也门控，小logits验证不证明LLM更稳或更快。 |
 | [Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models](../../../post-training/2611.16628-safety-budget-cgrpo/README.md) · [原始来源](https://arxiv.org/abs/2611.16628v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界 | 保持raw base reward，把训练轨迹PAV映射只放入penalty和dual control，并用不除总std的优势保留multiplier尺度。 | Dr.GRPO移除std以修正训练偏置；这里同一算术还关系到约束控制是否生效。校准排序与均值level不同，CPU单调映射不是VLM安全或预算达成证据。 |
+| [SpeCal: Spectral Calibration for Unsupervised RLVR](../../../post-training/2611.20691-specal/README.md) · [原始来源](https://arxiv.org/abs/2611.20691v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 归一化response表示的中心Gram谱、质量×effective-rank带通、LOO去噪SVD条件支持及双层RMS advantage校准。 | GRPO使用组内reward均值/方差；SpeCal还依赖跨层token平均后的表示谱和LOO条件支持，并在batch/group两级RMS校准，不能只换一个reward标准差来冒充。 |
+| [Regularized Score Centering](../../../post-training/2611.21791-regularized-score-centering/README.md) · [原始来源](https://arxiv.org/abs/2611.21791v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 独立auxiliary actions的加权score center、detached TIS权重、独立KL cap的reverse-KL梯度估计；不是reward减均值。 | RSC专门惩罚learner相对产生本批数据的behavior分布的reverse KL，参考随sampler刷新；GRPO常以较固定pretrained reference约束。行为概率不能被另一个reference概率替换。 |
+| [Get Hint-Augmented GRPO Done Right Through Activation Steering](../../../post-training/2611.23124-ash-hint-steering/README.md) · [原始来源](https://arxiv.org/abs/2611.23124v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 只收录每步先训练steering再GRPO、hint/plain独立归一化advantage及最后一步不更新model的完整顺序；不把DPO公式当实现。 | GRPO消除critic但仍依赖同组相对reward；ASH在hint/plain双组上分别标准化，在GRPO之前另训activation steering并在最终步停model更新，防止返回stale向量。旧GRPO候选成功率不能当无hint生成能力。 |
 
 </div>
 
@@ -83,6 +86,24 @@ Dr.GRPO保留中心化奖励但移除组std与长度偏置；LGPO不定义新的
 Dr.GRPO式未缩放优势能避免总reward组std抵消乘子，但scorer若均值偏高或偏低，dual仍会饱和或关闭。Safety as a Budget因此把训练轨迹拟合的映射仅用于penalty/control，raw base reward保留组内差别。PAV的平台、训练/测试隔离、EMA前态和插值约定都需显式声明；既不能把单调性当校准保证，也不能把另一种逐目标标准化结果写成本地unscaled效果。
 
 对照来源：[safety-budget-cgrpo](../../../post-training/2611.16628-safety-budget-cgrpo/README.md) · [dr-grpo](../../../post-training/2503.20783-dr-grpo/README.md)
+
+### 为什么rollout不能用含自身的子空间证明自己？
+
+一个异常方向可能完全由该rollout创造。LOO先删去该行，中心化其余表示，用group有效秩截断SVD，才测被留出向量的投影能量比例。 GRPO使用组内reward均值/方差；SpeCal还依赖跨层token平均后的表示谱和LOO条件支持，并在batch/group两级RMS校准，不能只换一个reward标准差来冒充。 本轮边界：归一化response表示的中心Gram谱、质量×effective-rank带通、LOO去噪SVD条件支持及双层RMS advantage校准。
+
+对照来源：[specal](../../../post-training/2611.20691-specal/README.md) · [grpo](../../../post-training/2402.03300-grpo/README.md)
+
+### TIS和reverse-KL cap能共用一个clip后的ratio吗？
+
+不能默默混用。reward项sample与aux各自计算原ratio后TIS clip；KL项可用独立cap，所有系数对score surrogate detach，behavior在内层固定。 RSC专门惩罚learner相对产生本批数据的behavior分布的reverse KL，参考随sampler刷新；GRPO常以较固定pretrained reference约束。行为概率不能被另一个reference概率替换。 本轮边界：独立auxiliary actions的加权score center、detached TIS权重、独立KL cap的reverse-KL梯度估计；不是reward减均值。
+
+对照来源：[regularized-score-centering](../../../post-training/2611.21791-regularized-score-centering/README.md) · [grpo](../../../post-training/2402.03300-grpo/README.md)
+
+### 为什么每步必须先更新steering再更新model？
+
+steering loss拟合产生当前hint/plain样本的同一模型。先改model再拟合会用stale对应关系；最后一步只更新steering不改model，避免返回过时向量。 GRPO消除critic但仍依赖同组相对reward；ASH在hint/plain双组上分别标准化，在GRPO之前另训activation steering并在最终步停model更新，防止返回stale向量。旧GRPO候选成功率不能当无hint生成能力。 本轮边界：只收录每步先训练steering再GRPO、hint/plain独立归一化advantage及最后一步不更新model的完整顺序；不把DPO公式当实现。
+
+对照来源：[ash-hint-steering](../../../post-training/2611.23124-ash-hint-steering/README.md) · [grpo](../../../post-training/2402.03300-grpo/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -168,9 +189,51 @@ Dr.GRPO式未缩放优势能避免总reward组std抵消乘子，但scorer若均�
 
     对照来源：[safety-budget-cgrpo](../../../post-training/2611.16628-safety-budget-cgrpo/README.md) · [dr-grpo](../../../post-training/2503.20783-dr-grpo/README.md)
 
+### 与GRPO组内标准化相比新增了什么？ {#cross-nov18-specal}
+
+??? note "展开答案与例子"
+
+    **答案：** GRPO使用组内reward均值/方差；SpeCal还依赖跨层token平均后的表示谱和LOO条件支持，并在batch/group两级RMS校准，不能只换一个reward标准差来冒充。
+
+    **教学例子：** 教学例：整体乘某条表示7倍应被L2归一化抵消，但改变方向会改变谱和支持。
+
+    对照来源：[specal](../../../post-training/2611.20691-specal/README.md) · [grpo](../../../post-training/2402.03300-grpo/README.md)
+
+### 它与普通GRPO的reference KL有什么区别？ {#cross-nov18-regularized-score-centering}
+
+??? note "展开答案与例子"
+
+    **答案：** RSC专门惩罚learner相对产生本批数据的behavior分布的reverse KL，参考随sampler刷新；GRPO常以较固定pretrained reference约束。行为概率不能被另一个reference概率替换。
+
+    **教学例子：** 教学例：同token有behavior=.2、reference=.1时，importance ratio分母必须仍为.2。
+
+    对照来源：[regularized-score-centering](../../../post-training/2611.21791-regularized-score-centering/README.md) · [grpo](../../../post-training/2402.03300-grpo/README.md)
+
+### 已有GRPO实现是否足以宣称ASH无hint行为迁移已接入？ {#cross-nov18-ash-hint-steering}
+
+??? note "展开答案与例子"
+
+    **答案：** GRPO消除critic但仍依赖同组相对reward；ASH在hint/plain双组上分别标准化，在GRPO之前另训activation steering并在最终步停model更新，防止返回stale向量。旧GRPO候选成功率不能当无hint生成能力。
+
+    **教学例子：** 教学例：分别归一化hint/plain组后，还需先更新真实activation向量再更新model，并在最后一步停model更新。
+
+    对照来源：[ash-hint-steering](../../../post-training/2611.23124-ash-hint-steering/README.md) · [grpo](../../../post-training/2402.03300-grpo/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 只收录每步先训练steering再GRPO、hint/plain独立归一化advantage及最后一步不更新model的完整顺序；不把DPO公式当实现。 完整实验高成本不复现；组件诊断不等于能力比较。
+
+涉及：[ash-hint-steering](../../../post-training/2611.23124-ash-hint-steering/README.md) · [grpo](../../../post-training/2402.03300-grpo/README.md)
+
+**2026-11-18** · 独立auxiliary actions的加权score center、detached TIS权重、独立KL cap的reverse-KL梯度估计；不是reward减均值。 完整实验高成本不复现；组件诊断不等于能力比较。
+
+涉及：[regularized-score-centering](../../../post-training/2611.21791-regularized-score-centering/README.md) · [grpo](../../../post-training/2402.03300-grpo/README.md)
+
+**2026-11-18** · 归一化response表示的中心Gram谱、质量×effective-rank带通、LOO去噪SVD条件支持及双层RMS advantage校准。 完整实验高成本不复现；组件诊断不等于能力比较。
+
+涉及：[specal](../../../post-training/2611.20691-specal/README.md) · [grpo](../../../post-training/2402.03300-grpo/README.md)
 
 **2026-11-15** · 加入Safety as a Budget，区分优势尺度保留与控制level校准；仅实现训练限定PAV、双通道reward和显式EMA dual，不把CPU算术包装成安全训练，完整矩阵成本过高不复现。
 
@@ -200,7 +263,7 @@ Dr.GRPO式未缩放优势能避免总reward组std抵消乘子，但scorer若均�
 
 覆盖 54 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 60 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 63 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -264,6 +327,9 @@ Dr.GRPO式未缩放优势能避免总reward组std抵消乘子，但scorer若均�
 - [A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets](../../../post-training/2611.14467-apmd-reference-reset/README.md)
 - [Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?](../../../post-training/2611.15404-lgpo/README.md)
 - [Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models](../../../post-training/2611.16628-safety-budget-cgrpo/README.md)
+- [SpeCal: Spectral Calibration for Unsupervised RLVR](../../../post-training/2611.20691-specal/README.md)
+- [Regularized Score Centering](../../../post-training/2611.21791-regularized-score-centering/README.md)
+- [Get Hint-Augmented GRPO Done Right Through Activation Steering](../../../post-training/2611.23124-ash-hint-steering/README.md)
 
 </details>
 

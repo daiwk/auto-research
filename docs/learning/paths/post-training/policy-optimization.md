@@ -7,7 +7,7 @@ hide:
 
 # 策略优化：谁在采样，谁在被更新
 
-[LLM 后训练](index.md) / 240 个问题 · 60 篇论文
+[LLM 后训练](index.md) / 252 个问题 · 63 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,168 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">240 个问题 · 60 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">252 个问题 · 63 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ash-hint-steering" data-paper-title="Get Hint-Augmented GRPO Done Right Through Activation Steering" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Get Hint-Augmented GRPO Done Right Through Activation Steering LLM 后训练 University of Notre Dame 2026-11-17 训练问题附带reference solution前半hint更易有正reward，但推理没有该hint。ASH学习可注入activation的行为方向，在无hint输入上重现部分偏移。steering loss拟合产生当前hint/plain样本的同一模型。先改model再拟合会用stale对应关系；最后一步只更新steering不改model，避免返回过时向量。 完整实验成本过高，不复现（审查 DONE）；仅方法与成本收录，无本地模型实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录每步先训练steering再GRPO、hint/plain独立归一化advantage及最后一步不更新model的完整顺序；不把DPO公式当实现。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 hint-augmented GRPO有什么训练推理偏移？ 训练问题附带reference solution前半hint更易有正reward，但推理没有该hint。ASH学习可注入activation的行为方向，在无hint输入上重现部分偏移。 教学例：推理时不能悄悄再附gold解答来证明steering有效。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<span id="paper-post-training-ash-hint-steering-059515f5" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-8b3ad72e0ced2338">hint-augmented GRPO有什么训练推理偏移？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aash-hint-steering">Get Hint-Augmented GRPO Done Right Through Activation Steering</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Notre Dame</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>训练问题附带reference solution前半hint更易有正reward，但推理没有该hint。ASH学习可注入activation的行为方向，在无hint输入上重现部分偏移。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：推理时不能悄悄再附gold解答来证明steering有效。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23124v1">原论文</a> · <a href="../../../../post-training/2611.23124-ash-hint-steering/">实现解读</a> · <a href="#qa-8b3ad72e0ced2338">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ash-hint-steering" data-paper-title="Get Hint-Augmented GRPO Done Right Through Activation Steering" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Get Hint-Augmented GRPO Done Right Through Activation Steering LLM 后训练 University of Notre Dame 2026-11-17 训练问题附带reference solution前半hint更易有正reward，但推理没有该hint。ASH学习可注入activation的行为方向，在无hint输入上重现部分偏移。steering loss拟合产生当前hint/plain样本的同一模型。先改model再拟合会用stale对应关系；最后一步只更新steering不改model，避免返回过时向量。 完整实验成本过高，不复现（审查 DONE）；仅方法与成本收录，无本地模型实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录每步先训练steering再GRPO、hint/plain独立归一化advantage及最后一步不更新model的完整顺序；不把DPO公式当实现。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 为什么每步必须先更新steering再更新model？ steering loss拟合产生当前hint/plain样本的同一模型。先改model再拟合会用stale对应关系；最后一步只更新steering不改model，避免返回过时向量。 教学例：Algorithm1的if step&lt;T只包住model GRPO更新，不包steering更新。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-28dd26b1cce94870">为什么每步必须先更新steering再更新model？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aash-hint-steering">Get Hint-Augmented GRPO Done Right Through Activation Steering</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Notre Dame</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>steering loss拟合产生当前hint/plain样本的同一模型。先改model再拟合会用stale对应关系；最后一步只更新steering不改model，避免返回过时向量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Algorithm1的if step&lt;T只包住model GRPO更新，不包steering更新。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23124v1">原论文</a> · <a href="../../../../post-training/2611.23124-ash-hint-steering/">实现解读</a> · <a href="#qa-28dd26b1cce94870">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ash-hint-steering" data-paper-title="Get Hint-Augmented GRPO Done Right Through Activation Steering" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Get Hint-Augmented GRPO Done Right Through Activation Steering LLM 后训练 University of Notre Dame 2026-11-17 训练问题附带reference solution前半hint更易有正reward，但推理没有该hint。ASH学习可注入activation的行为方向，在无hint输入上重现部分偏移。steering loss拟合产生当前hint/plain样本的同一模型。先改model再拟合会用stale对应关系；最后一步只更新steering不改model，避免返回过时向量。 完整实验成本过高，不复现（审查 DONE）；仅方法与成本收录，无本地模型实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录每步先训练steering再GRPO、hint/plain独立归一化advantage及最后一步不更新model的完整顺序；不把DPO公式当实现。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 与GRPO相比能把hint和plain合成一个advantage组吗？ 不能。两组独立计算reward均值/std再相加目标，避免奖励难度差造成组间竞争；steering偏好目标本身不按正确性过滤样本。 教学例：hint奖励全1、plain全0时合组会制造正负优势，但各自标准化都无相对信号。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-02c6f7eaa852fa30">与GRPO相比能把hint和plain合成一个advantage组吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aash-hint-steering">Get Hint-Augmented GRPO Done Right Through Activation Steering</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Notre Dame</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。两组独立计算reward均值/std再相加目标，避免奖励难度差造成组间竞争；steering偏好目标本身不按正确性过滤样本。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：hint奖励全1、plain全0时合组会制造正负优势，但各自标准化都无相对信号。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23124v1">原论文</a> · <a href="../../../../post-training/2611.23124-ash-hint-steering/">实现解读</a> · <a href="#qa-02c6f7eaa852fa30">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ash-hint-steering" data-paper-title="Get Hint-Augmented GRPO Done Right Through Activation Steering" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Get Hint-Augmented GRPO Done Right Through Activation Steering LLM 后训练 University of Notre Dame 2026-11-17 训练问题附带reference solution前半hint更易有正reward，但推理没有该hint。ASH学习可注入activation的行为方向，在无hint输入上重现部分偏移。steering loss拟合产生当前hint/plain样本的同一模型。先改model再拟合会用stale对应关系；最后一步只更新steering不改model，避免返回过时向量。 完整实验成本过高，不复现（审查 DONE）；仅方法与成本收录，无本地模型实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录每步先训练steering再GRPO、hint/plain独立归一化advantage及最后一步不更新model的完整顺序；不把DPO公式当实现。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 本地为什么没有只给一个DPO公式就叫ASH？ ASH还要求可训练activation injection、双组在线rollout、先向量后模型两阶段和无hint推理。完整多模型训练矩阵高成本，不用公式或固定向量代替核心，审查DONE。 教学例：有loss函数但没有将v注入选层activation，不能说明hint行为被保留。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-68adbde50778b812">本地为什么没有只给一个DPO公式就叫ASH？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aash-hint-steering">Get Hint-Augmented GRPO Done Right Through Activation Steering</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Notre Dame</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>ASH还要求可训练activation injection、双组在线rollout、先向量后模型两阶段和无hint推理。完整多模型训练矩阵高成本，不用公式或固定向量代替核心，审查DONE。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：有loss函数但没有将v注入选层activation，不能说明hint行为被保留。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23124v1">原论文</a> · <a href="../../../../post-training/2611.23124-ash-hint-steering/">实现解读</a> · <a href="#qa-68adbde50778b812">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:regularized-score-centering" data-paper-title="Regularized Score Centering" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Regularized Score Centering LLM 后训练 University of Illinois Urbana-Champaign 2026-11-16 不是。它减去同一history下behavior分布的加权log-policy梯度期望。response advantage本来可以已中心化，但behavior下score均值仍不一定为0。不能默默混用。reward项sample与aux各自计算原ratio后TIS clip；KL项可用独立cap，所有系数对score surrogate detach，behavior在内层固定。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。独立auxiliary actions的加权score center、detached TIS权重、独立KL cap的reverse-KL梯度估计；不是reward减均值。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 score centering是不是把reward减组均值？ 不是。它减去同一history下behavior分布的加权log-policy梯度期望。response advantage本来可以已中心化，但behavior下score均值仍不一定为0。 教学例：learner和behavior分布不同，减常数reward baseline会残留drift；需要独立aux actions估计score center。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<span id="paper-post-training-regularized-score-centering-56e87aa6" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-2e0f2c34f5f3bc1a">score centering是不是把reward减组均值？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aregularized-score-centering">Regularized Score Centering</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。它减去同一history下behavior分布的加权log-policy梯度期望。response advantage本来可以已中心化，但behavior下score均值仍不一定为0。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：learner和behavior分布不同，减常数reward baseline会残留drift；需要独立aux actions估计score center。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21791v1">原论文</a> · <a href="../../../../post-training/2611.21791-regularized-score-centering/">实现解读</a> · <a href="#qa-2e0f2c34f5f3bc1a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:regularized-score-centering" data-paper-title="Regularized Score Centering" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Regularized Score Centering LLM 后训练 University of Illinois Urbana-Champaign 2026-11-16 不是。它减去同一history下behavior分布的加权log-policy梯度期望。response advantage本来可以已中心化，但behavior下score均值仍不一定为0。不能默默混用。reward项sample与aux各自计算原ratio后TIS clip；KL项可用独立cap，所有系数对score surrogate detach，behavior在内层固定。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。独立auxiliary actions的加权score center、detached TIS权重、独立KL cap的reverse-KL梯度估计；不是reward减均值。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 TIS和reverse-KL cap能共用一个clip后的ratio吗？ 不能默默混用。reward项sample与aux各自计算原ratio后TIS clip；KL项可用独立cap，所有系数对score surrogate detach，behavior在内层固定。 教学例：sample ratio4被cap到2，而另一aux ratio.25被下限抬到.5，两者都改变center。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-c145ac7eb03b7c05">TIS和reverse-KL cap能共用一个clip后的ratio吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aregularized-score-centering">Regularized Score Centering</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能默默混用。reward项sample与aux各自计算原ratio后TIS clip；KL项可用独立cap，所有系数对score surrogate detach，behavior在内层固定。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：sample ratio4被cap到2，而另一aux ratio.25被下限抬到.5，两者都改变center。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21791v1">原论文</a> · <a href="../../../../post-training/2611.21791-regularized-score-centering/">实现解读</a> · <a href="#qa-c145ac7eb03b7c05">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:regularized-score-centering" data-paper-title="Regularized Score Centering" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Regularized Score Centering LLM 后训练 University of Illinois Urbana-Champaign 2026-11-16 不是。它减去同一history下behavior分布的加权log-policy梯度期望。response advantage本来可以已中心化，但behavior下score均值仍不一定为0。不能默默混用。reward项sample与aux各自计算原ratio后TIS clip；KL项可用独立cap，所有系数对score surrogate detach，behavior在内层固定。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。独立auxiliary actions的加权score center、detached TIS权重、独立KL cap的reverse-KL梯度估计；不是reward减均值。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 它与普通GRPO的reference KL有什么区别？ RSC专门惩罚learner相对产生本批数据的behavior分布的reverse KL，参考随sampler刷新；GRPO常以较固定pretrained reference约束。行为概率不能被另一个reference概率替换。 教学例：同token有behavior=.2、reference=.1时，importance ratio分母必须仍为.2。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-925d979bd3f58c50">它与普通GRPO的reference KL有什么区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aregularized-score-centering">Regularized Score Centering</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>RSC专门惩罚learner相对产生本批数据的behavior分布的reverse KL，参考随sampler刷新；GRPO常以较固定pretrained reference约束。行为概率不能被另一个reference概率替换。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同token有behavior=.2、reference=.1时，importance ratio分母必须仍为.2。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21791v1">原论文</a> · <a href="../../../../post-training/2611.21791-regularized-score-centering/">实现解读</a> · <a href="#qa-925d979bd3f58c50">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:regularized-score-centering" data-paper-title="Regularized Score Centering" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Regularized Score Centering LLM 后训练 University of Illinois Urbana-Champaign 2026-11-16 不是。它减去同一history下behavior分布的加权log-policy梯度期望。response advantage本来可以已中心化，但behavior下score均值仍不一定为0。不能默默混用。reward项sample与aux各自计算原ratio后TIS clip；KL项可用独立cap，所有系数对score surrogate detach，behavior在内层固定。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。独立auxiliary actions的加权score center、detached TIS权重、独立KL cap的reverse-KL梯度估计；不是reward减均值。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 为什么本地loss数值不能当论文population目标？ 返回的是具有原式梯度的detached-score surrogate，不是W的无偏数值估计。测试以小词表全动作枚举核梯度，并比较去掉center的负控，不报告Agent回报。 教学例：独立枚举的梯度误差应接近浮点精度，而surrogate标量可与reverse-KL标量不同。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-a4430d26cbd547f8">为什么本地loss数值不能当论文population目标？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aregularized-score-centering">Regularized Score Centering</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>返回的是具有原式梯度的detached-score surrogate，不是W的无偏数值估计。测试以小词表全动作枚举核梯度，并比较去掉center的负控，不报告Agent回报。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：独立枚举的梯度误差应接近浮点精度，而surrogate标量可与reverse-KL标量不同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21791v1">原论文</a> · <a href="../../../../post-training/2611.21791-regularized-score-centering/">实现解读</a> · <a href="#qa-a4430d26cbd547f8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:specal" data-paper-title="SpeCal: Spectral Calibration for Unsupervised RLVR" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="SpeCal: Spectral Calibration for Unsupervised RLVR LLM 后训练 Zhejiang University / Ant Group 2026-11-16 不是。它从response hidden-state几何生成group和rollout权重，重加权已有无监督advantage，再沿原GRPO目标更新；几何权重全部stop-gradient。一个异常方向可能完全由该rollout创造。LOO先删去该行，中心化其余表示，用group有效秩截断SVD，才测被留出向量的投影能量比例。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。归一化response表示的中心Gram谱、质量×effective-rank带通、LOO去噪SVD条件支持及双层RMS advantage校准。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 SpeCal是在重写reward吗？ 不是。它从response hidden-state几何生成group和rollout权重，重加权已有无监督advantage，再沿原GRPO目标更新；几何权重全部stop-gradient。 教学例：相同reward得到的A^U保持输入身份，仅进入校准后的Acal，不用隐藏正确答案生成reward。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<span id="paper-post-training-specal-6da35dd2" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-fa9f0bbe410f76c6">SpeCal是在重写reward吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aspecal">SpeCal: Spectral Calibration for Unsupervised RLVR</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Zhejiang University / Ant Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。它从response hidden-state几何生成group和rollout权重，重加权已有无监督advantage，再沿原GRPO目标更新；几何权重全部stop-gradient。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：相同reward得到的A^U保持输入身份，仅进入校准后的Acal，不用隐藏正确答案生成reward。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20691v1">原论文</a> · <a href="../../../../post-training/2611.20691-specal/">实现解读</a> · <a href="#qa-fa9f0bbe410f76c6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:specal" data-paper-title="SpeCal: Spectral Calibration for Unsupervised RLVR" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="SpeCal: Spectral Calibration for Unsupervised RLVR LLM 后训练 Zhejiang University / Ant Group 2026-11-16 不是。它从response hidden-state几何生成group和rollout权重，重加权已有无监督advantage，再沿原GRPO目标更新；几何权重全部stop-gradient。一个异常方向可能完全由该rollout创造。LOO先删去该行，中心化其余表示，用group有效秩截断SVD，才测被留出向量的投影能量比例。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。归一化response表示的中心Gram谱、质量×effective-rank带通、LOO去噪SVD条件支持及双层RMS advantage校准。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 为什么rollout不能用含自身的子空间证明自己？ 一个异常方向可能完全由该rollout创造。LOO先删去该行，中心化其余表示，用group有效秩截断SVD，才测被留出向量的投影能量比例。 教学例：其余3条在xy平面，相比彼此一致的样本，孤立z方向的条件支持更低。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-3776a20605bc44ee">为什么rollout不能用含自身的子空间证明自己？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aspecal">SpeCal: Spectral Calibration for Unsupervised RLVR</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Zhejiang University / Ant Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>一个异常方向可能完全由该rollout创造。LOO先删去该行，中心化其余表示，用group有效秩截断SVD，才测被留出向量的投影能量比例。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：其余3条在xy平面，相比彼此一致的样本，孤立z方向的条件支持更低。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20691v1">原论文</a> · <a href="../../../../post-training/2611.20691-specal/">实现解读</a> · <a href="#qa-3776a20605bc44ee">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:specal" data-paper-title="SpeCal: Spectral Calibration for Unsupervised RLVR" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="SpeCal: Spectral Calibration for Unsupervised RLVR LLM 后训练 Zhejiang University / Ant Group 2026-11-16 不是。它从response hidden-state几何生成group和rollout权重，重加权已有无监督advantage，再沿原GRPO目标更新；几何权重全部stop-gradient。一个异常方向可能完全由该rollout创造。LOO先删去该行，中心化其余表示，用group有效秩截断SVD，才测被留出向量的投影能量比例。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。归一化response表示的中心Gram谱、质量×effective-rank带通、LOO去噪SVD条件支持及双层RMS advantage校准。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 与GRPO组内标准化相比新增了什么？ GRPO使用组内reward均值/方差；SpeCal还依赖跨层token平均后的表示谱和LOO条件支持，并在batch/group两级RMS校准，不能只换一个reward标准差来冒充。 教学例：整体乘某条表示7倍应被L2归一化抵消，但改变方向会改变谱和支持。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-38ae572a2a18ef31">与GRPO组内标准化相比新增了什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aspecal">SpeCal: Spectral Calibration for Unsupervised RLVR</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Zhejiang University / Ant Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>GRPO使用组内reward均值/方差；SpeCal还依赖跨层token平均后的表示谱和LOO条件支持，并在batch/group两级RMS校准，不能只换一个reward标准差来冒充。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：整体乘某条表示7倍应被L2归一化抵消，但改变方向会改变谱和支持。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20691v1">原论文</a> · <a href="../../../../post-training/2611.20691-specal/">实现解读</a> · <a href="#qa-38ae572a2a18ef31">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:specal" data-paper-title="SpeCal: Spectral Calibration for Unsupervised RLVR" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="SpeCal: Spectral Calibration for Unsupervised RLVR LLM 后训练 Zhejiang University / Ant Group 2026-11-16 不是。它从response hidden-state几何生成group和rollout权重，重加权已有无监督advantage，再沿原GRPO目标更新；几何权重全部stop-gradient。一个异常方向可能完全由该rollout创造。LOO先删去该行，中心化其余表示，用group有效秩截断SVD，才测被留出向量的投影能量比例。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。归一化response表示的中心Gram谱、质量×effective-rank带通、LOO去噪SVD条件支持及双层RMS advantage校准。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 所有response表示相同应得高置信权重吗？ 不。该组没有相对语义差异，spectral mass为0。实现显式返回0校准advantage，并拒绝零向量输入，防止NaN或把退化组记作完美。 教学例：四条全1表示的group weight和Acal均为0，不是任务正确率1。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-36398ebd6f6901ea">所有response表示相同应得高置信权重吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aspecal">SpeCal: Spectral Calibration for Unsupervised RLVR</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Zhejiang University / Ant Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不。该组没有相对语义差异，spectral mass为0。实现显式返回0校准advantage，并拒绝零向量输入，防止NaN或把退化组记作完美。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：四条全1表示的group weight和Acal均为0，不是任务正确率1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20691v1">原论文</a> · <a href="../../../../post-training/2611.20691-specal/">实现解读</a> · <a href="#qa-36398ebd6f6901ea">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:safety-budget-cgrpo" data-paper-title="Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models LLM 后训练 Lanzhou University 2026-11-12 给 GRPO 增加安全预算并不足够：scorer 分数的均值偏差会使 dual controller 读错约束，且对已加权总奖励作组内标准化可能消掉 multiplier 的梯度尺度。本文拆成两条通道：原始概率保留 base reward 的组内排序；用独立 judge 在训练轨迹上拟合的单调校准映射，只服务于 penalty 与预算控制。校准图不能直接挪进 base reward，因为 isotonic 的平坦区会抹掉原始相对分数。保持 multiplier 的一种方案是只中心化、不按总奖励标准差缩放； 完整安全训练成本过高，不复现（审查 DONE）。CPU 三种子机制诊断；L1 CPU 校准 / 奖励 / dual-state 算术组件，diagnostic only。没有 VLM、scorer、judge 或 RL trainer；完整安全训练成本过高，不复现（审查 DONE）。fit_isotonic(..., split=&quot;train&quot;)只接受训练声明，验证/测试 split 被拒绝；但源数据 provenance 仍由调用方负责，字符串不是泄漏防护的充分证明。  策略优化 安全预算与双通道控制 LLM 后训练 策略优化：谁在采样，谁在被更新 安全scorer排序正确，为什么预算仍可能读错？ 排序只比较相对分数，预算却将概率均值与目标率比较。单调变换可保持排序而移动均值偏差，使dual乘子过早归零或一直饱和。真实校准还依赖训练轨迹标签质量，不能由单调性推出。 教学例：把所有概率平方通常保持排序，却降低均值；原本需要约束的组可能被控制器误认为已在预算内。 2026-11-15">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
 <span id="paper-post-training-safety-budget-cgrpo-14f718cd" class="ar-learning-paper-anchor"></span>

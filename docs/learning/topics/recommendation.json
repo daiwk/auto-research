@@ -58,7 +58,9 @@
         "recommendation:transretrieval",
         "recommendation:youtube-dnn",
         "recommendation:zorro",
-        "recommendation:ured"
+        "recommendation:ured",
+        "recommendation:yuanbao-rubric",
+        "recommendation:intentflow"
       ]
     },
     {
@@ -374,7 +376,8 @@
         "recommendation:twice",
         "recommendation:twitch-mor",
         "recommendation:unimvt",
-        "recommendation:kl-mopd"
+        "recommendation:kl-mopd",
+        "recommendation:cotti"
       ]
     },
     {
@@ -472,7 +475,8 @@
         "recommendation:rocs",
         "recommendation:self-evolving-rec",
         "recommendation:solaris",
-        "recommendation:ug-sep"
+        "recommendation:ug-sep",
+        "recommendation:cutagent"
       ]
     }
   ]

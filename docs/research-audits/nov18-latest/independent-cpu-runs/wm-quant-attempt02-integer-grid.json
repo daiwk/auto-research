@@ -1,0 +1,99 @@
+{
+  "schema_version": 2,
+  "method": "wm-quant",
+  "manifest_ref": "foundation-models:wm-quant",
+  "dataset": {
+    "id": "synthetic:nov18-latest-wm-quant-integer-grid-v2",
+    "kind": "explicit_mechanism_or_protocol_fixtures",
+    "revision": "sha256:013f49906528f972985f9880e74a4ac7628bad2cd156a470a5fad6c469e7ee9b",
+    "public_capability_benchmark": false
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "rollout_calibration_before": 3.951021194458008,
+        "rollout_calibration_after": 3.73524808883667,
+        "zero_quantization_error": 0.0
+      },
+      "checks": {
+        "joint_ranges_optimized": true,
+        "control_path_preserved": true,
+        "step_ranges_not_shared": true,
+        "integer_zero_point_preserves_zero": true,
+        "model_weights_frozen": true
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "rollout_calibration_before": 4.191948890686035,
+        "rollout_calibration_after": 4.176647663116455,
+        "zero_quantization_error": 0.0
+      },
+      "checks": {
+        "joint_ranges_optimized": true,
+        "control_path_preserved": true,
+        "step_ranges_not_shared": true,
+        "integer_zero_point_preserves_zero": true,
+        "model_weights_frozen": true
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "rollout_calibration_before": 2.983029365539551,
+        "rollout_calibration_after": 2.4646170139312744,
+        "zero_quantization_error": 0.0
+      },
+      "checks": {
+        "joint_ranges_optimized": true,
+        "control_path_preserved": true,
+        "step_ranges_not_shared": true,
+        "integer_zero_point_preserves_zero": true,
+        "model_weights_frozen": true
+      }
+    }
+  ],
+  "metrics": {
+    "rollout_calibration_before": 3.7086664835611978,
+    "rollout_calibration_after": 3.4588375886281333,
+    "zero_quantization_error": 0.0
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "correction": "Independent review caught a continuous-low lattice; fixed to integer zero-point Eq1\u20132 with literal-equation, exact-zero and clipping controls. Old proof and CPU diagnostics preserved; corrected source needs a new GPU freeze/run.",
+  "execution_device": "cpu",
+  "provenance": {
+    "commit": "7eef21ad7e094b61272302f30a6b05f7936f56c1",
+    "source_state": "corrected uncommitted working tree; exact SHA256 below",
+    "accelerator": "CPU",
+    "executed_source_sha256": {
+      "src/auto_research/foundation_models/wm_quant.py": "013f49906528f972985f9880e74a4ac7628bad2cd156a470a5fad6c469e7ee9b"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "domain": "post-training",
+  "key": "optimistic-verifier-audit",
+  "title": "Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle",
+  "paper_url": "https://arxiv.org/abs/2611.21538v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.21538v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.21538-optimistic-verifier-audit/README.md",
+  "first_author": "Arunkumar V",
+  "first_author_affiliation": "University College of Engineering, BIT Campus, Anna University, Tiruchirappalli",
+  "published": "2026-11-16",
+  "published_at": "2026-11-16T18:25:42Z",
+  "code": null,
+  "code_status": "固定v1及所核作者入口未找到可验证的本篇方法源码发布；引用的训练器、模型或库不算本篇开源。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "reward-and-credit",
+    "后训练算法组件"
+  ],
+  "priority": "P1",
+  "intake_class": "new_submission_in_requested_window",
+  "implementation_status": "component_only",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.21538v1",
+    "source_sections": [
+      "§3 Definitions1–2",
+      "§4–5",
+      "AppendixA/B/D"
+    ],
+    "basis": "§3/D完整124416状态、12训练gate/4留出gate、14真实策略、4B/mini多框架精度/adapter/seed训练矩阵；本地只在小枚举域核定义，不跑模型campaign。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API call.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30,
+      "gpu_component_seconds_per_seed_cap": 0,
+      "cap_scope": "Tiny exact operator/negative-control checks only; not a training campaign."
+    }
+  },
+  "summary": "固定被引用特征后，所有其它特征补全都必须维持同一决策；再去掉任一特征就不充分才是minimal。可能存在多个替代充分理由，需保存antichain。 小有限状态域的精确MSR antichain、因果precision/recall/F1、代理selection-error和signed/absolute gap；不伪造LLM训练伤害。",
+  "evaluation_tier": "l1_mechanism",
+  "local_operator": "auto_research.post_training.optimistic_verifier_audit.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.optimistic_verifier_audit import diagnostic; print(diagnostic(42))'"
+}

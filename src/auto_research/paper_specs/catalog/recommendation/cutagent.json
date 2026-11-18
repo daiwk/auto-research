@@ -1,0 +1,43 @@
+{
+  "domain": "recommendation",
+  "key": "cutagent",
+  "title": "CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation",
+  "paper_url": "https://arxiv.org/abs/2611.22418v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.22418v1",
+  "reviewed_version": "v1",
+  "published": "2026-11-17",
+  "published_at": "2026-11-17T08:54:39Z",
+  "detail_path": "recommendation-components/2611.22418-cutagent/README.md",
+  "topic": [
+    "广告与商业决策",
+    "创意生成与投放优化"
+  ],
+  "first_author": "Xuyue Huang",
+  "first_author_affiliation": "JD.com / Tsinghua University",
+  "verified_priority_organizations": [],
+  "code": null,
+  "code_status": "原文及其关联链接未找到/未核验公开的本论文专属作者代码。引用依赖或声称集成不等于已核验专属实现。",
+  "method_source_sha256": "550013011428377f3413ecbbb57a13730e44e08d91cd01036e089516eac5e072",
+  "adapter": null,
+  "priority": "P1",
+  "intake_class": "new_paper",
+  "implementation_status": "review_only",
+  "evaluation_tier": null,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/pdf/2611.22418v1",
+    "available_resource": "one A100/A30 or local Mac",
+    "paper_configuration": "8BVLM gene planner,70Kproducts with90–120clips each, multimodal teacher calls,TTS/BGM/video production and397Bjudge; full random-traffic CTR campaign cannot be reproduced on one card. No mock gene planner or fake CTR",
+    "decision": "8B多模态规划器、70K商品各90–120视频片段、教师数据、TTS/BGM/渲染、397B评审与真实广告流量完整矩阵超出单卡/本地预算。"
+  },
+  "summary": "CutAgent把多模态商品理解与可靠视频制作拆为GeneAgent和VideoAgent，以结构化creative gene连接。Gene规定narrative units和配音／音乐／脚本规则；前者经高CTR SFT和CTR-level GRPO学习规划，后者展开分镜并检索商品素材、做TTS/BGM和渲染，再只修复带时间证据的缺陷。 本地边界：本篇review-only，完整实验成本过高，不复现（审查DONE）。70K商品每件90–120clips、多模态teacher、8B训练／检索、TTS与渲染、397Bjudge及真实流量均未运行；不下载资源，不编造creative-gene规划器、素材检索或本地CTR。固定v1没有核实本篇作者仓库，FireRed等第三方baseline代码不算CutAgent开源。"
+}

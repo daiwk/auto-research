@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "key": "sh-opd",
+  "device": "cpu",
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "pmf_normalized": true,
+        "alpha_zero_is_full_opd": true,
+        "true_shared_generation_cap": true,
+        "token_not_sequence_mean": true,
+        "padding_zero_gradient": true,
+        "implicit_early_weight_not_debiased": true
+      },
+      "metrics": {
+        "expected_horizon": 5.568914100752347,
+        "sampled_horizon": 2,
+        "loss": 0.12108656038544613
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "pmf_normalized": true,
+        "alpha_zero_is_full_opd": true,
+        "true_shared_generation_cap": true,
+        "token_not_sequence_mean": true,
+        "padding_zero_gradient": true,
+        "implicit_early_weight_not_debiased": true
+      },
+      "metrics": {
+        "expected_horizon": 5.568914100752347,
+        "sampled_horizon": 8,
+        "loss": 0.14496847104673097
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "pmf_normalized": true,
+        "alpha_zero_is_full_opd": true,
+        "true_shared_generation_cap": true,
+        "token_not_sequence_mean": true,
+        "padding_zero_gradient": true,
+        "implicit_early_weight_not_debiased": true
+      },
+      "metrics": {
+        "expected_horizon": 5.568914100752347,
+        "sampled_horizon": 8,
+        "loss": -0.4478981957298041
+      }
+    }
+  ],
+  "capability_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "checkpoint_calls": 0,
+  "dataset_downloads": 0
+}

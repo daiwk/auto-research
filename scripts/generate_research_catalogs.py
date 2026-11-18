@@ -345,6 +345,22 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "vishead-spec": ("多模态基础模型", "视觉语言适配与高效推理"),
+    "spool": ("注意力与长上下文", "线性注意力与状态空间"),
+    "infuseloop": ("网络架构", "循环与弹性深度"),
+    "echomoe": ("网络架构", "MoE 与动态路由"),
+    "wm-quant": ("推理与系统效率", "量化"),
+    "fm-mamba": ("注意力与长上下文", "线性注意力与状态空间"),
+    "lara-plus-plus": ("注意力与长上下文", "线性注意力与状态空间"),
+    "gaugerope": ("注意力与长上下文", "KV cache 与上下文压缩"),
+    "risa": ("注意力与长上下文", "稀疏、门控与动态注意力"),
+    "cascadejepa": ("多模态基础模型", "JEPA与物理态监督"),
+    "beyond-bitwidth": ("推理与系统效率", "量化"),
+    "latent-feedback-scaling": ("网络架构", "循环与弹性深度"),
+    "simq": ("推理与系统效率", "向量索引与聚类训练"),
+    "unigraph": ("推理与系统效率", "向量索引与聚类训练"),
+    "dealrank": ("推理与系统效率", "基础模型检索与排序"),
+    "efficient-evals-tensor": ("推理与系统效率", "能力评测与推理协议"),
     "hvmap": ("网络架构", "检索与生成共享表征"),
     "mixed-signals-weights": ("网络架构", "权重空间编程与审计"),
     "stratified-retention-protocol": ("预训练与数据", "持续适应与评测协议"),
@@ -894,6 +910,11 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in (
+            "vishead-spec", "spool", "infuseloop", "echomoe", "wm-quant", "fm-mamba",
+            "lara-plus-plus", "gaugerope", "risa", "cascadejepa", "beyond-bitwidth", "latent-feedback-scaling",
+            "simq", "unigraph", "dealrank", "efficient-evals-tensor",
+        )},
         **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in (
             "hvmap", "mixed-signals-weights", "stratified-retention-protocol",
             "tokenization-premium", "runway-inference-protocol", "smart-model-routing",

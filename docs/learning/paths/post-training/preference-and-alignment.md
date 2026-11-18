@@ -7,7 +7,7 @@ hide:
 
 # 偏好与对齐：先看反馈长什么样
 
-[LLM 后训练](index.md) / 108 个问题 · 27 篇论文
+[LLM 后训练](index.md) / 128 个问题 · 32 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,274 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">108 个问题 · 27 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">128 个问题 · 32 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ambient-sft" data-paper-title="Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching LLM 后训练 Massachusetts Institute of Technology 2026-11-17 目标不是复制base全部细节，而是在小数据SFT时保留其粗粒度分布；升温降低对错误细节的信任，clean CE仍提供新任务方向。原式没有T²，T趋无穷时KL项自然消失并还原SFT；乘T²会改变这个极限和温度控制的偏差—方差关系。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。原式CE与同位置温度forward-KL、冻结教师、随机clean/matching分支；不乘T²。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 为什么用可能比学生更弱的冻结base做教师？ 目标不是复制base全部细节，而是在小数据SFT时保留其粗粒度分布；升温降低对错误细节的信任，clean CE仍提供新任务方向。 教学例：两个类别的教师偏差在高温下变小，但目标token的CE并未被删掉。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<span id="paper-post-training-ambient-sft-f64b9f6a" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a34727aec626aacb">为什么用可能比学生更弱的冻结base做教师？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aambient-sft">Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Massachusetts Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>目标不是复制base全部细节，而是在小数据SFT时保留其粗粒度分布；升温降低对错误细节的信任，clean CE仍提供新任务方向。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个类别的教师偏差在高温下变小，但目标token的CE并未被删掉。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23229v1">原论文</a> · <a href="../../../../post-training/2611.23229-ambient-sft/">实现解读</a> · <a href="#qa-a34727aec626aacb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ambient-sft" data-paper-title="Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching LLM 后训练 Massachusetts Institute of Technology 2026-11-17 目标不是复制base全部细节，而是在小数据SFT时保留其粗粒度分布；升温降低对错误细节的信任，clean CE仍提供新任务方向。原式没有T²，T趋无穷时KL项自然消失并还原SFT；乘T²会改变这个极限和温度控制的偏差—方差关系。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。原式CE与同位置温度forward-KL、冻结教师、随机clean/matching分支；不乘T²。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 为何这里不能套常见KD的T²缩放？ 原式没有T²，T趋无穷时KL项自然消失并还原SFT；乘T²会改变这个极限和温度控制的偏差—方差关系。 教学例：固定λ，把T从2提高到1000000，测试KL趋零而不是维持同等梯度。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-0c5c3bf34d1e56bb">为何这里不能套常见KD的T²缩放？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aambient-sft">Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Massachusetts Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原式没有T²，T趋无穷时KL项自然消失并还原SFT；乘T²会改变这个极限和温度控制的偏差—方差关系。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：固定λ，把T从2提高到1000000，测试KL趋零而不是维持同等梯度。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23229v1">原论文</a> · <a href="../../../../post-training/2611.23229-ambient-sft/">实现解读</a> · <a href="#qa-0c5c3bf34d1e56bb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ambient-sft" data-paper-title="Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching LLM 后训练 Massachusetts Institute of Technology 2026-11-17 目标不是复制base全部细节，而是在小数据SFT时保留其粗粒度分布；升温降低对错误细节的信任，clean CE仍提供新任务方向。原式没有T²，T趋无穷时KL项自然消失并还原SFT；乘T²会改变这个极限和温度控制的偏差—方差关系。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。原式CE与同位置温度forward-KL、冻结教师、随机clean/matching分支；不乘T²。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 它与DPO的reference约束有何不同？ DPO对chosen/rejected的reference-relative log-ratio分类；Ambient SFT在相同观察token的完整词表上匹配冻结base温度分布，既不需要偏好对，也不是奖励优化。 教学例：一条无偏好标注的SFT序列足以算Ambient loss，却不足以构成DPO偏好对。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-58eeb2b058d8da1d">它与DPO的reference约束有何不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aambient-sft">Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Massachusetts Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>DPO对chosen/rejected的reference-relative log-ratio分类；Ambient SFT在相同观察token的完整词表上匹配冻结base温度分布，既不需要偏好对，也不是奖励优化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一条无偏好标注的SFT序列足以算Ambient loss，却不足以构成DPO偏好对。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23229v1">原论文</a> · <a href="../../../../post-training/2611.23229-ambient-sft/">实现解读</a> · <a href="#qa-58eeb2b058d8da1d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ambient-sft" data-paper-title="Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching LLM 后训练 Massachusetts Institute of Technology 2026-11-17 目标不是复制base全部细节，而是在小数据SFT时保留其粗粒度分布；升温降低对错误细节的信任，clean CE仍提供新任务方向。原式没有T²，T趋无穷时KL项自然消失并还原SFT；乘T²会改变这个极限和温度控制的偏差—方差关系。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。原式CE与同位置温度forward-KL、冻结教师、随机clean/matching分支；不乘T²。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 本地验证能说明SFT质量提升吗？ 不能。本地执行原loss、冻结teacher和mask梯度负控；没有数据域迁移、真实checkpoint训练或能力分数。随机分支的期望是p_c乘原目标，学习率比较应说明该整体缩放。 教学例：clean_probability=.75且draw=.75进入matching分支；这不是75%的任务成功率。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e82c775a14d21f21">本地验证能说明SFT质量提升吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aambient-sft">Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Massachusetts Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。本地执行原loss、冻结teacher和mask梯度负控；没有数据域迁移、真实checkpoint训练或能力分数。随机分支的期望是p_c乘原目标，学习率比较应说明该整体缩放。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：clean_probability=.75且draw=.75进入matching分支；这不是75%的任务成功率。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23229v1">原论文</a> · <a href="../../../../post-training/2611.23229-ambient-sft/">实现解读</a> · <a href="#qa-e82c775a14d21f21">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mpg-dpo" data-paper-title="Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data LLM 后训练 RIKEN Center for Advanced Intelligence Project 2026-11-17 用户反馈保留的方向生成偏好cone，dual generators形成W；以偏序筛除确定被支配回答，再选择尚有规则trade-off的回答对，避免先拍定单一权重。只有所有旧规则都以超过τ的margin支持相反方向才丢弃；还要处理零score差、dual trivial和候选不足等边界。不能把任一规则反对误读成全体反对。 完整实验成本过高，不复现（审查 DONE）；仅方法与成本收录，无本地模型实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录cone+ridge confidence+非支配trade-off主动选对的完整算法；不将一个pair selector宣称完整个性化DPO。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 为什么多维评分不是直接加权求和？ 用户反馈保留的方向生成偏好cone，dual generators形成W；以偏序筛除确定被支配回答，再选择尚有规则trade-off的回答对，避免先拍定单一权重。 教学例：两规则分别重视helpfulness与brevity时，两者冲突可值得下一次询问。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<span id="paper-post-training-mpg-dpo-aa13b941" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-987e7b4682a0cd3f">为什么多维评分不是直接加权求和？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ampg-dpo">Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · RIKEN Center for Advanced Intelligence Project</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>用户反馈保留的方向生成偏好cone，dual generators形成W；以偏序筛除确定被支配回答，再选择尚有规则trade-off的回答对，避免先拍定单一权重。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两规则分别重视helpfulness与brevity时，两者冲突可值得下一次询问。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22210v1">原论文</a> · <a href="../../../../post-training/2611.22210-mpg-dpo/">实现解读</a> · <a href="#qa-987e7b4682a0cd3f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mpg-dpo" data-paper-title="Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data LLM 后训练 RIKEN Center for Advanced Intelligence Project 2026-11-17 用户反馈保留的方向生成偏好cone，dual generators形成W；以偏序筛除确定被支配回答，再选择尚有规则trade-off的回答对，避免先拍定单一权重。只有所有旧规则都以超过τ的margin支持相反方向才丢弃；还要处理零score差、dual trivial和候选不足等边界。不能把任一规则反对误读成全体反对。 完整实验成本过高，不复现（审查 DONE）；仅方法与成本收录，无本地模型实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录cone+ridge confidence+非支配trade-off主动选对的完整算法；不将一个pair selector宣称完整个性化DPO。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 新反馈与旧偏好冲突就全部丢弃吗？ 只有所有旧规则都以超过τ的margin支持相反方向才丢弃；还要处理零score差、dual trivial和候选不足等边界。不能把任一规则反对误读成全体反对。 教学例：一条规则反对、另一条不反对时min判定仍可能保留该方向。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-b7bf9f97bab58384">新反馈与旧偏好冲突就全部丢弃吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ampg-dpo">Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · RIKEN Center for Advanced Intelligence Project</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>只有所有旧规则都以超过τ的margin支持相反方向才丢弃；还要处理零score差、dual trivial和候选不足等边界。不能把任一规则反对误读成全体反对。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一条规则反对、另一条不反对时min判定仍可能保留该方向。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22210v1">原论文</a> · <a href="../../../../post-training/2611.22210-mpg-dpo/">实现解读</a> · <a href="#qa-b7bf9f97bab58384">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mpg-dpo" data-paper-title="Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data LLM 后训练 RIKEN Center for Advanced Intelligence Project 2026-11-17 用户反馈保留的方向生成偏好cone，dual generators形成W；以偏序筛除确定被支配回答，再选择尚有规则trade-off的回答对，避免先拍定单一权重。只有所有旧规则都以超过τ的margin支持相反方向才丢弃；还要处理零score差、dual trivial和候选不足等边界。不能把任一规则反对误读成全体反对。 完整实验成本过高，不复现（审查 DONE）；仅方法与成本收录，无本地模型实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录cone+ridge confidence+非支配trade-off主动选对的完整算法；不将一个pair selector宣称完整个性化DPO。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 与DPO相比，主要新意在loss吗？ 不是，核心在带ridge置信界的主动pair选择及cone在线更新，随后才用标准在线DPO。只调用DPO loss或从固定pair池挑最高差分不能冒充完整MPG-DPO。 教学例：还没查询的候选不能先读取oracle评分来筛选；应由历史拟合的score predictor估计。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-b47ddf0a1c2a5664">与DPO相比，主要新意在loss吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ampg-dpo">Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · RIKEN Center for Advanced Intelligence Project</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是，核心在带ridge置信界的主动pair选择及cone在线更新，随后才用标准在线DPO。只调用DPO loss或从固定pair池挑最高差分不能冒充完整MPG-DPO。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：还没查询的候选不能先读取oracle评分来筛选；应由历史拟合的score predictor估计。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22210v1">原论文</a> · <a href="../../../../post-training/2611.22210-mpg-dpo/">实现解读</a> · <a href="#qa-b47ddf0a1c2a5664">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mpg-dpo" data-paper-title="Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data LLM 后训练 RIKEN Center for Advanced Intelligence Project 2026-11-17 用户反馈保留的方向生成偏好cone，dual generators形成W；以偏序筛除确定被支配回答，再选择尚有规则trade-off的回答对，避免先拍定单一权重。只有所有旧规则都以超过τ的margin支持相反方向才丢弃；还要处理零score差、dual trivial和候选不足等边界。不能把任一规则反对误读成全体反对。 完整实验成本过高，不复现（审查 DONE）；仅方法与成本收录，无本地模型实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录cone+ridge confidence+非支配trade-off主动选对的完整算法；不将一个pair selector宣称完整个性化DPO。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 为什么本轮只有审查没有pair-selector替身？ 完整定义包含double-description cone、独立编码器、在线评分/偏好查询和7B多seed训练。抽出一行argmax会漏核心估计链，故高成本完整campaign不复现且不造能力指标。 教学例：给定任意W的数值argmax不证明W由真实用户反馈正确形成。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-5ed861c067a83958">为什么本轮只有审查没有pair-selector替身？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ampg-dpo">Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · RIKEN Center for Advanced Intelligence Project</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>完整定义包含double-description cone、独立编码器、在线评分/偏好查询和7B多seed训练。抽出一行argmax会漏核心估计链，故高成本完整campaign不复现且不造能力指标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：给定任意W的数值argmax不证明W由真实用户反馈正确形成。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22210v1">原论文</a> · <a href="../../../../post-training/2611.22210-mpg-dpo/">实现解读</a> · <a href="#qa-5ed861c067a83958">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ca-zodpo" data-paper-title="Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment LLM 后训练 Uppsala University 2026-11-16 偏好loss仍是policy/reference的chosen-rejected margin；改变的是无需反传的搜索方向，用chosen与rejected输入activation差提取低秩空间，而非全参数各向同性扰动。原式用该因子使不同rank的扰动规模可比。删掉会把增大rank与增大搜索步长混在一起，使算子和成本/质量对照失去原口径。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。chosen/rejected activation差的power-iteration子空间、rank归一化双点有限差分、换basis投影的低秩momentum更新。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 它保留DPO目标却改变了哪里？ 偏好loss仍是policy/reference的chosen-rejected margin；改变的是无需反传的搜索方向，用chosen与rejected输入activation差提取低秩空间，而非全参数各向同性扰动。 教学例：相同chosen/rejected activation没有可提取对比方向，应拒绝请求rank而非伪造有信息basis。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<span id="paper-post-training-ca-zodpo-a5fadaee" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f979aff751e269f6">它保留DPO目标却改变了哪里？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aca-zodpo">Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Uppsala University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>偏好loss仍是policy/reference的chosen-rejected margin；改变的是无需反传的搜索方向，用chosen与rejected输入activation差提取低秩空间，而非全参数各向同性扰动。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：相同chosen/rejected activation没有可提取对比方向，应拒绝请求rank而非伪造有信息basis。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20635v1">原论文</a> · <a href="../../../../post-training/2611.20635-ca-zodpo/">实现解读</a> · <a href="#qa-f979aff751e269f6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ca-zodpo" data-paper-title="Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment LLM 后训练 Uppsala University 2026-11-16 偏好loss仍是policy/reference的chosen-rejected margin；改变的是无需反传的搜索方向，用chosen与rejected输入activation差提取低秩空间，而非全参数各向同性扰动。原式用该因子使不同rank的扰动规模可比。删掉会把增大rank与增大搜索步长混在一起，使算子和成本/质量对照失去原口径。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。chosen/rejected activation差的power-iteration子空间、rank归一化双点有限差分、换basis投影的低秩momentum更新。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 为何Δ=RAᵀ还需除sqrt(rank)？ 原式用该因子使不同rank的扰动规模可比。删掉会把增大rank与增大搜索步长混在一起，使算子和成本/质量对照失去原口径。 教学例：固定R条目方差，rank从1到4时不能无说明把扰动能量放大4倍。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1844a29a9d63786a">为何Δ=RAᵀ还需除sqrt(rank)？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aca-zodpo">Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Uppsala University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原式用该因子使不同rank的扰动规模可比。删掉会把增大rank与增大搜索步长混在一起，使算子和成本/质量对照失去原口径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：固定R条目方差，rank从1到4时不能无说明把扰动能量放大4倍。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20635v1">原论文</a> · <a href="../../../../post-training/2611.20635-ca-zodpo/">实现解读</a> · <a href="#qa-1844a29a9d63786a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ca-zodpo" data-paper-title="Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment LLM 后训练 Uppsala University 2026-11-16 偏好loss仍是policy/reference的chosen-rejected margin；改变的是无需反传的搜索方向，用chosen与rejected输入activation差提取低秩空间，而非全参数各向同性扰动。原式用该因子使不同rank的扰动规模可比。删掉会把增大rank与增大搜索步长混在一起，使算子和成本/质量对照失去原口径。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。chosen/rejected activation差的power-iteration子空间、rank归一化双点有限差分、换basis投影的低秩momentum更新。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 与DPO相比，低显存是否一定更快？ 不一定。每步要提取activation basis并做正负两次损失前向，少了反传但增加前向；真实time-to-quality需同数据预算和模型评判，组件不报告该结论。 教学例：两点差分可在小二次loss上精确匹配方向导数，但没有测1.5B模型wall time。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-a1b72e5df5787f41">与DPO相比，低显存是否一定更快？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aca-zodpo">Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Uppsala University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一定。每步要提取activation basis并做正负两次损失前向，少了反传但增加前向；真实time-to-quality需同数据预算和模型评判，组件不报告该结论。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两点差分可在小二次loss上精确匹配方向导数，但没有测1.5B模型wall time。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20635v1">原论文</a> · <a href="../../../../post-training/2611.20635-ca-zodpo/">实现解读</a> · <a href="#qa-a1b72e5df5787f41">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ca-zodpo" data-paper-title="Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment LLM 后训练 Uppsala University 2026-11-16 偏好loss仍是policy/reference的chosen-rejected margin；改变的是无需反传的搜索方向，用chosen与rejected输入activation差提取低秩空间，而非全参数各向同性扰动。原式用该因子使不同rank的扰动规模可比。删掉会把增大rank与增大搜索步长混在一起，使算子和成本/质量对照失去原口径。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。chosen/rejected activation差的power-iteration子空间、rank归一化双点有限差分、换basis投影的低秩momentum更新。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 basis更新时旧momentum能直接沿用吗？ 不能。系数坐标随basis变化，需用A_oldᵀA_new投影旧buffer再累积；否则相同数字代表不同全权重方向。 教学例：将basis旋转90度后，正确transport保持重建momentum不变；直接复制buffer会旋转更新方向。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-c729e2be8d983e6d">basis更新时旧momentum能直接沿用吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aca-zodpo">Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Uppsala University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。系数坐标随basis变化，需用A_oldᵀA_new投影旧buffer再累积；否则相同数字代表不同全权重方向。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：将basis旋转90度后，正确transport保持重建momentum不变；直接复制buffer会旋转更新方向。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20635v1">原论文</a> · <a href="../../../../post-training/2611.20635-ca-zodpo/">实现解读</a> · <a href="#qa-c729e2be8d983e6d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:confidence-adaptive-granularity" data-paper-title="Teaching Language Models to Adapt Answer Granularity to Their Confidence" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Teaching Language Models to Adapt Answer Granularity to Their Confidence LLM 后训练 Technical University of Munich 2026-11-16 在该任务定义中可以，但应返回模型可靠支持的最细层级，而不是无限泛化。utility按剩余不确定性衡量正确信息，错误记-1，拒答记0。Vital Persons规则在20个模型回答中找至少16条共享的最细值，只依赖一致性而非gold正确性。usable不足16则排除；足够却无共识则训练IDK。 完整实验成本过高，不复现（审查 DONE）；l0_interface 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。给定已核验hierarchy上的20采样/16共识规则、recognition的逐层全coarser通过规则与归一化information utility；不拿gold选训练共识。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 不知道具体日期时，年份正确能否比拒答更好？ 在该任务定义中可以，但应返回模型可靠支持的最细层级，而不是无限泛化。utility按剩余不确定性衡量正确信息，错误记-1，拒答记0。 教学例：正确年份的utility介于0与1；瞎猜具体日即使年份碰巧正确仍可能是不可验证错误。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<span id="paper-post-training-confidence-adaptive-granularity-997e6fa7" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-b362ce624f81a391">不知道具体日期时，年份正确能否比拒答更好？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aconfidence-adaptive-granularity">Teaching Language Models to Adapt Answer Granularity to Their Confidence</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Technical University of Munich</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>在该任务定义中可以，但应返回模型可靠支持的最细层级，而不是无限泛化。utility按剩余不确定性衡量正确信息，错误记-1，拒答记0。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：正确年份的utility介于0与1；瞎猜具体日即使年份碰巧正确仍可能是不可验证错误。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21211v1">原论文</a> · <a href="../../../../post-training/2611.21211-confidence-adaptive-granularity/">实现解读</a> · <a href="#qa-b362ce624f81a391">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:confidence-adaptive-granularity" data-paper-title="Teaching Language Models to Adapt Answer Granularity to Their Confidence" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Teaching Language Models to Adapt Answer Granularity to Their Confidence LLM 后训练 Technical University of Munich 2026-11-16 在该任务定义中可以，但应返回模型可靠支持的最细层级，而不是无限泛化。utility按剩余不确定性衡量正确信息，错误记-1，拒答记0。Vital Persons规则在20个模型回答中找至少16条共享的最细值，只依赖一致性而非gold正确性。usable不足16则排除；足够却无共识则训练IDK。 完整实验成本过高，不复现（审查 DONE）；l0_interface 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。给定已核验hierarchy上的20采样/16共识规则、recognition的逐层全coarser通过规则与归一化information utility；不拿gold选训练共识。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 共识target为何不能从gold层级选？ Vital Persons规则在20个模型回答中找至少16条共享的最细值，只依赖一致性而非gold正确性。usable不足16则排除；足够却无共识则训练IDK。 教学例：20个不同日期但同2020年，target选年；15个可解析回答则exclude，不把余下5条当反对票。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-d4f7e68a9da2e842">共识target为何不能从gold层级选？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aconfidence-adaptive-granularity">Teaching Language Models to Adapt Answer Granularity to Their Confidence</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Technical University of Munich</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Vital Persons规则在20个模型回答中找至少16条共享的最细值，只依赖一致性而非gold正确性。usable不足16则排除；足够却无共识则训练IDK。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：20个不同日期但同2020年，target选年；15个可解析回答则exclude，不把余下5条当反对票。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21211v1">原论文</a> · <a href="../../../../post-training/2611.21211-confidence-adaptive-granularity/">实现解读</a> · <a href="#qa-d4f7e68a9da2e842">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:confidence-adaptive-granularity" data-paper-title="Teaching Language Models to Adapt Answer Granularity to Their Confidence" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Teaching Language Models to Adapt Answer Granularity to Their Confidence LLM 后训练 Technical University of Munich 2026-11-16 在该任务定义中可以，但应返回模型可靠支持的最细层级，而不是无限泛化。utility按剩余不确定性衡量正确信息，错误记-1，拒答记0。Vital Persons规则在20个模型回答中找至少16条共享的最细值，只依赖一致性而非gold正确性。usable不足16则排除；足够却无共识则训练IDK。 完整实验成本过高，不复现（审查 DONE）；l0_interface 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。给定已核验hierarchy上的20采样/16共识规则、recognition的逐层全coarser通过规则与归一化information utility；不拿gold选训练共识。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 它与DPO对齐回答偏好有什么不同？ 这里按模型展示的可辨识知识自训练粒度，不需要chosen/rejected偏好loss；Granola-EQ另用答案和同层distractor的mean-token-logp识别规则。DPO的pair margin不能替代层级知识探测。 教学例：最细答案分高但某coarser层败给distractor时，不允许直接选最细层。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-fd9c6e8506441d00">它与DPO对齐回答偏好有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aconfidence-adaptive-granularity">Teaching Language Models to Adapt Answer Granularity to Their Confidence</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Technical University of Munich</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这里按模型展示的可辨识知识自训练粒度，不需要chosen/rejected偏好loss；Granola-EQ另用答案和同层distractor的mean-token-logp识别规则。DPO的pair margin不能替代层级知识探测。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：最细答案分高但某coarser层败给distractor时，不允许直接选最细层。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21211v1">原论文</a> · <a href="../../../../post-training/2611.21211-confidence-adaptive-granularity/">实现解读</a> · <a href="#qa-fd9c6e8506441d00">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:confidence-adaptive-granularity" data-paper-title="Teaching Language Models to Adapt Answer Granularity to Their Confidence" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Teaching Language Models to Adapt Answer Granularity to Their Confidence LLM 后训练 Technical University of Munich 2026-11-16 在该任务定义中可以，但应返回模型可靠支持的最细层级，而不是无限泛化。utility按剩余不确定性衡量正确信息，错误记-1，拒答记0。Vital Persons规则在20个模型回答中找至少16条共享的最细值，只依赖一致性而非gold正确性。usable不足16则排除；足够却无共识则训练IDK。 完整实验成本过高，不复现（审查 DONE）；l0_interface 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。给定已核验hierarchy上的20采样/16共识规则、recognition的逐层全coarser通过规则与归一化information utility；不拿gold选训练共识。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 本地parser和地理grounding都实现了吗？ 没有。接口要求外部已核验fine-to-coarse路径，避免按字符串相似猜城市包含关系；只实现选择和utility协议，不把同层一致性写成模型知识准确率。 教学例：recognition的每个更粗层都须严格胜过全部distractor，平分不通过。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-ad98d154e695a5af">本地parser和地理grounding都实现了吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aconfidence-adaptive-granularity">Teaching Language Models to Adapt Answer Granularity to Their Confidence</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Technical University of Munich</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。接口要求外部已核验fine-to-coarse路径，避免按字符串相似猜城市包含关系；只实现选择和utility协议，不把同层一致性写成模型知识准确率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：recognition的每个更粗层都须严格胜过全部distractor，平分不通过。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21211v1">原论文</a> · <a href="../../../../post-training/2611.21211-confidence-adaptive-granularity/">实现解读</a> · <a href="#qa-ad98d154e695a5af">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:margin-dynamics-tpo" data-paper-title="Margin Dynamics for Large Language Model Alignment" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Margin Dynamics for Large Language Model Alignment LLM 后训练 Amazon 2026-11-16 普通sigmoid偏好loss的margin可持续增大；容易样本梯度饱和后，困难样本间干扰会集中。TPO希望保留目标附近恢复力并限制远端梯度。label smoothing让正负两侧力平衡，δ=log((1-ε)/ε)，所以原始长度归一化分差还要加μ并除β；不能漏掉margin平移。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。长度归一化分数的TPO-S label-smoothed sigmoid与AppendixB精确归一化Huber TPO-H；验证有限吸引点和有界梯度。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 为何仅让chosen超过rejected可能仍不稳定？ 普通sigmoid偏好loss的margin可持续增大；容易样本梯度饱和后，困难样本间干扰会集中。TPO希望保留目标附近恢复力并限制远端梯度。 教学例：chosen已经远超目标，TPO仍可把margin往回拉，而非永远鼓励增大。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<span id="paper-post-training-margin-dynamics-tpo-48d16373" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d719455fa53377d3">为何仅让chosen超过rejected可能仍不稳定？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amargin-dynamics-tpo">Margin Dynamics for Large Language Model Alignment</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Amazon</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>普通sigmoid偏好loss的margin可持续增大；容易样本梯度饱和后，困难样本间干扰会集中。TPO希望保留目标附近恢复力并限制远端梯度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：chosen已经远超目标，TPO仍可把margin往回拉，而非永远鼓励增大。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21766v1">原论文</a> · <a href="../../../../post-training/2611.21766-margin-dynamics-tpo/">实现解读</a> · <a href="#qa-d719455fa53377d3">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:margin-dynamics-tpo" data-paper-title="Margin Dynamics for Large Language Model Alignment" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Margin Dynamics for Large Language Model Alignment LLM 后训练 Amazon 2026-11-16 普通sigmoid偏好loss的margin可持续增大；容易样本梯度饱和后，困难样本间干扰会集中。TPO希望保留目标附近恢复力并限制远端梯度。label smoothing让正负两侧力平衡，δ=log((1-ε)/ε)，所以原始长度归一化分差还要加μ并除β；不能漏掉margin平移。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。长度归一化分数的TPO-S label-smoothed sigmoid与AppendixB精确归一化Huber TPO-H；验证有限吸引点和有界梯度。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 TPO-S有限吸引点由什么决定？ label smoothing让正负两侧力平衡，δ*=log((1-ε)/ε)，所以原始长度归一化分差还要加μ并除β；不能漏掉margin平移。 教学例：β=.1、μ=.5、ε=.05时分差吸引点约29.944，不是δ*=2.944本身。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-dbcf63c97cb0bf98">TPO-S有限吸引点由什么决定？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amargin-dynamics-tpo">Margin Dynamics for Large Language Model Alignment</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Amazon</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>label smoothing让正负两侧力平衡，δ*=log((1-ε)/ε)，所以原始长度归一化分差还要加μ并除β；不能漏掉margin平移。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：β=.1、μ=.5、ε=.05时分差吸引点约29.944，不是δ*=2.944本身。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21766v1">原论文</a> · <a href="../../../../post-training/2611.21766-margin-dynamics-tpo/">实现解读</a> · <a href="#qa-dbcf63c97cb0bf98">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:margin-dynamics-tpo" data-paper-title="Margin Dynamics for Large Language Model Alignment" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Margin Dynamics for Large Language Model Alignment LLM 后训练 Amazon 2026-11-16 普通sigmoid偏好loss的margin可持续增大；容易样本梯度饱和后，困难样本间干扰会集中。TPO希望保留目标附近恢复力并限制远端梯度。label smoothing让正负两侧力平衡，δ=log((1-ε)/ε)，所以原始长度归一化分差还要加μ并除β；不能漏掉margin平移。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。长度归一化分数的TPO-S label-smoothed sigmoid与AppendixB精确归一化Huber TPO-H；验证有限吸引点和有界梯度。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 TPO-S就是带reference的cDPO吗？ 二者都可用label smoothing，但本式用reference-free长度归一化分数并带目标margin；DPO用相对冻结reference的log-ratio，参考轴不同，不能只比较同一个ε。 教学例：复制DPO的reference差分到TPO-S会改变原式吸引点所对应的量。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-99eb1712e445ba7a">TPO-S就是带reference的cDPO吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amargin-dynamics-tpo">Margin Dynamics for Large Language Model Alignment</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Amazon</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>二者都可用label smoothing，但本式用reference-free长度归一化分数并带目标margin；DPO用相对冻结reference的log-ratio，参考轴不同，不能只比较同一个ε。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：复制DPO的reference差分到TPO-S会改变原式吸引点所对应的量。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21766v1">原论文</a> · <a href="../../../../post-training/2611.21766-margin-dynamics-tpo/">实现解读</a> · <a href="#qa-99eb1712e445ba7a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:margin-dynamics-tpo" data-paper-title="Margin Dynamics for Large Language Model Alignment" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Margin Dynamics for Large Language Model Alignment LLM 后训练 Amazon 2026-11-16 普通sigmoid偏好loss的margin可持续增大；容易样本梯度饱和后，困难样本间干扰会集中。TPO希望保留目标附近恢复力并限制远端梯度。label smoothing让正负两侧力平衡，δ=log((1-ε)/ε)，所以原始长度归一化分差还要加μ并除β；不能漏掉margin平移。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。长度归一化分数的TPO-S label-smoothed sigmoid与AppendixB精确归一化Huber TPO-H；验证有限吸引点和有界梯度。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 TPO-H应调用普通MSE还是标准Huber？ 都不能不看归一化。AppendixB是误差²/(2δ)，超过δ后为|误差|-δ/2；这保证远端梯度绝对值为1，batch mean再除样本数。 教学例：误差1、δ2时loss=.25，不是.5；误差3时为2。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-bd74425f126193cf">TPO-H应调用普通MSE还是标准Huber？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amargin-dynamics-tpo">Margin Dynamics for Large Language Model Alignment</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Amazon</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>都不能不看归一化。AppendixB是误差²/(2δ)，超过δ后为|误差|-δ/2；这保证远端梯度绝对值为1，batch mean再除样本数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：误差1、δ2时loss=.25，不是.5；误差3时为2。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21766v1">原论文</a> · <a href="../../../../post-training/2611.21766-margin-dynamics-tpo/">实现解读</a> · <a href="#qa-bd74425f126193cf">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:calibrated-judges-protocol" data-paper-title="Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix LLM 后训练 Independent Researcher 2026-11-15 论文先报告三个负结果：音素交织继续预训练没有改善可感知口语风格且增加重复；prosody plan 遵从低于门槛；规则韵律 reward 的人类与裁判盲评近似随机。作者因此把重点转向评测：自动特征、功效受限的人类盲评、经过 catch trials 校准的 LLM judge，三层互补，不能用单一客观特征代替感知质量。Layer 3 先在已知答案的 catch trials 检查灵敏度（门槛 0.75），再由两个隔离 judge、A/B 换序标注，分歧计 0.5。 完整语音/偏好训练与裁判实验：高成本，不复现（审查 DONE）。实际执行由组件诊断产物记录；状态：CPU L1 标注协议组件，diagnostic only。只处理外部提供的 verdict；不调用 LLM、不生成模拟能力评分、不训练 0.6B 模型。完整语音/偏好训练与裁判实验：高成本，不复现（审查 DONE）。qualify 接收 evaluator-only catch verdict+canonical expected side；join_swapped_judgments 只接收普通文本对的 verdict 与资格记录，不接收 gold；已知 catch IDs 禁止复用为训练标注。  偏好与对齐 裁判校准与偏差转导 LLM 后训练 偏好与对齐：先看反馈长什么样 catch trial的答案键可以发给被评模型或普通judge吗？ 不可以。它只用于evaluator检查judge是否达到灵敏度门槛；blind文本对要去掉答案和reward字段。校准、训练、heldout ID必须隔离，本地合并普通verdict接口没有gold参数。 教学例：catch-0用于资格考试后不能又作为训练pair让模型学习其答案；ID隔离仍不替代近重复审计。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-calibrated-judges-protocol-29e1bb2c" class="ar-learning-paper-anchor"></span>

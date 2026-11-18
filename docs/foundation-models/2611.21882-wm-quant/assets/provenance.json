@@ -1,0 +1,13 @@
+{
+  "source_url": "https://arxiv.org/html/2611.21882v1/lewm_pusht_W4A4_clip_ranges.png",
+  "figure": "S3.F5",
+  "caption": "Figure 5 : Activation distributions and clipping ranges across rollout steps (LeWM, PushT, W4A4) entering one quantized MLP predictor layer. Bars show the clipping range used by the activation quantizer: min/max calibration for the base method, and the range learned by rollout-aware scaling for WM-Quant.",
+  "original_sha256": "942e7f13f22df5bd587c2fa0171e1a27e4089e2a70f75901ac0500d30a1de53a",
+  "extraction": "Author original raster image, or original SVG rasterized without semantic editing",
+  "paper_url": "https://arxiv.org/html/2611.21882v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-18",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result.",
+  "source_html_sha256": "b6575bd7bc6437e94d42fb19ad5e58859f15a777429743f656a4af97919ee1a1",
+  "asset_sha256": "1d5b751fe23e5ee1eda9ec586b3276dc484304f41f74e5992af29731be58180f"
+}

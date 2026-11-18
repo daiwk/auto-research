@@ -1,0 +1,581 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:ambient-sft/defining-problem": {
+      "source_sha256": "6caa7d66d7ddd0dfa83ef732c4a1c6b38fee85a49d65db861e95da499f3573ca",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a frozen base that may be weaker than the student?",
+        "answer": "The aim is to retain a coarse distribution during small-data SFT, not copy every base-model detail. Temperature reduces trust in erroneous details while clean CE supplies the adaptation signal.",
+        "example": "Teaching example: smoothing reduces a teacher's two-class bias without removing CE on the observed target."
+      }
+    },
+    "qa/post-training:ambient-sft/mechanism-boundary": {
+      "source_sha256": "4da2ae9f017d9114ea370df4f2d6ad6f42cadc942683ed0a7480f6dce3c7fce8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not add the common KD T-squared multiplier?",
+        "answer": "The source has no T-squared factor: KL vanishes as temperature grows, recovering SFT. Adding it changes that limit and the temperature-controlled bias–variance trade-off.",
+        "example": "Teaching example: at fixed lambda, increasing T from 2 to one million makes the KL term vanish rather than preserve its gradient scale."
+      }
+    },
+    "qa/post-training:ambient-sft/compare-existing": {
+      "source_sha256": "32516c1b1a6fa0f93f4f12bb55902bcc5b6b0d038d9065f7eff4cd01b384510a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does its frozen-base constraint differ from DPO?",
+        "answer": "DPO classifies chosen/rejected reference-relative log ratios. Ambient SFT matches full-vocabulary tempered base distributions on observed tokens; it needs neither preference pairs nor a reward optimization loop.",
+        "example": "Teaching example: one SFT sequence without preference labels can define Ambient loss but not a DPO preference pair."
+      }
+    },
+    "qa/post-training:ambient-sft/implementation-integrity": {
+      "source_sha256": "6e7c765d65756cc65e9055f0099c2ec910ba5f0e39059c92c7cde31b787f3108",
+      "reviewed": true,
+      "fields": {
+        "question": "Do the local checks establish better SFT quality?",
+        "answer": "No. They execute the exact loss, frozen-teacher and masked-gradient controls, without checkpoint adaptation or capability scores. The stochastic objective equals p_c times the stated objective in expectation, so learning-rate comparisons must disclose that overall scale.",
+        "example": "Teaching example: clean_probability=.75 and draw=.75 select matching, not a 75% task-success rate."
+      }
+    },
+    "qa/post-training:sh-opd/defining-problem": {
+      "source_sha256": "356792a846e80fed4c197a51bd1158985b9b283959eb7a59bb63418d5b1fbaa0",
+      "reviewed": true,
+      "fields": {
+        "question": "What does SH-OPD truncate?",
+        "answer": "It samples one generation cap per batch, broadcasts it to all rollout workers and stops at EOS or that cap. It does not generate a full long answer and only trim its loss afterward.",
+        "example": "Teaching example: H=4 must reach the callback as max_new_tokens=4; returning eight tokens is rejected."
+      }
+    },
+    "qa/post-training:sh-opd/mechanism-boundary": {
+      "source_sha256": "0e3c0096b83a82cccc891d156e78d20ab5da0c340ee139aa91d01b80fc44f78d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is inverse-probability debiasing absent?",
+        "answer": "SH-OPD retains the original token-mean objective and accepts systematic depth reweighting. Inverse-probability compensation belongs to its comparison STOPD, not this algorithm.",
+        "example": "Teaching example: H0=2,Hmax=8,alpha=0 always selects eight; positive alpha gives early blocks more expected weight than the last block."
+      }
+    },
+    "qa/post-training:sh-opd/compare-existing": {
+      "source_sha256": "833f38d445d90d36092826b3f7429467dc9a8eda04283c46b686c9b5e64409fa",
+      "reviewed": true,
+      "fields": {
+        "question": "What budget axis differs from LCS reference selection?",
+        "answer": "LCS chooses a compatible same-task success for the failed student's teacher. SH-OPD changes actual generation depth. Better references do not imply fewer generated tokens, so the axes require separate accounting.",
+        "example": "Teaching example: reducing H from eight to four changes depth exposure without automatically improving an LCS compatibility score."
+      }
+    },
+    "qa/post-training:sh-opd/implementation-integrity": {
+      "source_sha256": "add2a41078f7c8b38739a37d575be5d1cade4c88978ae322c41a2b9771244169",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not average each response before averaging the batch?",
+        "answer": "Algorithm 1 averages all supervised generated tokens together. With unequal EOS lengths, per-response averaging changes token weights. The component checks caps, PMFs and masks, not real rollout throughput.",
+        "example": "Teaching example: losses [1] and [3,5] give three, not (1+4)/2=2.5."
+      }
+    },
+    "qa/post-training:leaf-opd/defining-problem": {
+      "source_sha256": "ee924c2bffc81d6b3cb017e5462ad6d7bd392ff9085ae36c74d34e3d6ea7c1c0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a teacher that refuses still be a bad teacher?",
+        "answer": "Its first token may strongly favor refusal, yet suppression can disappear when conditioned on a student's factual prefix. Strength and persistence must be measured along that same student trajectory.",
+        "example": "Teaching example: delta=[-4,0,0,0] looks strong initially but has second-half SS=0 and fails the teacher criterion."
+      }
+    },
+    "qa/post-training:leaf-opd/mechanism-boundary": {
+      "source_sha256": "c45d5acba53176a5711c02c38f4ed7e99f6e3ccf7fed7d07079ed87a4a539546",
+      "reviewed": true,
+      "fields": {
+        "question": "May the privileged context also be given to the student?",
+        "answer": "No. The forget teacher sees the non-disclosure instruction; the student only sees the question and its own prefix. The retain teacher is bare. Giving the instruction to the student changes the parameter-unlearning problem.",
+        "example": "Teaching example: routing returns student='question' and teacher='do not disclose\\nquestion', with no gold-answer field."
+      }
+    },
+    "qa/post-training:leaf-opd/compare-existing": {
+      "source_sha256": "16fa8196de1229385c16d09ee0c90e904ce7e8cdc90ba00e0253568427d8d877",
+      "reviewed": true,
+      "fields": {
+        "question": "Is this the same as an LCS teacher-only reference?",
+        "answer": "Both isolate extra teacher context, but LCS supplies compatible success trajectories to correct failures. LEAF uses non-disclosure context to suppress target facts and a retain branch to preserve utility.",
+        "example": "Teaching example: one reference helps finish a task correctly; a forget context requests non-disclosure, so their target directions differ."
+      }
+    },
+    "qa/post-training:leaf-opd/implementation-integrity": {
+      "source_sha256": "319b27f9ee703098d8aee74fd472c0832f9450e675d3d1713c4cd91a62de9f65",
+      "reviewed": true,
+      "fields": {
+        "question": "Does passing SS prove unlearning?",
+        "answer": "No. SS diagnoses teacher opposition on a fixed trajectory. Local loss/gradient and context-boundary checks do not measure erased knowledge, attack resistance or retained model utility.",
+        "example": "Teaching example: for length three, the second half starts at token floor(3/2)+1=2, not only the last token."
+      }
+    },
+    "qa/post-training:streaming-opd/defining-problem": {
+      "source_sha256": "5c2d83ec205df858d3508120cea733a40d19cf4866528a5f84ca5205c2c01f74",
+      "reviewed": true,
+      "fields": {
+        "question": "Why may completion, delivery and update be decoupled?",
+        "answer": "Local token supervision depends on the generated prefix, not future tokens. A segment may enter a candidate pool before response completion, then wait for a supervision budget rather than forcing one update per segment.",
+        "example": "Teaching example: the second segment retains the first segment as input context but masks its loss to zero."
+      }
+    },
+    "qa/post-training:streaming-opd/mechanism-boundary": {
+      "source_sha256": "eb9fd1f9e1fa3b0b76ab9cd01435c03ebb0338b988a4f4310598b6d2d15c19c1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can the top-k loss be negative before clipping?",
+        "answer": "It sums only teacher-selected top-k entries without renormalizing full-vocabulary probabilities. This is not full KL; the partial sum may be negative, so the implementation floors logs and clips to [0,C].",
+        "example": "Teaching example: teacher top1 mass .6 and student mass .9 give .6 log(.6/.9)<0, clipped to zero rather than re-softmaxing top1."
+      }
+    },
+    "qa/post-training:streaming-opd/compare-existing": {
+      "source_sha256": "e2c7df58e5478d6cbcc1d1532301afc2d94b34ad9e60e49231350c0a8c66f147",
+      "reviewed": true,
+      "fields": {
+        "question": "How does it differ from SH-OPD?",
+        "answer": "SH-OPD changes generation caps and depth exposure. Streaming OPD keeps continuing prefixes and changes supervision delivery/consumption timing. Both need actual loss-bearing token accounting, not object or raw-token counts.",
+        "example": "Teaching example: splitting a long answer into four segments may generate the same number of tokens and repeatedly recompute prefixes."
+      }
+    },
+    "qa/post-training:streaming-opd/implementation-integrity": {
+      "source_sha256": "b1bb6a6860d85f42241bb9669b6b559f63beed493e3af94fe6656673012fe0a9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain actual generation versions per token?",
+        "answer": "A resumed response may mix versions after weight updates. Lag is a clue to distribution shift, not its magnitude; labeling every token with the final version falsely makes data fresh.",
+        "example": "Teaching example: versions [0,0,1,1] consumed at v2 have lags [2,2,1,1]; sealing does not insert EOS."
+      }
+    },
+    "qa/post-training:specal/defining-problem": {
+      "source_sha256": "853be5ddf77501e3dbe9b6e86ad9a2c3df061cbf4353b1fd264abfa63de16a29",
+      "reviewed": true,
+      "fields": {
+        "question": "Does SpeCal redefine the reward?",
+        "answer": "No. It derives group and rollout weights from response hidden-state geometry, recalibrates existing unsupervised advantages and keeps the GRPO objective. Geometry weights are stop-gradient.",
+        "example": "Teaching example: the same external A^U is recalibrated; hidden gold answers are not used to manufacture rewards."
+      }
+    },
+    "qa/post-training:specal/mechanism-boundary": {
+      "source_sha256": "b78beb3656f0ca3fa8d5add2237254a46a9251f8cdf384e7313a776ffa18679c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must a rollout not certify itself using a subspace containing itself?",
+        "answer": "An outlier may create its own direction. LOO removes the row, centers the others and truncates their SVD using group effective rank before measuring held-out projected energy.",
+        "example": "Teaching example: when three rollouts share the xy plane, an isolated z-direction has lower conditional support than mutually supported rows."
+      }
+    },
+    "qa/post-training:specal/compare-existing": {
+      "source_sha256": "cf2764711e8aefe4670914679391a3cccfd5981be0b09118cd614a80252f88cd",
+      "reviewed": true,
+      "fields": {
+        "question": "What is added beyond GRPO group standardization?",
+        "answer": "GRPO uses group reward mean/variance. SpeCal additionally uses pooled hidden-state spectra and LOO support, with batch/group RMS calibration. Replacing a reward standard deviation cannot reproduce it.",
+        "example": "Teaching example: scaling one representation by seven is removed by L2 normalization; changing its direction changes the spectrum and support."
+      }
+    },
+    "qa/post-training:specal/implementation-integrity": {
+      "source_sha256": "e0385b6fde4a0e326ae5292b4bc7b26fd5b03d050dad22aa025638d9bfeb4f7c",
+      "reviewed": true,
+      "fields": {
+        "question": "Should identical response representations receive high-confidence weights?",
+        "answer": "No. They provide no semantic contrast and have zero spectral mass. The component returns zero calibrated advantages and rejects zero vectors, avoiding NaNs or treating degeneracy as perfection.",
+        "example": "Teaching example: four identical all-one rows give zero group weight and Acal, not task accuracy one."
+      }
+    },
+    "qa/post-training:regularized-score-centering/defining-problem": {
+      "source_sha256": "6b4b21b5f14ccc5fa3d117893aebf597df42f08c4ddd22472f58c3c6995845fa",
+      "reviewed": true,
+      "fields": {
+        "question": "Is score centering just subtracting a group-mean reward?",
+        "answer": "No. It subtracts the behavior expectation of a weighted log-policy gradient at the same history. Response advantages may already be centered while the behavior-averaged learner score remains nonzero.",
+        "example": "Teaching example: mismatched learner/behavior distributions leave drift after subtracting a reward baseline; independent auxiliary actions estimate the score center."
+      }
+    },
+    "qa/post-training:regularized-score-centering/mechanism-boundary": {
+      "source_sha256": "7ff9b5e939b795dac0ace3cdc274a9823b906cb43cd7a0c7e3d00613a824e59b",
+      "reviewed": true,
+      "fields": {
+        "question": "Can TIS and reverse-KL silently share an already clipped ratio?",
+        "answer": "No. Sample and auxiliary reward ratios are independently computed and TIS-clipped. The KL term has its own cap. Coefficients are detached in the score surrogate and behavior remains fixed within an inner fit.",
+        "example": "Teaching example: sample ratio four clips to two while auxiliary ratio .25 clips up to .5; both affect the center."
+      }
+    },
+    "qa/post-training:regularized-score-centering/compare-existing": {
+      "source_sha256": "e96bc0c5f49db249e2b0b17f40961cdbd33583129917ffa20583c1b3eeed8a8a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does its KL differ from ordinary GRPO reference KL?",
+        "answer": "RSC uses reverse KL to the behavior distribution that generated the batch and refreshes this reference with the sampler. GRPO commonly uses a more fixed pretrained reference. Behavior probabilities cannot be replaced by another reference's probabilities in importance ratios.",
+        "example": "Teaching example: with behavior .2 and reference .1, the importance-ratio denominator remains .2."
+      }
+    },
+    "qa/post-training:regularized-score-centering/implementation-integrity": {
+      "source_sha256": "5376596b6d2486e7615900094ff83cb7c096bc3749766e772b01ba014490a9b1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is the local loss value not the paper's population objective?",
+        "answer": "It is a detached-score surrogate with the prescribed gradient, not an unbiased numerical estimate of W. Tests compare gradients against full-action enumeration and a no-center control, not agent returns.",
+        "example": "Teaching example: gradient error should be near floating-point precision even when the surrogate scalar differs from the reverse-KL scalar."
+      }
+    },
+    "qa/post-training:margin-dynamics-tpo/defining-problem": {
+      "source_sha256": "92af05c2dcdc8c967d762dbcc65d1c188d9bef3f7edcc20c88fa64f1888ce9c8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why may simply ranking chosen above rejected remain unstable?",
+        "answer": "An ordinary sigmoid preference loss can keep increasing the margin. Saturated easy examples leave concentrated hard-example interference. TPO seeks restoring force near a target and bounded distant gradients.",
+        "example": "Teaching example: TPO can pull an overshooting chosen–rejected gap back instead of always increasing it."
+      }
+    },
+    "qa/post-training:margin-dynamics-tpo/mechanism-boundary": {
+      "source_sha256": "2cf19d5d001dbf35497b95cd38bffca722a989896b0ac84db82f5e853407a0be",
+      "reviewed": true,
+      "fields": {
+        "question": "What determines the TPO-S attractor?",
+        "answer": "Label smoothing balances the two forces at delta*=log((1-epsilon)/epsilon). The original length-normalized score gap must divide by beta and add mu; the margin shift cannot be omitted.",
+        "example": "Teaching example: beta=.1, mu=.5 and epsilon=.05 give a score-gap attractor near 29.944, not delta*=2.944 itself."
+      }
+    },
+    "qa/post-training:margin-dynamics-tpo/compare-existing": {
+      "source_sha256": "5ce8fc2ffb6b2b1e7ce922603978cdd6f6d884c2261d52996780abbe923b2d7a",
+      "reviewed": true,
+      "fields": {
+        "question": "Is TPO-S merely reference-based cDPO?",
+        "answer": "Both may use label smoothing, but TPO-S uses reference-free length-normalized scores with a margin. DPO uses frozen-reference log ratios; comparing the same epsilon does not align the reference axis.",
+        "example": "Teaching example: inserting a DPO reference correction changes the quantity whose TPO-S attractor is controlled."
+      }
+    },
+    "qa/post-training:margin-dynamics-tpo/implementation-integrity": {
+      "source_sha256": "f812069edc55a077b9507da687dbe3b37ae5699c73d31dfaa595aaf6b5fe4000",
+      "reviewed": true,
+      "fields": {
+        "question": "Should TPO-H use ordinary MSE or an unexamined standard Huber call?",
+        "answer": "Neither without checking normalization. Appendix B uses error squared/(2 delta), then absolute error-delta/2. Distant per-example gradient magnitude is one before batch averaging.",
+        "example": "Teaching example: error one at delta two gives .25, not .5; error three gives two."
+      }
+    },
+    "qa/post-training:ca-zodpo/defining-problem": {
+      "source_sha256": "8c6e3c608e67ccba19eee0c094a4c48f573c2455320f50700112bd30d62f7bfd",
+      "reviewed": true,
+      "fields": {
+        "question": "What changes while retaining the DPO objective?",
+        "answer": "The loss remains the chosen–rejected policy/reference margin. The update uses forward-only search directions from contrastive input activations instead of isotropic full-parameter perturbations.",
+        "example": "Teaching example: identical chosen/rejected activations have no contrastive rank; a requested informative basis must not be fabricated."
+      }
+    },
+    "qa/post-training:ca-zodpo/mechanism-boundary": {
+      "source_sha256": "5cbcb4b6718c79858c03643753329c3cd12bd4d92473e322773494cc14eda2a4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why divide R A-transpose by square root of rank?",
+        "answer": "The factor keeps perturbation scale comparable across ranks. Removing it conflates a larger subspace with a larger search step and changes the source's comparison.",
+        "example": "Teaching example: with fixed coefficient variance, increasing rank from one to four must not silently quadruple perturbation energy."
+      }
+    },
+    "qa/post-training:ca-zodpo/compare-existing": {
+      "source_sha256": "31e8516d8ef8dad82e06ccc2f661de89f5f611645d76d256fb6b64e4423b4562",
+      "reviewed": true,
+      "fields": {
+        "question": "Does lower memory necessarily make it faster than DPO?",
+        "answer": "No. Each step extracts an activation basis and evaluates positive/negative perturbations. It avoids backpropagation but adds forwards. Time-to-quality needs matched data and model evaluation, not this component check.",
+        "example": "Teaching example: a two-point estimate matches a small quadratic's directional derivative without measuring 1.5B-model wall time."
+      }
+    },
+    "qa/post-training:ca-zodpo/implementation-integrity": {
+      "source_sha256": "41c9b80b1b43c81cbc230d2fc9e22918391e698d77788a87f4db7abc53fa2b16",
+      "reviewed": true,
+      "fields": {
+        "question": "Can old momentum coefficients be reused after the basis changes?",
+        "answer": "No. Coordinates change with the basis, so the old buffer is transported through A_old-transpose A_new before accumulation. The same coefficients otherwise represent a different full-weight direction.",
+        "example": "Teaching example: a 90-degree basis rotation with correct transport preserves reconstructed momentum; copying the buffer rotates the update."
+      }
+    },
+    "qa/post-training:jev-safety-reward/defining-problem": {
+      "source_sha256": "6ac139fa2777a9a67c4f8def2096f16180d206aa02a7767f6a0caf38098b184b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does delegating only uncertain verdicts leave a safety blind spot?",
+        "answer": "Only confidence below the threshold reaches the stronger judge. A confidently safe false negative is never delegated, so optimization may concentrate harm there.",
+        "example": "Teaching example: harm probability .01 with external harmful label has confidence .99 and passes even at threshold .93."
+      }
+    },
+    "qa/post-training:jev-safety-reward/mechanism-boundary": {
+      "source_sha256": "abb156d3da684dfabe973e1c1a558924664f40f3a79cfbf75605d98506673781",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is rising GPR not sufficient evidence of reward escape?",
+        "answer": "GPR divides by remaining harm, whereas PHR divides by all harmful-prompt responses. Known harm can fall faster, increasing the blind-spot share while its amount declines. Escape requires significantly rising PHR and external audit.",
+        "example": "Teaching example: misses fall from ten to five while total harm falls from 100 to ten; GPR rises from .1 to .5 while misses halve."
+      }
+    },
+    "qa/post-training:jev-safety-reward/compare-existing": {
+      "source_sha256": "3461eb02ade8ac1bb31880a22bfe68edc3b2291a637dcdd7e5d680dbad20239a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does it relate to Bait reward-sign flipping?",
+        "answer": "Bait transforms rewards from a private probe/policy reward gap. This protocol audits gated misses and temporal changes; it does not automatically flip rewards or treat one reference judge as absolute truth.",
+        "example": "Teaching example: a PHR interval containing zero calls for S3, not negation of every training reward."
+      }
+    },
+    "qa/post-training:jev-safety-reward/implementation-integrity": {
+      "source_sha256": "8a05d4ce615add3bcb939ad6eeee39799017392379ea2cdf5494303172e464ed",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not bootstrap eight responses to one prompt independently?",
+        "answer": "They share the prompt and are dependent, which can understate interval width. The source uses 2,000 prompt resamples and excludes 100 calibration items from later evaluation; version changes recheck the threshold rule.",
+        "example": "Teaching example: the interface resamples entire rows of a prompt-by-rollout matrix, not shuffled responses or tokens."
+      }
+    },
+    "qa/post-training:optimistic-verifier-audit/defining-problem": {
+      "source_sha256": "93121d3fbafc5a410866c3a12ddb47223d5ce64843e030cd3c5abf8b1345eaeb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a minimal sufficient reason not simply the first matched rule?",
+        "answer": "Fixing the cited features must preserve the decision for every completion of other features; subset minimality then removes redundant features. Multiple alternative reasons form an antichain.",
+        "example": "Teaching example: for gate=x0 OR x1 with both one, {0} and {1} are minimal reasons, not {0,1}."
+      }
+    },
+    "qa/post-training:optimistic-verifier-audit/mechanism-boundary": {
+      "source_sha256": "87e50e37bbab48149b5ef9d083311ba1ddb8f6761c39c5255f08ddbf3a16b1f9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can sufficiency-only rewards encourage padding?",
+        "answer": "Citing every feature may be sufficient while including irrelevant material. The exact reward uses the MSR union for precision and the best individual MSR for recall, so padding lowers precision.",
+        "example": "Teaching example: when x0 suffices, adding irrelevant x2 reduces precision even if the decision word is correct."
+      }
+    },
+    "qa/post-training:optimistic-verifier-audit/compare-existing": {
+      "source_sha256": "bfcd2806b0f54d7dc8ac6a5909ee01a0bb3748b0414ccc7789c8a4ed86b7defb",
+      "reviewed": true,
+      "fields": {
+        "question": "Does it repair rewards like Bait?",
+        "answer": "No. It audits proxy selection error and reward gaps where truth is enumerable; Bait applies a probe-based defense. Such exact oracles are domain-limited and do not solve general agent truth.",
+        "example": "Teaching example: a proxy tie between unequal true rewards contributes .5 selection error, which diagnoses selection distortion rather than observed training damage."
+      }
+    },
+    "qa/post-training:optimistic-verifier-audit/implementation-integrity": {
+      "source_sha256": "6c66673128d78ea2e9e57cd933e958cf101315b639b3c09a0485e738a395cb12",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does the local oracle enforce a small enumeration budget?",
+        "answer": "Completion/subset enumeration grows exponentially. The component rejects over-budget domains rather than probing the entire 124,416-state multi-gate/model campaign. The oracle belongs only to an external scorer.",
+        "example": "Teaching example: thirteen binary features mean 8,192 states, exceeding the default 4,096 cap; unexamined states are not silently safe."
+      }
+    },
+    "qa/post-training:confidence-adaptive-granularity/defining-problem": {
+      "source_sha256": "889eb518dffa13d903a24ca38ad0a1070444afaf7a6d6c4325b956a42534837e",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a correct year be better than abstention when the exact date is unknown?",
+        "answer": "Under this task definition yes, but the answer should use the finest reliably supported level. Utility measures verified information gain, assigning -1 to an error and zero to abstention.",
+        "example": "Teaching example: a correct year's utility lies between zero and one; an unsupported precise day can still be an unverifiable error."
+      }
+    },
+    "qa/post-training:confidence-adaptive-granularity/mechanism-boundary": {
+      "source_sha256": "82e6c63a13f5f21e01543cd970a7a270294fce1f85ae9c0a4d08ba1ebb57e538",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must the consensus target not be selected from gold?",
+        "answer": "Vital Persons chooses the finest value shared by at least sixteen of twenty model responses using agreement, not gold correctness. Fewer than sixteen usable parses are excluded; enough usable responses without consensus yield IDK.",
+        "example": "Teaching example: twenty different days in 2020 yield a year target; fifteen usable parses mean exclusion, not five votes against it."
+      }
+    },
+    "qa/post-training:confidence-adaptive-granularity/compare-existing": {
+      "source_sha256": "ec1d5f74228912fa24cab23bdb1244b47f4be24d28aec369d433aad551222753",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from DPO response-preference alignment?",
+        "answer": "It self-trains granularity from demonstrated knowledge without a chosen/rejected loss. Granola-EQ separately uses mean-token-log-probability recognition against level-matched distractors. A DPO margin cannot replace hierarchical knowledge probing.",
+        "example": "Teaching example: a high-scoring finest answer is not selected if an intermediate coarser level loses to a distractor."
+      }
+    },
+    "qa/post-training:confidence-adaptive-granularity/implementation-integrity": {
+      "source_sha256": "8fd97f31360861ffcd5131696188613804f715363f7f576ef57fbf8681262693",
+      "reviewed": true,
+      "fields": {
+        "question": "Are the complete parser and geographic grounding implemented locally?",
+        "answer": "No. The interface requires externally verified fine-to-coarse paths instead of guessing geographic containment from strings. It implements selection and utility, not a model-knowledge accuracy measure.",
+        "example": "Teaching example: every coarser recognition level must strictly beat all distractors; a tie fails."
+      }
+    },
+    "qa/post-training:design-taste-admission/defining-problem": {
+      "source_sha256": "5b8603e141e5d53f9cc3958056e05733da45e993c7c33125936d9ad3ccef126b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a computable web metric not automatically a valid RL reward?",
+        "answer": "Even spacing metrics can be gamed. Admission requires expert agreement, causal perturbation/repair sensitivity, hack-trap resistance and stability. Failed signals remain evaluation-only.",
+        "example": "Teaching example: collapsing all spacing to one value improves scale conformity while harming proximity; a trap should expose it."
+      }
+    },
+    "qa/post-training:design-taste-admission/mechanism-boundary": {
+      "source_sha256": "9224a8e8f9d870a716b8aae7b2fcd443f52304fab9a8428e41a2f744a2cfd775",
+      "reviewed": true,
+      "fields": {
+        "question": "May the V4 expert panel be added directly to composite reward?",
+        "answer": "No. Experts determine signal admission and score blinded canaries. Reward aggregates only function/design/rubric/preference channels, while build/render/anticheat and other V0 gates multiply it.",
+        "example": "Teaching example: all soft scores equal one but no-regression=false still gives zero reward."
+      }
+    },
+    "qa/post-training:design-taste-admission/compare-existing": {
+      "source_sha256": "964bc79b6f1c1eb247098f0c990a6e3b8eff96a7e9b50b1a4d169efd47c5c50e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is this distinct from Bait despite both addressing reward hacking?",
+        "answer": "Bait detects private-probe reward preferences and flips rewards. This method admits and revalidates candidate judging signals. Probe coverage and expert golden/trap coverage are different assumptions, neither a universal guarantee.",
+        "example": "Teaching example: expert agreement .99 but trap-failure .21 rejects admission rather than negating the metric."
+      }
+    },
+    "qa/post-training:design-taste-admission/implementation-integrity": {
+      "source_sha256": "185fcc9846c2f9241e4a3eb50a7a7eac69423cf636f315ab2b537480974fe23f",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the component reproduce the web-design agent?",
+        "answer": "No. It consumes external observation rates/admitted scores and executes four gates and reward algebra. There is no Chromium, expert panel, judge ensemble or 4B model. The starting-state <=.4 rule admits tasks; it does not clip final rewards.",
+        "example": "Teaching example: a starting reward .41 is ineligible, but a completed episode's .75 reward is not clipped to .4."
+      }
+    },
+    "qa/post-training:gprm/defining-problem": {
+      "source_sha256": "565e1312f50146a7e22810752e13ea5f119773545a29fea0d037044ddb04e251",
+      "reviewed": true,
+      "fields": {
+        "question": "What extra information supplies the global perspective?",
+        "answer": "Besides the question/current step it reads past steps with predicted judgments and the candidate's future trajectory. Its four axes are forward consistency, posterior verification, goal alignment and self validity.",
+        "example": "Teaching example: evaluation history uses predicted labels, not secretly substituted gold judgments."
+      }
+    },
+    "qa/post-training:gprm/mechanism-boundary": {
+      "source_sha256": "81a76a4e652337b1f699c57e2bd705f064c9d81a9afd45f8daaefc9a40d8e702",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is full-trajectory scoring cheaper offline than online?",
+        "answer": "Offline diagnosis and best-of-N already have completed candidates. Step-wise search must generate continuations before judging the current step; cost cannot be estimated as ordinary prefix-only PRM scoring.",
+        "example": "Teaching example: expanding eight current-step candidates can also require eight endpoint continuations, not just eight short forwards."
+      }
+    },
+    "qa/post-training:gprm/compare-existing": {
+      "source_sha256": "be32e315c7d15e92a6c9619ae350a45fad50d7ade21332df6d5fe7ba7acbafda",
+      "reviewed": true,
+      "fields": {
+        "question": "How does it relate to existing GRPO?",
+        "answer": "GRPO is only the second-stage optimizer. The defining model is a four-axis diagnostic with predicted history and a future view. An existing GRPO loss does not supply global process-correctness capability.",
+        "example": "Teaching example: wrapping a random binary classifier in GRPO does not create structured recursive judgments."
+      }
+    },
+    "qa/post-training:gprm/implementation-integrity": {
+      "source_sha256": "2cd3171c0ad54185d03d1f4b015e7bf8c7258d6795f36c8dcb453b995d5a3f4c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not count a parser as a low-cost reproduction?",
+        "answer": "A parser only extracts [CORRECT]; it cannot replace the 235B synthesis teacher, 4B/14B diagnostic models and search training. The full high-cost experiment is not reproduced, review DONE, with no invented model scores.",
+        "example": "Teaching example: parsing a label does not identify the first logical error."
+      }
+    },
+    "qa/post-training:mpg-dpo/defining-problem": {
+      "source_sha256": "bc6faf6c337388da930e05eb70493a6c7d75edb784e87e7c4987f13508413cf6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not simply sum weighted multidimensional scores?",
+        "answer": "Retained feedback directions generate a preference cone whose dual gives W. It filters confidently dominated answers and queries unresolved trade-offs instead of committing to one scalar weight vector.",
+        "example": "Teaching example: conflicting helpfulness and brevity rules can make a comparison informative."
+      }
+    },
+    "qa/post-training:mpg-dpo/mechanism-boundary": {
+      "source_sha256": "d0447ce4a647a380f56c60ab7384ec10122805881ce3f0aa98ddec8495734d38",
+      "reviewed": true,
+      "fields": {
+        "question": "Is every conflicting new preference discarded?",
+        "answer": "Only when every old rule supports the opposite direction beyond tau is it discarded. Zero differences, trivial duals and insufficient survivors also need handling. One opposing rule does not mean unanimous opposition.",
+        "example": "Teaching example: one opposing and one non-opposing rule may still retain the new direction under the minimum test."
+      }
+    },
+    "qa/post-training:mpg-dpo/compare-existing": {
+      "source_sha256": "b200162d14967e4d54914b3447a54e310d2430ed792aebfd8d8a9f5d50cd38df",
+      "reviewed": true,
+      "fields": {
+        "question": "Is the main novelty a new DPO loss?",
+        "answer": "No. It is active pair selection with ridge confidence bounds and online cone updates, followed by online DPO. A DPO loss or a heuristic pair picker does not reproduce MPG-DPO.",
+        "example": "Teaching example: unqueried candidates cannot read oracle scores for filtering; a predictor fitted on historical queried scores must estimate them."
+      }
+    },
+    "qa/post-training:mpg-dpo/implementation-integrity": {
+      "source_sha256": "840fc580a7295efd00a9476e805ed209bd339cdc901fcd844e75ec56adb18a04",
+      "reviewed": true,
+      "fields": {
+        "question": "Why review rather than offer a stand-in pair selector?",
+        "answer": "The full method includes double-description cones, an independent encoder, online scoring/preference queries and multi-seed 7B training. A single argmax omits the estimation chain, so the high-cost campaign is not reproduced and no capability metric is invented.",
+        "example": "Teaching example: computing argmax for arbitrary W does not show that real user feedback correctly produced W."
+      }
+    },
+    "qa/post-training:ash-hint-steering/defining-problem": {
+      "source_sha256": "280265e14a76b6976408acdc034625648c62e5d74190313eba356815e3b30714",
+      "reviewed": true,
+      "fields": {
+        "question": "What mismatch affects hint-augmented GRPO?",
+        "answer": "Training adds a hint from the first half of a reference solution and more easily obtains positive reward, but inference lacks it. ASH learns an injectable activation direction to recover a behavioral shift on plain inputs.",
+        "example": "Teaching example: inference cannot secretly append a gold solution to demonstrate steering efficacy."
+      }
+    },
+    "qa/post-training:ash-hint-steering/mechanism-boundary": {
+      "source_sha256": "f81f47ff86ee24e93369626bf62e031beca2cbc4b3659fdd8b66b1b3faed2415",
+      "reviewed": true,
+      "fields": {
+        "question": "Why update steering before the model each step?",
+        "answer": "The steering loss must fit the model that generated the current hinted/plain samples. Updating the model first makes that relation stale. The final step updates steering only, avoiding a stale returned vector.",
+        "example": "Teaching example: Algorithm 1 places the model GRPO update, not steering, inside if step<T."
+      }
+    },
+    "qa/post-training:ash-hint-steering/compare-existing": {
+      "source_sha256": "571dadd5d92a9ad22c8e168bfc99d5b7d088ff739b6f907abee80ca2393dc160",
+      "reviewed": true,
+      "fields": {
+        "question": "May hinted and plain samples share one GRPO advantage group?",
+        "answer": "No. Each group separately computes reward mean/std before summing objectives, avoiding cross-difficulty competition. The steering preference objective also does not correctness-filter its samples.",
+        "example": "Teaching example: all-one hinted rewards and all-zero plain rewards create artificial signs if pooled, but no within-group relative signal separately."
+      }
+    },
+    "qa/post-training:ash-hint-steering/implementation-integrity": {
+      "source_sha256": "0ab25a947642b5528594f8b499fbc5e08d3a733bf2983042d582cf8666495c72",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not label a DPO formula alone as ASH?",
+        "answer": "ASH requires trainable activation injection, two online rollout groups, steering-before-model co-training and hint-free inference. The full model matrix is high-cost; a formula or fixed vector cannot replace that core, review DONE.",
+        "example": "Teaching example: a loss without injecting v into the selected activation layer does not demonstrate retained hint behavior."
+      }
+    },
+    "qa/post-training:tailroll/defining-problem": {
+      "source_sha256": "3ffbd4a7ef0cee3ebbea9bf70b08310caa8e02ffbfa7fd1437fe626d65f9317d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can balanced mean load still cause long waits?",
+        "answer": "The longest tail response can set rollout-step duration. TailRoll migrates in-flight requests at chunk boundaries and separately terminates stragglers once enough siblings finish.",
+        "example": "Teaching example: three idle engines and one long remaining response yield low average load yet block the step."
+      }
+    },
+    "qa/post-training:tailroll/mechanism-boundary": {
+      "source_sha256": "d2ae3f9489a4f1bcca514a97351d90abeed815b0a7c00a4aa5b6d521c89d9e06",
+      "reviewed": true,
+      "fields": {
+        "question": "Does migration simply copy the KV cache?",
+        "answer": "It uses stateless in-flight migration: the destination reconstructs state from prompt/generated tokens and resumes after one re-prefill, guarded by costs, reservations, hop limits and post-migration checks.",
+        "example": "Teaching example: migration is rejected when re-prefill costs exceed the expected tail-time saving."
+      }
+    },
+    "qa/post-training:tailroll/compare-existing": {
+      "source_sha256": "7f3ba07123cdc7fa344477eec97d4c09a78777d00a2ee4b513f58e6910a8d1fc",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from GRPODropout?",
+        "answer": "GRPODropout filters responses after generation using entropy contribution and generally does not save generation. TailRoll may stop a tail response early and mask its partial loss, changing completed samples and system timing.",
+        "example": "Teaching example: a half-finished answer cannot be inserted as a completed incorrect sample while claiming an unchanged GRPO group."
+      }
+    },
+    "qa/post-training:tailroll/implementation-integrity": {
+      "source_sha256": "d2071c45dc0c320f5292f51aefc35e1eabf425ee076bac414732b543657e5eb7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a single-card offline scheduling simulation not a system reproduction?",
+        "answer": "It lacks real multi-engine recovery, decode contention, re-prefill cost and training-reward effects. The source uses multiple Ascend 910Cs; a single A100/A30 numerical rule cannot establish that system result, so the full experiment is not reproduced.",
+        "example": "Teaching example: reordering tasks with preset durations for a 20% simulated gain is not measured LLM throughput."
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "schema_version": 2,
+  "paper": "agent-research:detourbench",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "execution_device": "cpu",
+  "execution_accelerator": "CPU",
+  "local_operator": "auto_research.agent_research.detourbench.diagnostic",
+  "source_sha256": {
+    "src/auto_research/agent_research/detourbench.py": "d505a44a2e68fa3b60405a9891560dd19d635c9cc2d1d70f9536b654577d87f5"
+  },
+  "data_revision": "authored deterministic boundary controls v1; not official benchmark",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "bfs_replay": true,
+        "invalid_duplicate_charged": true,
+        "batch_stops_terminal": true,
+        "wrong_not_zero_residual": true,
+        "partial_residual": true,
+        "budget_not_efficiency_numerator": true
+      },
+      "metrics": {
+        "oracle_cost": 2,
+        "charged_accesses": 4,
+        "attainment": 0.5,
+        "normalized_detour": 1.0
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "bfs_replay": true,
+        "invalid_duplicate_charged": true,
+        "batch_stops_terminal": true,
+        "wrong_not_zero_residual": true,
+        "partial_residual": true,
+        "budget_not_efficiency_numerator": true
+      },
+      "metrics": {
+        "oracle_cost": 2,
+        "charged_accesses": 4,
+        "attainment": 0.5,
+        "normalized_detour": 1.0
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "bfs_replay": true,
+        "invalid_duplicate_charged": true,
+        "batch_stops_terminal": true,
+        "wrong_not_zero_residual": true,
+        "partial_residual": true,
+        "budget_not_efficiency_numerator": true
+      },
+      "metrics": {
+        "oracle_cost": 2,
+        "charged_accesses": 4,
+        "attainment": 0.5,
+        "normalized_detour": 1.0
+      }
+    }
+  ],
+  "capability_claim": false,
+  "note": "All seeds repeat deterministic controls; no statistical robustness or task success claim."
+}

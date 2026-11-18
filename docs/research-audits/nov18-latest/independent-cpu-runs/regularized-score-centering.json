@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "key": "regularized-score-centering",
+  "device": "cpu",
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "exact_action_enumeration_gradient": true,
+        "center_is_not_reward_mean": true,
+        "external_advantage_frozen": true,
+        "finite_gradient": true
+      },
+      "metrics": {
+        "surrogate": -0.4725159220708788,
+        "gradient_oracle_error": 2.220446049250313e-16,
+        "uncentered_gradient_difference": 1.2502209161276456
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "exact_action_enumeration_gradient": true,
+        "center_is_not_reward_mean": true,
+        "external_advantage_frozen": true,
+        "finite_gradient": true
+      },
+      "metrics": {
+        "surrogate": 1.6365624280338664,
+        "gradient_oracle_error": 2.220446049250313e-16,
+        "uncentered_gradient_difference": 0.9340625679908963
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "exact_action_enumeration_gradient": true,
+        "center_is_not_reward_mean": true,
+        "external_advantage_frozen": true,
+        "finite_gradient": true
+      },
+      "metrics": {
+        "surrogate": -0.17223131014320642,
+        "gradient_oracle_error": 1.3877787807814457e-16,
+        "uncentered_gradient_difference": 0.9944938939381115
+      }
+    }
+  ],
+  "capability_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "checkpoint_calls": 0,
+  "dataset_downloads": 0
+}

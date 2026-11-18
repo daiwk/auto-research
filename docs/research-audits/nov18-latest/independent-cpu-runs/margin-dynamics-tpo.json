@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "key": "margin-dynamics-tpo",
+  "device": "cpu",
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "below_attractor_pushed_up": true,
+        "attractor_zero_gradient": true,
+        "overshoot_restoring_force": true,
+        "huber_gradient_bounded": true,
+        "huber_target_is_stationary": true
+      },
+      "metrics": {
+        "tpo_s_loss": 0.1991500856859795,
+        "tpo_h_loss": 66.0,
+        "score_gap_attractor": 29.944389791664403,
+        "seeded_probe": 0.8822692632675171
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "below_attractor_pushed_up": true,
+        "attractor_zero_gradient": true,
+        "overshoot_restoring_force": true,
+        "huber_gradient_bounded": true,
+        "huber_target_is_stationary": true
+      },
+      "metrics": {
+        "tpo_s_loss": 0.1991500856859795,
+        "tpo_h_loss": 66.0,
+        "score_gap_attractor": 29.944389791664403,
+        "seeded_probe": 0.4539682865142822
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "below_attractor_pushed_up": true,
+        "attractor_zero_gradient": true,
+        "overshoot_restoring_force": true,
+        "huber_gradient_bounded": true,
+        "huber_target_is_stationary": true
+      },
+      "metrics": {
+        "tpo_s_loss": 0.1991500856859795,
+        "tpo_h_loss": 66.0,
+        "score_gap_attractor": 29.944389791664403,
+        "seeded_probe": 0.719590425491333
+      }
+    }
+  ],
+  "capability_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "checkpoint_calls": 0,
+  "dataset_downloads": 0
+}
