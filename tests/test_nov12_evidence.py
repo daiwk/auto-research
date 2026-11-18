@@ -99,6 +99,21 @@ def test_portable_record_check_does_not_reread_captures(monkeypatch):
     recorder.record(check_only=True)
 
 
+def test_historical_portable_check_preserves_a_later_watermark(monkeypatch, tmp_path):
+    path = tmp_path / "watermark.json"
+    raw = b'{"review_watermark":"2026-11-15"}\n'
+    path.write_bytes(raw)
+    monkeypatch.setattr(recorder, "WATERMARK", path)
+    recorder.record(check_only=True)
+    assert path.read_bytes() == raw
+    empty_ledger = tmp_path / "ledger.json"
+    empty_ledger.write_text('{"batches":[]}\n')
+    monkeypatch.setattr(recorder, "LEDGER", empty_ledger)
+    monkeypatch.setattr(recorder, "AUDIT", tmp_path / "unadmitted")
+    with pytest.raises(ValueError, match="does not advance"):
+        recorder.record(check_only=False)
+
+
 def test_source_recheck_is_explicit_and_required_for_initial_admission(monkeypatch):
     calls = []
     monkeypatch.setattr(recorder, "verify_captures", lambda rows: calls.append(rows))

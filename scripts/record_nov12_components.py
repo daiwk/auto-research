@@ -121,7 +121,13 @@ def validate_execution(specs):
 
 def record(*, check_only=False, recheck_source_captures=False):
     before = WATERMARK.read_bytes()
-    if load(WATERMARK)["review_watermark"] != "2026-11-09":
+    already_admitted = ((AUDIT / "task-scope.json").exists()
+                        or any(row["batch"] == BATCH for row in load(LEDGER)["batches"]))
+    # Admission belongs to the original Nov9 baseline. Portable verification of
+    # an immutable historical cohort must still work after a later review closes.
+    # The source-derived batch below retains its exact Nov9 before/after values,
+    # and the byte-level no-mutation check still protects the current watermark.
+    if not check_only and not already_admitted and load(WATERMARK)["review_watermark"] != "2026-11-09":
         raise ValueError("this cohort does not advance the November 9 watermark")
     specs = specifications()
     validate_sources(specs, reread_captures=not check_only or recheck_source_captures)
