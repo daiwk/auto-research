@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-18",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "foundation-models:hvmap",
+      "target_card": "foundation-models/context-and-state",
+      "source_revisions": {
+        "foundation-models:hvmap": "34c0f79eee9d1fe6fbc2b41e76c1c4671ba6a2346e8a290b93efb9b9ae044d9b",
+        "foundation-models:ecg-rag": "2d522783223ba0b570c26df2de796e7731ee037643b31cc39a0543368a720c7f"
+      },
+      "comparison": {
+        "position": "四层归一化映射用跨目标fuzzy loss锚定异构空间；native/mapped双分数联合取K，spoke最多经hub两次映射。",
+        "tradeoff": "ECG-RAG让检索与压缩生成共享表示，HVMap不生成答案而对齐已存在的异构库。局部fuzzy loss与ECG联合loss均不代表完整RAG效果。",
+        "sections": [
+          "核心公式",
+          "数据协议与代码映射",
+          "结果、负控与边界",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "共享一份表示与对齐多种表示，是不同的系统选择",
+        "body": "ECG-RAG为避免重复存储而联合学习检索与压缩表示，依赖decoder训练；HVMap接受库已由不同编码器生成，通过配对映射和候选双空间评分消除部分不兼容。fuzzy loss对角锚定绝对对应，RKD只保相对几何不够；SCORE2还要保留每库native向量而不是总偏hub。小张量梯度不证明跨模态召回或索引吞吐，不能将完整campaign的作者结果搬进本地看板。",
+        "papers": [
+          "foundation-models:hvmap",
+          "foundation-models:ecg-rag"
+        ]
+      },
+      "question": {
+        "id": "cross-nov18-hvmap-alignment",
+        "question": "ECG式共享表示与HVMap的低fuzzy loss能共同证明RAG质量提升吗？",
+        "answer": "不能。两者改变不同链路且本地都缺完整训练/检索/答案评估；HVMap还须验证语义配对泛化与联合排序，ECG须验证压缩上下文生成。诊断loss不是端到端能力。",
+        "example": "教学例：反向传播成功并不说明一个相关文档进入top10，更不说明答案正确。",
+        "papers": [
+          "foundation-models:hvmap",
+          "foundation-models:ecg-rag"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:hvmap",
+          "foundation-models:ecg-rag"
+        ],
+        "summary": "补HVMap跨空间fuzzy锚定、native权重与无配额联合检索；对照共享RAG表示，明确L1小张量与高成本完整实验的边界。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Four-layer normalized maps use cross-target fuzzy alignment; native/mapped scores merge global K, with at most two hub maps between spokes.",
+          "tradeoff": "ECG-RAG shares retrieval and compressed-generation representations. HVMap aligns existing heterogeneous databases without answering questions. Local fuzzy and joint losses are not full RAG evidence."
+        },
+        "analysis": {
+          "title": "Sharing one representation and aligning several are different system choices",
+          "body": "ECG-RAG jointly learns retrieval/compression to avoid duplicate storage and still needs decoder training. HVMap accepts already heterogeneous encoders, using paired maps and two-space scoring. Fuzzy diagonal terms anchor absolute correspondence; relative RKD geometry is insufficient. SCORE2 retains each native vector rather than always favoring the hub. Small-tensor gradients establish neither cross-modal retrieval nor index throughput, so author campaign results must not become local dashboard claims."
+        },
+        "question": {
+          "question": "Do ECG shared representations plus a low HVMap fuzzy loss prove better RAG?",
+          "answer": "No. They change different stages, and local components lack complete training, retrieval and answer evaluation. HVMap needs semantic generalization and union rankings; ECG needs compressed-context generation. Diagnostic loss is not end-to-end capability.",
+          "example": "Teaching example: successful backpropagation does not put a relevant document in top ten or make an answer correct."
+        },
+        "update": "Add HVMap cross-space anchors, native weights and quota-free merging, contrasted with shared RAG representations. Separate L1 tensor evidence from high-cost full campaigns."
+      }
+    },
+    {
+      "paper": "foundation-models:mixed-signals-weights",
+      "target_card": "foundation-models/evaluation-and-evidence",
+      "source_revisions": {
+        "foundation-models:mixed-signals-weights": "a445ef56e0412ba813230da9f50808a00063c16e12464d02e598ef333039beca",
+        "foundation-models:activation-model-scanner": "9160cad6a859eb0edd5be4fdc3cb49cc0b6077d93f426931592b67298289ff73"
+      },
+      "comparison": {
+        "position": "用原子参数补丁和受限practice反馈表达WSP接口，测试标签留在外部评价器，不用SGD替代推理编辑。",
+        "tradeoff": "AMS从固定激活读出结构差异，不写参数也不认证安全；WSP问能否推理改权重。当前L0线性harness不含LLM、TinyEEGNet或被试数据。",
+        "sections": [
+          "核心公式",
+          "数据协议与代码映射",
+          "结果、负控与边界",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "读出差异与修复能力不能靠同一个诊断标签混为一谈",
+        "body": "AMS的方向/漂移是检测信号，存在结构保持攻击盲区；Mixed Signals的推理写权重还要求受限反馈和独立未见被试评价。原子写入、失败消耗预算和正确balanced accuracy是必要工程合同，却不创造会编辑的LLM。SGD违规替换和test反馈泄漏都改变了问题。完整campaign高成本不复现，保留L0接口与实际CUDA加载前向证据，不拿作者医学结果背书。",
+        "papers": [
+          "foundation-models:mixed-signals-weights",
+          "foundation-models:activation-model-scanner"
+        ]
+      },
+      "question": {
+        "id": "cross-nov18-wsp-not-ams",
+        "question": "AMS检查通过、权重补丁接口也通过，能标成成功修复吗？",
+        "answer": "不能。AMS仅给激活结构诊断，接口仅给原子性/预算合同；修复需要真实推理编辑器在权限隔离的practice反馈下操作，并在未见被试上独立评价。",
+        "example": "教学例：把线性层取负确实改了forward，但不能当EEG模型准确率提高。",
+        "papers": [
+          "foundation-models:mixed-signals-weights",
+          "foundation-models:activation-model-scanner"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:mixed-signals-weights",
+          "foundation-models:activation-model-scanner"
+        ],
+        "summary": "补WSP权重补丁、预算和评价接口，对照AMS检测而非编辑的边界；不调用LLM、不替代TinyEEGNet，完整实验高成本不复现。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Atomic patches and bounded practice feedback express the WSP interface; test labels remain external and SGD does not replace reasoning edits.",
+          "tradeoff": "AMS reads fixed activations without editing or certifying safety. WSP asks about reasoning-based weight changes. The L0 linear harness has no LLM, TinyEEGNet or subject records."
+        },
+        "analysis": {
+          "title": "Detecting a difference is not evidence of repair capability",
+          "body": "AMS directions/drift are signals with structure-preserving attack blind spots. Mixed Signals additionally requires bounded editing feedback and independent unseen-subject evaluation. Atomicity, charged failures and balanced accuracy are necessary contracts, not an editing LLM. SGD substitution and test-feedback leakage change the task. High-cost campaigns are not reproduced; retain L0 and real CUDA loading/forward evidence without borrowing author medical results."
+        },
+        "question": {
+          "question": "Do passing AMS and patch-interface checks establish successful repair?",
+          "answer": "No. AMS supplies structural diagnostics and the interface supplies atomicity/budget contracts. Repair needs an actual reasoning editor under isolated practice feedback and independent unseen-subject evaluation.",
+          "example": "Teaching example: negating a linear layer changes its forward pass, not necessarily EEG accuracy."
+        },
+        "update": "Add WSP patch, budget and evaluator interfaces against AMS's detection-not-editing boundary. No LLM or TinyEEGNet substitute; high-cost full experiments are not reproduced."
+      }
+    }
+  ]
+}

@@ -375,6 +375,11 @@
 
 - [Behavioral Canaries: Auditing Private Retrieved Context Usage in RL Fine-Tuning](../2604.22191-behavioral-canaries/README.md)（`behavioral-canaries`）：RL 更新可能留下风格偏好而不是逐字记忆，因此只测训练句复现不一定能判断检索文档是否被用于后训练。本文把文档 trigger 与弱风格 canary 的偏好反馈相关联，再以未参与训练的成对文档测量目标风格概率是否放大。
 
+### 偏好评测与校准
+
+- [Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix](../2611.19840-calibrated-judges-protocol/README.md)（`calibrated-judges-protocol`）：论文先报告三个负结果：音素交织继续预训练没有改善可感知口语风格且增加重复；prosody plan 遵从低于门槛；规则韵律 reward 的人类与裁判盲评近似随机。作者因此把重点转向评测：自动特征、功效受限的人类盲评、经过 catch trials 校准的 LLM judge，三层互补，不能用单一客观特征代替感知质量。
+- [Similar Models, Broken Odds: Where Luce's Axiom Fails in Chatbot Arena](../2610.19095-luce-similarity-audit/README.md)（`luce-similarity-audit`）：Bradley–Terry 用每个模型一个分数推导任意两模型胜率，隐含“加入相似选项不应改变现有两者赔率”的 Luce/IIA 思路。作者发现，同系列版本、同代不同尺寸和同实验室模型之间的投票比全局分差预测得更果断。
+
 ### 成对、单样本与排序偏好
 
 - [CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF](../2610.21138-clean-rm/README.md)（`clean-rm`）：不同偏好样本的标注噪声不一定相同。CleanRM 用少量干净反馈校准两个方向的样本级噪声率；以语义与恢复偏好的**联合分布**作最优传输，而不是只匹配偏好直方图。

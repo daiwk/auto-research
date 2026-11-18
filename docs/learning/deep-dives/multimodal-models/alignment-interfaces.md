@@ -7,7 +7,7 @@ hide:
 
 # 多模态对齐到底对齐什么：向量、视觉接口还是证据依赖
 
-[多模态](../index.md) · 更新 2026-11-15 · 27 篇主题资料 / 13 篇重点对照
+[多模态](../index.md) · 更新 2026-11-18 · 29 篇主题资料 / 15 篇重点对照
 
 CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条件生成，CV-OPD训练证据依赖，UMRM给回答评分。它们的输出合同和监督对象不同，不是同一条从小到大的能力排行榜。
 
@@ -38,6 +38,8 @@ CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条�
 | [Asymmetric Multimodal Learning with Decomposed JEPAs](../../../foundation-models/2611.16639-d-jepa/README.md) · [原始来源](https://arxiv.org/abs/2611.16639v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 在每模态拆共享core/私有fiber，对四子空间独立SIGReg，预测另一view的停止梯度表示，仅惩罚四组private-shared相关。 | CLIP直接把配对图文映射进同一单位空间并双向对比；D-JEPA专门处理信息不对称下共享与私有信号的分工。定理只约束严格alignment-only解，不是对CLIP完整训练的无条件否定。 |
 | [DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces](../../../foundation-models/2611.15968-duojepa/README.md) · [原始来源](https://arxiv.org/abs/2611.15968v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 各模态保留自己的LeJEPA空间，单层skipless translator在对方own space做InfoNCE；centroid由逐view LN/单位化后聚合，两个目标侧都反传。 | CLIP直接优化共同空间的图文分数；DuoJEPA将匹配压力交给无残差翻译层，但encoder仍联合训练。没有直接own-space项不证明独立训练，也不保证任意空间都能翻译。 |
 | [Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning](../../../foundation-models/2601.20154-spectral-ghost/README.md) · [原始来源](https://arxiv.org/abs/2601.20154v4)<br>章节：背景与主要改动、核心机制与公式、论文结果与证据边界 | 以谱表示联系CLIP等SSL方法，区分无偏、固定负例surrogate和有偏plug-in，推导排除同样本项的U-statistic目标；固定v4仅理论收录。 | CLIP提供可执行图文对比模型；Spectral Ghost分析其参数化与目标估计，不能由无偏或一致性推出某任务准确率更高。v1 Google署名历史也不能替代v4机构。 |
+| [Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries](../../../multimodal-models/2611.17726-multimodal-library-protocol/README.md) · [原始来源](https://arxiv.org/abs/2611.17726v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 沿用ColPali页面多向量做query-token到page-token MaxSim，比较Qdrant距离与索引；本地仅向量/排名算术和带scope的计时读出。 | CLIP学习双塔全局归一化表示与对比目标，数字馆论文不新训练对齐模型而研究局部读出/数据库。CLIP真实图像小实验与人工token向量算术的证据等级不同，不能当视觉检索胜负。 |
+| [FEND: Far-End Detection in Outbound Voice AI Calls](../../../multimodal-models/2611.18050-fend-protocol/README.md) · [原始来源](https://arxiv.org/abs/2611.18050v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 外部事件在deadline内累计，以VM／IVR／AI优先级仲裁，human默认；独立HFPR和声学human-null接口。 | GSLM2学习多流语音单元、共享时序和生成分布；FEND是外呼风险检测。外部离散单元与检测事件都不是本地训练模型，二者不能共用能力排名。 |
 
 </div>
 
@@ -102,6 +104,18 @@ Unbundling把额外容量移进联合attention/FFN，BLIP-2先用query从视觉t
 InfoNCE中的负例数不仅影响采样方差；在错设条件下可改变surrogate最优点。另一方面，non-contrastive平方协方差若带同样本项也可有偏。应分别审查表示几何、目标定义、独立采样和优化预算，而不是给方法贴contrastive标签后推断成本/能力。本篇原文无实证矩阵，本地也不制造高成本延期实验。
 
 对照来源：[spectral-ghost](../../../foundation-models/2601.20154-spectral-ghost/README.md) · [clip](../../../reproductions/2103.00020-clip/README.md)
+
+### 训练对齐、局部检索与数据库吞吐要分别验证
+
+CLIP的相似度来自对比学习的全局图文表征；页面多向量late interaction保留每个query token的局部最佳证据。向量检索分数不是相关概率，必须由独立封存相关性评价。数字馆原文数据库预编码与端到端并发描述存在冲突，因此本地接口强制scope并用真实wall time算QPS，拒绝把作者Table VII解释为已复现的模型吞吐。
+
+对照来源：[multimodal-library-protocol](../../../multimodal-models/2611.17726-multimodal-library-protocol/README.md) · [clip](../../../reproductions/2103.00020-clip/README.md)
+
+### 语音表示分数与通话决策风险属于不同层次
+
+GSLM2的局部切片按流变化联合去重并计算转移分数，源模型仍在外部。FEND的局部切片从外部带时间事件选类，同样没有音频检测器。最高优先级要等窗口结束，不能抢答；HFPR以真人为分母。原文0.979是human-versus-rest F1，AI类F1仅0.571，不能把二元高分写成四类全解决。
+
+对照来源：[fend-protocol](../../../multimodal-models/2611.18050-fend-protocol/README.md) · [gslm2](../../../multimodal-models/2611.01143-gslm2/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -217,9 +231,37 @@ InfoNCE中的负例数不仅影响采样方差；在错设条件下可改变surr
 
     对照来源：[spectral-ghost](../../../foundation-models/2601.20154-spectral-ghost/README.md) · [clip](../../../reproductions/2103.00020-clip/README.md)
 
+### MaxSim小例子优于干扰向量，能否据此说它比CLIP更适合真实数字馆？ {#cross-nov18-multimodal-library-protocol}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。它只验证读出算术。真实比较还需相同页面与查询、标签审计、编码/重排配置和预算，并分离模型质量、索引召回与服务性能；CLIP小任务结果也不代表长文页面能力。
+
+    **教学例子：** 两token可分别命中页面两patch且分数为2，但这不说明相关页是否被完整索引，也不说明含ColPali推理的端到端QPS。
+
+    对照来源：[multimodal-library-protocol](../../../multimodal-models/2611.17726-multimodal-library-protocol/README.md) · [clip](../../../reproductions/2103.00020-clip/README.md)
+
+### FEND的human-versus-rest F1为0.979，可以证明多流语音模型也擅长AI语音识别吗？ {#cross-cross-nov18-fend-protocol}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。该二元指标不代表AI类F1或表征质量；FEND还依赖商业ASR、工具和时序模型。GSLM2的表示／语言判别任务不同，需各自冻结协议和真实模型输出。
+
+    **教学例子：** 教学例：human误拒低，但AI被误判为voicemail，二元分数仍可很高，四类分辨却不理想。
+
+    对照来源：[fend-protocol](../../../multimodal-models/2611.18050-fend-protocol/README.md) · [gslm2](../../../multimodal-models/2611.01143-gslm2/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 外部事件在deadline内累计，以VM／IVR／AI优先级仲裁，human默认；独立HFPR和声学human-null接口。 完整实验高成本不复现，局部协议不作能力或Evolve证据。
+
+涉及：[fend-protocol](../../../multimodal-models/2611.18050-fend-protocol/README.md) · [gslm2](../../../multimodal-models/2611.01143-gslm2/README.md)
+
+**2026-11-18** · 补入页面MaxSim、独立检索指标和显式计时scope的L0接口；与CLIP训练机制分轴，保留原文并发口径冲突，不跑高成本完整索引。
+
+涉及：[multimodal-library-protocol](../../../multimodal-models/2611.17726-multimodal-library-protocol/README.md) · [clip](../../../reproductions/2103.00020-clip/README.md)
 
 **2026-11-15** · 补入固定v4理论方法及版本化机构证据，不虚构训练实验或本地指标。
 
@@ -257,7 +299,7 @@ InfoNCE中的负例数不仅影响采样方差；在错设条件下可改变surr
 
 覆盖 20 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 27 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 29 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -288,6 +330,8 @@ InfoNCE中的负例数不仅影响采样方差；在错设条件下可改变surr
 - [Asymmetric Multimodal Learning with Decomposed JEPAs](../../../foundation-models/2611.16639-d-jepa/README.md)
 - [DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces](../../../foundation-models/2611.15968-duojepa/README.md)
 - [Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning](../../../foundation-models/2601.20154-spectral-ghost/README.md)
+- [Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries](../../../multimodal-models/2611.17726-multimodal-library-protocol/README.md)
+- [FEND: Far-End Detection in Outbound Voice AI Calls](../../../multimodal-models/2611.18050-fend-protocol/README.md)
 
 </details>
 

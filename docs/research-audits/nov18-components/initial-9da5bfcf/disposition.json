@@ -1,0 +1,7 @@
+{
+  "source_commit": "9da5bfcfd9756ba4c9221d163bfe475664af0573",
+  "acceptance": false,
+  "reason": "Initial CPU/CUDA diagnostics passed but independent source review found two uncovered edge cases: zero affine HVMap output and recovery arithmetic overflow. Sources were fixed and final execution must use a new frozen commit. These historical runs are retained, not promoted to final evidence or overwritten.",
+  "full_experiments_executed": false,
+  "promotion_eligible": false
+}

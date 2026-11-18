@@ -12,6 +12,7 @@
 
 | 方向 | 方法 | 机构 | 日期 | 主要方法 | 本地入口 |
 |---|---|---|---|---|---|
+| 类型化决策协议 | [Typed Inbox](2610.32955-typed-inbox-protocol/README.md) | Independent Researcher | 2026-10-23 | 先脱敏冻结模型可见快照，整线程隔离，以validation行动成本选择阈值；不将字段准确率当最终行动效用 | L0 CPU 协议；不运行邮箱模型，完整实验不复现 |
 | 类型反馈持续适配 | [Jev-DLC](2610.31521-jev-dlc/README.md) | HKUST (Guangzhou) | 2026-10-22 | 冻结scorer上语义计数、双通道PA-I与fixed-share可靠性，严格先决策后反馈 | CPU状态组件与独立参考；不加载JEV，27B完整实验高成本不复现 |
 | 多正确项校准审计 | [When Multiple Choices Are Correct](2610.29217-jev-multicorrect/README.md) | Independent Researcher | 2026-10-21 | 分离概率排序、完整集合恢复与独立二元校准；验证阈值固定后再评测test | CPU评分/隔离契约，未调用JEV，完整API实验高成本不复现 |
 | 多模态choice重排 | [Multimodal Reranking Is a System One Decision](../multimodal-models/2610.28435-system-one-rerank/README.md) | Aalto University | 2026-10-20 | 同一图文上下文单前向读取候选字母logits，稳定重排并保留尾部 | SmolVLM-256M真实A100前向；仅L1接口，完整27B实验不复现 |

@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-18",
+  "scope": "Four affordable CPU protocol opportunities from the already-reviewed November 15 closure; no new exhaustive scan claimed.",
+  "reviews": [
+    {
+      "id": "2610.32955",
+      "reviewed_arxiv_id": "2610.32955v4",
+      "identity": "system-one:typed-inbox-protocol",
+      "title": "Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox",
+      "published_at": "2026-10-23T17:49:43Z",
+      "source_url": "https://arxiv.org/html/2610.32955v4",
+      "source_sha256": "b853f2c0743cbcb06593ea3261dc3c8b862f16f6b64e96bc6af5e2ae7443a868",
+      "source_review_scope": "bounded primary method, protocol, evaluation, limitations and resource sections; not claimed line-by-line full manuscript review",
+      "locations": [
+        "§3–5 task/sampling/visible view",
+        "§6 action composition and Figure 1",
+        "§7 production observation",
+        "§9 validity"
+      ],
+      "implementation_status": "component_only",
+      "evaluation_tier": "l0_interface",
+      "local_operator": "auto_research.foundation_models.typed_inbox_protocol.diagnostic",
+      "method_fidelity_boundary": "L0仅含显式敏感值替换、无标签整线程分折及二元validation成本阈值；不是通用脱敏、原文类别分层CV、三开关组合成本或邮箱模型复现。",
+      "production_gate_passed": false,
+      "production_evidence_boundary": "Actual use or production-origin evaluation is not randomized production A/B. No industrial A/B acceptance inferred.",
+      "code_verification": {
+        "status": "作者公开MIT代码；固定v2.3 tag解析为902725e8439545451f6824c6916eb60ae2b7248b，私有邮件和标签不公开。",
+        "url": "https://github.com/federicolucca/foyer-measure/tree/902725e8439545451f6824c6916eb60ae2b7248b",
+        "verified_on": "2026-11-18"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2610.32955v4",
+        "available_resource": "单张A100/A30或本地Mac",
+        "basis": "完整私有邮箱、人工标签、联系图、多本地和托管模型及线程分层交叉验证不能低成本等价重建。",
+        "decision": "完整实验高成本不复现（审查DONE）；只实现CPU快照、线程隔离及validation行动成本阈值接口。"
+      },
+      "readme_sha256": "25815fc18a615070fcbcbfd15bffd49c876c6f5c5d3dfd146dca549142d7a464",
+      "comparison_source": {
+        "identity": "foundation-models:jev-capability",
+        "path": "docs/system-one/2610.11978-jev-capability/README.md",
+        "sha256": "9484343eb3f24d2ff8c29ecdb8396472ae1bdf62060678922467f9d94eb10033",
+        "read_done": true
+      },
+      "requires_gpu_validation": false,
+      "local_evidence_type": "CPU synthetic protocol/mechanism checks, not capability scores"
+    },
+    {
+      "id": "2611.15700",
+      "reviewed_arxiv_id": "2611.15700v1",
+      "identity": "agent-research:askalcf-protocol",
+      "title": "AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support",
+      "published_at": "2026-11-11T16:38:54Z",
+      "source_url": "https://arxiv.org/html/2611.15700v1",
+      "source_sha256": "6bccd63ae328991fc0fab63f8aee8a72df4ef37c44b1098d6f22c21529c58bf3",
+      "source_review_scope": "bounded primary method, protocol, evaluation, limitations and resource sections; not claimed line-by-line full manuscript review",
+      "locations": [
+        "§III-B1–5 layers and reproduction controls",
+        "Table I attribution outcomes",
+        "§V-D judge gate",
+        "§V-E after/null repairs",
+        "§VI limitations"
+      ],
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "local_operator": "auto_research.agent_research.askalcf_protocol.diagnostic",
+      "method_fidelity_boundary": "L1粗粒度七路合同不等于原文28条规则、7类Agent judge覆盖门或完整RAG；本地保守noise gate不是原文统计显著性检验。",
+      "production_gate_passed": false,
+      "production_evidence_boundary": "Actual use or production-origin evaluation is not randomized production A/B. No industrial A/B acceptance inferred.",
+      "code_verification": {
+        "status": "固定v1未找到可核实本篇作者源码链接，引用的工具或框架不算本篇发布。",
+        "url": null,
+        "verified_on": "2026-11-18"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2611.15700v1",
+        "available_resource": "单张A100/A30或本地Mac",
+        "basis": "完整系统依赖ALCF私有支持日志、设施知识、专家参考与Argo托管模型，多arm闭环不能由单卡低成本等价重建。",
+        "decision": "高成本完整实验不复现（审查DONE）；只实现回答盲双scope、粗粒度路由、revision缓存和真实人审动作回调。"
+      },
+      "readme_sha256": "b3b3f4b8a8c8321985e4da46b945c113afdcb88d88d25cb19ef0a92095d44422",
+      "comparison_source": {
+        "identity": "agent-research:harness2",
+        "path": "docs/agent-research/2610.14224-harness2/README.md",
+        "sha256": "c738a9266c1647b8f5cc0e50a0055d1aecf1fcf783ee78de3405c2e84850f48a",
+        "read_done": true
+      },
+      "requires_gpu_validation": false,
+      "local_evidence_type": "CPU synthetic protocol/mechanism checks, not capability scores"
+    },
+    {
+      "id": "2611.17381",
+      "reviewed_arxiv_id": "2611.17381v1",
+      "identity": "agent-research:prodpilot-protocol",
+      "title": "ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects",
+      "published_at": "2026-11-11T11:36:45Z",
+      "source_url": "https://arxiv.org/pdf/2611.17381v1",
+      "source_sha256": "7bce2d6c62085f8024f5af9f548789ab82c3ee5982c84df19ddde586e9adedfa",
+      "source_review_scope": "bounded primary method, protocol, evaluation, limitations and resource sections; not claimed line-by-line full manuscript review",
+      "locations": [
+        "PDF p.1 affiliations/abstract",
+        "§V architecture and repair/gate",
+        "§VI data/training/provider boundary",
+        "§VII setup and results",
+        "§VIII limitations"
+      ],
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "local_operator": "auto_research.agent_research.prodpilot_protocol.diagnostic",
+      "method_fidelity_boundary": "L1回调合同不含50条JS规则、MCP、Docker、云或训练部署估计器；概率为外部输入，脚本替身不能算线上部署。",
+      "production_gate_passed": false,
+      "production_evidence_boundary": "Actual use or production-origin evaluation is not randomized production A/B. No industrial A/B acceptance inferred.",
+      "code_verification": {
+        "status": "固定v1称Python包1.0.0rc1，但未提供可核实作者源码仓库URL；本轮未验证公开源码。",
+        "url": null,
+        "verified_on": "2026-11-18"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/pdf/2611.17381v1",
+        "available_resource": "单张A100/A30或本地Mac",
+        "basis": "完整配置含50条规则、真实IDE代理、容器、云凭据与684次Render部署，原文数据收集约35小时，并涉及真实云副作用。",
+        "decision": "高成本完整实验不复现（审查DONE）；只实现文件映射上的有界修复、独立checker、回滚及闭门部署回调。"
+      },
+      "readme_sha256": "528d60ba9ae602cf962e4b0b2faf41dc5de4e4ce6a3570fc3a0968710576d428",
+      "comparison_source": {
+        "identity": "agent-research:harness2",
+        "path": "docs/agent-research/2610.14224-harness2/README.md",
+        "sha256": "c738a9266c1647b8f5cc0e50a0055d1aecf1fcf783ee78de3405c2e84850f48a",
+        "read_done": true
+      },
+      "requires_gpu_validation": false,
+      "local_evidence_type": "CPU synthetic protocol/mechanism checks, not capability scores"
+    },
+    {
+      "id": "2611.18050",
+      "reviewed_arxiv_id": "2611.18050v1",
+      "identity": "multimodal-models:fend-protocol",
+      "title": "FEND: Far-End Detection in Outbound Voice AI Calls",
+      "published_at": "2026-11-13T11:25:42Z",
+      "source_url": "https://arxiv.org/html/2611.18050v1",
+      "source_sha256": "31c9a7974cf86f93881acf38c7e6e973fda47fc21fd9bbbb3a3db7f083eafab8",
+      "source_review_scope": "bounded primary method, protocol, evaluation, limitations and resource sections; not claimed line-by-line full manuscript review",
+      "locations": [
+        "§3 architecture and arbitration",
+        "§4 evaluation and Table 3",
+        "§5 calibration/ordering",
+        "Appendices cadence/null/sweep",
+        "limitations"
+      ],
+      "implementation_status": "component_only",
+      "evaluation_tier": "l0_interface",
+      "local_operator": "auto_research.multimodal.fend_protocol.diagnostic",
+      "method_fidelity_boundary": "L0事件／评分接口没有STFT、关键词、ASR、LLM或AI节奏模型；手工事件不构成自动语音检测能力。",
+      "production_gate_passed": false,
+      "production_evidence_boundary": "Actual use or production-origin evaluation is not randomized production A/B. No industrial A/B acceptance inferred.",
+      "code_verification": {
+        "status": "固定v1未找到本篇作者源码，引用的nexmo-community等仓库不算本篇发布。",
+        "url": null,
+        "verified_on": "2026-11-18"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2611.18050v1",
+        "available_resource": "单张A100/A30或本地Mac",
+        "basis": "完整链路依赖私有生产通话、商业ASR、既有对话LLM和训练时序／声学检测器，现有资源不能低成本等价重建。",
+        "decision": "高成本完整实验不复现（审查DONE）；只实现事件deadline、优先级、human默认与HFPR／声学null校准接口。"
+      },
+      "readme_sha256": "b6073c9d55fedbdc5c57dc620154134b83250693c45fedf1078526233c5e8e95",
+      "comparison_source": {
+        "identity": "multimodal-models:gslm2",
+        "path": "docs/multimodal-models/2611.01143-gslm2/README.md",
+        "sha256": "5ab8ce37c3b3aadad488495535e4ecda1ab9dc939871212b55de7ae8d11e870a",
+        "read_done": true
+      },
+      "requires_gpu_validation": false,
+      "local_evidence_type": "CPU synthetic protocol/mechanism checks, not capability scores"
+    }
+  ]
+}

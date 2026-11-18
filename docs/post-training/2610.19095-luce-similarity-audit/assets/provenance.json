@@ -1,0 +1,16 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.19095v3",
+  "source_url": "https://arxiv.org/pdf/2610.19095v3#page=7",
+  "figure": "Figure 3",
+  "caption": "Frozen transfer to target votes between related models: win-odds gain intervals and calibration slopes.",
+  "source_format": "PDF rendered crop including original caption",
+  "image": "paper-figure-01.png",
+  "asset_sha256": "f0cf9a1acd6a47cf113d9d6cf913f46e3e1c5ec0de8f5fd01c742da158bc93cf",
+  "image_sha256": "f0cf9a1acd6a47cf113d9d6cf913f46e3e1c5ec0de8f5fd01c742da158bc93cf",
+  "source_html_sha256": "85344bbc7e80ada21d486f1af82e61863ad4ef58a728009bafe08e7e9af41ef8",
+  "pdf_clip_points": [50, 385, 297, 590],
+  "render_scale": 2,
+  "copyright": "Copyright remains with the authors; CC BY 4.0",
+  "description": "Original scientific figure and caption; no redrawing or scientific-content modification. Author results, not local measurements.",
+  "visually_verified": true
+}

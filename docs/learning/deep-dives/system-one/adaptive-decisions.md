@@ -7,7 +7,7 @@ hide:
 
 # 追加推理、跨语言路由与持续反馈，各在哪个时刻改变决策？
 
-[结构化决策](../index.md) · 更新 2026-10-27 · 4 篇主题资料 / 4 篇重点对照
+[结构化决策](../index.md) · 更新 2026-11-18 · 5 篇主题资料 / 5 篇重点对照
 
 按需决策有三条时间轴：Selective Reasoning在单题内分配推理和读取预算，跨语言级联在不同后端间分配请求，Jev-DLC用已发生反馈影响后续请求。能力评测提供基线边界，却不自动证明任何控制策略有效。所有选择都要在当前测试目标揭晓之前冻结或作出。
 
@@ -29,6 +29,7 @@ hide:
 | [Jev-DLC: Decision-Level Continual Learning from Typed Feedback](../../../system-one/2610.31521-jev-dlc/README.md) · [原始来源](https://arxiv.org/abs/2610.31521v1)<br>章节：背景与主要改动、双通道、PA-I与可靠性、本地复现与边界 | 冻结scorer之上维护保守/响应双通道，PA-I更新修正方向，以反馈前预测误差调整可靠性。 | 不保留完整交互文本，但仍依赖外部表示与固定词表；只能在提交本次选择后接收反馈，更新不得回填当前成功。本地为随机外部logits的状态组件。 |
 | [Does System One Transfer? Calibrated Typed-Decision Models, Label Budgets, and Translation for Indonesian Regional Languages](../../../system-one/2610.14112-regional-transfer/README.md) · [原始来源](https://arxiv.org/abs/2610.14112)<br>章节：背景与主要改动、核心公式、已验证结果与边界 | 分别测跨语言准确率、概率校准与错误排序；按validation宏F1选低置信度路由比例，再冻结用于test。 | 温度校准不保证把错题排到最前，翻译也非无条件有效；同句不同语言须聚类统计，不能当独立样本扩大证据。 |
 | [Specialized Decision Models vs. General-Purpose LLMs: Benchmarking Jev Across Knowledge, Reasoning, and Multilingual Tasks](../../../system-one/2610.11978-jev-capability/README.md) · [原始来源](https://arxiv.org/abs/2610.11978)<br>章节：背景与主要改动、数据与评测契约、本地验证与边界 | 规范化知识、推理和多语言有限候选任务，以隔离标签评估一次选择，并分开供应商引用与实际测量。 | 它是评测协议而非自适应算法；本地NanoJev的ARC结果不代表闭源Jev，13类接口支持也不表示13任务全量已测。 |
+| [Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox](../../../system-one/2610.32955-typed-inbox-protocol/README.md) · [原始来源](https://arxiv.org/abs/2610.32955v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 先冻结可见输入与线程切分，再按动作成本选择validation阈值；本地只含L0二元接口。 | Jev能力入口运行独立问题／候选并按gold计分；Typed Inbox关注多开关组合后的行动损失与私有邮箱分布。线程隔离不能被三seed替代，简单阈值也不是原文完整模型。 |
 
 </div>
 
@@ -45,6 +46,12 @@ Selective Reasoning在答案未知时观察自己的中间分布，决定是否�
 跨语言迁移用ECE/Brier衡量概率校准，用风险覆盖等指标衡量错误排序，Selective Reasoning的归一化熵则只读当前分布集中程度。一个温度能改善校准，却不一定改善错题排序；能力评测中知识强、数学弱也不能直接变成逐题启动规则。应在验证集确定路由和预算，再独立测量不同任务与语言。
 
 对照来源：[jev-regional-transfer](../../../system-one/2610.14112-regional-transfer/README.md) · [selective-reasoning](../../../system-one/2610.19644-selective-reasoning/README.md) · [jev-capability](../../../system-one/2610.11978-jev-capability/README.md)
+
+### 从“选对标签”到“少漏重要邮件”还隔着行动策略
+
+Jev能力评测要求请求不带标准答案，并记录真实后端和数据覆盖。Typed Inbox进一步指出预测字段会组合为真实动作，错误的成本不对称；相同accuracy不代表同样漏信风险。先冻结邮箱可见快照，整线程切分，再在训练／validation内选阈值。原文的类别分层CV和完整三开关成本没有被局部二元接口替代。
+
+对照来源：[typed-inbox-protocol](../../../system-one/2610.32955-typed-inbox-protocol/README.md) · [jev-capability](../../../system-one/2610.11978-jev-capability/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -80,15 +87,29 @@ Selective Reasoning在答案未知时观察自己的中间分布，决定是否�
 
     对照来源：[jev-regional-transfer](../../../system-one/2610.14112-regional-transfer/README.md) · [jev-capability](../../../system-one/2610.11978-jev-capability/README.md) · [selective-reasoning](../../../system-one/2610.19644-selective-reasoning/README.md)
 
+### 把邮箱noise阈值在held-out邮件上调到最低成本，能当Jev能力评测的公平对比吗？ {#cross-cross-nov18-typed-inbox-protocol}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。它把测试标签用于选择策略，且动作成本不同于独立选择accuracy。必须提前固定切分、成本和阈值选择规则，冻结后只评分；本地也没有调用Jev。
+
+    **教学例子：** 教学例：看到漏掉一封重要信后回调阈值，会改变刚评过样本的决策，不能再当未见测试。
+
+    对照来源：[typed-inbox-protocol](../../../system-one/2610.32955-typed-inbox-protocol/README.md) · [jev-capability](../../../system-one/2610.11978-jev-capability/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 先冻结可见输入与线程切分，再按动作成本选择validation阈值；本地只含L0二元接口。 完整实验高成本不复现，局部协议不作能力或Evolve证据。
+
+涉及：[typed-inbox-protocol](../../../system-one/2610.32955-typed-inbox-protocol/README.md) · [jev-capability](../../../system-one/2610.11978-jev-capability/README.md)
 
 **2026-10-27** · 首版：比较selective-reasoning、jev-dlc、jev-regional-transfer、jev-capability，梳理单请求内控制与请求之间的状态更新与熵、校准、错误排序与任务准确率，并补充跨论文问答。
 
 涉及：[jev-capability](../../../system-one/2610.11978-jev-capability/README.md) · [jev-dlc](../../../system-one/2610.31521-jev-dlc/README.md) · [jev-regional-transfer](../../../system-one/2610.14112-regional-transfer/README.md) · [selective-reasoning](../../../system-one/2610.19644-selective-reasoning/README.md)
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 4 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 5 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -96,6 +117,7 @@ Selective Reasoning在答案未知时观察自己的中间分布，决定是否�
 - [Jev-DLC: Decision-Level Continual Learning from Typed Feedback](../../../system-one/2610.31521-jev-dlc/README.md)
 - [Does System One Transfer? Calibrated Typed-Decision Models, Label Budgets, and Translation for Indonesian Regional Languages](../../../system-one/2610.14112-regional-transfer/README.md)
 - [Selective Reasoning for Typed Decision Models: When to Start, Read, and Stop](../../../system-one/2610.19644-selective-reasoning/README.md)
+- [Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox](../../../system-one/2610.32955-typed-inbox-protocol/README.md)
 
 </details>
 

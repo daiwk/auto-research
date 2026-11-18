@@ -7,7 +7,7 @@ hide:
 
 # 能力证据：评测采样、读出与可靠性
 
-[基础模型](index.md) / 88 个问题 · 22 篇论文
+[基础模型](index.md) / 100 个问题 · 25 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">88 个问题 · 22 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">100 个问题 · 25 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:mixed-signals-weights" data-paper-title="Mixed Signals: Weight-Space Programming for EEG and ECG" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Mixed Signals: Weight-Space Programming for EEG and ECG 基础模型 EPFL 2026-11-10 论文让 LLM 通过阅读/写入网络参数解决 EEG/ECG 任务，覆盖读权重、改善、修复和从零写网络。关键区别是 weight-space programming 不使用梯度下降或迭代拟合；把 SGD 包装成“编辑器”不能视为等价复现。不同实验的网络、数据权限和 evaluate/probe 预算不同。§II 成本过高，不复现（审查 DONE），不调用付费模型、不启动完整编辑矩阵，不自动重试。诊断里的 nn.Linear(4,2) 只是自定义测试 harness，不是论文 TinyEEGNet；L0 接口：实现外部权重补丁、practice 调用预算和评价算术。没有调用 LLM，没有复现 TinyEEGNet/ECGResNet，没有患者数据，不声称模型会理解或修复网络。apply_weight_patch 只编辑显式传入的已注册参数，不接受任意 Python 程序或 buffer；PracticeBudget 只封装外部 practice callback；测试 labels 仅传给评价函数，不传给编辑提供方。  网络架构 权重空间编程与可解释性 基础模型 能力证据：评测采样、读出与可靠性 Mixed Signals中的权重空间编程，为什么不能直接用SGD实现？ 其研究问题是LLM能否通过推理读取或写入权重，规则排除梯度下降与迭代拟合。SGD能优化网络但回答不同问题；本地只实现外部补丁接口，未伪装一个LLM编辑器。 教学例：把loss.backward和optimizer.step藏在edit函数中，仍是梯度训练，不是WSP。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<span id="paper-foundation-models-mixed-signals-weights-57c6ef40" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-449c1ff75e858a31">Mixed Signals中的权重空间编程，为什么不能直接用SGD实现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amixed-signals-weights">Mixed Signals: Weight-Space Programming for EEG and ECG</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · EPFL</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>其研究问题是LLM能否通过推理读取或写入权重，规则排除梯度下降与迭代拟合。SGD能优化网络但回答不同问题；本地只实现外部补丁接口，未伪装一个LLM编辑器。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把loss.backward和optimizer.step藏在edit函数中，仍是梯度训练，不是WSP。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13758v1">原论文</a> · <a href="../../../../foundation-models/2611.13758-mixed-signals-weights/">实现解读</a> · <a href="#qa-449c1ff75e858a31">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:mixed-signals-weights" data-paper-title="Mixed Signals: Weight-Space Programming for EEG and ECG" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Mixed Signals: Weight-Space Programming for EEG and ECG 基础模型 EPFL 2026-11-10 论文让 LLM 通过阅读/写入网络参数解决 EEG/ECG 任务，覆盖读权重、改善、修复和从零写网络。关键区别是 weight-space programming 不使用梯度下降或迭代拟合；把 SGD 包装成“编辑器”不能视为等价复现。不同实验的网络、数据权限和 evaluate/probe 预算不同。§II 成本过高，不复现（审查 DONE），不调用付费模型、不启动完整编辑矩阵，不自动重试。诊断里的 nn.Linear(4,2) 只是自定义测试 harness，不是论文 TinyEEGNet；L0 接口：实现外部权重补丁、practice 调用预算和评价算术。没有调用 LLM，没有复现 TinyEEGNet/ECGResNet，没有患者数据，不声称模型会理解或修复网络。apply_weight_patch 只编辑显式传入的已注册参数，不接受任意 Python 程序或 buffer；PracticeBudget 只封装外部 practice callback；测试 labels 仅传给评价函数，不传给编辑提供方。  网络架构 权重空间编程与可解释性 基础模型 能力证据：评测采样、读出与可靠性 补丁原子性和practice预算为何都需要负控？ 无效参数不能在校验后半途留下已改权重，所以先验证全补丁再提交并预留回滚。practice每次实际尝试在执行前计数，失败仍消耗预算；否则异常可以变成免费搜索。 教学例：weight合法、bias含NaN时两者都不能写入；一次callback异常也消耗一次。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-c357234928a0938d">补丁原子性和practice预算为何都需要负控？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amixed-signals-weights">Mixed Signals: Weight-Space Programming for EEG and ECG</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · EPFL</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>无效参数不能在校验后半途留下已改权重，所以先验证全补丁再提交并预留回滚。practice每次实际尝试在执行前计数，失败仍消耗预算；否则异常可以变成免费搜索。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：weight合法、bias含NaN时两者都不能写入；一次callback异常也消耗一次。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13758v1">原论文</a> · <a href="../../../../foundation-models/2611.13758-mixed-signals-weights/">实现解读</a> · <a href="#qa-c357234928a0938d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:mixed-signals-weights" data-paper-title="Mixed Signals: Weight-Space Programming for EEG and ECG" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Mixed Signals: Weight-Space Programming for EEG and ECG 基础模型 EPFL 2026-11-10 论文让 LLM 通过阅读/写入网络参数解决 EEG/ECG 任务，覆盖读权重、改善、修复和从零写网络。关键区别是 weight-space programming 不使用梯度下降或迭代拟合；把 SGD 包装成“编辑器”不能视为等价复现。不同实验的网络、数据权限和 evaluate/probe 预算不同。§II 成本过高，不复现（审查 DONE），不调用付费模型、不启动完整编辑矩阵，不自动重试。诊断里的 nn.Linear(4,2) 只是自定义测试 harness，不是论文 TinyEEGNet；L0 接口：实现外部权重补丁、practice 调用预算和评价算术。没有调用 LLM，没有复现 TinyEEGNet/ECGResNet，没有患者数据，不声称模型会理解或修复网络。apply_weight_patch 只编辑显式传入的已注册参数，不接受任意 Python 程序或 buffer；PracticeBudget 只封装外部 practice callback；测试 labels 仅传给评价函数，不传给编辑提供方。  网络架构 权重空间编程与可解释性 基础模型 能力证据：评测采样、读出与可靠性 Mixed Signals接口与AMS激活扫描能互相替代吗？ 不能。AMS从固定模型激活方向检查安全训练变化，不编辑参数，也不是安全认证；WSP研究推理修改权重并在未见被试验证。两者诊断通过都不能推出医疗效果或真实修复能力。 教学例：AMS自比较方向相同不证明模型未被修改；线性harness补丁改变forward也不证明EEG修复。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-79d0658911b34103">Mixed Signals接口与AMS激活扫描能互相替代吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amixed-signals-weights">Mixed Signals: Weight-Space Programming for EEG and ECG</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · EPFL</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。AMS从固定模型激活方向检查安全训练变化，不编辑参数，也不是安全认证；WSP研究推理修改权重并在未见被试验证。两者诊断通过都不能推出医疗效果或真实修复能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：AMS自比较方向相同不证明模型未被修改；线性harness补丁改变forward也不证明EEG修复。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13758v1">原论文</a> · <a href="../../../../foundation-models/2611.13758-mixed-signals-weights/">实现解读</a> · <a href="#qa-79d0658911b34103">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:mixed-signals-weights" data-paper-title="Mixed Signals: Weight-Space Programming for EEG and ECG" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Mixed Signals: Weight-Space Programming for EEG and ECG 基础模型 EPFL 2026-11-10 论文让 LLM 通过阅读/写入网络参数解决 EEG/ECG 任务，覆盖读权重、改善、修复和从零写网络。关键区别是 weight-space programming 不使用梯度下降或迭代拟合；把 SGD 包装成“编辑器”不能视为等价复现。不同实验的网络、数据权限和 evaluate/probe 预算不同。§II 成本过高，不复现（审查 DONE），不调用付费模型、不启动完整编辑矩阵，不自动重试。诊断里的 nn.Linear(4,2) 只是自定义测试 harness，不是论文 TinyEEGNet；L0 接口：实现外部权重补丁、practice 调用预算和评价算术。没有调用 LLM，没有复现 TinyEEGNet/ECGResNet，没有患者数据，不声称模型会理解或修复网络。apply_weight_patch 只编辑显式传入的已注册参数，不接受任意 Python 程序或 buffer；PracticeBudget 只封装外部 practice callback；测试 labels 仅传给评价函数，不传给编辑提供方。  网络架构 权重空间编程与可解释性 基础模型 能力证据：评测采样、读出与可靠性 recovery超过1是不是bug，测试标签能给编辑器吗？ 恢复比例按(repaired-faulty)/(healthy-faulty)计算，可能大于1或小于0，不应截断；零分母报错。test标签只能留在评价器，不能以practice反馈泄漏；本地callback不是恶意代码沙箱。 教学例：healthy=.8、faulty=.4、repaired=.9，recovery=1.25，是超过健康参考，不是125%准确率。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-d8f04909090de493">recovery超过1是不是bug，测试标签能给编辑器吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amixed-signals-weights">Mixed Signals: Weight-Space Programming for EEG and ECG</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · EPFL</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>恢复比例按(repaired-faulty)/(healthy-faulty)计算，可能大于1或小于0，不应截断；零分母报错。test标签只能留在评价器，不能以practice反馈泄漏；本地callback不是恶意代码沙箱。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：healthy=.8、faulty=.4、repaired=.9，recovery=1.25，是超过健康参考，不是125%准确率。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13758v1">原论文</a> · <a href="../../../../foundation-models/2611.13758-mixed-signals-weights/">实现解读</a> · <a href="#qa-d8f04909090de493">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:runway-inference-protocol" data-paper-title="Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving 基础模型 MasterControl, Inc. 2026-11-09 推理吞吐不是单一模型或引擎的属性，它随输入输出长度、并发、streaming、warm-up、硬件和引擎配置变化。受监管场景还必须能回答：测量对应什么配置、是否满足既定 SLA、每个成功请求多少钱、报告能否由同一份原始测量重建。Runway 不修改 AIPerf 的测量定义，而是采用 Before / Measure / After：前置扩展实验网格；中间用原样 AIPerf；后置计算 SLA、成本和审计。缓存命中重用旧测量，不是又获得一个独立样本。 完整多引擎/实例/并发/MTP 压测：成本过高，不复现（审查 DONE）。教学常数不代表云实例报价或吞吐，实际诊断由组件指标产物记录。状态：CPU L1 缓存/SLA/成本协议组件，diagnostic only。不部署模型、不执行 AIPerf、不提交云实例任务。完整多引擎/实例/并发/MTP 压测：成本过高，不复现（审查 DONE）。result_for_cell 只接受明确注入的 measurement callback；默认没有推理后端。cache-only miss 抛错，no-cache 强制新 callback，返回 deepcopy 防止调用方篡改缓存对象。原始结果与后置 SLA 决策分开；  推理与系统效率 推理测量与证据协议 基础模型 能力证据：评测采样、读出与可靠性 Runway为什么不自己重新定义一套推理吞吐？ 它让原样AIPerf负责Measure，自己处理Before实验设计和After的SLA/成本/审计。测量与决策分离后，能说明报告基于哪份原始结果，而不把配置选择和测量定义混在一起。 教学例：同一raw p95可被两个不同版本SLA审查；这是两次决策，不是两次独立硬件测量。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<span id="paper-foundation-models-runway-inference-protocol-b9a61ce3" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-90dc404b9d1a7e7b">Runway为什么不自己重新定义一套推理吞吐？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arunway-inference-protocol">Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · MasterControl, Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它让原样AIPerf负责Measure，自己处理Before实验设计和After的SLA/成本/审计。测量与决策分离后，能说明报告基于哪份原始结果，而不把配置选择和测量定义混在一起。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一raw p95可被两个不同版本SLA审查；这是两次决策，不是两次独立硬件测量。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、架构与流程；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12737v2">原论文</a> · <a href="../../../../foundation-models/2611.12737-runway-inference-protocol/">实现解读</a> · <a href="#qa-90dc404b9d1a7e7b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:runway-inference-protocol" data-paper-title="Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving 基础模型 MasterControl, Inc. 2026-11-09 推理吞吐不是单一模型或引擎的属性，它随输入输出长度、并发、streaming、warm-up、硬件和引擎配置变化。受监管场景还必须能回答：测量对应什么配置、是否满足既定 SLA、每个成功请求多少钱、报告能否由同一份原始测量重建。Runway 不修改 AIPerf 的测量定义，而是采用 Before / Measure / After：前置扩展实验网格；中间用原样 AIPerf；后置计算 SLA、成本和审计。缓存命中重用旧测量，不是又获得一个独立样本。 完整多引擎/实例/并发/MTP 压测：成本过高，不复现（审查 DONE）。教学常数不代表云实例报价或吞吐，实际诊断由组件指标产物记录。状态：CPU L1 缓存/SLA/成本协议组件，diagnostic only。不部署模型、不执行 AIPerf、不提交云实例任务。完整多引擎/实例/并发/MTP 压测：成本过高，不复现（审查 DONE）。result_for_cell 只接受明确注入的 measurement callback；默认没有推理后端。cache-only miss 抛错，no-cache 强制新 callback，返回 deepcopy 防止调用方篡改缓存对象。原始结果与后置 SLA 决策分开；  推理与系统效率 推理测量与证据协议 基础模型 能力证据：评测采样、读出与可靠性 engine配置变了但模型名字没变，缓存还能复用吗？ 不能仅看名字。原文用新experiment路径隔离engine配置，其它测量字段通过fingerprint检查；本地更保守地将engine配置、revision、warm-up等全纳入SHA。任何影响结果的改变必须改变缓存身份。 教学例：打开MTP但沿用旧experiment名，本地engine_configuration哈希仍改变，从而避免误用旧吞吐。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-64b1c01d8cd850da">engine配置变了但模型名字没变，缓存还能复用吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arunway-inference-protocol">Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · MasterControl, Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能仅看名字。原文用新experiment路径隔离engine配置，其它测量字段通过fingerprint检查；本地更保守地将engine配置、revision、warm-up等全纳入SHA。任何影响结果的改变必须改变缓存身份。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：打开MTP但沿用旧experiment名，本地engine_configuration哈希仍改变，从而避免误用旧吞吐。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12737v2">原论文</a> · <a href="../../../../foundation-models/2611.12737-runway-inference-protocol/">实现解读</a> · <a href="#qa-64b1c01d8cd850da">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:runway-inference-protocol" data-paper-title="Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving 基础模型 MasterControl, Inc. 2026-11-09 推理吞吐不是单一模型或引擎的属性，它随输入输出长度、并发、streaming、warm-up、硬件和引擎配置变化。受监管场景还必须能回答：测量对应什么配置、是否满足既定 SLA、每个成功请求多少钱、报告能否由同一份原始测量重建。Runway 不修改 AIPerf 的测量定义，而是采用 Before / Measure / After：前置扩展实验网格；中间用原样 AIPerf；后置计算 SLA、成本和审计。缓存命中重用旧测量，不是又获得一个独立样本。 完整多引擎/实例/并发/MTP 压测：成本过高，不复现（审查 DONE）。教学常数不代表云实例报价或吞吐，实际诊断由组件指标产物记录。状态：CPU L1 缓存/SLA/成本协议组件，diagnostic only。不部署模型、不执行 AIPerf、不提交云实例任务。完整多引擎/实例/并发/MTP 压测：成本过高，不复现（审查 DONE）。result_for_cell 只接受明确注入的 measurement callback；默认没有推理后端。cache-only miss 抛错，no-cache 强制新 callback，返回 deepcopy 防止调用方篡改缓存对象。原始结果与后置 SLA 决策分开；  推理与系统效率 推理测量与证据协议 基础模型 能力证据：评测采样、读出与可靠性 每小时更贵的实例一定每请求也更贵吗？ 不一定。每成功请求成本是hourly_price×duration_seconds/(3600×completed_requests)。必须用相同工作负载的完成数和SLA，不能把tokens/s或峰值吞吐当请求数，也不能只比较GPU价格。 教学例：每小时6个成本单位、60秒完成100请求，成本是0.001/请求；另一个便宜但很慢的配置未必更省。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-5f92bc5a8791be82">每小时更贵的实例一定每请求也更贵吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arunway-inference-protocol">Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · MasterControl, Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一定。每成功请求成本是hourly_price×duration_seconds/(3600×completed_requests)。必须用相同工作负载的完成数和SLA，不能把tokens/s或峰值吞吐当请求数，也不能只比较GPU价格。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：每小时6个成本单位、60秒完成100请求，成本是0.001/请求；另一个便宜但很慢的配置未必更省。</p>
+<p class="ar-learning-sources">依据：核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12737v2">原论文</a> · <a href="../../../../foundation-models/2611.12737-runway-inference-protocol/">实现解读</a> · <a href="#qa-5f92bc5a8791be82">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:runway-inference-protocol" data-paper-title="Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving 基础模型 MasterControl, Inc. 2026-11-09 推理吞吐不是单一模型或引擎的属性，它随输入输出长度、并发、streaming、warm-up、硬件和引擎配置变化。受监管场景还必须能回答：测量对应什么配置、是否满足既定 SLA、每个成功请求多少钱、报告能否由同一份原始测量重建。Runway 不修改 AIPerf 的测量定义，而是采用 Before / Measure / After：前置扩展实验网格；中间用原样 AIPerf；后置计算 SLA、成本和审计。缓存命中重用旧测量，不是又获得一个独立样本。 完整多引擎/实例/并发/MTP 压测：成本过高，不复现（审查 DONE）。教学常数不代表云实例报价或吞吐，实际诊断由组件指标产物记录。状态：CPU L1 缓存/SLA/成本协议组件，diagnostic only。不部署模型、不执行 AIPerf、不提交云实例任务。完整多引擎/实例/并发/MTP 压测：成本过高，不复现（审查 DONE）。result_for_cell 只接受明确注入的 measurement callback；默认没有推理后端。cache-only miss 抛错，no-cache 强制新 callback，返回 deepcopy 防止调用方篡改缓存对象。原始结果与后置 SLA 决策分开；  推理与系统效率 推理测量与证据协议 基础模型 能力证据：评测采样、读出与可靠性 cache-only miss为什么要报错而不是调用fixture补一个结果？ cache-only承诺不测量；补数据会把缺失证据伪装成已有测量。接口只有明确measurement callback才可测量，fixture仅测控制流，不叫AIPerf结果。缺关键指标或单位不一致的critical SLA也必须拒绝。 教学例：2000 ms不能直接和2.5 s的裸数字比；本地不猜单位转换，而是fail closed并保留原因。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-8cb8da007eb076c9">cache-only miss为什么要报错而不是调用fixture补一个结果？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arunway-inference-protocol">Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · MasterControl, Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>cache-only承诺不测量；补数据会把缺失证据伪装成已有测量。接口只有明确measurement callback才可测量，fixture仅测控制流，不叫AIPerf结果。缺关键指标或单位不一致的critical SLA也必须拒绝。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：2000 ms不能直接和2.5 s的裸数字比；本地不猜单位转换，而是fail closed并保留原因。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12737v2">原论文</a> · <a href="../../../../foundation-models/2611.12737-runway-inference-protocol/">实现解读</a> · <a href="#qa-8cb8da007eb076c9">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:xla-trenches" data-paper-title="XLA from the Trenches: Correctness on TPU Workloads at Scale" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="XLA from the Trenches: Correctness on TPU Workloads at Scale 基础模型 Google 2026-10-31 编译器成功生成并执行程序，不保证数值正确。Google 将模板引导合成程序、生产 autotuner 的真实融合配置和 agent swarm 组合，发现静默错编译；随后从大 HLO 图定位到单个 fusion，再保留 fusion 原貌检查 VREG 中间值。它是编译正确性基础设施，不是新的推荐模型或通过 A/B 门槛的工业推荐条目。 完整实验成本过高，不复现（审查 DONE）。只读核对固定 v1 的 Sections2–4、上游 isolation/evaluator 链接与日期；没有运行、训练或调用其内部 harness，没有本地算法目录、metrics、GPU 收据或 Evolve 映射。公开宏图工具不意味着 agent 编排、目标 ISA/MXU 仿真、VREG stepping 和生产样本全部公开。  推理与系统效率 编译器正确性与分层故障隔离 基础模型 能力证据：评测采样、读出与可靠性 编译成功、程序没有崩溃，为什么还不能说明XLA执行正确？ 静默错编译会返回合法形状的有限张量，但索引、舍入、buffer或同步语义已出错。没有错误信号，只看运行完成或loss短期正常会漏检；论文依赖合法输入下的差分参考及逐层隔离，不把成功启动当作正确性证据。 教学例：一次窄整数iota回绕可能让索引5的写操作也改到261，程序仍执行完成，只有与正确索引语义的输出比较才暴露问题。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
 <span id="paper-foundation-models-xla-trenches-c37e2d34" class="ar-learning-paper-anchor"></span>
@@ -239,6 +345,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>bootstrap无法提供有效区间时，应显示未判定，而不是把异常处理当成等价通过。</p>
 <p class="ar-learning-sources">依据：核心公式、实现与数据协议；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.30716v1">原论文</a> · <a href="../../../../foundation-models/2609.30716-gemma-priority-protocol/">实现解读</a> · <a href="#qa-72e8f96ddb1142bd">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:tokenization-premium" data-paper-title="Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South 基础模型 LUA Vision Tecnologia 2026-09-22 微调通常继承基础模型的 tokenizer、知识、许可证与偏见。作者用《世界人权宣言》的平行内容，把“相同意思花多少 token”转成可比较成本：31 种语言、7 个 tokenizer、27 个共同条款。不能把大量字符压成 UNK 导致的低 token 数当作低成本优势。原文 §3 作者另提出八项黑盒主权审计，并强调拒答系统应同时报告覆盖率、选择性风险、全样本校准和每焦耳正确回答，不能只展示筛剩少数题的准确率。 专有架构及内部任务没有公开，完整模型实验不复现，审查 DONE。L1 CPU 算术组件。实现配对内容的 token 比、UNK 排除和校准/选择性风险读出；不训练作者的专有模型，不声称复现 31 语言 × 7 tokenizer 的完整测量。measure_aligned_texts 接收调用者提供的平行条款和 tokenizer callable，一次拼接编码；不下载权重。tokenization_premium 是外部总数的比率读出，不能自行证明分词边界一致。任意 UNK 被保守标成 unavailable：原文没有给出通用阈值，本地不会捏造阈值。  预训练与数据 多语言tokenization与评测成本 基础模型 能力证据：评测采样、读出与可靠性 为什么tokenization premium必须先对齐相同条款再比较？ 语义和长度不同会混入内容差异。论文使用共同27条款，按编号排序、空格拼接后一次编码，再把语言总token数除以英语总数；不是逐条款溢价均值。 教学例：两条款英语token为10、30，另一语言为10、90，总数比是100/40=2.5；逐条比率平均(1+3)/2=2会改变结果。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<span id="paper-foundation-models-tokenization-premium-7d3c936f" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-6612275a07534339">为什么tokenization premium必须先对齐相同条款再比较？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Atokenization-premium">Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · LUA Vision Tecnologia</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>语义和长度不同会混入内容差异。论文使用共同27条款，按编号排序、空格拼接后一次编码，再把语言总token数除以英语总数；不是逐条款溢价均值。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两条款英语token为10、30，另一语言为10、90，总数比是100/40=2.5；逐条比率平均(1+3)/2=2会改变结果。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13441v1">原论文</a> · <a href="../../../../foundation-models/2611.13441-tokenization-premium/">实现解读</a> · <a href="#qa-6612275a07534339">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:tokenization-premium" data-paper-title="Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South 基础模型 LUA Vision Tecnologia 2026-09-22 微调通常继承基础模型的 tokenizer、知识、许可证与偏见。作者用《世界人权宣言》的平行内容，把“相同意思花多少 token”转成可比较成本：31 种语言、7 个 tokenizer、27 个共同条款。不能把大量字符压成 UNK 导致的低 token 数当作低成本优势。原文 §3 作者另提出八项黑盒主权审计，并强调拒答系统应同时报告覆盖率、选择性风险、全样本校准和每焦耳正确回答，不能只展示筛剩少数题的准确率。 专有架构及内部任务没有公开，完整模型实验不复现，审查 DONE。L1 CPU 算术组件。实现配对内容的 token 比、UNK 排除和校准/选择性风险读出；不训练作者的专有模型，不声称复现 31 语言 × 7 tokenizer 的完整测量。measure_aligned_texts 接收调用者提供的平行条款和 tokenizer callable，一次拼接编码；不下载权重。tokenization_premium 是外部总数的比率读出，不能自行证明分词边界一致。任意 UNK 被保守标成 unavailable：原文没有给出通用阈值，本地不会捏造阈值。  预训练与数据 多语言tokenization与评测成本 基础模型 能力证据：评测采样、读出与可靠性 把一个陌生文字段落压成一个UNK，为何不能算分词更高效？ UNK丢失了内容，低token数是覆盖失败而不是保留相同内容的低成本。作者把这类单元标n/a；原文未给通用阈值，本地保守地让任意UNK触发unavailable。 教学例：英语40token，另一语言3token但其中2个UNK，不能展示0.075倍成本；接口返回premium=null并保留排除原因。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1bdf3e0cbd8a5944">把一个陌生文字段落压成一个UNK，为何不能算分词更高效？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Atokenization-premium">Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · LUA Vision Tecnologia</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>UNK丢失了内容，低token数是覆盖失败而不是保留相同内容的低成本。作者把这类单元标n/a；原文未给通用阈值，本地保守地让任意UNK触发unavailable。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：英语40token，另一语言3token但其中2个UNK，不能展示0.075倍成本；接口返回premium=null并保留排除原因。</p>
+<p class="ar-learning-sources">依据：核心公式、论文离线与线上效果、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13441v1">原论文</a> · <a href="../../../../foundation-models/2611.13441-tokenization-premium/">实现解读</a> · <a href="#qa-1bdf3e0cbd8a5944">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:tokenization-premium" data-paper-title="Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South 基础模型 LUA Vision Tecnologia 2026-09-22 微调通常继承基础模型的 tokenizer、知识、许可证与偏见。作者用《世界人权宣言》的平行内容，把“相同意思花多少 token”转成可比较成本：31 种语言、7 个 tokenizer、27 个共同条款。不能把大量字符压成 UNK 导致的低 token 数当作低成本优势。原文 §3 作者另提出八项黑盒主权审计，并强调拒答系统应同时报告覆盖率、选择性风险、全样本校准和每焦耳正确回答，不能只展示筛剩少数题的准确率。 专有架构及内部任务没有公开，完整模型实验不复现，审查 DONE。L1 CPU 算术组件。实现配对内容的 token 比、UNK 排除和校准/选择性风险读出；不训练作者的专有模型，不声称复现 31 语言 × 7 tokenizer 的完整测量。measure_aligned_texts 接收调用者提供的平行条款和 tokenizer callable，一次拼接编码；不下载权重。tokenization_premium 是外部总数的比率读出，不能自行证明分词边界一致。任意 UNK 被保守标成 unavailable：原文没有给出通用阈值，本地不会捏造阈值。  预训练与数据 多语言tokenization与评测成本 基础模型 能力证据：评测采样、读出与可靠性 这篇的多语言溢价与XLGoBench的跨语言能力差距能直接对应吗？ 不能。溢价测等内容输入长度/计费成本；XLGoBench固定算法实例与复杂度，比较不同语言任务能力。token变多可能影响预算，但不是错误率或推理能力的直接测量。 教学例：语言A使用2倍token，不代表最短路正确率必为英语一半；需相同实例、翻译核验与预算控制才能研究相关性。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-d1c4b3296f6d3db0">这篇的多语言溢价与XLGoBench的跨语言能力差距能直接对应吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Atokenization-premium">Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · LUA Vision Tecnologia</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。溢价测等内容输入长度/计费成本；XLGoBench固定算法实例与复杂度，比较不同语言任务能力。token变多可能影响预算，但不是错误率或推理能力的直接测量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：语言A使用2倍token，不代表最短路正确率必为英语一半；需相同实例、翻译核验与预算控制才能研究相关性。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13441v1">原论文</a> · <a href="../../../../foundation-models/2611.13441-tokenization-premium/">实现解读</a> · <a href="#qa-d1c4b3296f6d3db0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:tokenization-premium" data-paper-title="Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South 基础模型 LUA Vision Tecnologia 2026-09-22 微调通常继承基础模型的 tokenizer、知识、许可证与偏见。作者用《世界人权宣言》的平行内容，把“相同意思花多少 token”转成可比较成本：31 种语言、7 个 tokenizer、27 个共同条款。不能把大量字符压成 UNK 导致的低 token 数当作低成本优势。原文 §3 作者另提出八项黑盒主权审计，并强调拒答系统应同时报告覆盖率、选择性风险、全样本校准和每焦耳正确回答，不能只展示筛剩少数题的准确率。 专有架构及内部任务没有公开，完整模型实验不复现，审查 DONE。L1 CPU 算术组件。实现配对内容的 token 比、UNK 排除和校准/选择性风险读出；不训练作者的专有模型，不声称复现 31 语言 × 7 tokenizer 的完整测量。measure_aligned_texts 接收调用者提供的平行条款和 tokenizer callable，一次拼接编码；不下载权重。tokenization_premium 是外部总数的比率读出，不能自行证明分词边界一致。任意 UNK 被保守标成 unavailable：原文没有给出通用阈值，本地不会捏造阈值。  预训练与数据 多语言tokenization与评测成本 基础模型 能力证据：评测采样、读出与可靠性 怎样防止只回答少数高置信题美化校准与能效？ 同时报告覆盖率和选择性风险，ECE保留全部样本；能量分母覆盖完整评测，包括拒答题。没有回答时risk为不可用而非0，correctness只在独立scorer内使用。 教学例：4题只有1题被回答且正确，应展示coverage0.25；不能把100%已答准确率当全题准确率，或只计算这1题的能量。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-db0373685b69683b">怎样防止只回答少数高置信题美化校准与能效？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Atokenization-premium">Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · LUA Vision Tecnologia</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>同时报告覆盖率和选择性风险，ECE保留全部样本；能量分母覆盖完整评测，包括拒答题。没有回答时risk为不可用而非0，correctness只在独立scorer内使用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：4题只有1题被回答且正确，应展示coverage0.25；不能把100%已答准确率当全题准确率，或只计算这1题的能量。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13441v1">原论文</a> · <a href="../../../../foundation-models/2611.13441-tokenization-premium/">实现解读</a> · <a href="#qa-db0373685b69683b">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:interpolated-null-calibration" data-paper-title="How Calibration Content Shapes Attention-Based Reranking" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="How Calibration Content Shapes Attention-Based Reranking 基础模型 UC San Diego 2026-09-15 固定v1 Section3 Eq4–7：ΔN=s(empty,I)−s(empty,empty)，Sλ=s(q,I)−[λs(empty,I)+(1−λ)s(empty,empty)]；λ1标准ICR、λ0bare-null。调用方真实三pass提分数并保证doc identity对齐；λ只能validation选。论文oracle λ对全数据查询调参，不能当独立test结果。 成本过高，不复现（审查 DONE）。Gemma3-4B/Qwen3-4B/Llama3.1-8B/Qwen3-14B，top100每doc130tokens、16Kcontext三prefill，多benchmark/5fold/λ网格/QRhead选择；单A10040GB配置。完整模型加载和广泛矩阵超短时组件预算；不宣称真实retrieval改善。输入是已有三次模型attention读出的、相同doc ID顺序下的分数。本地实现Eq4–7及稳定ranking，没有真实attention extractor、ICR outlier filter/QRhead选择、LLM加载或工业线上A/B；  基础模型检索与排序 注意力读出与校准 基础模型 能力证据：评测采样、读出与可靠性 attention reranking 为什么需要比较带指令 null 与 bare null？ 无真实query时，指令本身也可能改变文档得分。插值null校准分开度量这部分影响，并控制从query+instruction得分中扣除哪种基线，避免把校准内容当成无关细节。 示意：相同文档仅因出现“判断相关性”指令而更高分，这部分未必来自用户query。 2026-10-27">

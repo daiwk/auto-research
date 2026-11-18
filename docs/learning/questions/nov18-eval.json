@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "post-training:luce-similarity-audit": {
+      "questions": [
+        {"id":"nov18-luce-basics","level":"basics","question":"为什么两个同系列版本的胜率不能只看全局BT分差？","answer":"原文发现相关模型的非平局比较比全局分差预测更果断，以k乘分差校正decisiveness；同时平局另建模。该观察不是模型变强，也不能从榜单排名变化推断。","example":"教学例：分差0.5、k=1.1比k=1给出更远离50%的胜率，但谁更强的方向不变。","source_sections":["背景与主要改动","核心公式"],"added":"2026-11-18"},
+        {"id":"nov18-luce-mechanism","level":"mechanism","question":"菜单delta为正，是否已经证明每个prompt都违反IIA？","answer":"没有。delta比较兄弟菜单与强度匹配placebo的T/S1赔率；跨prompt合并会混入题目异质性，原文within-prompt估计更小且区间跨零。本地只复算给定计数，不自动作统计因果结论。","example":"教学例：两个菜单的T/S1分别为30/20与30/30，合并delta=log(1.5)；仍需保留prompt分层再检查。","source_sections":["核心公式","论文离线与线上效果"],"added":"2026-11-18"},
+        {"id":"nov18-luce-comparison","level":"comparison","question":"为什么三结果log loss变好不等于新版本对旧版本胜率已经校准？","answer":"三结果包含平局，原文大量增益由tie项提供；非平局odds和冻结跨发布转移是不同指标。冻结lineage主区间包含零，不能用总体正增益替它背书。","example":"原文随机2024票的ties-only贡献+0.91/总体+0.96 millinats，而冻结odds主区间为[-2.92,+1.68]。","source_sections":["论文离线与线上效果","结果、负控与边界"],"added":"2026-11-18"},
+        {"id":"nov18-luce-implementation","level":"implementation","question":"本地算术接口为什么拒绝零计数，不直接加1？","answer":"平滑会改变稀有菜单的log-odds估计，必须由调用方披露。实现对正计数先取log再作差，避免先计算巨大比值溢出；它未实现票据拟合、bootstrap或joint tie模型。","example":"教学例：1e300/1e-300先除会溢出，log(1e300)-log(1e-300)仍有限；零票不是可静默忽略的条件。","source_sections":["数据协议与代码映射","结果、负控与边界"],"added":"2026-11-18"}
+      ]
+    },
+    "foundation-models:runway-inference-protocol": {
+      "questions": [
+        {"id":"nov18-runway-basics","level":"basics","question":"Runway为什么不自己重新定义一套推理吞吐？","answer":"它让原样AIPerf负责Measure，自己处理Before实验设计和After的SLA/成本/审计。测量与决策分离后，能说明报告基于哪份原始结果，而不把配置选择和测量定义混在一起。","example":"教学例：同一raw p95可被两个不同版本SLA审查；这是两次决策，不是两次独立硬件测量。","source_sections":["背景与主要改动","架构与流程"],"added":"2026-11-18"},
+        {"id":"nov18-runway-mechanism","level":"mechanism","question":"engine配置变了但模型名字没变，缓存还能复用吗？","answer":"不能仅看名字。原文用新experiment路径隔离engine配置，其它测量字段通过fingerprint检查；本地更保守地将engine配置、revision、warm-up等全纳入SHA。任何影响结果的改变必须改变缓存身份。","example":"教学例：打开MTP但沿用旧experiment名，本地engine_configuration哈希仍改变，从而避免误用旧吞吐。","source_sections":["核心公式","数据协议与代码映射"],"added":"2026-11-18"},
+        {"id":"nov18-runway-comparison","level":"comparison","question":"每小时更贵的实例一定每请求也更贵吗？","answer":"不一定。每成功请求成本是hourly_price×duration_seconds/(3600×completed_requests)。必须用相同工作负载的完成数和SLA，不能把tokens/s或峰值吞吐当请求数，也不能只比较GPU价格。","example":"教学例：每小时6个成本单位、60秒完成100请求，成本是0.001/请求；另一个便宜但很慢的配置未必更省。","source_sections":["核心公式","论文离线与线上效果"],"added":"2026-11-18"},
+        {"id":"nov18-runway-implementation","level":"implementation","question":"cache-only miss为什么要报错而不是调用fixture补一个结果？","answer":"cache-only承诺不测量；补数据会把缺失证据伪装成已有测量。接口只有明确measurement callback才可测量，fixture仅测控制流，不叫AIPerf结果。缺关键指标或单位不一致的critical SLA也必须拒绝。","example":"教学例：2000 ms不能直接和2.5 s的裸数字比；本地不猜单位转换，而是fail closed并保留原因。","source_sections":["数据协议与代码映射","结果、负控与边界"],"added":"2026-11-18"}
+      ]
+    },
+    "foundation-models:smart-model-routing": {
+      "questions": [
+        {"id":"nov18-routing-basics","level":"basics","question":"Smart Model Routing和Switch Transformer的router是同一种东西吗？","answer":"不是。本文在应用层选择完整模型endpoint，支付router/checker和每次推理费用；Switch在单个网络内部把token送给专家，关心激活参数和专家负载。两个层级的成本和质量约束不能混用。","example":"教学例：选小LLM还是frontier是外部路由；同一个LLM中选expert3不等于省掉整个frontier API调用。","source_sections":["背景与主要改动","架构与流程"],"added":"2026-11-18"},
+        {"id":"nov18-routing-mechanism","level":"mechanism","question":"cascade只要有便宜的第一阶段就一定省钱吗？","answer":"不一定。第一阶段无论接受与否都已付费，checker和router也有开销。两层严格省钱需要接受率大于(cheap+checker+router)/frontier，等号只是打平；K层需要比较完整路径而不是只看相邻阶段。","example":"教学例：cheap=1、checker=1、router=0.5、frontier=10，接受率须严格大于0.25。","source_sections":["核心公式","结果、负控与边界"],"added":"2026-11-18"},
+        {"id":"nov18-routing-comparison","level":"comparison","question":"便宜模型90%且router完全校准，为什么还可能几乎省不了钱？","answer":"校准不等于区分。如果所有请求特征一样，90%只是平均数，router不知道哪条会错。要达到98%平均质量而frontier为99%，至少8/9流量仍需frontier；难题更长还会进一步降低成本倍数。","example":"教学例：2%流量走25倍单价frontier看似省16.9倍，但这些请求若长100倍，修正后只约1.46倍。","source_sections":["背景与主要改动","核心公式","论文离线与线上效果"],"added":"2026-11-18"},
+        {"id":"nov18-routing-implementation","level":"implementation","question":"为什么cascade_quality要求传条件质量，不能直接填各模型总准确率？","answer":"更强模型只看到前一阶段拒绝的残余，通常比总体流量难。质量必须按接受/拒绝历史条件化。本地接口只计算输入统计量，既不偷看请求gold来选模型，也不假装估计checker能力。","example":"教学例：半数易题被A全对接受；B在残余难题仅20%正确，整体为0.5×1+0.5×0.2=0.6，不是用B总体0.6算出的0.8。","source_sections":["核心公式","数据协议与代码映射"],"added":"2026-11-18"}
+      ]
+    },
+    "post-training:calibrated-judges-protocol": {
+      "questions": [
+        {"id":"nov18-judges-basics","level":"basics","question":"catch trial的答案键可以发给被评模型或普通judge吗？","answer":"不可以。它只用于evaluator检查judge是否达到灵敏度门槛；blind文本对要去掉答案和reward字段。校准、训练、heldout ID必须隔离，本地合并普通verdict接口没有gold参数。","example":"教学例：catch-0用于资格考试后不能又作为训练pair让模型学习其答案；ID隔离仍不替代近重复审计。","source_sections":["核心公式","数据协议与代码映射"],"added":"2026-11-18"},
+        {"id":"nov18-judges-mechanism","level":"mechanism","question":"A/B换序后两个judge有一条不一致，能多数表决出chosen吗？","answer":"本地保守协议不能。先把BA的屏幕位置映射回canonical A/B，要求两个合格judge各自双顺序一致且两者同向；缺项、不合格或分歧均为0.5 tie，不生成硬偏好对。不同judge名字本身不能证明上下文隔离。","example":"教学例：AB选屏幕A、BA选屏幕B表示同一个canonical A；若BA仍选屏幕A则是位置不一致，必须tie。","source_sections":["核心公式","数据协议与代码映射"],"added":"2026-11-18"},
+        {"id":"nov18-judges-comparison","level":"comparison","question":"judge通过catch trials后，DPO是否就不会学到捷径？","answer":"不会。catch敏感度只说明能分辨该校准集，偏好标签仍可能偏向短文本。原文扩大数据后出现长度塌缩，SFT anchor只部分缓解，仍需训练后长度/风格与heldout检查；它没有另外训练reward model。","example":"原文iter-2 median75字被拒绝；Table1最终median156与§5.4另报213的口径不同，不合并成统一保证值。","source_sections":["背景与主要改动","论文离线与线上效果"],"added":"2026-11-18"},
+        {"id":"nov18-judges-implementation","level":"implementation","question":"diagnostic里的score_a=1能当作本地模型100%准确率吗？","answer":"不能。fixture verdict的1/0.5只是canonical winner映射和tie规则，未调用任何LLM。模块只验证qualify/join/isolation控制流，不验证中文写作判断能力、DPO收益或judge泛化。","example":"教学例：两个fixture-judge四条都指向A则score_a=1；故意让第二judge指向B应变成0.5，这才是被测负控。","source_sections":["结果、负控与边界","高成本完整实验"],"added":"2026-11-18"}
+      ]
+    }
+  }
+}

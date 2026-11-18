@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-18-affordable-components",
+  "component_keys": ["typed-inbox-protocol", "askalcf-protocol", "prodpilot-protocol", "fend-protocol", "stratified-retention-protocol", "tokenization-premium", "rslivebench-uav-protocol", "multimodal-library-protocol", "luce-similarity-audit", "runway-inference-protocol", "smart-model-routing", "calibrated-judges-protocol", "hvmap", "mixed-signals-weights"],
+  "cuda_keys": ["hvmap", "mixed-signals-weights"],
+  "seeds": [42, 43, 44],
+  "maximum_run_seconds": 180,
+  "maximum_cuda_devices": 1,
+  "model_and_dataset_downloads": 0,
+  "pretrained_model_calls": 0,
+  "api_calls": 0,
+  "full_experiments_executed": false,
+  "automatic_retry": false,
+  "input_scope": "Finite explicit protocol examples and seeded small tensors only; no capability benchmark, model editor, production mailbox, cloud deployment or provider calls.",
+  "scope_note": "Fourteen accepted low-cost opportunities from the closed Nov15 review. Each source determines its L0/L1 boundary. Stratified Retention is a proposed evaluation framework, not an empirical campaign. Other costly full campaigns are not reproduced and do not block review closure. No new source-coverage watermark claim."
+}

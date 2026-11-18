@@ -7,7 +7,7 @@ hide:
 
 # 偏好与对齐：先看反馈长什么样
 
-[LLM 后训练](index.md) / 100 个问题 · 25 篇论文
+[LLM 后训练](index.md) / 108 个问题 · 27 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">100 个问题 · 25 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">108 个问题 · 27 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:calibrated-judges-protocol" data-paper-title="Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix LLM 后训练 Independent Researcher 2026-11-15 论文先报告三个负结果：音素交织继续预训练没有改善可感知口语风格且增加重复；prosody plan 遵从低于门槛；规则韵律 reward 的人类与裁判盲评近似随机。作者因此把重点转向评测：自动特征、功效受限的人类盲评、经过 catch trials 校准的 LLM judge，三层互补，不能用单一客观特征代替感知质量。Layer 3 先在已知答案的 catch trials 检查灵敏度（门槛 0.75），再由两个隔离 judge、A/B 换序标注，分歧计 0.5。 完整语音/偏好训练与裁判实验：高成本，不复现（审查 DONE）。实际执行由组件诊断产物记录；状态：CPU L1 标注协议组件，diagnostic only。只处理外部提供的 verdict；不调用 LLM、不生成模拟能力评分、不训练 0.6B 模型。完整语音/偏好训练与裁判实验：高成本，不复现（审查 DONE）。qualify 接收 evaluator-only catch verdict+canonical expected side；join_swapped_judgments 只接收普通文本对的 verdict 与资格记录，不接收 gold；已知 catch IDs 禁止复用为训练标注。  偏好与对齐 裁判校准与偏差转导 LLM 后训练 偏好与对齐：先看反馈长什么样 catch trial的答案键可以发给被评模型或普通judge吗？ 不可以。它只用于evaluator检查judge是否达到灵敏度门槛；blind文本对要去掉答案和reward字段。校准、训练、heldout ID必须隔离，本地合并普通verdict接口没有gold参数。 教学例：catch-0用于资格考试后不能又作为训练pair让模型学习其答案；ID隔离仍不替代近重复审计。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<span id="paper-post-training-calibrated-judges-protocol-29e1bb2c" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f64c1a613f415373">catch trial的答案键可以发给被评模型或普通judge吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acalibrated-judges-protocol">Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不可以。它只用于evaluator检查judge是否达到灵敏度门槛；blind文本对要去掉答案和reward字段。校准、训练、heldout ID必须隔离，本地合并普通verdict接口没有gold参数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：catch-0用于资格考试后不能又作为训练pair让模型学习其答案；ID隔离仍不替代近重复审计。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.19840v1">原论文</a> · <a href="../../../../post-training/2611.19840-calibrated-judges-protocol/">实现解读</a> · <a href="#qa-f64c1a613f415373">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:calibrated-judges-protocol" data-paper-title="Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix LLM 后训练 Independent Researcher 2026-11-15 论文先报告三个负结果：音素交织继续预训练没有改善可感知口语风格且增加重复；prosody plan 遵从低于门槛；规则韵律 reward 的人类与裁判盲评近似随机。作者因此把重点转向评测：自动特征、功效受限的人类盲评、经过 catch trials 校准的 LLM judge，三层互补，不能用单一客观特征代替感知质量。Layer 3 先在已知答案的 catch trials 检查灵敏度（门槛 0.75），再由两个隔离 judge、A/B 换序标注，分歧计 0.5。 完整语音/偏好训练与裁判实验：高成本，不复现（审查 DONE）。实际执行由组件诊断产物记录；状态：CPU L1 标注协议组件，diagnostic only。只处理外部提供的 verdict；不调用 LLM、不生成模拟能力评分、不训练 0.6B 模型。完整语音/偏好训练与裁判实验：高成本，不复现（审查 DONE）。qualify 接收 evaluator-only catch verdict+canonical expected side；join_swapped_judgments 只接收普通文本对的 verdict 与资格记录，不接收 gold；已知 catch IDs 禁止复用为训练标注。  偏好与对齐 裁判校准与偏差转导 LLM 后训练 偏好与对齐：先看反馈长什么样 A/B换序后两个judge有一条不一致，能多数表决出chosen吗？ 本地保守协议不能。先把BA的屏幕位置映射回canonical A/B，要求两个合格judge各自双顺序一致且两者同向；缺项、不合格或分歧均为0.5 tie，不生成硬偏好对。不同judge名字本身不能证明上下文隔离。 教学例：AB选屏幕A、BA选屏幕B表示同一个canonical A；若BA仍选屏幕A则是位置不一致，必须tie。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-396adcb4db7726fb">A/B换序后两个judge有一条不一致，能多数表决出chosen吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acalibrated-judges-protocol">Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>本地保守协议不能。先把BA的屏幕位置映射回canonical A/B，要求两个合格judge各自双顺序一致且两者同向；缺项、不合格或分歧均为0.5 tie，不生成硬偏好对。不同judge名字本身不能证明上下文隔离。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：AB选屏幕A、BA选屏幕B表示同一个canonical A；若BA仍选屏幕A则是位置不一致，必须tie。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.19840v1">原论文</a> · <a href="../../../../post-training/2611.19840-calibrated-judges-protocol/">实现解读</a> · <a href="#qa-396adcb4db7726fb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:calibrated-judges-protocol" data-paper-title="Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix LLM 后训练 Independent Researcher 2026-11-15 论文先报告三个负结果：音素交织继续预训练没有改善可感知口语风格且增加重复；prosody plan 遵从低于门槛；规则韵律 reward 的人类与裁判盲评近似随机。作者因此把重点转向评测：自动特征、功效受限的人类盲评、经过 catch trials 校准的 LLM judge，三层互补，不能用单一客观特征代替感知质量。Layer 3 先在已知答案的 catch trials 检查灵敏度（门槛 0.75），再由两个隔离 judge、A/B 换序标注，分歧计 0.5。 完整语音/偏好训练与裁判实验：高成本，不复现（审查 DONE）。实际执行由组件诊断产物记录；状态：CPU L1 标注协议组件，diagnostic only。只处理外部提供的 verdict；不调用 LLM、不生成模拟能力评分、不训练 0.6B 模型。完整语音/偏好训练与裁判实验：高成本，不复现（审查 DONE）。qualify 接收 evaluator-only catch verdict+canonical expected side；join_swapped_judgments 只接收普通文本对的 verdict 与资格记录，不接收 gold；已知 catch IDs 禁止复用为训练标注。  偏好与对齐 裁判校准与偏差转导 LLM 后训练 偏好与对齐：先看反馈长什么样 judge通过catch trials后，DPO是否就不会学到捷径？ 不会。catch敏感度只说明能分辨该校准集，偏好标签仍可能偏向短文本。原文扩大数据后出现长度塌缩，SFT anchor只部分缓解，仍需训练后长度/风格与heldout检查；它没有另外训练reward model。 原文iter-2 median75字被拒绝；Table1最终median156与§5.4另报213的口径不同，不合并成统一保证值。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-affb2f6d813d37e4">judge通过catch trials后，DPO是否就不会学到捷径？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acalibrated-judges-protocol">Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不会。catch敏感度只说明能分辨该校准集，偏好标签仍可能偏向短文本。原文扩大数据后出现长度塌缩，SFT anchor只部分缓解，仍需训练后长度/风格与heldout检查；它没有另外训练reward model。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>原文iter-2 median75字被拒绝；Table1最终median156与§5.4另报213的口径不同，不合并成统一保证值。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.19840v1">原论文</a> · <a href="../../../../post-training/2611.19840-calibrated-judges-protocol/">实现解读</a> · <a href="#qa-affb2f6d813d37e4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:calibrated-judges-protocol" data-paper-title="Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix LLM 后训练 Independent Researcher 2026-11-15 论文先报告三个负结果：音素交织继续预训练没有改善可感知口语风格且增加重复；prosody plan 遵从低于门槛；规则韵律 reward 的人类与裁判盲评近似随机。作者因此把重点转向评测：自动特征、功效受限的人类盲评、经过 catch trials 校准的 LLM judge，三层互补，不能用单一客观特征代替感知质量。Layer 3 先在已知答案的 catch trials 检查灵敏度（门槛 0.75），再由两个隔离 judge、A/B 换序标注，分歧计 0.5。 完整语音/偏好训练与裁判实验：高成本，不复现（审查 DONE）。实际执行由组件诊断产物记录；状态：CPU L1 标注协议组件，diagnostic only。只处理外部提供的 verdict；不调用 LLM、不生成模拟能力评分、不训练 0.6B 模型。完整语音/偏好训练与裁判实验：高成本，不复现（审查 DONE）。qualify 接收 evaluator-only catch verdict+canonical expected side；join_swapped_judgments 只接收普通文本对的 verdict 与资格记录，不接收 gold；已知 catch IDs 禁止复用为训练标注。  偏好与对齐 裁判校准与偏差转导 LLM 后训练 偏好与对齐：先看反馈长什么样 diagnostic里的score_a=1能当作本地模型100%准确率吗？ 不能。fixture verdict的1/0.5只是canonical winner映射和tie规则，未调用任何LLM。模块只验证qualify/join/isolation控制流，不验证中文写作判断能力、DPO收益或judge泛化。 教学例：两个fixture-judge四条都指向A则score_a=1；故意让第二judge指向B应变成0.5，这才是被测负控。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-08569c671da8e291">diagnostic里的score_a=1能当作本地模型100%准确率吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acalibrated-judges-protocol">Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。fixture verdict的1/0.5只是canonical winner映射和tie规则，未调用任何LLM。模块只验证qualify/join/isolation控制流，不验证中文写作判断能力、DPO收益或judge泛化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个fixture-judge四条都指向A则score_a=1；故意让第二judge指向B应变成0.5，这才是被测负控。</p>
+<p class="ar-learning-sources">依据：结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.19840v1">原论文</a> · <a href="../../../../post-training/2611.19840-calibrated-judges-protocol/">实现解读</a> · <a href="#qa-08569c671da8e291">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:clean-rm" data-paper-title="CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF LLM 后训练 Zhejiang University 2026-10-15 不同偏好样本的标注噪声不一定相同。CleanRM 用少量干净反馈校准两个方向的样本级噪声率；以语义与恢复偏好的联合分布作最优传输，而不是只匹配偏好直方图。随后固定估计器，用去偏 surrogate 训练 RM。 完整 RM/RLHF 实验成本过高，不复现（审查 DONE）。L1 小特征、真实 joint OT 与 signed corrected loss 组件。不用预知噪声率代替核心估计器；不把合成机制结果称为真实 RLHF 安全能力。完整 RM/RLHF 实验成本过高，不复现（审查 DONE）。NoiseEstimator 通过三路 softmax 保证两向噪声率非负、总和至多 .95。noise_estimation_loss 只读取 noisy features/观察反馈以及独立 clean calibration 子集，不接收已知真实噪声率。编码特征在组件中视为固定，未下载原文 LLM backbone。  二元反馈对齐 后训练算法组件 CleanRM LLM 后训练 偏好与对齐：先看反馈长什么样 CleanRM为什么区分两种偏好翻转噪声，而不只估一个总体错误率？ 真实正偏好被标成负例，与真实负偏好被标成正例，可能由不同原因产生。分开估计两种条件噪声率，才能对观察标签对应的风险分别校正；总体错误率会掩盖这种不对称。 例如标注者偏爱长回答，正确短答被误拒与错误长答被误选的频率可以不同。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-clean-rm-81560dec" class="ar-learning-paper-anchor"></span>
@@ -80,6 +133,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如一次校正得到负损失，只要公式条件成立，就不能为让曲线好看而改成零。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21138v1">原论文</a> · <a href="../../../../post-training/2610.21138-clean-rm/">实现解读</a> · <a href="#qa-4642fc40ad22ddae">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:luce-similarity-audit" data-paper-title="Similar Models, Broken Odds: Where Luce&#x27;s Axiom Fails in Chatbot Arena" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Similar Models, Broken Odds: Where Luce&#x27;s Axiom Fails in Chatbot Arena LLM 后训练 Independent Researcher 2026-10-13 Bradley–Terry 用每个模型一个分数推导任意两模型胜率，隐含“加入相似选项不应改变现有两者赔率”的 Luce/IIA 思路。作者发现，同系列版本、同代不同尺寸和同实验室模型之间的投票比全局分差预测得更果断。论文分别修正非平局胜率的 decisiveness 与平局倾向，并检查相似措辞、长度差和格式是否解释偏差。这不是训练更强模型的方法。六参数校正改善预测投票，并不意味着发布版能力提高或榜单大换位。答案相似性不能取自被预测的 test battle； 完整票据拟合和 138,400 次模型裁判实验：成本过高，不复现（审查 DONE）。状态：CPU L1 数值/审计组件，diagnostic only。复算条件胜率、菜单 log-odds 和转移区间判定，不拟合 Arena 排名，不生成裁判投票，不声称模型能力提升。完整票据拟合和 138,400 次模型裁判实验：成本过高，不复现（审查 DONE）。只读取调用方提供的分差、倍率、计数和区间。corrected_win_probability 是 Eq.2 的稳定 sigmoid；menu_log_odds_shift 是 Eq.3；heldout_log_loss 只评非平局；  偏好与对齐 偏好评测与校准 LLM 后训练 偏好与对齐：先看反馈长什么样 为什么两个同系列版本的胜率不能只看全局BT分差？ 原文发现相关模型的非平局比较比全局分差预测更果断，以k乘分差校正decisiveness；同时平局另建模。该观察不是模型变强，也不能从榜单排名变化推断。 教学例：分差0.5、k=1.1比k=1给出更远离50%的胜率，但谁更强的方向不变。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<span id="paper-post-training-luce-similarity-audit-cc723e01" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-04533ba353a40fdb">为什么两个同系列版本的胜率不能只看全局BT分差？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aluce-similarity-audit">Similar Models, Broken Odds: Where Luce&#x27;s Axiom Fails in Chatbot Arena</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原文发现相关模型的非平局比较比全局分差预测更果断，以k乘分差校正decisiveness；同时平局另建模。该观察不是模型变强，也不能从榜单排名变化推断。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：分差0.5、k=1.1比k=1给出更远离50%的胜率，但谁更强的方向不变。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.19095v3">原论文</a> · <a href="../../../../post-training/2610.19095-luce-similarity-audit/">实现解读</a> · <a href="#qa-04533ba353a40fdb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:luce-similarity-audit" data-paper-title="Similar Models, Broken Odds: Where Luce&#x27;s Axiom Fails in Chatbot Arena" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Similar Models, Broken Odds: Where Luce&#x27;s Axiom Fails in Chatbot Arena LLM 后训练 Independent Researcher 2026-10-13 Bradley–Terry 用每个模型一个分数推导任意两模型胜率，隐含“加入相似选项不应改变现有两者赔率”的 Luce/IIA 思路。作者发现，同系列版本、同代不同尺寸和同实验室模型之间的投票比全局分差预测得更果断。论文分别修正非平局胜率的 decisiveness 与平局倾向，并检查相似措辞、长度差和格式是否解释偏差。这不是训练更强模型的方法。六参数校正改善预测投票，并不意味着发布版能力提高或榜单大换位。答案相似性不能取自被预测的 test battle； 完整票据拟合和 138,400 次模型裁判实验：成本过高，不复现（审查 DONE）。状态：CPU L1 数值/审计组件，diagnostic only。复算条件胜率、菜单 log-odds 和转移区间判定，不拟合 Arena 排名，不生成裁判投票，不声称模型能力提升。完整票据拟合和 138,400 次模型裁判实验：成本过高，不复现（审查 DONE）。只读取调用方提供的分差、倍率、计数和区间。corrected_win_probability 是 Eq.2 的稳定 sigmoid；menu_log_odds_shift 是 Eq.3；heldout_log_loss 只评非平局；  偏好与对齐 偏好评测与校准 LLM 后训练 偏好与对齐：先看反馈长什么样 菜单delta为正，是否已经证明每个prompt都违反IIA？ 没有。delta比较兄弟菜单与强度匹配placebo的T/S1赔率；跨prompt合并会混入题目异质性，原文within-prompt估计更小且区间跨零。本地只复算给定计数，不自动作统计因果结论。 教学例：两个菜单的T/S1分别为30/20与30/30，合并delta=log(1.5)；仍需保留prompt分层再检查。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-5adadb7c1bd38193">菜单delta为正，是否已经证明每个prompt都违反IIA？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aluce-similarity-audit">Similar Models, Broken Odds: Where Luce&#x27;s Axiom Fails in Chatbot Arena</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。delta比较兄弟菜单与强度匹配placebo的T/S1赔率；跨prompt合并会混入题目异质性，原文within-prompt估计更小且区间跨零。本地只复算给定计数，不自动作统计因果结论。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个菜单的T/S1分别为30/20与30/30，合并delta=log(1.5)；仍需保留prompt分层再检查。</p>
+<p class="ar-learning-sources">依据：核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.19095v3">原论文</a> · <a href="../../../../post-training/2610.19095-luce-similarity-audit/">实现解读</a> · <a href="#qa-5adadb7c1bd38193">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:luce-similarity-audit" data-paper-title="Similar Models, Broken Odds: Where Luce&#x27;s Axiom Fails in Chatbot Arena" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Similar Models, Broken Odds: Where Luce&#x27;s Axiom Fails in Chatbot Arena LLM 后训练 Independent Researcher 2026-10-13 Bradley–Terry 用每个模型一个分数推导任意两模型胜率，隐含“加入相似选项不应改变现有两者赔率”的 Luce/IIA 思路。作者发现，同系列版本、同代不同尺寸和同实验室模型之间的投票比全局分差预测得更果断。论文分别修正非平局胜率的 decisiveness 与平局倾向，并检查相似措辞、长度差和格式是否解释偏差。这不是训练更强模型的方法。六参数校正改善预测投票，并不意味着发布版能力提高或榜单大换位。答案相似性不能取自被预测的 test battle； 完整票据拟合和 138,400 次模型裁判实验：成本过高，不复现（审查 DONE）。状态：CPU L1 数值/审计组件，diagnostic only。复算条件胜率、菜单 log-odds 和转移区间判定，不拟合 Arena 排名，不生成裁判投票，不声称模型能力提升。完整票据拟合和 138,400 次模型裁判实验：成本过高，不复现（审查 DONE）。只读取调用方提供的分差、倍率、计数和区间。corrected_win_probability 是 Eq.2 的稳定 sigmoid；menu_log_odds_shift 是 Eq.3；heldout_log_loss 只评非平局；  偏好与对齐 偏好评测与校准 LLM 后训练 偏好与对齐：先看反馈长什么样 为什么三结果log loss变好不等于新版本对旧版本胜率已经校准？ 三结果包含平局，原文大量增益由tie项提供；非平局odds和冻结跨发布转移是不同指标。冻结lineage主区间包含零，不能用总体正增益替它背书。 原文随机2024票的ties-only贡献+0.91/总体+0.96 millinats，而冻结odds主区间为[-2.92,+1.68]。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-760b9cdcf2a69c1e">为什么三结果log loss变好不等于新版本对旧版本胜率已经校准？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aluce-similarity-audit">Similar Models, Broken Odds: Where Luce&#x27;s Axiom Fails in Chatbot Arena</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>三结果包含平局，原文大量增益由tie项提供；非平局odds和冻结跨发布转移是不同指标。冻结lineage主区间包含零，不能用总体正增益替它背书。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>原文随机2024票的ties-only贡献+0.91/总体+0.96 millinats，而冻结odds主区间为[-2.92,+1.68]。</p>
+<p class="ar-learning-sources">依据：论文离线与线上效果、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.19095v3">原论文</a> · <a href="../../../../post-training/2610.19095-luce-similarity-audit/">实现解读</a> · <a href="#qa-760b9cdcf2a69c1e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:luce-similarity-audit" data-paper-title="Similar Models, Broken Odds: Where Luce&#x27;s Axiom Fails in Chatbot Arena" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Similar Models, Broken Odds: Where Luce&#x27;s Axiom Fails in Chatbot Arena LLM 后训练 Independent Researcher 2026-10-13 Bradley–Terry 用每个模型一个分数推导任意两模型胜率，隐含“加入相似选项不应改变现有两者赔率”的 Luce/IIA 思路。作者发现，同系列版本、同代不同尺寸和同实验室模型之间的投票比全局分差预测得更果断。论文分别修正非平局胜率的 decisiveness 与平局倾向，并检查相似措辞、长度差和格式是否解释偏差。这不是训练更强模型的方法。六参数校正改善预测投票，并不意味着发布版能力提高或榜单大换位。答案相似性不能取自被预测的 test battle； 完整票据拟合和 138,400 次模型裁判实验：成本过高，不复现（审查 DONE）。状态：CPU L1 数值/审计组件，diagnostic only。复算条件胜率、菜单 log-odds 和转移区间判定，不拟合 Arena 排名，不生成裁判投票，不声称模型能力提升。完整票据拟合和 138,400 次模型裁判实验：成本过高，不复现（审查 DONE）。只读取调用方提供的分差、倍率、计数和区间。corrected_win_probability 是 Eq.2 的稳定 sigmoid；menu_log_odds_shift 是 Eq.3；heldout_log_loss 只评非平局；  偏好与对齐 偏好评测与校准 LLM 后训练 偏好与对齐：先看反馈长什么样 本地算术接口为什么拒绝零计数，不直接加1？ 平滑会改变稀有菜单的log-odds估计，必须由调用方披露。实现对正计数先取log再作差，避免先计算巨大比值溢出；它未实现票据拟合、bootstrap或joint tie模型。 教学例：1e300/1e-300先除会溢出，log(1e300)-log(1e-300)仍有限；零票不是可静默忽略的条件。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-2f8796aa547613a6">本地算术接口为什么拒绝零计数，不直接加1？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aluce-similarity-audit">Similar Models, Broken Odds: Where Luce&#x27;s Axiom Fails in Chatbot Arena</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>平滑会改变稀有菜单的log-odds估计，必须由调用方披露。实现对正计数先取log再作差，避免先计算巨大比值溢出；它未实现票据拟合、bootstrap或joint tie模型。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：1e300/1e-300先除会溢出，log(1e300)-log(1e-300)仍有限；零票不是可静默忽略的条件。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.19095v3">原论文</a> · <a href="../../../../post-training/2610.19095-luce-similarity-audit/">实现解读</a> · <a href="#qa-2f8796aa547613a6">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:gaw-po" data-paper-title="GAW-PO: Preference Optimization with Gradient-Aligned Token Weights" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="GAW-PO: Preference Optimization with Gradient-Aligned Token Weights LLM 后训练 National University of Science and Technology POLITEHNICA Bucharest 2026-10-01 用拒绝 token 梯度与 preferred update direction 的对齐度调节负权重；越支持优选行为的 token 越少受罚。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行梯度对齐权重；未进行 LoRA/DPO 训练。执行梯度对齐权重；未进行 LoRA/DPO 训练。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  偏好优化 token credit DPO LLM 后训练 偏好与对齐：先看反馈长什么样 GAW-PO里的preferred与rejected是整条回答标签，还是每个词元的好坏标注？ 它们是同一提示下两条回答的相对偏好标签，并没有逐词标注。被拒回答仍可能含有正确步骤或共享措辞。因此输入的监督粒度与实际调整的词元粒度不同；梯度对齐是补充的信用分配信号，不能被解释成新增的人类逐词真值。 教学例子：两份解答都先写出正确公式，只在最后计算不同；整条拒绝标签并未把公共公式标成错误。 2026-10-27">

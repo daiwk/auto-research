@@ -7,7 +7,7 @@ hide:
 
 # 跨模态对齐：表征、连接器与监督
 
-[多模态](index.md) / 109 个问题 · 27 篇论文
+[多模态](index.md) / 117 个问题 · 29 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">109 个问题 · 27 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">117 个问题 · 29 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:fend-protocol" data-paper-title="FEND: Far-End Detection in Outbound Voice AI Calls" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="FEND: Far-End Detection in Outbound Voice AI Calls 多模态大模型 Observe.AI, India 2026-11-13 外呼语音系统要区分真人、语音信箱、IVR和另一个AI。误把真人当自动系统会切断有效对话，因此不能只优化AI检测AUC。FEND并行读音频、流式ASR和既有对话模型的工具事件：STFT提示音、多语种关键词、LLM voicemail／IVR工具，以及依赖首轮词间时序的AI节奏分类。工具沿用运行中的对话模型，不等于这里已经实现了“零成本LLM检测”。检测事件累计到窗口，默认20秒。最后按voicemail &gt; IVR &gt; AI &gt; human选已触发的最高级；无事件才human。 完整私有通话实验高成本不复现（审查 DONE）。这些都是合成接口诊断，没有能力accuracy。component_only／L0语音检测协议接口。本地只处理外部检测事件与独立标签，未实现音频／ASR／LLM／AI节奏分类器；完整私有通话实验高成本不复现（审查 DONE）。DetectorEvent必须有有限非负时间、明确检测器和自动类别；arbitrate只接收事件，不接gold、音频或答案。被纳入，迟于窗口仅记ignored，不用真实墙钟sleep。检测器需要外部可信实现；手工注入的事件不是自动检测准确率。  音频与多模态接口 外呼检测与human FPR 多模态 跨模态对齐：表征、连接器与监督 AI检测AUC很高，就能放心中断被标为自动系统的电话吗？ 不能。误把真人判为任意自动类会伤害有效对话，必须看以真实human为分母的HFPR和固定工作点。AUC不能替代部署阈值下的真人误拒率。 教学例：100个真人中3个被标AI，HFPR是3%，不应除以包含900个语音信箱的全部1000通话。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-multimodal-models-fend-protocol-bd6df6f8" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a0e123dd56caa135">AI检测AUC很高，就能放心中断被标为自动系统的电话吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Afend-protocol">FEND: Far-End Detection in Outbound Voice AI Calls</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Observe.AI, India</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。误把真人判为任意自动类会伤害有效对话，必须看以真实human为分母的HFPR和固定工作点。AUC不能替代部署阈值下的真人误拒率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：100个真人中3个被标AI，HFPR是3%，不应除以包含900个语音信箱的全部1000通话。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.18050v1">原论文</a> · <a href="../../../../multimodal-models/2611.18050-fend-protocol/">实现解读</a> · <a href="#qa-a0e123dd56caa135">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:fend-protocol" data-paper-title="FEND: Far-End Detection in Outbound Voice AI Calls" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="FEND: Far-End Detection in Outbound Voice AI Calls 多模态大模型 Observe.AI, India 2026-11-13 外呼语音系统要区分真人、语音信箱、IVR和另一个AI。误把真人当自动系统会切断有效对话，因此不能只优化AI检测AUC。FEND并行读音频、流式ASR和既有对话模型的工具事件：STFT提示音、多语种关键词、LLM voicemail／IVR工具，以及依赖首轮词间时序的AI节奏分类。工具沿用运行中的对话模型，不等于这里已经实现了“零成本LLM检测”。检测事件累计到窗口，默认20秒。最后按voicemail &gt; IVR &gt; AI &gt; human选已触发的最高级；无事件才human。 完整私有通话实验高成本不复现（审查 DONE）。这些都是合成接口诊断，没有能力accuracy。component_only／L0语音检测协议接口。本地只处理外部检测事件与独立标签，未实现音频／ASR／LLM／AI节奏分类器；完整私有通话实验高成本不复现（审查 DONE）。DetectorEvent必须有有限非负时间、明确检测器和自动类别；arbitrate只接收事件，不接gold、音频或答案。被纳入，迟于窗口仅记ignored，不用真实墙钟sleep。检测器需要外部可信实现；手工注入的事件不是自动检测准确率。  音频与多模态接口 外呼检测与human FPR 多模态 跨模态对齐：表征、连接器与监督 1秒时AI检测触发，FEND应立即停止等后续检测吗？ 不应。窗口内持续累计，按voicemail大于IVR大于AI选最高优先级；默认20秒且恰在deadline的事件纳入。无自动事件才human，晚于窗口不计入。 教学例：1秒AI、19秒IVR、20秒voicemail，最终应是voicemail，不是第一个AI。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-2556411f97a27fcc">1秒时AI检测触发，FEND应立即停止等后续检测吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Afend-protocol">FEND: Far-End Detection in Outbound Voice AI Calls</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Observe.AI, India</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不应。窗口内持续累计，按voicemail大于IVR大于AI选最高优先级；默认20秒且恰在deadline的事件纳入。无自动事件才human，晚于窗口不计入。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：1秒AI、19秒IVR、20秒voicemail，最终应是voicemail，不是第一个AI。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.18050v1">原论文</a> · <a href="../../../../multimodal-models/2611.18050-fend-protocol/">实现解读</a> · <a href="#qa-2556411f97a27fcc">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:fend-protocol" data-paper-title="FEND: Far-End Detection in Outbound Voice AI Calls" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="FEND: Far-End Detection in Outbound Voice AI Calls 多模态大模型 Observe.AI, India 2026-11-13 外呼语音系统要区分真人、语音信箱、IVR和另一个AI。误把真人当自动系统会切断有效对话，因此不能只优化AI检测AUC。FEND并行读音频、流式ASR和既有对话模型的工具事件：STFT提示音、多语种关键词、LLM voicemail／IVR工具，以及依赖首轮词间时序的AI节奏分类。工具沿用运行中的对话模型，不等于这里已经实现了“零成本LLM检测”。检测事件累计到窗口，默认20秒。最后按voicemail &gt; IVR &gt; AI &gt; human选已触发的最高级；无事件才human。 完整私有通话实验高成本不复现（审查 DONE）。这些都是合成接口诊断，没有能力accuracy。component_only／L0语音检测协议接口。本地只处理外部检测事件与独立标签，未实现音频／ASR／LLM／AI节奏分类器；完整私有通话实验高成本不复现（审查 DONE）。DetectorEvent必须有有限非负时间、明确检测器和自动类别；arbitrate只接收事件，不接gold、音频或答案。被纳入，迟于窗口仅记ignored，不用真实墙钟sleep。检测器需要外部可信实现；手工注入的事件不是自动检测准确率。  音频与多模态接口 外呼检测与human FPR 多模态 跨模态对齐：表征、连接器与监督 FEND与GSLM2都是语音研究，可以用同一局部指标排名吗？ 不可以。FEND关心外呼类别、期限和真人误拒，GSLM2学习多流离散语音表示并评语言判别／生成。外部事件仲裁与外部单元评分都不是各自完整模型能力。 教学例：一组手写事件得到正确voicemail，不说明学到了更好的音位表示，也不能与sWuggy准确率比较。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-be9662d871c201d1">FEND与GSLM2都是语音研究，可以用同一局部指标排名吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Afend-protocol">FEND: Far-End Detection in Outbound Voice AI Calls</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Observe.AI, India</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不可以。FEND关心外呼类别、期限和真人误拒，GSLM2学习多流离散语音表示并评语言判别／生成。外部事件仲裁与外部单元评分都不是各自完整模型能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一组手写事件得到正确voicemail，不说明学到了更好的音位表示，也不能与sWuggy准确率比较。</p>
+<p class="ar-learning-sources">依据：结果、负控与边界、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.18050v1">原论文</a> · <a href="../../../../multimodal-models/2611.18050-fend-protocol/">实现解读</a> · <a href="#qa-be9662d871c201d1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:fend-protocol" data-paper-title="FEND: Far-End Detection in Outbound Voice AI Calls" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="FEND: Far-End Detection in Outbound Voice AI Calls 多模态大模型 Observe.AI, India 2026-11-13 外呼语音系统要区分真人、语音信箱、IVR和另一个AI。误把真人当自动系统会切断有效对话，因此不能只优化AI检测AUC。FEND并行读音频、流式ASR和既有对话模型的工具事件：STFT提示音、多语种关键词、LLM voicemail／IVR工具，以及依赖首轮词间时序的AI节奏分类。工具沿用运行中的对话模型，不等于这里已经实现了“零成本LLM检测”。检测事件累计到窗口，默认20秒。最后按voicemail &gt; IVR &gt; AI &gt; human选已触发的最高级；无事件才human。 完整私有通话实验高成本不复现（审查 DONE）。这些都是合成接口诊断，没有能力accuracy。component_only／L0语音检测协议接口。本地只处理外部检测事件与独立标签，未实现音频／ASR／LLM／AI节奏分类器；完整私有通话实验高成本不复现（审查 DONE）。DetectorEvent必须有有限非负时间、明确检测器和自动类别；arbitrate只接收事件，不接gold、音频或答案。被纳入，迟于窗口仅记ignored，不用真实墙钟sleep。检测器需要外部可信实现；手工注入的事件不是自动检测准确率。  音频与多模态接口 外呼检测与human FPR 多模态 跨模态对齐：表征、连接器与监督 声学human-null校准通过，为什么不等于AI分类器有效？ 它仅排除两真人语料上过大的标准化中位数偏移，不验证正类判别。零IQR或无human时相关量未定义，必须报错；本地没有ASR、STFT或训练分类器，不能报语音能力。 教学例：两个human集合分布完全相同可以过null gate，但分类器若对AI也给同样分数，仍无区分度。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3e8410b07ce6c3ea">声学human-null校准通过，为什么不等于AI分类器有效？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Afend-protocol">FEND: Far-End Detection in Outbound Voice AI Calls</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Observe.AI, India</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它仅排除两真人语料上过大的标准化中位数偏移，不验证正类判别。零IQR或无human时相关量未定义，必须报错；本地没有ASR、STFT或训练分类器，不能报语音能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个human集合分布完全相同可以过null gate，但分类器若对AI也给同样分数，仍无区分度。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.18050v1">原论文</a> · <a href="../../../../multimodal-models/2611.18050-fend-protocol/">实现解读</a> · <a href="#qa-3e8410b07ce6c3ea">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:multimodal-library-protocol" data-paper-title="Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries 多模态大模型 Indiana University 2026-11-13 纯 OCR 倒排索引难以按概念搜索图表与复杂排版。作者把教材页渲染成图像，经 ColPali/PaliGemma-3B 生成多向量，用 Qdrant 检索并比较余弦、点积、欧氏和 Manhattan 距离。HNSW、磁盘 Memmap、binary quantization 服务于索引成本；不是训练新的视觉语言架构。§III—V 完整系统成本过高，不复现（审查 DONE）；诊断检查 page-token MaxSim、距离方向、相同命中数但不同顺序的 AP 差别、未检索相关页、重复 ID、零范数余弦与延迟/吞吐口径。L0 检索/性能读出组件。接收外部向量、排名、相关性和计时样本；不是 ColPali 推理、Qdrant 服务或生产数字馆，不宣称复现论文吞吐。late_interaction_score 只计算调用者提供的 token 向量，无 gold 输入。retrieval_metrics 在策略外读取封存相关性，拒绝重复结果；subgroup_means 保留可重叠查询子集。  跨模态对齐与检索 多模态检索评测与系统效率 多模态 跨模态对齐：表征、连接器与监督 页面检索为什么要逐query token找最相关patch，而不是先平均整页？ late interaction让每个查询token匹配自己的最佳页面token后求和，能保留不同局部证据。整页平均可能把小图表或公式稀释，但局部得分仍不是相关性概率。 教学例：查询两token向量分别是[1,0]和[0,1]，页面各有一个匹配patch，余弦MaxSim总和为2；不能将其读成200%正确率。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-multimodal-models-multimodal-library-protocol-3c6351b8" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-69e7400aaca8d349">页面检索为什么要逐query token找最相关patch，而不是先平均整页？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Amultimodal-library-protocol">Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Indiana University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>late interaction让每个查询token匹配自己的最佳页面token后求和，能保留不同局部证据。整页平均可能把小图表或公式稀释，但局部得分仍不是相关性概率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：查询两token向量分别是[1,0]和[0,1]，页面各有一个匹配patch，余弦MaxSim总和为2；不能将其读成200%正确率。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17726v1">原论文</a> · <a href="../../../../multimodal-models/2611.17726-multimodal-library-protocol/">实现解读</a> · <a href="#qa-69e7400aaca8d349">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:multimodal-library-protocol" data-paper-title="Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries 多模态大模型 Indiana University 2026-11-13 纯 OCR 倒排索引难以按概念搜索图表与复杂排版。作者把教材页渲染成图像，经 ColPali/PaliGemma-3B 生成多向量，用 Qdrant 检索并比较余弦、点积、欧氏和 Manhattan 距离。HNSW、磁盘 Memmap、binary quantization 服务于索引成本；不是训练新的视觉语言架构。§III—V 完整系统成本过高，不复现（审查 DONE）；诊断检查 page-token MaxSim、距离方向、相同命中数但不同顺序的 AP 差别、未检索相关页、重复 ID、零范数余弦与延迟/吞吐口径。L0 检索/性能读出组件。接收外部向量、排名、相关性和计时样本；不是 ColPali 推理、Qdrant 服务或生产数字馆，不宣称复现论文吞吐。late_interaction_score 只计算调用者提供的 token 向量，无 gold 输入。retrieval_metrics 在策略外读取封存相关性，拒绝重复结果；subgroup_means 保留可重叠查询子集。  跨模态对齐与检索 多模态检索评测与系统效率 多模态 跨模态对齐：表征、连接器与监督 AP@5为何要看次序，并保留没检索出的已知相关页？ 每个相关命中按其所在排名的precision加权，再除以全部已知相关页数。相同命中数但更靠后时AP更低；删掉没命中的相关页会夸大召回与AP。 教学例：相关页a、c、z，排名x,a,b,c,y时AP@5=(1/2+2/4)/3=1/3，Recall@5=2/3；不能把分母改成2。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-76cffabe4441aeec">AP@5为何要看次序，并保留没检索出的已知相关页？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Amultimodal-library-protocol">Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Indiana University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>每个相关命中按其所在排名的precision加权，再除以全部已知相关页数。相同命中数但更靠后时AP更低；删掉没命中的相关页会夸大召回与AP。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：相关页a、c、z，排名x,a,b,c,y时AP@5=(1/2+2/4)/3=1/3，Recall@5=2/3；不能把分母改成2。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17726v1">原论文</a> · <a href="../../../../multimodal-models/2611.17726-multimodal-library-protocol/">实现解读</a> · <a href="#qa-76cffabe4441aeec">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:multimodal-library-protocol" data-paper-title="Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries 多模态大模型 Indiana University 2026-11-13 纯 OCR 倒排索引难以按概念搜索图表与复杂排版。作者把教材页渲染成图像，经 ColPali/PaliGemma-3B 生成多向量，用 Qdrant 检索并比较余弦、点积、欧氏和 Manhattan 距离。HNSW、磁盘 Memmap、binary quantization 服务于索引成本；不是训练新的视觉语言架构。§III—V 完整系统成本过高，不复现（审查 DONE）；诊断检查 page-token MaxSim、距离方向、相同命中数但不同顺序的 AP 差别、未检索相关页、重复 ID、零范数余弦与延迟/吞吐口径。L0 检索/性能读出组件。接收外部向量、排名、相关性和计时样本；不是 ColPali 推理、Qdrant 服务或生产数字馆，不宣称复现论文吞吐。late_interaction_score 只计算调用者提供的 token 向量，无 gold 输入。retrieval_metrics 在策略外读取封存相关性，拒绝重复结果；subgroup_means 保留可重叠查询子集。  跨模态对齐与检索 多模态检索评测与系统效率 多模态 跨模态对齐：表征、连接器与监督 与CLIP双塔相比，这里新增的是训练目标还是检索粒度？ 论文沿用ColPali多向量与late interaction，并比较数据库距离和索引配置；并未新训CLIP式模型。CLIP双塔对比目标学习全局对齐，页面token粒度读出与其训练机制不能互换。 教学例：本地CLIP的Fashion-MNIST小实验有真实视觉负控；数字馆小向量MaxSim通过只证明算术，不证明找到教材细图或更高真实检索率。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-44d247809b881d0a">与CLIP双塔相比，这里新增的是训练目标还是检索粒度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Amultimodal-library-protocol">Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Indiana University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文沿用ColPali多向量与late interaction，并比较数据库距离和索引配置；并未新训CLIP式模型。CLIP双塔对比目标学习全局对齐，页面token粒度读出与其训练机制不能互换。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：本地CLIP的Fashion-MNIST小实验有真实视觉负控；数字馆小向量MaxSim通过只证明算术，不证明找到教材细图或更高真实检索率。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17726v1">原论文</a> · <a href="../../../../multimodal-models/2611.17726-multimodal-library-protocol/">实现解读</a> · <a href="#qa-44d247809b881d0a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:multimodal-library-protocol" data-paper-title="Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries 多模态大模型 Indiana University 2026-11-13 纯 OCR 倒排索引难以按概念搜索图表与复杂排版。作者把教材页渲染成图像，经 ColPali/PaliGemma-3B 生成多向量，用 Qdrant 检索并比较余弦、点积、欧氏和 Manhattan 距离。HNSW、磁盘 Memmap、binary quantization 服务于索引成本；不是训练新的视觉语言架构。§III—V 完整系统成本过高，不复现（审查 DONE）；诊断检查 page-token MaxSim、距离方向、相同命中数但不同顺序的 AP 差别、未检索相关页、重复 ID、零范数余弦与延迟/吞吐口径。L0 检索/性能读出组件。接收外部向量、排名、相关性和计时样本；不是 ColPali 推理、Qdrant 服务或生产数字馆，不宣称复现论文吞吐。late_interaction_score 只计算调用者提供的 token 向量，无 gold 输入。retrieval_metrics 在策略外读取封存相关性，拒绝重复结果；subgroup_means 保留可重叠查询子集。  跨模态对齐与检索 多模态检索评测与系统效率 多模态 跨模态对齐：表征、连接器与监督 为何不能把Table VII的22k QPS直接当包含模型推理的数字馆吞吐？ 原文预编码数据库测试与后文端到端描述冲突，平均延迟也不支持随意解释。接口必须写清是否含encoding，QPS按请求数除以实测总wall time，并发时不是平均延迟倒数。 教学例：3个请求总wall time0.05秒得到60QPS，即使平均单请求20ms也不能套倒数得50；toy timing不是Qdrant实跑。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3e8913b18ba99069">为何不能把Table VII的22k QPS直接当包含模型推理的数字馆吞吐？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Amultimodal-library-protocol">Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Indiana University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原文预编码数据库测试与后文端到端描述冲突，平均延迟也不支持随意解释。接口必须写清是否含encoding，QPS按请求数除以实测总wall time，并发时不是平均延迟倒数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：3个请求总wall time0.05秒得到60QPS，即使平均单请求20ms也不能套倒数得50；toy timing不是Qdrant实跑。</p>
+<p class="ar-learning-sources">依据：论文离线与线上效果、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17726v1">原论文</a> · <a href="../../../../multimodal-models/2611.17726-multimodal-library-protocol/">实现解读</a> · <a href="#qa-3e8913b18ba99069">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:d-jepa" data-paper-title="Asymmetric Multimodal Learning with Decomposed JEPAs" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Asymmetric Multimodal Learning with Decomposed JEPAs 基础模型 论文未列机构 2026-11-12 图像和问题不一定是信息等价的两种视图。强迫两者完全对齐可能只保留共享部分，丢掉私有细节和联合推理所需信息。论文先对严格对齐解给出信息保留界，再设计共享core与私有fiber；这个界不适用于任意带辅助目标的完整模型，也不证明所有JEPA都塌缩。§2—3 整套下载和多阶段矩阵超出短时单卡预算，成本过高，不复现（审查 DONE）；诊断里的小线性头和生成特征只是测试夹具，不是原作者backbone。L1 单context目标组件：共享/私有分解、分开SIGReg、重建stop-gradient与四组相关惩罚；不是CLEVR能力、PID估计或完整训练复现。objective接收调用方提供的四子空间、同模态invariance标量、预测/目标特征与随机方向；特征目标显式detach。correlation_penalty/independence/sigreg分别保留样本相关系数、四对选择和ECF正则。  JEPA与世界模型 多模态共享私有表征 多模态 跨模态对齐：表征、连接器与监督 D-JEPA的对齐信息界是否证明所有多模态JEPA都会丢失私有信息？ 不是。界约束严格对齐解，在其假设下只能保留两模态共享的信息；含辅助预测、私有分支或其他目标的完整模型不由该界直接刻画。必须保留定理适用范围。 教学例：图像含颜色而问题只问数量时，两者不信息等价；加入图像私有预测后不能再把完整目标称为alignment-only。 2026-11-15">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
 <span id="paper-foundation-models-d-jepa-e4299c9a" class="ar-learning-paper-anchor"></span>

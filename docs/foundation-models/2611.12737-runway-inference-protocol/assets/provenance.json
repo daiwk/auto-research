@@ -1,0 +1,14 @@
+{
+  "paper_url": "https://arxiv.org/abs/2611.12737v2",
+  "source_url": "https://arxiv.org/html/2611.12737v2/architecture.png",
+  "figure": "Figure 1",
+  "caption": "Runway system overview: Before, Measure, After; a cache hit skips measurement.",
+  "source_format": "Original PNG from fixed arXiv HTML",
+  "image": "paper-figure-01.png",
+  "asset_sha256": "9c230eaa6dc41917b751eb3fd5c879fd3cbe0627780613e46c2eff574d5e5cc2",
+  "image_sha256": "9c230eaa6dc41917b751eb3fd5c879fd3cbe0627780613e46c2eff574d5e5cc2",
+  "source_html_sha256": "179662ea372bcf7b3917f5aa63ec0d47e89a91a21d5aad31be737b9d4fd39c67",
+  "copyright": "Copyright remains with the authors; CC BY 4.0",
+  "description": "Original scientific figure, copied without redrawing or scientific-content modification. The local protocol does not execute AIPerf.",
+  "visually_verified": true
+}

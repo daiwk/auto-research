@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-11-15 · 62 篇主题资料 / 25 篇重点对照
+[Agent](../index.md) · 更新 2026-11-18 · 64 篇主题资料 / 27 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
@@ -50,6 +50,8 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [Co-Director: Agentic Generative Video Storytelling](../../../agent-research/2604.24842-co-director/README.md) · [原始来源](https://arxiv.org/abs/2604.24842)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 分别更新策略/叙事/美学轴的战略reward，用推荐冷启动和UCB选方向，独立质量分选择已有视频。 | CoDirector用UCB乐观探索尚不确定的创意方向；RuHarness按联合后验效用的低分位保守选择rubric frontier，再让独立validation决定harness是否晋级。探索奖励和准入证据不能互换，也都不把judge关联分当因果效应。 |
 | [MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks](../../../agent-research/2611.15754-multiloop/README.md) · [原始来源](https://arxiv.org/abs/2611.15754v1)<br>章节：背景与主要改动、核心公式 | 把既有自动harness优化用于真实多Agent检索，记录完整历史并分析优化后仍未消除的编排失败；不提出新优化器。 | HarnessLens强调受影响行为的配对验证与归因门；MULTILOOP的整体提升多来自提示和工具。总分提高不能单独证明结构协调改善，10训练样例也不代表低API成本。 |
 | [Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science](../../../agent-research/2609.15983-stellar-colosseum/README.md) · [原始来源](https://arxiv.org/abs/2609.15983v1)<br>章节：背景与主要改动、核心公式 | 策略readiness门后分解证明依赖，带反驳的重叠树综合与全局验证指导局部修订／重新探索，结果grader与候选选择隔离。 | ScientistTwo控制子集到全量实验和review闭环；Colosseum核查数学假设与跨节论证。共同的多阶段形态不使语义judge或证据充分性可互换。 |
+| [AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support](../../../agent-research/2611.15700-askalcf-protocol/README.md) · [原始来源](https://arxiv.org/abs/2611.15700v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 回答盲的生产／全库充分性pivot、独立质量信号、revision缓存与受人审动作控制的修复协议。 | Harness²不依赖答案rubric，按开放执行对照选择并积累经验；AskALCF有冻结专家归因和target/control，不能用文本偏好选择替代充分性探针。局部七路不是原文28规则。 |
+| [ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects](../../../agent-research/2611.17381-prodpilot-protocol/README.md) · [原始来源](https://arxiv.org/abs/2611.17381v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 按修复类型分层，真实checker接受修改、全量审计回滚回归，再按规则和概率顺序门控；本地仅文件映射回调。 | ProdPilot依特定生产规则，Harness²比较开放任务行为且无gold rubric。规则通过不等于通用安全；handle返回不是smoke成功，外部调用异常还需记未知副作用。 |
 
 </div>
 
@@ -150,6 +152,18 @@ MULTILOOP让编码优化器读轨迹改harness，但实证指出关键编排故�
 ScientistTwo的升阶、消融与严格比较针对可执行实验；Colosseum的readiness、局部复核和全局反驳针对长证明。未发现反例不等于证明正确，模拟评审高分也不等于会议录用。二者完整系统依赖高成本外部语义研究；本地通用tree或callback不会自动继承这种能力。
 
 对照来源：[stellar-colosseum](../../../agent-research/2609.15983-stellar-colosseum/README.md) · [scientist-two](../../../agent-research/2609.19644-scientist-two/README.md)
+
+### 执行差异是证据，但不自动告诉你该修哪一层
+
+Harness²先提出并真实执行不同harness，再组合和反思；AskALCF先区分生产检索与全库知识是否充分，才把错误交给对应组件。两者都不能用成功计数代替真实动作。AskALCF的after必须与冷缓存null比较，并记录逐题翻转；人审ship/revert/decline不由judge自信度授权。
+
+对照来源：[askalcf-protocol](../../../agent-research/2611.15700-askalcf-protocol/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### 从可执行修改到可信交付，需要独立验收和失败语义
+
+Harness²保留真实候选执行与采用依据，不把“提案”当“执行”。ProdPilot在结构化修复域进一步把每个fix的接受交给原checker，回归即回滚，关键P0不能被高模型概率覆盖。局部回调能验证这些控制流，但没有50条规则、概率模型或实际云环境，因此不能宣称应用已生产就绪。
+
+对照来源：[prodpilot-protocol](../../../agent-research/2611.17381-prodpilot-protocol/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -325,9 +339,37 @@ ScientistTwo的升阶、消融与严格比较针对可执行实验；Colosseum�
 
     对照来源：[stellar-colosseum](../../../agent-research/2609.15983-stellar-colosseum/README.md) · [scientist-two](../../../agent-research/2609.19644-scientist-two/README.md)
 
+### Harness²的某候选回答更好，足以认定AskALCF需要补知识吗？ {#cross-cross-nov18-askalcf-protocol}
+
+??? note "展开答案与例子"
+
+    **答案：** 不足。更好文本不证明全库缺少权威文档；应看回答盲的R／C。R假C真优先修retrieval，二者假才是knowledge。再以冻结参考和null对照验证候选。
+
+    **教学例子：** 教学例：同一文档已在全库但top-k错过，补一份重复文档可能掩盖检索问题。
+
+    对照来源：[askalcf-protocol](../../../agent-research/2611.15700-askalcf-protocol/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### 修复后的规则分数很高，Harness²或ProdPilot就能自动部署吗？ {#cross-cross-nov18-prodpilot-protocol}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。ProdPilot还需无失败P0、概率门、确定构建和显式批准；Harness²没有同一生产门控保证。部署回调已发出但异常时状态未知，不能直接重试制造重复副作用。
+
+    **教学例子：** 教学例：全局分数93但唯一P0失败仍须闭门；服务创建后超时需查外部状态。
+
+    对照来源：[prodpilot-protocol](../../../agent-research/2611.17381-prodpilot-protocol/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 按修复类型分层，真实checker接受修改、全量审计回滚回归，再按规则和概率顺序门控；本地仅文件映射回调。 完整实验高成本不复现，局部协议不作能力或Evolve证据。
+
+涉及：[prodpilot-protocol](../../../agent-research/2611.17381-prodpilot-protocol/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+**2026-11-18** · 回答盲的生产／全库充分性pivot、独立质量信号、revision缓存与受人审动作控制的修复协议。 完整实验高成本不复现，局部协议不作能力或Evolve证据。
+
+涉及：[askalcf-protocol](../../../agent-research/2611.15700-askalcf-protocol/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
 
 **2026-11-15** · 策略readiness门后分解证明依赖，带反驳的重叠树综合与全局验证指导局部修订／重新探索，结果grader与候选选择隔离。 ScientistTwo控制子集到全量实验和review闭环；Colosseum核查数学假设与跨节论证。共同的多阶段形态不使语义judge或证据充分性可互换。
 
@@ -393,7 +435,7 @@ ScientistTwo的升阶、消融与严格比较针对可执行实验；Colosseum�
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 62 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 64 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -459,6 +501,8 @@ ScientistTwo的升阶、消融与严格比较针对可执行实验；Colosseum�
 - [Co-Director: Agentic Generative Video Storytelling](../../../agent-research/2604.24842-co-director/README.md)
 - [MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks](../../../agent-research/2611.15754-multiloop/README.md)
 - [Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science](../../../agent-research/2609.15983-stellar-colosseum/README.md)
+- [AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support](../../../agent-research/2611.15700-askalcf-protocol/README.md)
+- [ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects](../../../agent-research/2611.17381-prodpilot-protocol/README.md)
 
 </details>
 

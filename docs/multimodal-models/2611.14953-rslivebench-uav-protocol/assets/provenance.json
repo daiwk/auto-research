@@ -1,0 +1,22 @@
+{
+  "paper_url": "https://arxiv.org/abs/2611.14953v1",
+  "source_url": "https://arxiv.org/pdf/2611.14953v1#page=2",
+  "figure": "Figure 1",
+  "source_format": "PDF rendered crop including original caption",
+  "image": "paper-figure-01.png",
+  "image_sha256": "0ad433761451f5f34ccec48fc8c829fd611179e88f8adf86d3970ec72e7e5103",
+  "asset_sha256": "0ad433761451f5f34ccec48fc8c829fd611179e88f8adf86d3970ec72e7e5103",
+  "caption": "Figure 1, original fixed-version PDF page 2. Scientific content unchanged; not a local experiment result.",
+  "source_pdf_sha256": "4d649abc7c2f95dfc2d0b9719a0be8205ed14f3aa368ab588cf596673ed07421",
+  "method_source_sha256": "69048f43b46185d460e48dda9f4206c9c85a6292983e90f96b67e1d21f9dcd0f",
+  "pdf_clip_points": [
+    54,
+    60,
+    560,
+    410
+  ],
+  "render_scale": 2,
+  "description": "Original scientific figure/table; no redraw or scientific-content edits. Author evidence, not a local capability result.",
+  "copyright": "Copyright remains with the paper's authors.",
+  "visually_verified": true
+}

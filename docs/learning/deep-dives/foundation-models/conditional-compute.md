@@ -7,7 +7,7 @@ hide:
 
 # 按需算力：选择专家、跳过计算，还是查回旧知识
 
-[基础模型](../index.md) · 更新 2026-10-27 · 26 篇主题资料 / 6 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-18 · 27 篇主题资料 / 7 篇重点对照
 
 参数容量、每 token 激活量与部署时延是三件事。Switch 选择计算专家，Engram 和 Memory Grafting 查局部模式；AdaDSF、Telescopic LM 与 WIDE 则分别从 token—层、整体深度和组宽度分配计算。先识别路由对象，才能讨论容量和省算。
 
@@ -31,6 +31,7 @@ hide:
 | [Adaptive Depth Sparse Framework: Similarity-Driven Resource Allocation for Pre-Trained LLMs](../../../reproductions/2607.21291-adadsf/README.md) · [原始来源](https://arxiv.org/abs/2607.21291)<br>章节：背景与主要改动、核心公式、复现边界 | 用 dense teacher 的层间变化分配层预算，再由逐层 router 只处理 Top-K token，其余走残差旁路。 | 全局活跃比例要校准，token 路由需对齐教师；活跃 token 数不等于 GPU 实测 FLOPs 或时延。 |
 | [Telescopic Language Models](../../../foundation-models/2609.35769-telescopic-lm/README.md) · [原始来源](https://arxiv.org/abs/2609.35769)<br>章节：背景与主要改动 | 训练随机深度前缀并保留全深 anchor，让同一 checkpoint 在多个完整前缀深度可用。 | 控制的是可部署深度，不等于每个 token 都有细粒度层路由；本地只验证随机深度和 anchor 梯度路径。 |
 | [WIDE: Boosting Adaptive LLM Inference via Token-level Dynamic Width Pruning](../../../reproductions/2607.28418-wide/README.md) · [原始来源](https://arxiv.org/abs/2607.28418)<br>章节：背景与主要改动、核心公式、复现边界 | 每 token 分别选择 attention head group 与 FFN channel group，使计算粒度细于整层。 | 需要 mask 重排和设备内 block skip 才兑现速度；本地 dense kernel 下的稀疏率不能直接当加速。 |
+| [Smart Model Routing for Order-of-Magnitude LLM Cost Reduction](../../../foundation-models/2611.15911-smart-model-routing/README.md) · [原始来源](https://arxiv.org/abs/2611.15911v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果、结果、负控与边界 | 应用层按成本/预测质量选完整模型，计入router/checker、残余难题与token偏斜；cascade接受率需过严格全路径breakeven。 | Switch在单网络内做token级top-1专家和负载均衡，Smart Routing选完整endpoint。内部激活FLOPs与外部API账单不是同一单位；便宜调用或校准平均概率本身不保证可区分易题，也不保证省钱。 |
 
 </div>
 
@@ -47,6 +48,12 @@ Switch 把输入送到一个网络专家执行非线性变换；Engram 根据离
 AdaDSF 的层预算控制有多少 token 进入各层；Telescopic LM 使一个深度前缀整体可用；WIDE 则把某个 token 的注意力组和 FFN 组分别路由。它们可以产生相近的平均活跃比例，却有不同的数据依赖、负载和内核形状。部署中若仍执行 dense matmul 后乘零，理论省算并没有变成时延收益。选型必须把训练兼容性和实际跳过粒度一起列出。
 
 对照来源：[adadsf](../../../reproductions/2607.21291-adadsf/README.md) · [telescopic-lm](../../../foundation-models/2609.35769-telescopic-lm/README.md) · [wide](../../../reproductions/2607.28418-wide/README.md)
+
+### 算了多少专家，不等于付了多少模型调用
+
+Switch减少每token激活计算，而外部cascade无论首答是否采用都支付cheap/checker费用。原文2.19×变2.70×的误账与残余质量高估说明只统计终答不可靠；learned-router follow-up又未优于同成本blind mixing。CPU实现Eq.5/6/7与条件质量，只验证算术，不读取test gold选模型或宣称训练出有效router。
+
+对照来源：[smart-model-routing](../../../foundation-models/2611.15911-smart-model-routing/README.md) · [switch-transformer](../../../reproductions/2101.03961-switch-transformer/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -82,15 +89,29 @@ AdaDSF 的层预算控制有多少 token 进入各层；Telescopic LM 使一个�
 
     对照来源：[switch-transformer](../../../reproductions/2101.03961-switch-transformer/README.md) · [wide](../../../reproductions/2607.28418-wide/README.md)
 
+### Switch每token只激活一个expert，是否可直接套成外部cascade省钱比例？ {#cross-cross-nov18-routing-layer-cost}
+
+??? note "展开答案与例子"
+
+    **答案：** 不可以。外部模型路由支付完整回答、checker、fallback及router开销，必须按实际请求token和接受历史计算；Switch的expert负载均衡不提供这些endpoint级统计，也不能保证质量门槛。
+
+    **教学例子：** 教学例：cheap1+checker1+router0.5、frontier10时，接受率0.25仅打平；即使内部top-1稀疏也不能删掉这些账单项。
+
+    对照来源：[smart-model-routing](../../../foundation-models/2611.15911-smart-model-routing/README.md) · [switch-transformer](../../../reproductions/2101.03961-switch-transformer/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 补应用层完整模型路由成本核，与token专家路由分层；保留learned-router负结果，显式计checker/router、token偏斜与条件fallback质量。完整推理/收集不复现。
+
+涉及：[smart-model-routing](../../../foundation-models/2611.15911-smart-model-routing/README.md) · [switch-transformer](../../../reproductions/2101.03961-switch-transformer/README.md)
 
 **2026-10-27** · 首版：比较专家计算、离散查表、冻结短语嫁接与深度/宽度路由，区分容量、预算单位和硬件兑现条件。
 
 覆盖 26 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 26 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 27 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -120,6 +141,7 @@ AdaDSF 的层预算控制有多少 token 进入各层；Telescopic LM 使一个�
 - [SWRouter: Similarity-Contractive Window Routing for Multi-Turn Large Language Model Conversations](../../../foundation-models/2609.11414-swrouter/README.md)
 - [Telescopic Language Models](../../../foundation-models/2609.35769-telescopic-lm/README.md)
 - [WIDE: Boosting Adaptive LLM Inference via Token-level Dynamic Width Pruning](../../../reproductions/2607.28418-wide/README.md)
+- [Smart Model Routing for Order-of-Magnitude LLM Cost Reduction](../../../foundation-models/2611.15911-smart-model-routing/README.md)
 
 </details>
 

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-18",
+  "figures": [
+    {
+      "file": "paper-figure-01.png",
+      "paper_id": "2611.18050",
+      "version": "v1",
+      "figure": 1,
+      "caption": "Concurrent detection events accumulate until the window; the highest-priority firing wins.",
+      "source_url": "https://arxiv.org/pdf/2611.18050v1#page=3",
+      "paper_url": "https://arxiv.org/abs/2611.18050v1",
+      "source_kind": "fixed_version_pdf_crop_rendered_png",
+      "source_sha256": "9ad2de6caddbd9b53dde7fef0854cc79cd9006080a8093995a438c1a8bdbd5a8",
+      "asset_sha256": "aba42046f852ca285006525cba5f161fc7e15cbf097daad03e325145014d0d0f",
+      "image_sha256": "aba42046f852ca285006525cba5f161fc7e15cbf097daad03e325145014d0d0f",
+      "page": 3,
+      "crop_points": [
+        70,
+        65,
+        525,
+        265
+      ],
+      "render_dpi": 144,
+      "caption_included": true,
+      "scientific_content_modified": false,
+      "visual_review_done": true,
+      "attribution": "Copyright belongs to the original authors. Original paper crop used for research explanation, not local experimental evidence.",
+      "license": "See original arXiv source; this repository grants no new license."
+    }
+  ]
+}

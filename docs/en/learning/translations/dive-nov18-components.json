@@ -1,0 +1,453 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/multimodal-models/world-state-actions/comparison/foundation-models:stratified-retention-protocol": {
+      "source_sha256": "e410c6ff06bb72a7e02fd367ed6a8d9e0934d57676afcd32aab5b259a27a6c57",
+      "reviewed": true,
+      "fields": {
+        "position": "Stratifies world knowledge by environmental invariance timescale and separates per-round invariant retention from new-episode revision latency. The source is a proposal without new experiments; local code is an L0 reporting protocol.",
+        "tradeoff": "WOVEN turns (s,a,s') visual transitions into controlled supervision and trains an MLLM. Stratified retention neither generates data nor chooses an adaptation algorithm. WOVEN source-ID isolation does not replace fixed invariant panels and new-episode change probes; the scores are not directly rankable."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/analysis/8": {
+      "source_sha256": "f20ef879b7ac0f7d8c257c93f56742ffc6fedc28e88de3de7773829c5ab78e49",
+      "reviewed": true,
+      "fields": {
+        "title": "Transition supervision is not a continual evaluation of what should change",
+        "body": "WOVEN controls scene/action/reasoning for training and generalization, putting real visual transitions into response-only SFT; the repository retains a negative small grouped result. Stratified Retention distinguishes expired facts from structural forgetting: invariants may be corrected but should not degrade, while instance positions must update promptly. Combining the ideas would require predeclared strata, per-round probes and new-episode revision traces. No such model experiment is run here; the component only rejects leakage and censoring confounds."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/question/nov18-stratified-retention-protocol": {
+      "source_sha256": "467135dbc72d89911c0e2cb621e5e9cb489d3c8f7c7e50fcba5eb0a342469fe4",
+      "reviewed": true,
+      "fields": {
+        "question": "Does lower old-scene accuracy after WOVEN training establish harmful forgetting?",
+        "answer": "No. First ask whether the old answer remains true. Correctly revising stale instances differs from losing invariants. Existing grouped WOVEN accuracy does not supply per-round differential-retention evidence; it needs fixed panels, new-episode change probes and false-revision controls.",
+        "example": "After a chair moves, rejecting its old coordinates may be correct. Assuming it ceases to exist when occluded violates an invariant. Final recovery cannot hide an intermediate negative flip."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/update/2026-11-18/7": {
+      "source_sha256": "64be4b33d90a6f48dc4d53e73426086a491b8b78e9dab93039e455f1f61b11fc",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added an L0 stratified-retention reporting protocol and an axis-separated comparison with WOVEN training; no original full empirical study or costly training/capability result is invented."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:tokenization-premium": {
+      "source_sha256": "cfa0b06d9e3ca41d990ce86d8d577e07f0a7c1ac7026b1385347f20b7711e9e9",
+      "reviewed": true,
+      "fields": {
+        "position": "Joins the same common UDHR articles before one encoding, compares total token cost and excludes UNK collapse. Full-item ECE, coverage/risk and full-energy denominators are constrained separately.",
+        "tradeoff": "XLGoBench fixes abstract algorithmic instances and complexity to compare cross-lingual task capability; token premium only measures matched-content input cost. Both require comparable language content, but token count is not model error rate, and neither local scorer runs a full multilingual matrix."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/analysis/11": {
+      "source_sha256": "c66ba2aae9628bc8078cb3ebd0dd97230d72eab926d58d549cff9eb44b100f07",
+      "reviewed": true,
+      "fields": {
+        "title": "Matched-content price gaps and matched-task capability gaps are different axes",
+        "body": "The Tokenization Premium script joins 27 common articles by number; separately tokenizing and summing can change boundary merges. XLGoBench instead controls algorithmic instances and complexity and seals answers in a separate scorer. Studying token budgets and cross-lingual reasoning would require fixed content, verified translations, budgets and real model outputs. A 6.76× Amharic cost is not a 6.76× error prediction, and UNK collapse is not an improvement."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/nov18-tokenization-premium": {
+      "source_sha256": "1b83cef1e0c2cf4b7e38514402f208097bed037a9c863410fe65ee9f9f61bd6b",
+      "reviewed": true,
+      "fields": {
+        "question": "Does twice the English token count imply half the XLGoBench accuracy?",
+        "answer": "No. Premium measures matched-content cost, while task accuracy also depends on training coverage, translation, reasoning and budgets. Matched instances, verified templates and real model evaluation are needed to study their relationship.",
+        "example": "A shortest-path instance can keep the correct path while changing language. Expanding its input from 100 to 200 tokens does not change the algorithmic answer or establish an accuracy ratio."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/update/2026-11-18/10": {
+      "source_sha256": "fadd64f0b63b85fcade60b14774a9669e9468bd6013512aaadd4b74bf85b3fb4",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added matched-content token cost and abstention-safe readouts alongside the XLGoBench capability axis; recorded the original September 22 Zenodo release and real public measurement scripts rather than calling it a new November release."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/comparison/multimodal-models:rslivebench-uav-protocol": {
+      "source_sha256": "9c886297d655a1f2d609bddf451fe0e7a57d2ce16a6bf9f5b45d41499269f4ca",
+      "reviewed": true,
+      "fields": {
+        "position": "Controls continual evaluation using fresh real UAV observations, four-scene FIFO and answer embargo. Local code only implements capture/release windows, calendar-month embargo, an SC subscorer and missing-aware hierarchical aggregation.",
+        "tradeoff": "WOVEN trains visual-transition reasoning and controls scene/action/reasoning transfer. RSLiveBench-UAV emphasizes aerial geometry and continual renewal. Temporal freshness, physical acquisition and scene-OOD are distinct axes; their scores are not directly comparable."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/analysis/9": {
+      "source_sha256": "9229bd5b86b8bdfa61935ad128b65d2ad3464cb80ae4c5dc7aa46be3049314c9",
+      "reviewed": true,
+      "fields": {
+        "title": "Fresh capture and unseen scenes are not the same generalization control",
+        "body": "WOVEN groups initial-frame sources to keep related actions/questions out of different splits. RSLiveBench-UAV requires captures between consecutive releases and retires the earliest admitted scene. Renewal reduces exposure to old answers without removing scene bias; generated-scene OOD does not provide real aerial geometry. Tiny FIFO replay only validates timing and denominators, not spatial VLM capability or full benchmark integration."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/question/nov18-rslivebench-uav-protocol": {
+      "source_sha256": "fbae81723b5497fc1b8fa419c13d9342558339e172d926253554ac8764229864",
+      "reviewed": true,
+      "fields": {
+        "question": "Does replacing a scene with yesterday's images of the same car park establish both freshness and scene-OOD?",
+        "answer": "Not necessarily. It can satisfy capture windows and FIFO without testing unseen scenes when location, entities and viewpoints remain similar. WOVEN's scene axis and UAV temporal controls require separate records.",
+        "example": "A new capture of the same car park is a fresh observation. An unseen generated restaurant may be scene-OOD but supplies no real UAV cross-view vehicle geometry."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/update/2026-11-18/8": {
+      "source_sha256": "f7c631b6d05dabccc64227edc0973f81f2ba54ad1292ca31d4a709b9c16940ae",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added the L0 RSLiveBench-UAV release/scorer protocol separately from WOVEN transfer; full acquisition, annotation and the costly 30-model matrix are not reproduced."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/comparison/multimodal-models:multimodal-library-protocol": {
+      "source_sha256": "36890bf0e5898aa324d2a9e8d2737ca4b576cce796de78d64b4236beead5a011",
+      "reviewed": true,
+      "fields": {
+        "position": "Uses existing ColPali page multivectors for query-token/page-token MaxSim and compares Qdrant metrics/indexing. Local code only implements vector/ranking arithmetic and scope-labeled timing readouts.",
+        "tradeoff": "CLIP learns normalized global dual-tower representations with a contrastive objective. The library study uses an existing alignment model and studies local readouts/databases. Real-image CLIP experiments and constructed token arithmetic have different evidence levels, not a visual-retrieval ranking."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/analysis/10": {
+      "source_sha256": "54bb80bb37e93f036dce126ce658966d929f5c0d459a18b2ce2a655149516e93",
+      "reviewed": true,
+      "fields": {
+        "title": "Alignment training, local retrieval and database throughput need separate validation",
+        "body": "CLIP similarities come from contrastively learned global image/text representations. Page multivector late interaction preserves each query token's best local evidence. Similarity is not relevance probability and requires sealed independent judgments. The library paper conflicts on preencoded database versus end-to-end concurrency scope, so local timing requires an explicit scope and true wall-clock QPS rather than treating Table VII as reproduced model throughput."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/question/nov18-multimodal-library-protocol": {
+      "source_sha256": "25b771ca59cb9b09312c953bb62842e829a01dc9b3b8d51be2bfa43387ad51c2",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a MaxSim toy example beating a distractor show that it is better than CLIP for real libraries?",
+        "answer": "No. It only validates readout arithmetic. Real comparison needs matched pages/queries, audited judgments, encoding/reranking settings and budgets, separating model quality, index recall and serving performance. CLIP's small-task result is not long-document page capability either.",
+        "example": "Two query tokens may match two page patches for score 2, but that says neither whether relevant pages are fully indexed nor what throughput includes ColPali inference."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/update/2026-11-18/9": {
+      "source_sha256": "5248b80523b8c0de5a2d9d0be29c87e003fb4e7bb8043d98e86b047904d6f503",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added L0 page-MaxSim, independent retrieval metrics and explicit timing scope; separated them from CLIP training, retained the source's concurrency-scope conflict and did not run the costly full index."
+      }
+    },
+    "dive/system-one/adaptive-decisions/comparison/system-one:typed-inbox-protocol": {
+      "source_sha256": "05d152be7777af01553cbe486b4402c0a8baf7689a05672c54e2270666c85624",
+      "reviewed": true,
+      "fields": {
+        "position": "Freeze visible inputs and whole-thread splits, then choose validation cost thresholds; the local slice is L0 binary protocol only.",
+        "tradeoff": "The Jev capability entry scores independent questions/options against isolated gold. Typed Inbox concerns composed actions and private inbox distributions. Three seeds do not replace thread isolation, and a binary threshold is not the complete paper model."
+      }
+    },
+    "dive/system-one/adaptive-decisions/analysis/2": {
+      "source_sha256": "cff4fc08126661b0dd0c2f608516ccaafd75d88332fac133048efafc558a9701",
+      "reviewed": true,
+      "fields": {
+        "title": "Correct labels do not directly mean fewer costly missed emails",
+        "body": "The Jev benchmark isolates gold and records real backends and data coverage. Typed Inbox adds action composition and asymmetric error cost: equal accuracy need not mean equal missed-email risk. Freeze exact visible snapshots, isolate whole threads, and tune only inside training/validation. The binary interface does not replace class-stratified CV or full three-switch costs."
+      }
+    },
+    "dive/system-one/adaptive-decisions/question/cross-nov18-typed-inbox-protocol": {
+      "source_sha256": "eb0db25d9fe3ca78d6e93396f416a6ae8860d497ea083c97161d84b891378a01",
+      "reviewed": true,
+      "fields": {
+        "question": "Is tuning an inbox noise cutoff on held-out emails a fair Jev capability comparison?",
+        "answer": "No. It uses test labels to select policy, and action cost is not independent choice accuracy. Fix splits, costs and cutoff rules beforehand, then score only after freezing. No Jev backend is called locally.",
+        "example": "Teaching example: lowering the cutoff after seeing one missed important email changes an already-scored decision; it is no longer unseen test performance."
+      }
+    },
+    "dive/system-one/adaptive-decisions/update/2026-11-18/1": {
+      "source_sha256": "9550a5a36ff62fe1c59b8cbba5286c8146c72127b1249e2ea596b8e2f889c5ec",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add frozen-view/thread-isolation and validation action-cost interfaces; full private multi-model CV is not reproduced."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:askalcf-protocol": {
+      "source_sha256": "b0a62a7fc0bd41cae69636ffb34c66050b836b36878555d9d77e90cbe74bebec",
+      "reviewed": true,
+      "fields": {
+        "position": "Answer-blind production/corpus sufficiency, separate quality signals, revision caching and governed repair callbacks.",
+        "tradeoff": "Harness² uses open execution contrasts without answer rubrics; AskALCF has frozen expert attribution and target/control studies. Text preference cannot replace sufficiency probes, and the local seven routes are not all 28 rules."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/16": {
+      "source_sha256": "309c45ae981f648a5b5cc8ebb0641448680cd6581d0e8428df1eb22b67486ed9",
+      "reviewed": true,
+      "fields": {
+        "title": "An execution difference does not automatically identify the component to repair",
+        "body": "Harness² proposes and executes harness variants before composing and reflecting. AskALCF separates production retrieval from corpus coverage before assigning repair responsibility. Neither can substitute counters for actions. AskALCF compares after with a cold-cache null and retains paired flips; human ship/revert/decline authority does not come from judge confidence."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov18-askalcf-protocol": {
+      "source_sha256": "9c2a8549d8dac4b07d827eb823a39cd8db77c2f210c312d8013cfd82ac3bf1c7",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a better Harness² candidate answer establish that AskALCF needs new knowledge?",
+        "answer": "No. Better text does not prove missing authoritative corpus evidence. Use answer-blind R/C: false/true means retrieval, both false means knowledge. Then validate against frozen references and null controls.",
+        "example": "Teaching example: duplicating a page already in the corpus may conceal a top-k retrieval defect."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-18/16": {
+      "source_sha256": "f2b07d197cdfb2671efa38b408db228b5c52f023185b9b36e370737565ea9bfb",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add answer-blind two-scope attribution, dependency-aware caching and real reviewed callbacks; no RAG/agent judge or private campaign."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:prodpilot-protocol": {
+      "source_sha256": "224b0421ae32b88d3225931fb39770c6b6cc29623a5f6bbf8f0d4e77069f8b4a",
+      "reviewed": true,
+      "fields": {
+        "position": "Typed repair callbacks are checked independently; full audits roll back regressions before sequential rule/probability gates. Only in-memory file contracts are local.",
+        "tradeoff": "ProdPilot relies on specific readiness rules; Harness² compares open-task behavior without gold rubrics. Passing rules is not general safety, a deploy handle is not smoke success, and interrupted external calls retain unknown side effects."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/17": {
+      "source_sha256": "e5d96e937e8681bd263dff8297dcfb7da1e94be7f5965c5cf0cb9dec4da4f405",
+      "reviewed": true,
+      "fields": {
+        "title": "Executable changes require independent acceptance and explicit failure semantics",
+        "body": "Harness² retains real candidate execution and adoption evidence rather than treating proposals as execution. ProdPilot accepts each fix through its original checker, reverts regressions, and never lets high model probability overrule a failing P0. Local callbacks validate control flow, not the absent 50 rules, estimator or cloud deployment."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov18-prodpilot-protocol": {
+      "source_sha256": "1a993b4efc8b69a4a17502386bef9f3ff993097aac5fd1bf66d542364ed748ee",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a high repaired audit score authorize automatic deployment in Harness² or ProdPilot?",
+        "answer": "No. ProdPilot also needs no failing P0, the probability condition, a determined build and explicit approval; Harness² supplies no equivalent production gate. A deploy call that raises leaves status unknown and should not be blindly retried.",
+        "example": "Teaching example: score 93 with one failing P0 remains closed; inspect external state after service-creation timeout."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-18/17": {
+      "source_sha256": "58f800b9897bfed4346c8386db3440e7a61ecd316c551937ab6bc830bfb2cab2",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add bounded verified repair, regression rollback and fail-closed deployment interfaces; no cloud, full ruleset or trained estimator."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/comparison/multimodal-models:fend-protocol": {
+      "source_sha256": "7c893bb30f5c4e9f668d00b8beebf4063d61a4c868c987d057ad3941e9c23816",
+      "reviewed": true,
+      "fields": {
+        "position": "Accumulate external events through a deadline; arbitrate VM/IVR/AI with human default, separate HFPR and human-null calibration.",
+        "tradeoff": "GSLM2 learns multi-stream units and speech distributions; FEND detects outbound-call risk. Externally supplied units/events are not locally trained models and do not share a capability ranking."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/analysis/11": {
+      "source_sha256": "da18806818e79ab25388ea3a63ac5c14d70f3b30e07cc9aefea35cfe35487025",
+      "reviewed": true,
+      "fields": {
+        "title": "Speech representation scores and call-decision risks belong to different layers",
+        "body": "The GSLM2 slice jointly deduplicates changing streams and scores transitions, leaving the model external. The FEND slice arbitrates timestamped external events without audio detectors. Wait for the priority window and use true humans for HFPR. The paper's 0.979 is human-versus-rest F1; AI-class F1 is only 0.571, not solved four-class detection."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/question/cross-nov18-fend-protocol": {
+      "source_sha256": "a72aa46532bba26e493ad0ac4e70dad88ea9a82f0e56be04be5bf5d05db3eb59",
+      "reviewed": true,
+      "fields": {
+        "question": "Does FEND's 0.979 human-versus-rest F1 establish that a multi-stream speech model detects AI speech well?",
+        "answer": "No. Binary F1 is not AI-class F1 or representation quality. FEND additionally depends on commercial ASR, tools and timing models. GSLM2 addresses different tasks; each needs its own frozen protocol and real model outputs.",
+        "example": "Teaching example: low human rejection can coexist with AI mislabeled voicemail, retaining high binary F1 but poor four-way discrimination."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/update/2026-11-18/10": {
+      "source_sha256": "756a3be1820a7bf24e47170d99421b254eae0f68da96b0d1c400a51353621371",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add deadline/priority and human-FPR/null-calibration interfaces; no audio/ASR/LLM classifier, and distinguish binary F1 from four-class performance."
+      }
+    },
+    "dive/post-training/preference-and-alignment/comparison/post-training:luce-similarity-audit": {
+      "source_sha256": "8f702de081ad85eb96282e03413570e8a148111d1d6e66fadd9a48ecf5266cd9",
+      "reviewed": true,
+      "fields": {
+        "position": "Audit BT non-tied decisiveness, joint-model tie gains and sibling-menu odds against a strength-matched placebo separately.",
+        "tradeoff": "Probabilistic Autorater uses proper rewards to calibrate preference distributions; Luce audits the structural map from global scores to related-model odds. Proper probabilities do not imply IIA, and pooled shifts do not establish within-prompt causality."
+      }
+    },
+    "dive/post-training/preference-and-alignment/analysis/2": {
+      "source_sha256": "5ff22088f9ddc9d839fb12868967c7c1d541d580eba7d29937a318396a53cc5d",
+      "reviewed": true,
+      "fields": {
+        "title": "Calibrated probabilities do not make every score-derived odds ratio trustworthy",
+        "body": "Proper rewards calibrate reported distributions, while the Luce study examines related models and changing menus. Most three-outcome gains arise from ties, not proven release-decision odds. Crossing-zero frozen-lineage intervals and attenuated within-prompt shifts remain essential. Local Equations 2/3 are auditable arithmetic, not Arena fitting, test-battle similarity extraction or new judge evidence."
+      }
+    },
+    "dive/post-training/preference-and-alignment/question/cross-nov18-luce-calibration": {
+      "source_sha256": "d4db52ca62cbcec49f06b0ef4c31b14266d01aa7ae0f018277cf0d64368ef334",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a properly scored autorater reporting overall preferences guarantee correct BT odds for neighboring releases?",
+        "answer": "No. Distribution reporting differs from BT's single-score structure. Related-pair decisiveness, ties and prompt heterogeneity may invalidate score-derived odds. Separate non-tied, three-outcome and frozen-transfer outcomes rather than relying on overall loss.",
+        "example": "Ties-only nearly explains the paper's overall gain, yet the frozen-lineage non-tied interval [-2.92,+1.68] does not establish improvement."
+      }
+    },
+    "dive/post-training/preference-and-alignment/update/2026-11-18/1": {
+      "source_sha256": "a0e90b02e2349509016867296baf7f0ab550f11be843db50946dd6760c7fc0c4",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add related-model odds and menu audits, separating proper probabilities, tie gains and inconclusive frozen transfer. CPU arithmetic does not fit a leaderboard or establish capabilities; full vote/judge campaigns are not reproduced due to cost."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:runway-inference-protocol": {
+      "source_sha256": "09665253e367e4f9e66aee568b4da29c4108272926d250219a74081cce531c6f",
+      "reviewed": true,
+      "fields": {
+        "position": "Wrap unmodified AIPerf with configuration/cache identity, declarative SLAs and cost per successful request; cache hits only reuse existing evidence.",
+        "tradeoff": "XLA from the Trenches checks target-TPU numerical correctness; Runway checks serving metrics and contractual acceptance. CPU protocols establish neither TPU semantics nor CUDA throughput, and identical model/engine names do not imply identical cache identity."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/analysis/12": {
+      "source_sha256": "e5ac4be8f626d3e5abc0b087a5d01157331f76bb11fbf5280be0eaae56f1eccb",
+      "reviewed": true,
+      "fields": {
+        "title": "Reproducible reports are not repeated independent measurements",
+        "body": "XLA preserves target hardware semantics; Runway preserves configurations and raw AIPerf outputs. Neither is replaced by CPU fixtures. The local conservative hash includes engine settings, revisions and warm-up; cache-only misses raise and unit-mismatched SLAs reject. Two SLA decisions on one cached observation are not two independent samples and cannot narrow measurement intervals."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/cross-nov18-runway-cache-evidence": {
+      "source_sha256": "2a6816c193ee5db3300ea85cc2975fb7a8aed59b25b391659879063c6236f0b6",
+      "reviewed": true,
+      "fields": {
+        "question": "Do repeated reports from one cached configuration count as repeated hardware validation?",
+        "answer": "No. Runway cache hits skip measurement, adding decisions/reports but no independent observations. As with XLA's real-target confirmation, claims must bind actual execution to raw evidence; fixtures/cache hits cannot establish hardware validation.",
+        "example": "Teaching example: ten reports from one AIPerf result still contain one measurement. Enabling MTP requires a new identity, not old numbers."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/update/2026-11-18/11": {
+      "source_sha256": "983b88d2c11eb87a830843bd14506d19c06be8c2584848f2840a1087d6659a41",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add inference cache/SLA/cost evidence protocols: caching is not replication, units must match and hardware claims require actual measurements. Full engine/instance matrices are not reproduced due to cost."
+      }
+    },
+    "dive/foundation-models/conditional-compute/comparison/foundation-models:smart-model-routing": {
+      "source_sha256": "d8c33b1a97b05793a63075ad5c7e1237cb31060bb1ae0516e52e0cc87300c94b",
+      "reviewed": true,
+      "fields": {
+        "position": "Select complete models by cost/predicted quality, pricing router/checker overhead, residual hard traffic and token skew; cascade acceptance must clear strict whole-path breakeven.",
+        "tradeoff": "Switch performs token-level top-1 expert selection and balancing inside one network; Smart Routing chooses complete endpoints. Activated FLOPs and API bills are different units. Cheap calls or calibrated averages alone do not identify easy requests or ensure savings."
+      }
+    },
+    "dive/foundation-models/conditional-compute/analysis/2": {
+      "source_sha256": "7403fd80df9e9201bcf7c7c98194028da0c6f6c183b7115ee37263643c8de6a2",
+      "reviewed": true,
+      "fields": {
+        "title": "Counting activated experts is not counting paid model calls",
+        "body": "Switch reduces per-token activated compute; external cascades pay cheap-answer/checker calls even when discarded. The paper's inflated 2.70x versus accounted 2.19x and residual-quality overstatement expose terminal-answer-only accounting. The learned-router follow-up also fails to beat cost-matched blind mixing. CPU Equations 5/6/7 check arithmetic, not gold-based routing or a trained useful router."
+      }
+    },
+    "dive/foundation-models/conditional-compute/question/cross-nov18-routing-layer-cost": {
+      "source_sha256": "b397a5498c33f8e38dee6863880853ec350ac3bf956d5d8b7e156796674d5b09",
+      "reviewed": true,
+      "fields": {
+        "question": "Can Switch's one-expert-per-token sparsity directly predict external cascade savings?",
+        "answer": "No. External routing pays complete answer, checker, fallback and router costs conditioned on actual token use and acceptance history. Switch load balancing provides no endpoint-level accounting or quality guarantee.",
+        "example": "Teaching example: cheap1+checker1+router0.5 against frontier10 only breaks even at 0.25 acceptance. Internal top-1 sparsity does not erase these bills."
+      }
+    },
+    "dive/foundation-models/conditional-compute/update/2026-11-18/1": {
+      "source_sha256": "5d849aa3066709c948a3e4e3ae5a1e6fdc3fa279f9c6535f7df6b9bfa14696df",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add application-level model-routing arithmetic separately from token-expert routing. Preserve negative learned-router results and price checker/router overhead, token skew and conditional fallback quality; full inference/collection is not reproduced."
+      }
+    },
+    "dive/post-training/preference-and-alignment/comparison/post-training:calibrated-judges-protocol": {
+      "source_sha256": "b57b7e1b3f1a38372b4c6520b269af0fa8a9683530c9b8473be19a2984b605b4",
+      "reviewed": true,
+      "fields": {
+        "position": "Evaluator-only catch sensitivity gate, two isolated judges with order-restored consistency, disagreement ties and separate post-training bias-transduction checks.",
+        "tradeoff": "Probabilistic Autorater calibrates distributions/proper rewards; RA-Eval qualifies judges and processes verdicts. High catch accuracy does not remove training bias. Fixture 1/0.5 mappings are not capabilities, and ordinary joins cannot read gold."
+      }
+    },
+    "dive/post-training/preference-and-alignment/analysis/3": {
+      "source_sha256": "d210b93125424c99baf668e3eebae6a3574417f88cdc1291f462881c738b82e0",
+      "reviewed": true,
+      "fields": {
+        "title": "Passing a judge qualification exam does not stop training from amplifying its preferences into shortcuts",
+        "body": "Proper probabilities, catch sensitivity, blinding and order swaps control different risks. The paper's rejected 75-character iteration shows perceptually sensitive judges can still transfer length bias into DPO. An SFT anchor does not replace calibration, nor post-training length/style and held-out checks. The local module processes external verdicts, rejects catch/training ID reuse and calls no judge or training job."
+      }
+    },
+    "dive/post-training/preference-and-alignment/question/cross-nov18-judge-calibration-transduction": {
+      "source_sha256": "7d16e339519240f43bb6eefaec26d0a21b293c13cc6fff7558b0130b709b5ef5",
+      "reviewed": true,
+      "fields": {
+        "question": "Can calibrated judge probabilities and strong catch accuracy eliminate post-training length audits?",
+        "answer": "No. Probability calibration, catch sensitivity, order consistency and bias transduction are separate tests. Short-text preferences can remain and DPO can amplify chosen-length distributions. Audit length/style and held-out outcomes separately rather than treating annotation agreement as capability gain.",
+        "example": "The paper rejects a 240-pair iteration at median 75 characters. Four agreeing fixture verdicts locally yield protocol score 1, not 100% model accuracy."
+      }
+    },
+    "dive/post-training/preference-and-alignment/update/2026-11-18/2": {
+      "source_sha256": "833122d25431c3ac114b07ff0693a285f798f8818f6f316df94ca7ad3955ee54",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add catch, two-judge order-swap, tie and isolation components, separating proper probabilities from post-training bias transduction. Preserve negative speech interventions and length collapse; no paid judges or full 0.6B training."
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:hvmap": {
+      "source_sha256": "a3b8c86dfa667ae84a17ead969cf8285fa37b8dcf66090e5b232708b327c3afa",
+      "reviewed": true,
+      "fields": {
+        "position": "Four-layer normalized maps use cross-target fuzzy alignment; native/mapped scores merge global K, with at most two hub maps between spokes.",
+        "tradeoff": "ECG-RAG shares retrieval and compressed-generation representations. HVMap aligns existing heterogeneous databases without answering questions. Local fuzzy and joint losses are not full RAG evidence."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/8": {
+      "source_sha256": "473b02adcb4058aeff039afadfe0e7b5997424d5d274dd470d59f7a442430f2b",
+      "reviewed": true,
+      "fields": {
+        "title": "Sharing one representation and aligning several are different system choices",
+        "body": "ECG-RAG jointly learns retrieval/compression to avoid duplicate storage and still needs decoder training. HVMap accepts already heterogeneous encoders, using paired maps and two-space scoring. Fuzzy diagonal terms anchor absolute correspondence; relative RKD geometry is insufficient. SCORE2 retains each native vector rather than always favoring the hub. Small-tensor gradients establish neither cross-modal retrieval nor index throughput, so author campaign results must not become local dashboard claims."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/cross-nov18-hvmap-alignment": {
+      "source_sha256": "b7bad9b59290b8b895c3b3bb93033fd64ffe6ee260d19020bfa896560a0d9069",
+      "reviewed": true,
+      "fields": {
+        "question": "Do ECG shared representations plus a low HVMap fuzzy loss prove better RAG?",
+        "answer": "No. They change different stages, and local components lack complete training, retrieval and answer evaluation. HVMap needs semantic generalization and union rankings; ECG needs compressed-context generation. Diagnostic loss is not end-to-end capability.",
+        "example": "Teaching example: successful backpropagation does not put a relevant document in top ten or make an answer correct."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-11-18/7": {
+      "source_sha256": "381294bd8097f09fde82e3b59a5346237dfb2818ffe2b5dd7df05993535edd4b",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add HVMap cross-space anchors, native weights and quota-free merging, contrasted with shared RAG representations. Separate L1 tensor evidence from high-cost full campaigns."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:mixed-signals-weights": {
+      "source_sha256": "65010883ec0a911c10b14d20e14cadd3121e21119e3d41dab6958919853e5c2c",
+      "reviewed": true,
+      "fields": {
+        "position": "Atomic patches and bounded practice feedback express the WSP interface; test labels remain external and SGD does not replace reasoning edits.",
+        "tradeoff": "AMS reads fixed activations without editing or certifying safety. WSP asks about reasoning-based weight changes. The L0 linear harness has no LLM, TinyEEGNet or subject records."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/analysis/13": {
+      "source_sha256": "02408fc2e584e22165f3a1d314ecb234ba90de6a56af68e3d2166333f9e0da69",
+      "reviewed": true,
+      "fields": {
+        "title": "Detecting a difference is not evidence of repair capability",
+        "body": "AMS directions/drift are signals with structure-preserving attack blind spots. Mixed Signals additionally requires bounded editing feedback and independent unseen-subject evaluation. Atomicity, charged failures and balanced accuracy are necessary contracts, not an editing LLM. SGD substitution and test-feedback leakage change the task. High-cost campaigns are not reproduced; retain L0 and real CUDA loading/forward evidence without borrowing author medical results."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/cross-nov18-wsp-not-ams": {
+      "source_sha256": "48ff5ce9cda8835ad399378732fb532e1b0e3f14031195044afbb241884d6362",
+      "reviewed": true,
+      "fields": {
+        "question": "Do passing AMS and patch-interface checks establish successful repair?",
+        "answer": "No. AMS supplies structural diagnostics and the interface supplies atomicity/budget contracts. Repair needs an actual reasoning editor under isolated practice feedback and independent unseen-subject evaluation.",
+        "example": "Teaching example: negating a linear layer changes its forward pass, not necessarily EEG accuracy."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/update/2026-11-18/12": {
+      "source_sha256": "086ee91989494b7bde3fb6a6bf4c8966bfeef537d456f562d8853554d2a42fe4",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add WSP patch, budget and evaluator interfaces against AMS's detection-not-editing boundary. No LLM or TinyEEGNet substitute; high-cost full experiments are not reproduced."
+      }
+    }
+  }
+}

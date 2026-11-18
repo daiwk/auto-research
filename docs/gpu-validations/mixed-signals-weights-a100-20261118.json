@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "adapter_key": "mixed-signals-weights",
+  "validated_at": "2026-11-18",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB",
+    "count": 1
+  },
+  "command": [
+    "timeout",
+    "180",
+    "python3",
+    "scripts/run_nov18_components.py",
+    "--device",
+    "cuda",
+    "--source-commit",
+    "66426c021857ab45c7c014c25260755d65254909",
+    "--output",
+    "raw-cuda.json"
+  ],
+  "dataset": {
+    "id": "synthetic:nov18-mixed-signals-weights-component-v1",
+    "revision": "sha256:5913eb83ca90c60691b221cfdf1fc4ab9430382c672e8f93aa564e67ff8c85ac",
+    "recipe": "Seeded tensors or explicit evaluator/control examples; no pretrained output, public dataset or model capability score",
+    "capability_benchmark": false
+  },
+  "checkpoint": {
+    "public_id": "none-seeded-component-initialization",
+    "revision": "66426c021857ab45c7c014c25260755d65254909",
+    "pretrained": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "metrics": {
+    "failed_calls": 1.0,
+    "fixture_balanced_accuracy": 0.75,
+    "fixture_recovery": 1.25,
+    "harness_output_norm": 2.1635826428731284,
+    "practice_calls": 1.0
+  },
+  "diagnostic_only": true,
+  "evaluation_tier": "l0_interface",
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "provenance": {
+    "commit": "66426c021857ab45c7c014c25260755d65254909",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "artifact_path": "docs/gpu-validations/mixed-signals-weights-a100-20261118.json",
+    "executed_source_sha256": {
+      "scripts/run_nov18_components.py": "4682e5887a03dde2610b1143e96d389bc0576cc88adee11b9db218f42bdabab2",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov18-components/preflight.json": "e152367409a72aa5833f16c291ada6a7c6a54765d0889e6b8c0bf04df3b28f3c",
+      "src/auto_research/foundation_models/typed_inbox_protocol.py": "6749766cb6bfdba46aa56c9e95a8d2a9b39bb044cdfc8ae332d0cd742bea8b72",
+      "src/auto_research/agent_research/askalcf_protocol.py": "643ed5cd3f10927c485d608c48e2cf34245492dca3208cdc2d67811a73c93742",
+      "src/auto_research/agent_research/prodpilot_protocol.py": "be2e46e177379a86bfaf3ee1ca0ac201f92fcfabffaa3fcba2fa839bfe6d2f61",
+      "src/auto_research/multimodal/fend_protocol.py": "e0b6ffb52c1dfad465483a97cb2076701a5fa66727ad54572c57a80b61a5a329",
+      "src/auto_research/foundation_models/stratified_retention_protocol.py": "e9d2497cb0ef7081a90bc1b93a981c65f2c98d15b2c29b857dd557eb14f9f668",
+      "src/auto_research/foundation_models/tokenization_premium.py": "8e4313f900ea643446571d90e16e1b1c18d6c8b8ece12523b54340467c560a1f",
+      "src/auto_research/multimodal/rslivebench_uav_protocol.py": "27f51e8289b4d38f412161a43d3d781336df36dd6cabf87e3d134d68549e5edc",
+      "src/auto_research/multimodal/library_retrieval_protocol.py": "931a71f09e496f14db7a96dc806903a16ad6b4dc7ee1ccbbd1815e7ffc4513c7",
+      "src/auto_research/post_training/luce_similarity_audit.py": "68beaa0a044135651607a20c295578a50b0ad89a95a36a34a76ce44e6d7c58de",
+      "src/auto_research/foundation_models/runway_inference_protocol.py": "e06f902d55db4656f65a6a8bce31e763aab3435e3bbe50cf6c4e9b6f6a73aeac",
+      "src/auto_research/foundation_models/smart_model_routing.py": "2d4659be28c3c6a174d9473b244058330ec75ed3540659494270eef23a36f390",
+      "src/auto_research/post_training/calibrated_judges_protocol.py": "ae5e0d1769c3a74601ea3d84ae276d1881270eb97966d6a92a28ead07b59239e",
+      "src/auto_research/foundation_models/hvmap.py": "b43f8f12731236c2644bafcc9e423ddeede0e7e951031235e105e6893a6beb61",
+      "src/auto_research/foundation_models/mixed_signals_weights.py": "5913eb83ca90c60691b221cfdf1fc4ab9430382c672e8f93aa564e67ff8c85ac"
+    },
+    "dataset_fingerprint": "sha256:05a4fc2d1649973e1f6af3ec4c645ed22a39697d3c653dd9c5c9e6e0fcf122ca",
+    "raw_runner_artifact_sha256": "27c94104281fcb35e4100890f4e2f9718f96946c71c1b05d74d29b732a181e88",
+    "metric_artifact_path": "docs/foundation-models/2611.13758-mixed-signals-weights/metrics/component-cuda-seeds42-44.json"
+  }
+}

@@ -7,7 +7,7 @@ hide:
 
 # 按需决策：选择性推理、迁移与持续反馈
 
-[结构化决策](index.md) / 16 个问题 · 4 篇论文
+[结构化决策](index.md) / 20 个问题 · 5 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">16 个问题 · 4 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">20 个问题 · 5 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:typed-inbox-protocol" data-paper-title="Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox" data-learning-pending="false" data-level="basics" data-domain="system-one" data-theme="system-one" data-topic="system-one/adaptive-decisions" data-search="Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox system-one Independent researcher, Trento, Italy 2026-10-23 在个人多语言收件箱里，字段分类准确率不一定能转化为安全的动作。论文比较类型化决策模型、TF-IDF＋逻辑回归和生成式LLM，强调先冻结任务、标签与成本，再判断训练是否值得。生产系统遗留的关键词／模型字段不能当金标；联系人的relationship也不宜每封邮件重新推断。协议保存模型实际可见的sender、subject、截断至1500字符的body、日期和channel；敏感值必须先脱敏再存快照。线程按规范化subject＋sender key分组，不能随机按单封邮件切分； 完整私有邮箱与多模型实验高成本不复现（审查 DONE）。component_only／L0协议接口。本地没有邮件分类器、Jev或生成模型，不读取真实邮箱；完整私有邮箱与多模型实验高成本不复现（审查 DONE）。freeze_email先替换调用者显式提供的敏感字符串，再存1500字符正文与SHA256。它不发现未知密码／PII，不能当通用脱敏器。不可变FrozenEmail不接收gold字段。grouped_folds按线程哈希排序、整组分折，不读取标签，因此保证线程隔离但不是原文的类别分层5折。重复email ID直接拒绝。  类型化决策 任务协议与行动成本 结构化决策 按需决策：选择性推理、迁移与持续反馈 为什么不能把生产邮箱已有的type字段当成Typed Inbox金标？ 它混合历史关键词和模型预测，不是独立标注。应先保存模型实际可见且已脱敏的固定快照，再由独立标注协议给标签；否则只是在复刻旧系统的错误。 教学例：旧规则把发票写成广告，训练和评估都用该字段时，新模型也写广告就被错误记为正确。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">结构化决策 / 按需决策：选择性推理、迁移与持续反馈</a></p>
+<span id="paper-system-one-typed-inbox-protocol-d73d262a" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-9ccf51182af60b00">为什么不能把生产邮箱已有的type字段当成Typed Inbox金标？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=system-one%3Atyped-inbox-protocol">Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent researcher, Trento, Italy</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它混合历史关键词和模型预测，不是独立标注。应先保存模型实际可见且已脱敏的固定快照，再由独立标注协议给标签；否则只是在复刻旧系统的错误。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：旧规则把发票写成广告，训练和评估都用该字段时，新模型也写广告就被错误记为正确。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32955v1">原论文</a> · <a href="../../../../system-one/2610.32955-typed-inbox-protocol/">实现解读</a> · <a href="#qa-9ccf51182af60b00">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:typed-inbox-protocol" data-paper-title="Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox" data-learning-pending="false" data-level="mechanism" data-domain="system-one" data-theme="system-one" data-topic="system-one/adaptive-decisions" data-search="Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox system-one Independent researcher, Trento, Italy 2026-10-23 在个人多语言收件箱里，字段分类准确率不一定能转化为安全的动作。论文比较类型化决策模型、TF-IDF＋逻辑回归和生成式LLM，强调先冻结任务、标签与成本，再判断训练是否值得。生产系统遗留的关键词／模型字段不能当金标；联系人的relationship也不宜每封邮件重新推断。协议保存模型实际可见的sender、subject、截断至1500字符的body、日期和channel；敏感值必须先脱敏再存快照。线程按规范化subject＋sender key分组，不能随机按单封邮件切分； 完整私有邮箱与多模型实验高成本不复现（审查 DONE）。component_only／L0协议接口。本地没有邮件分类器、Jev或生成模型，不读取真实邮箱；完整私有邮箱与多模型实验高成本不复现（审查 DONE）。freeze_email先替换调用者显式提供的敏感字符串，再存1500字符正文与SHA256。它不发现未知密码／PII，不能当通用脱敏器。不可变FrozenEmail不接收gold字段。grouped_folds按线程哈希排序、整组分折，不读取标签，因此保证线程隔离但不是原文的类别分层5折。重复email ID直接拒绝。  类型化决策 任务协议与行动成本 结构化决策 按需决策：选择性推理、迁移与持续反馈 每封邮件做稳定哈希切分，为什么仍会泄漏？ 同一回复线程可能落到不同集合，重复正文和上下文就跨了边界。论文按规范化subject与sender key分组；本地保持整线程，但没有复制原文类别分层CV。 教学例：Topic与Re: Topic来自同一sender，即使email ID不同，也必须进入同一折。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">结构化决策 / 按需决策：选择性推理、迁移与持续反馈</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1c94f8c281ff3df2">每封邮件做稳定哈希切分，为什么仍会泄漏？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=system-one%3Atyped-inbox-protocol">Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent researcher, Trento, Italy</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>同一回复线程可能落到不同集合，重复正文和上下文就跨了边界。论文按规范化subject与sender key分组；本地保持整线程，但没有复制原文类别分层CV。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Topic与Re: Topic来自同一sender，即使email ID不同，也必须进入同一折。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32955v1">原论文</a> · <a href="../../../../system-one/2610.32955-typed-inbox-protocol/">实现解读</a> · <a href="#qa-1c94f8c281ff3df2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:typed-inbox-protocol" data-paper-title="Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox" data-learning-pending="false" data-level="comparison" data-domain="system-one" data-theme="system-one" data-topic="system-one/adaptive-decisions" data-search="Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox system-one Independent researcher, Trento, Italy 2026-10-23 在个人多语言收件箱里，字段分类准确率不一定能转化为安全的动作。论文比较类型化决策模型、TF-IDF＋逻辑回归和生成式LLM，强调先冻结任务、标签与成本，再判断训练是否值得。生产系统遗留的关键词／模型字段不能当金标；联系人的relationship也不宜每封邮件重新推断。协议保存模型实际可见的sender、subject、截断至1500字符的body、日期和channel；敏感值必须先脱敏再存快照。线程按规范化subject＋sender key分组，不能随机按单封邮件切分； 完整私有邮箱与多模型实验高成本不复现（审查 DONE）。component_only／L0协议接口。本地没有邮件分类器、Jev或生成模型，不读取真实邮箱；完整私有邮箱与多模型实验高成本不复现（审查 DONE）。freeze_email先替换调用者显式提供的敏感字符串，再存1500字符正文与SHA256。它不发现未知密码／PII，不能当通用脱敏器。不可变FrozenEmail不接收gold字段。grouped_folds按线程哈希排序、整组分折，不读取标签，因此保证线程隔离但不是原文的类别分层5折。重复email ID直接拒绝。  类型化决策 任务协议与行动成本 结构化决策 按需决策：选择性推理、迁移与持续反馈 Typed Inbox与Jev能力评测都输出选项，为什么不能只比accuracy？ 能力评测按任务标准答案计正确率；邮箱还把多个开关组合为动作，漏掉重要邮件的价格可能远高于多建一个任务。单字段accuracy相同也可有不同动作成本，两者都必须隔离gold。 教学例：把一封必须回复的邮件判成noise，与把一封普通邮件多打一个标记，错误数量相同但损失不同。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">结构化决策 / 按需决策：选择性推理、迁移与持续反馈</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-eaa252776b412e96">Typed Inbox与Jev能力评测都输出选项，为什么不能只比accuracy？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=system-one%3Atyped-inbox-protocol">Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent researcher, Trento, Italy</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>能力评测按任务标准答案计正确率；邮箱还把多个开关组合为动作，漏掉重要邮件的价格可能远高于多建一个任务。单字段accuracy相同也可有不同动作成本，两者都必须隔离gold。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把一封必须回复的邮件判成noise，与把一封普通邮件多打一个标记，错误数量相同但损失不同。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32955v1">原论文</a> · <a href="../../../../system-one/2610.32955-typed-inbox-protocol/">实现解读</a> · <a href="#qa-eaa252776b412e96">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:typed-inbox-protocol" data-paper-title="Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox" data-learning-pending="false" data-level="implementation" data-domain="system-one" data-theme="system-one" data-topic="system-one/adaptive-decisions" data-search="Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox system-one Independent researcher, Trento, Italy 2026-10-23 在个人多语言收件箱里，字段分类准确率不一定能转化为安全的动作。论文比较类型化决策模型、TF-IDF＋逻辑回归和生成式LLM，强调先冻结任务、标签与成本，再判断训练是否值得。生产系统遗留的关键词／模型字段不能当金标；联系人的relationship也不宜每封邮件重新推断。协议保存模型实际可见的sender、subject、截断至1500字符的body、日期和channel；敏感值必须先脱敏再存快照。线程按规范化subject＋sender key分组，不能随机按单封邮件切分； 完整私有邮箱与多模型实验高成本不复现（审查 DONE）。component_only／L0协议接口。本地没有邮件分类器、Jev或生成模型，不读取真实邮箱；完整私有邮箱与多模型实验高成本不复现（审查 DONE）。freeze_email先替换调用者显式提供的敏感字符串，再存1500字符正文与SHA256。它不发现未知密码／PII，不能当通用脱敏器。不可变FrozenEmail不接收gold字段。grouped_folds按线程哈希排序、整组分折，不读取标签，因此保证线程隔离但不是原文的类别分层5折。重复email ID直接拒绝。  类型化决策 任务协议与行动成本 结构化决策 按需决策：选择性推理、迁移与持续反馈 本地行动阈值接口覆盖了原文完整实验吗？ 没有。它只在显式validation上穷举二元分数切点，冻结后预测；不含模型、三开关组合、联系人图或分层CV。显式秘密替换也不是通用PII发现。完整私有多模型实验高成本不复现。 教学例：调用split=test会拒绝；若收到未知密码但未提供secrets，接口不会承诺自动识别并删除它。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">结构化决策 / 按需决策：选择性推理、迁移与持续反馈</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-7ab2e177725408e7">本地行动阈值接口覆盖了原文完整实验吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=system-one%3Atyped-inbox-protocol">Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent researcher, Trento, Italy</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。它只在显式validation上穷举二元分数切点，冻结后预测；不含模型、三开关组合、联系人图或分层CV。显式秘密替换也不是通用PII发现。完整私有多模型实验高成本不复现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：调用split=test会拒绝；若收到未知密码但未提供secrets，接口不会承诺自动识别并删除它。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32955v1">原论文</a> · <a href="../../../../system-one/2610.32955-typed-inbox-protocol/">实现解读</a> · <a href="#qa-7ab2e177725408e7">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:jev-dlc" data-paper-title="Jev-DLC: Decision-Level Continual Learning from Typed Feedback" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="system-one" data-topic="system-one/adaptive-decisions" data-search="Jev-DLC: Decision-Level Continual Learning from Typed Feedback 基础模型 The Hong Kong University of Science and Technology (Guangzhou) 2026-10-22 类型化决策能给出明确 accept 或 revoke(旧选择→新选择)。Jev-DLC 不把完整历史重新塞进模型，而是在冻结 scorer 上维护两个紧凑通道：保守通道记住重复动作的语义计数与局部方向；响应通道只存当前修正方向。反馈只能影响之后的请求，不能先看当前正确答案再报成功。 成本过高，不复现（审查 DONE）；三种子指标仅验证独立PA-I最小化参考、双通道/几何混合、反馈时序、硬掩码、revision和reset；外部给定随机logits/表示，不加载JEV、不生成任务答案。没有把1.0契约通过率标为模型准确率，也不根据合成反馈宣称能力提升。纯CPU路径无需CUDA回执。  System One / JEV 类型反馈与持续适配 结构化决策 按需决策：选择性推理、迁移与持续反馈 Jev-DLC持续适配时需要保存整段交互历史吗？ 方法在冻结评分器上保留两个紧凑状态：保守通道的语义计数与方向，以及响应通道的当前修正方向。历史反馈被压入状态，不是把所有旧对话不断塞回上下文。 例如用户反复纠正同类路由，系统更新计数和方向，而不无限拼接所有旧工单。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">结构化决策 / 按需决策：选择性推理、迁移与持续反馈</a></p>
 <span id="paper-foundation-models-jev-dlc-8eed7f0b" class="ar-learning-paper-anchor"></span>

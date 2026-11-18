@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/system-one:typed-inbox-protocol/frozen-view-not-production-label": {
+      "source_sha256": "56fde172a83cfeaf3abb8e68267c2f5491997bd73d2c4a9e33b132464ec1379f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is an existing production inbox type field not a Typed Inbox gold label?",
+        "answer": "It mixes historical keyword and model predictions, not independent annotation. Freeze the exact redacted model-visible snapshot before assigning labels under a separate protocol; otherwise evaluation merely reproduces old errors.",
+        "example": "Teaching example: if the old rule calls an invoice advertising, training and scoring against that field incorrectly rewards the same error."
+      }
+    },
+    "qa/system-one:typed-inbox-protocol/whole-thread-not-email-hash": {
+      "source_sha256": "c2738a3e2acdef7bd9d812a449d24b267bb3e8beed083348b8342343121ce232",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a stable per-email hash split still leak information?",
+        "answer": "Replies in one thread can enter different splits, leaking repeated bodies and context. The paper groups normalized subjects with sender keys. The local interface preserves whole threads but does not reproduce class-stratified CV.",
+        "example": "Teaching example: Topic and Re: Topic from the same sender must share a fold even with different email IDs."
+      }
+    },
+    "qa/system-one:typed-inbox-protocol/capability-versus-action-cost": {
+      "source_sha256": "7e899189e7d38a660fb7efab4924953a1fb3fc6eef0219129a5dfbca259cb0f1",
+      "reviewed": true,
+      "fields": {
+        "question": "Typed Inbox and Jev benchmarks both choose options; why not compare only accuracy?",
+        "answer": "Capability benchmarks score task answers. Inbox switches compose actions, where missing an important email can cost much more than creating an extra task. Equal field accuracy can imply different action costs. Both still require gold isolation.",
+        "example": "Teaching example: marking a required reply as noise and adding one unnecessary flag are each one error but have different losses."
+      }
+    },
+    "qa/system-one:typed-inbox-protocol/threshold-only-validation": {
+      "source_sha256": "2f30c257f2be75f0ae1a614a5e72d323787d3cca80a2892dc545bf988a1c9921",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local action-threshold interface reproduce the full experiment?",
+        "answer": "No. It enumerates binary cutoffs on explicit validation data and freezes prediction. It omits models, three-switch composition, contact graphs and stratified CV. Explicit secret replacement is not general PII discovery. The private full campaign is not reproduced due to cost.",
+        "example": "Teaching example: split=test is rejected. An unknown password absent from the explicit secrets list is not guaranteed to be discovered."
+      }
+    },
+    "qa/agent-research:askalcf-protocol/attribution-not-weight-training": {
+      "source_sha256": "8a55c819607da251f42023d3d10cf51075c4ab40be4cdf2c1b717a28fe5b929a",
+      "reviewed": true,
+      "fields": {
+        "question": "Does self-improving AskALCF mean RL training of its HPC assistant?",
+        "answer": "No. It mainly changes rules, prompts, knowledge and the tool harness under expert references and controlled arms. This is not model-weight training, and no knowledge PR had yet been merged and re-indexed in production.",
+        "example": "Teaching example: changing a clarification rule and rerunning support logs offline does not train a new language model."
+      }
+    },
+    "qa/agent-research:askalcf-protocol/answer-blind-two-scope-pivot": {
+      "source_sha256": "62e608743091122641eeb8be626749ed0bdf80249f2ca6552037d3528aa041cc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must retrieval sufficiency not see the generated answer?",
+        "answer": "It independently tests whether production passages and the corpus can answer the question. Seeing generation can turn hallucinations into supposed requirements and mix retrieval with generation responsibility. R=false/C=true means retrieval; both false means knowledge. Low correctness must not bypass the pivot.",
+        "example": "Teaching example: when the corpus contains the installation page but top-k misses it, investigate retrieval before blaming the model."
+      }
+    },
+    "qa/agent-research:askalcf-protocol/askalcf-versus-harness-two": {
+      "source_sha256": "f7ec01eda008d126bcf1073d1e85219e37ab61b8dfdc5a3883b8bb25fc8f1715",
+      "reviewed": true,
+      "fields": {
+        "question": "Can Harness²'s rubric-free selector directly verify AskALCF attribution?",
+        "answer": "No. Harness² contrasts open execution behavior and chooses anonymous existing artifacts. AskALCF uses separate answer/retrieval evidence, frozen expert attribution and target/control studies to locate repair sites. Execution evidence is shared, but references and decisions differ.",
+        "example": "Teaching example: two different replies do not establish a documentation gap; an answer-blind corpus sufficiency probe is still needed."
+      }
+    },
+    "qa/agent-research:askalcf-protocol/null-flips-and-revision-cache": {
+      "source_sha256": "e69c386b258c9090be8f17f14f18236fd26cb5b7b7d7f98a77c7ab21697f4f82",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep per-turn flips and cache revisions when null has zero net change?",
+        "answer": "Opposing flips can cancel the mean without removing noise. Expansion caching must depend on query/model/prompt/corpus revisions and other dependencies; null must actually bypass the cache. The local noise gate is not a significance test, and shipping remains an explicit human decision.",
+        "example": "Teaching example: before is wrong/right and null is right/wrong. The mean is unchanged but two flips remain, so one repair gain is not reliable evidence."
+      }
+    },
+    "qa/agent-research:prodpilot-protocol/rules-share-not-project-rate": {
+      "source_sha256": "8998acfe64cb1b9b769934f18bad22a719a7432d3d12a1a5833e3777a451f153",
+      "reviewed": true,
+      "fields": {
+        "question": "Does ProdPilot's 88% model-free share mean 88% of applications deploy successfully?",
+        "answer": "No. Twenty-eight static plus 16 parametric rules are 88% of 50 rule types. A project can still trigger delegated rules or deployment failures. Original checkers and all gate conditions remain required.",
+        "example": "Teaching example: even if 49 rules pass, one unresolved P0 cannot be overruled by the model probability."
+      }
+    },
+    "qa/agent-research:prodpilot-protocol/checker-and-regression-before-accept": {
+      "source_sha256": "096d57547894d1fd56909b2091301e2344ad7bb12b78336b1322a82e52937fce",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a fix callback returning new files still require rollback?",
+        "answer": "A report or file edit is not acceptance. The original checker must pass, and the full audit must preserve every previously passing rule. Boundary violations and exceptions also fail. Three attempts per issue and five cycles per run bound retries.",
+        "example": "Teaching example: adding health while breaking security middleware must restore the old snapshot and request review, not increment a health-success counter."
+      }
+    },
+    "qa/agent-research:prodpilot-protocol/prodpilot-versus-open-harness": {
+      "source_sha256": "4197297aa00a297d098ede4acde9484ba656f3b63aefcc7427160612182878d0",
+      "reviewed": true,
+      "fields": {
+        "question": "Are ProdPilot and Harness² execution evidence interchangeable?",
+        "answer": "No. ProdPilot checks specific production rules; passing says nothing about uncovered vulnerabilities. Harness² contrasts artifacts and harness behavior without answer rubrics. Rule verification is not the same as an open-task comparison or a general safety proof.",
+        "example": "Teaching example: satisfying a health rule neither proves business-authorization safety nor establishes a better open-task answer."
+      }
+    },
+    "qa/agent-research:prodpilot-protocol/deploy-return-not-smoke-success": {
+      "source_sha256": "dc62d92db643e2648046882db9d9a923f190ebf92119e91b4c46eba394e8fdf6",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a deploy handle or exception establish success or no deployment?",
+        "answer": "Neither. A handle only means the callback returned; smoke verification remains. Interrupted calls may already have external effects, so preserve the attempt and record unknown. The local interface has no cloud or trained probability model; the full 684-deployment campaign is not reproduced due to cost.",
+        "example": "Teaching example: after service creation times out, do not assert deployed=false and blindly create another service; inspect external state first."
+      }
+    },
+    "qa/multimodal-models:fend-protocol/human-risk-not-ai-auc": {
+      "source_sha256": "bc640882e7aafa21de915d11dc584ce0e2c755ef62cdce8d3291321aa9166433",
+      "reviewed": true,
+      "fields": {
+        "question": "Does high AI-detection AUC justify ending every call labeled automated?",
+        "answer": "No. Any automated label assigned to a person can interrupt a valid call. Measure HFPR with true humans as the denominator at the frozen operating point. AUC does not replace human rejection risk at deployment thresholds.",
+        "example": "Teaching example: three of 100 humans labeled AI means 3% HFPR, not three divided by 1,000 calls including 900 voicemail examples."
+      }
+    },
+    "qa/multimodal-models:fend-protocol/accumulate-not-first-firing": {
+      "source_sha256": "1b4030cc1c79af3d9eb4e852badf97af10350735be6270b4c7c49983f65462b7",
+      "reviewed": true,
+      "fields": {
+        "question": "Should FEND stop waiting when AI fires after one second?",
+        "answer": "No. Accumulate through the window and choose voicemail above IVR above AI. The default deadline is 20 seconds and includes events exactly on it. No automated firing means human; later events are ignored.",
+        "example": "Teaching example: AI at one second, IVR at 19, voicemail at 20 yields voicemail, not the first AI firing."
+      }
+    },
+    "qa/multimodal-models:fend-protocol/fend-versus-gslm-two": {
+      "source_sha256": "697c6195fa4bb60e7dc7296618cf06863f464f81687b844708d095cc8b82112c",
+      "reviewed": true,
+      "fields": {
+        "question": "Can FEND and GSLM2 be ranked using one local speech metric?",
+        "answer": "No. FEND concerns call classes, deadlines and human rejection; GSLM2 learns multi-stream speech representations for discrimination/generation. External-event arbitration and external-unit scoring are not full model capabilities.",
+        "example": "Teaching example: hand-written events yielding voicemail do not demonstrate improved phonetic representations or compare with sWuggy accuracy."
+      }
+    },
+    "qa/multimodal-models:fend-protocol/null-gate-not-discrimination": {
+      "source_sha256": "fbf449ac89c2aa33f062c16df8702d576dce401a72802974747cf40b3e624c18",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does passing the acoustic human-null screen not establish AI discrimination?",
+        "answer": "It only screens excessive normalized median shifts between human corpora. It does not test positive-class separation. Zero IQR or absent humans makes the relevant quantity undefined and must fail explicitly. No ASR, STFT or trained classifier exists in this interface.",
+        "example": "Teaching example: identical human distributions pass the screen, but a classifier assigning the same scores to AI has no discrimination."
+      }
+    }
+  }
+}

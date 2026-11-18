@@ -50,6 +50,14 @@
 
 - 2025-02-03 · 一作：Kevin Chen · [LOOP](../2502.01600-loop/README.md)（`loop`）：长程数字 Agent 的 rollout 昂贵，而传统 PPO 还要维护 value model。LOOP 把 PPO trust region 与 leave-one-out baseline 结合：无需 critic，可对同一批轨迹进行多次更新；逐 token importance ratio 只裁剪漂移 token，不丢弃整条长轨迹。
 
+## Argonne National Laboratory
+
+- 2026-11-11 · 一作：Jingyan Jiang · [AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support](../2611.15700-askalcf-protocol/README.md)（`askalcf-protocol`）：技术支持系统答错后，直接改提示或补知识容易修错对象。AskALCF把生产RAG问答、知识PR撰写、日志归因和工单处理连成受人审控制的闭环；“自改进”主要指harness规则、提示和知识，不是模型权重RL。
+
+## Artificial Intelligence Technology Centre (AITeC) / Shifa Tameer-e-Millat University
+
+- 2026-11-11 · 一作：Muhammad Sudais Khalid · [ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects](../2611.17381-prodpilot-protocol/README.md)（`prodpilot-protocol`）：AI生成应用能在本地运行，不代表生产配置正确。ProdPilot用五层MCP系统识别技术栈、审计、修复、评分门控和部署。
+
 ## Aston University
 
 - 2026-08-26 · 一作：Songyuan Li · [ProgRouter: Online Progress-Guided Orchestration for Multi-Agent LLM Workflows under Quality-Cost Tradeoffs](../2608.25992-progrouter/README.md)（`progrouter`）：用多视角 scorer 衡量子任务完成度、进展趋势和状态质量，再由双路径 predictor 估计候选模型的边际进展，以 meta-gate 在质量、时间和长期成本预算间逐步决策。

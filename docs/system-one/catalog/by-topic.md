@@ -7,6 +7,7 @@
 
 ## 类型化决策协议
 
+- [Typed Inbox](../2610.32955-typed-inbox-protocol/README.md)：冻结脱敏输入、整线程隔离与validation行动成本阈值；仅L0协议，不实现邮箱模型或原文类别分层CV。
 - [TypeSafe Jev](../implementations.md#official-jev)：Choice、Score、Noul 三类问题共享状态输入，返回机器可直接消费的概率化结果。
 
 ## 动态候选分类

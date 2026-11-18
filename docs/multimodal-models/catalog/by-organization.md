@@ -26,6 +26,10 @@
 
 - 2026-10-23 · [FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation](../../multimodal-models/2610.32976-flexglue/README.md)（`flexglue`）：稀疏matcher受两图keypoint重复检测能力限制，dense matcher则昂贵，而且两者常只在共视正样本训练，面对对称建筑等doppelganger会给出高置信假匹配。FlexGlue在stride8全图token网格上先做self/cross attention，再只对给定query插值读取特征并寻找另一图的坐标。局部3×3窗口读取避免全局期望在多个候选间平均；轻量MLP对两个方向的offset bins取期望做局部细化。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
+## East China Normal University
+
+- 2026-11-11 · [RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence](../../multimodal-models/2611.14953-rslivebench-uav-protocol/README.md)（`rslivebench-uav-protocol`）：航空空间题需要跨视角实体匹配、真实几何与新观察，不是给旧图片改写问题。作者将持续实地 UAV 采集、实体中心的答案生产、四场景滚动窗口和延迟公开答案组合成持续 benchmark。新版本只接受上一发布与本次发布之间拍摄的图像；每次退役最早入窗场景，更新的是 25% **场景**，不是固定 25% 题目或分数。[§3、附录评分协议](https://arxiv.org/html/2611.14953v1#S3)
+
 ## Eastern Institute of Technology, Ningbo
 
 - 2026-04-25 · [MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models](../../multimodal-models/2604.23321-mmeb-v3/README.md)（`mmeb-v3`）：单一图文检索成绩不足以判断统一嵌入模型是否适合音频、文档、Agent 工具检索或跨模态混合候选。MMEB-V3 将评测扩展为六类、16 个元任务、190 个任务，其中新增 111 个任务：11 个音频、53 个文本和 47 个 Agent 任务。它不仅比较语义匹配，还检查请求的输出模态是否被遵循。
@@ -46,6 +50,10 @@
 
 - 2025-04-07 · [SmolVLM: Redefining small and efficient multimodal models](../../reproductions/2504.05299-smolvlm/README.md)（`smolvlm`）：SmolVLM 重新分配小模型视觉/语言侧算力，以 pixel shuffle 将相邻空间 token 搬到 channel 维，再用 MLP 映射到 LM 空间；同时研究长上下文、图像切片、学习位置 token 和数据配比， 使 256M/500M/2.2B 模型在低显存下保持图像与视频能力。
 
+## Indiana University
+
+- 2026-11-13 · [Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries](../../multimodal-models/2611.17726-multimodal-library-protocol/README.md)（`multimodal-library-protocol`）：纯 OCR 倒排索引难以按概念搜索图表与复杂排版。作者把教材页渲染成图像，经 ColPali/PaliGemma-3B 生成多向量，用 Qdrant 检索并比较余弦、点积、欧氏和 Manhattan 距离。HNSW、磁盘 Memmap、binary quantization 服务于索引成本；不是训练新的视觉语言架构。[§III—V](https://arxiv.org/html/2611.17726v1#S3)
+
 ## Massachusetts Institute of Technology
 
 - 2026-10-08 · [Unsupervised Multimodal Reward Modeling](../../reproductions/2610.12707-umrm/README.md)（`umrm`）：偏好pair昂贵，reward benchmark名次也不必代表部署选择效用。作者冻结Qwen3-VL，在中间language层只均值池化response tokens，再训练无bias线性reward head；公开caption为positive，同一caption的颜色/数量/尺寸/方位单span变化、tail splice、clause shuffle及cross-image caption为negative，不需人工偏好标注。
@@ -61,6 +69,10 @@
 ## Northwestern University
 
 - 2026-10-08 · [WOVEN: Weaving Visual World Modeling into Multimodal LLMs](../../reproductions/2610.12417-woven/README.md)（`woven`）：静态识别不等于理解状态变化。WOVEN以$(s,a,s')$为共同对象，用视频生成模型rollout提供结果/中间状态，而非在prompt里预写结果。相同初始状态在不同动作下的rollout提供counterfactual候选；按scene、action、reasoning三个轴形成可控监督，用error-typed distractors区分错误机制。
+
+## Observe.AI, India
+
+- 2026-11-13 · [FEND: Far-End Detection in Outbound Voice AI Calls](../../multimodal-models/2611.18050-fend-protocol/README.md)（`fend-protocol`）：外呼语音系统要区分真人、语音信箱、IVR和另一个AI。误把真人当自动系统会切断有效对话，因此不能只优化AI检测AUC。FEND并行读音频、流式ASR和既有对话模型的工具事件：STFT提示音、多语种关键词、LLM voicemail／IVR工具，以及依赖首轮词间时序的AI节奏分类。工具沿用运行中的对话模型，不等于这里已经实现了“零成本LLM检测”。
 
 ## OpenAI
 

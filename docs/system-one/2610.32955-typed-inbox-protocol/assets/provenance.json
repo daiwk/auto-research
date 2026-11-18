@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-18",
+  "figures": [
+    {
+      "file": "paper-figure-01.png",
+      "paper_id": "2610.32955",
+      "version": "v4",
+      "figure": 1,
+      "caption": "Action cost as the price of a missed email changes; dashed thresholds are selected inside cross-validation.",
+      "source_url": "https://arxiv.org/pdf/2610.32955v4#page=7",
+      "paper_url": "https://arxiv.org/abs/2610.32955v4",
+      "source_kind": "fixed_version_pdf_crop_rendered_png",
+      "source_sha256": "627265a5e4dd0cfe57f7ac732c5ff129f6df1e0b587a6464afbffe9243bf0864",
+      "asset_sha256": "04f8b9b650498d6a731c8587a995db710160510ac69675c3de7dbefa8b633ed7",
+      "image_sha256": "04f8b9b650498d6a731c8587a995db710160510ac69675c3de7dbefa8b633ed7",
+      "page": 7,
+      "crop_points": [
+        55,
+        60,
+        540,
+        310
+      ],
+      "render_dpi": 144,
+      "caption_included": true,
+      "scientific_content_modified": false,
+      "visual_review_done": true,
+      "attribution": "Copyright belongs to the original authors. Original paper crop used for research explanation, not local experimental evidence.",
+      "license": "See original arXiv source; this repository grants no new license."
+    }
+  ]
+}

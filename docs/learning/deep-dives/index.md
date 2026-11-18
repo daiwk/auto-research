@@ -11,7 +11,7 @@ hide:
 
 每个子主题维护一张卡片。新论文进入后，更新对应卡片的比较或结论，并记录这次变化；不必再从头读整批论文。
 
-31 张精读卡片 · 1163 篇主题资料 · 按主题折叠
+31 张精读卡片 · 1177 篇主题资料 · 按主题折叠
 
 <details class="ar-deep-shelf"><summary>搜广推 · 7 张</summary>
 <div class="ar-deep-grid">
@@ -57,12 +57,12 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/context-and-state/">长上下文不是一条轴：位置、读取与状态压缩</a></h2>
 <p>先问历史以什么形式存在，再问当前 token 怎样读它。RoPE 改变相对位置关系，Mamba 把历史写入递归状态，NSA 在多条读取路径间分工，OpenAttention 为未精读部分保留代理，TTR 则为当前输入求一个压缩表示。这些方法不能只按“支持多长”排成一列。 MERLIN在多个压缩状态之外保留routing key矩统计，改变段间读取权重，而不替换每段内部的递归写入。</p>
-<p class="ar-learning-topic-meta">13 篇重点对照 · 9 个跨论文问答 · 2026-11-13</p>
+<p class="ar-learning-topic-meta">14 篇重点对照 · 10 个跨论文问答 · 2026-11-18</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/conditional-compute/">按需算力：选择专家、跳过计算，还是查回旧知识</a></h2>
 <p>参数容量、每 token 激活量与部署时延是三件事。Switch 选择计算专家，Engram 和 Memory Grafting 查局部模式；AdaDSF、Telescopic LM 与 WIDE 则分别从 token—层、整体深度和组宽度分配计算。先识别路由对象，才能讨论容量和省算。</p>
-<p class="ar-learning-topic-meta">6 篇重点对照 · 3 个跨论文问答 · 2026-10-27</p>
+<p class="ar-learning-topic-meta">7 篇重点对照 · 4 个跨论文问答 · 2026-11-18</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/training-budget/">训练预算：改数据、改更新方向，还是改比较口径</a></h2>
@@ -82,7 +82,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/evaluation-and-evidence/">能力证据：准确打分、节省观测与解释预测</a></h2>
 <p>先区分“正确答案怎样定义”“下一题测谁”“多个裁判怎样融合”和“预测怎样解释”。XLGoBench、ProEval、FUSE、TCAB 与 DetectorScope 分别改变这些环节；观测更少或解释可加，不等于被测能力本身更强。XLA from the Trenches还提醒：评分之前，编译后程序本身就可能静默偏离原始数值语义，不能把编译成功当作执行正确。</p>
-<p class="ar-learning-topic-meta">14 篇重点对照 · 12 个跨论文问答 · 2026-11-13</p>
+<p class="ar-learning-topic-meta">17 篇重点对照 · 15 个跨论文问答 · 2026-11-18</p>
 </article>
 </div></details>
 
@@ -101,7 +101,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="system-one/adaptive-decisions/">追加推理、跨语言路由与持续反馈，各在哪个时刻改变决策？</a></h2>
 <p>按需决策有三条时间轴：Selective Reasoning在单题内分配推理和读取预算，跨语言级联在不同后端间分配请求，Jev-DLC用已发生反馈影响后续请求。能力评测提供基线边界，却不自动证明任何控制策略有效。所有选择都要在当前测试目标揭晓之前冻结或作出。</p>
-<p class="ar-learning-topic-meta">4 篇重点对照 · 3 个跨论文问答 · 2026-10-27</p>
+<p class="ar-learning-topic-meta">5 篇重点对照 · 4 个跨论文问答 · 2026-11-18</p>
 </article>
 </div></details>
 
@@ -110,7 +110,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="multimodal-models/alignment-interfaces/">多模态对齐到底对齐什么：向量、视觉接口还是证据依赖</a></h2>
 <p>CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条件生成，CV-OPD训练证据依赖，UMRM给回答评分。它们的输出合同和监督对象不同，不是同一条从小到大的能力排行榜。</p>
-<p class="ar-learning-topic-meta">13 篇重点对照 · 11 个跨论文问答 · 2026-11-15</p>
+<p class="ar-learning-topic-meta">15 篇重点对照 · 13 个跨论文问答 · 2026-11-18</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="multimodal-models/visual-evidence-budget/">少看、晚看还是再看：把视觉预算放到正确阶段</a></h2>
@@ -120,7 +120,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="multimodal-models/world-state-actions/">会预测下一幕，还不等于会行动或保持同一个世界</a></h2>
 <p>世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。</p>
-<p class="ar-learning-topic-meta">12 篇重点对照 · 9 个跨论文问答 · 2026-11-15</p>
+<p class="ar-learning-topic-meta">14 篇重点对照 · 11 个跨论文问答 · 2026-11-18</p>
 </article>
 </div></details>
 
@@ -129,7 +129,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="post-training/preference-and-alignment/">偏好不是一个分数：先确定反馈格式，再选对齐目标</a></h2>
 <p>DPO、KTO、SimPO、ORPO和IPO主要改变“怎样使用反馈”，CleanRM先处理“反馈是否可信”。参考模型、长度归一化、有限间隔和噪声校正是不同设计轴，不能因都在扩大好坏回答差异就当成同一方法。</p>
-<p class="ar-learning-topic-meta">6 篇重点对照 · 3 个跨论文问答 · 2026-10-27</p>
+<p class="ar-learning-topic-meta">8 篇重点对照 · 5 个跨论文问答 · 2026-11-18</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="post-training/policy-optimization/">同一个GRPO名字之外：优势尺度、裁剪单位与训推失配</a></h2>
@@ -178,7 +178,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="agent-research/harness-and-self-improvement/">自改进先标对象：答案、经验、接口与系统版本</a></h2>
 <p>Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。</p>
-<p class="ar-learning-topic-meta">25 篇重点对照 · 17 个跨论文问答 · 2026-11-15</p>
+<p class="ar-learning-topic-meta">27 篇重点对照 · 19 个跨论文问答 · 2026-11-18</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/agent-policy-learning/">交互学习：统一轨迹之后，信用和教师信息怎样分配</a></h2>

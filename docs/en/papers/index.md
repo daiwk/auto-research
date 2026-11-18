@@ -4,19 +4,22 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1163 entries from the shared research manifest. English write-ups available: 1163.
+The catalog lists 1177 entries from the shared research manifest. English write-ups available: 1177.
 
 ## Browse by domain
 
 - [Search, ads, recommendation, and LLM applications](recommendation.md): 332 catalog entries, 332 English write-ups
-- [Foundation models](foundation-models.md): 231 catalog entries, 231 English write-ups
-- [Structured decisions / System One](system-one.md): 6 catalog entries, 6 English write-ups
-- [Multimodal models](multimodal-models.md): 26 catalog entries, 26 English write-ups
-- [LLM post-training](post-training.md): 266 catalog entries, 266 English write-ups
-- [Agents](agent-research.md): 302 catalog entries, 302 English write-ups
+- [Foundation models](foundation-models.md): 237 catalog entries, 237 English write-ups
+- [Structured decisions / System One](system-one.md): 7 catalog entries, 7 English write-ups
+- [Multimodal models](multimodal-models.md): 29 catalog entries, 29 English write-ups
+- [LLM post-training](post-training.md): 268 catalog entries, 268 English write-ups
+- [Agents](agent-research.md): 304 catalog entries, 304 English write-ups
 
 ## Read in English
 
+- [Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix](../../post-training/2611.19840-calibrated-judges-protocol/README-en.md)
+- [Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries](../../multimodal-models/2611.17726-multimodal-library-protocol/README-en.md)
+- [FEND: Far-End Detection in Outbound Voice AI Calls](../../multimodal-models/2611.18050-fend-protocol/README-en.md)
 - [Unbundling Multimodal Vision Encoding](../../foundation-models/2611.17334-unbundling-vision/README-en.md)
 - [TriGen: A Generative Paradigm for Trigger-Induced Recommendation](../../recommendation-components/2611.16395-trigen/README-en.md)
 - [Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models](../../post-training/2611.16628-safety-budget-cgrpo/README-en.md)
@@ -29,15 +32,20 @@ The catalog lists 1163 entries from the shared research manifest. English write-
 - [Back to Pixels: Lifting Latent Video Diffusion into Pixel Space](../../multimodal-models/2611.17336-pixvid/README-en.md)
 - [Asymmetric Multimodal Learning with Decomposed JEPAs](../../foundation-models/2611.16639-d-jepa/README-en.md)
 - [ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research](../../foundation-models/2611.17332-archspace/README-en.md)
+- [Smart Model Routing for Order-of-Magnitude LLM Cost Reduction](../../foundation-models/2611.15911-smart-model-routing/README-en.md)
+- [RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence](../../multimodal-models/2611.14953-rslivebench-uav-protocol/README-en.md)
+- [ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects](../../agent-research/2611.17381-prodpilot-protocol/README-en.md)
 - [MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks](../../agent-research/2611.15754-multiloop/README-en.md)
 - [Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?](../../post-training/2611.15404-lgpo/README-en.md)
 - [DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces](../../foundation-models/2611.15968-duojepa/README-en.md)
+- [AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support](../../agent-research/2611.15700-askalcf-protocol/README-en.md)
 - [When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents](../../agent-research/2611.14326-fgse/README-en.md)
 - [ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows](../../agent-research/2611.14492-retrace/README-en.md)
 - [RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval](../../multimodal-models/2611.14496-rs-jepa/README-en.md)
 - [REAL Loss: Optimizing Real Expected Acceptance Length for Speculative Decoding](../../foundation-models/2611.14399-real-loss/README-en.md)
 - [Program-Aided Patchable Skill Evolution](../../agent-research/2611.14019-pase/README-en.md)
 - [OnlyAct: Extracting Action Representations from Foundation Models for World Models](../../multimodal-models/2611.14420-onlyact/README-en.md)
+- [Mixed Signals: Weight-Space Programming for EEG and ECG](../../foundation-models/2611.13758-mixed-signals-weights/README-en.md)
 - [Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards](../../post-training/2611.14015-mcpo/README-en.md)
 - [Don't Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents](../../agent-research/2611.14320-wikitrace/README-en.md)
 - [C²-Routing: Complementary Cropping and Compression for Efficient Vision-Language Inference](../../multimodal-models/2611.14469-c2-routing/README-en.md)
@@ -50,6 +58,7 @@ The catalog lists 1163 entries from the shared research manifest. English write-
 - [Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation](../../post-training/2611.13135-lcs-reference-opd/README-en.md)
 - [Off-policy Learning with Excursion Policies](../../post-training/2611.13275-excursion-td/README-en.md)
 - [MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning](../../post-training/2611.12825-maxim/README-en.md)
+- [Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving](../../foundation-models/2611.12737-runway-inference-protocol/README-en.md)
 - [DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation](../../post-training/2611.13249-drd-mopd/README-en.md)
 - [ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation](../../foundation-models/2611.12956-adindex/README-en.md)
 - [e-means: outperforming k-means (in one-tenth the epochs)](../../foundation-models/2611.09501-e-means/README-en.md)
@@ -84,6 +93,7 @@ The catalog lists 1163 entries from the shared research manifest. English write-
 - [RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs](../../post-training/2611.02455-rlid/README-en.md)
 - [P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors](../../post-training/2611.03953-p2-mopd/README-en.md)
 - [Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention](../../foundation-models/2611.03768-multi-layer-indexer/README-en.md)
+- [Federated Vector Retrieval across Heterogeneous VectorDBs](../../foundation-models/2611.01514-hvmap/README-en.md)
 - [XLA from the Trenches: Correctness on TPU Workloads at Scale](../../foundation-models/2611.00624-xla-trenches/README-en.md)
 - [WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search](../../recommendation-components/2611.00530-wesearch/README-en.md)
 - [GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling](../../multimodal-models/2611.01143-gslm2/README-en.md)
@@ -112,6 +122,7 @@ The catalog lists 1163 entries from the shared research manifest. English write-
 - [RSI-Opt: Recursive Self-Improvement Optimizer Agents For Model Training](../../agent-research/2610.32026-rsi-opt/README-en.md)
 - [PathJev: Decision-Native Vision–Language Modelling for Histopathology](../../foundation-models/2610.32478-pathjev/README-en.md)
 - [On-Policy Self-Training: Data-Free Self-Improvement in Large Language Models](../../post-training/2610.32770-opst/README-en.md)
+- [Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox](../../system-one/2610.32955-typed-inbox-protocol/README-en.md)
 - [ImageRSI: Verification-Driven Recursive Self-Improvement for Agentic Image Generation](../../agent-research/2610.32120-image-rsi/README-en.md)
 - [Hierarchical GTV Estimation: Bridging the Gap between Container-Level Ranking and Item-Level Conversion](../../recommendation-components/2610.32420-hge/README-en.md)
 - [HarnessMM: Recursive Self-Improvement for Harness Token Efficiency](../../agent-research/2610.32813-harnessmm/README-en.md)
@@ -266,6 +277,7 @@ The catalog lists 1163 entries from the shared research manifest. English write-
 - [CASI: Credit Assignment via Set Intervention for Agentic Retrieval](../../reproductions/2610.20293-casi/README-en.md)
 - [AlphaDiana: A Measurement System for Agents in Verifiable Reasoning Tasks](../../agent-research/2610.20675-alpha-diana/README-en.md)
 - [ARIA: Runtime Inspection and Amendment for Multi-Agent Systems](../../agent-research/2610.20780-aria/README-en.md)
+- [Similar Models, Broken Odds: Where Luce's Axiom Fails in Chatbot Arena](../../post-training/2610.19095-luce-similarity-audit/README-en.md)
 - [LoOPSD: On-Policy Self-Distillation with Looped Teachers](../../reproductions/2610.18162-loopsd/README-en.md)
 - [CLASHarness: Benchmarking Multi-Agent Conflict in Computer Use via a Controllable and Verifiable Generation Pipeline](../../agent-research/2610.19128-clasharness/README-en.md)
 - [WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat](../../reproductions/2610.16979-wegr/README-en.md)
@@ -341,6 +353,7 @@ The catalog lists 1163 entries from the shared research manifest. English write-
 - [SpecGuard: Proving a Task Is Broken Before the Agent Cheats](../../agent-research/2610.09159-specguard/README-en.md)
 - [EmbeddingGemma 2: Unified and Efficient Multimodal Representations](../../multimodal-models/embeddinggemma2/README-en.md)
 - [Video Encoders Built on Image Representations](../../foundation-models/2610.06616-video-encoder-selection/README-en.md)
+- [What Should World Models Forget? Stratified Retention for Continual Adaptation](../../foundation-models/2610.03713-stratified-retention-protocol/README-en.md)
 - [Sentry: Learning to Recover from LLM Agent Failures at Test Time](../../agent-research/2610.02994-sentry/README-en.md)
 - [SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting](../../agent-research/2610.04109-seer-forecasting/README-en.md)
 - [LESSER: Post-Training Data Selection with Output-Layer Gradients](../../post-training/2610.03702-lesser/README-en.md)
@@ -454,6 +467,7 @@ The catalog lists 1163 entries from the shared research manifest. English write-
 - [OneTrans-V2: Unifying Retrieval, Pre-rank, and Fine-rank with One Transformer in Industrial Recommender](../../reproductions/2609.28589-onetrans-v2/README-en.md)
 - [Learned Cross-Task Relationships in Multi-Task Models](../../recommendation-components/2609.28776-cross-task-relationships/README-en.md)
 - [PACT: From Credit Assignment to Critic Alignment](../../post-training/2609.26355-pact/README-en.md)
+- [Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South](../../foundation-models/2611.13441-tokenization-premium/README-en.md)
 - [Lightweight Ranking Heads: Accelerating Multi-Task Experimentation in Production Recommender Systems](../../reproductions/2609.25433-light-heads/README-en.md)
 - [UNIQUE: A Unified Retrieval and Ranking System for Large-Scale Feed Recommendation](../../reproductions/2609.23718-unique/README-en.md)
 - [MuSeR: Scalable Long-sequence Recommendation with Multi-interest Modeling](../../reproductions/2609.23677-muser/README-en.md)

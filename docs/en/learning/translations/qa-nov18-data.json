@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:stratified-retention-protocol/revise-is-not-forget": {
+      "source_sha256": "e681ff0048c8e2cc6bf097f087395e49109c50961cdb354a5b06c48b4585a356",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is stopping prediction of a chair's old position not automatically forgetting?",
+        "answer": "The old position is no longer true and should be revised, while invariants such as object permanence should persist. The strata describe environmental truth timescales, not unconditional preservation of old answers.",
+        "example": "Teaching example: predicting closed after an open door closes is a correct revision. Losing object permanence during that update is an invariant negative flip."
+      }
+    },
+    "qa/foundation-models:stratified-retention-protocol/streak-and-censoring": {
+      "source_sha256": "cb932795c6516c63c1566b98c184accca6a6aa0a033a18105a5d834cd026a6b8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not use the first correct answer or final accuracy as revision latency?",
+        "answer": "One preference for a new fact may be a fluctuation. Held-out new-episode queries must exceed a declared margin consecutively, counting relevant-region observations. Never reaching the criterion and right-censoring near stream end are distinct.",
+        "example": "Teaching example: gaps 0.2, -0.2, 0.2, 0.2 with margin 0.1 and a two-observation streak give latency 4, not 1. A change with only one observable step is separately censored."
+      }
+    },
+    "qa/foundation-models:stratified-retention-protocol/proposal-versus-woven": {
+      "source_sha256": "8ad1e1738b3ed8799a31cacead81af13c5579ef3ba58cd2b09936b5cdd498306",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are Stratified Retention and WOVEN not two directly rankable training algorithms?",
+        "answer": "WOVEN creates supervision from visual transitions and trains an MLLM. Stratified Retention proposes what to retain and how to measure revision, without a new training algorithm or experiment. A protocol can constrain future studies without establishing training gains.",
+        "example": "Teaching example: WOVEN groups source IDs to prevent the same initial image crossing splits. Stratified retention additionally needs per-round invariant probes and new-episode revision traces; the evaluation axes differ."
+      }
+    },
+    "qa/foundation-models:stratified-retention-protocol/probe-leakage-control": {
+      "source_sha256": "b8c6d5251fc87fd239b72ecbc678df5afd5cebd90a54a5e99686ad68a2d6b68b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the local protocol avoid calling memorization of just-seen answers revision capability?",
+        "answer": "Fixed probe IDs must be disjoint from adaptation IDs, and a ChangeTrace query episode must differ from the adaptation episode. The module only consumes external scores, with no model or gold-to-policy channel. Constructed traces remain L0 counterexamples.",
+        "example": "Teaching example: gravity cannot be both an adaptation ID and a held-out probe. Identical query_episode and adaptation_episode also raise an error."
+      }
+    },
+    "qa/foundation-models:tokenization-premium/aligned-content-first": {
+      "source_sha256": "479436a55418216b06732427c50c73bc6184d9da5715870c2969967a9abac2fa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why align the same articles before comparing tokenization premiums?",
+        "answer": "Otherwise meaning and length differences confound cost. The paper sorts the same 27 articles, joins them with spaces and encodes once, then divides total tokens by the English total. It does not average per-article premiums.",
+        "example": "Teaching example: totals for English articles 10 and 30 versus another language's 10 and 90 give 100/40 = 2.5, not the per-article mean (1+3)/2 = 2."
+      }
+    },
+    "qa/foundation-models:tokenization-premium/unknown-is-not-cheap": {
+      "source_sha256": "752d2dcd87791512fb820dd0183741bd7a2045a5151427b3d8f6fcaf44329f4b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is collapsing an unfamiliar paragraph into one UNK not efficient tokenization?",
+        "answer": "UNK loses content; the low count reflects coverage failure, not cheaper preservation of equivalent text. The authors mark these cells n/a. With no universal threshold specified, the local conservative guard makes any UNK unavailable.",
+        "example": "Teaching example: English uses 40 tokens; another language has 3 tokens including 2 UNKs. This is not a 0.075 cost ratio: premium is null with an exclusion reason."
+      }
+    },
+    "qa/foundation-models:tokenization-premium/cost-versus-xlgobench": {
+      "source_sha256": "2ffc8b4452d143228e37d2ddaa25787ad26e80e9797a5c489a641cf8477526df",
+      "reviewed": true,
+      "fields": {
+        "question": "Can token premiums be directly mapped to XLGoBench cross-lingual capability gaps?",
+        "answer": "No. Premium measures input length/cost for matched content. XLGoBench holds algorithmic instances and complexity fixed while comparing task performance across languages. More tokens can affect budgets but do not directly measure error rate or reasoning skill.",
+        "example": "Teaching example: twice the tokens does not imply half the shortest-path accuracy. Studying that relationship requires matched instances, verified translations and controlled budgets."
+      }
+    },
+    "qa/foundation-models:tokenization-premium/abstention-denominators": {
+      "source_sha256": "d036b1e049168bd3b3281858165fb1e4b133afc20183085e8358f5951dc56a63",
+      "reviewed": true,
+      "fields": {
+        "question": "How can reporting avoid beautifying calibration and efficiency by answering only a few confident items?",
+        "answer": "Report coverage alongside selective risk, retain all items for ECE, and use full-evaluation energy including abstentions. At zero answers risk is unavailable, not zero. Correctness belongs only to the separate evaluator.",
+        "example": "Teaching example: one correct answer out of four attempted items means coverage 0.25. Its 100% answered accuracy is not full-task accuracy, and energy cannot count only that answered item."
+      }
+    },
+    "qa/multimodal-models:rslivebench-uav-protocol/scenes-not-questions": {
+      "source_sha256": "08e017b7720f141354880a04652e326350848e952715276006618f24c2f62d4d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does replacing one of four scenes not mean replacing exactly 25% of questions or score?",
+        "answer": "FIFO retires the earliest admitted scene. The 25% proportion applies only to scene count; question counts, task composition and group-macro weights differ.",
+        "example": "Teaching example: scenes with 10, 20, 30 and 40 questions lose only 10% of old questions when the first scene retires. Four capability groups still receive equal 25% weights."
+      }
+    },
+    "qa/multimodal-models:rslivebench-uav-protocol/calendar-and-retirement": {
+      "source_sha256": "15a182b2a062e6b2418d69c83940a569c8c9ef30ebfd6555398e32058fb02839",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not disclose answers automatically 120 days after release?",
+        "answer": "Disclosure requires both retirement and at least four calendar months after first release, taking the later timestamp. Calendar months are not a fixed 120 days, and active scenes stay embargoed.",
+        "example": "Teaching example: a January 31 scene retired in February cannot disclose before May 31; May 30 is too early. If retirement is June 1, disclosure waits until June 1."
+      }
+    },
+    "qa/multimodal-models:rslivebench-uav-protocol/freshness-versus-woven": {
+      "source_sha256": "ba609f4e54a0a0e153adddecf13b54b099c8bc2e254d9435b72334981c255000",
+      "reviewed": true,
+      "fields": {
+        "question": "How does RSLiveBench-UAV freshness differ from WOVEN scene-OOD evaluation?",
+        "answer": "The former controls fresh observations and answer exposure using real capture dates and rolling retirement. The latter tests generalization along a scene axis of visual-transition supervision. Temporal freshness and cross-scene generalization are different.",
+        "example": "Teaching example: yesterday's images of the same car park can satisfy capture windows without testing new-scene generalization. WOVEN restaurant OOD does not provide UAV geometry."
+      }
+    },
+    "qa/multimodal-models:rslivebench-uav-protocol/missing-is-not-parse-failure": {
+      "source_sha256": "0bee858e5819b9137394ca82475ba5a2f90f603438eeacf9a60475b25d320513",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish an unrun question from a malformed returned answer?",
+        "answer": "A malformed output is an observed failure scored zero in the denominator. An unrun question is unobserved and makes the complete official score unavailable. Aggregate components, tasks and four groups rather than averaging all questions.",
+        "example": "Teaching example: four group scores 100, 50, parse failure 0 and 80 give 57.5. If the last group was not run, overall is null rather than padded with zero."
+      }
+    },
+    "qa/multimodal-models:multimodal-library-protocol/maxsim-not-mean": {
+      "source_sha256": "b070705dd0482c5a840a0d93369af9cc9e89593379a94c81d84ac1ce6704fb89",
+      "reviewed": true,
+      "fields": {
+        "question": "Why match each query token to its best page patch instead of averaging the page first?",
+        "answer": "Late interaction sums each query token's best page-token match, preserving distinct local evidence. Page averaging can dilute small charts or formulas, but a local similarity is still not a relevance probability.",
+        "example": "Teaching example: query vectors [1,0] and [0,1] with matching page patches produce cosine MaxSim sum 2, not 200% accuracy."
+      }
+    },
+    "qa/multimodal-models:multimodal-library-protocol/rank-and-unretrieved-labels": {
+      "source_sha256": "dc4331724109185234584d871e974604ccc53ee870cbf03b415abdf3bfd7abfc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must AP@5 use rank and retain known relevant pages that were not retrieved?",
+        "answer": "Each relevant hit contributes precision at its rank, divided by all known relevant pages. Later hits lower AP despite equal hit count. Dropping unretrieved relevance inflates recall and AP.",
+        "example": "Teaching example: gold pages a, c, z and ranking x,a,b,c,y give AP@5 = (1/2+2/4)/3 = 1/3 and recall 2/3; the denominator is not 2."
+      }
+    },
+    "qa/multimodal-models:multimodal-library-protocol/clip-versus-page-tokens": {
+      "source_sha256": "0c73c1cc6209b54ae8e4d5f02e11224080873892558f9be5ef33322b939ff35e",
+      "reviewed": true,
+      "fields": {
+        "question": "Compared with CLIP dual towers, is the new element a training objective or retrieval granularity?",
+        "answer": "The paper uses existing ColPali multivectors/late interaction and compares database metrics/index settings; it does not newly train a CLIP-like model. CLIP's global contrastive alignment and page-token retrieval readouts are different mechanisms.",
+        "example": "Teaching example: the local CLIP Fashion-MNIST experiment has a real visual control. A toy library MaxSim check establishes arithmetic, not fine-diagram discovery or improved real retrieval."
+      }
+    },
+    "qa/multimodal-models:multimodal-library-protocol/throughput-scope": {
+      "source_sha256": "66382a0999a0490b6ba9df04046a722e5ca0c6ae85d6825fbeb98b8dd1347b9a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not interpret Table VII's 22k QPS as library throughput including model inference?",
+        "answer": "The preencoded database benchmark conflicts with later end-to-end wording, and its latency does not justify arbitrary interpretation. Declare whether encoding is included and compute QPS from requests divided by measured wall time, not inverse mean latency.",
+        "example": "Teaching example: three requests over 0.05 wall-clock seconds yield 60 QPS, even if mean per-request latency is 20 ms. Toy timing is not a Qdrant run."
+      }
+    }
+  }
+}

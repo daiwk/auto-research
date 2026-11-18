@@ -5,7 +5,7 @@
     "alignment-interfaces": {
       "title": "多模态对齐到底对齐什么：向量、视觉接口还是证据依赖",
       "thesis": "CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条件生成，CV-OPD训练证据依赖，UMRM给回答评分。它们的输出合同和监督对象不同，不是同一条从小到大的能力排行榜。",
-      "updated": "2026-11-15",
+      "updated": "2026-11-18",
       "reviewed_papers": [
         "foundation-models:blip2",
         "foundation-models:clip",
@@ -33,7 +33,9 @@
         "foundation-models:unbundling-vision",
         "foundation-models:d-jepa",
         "foundation-models:duojepa",
-        "foundation-models:spectral-ghost"
+        "foundation-models:spectral-ghost",
+        "multimodal-models:multimodal-library-protocol",
+        "multimodal-models:fend-protocol"
       ],
       "axes": [
         "输出对象：检索向量、视觉token、生成回答、reward",
@@ -175,6 +177,28 @@
             "核心机制与公式",
             "论文结果与证据边界"
           ]
+        },
+        {
+          "paper": "multimodal-models:multimodal-library-protocol",
+          "position": "沿用ColPali页面多向量做query-token到page-token MaxSim，比较Qdrant距离与索引；本地仅向量/排名算术和带scope的计时读出。",
+          "tradeoff": "CLIP学习双塔全局归一化表示与对比目标，数字馆论文不新训练对齐模型而研究局部读出/数据库。CLIP真实图像小实验与人工token向量算术的证据等级不同，不能当视觉检索胜负。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
+        },
+        {
+          "paper": "multimodal-models:fend-protocol",
+          "position": "外部事件在deadline内累计，以VM／IVR／AI优先级仲裁，human默认；独立HFPR和声学human-null接口。",
+          "tradeoff": "GSLM2学习多流语音单元、共享时序和生成分布；FEND是外呼风险检测。外部离散单元与检测事件都不是本地训练模型，二者不能共用能力排名。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -260,6 +284,22 @@
           "papers": [
             "foundation-models:spectral-ghost",
             "foundation-models:clip"
+          ]
+        },
+        {
+          "title": "训练对齐、局部检索与数据库吞吐要分别验证",
+          "body": "CLIP的相似度来自对比学习的全局图文表征；页面多向量late interaction保留每个query token的局部最佳证据。向量检索分数不是相关概率，必须由独立封存相关性评价。数字馆原文数据库预编码与端到端并发描述存在冲突，因此本地接口强制scope并用真实wall time算QPS，拒绝把作者Table VII解释为已复现的模型吞吐。",
+          "papers": [
+            "multimodal-models:multimodal-library-protocol",
+            "foundation-models:clip"
+          ]
+        },
+        {
+          "title": "语音表示分数与通话决策风险属于不同层次",
+          "body": "GSLM2的局部切片按流变化联合去重并计算转移分数，源模型仍在外部。FEND的局部切片从外部带时间事件选类，同样没有音频检测器。最高优先级要等窗口结束，不能抢答；HFPR以真人为分母。原文0.979是human-versus-rest F1，AI类F1仅0.571，不能把二元高分写成四类全解决。",
+          "papers": [
+            "multimodal-models:fend-protocol",
+            "multimodal-models:gslm2"
           ]
         }
       ],
@@ -374,6 +414,26 @@
           "papers": [
             "foundation-models:spectral-ghost",
             "foundation-models:clip"
+          ]
+        },
+        {
+          "id": "nov18-multimodal-library-protocol",
+          "question": "MaxSim小例子优于干扰向量，能否据此说它比CLIP更适合真实数字馆？",
+          "answer": "不能。它只验证读出算术。真实比较还需相同页面与查询、标签审计、编码/重排配置和预算，并分离模型质量、索引召回与服务性能；CLIP小任务结果也不代表长文页面能力。",
+          "example": "两token可分别命中页面两patch且分数为2，但这不说明相关页是否被完整索引，也不说明含ColPali推理的端到端QPS。",
+          "papers": [
+            "multimodal-models:multimodal-library-protocol",
+            "foundation-models:clip"
+          ]
+        },
+        {
+          "id": "cross-nov18-fend-protocol",
+          "question": "FEND的human-versus-rest F1为0.979，可以证明多流语音模型也擅长AI语音识别吗？",
+          "answer": "不能。该二元指标不代表AI类F1或表征质量；FEND还依赖商业ASR、工具和时序模型。GSLM2的表示／语言判别任务不同，需各自冻结协议和真实模型输出。",
+          "example": "教学例：human误拒低，但AI被误判为voicemail，二元分数仍可很高，四类分辨却不理想。",
+          "papers": [
+            "multimodal-models:fend-protocol",
+            "multimodal-models:gslm2"
           ]
         }
       ],
@@ -516,6 +576,30 @@
           "source_revisions": {
             "foundation-models:spectral-ghost": "8974441bb41e91e867e062ab0490aef1ba6086eb162dd60354b1c09df6ad05bd",
             "foundation-models:clip": "9a8c03405713d34f4c7af432f78e05830369fa6b5e331a67a6d540983a205fa1"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "multimodal-models:multimodal-library-protocol",
+            "foundation-models:clip"
+          ],
+          "summary": "补入页面MaxSim、独立检索指标和显式计时scope的L0接口；与CLIP训练机制分轴，保留原文并发口径冲突，不跑高成本完整索引。",
+          "source_revisions": {
+            "multimodal-models:multimodal-library-protocol": "4376093729a3f277a47da39c45ef1b60430de42fec608056f45836609eb904af",
+            "foundation-models:clip": "9a8c03405713d34f4c7af432f78e05830369fa6b5e331a67a6d540983a205fa1"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "multimodal-models:fend-protocol",
+            "multimodal-models:gslm2"
+          ],
+          "summary": "外部事件在deadline内累计，以VM／IVR／AI优先级仲裁，human默认；独立HFPR和声学human-null接口。 完整实验高成本不复现，局部协议不作能力或Evolve证据。",
+          "source_revisions": {
+            "multimodal-models:fend-protocol": "6ab965d73f88abc3a347317c728c010f709def3d70a3fd2069b83aa09eb3fd76",
+            "multimodal-models:gslm2": "5ab8ce37c3b3aadad488495535e4ecda1ab9dc939871212b55de7ae8d11e870a"
           }
         }
       ]
@@ -790,7 +874,7 @@
     "world-state-actions": {
       "title": "会预测下一幕，还不等于会行动或保持同一个世界",
       "thesis": "世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。",
-      "updated": "2026-11-15",
+      "updated": "2026-11-18",
       "reviewed_papers": [
         "foundation-models:alps",
         "multimodal-models:aw0",
@@ -819,7 +903,9 @@
         "multimodal-models:rs-jepa",
         "multimodal-models:onlyact",
         "multimodal-models:sensorwm-planning",
-        "multimodal-models:pixvid"
+        "multimodal-models:pixvid",
+        "foundation-models:stratified-retention-protocol",
+        "multimodal-models:rslivebench-uav-protocol"
       ],
       "axes": [
         "学习对象：未来latent、动作分布、视觉转移、持久几何",
@@ -948,6 +1034,26 @@
             "核心机制与公式",
             "论文离线与线上效果"
           ]
+        },
+        {
+          "paper": "foundation-models:stratified-retention-protocol",
+          "position": "把世界知识按环境不变时间尺度分层，分别报告逐轮不变量保持和新episode修订延迟；原文是无新实证的评测提案，本地仅L0报告协议。",
+          "tradeoff": "WOVEN用(s,a,s')视觉转移产生受控监督并训练MLLM；分层保持不生成训练数据、不指定适应算法。WOVEN的source_id隔离不代替逐轮不变量面板与变化后新episode查询，不能把两个分数直接排名。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
+        },
+        {
+          "paper": "multimodal-models:rslivebench-uav-protocol",
+          "position": "以真实新UAV观察、四场景FIFO和答案禁运控制持续评测；本地只实现采集/发布时窗、日历月禁运、SC子计分及缺失感知层次聚合。",
+          "tradeoff": "WOVEN训练视觉状态转移推理并按scene/action/reasoning验证迁移；RSLiveBench-UAV重点是航空几何与持续刷新。时间新鲜、真实采集和scene-OOD是不同维度，二者分数不能直接比较。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
         }
       ],
       "analysis": [
@@ -1014,6 +1120,22 @@
           "body": "视频生成器可以作为下游转移训练的数据源，但要分开验证视觉质量、动作条件忠实度、状态一致性和学习后的推理能力。PixVid完整14B/130万clip矩阵不运行；WOVEN既有小样本SFT负结果也不用于推断PixVid的收益。两者不构成本地联合系统。",
           "papers": [
             "multimodal-models:pixvid",
+            "multimodal-models:woven"
+          ]
+        },
+        {
+          "title": "状态变化监督不等于“该改什么”的持续评测",
+          "body": "WOVEN按scene/action/reasoning控制训练与泛化，真实视觉状态转移进入response-only SFT；本地已有分组小样本负结果。Stratified Retention进一步区分旧事实过期与结构遗忘：应保持的不变量可纠错但不能退化，实例位置必须及时更新。要把二者连起来，需预先标注稳定性层、适应后逐轮probe和新episode修订轨迹；本轮没有这些模型实验，只有拒绝泄漏与删失混淆的协议。",
+          "papers": [
+            "foundation-models:stratified-retention-protocol",
+            "multimodal-models:woven"
+          ]
+        },
+        {
+          "title": "新拍摄与新场景不是同一个泛化控制",
+          "body": "WOVEN源初始图分组防止多个动作/问题跨split，RSLiveBench-UAV要求每批图像在相邻release之间拍摄，并退役最早入窗场景。持续更新降低旧答案暴露但不自动消除场景偏差；反过来，生成场景的OOD测试不提供真实航空空间几何。小FIFO重放只检验时窗与分母，不证明任何VLM空间能力或完整benchmark已接入。",
+          "papers": [
+            "multimodal-models:rslivebench-uav-protocol",
             "multimodal-models:woven"
           ]
         }
@@ -1107,6 +1229,26 @@
           "example": "更清晰地生成一个错误动作结果，仍会把错误监督传给下游转移问答。",
           "papers": [
             "multimodal-models:pixvid",
+            "multimodal-models:woven"
+          ]
+        },
+        {
+          "id": "nov18-stratified-retention-protocol",
+          "question": "WOVEN训练后某旧场景题准确率下降，能据此断言发生有害遗忘吗？",
+          "answer": "不能。先判断旧答案是否仍真实；正确修订过期实例与忘掉不变量应分开。WOVEN现有分组accuracy也不提供逐轮差分保持证据，需要额外稳定面板、新episode变化查询和假修订对照。",
+          "example": "椅子移动后不再选旧坐标可能是好事；若遮挡后认为椅子不存在才违反稳定知识。最终恢复正确也不能掩盖中途一次负翻转。",
+          "papers": [
+            "foundation-models:stratified-retention-protocol",
+            "multimodal-models:woven"
+          ]
+        },
+        {
+          "id": "nov18-rslivebench-uav-protocol",
+          "question": "用昨天新拍的同一停车场替换一个场景，是否同时完成了freshness和scene-OOD评测？",
+          "answer": "不一定。可满足capture时窗与FIFO，但若地点、实体和视角类似，未必形成未见场景泛化。WOVEN的scene轴和UAV持续时间控制需各自按协议记录。",
+          "example": "新拍同一停车场可算新观察；一个从未见过的生成餐厅可算场景OOD，却不代表真实UAV跨视角车辆几何。",
+          "papers": [
+            "multimodal-models:rslivebench-uav-protocol",
             "multimodal-models:woven"
           ]
         }
@@ -1229,6 +1371,30 @@
           "summary": "补入固定版本方法、低成本组件或明确资料收录，分开原文结果、本地诊断及高成本不复现范围。",
           "source_revisions": {
             "multimodal-models:pixvid": "af14fd84ecf954028202fd5cf61ef0145afa848db73a106afc7f41fd4ff8a8ae",
+            "multimodal-models:woven": "3c7f5518fd36be1bc8aa964050531232d66f297057e8e0ccd57f3f4376d2f575"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:stratified-retention-protocol",
+            "multimodal-models:woven"
+          ],
+          "summary": "补入分层保持的L0报告协议，与WOVEN视觉转移训练分轴比较；无原始完整实证，不虚构高成本训练或能力排名。",
+          "source_revisions": {
+            "foundation-models:stratified-retention-protocol": "4ca784aeee5aef56a27ffb538cf2c072c6981bd08177c9fec708de88a2de397a",
+            "multimodal-models:woven": "3c7f5518fd36be1bc8aa964050531232d66f297057e8e0ccd57f3f4376d2f575"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "multimodal-models:rslivebench-uav-protocol",
+            "multimodal-models:woven"
+          ],
+          "summary": "补入RSLiveBench-UAV的L0发布/scorer协议，与WOVEN场景迁移分开；完整采集、标注和30模型高成本矩阵不复现。",
+          "source_revisions": {
+            "multimodal-models:rslivebench-uav-protocol": "fd7ec0c903a2ca99b30f35a323af497cc2c51ae5579795ec96e8fc2440a22908",
             "multimodal-models:woven": "3c7f5518fd36be1bc8aa964050531232d66f297057e8e0ccd57f3f4376d2f575"
           }
         }

@@ -278,7 +278,9 @@
         "agent-research:alphaevolve",
         "agent-research:co-director",
         "agent-research:multiloop",
-        "agent-research:stellar-colosseum"
+        "agent-research:stellar-colosseum",
+        "agent-research:askalcf-protocol",
+        "agent-research:prodpilot-protocol"
       ]
     },
     {

@@ -7,7 +7,7 @@ hide:
 
 # 世界建模：状态、生成与动作条件
 
-[多模态](index.md) / 112 个问题 · 28 篇论文
+[多模态](index.md) / 120 个问题 · 30 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">112 个问题 · 28 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">120 个问题 · 30 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:pixvid" data-paper-title="Back to Pixels: Lifting Latent Video Diffusion into Pixel Space" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Back to Pixels: Lifting Latent Video Diffusion into Pixel Space 多模态大模型 Roblox 2026-11-12 像素视频生成避免VAE潜空间约束，但直接从零学习大规模时空关系成本很高。PixVid保留预训练latent DiT知识，以离线像素—latent线性对齐融合进patch embedding、校准噪声时间步，再加入detailer处理高频细节。高分辨率patch初始化与新增上采样块控制token数量，不能只把VAE删掉就等同本文。§2—3 完整14B视频训练与评测成本过高，不复现（审查 DONE）；未实现组件、未生成视频、未运行GPU、没有指标产物；资料收录，未实现。完整14B视频训练与评测成本过高，不复现（审查 DONE）；普通flow loss或插值不是PixVid复现。本轮仅核对方法、首发时间、机构、代码发布状态与成本。未实现组件、未生成视频、未运行GPU、没有指标产物；不放入Evolve，不将原图或作者视频当本地结果。  视频生成与世界模型 像素空间视频扩散 多模态 世界建模：状态、生成与动作条件 PixVid在像素空间生成，是否意味着不使用预训练latent模型知识？ 不是。它迁移预训练latent DiT，通过离线像素-latent对齐和时间步校准保留知识，再新增detailer。像素输出空间与是否从零训练是两件事。 教学例：继承DiT权重但替换输入patch映射和输出detailer，仍属于利用latent预训练，不是随机初始化全模型。 2026-11-15">
@@ -80,6 +80,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：原文一个设置需192秒生成一clip；成百上千clip、多种子和训练还另计，不能称为快速组件验证。</p>
 <p class="ar-learning-sources">依据：论文离线与线上效果、本地范围与成本决定；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17336v1">原论文</a> · <a href="../../../../multimodal-models/2611.17336-pixvid/">实现解读</a> · <a href="#qa-b26edbe834029176">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:rslivebench-uav-protocol" data-paper-title="RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence 多模态大模型 East China Normal University 2026-11-11 航空空间题需要跨视角实体匹配、真实几何与新观察，不是给旧图片改写问题。作者将持续实地 UAV 采集、实体中心的答案生产、四场景滚动窗口和延迟公开答案组合成持续 benchmark。新版本只接受上一发布与本次发布之间拍摄的图像；每次退役最早入窗场景，更新的是 25% 场景，不是固定 25% 题目或分数。§3、附录评分协议 成本过高，不复现（审查 DONE）；L0 协议/部分 scorer。只重放四场景 FIFO、采集时窗、答案禁运和部分确定性计分，不采集无人机图像、不运行完整 17 任务 benchmark，也不提供 VLM 能力分数。RollingWindow.advance 验证时间严格不等式与 FIFO；disclosure_allowed 实现日历月禁运。strict_count_mra 只做 SC 子 scorer，不宣称涵盖框、角度、GPS、类别的完整 parser。aggregate_scores 对调用者声明的四组 inventory 做层次聚合，并拒绝重复/未知 ID、将缺预测传成 unavailable。  多模态评测与数据 航空空间与持续基准 多模态 世界建模：状态、生成与动作条件 四场景每轮换一个，为什么不能说固定更新25%的题或分数？ FIFO替换最早入窗场景，25%只对场景数成立。场景题量、任务组成和四组宏平均权重不同，不能把场景比例直接当题量或分数比例。 教学例：四场景分别有10、20、30、40题，退役10题场景只移除10%旧题；最终四能力组仍各占25%。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<span id="paper-multimodal-models-rslivebench-uav-protocol-52a74eb2" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-239f1081e4677a8a">四场景每轮换一个，为什么不能说固定更新25%的题或分数？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Arslivebench-uav-protocol">RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · East China Normal University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>FIFO替换最早入窗场景，25%只对场景数成立。场景题量、任务组成和四组宏平均权重不同，不能把场景比例直接当题量或分数比例。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：四场景分别有10、20、30、40题，退役10题场景只移除10%旧题；最终四能力组仍各占25%。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14953v1">原论文</a> · <a href="../../../../multimodal-models/2611.14953-rslivebench-uav-protocol/">实现解读</a> · <a href="#qa-239f1081e4677a8a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:rslivebench-uav-protocol" data-paper-title="RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence 多模态大模型 East China Normal University 2026-11-11 航空空间题需要跨视角实体匹配、真实几何与新观察，不是给旧图片改写问题。作者将持续实地 UAV 采集、实体中心的答案生产、四场景滚动窗口和延迟公开答案组合成持续 benchmark。新版本只接受上一发布与本次发布之间拍摄的图像；每次退役最早入窗场景，更新的是 25% 场景，不是固定 25% 题目或分数。§3、附录评分协议 成本过高，不复现（审查 DONE）；L0 协议/部分 scorer。只重放四场景 FIFO、采集时窗、答案禁运和部分确定性计分，不采集无人机图像、不运行完整 17 任务 benchmark，也不提供 VLM 能力分数。RollingWindow.advance 验证时间严格不等式与 FIFO；disclosure_allowed 实现日历月禁运。strict_count_mra 只做 SC 子 scorer，不宣称涵盖框、角度、GPS、类别的完整 parser。aggregate_scores 对调用者声明的四组 inventory 做层次聚合，并拒绝重复/未知 ID、将缺预测传成 unavailable。  多模态评测与数据 航空空间与持续基准 多模态 世界建模：状态、生成与动作条件 答案为什么不能在发布120天后直接公开？ 协议要求场景已退役，且自首次发布至少经过4个日历月，取两者较晚时间。日历月不是固定120天；未退役时即使很久也不能公开。 教学例：1月31日首发、2月退役，最早到5月31日；5月30日仍禁运。若6月1日才退役，则需等6月1日。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-30a9a213d54055f3">答案为什么不能在发布120天后直接公开？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Arslivebench-uav-protocol">RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · East China Normal University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>协议要求场景已退役，且自首次发布至少经过4个日历月，取两者较晚时间。日历月不是固定120天；未退役时即使很久也不能公开。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：1月31日首发、2月退役，最早到5月31日；5月30日仍禁运。若6月1日才退役，则需等6月1日。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14953v1">原论文</a> · <a href="../../../../multimodal-models/2611.14953-rslivebench-uav-protocol/">实现解读</a> · <a href="#qa-30a9a213d54055f3">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:rslivebench-uav-protocol" data-paper-title="RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence 多模态大模型 East China Normal University 2026-11-11 航空空间题需要跨视角实体匹配、真实几何与新观察，不是给旧图片改写问题。作者将持续实地 UAV 采集、实体中心的答案生产、四场景滚动窗口和延迟公开答案组合成持续 benchmark。新版本只接受上一发布与本次发布之间拍摄的图像；每次退役最早入窗场景，更新的是 25% 场景，不是固定 25% 题目或分数。§3、附录评分协议 成本过高，不复现（审查 DONE）；L0 协议/部分 scorer。只重放四场景 FIFO、采集时窗、答案禁运和部分确定性计分，不采集无人机图像、不运行完整 17 任务 benchmark，也不提供 VLM 能力分数。RollingWindow.advance 验证时间严格不等式与 FIFO；disclosure_allowed 实现日历月禁运。strict_count_mra 只做 SC 子 scorer，不宣称涵盖框、角度、GPS、类别的完整 parser。aggregate_scores 对调用者声明的四组 inventory 做层次聚合，并拒绝重复/未知 ID、将缺预测传成 unavailable。  多模态评测与数据 航空空间与持续基准 多模态 世界建模：状态、生成与动作条件 RSLiveBench-UAV的freshness与WOVEN的scene-OOD有什么区别？ 前者用实地采集时间和滚动退役控制新观察与答案暴露；后者按视觉转移监督的场景轴划分泛化评测。时间新鲜不能代替跨场景泛化，生成场景的OOD也不能证明真实新采集无污染。 教学例：昨天新拍但一直同一停车场可满足采集时窗，却未必测新场景泛化；WOVEN未见过餐厅场景也不等于它有UAV几何。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-f8d341a8e9573a40">RSLiveBench-UAV的freshness与WOVEN的scene-OOD有什么区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Arslivebench-uav-protocol">RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · East China Normal University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>前者用实地采集时间和滚动退役控制新观察与答案暴露；后者按视觉转移监督的场景轴划分泛化评测。时间新鲜不能代替跨场景泛化，生成场景的OOD也不能证明真实新采集无污染。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：昨天新拍但一直同一停车场可满足采集时窗，却未必测新场景泛化；WOVEN未见过餐厅场景也不等于它有UAV几何。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14953v1">原论文</a> · <a href="../../../../multimodal-models/2611.14953-rslivebench-uav-protocol/">实现解读</a> · <a href="#qa-f8d341a8e9573a40">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:rslivebench-uav-protocol" data-paper-title="RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence 多模态大模型 East China Normal University 2026-11-11 航空空间题需要跨视角实体匹配、真实几何与新观察，不是给旧图片改写问题。作者将持续实地 UAV 采集、实体中心的答案生产、四场景滚动窗口和延迟公开答案组合成持续 benchmark。新版本只接受上一发布与本次发布之间拍摄的图像；每次退役最早入窗场景，更新的是 25% 场景，不是固定 25% 题目或分数。§3、附录评分协议 成本过高，不复现（审查 DONE）；L0 协议/部分 scorer。只重放四场景 FIFO、采集时窗、答案禁运和部分确定性计分，不采集无人机图像、不运行完整 17 任务 benchmark，也不提供 VLM 能力分数。RollingWindow.advance 验证时间严格不等式与 FIFO；disclosure_allowed 实现日历月禁运。strict_count_mra 只做 SC 子 scorer，不宣称涵盖框、角度、GPS、类别的完整 parser。aggregate_scores 对调用者声明的四组 inventory 做层次聚合，并拒绝重复/未知 ID、将缺预测传成 unavailable。  多模态评测与数据 航空空间与持续基准 多模态 世界建模：状态、生成与动作条件 模型没跑的题和返回格式错误的题为什么不能都当0分？ 格式错误是已观察失败，必须留在分母记0；没跑的题没有观察，官方完整得分应不可用。聚合先component再task再四组，不能按题数直接平均。 教学例：四组得分100、50、解析失败0、80时宏平均57.5；若最后一组根本没跑，则overall=null而不是把它补0。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-45111a721b9c19d8">模型没跑的题和返回格式错误的题为什么不能都当0分？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Arslivebench-uav-protocol">RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · East China Normal University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>格式错误是已观察失败，必须留在分母记0；没跑的题没有观察，官方完整得分应不可用。聚合先component再task再四组，不能按题数直接平均。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：四组得分100、50、解析失败0、80时宏平均57.5；若最后一组根本没跑，则overall=null而不是把它补0。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14953v1">原论文</a> · <a href="../../../../multimodal-models/2611.14953-rslivebench-uav-protocol/">实现解读</a> · <a href="#qa-45111a721b9c19d8">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:onlyact" data-paper-title="OnlyAct: Extracting Action Representations from Foundation Models for World Models" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="OnlyAct: Extracting Action Representations from Foundation Models for World Models 多模态大模型 University of Oxford 2026-11-10 无标签 latent-action 方法常用重建瓶颈排除场景，但过窄会丢动作细节，过宽又会泄漏外观。OnlyAct 从已预训练的 V-JEPA 2 ViT-L 出发：两帧作为同一 clip 输入，tubelet 从第一层联合观察两帧，而不是先单帧编码再求差；均值池化、固定随机投影至 640 维并归一化。它用场景交换的同动作正例，以及同一视频不同时间窗的 hard negative 做对比适配。静态相机用 RAFT 光流提取移动区域，原像素共同平移并粘到另一场景； 完整矩阵明显超出本轮短预算，成本过高，不复现（审查 DONE）；真实 NVIDIA A100 的 CUDA 42/43/44 诊断也已通过，见真实 GPU 回执与三 seed 指标。L1 对比损失／输入合同组件，不是 V-JEPA 2 动作编码器或世界模型复现。本地执行全候选损失、固定投影和 hard-negative 合同，不伪造场景交换视频、光流或真实动作能力。pooled_action 只处理外部两帧联合编码 token 的池化、冻结投影和归一化，不含任何假 V-JEPA。bank_contract 定义精确候选与正例索引；contrastive_loss 执行对称 InfoNCE 并实际反传。  JEPA 表征学习 动作场景解耦与世界模型 多模态 世界建模：状态、生成与动作条件 OnlyAct为什么把同一视频的另一时间窗当hard negative，而不只用其他视频？ 不同视频常能仅凭背景外观分开，模型可能不必学习动作。同视频非重叠窗保留较相似场景，使这种捷径更难；但无动作标签，所以不同窗不保证动作语义真的不同。 教学例：同一厨房里“开抽屉”和“关抽屉”比厨房与游戏画面的对比更难用场景颜色直接区分。 2026-11-12">
@@ -1352,6 +1405,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如同一初始帧生成三道题，应一起划到训练或留出；否则模型可记住来源，再在所谓 test 回答变体问题。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、代码映射与边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12417">原论文</a> · <a href="../../../../reproductions/2610.12417-woven/">实现解读</a> · <a href="#qa-def30335d1ff6136">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stratified-retention-protocol" data-paper-title="What Should World Models Forget? Stratified Retention for Continual Adaptation" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="What Should World Models Forget? Stratified Retention for Continual Adaptation 基础模型 University of Maryland, College Park 2026-10-02 世界会变化：椅子移动后继续预测旧位置不是“记忆好”，而是知识过期；但物体永久性等结构知识不应随一次适应丢失。作者按环境知识保持为真的时间尺度分四层：不变量、长期环境规律、短期实例配置、即时状态。这里的时间尺度不是缓存 TTL，即时状态也不应统统写入权重。§3—5 单看旧任务准确率会奖励冻结模型。论文因此要求分别报告不变量保持、变化后的修订延迟，以及短暂扰动引起的假修订，不合成一个掩盖取舍的总分。 诊断输入包含先失效后恢复的不变量、改正旧错误、一直不改的冻结轨迹和临近结束的删失变化。L0 评测协议组件，非持续学习算法。原文是无新实证的研究提案；本地实现审计算术，不训练世界模型，也不声称获得更好的记忆或适应能力。ProbeRound/invariant_retention 接收外部评测结果，不接收模型、标签到策略的通路；要求 probe ID 固定且与适应样本不重叠。ChangeTrace/revision_report 显式区分 regularity、instance，要求评测 episode 不同于适应 episode，输出延迟、从未修订数与右删失数。  预训练与数据 持续适应与评测协议 多模态 世界建模：状态、生成与动作条件 椅子搬走后不再预测旧位置，为什么不应直接记成遗忘？ 旧位置已经不真实，应修订；物体永久性等不变量仍应保持。论文按环境中知识为真的时间尺度分层，不把所有旧答案都当必须保留。 教学例：门从开变关后预测关是正确更新；随后把“遮挡物仍存在”也忘掉才是不变量负翻转。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<span id="paper-foundation-models-stratified-retention-protocol-5f3cc655" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-284724fe14c075e2">椅子搬走后不再预测旧位置，为什么不应直接记成遗忘？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astratified-retention-protocol">What Should World Models Forget? Stratified Retention for Continual Adaptation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>旧位置已经不真实，应修订；物体永久性等不变量仍应保持。论文按环境中知识为真的时间尺度分层，不把所有旧答案都当必须保留。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：门从开变关后预测关是正确更新；随后把“遮挡物仍存在”也忘掉才是不变量负翻转。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.03713v2">原论文</a> · <a href="../../../../foundation-models/2610.03713-stratified-retention-protocol/">实现解读</a> · <a href="#qa-284724fe14c075e2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stratified-retention-protocol" data-paper-title="What Should World Models Forget? Stratified Retention for Continual Adaptation" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="What Should World Models Forget? Stratified Retention for Continual Adaptation 基础模型 University of Maryland, College Park 2026-10-02 世界会变化：椅子移动后继续预测旧位置不是“记忆好”，而是知识过期；但物体永久性等结构知识不应随一次适应丢失。作者按环境知识保持为真的时间尺度分四层：不变量、长期环境规律、短期实例配置、即时状态。这里的时间尺度不是缓存 TTL，即时状态也不应统统写入权重。§3—5 单看旧任务准确率会奖励冻结模型。论文因此要求分别报告不变量保持、变化后的修订延迟，以及短暂扰动引起的假修订，不合成一个掩盖取舍的总分。 诊断输入包含先失效后恢复的不变量、改正旧错误、一直不改的冻结轨迹和临近结束的删失变化。L0 评测协议组件，非持续学习算法。原文是无新实证的研究提案；本地实现审计算术，不训练世界模型，也不声称获得更好的记忆或适应能力。ProbeRound/invariant_retention 接收外部评测结果，不接收模型、标签到策略的通路；要求 probe ID 固定且与适应样本不重叠。ChangeTrace/revision_report 显式区分 regularity、instance，要求评测 episode 不同于适应 episode，输出延迟、从未修订数与右删失数。  预训练与数据 持续适应与评测协议 多模态 世界建模：状态、生成与动作条件 修订延迟为什么不能用第一次答对或最终准确率代替？ 一次新事实偏好可能是瞬时抖动，需在新episode查询上连续超过已声明margin；延迟按相关区域观察次数计。未达门槛与临近结束无法判断的右删失必须分开。 教学例：差值0.2、-0.2、0.2、0.2，margin0.1、连续2次时延迟为4次观察，不是1；只来得及观察1次的变化应单列censored。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-a53ec8eb662bfa60">修订延迟为什么不能用第一次答对或最终准确率代替？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astratified-retention-protocol">What Should World Models Forget? Stratified Retention for Continual Adaptation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>一次新事实偏好可能是瞬时抖动，需在新episode查询上连续超过已声明margin；延迟按相关区域观察次数计。未达门槛与临近结束无法判断的右删失必须分开。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：差值0.2、-0.2、0.2、0.2，margin0.1、连续2次时延迟为4次观察，不是1；只来得及观察1次的变化应单列censored。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.03713v2">原论文</a> · <a href="../../../../foundation-models/2610.03713-stratified-retention-protocol/">实现解读</a> · <a href="#qa-a53ec8eb662bfa60">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stratified-retention-protocol" data-paper-title="What Should World Models Forget? Stratified Retention for Continual Adaptation" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="What Should World Models Forget? Stratified Retention for Continual Adaptation 基础模型 University of Maryland, College Park 2026-10-02 世界会变化：椅子移动后继续预测旧位置不是“记忆好”，而是知识过期；但物体永久性等结构知识不应随一次适应丢失。作者按环境知识保持为真的时间尺度分四层：不变量、长期环境规律、短期实例配置、即时状态。这里的时间尺度不是缓存 TTL，即时状态也不应统统写入权重。§3—5 单看旧任务准确率会奖励冻结模型。论文因此要求分别报告不变量保持、变化后的修订延迟，以及短暂扰动引起的假修订，不合成一个掩盖取舍的总分。 诊断输入包含先失效后恢复的不变量、改正旧错误、一直不改的冻结轨迹和临近结束的删失变化。L0 评测协议组件，非持续学习算法。原文是无新实证的研究提案；本地实现审计算术，不训练世界模型，也不声称获得更好的记忆或适应能力。ProbeRound/invariant_retention 接收外部评测结果，不接收模型、标签到策略的通路；要求 probe ID 固定且与适应样本不重叠。ChangeTrace/revision_report 显式区分 regularity、instance，要求评测 episode 不同于适应 episode，输出延迟、从未修订数与右删失数。  预训练与数据 持续适应与评测协议 多模态 世界建模：状态、生成与动作条件 Stratified Retention和WOVEN都讨论状态变化，为什么不是两种可直接排名的训练算法？ WOVEN用视觉转移构造监督并训练MLLM；Stratified Retention提出应保留什么和怎样测修订，没有新训练算法或实证。评测协议可约束未来实验，但不能冒充训练收益。 教学例：WOVEN的source_id分组防止相同初始图跨切分；分层保持还要求逐轮不变量probe和新episode修订轨迹，二者测的轴不同。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-363ef434f77abd35">Stratified Retention和WOVEN都讨论状态变化，为什么不是两种可直接排名的训练算法？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astratified-retention-protocol">What Should World Models Forget? Stratified Retention for Continual Adaptation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>WOVEN用视觉转移构造监督并训练MLLM；Stratified Retention提出应保留什么和怎样测修订，没有新训练算法或实证。评测协议可约束未来实验，但不能冒充训练收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：WOVEN的source_id分组防止相同初始图跨切分；分层保持还要求逐轮不变量probe和新episode修订轨迹，二者测的轴不同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果、完整实验状态；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.03713v2">原论文</a> · <a href="../../../../foundation-models/2610.03713-stratified-retention-protocol/">实现解读</a> · <a href="#qa-363ef434f77abd35">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stratified-retention-protocol" data-paper-title="What Should World Models Forget? Stratified Retention for Continual Adaptation" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="What Should World Models Forget? Stratified Retention for Continual Adaptation 基础模型 University of Maryland, College Park 2026-10-02 世界会变化：椅子移动后继续预测旧位置不是“记忆好”，而是知识过期；但物体永久性等结构知识不应随一次适应丢失。作者按环境知识保持为真的时间尺度分四层：不变量、长期环境规律、短期实例配置、即时状态。这里的时间尺度不是缓存 TTL，即时状态也不应统统写入权重。§3—5 单看旧任务准确率会奖励冻结模型。论文因此要求分别报告不变量保持、变化后的修订延迟，以及短暂扰动引起的假修订，不合成一个掩盖取舍的总分。 诊断输入包含先失效后恢复的不变量、改正旧错误、一直不改的冻结轨迹和临近结束的删失变化。L0 评测协议组件，非持续学习算法。原文是无新实证的研究提案；本地实现审计算术，不训练世界模型，也不声称获得更好的记忆或适应能力。ProbeRound/invariant_retention 接收外部评测结果，不接收模型、标签到策略的通路；要求 probe ID 固定且与适应样本不重叠。ChangeTrace/revision_report 显式区分 regularity、instance，要求评测 episode 不同于适应 episode，输出延迟、从未修订数与右删失数。  预训练与数据 持续适应与评测协议 多模态 世界建模：状态、生成与动作条件 本地协议怎样避免把“记住刚见过的答案”当成修订能力？ 固定probe ID必须与适应样本ID不重叠，ChangeTrace查询episode必须不同于适应episode。模块只读外部评测结果，没有模型或gold到策略的接口；人工轨迹只作L0反例。 教学例：adaptation_ids含gravity时，gravity不能同时出现在held-out面板；query_episode=adaptation_episode也直接报错。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-171e7767e46e5b4c">本地协议怎样避免把“记住刚见过的答案”当成修订能力？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astratified-retention-protocol">What Should World Models Forget? Stratified Retention for Continual Adaptation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>固定probe ID必须与适应样本ID不重叠，ChangeTrace查询episode必须不同于适应episode。模块只读外部评测结果，没有模型或gold到策略的接口；人工轨迹只作L0反例。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：adaptation_ids含gravity时，gravity不能同时出现在held-out面板；query_episode=adaptation_episode也直接报错。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.03713v2">原论文</a> · <a href="../../../../foundation-models/2610.03713-stratified-retention-protocol/">实现解读</a> · <a href="#qa-171e7767e46e5b4c">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:vjepa-policy" data-paper-title="V-JEPA Policy: Building Effective World-Action Models on Predictive Visual Latents" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="V-JEPA Policy: Building Effective World-Action Models on Predictive Visual Latents 基础模型 Tsinghua University 2026-09-29 冻结 V-JEPA 2.1 视觉编码器，在预测视觉潜空间中联合训练 instruction-conditioned future-latent predictor 和 flow-matching action expert；动作生成读取 predictor 的未来信息上下文。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 future-latent stop-gradient 与 action flow matching；未加载 V-JEPA 2.1 或机器人数据。执行 future-latent stop-gradient 与 action flow matching；未加载 V-JEPA 2.1 或机器人数据。本地对照口径：基线为论文机制关闭或默认状态，实验组为开启对应核心算子；本批只验证不变量和状态转换，跨模型相对变化不适用。  世界动作模型 预测视觉潜变量 机器人 多模态 世界建模：状态、生成与动作条件 机器人动作策略为什么会从“预测将看到什么”中获得额外条件？ 仅靠当前图像选择动作，可能缺少目标执行后场景如何变化的线索。V-JEPA Policy 将指令条件未来表示预测与动作学习联系起来，让动作专家读取预测上下文。未来信息必须来自模型预测，不能在控制时偷读真实后续视频；预测有误也会影响动作，因此仍需实际执行验证。 教学例：指令要求把杯子放入盒子，未来表示可帮助描述目标视觉状态；机器人尚未行动，不能直接读取任务结束后的真实画面。 2026-10-27">
