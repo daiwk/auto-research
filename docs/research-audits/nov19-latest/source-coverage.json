@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-19",
+  "requested_window": {
+    "start": "2026-11-18",
+    "end": "2026-11-19"
+  },
+  "metadata_identities": 2781,
+  "announcement_identities": 1082,
+  "metadata_only_inventory": "metadata-index.json",
+  "overlap_start_utc": "2026-11-16T00:00:00",
+  "priority_source_captures": "priority-source-captures.json",
+  "fixed_intake": "intake-scope.json",
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "coverage_limits": [
+    "Nine configured arXiv categories with overlapping updated-date recall, plus current bulletins and finite official directories; not every source/venue.",
+    "529 metadata identities initially marked new with publication since Nov18 are a selection pool, not an implementation backlog.",
+    "Full-text review is limited to accepted papers and explicit primary-source exclusions.",
+    "Meta publication landing page returns45bytes withHTTP200; archive this nonblocking source exception rather than infer no new Meta work.",
+    "Newly observed Google SearchInject directory listing is a Nov2historical backfill, not a Nov19publication."
+  ]
+}

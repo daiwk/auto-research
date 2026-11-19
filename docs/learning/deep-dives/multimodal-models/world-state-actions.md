@@ -7,7 +7,7 @@ hide:
 
 # 会预测下一幕，还不等于会行动或保持同一个世界
 
-[多模态](../index.md) · 更新 2026-11-18 · 32 篇主题资料 / 16 篇重点对照
+[多模态](../index.md) · 更新 2026-11-19 · 34 篇主题资料 / 18 篇重点对照
 
 世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。
 
@@ -41,6 +41,8 @@ hide:
 | [RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence](../../../multimodal-models/2611.14953-rslivebench-uav-protocol/README.md) · [原始来源](https://arxiv.org/abs/2611.14953v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 以真实新UAV观察、四场景FIFO和答案禁运控制持续评测；本地只实现采集/发布时窗、日历月禁运、SC子计分及缺失感知层次聚合。 | WOVEN训练视觉状态转移推理并按scene/action/reasoning验证迁移；RSLiveBench-UAV重点是航空几何与持续刷新。时间新鲜、真实采集和scene-OOD是不同维度，二者分数不能直接比较。 |
 | [WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models](../../../foundation-models/2611.21882-wm-quant/README.md) · [原始来源](https://arxiv.org/abs/2611.21882v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | JEPA世界模型把连续latent递归输入预测器，量化误差不会像离散token一样重置。WM-Quant保留前三个encoder blocks的8-bit激活、浮点action/proprioception控制通路，并联合优化encoder范围和每个rollout step独立的predictor范围。 | LeWAM联合训练视觉encoder、latent动力学与action flow，再对策略候选做潜空间规划；WM-Quant研究连续rollout中的量化误差与范围校准。注意新论文实验对象是LeWM/DINO-WM，不是LeWAM，未声称把WM-Quant接入了LeWAM训练或规划。 |
 | [Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers](../../../multimodal-models/2611.22287-dwd/README.md) · [原始来源](https://arxiv.org/abs/2611.22287v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | DWD在预训练DiT最后隐状态上并联线性pixel head，原denoising head继续驱动采样，只有最后一个非零time step才由pixel head输出图像/视频。通过分离pixel质量目标与trajectory anchoring，避免让同一输出承担冲突目标。 | PixVid迁移latent DiT到pixel输入/生成空间并加detailer；DWD保留latent采样，只改变最终读出。输出是像素不意味着整个采样都在pixel空间。 |
+| [Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;](../../../foundation-models/2611.24778-counterfactual-wm/README.md) · [原始来源](https://arxiv.org/abs/2611.24778v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 普通world model给动作的平均结果，不能仅凭更准的事实分布识别同一扰动下的个体反事实。本文将实际观测结果作为事件信息，加上同一事实预测器对两个动作的预测差；加性扰动时精确，平滑短时动力学下有交互误差界，但碰撞、乘法故障和弯曲坐标可破坏近似。 | DT-JEPA在历史下预测未来latent分布并用于决策，真实未来只在训练目标出现；CWM在一个事实结果已经可见后推断同一事件的替代动作结果。不能让CWM提前使用尚未观测的未来，亦不能把DT-JEPA的均值直接称个体反事实。 |
+| [Autoregressive View Model](../../../multimodal-models/2611.23417-autoregressive-view-model/README.md) · [原始来源](https://arxiv.org/abs/2611.23417v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | AVM不拟合显式3D表示，而在给定相机路径下生成短视图片段。预填图像/视频与历史生成片段统一成为context；检索保持活动上下文有界。先把双向视频DiT微调为N-in-1-out的flow matching，再以自身rollout做因果tuning和蒸馏，让生成内容可回到历史中支持后续重访。 | CWM在一个事实事件之后改变动作并复用同一扰动残差；AVM沿相机轨迹继续生成并检索历史视图。二者都使用world model语汇，但AVM的场景重访一致性不证明同一扰动反事实可识别。 |
 
 </div>
 
@@ -117,6 +119,18 @@ WOVEN源初始图分组防止多个动作/问题跨split，RSLiveBench-UAV要求
 PixVid迁移latent DiT到pixel输入/生成空间并加detailer；DWD保留latent采样，只改变最终读出。输出是像素不意味着整个采样都在pixel空间。 pixel与trajectory损失从不同time distributions取样，两次反传后统一optimizer step。末步不用CFG，因为该步读出像素而不推进trajectory；t=0的“当成decoder”模式在原文退化。
 
 对照来源：[dwd](../../../multimodal-models/2611.22287-dwd/README.md) · [pixvid](../../../multimodal-models/2611.17336-pixvid/README.md)
+
+### Counterfactual WM：复用已发生事件的残差，而非预测平均未来
+
+DT-JEPA在历史下预测未来latent分布并用于决策，真实未来只在训练目标出现；CWM在一个事实结果已经可见后推断同一事件的替代动作结果。不能让CWM提前使用尚未观测的未来，亦不能把DT-JEPA的均值直接称个体反事实。 观测是已经执行动作a之后的结果，替代动作真值不作为算法输入。先在embedding运输后decode，与先decode每项再做残差运输一般不同；选择坐标需要额外readout假设。误差等于个体动作效应与平均动作效应之差，不是“world model零误差就保证反事实零误差”。
+
+对照来源：[counterfactual-wm](../../../foundation-models/2611.24778-counterfactual-wm/README.md) · [dt-jepa](../../../foundation-models/2610.32657-dt-jepa/README.md)
+
+### AVM：把场景作为带检索上下文的视图流生成
+
+CWM在一个事实事件之后改变动作并复用同一扰动残差；AVM沿相机轨迹继续生成并检索历史视图。二者都使用world model语汇，但AVM的场景重访一致性不证明同一扰动反事实可识别。 上式用统一记号概括原文flow目标与context检索，不补造新的算法。检索对象既有真实输入也有模型生成的历史；没有显式3D不等于没有几何条件。相机、时间和context角色仍影响生成。
+
+对照来源：[autoregressive-view-model](../../../multimodal-models/2611.23417-autoregressive-view-model/README.md) · [counterfactual-wm](../../../foundation-models/2611.24778-counterfactual-wm/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -252,9 +266,37 @@ PixVid迁移latent DiT到pixel输入/生成空间并加detailer；DWD保留laten
 
     对照来源：[dwd](../../../multimodal-models/2611.22287-dwd/README.md) · [pixvid](../../../multimodal-models/2611.17336-pixvid/README.md)
 
+### 与DT-JEPA查询时的信息有什么不同？ {#cross-nov19-counterfactual-wm}
+
+??? note "展开答案与例子"
+
+    **答案：** DT-JEPA用行动前历史预测未来；CWM需已执行事实动作的结果。允许的信息集和问题不同，不能比较为同一预测任务。
+
+    **教学例子：** 教学例：第一次执行动作前不能拿尚不存在的observed_outcome喂CWM。
+
+    对照来源：[counterfactual-wm](../../../foundation-models/2611.24778-counterfactual-wm/README.md) · [dt-jepa](../../../foundation-models/2610.32657-dt-jepa/README.md)
+
+### 场景重访一致是否等于CWM的反事实能力？ {#cross-nov19-autoregressive-view-model}
+
+??? note "展开答案与例子"
+
+    **答案：** 不等于。重访是在相机轨迹和生成历史下维持场景；个体反事实还需同一扰动下不同动作结果的耦合假设。
+
+    **教学例子：** 教学例：门框位置保持不变，不能说明同一阵风下船改航向会到哪里。
+
+    对照来源：[autoregressive-view-model](../../../multimodal-models/2611.23417-autoregressive-view-model/README.md) · [counterfactual-wm](../../../foundation-models/2611.24778-counterfactual-wm/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-19** · CWM在一个事实事件之后改变动作并复用同一扰动残差；AVM沿相机轨迹继续生成并检索历史视图。二者都使用world model语汇，但AVM的场景重访一致性不证明同一扰动反事实可识别。 本地组件合同和高成本不复现分别记录。
+
+涉及：[autoregressive-view-model](../../../multimodal-models/2611.23417-autoregressive-view-model/README.md) · [counterfactual-wm](../../../foundation-models/2611.24778-counterfactual-wm/README.md)
+
+**2026-11-19** · DT-JEPA在历史下预测未来latent分布并用于决策，真实未来只在训练目标出现；CWM在一个事实结果已经可见后推断同一事件的替代动作结果。不能让CWM提前使用尚未观测的未来，亦不能把DT-JEPA的均值直接称个体反事实。 本地组件合同和高成本不复现分别记录。
+
+涉及：[counterfactual-wm](../../../foundation-models/2611.24778-counterfactual-wm/README.md) · [dt-jepa](../../../foundation-models/2610.32657-dt-jepa/README.md)
 
 **2026-11-18** · PixVid迁移latent DiT到pixel输入/生成空间并加detailer；DWD保留latent采样，只改变最终读出。输出是像素不意味着整个采样都在pixel空间。 本地边界与完整高成本不复现分别记录。
 
@@ -300,7 +342,7 @@ PixVid迁移latent DiT到pixel输入/生成空间并加detailer；DWD保留laten
 
 覆盖 22 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 32 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 34 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -336,6 +378,8 @@ PixVid迁移latent DiT到pixel输入/生成空间并加detailer；DWD保留laten
 - [RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence](../../../multimodal-models/2611.14953-rslivebench-uav-protocol/README.md)
 - [WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models](../../../foundation-models/2611.21882-wm-quant/README.md)
 - [Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers](../../../multimodal-models/2611.22287-dwd/README.md)
+- [Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;](../../../foundation-models/2611.24778-counterfactual-wm/README.md)
+- [Autoregressive View Model](../../../multimodal-models/2611.23417-autoregressive-view-model/README.md)
 
 </details>
 

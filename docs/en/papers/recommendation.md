@@ -8,6 +8,9 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction](<https://arxiv.org/abs/2611.24283v1>) | 2026-11-18 | [English](../../recommendation-components/2611.24283-xsplit-argus/README-en.md) · [Chinese](../../recommendation-components/2611.24283-xsplit-argus/README.md) |
+| [MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems](<https://arxiv.org/abs/2611.23910v1>) | 2026-11-18 | [English](../../recommendation-components/2611.23910-mle-agents/README-en.md) · [Chinese](../../recommendation-components/2611.23910-mle-agents/README.md) |
+| [MARS Technical Report](<https://arxiv.org/abs/2611.24006v1>) | 2026-11-18 | [English](../../recommendation-components/2611.24006-mars-fapo/README-en.md) · [Chinese](../../recommendation-components/2611.24006-mars-fapo/README.md) |
 | [From Relevance to Utility: Rubric Alignment in Yuanbao Search](<https://arxiv.org/abs/2611.22503v1>) | 2026-11-17 | [English](../../recommendation-components/2611.22503-yuanbao-rubric/README-en.md) · [Chinese](../../recommendation-components/2611.22503-yuanbao-rubric/README.md) |
 | [CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation](<https://arxiv.org/abs/2611.22418v1>) | 2026-11-17 | [English](../../recommendation-components/2611.22418-cutagent/README-en.md) · [Chinese](../../recommendation-components/2611.22418-cutagent/README.md) |
 | [COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift](<https://arxiv.org/abs/2611.22597v1>) | 2026-11-17 | [English](../../recommendation-components/2611.22597-cotti/README-en.md) · [Chinese](../../recommendation-components/2611.22597-cotti/README.md) |

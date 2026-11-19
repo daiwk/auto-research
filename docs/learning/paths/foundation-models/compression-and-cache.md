@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩：权重、KV 缓存与服务带宽
 
-[基础模型](index.md) / 160 个问题 · 40 篇论文
+[基础模型](index.md) / 164 个问题 · 41 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">160 个问题 · 40 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">164 个问题 · 41 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:loopcache-interface" data-paper-title="LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers 基础模型 Peking University 2026-11-18 固定深度的draft可能沿过时轨迹继续推进。LoopCache用新候选相对旧候选的logit差控制替换，并清除依赖旧token的所有后代。推测路径轮转读取同一loop cache，独立KV分支再以正确loop缓存重算；浅层差异较大时才单独读取对应loop的cache。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l0_interface组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。仅实现Eq2–4的阈值更新、循环loop编号、浅层cache选择及最近完整验证周期接口，标记L0。没有模型、实际KV内存、exact verifier、随机采样拒绝或token提交；tokens_committed固定为0是接口边界，不是模型指标。  推理与系统效率 循环模型与KV调度 基础模型 推理压缩：权重、KV 缓存与服务带宽 循环cache调度解决什么瓶颈？ 将单步读取的长前缀cache从多个loop集中为一个；这减少读取来源，不代表推测计算已变为精确。 教学例：R=4时全局步骤依次读取1、2、3、4、1，但spec token当前深度可能是3。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-loopcache-interface-8b8dfb66" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-4f13db93fb4aed34">循环cache调度解决什么瓶颈？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aloopcache-interface">LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Peking University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>将单步读取的长前缀cache从多个loop集中为一个；这减少读取来源，不代表推测计算已变为精确。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：R=4时全局步骤依次读取1、2、3、4、1，但spec token当前深度可能是3。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24301v1">原论文</a> · <a href="../../../../foundation-models/2611.24301-loopcache-interface/">实现解读</a> · <a href="#qa-4f13db93fb4aed34">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:loopcache-interface" data-paper-title="LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers 基础模型 Peking University 2026-11-18 固定深度的draft可能沿过时轨迹继续推进。LoopCache用新候选相对旧候选的logit差控制替换，并清除依赖旧token的所有后代。推测路径轮转读取同一loop cache，独立KV分支再以正确loop缓存重算；浅层差异较大时才单独读取对应loop的cache。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l0_interface组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。仅实现Eq2–4的阈值更新、循环loop编号、浅层cache选择及最近完整验证周期接口，标记L0。没有模型、实际KV内存、exact verifier、随机采样拒绝或token提交；tokens_committed固定为0是接口边界，不是模型指标。  推理与系统效率 循环模型与KV调度 基础模型 推理压缩：权重、KV 缓存与服务带宽 替换草稿为什么必须清理后代？ 后代以旧token为条件，旧token换掉后其hidden/cache依赖失效。门槛使用当前新旧logit差，不读取未来是否翻回。 教学例：旧draft=A，后代为B/C；A改D后不能把原B/C接在D后直接验证。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-76174c5029edef1c">替换草稿为什么必须清理后代？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aloopcache-interface">LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Peking University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>后代以旧token为条件，旧token换掉后其hidden/cache依赖失效。门槛使用当前新旧logit差，不读取未来是否翻回。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：旧draft=A，后代为B/C；A改D后不能把原B/C接在D后直接验证。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24301v1">原论文</a> · <a href="../../../../foundation-models/2611.24301-loopcache-interface/">实现解读</a> · <a href="#qa-76174c5029edef1c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:loopcache-interface" data-paper-title="LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers 基础模型 Peking University 2026-11-18 固定深度的draft可能沿过时轨迹继续推进。LoopCache用新候选相对旧候选的logit差控制替换，并清除依赖旧token的所有后代。推测路径轮转读取同一loop cache，独立KV分支再以正确loop缓存重算；浅层差异较大时才单独读取对应loop的cache。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l0_interface组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。仅实现Eq2–4的阈值更新、循环loop编号、浅层cache选择及最近完整验证周期接口，标记L0。没有模型、实际KV内存、exact verifier、随机采样拒绝或token提交；tokens_committed固定为0是接口边界，不是模型指标。  推理与系统效率 循环模型与KV调度 基础模型 推理压缩：权重、KV 缓存与服务带宽 与Spool的精确状态重建是同一个承诺吗？ 不是。Spool对固定记录输入重放状态变换；LoopCache的lossless token提交还依赖完整正确loop KV分支。 教学例：调度编号正确不意味着已运行目标模型验证。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-7780f4fe0a1b9698">与Spool的精确状态重建是同一个承诺吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aloopcache-interface">LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Peking University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。Spool对固定记录输入重放状态变换；LoopCache的lossless token提交还依赖完整正确loop KV分支。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：调度编号正确不意味着已运行目标模型验证。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24301v1">原论文</a> · <a href="../../../../foundation-models/2611.24301-loopcache-interface/">实现解读</a> · <a href="#qa-7780f4fe0a1b9698">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:loopcache-interface" data-paper-title="LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers 基础模型 Peking University 2026-11-18 固定深度的draft可能沿过时轨迹继续推进。LoopCache用新候选相对旧候选的logit差控制替换，并清除依赖旧token的所有后代。推测路径轮转读取同一loop cache，独立KV分支再以正确loop缓存重算；浅层差异较大时才单独读取对应loop的cache。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l0_interface组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。仅实现Eq2–4的阈值更新、循环loop编号、浅层cache选择及最近完整验证周期接口，标记L0。没有模型、实际KV内存、exact verifier、随机采样拒绝或token提交；tokens_committed固定为0是接口边界，不是模型指标。  推理与系统效率 循环模型与KV调度 基础模型 推理压缩：权重、KV 缓存与服务带宽 接口测试全过为何仍只标L0？ 本地没有token verifier和真实KV执行，不能验证最终分布或lossless输出；只检验决定何时更新、读取哪份cache的合同。 教学例：tokens_committed=0明确表明没有输出能力评测。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f839b7ef9e2edf80">接口测试全过为何仍只标L0？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aloopcache-interface">LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Peking University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>本地没有token verifier和真实KV执行，不能验证最终分布或lossless输出；只检验决定何时更新、读取哪份cache的合同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：tokens_committed=0明确表明没有输出能力评测。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24301v1">原论文</a> · <a href="../../../../foundation-models/2611.24301-loopcache-interface/">实现解读</a> · <a href="#qa-f839b7ef9e2edf80">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:echomoe" data-paper-title="Communicate the Change: Efficient Expert Parallelism via Activation Compression" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Communicate the Change: Efficient Expert Parallelism via Activation Compression 基础模型 Mila / McGill University 2026-11-17 每组MoE层先广播参考z，其余层只发送x-a⊙z的压缩code；router仍读取完整x。专家将reference gain和dispatch decoder折入gate/up权重，再将combine compressor折入down权重，避免完整重建或输出物化。已核方法位置：4.1–4.4, 5.1, G.1。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行非reference层的两侧压缩、专家SwiGLU、路由加权合并、折叠/未折叠输出与梯度对照及解析traffic；不实现分布式collectives、异步broadcast或完整模型适配。  推理与系统效率 MoE通信压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 EchoMoE压缩的是token的KV cache吗？ 不是。主要压缩专家并行dispatch/combine的激活；跨层参考保存在各rank，以差值code代替每层全宽通信。 教学例：参考z已存在时，发送C_d(x-a⊙z)而不是整条x。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-echomoe-e4a304a5" class="ar-learning-paper-anchor"></span>

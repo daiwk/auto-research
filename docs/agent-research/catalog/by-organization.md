@@ -10,6 +10,10 @@
 
 - 2026-08-25 · 一作：Shidong Yang · [SkillForge: Automated Skill Discovery and Refinement for Tool-Using Agents](../2608.24747-skillforge/README.md)（`skillforge`）：SkillRL 类方法从轨迹提取技能后只追加，错误和过时技能会永久污染库。SkillForge 让 policy 输出环境动作时显式选择技能，把调用决策纳入 RL；成功、失败和对比轨迹经多路径 induction 生成候选，环境证据再决定激活、修订或去重。
 
+## AMD Singapore
+
+- 2026-11-18 · 一作：Boxi Zhou · [Reducing Inference Cost of Coding Agents with Timeout Cascades](../2611.24324-timeout-cascades/README.md)（`timeout-cascades`）：小模型先做所有编程题；只有在时限内产生有效且通过测试的patch才直接结束。超时、空patch、语法错误或测试失败，都转给大模型。
+
 ## AWS AI Labs / Purdue University
 
 - 2026-08-25 · 一作：Xiaolong Jin · [AHEAD: Agentic Hints for Effective Agent Development](../2608.24114-ahead/README.md)（`ahead`）：轨迹级 GRPO 给所有步骤同一 advantage；统一 privileged information 又浪费在普通步骤上。AHEAD 先分析失败轨迹定位关键错误：所有步骤的 teacher 都看到环境反馈，只有错误步骤额外看到 LLM corrective hint；teacher/student log-prob gap 被有界地注入 GRPO advantage。
@@ -97,6 +101,10 @@
 
 - 2025-04-15 · 一作：Jiazhan Feng · [ReTool](../2504.11536-retool/README.md)（`retool`）：策略在自然语言 reasoning 与工具执行之间交替，并由可执行反馈学习调用、纠错和停止。
 
+## ByteDance Seed / Tsinghua University AIR / SIA-Lab
+
+- 2026-11-18 · 一作：Hanlin Wu · [RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?](../2611.24395-rsibench-infra/README.md)（`rsibench-infra`）：单算子快不代表端到端训练或服务变快。RSIBench-Infra让Agent从官方可运行baseline出发，跨engine、kernel、instruction修改，但只提交一个OCI filesystem layer。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## CASIA
 
 - 2026-07-28 · 一作：Siyu Xia · [UniMem](../2607.26017-unimem/README.md)（`unimem`）：新颖任务先进入 episodic buffer；反复出现且可靠的执行模式再被自路由控制器固化到可扩展 parametric memory。
@@ -155,6 +163,10 @@
 
 - 2026-10-27 · 一作：Yipeng Hao · [Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems](../2610.36652-discernmem/README.md)（`discernmem`）：团队失败不代表注入的每条记忆都有错。DiscernMem把“规则内容有缺陷”和“好规则用错场景”分开：以相同任务、seed和配置运行完整团队，仅向原拥有者注入一条记忆，再与所有角色都无记忆的执行比较。
 
+## Emory University
+
+- 2026-11-18 · 一作：Eugene Agichtein · [Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling](../2611.24849-execjudges/README.md)（`execjudges`）：对每个topic独立生成三个轻量Python评审程序，程序回答on-subject/some-answer/exact/dedicated四个证据问题，固定评分函数映射为等级，再对三个分数均值向下取整。LLM负责一次性的程序编写而不是逐文档调用，生成代码必须隔离执行。
+
 ## FAIR at Meta
 
 - 未标注 · 一作：Charles Arnal / Ahmad Rammal（共同一作，随机排序） · [AutoformBench: A Lean Formalization Benchmark for Advanced Mathematics](../autoformbench/README.md)（`autoformbench`）：AutoformBench 不只要求补一个孤立证明，而是让 Agent 在固定 Lean/Mathlib 上构造支撑高级数学命题的定义、辅助引理和证明。341 个任务来自 24 个数学来源，共有 1,155 个需要完成的证明义务；一个任务只有全部义务均通过可信验证才算成功。
@@ -177,6 +189,7 @@
 
 ## Fudan University
 
+- 2026-11-18 · 一作：Jiahang Lin · [Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses](../2611.24924-ahe-beta/README.md)（`ahe-beta`）：AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。
 - 2026-10-15 · 一作：Weiting Liu · [GACC-Bench: Benchmarking Goal-Adaptive Context Compression Ability across Large Language Models](../2610.21893-gacc-bench/README.md)（`gacc-bench`）：长期上下文压缩常在具体后续问题尚未知时执行，但用户可能已给出高层目标。GACC-Bench 按 context–goal 组织多道后续问题，压缩器只能看到来源、目标和预算；固定 reader 用同一压缩记忆逐题回答，再由固定 judge 对照原文和参考答案评分，检验是否保全整组目标证据。
 - 2026-09-08 · 一作：Hongbang Yuan · [Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks](../2609.08404-feedback-scaffold/README.md)（`feedback-scaffold`）：论文指出统一反馈不适合整个探索过程：早期能力不足时使用 action guidance 降低搜索难度，后期则改为 observation enrichment，让 Agent 自己选择动作，避免长期依赖示范。
 - 2026-08-27 · 一作：Jinghan Xu · [Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification](../2608.27311-harnesslens/README.md)（`harnesslens`）：固定验证集浪费 rollout 且会用平均分掩盖局部回退。HarnessLens 从执行轨迹提出修改，只在受影响行为对应的任务上成对验证，并要求证据能归因到候选修改。
@@ -257,6 +270,10 @@
 
 - 2026-04-27 · 一作：Yale Song · [Co-Director: Agentic Generative Video Storytelling](../2604.24842-co-director/README.md)（`co-director`）：Co-Director 将生成式视频拆为全局创意方向与局部多模态修正。创意方向有策略 3 类、叙事 3 类、美学 4 类；一次完整视频产生三个战略效果分，各自更新所属轴，而最终视频用独立质量分选择。
 
+## Google LLC
+
+- 2026-11-02 · 一作：Kainan Zhou · [SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search](../2611.02643-searchinject/README.md)（`searchinject`）：间接注入先要进入上下文才有机会影响LLM。SearchInject在原top100候选中，用相关性、abuse、instruction概率及两项相关性交互做logistic风险评分；超过冻结阈值才隔离，按原顺序从同一候选池补足top10。
+
 ## Google Research
 
 - 2026-10-17 · 一作：Zachary Cutts · [Aptamers as a sandbox for lab-in-the-loop agentic molecular discovery](../2610.24806-aptamer-lab-loop/README.md)（`aptamer-lab-loop`）：该研究把计算设计与真实实验测量放进多轮反馈闭环，让Agent利用成功和失败证据调整下一轮策略。关键不是把Agent多跑几轮，而是实物测量可以否定计算评分；论文显示一些预测代理与实际测量不一致。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -318,6 +335,10 @@
 ## Illinois Institute of Technology
 
 - 2026-10-01 · 一作：Arman Behnam · [Causal Memory Policy: Making Memory Utility Identifiable by Intervening on Retrieval](../2610.02070-causal-memory-policy/README.md)（`causal-memory-policy`）：被检索到的记忆与任务难度天然相关，直接按任务成败删除记忆存在选择偏差。CMP 在固定候选池中预留均衡随机曝光槽位，使每条记忆都有可估计的处理/对照样本，再用带标准误的效用判断保护不确定的记忆。
+
+## Independent
+
+- 2026-11-18 · 一作：Jiapeng Pei · [Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates](../2611.23651-safe-personal-rsi/README.md)（`safe-personal-rsi`）：个人Agent的prompt更新可能提升主动性，却同时改变隐私披露、承诺和执行报告。论文固定模型和runtime，只改指令；先比较候选与父版本寻找反例，再重复确认、回滚定位和修复。
 
 ## Independent Researcher
 
@@ -498,6 +519,7 @@
 
 ## Northeastern University
 
+- 2026-11-18 · 一作：Tushin Mallick · [Kaer: Security-Aware Replanning for Multi-Agent Systems](../2611.24839-kaer/README.md)（`kaer`）：不可信子Agent可把恶意指令夹在失败反馈里，诱导orchestrator授予新权限或改任务。Kaer不让自由文本失败报告进入planner，只传部署前固定的失败模板；planner用固定七种确定性算子修改尚未完成的子任务，最后重新验证任务及Agent策略。
 - 2026-10-09 · 一作：Zijun Wang · [Test-Time Memory Construction](../../reproductions/2610.13348-t2mem/README.md)（`t2mem`）：离线只提取事件级轻量 metadata 并保留原会话链接。推理时依据查询、已有 memory 与最新 observation 构造 memory cache，再自主选择 SearchMeta、ReadRaw 或 Answer；memory 与信息需求交错演化。
 - 2023-03-20 · 一作：Noah Shinn · [Reflexion](../2303.11366-reflexion/README.md)（`reflexion`）：传统 RL 要大量采样与参数更新。Reflexion 把稀疏标量/二值反馈“放大”为可执行的自然语言经验，写入长期 episodic memory；Actor 在下一 trial 读取反思，Evaluator 继续判定成功与否。
 

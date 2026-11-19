@@ -345,6 +345,10 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "kernel-ridge-attention": ("注意力与长上下文", "线性注意力与状态空间"),
+    "narrow-spec": ("推理与系统效率", "推测解码与 KV cache"),
+    "loopcache-interface": ("推理与系统效率", "推测解码与 KV cache"),
+    "counterfactual-wm": ("网络架构", "JEPA 与几何表征"),
     "vishead-spec": ("多模态基础模型", "视觉语言适配与高效推理"),
     "spool": ("注意力与长上下文", "线性注意力与状态空间"),
     "infuseloop": ("网络架构", "循环与弹性深度"),
@@ -910,6 +914,9 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in (
+            "kernel-ridge-attention", "narrow-spec", "loopcache-interface", "counterfactual-wm",
+        )},
         **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in (
             "vishead-spec", "spool", "infuseloop", "echomoe", "wm-quant", "fm-mamba",
             "lara-plus-plus", "gaugerope", "risa", "cascadejepa", "beyond-bitwidth", "latent-feedback-scaling",

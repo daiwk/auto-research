@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:mle-agents/calibrated-objective": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why not search click AUPRC forever?",
+        "answer": "It overemphasized easy navigational queries and did not track downstream engagement, motivating historically calibrated weighted NE.",
+        "example": "Teaching example: click NE−.01 and downstream NE+.01 worsen the0.3/0.7 objective by.004."
+      },
+      "source_sha256": "c7dc2647de63b642542b8edeaba7a3a6293d464451be2ebe39ddcf8d12504692"
+    },
+    "qa/recommendation:mle-agents/probe-reference": {
+      "reviewed": true,
+      "fields": {
+        "question": "What is the admission reference?",
+        "answer": "Use the same-iteration variance probe and require at least0.0005 objective reduction for offline search admission.",
+        "example": "Teaching example: .65 beats an old.68 baseline but loses to this round’s.64 probe and must be rejected."
+      },
+      "source_sha256": "078150ecb738909668f6b144cdc4eb54cfcadf7480cb1ca71963aa394309c9cd"
+    },
+    "qa/recommendation:mle-agents/contract-not-launch": {
+      "reviewed": true,
+      "fields": {
+        "question": "Can MLE admission replace EvoPilot?",
+        "answer": "No. MLE calibrates objectives/noise; EvoPilot validates matched experiments and artifacts. Both still need human and online review.",
+        "example": "Teaching example: a large NE gap does not excuse different data versions across arms."
+      },
+      "source_sha256": "ccc08720d6dffba576348e615394c4f0983bf6b50bbc07bb358d09b65be4f723"
+    },
+    "qa/recommendation:mle-agents/two-completion-signals": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why are two completion signals required?",
+        "answer": "A scheduler success alone can coexist with missing evaluation or partial artifacts; both independent signals must confirm completion.",
+        "example": "Teaching example: a completed job with unfinished artifacts stays inadmissible and never launches automatically."
+      },
+      "source_sha256": "4bf6d6fabb1215aa47ca24e9334511cfef185295351b92e8be8e0cd6ffb59f00"
+    },
+    "qa/recommendation:xsplit-argus/cache-not-detach": {
+      "reviewed": true,
+      "fields": {
+        "question": "Does caching freeze the compressor during training?",
+        "answer": "No. Caching is a serving choice; GT and KD gradients flow through the decoder into shared history encoders.",
+        "example": "Teaching example: a KD error produces compressor gradients but no teacher gradient."
+      },
+      "source_sha256": "4ca7e97b4e9606d715e18997e2eca7eadf21299512b143a636a63e5f0ca6757d"
+    },
+    "qa/recommendation:xsplit-argus/causal-boundary": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish recent budget and cache cutoff?",
+        "answer": "A serving snapshot can lag or overlap recent events; default training adjacency does not make serving boundaries identical. Both must precede the target.",
+        "example": "Teaching example: one-based target7 andM=2 giveb=4; servingb=5 overlaps one historical event without reading the target."
+      },
+      "source_sha256": "7343a0e7b821e03567750ee750ba46da6508431087e862775fc05d7e5b901058"
+    },
+    "qa/recommendation:xsplit-argus/argus-not-same-head": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why not reuse the original ARGUS item head unchanged?",
+        "answer": "ARGUS factorizes feedback/next-item; X-split predicts candidate clicks and uses a separate raw-logit KD head. The tasks and heads differ.",
+        "example": "Teaching example: item-softmax CE cannot replace raw-logit L1."
+      },
+      "source_sha256": "8d81ff6756f7a3d32eda177e8e7cc03199ba22acf79a417d1ff718385e89328f"
+    },
+    "qa/recommendation:xsplit-argus/future-negative-control": {
+      "reviewed": true,
+      "fields": {
+        "question": "How do we test feedback leakage beyond shape?",
+        "answer": "Perturb target/future events and require unchanged target predictions and zero future gradients. Shape checks alone are insufficient.",
+        "example": "Teaching example: adding100 fromt onward changes no target score, while changingt−1 may matter."
+      },
+      "source_sha256": "e7aad7556d7d9280321035869fc0d97e0990844de7bf2b95420297b74d5c1991"
+    },
+    "qa/recommendation:mars-fapo/nearline-not-free": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why is near-line orchestration not free?",
+        "answer": "Online serving consumes cached valid actions, but near-line generation, refresh and storage still cost resources.",
+        "example": "Teaching example: 12ms lower serving latency is not12ms faster0.6B decoding."
+      },
+      "source_sha256": "a9c3acd19c19332ce57140cd5649736a75edf98377d65b08045633213582ed79"
+    },
+    "qa/recommendation:mars-fapo/mask-and-anchor": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why do structural tokens retain gradients?",
+        "answer": "ActionMask limits only the preference odds; the full chosen-response generation anchor still supervises structure.",
+        "example": "Teaching example: rejected shared braces have zero gradient; chosen braces retain generation gradients."
+      },
+      "source_sha256": "2ed5ac8c5e927b9eb34f31ef564255c9928a4b1bf986ca9c25d8a3168e151a24"
+    },
+    "qa/recommendation:mars-fapo/policy-versus-verifier": {
+      "reviewed": true,
+      "fields": {
+        "question": "How do MARS and EvoPilot differ?",
+        "answer": "MARS trains per-user pipeline actions; EvoPilot audits model-development comparisons. Valid action formatting does not make experimental claims reliable.",
+        "example": "Teaching example: a valid Minimal action cannot replace control/treatment data-version checks."
+      },
+      "source_sha256": "febaca732d1e6023c635dfce7917e2f5cb827ea9dd6b61ac0f2d52316acb05e2"
+    },
+    "qa/recommendation:mars-fapo/posterior-not-causal": {
+      "reviewed": true,
+      "fields": {
+        "question": "What happens with missing V2P or conflicting strong evidence?",
+        "answer": "Missing either estimate gives weight1. Strong pairs retain business-score orientation; only weak pairs meeting the gap may reverse. V2P is not causal.",
+        "example": "Teaching example: chosen.1 versus rejected.2 does not reverse strong evidence, although its preference weight may fall to.2."
+      },
+      "source_sha256": "7f8b25fe7f28f8d2fabc2eea82e728bd42ae7a4b99434a61ebda2cd29a26c00e"
+    },
+    "qa/agent-research:searchinject/exposure-not-hijack": {
+      "reviewed": true,
+      "fields": {
+        "question": "Does lower exposure prove fewer successful attacks?",
+        "answer": "No. Carrier admission differs from verified downstream hijacking; the follow-up confirms no undefended success from which to estimate a reduction.",
+        "example": "Teaching example: removing83carriers with zero confirmed hijacks in either arm does not yield a defense-success rate."
+      },
+      "source_sha256": "47e3bdb50657dc636905f9ceac332ffae1daa06cfd3299a3cb4324b533140b93"
+    },
+    "qa/agent-research:searchinject/strict-refill": {
+      "reviewed": true,
+      "fields": {
+        "question": "What happens at equality and after quarantine?",
+        "answer": "Equality is retained; onlys>tau is quarantined. Refill to10in the original top100order without reranking or new retrieval.",
+        "example": "Teaching example: at.8, retain.8and remove.9; the original rank11may enter context."
+      },
+      "source_sha256": "03618b35abc95a34f1417ee938cc8e37539b2c8e2d33adc5386a50684aa54afd"
+    },
+    "qa/agent-research:searchinject/different-gates": {
+      "reviewed": true,
+      "fields": {
+        "question": "Are SearchInject and SilentGuard the same gate?",
+        "answer": "No. One screens retrieved context and the other validates tool-result invariants. Passing one does not certify the other.",
+        "example": "Teaching example: low-risk text may still report an API value violating the requested filter."
+      },
+      "source_sha256": "7ce7209b920456ccff8f0d976bdd2ade38f3c2fbba5f0aa983034eae17016803"
+    },
+    "qa/agent-research:searchinject/calibration-transfer": {
+      "reviewed": true,
+      "fields": {
+        "question": "Is the0.5% empirical constraint an online guarantee?",
+        "answer": "No. A frozen threshold can exceed it under shift; the reported test rate0.59–0.65%must remain visible.",
+        "example": "Teaching example: at most5of1000calibration placements does not guarantee the same test count."
+      },
+      "source_sha256": "0aa5993ef30e76c52a8b564cb6bc91038f2711098d89569c8868325c242a1276"
+    },
+    "qa/agent-research:execjudges/writer-not-every-document": {
+      "reviewed": true,
+      "fields": {
+        "question": "Where are LLM calls spent?",
+        "answer": "They write independent programs per topic, which CPU grading reuses for all documents. The local implementation is only a mapping interface, not a writer.",
+        "example": "Teaching example: three programs can grade1000documents without claiming3000local LLM calls."
+      },
+      "source_sha256": "81cc6b7187261d407d1cd89f23e23282d4d4527fdaa732f9258b3fb2dfdfb2ed"
+    },
+    "qa/agent-research:execjudges/floor-not-vote": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why do grades3,2,3produce2?",
+        "answer": "Floor the mean8/3; do not take majority vote or nearest rounding.",
+        "example": "Teaching example:1,0,1has mean2/3and final label0."
+      },
+      "source_sha256": "d61676abc84684d9742d5064c0ce402d04d66c1f0d0cbaee888d910020084b69"
+    },
+    "qa/agent-research:execjudges/evidence-versus-hidden-state": {
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from FUSE verification?",
+        "answer": "ExecJudges maps textual evidence; FUSE verifies reasoning against hidden simulated motives. Correct aggregation does not make evidence judgments correct.",
+        "example": "Teaching example: all three programs may misread exact evidence and still aggregate incorrectly."
+      },
+      "source_sha256": "c29407f59d42f5a317a60467c11293532f7fefb2b361dd93d760466599d9f6d8"
+    },
+    "qa/agent-research:execjudges/qrels-and-code-isolation": {
+      "reviewed": true,
+      "fields": {
+        "question": "What boundaries remain for a full implementation?",
+        "answer": "Keep test qrels from the writer and execute generated code under no-network/no-model resource isolation. The local interface is not that sandbox.",
+        "example": "Teaching example: a function returning four booleans does not make untrusted code safe to execute."
+      },
+      "source_sha256": "7798df7ba09a839042d65709ef98da2d0e61667c7b34a4231cbbd960dedd99bf"
+    }
+  }
+}

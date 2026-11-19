@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-19",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "foundation-models:kernel-ridge-attention",
+      "target_card": "foundation-models/context-and-state",
+      "source_revisions": {
+        "foundation-models:kernel-ridge-attention": "44d055261f665849341526b12537423ee07559cebe19cec23e3ef32cbed78006",
+        "foundation-models:mamba": "cc8e64d103688cf6f1eb766728f173a4c9af31eca88def398193334b5ab90220"
+      },
+      "comparison": {
+        "position": "KRA把历史关联写入固定大小的回归矩阵，同时保留后验协方差。共享可学习Fourier特征形成非线性核；内容相关OU时钟既衰减旧系数，也把协方差恢复到先验，使已经遗忘的方向重新可写。读取发生在当前值写入之后。",
+        "tradeoff": "Mamba用输入相关步长和读写向量控制SSM状态；KRA额外维护后验协方差来处理相关key方向的干扰。两者都是有界状态，但KRA每头还承担D平方协方差存储，不能仅按线性序列复杂度认为成本相同。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "KRA：在遗忘时恢复不确定性，用协方差决定写入方向",
+        "body": "Mamba用输入相关步长和读写向量控制SSM状态；KRA额外维护后验协方差来处理相关key方向的干扰。两者都是有界状态，但KRA每头还承担D平方协方差存储，不能仅按线性序列复杂度认为成本相同。 a、b由同一组cos/sin频率映射，范数为1。P不是可省略的标量门；它会旋转并缩放写入方向。独立dual参考求解内容Gram与OU时间Gram的乘积核，按每个因果prefix核对输出。",
+        "papers": [
+          "foundation-models:kernel-ridge-attention",
+          "foundation-models:mamba"
+        ]
+      },
+      "question": {
+        "id": "nov19-kernel-ridge-attention",
+        "question": "与Mamba相比，多保留了什么状态？",
+        "answer": "除回归系数外还有每头D乘D协方差；它描述已约束方向。Mamba的selective scan并不维护同一后验几何。",
+        "example": "教学例：D翻倍时，协方差元素从D平方变成4D平方，即使上下文长度不变。",
+        "papers": [
+          "foundation-models:kernel-ridge-attention",
+          "foundation-models:mamba"
+        ]
+      },
+      "update": {
+        "date": "2026-11-19",
+        "papers": [
+          "foundation-models:kernel-ridge-attention",
+          "foundation-models:mamba"
+        ],
+        "summary": "Mamba用输入相关步长和读写向量控制SSM状态；KRA额外维护后验协方差来处理相关key方向的干扰。两者都是有界状态，但KRA每头还承担D平方协方差存储，不能仅按线性序列复杂度认为成本相同。 本地组件合同和高成本不复现分别记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "KRA stores associations in fixed-size regression coefficients and posterior covariance. Shared learned Fourier features supply a nonlinear kernel. A content-dependent OU clock decays coefficients while restoring uncertainty toward the prior, reopening forgotten directions for writing. Reads include the current write.",
+          "tradeoff": "Mamba controls an SSM with input-dependent steps and read/write vectors. KRA additionally maintains covariance to handle correlated-key interference, costing D-squared state per head. Bounded context-independent state does not make their costs identical."
+        },
+        "analysis": {
+          "title": "Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting",
+          "body": "Mamba controls an SSM with input-dependent steps and read/write vectors. KRA additionally maintains covariance to handle correlated-key interference, costing D-squared state per head. Bounded context-independent state does not make their costs identical. Keys and queries share unit-norm sine/cosine features. P rotates and rescales a write; it is not a scalar gate. An independent dual reference solves each causal prefix with the product of content and OU-time Gram matrices."
+        },
+        "question": {
+          "question": "What extra state distinguishes it from Mamba?",
+          "answer": "KRA stores a per-head D-by-D covariance in addition to regression coefficients. Mamba selective scans do not maintain that posterior geometry.",
+          "example": "Doubling D quadruples covariance elements even with fixed context length."
+        },
+        "update": "Mamba controls an SSM with input-dependent steps and read/write vectors. KRA additionally maintains covariance to handle correlated-key interference, costing D-squared state per head. Bounded context-independent state does not make their costs identical. Local contracts and high-cost non-reproduction remain separate."
+      }
+    },
+    {
+      "paper": "foundation-models:narrow-spec",
+      "target_card": "foundation-models/generation-paths",
+      "source_revisions": {
+        "foundation-models:narrow-spec": "af0c3da4fb5afdcf2ccda4773e3d22f5e393cdc084f3bf89a8e2b958587c0947",
+        "foundation-models:loopspec": "791bc00fc3c23fb9ccb926cc054f4d82a92d77d6fbdb18a2af907bf23778a23d"
+      },
+      "comparison": {
+        "position": "把DFlash/EAGLE-3的整个残差宽度设为目标的二分之一或四分之一，并从头训练窄草稿；边界adapter连接目标hidden和共享词表。DFlash输出adapter可与目标head相乘，EAGLE-3输入adapter可折进embedding。head数量和head维度保持不变，因此KV cache不因残差流变窄而自动缩小。",
+        "tradeoff": "LoopSpec改变looped模型的推测/验证流水线；NarrowSpec改变草稿网络的残差宽度，并保持目标verify不变。一个降低等待，一个减少草稿计算，不能用折叠等价证明任一方法的接受率。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "NarrowSpec：缩窄整个草稿残差流，而不只是词表投影",
+        "body": "LoopSpec改变looped模型的推测/验证流水线；NarrowSpec改变草稿网络的残差宽度，并保持目标verify不变。一个降低等待，一个减少草稿计算，不能用折叠等价证明任一方法的接受率。 两侧线性映射之间没有额外非线性或norm才能直接折叠。浮点结合顺序变化会改变舍入，不能要求bitwise一致；Q(WlmWout)一般不等于Q(Wlm)Wout，预先量化的head不能据此保证等价。",
+        "papers": [
+          "foundation-models:narrow-spec",
+          "foundation-models:loopspec"
+        ]
+      },
+      "question": {
+        "id": "nov19-narrow-spec",
+        "question": "与LoopSpec降低推理开销的方向有什么不同？",
+        "answer": "LoopSpec安排循环深度间的推测与验证；NarrowSpec减少草稿每次前向的残差宽度，不改变目标verify。",
+        "example": "教学例：较窄草稿仍可能因为接受长度变短而抵消每轮节省。",
+        "papers": [
+          "foundation-models:narrow-spec",
+          "foundation-models:loopspec"
+        ]
+      },
+      "update": {
+        "date": "2026-11-19",
+        "papers": [
+          "foundation-models:narrow-spec",
+          "foundation-models:loopspec"
+        ],
+        "summary": "LoopSpec改变looped模型的推测/验证流水线；NarrowSpec改变草稿网络的残差宽度，并保持目标verify不变。一个降低等待，一个减少草稿计算，不能用折叠等价证明任一方法的接受率。 本地组件合同和高成本不复现分别记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "DFlash/EAGLE-3 residual width is halved or quartered and the narrow drafter is trained from scratch. Boundary adapters connect target features and token space. DFlash folds its output adapter into the target head; EAGLE-3 can fold its input adapter into embeddings. Head geometry stays fixed, so KV cache size does not automatically shrink.",
+          "tradeoff": "LoopSpec changes the draft/verify pipeline of a looped model. NarrowSpec narrows drafter residuals while leaving target verification unchanged. Pipeline waiting and drafter work are different axes; fold parity says nothing about acceptance quality."
+        },
+        "analysis": {
+          "title": "NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding",
+          "body": "LoopSpec changes the draft/verify pipeline of a looped model. NarrowSpec narrows drafter residuals while leaving target verification unchanged. Pipeline waiting and drafter work are different axes; fold parity says nothing about acceptance quality. A fold requires consecutive linear maps without intervening normalization/nonlinearity. Floating-point association changes rounding, so equality is not bitwise. Quantizing a product generally differs from multiplying a quantized head; a pre-quantized head is not covered by this identity."
+        },
+        "question": {
+          "question": "How does this differ from LoopSpec?",
+          "answer": "LoopSpec schedules speculation and verification across recurrent depths. NarrowSpec reduces drafter residual width without changing target verification.",
+          "example": "Fewer drafter operations can be offset by shorter acceptance length."
+        },
+        "update": "LoopSpec changes the draft/verify pipeline of a looped model. NarrowSpec narrows drafter residuals while leaving target verification unchanged. Pipeline waiting and drafter work are different axes; fold parity says nothing about acceptance quality. Local contracts and high-cost non-reproduction remain separate."
+      }
+    },
+    {
+      "paper": "foundation-models:loopcache-interface",
+      "target_card": "foundation-models/compression-and-cache",
+      "source_revisions": {
+        "foundation-models:loopcache-interface": "3153657fd45239f535a445cbd69fdbac58199463917094ff51fa0606112fbf90",
+        "foundation-models:spool": "e1973cc17fa472fb3e50fc8b84d171d091b9814f2be479f2555760e6d4b6f092"
+      },
+      "comparison": {
+        "position": "固定深度的draft可能沿过时轨迹继续推进。LoopCache用新候选相对旧候选的logit差控制替换，并清除依赖旧token的所有后代。推测路径轮转读取同一loop cache，独立KV分支再以正确loop缓存重算；浅层差异较大时才单独读取对应loop的cache。",
+        "tradeoff": "Spool重建固定记录层输入下的递归状态；LoopCache安排loop-specific KV读取并以exact分支纠正近似推测。前者的摘要精确性与后者的目标解码精确性证明对象不同。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "LoopCache：循环KV调度与有条件草稿更新接口",
+        "body": "Spool重建固定记录层输入下的递归状态；LoopCache安排loop-specific KV读取并以exact分支纠正近似推测。前者的摘要精确性与后者的目标解码精确性证明对象不同。 阈值相等也触发替换；无需未来loop预测来决定当前更新。未来回到旧token的harmful-switch定义只用于分析，不能变成运行时oracle。近似spec cache不能直接提交token，必须等待独立exact分支。",
+        "papers": [
+          "foundation-models:loopcache-interface",
+          "foundation-models:spool"
+        ]
+      },
+      "question": {
+        "id": "nov19-loopcache-interface",
+        "question": "与Spool的精确状态重建是同一个承诺吗？",
+        "answer": "不是。Spool对固定记录输入重放状态变换；LoopCache的lossless token提交还依赖完整正确loop KV分支。",
+        "example": "教学例：调度编号正确不意味着已运行目标模型验证。",
+        "papers": [
+          "foundation-models:loopcache-interface",
+          "foundation-models:spool"
+        ]
+      },
+      "update": {
+        "date": "2026-11-19",
+        "papers": [
+          "foundation-models:loopcache-interface",
+          "foundation-models:spool"
+        ],
+        "summary": "Spool重建固定记录层输入下的递归状态；LoopCache安排loop-specific KV读取并以exact分支纠正近似推测。前者的摘要精确性与后者的目标解码精确性证明对象不同。 本地组件合同和高成本不复现分别记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "A fixed-depth draft can remain on a stale trajectory. LoopCache replaces it only when the new-versus-old logit margin is large enough and prunes dependent descendants. Speculation shares a cyclic cache while a separate exact KV branch recomputes with correct loop caches. Selected shallow layers may decouple when loop mismatch is large.",
+          "tradeoff": "Spool reconstructs recurrent state for fixed recorded layer inputs. LoopCache schedules loop-specific KV reads and corrects approximate speculation through an exact branch. Their exactness claims concern different objects."
+        },
+        "analysis": {
+          "title": "LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers",
+          "body": "Spool reconstructs recurrent state for fixed recorded layer inputs. LoopCache schedules loop-specific KV reads and corrects approximate speculation through an exact branch. Their exactness claims concern different objects. Equality at the margin threshold triggers replacement. Future-loop harmful-switch labels are analysis only, never runtime oracles. Approximate speculative-cache computation cannot commit a token; the exact branch is mandatory."
+        },
+        "question": {
+          "question": "Is this the same exactness as Spool?",
+          "answer": "No. Spool replays transitions for fixed recorded inputs. Lossless token commitment in LoopCache also needs the correct full KV branch.",
+          "example": "A correct schedule ID does not imply that target verification ran."
+        },
+        "update": "Spool reconstructs recurrent state for fixed recorded layer inputs. LoopCache schedules loop-specific KV reads and corrects approximate speculation through an exact branch. Their exactness claims concern different objects. Local contracts and high-cost non-reproduction remain separate."
+      }
+    },
+    {
+      "paper": "foundation-models:counterfactual-wm",
+      "target_card": "multimodal-models/world-state-actions",
+      "source_revisions": {
+        "foundation-models:counterfactual-wm": "a75e14881c4e4fc60f3fc62d1c2fb7bc0d846158c61948fe9e96ad0763343bee",
+        "foundation-models:dt-jepa": "2cc1cbec19b52dcb4ffd65b921cc4a011a2089ef2bb6de30987366c2d893e240"
+      },
+      "comparison": {
+        "position": "普通world model给动作的平均结果，不能仅凭更准的事实分布识别同一扰动下的个体反事实。本文将实际观测结果作为事件信息，加上同一事实预测器对两个动作的预测差；加性扰动时精确，平滑短时动力学下有交互误差界，但碰撞、乘法故障和弯曲坐标可破坏近似。",
+        "tradeoff": "DT-JEPA在历史下预测未来latent分布并用于决策，真实未来只在训练目标出现；CWM在一个事实结果已经可见后推断同一事件的替代动作结果。不能让CWM提前使用尚未观测的未来，亦不能把DT-JEPA的均值直接称个体反事实。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "Counterfactual WM：复用已发生事件的残差，而非预测平均未来",
+        "body": "DT-JEPA在历史下预测未来latent分布并用于决策，真实未来只在训练目标出现；CWM在一个事实结果已经可见后推断同一事件的替代动作结果。不能让CWM提前使用尚未观测的未来，亦不能把DT-JEPA的均值直接称个体反事实。 观测是已经执行动作a之后的结果，替代动作真值不作为算法输入。先在embedding运输后decode，与先decode每项再做残差运输一般不同；选择坐标需要额外readout假设。误差等于个体动作效应与平均动作效应之差，不是“world model零误差就保证反事实零误差”。",
+        "papers": [
+          "foundation-models:counterfactual-wm",
+          "foundation-models:dt-jepa"
+        ]
+      },
+      "question": {
+        "id": "nov19-counterfactual-wm",
+        "question": "与DT-JEPA查询时的信息有什么不同？",
+        "answer": "DT-JEPA用行动前历史预测未来；CWM需已执行事实动作的结果。允许的信息集和问题不同，不能比较为同一预测任务。",
+        "example": "教学例：第一次执行动作前不能拿尚不存在的observed_outcome喂CWM。",
+        "papers": [
+          "foundation-models:counterfactual-wm",
+          "foundation-models:dt-jepa"
+        ]
+      },
+      "update": {
+        "date": "2026-11-19",
+        "papers": [
+          "foundation-models:counterfactual-wm",
+          "foundation-models:dt-jepa"
+        ],
+        "summary": "DT-JEPA在历史下预测未来latent分布并用于决策，真实未来只在训练目标出现；CWM在一个事实结果已经可见后推断同一事件的替代动作结果。不能让CWM提前使用尚未观测的未来，亦不能把DT-JEPA的均值直接称个体反事实。 本地组件合同和高成本不复现分别记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "A factual world model estimates average outcomes, not the same-event coupling between actions. This method combines an observed outcome with the factual predictor’s action contrast. It is exact under additive disturbances, with interaction bounds for smooth short transitions; contacts, gain faults and curved coordinates can break it.",
+          "tradeoff": "DT-JEPA predicts future latent distributions from history for decision making; true futures appear only in training. CWM answers alternative actions after a factual outcome is observed. It cannot access an unobserved future, and a DT-JEPA mean is not automatically an individual counterfactual."
+        },
+        "analysis": {
+          "title": "Counterfactual World Models: JEPAs That Reason About \"What If\"",
+          "body": "DT-JEPA predicts future latent distributions from history for decision making; true futures appear only in training. CWM answers alternative actions after a factual outcome is observed. It cannot access an unobserved future, and a DT-JEPA mean is not automatically an individual counterfactual. The observed input follows the factual action; the true alternative outcome is never an algorithm input. Transport-then-decode differs from decoding each term before transport. Coordinate guarantees need readout assumptions. Error is individual-minus-average action effect, not simply factual-model prediction error."
+        },
+        "question": {
+          "question": "How does its information set differ from DT-JEPA?",
+          "answer": "DT-JEPA predicts before acting from history. CWM needs the observed factual outcome. They answer different queries with different information.",
+          "example": "Before the first action, its not-yet-observed outcome cannot be passed to CWM."
+        },
+        "update": "DT-JEPA predicts future latent distributions from history for decision making; true futures appear only in training. CWM answers alternative actions after a factual outcome is observed. It cannot access an unobserved future, and a DT-JEPA mean is not automatically an individual counterfactual. Local contracts and high-cost non-reproduction remain separate."
+      }
+    },
+    {
+      "paper": "multimodal-models:autoregressive-view-model",
+      "target_card": "multimodal-models/world-state-actions",
+      "source_revisions": {
+        "multimodal-models:autoregressive-view-model": "ba6186a4552d23d5da9dc59d08d52a31e47e2bfc5a6b929d517afb83c396d77b",
+        "foundation-models:counterfactual-wm": "a75e14881c4e4fc60f3fc62d1c2fb7bc0d846158c61948fe9e96ad0763343bee"
+      },
+      "comparison": {
+        "position": "AVM不拟合显式3D表示，而在给定相机路径下生成短视图片段。预填图像/视频与历史生成片段统一成为context；检索保持活动上下文有界。先把双向视频DiT微调为N-in-1-out的flow matching，再以自身rollout做因果tuning和蒸馏，让生成内容可回到历史中支持后续重访。",
+        "tradeoff": "CWM在一个事实事件之后改变动作并复用同一扰动残差；AVM沿相机轨迹继续生成并检索历史视图。二者都使用world model语汇，但AVM的场景重访一致性不证明同一扰动反事实可识别。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "AVM：把场景作为带检索上下文的视图流生成",
+        "body": "CWM在一个事实事件之后改变动作并复用同一扰动残差；AVM沿相机轨迹继续生成并检索历史视图。二者都使用world model语汇，但AVM的场景重访一致性不证明同一扰动反事实可识别。 上式用统一记号概括原文flow目标与context检索，不补造新的算法。检索对象既有真实输入也有模型生成的历史；没有显式3D不等于没有几何条件。相机、时间和context角色仍影响生成。",
+        "papers": [
+          "multimodal-models:autoregressive-view-model",
+          "foundation-models:counterfactual-wm"
+        ]
+      },
+      "question": {
+        "id": "nov19-autoregressive-view-model",
+        "question": "场景重访一致是否等于CWM的反事实能力？",
+        "answer": "不等于。重访是在相机轨迹和生成历史下维持场景；个体反事实还需同一扰动下不同动作结果的耦合假设。",
+        "example": "教学例：门框位置保持不变，不能说明同一阵风下船改航向会到哪里。",
+        "papers": [
+          "multimodal-models:autoregressive-view-model",
+          "foundation-models:counterfactual-wm"
+        ]
+      },
+      "update": {
+        "date": "2026-11-19",
+        "papers": [
+          "multimodal-models:autoregressive-view-model",
+          "foundation-models:counterfactual-wm"
+        ],
+        "summary": "CWM在一个事实事件之后改变动作并复用同一扰动残差；AVM沿相机轨迹继续生成并检索历史视图。二者都使用world model语汇，但AVM的场景重访一致性不证明同一扰动反事实可识别。 本地组件合同和高成本不复现分别记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "AVM streams short view clips along a camera path without fitting explicit3D geometry. Prefill observations and generated history share one context interface, with retrieval bounding active context. An N-in-1-out flow-matching model is followed by causal tuning/distillation on its own rollouts so earlier outputs can support revisits.",
+          "tradeoff": "CWM changes an action after an observed event and reuses its disturbance residual. AVM continues camera-conditioned generation with retrieved history. Scene-revisit consistency does not establish identifiable same-disturbance counterfactuals."
+        },
+        "analysis": {
+          "title": "Autoregressive View Model",
+          "body": "CWM changes an action after an observed event and reuses its disturbance residual. AVM continues camera-conditioned generation with retrieved history. Scene-revisit consistency does not establish identifiable same-disturbance counterfactuals. The notation summarizes the paper flow objective and context retrieval, not a new algorithm. Retrieved history includes both observations and model-generated views. No explicit3D representation does not mean no geometric conditioning: cameras, time and context roles still matter."
+        },
+        "question": {
+          "question": "Does revisit consistency imply CWM counterfactual ability?",
+          "answer": "No. Revisit persistence concerns camera paths and generated history. Individual counterfactuals require a same-disturbance coupling across actions.",
+          "example": "A stable door frame says nothing about a boat’s alternative heading in the same wind."
+        },
+        "update": "CWM changes an action after an observed event and reuses its disturbance residual. AVM continues camera-conditioned generation with retrieved history. Scene-revisit consistency does not establish identifiable same-disturbance counterfactuals. Local contracts and high-cost non-reproduction remain separate."
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.23896v1",
+  "paper_url": "https://arxiv.org/abs/2611.23896v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-19",
+  "page": 2,
+  "crop_box_pdf_points": [
+    100,
+    75,
+    520,
+    395
+  ],
+  "caption": "Figure1: Kernel Ridge Attention mechanism",
+  "extraction": "Original PDF crop, no semantic editing",
+  "source_pdf_sha256": "0f3b10393793d48916ed4401ec43acea406f9e4150c5c17da9cd45ec2effbc50",
+  "asset_sha256": "afc3d006453bf8636908bfd39f01a49d3b18ba92ba8c4ca99162230c1c28c807",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result."
+}

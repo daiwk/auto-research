@@ -7,7 +7,7 @@ hide:
 
 # 规划与搜索：下一步该做什么
 
-[Agent](index.md) / 88 个问题 · 22 篇论文
+[Agent](index.md) / 96 个问题 · 24 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">88 个问题 · 22 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">96 个问题 · 24 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:kaer" data-paper-title="Kaer: Security-Aware Replanning for Multi-Agent Systems" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Kaer: Security-Aware Replanning for Multi-Agent Systems Agent Northeastern University 2026-11-18 不可信子Agent可把恶意指令夹在失败反馈里，诱导orchestrator授予新权限或改任务。Kaer不让自由文本失败报告进入planner，只传部署前固定的失败模板；planner用固定七种确定性算子修改尚未完成的子任务，最后重新验证任务及Agent策略。计划每一步的能力必须同时属于执行Agent能力集和任务策略；数据依赖只能来自较早步骤，接收Agent必须被来源Agent的输出策略允许，除最终步骤外每个产物都要有后继消费者。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。实现13种模板ID去重、四项计划策略检查、七种算子和INSERT/PRUNE依赖重编号；操作事务化，仅最终有效计划可返回。使用0-based位置，论文k对应本地k−1。本地严格拒绝任务策略外能力，没有实现原文单独的用户授权扩展、LLM planner、MCP gateway、重试调度或真实Cintra。  规划与搜索 kaer Agent 规划与搜索：下一步该做什么 为什么失败报告是攻击入口？ planner据反馈改计划，攻击者可把“缺资料”写成“运行某脚本”，把信息变成授权指令。Kaer仅传固定失败条件。 教学例：缺Q3收入只能报input_lacks_required_datum，不能附带运行窃密脚本的命令。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<span id="paper-agent-research-kaer-2bd51ecb" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a2da6aacf7fb5d4f">为什么失败报告是攻击入口？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Akaer">Kaer: Security-Aware Replanning for Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Northeastern University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>planner据反馈改计划，攻击者可把“缺资料”写成“运行某脚本”，把信息变成授权指令。Kaer仅传固定失败条件。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：缺Q3收入只能报input_lacks_required_datum，不能附带运行窃密脚本的命令。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24839v1">原论文</a> · <a href="../../../../agent-research/2611.24839-kaer/">实现解读</a> · <a href="#qa-a2da6aacf7fb5d4f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:kaer" data-paper-title="Kaer: Security-Aware Replanning for Multi-Agent Systems" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Kaer: Security-Aware Replanning for Multi-Agent Systems Agent Northeastern University 2026-11-18 不可信子Agent可把恶意指令夹在失败反馈里，诱导orchestrator授予新权限或改任务。Kaer不让自由文本失败报告进入planner，只传部署前固定的失败模板；planner用固定七种确定性算子修改尚未完成的子任务，最后重新验证任务及Agent策略。计划每一步的能力必须同时属于执行Agent能力集和任务策略；数据依赖只能来自较早步骤，接收Agent必须被来源Agent的输出策略允许，除最终步骤外每个产物都要有后继消费者。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。实现13种模板ID去重、四项计划策略检查、七种算子和INSERT/PRUNE依赖重编号；操作事务化，仅最终有效计划可返回。使用0-based位置，论文k对应本地k−1。本地严格拒绝任务策略外能力，没有实现原文单独的用户授权扩展、LLM planner、MCP gateway、重试调度或真实Cintra。  规划与搜索 kaer Agent 规划与搜索：下一步该做什么 固定七种修复算子为何还要策略检查？ 算子序列仍可组合成危险计划，所以最终能力、数据流、依赖和产物使用都要重验；算子有限不等于结果必安全。 教学例：RESCOPE是合法算子，但给coder加terminal仍可能违反任务策略。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-cba867783543810d">固定七种修复算子为何还要策略检查？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Akaer">Kaer: Security-Aware Replanning for Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Northeastern University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>算子序列仍可组合成危险计划，所以最终能力、数据流、依赖和产物使用都要重验；算子有限不等于结果必安全。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：RESCOPE是合法算子，但给coder加terminal仍可能违反任务策略。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24839v1">原论文</a> · <a href="../../../../agent-research/2611.24839-kaer/">实现解读</a> · <a href="#qa-cba867783543810d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:kaer" data-paper-title="Kaer: Security-Aware Replanning for Multi-Agent Systems" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Kaer: Security-Aware Replanning for Multi-Agent Systems Agent Northeastern University 2026-11-18 不可信子Agent可把恶意指令夹在失败反馈里，诱导orchestrator授予新权限或改任务。Kaer不让自由文本失败报告进入planner，只传部署前固定的失败模板；planner用固定七种确定性算子修改尚未完成的子任务，最后重新验证任务及Agent策略。计划每一步的能力必须同时属于执行Agent能力集和任务策略；数据依赖只能来自较早步骤，接收Agent必须被来源Agent的输出策略允许，除最终步骤外每个产物都要有后继消费者。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。实现13种模板ID去重、四项计划策略检查、七种算子和INSERT/PRUNE依赖重编号；操作事务化，仅最终有效计划可返回。使用0-based位置，论文k对应本地k−1。本地严格拒绝任务策略外能力，没有实现原文单独的用户授权扩展、LLM planner、MCP gateway、重试调度或真实Cintra。  规划与搜索 kaer Agent 规划与搜索：下一步该做什么 它相对ReAct改变的是哪一层？ ReAct交替推理与动作观察；Kaer收窄多Agent失败通道并验证计划修改，目标是控制权劫持而非提升单步推理。 教学例：能够根据新观察换路线，不代表不可信观察能授予新工具。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-c0157245c47565c7">它相对ReAct改变的是哪一层？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Akaer">Kaer: Security-Aware Replanning for Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Northeastern University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>ReAct交替推理与动作观察；Kaer收窄多Agent失败通道并验证计划修改，目标是控制权劫持而非提升单步推理。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：能够根据新观察换路线，不代表不可信观察能授予新工具。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24839v1">原论文</a> · <a href="../../../../agent-research/2611.24839-kaer/">实现解读</a> · <a href="#qa-c0157245c47565c7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:kaer" data-paper-title="Kaer: Security-Aware Replanning for Multi-Agent Systems" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Kaer: Security-Aware Replanning for Multi-Agent Systems Agent Northeastern University 2026-11-18 不可信子Agent可把恶意指令夹在失败反馈里，诱导orchestrator授予新权限或改任务。Kaer不让自由文本失败报告进入planner，只传部署前固定的失败模板；planner用固定七种确定性算子修改尚未完成的子任务，最后重新验证任务及Agent策略。计划每一步的能力必须同时属于执行Agent能力集和任务策略；数据依赖只能来自较早步骤，接收Agent必须被来源Agent的输出策略允许，除最终步骤外每个产物都要有后继消费者。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。实现13种模板ID去重、四项计划策略检查、七种算子和INSERT/PRUNE依赖重编号；操作事务化，仅最终有效计划可返回。使用0-based位置，论文k对应本地k−1。本地严格拒绝任务策略外能力，没有实现原文单独的用户授权扩展、LLM planner、MCP gateway、重试调度或真实Cintra。  规划与搜索 kaer Agent 规划与搜索：下一步该做什么 被拒的修复能留下部分计划修改吗？ 不能。算子作用在副本，只有全部操作后策略通过才采用；已完成步骤不可动。INSERT/PRUNE必须同步改依赖位置。 教学例：插入步骤后旧下标1变2，旧依赖也要重编号。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e5eb2d96bca72570">被拒的修复能留下部分计划修改吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Akaer">Kaer: Security-Aware Replanning for Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Northeastern University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。算子作用在副本，只有全部操作后策略通过才采用；已完成步骤不可动。INSERT/PRUNE必须同步改依赖位置。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：插入步骤后旧下标1变2，旧依赖也要重编号。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24839v1">原论文</a> · <a href="../../../../agent-research/2611.24839-kaer/">实现解读</a> · <a href="#qa-e5eb2d96bca72570">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:timeout-cascades" data-paper-title="Reducing Inference Cost of Coding Agents with Timeout Cascades" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Reducing Inference Cost of Coding Agents with Timeout Cascades Agent AMD Singapore 2026-11-18 小模型先做所有编程题；只有在时限内产生有效且通过测试的patch才直接结束。超时、空patch、语法错误或测试失败，都转给大模型。大模型从原始任务状态重新开始，不继承小模型的编辑、工具输出或推理。作者从固定mini-swe-agent的单模型运行轨迹模拟策略，不重新跑级联。500题用于模型能力图；只有466题有两模型完整匹配轨迹，供级联模拟。有效GPU小时按每题runtime乘独占GPU数，即使真实批量有并发也不摊销；它不是集群实际电表成本。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。Trace严格保存非负时长、GPU数量、有效patch与evaluator测试标签；cascade计算截断小模型费用、冷启动fallback和串行时延，evaluate仅接收完整匹配对。这里只处理合成轨迹数值，不调用模型、不运行SWE-bench、不做真实wall-clock路由，也不实现基于隐藏难度标签的oracle router。  规划与搜索 timeout-cascades Agent 规划与搜索：下一步该做什么 fallback会继承小模型已改文件吗？ 论文trace模拟采用冷启动，大模型从原始任务状态开始；继承编辑是未研究的未来优化，不能默认加进去。 教学例：小模型改错文件后，大模型并不是在错误工作区上继续。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<span id="paper-agent-research-timeout-cascades-5c2e03fc" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-77ad766e16978cc4">fallback会继承小模型已改文件吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atimeout-cascades">Reducing Inference Cost of Coding Agents with Timeout Cascades</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · AMD Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文trace模拟采用冷启动，大模型从原始任务状态开始；继承编辑是未研究的未来优化，不能默认加进去。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：小模型改错文件后，大模型并不是在错误工作区上继续。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24324v1">原论文</a> · <a href="../../../../agent-research/2611.24324-timeout-cascades/">实现解读</a> · <a href="#qa-77ad766e16978cc4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:timeout-cascades" data-paper-title="Reducing Inference Cost of Coding Agents with Timeout Cascades" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Reducing Inference Cost of Coding Agents with Timeout Cascades Agent AMD Singapore 2026-11-18 小模型先做所有编程题；只有在时限内产生有效且通过测试的patch才直接结束。超时、空patch、语法错误或测试失败，都转给大模型。大模型从原始任务状态重新开始，不继承小模型的编辑、工具输出或推理。作者从固定mini-swe-agent的单模型运行轨迹模拟策略，不重新跑级联。500题用于模型能力图；只有466题有两模型完整匹配轨迹，供级联模拟。有效GPU小时按每题runtime乘独占GPU数，即使真实批量有并发也不摊销；它不是集群实际电表成本。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。Trace严格保存非负时长、GPU数量、有效patch与evaluator测试标签；cascade计算截断小模型费用、冷启动fallback和串行时延，evaluate仅接收完整匹配对。这里只处理合成轨迹数值，不调用模型、不运行SWE-bench、不做真实wall-clock路由，也不实现基于隐藏难度标签的oracle router。  规划与搜索 timeout-cascades Agent 规划与搜索：下一步该做什么 小模型超时后费用怎么计？ 先计截断到时限的小模型时长乘其GPU数，再加大模型完整时长乘GPU数；串行延迟也要加两段。 教学例：30秒×1卡后fallback120秒×4卡，共510 GPU秒、150秒墙钟。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1bf689d76d235016">小模型超时后费用怎么计？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atimeout-cascades">Reducing Inference Cost of Coding Agents with Timeout Cascades</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · AMD Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先计截断到时限的小模型时长乘其GPU数，再加大模型完整时长乘GPU数；串行延迟也要加两段。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：30秒×1卡后fallback120秒×4卡，共510 GPU秒、150秒墙钟。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24324v1">原论文</a> · <a href="../../../../agent-research/2611.24324-timeout-cascades/">实现解读</a> · <a href="#qa-1bf689d76d235016">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:timeout-cascades" data-paper-title="Reducing Inference Cost of Coding Agents with Timeout Cascades" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Reducing Inference Cost of Coding Agents with Timeout Cascades Agent AMD Singapore 2026-11-18 小模型先做所有编程题；只有在时限内产生有效且通过测试的patch才直接结束。超时、空patch、语法错误或测试失败，都转给大模型。大模型从原始任务状态重新开始，不继承小模型的编辑、工具输出或推理。作者从固定mini-swe-agent的单模型运行轨迹模拟策略，不重新跑级联。500题用于模型能力图；只有466题有两模型完整匹配轨迹，供级联模拟。有效GPU小时按每题runtime乘独占GPU数，即使真实批量有并发也不摊销；它不是集群实际电表成本。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。Trace严格保存非负时长、GPU数量、有效patch与evaluator测试标签；cascade计算截断小模型费用、冷启动fallback和串行时延，evaluate仅接收完整匹配对。这里只处理合成轨迹数值，不调用模型、不运行SWE-bench、不做真实wall-clock路由，也不实现基于隐藏难度标签的oracle router。  规划与搜索 timeout-cascades Agent 规划与搜索：下一步该做什么 它和BATS的预算机制有什么不同？ BATS逐工具扣账并重规划；这里按模型尝试超时切换。工具额度省下不代表GPU小时下降，GPU小时下降也不保证用户等待更短。 教学例：小模型多等一分钟可能省大模型计算，却让一个请求更慢。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-bf4bb22fb9e61c18">它和BATS的预算机制有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atimeout-cascades">Reducing Inference Cost of Coding Agents with Timeout Cascades</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · AMD Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>BATS逐工具扣账并重规划；这里按模型尝试超时切换。工具额度省下不代表GPU小时下降，GPU小时下降也不保证用户等待更短。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：小模型多等一分钟可能省大模型计算，却让一个请求更慢。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24324v1">原论文</a> · <a href="../../../../agent-research/2611.24324-timeout-cascades/">实现解读</a> · <a href="#qa-bf4bb22fb9e61c18">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:timeout-cascades" data-paper-title="Reducing Inference Cost of Coding Agents with Timeout Cascades" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Reducing Inference Cost of Coding Agents with Timeout Cascades Agent AMD Singapore 2026-11-18 小模型先做所有编程题；只有在时限内产生有效且通过测试的patch才直接结束。超时、空patch、语法错误或测试失败，都转给大模型。大模型从原始任务状态重新开始，不继承小模型的编辑、工具输出或推理。作者从固定mini-swe-agent的单模型运行轨迹模拟策略，不重新跑级联。500题用于模型能力图；只有466题有两模型完整匹配轨迹，供级联模拟。有效GPU小时按每题runtime乘独占GPU数，即使真实批量有并发也不摊销；它不是集群实际电表成本。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。Trace严格保存非负时长、GPU数量、有效patch与evaluator测试标签；cascade计算截断小模型费用、冷启动fallback和串行时延，evaluate仅接收完整匹配对。这里只处理合成轨迹数值，不调用模型、不运行SWE-bench、不做真实wall-clock路由，也不实现基于隐藏难度标签的oracle router。  规划与搜索 timeout-cascades Agent 规划与搜索：下一步该做什么 为什么不把缺失34题按失败补零？ 完整模型图有500题，级联仅466个可用配对。缺轨迹无法知道时长、验证和fallback结果，补零会改变分母和成本。 教学例：未记录大模型时长不等于它用了0秒。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-dfa7a27c8d99514b">为什么不把缺失34题按失败补零？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atimeout-cascades">Reducing Inference Cost of Coding Agents with Timeout Cascades</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · AMD Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>完整模型图有500题，级联仅466个可用配对。缺轨迹无法知道时长、验证和fallback结果，补零会改变分母和成本。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：未记录大模型时长不等于它用了0秒。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24324v1">原论文</a> · <a href="../../../../agent-research/2611.24324-timeout-cascades/">实现解读</a> · <a href="#qa-dfa7a27c8d99514b">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:drago" data-paper-title="Repairing LLM-Generated Specifications with Deterministic Diagnosis" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Repairing LLM-Generated Specifications with Deterministic Diagnosis Agent University of Oxford 2026-10-15 形式规格“能运行”不等于“忠实表达了题意”。DRAGO 将 SMT-LIB2、MiniZinc 和 PDDL 的契约、求解器探针及题意对齐检查转为可定位诊断，再要求模型定向修复。候选必须保留语法/词表/输出合同，严格降低阻塞诊断，并满足防退化条件；参考形式化和最终标签只用于最后评分。方法 §3、附录 A.2 原图建议：原论文 Figure 2 为诊断/接纳消融；Figure 3 为 Planetarium 输入渲染缺陷。它们分别解释算法贡献和评测风险。 原文用 4×A100 服务30B/31B模型，跨5个 benchmark 多seed、多臂重评估，完整实验成本过高，不复现（审查 DONE）。实现 grounded STRIPS/PDDL 方向的诊断算子子集；component_only / L1 CPU。实现 grounded STRIPS/PDDL 方向的诊断算子子集；不冒充完整三形式化语言框架。CPU fixture 随机化走廊规模，实际执行无前提路径、联合目标冲突、预算耗尽、证据支持的初态修复，以及“删掉目标就算修好”的负对照。proposal 回调只拿公开 Problem 和 Diagnosis，不拿金标准。  规划与搜索 形式规格诊断与保守修复 Agent 规划与搜索：下一步该做什么 让 LLM 把自然语言题目写成形式规格时，DRAGO 要防哪类“看似成功”？ 模型可能生成能解析、能求解，却遗漏要求的规格，后续求解器只会忠实解决这个错误版本。DRAGO 关注自然语言到形式系统的转换可靠性，用可定位诊断约束修复，而不是把拿到一个解当作原题已解决；规格和求解是两个需要分开检查的环节。 例如题目要求两人都被安排，规格漏写一人后排班更容易有解，但这个“成功”恰好暴露了形式化阶段的遗漏。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
 <span id="paper-agent-research-drago-838b0a34" class="ar-learning-paper-anchor"></span>

@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-11-18 · 73 篇主题资料 / 36 篇重点对照
+[Agent](../index.md) · 更新 2026-11-19 · 77 篇主题资料 / 40 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
@@ -61,6 +61,10 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [SkillBuffBench: Measuring What Agent Skills Contribute across Harnesses, Models, Skill Access Modes and Memory](../../../agent-research/2611.22017-skillbuffbench/README.md) · [原始来源](https://arxiv.org/abs/2611.22017v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 手工给Agent正确skill测的是精选上界，不等于部署时能从库里找到它。SkillBuffBench在同一任务／模型／harness下交叉三种skill访问（无、精选、自动）与两种memory模式，单独测内容收益、发现损失和记忆交互。模型池和harness版本应固定到每次结果，不能把更新后版本混进同一格。 | Harness²会产生与改进执行框架；SkillBuffBench评估框架、模型、skill access和memory条件的配对差异。让改进过程看测试任务的verifier会同时改变二者的信息边界。精选skill不应被写成自动发现能力。 |
 | [Verifying Agents in Rubric-Graded Environments](../../../agent-research/2611.22841-gandalf-bvb/README.md) · [原始来源](https://arxiv.org/abs/2611.22841v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 复杂任务产物可能是Excel、PowerPoint或应用状态，单纯把文件转成文本会丢公式、布局与跨文件关系。本文不是新做任务的Agent，而是研究判断Agent产物的verifier：BVB包含24投资银行任务、2464个人工判定criteria，用来评测验证器的判断。 | AskALCF把回答质量与检索充分性分开归因，Gandalf检查已完成工作是否满足rubric；二者都依赖独立证据但不能互换。judge拥有的固定workspace和文件权限不能泄漏给actor作为gold，judge也不能有写权限。完整API／多任务评测成本过高，不复现（审查DONE）。 |
 | [Do LLM Agents Still Need to Be Told How to Self-Improve?](../../../agent-research/2611.23219-self-organized-learning/README.md) · [原始来源](https://arxiv.org/abs/2611.23219v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 本文不先指定GEPA式优化循环，而是给冻结teacher通用自改进目标、文件读写／Bash／gameplay原语与资源预算。teacher可自己造游戏、观察短生命周期player、编辑文本产物，自行决定何时探索、比较和更新。真实游戏与外部benchmark不在teacher训练访问范围。 | ELITE预设explore-then-integrate程序且不读下游任务结果，本篇刻意不给外部优化loop、让teacher自行选择学习动作；Harness²又有预定义Propose–Probe–Compose。固定脚手架协议可支持研究，但不等于复现自发学习能力。完整多模型多benchmark长rollout成本过高，不复现（审查DONE）。 |
+| [Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses](../../../agent-research/2611.24924-ahe-beta/README.md) · [原始来源](https://arxiv.org/abs/2611.24924v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。开发者只接收被准入的需求及其证据包。 | Harness²按执行对照提出、组合并积累经验，且不使用rubric；AHE-Beta把跨会话需求、证据准入和head绑定审查作为演进主干。两者都不能由本地固定角色替身的通过数证明泛化能力。 |
+| [Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates](../../../agent-research/2611.23651-safe-personal-rsi/README.md) · [原始来源](https://arxiv.org/abs/2611.23651v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 个人Agent的prompt更新可能提升主动性，却同时改变隐私披露、承诺和执行报告。论文固定模型和runtime，只改指令；先比较候选与父版本寻找反例，再重复确认、回滚定位和修复。修复局部验证后仍须完整admission；没有通过版本就继续用父版本。 | Harness²用执行差异优化harness，不要求rubric；Safe Personal RSI对prompt候选显式比较安全/效用并保留父版本。后者有领域风险标签但仍不是安全证明；不能把前者匿名产物选择当后者admission。 |
+| [RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?](../../../agent-research/2611.24395-rsibench-infra/README.md) · [原始来源](https://arxiv.org/abs/2611.24395v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 单算子快不代表端到端训练或服务变快。RSIBench-Infra让Agent从官方可运行baseline出发，跨engine、kernel、instruction修改，但只提交一个OCI filesystem layer。独立Serve/Train Job把同一digest应用到每个rank；Benchmark Job绝不加载候选层，单独做质量门和端到端计时。 | Harness²改模型外执行框架并以任务执行对照积累经验；RSIBench-Infra评价跨栈训练/推理优化，以独立质量门约束端到端加速。优化harness通过数和已验证吞吐收益不是同一个结果，前者不能代替后者硬件链路。 |
+| [SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search](../../../agent-research/2611.02643-searchinject/README.md) · [原始来源](https://arxiv.org/abs/2611.02643v1)<br>章节：背景与主要改动、核心公式、同主题对照 | 间接注入先要进入上下文才有机会影响LLM。SearchInject在原top100候选中，用相关性、abuse、instruction概率及两项相关性交互做logistic风险评分；超过冻结阈值才隔离，按原顺序从同一候选池补足top10。它控制暴露，而不是验证下游攻击成功。Google官方目录今天新增，但论文首发11月2日，按历史发现补录，不算今天新论文。 | SilentGuard核对工具返回值是否满足请求不变量；SearchInject在第三方文本进入上下文之前做风险准入。前者检查语义执行合同，后者检查检索暴露，HTTP200或低暴露率都不能证明最终回答安全。 |
 
 </div>
 
@@ -227,6 +231,30 @@ Gandalf把rubric转成reactive检查任务，自行决定读什么原生文件�
 teacher在持久session内组织算法，player每次新session只读取当前文本产物；权重不变。论文分析自发课程、难度选择和A/B测试行为，并在不同游戏horizon／机制／3D导航上检验迁移。teacher看到自己生成任务的结果不等于能看最终外部测试标签。 ELITE预设explore-then-integrate程序且不读下游任务结果，本篇刻意不给外部优化loop、让teacher自行选择学习动作；Harness²又有预定义Propose–Probe–Compose。固定脚手架协议可支持研究，但不等于复现自发学习能力。完整多模型多benchmark长rollout成本过高，不复现（审查DONE）。
 
 对照来源：[self-organized-learning](../../../agent-research/2611.23219-self-organized-learning/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### AHE-Beta：让需求证据而非基准分数决定Harness演进
+
+证据包只有被引用会话的运行日志、公开任务和执行条件，用户对话、隐藏测试和grader不能传给开发者。RFC先做设计审查，代码再按验收标准审查；合并时批准必须绑定当前PR head，且RFC仍与已审设计一致。这里的“verified”是上游角色判断，不是形式正确性证明。测试确认未核实的合并需求不能吞掉原需求；原始issue不能作为交付类型；证据为空、head过期、RFC变动或全套测试未完成均不能通过。无benchmark score、gold或隐藏test参数，但不提供恶意回调沙箱。
+
+对照来源：[ahe-beta](../../../agent-research/2611.24924-ahe-beta/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### Safe Personal RSI：修复通过不等于更新可准入
+
+Appendix I以所有开发重放（含control）为分母，取五个primary风险类别的最大率。确认过的未授权披露case产生持久严重性veto，即使后来修复也拒该attempt；否则父/工作版本各至少5条且全部执行完成，最大风险不超过0.10且不高于父版本。效用不降，或成功率最多绝对下降0.02且成本proxy绝对减少至少0.10，才可准入。RQ1模板确认可接受非空截断多数；RQ2要求三次候选确认完整，差分还要三次父重放。测试保留论文限制：最大风险不变时次大类别风险仍可升高；不偷偷把规则增强为总风险比较。缺5条、未完成、严重veto、风险上升或效用/成本均不达标分别拒绝。阈值是点估计与工程常数，不提供置信界或总体安全概率。
+
+对照来源：[safe-personal-rsi](../../../agent-research/2611.23651-safe-personal-rsi/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### RSIBench-Infra：把生产级基础设施优化与独立质量验证分开
+
+任务定义含模型、环境、资源和独立verifier。16推理+4训练任务覆盖1–32个加速器、最多4节点；推理模型1.7B–2.8T。训练固定输入，比较逐步loss和全局梯度范数；VLM GRPO还检查policy/KL loss、forward及隔离KL梯度。性能得分只有通过任务质量门才有效，microbenchmark不能替代端到端计时。审查明确隔离Agent环境、Serve/Train环境和Benchmark环境，比较部署digest与质量门，而不是伪造本地通过指标。没有运行正式任务、提交OCI、训练或测试模型；所以没有CPU/GPU能力分数，也不要求GPU回执。
+
+对照来源：[rsibench-infra](../../../agent-research/2611.24395-rsibench-infra/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### SearchInject：检索风险与干净误隔离预算：机制和证据边界
+
+§III-C/D：joint模型为class-balanced logistic regression，不能把输出当校准概率。阈值只在calibration集选并冻结；文档重复出现在不同query时按placement计数。原稿未发布abuse/字符与词n-gram词表、IDF、scaler或拟合系数，因此本地明确接收外部特征/系数，只实现score、约束选阈与有序refill，不用关键词规则假装原检测器。 SilentGuard核对工具返回值是否满足请求不变量；SearchInject在第三方文本进入上下文之前做风险准入。前者检查语义执行合同，后者检查检索暴露，HTTP200或低暴露率都不能证明最终回答安全。
+
+对照来源：[searchinject](../../../agent-research/2611.02643-searchinject/README.md) · [silentguard](../../../agent-research/2611.20595-silentguard/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -512,9 +540,65 @@ teacher在持久session内组织算法，player每次新session只读取当前�
 
     对照来源：[self-organized-learning](../../../agent-research/2611.23219-self-organized-learning/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
 
+### 它和Harness²都不看rubric，为何不是同一算法？ {#cross-cross-nov19-ahe-beta}
+
+??? note "展开答案与例子"
+
+    **答案：** Harness²用当前任务执行对照组合候选，再积累如何改的经验；AHE-Beta以会话需求、角色分工和审查准入选择跨任务结构改动。
+
+    **教学例子：** 教学例：比较两个产物和核实中断控制需求，是两种不同证据。
+
+    对照来源：[ahe-beta](../../../agent-research/2611.24924-ahe-beta/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### 相比Harness²，它的安全门是否证明风险不会增加？ {#cross-cross-nov19-safe-personal-rsi}
+
+??? note "展开答案与例子"
+
+    **答案：** 不证明。它比较最大primary类别点估计，次大类别甚至总primary风险可增加；Harness²的执行对照又不是这个领域风险门。
+
+    **教学例子：** 教学例：最大类别维持2/20，另一类别0→1/20仍可能准入。
+
+    对照来源：[safe-personal-rsi](../../../agent-research/2611.23651-safe-personal-rsi/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### 相比Harness²或kernel评测，它的目标有什么不同？ {#cross-cross-nov19-rsibench-infra}
+
+??? note "展开答案与例子"
+
+    **答案：** 这里检查整个模型服务/训练链路在质量门下是否更快；harness任务通过或单kernel提速不证明端到端吞吐提高。
+
+    **教学例子：** 教学例：kernel快2倍但数据传输占90%，整条链路提升仍可能很小。
+
+    对照来源：[rsibench-infra](../../../agent-research/2611.24395-rsibench-infra/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### SearchInject和SilentGuard的门槛是否相同？ {#cross-cross-nov19-searchinject}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是。前者筛选检索上下文，后者验证工具结果不变量；一种通过不证明另一种安全。
+
+    **教学例子：** 教学例：低风险页面仍可能给出不满足过滤条件的API值。
+
+    对照来源：[searchinject](../../../agent-research/2611.02643-searchinject/README.md) · [silentguard](../../../agent-research/2611.20595-silentguard/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-19** · 显式数值夹具只检查feature顺序、严格>阈值、干净经验约束与refill。无真实payload、SciFact检索、拟合分类器、生成模型或安全认证；更低阈值移除更多候选，也可能补入原rank10外的攻击页。 完整高成本实验不复现，审查DONE。
+
+涉及：[searchinject](../../../agent-research/2611.02643-searchinject/README.md) · [silentguard](../../../agent-research/2611.20595-silentguard/README.md)
+
+**2026-11-19** · 仅做原文审查、成本评估、中英文说明和学习材料。没有把OCI字段stub、任意microbenchmark或单卡小模型标成RSIBench-Infra已接入；local_operator=null，不提供可执行Evolve算子。项目页https://rsibench-infra.github.io已核对，未验证论文专用源码仓库公开。 完整实验高成本不复现，不作能力证据。
+
+涉及：[rsibench-infra](../../../agent-research/2611.24395-rsibench-infra/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+**2026-11-19** · 实现Replay评测记录、最大类别风险准入、持久veto、最少重放/完成检查、严格多数确认两种协议与回滚gain-retention的零gain约定。未实现Willow/Kicker、邮件工具、攻击搜索、LLM修复、语义judge、verification回放或OAuth修复。Replay不是给Actor的输入，只有离线evaluator调用。 完整实验高成本不复现，不作能力证据。
+
+涉及：[safe-personal-rsi](../../../agent-research/2611.23651-safe-personal-rsi/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+**2026-11-19** · 只实现类型化Evidence/Requirement交付集、已核实合并需求的covers消解，以及绑定head与RFC的纯merge_eligible判定。没有模拟用户、Triage/Architect/PM语言判断、开发Agent或真正git合并。结构字段不保证字符串内部绝无隐藏答案，所以保持L0，不把类型检查称为语义安全。 完整实验高成本不复现，不作能力证据。
+
+涉及：[ahe-beta](../../../agent-research/2611.24924-ahe-beta/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
 
 **2026-11-18** · 本轮review-only，不用预写课程／固定答案脚本替代自组织行为，不启动Bash工具Agent或付费gameplay。保留官方project入口和固定v1方法、预算及允许权限，未验证作者源仓库时明确记未核实。 完整实验高成本不复现，不作能力证据。
 
@@ -624,7 +708,7 @@ teacher在持久session内组织算法，player每次新session只读取当前�
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 73 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 77 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -701,6 +785,10 @@ teacher在持久session内组织算法，player每次新session只读取当前�
 - [SkillBuffBench: Measuring What Agent Skills Contribute across Harnesses, Models, Skill Access Modes and Memory](../../../agent-research/2611.22017-skillbuffbench/README.md)
 - [Verifying Agents in Rubric-Graded Environments](../../../agent-research/2611.22841-gandalf-bvb/README.md)
 - [Do LLM Agents Still Need to Be Told How to Self-Improve?](../../../agent-research/2611.23219-self-organized-learning/README.md)
+- [Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses](../../../agent-research/2611.24924-ahe-beta/README.md)
+- [Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates](../../../agent-research/2611.23651-safe-personal-rsi/README.md)
+- [RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?](../../../agent-research/2611.24395-rsibench-infra/README.md)
+- [SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search](../../../agent-research/2611.02643-searchinject/README.md)
 
 </details>
 

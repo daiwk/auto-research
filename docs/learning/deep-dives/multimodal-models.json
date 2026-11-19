@@ -956,7 +956,7 @@
     "world-state-actions": {
       "title": "会预测下一幕，还不等于会行动或保持同一个世界",
       "thesis": "世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。",
-      "updated": "2026-11-18",
+      "updated": "2026-11-19",
       "reviewed_papers": [
         "foundation-models:alps",
         "multimodal-models:aw0",
@@ -989,7 +989,9 @@
         "foundation-models:stratified-retention-protocol",
         "multimodal-models:rslivebench-uav-protocol",
         "foundation-models:wm-quant",
-        "multimodal-models:dwd"
+        "multimodal-models:dwd",
+        "foundation-models:counterfactual-wm",
+        "multimodal-models:autoregressive-view-model"
       ],
       "axes": [
         "学习对象：未来latent、动作分布、视觉转移、持久几何",
@@ -1158,6 +1160,26 @@
             "核心公式",
             "同主题比较与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:counterfactual-wm",
+          "position": "普通world model给动作的平均结果，不能仅凭更准的事实分布识别同一扰动下的个体反事实。本文将实际观测结果作为事件信息，加上同一事实预测器对两个动作的预测差；加性扰动时精确，平滑短时动力学下有交互误差界，但碰撞、乘法故障和弯曲坐标可破坏近似。",
+          "tradeoff": "DT-JEPA在历史下预测未来latent分布并用于决策，真实未来只在训练目标出现；CWM在一个事实结果已经可见后推断同一事件的替代动作结果。不能让CWM提前使用尚未观测的未来，亦不能把DT-JEPA的均值直接称个体反事实。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
+        },
+        {
+          "paper": "multimodal-models:autoregressive-view-model",
+          "position": "AVM不拟合显式3D表示，而在给定相机路径下生成短视图片段。预填图像/视频与历史生成片段统一成为context；检索保持活动上下文有界。先把双向视频DiT微调为N-in-1-out的flow matching，再以自身rollout做因果tuning和蒸馏，让生成内容可回到历史中支持后续重访。",
+          "tradeoff": "CWM在一个事实事件之后改变动作并复用同一扰动残差；AVM沿相机轨迹继续生成并检索历史视图。二者都使用world model语汇，但AVM的场景重访一致性不证明同一扰动反事实可识别。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1257,6 +1279,22 @@
           "papers": [
             "multimodal-models:dwd",
             "multimodal-models:pixvid"
+          ]
+        },
+        {
+          "title": "Counterfactual WM：复用已发生事件的残差，而非预测平均未来",
+          "body": "DT-JEPA在历史下预测未来latent分布并用于决策，真实未来只在训练目标出现；CWM在一个事实结果已经可见后推断同一事件的替代动作结果。不能让CWM提前使用尚未观测的未来，亦不能把DT-JEPA的均值直接称个体反事实。 观测是已经执行动作a之后的结果，替代动作真值不作为算法输入。先在embedding运输后decode，与先decode每项再做残差运输一般不同；选择坐标需要额外readout假设。误差等于个体动作效应与平均动作效应之差，不是“world model零误差就保证反事实零误差”。",
+          "papers": [
+            "foundation-models:counterfactual-wm",
+            "foundation-models:dt-jepa"
+          ]
+        },
+        {
+          "title": "AVM：把场景作为带检索上下文的视图流生成",
+          "body": "CWM在一个事实事件之后改变动作并复用同一扰动残差；AVM沿相机轨迹继续生成并检索历史视图。二者都使用world model语汇，但AVM的场景重访一致性不证明同一扰动反事实可识别。 上式用统一记号概括原文flow目标与context检索，不补造新的算法。检索对象既有真实输入也有模型生成的历史；没有显式3D不等于没有几何条件。相机、时间和context角色仍影响生成。",
+          "papers": [
+            "multimodal-models:autoregressive-view-model",
+            "foundation-models:counterfactual-wm"
           ]
         }
       ],
@@ -1390,6 +1428,26 @@
           "papers": [
             "multimodal-models:dwd",
             "multimodal-models:pixvid"
+          ]
+        },
+        {
+          "id": "nov19-counterfactual-wm",
+          "question": "与DT-JEPA查询时的信息有什么不同？",
+          "answer": "DT-JEPA用行动前历史预测未来；CWM需已执行事实动作的结果。允许的信息集和问题不同，不能比较为同一预测任务。",
+          "example": "教学例：第一次执行动作前不能拿尚不存在的observed_outcome喂CWM。",
+          "papers": [
+            "foundation-models:counterfactual-wm",
+            "foundation-models:dt-jepa"
+          ]
+        },
+        {
+          "id": "nov19-autoregressive-view-model",
+          "question": "场景重访一致是否等于CWM的反事实能力？",
+          "answer": "不等于。重访是在相机轨迹和生成历史下维持场景；个体反事实还需同一扰动下不同动作结果的耦合假设。",
+          "example": "教学例：门框位置保持不变，不能说明同一阵风下船改航向会到哪里。",
+          "papers": [
+            "multimodal-models:autoregressive-view-model",
+            "foundation-models:counterfactual-wm"
           ]
         }
       ],
@@ -1560,6 +1618,30 @@
           "source_revisions": {
             "multimodal-models:dwd": "1e24935b79acdb628e2bbf36d868874d47245fa4ee5abe5e23f2c3642cab41d5",
             "multimodal-models:pixvid": "af14fd84ecf954028202fd5cf61ef0145afa848db73a106afc7f41fd4ff8a8ae"
+          }
+        },
+        {
+          "date": "2026-11-19",
+          "papers": [
+            "foundation-models:counterfactual-wm",
+            "foundation-models:dt-jepa"
+          ],
+          "summary": "DT-JEPA在历史下预测未来latent分布并用于决策，真实未来只在训练目标出现；CWM在一个事实结果已经可见后推断同一事件的替代动作结果。不能让CWM提前使用尚未观测的未来，亦不能把DT-JEPA的均值直接称个体反事实。 本地组件合同和高成本不复现分别记录。",
+          "source_revisions": {
+            "foundation-models:counterfactual-wm": "a75e14881c4e4fc60f3fc62d1c2fb7bc0d846158c61948fe9e96ad0763343bee",
+            "foundation-models:dt-jepa": "2cc1cbec19b52dcb4ffd65b921cc4a011a2089ef2bb6de30987366c2d893e240"
+          }
+        },
+        {
+          "date": "2026-11-19",
+          "papers": [
+            "multimodal-models:autoregressive-view-model",
+            "foundation-models:counterfactual-wm"
+          ],
+          "summary": "CWM在一个事实事件之后改变动作并复用同一扰动残差；AVM沿相机轨迹继续生成并检索历史视图。二者都使用world model语汇，但AVM的场景重访一致性不证明同一扰动反事实可识别。 本地组件合同和高成本不复现分别记录。",
+          "source_revisions": {
+            "multimodal-models:autoregressive-view-model": "ba6186a4552d23d5da9dc59d08d52a31e47e2bfc5a6b929d517afb83c396d77b",
+            "foundation-models:counterfactual-wm": "a75e14881c4e4fc60f3fc62d1c2fb7bc0d846158c61948fe9e96ad0763343bee"
           }
         }
       ]

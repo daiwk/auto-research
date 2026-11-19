@@ -7,7 +7,7 @@ hide:
 
 # 长上下文：注意力、递归状态与记忆
 
-[基础模型](index.md) / 184 个问题 · 46 篇论文
+[基础模型](index.md) / 188 个问题 · 47 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">184 个问题 · 46 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">188 个问题 · 47 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:kernel-ridge-attention" data-paper-title="Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting 基础模型 Independent Researcher 2026-11-18 KRA把历史关联写入固定大小的回归矩阵，同时保留后验协方差。共享可学习Fourier特征形成非线性核；内容相关OU时钟既衰减旧系数，也把协方差恢复到先验，使已经遗忘的方向重新可写。读取发生在当前值写入之后。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。实现共享Fourier特征、OU预测、协方差引导RLS、inclusive读取及状态续接；不含width4因果卷积前端、完整decoder、手写并行adjoint或融合内核。dual solve只作独立小规模参考，不能当高效推理路径。  注意力与长上下文 递归状态与核回归 基础模型 长上下文：注意力、递归状态与记忆 为什么遗忘旧信息时还要补回协方差？ 协方差表示哪些特征方向仍可被新观测约束。只缩小P会让所有方向越来越难写；OU恢复项让遗忘同时恢复可塑性。 教学例：delta=0.5且P=0.1I时，先验为I，预测P为0.775I，不是0.025I。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-kernel-ridge-attention-e4bb886d" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d5f10085919c780c">为什么遗忘旧信息时还要补回协方差？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Akernel-ridge-attention">Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>协方差表示哪些特征方向仍可被新观测约束。只缩小P会让所有方向越来越难写；OU恢复项让遗忘同时恢复可塑性。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：delta=0.5且P=0.1I时，先验为I，预测P为0.775I，不是0.025I。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23896v1">原论文</a> · <a href="../../../../foundation-models/2611.23896-kernel-ridge-attention/">实现解读</a> · <a href="#qa-d5f10085919c780c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:kernel-ridge-attention" data-paper-title="Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting 基础模型 Independent Researcher 2026-11-18 KRA把历史关联写入固定大小的回归矩阵，同时保留后验协方差。共享可学习Fourier特征形成非线性核；内容相关OU时钟既衰减旧系数，也把协方差恢复到先验，使已经遗忘的方向重新可写。读取发生在当前值写入之后。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。实现共享Fourier特征、OU预测、协方差引导RLS、inclusive读取及状态续接；不含width4因果卷积前端、完整decoder、手写并行adjoint或融合内核。dual solve只作独立小规模参考，不能当高效推理路径。  注意力与长上下文 递归状态与核回归 基础模型 长上下文：注意力、递归状态与记忆 KRA为何不能用一个学习率乘key替代增益？ 增益由P乘key再归一化，非各向同性P会改变方向，不只是改变长度。 教学例：key=(1,1)，P=diag(0.4,0.2)时写入方向比例为2:1，而非1:1。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-b3e632543b510010">KRA为何不能用一个学习率乘key替代增益？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Akernel-ridge-attention">Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>增益由P乘key再归一化，非各向同性P会改变方向，不只是改变长度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：key=(1,1)，P=diag(0.4,0.2)时写入方向比例为2:1，而非1:1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23896v1">原论文</a> · <a href="../../../../foundation-models/2611.23896-kernel-ridge-attention/">实现解读</a> · <a href="#qa-b3e632543b510010">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:kernel-ridge-attention" data-paper-title="Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting 基础模型 Independent Researcher 2026-11-18 KRA把历史关联写入固定大小的回归矩阵，同时保留后验协方差。共享可学习Fourier特征形成非线性核；内容相关OU时钟既衰减旧系数，也把协方差恢复到先验，使已经遗忘的方向重新可写。读取发生在当前值写入之后。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。实现共享Fourier特征、OU预测、协方差引导RLS、inclusive读取及状态续接；不含width4因果卷积前端、完整decoder、手写并行adjoint或融合内核。dual solve只作独立小规模参考，不能当高效推理路径。  注意力与长上下文 递归状态与核回归 基础模型 长上下文：注意力、递归状态与记忆 与Mamba相比，多保留了什么状态？ 除回归系数外还有每头D乘D协方差；它描述已约束方向。Mamba的selective scan并不维护同一后验几何。 教学例：D翻倍时，协方差元素从D平方变成4D平方，即使上下文长度不变。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-07bac3cc3b7295bf">与Mamba相比，多保留了什么状态？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Akernel-ridge-attention">Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>除回归系数外还有每头D乘D协方差；它描述已约束方向。Mamba的selective scan并不维护同一后验几何。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：D翻倍时，协方差元素从D平方变成4D平方，即使上下文长度不变。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23896v1">原论文</a> · <a href="../../../../foundation-models/2611.23896-kernel-ridge-attention/">实现解读</a> · <a href="#qa-07bac3cc3b7295bf">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:kernel-ridge-attention" data-paper-title="Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting 基础模型 Independent Researcher 2026-11-18 KRA把历史关联写入固定大小的回归矩阵，同时保留后验协方差。共享可学习Fourier特征形成非线性核；内容相关OU时钟既衰减旧系数，也把协方差恢复到先验，使已经遗忘的方向重新可写。读取发生在当前值写入之后。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。实现共享Fourier特征、OU预测、协方差引导RLS、inclusive读取及状态续接；不含width4因果卷积前端、完整decoder、手写并行adjoint或融合内核。dual solve只作独立小规模参考，不能当高效推理路径。  注意力与长上下文 递归状态与核回归 基础模型 长上下文：注意力、递归状态与记忆 本地dual一致能证明论文吞吐吗？ 不能。它核对给定feature/clock序列的数学输出；完整网络、并行scan、精度和八卡训练未运行。 教学例：逐prefix矩阵求逆虽可作正确性参考，却比递推更慢。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-6e0afff32b0c07f6">本地dual一致能证明论文吞吐吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Akernel-ridge-attention">Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它核对给定feature/clock序列的数学输出；完整网络、并行scan、精度和八卡训练未运行。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：逐prefix矩阵求逆虽可作正确性参考，却比递推更慢。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23896v1">原论文</a> · <a href="../../../../foundation-models/2611.23896-kernel-ridge-attention/">实现解读</a> · <a href="#qa-6e0afff32b0c07f6">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:dealrank" data-paper-title="Deal With It: On Better Schedules for Listwise Reranking" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Deal With It: On Better Schedules for Listwise Reranking 基础模型 Mixedbread 2026-11-17 并行listwise重排要把候选分组，每组只晋级固定配额。连续切块会把初始召回前部的好文档挤进同一组，越好的retriever越可能被配额误切。DealRank按retriever名次轮流发牌，使每个前缀在各组尽量平衡，再并行排序、按配额晋级并最终合并，不依赖补救认证轮。 成本过高，不复现（审查DONE）；true_top只给quota_cuts外层诊断，不进入schedule。L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。本地ranker是确定性一致排序回调，不是模型；true_top只给quota_cuts外层诊断，不进入schedule。没有RankGPT提示、token费用或真实API延迟，机制计数不作NDCG／速度证据。作者提供mixedbread-ai/dealrank链接，但2026-11-18仓库／main commit API返回404，未核实公开源码或许可，不执行外部代码。完整多模型及27B计时矩阵高成本不复现。  检索与上下文 列表重排与调用调度 基础模型 长上下文：注意力、递归状态与记忆 更好的retriever为什么反而会被连续切块伤害？ 好文档集中在前部，一个chunk的晋级配额会切掉同组其他好文档。 教学例：前20全是好文档而每组留4，连续切块先丢16个，轮发可分摊。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
 <span id="paper-foundation-models-dealrank-9c3ce34d" class="ar-learning-paper-anchor"></span>

@@ -135,7 +135,8 @@
         "post-training:safety-budget-cgrpo",
         "post-training:specal",
         "post-training:regularized-score-centering",
-        "post-training:ash-hint-steering"
+        "post-training:ash-hint-steering",
+        "post-training:led-edits"
       ]
     },
     {
@@ -202,7 +203,9 @@
         "post-training:jev-safety-reward",
         "post-training:optimistic-verifier-audit",
         "post-training:design-taste-admission",
-        "post-training:gprm"
+        "post-training:gprm",
+        "post-training:eca-credit",
+        "post-training:dcc-aggregation"
       ]
     },
     {
@@ -268,7 +271,8 @@
         "post-training:mpopd",
         "post-training:cord-rollout",
         "post-training:drd-mopd",
-        "post-training:streaming-opd"
+        "post-training:streaming-opd",
+        "post-training:mrpd-replay"
       ]
     },
     {
@@ -343,7 +347,8 @@
         "post-training:lcs-reference-opd",
         "post-training:social-meta-learning",
         "post-training:behavioral-canaries",
-        "post-training:leaf-opd"
+        "post-training:leaf-opd",
+        "post-training:hint-wam"
       ]
     },
     {

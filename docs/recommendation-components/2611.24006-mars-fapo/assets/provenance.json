@@ -1,0 +1,11 @@
+{
+  "figure": 3,
+  "caption": "MARS Technical Report",
+  "source_url": "https://arxiv.org/html/2611.24006v1/post_train.png",
+  "source_version": "v1",
+  "source_sha256": "b0a7757ad178bd0cbd21344bd05f9e040d43cfbacb9e1527c0dfd2722edb99e9",
+  "extraction": "original HTML image, no redraw",
+  "file": "paper-figure-01.png",
+  "asset_sha256": "d7c0ab119698f184647aee0cf0d988d31383d137d401b050d93376a7ee622417",
+  "copyright": "Original paper authors; no claim of local generation"
+}

@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:kernel-ridge-attention/why-covariance": {
+      "source_sha256": "e0a754c84311709933d30949a99459a94c6f6ea6f0d31cde506788f7f81a2f94",
+      "reviewed": true,
+      "fields": {
+        "question": "Why restore covariance when forgetting?",
+        "answer": "Covariance records which directions remain uncertain. Decaying P alone progressively suppresses writes; the OU prior term restores plasticity.",
+        "example": "With delta0.5, P0.1I and priorI, predicted P is0.775I, not0.025I."
+      }
+    },
+    "qa/foundation-models:kernel-ridge-attention/write-geometry": {
+      "source_sha256": "81611b5b23fb7b2173427f9bab0a1ed621d1b9b6ddde2dfda61592b5ec23863c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a scalar write rate insufficient?",
+        "answer": "P times the key can rotate the gain, not merely scale it. A scalar rate cannot reproduce anisotropic covariance geometry.",
+        "example": "For key(1,1) and P=diag(0.4,0.2), the write direction is2:1 rather than1:1."
+      }
+    },
+    "qa/foundation-models:kernel-ridge-attention/mamba-state": {
+      "source_sha256": "c702a3bfbe2d793cb0c68377193c28685053fc0b2229d33e0b87a4fb12297d68",
+      "reviewed": true,
+      "fields": {
+        "question": "What extra state distinguishes it from Mamba?",
+        "answer": "KRA stores a per-head D-by-D covariance in addition to regression coefficients. Mamba selective scans do not maintain that posterior geometry.",
+        "example": "Doubling D quadruples covariance elements even with fixed context length."
+      }
+    },
+    "qa/foundation-models:kernel-ridge-attention/dual-validation": {
+      "source_sha256": "993e2a33b5320cf3ee3b031e1ed8eee28ec1af8abc27925fcf8a47970a603c3b",
+      "reviewed": true,
+      "fields": {
+        "question": "Does dual parity prove paper throughput?",
+        "answer": "No. It checks outputs for a fixed feature/clock path. The full network, parallel scan, precision strategy and eight-GPU training are absent.",
+        "example": "Repeated prefix solves are a correctness reference, not a fast serving algorithm."
+      }
+    },
+    "qa/foundation-models:narrow-spec/residual-not-head": {
+      "source_sha256": "2abc2425cb4a726401b2aeb8a78e6e7308dd76dfb25cd321e4de5261dc131f71",
+      "reviewed": true,
+      "fields": {
+        "question": "Is shrinking only the vocabulary head NarrowSpec?",
+        "answer": "No. It narrows the whole residual stream and projections that read/write it. Head folding is only boundary handling.",
+        "example": "A low-rank head with unchanged decoder MLPs does not perform the principal intervention."
+      }
+    },
+    "qa/foundation-models:narrow-spec/linear-fold-condition": {
+      "source_sha256": "e3514ef48d32f508056653d6277a3d8c24e6ac421e230dae0e3be4ab87cc9c79",
+      "reviewed": true,
+      "fields": {
+        "question": "When may the output adapter be folded?",
+        "answer": "When two consecutive maps are linear, combine Wlm times Wout. Intervening normalization or nonlinearity invalidates that fold.",
+        "example": "Wlm ReLU(Wout h) is not generally (WlmWout)h."
+      }
+    },
+    "qa/foundation-models:narrow-spec/pipeline-versus-width": {
+      "source_sha256": "037645dc6604197289cef389566173a399ba9edaa9c9ac7566548adf448d3853",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from LoopSpec?",
+        "answer": "LoopSpec schedules speculation and verification across recurrent depths. NarrowSpec reduces drafter residual width without changing target verification.",
+        "example": "Fewer drafter operations can be offset by shorter acceptance length."
+      }
+    },
+    "qa/foundation-models:narrow-spec/cache-and-quantization": {
+      "source_sha256": "eeaa722fc0c4408ed164a419751838487be442ad0f57b3a4390ec333d3dc47be",
+      "reviewed": true,
+      "fields": {
+        "question": "Does fold parity imply smaller KV, quantization parity or speedup?",
+        "answer": "No. Head geometry is fixed, quantization does not commute with multiplication, and speed depends on trained acceptance and hardware.",
+        "example": "Halving residual width leaves KV elements unchanged when head count and head dimension stay fixed."
+      }
+    },
+    "qa/foundation-models:loopcache-interface/why-shared-loop": {
+      "source_sha256": "7b404963c37ca3f74a1b4505710d273babc9e3f3c4323af23335cd4c263b7fe0",
+      "reviewed": true,
+      "fields": {
+        "question": "What does cyclic-cache scheduling reduce?",
+        "answer": "It concentrates long-prefix reads onto one loop cache per step. This does not make mismatched speculative computation exact.",
+        "example": "For R4, cache IDs cycle1,2,3,4,1 while a speculative token may be at depth3."
+      }
+    },
+    "qa/foundation-models:loopcache-interface/margin-and-pruning": {
+      "source_sha256": "1c50be3704923499ecbf17f3da00c8a3a16bab7dce825ca32612e071bc00fbc7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why prune descendants after replacing a draft?",
+        "answer": "Their hidden/cache states depended on the old token. The decision uses the current margin, not future reversal labels.",
+        "example": "Replacing ancestor A with D invalidates descendants B/C computed under A."
+      }
+    },
+    "qa/foundation-models:loopcache-interface/spool-exactness": {
+      "source_sha256": "d93695b71d58af62178933e088440407979067aa675d581dfa5915e78389edf2",
+      "reviewed": true,
+      "fields": {
+        "question": "Is this the same exactness as Spool?",
+        "answer": "No. Spool replays transitions for fixed recorded inputs. Lossless token commitment in LoopCache also needs the correct full KV branch.",
+        "example": "A correct schedule ID does not imply that target verification ran."
+      }
+    },
+    "qa/foundation-models:loopcache-interface/interface-not-decoder": {
+      "source_sha256": "409ce0093b1f4bab8d574ffd9a6943b7cb049f20527c4560727ace726b15599e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a passing implementation still L0?",
+        "answer": "No real KV execution or token verifier is implemented, so output distributions and losslessness are untested. Only update/read policy contracts are checked.",
+        "example": "The committed-token count is zero because no decoder ran."
+      }
+    },
+    "qa/foundation-models:counterfactual-wm/average-versus-event": {
+      "source_sha256": "964cd3ff43a2f204eae3afcc7f1dc9523d4fae879c8f335c56bdd29c1581298b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is an accurate average future not an individual counterfactual?",
+        "answer": "Factual laws give marginals per action, not their same-disturbance pairing. Individual counterfactuals need that coupling.",
+        "example": "U and1-U are both uniform, but observing U0.2 implies alternatives0.2 or0.8 under different couplings."
+      }
+    },
+    "qa/foundation-models:counterfactual-wm/residual-reuse": {
+      "source_sha256": "99cc834e111369d5b98ba252c8b2d64aa0e06d11e31fb293a09fac6dc5f94bfe",
+      "reviewed": true,
+      "fields": {
+        "question": "What is reused by residual reuse?",
+        "answer": "The observed-minus-factual-prediction residual is added to the alternative prediction. The true disturbance need not be recovered; reliability still needs suitable interaction assumptions.",
+        "example": "A0.3-meter event-specific drift is retained when changing the predicted command."
+      }
+    },
+    "qa/foundation-models:counterfactual-wm/dt-jepa-information": {
+      "source_sha256": "c430f53d622ef7e8a8c2de5956be6111bf3520b7b12f9975ed6f56042019c02b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does its information set differ from DT-JEPA?",
+        "answer": "DT-JEPA predicts before acting from history. CWM needs the observed factual outcome. They answer different queries with different information.",
+        "example": "Before the first action, its not-yet-observed outcome cannot be passed to CWM."
+      }
+    },
+    "qa/foundation-models:counterfactual-wm/failure-control": {
+      "source_sha256": "bca7313eb351aee70540e0c7fbbc710208b9dae0121889b25e4f246c53cee845",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve nonzero gain-fault error?",
+        "answer": "A disturbance multiplying the command makes action effects event-specific and breaks shared additive residuals. Hiding error would erase a stated limitation.",
+        "example": "If only50% of a command is delivered, its residual cannot simply be reused for twice the command."
+      }
+    },
+    "qa/multimodal-models:autoregressive-view-model/view-stream": {
+      "source_sha256": "ab00795301de4889794f6407faa82dd98d02ae9427d76d8a28504821a2d3624c",
+      "reviewed": true,
+      "fields": {
+        "question": "How is scene information retained without explicit3D?",
+        "answer": "Prefill and history views provide context, with an active subset retrieved for the camera query. This conditions generation rather than fitting a NeRF or Gaussian scene.",
+        "example": "A room revisit can retrieve earlier door/table views without a complete mesh."
+      }
+    },
+    "qa/multimodal-models:autoregressive-view-model/own-rollouts": {
+      "source_sha256": "ac135bb4abe5478fe82009f112d7d10d37711a42b531c48fe7a8d518461b976c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why causal tuning on self-rollouts after bidirectional training?",
+        "answer": "Streaming sees generated history and accumulated errors absent from purely factual context. Causal tuning/distillation addresses that path and few-step sampling.",
+        "example": "Later clips may condition on a slightly misplaced generated table leg, not always a real one."
+      }
+    },
+    "qa/multimodal-models:autoregressive-view-model/counterfactual-not-revisit": {
+      "source_sha256": "3cc030936e805706ad5a5b52df9bb89fc64a5b87acca86a9d9f29bc4bce90f7e",
+      "reviewed": true,
+      "fields": {
+        "question": "Does revisit consistency imply CWM counterfactual ability?",
+        "answer": "No. Revisit persistence concerns camera paths and generated history. Individual counterfactuals require a same-disturbance coupling across actions.",
+        "example": "A stable door frame says nothing about a boat’s alternative heading in the same wind."
+      }
+    },
+    "qa/multimodal-models:autoregressive-view-model/no-cheap-shadow": {
+      "source_sha256": "d37b1ff2c25a97aeb9b66382079527054a2a7a1eca72fe9e32a2a3149511793e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not count a tiny retrieval example as reproduction?",
+        "answer": "Retrieval cannot replace14B video generation, flow training and self-rollout tuning. The cost gate requires explicit non-reproduction rather than a cheap shadow.",
+        "example": "Retrieving a nearby camera frame does not generate unseen regions or dynamic objects."
+      }
+    }
+  }
+}

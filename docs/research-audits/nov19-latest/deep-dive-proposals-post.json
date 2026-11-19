@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-19",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "post-training:eca-credit",
+      "target_card": "post-training/reward-and-credit",
+      "source_revisions": {
+        "post-training:eca-credit": "25167093ccd4a0b569f3149946478ac17a51c59bb7c792588ef6fd482404a031",
+        "post-training:opcredit": "68850a49841d1702552ad4020e63204a73b9860466f8f33e47c304390cc5f4f0"
+      },
+      "comparison": {
+        "position": "固定G=8、H=3的势函数suffix return、对侧fold样本标准差/0.25 floor、novelty gate、search-local token advantage及无ratio clip的序列求和策略损失。冻结scorer打分、检索器和完整LLM训练未实现。",
+        "tradeoff": "OpCredit在KG操作上组合复用分支结果的BOC与答案邻域的FTC；ECA在文本检索中用冻结模型对证据的答案似然做势函数。二者都把训练信用对齐到操作span，但不能互换状态定义、势函数或把训练gold放进Actor。",
+        "sections": [
+          "背景与主要改动",
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "ECA和OpCredit是否都是同一种过程奖励？",
+        "body": "OpCredit在KG操作上组合复用分支结果的BOC与答案邻域的FTC；ECA在文本检索中用冻结模型对证据的答案似然做势函数。二者都把训练信用对齐到操作span，但不能互换状态定义、势函数或把训练gold放进Actor。 不会。组件只接收外部训练势函数数值、奖励和span mask，不实现或评测Agent，也不接收答案文本。参考答案只应供独立训练scorer；推理Actor只能看合法问题、自身历史和观察。",
+        "papers": [
+          "post-training:eca-credit",
+          "post-training:opcredit"
+        ]
+      },
+      "question": {
+        "id": "nov19-eca-credit",
+        "question": "ECA和OpCredit是否都是同一种过程奖励？",
+        "answer": "不是。OpCredit的FTC依赖KG答案邻域与操作局部前沿，ECA依赖冻结策略对去重文本证据的参考答案似然；共享search-local分配原则不代表势函数可替换。",
+        "example": "教学例：一段检索文档可提高答案token似然，却没有可直接代入KG一跳邻域的活动实体集合。",
+        "papers": [
+          "post-training:eca-credit",
+          "post-training:opcredit"
+        ]
+      },
+      "update": {
+        "date": "2026-11-19",
+        "papers": [
+          "post-training:eca-credit",
+          "post-training:opcredit"
+        ],
+        "summary": "固定G=8、H=3的势函数suffix return、对侧fold样本标准差/0.25 floor、novelty gate、search-local token advantage及无ratio clip的序列求和策略损失。冻结scorer打分、检索器和完整LLM训练未实现。 完整实验高成本不复现；组件或资料不构成能力晋级。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Fixed G=8/H=3 suffix-potential returns, opposite-fold sample standard deviation with a 0.25 floor, novelty gating, search-local token advantages and the unclipped sequence-sum policy loss. No scorer checkpoint, retriever or full LLM trainer is implemented.",
+          "tradeoff": "OpCredit combines reused branch-outcome credit with answer-neighborhood frontier credit for KG operations. ECA uses a frozen model's answer likelihood from retrieved text as its potential. Both align training credit to operation spans, but their states and potentials are not interchangeable, and neither permits training gold in the actor."
+        },
+        "analysis": {
+          "title": "Are ECA and OpCredit the same process reward?",
+          "body": "OpCredit combines reused branch-outcome credit with answer-neighborhood frontier credit for KG operations. ECA uses a frozen model's answer likelihood from retrieved text as its potential. Both align training credit to operation spans, but their states and potentials are not interchangeable, and neither permits training gold in the actor. No. It accepts external training-potential values, rewards and span masks, not answer text, and implements no evaluated agent. Reference answers belong only to an isolated training scorer; inference actors see legitimate questions, history and observations."
+        },
+        "question": {
+          "question": "Are ECA and OpCredit the same process reward?",
+          "answer": "No. OpCredit's FTC depends on KG answer neighborhoods and operation-local frontiers, whereas ECA depends on a frozen policy's reference-answer likelihood from deduplicated text. Shared operation-local assignment does not make the potentials interchangeable.",
+          "example": "Teaching example: a retrieved passage can improve answer-token likelihood without defining an active entity frontier in a one-hop KG neighborhood."
+        },
+        "update": "Fixed G=8/H=3 suffix-potential returns, opposite-fold sample standard deviation with a 0.25 floor, novelty gating, search-local token advantages and the unclipped sequence-sum policy loss. No scorer checkpoint, retriever or full LLM trainer is implemented. The high-cost full experiment is not reproduced; components or references do not establish capability promotion."
+      }
+    },
+    {
+      "paper": "post-training:mrpd-replay",
+      "target_card": "post-training/student-trajectory-distillation",
+      "source_revisions": {
+        "post-training:mrpd-replay": "d6fd4cb967ed5da07b26e1a2be058067588d926517ce97f941f0f4880df8901e",
+        "post-training:streaming-opd": "d1d113d64cd6d0a49407520af48c62e17235118dcd1455cfd973ce328d260e24"
+      },
+      "comparison": {
+        "position": "显式chronological log schedule检查、teacher-top-k加tail的reverse KL、日志策略ratio与0.2/0.28非对称clip、response-mean损失和冻结teacher/logging policy梯度。无真实专家日志/训练器/环境集成。",
+        "tradeoff": "Streaming OPD在新学生生成prefix上拆开生成、交付、更新时钟，top-k部分KL不补tail且作截断；MRPD不生成新轨迹，按专家日志顺序重放，top-k和tail合成完整粗粒化分布，并使用reverse KL。二者不能仅因都写top-k而共用损失。",
+        "sections": [
+          "背景与主要改动",
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "MRPD的top-k损失能替换Streaming OPD损失吗？",
+        "body": "Streaming OPD在新学生生成prefix上拆开生成、交付、更新时钟，top-k部分KL不补tail且作截断；MRPD不生成新轨迹，按专家日志顺序重放，top-k和tail合成完整粗粒化分布，并使用reverse KL。二者不能仅因都写top-k而共用损失。 只证明小张量算子、teacher/logging detach、工具观察零梯度和归约在CUDA可运行；没有训练Qwen3、多专家合并或验证论文能力。原作者仓库链接本轮404，不能称已取得其训练源码。",
+        "papers": [
+          "post-training:mrpd-replay",
+          "post-training:streaming-opd"
+        ]
+      },
+      "question": {
+        "id": "nov19-mrpd-replay",
+        "question": "MRPD的top-k损失能替换Streaming OPD损失吗？",
+        "answer": "不能。MRPD计算student到teacher的粗粒化reverse KL，dense项不经ratio和clip；Streaming OPD对teacher top-k求部分forward样式和、无tail且另作非负截断，还面向新生成片段。",
+        "example": "教学例：相同top1 token下，MRPD的tail mismatch可使KL大于0，而Streaming的被截断部分和可能为0。",
+        "papers": [
+          "post-training:mrpd-replay",
+          "post-training:streaming-opd"
+        ]
+      },
+      "update": {
+        "date": "2026-11-19",
+        "papers": [
+          "post-training:mrpd-replay",
+          "post-training:streaming-opd"
+        ],
+        "summary": "显式chronological log schedule检查、teacher-top-k加tail的reverse KL、日志策略ratio与0.2/0.28非对称clip、response-mean损失和冻结teacher/logging policy梯度。无真实专家日志/训练器/环境集成。 完整实验高成本不复现；组件或资料不构成能力晋级。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Explicit chronological-log schedule checks, teacher-top-k-plus-tail reverse KL, logging-policy ratios, asymmetric 0.2/0.28 clipping, response-mean reduction and frozen teacher/logging gradients. No real expert log, trainer or environment integration.",
+          "tradeoff": "Streaming OPD decouples generation, delivery and updates on fresh student prefixes; its partial top-k loss has no tail atom and is clipped. MRPD generates no new trajectory, replays expert steps in order and forms a complete coarsened top-k-plus-tail distribution for reverse KL. A shared top-k label does not justify sharing their losses."
+        },
+        "analysis": {
+          "title": "Can MRPD's top-k loss replace Streaming OPD's loss?",
+          "body": "Streaming OPD decouples generation, delivery and updates on fresh student prefixes; its partial top-k loss has no tail atom and is clipped. MRPD generates no new trajectory, replays expert steps in order and forms a complete coarsened top-k-plus-tail distribution for reverse KL. A shared top-k label does not justify sharing their losses. Only that tiny tensor operators, teacher/logging detachment, observation masks and reduction work on CUDA. It does not train Qwen3 or consolidate experts. The author-provided repository returned 404, so obtaining the training source is not claimed."
+        },
+        "question": {
+          "question": "Can MRPD's top-k loss replace Streaming OPD's loss?",
+          "answer": "No. MRPD uses coarsened student-to-teacher reverse KL directly, without ratio or clipping on the dense term. Streaming OPD uses a teacher-top-k partial forward-style sum without a tail and clips it nonnegative, on fresh generated segments.",
+          "example": "Teaching example: with the same top1 token, a tail mismatch can make MRPD KL positive while Streaming's clipped partial sum is zero."
+        },
+        "update": "Explicit chronological-log schedule checks, teacher-top-k-plus-tail reverse KL, logging-policy ratios, asymmetric 0.2/0.28 clipping, response-mean reduction and frozen teacher/logging gradients. No real expert log, trainer or environment integration. The high-cost full experiment is not reproduced; components or references do not establish capability promotion."
+      }
+    },
+    {
+      "paper": "post-training:dcc-aggregation",
+      "target_card": "post-training/reward-and-credit",
+      "source_revisions": {
+        "post-training:dcc-aggregation": "c282369a45c9a59d57f58f3aa6bfc70ff414371a1dafca2015738f6608192778",
+        "post-training:dynamic-rubric": "c07b566ed4926d31d375558d5d4dcab3989d6dddb98123114dc9584c60480c7d"
+      },
+      "comparison": {
+        "position": "CPU精确1D two-medians、共享clip区间、相同分数退化、最小split tie-break与可选权重归约。只处理已存在的合法judge分数，不调用或伪造judge，也不训练GRPO。",
+        "tradeoff": "DynamicRubric改变评估维度和权重，并与policy共进化；DCC把rubric、judge和权重视为给定，仅根据当前候选组数值拟合共享clip端点。二者解决评估器适应与分数量纲影响两个不同层次，不可把聚合核当动态judge。",
+        "sections": [
+          "背景与主要改动",
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "DCC和DynamicRubric都使用rubric，作用点相同吗？",
+        "body": "DynamicRubric改变评估维度和权重，并与policy共进化；DCC把rubric、judge和权重视为给定，仅根据当前候选组数值拟合共享clip端点。二者解决评估器适应与分数量纲影响两个不同层次，不可把聚合核当动态judge。 two-medians可让孤立极端值自成一簇，因此共享区间上界就等于该极值。DCC提供条件性的贡献上界，不是保证移除所有outlier或提高任务能力。",
+        "papers": [
+          "post-training:dcc-aggregation",
+          "post-training:dynamic-rubric"
+        ]
+      },
+      "question": {
+        "id": "nov19-dcc-aggregation",
+        "question": "DCC和DynamicRubric都使用rubric，作用点相同吗？",
+        "answer": "不同。DynamicRubric生成/更新标准和权重；DCC固定这些语义，只变换已有评分的数值范围。权重只进入最终平均，不改变中心。",
+        "example": "教学例：把某维权重从1改成100会改变最终reward，却不会改变DCC为同一分数矩阵拟合的两个端点。",
+        "papers": [
+          "post-training:dcc-aggregation",
+          "post-training:dynamic-rubric"
+        ]
+      },
+      "update": {
+        "date": "2026-11-19",
+        "papers": [
+          "post-training:dcc-aggregation",
+          "post-training:dynamic-rubric"
+        ],
+        "summary": "CPU精确1D two-medians、共享clip区间、相同分数退化、最小split tie-break与可选权重归约。只处理已存在的合法judge分数，不调用或伪造judge，也不训练GRPO。 完整实验高成本不复现；组件或资料不构成能力晋级。"
+      },
+      "english": {
+        "comparison": {
+          "position": "CPU exact 1D two-medians, shared clipping, constant-score degeneracy, smallest-split tie breaking and optional weighted reduction. It consumes existing legitimate judge scores, without calling or simulating a judge or training GRPO.",
+          "tradeoff": "DynamicRubric changes evaluation criteria and weights while co-evolving with the policy. DCC treats rubric, judge and weights as given, fitting shared clipping endpoints from the current group's numeric scores. They address different levels—evaluator adaptation versus score-scale effects—and an aggregator is not a dynamic judge."
+        },
+        "analysis": {
+          "title": "Do DCC and DynamicRubric act at the same point?",
+          "body": "DynamicRubric changes evaluation criteria and weights while co-evolving with the policy. DCC treats rubric, judge and weights as given, fitting shared clipping endpoints from the current group's numeric scores. They address different levels—evaluator adaptation versus score-scale effects—and an aggregator is not a dynamic judge. Two-medians can isolate an extreme in its own cluster, making that value the upper endpoint. DCC offers a conditional contribution bound, not universal outlier removal or capability improvement."
+        },
+        "question": {
+          "question": "Do DCC and DynamicRubric act at the same point?",
+          "answer": "No. DynamicRubric generates or updates criteria and weights; DCC holds those semantics fixed and transforms existing score ranges. Weights enter only the final average, not center estimation.",
+          "example": "Teaching example: changing a criterion weight from1 to100 changes rewards but not the fitted endpoints of the same score matrix."
+        },
+        "update": "CPU exact 1D two-medians, shared clipping, constant-score degeneracy, smallest-split tie breaking and optional weighted reduction. It consumes existing legitimate judge scores, without calling or simulating a judge or training GRPO. The high-cost full experiment is not reproduced; components or references do not establish capability promotion."
+      }
+    },
+    {
+      "paper": "post-training:led-edits",
+      "target_card": "post-training/policy-optimization",
+      "source_revisions": {
+        "post-training:led-edits": "25308054942444e05c5b053eb640c50cdec6d9639a26429efd15be4fb27ee02c",
+        "post-training:orl-diffusion": "61fd35c2b6c66949846328e6ea75437083da79c96dae789e9f1594ce96d22df7"
+      },
+      "comparison": {
+        "position": "最长公共子序列的固定block edit标签、每gap单次Ins、末尾gap不造锚点、mask阈值fallback、visible-token edit阈值以及同时编辑后截断/补mask。没有扩散模型forward、多阶段SFT或循环重采样decoder。",
+        "tradeoff": "ORL让扩散模型在自身诱导的残差状态上学习并需专用推理链；LED改变离散序列的长度对齐与edit监督，插删由LCS提供标签。二者都处理训练/推理状态差异，但残差分布不等于编辑动作，两个review边界也不能互相补成完整模型。",
+        "sections": [
+          "背景与主要改动",
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "LED能直接替代ORL的残差学习吗？",
+        "body": "ORL让扩散模型在自身诱导的残差状态上学习并需专用推理链；LED改变离散序列的长度对齐与edit监督，插删由LCS提供标签。二者都处理训练/推理状态差异，但残差分布不等于编辑动作，两个review边界也不能互相补成完整模型。 不是。当前程序真实执行确定性LCS与单轮编辑，gold target只用于监督标签构造；没有模型预测、扩散SFT、多阶段训练或基准答案生成，因此只属L1机制诊断。",
+        "papers": [
+          "post-training:led-edits",
+          "post-training:orl-diffusion"
+        ]
+      },
+      "question": {
+        "id": "nov19-led-edits",
+        "question": "LED能直接替代ORL的残差学习吗？",
+        "answer": "不能。LED在离散token位置上重建插删监督，ORL传递模型残差分布并在线收集状态。共同关注exposure bias，不代表输入状态、训练目标和推理引擎相同。",
+        "example": "教学例：LCS输出Ins标签没有提供下一轮完整残差概率张量，也没有训练过扩散模型。",
+        "papers": [
+          "post-training:led-edits",
+          "post-training:orl-diffusion"
+        ]
+      },
+      "update": {
+        "date": "2026-11-19",
+        "papers": [
+          "post-training:led-edits",
+          "post-training:orl-diffusion"
+        ],
+        "summary": "最长公共子序列的固定block edit标签、每gap单次Ins、末尾gap不造锚点、mask阈值fallback、visible-token edit阈值以及同时编辑后截断/补mask。没有扩散模型forward、多阶段SFT或循环重采样decoder。 完整实验高成本不复现；组件或资料不构成能力晋级。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Fixed-block LCS edit targets, one Ins per gap, no fictitious terminal anchor, mask-threshold fallback, visible-token edit threshold and simultaneous edits followed by truncation/padding. No diffusion forward pass, multi-stage SFT or cycle-resampling decoder.",
+          "tradeoff": "ORL learns on model-induced residual states and requires its own inference chain. LED changes discrete length alignment and edit supervision using LCS targets. Both address training/inference state mismatch, but residual distributions are not edit actions, and their separate local boundaries do not combine into a complete model."
+        },
+        "analysis": {
+          "title": "Can LED directly replace ORL residual learning?",
+          "body": "ORL learns on model-induced residual states and requires its own inference chain. LED changes discrete length alignment and edit supervision using LCS targets. Both address training/inference state mismatch, but residual distributions are not edit actions, and their separate local boundaries do not combine into a complete model. No. The program executes deterministic LCS and edit transitions, with a clean target only for label construction. It has no model prediction, diffusion SFT, multi-stage training or benchmark answer generation, so it is an L1 mechanism diagnostic."
+        },
+        "question": {
+          "question": "Can LED directly replace ORL residual learning?",
+          "answer": "No. LED reconstructs discrete position-level edit supervision. ORL transports model residual distributions and collects induced states online. Shared exposure-bias motivation does not imply equal states, objectives or inference engines.",
+          "example": "Teaching example: an LCS Ins label supplies neither a full next-round residual probability tensor nor a trained diffusion model."
+        },
+        "update": "Fixed-block LCS edit targets, one Ins per gap, no fictitious terminal anchor, mask-threshold fallback, visible-token edit threshold and simultaneous edits followed by truncation/padding. No diffusion forward pass, multi-stage SFT or cycle-resampling decoder. The high-cost full experiment is not reproduced; components or references do not establish capability promotion."
+      }
+    },
+    {
+      "paper": "post-training:hint-wam",
+      "target_card": "post-training/teacher-and-context",
+      "source_revisions": {
+        "post-training:hint-wam": "80b9df690f43af3700f2118ee0fdb42780d284a3f6e804455dce25b959beb2a3",
+        "post-training:video-opsd": "82a7cae2588d9fd34fa061aadb9c9002dd4127c10cdffa1be1e16010872882a8"
+      },
+      "comparison": {
+        "position": "只收录同源hindsight teacher、学生ODE状态上的energy-score与BC anchor、成本和限制。无本地模型/算子/指标，不用静态动作样本替代真实WAM蒸馏。",
+        "tradeoff": "Video-OPSD用人工证据帧为文本token提供特权自教师监督；HINT-WAM的特权是示范未来，目标是动作chunk分布而非文本token，且teacher必须与学生同一backbone。旧Video-OPSD的证据视图checkpoint审计不等于HINT-WAM训练。",
+        "sections": [
+          "背景与主要改动",
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "它与Video-OPSD的特权信息和输出相同吗？",
+        "body": "Video-OPSD用人工证据帧为文本token提供特权自教师监督；HINT-WAM的特权是示范未来，目标是动作chunk分布而非文本token，且teacher必须与学生同一backbone。旧Video-OPSD的证据视图checkpoint审计不等于HINT-WAM训练。 完整方法需要真实backbone、未来teacher训练和学生ODE轨迹。原文测得8GPU×71.6小时；静态随机动作的energy-score公式不等于该训练链。因此只收录并审查DONE，无待验收GPU或自动重试。",
+        "papers": [
+          "post-training:hint-wam",
+          "post-training:video-opsd"
+        ]
+      },
+      "question": {
+        "id": "nov19-hint-wam",
+        "question": "它与Video-OPSD的特权信息和输出相同吗？",
+        "answer": "不同。Video-OPSD选择证据帧并蒸馏文本token；HINT-WAM读取示范未来并对动作chunk分布蒸馏，同backbone与teacher-only未来隔离是定义条件。",
+        "example": "教学例：对文本token加evidence权重不能训练6.02B WAM的动作ODE，也不会提供机器人成功率。",
+        "papers": [
+          "post-training:hint-wam",
+          "post-training:video-opsd"
+        ]
+      },
+      "update": {
+        "date": "2026-11-19",
+        "papers": [
+          "post-training:hint-wam",
+          "post-training:video-opsd"
+        ],
+        "summary": "只收录同源hindsight teacher、学生ODE状态上的energy-score与BC anchor、成本和限制。无本地模型/算子/指标，不用静态动作样本替代真实WAM蒸馏。 完整实验高成本不复现；组件或资料不构成能力晋级。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Review only: same-backbone hindsight teacher, energy score on student ODE states, BC anchor, costs and limitations. No local model, operator or metrics; static action samples do not substitute for WAM distillation.",
+          "tradeoff": "Video-OPSD uses annotated evidence frames to supervise text tokens through a privileged self-teacher. HINT-WAM's privilege is demonstration future, its target is an action-chunk distribution and its teacher must share the student's backbone. An existing Video-OPSD checkpoint evidence-view audit does not establish HINT-WAM training."
+        },
+        "analysis": {
+          "title": "Are its privileged information and outputs the same as Video-OPSD?",
+          "body": "Video-OPSD uses annotated evidence frames to supervise text tokens through a privileged self-teacher. HINT-WAM's privilege is demonstration future, its target is an action-chunk distribution and its teacher must share the student's backbone. An existing Video-OPSD checkpoint evidence-view audit does not establish HINT-WAM training. The defining method requires the real backbone, hindsight-teacher training and student ODE trajectories. The reported cost is eight GPUs for71.6 hours. An energy-score formula on static random actions is not that chain, so this is review-only DONE, without pending GPU acceptance or automatic retry."
+        },
+        "question": {
+          "question": "Are its privileged information and outputs the same as Video-OPSD?",
+          "answer": "No. Video-OPSD selects evidence frames and distills text tokens. HINT-WAM reads demonstration future and distills action-chunk distributions; same-backbone and teacher-only future isolation define the method.",
+          "example": "Teaching example: evidence-weighted text-token loss does not train a6.02B WAM action ODE or provide robot success rates."
+        },
+        "update": "Review only: same-backbone hindsight teacher, energy score on student ODE states, BC anchor, costs and limitations. No local model, operator or metrics; static action samples do not substitute for WAM distillation. The high-cost full experiment is not reproduced; components or references do not establish capability promotion."
+      }
+    }
+  ]
+}

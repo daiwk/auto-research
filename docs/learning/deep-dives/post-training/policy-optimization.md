@@ -7,7 +7,7 @@ hide:
 
 # 同一个GRPO名字之外：优势尺度、裁剪单位与训推失配
 
-[LLM 后训练](../index.md) · 更新 2026-11-18 · 63 篇主题资料 / 15 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-19 · 64 篇主题资料 / 16 篇重点对照
 
 GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。
 
@@ -40,6 +40,7 @@ GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比�
 | [SpeCal: Spectral Calibration for Unsupervised RLVR](../../../post-training/2611.20691-specal/README.md) · [原始来源](https://arxiv.org/abs/2611.20691v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 归一化response表示的中心Gram谱、质量×effective-rank带通、LOO去噪SVD条件支持及双层RMS advantage校准。 | GRPO使用组内reward均值/方差；SpeCal还依赖跨层token平均后的表示谱和LOO条件支持，并在batch/group两级RMS校准，不能只换一个reward标准差来冒充。 |
 | [Regularized Score Centering](../../../post-training/2611.21791-regularized-score-centering/README.md) · [原始来源](https://arxiv.org/abs/2611.21791v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 独立auxiliary actions的加权score center、detached TIS权重、独立KL cap的reverse-KL梯度估计；不是reward减均值。 | RSC专门惩罚learner相对产生本批数据的behavior分布的reverse KL，参考随sampler刷新；GRPO常以较固定pretrained reference约束。行为概率不能被另一个reference概率替换。 |
 | [Get Hint-Augmented GRPO Done Right Through Activation Steering](../../../post-training/2611.23124-ash-hint-steering/README.md) · [原始来源](https://arxiv.org/abs/2611.23124v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 只收录每步先训练steering再GRPO、hint/plain独立归一化advantage及最后一步不更新model的完整顺序；不把DPO公式当实现。 | GRPO消除critic但仍依赖同组相对reward；ASH在hint/plain双组上分别标准化，在GRPO之前另训activation steering并在最终步停model更新，防止返回stale向量。旧GRPO候选成功率不能当无hint生成能力。 |
+| [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](../../../post-training/2611.23750-led-edits/README.md) · [原始来源](https://arxiv.org/abs/2611.23750v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 最长公共子序列的固定block edit标签、每gap单次Ins、末尾gap不造锚点、mask阈值fallback、visible-token edit阈值以及同时编辑后截断/补mask。没有扩散模型forward、多阶段SFT或循环重采样decoder。 | ORL让扩散模型在自身诱导的残差状态上学习并需专用推理链；LED改变离散序列的长度对齐与edit监督，插删由LCS提供标签。二者都处理训练/推理状态差异，但残差分布不等于编辑动作，两个review边界也不能互相补成完整模型。 |
 
 </div>
 
@@ -104,6 +105,12 @@ Dr.GRPO式未缩放优势能避免总reward组std抵消乘子，但scorer若均�
 steering loss拟合产生当前hint/plain样本的同一模型。先改model再拟合会用stale对应关系；最后一步只更新steering不改model，避免返回过时向量。 GRPO消除critic但仍依赖同组相对reward；ASH在hint/plain双组上分别标准化，在GRPO之前另训activation steering并在最终步停model更新，防止返回stale向量。旧GRPO候选成功率不能当无hint生成能力。 本轮边界：只收录每步先训练steering再GRPO、hint/plain独立归一化advantage及最后一步不更新model的完整顺序；不把DPO公式当实现。
 
 对照来源：[ash-hint-steering](../../../post-training/2611.23124-ash-hint-steering/README.md) · [grpo](../../../post-training/2402.03300-grpo/README.md)
+
+### LED能直接替代ORL的残差学习吗？
+
+ORL让扩散模型在自身诱导的残差状态上学习并需专用推理链；LED改变离散序列的长度对齐与edit监督，插删由LCS提供标签。二者都处理训练/推理状态差异，但残差分布不等于编辑动作，两个review边界也不能互相补成完整模型。 不是。当前程序真实执行确定性LCS与单轮编辑，gold target只用于监督标签构造；没有模型预测、扩散SFT、多阶段训练或基准答案生成，因此只属L1机制诊断。
+
+对照来源：[led-edits](../../../post-training/2611.23750-led-edits/README.md) · [orl-diffusion](../../../post-training/2610.20687-orl-diffusion/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -219,9 +226,23 @@ steering loss拟合产生当前hint/plain样本的同一模型。先改model再�
 
     对照来源：[ash-hint-steering](../../../post-training/2611.23124-ash-hint-steering/README.md) · [grpo](../../../post-training/2402.03300-grpo/README.md)
 
+### LED能直接替代ORL的残差学习吗？ {#cross-nov19-led-edits}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。LED在离散token位置上重建插删监督，ORL传递模型残差分布并在线收集状态。共同关注exposure bias，不代表输入状态、训练目标和推理引擎相同。
+
+    **教学例子：** 教学例：LCS输出Ins标签没有提供下一轮完整残差概率张量，也没有训练过扩散模型。
+
+    对照来源：[led-edits](../../../post-training/2611.23750-led-edits/README.md) · [orl-diffusion](../../../post-training/2610.20687-orl-diffusion/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-19** · 最长公共子序列的固定block edit标签、每gap单次Ins、末尾gap不造锚点、mask阈值fallback、visible-token edit阈值以及同时编辑后截断/补mask。没有扩散模型forward、多阶段SFT或循环重采样decoder。 完整实验高成本不复现；组件或资料不构成能力晋级。
+
+涉及：[led-edits](../../../post-training/2611.23750-led-edits/README.md) · [orl-diffusion](../../../post-training/2610.20687-orl-diffusion/README.md)
 
 **2026-11-18** · 只收录每步先训练steering再GRPO、hint/plain独立归一化advantage及最后一步不更新model的完整顺序；不把DPO公式当实现。 完整实验高成本不复现；组件诊断不等于能力比较。
 
@@ -263,7 +284,7 @@ steering loss拟合产生当前hint/plain样本的同一模型。先改model再�
 
 覆盖 54 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 63 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 64 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -330,6 +351,7 @@ steering loss拟合产生当前hint/plain样本的同一模型。先改model再�
 - [SpeCal: Spectral Calibration for Unsupervised RLVR](../../../post-training/2611.20691-specal/README.md)
 - [Regularized Score Centering](../../../post-training/2611.21791-regularized-score-centering/README.md)
 - [Get Hint-Augmented GRPO Done Right Through Activation Steering](../../../post-training/2611.23124-ash-hint-steering/README.md)
+- [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](../../../post-training/2611.23750-led-edits/README.md)
 
 </details>
 

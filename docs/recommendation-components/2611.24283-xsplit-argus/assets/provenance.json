@@ -1,0 +1,11 @@
+{
+  "figure": 1,
+  "caption": "Figure 1: X-split ARGUS architecture: jointly trained history compression and\ncandidate-aware ranking with recent events, supervised click prediction,\nand knowledge distillation.",
+  "source_url": "https://arxiv.org/pdf/2611.24283v1",
+  "source_version": "v1",
+  "source_sha256": "7809ed9910110de5b7e94703fe47d21508eca0037e8b121f6215ee8b50625b26",
+  "extraction": "fixed v1 PDF page5, crop[80, 300, 515, 555]; no redraw",
+  "file": "paper-figure-01.png",
+  "asset_sha256": "a86f4abca52a39bea8290ad0079d63aca18493ef46c407c30ce79bd7985ac545",
+  "copyright": "Original paper authors; no claim of local generation"
+}

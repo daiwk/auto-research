@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-19-latest-components",
+  "requested_window": {
+    "start": "2026-11-18",
+    "end": "2026-11-19"
+  },
+  "accepted_papers": [
+    "agent-research:ahe-beta",
+    "agent-research:execjudges",
+    "agent-research:kaer",
+    "agent-research:rsibench-infra",
+    "agent-research:safe-personal-rsi",
+    "agent-research:searchinject",
+    "agent-research:timeout-cascades",
+    "foundation-models:counterfactual-wm",
+    "foundation-models:kernel-ridge-attention",
+    "foundation-models:loopcache-interface",
+    "foundation-models:narrow-spec",
+    "multimodal-models:autoregressive-view-model",
+    "post-training:dcc-aggregation",
+    "post-training:eca-credit",
+    "post-training:hint-wam",
+    "post-training:led-edits",
+    "post-training:mrpd-replay",
+    "recommendation:mars-fapo",
+    "recommendation:mle-agents",
+    "recommendation:xsplit-argus"
+  ],
+  "component_papers": [
+    "agent-research:ahe-beta",
+    "agent-research:execjudges",
+    "agent-research:kaer",
+    "agent-research:safe-personal-rsi",
+    "agent-research:searchinject",
+    "agent-research:timeout-cascades",
+    "foundation-models:counterfactual-wm",
+    "foundation-models:kernel-ridge-attention",
+    "foundation-models:loopcache-interface",
+    "foundation-models:narrow-spec",
+    "post-training:dcc-aggregation",
+    "post-training:eca-credit",
+    "post-training:led-edits",
+    "post-training:mrpd-replay",
+    "recommendation:mars-fapo",
+    "recommendation:mle-agents",
+    "recommendation:xsplit-argus"
+  ],
+  "review_only_papers": [
+    "agent-research:rsibench-infra",
+    "multimodal-models:autoregressive-view-model",
+    "post-training:hint-wam"
+  ],
+  "new_papers": [
+    "foundation-models:kernel-ridge-attention",
+    "foundation-models:narrow-spec",
+    "foundation-models:loopcache-interface",
+    "foundation-models:counterfactual-wm",
+    "post-training:eca-credit",
+    "post-training:mrpd-replay",
+    "post-training:dcc-aggregation",
+    "post-training:led-edits",
+    "post-training:hint-wam",
+    "agent-research:ahe-beta",
+    "agent-research:timeout-cascades",
+    "agent-research:kaer",
+    "agent-research:safe-personal-rsi",
+    "agent-research:rsibench-infra",
+    "recommendation:mle-agents",
+    "recommendation:xsplit-argus",
+    "recommendation:mars-fapo",
+    "agent-research:execjudges"
+  ],
+  "announcement_overlap_backfill": [
+    "multimodal-models:autoregressive-view-model"
+  ],
+  "historical_directory_backfill": [
+    "agent-research:searchinject"
+  ],
+  "scope_note": "Finite high-value primary-method review, not full-text review of every metadata identity or institution-wide exhaustion. API publication, bulletin announcement, directory observation and repository pushes are separate events.",
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "scan_coverage_changed": false,
+  "cost_policy": "High-cost full experiments not reproduced; review DONE, terminal and no automatic retry/implementation queue."
+}

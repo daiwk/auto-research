@@ -7,7 +7,7 @@ hide:
 
 # 轨迹蒸馏：学生、提案与前缀分布
 
-[LLM 后训练](index.md) / 184 个问题 · 46 篇论文
+[LLM 后训练](index.md) / 188 个问题 · 47 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">184 个问题 · 46 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">188 个问题 · 47 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mrpd-replay" data-paper-title="Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts LLM 后训练 University of Illinois Urbana-Champaign 2026-11-18 MRPD把专家RL训练日志当作随训练步变化的课程，而非混洗后的离线数据池。学生与专家同一SFT初始化；第k步合并各域专家第k步日志，使用日志采样策略的log-prob做importance ratio，重算组相对奖励的非对称clipped PG。最终域专家只在日志prefix上提供分布，不重新采样或调用环境。默认dense项取教师top-256词以及剩余质量构成的tail atom，计算student到teacher的reverse KL； 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。显式chronological log schedule检查、teacher-top-k加tail的reverse KL、日志策略ratio与0.2/0.28非对称clip、response-mean损失和冻结teacher/logging policy梯度。无真实专家日志/训练器/环境集成。  student-trajectory-distillation 后训练算法组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 为什么专家日志不是普通离线混合数据？ MRPD依赖学生和专家共享初始化，并沿专家训练时序前进；原日志策略从共同起点逐步接近最终专家，使importance ratio有机会维持在clip范围内。混洗改变这个课程。 教学例：域A和B都必须先消费step0再step1；把step1放到最前不会被schedule检查器静默排序修复。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<span id="paper-post-training-mrpd-replay-8645d3c1" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d8e7b39f4897836a">为什么专家日志不是普通离线混合数据？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amrpd-replay">Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>MRPD依赖学生和专家共享初始化，并沿专家训练时序前进；原日志策略从共同起点逐步接近最终专家，使importance ratio有机会维持在clip范围内。混洗改变这个课程。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：域A和B都必须先消费step0再step1；把step1放到最前不会被schedule检查器静默排序修复。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24059v1">原论文</a> · <a href="../../../../post-training/2611.24059-mrpd-replay/">实现解读</a> · <a href="#qa-d8e7b39f4897836a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mrpd-replay" data-paper-title="Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts LLM 后训练 University of Illinois Urbana-Champaign 2026-11-18 MRPD把专家RL训练日志当作随训练步变化的课程，而非混洗后的离线数据池。学生与专家同一SFT初始化；第k步合并各域专家第k步日志，使用日志采样策略的log-prob做importance ratio，重算组相对奖励的非对称clipped PG。最终域专家只在日志prefix上提供分布，不重新采样或调用环境。默认dense项取教师top-256词以及剩余质量构成的tail atom，计算student到teacher的reverse KL； 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。显式chronological log schedule检查、teacher-top-k加tail的reverse KL、日志策略ratio与0.2/0.28非对称clip、response-mean损失和冻结teacher/logging policy梯度。无真实专家日志/训练器/环境集成。  student-trajectory-distillation 后训练算法组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 为什么top-k之外还要一个tail atom？ 教师top-k只保留若干token时，两边剩余概率质量通常不同。tail保留该质量差，构成k+1原子粗粒化分布；对选中token单独重归一化会删除此监督。 教学例：教师选中token概率.5，学生.3，其tail分别.5/.7；若各自对singleton归一化会错误给KL=0。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-51a14ab619287270">为什么top-k之外还要一个tail atom？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amrpd-replay">Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>教师top-k只保留若干token时，两边剩余概率质量通常不同。tail保留该质量差，构成k+1原子粗粒化分布；对选中token单独重归一化会删除此监督。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：教师选中token概率.5，学生.3，其tail分别.5/.7；若各自对singleton归一化会错误给KL=0。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24059v1">原论文</a> · <a href="../../../../post-training/2611.24059-mrpd-replay/">实现解读</a> · <a href="#qa-51a14ab619287270">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mrpd-replay" data-paper-title="Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts LLM 后训练 University of Illinois Urbana-Champaign 2026-11-18 MRPD把专家RL训练日志当作随训练步变化的课程，而非混洗后的离线数据池。学生与专家同一SFT初始化；第k步合并各域专家第k步日志，使用日志采样策略的log-prob做importance ratio，重算组相对奖励的非对称clipped PG。最终域专家只在日志prefix上提供分布，不重新采样或调用环境。默认dense项取教师top-256词以及剩余质量构成的tail atom，计算student到teacher的reverse KL； 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。显式chronological log schedule检查、teacher-top-k加tail的reverse KL、日志策略ratio与0.2/0.28非对称clip、response-mean损失和冻结teacher/logging policy梯度。无真实专家日志/训练器/环境集成。  student-trajectory-distillation 后训练算法组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 MRPD的top-k损失能替换Streaming OPD损失吗？ 不能。MRPD计算student到teacher的粗粒化reverse KL，dense项不经ratio和clip；Streaming OPD对teacher top-k求部分forward样式和、无tail且另作非负截断，还面向新生成片段。 教学例：相同top1 token下，MRPD的tail mismatch可使KL大于0，而Streaming的被截断部分和可能为0。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ce3eb87896b2d9da">MRPD的top-k损失能替换Streaming OPD损失吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amrpd-replay">Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。MRPD计算student到teacher的粗粒化reverse KL，dense项不经ratio和clip；Streaming OPD对teacher top-k求部分forward样式和、无tail且另作非负截断，还面向新生成片段。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：相同top1 token下，MRPD的tail mismatch可使KL大于0，而Streaming的被截断部分和可能为0。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24059v1">原论文</a> · <a href="../../../../post-training/2611.24059-mrpd-replay/">实现解读</a> · <a href="#qa-ce3eb87896b2d9da">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mrpd-replay" data-paper-title="Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts LLM 后训练 University of Illinois Urbana-Champaign 2026-11-18 MRPD把专家RL训练日志当作随训练步变化的课程，而非混洗后的离线数据池。学生与专家同一SFT初始化；第k步合并各域专家第k步日志，使用日志采样策略的log-prob做importance ratio，重算组相对奖励的非对称clipped PG。最终域专家只在日志prefix上提供分布，不重新采样或调用环境。默认dense项取教师top-256词以及剩余质量构成的tail atom，计算student到teacher的reverse KL； 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。显式chronological log schedule检查、teacher-top-k加tail的reverse KL、日志策略ratio与0.2/0.28非对称clip、response-mean损失和冻结teacher/logging policy梯度。无真实专家日志/训练器/环境集成。  student-trajectory-distillation 后训练算法组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 真实GPU执行这里证明了什么？ 只证明小张量算子、teacher/logging detach、工具观察零梯度和归约在CUDA可运行；没有训练Qwen3、多专家合并或验证论文能力。原作者仓库链接本轮404，不能称已取得其训练源码。 教学例：两条响应长度1和2应各占一半样本权重，而不是把3个token合并平均。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-d68ba6c54dba2af0">真实GPU执行这里证明了什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amrpd-replay">Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>只证明小张量算子、teacher/logging detach、工具观察零梯度和归约在CUDA可运行；没有训练Qwen3、多专家合并或验证论文能力。原作者仓库链接本轮404，不能称已取得其训练源码。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两条响应长度1和2应各占一半样本权重，而不是把3个token合并平均。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24059v1">原论文</a> · <a href="../../../../post-training/2611.24059-mrpd-replay/">实现解读</a> · <a href="#qa-d68ba6c54dba2af0">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:streaming-opd" data-paper-title="Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption LLM 后训练 Independent Researcher, China 2026-11-17 token局部teacher监督只依赖已生成prefix，不依赖未来token。片段可先进入candidate pool，等监督预算凑齐才更新，而不必每片段一次更新或等整答案结束。实现只在teacher选的top-k上求和，保留完整词表概率不重新归一化；这不是完整KL，部分和可为负，原文用log floor和[0,C]截断。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。保留完整因果prefix的新片段loss mask/version记录、teacher top-k不重归一化截断clip损失、按监督权重归约。  student-trajectory-distillation 后训练算法组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 completion、delivery、update为何可以分开？ token局部teacher监督只依赖已生成prefix，不依赖未来token。片段可先进入candidate pool，等监督预算凑齐才更新，而不必每片段一次更新或等整答案结束。 教学例：第2片段训练输入仍含第1片段，但第1片段mask为0。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
 <span id="paper-post-training-streaming-opd-a2591da7" class="ar-learning-paper-anchor"></span>

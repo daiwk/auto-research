@@ -65,7 +65,8 @@
         "foundation-models:gaugerope",
         "foundation-models:simq",
         "foundation-models:unigraph",
-        "foundation-models:dealrank"
+        "foundation-models:dealrank",
+        "foundation-models:kernel-ridge-attention"
       ]
     },
     {
@@ -225,7 +226,8 @@
         "foundation-models:spool",
         "foundation-models:echomoe",
         "foundation-models:risa",
-        "foundation-models:beyond-bitwidth"
+        "foundation-models:beyond-bitwidth",
+        "foundation-models:loopcache-interface"
       ]
     },
     {
@@ -261,7 +263,8 @@
         "foundation-models:tadm",
         "foundation-models:windowed-mtp",
         "foundation-models:b3",
-        "foundation-models:real-loss"
+        "foundation-models:real-loss",
+        "foundation-models:narrow-spec"
       ]
     },
     {

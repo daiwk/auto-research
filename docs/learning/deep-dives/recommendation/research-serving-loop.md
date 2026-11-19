@@ -7,7 +7,7 @@ hide:
 
 # 从更便宜的一次前向，到可验证的长期研究闭环
 
-[搜广推](../index.md) · 更新 2026-11-18 · 20 篇主题资料 / 6 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-19 · 22 篇主题资料 / 8 篇重点对照
 
 ROCS减少请求内重复计算，Rec-Distill将昂贵教师知识移到训练，Effective Training Time追踪训练生命周期损耗，FORTE控制特征退役风险，Self-Evolving RecSys把提案、实验和线上反馈接成长期循环。它们优化的时间尺度不同；省GPU、删特征和自动提出方案，都不能直接当作推荐效果提升。
 
@@ -31,6 +31,8 @@ ROCS减少请求内重复计算，Rec-Distill将昂贵教师知识移到训练�
 | [FORTE: A Production Framework for Feature Evaluation and Deprecation in Industrial Recommender Systems](../../../reproductions/2610.13806-forte/README.md) · [原始来源](https://arxiv.org/abs/2610.13806)<br>章节：背景与主要改动、核心公式、复现边界 | 冻结模型扰动依赖，经所有头/时间窗筛选，再联合消融、真实重训、线上实验与所有消费者血缘审计逐级退役特征。 | 单特征弱依赖不能相加推导联合安全；本地A100三种子没有候选通过全部门槛，最终保留基线，流程完成不等于删除带来收益。 |
 | [Self-Evolving Recommendation System: End-To-End Autonomous Model Optimization With LLM Agents](../../../reproductions/2602.10226-self-evolving-rec/README.md) · [原始来源](https://arxiv.org/abs/2602.10226)<br>章节：背景与主要改动、核心公式、本地复现 | 内层研究agent提出optimizer/结构/reward并运行工具，外层状态机控制约束、离线门槛和真实A/B promotion，结论写回journal。 | 可执行试验与独立评价是闭环必要条件，提案或注册名称不是能力；原文生产反馈不能用本地小实验替代，也不能因agent主动探索跳过门槛。 |
 | [CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation](../../../recommendation-components/2611.22418-cutagent/README.md) · [原始来源](https://arxiv.org/abs/2611.22418v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | CutAgent把多模态商品理解与可靠视频制作拆为GeneAgent和VideoAgent，以结构化creative gene连接。Gene规定narrative units和配音／音乐／脚本规则；前者经高CTR SFT和CTR-level GRPO学习规划，后者展开分镜并检索商品素材、做TTS/BGM和渲染，再只修复带时间证据的缺陷。 | AgenticRecTune把推荐系统配置方案经实验平台反馈沉淀到SkillHub，CutAgent把广告制作失败修复写成类目／gene条件经验。二者都复用执行经验，但优化对象、反馈和测试权限不同；本篇的LightGBM surrogate不是推荐实验平台，也不能替代真实线上随机分流证据。 |
+| [MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems](../../../recommendation-components/2611.23910-mle-agents/README.md) · [原始来源](https://arxiv.org/abs/2611.23910v1)<br>章节：背景与主要改动、核心公式、同主题对照 | Meta把提假设、改代码、训练和读指标组成有人监督的模型研发循环。2.0每轮名义上并行七个候选和一个方差探针，使用与线上影响校准过的加权NE，而不是只追逐点击AUPRC。失败块名单、结构化输出和只回传近期未采纳赢家控制上下文陈旧；最终模型仍由工程师审核并独立做线上实验。 | EvoPilot先锁定控制/实验两臂的比较合同并拒绝不匹配证据；MLE Agents强调搜索目标与同轮噪声探针。二者都不让“训练结束”自动成为可发布结论，目标校准也不能取代EvoPilot的产物一致性检查。 |
+| [MARS Technical Report](../../../recommendation-components/2611.24006-mars-fapo/README.md) · [原始来源](https://arxiv.org/abs/2611.24006v1)<br>章节：背景与主要改动、核心公式、同主题对照 | MARS让近线0.6B策略为用户产生跨召回、粗排、精排和重排的七维配置，经校验后缓存，在线始终不等待LLM。SFT建立合法格式，FAPO把偏好比较集中到实际不同的动作值token，最后GRPO在沙箱回放和冻结奖励模型上继续优化。正文版权行为Taobao，贡献者按名字母排序，不虚构个人一作机构。 | EvoPilot校验模型开发实验的两臂证据，MARS生成和训练线上流水线配置。MARS的缓存/fallback是服务安全，不能替代开发比较合同；ActionMask loss也不能证明策略已经能生成合法或优质配置。 |
 
 </div>
 
@@ -53,6 +55,18 @@ FORTE把成本节省的提案放进多道质量与血缘门槛，本地无候选
 GeneAgent采用Qwen3-VL-8B，冻结视觉模块、仅语言LoRA；SFT取观测CTR前20%，GRPO每商品采8个gene。LightGBM按类目内Low/Mid/High预测CTR-level，仅是训练奖励，不充当线上CTR。VideoAgent先按43类目选memory shard，再用gene相似度取已验证failure-correction作为制作约束；memory不是商品clip pool，反思不能用固定模板成功代替。 AgenticRecTune把推荐系统配置方案经实验平台反馈沉淀到SkillHub，CutAgent把广告制作失败修复写成类目／gene条件经验。二者都复用执行经验，但优化对象、反馈和测试权限不同；本篇的LightGBM surrogate不是推荐实验平台，也不能替代真实线上随机分流证据。
 
 对照来源：[cutagent](../../../recommendation-components/2611.22418-cutagent/README.md) · [agentic-rec-tune](../../../reproductions/2604.26969-agentic-rec-tune/README.md)
+
+### MLE Agents：工业精排的目标校准与方差探针准入：机制和证据边界
+
+§1.2给出0.3/0.7目标，§3.5明确与同轮variance probe比较，而不是任意旧基线。完成状态须有两条独立信号；一候选只改一项连贯机制。阈值来自历史噪声探针，不能把0.0005说成显著性检验或跨数据通用常数。接口返回离线搜索接纳和仍需人工审核，不发起训练或生产发布。 EvoPilot先锁定控制/实验两臂的比较合同并拒绝不匹配证据；MLE Agents强调搜索目标与同轮噪声探针。二者都不让“训练结束”自动成为可发布结论，目标校准也不能取代EvoPilot的产物一致性检查。
+
+对照来源：[mle-agents](../../../recommendation-components/2611.23910-mle-agents/README.md) · [evopilot](../../../reproductions/2609.21257-evopilot/README.md)
+
+### MARS：近线推荐编排与ActionMask偏好优化：机制和证据边界
+
+Eq11–13保留全chosen回答的生成anchor，只有偏好项乘clip(1+2(p+−p−)/p均值,0.2,3)。缺失任一历史V2P时权重为1。只有弱证据且达到相对gap才允许反转chosen/rejected；强证据不反转。动作mask由可信的字段值span/token对齐层提供，必须包含完整变化值而非共享JSON结构；不以脆弱字符串搜索冒充原tokenizer。历史配置V2P是观察统计，不是因果后验。 EvoPilot校验模型开发实验的两臂证据，MARS生成和训练线上流水线配置。MARS的缓存/fallback是服务安全，不能替代开发比较合同；ActionMask loss也不能证明策略已经能生成合法或优质配置。
+
+对照来源：[mars-fapo](../../../recommendation-components/2611.24006-mars-fapo/README.md) · [evopilot](../../../reproductions/2609.21257-evopilot/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -108,9 +122,37 @@ GeneAgent采用Qwen3-VL-8B，冻结视觉模块、仅语言LoRA；SFT取观测CT
 
     对照来源：[cutagent](../../../recommendation-components/2611.22418-cutagent/README.md) · [agentic-rec-tune](../../../reproductions/2604.26969-agentic-rec-tune/README.md)
 
+### MLE Agents和EvoPilot的准入能互代吗？ {#cross-cross-nov19-mle-agents}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。前者校准目标/训练噪声，后者核对两臂实验与产物；都还需要最终人工和线上确认。
+
+    **教学例子：** 教学例：数据版本不同的两臂即使NE差够大，也不能用噪声门槛盖过协议失败。
+
+    对照来源：[mle-agents](../../../recommendation-components/2611.23910-mle-agents/README.md) · [evopilot](../../../reproductions/2609.21257-evopilot/README.md)
+
+### MARS和EvoPilot都是Agent，有什么根本区别？ {#cross-cross-nov19-mars-fapo}
+
+??? note "展开答案与例子"
+
+    **答案：** MARS训练用户流水线动作；EvoPilot审核模型开发比较证据。配置格式合法不等于实验结论可信。
+
+    **教学例子：** 教学例：合法Minimal动作不能代替控制/实验模型的数据版本核对。
+
+    对照来源：[mars-fapo](../../../recommendation-components/2611.24006-mars-fapo/README.md) · [evopilot](../../../reproductions/2609.21257-evopilot/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-19** · 本地只实现posterior启发式权重、弱证据翻转规则与FAPO张量损失；没有0.6B生成、字段tokenizer、SFT/GRPO、Sandbox、奖励模型、iGraph缓存或实时推荐。结构token仍有生成梯度，rejected非动作token没有偏好梯度。 完整高成本实验不复现，审查DONE。
+
+涉及：[mars-fapo](../../../recommendation-components/2611.24006-mars-fapo/README.md) · [evopilot](../../../reproductions/2609.21257-evopilot/README.md)
+
+**2026-11-19** · 本地只执行目标与完成/准入接口。没有运行Claude研究调用、候选代码生成、私有数据分布式训练或线上A/B，也没有新增可执行Evolve搜索策略。合成输入不代表Meta模型指标。 完整高成本实验不复现，审查DONE。
+
+涉及：[mle-agents](../../../recommendation-components/2611.23910-mle-agents/README.md) · [evopilot](../../../reproductions/2609.21257-evopilot/README.md)
 
 **2026-11-18** · 本篇review-only，完整实验成本过高，不复现（审查DONE）。70K商品每件90–120clips、多模态teacher、8B训练／检索、TTS与渲染、397Bjudge及真实流量均未运行；不下载资源，不编造creative-gene规划器、素材检索或本地CTR。固定v1没有核实本篇作者仓库，FireRed等第三方baseline代码不算CutAgent开源。 完整实验高成本不复现，未作能力或Evolve晋级证据。
 
@@ -120,7 +162,7 @@ GeneAgent采用Qwen3-VL-8B，冻结视觉模块、仅语言LoRA；SFT取观测CT
 
 覆盖 19 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 20 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 22 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -144,6 +186,8 @@ GeneAgent采用Qwen3-VL-8B，冻结视觉模块、仅语言LoRA；SFT取观测CT
 - [SOLARIS: Speculative Offloading of Latent-bAsed Representation for Inference Scaling](../../../reproductions/2604.12110-solaris/README.md)
 - [Compute Only Once: UG-Separation for Efficient Large Recommendation Models](../../../reproductions/2602.10455-ug-sep/README.md)
 - [CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation](../../../recommendation-components/2611.22418-cutagent/README.md)
+- [MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems](../../../recommendation-components/2611.23910-mle-agents/README.md)
+- [MARS Technical Report](../../../recommendation-components/2611.24006-mars-fapo/README.md)
 
 </details>
 

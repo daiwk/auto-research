@@ -43,6 +43,10 @@
 
 - 2026-10-27 · [SWIM: Learning What Matters from Behaviors for JEPA World Models](../../foundation-models/2610.36662-swim/README.md)（`swim`）：JEPA world model 预测视觉 latent，但 latent 欧氏距离不一定反映规划进展。SCALE 用 simulator state 的距离校准 latent 几何；若状态中含无关坐标，均匀加权会把这些干扰也学进去。SWIM 先用已记录动作训练门控逆动力学，再把冻结的连续权重传给状态距离监督。
 
+## Brown University
+
+- 2026-11-18 · [Counterfactual World Models: JEPAs That Reason About "What If"](../../foundation-models/2611.24778-counterfactual-wm/README.md)（`counterfactual-wm`）：普通world model给动作的平均结果，不能仅凭更准的事实分布识别同一扰动下的个体反事实。本文将实际观测结果作为事件信息，加上同一事实预测器对两个动作的预测差；加性扰动时精确，平滑短时动力学下有交互误差界，但碰撞、乘法故障和弯曲坐标可破坏近似。 [Fixed-v1 source](https://arxiv.org/pdf/2611.24778v1).
+
 ## ByteDance
 
 - 2026-08-12 · [Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction](../../reproductions/2608.12209-gas/README.md)（`gas`）：常规 MLLM 只用文本 next-token loss，视觉结构只能被语言间接监督；统一理解/生成模型又会把生成参数和开销留到部署阶段。GAS 把生成改成纯训练期辅助任务：理解分支与生成分支共享较低层视觉路径，上层 Transformer 参数解耦；生成分支在与 LLM 输入相同的连续视觉空间自回归预测目标图像 embedding。
@@ -208,6 +212,7 @@
 
 ## Independent Researcher
 
+- 2026-11-18 · [Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting](../../foundation-models/2611.23896-kernel-ridge-attention/README.md)（`kernel-ridge-attention`）：KRA把历史关联写入固定大小的回归矩阵，同时保留后验协方差。共享可学习Fourier特征形成非线性核；内容相关OU时钟既衰减旧系数，也把协方差恢复到先验，使已经遗忘的方向重新可写。读取发生在当前值写入之后。 [Fixed-v1 source](https://arxiv.org/pdf/2611.23896v1).
 - 2026-11-11 · [Smart Model Routing for Order-of-Magnitude LLM Cost Reduction](../../foundation-models/2611.15911-smart-model-routing/README.md)（`smart-model-routing`）：本文研究**应用层在多个完整模型/endpoint 之间选路**，不是 MoE 内部 token→expert，也不是同一模型副本的负载均衡。核心问题是：在可接受质量下，让每个请求尽量使用便宜模型，同时计入 router、checker、被拒绝的小模型调用和长难题的额外 token 成本。
 - 2026-10-27 · [Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels](../../foundation-models/2610.36520-fold-bias/README.md)（`fold-bias`）：Attention Matching（AM）保留部分 keys，拟合每个保留项的静态 logit bias 和 values。标准 KV cache / attention 内核未必接收这项 bias；直接丢掉它，会改变压缩后注意力。FoldBias 在每个 head 的上下文 queries 上拟合一个共享方向，把每项 bias 写成沿该方向的 key 位移，保持 head 维度和模型自身 query 路径。
 - 2026-10-21 · [When Multiple Choices Are Correct: Asymmetric Probability Allocation in Jev and Other Decision Models](../../system-one/2610.29217-jev-multicorrect/README.md)（`jev-multicorrect`）：当一个列表有多个正确选项时，模型可能把大部分概率分给其中一个正确项，另一个正确项虽高于所有干扰项，概率仍低于均匀基线。单选 top-1 或“正确项都排在干扰项之前”因此会掩盖完整集合恢复的失败。论文同时分析 JEV、Luna 和 Gemini，避免把所有现象都归因于某一种架构。
@@ -362,6 +367,7 @@
 
 ## NVIDIA
 
+- 2026-11-18 · [NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding](../../foundation-models/2611.23835-narrow-spec/README.md)（`narrow-spec`）：把DFlash/EAGLE-3的整个残差宽度设为目标的二分之一或四分之一，并从头训练窄草稿；边界adapter连接目标hidden和共享词表。DFlash输出adapter可与目标head相乘，EAGLE-3输入adapter可折进embedding。head数量和head维度保持不变，因此KV cache不因残差流变窄而自动缩小。 [Fixed-v1 source](https://arxiv.org/pdf/2611.23835v1).
 - 2026-11-10 · [Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding](../../foundation-models/2611.13545-stochastic-rounding/README.md)（`stochastic-rounding`）：FP32 主权重在训练中发生小变化，转为 BF16 后却可能仍落在同一格点，导致 rollout 策略看不到更新。BF16 在一般正规数区间的格距比 FP16 大八倍，因此相似的小步长可表现出不同的有效更新速度。随机舍入按到相邻格点的距离选上下端点，在条件期望上保留主权重变化，而不是强行放大学习率。
 - 2026-07-23 · [Windowed-MTP: Removing the Full-Context Draft-KV Tax at Million-Token Context](../../reproductions/2607.21535-windowed-mtp/README.md)（`windowed-mtp`）：内置 MTP/NEXTN draft 通常每提出一个 token 都读取完整 KV cache；在百万 token 上，即使 target 已使用 GDN/Mamba 等便宜 verifier，draft 的全量 KV read 仍会成为瓶颈。Windowed-MTP 只改变 draft：保留最前面的 attention sink 与最近 $W$ 个 token，同时 target 继续读取完整上下文并验证所有候选。
 - 2024-11-20 · [Hymba: A Hybrid-head Architecture for Small Language Models](../../reproductions/2411.13676-hymba/README.md)（`hymba`）：同一层并行执行 attention 与状态空间分支，再用输入相关 gate 融合局部精确检索和线性长程状态。
@@ -408,6 +414,7 @@
 
 ## Peking University
 
+- 2026-11-18 · [LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers](../../foundation-models/2611.24301-loopcache-interface/README.md)（`loopcache-interface`）：固定深度的draft可能沿过时轨迹继续推进。LoopCache用新候选相对旧候选的logit差控制替换，并清除依赖旧token的所有后代。推测路径轮转读取同一loop cache，独立KV分支再以正确loop缓存重算；浅层差异较大时才单独读取对应loop的cache。 [Fixed-v1 source](https://arxiv.org/pdf/2611.24301v1).
 - 2026-10-23 · [EditJev: System One Routing for Image Editing Models](../../foundation-models/2610.32635-editjev/README.md)（`editjev`）：固定使用一个图像编辑器会忽视样本级互补性。EditJev先离线让所有候选产生输出并由judge评分，再将可靠质量差转为pairwise监督；router不生成模型名称，而直接输出固定候选顺序的utility vector。推理无需先运行各编辑器，仅对utility加beta倍固定速度分后选一次argmax。
 - 2026-03-27 · [Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers](../../reproductions/2603.26380-switch-attention/README.md)（`switch-attention`）：静态 hybrid attention 对所有 token 使用固定模式。Switch Attention 学习细粒度 router，只让需要全局信息的 token 走 full attention。
 

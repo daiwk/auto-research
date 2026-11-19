@@ -20,7 +20,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="history-ranking-backbones/">用户历史与排序骨干</a></h2>
 <p>计算预算应该花在历史内部、候选与历史，还是异构字段之间？</p>
-<p class="ar-learning-topic-meta">299 个问题 · 73 篇论文</p>
+<p class="ar-learning-topic-meta">303 个问题 · 74 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="generative-retrieval-reasoning/">生成式召回与推理推荐</a></h2>
@@ -40,7 +40,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="research-serving-loop/">自动研究与高效上线</a></h2>
 <p>一个离线更好的方案，怎样才算在真实请求和持续迭代中可用？</p>
-<p class="ar-learning-topic-meta">80 个问题 · 20 篇论文</p>
+<p class="ar-learning-topic-meta">88 个问题 · 22 篇论文</p>
 </article>
 </div>
 

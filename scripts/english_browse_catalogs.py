@@ -71,6 +71,8 @@ def _label_map(raw: str) -> dict[str, str]:
 
 
 _LABELS = _label_map("""
+Agent 评测与可靠性 = Agent evaluation and reliability
+研究与服务闭环 = Research and serving feedback loops
 偏好评测与校准 = Preference evaluation and calibration
 检索归因与受控修复 = Retrieval attribution and governed repair
 独立校验与部署门 = Independent checks and deployment gates

@@ -233,7 +233,8 @@
         "recommendation:uxsid",
         "recommendation:whale",
         "recommendation:wide-deep",
-        "recommendation:zenith"
+        "recommendation:zenith",
+        "recommendation:xsplit-argus"
       ]
     },
     {
@@ -476,7 +477,9 @@
         "recommendation:self-evolving-rec",
         "recommendation:solaris",
         "recommendation:ug-sep",
-        "recommendation:cutagent"
+        "recommendation:cutagent",
+        "recommendation:mle-agents",
+        "recommendation:mars-fapo"
       ]
     }
   ]

@@ -43,6 +43,15 @@
 - [Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems](../2609.30001-agentx-model/README.md)（`agentx-model-replay`）：早期 AgentX 关注从研究构想到实现、评估的单次闭环；AgentX-Model 追问**一次实验之后如何决定下一次做什么**。Research Agent 负责跨论文和实验路径提出、独立审查研究问题；Model Agent 接收获批提案，在固定业务输入与预测任务下多轮改代码、训练、测量，并返回中间最佳实现、负结果和未解问题。
 - [AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems](../2606.26859-agentx/README.md)（`agentx`）：传统推荐迭代需要工程师串联假设、生产代码、上线 A/B 和归因，经验也难以跨实验积累。AgentX 将流程改造成四阶段闭环：Brainstorm Agent 从实验库、系统知识、数据分析和外部论文生成有证据的候选；Developing Agent 在仓库约束下实现并验证；Evaluation Agent 用护栏否决的线上 A/B 判断；最后以 SGPO 从成功与失败轨迹更新 Agent harness。
 
+### 执行框架与自改进
+
+- [Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses](../2611.24924-ahe-beta/README.md)（`ahe-beta`）：AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。
+- [RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?](../2611.24395-rsibench-infra/README.md)（`rsibench-infra`）：单算子快不代表端到端训练或服务变快。RSIBench-Infra让Agent从官方可运行baseline出发，跨engine、kernel、instruction修改，但只提交一个OCI filesystem layer。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates](../2611.23651-safe-personal-rsi/README.md)（`safe-personal-rsi`）：个人Agent的prompt更新可能提升主动性，却同时改变隐私披露、承诺和执行报告。论文固定模型和runtime，只改指令；先比较候选与父版本寻找反例，再重复确认、回滚定位和修复。
+- [Do LLM Agents Still Need to Be Told How to Self-Improve?](../2611.23219-self-organized-learning/README.md)（`self-organized-learning`）：本文不先指定GEPA式优化循环，而是给冻结teacher通用自改进目标、文件读写／Bash／gameplay原语与资源预算。teacher可自己造游戏、观察短生命周期player、编辑文本产物，自行决定何时探索、比较和更新。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [Evaluation-Free Recursive Self-Improvement for Coding Agents](../2611.21056-elite-eval-free/README.md)（`elite-eval-free`）：ELITE质疑反复在固定下游任务上evaluate-and-select的成本与适应偏差。冻结模型，演化可执行scaffold代码：同一parent先给出多个聚焦改进假设，每条假设独立实现，经过确定性有效性检查后交给LLM integrator。
+- [MetaAct: Self-Evolving Executable Action Constraints for Embodied Language Agents](../2611.20655-metaact/README.md)（`metaact`）：自然语言教训改变偏好，却不能保证不可逆动作不执行。MetaAct让LLM输出类型化GEAR规格，由固定编译器转成确定性guard；运行时拒绝违反约束的动作并返触发消息，模型需要重新规划。
+
 ### 自动研究
 
 - [AIRS-Bench: a Suite of Tasks for Frontier AI Research Science Agents](../2602.06855-airs-bench/README.md)（`airs-bench`）：以问题、数据集、指标和人工SOTA定义20个任务。Agent自行提出方法、实现训练、分析实验并修订，不提供基线解法；协议区分Agent、搜索scaffold与运行harness，比较顺序MLGym和树搜索AIRA-dojo。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -64,6 +73,8 @@
 
 ### 规划与搜索
 
+- [Kaer: Security-Aware Replanning for Multi-Agent Systems](../2611.24839-kaer/README.md)（`kaer`）：不可信子Agent可把恶意指令夹在失败反馈里，诱导orchestrator授予新权限或改任务。Kaer不让自由文本失败报告进入planner，只传部署前固定的失败模板；planner用固定七种确定性算子修改尚未完成的子任务，最后重新验证任务及Agent策略。
+- [Reducing Inference Cost of Coding Agents with Timeout Cascades](../2611.24324-timeout-cascades/README.md)（`timeout-cascades`）：小模型先做所有编程题；只有在时限内产生有效且通过测试的patch才直接结束。超时、空patch、语法错误或测试失败，都转给大模型。
 - [Repairing LLM-Generated Specifications with Deterministic Diagnosis](../2610.22568-drago/README.md)（`drago`）：形式规格“能运行”不等于“忠实表达了题意”。DRAGO 将 SMT-LIB2、MiniZinc 和 PDDL 的契约、求解器探针及题意对齐检查转为可定位诊断，再要求模型定向修复。
 - [Budget-Aware Tool Use Enables Effective Agent Scaling](../2511.17006-bats/README.md)（`bats`）：给 ReAct 更多工具额度不保证它改变探索策略。Budget Tracker 将每个工具已经用掉和剩余的调用次数持续放进上下文。
 
@@ -151,12 +162,6 @@
 
 - [Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents](../2609.11677-ecdysis/README.md)（`ecdysis`）：聚合跨任务重复失败以区分模型偶发错误和 harness 系统缺陷，再由 FDCR 多角色诊断形成修复规格。
 
-### 执行框架与自改进
-
-- [Do LLM Agents Still Need to Be Told How to Self-Improve?](../2611.23219-self-organized-learning/README.md)（`self-organized-learning`）：本文不先指定GEPA式优化循环，而是给冻结teacher通用自改进目标、文件读写／Bash／gameplay原语与资源预算。teacher可自己造游戏、观察短生命周期player、编辑文本产物，自行决定何时探索、比较和更新。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
-- [Evaluation-Free Recursive Self-Improvement for Coding Agents](../2611.21056-elite-eval-free/README.md)（`elite-eval-free`）：ELITE质疑反复在固定下游任务上evaluate-and-select的成本与适应偏差。冻结模型，演化可执行scaffold代码：同一parent先给出多个聚焦改进假设，每条假设独立实现，经过确定性有效性检查后交给LLM integrator。
-- [MetaAct: Self-Evolving Executable Action Constraints for Embodied Language Agents](../2611.20655-metaact/README.md)（`metaact`）：自然语言教训改变偏好，却不能保证不可逆动作不执行。MetaAct让LLM输出类型化GEAR规格，由固定编译器转成确定性guard；运行时拒绝违反约束的动作并返触发消息，模型需要重新规划。
-
 ### 长期记忆与技能
 
 - [ENGRAM: From Agent Experience to Weights through Verified Consolidation](../2611.09472-engram-consolidation/README.md)（`engram-consolidation`）：检索过往轨迹能支持 Agent 执行，但检索库不会因为模型微调而自然缩小。ENGRAM 把两个问题拆开：有没有值得学的经验，以及这次更新的权重能否替代外部检索。
@@ -170,6 +175,11 @@
 ### GUI Agent
 
 - [Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents](../2609.17653-evoskill-gui/README.md)（`evoskill-gui`）：把 GUI 技能拆成可编辑组件，执行失败后由信息隔离 critic 反思，并只修改责任组件，验证后的技能可跨任务复用。
+
+### Agent 评测与可靠性
+
+- [Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling](../2611.24849-execjudges/README.md)（`execjudges`）：对每个topic独立生成三个轻量Python评审程序，程序回答on-subject/some-answer/exact/dedicated四个证据问题，固定评分函数映射为等级，再对三个分数均值向下取整。LLM负责一次性的程序编写而不是逐文档调用，生成代码必须隔离执行。
+- [SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search](../2611.02643-searchinject/README.md)（`searchinject`）：间接注入先要进入上下文才有机会影响LLM。SearchInject在原top100候选中，用相关性、abuse、instruction概率及两项相关性交互做logistic风险评分；超过冻结阈值才隔离，按原顺序从同一候选池补足top10。
 
 ### 自进化与技能优化
 

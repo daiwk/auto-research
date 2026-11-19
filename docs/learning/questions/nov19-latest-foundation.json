@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:kernel-ridge-attention": {
+      "questions": [
+        {
+          "id": "why-covariance",
+          "level": "basics",
+          "question": "为什么遗忘旧信息时还要补回协方差？",
+          "answer": "协方差表示哪些特征方向仍可被新观测约束。只缩小P会让所有方向越来越难写；OU恢复项让遗忘同时恢复可塑性。",
+          "example": "教学例：delta=0.5且P=0.1I时，先验为I，预测P为0.775I，不是0.025I。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "write-geometry",
+          "level": "mechanism",
+          "question": "KRA为何不能用一个学习率乘key替代增益？",
+          "answer": "增益由P乘key再归一化，非各向同性P会改变方向，不只是改变长度。",
+          "example": "教学例：key=(1,1)，P=diag(0.4,0.2)时写入方向比例为2:1，而非1:1。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "mamba-state",
+          "level": "comparison",
+          "question": "与Mamba相比，多保留了什么状态？",
+          "answer": "除回归系数外还有每头D乘D协方差；它描述已约束方向。Mamba的selective scan并不维护同一后验几何。",
+          "example": "教学例：D翻倍时，协方差元素从D平方变成4D平方，即使上下文长度不变。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "dual-validation",
+          "level": "implementation",
+          "question": "本地dual一致能证明论文吞吐吗？",
+          "answer": "不能。它核对给定feature/clock序列的数学输出；完整网络、并行scan、精度和八卡训练未运行。",
+          "example": "教学例：逐prefix矩阵求逆虽可作正确性参考，却比递推更慢。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    },
+    "foundation-models:narrow-spec": {
+      "questions": [
+        {
+          "id": "residual-not-head",
+          "level": "basics",
+          "question": "只缩词表head是否等于NarrowSpec？",
+          "answer": "不是。该方法缩整个残差流，包括读写残差的attention/MLP投影；词表head折叠只是边界处理。",
+          "example": "教学例：只把head低秩化仍保留原宽度的每层MLP，没执行本文主要干预。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "linear-fold-condition",
+          "level": "mechanism",
+          "question": "什么时候可以把输出adapter折进LM head？",
+          "answer": "当两者是连续线性映射时，按Wlm乘Wout合并；若中间有norm或非线性则不能这样折。",
+          "example": "教学例：Wlm ReLU(Wout h)不等于(WlmWout)h。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "pipeline-versus-width",
+          "level": "comparison",
+          "question": "与LoopSpec降低推理开销的方向有什么不同？",
+          "answer": "LoopSpec安排循环深度间的推测与验证；NarrowSpec减少草稿每次前向的残差宽度，不改变目标verify。",
+          "example": "教学例：较窄草稿仍可能因为接受长度变短而抵消每轮节省。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "cache-and-quantization",
+          "level": "implementation",
+          "question": "本地折叠成功能否推出KV减半、量化等价和解码提速？",
+          "answer": "都不能。原head几何固定；量化与矩阵乘法不交换；端到端速度还需训练后接受率和硬件验证。",
+          "example": "教学例：8维残差改4维，但KV heads与head_dim都不变时，KV张量元素数不变。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    },
+    "foundation-models:loopcache-interface": {
+      "questions": [
+        {
+          "id": "why-shared-loop",
+          "level": "basics",
+          "question": "循环cache调度解决什么瓶颈？",
+          "answer": "将单步读取的长前缀cache从多个loop集中为一个；这减少读取来源，不代表推测计算已变为精确。",
+          "example": "教学例：R=4时全局步骤依次读取1、2、3、4、1，但spec token当前深度可能是3。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "margin-and-pruning",
+          "level": "mechanism",
+          "question": "替换草稿为什么必须清理后代？",
+          "answer": "后代以旧token为条件，旧token换掉后其hidden/cache依赖失效。门槛使用当前新旧logit差，不读取未来是否翻回。",
+          "example": "教学例：旧draft=A，后代为B/C；A改D后不能把原B/C接在D后直接验证。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "spool-exactness",
+          "level": "comparison",
+          "question": "与Spool的精确状态重建是同一个承诺吗？",
+          "answer": "不是。Spool对固定记录输入重放状态变换；LoopCache的lossless token提交还依赖完整正确loop KV分支。",
+          "example": "教学例：调度编号正确不意味着已运行目标模型验证。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "interface-not-decoder",
+          "level": "implementation",
+          "question": "接口测试全过为何仍只标L0？",
+          "answer": "本地没有token verifier和真实KV执行，不能验证最终分布或lossless输出；只检验决定何时更新、读取哪份cache的合同。",
+          "example": "教学例：tokens_committed=0明确表明没有输出能力评测。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    },
+    "foundation-models:counterfactual-wm": {
+      "questions": [
+        {
+          "id": "average-versus-event",
+          "level": "basics",
+          "question": "为什么平均未来预测准确还不等于反事实准确？",
+          "answer": "事实分布只给不同动作的边缘结果，没说明两种结果属于同一扰动事件的哪一对。个体反事实需要这份配对结构。",
+          "example": "教学例：U与1-U都均匀分布，但观测U=0.2时两种耦合的替代结果分别是0.2和0.8。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "residual-reuse",
+          "level": "mechanism",
+          "question": "残差复用到底复用了什么？",
+          "answer": "复用事实观测与事实预测之差，再加到替代动作预测上；无需恢复真实扰动变量。只在动作与扰动的交互足够小等条件下可靠。",
+          "example": "教学例：原预测向东1米，实测1.3米；替代预测向北1米时保留这次事件的0.3米漂移。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "dt-jepa-information",
+          "level": "comparison",
+          "question": "与DT-JEPA查询时的信息有什么不同？",
+          "answer": "DT-JEPA用行动前历史预测未来；CWM需已执行事实动作的结果。允许的信息集和问题不同，不能比较为同一预测任务。",
+          "example": "教学例：第一次执行动作前不能拿尚不存在的observed_outcome喂CWM。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "failure-control",
+          "level": "implementation",
+          "question": "为什么测试里应保留乘法故障的非零误差？",
+          "answer": "该故障使扰动与动作相乘，个体动作效应随事件变化，违反共享加性残差条件。清掉误差会掩盖论文已说明的边界。",
+          "example": "教学例：实际执行只有命令的50%时，原动作残差不能无条件照搬到两倍命令上。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    },
+    "multimodal-models:autoregressive-view-model": {
+      "questions": [
+        {
+          "id": "view-stream",
+          "level": "basics",
+          "question": "没有显式3D表示，AVM怎样保留可用场景信息？",
+          "answer": "用预填和历史视图作context，并按当前相机查询检索活动子集；它是生成条件，不是拟合NeRF或高斯场景。",
+          "example": "教学例：重访一间屋子时可检索此前生成的门和桌面视角，而不是重建一份完整mesh。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "own-rollouts",
+          "level": "mechanism",
+          "question": "为什么双向训练后还做自身rollout的因果tuning？",
+          "answer": "流式后续生成会接触自己产生的历史；只在真实context训练不覆盖这类误差累积。因果tuning和蒸馏处理流式路径与少步采样。",
+          "example": "教学例：早期生成的桌腿略偏，后续片段需在这一历史上保持或修正，而非总拿真实桌腿作context。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "counterfactual-not-revisit",
+          "level": "comparison",
+          "question": "场景重访一致是否等于CWM的反事实能力？",
+          "answer": "不等于。重访是在相机轨迹和生成历史下维持场景；个体反事实还需同一扰动下不同动作结果的耦合假设。",
+          "example": "教学例：门框位置保持不变，不能说明同一阵风下船改航向会到哪里。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "no-cheap-shadow",
+          "level": "implementation",
+          "question": "为什么本轮不加一个检索小样例就算复现？",
+          "answer": "检索只是AVM一部分，不能替代14B视频生成、flow训练及自rollout路径。成本门槛要求透明不复现，而不是把便宜影子程序叫完整实现。",
+          "example": "教学例：取出相近相机的旧帧不等于生成未见区域或动态物体。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    }
+  }
+}

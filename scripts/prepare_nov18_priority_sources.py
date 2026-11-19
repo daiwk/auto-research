@@ -55,15 +55,25 @@ def capture(url):
 
 
 def main():
+    global CACHE, AUDIT
     from bs4 import BeautifulSoup
 
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--start", default="2026-11-16")
+    parser.add_argument("--end", default="2026-11-18")
+    parser.add_argument("--cache-dir", type=Path, default=CACHE)
+    parser.add_argument("--audit-dir", type=Path, default=AUDIT)
     parser.add_argument(
         "--reconcile-captures",
         action="store_true",
         help="Reparse this run's actual captures without repeating network requests",
     )
     args = parser.parse_args()
+    if args.start > args.end:
+        parser.error("start <= end required")
+    for value in (args.start, args.end):
+        datetime.strptime(value, "%Y-%m-%d")
+    CACHE, AUDIT = args.cache_dir.resolve(), args.audit_dir.resolve()
     CACHE.mkdir(parents=True, exist_ok=True)
     AUDIT.mkdir(parents=True, exist_ok=True)
     old = {
@@ -135,7 +145,7 @@ def main():
     repositories = previous["repository_events"] if previous else []
     for org in () if previous else ("google-research", "google-deepmind", "facebookresearch"):
         for event in ("created", "pushed"):
-            query = f"org:{org} {event}:2026-11-16..2026-11-18"
+            query = f"org:{org} {event}:{args.start}..{args.end}"
             process = subprocess.run(
                 [
                     "gh",
@@ -191,8 +201,8 @@ def main():
             )
     payload = {
         "schema_version": 1,
-        "checked_on": "2026-11-18",
-        "window": {"start": "2026-11-16", "end": "2026-11-18"},
+        "checked_on": args.end,
+        "window": {"start": args.start, "end": args.end},
         "scope": "Fresh finite official directory and repository-event delta; not affiliation or method exhaustion.",
         "all_sources_exhaustive": False,
         "baseline": "nov15-review-closure/google-source-review.json",

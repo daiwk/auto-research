@@ -1,0 +1,301 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-19",
+  "proposals": [
+    {
+      "paper": "recommendation:mle-agents",
+      "target_card": "recommendation/research-serving-loop",
+      "source_revisions": {
+        "recommendation:mle-agents": "0bd7f4f9ad3821aa4f88f89458e31d2fa7baa94a6f033a272f067ce1e64d75b9",
+        "recommendation:evopilot": "461d4284afa1aa1a754016383d87aca09361b2b6abf0f9dfca423a3b156fdbae"
+      },
+      "comparison": {
+        "position": "Meta把提假设、改代码、训练和读指标组成有人监督的模型研发循环。2.0每轮名义上并行七个候选和一个方差探针，使用与线上影响校准过的加权NE，而不是只追逐点击AUPRC。失败块名单、结构化输出和只回传近期未采纳赢家控制上下文陈旧；最终模型仍由工程师审核并独立做线上实验。",
+        "tradeoff": "EvoPilot先锁定控制/实验两臂的比较合同并拒绝不匹配证据；MLE Agents强调搜索目标与同轮噪声探针。二者都不让“训练结束”自动成为可发布结论，目标校准也不能取代EvoPilot的产物一致性检查。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题对照"
+        ]
+      },
+      "analysis": {
+        "title": "MLE Agents：工业精排的目标校准与方差探针准入：机制和证据边界",
+        "body": "§1.2给出0.3/0.7目标，§3.5明确与同轮variance probe比较，而不是任意旧基线。完成状态须有两条独立信号；一候选只改一项连贯机制。阈值来自历史噪声探针，不能把0.0005说成显著性检验或跨数据通用常数。接口返回离线搜索接纳和仍需人工审核，不发起训练或生产发布。 EvoPilot先锁定控制/实验两臂的比较合同并拒绝不匹配证据；MLE Agents强调搜索目标与同轮噪声探针。二者都不让“训练结束”自动成为可发布结论，目标校准也不能取代EvoPilot的产物一致性检查。",
+        "papers": [
+          "recommendation:mle-agents",
+          "recommendation:evopilot"
+        ]
+      },
+      "question": {
+        "id": "cross-nov19-mle-agents",
+        "question": "MLE Agents和EvoPilot的准入能互代吗？",
+        "answer": "不能。前者校准目标/训练噪声，后者核对两臂实验与产物；都还需要最终人工和线上确认。",
+        "example": "教学例：数据版本不同的两臂即使NE差够大，也不能用噪声门槛盖过协议失败。",
+        "papers": [
+          "recommendation:mle-agents",
+          "recommendation:evopilot"
+        ]
+      },
+      "update": {
+        "date": "2026-11-19",
+        "papers": [
+          "recommendation:mle-agents",
+          "recommendation:evopilot"
+        ],
+        "summary": "本地只执行目标与完成/准入接口。没有运行Claude研究调用、候选代码生成、私有数据分布式训练或线上A/B，也没有新增可执行Evolve搜索策略。合成输入不代表Meta模型指标。 完整高成本实验不复现，审查DONE。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Meta combines hypotheses, code changes, training and metric inspection in a human-on-the-loop development cycle. Version2.0 nominally evaluates seven candidates and a variance probe in parallel, using weighted NE calibrated against online outcomes instead of click AUPRC alone. A failure blocklist, structured outputs and recent uncarried winners limit stale context. Engineers still review the final model and conduct a separate online experiment.",
+          "tradeoff": "EvoPilot fixes a matched control/treatment contract and rejects mismatched evidence; MLE Agents emphasizes objective calibration and same-iteration noise probes. Neither treats a completed job as a launchable conclusion, and calibrated objectives do not replace artifact consistency checks."
+        },
+        "analysis": {
+          "title": "mle-agents: mechanism and evidence boundaries",
+          "body": "Section1.2 defines the0.3/0.7 objective; section3.5 compares a candidate to its same-iteration variance probe, not an arbitrary old baseline. Completion needs two independent signals and each candidate makes one coherent change. The0.0005 threshold is estimated from historical training noise, not a significance test or a universal constant. The interface reports offline search admission and required human review without launching jobs or production changes. EvoPilot fixes a matched control/treatment contract and rejects mismatched evidence; MLE Agents emphasizes objective calibration and same-iteration noise probes. Neither treats a completed job as a launchable conclusion, and calibrated objectives do not replace artifact consistency checks."
+        },
+        "question": {
+          "question": "Can MLE admission replace EvoPilot?",
+          "answer": "No. MLE calibrates objectives/noise; EvoPilot validates matched experiments and artifacts. Both still need human and online review.",
+          "example": "Teaching example: a large NE gap does not excuse different data versions across arms."
+        },
+        "update": "Only the objective and completion/admission interface run locally. There are no Claude research calls, candidate generation, distributed private-data training, online A/B or executable new Evolve search strategy. Fixture inputs are not Meta model measurements. Full high-cost experiments are not reproduced; review DONE."
+      }
+    },
+    {
+      "paper": "recommendation:xsplit-argus",
+      "target_card": "recommendation/history-ranking-backbones",
+      "source_revisions": {
+        "recommendation:xsplit-argus": "b5b614058f7d5638c79d0da540dcb805491cf139785fd54ba1f6ca6874c96a69",
+        "recommendation:argus": "a8e69376692095761a43eae09f99dc06519c68209e297b83758fbb0c4d7754e5"
+      },
+      "comparison": {
+        "position": "将候选无关的旧历史压成因果编码器末K个状态，在线只编码最近M个事件；候选token再对两段记忆做cross-attention。离线缓存是服务时的执行安排，不是训练时detach压缩器。点击监督头与原始logit的L1蒸馏头共享历史表示，但上线只使用监督头。",
+        "tradeoff": "ARGUS前作按反馈→物品分解下一事件分布；X-split重点是候选无关历史缓存和候选特定点击logit蒸馏，目标排列与预测头不能照搬。二者的本地负结果/诊断也不能互相当作能力对照。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题对照"
+        ]
+      },
+      "analysis": {
+        "title": "X-split ARGUS：可复用历史token与双头蒸馏：机制和证据边界",
+        "body": "Eq1–11：历史编码因果且候选无关；训练memory只选目标之前状态。默认b(t)=max(0,t−1−M)，服务缓存cutoff允许与最近事件重叠或留缺口。训练runtime共享全序列因果局部attention，服务只重算最近M条，左边界/有效感受野并不相同。KD是原始logit的L1，不是BCE或KL；仅负标签抬到epsilon，教师完全detach。小网络缩小层数/维度，保留真实attention、双头与梯度。 ARGUS前作按反馈→物品分解下一事件分布；X-split重点是候选无关历史缓存和候选特定点击logit蒸馏，目标排列与预测头不能照搬。二者的本地负结果/诊断也不能互相当作能力对照。",
+        "papers": [
+          "recommendation:xsplit-argus",
+          "recommendation:argus"
+        ]
+      },
+      "question": {
+        "id": "cross-nov19-xsplit-argus",
+        "question": "为什么不能直接把ARGUS的物品头用到X-split？",
+        "answer": "ARGUS分解反馈和next-item；X-split用候选特征预测点击，另用辅助头匹配teacher原始logit，任务和头不同。",
+        "example": "教学例：把L1 logit误差替成物品softmax CE会改变监督信号。",
+        "papers": [
+          "recommendation:xsplit-argus",
+          "recommendation:argus"
+        ]
+      },
+      "update": {
+        "date": "2026-11-19",
+        "papers": [
+          "recommendation:xsplit-argus",
+          "recommendation:argus"
+        ],
+        "summary": "输入是显式小型事件/候选特征；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。负控改目标/未来反馈保持预测不变；KD反传到compressor，但不能据此推断NE或ACV收益。 完整高成本实验不复现，审查DONE。"
+      },
+      "english": {
+        "comparison": {
+          "position": "A candidate-independent causal encoder retains the lastK states of older history. Serving encodes only the most recentM events, and candidate tokens cross-attend to both memories. Offline caching is a serving execution choice, not a reason to detach the compressor during training. A supervised click head and an L1 raw-logit distillation head share representations; only the supervised head serves predictions.",
+          "tradeoff": "Earlier ARGUS factorizes the next event as feedback then item. X-split focuses on candidate-independent cached history and candidate-specific click-logit distillation, so token ordering and heads are not interchangeable. Their local negative results/diagnostics are not a matched capability comparison."
+        },
+        "analysis": {
+          "title": "xsplit-argus: mechanism and evidence boundaries",
+          "body": "Eqs1–11 require causal, candidate-independent history states and strictly pretarget memory. The default boundary ismax(0,t−1−M); a serving snapshot may overlap recent events or leave a gap. Shared causal local-attention training and serving on only the lastM events have different left boundaries/receptive fields. KD is raw-logit L1, not BCE or KL. Only negatives are smoothed and teacher logits are detached. The small network reduces depth/dimension but executes real attention, separate heads and gradients. Earlier ARGUS factorizes the next event as feedback then item. X-split focuses on candidate-independent cached history and candidate-specific click-logit distillation, so token ordering and heads are not interchangeable. Their local negative results/diagnostics are not a matched capability comparison."
+        },
+        "question": {
+          "question": "Why not reuse the original ARGUS item head unchanged?",
+          "answer": "ARGUS factorizes feedback/next-item; X-split predicts candidate clicks and uses a separate raw-logit KD head. The tasks and heads differ.",
+          "example": "Teaching example: item-softmax CE cannot replace raw-logit L1."
+        },
+        "update": "Inputs are explicit small event/candidate features. Teacher training, vocabularies, daily caching, RTB data and serving are absent. Changing target/future feedback leaves predictions invariant and KD reaches the compressor; neither check establishes NE or ACV gains. Full high-cost experiments are not reproduced; review DONE."
+      }
+    },
+    {
+      "paper": "recommendation:mars-fapo",
+      "target_card": "recommendation/research-serving-loop",
+      "source_revisions": {
+        "recommendation:mars-fapo": "111fb9c35ae6ceb7aa1d1d06316e6299db9bd6bf1a67be767f8e07de4ed3f9cb",
+        "recommendation:evopilot": "461d4284afa1aa1a754016383d87aca09361b2b6abf0f9dfca423a3b156fdbae"
+      },
+      "comparison": {
+        "position": "MARS让近线0.6B策略为用户产生跨召回、粗排、精排和重排的七维配置，经校验后缓存，在线始终不等待LLM。SFT建立合法格式，FAPO把偏好比较集中到实际不同的动作值token，最后GRPO在沙箱回放和冻结奖励模型上继续优化。正文版权行为Taobao，贡献者按名字母排序，不虚构个人一作机构。",
+        "tradeoff": "EvoPilot校验模型开发实验的两臂证据，MARS生成和训练线上流水线配置。MARS的缓存/fallback是服务安全，不能替代开发比较合同；ActionMask loss也不能证明策略已经能生成合法或优质配置。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题对照"
+        ]
+      },
+      "analysis": {
+        "title": "MARS：近线推荐编排与ActionMask偏好优化：机制和证据边界",
+        "body": "Eq11–13保留全chosen回答的生成anchor，只有偏好项乘clip(1+2(p+−p−)/p均值,0.2,3)。缺失任一历史V2P时权重为1。只有弱证据且达到相对gap才允许反转chosen/rejected；强证据不反转。动作mask由可信的字段值span/token对齐层提供，必须包含完整变化值而非共享JSON结构；不以脆弱字符串搜索冒充原tokenizer。历史配置V2P是观察统计，不是因果后验。 EvoPilot校验模型开发实验的两臂证据，MARS生成和训练线上流水线配置。MARS的缓存/fallback是服务安全，不能替代开发比较合同；ActionMask loss也不能证明策略已经能生成合法或优质配置。",
+        "papers": [
+          "recommendation:mars-fapo",
+          "recommendation:evopilot"
+        ]
+      },
+      "question": {
+        "id": "cross-nov19-mars-fapo",
+        "question": "MARS和EvoPilot都是Agent，有什么根本区别？",
+        "answer": "MARS训练用户流水线动作；EvoPilot审核模型开发比较证据。配置格式合法不等于实验结论可信。",
+        "example": "教学例：合法Minimal动作不能代替控制/实验模型的数据版本核对。",
+        "papers": [
+          "recommendation:mars-fapo",
+          "recommendation:evopilot"
+        ]
+      },
+      "update": {
+        "date": "2026-11-19",
+        "papers": [
+          "recommendation:mars-fapo",
+          "recommendation:evopilot"
+        ],
+        "summary": "本地只实现posterior启发式权重、弱证据翻转规则与FAPO张量损失；没有0.6B生成、字段tokenizer、SFT/GRPO、Sandbox、奖励模型、iGraph缓存或实时推荐。结构token仍有生成梯度，rejected非动作token没有偏好梯度。 完整高成本实验不复现，审查DONE。"
+      },
+      "english": {
+        "comparison": {
+          "position": "MARS uses a near-line0.6B policy to produce seven-dimensional user configurations spanning retrieval, preranking, ranking and reranking. Validated configurations are cached; online serving never waits for an LLM. SFT establishes valid formatting, FAPO compares differing action-value tokens, and GRPO continues with sandbox replay and a frozen reward model. The manuscript credits Taobao and lists contributors alphabetically rather than assigning an invented individual-first-author affiliation.",
+          "tradeoff": "EvoPilot validates evidence for model-development comparisons; MARS trains serving-pipeline configurations. Cache/fallback safety does not replace an experiment contract, and an ActionMask loss does not establish valid or high-quality policy generation."
+        },
+        "analysis": {
+          "title": "mars-fapo: mechanism and evidence boundaries",
+          "body": "Eqs11–13 retain the full chosen-response generation anchor; only preference loss receivesclip(1+2(p+−p−)/scenario_mean,0.2,3). A missing V2P estimate gives weight1. Only weak-evidence pairs meeting the relative-gap rule may reverse; strong pairs retain their business-score ordering. Masks come from a trusted field-value span/token alignment layer and cover complete differing values, not shared JSON structure. No fragile substring matcher impersonates the tokenizer. Historical configuration V2P is observational, not causal. EvoPilot validates evidence for model-development comparisons; MARS trains serving-pipeline configurations. Cache/fallback safety does not replace an experiment contract, and an ActionMask loss does not establish valid or high-quality policy generation."
+        },
+        "question": {
+          "question": "How do MARS and EvoPilot differ?",
+          "answer": "MARS trains per-user pipeline actions; EvoPilot audits model-development comparisons. Valid action formatting does not make experimental claims reliable.",
+          "example": "Teaching example: a valid Minimal action cannot replace control/treatment data-version checks."
+        },
+        "update": "Local code implements only historical weighting, weak-pair orientation and the FAPO tensor loss. There is no0.6B generation, field tokenizer, SFT/GRPO, sandbox, reward model, iGraph cache or live recommendation. Chosen structural tokens retain generation gradients; rejected nonaction tokens have no preference gradient. Full high-cost experiments are not reproduced; review DONE."
+      }
+    },
+    {
+      "paper": "agent-research:searchinject",
+      "target_card": "agent-research/harness-and-self-improvement",
+      "source_revisions": {
+        "agent-research:searchinject": "44387036c581852d1b2ac0bf5a615cdcca0a93909ad769b51321314a9ddf0e66",
+        "agent-research:silentguard": "7b65bd17259f9c4392abfdb9ca98ba7e0bdcbadbe4f3e34da25ef08880be7c9b"
+      },
+      "comparison": {
+        "position": "间接注入先要进入上下文才有机会影响LLM。SearchInject在原top100候选中，用相关性、abuse、instruction概率及两项相关性交互做logistic风险评分；超过冻结阈值才隔离，按原顺序从同一候选池补足top10。它控制暴露，而不是验证下游攻击成功。Google官方目录今天新增，但论文首发11月2日，按历史发现补录，不算今天新论文。",
+        "tradeoff": "SilentGuard核对工具返回值是否满足请求不变量；SearchInject在第三方文本进入上下文之前做风险准入。前者检查语义执行合同，后者检查检索暴露，HTTP200或低暴露率都不能证明最终回答安全。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题对照"
+        ]
+      },
+      "analysis": {
+        "title": "SearchInject：检索风险与干净误隔离预算：机制和证据边界",
+        "body": "§III-C/D：joint模型为class-balanced logistic regression，不能把输出当校准概率。阈值只在calibration集选并冻结；文档重复出现在不同query时按placement计数。原稿未发布abuse/字符与词n-gram词表、IDF、scaler或拟合系数，因此本地明确接收外部特征/系数，只实现score、约束选阈与有序refill，不用关键词规则假装原检测器。 SilentGuard核对工具返回值是否满足请求不变量；SearchInject在第三方文本进入上下文之前做风险准入。前者检查语义执行合同，后者检查检索暴露，HTTP200或低暴露率都不能证明最终回答安全。",
+        "papers": [
+          "agent-research:searchinject",
+          "agent-research:silentguard"
+        ]
+      },
+      "question": {
+        "id": "cross-nov19-searchinject",
+        "question": "SearchInject和SilentGuard的门槛是否相同？",
+        "answer": "不是。前者筛选检索上下文，后者验证工具结果不变量；一种通过不证明另一种安全。",
+        "example": "教学例：低风险页面仍可能给出不满足过滤条件的API值。",
+        "papers": [
+          "agent-research:searchinject",
+          "agent-research:silentguard"
+        ]
+      },
+      "update": {
+        "date": "2026-11-19",
+        "papers": [
+          "agent-research:searchinject",
+          "agent-research:silentguard"
+        ],
+        "summary": "显式数值夹具只检查feature顺序、严格>阈值、干净经验约束与refill。无真实payload、SciFact检索、拟合分类器、生成模型或安全认证；更低阈值移除更多候选，也可能补入原rank10外的攻击页。 完整高成本实验不复现，审查DONE。"
+      },
+      "english": {
+        "comparison": {
+          "position": "An indirect injection must enter context before influencing an LLM. SearchInject scores the original top100 candidates with relevance, abuse, instruction likelihood and two relevance interactions. It quarantines scores strictly above a frozen threshold and refills top10 in the original order from the same pool. It controls exposure, not downstream attack success. The Google directory entry is new to this capture, but the November2 paper is a historical backfill, not a new publication today.",
+          "tradeoff": "SilentGuard checks tool responses against request invariants; SearchInject screens third-party text before context admission. Semantic execution contracts and retrieval exposure are distinct: neither HTTP200 nor lower exposure proves a safe final answer."
+        },
+        "analysis": {
+          "title": "searchinject: mechanism and evidence boundaries",
+          "body": "SectionsIII-C/D use class-balanced logistic regression, not calibrated probabilities. Choose and freeze the threshold on calibration only, counting repeated query-document placements separately. Fitted abuse models, word/character vocabularies, IDF, scalers and coefficients are unreleased. Local APIs explicitly accept external features/coefficients and implement scoring, constrained threshold selection and ordered refill; keyword rules do not stand in for the detector. SilentGuard checks tool responses against request invariants; SearchInject screens third-party text before context admission. Semantic execution contracts and retrieval exposure are distinct: neither HTTP200 nor lower exposure proves a safe final answer."
+        },
+        "question": {
+          "question": "Are SearchInject and SilentGuard the same gate?",
+          "answer": "No. One screens retrieved context and the other validates tool-result invariants. Passing one does not certify the other.",
+          "example": "Teaching example: low-risk text may still report an API value violating the requested filter."
+        },
+        "update": "Explicit numerical fixtures check feature order, strict thresholding, empirical clean cost and refill. There are no real payloads, SciFact retrieval, fitted classifiers, generators or security certification. A lower threshold can remove more candidates yet refill a surviving attack page from below rank10. Full high-cost experiments are not reproduced; review DONE."
+      }
+    },
+    {
+      "paper": "agent-research:execjudges",
+      "target_card": "agent-research/evaluation-and-reliability",
+      "source_revisions": {
+        "agent-research:execjudges": "c5aacad03190f07aa14abc86eff5e3808aa8f4f1689f8e358419c706904e117e",
+        "agent-research:fuse-evaluator": "d671cea8c8daefd92800ec9b34b94b2f627505aa4b348240afd5d4a99300ef11"
+      },
+      "comparison": {
+        "position": "对每个topic独立生成三个轻量Python评审程序，程序回答on-subject/some-answer/exact/dedicated四个证据问题，固定评分函数映射为等级，再对三个分数均值向下取整。LLM负责一次性的程序编写而不是逐文档调用，生成代码必须隔离执行。本地不执行来自网络或LLM的代码。",
+        "tradeoff": "FUSE用隐藏真实动机和可验证模拟状态评估社会推理；ExecJudges将检索证据映射为显式等级。确定性聚合能提高可检查性，却不产生正确的证据判断，也不代替隐藏状态评测。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题对照"
+        ]
+      },
+      "analysis": {
+        "title": "ExecJudges：显式证据等级与向下取整共识：机制和证据边界",
+        "body": "§3.2：0–3和0–2量表分别实现；没有证据不能由其他布尔项抬高等级。共识是floor不是round或多数票；k=3与取整规则在测试前固定。ExecJudges-L可看少量训练标签，评测必须分开这些样本，不能把gold测试qrels送给生成器。本地只接受显式布尔证据/分数，没有假装实现LLM writer、NLP toolkit或恶意代码沙箱。 FUSE用隐藏真实动机和可验证模拟状态评估社会推理；ExecJudges将检索证据映射为显式等级。确定性聚合能提高可检查性，却不产生正确的证据判断，也不代替隐藏状态评测。",
+        "papers": [
+          "agent-research:execjudges",
+          "agent-research:fuse-evaluator"
+        ]
+      },
+      "question": {
+        "id": "cross-nov19-execjudges",
+        "question": "与FUSE的验证有什么不同？",
+        "answer": "ExecJudges映射文本证据，FUSE对隐藏动机模拟状态核验；聚合正确不保证证据判断正确。",
+        "example": "教学例：三个程序都误判exact，floor仍可能错；不能当成隐藏动机推断成功。",
+        "papers": [
+          "agent-research:execjudges",
+          "agent-research:fuse-evaluator"
+        ]
+      },
+      "update": {
+        "date": "2026-11-19",
+        "papers": [
+          "agent-research:execjudges",
+          "agent-research:fuse-evaluator"
+        ],
+        "summary": "只运行固定grade mapping和floor聚合的L0接口，未生成或执行评审程序、未下载TREC、未调用模型，不输出相关性准确率。布尔值必须严格bool，整数0/1不会静默当证据。 完整高成本实验不复现，审查DONE。"
+      },
+      "english": {
+        "comparison": {
+          "position": "For each topic, three independently generated lightweight programs answer on-subject/some-answer/exact/dedicated evidence questions. A fixed function maps answers to grades, then floors the mean of the three grades. The LLM writes programs once rather than judging every document, and generated code must run in isolation. Local code never executes network- or LLM-generated code.",
+          "tradeoff": "FUSE evaluates social reasoning against hidden motives and verifiable simulated state; ExecJudges maps retrieval evidence to explicit grades. Deterministic aggregation improves inspectability but supplies neither correct evidence judgments nor hidden-state evaluation."
+        },
+        "analysis": {
+          "title": "execjudges: mechanism and evidence boundaries",
+          "body": "Section3.2 uses separate0–3 and0–2 scales. Other booleans cannot override absent subject/answer evidence. Consensus floors rather than rounds or votes; k=3 and the rule were fixed before test evaluation. ExecJudges-L may use a small labeled training subset, but evaluation must separate it and never give test qrels to the writer. Local APIs accept explicit booleans/grades, not a pretend LLM writer, NLP toolkit or hostile-code sandbox. FUSE evaluates social reasoning against hidden motives and verifiable simulated state; ExecJudges maps retrieval evidence to explicit grades. Deterministic aggregation improves inspectability but supplies neither correct evidence judgments nor hidden-state evaluation."
+        },
+        "question": {
+          "question": "How does this differ from FUSE verification?",
+          "answer": "ExecJudges maps textual evidence; FUSE verifies reasoning against hidden simulated motives. Correct aggregation does not make evidence judgments correct.",
+          "example": "Teaching example: all three programs may misread exact evidence and still aggregate incorrectly."
+        },
+        "update": "Only the fixed grade mapping and floor aggregation run as L0 interfaces. No program generation/execution, TREC download or model call occurs, and no relevance accuracy is reported. Evidence must be strict booleans; integers0/1 are not silently accepted. Full high-cost experiments are not reproduced; review DONE."
+      }
+    }
+  ]
+}

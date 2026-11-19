@@ -4,19 +4,37 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1224 entries from the shared research manifest. English write-ups available: 1224.
+The catalog lists 1244 entries from the shared research manifest. English write-ups available: 1244.
 
 ## Browse by domain
 
-- [Search, ads, recommendation, and LLM applications](recommendation.md): 336 catalog entries, 336 English write-ups
-- [Foundation models](foundation-models.md): 253 catalog entries, 253 English write-ups
+- [Search, ads, recommendation, and LLM applications](recommendation.md): 339 catalog entries, 339 English write-ups
+- [Foundation models](foundation-models.md): 257 catalog entries, 257 English write-ups
 - [Structured decisions / System One](system-one.md): 7 catalog entries, 7 English write-ups
-- [Multimodal models](multimodal-models.md): 30 catalog entries, 30 English write-ups
-- [LLM post-training](post-training.md): 284 catalog entries, 284 English write-ups
-- [Agents](agent-research.md): 314 catalog entries, 314 English write-ups
+- [Multimodal models](multimodal-models.md): 31 catalog entries, 31 English write-ups
+- [LLM post-training](post-training.md): 289 catalog entries, 289 English write-ups
+- [Agents](agent-research.md): 321 catalog entries, 321 English write-ups
 
 ## Read in English
 
+- [X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction](../../recommendation-components/2611.24283-xsplit-argus/README-en.md)
+- [Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates](../../agent-research/2611.23651-safe-personal-rsi/README-en.md)
+- [Replay, Don't Resample: Off-Policy Consolidation of Long-Horizon RL Experts](../../post-training/2611.24059-mrpd-replay/README-en.md)
+- [Reducing Inference Cost of Coding Agents with Timeout Cascades](../../agent-research/2611.24324-timeout-cascades/README-en.md)
+- [RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?](../../agent-research/2611.24395-rsibench-infra/README-en.md)
+- [NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding](../../foundation-models/2611.23835-narrow-spec/README-en.md)
+- [MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems](../../recommendation-components/2611.23910-mle-agents/README-en.md)
+- [MARS Technical Report](../../recommendation-components/2611.24006-mars-fapo/README-en.md)
+- [LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers](../../foundation-models/2611.24301-loopcache-interface/README-en.md)
+- [Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting](../../foundation-models/2611.23896-kernel-ridge-attention/README-en.md)
+- [Kaer: Security-Aware Replanning for Multi-Agent Systems](../../agent-research/2611.24839-kaer/README-en.md)
+- [How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation](../../post-training/2611.24005-dcc-aggregation/README-en.md)
+- [HINT-WAM: Hindsight-Informed Training for World Action Models](../../post-training/2611.24789-hint-wam/README-en.md)
+- [Evidence-Based Credit Assignment for Search-Augmented Language Models](../../post-training/2611.23824-eca-credit/README-en.md)
+- [Counterfactual World Models: JEPAs That Reason About "What If"](../../foundation-models/2611.24778-counterfactual-wm/README-en.md)
+- [Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling](../../agent-research/2611.24849-execjudges/README-en.md)
+- [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](../../post-training/2611.23750-led-edits/README-en.md)
+- [Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses](../../agent-research/2611.24924-ahe-beta/README-en.md)
 - [Verifying Agents in Rubric-Graded Environments](../../agent-research/2611.22841-gandalf-bvb/README-en.md)
 - [The Resolution Hypothesis: Agent Evolution's Key Is Identifying Improvements](../../agent-research/2611.23068-resolution-hypothesis/README-en.md)
 - [The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale](../../foundation-models/2611.22947-lara-plus-plus/README-en.md)
@@ -38,6 +56,7 @@ The catalog lists 1224 entries from the shared research manifest. English write-
 - [Communicate the Change: Efficient Expert Parallelism via Activation Compression](../../foundation-models/2611.22215-echomoe/README-en.md)
 - [CascadeJEPA: Enhancing 3D Geometric Representations via Spatially Coupled Cascaded Prediction](../../foundation-models/2611.22686-cascadejepa/README-en.md)
 - [COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift](../../recommendation-components/2611.22597-cotti/README-en.md)
+- [Autoregressive View Model](../../multimodal-models/2611.23417-autoregressive-view-model/README-en.md)
 - [Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching](../../post-training/2611.23229-ambient-sft/README-en.md)
 - [WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models](../../foundation-models/2611.21882-wm-quant/README-en.md)
 - [VisHead-Spec: Head-Routed Visual Attention for Multimodal Speculative Decoding](../../foundation-models/2611.21839-vishead-spec/README-en.md)
@@ -135,6 +154,7 @@ The catalog lists 1224 entries from the shared research manifest. English write-
 - [Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training](../../foundation-models/2611.04327-anchor-kv/README-en.md)
 - [Strategist: Evolving Reasoning with Agents](../../agent-research/2611.03618-strategist/README-en.md)
 - [SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding](../../post-training/2611.02846-specopd/README-en.md)
+- [SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search](../../agent-research/2611.02643-searchinject/README-en.md)
 - [RuntimeTickets: Source-Grounded Security Obligations for Agent Skills](../../agent-research/2611.03772-runtime-tickets/README-en.md)
 - [RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs](../../post-training/2611.02455-rlid/README-en.md)
 - [P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors](../../post-training/2611.03953-p2-mopd/README-en.md)

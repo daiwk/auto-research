@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩先找瓶颈：权重、KV 内容与缓存层级
 
-[基础模型](../index.md) · 更新 2026-11-18 · 40 篇主题资料 / 17 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-19 · 41 篇主题资料 / 18 篇重点对照
 
 AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM 管可执行历史视图，Remote KV Tiers 解决跨层级加载。它们可以组合，但不能用一个“压缩率”解释质量、可恢复性和端到端速度。 FoldBias另解决压缩缓存的接口障碍：把静态bias折进同维key，但未来query漂移仍会引入误差。
 
@@ -42,6 +42,7 @@ AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM
 | [Communicate the Change: Efficient Expert Parallelism via Activation Compression](../../../foundation-models/2611.22215-echomoe/README.md) · [原始来源](https://arxiv.org/abs/2611.22215v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 每组MoE层先广播参考z，其余层只发送x-a⊙z的压缩code；router仍读取完整x。专家将reference gain和dispatch decoder折入gate/up权重，再将combine compressor折入down权重，避免完整重建或输出物化。 | MoEZip保护路由敏感KV token；EchoMoE压缩专家并行激活通信，两者不是同一缓存，也不能共享“压缩率”作为吞吐对照。 |
 | [RISA: Recoverable Sparse Attention for Block-Diffusion Language Models](../../../foundation-models/2611.22191-risa/README.md) · [原始来源](https://arxiv.org/abs/2611.22191v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | RISA区分长期HOT/COLD存储优先级和当前denoising block的短期read plan。未读取页面不被删除，后续query可以恢复COLD。seed根据page min/max key摘要评分，保护初始/近期HOT并加入mandatory近期/current行。 | DropKV实际驱逐KV以缩减存储；RISA主要限制每步读取但保留COLD以便恢复。读得少与存得少是不同预算，不能互换显存/延迟结论。 |
 | [Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell](../../../foundation-models/2611.21974-beyond-bitwidth/README.md) · [原始来源](https://arxiv.org/abs/2611.21974v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 低比特名称不保证GPU真的按该格式执行，也不保证多语种质量。本文用固定诊断/selection/final切分，逐fused-module核对weight类型、activation policy、kernel、fallback和显存，再按服务质量约束配置保护。 | AWQ用calibration activation搜索等价通道缩放后统一做低比特weight-only量化；Beyond Bitwidth研究B200原生format、mixed precision分配及质量/显存/延迟门槛。保护重要通道与给模块分配不同格式不是同一算法，AWQ的小型输出MSE不能充当Blackwell执行证据。 |
+| [LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers](../../../foundation-models/2611.24301-loopcache-interface/README.md) · [原始来源](https://arxiv.org/abs/2611.24301v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 固定深度的draft可能沿过时轨迹继续推进。LoopCache用新候选相对旧候选的logit差控制替换，并清除依赖旧token的所有后代。推测路径轮转读取同一loop cache，独立KV分支再以正确loop缓存重算；浅层差异较大时才单独读取对应loop的cache。 | Spool重建固定记录层输入下的递归状态；LoopCache安排loop-specific KV读取并以exact分支纠正近似推测。前者的摘要精确性与后者的目标解码精确性证明对象不同。 |
 
 </div>
 
@@ -112,6 +113,12 @@ DropKV实际驱逐KV以缩减存储；RISA主要限制每步读取但保留COLD�
 实读AWQ的核心是XW=(XS^-1)(SW)，用激活统计搜索缩放以减少量化输出误差；本地未用TinyChat CUDA kernel，MSE不代表端到端吞吐。Beyond Bitwidth按fused module核weight type、activation policy、kernel及fallback，在独立final集合验证服务约束；单模块BF16恢复效应不可相加，最终activation精度与INT8保护共同改变，不能把全部收益归于allocation。原生NVFP4/B200路径也不能由A100上的模拟误差替代。
 
 对照来源：[beyond-bitwidth](../../../foundation-models/2611.21974-beyond-bitwidth/README.md) · [awq](../../../reproductions/2306.00978-awq/README.md)
+
+### LoopCache：循环KV调度与有条件草稿更新接口
+
+Spool重建固定记录层输入下的递归状态；LoopCache安排loop-specific KV读取并以exact分支纠正近似推测。前者的摘要精确性与后者的目标解码精确性证明对象不同。 阈值相等也触发替换；无需未来loop预测来决定当前更新。未来回到旧token的harmful-switch定义只用于分析，不能变成运行时oracle。近似spec cache不能直接提交token，必须等待独立exact分支。
+
+对照来源：[loopcache-interface](../../../foundation-models/2611.24301-loopcache-interface/README.md) · [spool](../../../foundation-models/2611.23228-spool/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -237,9 +244,23 @@ DropKV实际驱逐KV以缩减存储；RISA主要限制每步读取但保留COLD�
 
     对照来源：[beyond-bitwidth](../../../foundation-models/2611.21974-beyond-bitwidth/README.md) · [awq](../../../reproductions/2306.00978-awq/README.md)
 
+### 与Spool的精确状态重建是同一个承诺吗？ {#cross-nov19-loopcache-interface}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是。Spool对固定记录输入重放状态变换；LoopCache的lossless token提交还依赖完整正确loop KV分支。
+
+    **教学例子：** 教学例：调度编号正确不意味着已运行目标模型验证。
+
+    对照来源：[loopcache-interface](../../../foundation-models/2611.24301-loopcache-interface/README.md) · [spool](../../../foundation-models/2611.23228-spool/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-19** · Spool重建固定记录层输入下的递归状态；LoopCache安排loop-specific KV读取并以exact分支纠正近似推测。前者的摘要精确性与后者的目标解码精确性证明对象不同。 本地组件合同和高成本不复现分别记录。
+
+涉及：[loopcache-interface](../../../foundation-models/2611.24301-loopcache-interface/README.md) · [spool](../../../foundation-models/2611.23228-spool/README.md)
 
 **2026-11-18** · AWQ用calibration activation搜索等价通道缩放后统一做低比特weight-only量化；Beyond Bitwidth研究B200原生format、mixed precision分配及质量/显存/延迟门槛。保护重要通道与给模块分配不同格式不是同一算法，AWQ的小型输出MSE不能充当Blackwell执行证据。 本次实读已有同主题代表README，按真实研究轴比较，不借比较对象改变算法或宣称跨论文效果复现。
 
@@ -285,7 +306,7 @@ DropKV实际驱逐KV以缩减存储；RISA主要限制每步读取但保留COLD�
 
 覆盖 29 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 40 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 41 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -329,6 +350,7 @@ DropKV实际驱逐KV以缩减存储；RISA主要限制每步读取但保留COLD�
 - [Communicate the Change: Efficient Expert Parallelism via Activation Compression](../../../foundation-models/2611.22215-echomoe/README.md)
 - [RISA: Recoverable Sparse Attention for Block-Diffusion Language Models](../../../foundation-models/2611.22191-risa/README.md)
 - [Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell](../../../foundation-models/2611.21974-beyond-bitwidth/README.md)
+- [LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers](../../../foundation-models/2611.24301-loopcache-interface/README.md)
 
 </details>
 

@@ -172,6 +172,7 @@
 
 ### policy-optimization
 
+- [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](../2611.23750-led-edits/README.md)（`led-edits`）：仅允许token替换时，一个遗漏或多余token会让整段后缀错位，需要许多位置分别修复。LED把[Ins]/[Del]加入输出词表、排除在输入词表外：删除当前token，或在其前插入新[Mask]，同时保留该锚点token。
 - [Get Hint-Augmented GRPO Done Right Through Activation Steering](../2611.23124-ash-hint-steering/README.md)（`ash-hint-steering`）：训练问题附带reference solution前半hint更易有正reward，但推理没有该hint。ASH学习可注入activation的行为方向，在无hint输入上重现部分偏移。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [Regularized Score Centering](../2611.21791-regularized-score-centering/README.md)（`regularized-score-centering`）：不是。它减去同一history下behavior分布的加权log-policy梯度期望。
 - [SpeCal: Spectral Calibration for Unsupervised RLVR](../2611.20691-specal/README.md)（`specal`）：不是。它从response hidden-state几何生成group和rollout权重，重加权已有无监督advantage，再沿原GRPO目标更新；几何权重全部stop-gradient。
@@ -230,6 +231,8 @@
 
 ### reward-and-credit
 
+- [Evidence-Based Credit Assignment for Search-Augmented Language Models](../2611.23824-eca-credit/README.md)（`eca-credit`）：终止答案全错时，组相对奖励为零，但检索可能已经取得有价值证据。ECA用训练专用冻结策略在仅含问题与去重文档的上下文中，计算参考答案的长度归一化对数似然势函数；生成的思考、查询和其他轨迹不参与打分。
+- [How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation](../2611.24005-dcc-aggregation/README.md)（`dcc-aggregation`）：等权rubric相加并不代表各维贡献相等：每维满足/不满足样本的平均分差形成reward gain。论文把候选奖励差精确拆成基础满足数量信号、gain imbalance项和残差；把gain全部归一成1反而可能放大小gain维度的噪声。
 - [GPRM: Global Perspective Process Reward Model](../2611.20755-gprm/README.md)（`gprm`）：除问题和当前step，还读历史step与已预测judgment、当前候选的后续trajectory；四维分析是forward consistency、posterior verification、goal alignment、self validity。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning](../2611.20955-jev-safety-reward/README.md)（`jev-safety-reward`）：c=max(p,1-p)低于阈值才交强judge；高置信把有害判为安全的miss永远不会被委托，训练可能集中到这个区域。
 - [Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning](../2611.20612-design-taste-admission/README.md)（`design-taste-admission`）：spacing等指标也可被刷分；必须同时通过expert agreement、单原则扰动/修复因果敏感性、hack trap和重复稳定性。未通过的项只作evaluation，不进reward。
@@ -265,6 +268,7 @@
 
 ### teacher-and-context
 
+- [HINT-WAM: Hindsight-Informed Training for World Action Models](../2611.24789-hint-wam/README.md)（`hint-wam`）：HINT-WAM先SFT动作专家，再冻结同一backbone，只训练hindsight encoder与gated adapters读取示范未来视频。teacher去掉当前帧并保留时间轴，学生与部署策略从来不看未来。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation](../2611.20674-leaf-opd/README.md)（`leaf-opd`）：教师独立解码的首token可能强烈拒答，但在学生已生成事实前缀上，后续token抑制可能迅速消失；需要按同一学生轨迹测监督强度和持续性。
 
 ### 后训练数据选择
@@ -282,6 +286,11 @@
 ### 后训练算法组件
 
 - [MOER: Mix-Policy Optimization under Expert Prefix Guidance with Selective Rollback](../2610.30873-moer/README.md)（`moer`）：既有混合策略训练直接加入完整专家解法，可能削弱探索；专家前缀引导虽允许学生续写，却可能把错误续写继续作为监督。MOER 逐步缩短专家 CoT 前缀：成功则保留前缀加续写，失败则回滚到已有的完整、已验证专家轨迹。
+
+### student-trajectory-distillation
+
+- [Replay, Don't Resample: Off-Policy Consolidation of Long-Horizon RL Experts](../2611.24059-mrpd-replay/README.md)（`mrpd-replay`）：MRPD把专家RL训练日志当作随训练步变化的课程，而非混洗后的离线数据池。学生与专家同一SFT初始化；第k步合并各域专家第k步日志，使用日志采样策略的log-prob做importance ratio，重算组相对奖励的非对称clipped PG。
+- [Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption](../2611.22298-streaming-opd/README.md)（`streaming-opd`）：token局部teacher监督只依赖已生成prefix，不依赖未来token。片段可先进入candidate pool，等监督预算凑齐才更新，而不必每片段一次更新或等整答案结束。
 
 ### DPO 偏好/优化尺度解耦
 
@@ -382,10 +391,6 @@
 ### 训练流程与资源分配
 
 - [Beyond GRPO and On-Policy Distillation: An Empirical Sparse-to-Dense Reward Principle for Language-Model Post-Training](../2605.12483-sparse-to-dense-reward-principle/README.md)（`sparse-to-dense-reward-principle`）：Sec.2–3四阶段工作流和等标签预算经验对照是本论文核心；FKL在teacher occupancy、OPD在student occupancy，教师冻结且需共享tokenizer。库中已有GRPO/OPD/KL算子不等于本文完整流程；不重复包装通用KL或把四个状态标签称为复现。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
-
-### student-trajectory-distillation
-
-- [Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption](../2611.22298-streaming-opd/README.md)（`streaming-opd`）：token局部teacher监督只依赖已生成prefix，不依赖未来token。片段可先进入candidate pool，等监督预算凑齐才更新，而不必每片段一次更新或等整答案结束。
 
 ### 测试时适配
 

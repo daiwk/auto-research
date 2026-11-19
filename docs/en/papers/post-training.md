@@ -8,6 +8,11 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [Replay, Don't Resample: Off-Policy Consolidation of Long-Horizon RL Experts](<https://arxiv.org/abs/2611.24059v1>) | 2026-11-18 | [English](../../post-training/2611.24059-mrpd-replay/README-en.md) · [Chinese](../../post-training/2611.24059-mrpd-replay/README.md) |
+| [How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation](<https://arxiv.org/abs/2611.24005v1>) | 2026-11-18 | [English](../../post-training/2611.24005-dcc-aggregation/README-en.md) · [Chinese](../../post-training/2611.24005-dcc-aggregation/README.md) |
+| [HINT-WAM: Hindsight-Informed Training for World Action Models](<https://arxiv.org/abs/2611.24789v1>) | 2026-11-18 | [English](../../post-training/2611.24789-hint-wam/README-en.md) · [Chinese](../../post-training/2611.24789-hint-wam/README.md) |
+| [Evidence-Based Credit Assignment for Search-Augmented Language Models](<https://arxiv.org/abs/2611.23824v1>) | 2026-11-18 | [English](../../post-training/2611.23824-eca-credit/README-en.md) · [Chinese](../../post-training/2611.23824-eca-credit/README.md) |
+| [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](<https://arxiv.org/abs/2611.23750v1>) | 2026-11-18 | [English](../../post-training/2611.23750-led-edits/README-en.md) · [Chinese](../../post-training/2611.23750-led-edits/README.md) |
 | [TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training](<https://arxiv.org/abs/2611.22206v1>) | 2026-11-17 | [English](../../post-training/2611.22206-tailroll/README-en.md) · [Chinese](../../post-training/2611.22206-tailroll/README.md) |
 | [Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption](<https://arxiv.org/abs/2611.22298v1>) | 2026-11-17 | [English](../../post-training/2611.22298-streaming-opd/README-en.md) · [Chinese](../../post-training/2611.22298-streaming-opd/README.md) |
 | [Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data](<https://arxiv.org/abs/2611.22210v1>) | 2026-11-17 | [English](../../post-training/2611.22210-mpg-dpo/README-en.md) · [Chinese](../../post-training/2611.22210-mpg-dpo/README.md) |

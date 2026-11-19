@@ -1,0 +1,83 @@
+{
+  "schema_version": 2,
+  "key": "mrpd-replay",
+  "device": "cpu",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "coarsening_lower_bounds_full_kl": true,
+        "teacher_and_logging_policy_frozen": true,
+        "masked_observation_gradient_zero": true,
+        "student_gradient_nonzero": true,
+        "replay_retains_step_schedule": true,
+        "dense_kl_not_clipped_or_added_to_advantage": true
+      },
+      "metrics": {
+        "loss": 0.27270983017152783,
+        "policy_loss": 0.0,
+        "coarsened_kl": 0.27270983017152783,
+        "full_kl_mean": 0.31760485465125493,
+        "gradient_norm": 0.5418177690064163
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "coarsening_lower_bounds_full_kl": true,
+        "teacher_and_logging_policy_frozen": true,
+        "masked_observation_gradient_zero": true,
+        "student_gradient_nonzero": true,
+        "replay_retains_step_schedule": true,
+        "dense_kl_not_clipped_or_added_to_advantage": true
+      },
+      "metrics": {
+        "loss": 0.9281566206110683,
+        "policy_loss": 0.0,
+        "coarsened_kl": 0.9281566206110683,
+        "full_kl_mean": 1.05197031946933,
+        "gradient_norm": 0.7994139244827827
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "coarsening_lower_bounds_full_kl": true,
+        "teacher_and_logging_policy_frozen": true,
+        "masked_observation_gradient_zero": true,
+        "student_gradient_nonzero": true,
+        "replay_retains_step_schedule": true,
+        "dense_kl_not_clipped_or_added_to_advantage": true
+      },
+      "metrics": {
+        "loss": 0.3280786508312404,
+        "policy_loss": 0.0,
+        "coarsened_kl": 0.3280786508312404,
+        "full_kl_mean": 0.8445098564869907,
+        "gradient_norm": 0.575405577434528
+      }
+    }
+  ],
+  "source_sha256": {
+    "src/auto_research/post_training/mrpd_replay.py": "1ed005ec01114d7bbd53281ff58b3618ed18c73de8195fa6f811814a0fdb0250"
+  },
+  "source_commit": null,
+  "provenance_note": "Independent working-tree CPU execution; content hashes identify the code. This is not the later frozen-source batch receipt.",
+  "formal_comparison": false,
+  "capability_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false
+}

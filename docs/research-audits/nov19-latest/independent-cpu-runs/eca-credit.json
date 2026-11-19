@@ -1,0 +1,80 @@
+{
+  "schema_version": 2,
+  "key": "eca-credit",
+  "device": "cpu",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "horizon_preserves_telescope": true,
+        "step_clipping_erases_spike_gain": true,
+        "novelty_never_gives_positive_repeat_credit": true,
+        "all_failure_search_gradient_survives": true,
+        "final_answer_and_observations_have_no_auxiliary_gradient": true,
+        "behavior_is_frozen": true
+      },
+      "metrics": {
+        "loss": 8.314475410248212e-18,
+        "horizon_return": 0.16666666666666666,
+        "step_return": 0.0,
+        "search_gradient_norm": 0.000205321535689886
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "horizon_preserves_telescope": true,
+        "step_clipping_erases_spike_gain": true,
+        "novelty_never_gives_positive_repeat_credit": true,
+        "all_failure_search_gradient_survives": true,
+        "final_answer_and_observations_have_no_auxiliary_gradient": true,
+        "behavior_is_frozen": true
+      },
+      "metrics": {
+        "loss": 1.3877787807814457e-17,
+        "horizon_return": 0.16666666666666666,
+        "step_return": 0.0,
+        "search_gradient_norm": 0.0005319695270205711
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "horizon_preserves_telescope": true,
+        "step_clipping_erases_spike_gain": true,
+        "novelty_never_gives_positive_repeat_credit": true,
+        "all_failure_search_gradient_survives": true,
+        "final_answer_and_observations_have_no_auxiliary_gradient": true,
+        "behavior_is_frozen": true
+      },
+      "metrics": {
+        "loss": 1.6588293239028218e-17,
+        "horizon_return": 0.16666666666666666,
+        "step_return": 0.0,
+        "search_gradient_norm": 0.0005161251013444567
+      }
+    }
+  ],
+  "source_sha256": {
+    "src/auto_research/post_training/eca_credit.py": "60a0c68ac584ff93010821cb5e9f181ff80663f85c03ace8942256be4298eee1"
+  },
+  "source_commit": null,
+  "provenance_note": "Independent working-tree CPU execution; content hashes identify the code. This is not the later frozen-source batch receipt.",
+  "formal_comparison": false,
+  "capability_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false
+}

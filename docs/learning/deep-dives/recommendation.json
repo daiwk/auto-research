@@ -683,7 +683,7 @@
     "history-ranking-backbones": {
       "title": "DIN、HSTU、LONGER、SlimPer、RankMixer：究竟让谁与谁交互？",
       "thesis": "比较排序骨干前先画三条边：历史到历史、候选到历史、字段到字段。DIN按候选激活历史，HSTU在输入窗口内逐层改写历史状态，LONGER先合并再以短查询读长KV，SlimPer反复读取用户池但只传播小知识库，RankMixer则更换异构字段交互。它们可处于同一流水线的不同位置，不能按一个长度变量或一张本地结果表排总名次。",
-      "updated": "2026-10-27",
+      "updated": "2026-11-19",
       "axes": [
         "交互对象：历史内部、目标读取还是字段混合",
         "每层传播的状态及原始历史是否持续可读",
@@ -739,6 +739,16 @@
             "核心公式",
             "本地复现"
           ]
+        },
+        {
+          "paper": "recommendation:xsplit-argus",
+          "position": "将候选无关的旧历史压成因果编码器末K个状态，在线只编码最近M个事件；候选token再对两段记忆做cross-attention。离线缓存是服务时的执行安排，不是训练时detach压缩器。点击监督头与原始logit的L1蒸馏头共享历史表示，但上线只使用监督头。",
+          "tradeoff": "ARGUS前作按反馈→物品分解下一事件分布；X-split重点是候选无关历史缓存和候选特定点击logit蒸馏，目标排列与预测头不能照搬。二者的本地负结果/诊断也不能互相当作能力对照。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题对照"
+          ]
         }
       ],
       "analysis": [
@@ -762,6 +772,14 @@
             "recommendation:hstu",
             "recommendation:longer",
             "recommendation:rankmixer"
+          ]
+        },
+        {
+          "title": "X-split ARGUS：可复用历史token与双头蒸馏：机制和证据边界",
+          "body": "Eq1–11：历史编码因果且候选无关；训练memory只选目标之前状态。默认b(t)=max(0,t−1−M)，服务缓存cutoff允许与最近事件重叠或留缺口。训练runtime共享全序列因果局部attention，服务只重算最近M条，左边界/有效感受野并不相同。KD是原始logit的L1，不是BCE或KL；仅负标签抬到epsilon，教师完全detach。小网络缩小层数/维度，保留真实attention、双头与梯度。 ARGUS前作按反馈→物品分解下一事件分布；X-split重点是候选无关历史缓存和候选特定点击logit蒸馏，目标排列与预测头不能照搬。二者的本地负结果/诊断也不能互相当作能力对照。",
+          "papers": [
+            "recommendation:xsplit-argus",
+            "recommendation:argus"
           ]
         }
       ],
@@ -797,6 +815,16 @@
             "recommendation:rankmixer",
             "recommendation:longer",
             "recommendation:hstu"
+          ]
+        },
+        {
+          "id": "cross-nov19-xsplit-argus",
+          "question": "为什么不能直接把ARGUS的物品头用到X-split？",
+          "answer": "ARGUS分解反馈和next-item；X-split用候选特征预测点击，另用辅助头匹配teacher原始logit，任务和头不同。",
+          "example": "教学例：把L1 logit误差替成物品softmax CE会改变监督信号。",
+          "papers": [
+            "recommendation:xsplit-argus",
+            "recommendation:argus"
           ]
         }
       ],
@@ -873,7 +901,8 @@
         "recommendation:uxsid",
         "recommendation:whale",
         "recommendation:wide-deep",
-        "recommendation:zenith"
+        "recommendation:zenith",
+        "recommendation:xsplit-argus"
       ],
       "updates": [
         {
@@ -1028,6 +1057,18 @@
             "recommendation:whale": "1b14d300547e596cf5c3eb2628b50ca8ebba2fefdb8785aa7ff8edcbea29fec6",
             "recommendation:wide-deep": "ce3072148a53f5c5d0b37429ed96404ac3fe1452571bf9d9d41ee59c20686ab5",
             "recommendation:zenith": "e607e79b7d2e793b0aa19dec231a77b628036fe9cc4cdcacacd67451fac84b91"
+          }
+        },
+        {
+          "date": "2026-11-19",
+          "papers": [
+            "recommendation:xsplit-argus",
+            "recommendation:argus"
+          ],
+          "summary": "输入是显式小型事件/候选特征；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。负控改目标/未来反馈保持预测不变；KD反传到compressor，但不能据此推断NE或ACV收益。 完整高成本实验不复现，审查DONE。",
+          "source_revisions": {
+            "recommendation:xsplit-argus": "b5b614058f7d5638c79d0da540dcb805491cf139785fd54ba1f6ca6874c96a69",
+            "recommendation:argus": "a8e69376692095761a43eae09f99dc06519c68209e297b83758fbb0c4d7754e5"
           }
         }
       ]
@@ -2270,7 +2311,7 @@
     "research-serving-loop": {
       "title": "从更便宜的一次前向，到可验证的长期研究闭环",
       "thesis": "ROCS减少请求内重复计算，Rec-Distill将昂贵教师知识移到训练，Effective Training Time追踪训练生命周期损耗，FORTE控制特征退役风险，Self-Evolving RecSys把提案、实验和线上反馈接成长期循环。它们优化的时间尺度不同；省GPU、删特征和自动提出方案，都不能直接当作推荐效果提升。",
-      "updated": "2026-11-18",
+      "updated": "2026-11-19",
       "axes": [
         "成本属于训练、请求内推理还是长期研发生命周期",
         "复用与删除要求哪些依赖/消费者保持一致",
@@ -2338,6 +2379,26 @@
             "同主题对照",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "recommendation:mle-agents",
+          "position": "Meta把提假设、改代码、训练和读指标组成有人监督的模型研发循环。2.0每轮名义上并行七个候选和一个方差探针，使用与线上影响校准过的加权NE，而不是只追逐点击AUPRC。失败块名单、结构化输出和只回传近期未采纳赢家控制上下文陈旧；最终模型仍由工程师审核并独立做线上实验。",
+          "tradeoff": "EvoPilot先锁定控制/实验两臂的比较合同并拒绝不匹配证据；MLE Agents强调搜索目标与同轮噪声探针。二者都不让“训练结束”自动成为可发布结论，目标校准也不能取代EvoPilot的产物一致性检查。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题对照"
+          ]
+        },
+        {
+          "paper": "recommendation:mars-fapo",
+          "position": "MARS让近线0.6B策略为用户产生跨召回、粗排、精排和重排的七维配置，经校验后缓存，在线始终不等待LLM。SFT建立合法格式，FAPO把偏好比较集中到实际不同的动作值token，最后GRPO在沙箱回放和冻结奖励模型上继续优化。正文版权行为Taobao，贡献者按名字母排序，不虚构个人一作机构。",
+          "tradeoff": "EvoPilot校验模型开发实验的两臂证据，MARS生成和训练线上流水线配置。MARS的缓存/fallback是服务安全，不能替代开发比较合同；ActionMask loss也不能证明策略已经能生成合法或优质配置。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题对照"
+          ]
         }
       ],
       "analysis": [
@@ -2365,6 +2426,22 @@
           "papers": [
             "recommendation:cutagent",
             "recommendation:agentic-rec-tune"
+          ]
+        },
+        {
+          "title": "MLE Agents：工业精排的目标校准与方差探针准入：机制和证据边界",
+          "body": "§1.2给出0.3/0.7目标，§3.5明确与同轮variance probe比较，而不是任意旧基线。完成状态须有两条独立信号；一候选只改一项连贯机制。阈值来自历史噪声探针，不能把0.0005说成显著性检验或跨数据通用常数。接口返回离线搜索接纳和仍需人工审核，不发起训练或生产发布。 EvoPilot先锁定控制/实验两臂的比较合同并拒绝不匹配证据；MLE Agents强调搜索目标与同轮噪声探针。二者都不让“训练结束”自动成为可发布结论，目标校准也不能取代EvoPilot的产物一致性检查。",
+          "papers": [
+            "recommendation:mle-agents",
+            "recommendation:evopilot"
+          ]
+        },
+        {
+          "title": "MARS：近线推荐编排与ActionMask偏好优化：机制和证据边界",
+          "body": "Eq11–13保留全chosen回答的生成anchor，只有偏好项乘clip(1+2(p+−p−)/p均值,0.2,3)。缺失任一历史V2P时权重为1。只有弱证据且达到相对gap才允许反转chosen/rejected；强证据不反转。动作mask由可信的字段值span/token对齐层提供，必须包含完整变化值而非共享JSON结构；不以脆弱字符串搜索冒充原tokenizer。历史配置V2P是观察统计，不是因果后验。 EvoPilot校验模型开发实验的两臂证据，MARS生成和训练线上流水线配置。MARS的缓存/fallback是服务安全，不能替代开发比较合同；ActionMask loss也不能证明策略已经能生成合法或优质配置。",
+          "papers": [
+            "recommendation:mars-fapo",
+            "recommendation:evopilot"
           ]
         }
       ],
@@ -2418,6 +2495,26 @@
             "recommendation:cutagent",
             "recommendation:agentic-rec-tune"
           ]
+        },
+        {
+          "id": "cross-nov19-mle-agents",
+          "question": "MLE Agents和EvoPilot的准入能互代吗？",
+          "answer": "不能。前者校准目标/训练噪声，后者核对两臂实验与产物；都还需要最终人工和线上确认。",
+          "example": "教学例：数据版本不同的两臂即使NE差够大，也不能用噪声门槛盖过协议失败。",
+          "papers": [
+            "recommendation:mle-agents",
+            "recommendation:evopilot"
+          ]
+        },
+        {
+          "id": "cross-nov19-mars-fapo",
+          "question": "MARS和EvoPilot都是Agent，有什么根本区别？",
+          "answer": "MARS训练用户流水线动作；EvoPilot审核模型开发比较证据。配置格式合法不等于实验结论可信。",
+          "example": "教学例：合法Minimal动作不能代替控制/实验模型的数据版本核对。",
+          "papers": [
+            "recommendation:mars-fapo",
+            "recommendation:evopilot"
+          ]
         }
       ],
       "reviewed_papers": [
@@ -2440,7 +2537,9 @@
         "recommendation:self-evolving-rec",
         "recommendation:solaris",
         "recommendation:ug-sep",
-        "recommendation:cutagent"
+        "recommendation:cutagent",
+        "recommendation:mle-agents",
+        "recommendation:mars-fapo"
       ],
       "updates": [
         {
@@ -2499,6 +2598,30 @@
           "source_revisions": {
             "recommendation:cutagent": "b11b921cd5dee3b6454f0a0b56dffddb338bab85d7fe85e16b6ffc44f5defec6",
             "recommendation:agentic-rec-tune": "577f19e686b62b5cff25150df3488cbb65835a454142de3a037fe66277fa7eae"
+          }
+        },
+        {
+          "date": "2026-11-19",
+          "papers": [
+            "recommendation:mle-agents",
+            "recommendation:evopilot"
+          ],
+          "summary": "本地只执行目标与完成/准入接口。没有运行Claude研究调用、候选代码生成、私有数据分布式训练或线上A/B，也没有新增可执行Evolve搜索策略。合成输入不代表Meta模型指标。 完整高成本实验不复现，审查DONE。",
+          "source_revisions": {
+            "recommendation:mle-agents": "0bd7f4f9ad3821aa4f88f89458e31d2fa7baa94a6f033a272f067ce1e64d75b9",
+            "recommendation:evopilot": "461d4284afa1aa1a754016383d87aca09361b2b6abf0f9dfca423a3b156fdbae"
+          }
+        },
+        {
+          "date": "2026-11-19",
+          "papers": [
+            "recommendation:mars-fapo",
+            "recommendation:evopilot"
+          ],
+          "summary": "本地只实现posterior启发式权重、弱证据翻转规则与FAPO张量损失；没有0.6B生成、字段tokenizer、SFT/GRPO、Sandbox、奖励模型、iGraph缓存或实时推荐。结构token仍有生成梯度，rejected非动作token没有偏好梯度。 完整高成本实验不复现，审查DONE。",
+          "source_revisions": {
+            "recommendation:mars-fapo": "111fb9c35ae6ceb7aa1d1d06316e6299db9bd6bf1a67be767f8e07de4ed3f9cb",
+            "recommendation:evopilot": "461d4284afa1aa1a754016383d87aca09361b2b6abf0f9dfca423a3b156fdbae"
           }
         }
       ]
