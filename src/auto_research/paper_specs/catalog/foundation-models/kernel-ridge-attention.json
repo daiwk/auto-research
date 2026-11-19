@@ -33,7 +33,7 @@
   "local_operator": "auto_research.foundation_models.kernel_ridge_attention.diagnostic",
   "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.kernel_ridge_attention import diagnostic; print(diagnostic(42))'",
   "requires_gpu_validation": true,
-  "gpu_validation_passed": false,
+  "gpu_validation_passed": true,
   "gpu_validation_artifact": "docs/gpu-validations/kernel-ridge-attention-a100-20261119-latest.json",
   "full_experiment_status": "not_reproduced_high_cost",
   "full_experiment_review_done": true,

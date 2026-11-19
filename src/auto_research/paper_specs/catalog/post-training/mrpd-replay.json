@@ -26,7 +26,7 @@
   "promotion_eligible": false,
   "evolve_integrated": false,
   "requires_gpu_validation": true,
-  "gpu_validation_passed": false,
+  "gpu_validation_passed": true,
   "full_experiment_status": "not_reproduced_high_cost",
   "full_experiment_review_done": true,
   "review_done": true,

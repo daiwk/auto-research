@@ -43,6 +43,6 @@
   "summary": "MARS让近线0.6B策略为用户产生跨召回、粗排、精排和重排的七维配置，经校验后缓存，在线始终不等待LLM。SFT建立合法格式，FAPO把偏好比较集中到实际不同的动作值token，最后GRPO在沙箱回放和冻结奖励模型上继续优化。正文版权行为Taobao，贡献者按名字母排序，不虚构个人一作机构。 本地边界：本地只实现posterior启发式权重、弱证据翻转规则与FAPO张量损失；没有0.6B生成、字段tokenizer、SFT/GRPO、Sandbox、奖励模型、iGraph缓存或实时推荐。结构token仍有生成梯度，rejected非动作token没有偏好梯度。",
   "local_operator": "auto_research.reproductions.mars_fapo_components.diagnostic",
   "local_command": "PYTHONPATH=src python -c 'from auto_research.reproductions.mars_fapo_components import diagnostic; print(diagnostic(42, device=\"cpu\"))'",
-  "gpu_validation_passed": false,
+  "gpu_validation_passed": true,
   "gpu_validation_artifact": "docs/gpu-validations/mars-fapo-a100-20261119-latest.json"
 }
