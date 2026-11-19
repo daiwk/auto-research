@@ -1,6 +1,6 @@
 # Beyond Replacement: Levenshtein Editing for Diffusion Language Models
 
-<!-- source-sha256: 25308054942444e05c5b053eb640c50cdec6d9639a26429efd15be4fb27ee02c -->
+<!-- source-sha256: 3c53f1e7bf1430e9b850357fc630e9bf5125aac78eff71433e7c5b4df5974975 -->
 
 [简体中文](README.md)
 
@@ -36,7 +36,7 @@ Original figure and full caption from [fixed-v1 PDF page4](https://arxiv.org/pdf
 Source locations: §4.1–4.4; Appendix D Algorithms1–4; Appendix A scale.
 
 $$
-\pi^*=\operatorname{LCS}(s,y),\quad \ell_k=\min(|I_k|,|J_k|),\quad e_{I_k[p]}=\begin{cases}y_{J_k[p]},&p\le\ell_k,\\[Del],&p>\ell_k.\end{cases}\quad |J_k|>\ell_k,\ k<K\Rightarrow e_{i_{k+1}}=[Ins].
+\pi^*=\operatorname{LCS}(s,y),\quad \ell_k=\min(|I_k|,|J_k|),\quad e_{I_k[p]}=\begin{cases}y_{J_k[p]},&p\le\ell_k,\\ \mathrm{[Del]},&p>\ell_k.\end{cases}\quad |J_k|>\ell_k,\ k<K\Rightarrow e_{i_{k+1}}=\mathrm{[Ins]}.
 $$
 
 ### Paper results and online evidence

@@ -43,7 +43,7 @@ flowchart LR
 固定v1位置：§4.1–4.4；Appendix D Algorithms1–4；Appendix A scale。
 
 $$
-\pi^*=\operatorname{LCS}(s,y),\quad \ell_k=\min(|I_k|,|J_k|),\quad e_{I_k[p]}=\begin{cases}y_{J_k[p]},&p\le\ell_k,\\[Del],&p>\ell_k.\end{cases}\quad |J_k|>\ell_k,\ k<K\Rightarrow e_{i_{k+1}}=[Ins].
+\pi^*=\operatorname{LCS}(s,y),\quad \ell_k=\min(|I_k|,|J_k|),\quad e_{I_k[p]}=\begin{cases}y_{J_k[p]},&p\le\ell_k,\\ \mathrm{[Del]},&p>\ell_k.\end{cases}\quad |J_k|>\ell_k,\ k<K\Rightarrow e_{i_{k+1}}=\mathrm{[Ins]}.
 $$
 
 ### 论文离线与线上效果

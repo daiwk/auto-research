@@ -132,7 +132,7 @@
       "automatic_retry": false,
       "automatic_implementation_queue": false,
       "local_module": "src/auto_research/post_training/led_edits.py",
-      "english_source_sha256": "25308054942444e05c5b053eb640c50cdec6d9639a26429efd15be4fb27ee02c"
+      "english_source_sha256": "3c53f1e7bf1430e9b850357fc630e9bf5125aac78eff71433e7c5b4df5974975"
     },
     {
       "id": "2611.24789",

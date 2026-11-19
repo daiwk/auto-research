@@ -283,7 +283,7 @@
       }
     },
     "dive/post-training/policy-optimization/update/2026-11-19/10": {
-      "source_sha256": "7f9da9f4dcef89092687d355812fc57a0cb14dcf9f9c1676053f4f5f80786c30",
+      "source_sha256": "df88f50829d530ca04cae0379b59d816d4c576f6c551d20f1339f174b2d384a6",
       "reviewed": true,
       "fields": {
         "summary": "Fixed-block LCS edit targets, one Ins per gap, no fictitious terminal anchor, mask-threshold fallback, visible-token edit threshold and simultaneous edits followed by truncation/padding. No diffusion forward pass, multi-stage SFT or cycle-resampling decoder. The high-cost full experiment is not reproduced; components or references do not establish capability promotion."

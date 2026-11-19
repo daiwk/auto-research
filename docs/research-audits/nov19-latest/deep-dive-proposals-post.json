@@ -184,7 +184,7 @@
       "paper": "post-training:led-edits",
       "target_card": "post-training/policy-optimization",
       "source_revisions": {
-        "post-training:led-edits": "25308054942444e05c5b053eb640c50cdec6d9639a26429efd15be4fb27ee02c",
+        "post-training:led-edits": "3c53f1e7bf1430e9b850357fc630e9bf5125aac78eff71433e7c5b4df5974975",
         "post-training:orl-diffusion": "61fd35c2b6c66949846328e6ea75437083da79c96dae789e9f1594ce96d22df7"
       },
       "comparison": {
