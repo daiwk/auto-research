@@ -640,6 +640,102 @@
       "fields": {
         "summary": "Only the fixed grade mapping and floor aggregation run as L0 interfaces. No program generation/execution, TREC download or model call occurs, and no relevance accuracy is reported. Evidence must be strict booleans; integers0/1 are not silently accepted. Full high-cost experiments are not reproduced; review DONE."
       }
+    },
+    "dive/system-one/typed-readout/comparison/system-one:jeveration": {
+      "source_sha256": "1b9c44233ce71cbb670285eb63fedaf26093b038de9929ab38ddb7c06d453f5a",
+      "reviewed": true,
+      "fields": {
+        "position": "Images become a joint Choice over128 discrete codes. A shared random state coordinates positions rather than independently sampling marginal codes. A frozen Qwen3.5-4B with shared LoRA/heads first learns masked image conditionals, then distribution matching and confidence correction teach single-pass decisions. One checkpoint also serves image-to-image and dense tasks.",
+        "tradeoff": "LLM2Jev reads a finite candidate decision distribution. Jeveration must also coordinate spatial outputs and learn to use shared randomness. Candidate scoring alone does not establish a coherent joint image distribution."
+      }
+    },
+    "dive/system-one/typed-readout/analysis/2": {
+      "source_sha256": "8e5324b855dc0379924d09e7cdc725d7a661c29206df79de1db91dc612b3c331",
+      "reviewed": true,
+      "fields": {
+        "title": "Jeveration: System One Models Now Generate",
+        "body": "LLM2Jev reads a finite candidate decision distribution. Jeveration must also coordinate spatial outputs and learn to use shared randomness. Candidate scoring alone does not establish a coherent joint image distribution. Choices factorize conditionally on shared xi, but mixing over xi permits dependence. Noise alone is insufficient: direct supervision can ignore it. Training correction re-masks the least-confident half and uses the frozen first-stage model to complete them; inference remains one generation pass."
+      }
+    },
+    "dive/system-one/typed-readout/question/nov19-jeveration": {
+      "source_sha256": "bbf65c522985c7b665037eb9f932f623656e995677bc1eb6663dbb311e524fe5",
+      "reviewed": true,
+      "fields": {
+        "question": "What is harder than an LLM2Jev candidate Choice?",
+        "answer": "Multiple spatial decisions must jointly match a prompt. A single candidate softmax need not learn that spatial joint law.",
+        "example": "Choosing an existing image differs from generating128 mutually coherent codes."
+      }
+    },
+    "dive/system-one/typed-readout/update/2026-11-19/1": {
+      "source_sha256": "e4f2afdf526a09ed6793fd793220cf3750d7bed74a3e56adb93c0e726a0fb1b1",
+      "reviewed": true,
+      "fields": {
+        "summary": "LLM2Jev reads a finite candidate decision distribution. Jeveration must also coordinate spatial outputs and learn to use shared randomness. Candidate scoring alone does not establish a coherent joint image distribution. Full experiments are not reproduced; components are separate from capability evidence."
+      }
+    },
+    "dive/system-one/typed-readout/comparison/system-one:egojev": {
+      "source_sha256": "718a876a7c03b149e346cacb43955b036bb1e841d640360768d9e718cf17ea06",
+      "reviewed": true,
+      "fields": {
+        "position": "One frozen VLM compares labeled thumbnails in one prompt. Complete label probabilities replace written timestamps. Coarse mass selects refinement windows; local fine readouts retain their window mass and are geometrically fused with coarse probabilities. Midpoint quantiles of a piecewise-uniform time distribution allocate answer frames.",
+        "tradeoff": "System One reranking sorts a joint candidate distribution. EgoJev uses it to allocate time budget. Single-token letter readout cannot silently replace multi-token numeric labels, and quantile frames are not simply the top-k frames."
+      }
+    },
+    "dive/system-one/typed-readout/analysis/3": {
+      "source_sha256": "0e05dd655f6542649045e4ac50a1493abba5332154ce3afd428df0b22eb010b2",
+      "reviewed": true,
+      "fields": {
+        "title": "EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions",
+        "body": "System One reranking sorts a joint candidate distribution. EgoJev uses it to allocate time budget. Single-token letter readout cannot silently replace multi-token numeric labels, and quantile frames are not simply the top-k frames. Normalize each refined local distribution, then multiply by its coarse window mass; unrefined windows spread that mass evenly. A square root is not a plain product. For k0, keep the single-level coarse distribution. Inverse-CDF placement interpolates within bins. Full labels such as17] require all conditional token probabilities, including the closing bracket; that VLM readout is not implemented locally."
+      }
+    },
+    "dive/system-one/typed-readout/question/nov19-egojev": {
+      "source_sha256": "2b8441dc2482454281be17218fa6022d25671e3abf9419fd21762be69cec59fe",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from System One reranking?",
+        "answer": "It uses inverse-CDF midpoint quantiles, not probability top-k. Multiple distinct times may lie inside one high-mass segment.",
+        "example": "With all mass in the last half of10seconds and budget2, times are6.25 and8.75, not two7.5s."
+      }
+    },
+    "dive/system-one/typed-readout/update/2026-11-19/2": {
+      "source_sha256": "15097d026dfc70fda79a3fdd4fe5e498068cbf89e943f778ca9865dce48f9994",
+      "reviewed": true,
+      "fields": {
+        "summary": "System One reranking sorts a joint candidate distribution. EgoJev uses it to allocate time budget. Single-token letter readout cannot silently replace multi-token numeric labels, and quantile frames are not simply the top-k frames. Full experiments are not reproduced; components are separate from capability evidence."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/comparison/multimodal-models:jepa-dots": {
+      "source_sha256": "2dcf1a3e6048a25322c3dc9b9a562e50e6718a560d2f61711fcff6468d019a18",
+      "reviewed": true,
+      "fields": {
+        "position": "A shared visual backbone feeds separate dynamics and task latents; language FiLM enters only the task path. World queries read dynamics history and supplied clean actions; the policy reads history, goals and noisy actions. Multi-layer masks also block indirect leakage. Fixed observations/actions/parameters yield instruction-invariant world predictions while policy actions may change.",
+        "tradeoff": "LeWAM jointly models worlds/actions and plans through prediction. JEPA Dots separates language goals from fixed-action dynamics and does not use its world branch for deployment action search. Shared masked-MoT ancestry does not imply identical inference."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/analysis/14": {
+      "source_sha256": "23a33dce01ef0d4b4806e172df57a00098c50dd1c7764f822af1bfe05af3ac21",
+      "reviewed": true,
+      "fields": {
+        "title": "JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control",
+        "body": "LeWAM jointly models worlds/actions and plans through prediction. JEPA Dots separates language goals from fixed-action dynamics and does not use its world branch for deployment action search. Shared masked-MoT ancestry does not imply identical inference. The invariance is a forward-conditioning property, not statistical independence after joint backbone training. The world branch supplies training supervision; deployment generates eight actions by action flow and executes the first two before replanning, rather than searching actions through the world model."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/question/nov19-jepa-dots": {
+      "source_sha256": "4250d080827d70785c7545759a670e39a634a2e6537c0f5902603a6c833d9b03",
+      "reviewed": true,
+      "fields": {
+        "question": "How does deployment differ from LeWAM?",
+        "answer": "The JEPA Dots world branch is training supervision, while deployment uses a flow policy, not LeWAM-style world-model action optimization.",
+        "example": "Executing two actions from an eight-step chunk is receding-horizon control, not gradient planning over a world cost."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/update/2026-11-19/13": {
+      "source_sha256": "485a30d3ac3b0d3ab9627eb7832c47c709b6724b15d0790c2d0e69989e95f962",
+      "reviewed": true,
+      "fields": {
+        "summary": "LeWAM jointly models worlds/actions and plans through prediction. JEPA Dots separates language goals from fixed-action dynamics and does not use its world branch for deployment action search. Shared masked-MoT ancestry does not imply identical inference. Full experiments are not reproduced; components are separate from capability evidence."
+      }
     }
   }
 }

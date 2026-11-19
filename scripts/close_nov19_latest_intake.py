@@ -107,6 +107,13 @@ def main():
     verify_sources(ROOT, frozen["commit"], frozen["source_sha256"], frozen["proof"])
     for device in ("cpu", "cuda"):
         validate_raw(load(AUDIT / f"raw-{device}.json"), frozen)
+    from run_nov19_egojev_cpu import hashes as extra_hashes, validate_raw as validate_extra
+
+    extra = load(AUDIT / "frozen-egojev-sources.json")
+    if extra_hashes() != extra["source_sha256"]:
+        raise ValueError("supplemental CPU source changed")
+    verify_sources(ROOT, extra["commit"], extra["source_sha256"], extra["proof"])
+    validate_extra(load(AUDIT / "raw-egojev-cpu.json"), extra)
     intake = load(AUDIT / "intake-scope.json")
     learning = learning_counts(set(intake["accepted_papers"]))
     manifest = load(ROOT / "docs/paper-figures-manifest.json")
@@ -133,11 +140,17 @@ def main():
         ):
             raise ValueError("incomplete/overstated review: " + identity)
         if component:
-            item = config()["components"][spec["key"]]
+            supplemental = identity == "system-one:egojev"
+            item = (
+                {"evaluation_tier": "l1_mechanism", "cuda": False}
+                if supplemental
+                else config()["components"][spec["key"]]
+            )
+            execution_frozen = extra if supplemental else frozen
             for device in ("cpu", "cuda") if item["cuda"] else ("cpu",):
                 evidence = load(page.parent / f"metrics/component-{device}-seeds42-44.json")
                 if (
-                    evidence["provenance"]["commit"] != frozen["commit"]
+                    evidence["provenance"]["commit"] != execution_frozen["commit"]
                     or evidence["evaluation_tier"] != item["evaluation_tier"]
                 ):
                     raise ValueError("wrong execution binding")
@@ -201,7 +214,7 @@ def main():
         "new_first_releases": len(intake["new_papers"]),
         "announcement_overlap_backfill": 1,
         "historical_directory_backfill": 1,
-        "low_cost_components": len(config()["components"]),
+        "low_cost_components": len(intake["component_papers"]),
         "cuda_components": sum(p["cuda"] for p in config()["components"].values()),
         "high_cost_review_only": len(intake["review_only_papers"]),
         "full_capability_reproductions": 0,
@@ -213,6 +226,7 @@ def main():
         "counts": counts,
         "papers": papers,
         "source_commit": frozen["commit"],
+        "supplemental_cpu_source_commit": extra["commit"],
     }
     dump(AUDIT / "task-scope.json", scope)
     dump(ROOT / "docs/paper-figures-manifest.json", manifest)
@@ -228,7 +242,7 @@ def main():
         "",
         "[English](../../en/research-audits/nov19-latest/README.md)",
         "",
-        "本轮20项：18篇11月18日新首发、1篇11月17日首发/今日公告补录的Meta AVM、1篇11月2日Google SearchInject历史目录补录。17个低成本组件/接口、3篇高成本仅收录；7个CUDA组件在真实A100完成42/43/44三种子验证。80道逐题校对中英问答、20条同主题深读更新。",
+        "本轮23项：21篇11月18日新首发、1篇11月17日首发/今日公告补录的Meta AVM、1篇11月2日Google SearchInject历史目录补录。18个低成本组件/接口、5篇高成本仅收录；7个CUDA组件在真实A100完成42/43/44三种子验证。92道逐题校对中英问答、23条同主题深读更新。",
         "",
         "## 范围与证据",
         "",
@@ -237,6 +251,8 @@ def main():
         "Google/Meta优先：MLE Agents核对Meta作者栏和真实A/B，同时保留延迟护栏退化；AVM完整8M视频训练高成本不复现；SearchInject只证明检索暴露控制，不证明攻击成功下降。CWM作者当前为Brown/AMI与NYU/AMI，不凭熟悉姓名标Meta；X-split原文未列机构，不猜Yandex。",
         "",
         "本地均为L0/L1诊断，不是模型能力、线上收益或Evolve晋级。高成本完整实验明确成本过高，不复现（审查 DONE），不自动重试。交叉复核发现的ECA/MRPD掩码指数溢出已在冻结前修复并加入极端值负控。",
+        "",
+        "最终跨主题复核补入Jeveration、EgoJev和JEPA Dots。EgoJev的显式概率CPU后处理用独立冻结组执行；已完成的17组件主体和7个A100结果保持原样，不覆盖或冒充再次测量。新增两篇的完整生成/机器人训练仅收录、不复现。",
         "",
         "[来源覆盖](source-coverage.json) · [优先来源核对](priority-primary-selection.json) · [完整交付账本](task-scope.json) · [成本与执行预算](preflight.json) · [真实CUDA产物](raw-cuda.json)",
         "",
@@ -250,7 +266,7 @@ def main():
         "",
         "[简体中文](../../../research-audits/nov19-latest/README.md)",
         "",
-        "20items:18first releases from November18,Meta AVM first published November17and announced today,and historical November2Google SearchInject newly observed in the directory.17bounded components/interfaces and3review-only high-cost papers;7CUDA components actually ran on an A100with seeds42/43/44.80individually reviewed bilingual questions and20same-topic deep-dive updates.",
+        "23 items: 21 first releases from November18, Meta AVM first published November17 and announced today, and historical November2 Google SearchInject newly observed in the directory. 18 bounded components/interfaces and5 review-only high-cost papers;7 CUDA components actually ran on an A100 with seeds42/43/44. 92 individually reviewed bilingual questions and23 same-topic deep-dive updates.",
         "",
         "## Scope and evidence",
         "",
@@ -259,6 +275,8 @@ def main():
         "Google/Meta were prioritized. Meta MLE Agents includes verified production A/B and the adverse latency guardrail. The complete8M-video AVM campaign is not reproduced. SearchInject measures exposure, not attack-success reduction. CWM has Brown/AMI and NYU/AMI bylines, not an inferred Meta affiliation; X-split leaves institution unspecified rather than guessing Yandex.",
         "",
         "All local evidence is L0/L1diagnostic, not model capability, online lift or Evolve promotion. High-cost full experiments are explicitly not reproduced, review DONE, without automatic retries. Independent review caught masked exponential overflow in ECA/MRPD; the fix and extreme-value negative controls precede the frozen run.",
+        "",
+        "A final cross-topic review added Jeveration, EgoJev and JEPA Dots. EgoJev's explicit-probability CPU postprocessing has its own frozen execution group. The completed17-component primary group and7 A100 measurements remain unchanged, not overwritten or presented as new runs. The added full generation/robotics training campaigns are review-only and not reproduced.",
         "",
         "[Coverage](../../../research-audits/nov19-latest/source-coverage.json) · [Priority source review](../../../research-audits/nov19-latest/priority-primary-selection.json) · [Delivery ledger](../../../research-audits/nov19-latest/task-scope.json) · [Cost preflight](../../../research-audits/nov19-latest/preflight.json) · [Actual CUDA run](../../../research-audits/nov19-latest/raw-cuda.json)",
         "",

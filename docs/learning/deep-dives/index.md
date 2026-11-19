@@ -11,7 +11,7 @@ hide:
 
 每个子主题维护一张卡片。新论文进入后，更新对应卡片的比较或结论，并记录这次变化；不必再从头读整批论文。
 
-31 张精读卡片 · 1244 篇主题资料 · 按主题折叠
+31 张精读卡片 · 1247 篇主题资料 · 按主题折叠
 
 <details class="ar-deep-shelf"><summary>搜广推 · 7 张</summary>
 <div class="ar-deep-grid">
@@ -91,7 +91,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="system-one/typed-readout/">同样输出候选分布，读出位置与缓存边界为何不同？</a></h2>
 <p>类型化决策先把输出空间限定下来，但“无需生成长句”并不指定唯一架构。LLM2Jev读选项标签的语言概率，System One重排读首答案位置的候选字母，MJev-Spatial复用原生注意力Q/K，MetaEncoder则把请求和候选独立编码。先看打分依赖谁，再判断是否可缓存、能否开放检索，以及连续输出怎样离散化。</p>
-<p class="ar-learning-topic-meta">4 篇重点对照 · 3 个跨论文问答 · 2026-10-27</p>
+<p class="ar-learning-topic-meta">6 篇重点对照 · 5 个跨论文问答 · 2026-11-19</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="system-one/candidate-invariance/">排序不变、概率校准与完整集合恢复，是三种不同承诺</a></h2>
@@ -120,7 +120,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="multimodal-models/world-state-actions/">会预测下一幕，还不等于会行动或保持同一个世界</a></h2>
 <p>世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。</p>
-<p class="ar-learning-topic-meta">18 篇重点对照 · 15 个跨论文问答 · 2026-11-19</p>
+<p class="ar-learning-topic-meta">19 篇重点对照 · 16 个跨论文问答 · 2026-11-19</p>
 </article>
 </div></details>
 

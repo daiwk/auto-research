@@ -18,6 +18,7 @@
     "foundation-models:loopcache-interface",
     "foundation-models:narrow-spec",
     "multimodal-models:autoregressive-view-model",
+    "multimodal-models:jepa-dots",
     "post-training:dcc-aggregation",
     "post-training:eca-credit",
     "post-training:hint-wam",
@@ -25,7 +26,9 @@
     "post-training:mrpd-replay",
     "recommendation:mars-fapo",
     "recommendation:mle-agents",
-    "recommendation:xsplit-argus"
+    "recommendation:xsplit-argus",
+    "system-one:egojev",
+    "system-one:jeveration"
   ],
   "component_papers": [
     "agent-research:ahe-beta",
@@ -44,18 +47,24 @@
     "post-training:mrpd-replay",
     "recommendation:mars-fapo",
     "recommendation:mle-agents",
-    "recommendation:xsplit-argus"
+    "recommendation:xsplit-argus",
+    "system-one:egojev"
   ],
   "review_only_papers": [
     "agent-research:rsibench-infra",
     "multimodal-models:autoregressive-view-model",
-    "post-training:hint-wam"
+    "multimodal-models:jepa-dots",
+    "post-training:hint-wam",
+    "system-one:jeveration"
   ],
   "new_papers": [
     "foundation-models:kernel-ridge-attention",
     "foundation-models:narrow-spec",
     "foundation-models:loopcache-interface",
     "foundation-models:counterfactual-wm",
+    "system-one:jeveration",
+    "system-one:egojev",
+    "multimodal-models:jepa-dots",
     "post-training:eca-credit",
     "post-training:mrpd-replay",
     "post-training:dcc-aggregation",
@@ -76,6 +85,9 @@
   ],
   "historical_directory_backfill": [
     "agent-research:searchinject"
+  ],
+  "supplemental_cpu_papers": [
+    "system-one:egojev"
   ],
   "scope_note": "Finite high-value primary-method review, not full-text review of every metadata identity or institution-wide exhaustion. API publication, bulletin announcement, directory observation and repository pushes are separate events.",
   "all_sources_exhaustive": false,

@@ -16917,6 +16917,21 @@
     "asset_sha256": "ebb9fe1d8108731bccb1d82d257c8aad968c1c2f8ae47ff6f32858d6b672ebe7"
   },
   {
+    "page": "docs/multimodal-models/2611.24062-jepa-dots/README.md",
+    "paper_url": "https://arxiv.org/abs/2611.24062v1",
+    "arxiv_id": "2611.24062",
+    "figure": "Original figure",
+    "original_caption": "Figure1: Dynamics/task separation and masked world-action modeling",
+    "source_url": "https://arxiv.org/pdf/2611.24062v1",
+    "extraction": "original_source_reviewed",
+    "asset": "docs/multimodal-models/2611.24062-jepa-dots/assets/paper-figure-01.png",
+    "width": 1010,
+    "height": 690,
+    "score": 0,
+    "error": "",
+    "asset_sha256": "3f3c4a5791a56d1e59a203b680b01edfc3f3a571cfaef7ec755fd4b235e944a6"
+  },
+  {
     "page": "docs/post-training/2611.24005-dcc-aggregation/README.md",
     "paper_url": "https://arxiv.org/abs/2611.24005v1",
     "arxiv_id": "2611.24005",
@@ -17035,5 +17050,35 @@
     "score": 0,
     "error": "",
     "asset_sha256": "a86f4abca52a39bea8290ad0079d63aca18493ef46c407c30ce79bd7985ac545"
+  },
+  {
+    "page": "docs/system-one/2611.24616-egojev/README.md",
+    "paper_url": "https://arxiv.org/abs/2611.24616v1",
+    "arxiv_id": "2611.24616",
+    "figure": "Original figure",
+    "original_caption": "Figure2: EgoJev coarse-to-fine readout and answer frames",
+    "source_url": "https://arxiv.org/pdf/2611.24616v1",
+    "extraction": "original_source_reviewed",
+    "asset": "docs/system-one/2611.24616-egojev/assets/paper-figure-01.png",
+    "width": 1010,
+    "height": 476,
+    "score": 0,
+    "error": "",
+    "asset_sha256": "48e4851f0bb655bd5891cb09e9d85585744d40ce84ead170f671a28bb8388331"
+  },
+  {
+    "page": "docs/system-one/2611.24738-jeveration/README.md",
+    "paper_url": "https://arxiv.org/abs/2611.24738v1",
+    "arxiv_id": "2611.24738",
+    "figure": "Original figure",
+    "original_caption": "Figure3: Architecture overview",
+    "source_url": "https://arxiv.org/pdf/2611.24738v1",
+    "extraction": "original_source_reviewed",
+    "asset": "docs/system-one/2611.24738-jeveration/assets/paper-figure-01.png",
+    "width": 1010,
+    "height": 452,
+    "score": 0,
+    "error": "",
+    "asset_sha256": "438c681441f1887ba5d82cb77eb6986c5c78c8d5a54841fc248f67f76873731a"
   }
 ]

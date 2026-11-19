@@ -25,7 +25,7 @@ def test_bilingual_documents_original_assets_and_reviewed_questions():
     overlays = json.loads(
         (root / "docs/en/learning/translations/qa-nov19-latest-foundation.json").read_text()
     )["units"]
-    assert len(audit["accepted"]) == 5
+    assert len(audit["accepted"]) == 8
     for paper in audit["accepted"]:
         directory = root / "docs" / paper["local_detail_path"]
         cn = directory.read_bytes()

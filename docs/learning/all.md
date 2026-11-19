@@ -69,7 +69,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">4986 个问题 · 1244 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">4998 个问题 · 1247 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ahe-beta" data-paper-title="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses Agent Fudan University 2026-11-18 AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。开发者只接收被准入的需求及其证据包。证据包只有被引用会话的运行日志、公开任务和执行条件，用户对话、隐藏测试和grader不能传给开发者。RFC先做设计审查，代码再按验收标准审查；合并时批准必须绑定当前PR head，且RFC仍与已审设计一致。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l0_interface；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。只实现类型化Evidence/Requirement交付集、已核实合并需求的covers消解，以及绑定head与RFC的纯merge_eligible判定。没有模拟用户、Triage/Architect/PM语言判断、开发Agent或真正git合并。结构字段不保证字符串内部绝无隐藏答案，所以保持L0，不把类型检查称为语义安全。  执行框架与自改进 ahe-beta Agent 运行流程与自进化：改的是哪一层 为什么测试通过仍可能不满足用户？ 测试可读最终工作区，但用户可能没收到结果、纠正请求未送达，或不允许的文件被修改；这些需求要靠交互记录核实。 教学例：修好代码却没有回复用户，不等于交付完成。 2026-11-19">
@@ -602,6 +602,59 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23835v1">原论文</a> · <a href="../../foundation-models/2611.23835-narrow-spec/">实现解读</a> · <a href="#qa-c4651411635b0aec">问题链接</a></p>
 </details>
 </article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:jepa-dots" data-paper-title="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control 多模态大模型 Z Robotics 2026-11-18 共享视觉骨干之后拆动力学和任务两条latent路径，语言FiLM只进入任务路径。world query只读动力学历史和给定clean动作，policy读历史、goal和noisy动作；多层mask同时阻断间接泄漏。固定参数、观测和给定动作时，换指令不能改变world预测，但policy可以生成不同动作。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料、公式、机构及成本收录，无operator、训练、LIBERO安装、机器人执行、metrics或GPU回执。不得用一个语言无关函数的恒等式fixture冒充完整双latent控制模型。  世界模型 任务与动力学分离 多模态 世界建模：状态、生成与动作条件 为什么相同观测和动作下world预测不该因语言改变？ 语言描述的是任务目标，不应改变这些已固定动作的物理后果；因此语言只进入task/policy而非world动力学通路。 教学例：同样向左移动夹爪，指令改成拿杯子不应让固定动作的预测位移突然向右。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<span id="paper-multimodal-models-jepa-dots-ebbd7b0b" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-569ecbc969dd991d">为什么相同观测和动作下world预测不该因语言改变？</h2>
+<p class="ar-learning-paper"><a href="./?paper=multimodal-models%3Ajepa-dots">JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Z Robotics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>语言描述的是任务目标，不应改变这些已固定动作的物理后果；因此语言只进入task/policy而非world动力学通路。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同样向左移动夹爪，指令改成拿杯子不应让固定动作的预测位移突然向右。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24062v1">原论文</a> · <a href="../../multimodal-models/2611.24062-jepa-dots/">实现解读</a> · <a href="#qa-569ecbc969dd991d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:jepa-dots" data-paper-title="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control 多模态大模型 Z Robotics 2026-11-18 共享视觉骨干之后拆动力学和任务两条latent路径，语言FiLM只进入任务路径。world query只读动力学历史和给定clean动作，policy读历史、goal和noisy动作；多层mask同时阻断间接泄漏。固定参数、观测和给定动作时，换指令不能改变world预测，但policy可以生成不同动作。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料、公式、机构及成本收录，无operator、训练、LIBERO安装、机器人执行、metrics或GPU回执。不得用一个语言无关函数的恒等式fixture冒充完整双latent控制模型。  世界模型 任务与动力学分离 多模态 世界建模：状态、生成与动作条件 隔离goal token是否足以防止泄漏？ 还需限制中间token的多层信息通路；只在最后一层屏蔽直接goal边，不保证前层信息没进入world可见token。 教学例：history token先读goal，再被world读到，会产生间接语言通道。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-8f46ae596ce78656">隔离goal token是否足以防止泄漏？</h2>
+<p class="ar-learning-paper"><a href="./?paper=multimodal-models%3Ajepa-dots">JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Z Robotics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>还需限制中间token的多层信息通路；只在最后一层屏蔽直接goal边，不保证前层信息没进入world可见token。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：history token先读goal，再被world读到，会产生间接语言通道。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24062v1">原论文</a> · <a href="../../multimodal-models/2611.24062-jepa-dots/">实现解读</a> · <a href="#qa-8f46ae596ce78656">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:jepa-dots" data-paper-title="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control 多模态大模型 Z Robotics 2026-11-18 共享视觉骨干之后拆动力学和任务两条latent路径，语言FiLM只进入任务路径。world query只读动力学历史和给定clean动作，policy读历史、goal和noisy动作；多层mask同时阻断间接泄漏。固定参数、观测和给定动作时，换指令不能改变world预测，但policy可以生成不同动作。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料、公式、机构及成本收录，无operator、训练、LIBERO安装、机器人执行、metrics或GPU回执。不得用一个语言无关函数的恒等式fixture冒充完整双latent控制模型。  世界模型 任务与动力学分离 多模态 世界建模：状态、生成与动作条件 与LeWAM的world-action联学相比，部署差异是什么？ JEPA Dots world分支只供训练监督，部署执行flow policy；不能因此说它已复现LeWAM通过world模型优化动作的规划链。 教学例：生成8步动作后执行2步再观测，是receding-horizon policy，不等于对world cost做梯度规划。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-d18e12bfa93f2ea4">与LeWAM的world-action联学相比，部署差异是什么？</h2>
+<p class="ar-learning-paper"><a href="./?paper=multimodal-models%3Ajepa-dots">JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Z Robotics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>JEPA Dots world分支只供训练监督，部署执行flow policy；不能因此说它已复现LeWAM通过world模型优化动作的规划链。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：生成8步动作后执行2步再观测，是receding-horizon policy，不等于对world cost做梯度规划。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24062v1">原论文</a> · <a href="../../multimodal-models/2611.24062-jepa-dots/">实现解读</a> · <a href="#qa-d18e12bfa93f2ea4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:jepa-dots" data-paper-title="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control 多模态大模型 Z Robotics 2026-11-18 共享视觉骨干之后拆动力学和任务两条latent路径，语言FiLM只进入任务路径。world query只读动力学历史和给定clean动作，policy读历史、goal和noisy动作；多层mask同时阻断间接泄漏。固定参数、观测和给定动作时，换指令不能改变world预测，但policy可以生成不同动作。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料、公式、机构及成本收录，无operator、训练、LIBERO安装、机器人执行、metrics或GPU回执。不得用一个语言无关函数的恒等式fixture冒充完整双latent控制模型。  世界模型 任务与动力学分离 多模态 世界建模：状态、生成与动作条件 39.1M参数为何仍不跑完整实验？ 成本主要还来自多个训练run和40任务的数千闭环episode；参数少不能抵消环境模拟与评测矩阵。 教学例：4000episode各最多600步，单模型上限即240万环境步，尚未算三run消融。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-945082160c96079c">39.1M参数为何仍不跑完整实验？</h2>
+<p class="ar-learning-paper"><a href="./?paper=multimodal-models%3Ajepa-dots">JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Z Robotics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>成本主要还来自多个训练run和40任务的数千闭环episode；参数少不能抵消环境模拟与评测矩阵。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：4000episode各最多600步，单模型上限即240万环境步，尚未算三run消融。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24062v1">原论文</a> · <a href="../../multimodal-models/2611.24062-jepa-dots/">实现解读</a> · <a href="#qa-945082160c96079c">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dcc-aggregation" data-paper-title="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation LLM 后训练 Northwestern Polytechnical University 2026-11-18 等权rubric相加并不代表各维贡献相等：每维满足/不满足样本的平均分差形成reward gain。论文把候选奖励差精确拆成基础满足数量信号、gain imbalance项和残差；把gain全部归一成1反而可能放大小gain维度的噪声。DCC不重新训练judge，也不学习rubric权重。它把当前prompt全部候选×标准的分数放在一起，精确扫描一维双median分簇，用最小绝对偏差确定两个公共clip端点；同成本取最小split。最后在公共区间clip，再按可选标准权重求平均；权重不参与端点拟合。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。CPU精确1D two-medians、共享clip区间、相同分数退化、最小split tie-break与可选权重归约。只处理已存在的合法judge分数，不调用或伪造judge，也不训练GRPO。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 等权聚合为什么不等于标准贡献相等？ 第k维满足与不满足样本的平均分差Δk会隐式乘到满足状态上；即使权重都是1/K，gain更大的标准仍更有影响。简单除以Δk也会放大其残差。 教学例：两维满足/不满足分差分别10和1，等权求和时前者可盖过后者；但把后者放大10倍也同步放大噪声。 2026-11-19">
 <p class="ar-learning-card__domain"><a href="../paths/post-training/reward-and-credit/">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
 <span id="paper-post-training-dcc-aggregation-55e188d6" class="ar-learning-paper-anchor"></span>
@@ -1024,6 +1077,112 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：把t及其后特征加100仍预测不变；改t−1则允许变化。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24283v1">原论文</a> · <a href="../../recommendation-components/2611.24283-xsplit-argus/">实现解读</a> · <a href="#qa-37bf62c8df1f62b6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:egojev" data-paper-title="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions" data-learning-pending="false" data-level="basics" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions system-one Harvard University 2026-11-18 同一冻结VLM把带数字标签的候选缩略图放在一个prompt中，读取完整标签的条件概率而不是生成时间文本。粗分布决定细看窗口，细分布先保留窗口粗概率总量，再与对应粗分布做几何平均。最后在时间的分段均匀分布上取中点分位数，分配有限回答帧。 无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。诊断概率是合成算例，不是VLM能力证据；仅L1 CPU后处理；无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。CPU组件仅接受显式给定的候选概率，执行窗口质量/稳定top-k、细层质量缩放、几何融合和分段均匀逆CDF。输入不含gold证据或答案；未实现VLM标签打分、tokenizer、图像预填缓存、label permutation检查、视频解码或回答模型。诊断概率是合成算例，不是VLM能力证据；L1只指后处理机制。  类型化决策 视频证据与帧预算 结构化决策 类型化读出：从生成句子到候选分布 为什么候选分布而不只一个最优帧有用？ 分布同时表示多个可能证据位置，能让回答帧在确信处集中、不确定处展开；单个argmax会丢掉预算分配信息。 教学例：两个窗口各占50%时，8帧应覆盖两边，而非全堆在一个并列最优点。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/system-one/typed-readout/">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<span id="paper-system-one-egojev-f4f3b229" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-31f0885d2bb94207">为什么候选分布而不只一个最优帧有用？</h2>
+<p class="ar-learning-paper"><a href="./?paper=system-one%3Aegojev">EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Harvard University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>分布同时表示多个可能证据位置，能让回答帧在确信处集中、不确定处展开；单个argmax会丢掉预算分配信息。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个窗口各占50%时，8帧应覆盖两边，而非全堆在一个并列最优点。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24616v1">原论文</a> · <a href="../../system-one/2611.24616-egojev/">实现解读</a> · <a href="#qa-31f0885d2bb94207">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:egojev" data-paper-title="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions" data-learning-pending="false" data-level="mechanism" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions system-one Harvard University 2026-11-18 同一冻结VLM把带数字标签的候选缩略图放在一个prompt中，读取完整标签的条件概率而不是生成时间文本。粗分布决定细看窗口，细分布先保留窗口粗概率总量，再与对应粗分布做几何平均。最后在时间的分段均匀分布上取中点分位数，分配有限回答帧。 无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。诊断概率是合成算例，不是VLM能力证据；仅L1 CPU后处理；无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。CPU组件仅接受显式给定的候选概率，执行窗口质量/稳定top-k、细层质量缩放、几何融合和分段均匀逆CDF。输入不含gold证据或答案；未实现VLM标签打分、tokenizer、图像预填缓存、label permutation检查、视频解码或回答模型。诊断概率是合成算例，不是VLM能力证据；L1只指后处理机制。  类型化决策 视频证据与帧预算 结构化决策 类型化读出：从生成句子到候选分布 细读概率能直接与粗概率相乘吗？ 先归一每个细读窗口并乘其粗总质量，再做平方根几何融合和全局归一。普通乘积会比原式更尖锐，未细读窗口也不能丢掉。 教学例：一个窗口仅有20%粗质量，即使内部最高概率为1，也不应先变成全视频100%。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/system-one/typed-readout/">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-835f1c5c4b08b14c">细读概率能直接与粗概率相乘吗？</h2>
+<p class="ar-learning-paper"><a href="./?paper=system-one%3Aegojev">EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Harvard University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先归一每个细读窗口并乘其粗总质量，再做平方根几何融合和全局归一。普通乘积会比原式更尖锐，未细读窗口也不能丢掉。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个窗口仅有20%粗质量，即使内部最高概率为1，也不应先变成全视频100%。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24616v1">原论文</a> · <a href="../../system-one/2611.24616-egojev/">实现解读</a> · <a href="#qa-835f1c5c4b08b14c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:egojev" data-paper-title="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions" data-learning-pending="false" data-level="comparison" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions system-one Harvard University 2026-11-18 同一冻结VLM把带数字标签的候选缩略图放在一个prompt中，读取完整标签的条件概率而不是生成时间文本。粗分布决定细看窗口，细分布先保留窗口粗概率总量，再与对应粗分布做几何平均。最后在时间的分段均匀分布上取中点分位数，分配有限回答帧。 无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。诊断概率是合成算例，不是VLM能力证据；仅L1 CPU后处理；无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。CPU组件仅接受显式给定的候选概率，执行窗口质量/稳定top-k、细层质量缩放、几何融合和分段均匀逆CDF。输入不含gold证据或答案；未实现VLM标签打分、tokenizer、图像预填缓存、label permutation检查、视频解码或回答模型。诊断概率是合成算例，不是VLM能力证据；L1只指后处理机制。  类型化决策 视频证据与帧预算 结构化决策 类型化读出：从生成句子到候选分布 与System One多模态重排的候选排序有何不同？ 这里用分布的逆CDF选择时间中点分位数，而不是按概率取top-k；分位数可能在同一高质量bin内取多个不同时间。 教学例：后半段概率为1、总时长10秒、预算2时为6.25和8.75秒，不是两个7.5秒。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/system-one/typed-readout/">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-9556f608ecd6322a">与System One多模态重排的候选排序有何不同？</h2>
+<p class="ar-learning-paper"><a href="./?paper=system-one%3Aegojev">EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Harvard University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这里用分布的逆CDF选择时间中点分位数，而不是按概率取top-k；分位数可能在同一高质量bin内取多个不同时间。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：后半段概率为1、总时长10秒、预算2时为6.25和8.75秒，不是两个7.5秒。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24616v1">原论文</a> · <a href="../../system-one/2611.24616-egojev/">实现解读</a> · <a href="#qa-9556f608ecd6322a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:egojev" data-paper-title="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions" data-learning-pending="false" data-level="implementation" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions system-one Harvard University 2026-11-18 同一冻结VLM把带数字标签的候选缩略图放在一个prompt中，读取完整标签的条件概率而不是生成时间文本。粗分布决定细看窗口，细分布先保留窗口粗概率总量，再与对应粗分布做几何平均。最后在时间的分段均匀分布上取中点分位数，分配有限回答帧。 无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。诊断概率是合成算例，不是VLM能力证据；仅L1 CPU后处理；无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。CPU组件仅接受显式给定的候选概率，执行窗口质量/稳定top-k、细层质量缩放、几何融合和分段均匀逆CDF。输入不含gold证据或答案；未实现VLM标签打分、tokenizer、图像预填缓存、label permutation检查、视频解码或回答模型。诊断概率是合成算例，不是VLM能力证据；L1只指后处理机制。  类型化决策 视频证据与帧预算 结构化决策 类型化读出：从生成句子到候选分布 CPU后处理通过为什么不能宣称62%准确率？ 给定概率并未验证VLM是否找到正确证据；完整方法还需多token标签读出、真实视频与回答评测。合成输入不冒充模型分数。 教学例：手工把证据窗口设为概率1，只能测试分位数公式，不能测试证据识别。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/system-one/typed-readout/">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-0ffe193fd15c0c13">CPU后处理通过为什么不能宣称62%准确率？</h2>
+<p class="ar-learning-paper"><a href="./?paper=system-one%3Aegojev">EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Harvard University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>给定概率并未验证VLM是否找到正确证据；完整方法还需多token标签读出、真实视频与回答评测。合成输入不冒充模型分数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：手工把证据窗口设为概率1，只能测试分位数公式，不能测试证据识别。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24616v1">原论文</a> · <a href="../../system-one/2611.24616-egojev/">实现解读</a> · <a href="#qa-0ffe193fd15c0c13">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:jeveration" data-paper-title="Jeveration: System One Models Now Generate" data-learning-pending="false" data-level="basics" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="Jeveration: System One Models Now Generate system-one National University of Singapore 2026-11-18 把图像表示为128个离散code的联合Choice，所有位置共享随机状态，而不是把各位置的边缘分布独立采样。冻结Qwen3.5-4B配共享LoRA与任务head，先学masked图像分布，再以distribution matching和置信纠正训练单步决策；同一checkpoint还做图到图与dense prediction。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录，无模型、head、训练、生成或指标文件。不能用几个共享随机数加线性层假装得到论文的联合图像生成。  类型化决策 联合图像生成 结构化决策 类型化读出：从生成句子到候选分布 为什么逐位置独立采样容易不协调？ 各位置可能选择不同有效图像的局部模式；共享随机状态让它们在同一实现条件下决定，再形成联合混合分布。 教学例：左半边选择白天、右半边选择夜晚都是合理边缘，却不是同一场景。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/system-one/typed-readout/">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<span id="paper-system-one-jeveration-85faa22e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-e56bf6c016e5b796">为什么逐位置独立采样容易不协调？</h2>
+<p class="ar-learning-paper"><a href="./?paper=system-one%3Ajeveration">Jeveration: System One Models Now Generate</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>各位置可能选择不同有效图像的局部模式；共享随机状态让它们在同一实现条件下决定，再形成联合混合分布。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：左半边选择白天、右半边选择夜晚都是合理边缘，却不是同一场景。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24738v1">原论文</a> · <a href="../../system-one/2611.24738-jeveration/">实现解读</a> · <a href="#qa-e56bf6c016e5b796">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:jeveration" data-paper-title="Jeveration: System One Models Now Generate" data-learning-pending="false" data-level="mechanism" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="Jeveration: System One Models Now Generate system-one National University of Singapore 2026-11-18 把图像表示为128个离散code的联合Choice，所有位置共享随机状态，而不是把各位置的边缘分布独立采样。冻结Qwen3.5-4B配共享LoRA与任务head，先学masked图像分布，再以distribution matching和置信纠正训练单步决策；同一checkpoint还做图到图与dense prediction。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录，无模型、head、训练、生成或指标文件。不能用几个共享随机数加线性层假装得到论文的联合图像生成。  类型化决策 联合图像生成 结构化决策 类型化读出：从生成句子到候选分布 只把所有位置加同一随机输入是否足够？ 不够。模型可忽略随机状态；原文先学习masked分布，再做distribution matching与纠正监督来教会它使用状态。 教学例：输出恒定图片也可完全忽略随机数，形式上有xi但没有多样性。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/system-one/typed-readout/">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-62a879e83ba157cd">只把所有位置加同一随机输入是否足够？</h2>
+<p class="ar-learning-paper"><a href="./?paper=system-one%3Ajeveration">Jeveration: System One Models Now Generate</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不够。模型可忽略随机状态；原文先学习masked分布，再做distribution matching与纠正监督来教会它使用状态。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：输出恒定图片也可完全忽略随机数，形式上有xi但没有多样性。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24738v1">原论文</a> · <a href="../../system-one/2611.24738-jeveration/">实现解读</a> · <a href="#qa-62a879e83ba157cd">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:jeveration" data-paper-title="Jeveration: System One Models Now Generate" data-learning-pending="false" data-level="comparison" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="Jeveration: System One Models Now Generate system-one National University of Singapore 2026-11-18 把图像表示为128个离散code的联合Choice，所有位置共享随机状态，而不是把各位置的边缘分布独立采样。冻结Qwen3.5-4B配共享LoRA与任务head，先学masked图像分布，再以distribution matching和置信纠正训练单步决策；同一checkpoint还做图到图与dense prediction。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录，无模型、head、训练、生成或指标文件。不能用几个共享随机数加线性层假装得到论文的联合图像生成。  类型化决策 联合图像生成 结构化决策 类型化读出：从生成句子到候选分布 与LLM2Jev有限候选Choice多了什么困难？ 整图有多个位置，既要符合提示又要跨位置协调；单个候选softmax没有学习空间联合分布的负担。 教学例：选一张现成图片与生成128个相互一致的code不是同一任务。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/system-one/typed-readout/">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-0be71085f208d064">与LLM2Jev有限候选Choice多了什么困难？</h2>
+<p class="ar-learning-paper"><a href="./?paper=system-one%3Ajeveration">Jeveration: System One Models Now Generate</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>整图有多个位置，既要符合提示又要跨位置协调；单个候选softmax没有学习空间联合分布的负担。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：选一张现成图片与生成128个相互一致的code不是同一任务。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24738v1">原论文</a> · <a href="../../system-one/2611.24738-jeveration/">实现解读</a> · <a href="#qa-0be71085f208d064">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:jeveration" data-paper-title="Jeveration: System One Models Now Generate" data-learning-pending="false" data-level="implementation" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="Jeveration: System One Models Now Generate system-one National University of Singapore 2026-11-18 把图像表示为128个离散code的联合Choice，所有位置共享随机状态，而不是把各位置的边缘分布独立采样。冻结Qwen3.5-4B配共享LoRA与任务head，先学masked图像分布，再以distribution matching和置信纠正训练单步决策；同一checkpoint还做图到图与dense prediction。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录，无模型、head、训练、生成或指标文件。不能用几个共享随机数加线性层假装得到论文的联合图像生成。  类型化决策 联合图像生成 结构化决策 类型化读出：从生成句子到候选分布 为什么这次不实现一个随机head就算完成？ 核心是经过两阶段训练的联合图像分布和解码链路，廉价head fixture不能替代。完整实验成本已由原文四卡四天证明。 教学例：随机输出128个token无法验证GenEval或77.8ms端到端结果。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/system-one/typed-readout/">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-0f50d6f9331fd2a1">为什么这次不实现一个随机head就算完成？</h2>
+<p class="ar-learning-paper"><a href="./?paper=system-one%3Ajeveration">Jeveration: System One Models Now Generate</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>核心是经过两阶段训练的联合图像分布和解码链路，廉价head fixture不能替代。完整实验成本已由原文四卡四天证明。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：随机输出128个token无法验证GenEval或77.8ms端到端结果。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24738v1">原论文</a> · <a href="../../system-one/2611.24738-jeveration/">实现解读</a> · <a href="#qa-0f50d6f9331fd2a1">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:gandalf-bvb" data-paper-title="Verifying Agents in Rubric-Graded Environments" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Verifying Agents in Rubric-Graded Environments Agent Handshake AI Research 2026-11-17 复杂任务产物可能是Excel、PowerPoint或应用状态，单纯把文件转成文本会丢公式、布局与跨文件关系。本文不是新做任务的Agent，而是研究判断Agent产物的verifier：BVB包含24投资银行任务、2464个人工判定criteria，用来评测验证器的判断。Gandalf把rubric转成reactive检查任务，自行决定读什么原生文件／工具，直到得出布尔verdict；环境对齐让judge使用只读固定快照工具，domain guidance给全语料通用银行惯例，不含任务答案。 完整实验成本过高，不复现（审查 DONE）；review_only / deferred_high_cost；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本轮review-only，不提供一个空JSON接口冒充reactive verifier，不调用付费模型，也不重建native banking环境。官方Gandalf与BVBv1.0仓库可供后续显式预算实验，但本轮没有运行或审计其全部运行权限。  评测与可靠性 gandalf-bvb Agent 运行流程与自进化：改的是哪一层 BVB的F1能当Agent任务成功率吗？ 不能。它测verifier是否正确发现未满足rubric的criteria，actor可能已失败但judge能正确检出。 教学例：表格公式错误被准确判fail，提高的是judge F1。 2026-11-18">

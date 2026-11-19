@@ -7,7 +7,7 @@ hide:
 
 # 会预测下一幕，还不等于会行动或保持同一个世界
 
-[多模态](../index.md) · 更新 2026-11-19 · 34 篇主题资料 / 18 篇重点对照
+[多模态](../index.md) · 更新 2026-11-19 · 35 篇主题资料 / 19 篇重点对照
 
 世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。
 
@@ -43,6 +43,7 @@ hide:
 | [Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers](../../../multimodal-models/2611.22287-dwd/README.md) · [原始来源](https://arxiv.org/abs/2611.22287v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | DWD在预训练DiT最后隐状态上并联线性pixel head，原denoising head继续驱动采样，只有最后一个非零time step才由pixel head输出图像/视频。通过分离pixel质量目标与trajectory anchoring，避免让同一输出承担冲突目标。 | PixVid迁移latent DiT到pixel输入/生成空间并加detailer；DWD保留latent采样，只改变最终读出。输出是像素不意味着整个采样都在pixel空间。 |
 | [Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;](../../../foundation-models/2611.24778-counterfactual-wm/README.md) · [原始来源](https://arxiv.org/abs/2611.24778v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 普通world model给动作的平均结果，不能仅凭更准的事实分布识别同一扰动下的个体反事实。本文将实际观测结果作为事件信息，加上同一事实预测器对两个动作的预测差；加性扰动时精确，平滑短时动力学下有交互误差界，但碰撞、乘法故障和弯曲坐标可破坏近似。 | DT-JEPA在历史下预测未来latent分布并用于决策，真实未来只在训练目标出现；CWM在一个事实结果已经可见后推断同一事件的替代动作结果。不能让CWM提前使用尚未观测的未来，亦不能把DT-JEPA的均值直接称个体反事实。 |
 | [Autoregressive View Model](../../../multimodal-models/2611.23417-autoregressive-view-model/README.md) · [原始来源](https://arxiv.org/abs/2611.23417v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | AVM不拟合显式3D表示，而在给定相机路径下生成短视图片段。预填图像/视频与历史生成片段统一成为context；检索保持活动上下文有界。先把双向视频DiT微调为N-in-1-out的flow matching，再以自身rollout做因果tuning和蒸馏，让生成内容可回到历史中支持后续重访。 | CWM在一个事实事件之后改变动作并复用同一扰动残差；AVM沿相机轨迹继续生成并检索历史视图。二者都使用world model语汇，但AVM的场景重访一致性不证明同一扰动反事实可识别。 |
+| [JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control](../../../multimodal-models/2611.24062-jepa-dots/README.md) · [原始来源](https://arxiv.org/abs/2611.24062v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 共享视觉骨干之后拆动力学和任务两条latent路径，语言FiLM只进入任务路径。world query只读动力学历史和给定clean动作，policy读历史、goal和noisy动作；多层mask同时阻断间接泄漏。固定参数、观测和给定动作时，换指令不能改变world预测，但policy可以生成不同动作。 | LeWAM联合world/action并用预测模型规划；JEPA Dots强调语言目标与动力学给定动作输入的隔离，部署world分支不参与动作搜索。相同masked-MoT背景不代表推理链相同。 |
 
 </div>
 
@@ -131,6 +132,12 @@ DT-JEPA在历史下预测未来latent分布并用于决策，真实未来只在�
 CWM在一个事实事件之后改变动作并复用同一扰动残差；AVM沿相机轨迹继续生成并检索历史视图。二者都使用world model语汇，但AVM的场景重访一致性不证明同一扰动反事实可识别。 上式用统一记号概括原文flow目标与context检索，不补造新的算法。检索对象既有真实输入也有模型生成的历史；没有显式3D不等于没有几何条件。相机、时间和context角色仍影响生成。
 
 对照来源：[autoregressive-view-model](../../../multimodal-models/2611.23417-autoregressive-view-model/README.md) · [counterfactual-wm](../../../foundation-models/2611.24778-counterfactual-wm/README.md)
+
+### JEPA Dots：隔离语言任务表征与固定动作下的动力学预测
+
+LeWAM联合world/action并用预测模型规划；JEPA Dots强调语言目标与动力学给定动作输入的隔离，部署world分支不参与动作搜索。相同masked-MoT背景不代表推理链相同。 不变性约束的是forward信息通路，不是说共享骨干训练后两种latent统计独立。world预测分支只在训练监督中使用，部署是action flow生成8动作、执行前2个后重规划，不是用world model在线搜索动作。
+
+对照来源：[jepa-dots](../../../multimodal-models/2611.24062-jepa-dots/README.md) · [lewam](../../../reproductions/2610.12818-lewam/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -286,9 +293,23 @@ CWM在一个事实事件之后改变动作并复用同一扰动残差；AVM沿�
 
     对照来源：[autoregressive-view-model](../../../multimodal-models/2611.23417-autoregressive-view-model/README.md) · [counterfactual-wm](../../../foundation-models/2611.24778-counterfactual-wm/README.md)
 
+### 与LeWAM的world-action联学相比，部署差异是什么？ {#cross-nov19-jepa-dots}
+
+??? note "展开答案与例子"
+
+    **答案：** JEPA Dots world分支只供训练监督，部署执行flow policy；不能因此说它已复现LeWAM通过world模型优化动作的规划链。
+
+    **教学例子：** 教学例：生成8步动作后执行2步再观测，是receding-horizon policy，不等于对world cost做梯度规划。
+
+    对照来源：[jepa-dots](../../../multimodal-models/2611.24062-jepa-dots/README.md) · [lewam](../../../reproductions/2610.12818-lewam/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-19** · LeWAM联合world/action并用预测模型规划；JEPA Dots强调语言目标与动力学给定动作输入的隔离，部署world分支不参与动作搜索。相同masked-MoT背景不代表推理链相同。 高成本完整实验不复现，组件与能力证据分开。
+
+涉及：[jepa-dots](../../../multimodal-models/2611.24062-jepa-dots/README.md) · [lewam](../../../reproductions/2610.12818-lewam/README.md)
 
 **2026-11-19** · CWM在一个事实事件之后改变动作并复用同一扰动残差；AVM沿相机轨迹继续生成并检索历史视图。二者都使用world model语汇，但AVM的场景重访一致性不证明同一扰动反事实可识别。 本地组件合同和高成本不复现分别记录。
 
@@ -342,7 +363,7 @@ CWM在一个事实事件之后改变动作并复用同一扰动残差；AVM沿�
 
 覆盖 22 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 34 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 35 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -380,6 +401,7 @@ CWM在一个事实事件之后改变动作并复用同一扰动残差；AVM沿�
 - [Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers](../../../multimodal-models/2611.22287-dwd/README.md)
 - [Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;](../../../foundation-models/2611.24778-counterfactual-wm/README.md)
 - [Autoregressive View Model](../../../multimodal-models/2611.23417-autoregressive-view-model/README.md)
+- [JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control](../../../multimodal-models/2611.24062-jepa-dots/README.md)
 
 </details>
 

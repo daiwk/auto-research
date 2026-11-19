@@ -1,0 +1,18 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.24738v1",
+  "paper_url": "https://arxiv.org/abs/2611.24738v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-19",
+  "page": 4,
+  "crop_box_pdf_points": [
+    54,
+    42,
+    559,
+    268
+  ],
+  "caption": "Figure3: Architecture overview",
+  "source_pdf_sha256": "07ad78da7a805ab7cf0bdfb340016185e71e1c4288650d4d9e8a2bee9048cb46",
+  "asset_sha256": "438c681441f1887ba5d82cb77eb6986c5c78c8d5a54841fc248f67f76873731a",
+  "extraction": "Original PDF crop; no semantic edits",
+  "copyright": "Copyright retained by original authors; research commentary, not local evidence."
+}

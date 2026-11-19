@@ -21,7 +21,7 @@ hide:
 
 <!-- learning-topics:start -->
 
-6 个主题 · 31 个子主题 · 4986 个问题 / 1244 篇论文
+6 个主题 · 31 个子主题 · 4998 个问题 / 1247 篇论文
 
 <div class="ar-learning-topics">
 <article class="ar-learning-topic-tile">
@@ -54,9 +54,9 @@ hide:
 <article class="ar-learning-topic-tile">
 <h2><a href="paths/system-one/">结构化决策</a></h2>
 <p>把语言模型用于有限候选决策：先看如何读出分布，再检验不变性、推理预算与持续反馈。</p>
-<p class="ar-learning-topic-meta">3 个子主题 · 68 问 / 17 篇</p>
+<p class="ar-learning-topic-meta">3 个子主题 · 76 问 / 19 篇</p>
 <details><summary>展开子主题问题库</summary><ul>
-<li><a href="paths/system-one/typed-readout/">类型化读出：从生成句子到候选分布</a><span>36 问<a class="ar-learning-deep-link" href="deep-dives/system-one/typed-readout/">精读对比</a></span></li>
+<li><a href="paths/system-one/typed-readout/">类型化读出：从生成句子到候选分布</a><span>44 问<a class="ar-learning-deep-link" href="deep-dives/system-one/typed-readout/">精读对比</a></span></li>
 <li><a href="paths/system-one/candidate-invariance/">候选不变性：顺序、竞争者与概率校准</a><span>12 问<a class="ar-learning-deep-link" href="deep-dives/system-one/candidate-invariance/">精读对比</a></span></li>
 <li><a href="paths/system-one/adaptive-decisions/">按需决策：选择性推理、迁移与持续反馈</a><span>20 问<a class="ar-learning-deep-link" href="deep-dives/system-one/adaptive-decisions/">精读对比</a></span></li>
 </ul></details>
@@ -64,11 +64,11 @@ hide:
 <article class="ar-learning-topic-tile">
 <h2><a href="paths/multimodal-models/">多模态</a></h2>
 <p>围绕三件事学习：对齐不同模态、分配视觉证据预算、预测状态与动作的后果。</p>
-<p class="ar-learning-topic-meta">3 个子主题 · 334 问 / 83 篇</p>
+<p class="ar-learning-topic-meta">3 个子主题 · 338 问 / 84 篇</p>
 <details><summary>展开子主题问题库</summary><ul>
 <li><a href="paths/multimodal-models/alignment-interfaces/">跨模态对齐：表征、连接器与监督</a><span>125 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/alignment-interfaces/">精读对比</a></span></li>
 <li><a href="paths/multimodal-models/visual-evidence-budget/">视觉证据预算：选 Token、选帧与按需回看</a><span>72 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/visual-evidence-budget/">精读对比</a></span></li>
-<li><a href="paths/multimodal-models/world-state-actions/">世界建模：状态、生成与动作条件</a><span>137 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/world-state-actions/">精读对比</a></span></li>
+<li><a href="paths/multimodal-models/world-state-actions/">世界建模：状态、生成与动作条件</a><span>141 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/world-state-actions/">精读对比</a></span></li>
 </ul></details>
 </article>
 <article class="ar-learning-topic-tile">
@@ -108,14 +108,14 @@ hide:
 <!-- learning-recent:start -->
 
 <div class="ar-learning-recent"><ul>
-<li><a href="all/#qa-37bf62c8df1f62b6">怎样检查反馈泄漏而不是只看shape？</a><span>2026-11-19 · xsplit-argus</span></li>
-<li><a href="all/#qa-e1d46411bb0df188">近期历史与缓存cutoff为什么不能只用一个参数？</a><span>2026-11-19 · xsplit-argus</span></li>
-<li><a href="all/#qa-e30476e653de915c">历史token缓存意味着训练时冻结compressor吗？</a><span>2026-11-19 · xsplit-argus</span></li>
-<li><a href="all/#qa-2c63bfcfe7c2568a">为什么不能直接把ARGUS的物品头用到X-split？</a><span>2026-11-19 · xsplit-argus</span></li>
-<li><a href="all/#qa-4fbf5ed387d41e51">为什么完成状态有一条成功还不能接纳？</a><span>2026-11-19 · mle-agents</span></li>
-<li><a href="all/#qa-7c2ace012537327a">候选应和什么比才能过噪声门槛？</a><span>2026-11-19 · mle-agents</span></li>
-<li><a href="all/#qa-50921866429446a5">MLE Agents和EvoPilot的准入能互代吗？</a><span>2026-11-19 · mle-agents</span></li>
-<li><a href="all/#qa-bc3d34c95d2ec1df">为什么不用点击AUPRC一直搜索？</a><span>2026-11-19 · mle-agents</span></li>
+<li><a href="all/#qa-e56bf6c016e5b796">为什么逐位置独立采样容易不协调？</a><span>2026-11-19 · jeveration</span></li>
+<li><a href="all/#qa-62a879e83ba157cd">只把所有位置加同一随机输入是否足够？</a><span>2026-11-19 · jeveration</span></li>
+<li><a href="all/#qa-0f50d6f9331fd2a1">为什么这次不实现一个随机head就算完成？</a><span>2026-11-19 · jeveration</span></li>
+<li><a href="all/#qa-0be71085f208d064">与LLM2Jev有限候选Choice多了什么困难？</a><span>2026-11-19 · jeveration</span></li>
+<li><a href="all/#qa-9556f608ecd6322a">与System One多模态重排的候选排序有何不同？</a><span>2026-11-19 · egojev</span></li>
+<li><a href="all/#qa-0ffe193fd15c0c13">CPU后处理通过为什么不能宣称62%准确率？</a><span>2026-11-19 · egojev</span></li>
+<li><a href="all/#qa-835f1c5c4b08b14c">细读概率能直接与粗概率相乘吗？</a><span>2026-11-19 · egojev</span></li>
+<li><a href="all/#qa-31f0885d2bb94207">为什么候选分布而不只一个最优帧有用？</a><span>2026-11-19 · egojev</span></li>
 </ul></div>
 
 <!-- learning-recent:end -->

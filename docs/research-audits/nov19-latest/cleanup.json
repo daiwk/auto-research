@@ -1,9 +1,9 @@
 {
   "cleaned_on": "2026-11-19",
-  "disposable_files_removed": 34,
-  "disposable_bytes_removed": 75309327,
+  "disposable_files_removed": 40,
+  "disposable_bytes_removed": 105179712,
   "site_build_bytes_removed": 1034885189,
-  "total_bytes_removed": 1110194516,
+  "total_bytes_removed": 1140064901,
   "scope": [
     "this batch public-paper PDF downloads and rendering previews",
     "this batch redundant GPU source archive",

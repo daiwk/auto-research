@@ -4,14 +4,14 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1244 entries from the shared research manifest. English write-ups available: 1244.
+The catalog lists 1247 entries from the shared research manifest. English write-ups available: 1247.
 
 ## Browse by domain
 
 - [Search, ads, recommendation, and LLM applications](recommendation.md): 339 catalog entries, 339 English write-ups
 - [Foundation models](foundation-models.md): 257 catalog entries, 257 English write-ups
-- [Structured decisions / System One](system-one.md): 7 catalog entries, 7 English write-ups
-- [Multimodal models](multimodal-models.md): 31 catalog entries, 31 English write-ups
+- [Structured decisions / System One](system-one.md): 9 catalog entries, 9 English write-ups
+- [Multimodal models](multimodal-models.md): 32 catalog entries, 32 English write-ups
 - [LLM post-training](post-training.md): 289 catalog entries, 289 English write-ups
 - [Agents](agent-research.md): 321 catalog entries, 321 English write-ups
 
@@ -28,9 +28,12 @@ The catalog lists 1244 entries from the shared research manifest. English write-
 - [LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers](../../foundation-models/2611.24301-loopcache-interface/README-en.md)
 - [Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting](../../foundation-models/2611.23896-kernel-ridge-attention/README-en.md)
 - [Kaer: Security-Aware Replanning for Multi-Agent Systems](../../agent-research/2611.24839-kaer/README-en.md)
+- [Jeveration: System One Models Now Generate](../../system-one/2611.24738-jeveration/README-en.md)
+- [JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control](../../multimodal-models/2611.24062-jepa-dots/README-en.md)
 - [How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation](../../post-training/2611.24005-dcc-aggregation/README-en.md)
 - [HINT-WAM: Hindsight-Informed Training for World Action Models](../../post-training/2611.24789-hint-wam/README-en.md)
 - [Evidence-Based Credit Assignment for Search-Augmented Language Models](../../post-training/2611.23824-eca-credit/README-en.md)
+- [EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions](../../system-one/2611.24616-egojev/README-en.md)
 - [Counterfactual World Models: JEPAs That Reason About "What If"](../../foundation-models/2611.24778-counterfactual-wm/README-en.md)
 - [Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling](../../agent-research/2611.24849-execjudges/README-en.md)
 - [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](../../post-training/2611.23750-led-edits/README-en.md)

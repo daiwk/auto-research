@@ -71,6 +71,9 @@ def _label_map(raw: str) -> dict[str, str]:
 
 
 _LABELS = _label_map("""
+视觉生成与编辑 = Visual generation and editing
+L1 CPU后处理；不运行VLM，完整视频矩阵不复现 = L1 CPU postprocessing; no VLM execution; full video evaluation matrix not reproduced
+高成本资料收录；完整训练不复现，不等于TypeSafe Jev官方实现 = High-cost research material; full training not reproduced; not an official TypeSafe Jev implementation
 Agent 评测与可靠性 = Agent evaluation and reliability
 研究与服务闭环 = Research and serving feedback loops
 偏好评测与校准 = Preference evaluation and calibration

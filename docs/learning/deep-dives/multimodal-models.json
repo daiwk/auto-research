@@ -991,7 +991,8 @@
         "foundation-models:wm-quant",
         "multimodal-models:dwd",
         "foundation-models:counterfactual-wm",
-        "multimodal-models:autoregressive-view-model"
+        "multimodal-models:autoregressive-view-model",
+        "multimodal-models:jepa-dots"
       ],
       "axes": [
         "学习对象：未来latent、动作分布、视觉转移、持久几何",
@@ -1180,6 +1181,16 @@
             "核心公式",
             "同主题比较与边界"
           ]
+        },
+        {
+          "paper": "multimodal-models:jepa-dots",
+          "position": "共享视觉骨干之后拆动力学和任务两条latent路径，语言FiLM只进入任务路径。world query只读动力学历史和给定clean动作，policy读历史、goal和noisy动作；多层mask同时阻断间接泄漏。固定参数、观测和给定动作时，换指令不能改变world预测，但policy可以生成不同动作。",
+          "tradeoff": "LeWAM联合world/action并用预测模型规划；JEPA Dots强调语言目标与动力学给定动作输入的隔离，部署world分支不参与动作搜索。相同masked-MoT背景不代表推理链相同。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1295,6 +1306,14 @@
           "papers": [
             "multimodal-models:autoregressive-view-model",
             "foundation-models:counterfactual-wm"
+          ]
+        },
+        {
+          "title": "JEPA Dots：隔离语言任务表征与固定动作下的动力学预测",
+          "body": "LeWAM联合world/action并用预测模型规划；JEPA Dots强调语言目标与动力学给定动作输入的隔离，部署world分支不参与动作搜索。相同masked-MoT背景不代表推理链相同。 不变性约束的是forward信息通路，不是说共享骨干训练后两种latent统计独立。world预测分支只在训练监督中使用，部署是action flow生成8动作、执行前2个后重规划，不是用world model在线搜索动作。",
+          "papers": [
+            "multimodal-models:jepa-dots",
+            "foundation-models:lewam"
           ]
         }
       ],
@@ -1448,6 +1467,16 @@
           "papers": [
             "multimodal-models:autoregressive-view-model",
             "foundation-models:counterfactual-wm"
+          ]
+        },
+        {
+          "id": "nov19-jepa-dots",
+          "question": "与LeWAM的world-action联学相比，部署差异是什么？",
+          "answer": "JEPA Dots world分支只供训练监督，部署执行flow policy；不能因此说它已复现LeWAM通过world模型优化动作的规划链。",
+          "example": "教学例：生成8步动作后执行2步再观测，是receding-horizon policy，不等于对world cost做梯度规划。",
+          "papers": [
+            "multimodal-models:jepa-dots",
+            "foundation-models:lewam"
           ]
         }
       ],
@@ -1642,6 +1671,18 @@
           "source_revisions": {
             "multimodal-models:autoregressive-view-model": "ba6186a4552d23d5da9dc59d08d52a31e47e2bfc5a6b929d517afb83c396d77b",
             "foundation-models:counterfactual-wm": "a75e14881c4e4fc60f3fc62d1c2fb7bc0d846158c61948fe9e96ad0763343bee"
+          }
+        },
+        {
+          "date": "2026-11-19",
+          "papers": [
+            "multimodal-models:jepa-dots",
+            "foundation-models:lewam"
+          ],
+          "summary": "LeWAM联合world/action并用预测模型规划；JEPA Dots强调语言目标与动力学给定动作输入的隔离，部署world分支不参与动作搜索。相同masked-MoT背景不代表推理链相同。 高成本完整实验不复现，组件与能力证据分开。",
+          "source_revisions": {
+            "multimodal-models:jepa-dots": "6ac91a29f242096ab4dc5ff7bd067052897606bccd38a70c3f80aa4f6fd29192",
+            "foundation-models:lewam": "5e991ab90d6400d319dbccbf83e7ff06f2749baa45a5e10a79ea26b235f1ed45"
           }
         }
       ]

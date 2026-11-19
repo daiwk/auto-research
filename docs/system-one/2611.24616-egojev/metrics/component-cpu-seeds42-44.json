@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "method": "egojev",
+  "manifest_ref": "system-one:egojev",
+  "dataset": {
+    "id": "synthetic:nov19-egojev-explicit-probability-interface-v1",
+    "kind": "explicit_protocol_or_mechanism_fixtures",
+    "revision": "sha256:838ec9e2eeeebff3a25dc57906a9874464c6f7841a71aa47f30b755ffe5adad4",
+    "public_capability_benchmark": false,
+    "source": "Explicit seeded non-gold decision probabilities and temporal partitions; no VLM, video, checkpoint or evidence benchmark execution"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "top_window_by_mass": true,
+        "single_level_unchanged": true,
+        "normalized_fine_geometry": true,
+        "inverse_cdf_not_bin_center": true,
+        "flat_readout_is_uniform_midpoints": true,
+        "geometric_not_product": true,
+        "chronological_quantiles": true
+      },
+      "metrics": {
+        "fine_segments": 8,
+        "quantile_budget": 8,
+        "geometric_product_max_difference": 0.14431271931685113,
+        "first_quantile_seconds": 12.414646457873806,
+        "last_quantile_seconds": 77.7983745117617
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "top_window_by_mass": true,
+        "single_level_unchanged": true,
+        "normalized_fine_geometry": true,
+        "inverse_cdf_not_bin_center": true,
+        "flat_readout_is_uniform_midpoints": true,
+        "geometric_not_product": true,
+        "chronological_quantiles": true
+      },
+      "metrics": {
+        "fine_segments": 8,
+        "quantile_budget": 8,
+        "geometric_product_max_difference": 0.1450130488824667,
+        "first_quantile_seconds": 12.403922188145257,
+        "last_quantile_seconds": 77.80685299980303
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "top_window_by_mass": true,
+        "single_level_unchanged": true,
+        "normalized_fine_geometry": true,
+        "inverse_cdf_not_bin_center": true,
+        "flat_readout_is_uniform_midpoints": true,
+        "geometric_not_product": true,
+        "chronological_quantiles": true
+      },
+      "metrics": {
+        "fine_segments": 8,
+        "quantile_budget": 8,
+        "geometric_product_max_difference": 0.14458427716039746,
+        "first_quantile_seconds": 12.410661038252336,
+        "last_quantile_seconds": 77.80160745669994
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "fine_segments": 8.0,
+    "first_quantile_seconds": 12.409743228090468,
+    "geometric_product_max_difference": 0.14463668178657177,
+    "last_quantile_seconds": 77.80227832275489,
+    "quantile_budget": 8.0
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Operator/interface controls only; not a complete model, agent, public benchmark or production comparison"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "62d808ecae31fc831c0e8c740b9f207c523445af",
+    "accelerator": "CPU",
+    "artifact_path": "docs/system-one/2611.24616-egojev/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_nov19_egojev_cpu.py": "33c1fb5bf438340b65b3618c2906553a5f4b31e68dc65f04d46aa04a0c9a7bab",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/system_one/egojev_components.py": "838ec9e2eeeebff3a25dc57906a9874464c6f7841a71aa47f30b755ffe5adad4",
+      "src/auto_research/__init__.py": "ebea89760aafc6784a537e81317c59ccb75661b28340ddf3e788cd12f9ca43f7",
+      "src/auto_research/system_one/__init__.py": "12c22f97762c474284c5a59bb4616ccf210c274401a634f667f7dc4e0e70b092"
+    },
+    "dataset_fingerprint": "sha256:eefd4a8e1414acc0d080238c2d8773852246e97af6a3738abcec86480212d998",
+    "raw_runner_artifact_sha256": "9d7166819896e423bd857d31dd505837489e51ba7139c4f873936b6ec61347c4"
+  }
+}

@@ -180,6 +180,114 @@
         "answer": "Retrieval cannot replace14B video generation, flow training and self-rollout tuning. The cost gate requires explicit non-reproduction rather than a cheap shadow.",
         "example": "Retrieving a nearby camera frame does not generate unseen regions or dynamic objects."
       }
+    },
+    "qa/system-one:jeveration/why-shared-randomness": {
+      "source_sha256": "e4b09a8d3eeaf52b81af762b4d60594108ce5f7f8e319023e7a4aa1ca6aa981a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can independent position samples be incoherent?",
+        "answer": "Positions can select parts of different valid images. Shared randomness coordinates one realization before mixing over realizations.",
+        "example": "Day on the left and night on the right can be valid marginals but an incoherent whole."
+      }
+    },
+    "qa/system-one:jeveration/training-not-noise-only": {
+      "source_sha256": "febb099c143bfbbb4252eca1369337e8f37b7e3c918595e891c358eb1ef4434c",
+      "reviewed": true,
+      "fields": {
+        "question": "Is adding shared randomness sufficient?",
+        "answer": "No. The model may ignore it; masked-distribution learning and subsequent matching/correction teach its use.",
+        "example": "A constant image can ignore xi despite receiving random input."
+      }
+    },
+    "qa/system-one:jeveration/choice-versus-image": {
+      "source_sha256": "dd6ed1c7cd7ee1670800fef10e604578df41ea43b7d8848c405d33833474cc3a",
+      "reviewed": true,
+      "fields": {
+        "question": "What is harder than an LLM2Jev candidate Choice?",
+        "answer": "Multiple spatial decisions must jointly match a prompt. A single candidate softmax need not learn that spatial joint law.",
+        "example": "Choosing an existing image differs from generating128 mutually coherent codes."
+      }
+    },
+    "qa/system-one:jeveration/not-head-fixture": {
+      "source_sha256": "7cf0d6d978090b7aec8d0761853860eda6c9358cdfc4b499b66a5566a1910a0e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not count a random output head as reproduction?",
+        "answer": "The learned two-stage joint distribution and decoder are defining components. A cheap head fixture cannot replace them.",
+        "example": "Random128-token outputs verify neither GenEval nor the77.8ms result."
+      }
+    },
+    "qa/system-one:egojev/distribution-not-score": {
+      "source_sha256": "e12b6f6dd39a55a59f5392d46e79e5050bc4901ca4f5b2a9dab70ce0cff1a99c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain a distribution rather than one best frame?",
+        "answer": "It allocates frames across plausible evidence: concentrate when certain, spread when uncertain. Argmax loses that information.",
+        "example": "With two windows of50% mass, eight frames should cover both."
+      }
+    },
+    "qa/system-one:egojev/geometric-mass": {
+      "source_sha256": "920b0fc6f626826355659ccc70f14890e2db445846bff9670b28d5fa7146e14f",
+      "reviewed": true,
+      "fields": {
+        "question": "May fine probabilities be multiplied directly?",
+        "answer": "Normalize locally, restore coarse window mass, then apply square-root fusion and global normalization. Plain multiplication sharpens differently and unrefined windows retain mass.",
+        "example": "A window with20% coarse mass must not become100% globally just because its local maximum is1."
+      }
+    },
+    "qa/system-one:egojev/ranking-versus-quantiles": {
+      "source_sha256": "185e9de7641b4aa8976bb3ddaa61f369e87a86a05a27031dfa5aaeae09800fc0",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from System One reranking?",
+        "answer": "It uses inverse-CDF midpoint quantiles, not probability top-k. Multiple distinct times may lie inside one high-mass segment.",
+        "example": "With all mass in the last half of10seconds and budget2, times are6.25 and8.75, not two7.5s."
+      }
+    },
+    "qa/system-one:egojev/probabilities-not-vlm-evidence": {
+      "source_sha256": "e46d216a4c365be25652e76c361d081c6c23f3e34a9c6ed06fe9b285f2956b7a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CPU parity not establish62% accuracy?",
+        "answer": "Given probabilities do not establish that a VLM found evidence. Full evaluation needs multi-token labels, real videos and answers; synthetic inputs are not model scores.",
+        "example": "Manually assigning evidence mass1 tests placement arithmetic, not evidence recognition."
+      }
+    },
+    "qa/multimodal-models:jepa-dots/conditioning-separation": {
+      "source_sha256": "3138646944a3ea1ecf7060a0ca67e7dd4b808d66281a57804517c1bc0d476c06",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep fixed-action world predictions invariant to language?",
+        "answer": "Instructions specify goals, not different physics for identical observations/actions, so language enters task/policy paths rather than world dynamics.",
+        "example": "The same leftward command should not predict rightward motion merely because the goal becomes picking a cup."
+      }
+    },
+    "qa/multimodal-models:jepa-dots/mask-not-statistical-independence": {
+      "source_sha256": "4b082c4e8c7bffc7619da7c8789769abe23892dc476be29599dc8437e83ede1f",
+      "reviewed": true,
+      "fields": {
+        "question": "Is directly hiding goal tokens sufficient?",
+        "answer": "Intermediate multi-layer paths must also be restricted. A final-layer direct mask cannot undo earlier goal information in visible tokens.",
+        "example": "A history token that first reads goals can leak them when later read by the world branch."
+      }
+    },
+    "qa/multimodal-models:jepa-dots/lewam-deployment": {
+      "source_sha256": "3dbed8214e3853f405effe5dbdd2c743d91d9fa1d9954cbb1d162ddc3f39ea23",
+      "reviewed": true,
+      "fields": {
+        "question": "How does deployment differ from LeWAM?",
+        "answer": "The JEPA Dots world branch is training supervision, while deployment uses a flow policy, not LeWAM-style world-model action optimization.",
+        "example": "Executing two actions from an eight-step chunk is receding-horizon control, not gradient planning over a world cost."
+      }
+    },
+    "qa/multimodal-models:jepa-dots/small-model-expensive-eval": {
+      "source_sha256": "0483d3609c4f8557e89e1d7d670a17e4d5aa3519e214080a594cba8573b8600a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why defer a39.1M model’s full experiment?",
+        "answer": "Multiple training runs and thousands of closed-loop episodes across40tasks remain costly despite small weights.",
+        "example": "4000episodes times up to600steps gives2.4million environment steps/model before three-run ablations."
+      }
     }
   }
 }

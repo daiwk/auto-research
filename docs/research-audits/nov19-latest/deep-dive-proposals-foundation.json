@@ -297,6 +297,183 @@
         },
         "update": "CWM changes an action after an observed event and reuses its disturbance residual. AVM continues camera-conditioned generation with retrieved history. Scene-revisit consistency does not establish identifiable same-disturbance counterfactuals. Local contracts and high-cost non-reproduction remain separate."
       }
+    },
+    {
+      "paper": "system-one:jeveration",
+      "target_card": "system-one/typed-readout",
+      "source_revisions": {
+        "system-one:jeveration": "2778cec61fd33d1beebf345e8dd0c31972d3e1a202797960b49dfb61221270c3",
+        "foundation-models:llm2jev": "5fb8241b7b4af53bfcef2035c9ab72427d02fafaf7ef86cc180484a92f681019"
+      },
+      "comparison": {
+        "position": "把图像表示为128个离散code的联合Choice，所有位置共享随机状态，而不是把各位置的边缘分布独立采样。冻结Qwen3.5-4B配共享LoRA与任务head，先学masked图像分布，再以distribution matching和置信纠正训练单步决策；同一checkpoint还做图到图与dense prediction。",
+        "tradeoff": "LLM2Jev把候选标签读成有限决策分布；Jeveration还必须协调空间上众多输出，并学会使用共同随机状态。单选候选打分成功，不证明整图联合分布或图像质量。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "Jeveration：以共享随机状态协调一次前向图像决策",
+        "body": "LLM2Jev把候选标签读成有限决策分布；Jeveration还必须协调空间上众多输出，并学会使用共同随机状态。单选候选打分成功，不证明整图联合分布或图像质量。 给定共享xi后可并行选择，但对xi求混合后各位置不再必须独立。仅添加随机噪声不够：原文指出直接监督可忽略该状态。纠正target在训练时重mask最低置信的一半位置，由冻结的第一阶段模型补全；推理仍是一次生成前向，不是把训练辅助步骤算成免费。",
+        "papers": [
+          "system-one:jeveration",
+          "foundation-models:llm2jev"
+        ]
+      },
+      "question": {
+        "id": "nov19-jeveration",
+        "question": "与LLM2Jev有限候选Choice多了什么困难？",
+        "answer": "整图有多个位置，既要符合提示又要跨位置协调；单个候选softmax没有学习空间联合分布的负担。",
+        "example": "教学例：选一张现成图片与生成128个相互一致的code不是同一任务。",
+        "papers": [
+          "system-one:jeveration",
+          "foundation-models:llm2jev"
+        ]
+      },
+      "update": {
+        "date": "2026-11-19",
+        "papers": [
+          "system-one:jeveration",
+          "foundation-models:llm2jev"
+        ],
+        "summary": "LLM2Jev把候选标签读成有限决策分布；Jeveration还必须协调空间上众多输出，并学会使用共同随机状态。单选候选打分成功，不证明整图联合分布或图像质量。 高成本完整实验不复现，组件与能力证据分开。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Images become a joint Choice over128 discrete codes. A shared random state coordinates positions rather than independently sampling marginal codes. A frozen Qwen3.5-4B with shared LoRA/heads first learns masked image conditionals, then distribution matching and confidence correction teach single-pass decisions. One checkpoint also serves image-to-image and dense tasks.",
+          "tradeoff": "LLM2Jev reads a finite candidate decision distribution. Jeveration must also coordinate spatial outputs and learn to use shared randomness. Candidate scoring alone does not establish a coherent joint image distribution."
+        },
+        "analysis": {
+          "title": "Jeveration: System One Models Now Generate",
+          "body": "LLM2Jev reads a finite candidate decision distribution. Jeveration must also coordinate spatial outputs and learn to use shared randomness. Candidate scoring alone does not establish a coherent joint image distribution. Choices factorize conditionally on shared xi, but mixing over xi permits dependence. Noise alone is insufficient: direct supervision can ignore it. Training correction re-masks the least-confident half and uses the frozen first-stage model to complete them; inference remains one generation pass."
+        },
+        "question": {
+          "question": "What is harder than an LLM2Jev candidate Choice?",
+          "answer": "Multiple spatial decisions must jointly match a prompt. A single candidate softmax need not learn that spatial joint law.",
+          "example": "Choosing an existing image differs from generating128 mutually coherent codes."
+        },
+        "update": "LLM2Jev reads a finite candidate decision distribution. Jeveration must also coordinate spatial outputs and learn to use shared randomness. Candidate scoring alone does not establish a coherent joint image distribution. Full experiments are not reproduced; components are separate from capability evidence."
+      }
+    },
+    {
+      "paper": "system-one:egojev",
+      "target_card": "system-one/typed-readout",
+      "source_revisions": {
+        "system-one:egojev": "37657219b8d52e742e72ac97cc3b9eb9a1e03ef03d2f9c795be8bbd165d67673",
+        "multimodal-models:system-one-rerank": "2540a111fd8bb9ed5a79346d60470b71f76b81759e3a6012e6e5e1f2a7c22efc"
+      },
+      "comparison": {
+        "position": "同一冻结VLM把带数字标签的候选缩略图放在一个prompt中，读取完整标签的条件概率而不是生成时间文本。粗分布决定细看窗口，细分布先保留窗口粗概率总量，再与对应粗分布做几何平均。最后在时间的分段均匀分布上取中点分位数，分配有限回答帧。",
+        "tradeoff": "System One多模态重排把一个联合候选分布用于排序；EgoJev将分布用于时间预算分配。前者单token字母读出不能不加检查地替代后者多token数字标签概率，frame quantile也不是单纯top-k帧。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "EgoJev：以决策分布几何融合与分位数分配视频帧",
+        "body": "System One多模态重排把一个联合候选分布用于排序；EgoJev将分布用于时间预算分配。前者单token字母读出不能不加检查地替代后者多token数字标签概率，frame quantile也不是单纯top-k帧。 细读窗口的局部分布归一后乘该窗口的粗概率总量；未细读窗口均摊其窗口质量。平方根不同于普通乘积，后者过度锐化。k=0直接保留单层粗分布。分位数需在bin内插值而不是一律取bin中心。标签如17]可能多token，完整读出需逐条件概率相乘并含终止]，本地不实现这部分。",
+        "papers": [
+          "system-one:egojev",
+          "multimodal-models:system-one-rerank"
+        ]
+      },
+      "question": {
+        "id": "nov19-egojev",
+        "question": "与System One多模态重排的候选排序有何不同？",
+        "answer": "这里用分布的逆CDF选择时间中点分位数，而不是按概率取top-k；分位数可能在同一高质量bin内取多个不同时间。",
+        "example": "教学例：后半段概率为1、总时长10秒、预算2时为6.25和8.75秒，不是两个7.5秒。",
+        "papers": [
+          "system-one:egojev",
+          "multimodal-models:system-one-rerank"
+        ]
+      },
+      "update": {
+        "date": "2026-11-19",
+        "papers": [
+          "system-one:egojev",
+          "multimodal-models:system-one-rerank"
+        ],
+        "summary": "System One多模态重排把一个联合候选分布用于排序；EgoJev将分布用于时间预算分配。前者单token字母读出不能不加检查地替代后者多token数字标签概率，frame quantile也不是单纯top-k帧。 高成本完整实验不复现，组件与能力证据分开。"
+      },
+      "english": {
+        "comparison": {
+          "position": "One frozen VLM compares labeled thumbnails in one prompt. Complete label probabilities replace written timestamps. Coarse mass selects refinement windows; local fine readouts retain their window mass and are geometrically fused with coarse probabilities. Midpoint quantiles of a piecewise-uniform time distribution allocate answer frames.",
+          "tradeoff": "System One reranking sorts a joint candidate distribution. EgoJev uses it to allocate time budget. Single-token letter readout cannot silently replace multi-token numeric labels, and quantile frames are not simply the top-k frames."
+        },
+        "analysis": {
+          "title": "EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions",
+          "body": "System One reranking sorts a joint candidate distribution. EgoJev uses it to allocate time budget. Single-token letter readout cannot silently replace multi-token numeric labels, and quantile frames are not simply the top-k frames. Normalize each refined local distribution, then multiply by its coarse window mass; unrefined windows spread that mass evenly. A square root is not a plain product. For k0, keep the single-level coarse distribution. Inverse-CDF placement interpolates within bins. Full labels such as17] require all conditional token probabilities, including the closing bracket; that VLM readout is not implemented locally."
+        },
+        "question": {
+          "question": "How does this differ from System One reranking?",
+          "answer": "It uses inverse-CDF midpoint quantiles, not probability top-k. Multiple distinct times may lie inside one high-mass segment.",
+          "example": "With all mass in the last half of10seconds and budget2, times are6.25 and8.75, not two7.5s."
+        },
+        "update": "System One reranking sorts a joint candidate distribution. EgoJev uses it to allocate time budget. Single-token letter readout cannot silently replace multi-token numeric labels, and quantile frames are not simply the top-k frames. Full experiments are not reproduced; components are separate from capability evidence."
+      }
+    },
+    {
+      "paper": "multimodal-models:jepa-dots",
+      "target_card": "multimodal-models/world-state-actions",
+      "source_revisions": {
+        "multimodal-models:jepa-dots": "6ac91a29f242096ab4dc5ff7bd067052897606bccd38a70c3f80aa4f6fd29192",
+        "foundation-models:lewam": "5e991ab90d6400d319dbccbf83e7ff06f2749baa45a5e10a79ea26b235f1ed45"
+      },
+      "comparison": {
+        "position": "共享视觉骨干之后拆动力学和任务两条latent路径，语言FiLM只进入任务路径。world query只读动力学历史和给定clean动作，policy读历史、goal和noisy动作；多层mask同时阻断间接泄漏。固定参数、观测和给定动作时，换指令不能改变world预测，但policy可以生成不同动作。",
+        "tradeoff": "LeWAM联合world/action并用预测模型规划；JEPA Dots强调语言目标与动力学给定动作输入的隔离，部署world分支不参与动作搜索。相同masked-MoT背景不代表推理链相同。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "JEPA Dots：隔离语言任务表征与固定动作下的动力学预测",
+        "body": "LeWAM联合world/action并用预测模型规划；JEPA Dots强调语言目标与动力学给定动作输入的隔离，部署world分支不参与动作搜索。相同masked-MoT背景不代表推理链相同。 不变性约束的是forward信息通路，不是说共享骨干训练后两种latent统计独立。world预测分支只在训练监督中使用，部署是action flow生成8动作、执行前2个后重规划，不是用world model在线搜索动作。",
+        "papers": [
+          "multimodal-models:jepa-dots",
+          "foundation-models:lewam"
+        ]
+      },
+      "question": {
+        "id": "nov19-jepa-dots",
+        "question": "与LeWAM的world-action联学相比，部署差异是什么？",
+        "answer": "JEPA Dots world分支只供训练监督，部署执行flow policy；不能因此说它已复现LeWAM通过world模型优化动作的规划链。",
+        "example": "教学例：生成8步动作后执行2步再观测，是receding-horizon policy，不等于对world cost做梯度规划。",
+        "papers": [
+          "multimodal-models:jepa-dots",
+          "foundation-models:lewam"
+        ]
+      },
+      "update": {
+        "date": "2026-11-19",
+        "papers": [
+          "multimodal-models:jepa-dots",
+          "foundation-models:lewam"
+        ],
+        "summary": "LeWAM联合world/action并用预测模型规划；JEPA Dots强调语言目标与动力学给定动作输入的隔离，部署world分支不参与动作搜索。相同masked-MoT背景不代表推理链相同。 高成本完整实验不复现，组件与能力证据分开。"
+      },
+      "english": {
+        "comparison": {
+          "position": "A shared visual backbone feeds separate dynamics and task latents; language FiLM enters only the task path. World queries read dynamics history and supplied clean actions; the policy reads history, goals and noisy actions. Multi-layer masks also block indirect leakage. Fixed observations/actions/parameters yield instruction-invariant world predictions while policy actions may change.",
+          "tradeoff": "LeWAM jointly models worlds/actions and plans through prediction. JEPA Dots separates language goals from fixed-action dynamics and does not use its world branch for deployment action search. Shared masked-MoT ancestry does not imply identical inference."
+        },
+        "analysis": {
+          "title": "JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control",
+          "body": "LeWAM jointly models worlds/actions and plans through prediction. JEPA Dots separates language goals from fixed-action dynamics and does not use its world branch for deployment action search. Shared masked-MoT ancestry does not imply identical inference. The invariance is a forward-conditioning property, not statistical independence after joint backbone training. The world branch supplies training supervision; deployment generates eight actions by action flow and executes the first two before replanning, rather than searching actions through the world model."
+        },
+        "question": {
+          "question": "How does deployment differ from LeWAM?",
+          "answer": "The JEPA Dots world branch is training supervision, while deployment uses a flow policy, not LeWAM-style world-model action optimization.",
+          "example": "Executing two actions from an eight-step chunk is receding-horizon control, not gradient planning over a world cost."
+        },
+        "update": "LeWAM jointly models worlds/actions and plans through prediction. JEPA Dots separates language goals from fixed-action dynamics and does not use its world branch for deployment action search. Shared masked-MoT ancestry does not imply identical inference. Full experiments are not reproduced; components are separate from capability evidence."
+      }
     }
   ]
 }

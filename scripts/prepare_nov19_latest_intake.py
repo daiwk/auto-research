@@ -24,16 +24,16 @@ def main():
         for name in ("foundation", "post", "agent", "root")
         for r in load(AUDIT / f"deep-dive-proposals-{name}.json")["proposals"]
     ]
-    if len(identities) != 20 or len(set(identities)) != 20:
-        raise ValueError("fixed20-paper intake missing/duplicated")
+    if len(identities) != 23 or len(set(identities)) != 23:
+        raise ValueError("fixed23-paper intake missing/duplicated")
     specs = {
         i: load(ROOT / "src/auto_research/paper_specs/catalog" / f"{i.replace(':', '/')}.json")
         for i in identities
     }
     components = {i: p for i, p in specs.items() if p["implementation_status"] == "component_only"}
     reviews = {i: p for i, p in specs.items() if p["implementation_status"] == "deferred_high_cost"}
-    if len(components) != 17 or len(reviews) != 3:
-        raise ValueError("expected17components/3review-only")
+    if len(components) != 18 or len(reviews) != 5:
+        raise ValueError("expected18components/5review-only")
     intake = {
         "schema_version": 1,
         "batch": "2026-11-19-latest-components",
@@ -44,6 +44,7 @@ def main():
         "new_papers": [i for i, p in specs.items() if p["published"] >= "2026-11-18"],
         "announcement_overlap_backfill": ["multimodal-models:autoregressive-view-model"],
         "historical_directory_backfill": ["agent-research:searchinject"],
+        "supplemental_cpu_papers": ["system-one:egojev"],
         "scope_note": "Finite high-value primary-method review, not full-text review of every metadata identity or institution-wide exhaustion. API publication, bulletin announcement, directory observation and repository pushes are separate events.",
         "all_sources_exhaustive": False,
         "watermark_advanced": False,
@@ -63,6 +64,7 @@ def main():
             "cuda": p["requires_gpu_validation"],
         }
         for p in components.values()
+        if p["key"] != "egojev"
     }
     dump(
         AUDIT / "preflight.json",

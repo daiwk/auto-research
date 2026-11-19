@@ -1,0 +1,104 @@
+{
+  "schema_version": 2,
+  "batch": "2026-11-19-egojev-cpu-supplement",
+  "device": "cpu",
+  "accelerator": "CPU",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "components": {
+    "egojev": {
+      "evaluation_tier": "l1_mechanism",
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "top_window_by_mass": true,
+            "single_level_unchanged": true,
+            "normalized_fine_geometry": true,
+            "inverse_cdf_not_bin_center": true,
+            "flat_readout_is_uniform_midpoints": true,
+            "geometric_not_product": true,
+            "chronological_quantiles": true
+          },
+          "metrics": {
+            "fine_segments": 8,
+            "quantile_budget": 8,
+            "geometric_product_max_difference": 0.14431271931685113,
+            "first_quantile_seconds": 12.414646457873806,
+            "last_quantile_seconds": 77.7983745117617
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "top_window_by_mass": true,
+            "single_level_unchanged": true,
+            "normalized_fine_geometry": true,
+            "inverse_cdf_not_bin_center": true,
+            "flat_readout_is_uniform_midpoints": true,
+            "geometric_not_product": true,
+            "chronological_quantiles": true
+          },
+          "metrics": {
+            "fine_segments": 8,
+            "quantile_budget": 8,
+            "geometric_product_max_difference": 0.1450130488824667,
+            "first_quantile_seconds": 12.403922188145257,
+            "last_quantile_seconds": 77.80685299980303
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "top_window_by_mass": true,
+            "single_level_unchanged": true,
+            "normalized_fine_geometry": true,
+            "inverse_cdf_not_bin_center": true,
+            "flat_readout_is_uniform_midpoints": true,
+            "geometric_not_product": true,
+            "chronological_quantiles": true
+          },
+          "metrics": {
+            "fine_segments": 8,
+            "quantile_budget": 8,
+            "geometric_product_max_difference": 0.14458427716039746,
+            "first_quantile_seconds": 12.410661038252336,
+            "last_quantile_seconds": 77.80160745669994
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    }
+  },
+  "source_sha256": {
+    "scripts/run_nov19_egojev_cpu.py": "33c1fb5bf438340b65b3618c2906553a5f4b31e68dc65f04d46aa04a0c9a7bab",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "src/auto_research/system_one/egojev_components.py": "838ec9e2eeeebff3a25dc57906a9874464c6f7841a71aa47f30b755ffe5adad4",
+    "src/auto_research/__init__.py": "ebea89760aafc6784a537e81317c59ccb75661b28340ddf3e788cd12f9ca43f7",
+    "src/auto_research/system_one/__init__.py": "12c22f97762c474284c5a59bb4616ccf210c274401a634f667f7dc4e0e70b092"
+  },
+  "code_commit": "62d808ecae31fc831c0e8c740b9f207c523445af",
+  "elapsed_seconds": 0.0001695828977972269,
+  "diagnostic_only": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiments_executed": false,
+  "pretrained_model_calls": 0,
+  "api_calls": 0,
+  "automatic_retry": false
+}

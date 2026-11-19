@@ -1,0 +1,18 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.24062v1",
+  "paper_url": "https://arxiv.org/abs/2611.24062v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-19",
+  "page": 2,
+  "crop_box_pdf_points": [
+    54,
+    43,
+    559,
+    388
+  ],
+  "caption": "Figure1: Dynamics/task separation and masked world-action modeling",
+  "source_pdf_sha256": "daaa54e286fc4b57c321114b69c2b73eb38f88ae8da7a118670549c8c4d5acc6",
+  "asset_sha256": "3f3c4a5791a56d1e59a203b680b01edfc3f3a571cfaef7ec755fd4b235e944a6",
+  "extraction": "Original PDF crop; no semantic edits",
+  "copyright": "Copyright retained by original authors; research commentary, not local evidence."
+}

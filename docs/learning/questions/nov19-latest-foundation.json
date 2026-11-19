@@ -320,6 +320,198 @@
           "added": "2026-11-19"
         }
       ]
+    },
+    "system-one:jeveration": {
+      "questions": [
+        {
+          "id": "why-shared-randomness",
+          "level": "basics",
+          "question": "为什么逐位置独立采样容易不协调？",
+          "answer": "各位置可能选择不同有效图像的局部模式；共享随机状态让它们在同一实现条件下决定，再形成联合混合分布。",
+          "example": "教学例：左半边选择白天、右半边选择夜晚都是合理边缘，却不是同一场景。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "training-not-noise-only",
+          "level": "mechanism",
+          "question": "只把所有位置加同一随机输入是否足够？",
+          "answer": "不够。模型可忽略随机状态；原文先学习masked分布，再做distribution matching与纠正监督来教会它使用状态。",
+          "example": "教学例：输出恒定图片也可完全忽略随机数，形式上有xi但没有多样性。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "choice-versus-image",
+          "level": "comparison",
+          "question": "与LLM2Jev有限候选Choice多了什么困难？",
+          "answer": "整图有多个位置，既要符合提示又要跨位置协调；单个候选softmax没有学习空间联合分布的负担。",
+          "example": "教学例：选一张现成图片与生成128个相互一致的code不是同一任务。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "not-head-fixture",
+          "level": "implementation",
+          "question": "为什么这次不实现一个随机head就算完成？",
+          "answer": "核心是经过两阶段训练的联合图像分布和解码链路，廉价head fixture不能替代。完整实验成本已由原文四卡四天证明。",
+          "example": "教学例：随机输出128个token无法验证GenEval或77.8ms端到端结果。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    },
+    "system-one:egojev": {
+      "questions": [
+        {
+          "id": "distribution-not-score",
+          "level": "basics",
+          "question": "为什么候选分布而不只一个最优帧有用？",
+          "answer": "分布同时表示多个可能证据位置，能让回答帧在确信处集中、不确定处展开；单个argmax会丢掉预算分配信息。",
+          "example": "教学例：两个窗口各占50%时，8帧应覆盖两边，而非全堆在一个并列最优点。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "geometric-mass",
+          "level": "mechanism",
+          "question": "细读概率能直接与粗概率相乘吗？",
+          "answer": "先归一每个细读窗口并乘其粗总质量，再做平方根几何融合和全局归一。普通乘积会比原式更尖锐，未细读窗口也不能丢掉。",
+          "example": "教学例：一个窗口仅有20%粗质量，即使内部最高概率为1，也不应先变成全视频100%。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "ranking-versus-quantiles",
+          "level": "comparison",
+          "question": "与System One多模态重排的候选排序有何不同？",
+          "answer": "这里用分布的逆CDF选择时间中点分位数，而不是按概率取top-k；分位数可能在同一高质量bin内取多个不同时间。",
+          "example": "教学例：后半段概率为1、总时长10秒、预算2时为6.25和8.75秒，不是两个7.5秒。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "probabilities-not-vlm-evidence",
+          "level": "implementation",
+          "question": "CPU后处理通过为什么不能宣称62%准确率？",
+          "answer": "给定概率并未验证VLM是否找到正确证据；完整方法还需多token标签读出、真实视频与回答评测。合成输入不冒充模型分数。",
+          "example": "教学例：手工把证据窗口设为概率1，只能测试分位数公式，不能测试证据识别。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    },
+    "multimodal-models:jepa-dots": {
+      "questions": [
+        {
+          "id": "conditioning-separation",
+          "level": "basics",
+          "question": "为什么相同观测和动作下world预测不该因语言改变？",
+          "answer": "语言描述的是任务目标，不应改变这些已固定动作的物理后果；因此语言只进入task/policy而非world动力学通路。",
+          "example": "教学例：同样向左移动夹爪，指令改成拿杯子不应让固定动作的预测位移突然向右。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "mask-not-statistical-independence",
+          "level": "mechanism",
+          "question": "隔离goal token是否足以防止泄漏？",
+          "answer": "还需限制中间token的多层信息通路；只在最后一层屏蔽直接goal边，不保证前层信息没进入world可见token。",
+          "example": "教学例：history token先读goal，再被world读到，会产生间接语言通道。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "lewam-deployment",
+          "level": "comparison",
+          "question": "与LeWAM的world-action联学相比，部署差异是什么？",
+          "answer": "JEPA Dots world分支只供训练监督，部署执行flow policy；不能因此说它已复现LeWAM通过world模型优化动作的规划链。",
+          "example": "教学例：生成8步动作后执行2步再观测，是receding-horizon policy，不等于对world cost做梯度规划。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "small-model-expensive-eval",
+          "level": "implementation",
+          "question": "39.1M参数为何仍不跑完整实验？",
+          "answer": "成本主要还来自多个训练run和40任务的数千闭环episode；参数少不能抵消环境模拟与评测矩阵。",
+          "example": "教学例：4000episode各最多600步，单模型上限即240万环境步，尚未算三run消融。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
     }
   }
 }

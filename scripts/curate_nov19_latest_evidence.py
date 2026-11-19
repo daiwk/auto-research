@@ -16,6 +16,42 @@ _spec.loader.exec_module(_base)
 _base.AUDIT = AUDIT
 
 
+def curate_supplement(check):
+    from run_nov19_egojev_cpu import MODULE, hashes, validate_raw as validate_extra
+
+    frozen = load(AUDIT / "frozen-egojev-sources.json")
+    if hashes() != frozen["source_sha256"]:
+        raise ValueError("supplement source changed after actual CPU run")
+    verify_sources(ROOT, frozen["commit"], frozen["source_sha256"], frozen["proof"])
+    raw = load(AUDIT / "raw-egojev-cpu.json")
+    validate_extra(raw, frozen)
+    spec = load(ROOT / "src/auto_research/paper_specs/catalog/system-one/egojev.json")
+    if (
+        spec.get("requires_gpu_validation") is not False
+        or spec.get("evaluation_tier") != "l1_mechanism"
+    ):
+        raise ValueError("wrong supplemental CPU spec")
+    item = {
+        "domain": "system-one",
+        "module": MODULE.removeprefix("src/auto_research/"),
+        "evaluation_tier": "l1_mechanism",
+        "cuda": False,
+    }
+    payload = _base.metric("egojev", item, spec, raw, frozen)
+    payload["dataset"]["id"] = "synthetic:nov19-egojev-explicit-probability-interface-v1"
+    payload["dataset"]["source"] = (
+        "Explicit seeded non-gold decision probabilities and temporal partitions; no VLM, video, checkpoint or evidence benchmark execution"
+    )
+    payload["provenance"]["dataset_fingerprint"] = (
+        "sha256:"
+        + hashlib.sha256(json.dumps(payload["dataset"], sort_keys=True).encode()).hexdigest()
+    )
+    payload["provenance"]["raw_runner_artifact_sha256"] = hashlib.sha256(
+        (AUDIT / "raw-egojev-cpu.json").read_bytes()
+    ).hexdigest()
+    _base.put(ROOT / payload["provenance"]["artifact_path"], payload, check)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
@@ -62,10 +98,11 @@ def main():
             if not args.check:
                 spec["gpu_validation_passed"] = True
                 path.write_text(json.dumps(spec, ensure_ascii=False, indent=2) + "\n")
+    curate_supplement(args.check)
     print(
         json.dumps(
             {
-                "cpu_components": len(config()["components"]),
+                "cpu_components": len(config()["components"]) + 1,
                 "cuda_components": sum(x["cuda"] for x in config()["components"].values()),
                 "capability_promotions": 0,
             }

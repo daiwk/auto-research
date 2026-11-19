@@ -19,11 +19,12 @@ def test_fixed_scope_not_metadata_backlog_or_watermark_advance():
     scope = load(AUDIT / "task-scope.json")
     assert scope["selected_scope_complete"] and scope["delivery_status"] == "fixed_scope_complete"
     assert not scope["watermark_advanced"] and not scope["all_sources_exhaustive"]
-    assert len(scope["accepted_papers"]) == 20
-    assert len(scope["component_papers"]) == 17 and len(scope["review_only_papers"]) == 3
-    assert len(scope["new_papers"]) == 18
+    assert len(scope["accepted_papers"]) == 23
+    assert len(scope["component_papers"]) == 18 and len(scope["review_only_papers"]) == 5
+    assert len(scope["new_papers"]) == 21
     assert scope["historical_directory_backfill"] == ["agent-research:searchinject"]
     assert scope["announcement_overlap_backfill"] == ["multimodal-models:autoregressive-view-model"]
+    assert scope["supplemental_cpu_papers"] == ["system-one:egojev"]
     assert scope["counts"]["full_capability_reproductions"] == 0
     metadata = load(AUDIT / "metadata-index.json")
     assert (
@@ -42,6 +43,11 @@ def test_frozen_cpu_and_actual_nvidia_runs_remain_source_bound():
         assert raw["pretrained_model_calls"] == raw["api_calls"] == 0
     assert len(load(AUDIT / "raw-cpu.json")["components"]) == 17
     assert len(load(AUDIT / "raw-cuda.json")["components"]) == 7
+    from run_nov19_egojev_cpu import hashes, validate_raw as validate_extra
+
+    extra = load(AUDIT / "frozen-egojev-sources.json")
+    assert hashes() == extra["source_sha256"]
+    validate_extra(load(AUDIT / "raw-egojev-cpu.json"), extra)
 
 
 def test_twenty_papers_have_complete_metadata_reviewed_english_and_figures():
@@ -82,8 +88,8 @@ def test_twenty_papers_have_complete_metadata_reviewed_english_and_figures():
 def test_all_four_learning_levels_and_same_topic_updates_are_reviewed():
     expected = set(load(AUDIT / "intake-scope.json")["accepted_papers"])
     assert learning_counts(expected) == {
-        "authored_bilingual_questions": 80,
-        "same_topic_deep_dive_updates": 20,
+        "authored_bilingual_questions": 92,
+        "same_topic_deep_dive_updates": 23,
     }
     assert sum(p["cuda"] for p in config()["components"].values()) == 7
 
