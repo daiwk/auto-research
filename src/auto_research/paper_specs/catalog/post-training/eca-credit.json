@@ -1,0 +1,59 @@
+{
+  "domain": "post-training",
+  "key": "eca-credit",
+  "title": "Evidence-Based Credit Assignment for Search-Augmented Language Models",
+  "paper_url": "https://arxiv.org/abs/2611.23824v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.23824v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.23824-eca-credit/README.md",
+  "first_author": "Wen Wang",
+  "first_author_affiliation": "University of the Chinese Academy of Sciences / Tencent",
+  "published": "2026-11-18",
+  "published_at": "2026-11-18T04:24:51Z",
+  "code": null,
+  "code_status": "固定v1及所核作者入口未找到可验证的本篇方法源码发布；所用模型、训练库不算本篇开源。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "reward-and-credit",
+    "后训练算法组件"
+  ],
+  "priority": "P1",
+  "intake_class": "new_submission_announced_after_previous_scan",
+  "implementation_status": "component_only",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.23824v1",
+    "source_sections": [
+      "PDF p1 author superscripts",
+      "§3 Eq.2–9",
+      "§4 training and evaluation"
+    ],
+    "basis": "§4使用Qwen2.5-3B/7B、8192训练题、256更新×256轨迹=65536条轨迹/运行；Wikipedia18/E5检索服务、七测试集51713题、多方法与迁移对照。完整训练/检索评测超出本轮单卡秒级组件预算。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30,
+      "gpu_component_seconds_per_seed_cap": 30
+    }
+  },
+  "summary": "终止答案全错时，组相对奖励为零，但检索可能已经取得有价值证据。ECA用训练专用冻结策略在仅含问题与去重文档的上下文中，计算参考答案的长度归一化对数似然势函数；生成的思考、查询和其他轨迹不参与打分。 固定G=8、H=3的势函数suffix return、对侧fold样本标准差/0.25 floor、novelty gate、search-local token advantage及无ratio clip的序列求和策略损失。冻结scorer打分、检索器和完整LLM训练未实现。",
+  "evaluation_tier": "l1_mechanism",
+  "gpu_validation_artifact": "docs/gpu-validations/eca-credit-a100-20261119-latest.json",
+  "local_operator": "auto_research.post_training.eca_credit.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.eca_credit import diagnostic; print(diagnostic(42))'"
+}

@@ -1,0 +1,59 @@
+{
+  "domain": "post-training",
+  "key": "mrpd-replay",
+  "title": "Replay, Don't Resample: Off-Policy Consolidation of Long-Horizon RL Experts",
+  "paper_url": "https://arxiv.org/abs/2611.24059v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.24059v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.24059-mrpd-replay/README.md",
+  "first_author": "Zhenrui Yue",
+  "first_author_affiliation": "University of Illinois Urbana-Champaign",
+  "published": "2026-11-18",
+  "published_at": "2026-11-18T08:51:39Z",
+  "code": "https://github.com/Yueeeeeeee/MRPD",
+  "code_status": "论文提供[作者仓库地址](https://github.com/Yueeeeeeee/MRPD)，但本轮官方GitHub API返回404；未验证可获取本篇源码、许可或固定commit，不称开源已验收。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "student-trajectory-distillation",
+    "后训练算法组件"
+  ],
+  "priority": "P1",
+  "intake_class": "new_submission_announced_after_previous_scan",
+  "implementation_status": "component_only",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.24059v1",
+    "source_sections": [
+      "§3 Eq.1–3",
+      "Appendix A dense KL/reduction/parallelism",
+      "§4 experiments"
+    ],
+    "basis": "Appendix A使用Qwen3-4B、三个专家各300步，约46万日志轨迹；1536条/step、最长16k，8张H100、TP=2，需专家训练与多域工具服务。完整多专家campaign不在单A100/A30预算内。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30,
+      "gpu_component_seconds_per_seed_cap": 30
+    }
+  },
+  "summary": "MRPD把专家RL训练日志当作随训练步变化的课程，而非混洗后的离线数据池。学生与专家同一SFT初始化；第k步合并各域专家第k步日志，使用日志采样策略的log-prob做importance ratio，重算组相对奖励的非对称clipped PG。 显式chronological log schedule检查、teacher-top-k加tail的reverse KL、日志策略ratio与0.2/0.28非对称clip、response-mean损失和冻结teacher/logging policy梯度。无真实专家日志/训练器/环境集成。",
+  "evaluation_tier": "l1_mechanism",
+  "gpu_validation_artifact": "docs/gpu-validations/mrpd-replay-a100-20261119-latest.json",
+  "local_operator": "auto_research.post_training.mrpd_replay.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.mrpd_replay import diagnostic; print(diagnostic(42))'"
+}

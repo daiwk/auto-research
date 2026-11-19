@@ -7,7 +7,7 @@ hide:
 
 # 同样输出候选分布，读出位置与缓存边界为何不同？
 
-[结构化决策](../index.md) · 更新 2026-10-27 · 9 篇主题资料 / 4 篇重点对照
+[结构化决策](../index.md) · 更新 2026-11-19 · 11 篇主题资料 / 6 篇重点对照
 
 类型化决策先把输出空间限定下来，但“无需生成长句”并不指定唯一架构。LLM2Jev读选项标签的语言概率，System One重排读首答案位置的候选字母，MJev-Spatial复用原生注意力Q/K，MetaEncoder则把请求和候选独立编码。先看打分依赖谁，再判断是否可缓存、能否开放检索，以及连续输出怎样离散化。
 
@@ -29,6 +29,8 @@ hide:
 | [MetaEncoder: Exploring the Limit of Bi-Encoders for Multimodal System One Decision Making with Natural Language Interface](../../../foundation-models/2610.11316-metaencoder/README.md) · [原始来源](https://arxiv.org/abs/2610.11316)<br>章节：背景与主要改动、核心公式与原文效果、本地复现与成本决策 | 共享因果编码器分别编码请求和候选，取归一化末token向量，以温度缩放余弦分数做决策或检索。 | 候选独立编码便于预计算；请求可含选项，不能据此宣称请求表示对候选集合不变。双塔压缩限制细粒度联合推理，完整30B评测成本过高未复现。 |
 | [MJev-Spatial: System One Spatial Intelligence via Native Attention Matching](../../../foundation-models/2610.22276-mjev-spatial/README.md) · [原始来源](https://arxiv.org/abs/2610.22276)<br>章节：背景与主要改动、核心公式、代码映射与边界 | decision marker的原生Q与各candidate-end marker的原生K打分，不增加独立分类头；计数分桶，二维点用三级区域选择。 | 连续空间任务变成可约束的离散步骤，但裁剪/分桶改变了分辨率与调用次数；多阶段问题应先题内平均损失，不能把阶段多当成样本更多。 |
 | [Multimodal Reranking Is a System One Decision](../../../multimodal-models/2610.28435-system-one-rerank/README.md) · [原始来源](https://arxiv.org/abs/2610.28435v1)<br>章节：背景与主要改动、核心公式、复现边界 | query和首阶段top-K候选进入同一多模态prompt，在首答案位置读取不同单token字母logits并候选内归一化。 | 联合看候选便于setwise比较，候选表示不能直接当独立缓存。只重排top-K，外部保持原序；本地是诊断组件，未复现完整大模型检索矩阵或decision head训练。 |
+| [Jeveration: System One Models Now Generate](../../../system-one/2611.24738-jeveration/README.md) · [原始来源](https://arxiv.org/abs/2611.24738v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 把图像表示为128个离散code的联合Choice，所有位置共享随机状态，而不是把各位置的边缘分布独立采样。冻结Qwen3.5-4B配共享LoRA与任务head，先学masked图像分布，再以distribution matching和置信纠正训练单步决策；同一checkpoint还做图到图与dense prediction。 | LLM2Jev把候选标签读成有限决策分布；Jeveration还必须协调空间上众多输出，并学会使用共同随机状态。单选候选打分成功，不证明整图联合分布或图像质量。 |
+| [EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions](../../../system-one/2611.24616-egojev/README.md) · [原始来源](https://arxiv.org/abs/2611.24616v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 同一冻结VLM把带数字标签的候选缩略图放在一个prompt中，读取完整标签的条件概率而不是生成时间文本。粗分布决定细看窗口，细分布先保留窗口粗概率总量，再与对应粗分布做几何平均。最后在时间的分段均匀分布上取中点分位数，分配有限回答帧。 | System One多模态重排把一个联合候选分布用于排序；EgoJev将分布用于时间预算分配。前者单token字母读出不能不加检查地替代后者多token数字标签概率，frame quantile也不是单纯top-k帧。 |
 
 </div>
 
@@ -45,6 +47,18 @@ LLM2Jev和System One重排都能直接读概率，但一个选项标签可能包
 MetaEncoder的候选只按自己的内容编码，适合离线建向量索引；System One重排让候选共同进入上下文，换一组对手可能改变其上下文化结果。MetaEncoder闭集请求还可以包含选项，因此候选缓存可复用不等于请求向量对选项变化不变。前者偏向可索引性，后者保留联合比较，不能从接口直接判定准确率胜负。
 
 对照来源：[metaencoder](../../../foundation-models/2610.11316-metaencoder/README.md) · [system-one-rerank](../../../multimodal-models/2610.28435-system-one-rerank/README.md)
+
+### Jeveration：以共享随机状态协调一次前向图像决策
+
+LLM2Jev把候选标签读成有限决策分布；Jeveration还必须协调空间上众多输出，并学会使用共同随机状态。单选候选打分成功，不证明整图联合分布或图像质量。 给定共享xi后可并行选择，但对xi求混合后各位置不再必须独立。仅添加随机噪声不够：原文指出直接监督可忽略该状态。纠正target在训练时重mask最低置信的一半位置，由冻结的第一阶段模型补全；推理仍是一次生成前向，不是把训练辅助步骤算成免费。
+
+对照来源：[jeveration](../../../system-one/2611.24738-jeveration/README.md) · [llm2jev](../../../foundation-models/2610.02076-llm2jev/README.md)
+
+### EgoJev：以决策分布几何融合与分位数分配视频帧
+
+System One多模态重排把一个联合候选分布用于排序；EgoJev将分布用于时间预算分配。前者单token字母读出不能不加检查地替代后者多token数字标签概率，frame quantile也不是单纯top-k帧。 细读窗口的局部分布归一后乘该窗口的粗概率总量；未细读窗口均摊其窗口质量。平方根不同于普通乘积，后者过度锐化。k=0直接保留单层粗分布。分位数需在bin内插值而不是一律取bin中心。标签如17]可能多token，完整读出需逐条件概率相乘并含终止]，本地不实现这部分。
+
+对照来源：[egojev](../../../system-one/2611.24616-egojev/README.md) · [system-one-rerank](../../../multimodal-models/2610.28435-system-one-rerank/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -80,15 +94,43 @@ MetaEncoder的候选只按自己的内容编码，适合离线建向量索引；
 
     对照来源：[system-one-rerank](../../../multimodal-models/2610.28435-system-one-rerank/README.md) · [metaencoder](../../../foundation-models/2610.11316-metaencoder/README.md)
 
+### 与LLM2Jev有限候选Choice多了什么困难？ {#cross-nov19-jeveration}
+
+??? note "展开答案与例子"
+
+    **答案：** 整图有多个位置，既要符合提示又要跨位置协调；单个候选softmax没有学习空间联合分布的负担。
+
+    **教学例子：** 教学例：选一张现成图片与生成128个相互一致的code不是同一任务。
+
+    对照来源：[jeveration](../../../system-one/2611.24738-jeveration/README.md) · [llm2jev](../../../foundation-models/2610.02076-llm2jev/README.md)
+
+### 与System One多模态重排的候选排序有何不同？ {#cross-nov19-egojev}
+
+??? note "展开答案与例子"
+
+    **答案：** 这里用分布的逆CDF选择时间中点分位数，而不是按概率取top-k；分位数可能在同一高质量bin内取多个不同时间。
+
+    **教学例子：** 教学例：后半段概率为1、总时长10秒、预算2时为6.25和8.75秒，不是两个7.5秒。
+
+    对照来源：[egojev](../../../system-one/2611.24616-egojev/README.md) · [system-one-rerank](../../../multimodal-models/2610.28435-system-one-rerank/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-19** · System One多模态重排把一个联合候选分布用于排序；EgoJev将分布用于时间预算分配。前者单token字母读出不能不加检查地替代后者多token数字标签概率，frame quantile也不是单纯top-k帧。 高成本完整实验不复现，组件与能力证据分开。
+
+涉及：[egojev](../../../system-one/2611.24616-egojev/README.md) · [system-one-rerank](../../../multimodal-models/2610.28435-system-one-rerank/README.md)
+
+**2026-11-19** · LLM2Jev把候选标签读成有限决策分布；Jeveration还必须协调空间上众多输出，并学会使用共同随机状态。单选候选打分成功，不证明整图联合分布或图像质量。 高成本完整实验不复现，组件与能力证据分开。
+
+涉及：[jeveration](../../../system-one/2611.24738-jeveration/README.md) · [llm2jev](../../../foundation-models/2610.02076-llm2jev/README.md)
 
 **2026-10-27** · 首版：比较llm2jev、metaencoder、mjev-spatial、system-one-rerank，梳理评分来自语言词表、原生注意力还是向量相似度与候选是否联合上下文化及哪些表示可以缓存，并补充跨论文问答。
 
 覆盖 9 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 9 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 11 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -101,6 +143,8 @@ MetaEncoder的候选只按自己的内容编码，适合离线建向量索引；
 - [MJev-Spatial: System One Spatial Intelligence via Native Attention Matching](../../../foundation-models/2610.22276-mjev-spatial/README.md)
 - [PathJev: Decision-Native Vision–Language Modelling for Histopathology](../../../foundation-models/2610.32478-pathjev/README.md)
 - [Multimodal Reranking Is a System One Decision](../../../multimodal-models/2610.28435-system-one-rerank/README.md)
+- [Jeveration: System One Models Now Generate](../../../system-one/2611.24738-jeveration/README.md)
+- [EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions](../../../system-one/2611.24616-egojev/README.md)
 
 </details>
 

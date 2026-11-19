@@ -7,7 +7,7 @@ hide:
 
 # 评测与可靠性：如何知道真的做对了
 
-[Agent](index.md) / 196 个问题 · 49 篇论文
+[Agent](index.md) / 200 个问题 · 50 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">196 个问题 · 49 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">200 个问题 · 50 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:execjudges" data-paper-title="Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling Agent Emory University 2026-11-18 对每个topic独立生成三个轻量Python评审程序，程序回答on-subject/some-answer/exact/dedicated四个证据问题，固定评分函数映射为等级，再对三个分数均值向下取整。LLM负责一次性的程序编写而不是逐文档调用，生成代码必须隔离执行。本地不执行来自网络或LLM的代码。 成本过高，不复现（审查 DONE）；CPU诊断。l0_interface：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。只运行固定grade mapping和floor聚合的L0接口，未生成或执行评审程序、未下载TREC、未调用模型，不输出相关性准确率。布尔值必须严格bool，整数0/1不会静默当证据。  Agent 评测与可靠性 可执行评审与共识 Agent 评测与可靠性：如何知道真的做对了 ExecJudges把LLM调用放到哪一步？ 每topic写独立程序，然后CPU复用程序给所有文档；本地只有映射接口，没有writer。 教学例：三程序可打分1000文档，不应伪称本地调用了3000次LLM。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<span id="paper-agent-research-execjudges-d2ec0966" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-9d93ac8fc489bc7f">ExecJudges把LLM调用放到哪一步？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aexecjudges">Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Emory University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>每topic写独立程序，然后CPU复用程序给所有文档；本地只有映射接口，没有writer。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：三程序可打分1000文档，不应伪称本地调用了3000次LLM。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24849v1">原论文</a> · <a href="../../../../agent-research/2611.24849-execjudges/">实现解读</a> · <a href="#qa-9d93ac8fc489bc7f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:execjudges" data-paper-title="Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling Agent Emory University 2026-11-18 对每个topic独立生成三个轻量Python评审程序，程序回答on-subject/some-answer/exact/dedicated四个证据问题，固定评分函数映射为等级，再对三个分数均值向下取整。LLM负责一次性的程序编写而不是逐文档调用，生成代码必须隔离执行。本地不执行来自网络或LLM的代码。 成本过高，不复现（审查 DONE）；CPU诊断。l0_interface：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。只运行固定grade mapping和floor聚合的L0接口，未生成或执行评审程序、未下载TREC、未调用模型，不输出相关性准确率。布尔值必须严格bool，整数0/1不会静默当证据。  Agent 评测与可靠性 可执行评审与共识 Agent 评测与可靠性：如何知道真的做对了 三个等级3,2,3为何最终是2？ 先算均值8/3，再向下取整；不是多数票3，也不是四舍五入3。 教学例：1,0,1均值2/3，最终0。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-f5d05175b3b0ed71">三个等级3,2,3为何最终是2？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aexecjudges">Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Emory University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先算均值8/3，再向下取整；不是多数票3，也不是四舍五入3。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：1,0,1均值2/3，最终0。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24849v1">原论文</a> · <a href="../../../../agent-research/2611.24849-execjudges/">实现解读</a> · <a href="#qa-f5d05175b3b0ed71">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:execjudges" data-paper-title="Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling Agent Emory University 2026-11-18 对每个topic独立生成三个轻量Python评审程序，程序回答on-subject/some-answer/exact/dedicated四个证据问题，固定评分函数映射为等级，再对三个分数均值向下取整。LLM负责一次性的程序编写而不是逐文档调用，生成代码必须隔离执行。本地不执行来自网络或LLM的代码。 成本过高，不复现（审查 DONE）；CPU诊断。l0_interface：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。只运行固定grade mapping和floor聚合的L0接口，未生成或执行评审程序、未下载TREC、未调用模型，不输出相关性准确率。布尔值必须严格bool，整数0/1不会静默当证据。  Agent 评测与可靠性 可执行评审与共识 Agent 评测与可靠性：如何知道真的做对了 与FUSE的验证有什么不同？ ExecJudges映射文本证据，FUSE对隐藏动机模拟状态核验；聚合正确不保证证据判断正确。 教学例：三个程序都误判exact，floor仍可能错；不能当成隐藏动机推断成功。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-d6779db920fc7948">与FUSE的验证有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aexecjudges">Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Emory University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>ExecJudges映射文本证据，FUSE对隐藏动机模拟状态核验；聚合正确不保证证据判断正确。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：三个程序都误判exact，floor仍可能错；不能当成隐藏动机推断成功。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24849v1">原论文</a> · <a href="../../../../agent-research/2611.24849-execjudges/">实现解读</a> · <a href="#qa-d6779db920fc7948">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:execjudges" data-paper-title="Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling Agent Emory University 2026-11-18 对每个topic独立生成三个轻量Python评审程序，程序回答on-subject/some-answer/exact/dedicated四个证据问题，固定评分函数映射为等级，再对三个分数均值向下取整。LLM负责一次性的程序编写而不是逐文档调用，生成代码必须隔离执行。本地不执行来自网络或LLM的代码。 成本过高，不复现（审查 DONE）；CPU诊断。l0_interface：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。只运行固定grade mapping和floor聚合的L0接口，未生成或执行评审程序、未下载TREC、未调用模型，不输出相关性准确率。布尔值必须严格bool，整数0/1不会静默当证据。  Agent 评测与可靠性 可执行评审与共识 Agent 评测与可靠性：如何知道真的做对了 完整实现还必须保护哪些边界？ 测试qrels不进入writer，生成代码要在禁网/禁模型调用的资源沙箱运行；本地不提供这种沙箱。 教学例：能返回四个bool的Python函数不等于可安全执行不可信代码。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e3caf09b78e7cfaa">完整实现还必须保护哪些边界？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aexecjudges">Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Emory University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>测试qrels不进入writer，生成代码要在禁网/禁模型调用的资源沙箱运行；本地不提供这种沙箱。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：能返回四个bool的Python函数不等于可安全执行不可信代码。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24849v1">原论文</a> · <a href="../../../../agent-research/2611.24849-execjudges/">实现解读</a> · <a href="#qa-e3caf09b78e7cfaa">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:alphaproof-code" data-paper-title="AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level Agent Google DeepMind 2026-11-10 人类与规格编写/审阅 Agent 先定义并批准要证明的安全性质，证明团队再处理实际 Rust 代码经标准编译器生成的 AArch64 程序。Lean 内核检查证明，gatekeeper 还要防止团队偷偷弱化规格或其依赖。原文涉及 PQXDH 握手和 Triple Ratchet 的符号/计算安全保证，而不是“所有 Signal 场景都无漏洞”。PDF §2、§4–5 deferred_high_cost，仅论文/代码来源与成本审查，成本过高，不复现（审查 DONE）。deferred_high_cost，仅论文/代码来源与成本审查，成本过高，不复现（审查 DONE）。没有本地形式证明器、Agent 或可执行算子，不生成伪指标。本轮只读了报告署名、§2.4、§7 与官方项目/固定 README，核对一手出处和成本。没有克隆整个大型证明仓库，没有安装 Lean/Rust 工具链，没有跑 lake build 或 comparator。也没有用 schema、哈希或 regex 模拟形式证明。无本地实验指标，不要求 GPU 回执，不接入 Evolve。  统一评测与可靠性 形式验证与规格保真 Agent 评测与可靠性：如何知道真的做对了 AlphaProof Code 为什么把规格列为可信，而把AI写出的证明列为不可信？ 证明中的逻辑错误可由Lean内核拒绝，因此不必相信生成证明的模型；但内核只检查给定命题，不能判断命题是否充分表达真实安全目标。人类仍要审查规格、依赖、机器语义和密码学假设。 教学例：证明“程序会返回某个整数”可能完全正确，却没有证明“攻击者无法恢复密钥”。证明正确与目标足够强是两件事。 2026-11-11">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <span id="paper-agent-research-alphaproof-code-5f282556" class="ar-learning-paper-anchor"></span>

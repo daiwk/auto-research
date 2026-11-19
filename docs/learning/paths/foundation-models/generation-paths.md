@@ -7,7 +7,7 @@ hide:
 
 # 生成路径：草稿验证、并行去噪与少步迭代
 
-[基础模型](index.md) / 68 个问题 · 17 篇论文
+[基础模型](index.md) / 72 个问题 · 18 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">68 个问题 · 17 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">72 个问题 · 18 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:narrow-spec" data-paper-title="NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/generation-paths" data-search="NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding 基础模型 NVIDIA 2026-11-18 把DFlash/EAGLE-3的整个残差宽度设为目标的二分之一或四分之一，并从头训练窄草稿；边界adapter连接目标hidden和共享词表。DFlash输出adapter可与目标head相乘，EAGLE-3输入adapter可折进embedding。head数量和head维度保持不变，因此KV cache不因残差流变窄而自动缩小。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。仅实现两种边界折叠及输入/输出、hidden梯度一致性；不构造或训练DFlash/EAGLE-3，不运行目标模型、token接受/拒绝或SGLang。量化不交换负控使用说明性均匀量化，不冒充论文NVFP4内核。  推理与系统效率 推测解码与权重折叠 基础模型 生成路径：草稿验证、并行去噪与少步迭代 只缩词表head是否等于NarrowSpec？ 不是。该方法缩整个残差流，包括读写残差的attention/MLP投影；词表head折叠只是边界处理。 教学例：只把head低秩化仍保留原宽度的每层MLP，没执行本文主要干预。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 生成路径：草稿验证、并行去噪与少步迭代</a></p>
+<span id="paper-foundation-models-narrow-spec-9b808416" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-759edea1dfe5101a">只缩词表head是否等于NarrowSpec？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Anarrow-spec">NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。该方法缩整个残差流，包括读写残差的attention/MLP投影；词表head折叠只是边界处理。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：只把head低秩化仍保留原宽度的每层MLP，没执行本文主要干预。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23835v1">原论文</a> · <a href="../../../../foundation-models/2611.23835-narrow-spec/">实现解读</a> · <a href="#qa-759edea1dfe5101a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:narrow-spec" data-paper-title="NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/generation-paths" data-search="NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding 基础模型 NVIDIA 2026-11-18 把DFlash/EAGLE-3的整个残差宽度设为目标的二分之一或四分之一，并从头训练窄草稿；边界adapter连接目标hidden和共享词表。DFlash输出adapter可与目标head相乘，EAGLE-3输入adapter可折进embedding。head数量和head维度保持不变，因此KV cache不因残差流变窄而自动缩小。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。仅实现两种边界折叠及输入/输出、hidden梯度一致性；不构造或训练DFlash/EAGLE-3，不运行目标模型、token接受/拒绝或SGLang。量化不交换负控使用说明性均匀量化，不冒充论文NVFP4内核。  推理与系统效率 推测解码与权重折叠 基础模型 生成路径：草稿验证、并行去噪与少步迭代 什么时候可以把输出adapter折进LM head？ 当两者是连续线性映射时，按Wlm乘Wout合并；若中间有norm或非线性则不能这样折。 教学例：Wlm ReLU(Wout h)不等于(WlmWout)h。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 生成路径：草稿验证、并行去噪与少步迭代</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-12bf04743b9efbcd">什么时候可以把输出adapter折进LM head？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Anarrow-spec">NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>当两者是连续线性映射时，按Wlm乘Wout合并；若中间有norm或非线性则不能这样折。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Wlm ReLU(Wout h)不等于(WlmWout)h。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23835v1">原论文</a> · <a href="../../../../foundation-models/2611.23835-narrow-spec/">实现解读</a> · <a href="#qa-12bf04743b9efbcd">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:narrow-spec" data-paper-title="NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/generation-paths" data-search="NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding 基础模型 NVIDIA 2026-11-18 把DFlash/EAGLE-3的整个残差宽度设为目标的二分之一或四分之一，并从头训练窄草稿；边界adapter连接目标hidden和共享词表。DFlash输出adapter可与目标head相乘，EAGLE-3输入adapter可折进embedding。head数量和head维度保持不变，因此KV cache不因残差流变窄而自动缩小。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。仅实现两种边界折叠及输入/输出、hidden梯度一致性；不构造或训练DFlash/EAGLE-3，不运行目标模型、token接受/拒绝或SGLang。量化不交换负控使用说明性均匀量化，不冒充论文NVFP4内核。  推理与系统效率 推测解码与权重折叠 基础模型 生成路径：草稿验证、并行去噪与少步迭代 与LoopSpec降低推理开销的方向有什么不同？ LoopSpec安排循环深度间的推测与验证；NarrowSpec减少草稿每次前向的残差宽度，不改变目标verify。 教学例：较窄草稿仍可能因为接受长度变短而抵消每轮节省。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 生成路径：草稿验证、并行去噪与少步迭代</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e91040e0a45e7c0a">与LoopSpec降低推理开销的方向有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Anarrow-spec">NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>LoopSpec安排循环深度间的推测与验证；NarrowSpec减少草稿每次前向的残差宽度，不改变目标verify。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：较窄草稿仍可能因为接受长度变短而抵消每轮节省。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23835v1">原论文</a> · <a href="../../../../foundation-models/2611.23835-narrow-spec/">实现解读</a> · <a href="#qa-e91040e0a45e7c0a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:narrow-spec" data-paper-title="NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/generation-paths" data-search="NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding 基础模型 NVIDIA 2026-11-18 把DFlash/EAGLE-3的整个残差宽度设为目标的二分之一或四分之一，并从头训练窄草稿；边界adapter连接目标hidden和共享词表。DFlash输出adapter可与目标head相乘，EAGLE-3输入adapter可折进embedding。head数量和head维度保持不变，因此KV cache不因残差流变窄而自动缩小。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。仅实现两种边界折叠及输入/输出、hidden梯度一致性；不构造或训练DFlash/EAGLE-3，不运行目标模型、token接受/拒绝或SGLang。量化不交换负控使用说明性均匀量化，不冒充论文NVFP4内核。  推理与系统效率 推测解码与权重折叠 基础模型 生成路径：草稿验证、并行去噪与少步迭代 本地折叠成功能否推出KV减半、量化等价和解码提速？ 都不能。原head几何固定；量化与矩阵乘法不交换；端到端速度还需训练后接受率和硬件验证。 教学例：8维残差改4维，但KV heads与head_dim都不变时，KV张量元素数不变。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 生成路径：草稿验证、并行去噪与少步迭代</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-c4651411635b0aec">本地折叠成功能否推出KV减半、量化等价和解码提速？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Anarrow-spec">NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>都不能。原head几何固定；量化与矩阵乘法不交换；端到端速度还需训练后接受率和硬件验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：8维残差改4维，但KV heads与head_dim都不变时，KV张量元素数不变。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23835v1">原论文</a> · <a href="../../../../foundation-models/2611.23835-narrow-spec/">实现解读</a> · <a href="#qa-c4651411635b0aec">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:b3" data-paper-title="Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/generation-paths" data-search="Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models 基础模型 Technion / Amazon Web Services 2026-11-10 逐块扩散必须等一个块的最后几个困难 token 收敛，才开始下一个块。B3 在当前块足够稳定时提前生成未来块，两块共享前向。块因果掩码阻止当前块读取未来块，因此当前块预测不被未来草稿污染；未来块必须能 self-edit，以修正旧块尚未收敛时形成的猜测。 成本过高，不复现（审查 DONE），不下载这些权重或启动试跑。L1 CPU 机制组件：只执行 spawn gate 和块因果掩码的数值检查，没有扩散模型、文本答案或吞吐复现。SpawnGate 接受调用者真实提供的熵、接受标志和 EOS 状态；它不产生或猜测模型预测。block_causal_mask 仅构造两块可见关系。合成输入检查一拍滞后、活动未来块排除、EOS 保护、跨块阈值，以及真实 softmax 注意力下当前块输出与单独前向相同。  推理与系统效率 扩散语言模型解码 基础模型 生成路径：草稿验证、并行去噪与少步迭代 B3 两个块共享前向，为什么未来草稿不能影响当前块？ 块因果掩码禁止当前块读取未来块的key/value；未来块可以读取当前块，但方向不能反过来。这样重叠计算不改变当前块的注意力输入，未来块仍需self-edit修正尚未稳定前缀带来的猜测。 教学例：两个4token块组成8token矩阵，前4行后4列必须为不可见；后4行可读取前4列。 2026-11-11">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 生成路径：草稿验证、并行去噪与少步迭代</a></p>
 <span id="paper-foundation-models-b3-cde2b2be" class="ar-learning-paper-anchor"></span>

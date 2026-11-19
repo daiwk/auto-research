@@ -8,6 +8,10 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding](<https://arxiv.org/abs/2611.23835v1>) | 2026-11-18 | [English](../../foundation-models/2611.23835-narrow-spec/README-en.md) · [Chinese](../../foundation-models/2611.23835-narrow-spec/README.md) |
+| [LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers](<https://arxiv.org/abs/2611.24301v1>) | 2026-11-18 | [English](../../foundation-models/2611.24301-loopcache-interface/README-en.md) · [Chinese](../../foundation-models/2611.24301-loopcache-interface/README.md) |
+| [Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting](<https://arxiv.org/abs/2611.23896v1>) | 2026-11-18 | [English](../../foundation-models/2611.23896-kernel-ridge-attention/README-en.md) · [Chinese](../../foundation-models/2611.23896-kernel-ridge-attention/README.md) |
+| [Counterfactual World Models: JEPAs That Reason About "What If"](<https://arxiv.org/abs/2611.24778v1>) | 2026-11-18 | [English](../../foundation-models/2611.24778-counterfactual-wm/README-en.md) · [Chinese](../../foundation-models/2611.24778-counterfactual-wm/README.md) |
 | [The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale](<https://arxiv.org/abs/2611.22947v1>) | 2026-11-17 | [English](../../foundation-models/2611.22947-lara-plus-plus/README-en.md) · [Chinese](../../foundation-models/2611.22947-lara-plus-plus/README.md) |
 | [Spool: Low-Latency Streaming Inference for Hybrid Vision-Language Models](<https://arxiv.org/abs/2611.23228v1>) | 2026-11-17 | [English](../../foundation-models/2611.23228-spool/README-en.md) · [Chinese](../../foundation-models/2611.23228-spool/README.md) |
 | [SIMQ: A Single Graph-based Index for Multi-Vector Query](<https://arxiv.org/abs/2611.22079v1>) | 2026-11-17 | [English](../../foundation-models/2611.22079-simq/README-en.md) · [Chinese](../../foundation-models/2611.22079-simq/README.md) |

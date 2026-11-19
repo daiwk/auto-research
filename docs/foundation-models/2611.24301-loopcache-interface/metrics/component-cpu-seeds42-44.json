@@ -1,0 +1,149 @@
+{
+  "schema_version": 2,
+  "method": "loopcache-interface",
+  "manifest_ref": "foundation-models:loopcache-interface",
+  "dataset": {
+    "id": "synthetic:nov19-latest-loopcache-interface-component-v1",
+    "kind": "explicit_protocol_or_mechanism_fixtures",
+    "revision": "sha256:04487d9561fbc2899317c03045ee3940029233cd4b55a4014adb1146ff154dc5",
+    "public_capability_benchmark": false,
+    "source": "Seeded small tensors or explicit deterministic evaluator/control cases; no pretrained output or public capability measurement"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l0_interface",
+      "checks": {
+        "cycle_wrap": true,
+        "threshold_boundary_updates": true,
+        "weak_switch_retained": true,
+        "shallow_mismatch_decoupled": true,
+        "deep_layer_shares_cycle": true,
+        "verification_waits_for_full_cycle": true
+      },
+      "metrics": {
+        "distinct_cycle_slots": 4,
+        "verification_cycle_wait": 3,
+        "tokens_committed": 0,
+        "model_calls": 0
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l0_interface",
+      "checks": {
+        "cycle_wrap": true,
+        "threshold_boundary_updates": true,
+        "weak_switch_retained": true,
+        "shallow_mismatch_decoupled": true,
+        "deep_layer_shares_cycle": true,
+        "verification_waits_for_full_cycle": true
+      },
+      "metrics": {
+        "distinct_cycle_slots": 4,
+        "verification_cycle_wait": 3,
+        "tokens_committed": 0,
+        "model_calls": 0
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l0_interface",
+      "checks": {
+        "cycle_wrap": true,
+        "threshold_boundary_updates": true,
+        "weak_switch_retained": true,
+        "shallow_mismatch_decoupled": true,
+        "deep_layer_shares_cycle": true,
+        "verification_waits_for_full_cycle": true
+      },
+      "metrics": {
+        "distinct_cycle_slots": 4,
+        "verification_cycle_wait": 3,
+        "tokens_committed": 0,
+        "model_calls": 0
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "distinct_cycle_slots": 4.0,
+    "model_calls": 0.0,
+    "tokens_committed": 0.0,
+    "verification_cycle_wait": 3.0
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l0_interface",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l0_interface",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Operator/interface controls only; not a complete model, agent, public benchmark or production comparison"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "35f818c0fb0a143196838f9e319b9b7ddf5d91ee",
+    "accelerator": "CPU",
+    "artifact_path": "docs/foundation-models/2611.24301-loopcache-interface/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_nov19_latest_components.py": "b108095de52d36306ec372b819e71315f8ead276c45cda0005343080bc9e915f",
+      "scripts/run_nov18_latest_components.py": "0fe50e8e554f6663b3c8c179654400d10bfbb557ceb9cefb9880da78f164b7c1",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov19-latest/preflight.json": "97e20790ed2dae62a4fefd307891c62d918db349614ddd7ca6da75537952b360",
+      "src/auto_research/post_training/_nov18_contracts.py": "103b12bbdcad9c18fab47f31f66e73a77564e4db05618aec5809658dfcfdf39e",
+      "src/auto_research/__init__.py": "ebea89760aafc6784a537e81317c59ccb75661b28340ddf3e788cd12f9ca43f7",
+      "src/auto_research/foundation_models/__init__.py": "a12e1b69e3ea2eed6e8c5a6551f7dc0b123c2fced9ed7d120d79132fb4806c03",
+      "src/auto_research/post_training/__init__.py": "35cf722f6d202f5f8bf52059cc355bf18dbf14381fac6abf4720e467ce64a11c",
+      "src/auto_research/agent_research/__init__.py": "f69fbc30eab75bfe746f8735d5c34ec7e6afab5d47f04fcae0fd540846620eea",
+      "src/auto_research/reproductions/__init__.py": "34c58dc0680ea7168bd0e6c5fc813c9c1cd97eed723cc836cc206670a638382e",
+      "src/auto_research/foundation_models/kernel_ridge_attention.py": "3d4e4ba4f7bc83d40315d09328a0752cdc87432a10c97a23157d41c8d8fd5687",
+      "src/auto_research/foundation_models/narrow_spec.py": "af58f1504a8fa189daa6686c98d2313eec998f10acc78fe50f18b0d92c71aeb0",
+      "src/auto_research/foundation_models/loopcache_interface.py": "04487d9561fbc2899317c03045ee3940029233cd4b55a4014adb1146ff154dc5",
+      "src/auto_research/foundation_models/counterfactual_wm.py": "a33005d8f80f4bdf302ea64e25a6c48d6ab04f99a0c54d5d15ff53951993c494",
+      "src/auto_research/post_training/eca_credit.py": "1cdf180aad4b2f3ecb4f6f9fe160ddf911cf255e4781c282bc24e31774360adb",
+      "src/auto_research/post_training/mrpd_replay.py": "18b897e2be77385609afcffa72f37a968d689dc513ab7c98167bb84a4ef69795",
+      "src/auto_research/post_training/dcc_aggregation.py": "7087edfe0b3fdc0d3a039b879c92788face670f0f776b4665bc69eb952f45178",
+      "src/auto_research/post_training/led_edits.py": "efae4f86676cffb04d2dffc776bab340a60537a7db9f1f716f4d346f67b7b118",
+      "src/auto_research/agent_research/ahe_beta.py": "f352fd0a9aa0ae753a23c6a0c9a910fb17678a8dcc8343479e4046ea071d618d",
+      "src/auto_research/agent_research/timeout_cascades.py": "6754b13bcf311d35f8a51314ca11a6626c31d192b31867deb6154bdd4f04a7af",
+      "src/auto_research/agent_research/kaer.py": "af0c6b841485c2ea94221d453b59dd31984b187a8c603ae131695cbe9ffa8e6c",
+      "src/auto_research/agent_research/safe_personal_rsi.py": "2148af491748ecbeefa59c1feb249a90ce8af180196954d9763b69bcbad3083e",
+      "src/auto_research/reproductions/mle_agents_components.py": "28e13fbd1f70e6b6e5e786ecccca4fca524bfb822797778b83dc0bdd9c409243",
+      "src/auto_research/reproductions/xsplit_argus_components.py": "8bb754c6b1250caf9356d73d0973bd2fa561a8f336ff69b48b8f686d123269d4",
+      "src/auto_research/reproductions/mars_fapo_components.py": "95407e89c9ef6e04dee86ca93671d3e65687872ac9b140bd7a3f223644e9c08e",
+      "src/auto_research/agent_research/searchinject_components.py": "792ac1a3c5f7629ab3a669aef6cbc10caec9db1f5a2fa6ebf5c8fecaa09da4d9",
+      "src/auto_research/agent_research/execjudges_components.py": "059a244acb6c304d9bc86048b454369d567bd75074600921a6b4bcb9a165201f"
+    },
+    "dataset_fingerprint": "sha256:28e32dbaf6e8073b9f60011001b88bad605e2d5a1de79aeee42e43612988ea6d",
+    "raw_runner_artifact_sha256": "568ffb16d703a01a9784771e9ff7296451bcb3339efa859fc79d4980c20d398a"
+  }
+}

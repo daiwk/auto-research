@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "agent-research:ahe-beta": {
+      "questions": [
+        {
+          "id": "requirement-not-score",
+          "level": "basics",
+          "question": "为什么测试通过仍可能不满足用户？",
+          "answer": "测试可读最终工作区，但用户可能没收到结果、纠正请求未送达，或不允许的文件被修改；这些需求要靠交互记录核实。",
+          "example": "教学例：修好代码却没有回复用户，不等于交付完成。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "head-bound-review",
+          "level": "mechanism",
+          "question": "批准过的PR又改了代码，还能沿用批准吗？",
+          "answer": "不能。论文合并要求审查绑定当前head，RFC仍匹配审过的设计；旧批准不能覆盖后来改动。",
+          "example": "教学例：sha1获批后push sha2，head门必须拒绝。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "contrast-harness2",
+          "level": "comparison",
+          "question": "它和Harness²都不看rubric，为何不是同一算法？",
+          "answer": "Harness²用当前任务执行对照组合候选，再积累如何改的经验；AHE-Beta以会话需求、角色分工和审查准入选择跨任务结构改动。",
+          "example": "教学例：比较两个产物和核实中断控制需求，是两种不同证据。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "typed-not-semantic",
+          "level": "implementation",
+          "question": "本地Evidence类型能证明完全没有gold泄漏吗？",
+          "answer": "不能。它只限制公开交付表面并排除显式gold字段，字符串和外部调用仍需可信集成，所以仅是L0协议。",
+          "example": "教学例：把答案藏在runtime_log字符串中不是类型系统能排除的。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    },
+    "agent-research:timeout-cascades": {
+      "questions": [
+        {
+          "id": "cold-not-resume",
+          "level": "basics",
+          "question": "fallback会继承小模型已改文件吗？",
+          "answer": "论文trace模拟采用冷启动，大模型从原始任务状态开始；继承编辑是未研究的未来优化，不能默认加进去。",
+          "example": "教学例：小模型改错文件后，大模型并不是在错误工作区上继续。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "charge-both",
+          "level": "mechanism",
+          "question": "小模型超时后费用怎么计？",
+          "answer": "先计截断到时限的小模型时长乘其GPU数，再加大模型完整时长乘GPU数；串行延迟也要加两段。",
+          "example": "教学例：30秒×1卡后fallback120秒×4卡，共510 GPU秒、150秒墙钟。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "budget-vs-cascade",
+          "level": "comparison",
+          "question": "它和BATS的预算机制有什么不同？",
+          "answer": "BATS逐工具扣账并重规划；这里按模型尝试超时切换。工具额度省下不代表GPU小时下降，GPU小时下降也不保证用户等待更短。",
+          "example": "教学例：小模型多等一分钟可能省大模型计算，却让一个请求更慢。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "matched-not-fill",
+          "level": "implementation",
+          "question": "为什么不把缺失34题按失败补零？",
+          "answer": "完整模型图有500题，级联仅466个可用配对。缺轨迹无法知道时长、验证和fallback结果，补零会改变分母和成本。",
+          "example": "教学例：未记录大模型时长不等于它用了0秒。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    },
+    "agent-research:kaer": {
+      "questions": [
+        {
+          "id": "feedback-not-command",
+          "level": "basics",
+          "question": "为什么失败报告是攻击入口？",
+          "answer": "planner据反馈改计划，攻击者可把“缺资料”写成“运行某脚本”，把信息变成授权指令。Kaer仅传固定失败条件。",
+          "example": "教学例：缺Q3收入只能报input_lacks_required_datum，不能附带运行窃密脚本的命令。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "repair-not-rebuild",
+          "level": "mechanism",
+          "question": "固定七种修复算子为何还要策略检查？",
+          "answer": "算子序列仍可组合成危险计划，所以最终能力、数据流、依赖和产物使用都要重验；算子有限不等于结果必安全。",
+          "example": "教学例：RESCOPE是合法算子，但给coder加terminal仍可能违反任务策略。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "react-channel",
+          "level": "comparison",
+          "question": "它相对ReAct改变的是哪一层？",
+          "answer": "ReAct交替推理与动作观察；Kaer收窄多Agent失败通道并验证计划修改，目标是控制权劫持而非提升单步推理。",
+          "example": "教学例：能够根据新观察换路线，不代表不可信观察能授予新工具。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "copy-before-accept",
+          "level": "implementation",
+          "question": "被拒的修复能留下部分计划修改吗？",
+          "answer": "不能。算子作用在副本，只有全部操作后策略通过才采用；已完成步骤不可动。INSERT/PRUNE必须同步改依赖位置。",
+          "example": "教学例：插入步骤后旧下标1变2，旧依赖也要重编号。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    },
+    "agent-research:safe-personal-rsi": {
+      "questions": [
+        {
+          "id": "verify-not-admit",
+          "level": "basics",
+          "question": "修复重放没有违例，为何仍不能自动采用？",
+          "answer": "verification只查已确认反例和开发效用；完整admission还查严重veto、至少5条完整记录、最大风险和效用/成本条件。",
+          "example": "教学例：一个修复躲过旧攻击，但记录不足仍是insufficient evidence。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "risk-denominator",
+          "level": "mechanism",
+          "question": "风险分母为什么包含正常control？",
+          "answer": "公式使用所有开发重放做suite-normalized类别率，不是只在攻击子集上算；final attack rate另有分母，不能混用。",
+          "example": "教学例：20条含2个同类违例，类别率0.10，不因只有4条攻击改成0.50。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "max-not-proof",
+          "level": "comparison",
+          "question": "相比Harness²，它的安全门是否证明风险不会增加？",
+          "answer": "不证明。它比较最大primary类别点估计，次大类别甚至总primary风险可增加；Harness²的执行对照又不是这个领域风险门。",
+          "example": "教学例：最大类别维持2/20，另一类别0→1/20仍可能准入。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "complete-confirmations",
+          "level": "implementation",
+          "question": "两次确认都失败，RQ2能提前称confirmed吗？",
+          "answer": "不能。RQ2要求三次候选执行完整且严格多数；差分确认还需三次父重放且父违例更少。非空截断多数只属于RQ1模板配置。",
+          "example": "教学例：True,True缺第三次，RQ2返回False而非确认。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    },
+    "agent-research:rsibench-infra": {
+      "questions": [
+        {
+          "id": "layer-not-patch",
+          "level": "basics",
+          "question": "为什么不用一个git patch承载优化？",
+          "answer": "可改engine、库、编译产物和其他目录，git patch不覆盖全部环境变化；OCI层在干净baseline上重建同一提交。",
+          "example": "教学例：只提交Python diff会漏掉新编译kernel或库依赖。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "independent-benchmark",
+          "level": "mechanism",
+          "question": "Benchmark Job为什么不能加载候选OCI层？",
+          "answer": "候选层由Agent控制；加载它可能修改workload、质量检查或计分。Benchmark通过服务接口评测，计分代码保持独立。",
+          "example": "教学例：候选把测试答案写入验证器目录，不能靠同一层传入Benchmark环境。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "kernel-not-e2e",
+          "level": "comparison",
+          "question": "相比Harness²或kernel评测，它的目标有什么不同？",
+          "answer": "这里检查整个模型服务/训练链路在质量门下是否更快；harness任务通过或单kernel提速不证明端到端吞吐提高。",
+          "example": "教学例：kernel快2倍但数据传输占90%，整条链路提升仍可能很小。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "cost-terminal",
+          "level": "implementation",
+          "question": "为何本库不先缩成小模型跑一遍？",
+          "answer": "多rank部署、独立OCI应用、任务特定质量门和生产工作负载是定义性协议；任意小模型stub不能验证它们，故高成本审查终态不复现。",
+          "example": "教学例：本地一次矩阵乘计时不是20任务RSIBench-Infra复现。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    }
+  }
+}

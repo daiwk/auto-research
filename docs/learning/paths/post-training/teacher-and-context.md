@@ -7,7 +7,7 @@ hide:
 
 # 教师与纠错：额外信息何时能帮到学生
 
-[LLM 后训练](index.md) / 220 个问题 · 55 篇论文
+[LLM 后训练](index.md) / 224 个问题 · 56 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">220 个问题 · 55 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">224 个问题 · 56 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:hint-wam" data-paper-title="HINT-WAM: Hindsight-Informed Training for World Action Models" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="HINT-WAM: Hindsight-Informed Training for World Action Models LLM 后训练 National University of Singapore 2026-11-18 HINT-WAM先SFT动作专家，再冻结同一backbone，只训练hindsight encoder与gated adapters读取示范未来视频。teacher去掉当前帧并保留时间轴，学生与部署策略从来不看未来。最后学生在自身ODE采样轨迹上重新评估少量去噪点，匹配冻结teacher的动作分布。直接velocity MSE可能把学生看不到的多模态未来压成均值。论文用energy score：到teacher单样本的吸引项减去学生样本间排斥项，同时保留behavior-cloning anchor； 完整实验成本过高，不复现（审查 DONE）；仅研究资料，无本地实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录同源hindsight teacher、学生ODE状态上的energy-score与BC anchor、成本和限制。无本地模型/算子/指标，不用静态动作样本替代真实WAM蒸馏。  teacher-and-context 后训练方法资料 LLM 后训练 教师与纠错：额外信息何时能帮到学生 学生部署时为什么不需要未来视频？ 未来视频只通过训练期hindsight encoder/adapters进入冻结teacher；student只看当前帧、指令和本体状态，蒸馏结束丢弃teacher模块。把未来交给student会改变任务。 教学例：示范未来可消解抓取左物体/右物体的歧义，但真实机器人执行时不能读取尚未发生的示范帧。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<span id="paper-post-training-hint-wam-e62968c6" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-88b40ac676f1130e">学生部署时为什么不需要未来视频？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ahint-wam">HINT-WAM: Hindsight-Informed Training for World Action Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>未来视频只通过训练期hindsight encoder/adapters进入冻结teacher；student只看当前帧、指令和本体状态，蒸馏结束丢弃teacher模块。把未来交给student会改变任务。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：示范未来可消解抓取左物体/右物体的歧义，但真实机器人执行时不能读取尚未发生的示范帧。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24789v1">原论文</a> · <a href="../../../../post-training/2611.24789-hint-wam/">实现解读</a> · <a href="#qa-88b40ac676f1130e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:hint-wam" data-paper-title="HINT-WAM: Hindsight-Informed Training for World Action Models" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="HINT-WAM: Hindsight-Informed Training for World Action Models LLM 后训练 National University of Singapore 2026-11-18 HINT-WAM先SFT动作专家，再冻结同一backbone，只训练hindsight encoder与gated adapters读取示范未来视频。teacher去掉当前帧并保留时间轴，学生与部署策略从来不看未来。最后学生在自身ODE采样轨迹上重新评估少量去噪点，匹配冻结teacher的动作分布。直接velocity MSE可能把学生看不到的多模态未来压成均值。论文用energy score：到teacher单样本的吸引项减去学生样本间排斥项，同时保留behavior-cloning anchor； 完整实验成本过高，不复现（审查 DONE）；仅研究资料，无本地实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录同源hindsight teacher、学生ODE状态上的energy-score与BC anchor、成本和限制。无本地模型/算子/指标，不用静态动作样本替代真实WAM蒸馏。  teacher-and-context 后训练方法资料 LLM 后训练 教师与纠错：额外信息何时能帮到学生 为何用energy score而不是只匹配teacher velocity均值？ 学生看不到teacher的未来条件，MSE最优可能落在互不兼容模式的均值。energy score用teacher样本吸引与student样本间排斥匹配分布，另保留BC限制teacher错误。 教学例：正确动作可能绕左或绕右，均值直行可能碰障碍；本例说明目标设计，不是本地机器人实测。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-5181f16e56da46f2">为何用energy score而不是只匹配teacher velocity均值？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ahint-wam">HINT-WAM: Hindsight-Informed Training for World Action Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>学生看不到teacher的未来条件，MSE最优可能落在互不兼容模式的均值。energy score用teacher样本吸引与student样本间排斥匹配分布，另保留BC限制teacher错误。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：正确动作可能绕左或绕右，均值直行可能碰障碍；本例说明目标设计，不是本地机器人实测。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24789v1">原论文</a> · <a href="../../../../post-training/2611.24789-hint-wam/">实现解读</a> · <a href="#qa-5181f16e56da46f2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:hint-wam" data-paper-title="HINT-WAM: Hindsight-Informed Training for World Action Models" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="HINT-WAM: Hindsight-Informed Training for World Action Models LLM 后训练 National University of Singapore 2026-11-18 HINT-WAM先SFT动作专家，再冻结同一backbone，只训练hindsight encoder与gated adapters读取示范未来视频。teacher去掉当前帧并保留时间轴，学生与部署策略从来不看未来。最后学生在自身ODE采样轨迹上重新评估少量去噪点，匹配冻结teacher的动作分布。直接velocity MSE可能把学生看不到的多模态未来压成均值。论文用energy score：到teacher单样本的吸引项减去学生样本间排斥项，同时保留behavior-cloning anchor； 完整实验成本过高，不复现（审查 DONE）；仅研究资料，无本地实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录同源hindsight teacher、学生ODE状态上的energy-score与BC anchor、成本和限制。无本地模型/算子/指标，不用静态动作样本替代真实WAM蒸馏。  teacher-and-context 后训练方法资料 LLM 后训练 教师与纠错：额外信息何时能帮到学生 它与Video-OPSD的特权信息和输出相同吗？ 不同。Video-OPSD选择证据帧并蒸馏文本token；HINT-WAM读取示范未来并对动作chunk分布蒸馏，同backbone与teacher-only未来隔离是定义条件。 教学例：对文本token加evidence权重不能训练6.02B WAM的动作ODE，也不会提供机器人成功率。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-3fd12606b3d5185a">它与Video-OPSD的特权信息和输出相同吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ahint-wam">HINT-WAM: Hindsight-Informed Training for World Action Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同。Video-OPSD选择证据帧并蒸馏文本token；HINT-WAM读取示范未来并对动作chunk分布蒸馏，同backbone与teacher-only未来隔离是定义条件。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：对文本token加evidence权重不能训练6.02B WAM的动作ODE，也不会提供机器人成功率。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24789v1">原论文</a> · <a href="../../../../post-training/2611.24789-hint-wam/">实现解读</a> · <a href="#qa-3fd12606b3d5185a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:hint-wam" data-paper-title="HINT-WAM: Hindsight-Informed Training for World Action Models" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="HINT-WAM: Hindsight-Informed Training for World Action Models LLM 后训练 National University of Singapore 2026-11-18 HINT-WAM先SFT动作专家，再冻结同一backbone，只训练hindsight encoder与gated adapters读取示范未来视频。teacher去掉当前帧并保留时间轴，学生与部署策略从来不看未来。最后学生在自身ODE采样轨迹上重新评估少量去噪点，匹配冻结teacher的动作分布。直接velocity MSE可能把学生看不到的多模态未来压成均值。论文用energy score：到teacher单样本的吸引项减去学生样本间排斥项，同时保留behavior-cloning anchor； 完整实验成本过高，不复现（审查 DONE）；仅研究资料，无本地实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录同源hindsight teacher、学生ODE状态上的energy-score与BC anchor、成本和限制。无本地模型/算子/指标，不用静态动作样本替代真实WAM蒸馏。  teacher-and-context 后训练方法资料 LLM 后训练 教师与纠错：额外信息何时能帮到学生 为什么本轮不做一个缩小动作玩具来称已复现？ 完整方法需要真实backbone、未来teacher训练和学生ODE轨迹。原文测得8GPU×71.6小时；静态随机动作的energy-score公式不等于该训练链。因此只收录并审查DONE，无待验收GPU或自动重试。 教学例：能在四个二维点上算距离，不代表已保留机器人在LIBERO旧任务上的能力。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-25eaf2208b15561d">为什么本轮不做一个缩小动作玩具来称已复现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ahint-wam">HINT-WAM: Hindsight-Informed Training for World Action Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>完整方法需要真实backbone、未来teacher训练和学生ODE轨迹。原文测得8GPU×71.6小时；静态随机动作的energy-score公式不等于该训练链。因此只收录并审查DONE，无待验收GPU或自动重试。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：能在四个二维点上算距离，不代表已保留机器人在LIBERO旧任务上的能力。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24789v1">原论文</a> · <a href="../../../../post-training/2611.24789-hint-wam/">实现解读</a> · <a href="#qa-25eaf2208b15561d">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:leaf-opd" data-paper-title="LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation LLM 后训练 The Hong Kong University of Science and Technology (Guangzhou) 2026-11-16 教师独立解码的首token可能强烈拒答，但在学生已生成事实前缀上，后续token抑制可能迅速消失；需要按同一学生轨迹测监督强度和持续性。不能。forget teacher读取非披露指令，student始终只读原问题和自身生成prefix；retain teacher不带该指令。将指令给学生会改变所研究的参数遗忘问题。 完整实验成本过高，不复现（审查 DONE）；SS1/SS0.5教师持续监督诊断、teacher-only privileged-context边界、forget/retain分离forward-KL。l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。  teacher-and-context 后训练算法组件 LLM 后训练 教师与纠错：额外信息何时能帮到学生 为何看到teacher拒答仍可能是坏teacher？ 教师独立解码的首token可能强烈拒答，但在学生已生成事实前缀上，后续token抑制可能迅速消失；需要按同一学生轨迹测监督强度和持续性。 教学例：Δ=[-4,0,0,0]首步强，但后半SS=0，不能过good-teacher门槛。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
 <span id="paper-post-training-leaf-opd-018fab0c" class="ar-learning-paper-anchor"></span>

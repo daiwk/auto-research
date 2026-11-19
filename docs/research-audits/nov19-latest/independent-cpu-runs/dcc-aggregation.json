@@ -1,0 +1,80 @@
+{
+  "schema_version": 2,
+  "key": "dcc-aggregation",
+  "device": "cpu",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "two_cluster_median_clips_moderate_outlier": true,
+        "isolated_extreme_can_form_own_cluster": true,
+        "one_shared_interval": true,
+        "weights_do_not_change_centers": true,
+        "constant_group_is_constant": true,
+        "smallest_split_breaks_tie": true
+      },
+      "metrics": {
+        "lower_center": -1.0,
+        "upper_center": 2.0,
+        "raw_outlier": 8.0,
+        "clipped_outlier": 2.0
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "two_cluster_median_clips_moderate_outlier": true,
+        "isolated_extreme_can_form_own_cluster": true,
+        "one_shared_interval": true,
+        "weights_do_not_change_centers": true,
+        "constant_group_is_constant": true,
+        "smallest_split_breaks_tie": true
+      },
+      "metrics": {
+        "lower_center": -1.0,
+        "upper_center": 2.0,
+        "raw_outlier": 8.0,
+        "clipped_outlier": 2.0
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "two_cluster_median_clips_moderate_outlier": true,
+        "isolated_extreme_can_form_own_cluster": true,
+        "one_shared_interval": true,
+        "weights_do_not_change_centers": true,
+        "constant_group_is_constant": true,
+        "smallest_split_breaks_tie": true
+      },
+      "metrics": {
+        "lower_center": -1.0,
+        "upper_center": 2.0,
+        "raw_outlier": 8.0,
+        "clipped_outlier": 2.0
+      }
+    }
+  ],
+  "source_sha256": {
+    "src/auto_research/post_training/dcc_aggregation.py": "7087edfe0b3fdc0d3a039b879c92788face670f0f776b4665bc69eb952f45178"
+  },
+  "source_commit": null,
+  "provenance_note": "Independent working-tree CPU execution; content hashes identify the code. This is not the later frozen-source batch receipt.",
+  "formal_comparison": false,
+  "capability_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false
+}

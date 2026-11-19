@@ -7,7 +7,7 @@ hide:
 
 # 用户历史与排序骨干
 
-[搜广推](index.md) / 299 个问题 · 73 篇论文
+[搜广推](index.md) / 303 个问题 · 74 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">299 个问题 · 73 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">303 个问题 · 74 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:xsplit-argus" data-paper-title="X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction 搜广推与 LLM 应用 固定v1未列一作机构（不由其他作者邮箱推断） 2026-11-18 将候选无关的旧历史压成因果编码器末K个状态，在线只编码最近M个事件；候选token再对两段记忆做cross-attention。离线缓存是服务时的执行安排，不是训练时detach压缩器。点击监督头与原始logit的L1蒸馏头共享历史表示，但上线只使用监督头。 成本过高，不复现（审查 DONE）；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。输入是显式小型事件/候选特征；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。负控改目标/未来反馈保持预测不变；KD反传到compressor，但不能据此推断NE或ACV收益。  排序网络与长序列 历史压缩与在线复用 搜广推 用户历史与排序骨干 历史token缓存意味着训练时冻结compressor吗？ 不意味着。缓存是服务安排，GT和KD均经decoder反传到共同的历史编码器。 教学例：KD头误差变化后compressor有梯度，但teacher不能有梯度。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
+<span id="paper-recommendation-xsplit-argus-139b8013" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-e30476e653de915c">历史token缓存意味着训练时冻结compressor吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Axsplit-argus">X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · 固定v1未列一作机构（不由其他作者邮箱推断）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不意味着。缓存是服务安排，GT和KD均经decoder反传到共同的历史编码器。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：KD头误差变化后compressor有梯度，但teacher不能有梯度。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24283v1">原论文</a> · <a href="../../../../recommendation-components/2611.24283-xsplit-argus/">实现解读</a> · <a href="#qa-e30476e653de915c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:xsplit-argus" data-paper-title="X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction 搜广推与 LLM 应用 固定v1未列一作机构（不由其他作者邮箱推断） 2026-11-18 将候选无关的旧历史压成因果编码器末K个状态，在线只编码最近M个事件；候选token再对两段记忆做cross-attention。离线缓存是服务时的执行安排，不是训练时detach压缩器。点击监督头与原始logit的L1蒸馏头共享历史表示，但上线只使用监督头。 成本过高，不复现（审查 DONE）；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。输入是显式小型事件/候选特征；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。负控改目标/未来反馈保持预测不变；KD反传到compressor，但不能据此推断NE或ACV收益。  排序网络与长序列 历史压缩与在线复用 搜广推 用户历史与排序骨干 近期历史与缓存cutoff为什么不能只用一个参数？ 缓存快照可以落后或与近期窗口重叠；训练默认相邻，但服务两者未必相邻，必须独立检查目标前边界。 教学例：目标t=7、M=2时默认b=4；服务b=5会重叠一个历史事件而不是读取目标。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-e1d46411bb0df188">近期历史与缓存cutoff为什么不能只用一个参数？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Axsplit-argus">X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · 固定v1未列一作机构（不由其他作者邮箱推断）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>缓存快照可以落后或与近期窗口重叠；训练默认相邻，但服务两者未必相邻，必须独立检查目标前边界。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：目标t=7、M=2时默认b=4；服务b=5会重叠一个历史事件而不是读取目标。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24283v1">原论文</a> · <a href="../../../../recommendation-components/2611.24283-xsplit-argus/">实现解读</a> · <a href="#qa-e1d46411bb0df188">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:xsplit-argus" data-paper-title="X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction 搜广推与 LLM 应用 固定v1未列一作机构（不由其他作者邮箱推断） 2026-11-18 将候选无关的旧历史压成因果编码器末K个状态，在线只编码最近M个事件；候选token再对两段记忆做cross-attention。离线缓存是服务时的执行安排，不是训练时detach压缩器。点击监督头与原始logit的L1蒸馏头共享历史表示，但上线只使用监督头。 成本过高，不复现（审查 DONE）；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。输入是显式小型事件/候选特征；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。负控改目标/未来反馈保持预测不变；KD反传到compressor，但不能据此推断NE或ACV收益。  排序网络与长序列 历史压缩与在线复用 搜广推 用户历史与排序骨干 为什么不能直接把ARGUS的物品头用到X-split？ ARGUS分解反馈和next-item；X-split用候选特征预测点击，另用辅助头匹配teacher原始logit，任务和头不同。 教学例：把L1 logit误差替成物品softmax CE会改变监督信号。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-2c63bfcfe7c2568a">为什么不能直接把ARGUS的物品头用到X-split？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Axsplit-argus">X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · 固定v1未列一作机构（不由其他作者邮箱推断）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>ARGUS分解反馈和next-item；X-split用候选特征预测点击，另用辅助头匹配teacher原始logit，任务和头不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把L1 logit误差替成物品softmax CE会改变监督信号。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24283v1">原论文</a> · <a href="../../../../recommendation-components/2611.24283-xsplit-argus/">实现解读</a> · <a href="#qa-2c63bfcfe7c2568a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:xsplit-argus" data-paper-title="X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction 搜广推与 LLM 应用 固定v1未列一作机构（不由其他作者邮箱推断） 2026-11-18 将候选无关的旧历史压成因果编码器末K个状态，在线只编码最近M个事件；候选token再对两段记忆做cross-attention。离线缓存是服务时的执行安排，不是训练时detach压缩器。点击监督头与原始logit的L1蒸馏头共享历史表示，但上线只使用监督头。 成本过高，不复现（审查 DONE）；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。输入是显式小型事件/候选特征；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。负控改目标/未来反馈保持预测不变；KD反传到compressor，但不能据此推断NE或ACV收益。  排序网络与长序列 历史压缩与在线复用 搜广推 用户历史与排序骨干 怎样检查反馈泄漏而不是只看shape？ 改目标及未来事件的反馈/特征，目标预测必须不变且未来梯度为零；仅检查输出维度不够。 教学例：把t及其后特征加100仍预测不变；改t−1则允许变化。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-37bf62c8df1f62b6">怎样检查反馈泄漏而不是只看shape？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Axsplit-argus">X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · 固定v1未列一作机构（不由其他作者邮箱推断）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>改目标及未来事件的反馈/特征，目标预测必须不变且未来梯度为零；仅检查输出维度不够。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把t及其后特征加100仍预测不变；改t−1则允许变化。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24283v1">原论文</a> · <a href="../../../../recommendation-components/2611.24283-xsplit-argus/">实现解读</a> · <a href="#qa-37bf62c8df1f62b6">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:echo-selector-loss" data-paper-title="ECHO: Efficient Cascade with Homogeneous Operators for Distillation-Guided 100K-Sequence Modeling" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="ECHO: Efficient Cascade with Homogeneous Operators for Distillation-Guided 100K-Sequence Modeling 搜广推与 LLM 应用 Kuaishou Technology 2026-10-20 将100K历史压成少量潜向量会丢失记录地址；逐候选扫描全部历史又过贵。ECHO让用户侧DS保留原始记录，再由目标侧TFR选更小子集。训练侧候选感知教师通过完整软分布和选择边界监督DS，教师相关性参数还导出到检索和聚合。线上不运行DS，也不扫描完整历史。 原文完整实验成本过高，不复现（审查 DONE）。仅L1诊断，不是完整ECHO/TWIN或推荐能力；已实现选择器蒸馏损失，在真实A100上验证公式、梯度和短时更新。仅L1诊断，不是完整ECHO/TWIN或推荐能力；原文完整实验成本过高，不复现（审查 DONE）。固定合成logit、seed42/43/44，在A100执行逐标量CE参考、实际学生参数更新、教师无梯度、padding零梯度及同排序无有效边界配对的负对照。未加载预训练checkpoint，无推荐准确率或正式比较资格。  长序列推荐 蒸馏选择与边界监督 搜广推 用户历史与排序骨干 ECHO 为什么要保留历史记录地址，而不是仅缓存几个兴趣潜向量？ 潜向量压缩方便，却难按候选取回具体事件。保留可寻址记录再做目标侧小子集检索，让细粒度证据与用户侧复用并存。地址保留并不表示线上逐候选扫描全历史，实际服务需遵循导出索引与参数路径，本地损失组件不能代替该系统。 示意：相机候选可取近期微距浏览记录，跑鞋候选读取运动证据；只有“爱户外”的静态潜向量时，难恢复具体是哪次行为支持推荐。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
 <span id="paper-recommendation-echo-selector-loss-59466a02" class="ar-learning-paper-anchor"></span>

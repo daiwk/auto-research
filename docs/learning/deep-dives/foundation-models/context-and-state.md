@@ -7,7 +7,7 @@ hide:
 
 # 长上下文不是一条轴：位置、读取与状态压缩
 
-[基础模型](../index.md) · 更新 2026-11-18 · 46 篇主题资料 / 20 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-19 · 47 篇主题资料 / 21 篇重点对照
 
 先问历史以什么形式存在，再问当前 token 怎样读它。RoPE 改变相对位置关系，Mamba 把历史写入递归状态，NSA 在多条读取路径间分工，OpenAttention 为未精读部分保留代理，TTR 则为当前输入求一个压缩表示。这些方法不能只按“支持多长”排成一列。 MERLIN在多个压缩状态之外保留routing key矩统计，改变段间读取权重，而不替换每段内部的递归写入。
 
@@ -45,6 +45,7 @@ hide:
 | [SIMQ: A Single Graph-based Index for Multi-Vector Query](../../../foundation-models/2611.22079-simq/README.md) · [原始来源](https://arxiv.org/abs/2611.22079v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | ColBERT式MaxSim需要逐query token匹配文档token。SIMQ先均匀抽样token作初始聚合点，通过临时图分配剩余token，对过大cluster递归二分，归一化均值后建立一个质心图。查询只导航到少量质心，经质心到文档映射生成候选，最后才访问候选原始token精确重排，避免全query×centroid矩阵。 | HVMap解决不同编码器向量空间不能直接比较的问题，通过hub映射和双空间SCORE2联合重排；SIMQ假定同一规范化token空间，改变候选图组织和晚交互计算。前者的映射质量不由SIMQ的计数验证，后者的图效率也不由HVMap小张量loss证明。 |
 | [UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval](../../../foundation-models/2611.20758-unigraph/README.md) · [原始来源](https://arxiv.org/abs/2611.20758v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | 分别检索dense和sparse再合并可能过早漏掉仅在混合距离下优秀的向量。UniGraph在多个离散alpha下取近邻，按跨alpha入选频次合并成一个有界出度图；查询时不重构图，直接按自己的alpha遍历。稀疏或稠密guide给出入口，减少到目标区域的混合距离计算。 | HVMap学的是异构库之间的表示转换，UniGraph学不到新的向量映射，而是保留dense/sparse原分量并改变跨权重邻域组织。SCORE2的native/mapped双空间权重与UniGraph的语义／词汇alpha含义不同，不能共享一个未经验证的权重解释。 |
 | [Deal With It: On Better Schedules for Listwise Reranking](../../../foundation-models/2611.22392-dealrank/README.md) · [原始来源](https://arxiv.org/abs/2611.22392v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | 并行listwise重排要把候选分组，每组只晋级固定配额。连续切块会把初始召回前部的好文档挤进同一组，越好的retriever越可能被配额误切。DealRank按retriever名次轮流发牌，使每个前缀在各组尽量平衡，再并行排序、按配额晋级并最终合并，不依赖补救认证轮。 | HVMap改变异构向量候选怎么映射和打分，DealRank不训练表示，而是安排已有候选进入ranker的组合。它们可串在同一检索流水线，但更少调用不是更好向量对齐，SCORE2正确也不能证明listwise配额无损。 |
+| [Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting](../../../foundation-models/2611.23896-kernel-ridge-attention/README.md) · [原始来源](https://arxiv.org/abs/2611.23896v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | KRA把历史关联写入固定大小的回归矩阵，同时保留后验协方差。共享可学习Fourier特征形成非线性核；内容相关OU时钟既衰减旧系数，也把协方差恢复到先验，使已经遗忘的方向重新可写。读取发生在当前值写入之后。 | Mamba用输入相关步长和读写向量控制SSM状态；KRA额外维护后验协方差来处理相关key方向的干扰。两者都是有界状态，但KRA每头还承担D平方协方差存储，不能仅按线性序列复杂度认为成本相同。 |
 
 </div>
 
@@ -139,6 +140,12 @@ Alg1先对每alpha取top-kg，按出现次数选M个邻居；Alg2维护candidate
 §2.1的100候选配置是5组×20、每组留4、最后20再排，共6调用2轮。一致ranker只给最前q=4的最坏情况恢复保证，不是top10保证。500配置25组留3再4组留5，1000配置50组留2再5组留4，均三轮；被后轮淘汰的排在早轮前。调用回调必须返回原候选的一次排列，真正ThreadPool并发只验证调度，不产生LLM排序内容。 HVMap改变异构向量候选怎么映射和打分，DealRank不训练表示，而是安排已有候选进入ranker的组合。它们可串在同一检索流水线，但更少调用不是更好向量对齐，SCORE2正确也不能证明listwise配额无损。
 
 对照来源：[dealrank](../../../foundation-models/2611.22392-dealrank/README.md) · [hvmap](../../../foundation-models/2611.01514-hvmap/README.md)
+
+### KRA：在遗忘时恢复不确定性，用协方差决定写入方向
+
+Mamba用输入相关步长和读写向量控制SSM状态；KRA额外维护后验协方差来处理相关key方向的干扰。两者都是有界状态，但KRA每头还承担D平方协方差存储，不能仅按线性序列复杂度认为成本相同。 a、b由同一组cos/sin频率映射，范数为1。P不是可省略的标量门；它会旋转并缩放写入方向。独立dual参考求解内容Gram与OU时间Gram的乘积核，按每个因果prefix核对输出。
+
+对照来源：[kernel-ridge-attention](../../../foundation-models/2611.23896-kernel-ridge-attention/README.md) · [mamba](../../../reproductions/2312.00752-mamba/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -304,9 +311,23 @@ Alg1先对每alpha取top-kg，按出现次数选M个邻居；Alg2维护candidate
 
     对照来源：[dealrank](../../../foundation-models/2611.22392-dealrank/README.md) · [hvmap](../../../foundation-models/2611.01514-hvmap/README.md)
 
+### 与Mamba相比，多保留了什么状态？ {#cross-nov19-kernel-ridge-attention}
+
+??? note "展开答案与例子"
+
+    **答案：** 除回归系数外还有每头D乘D协方差；它描述已约束方向。Mamba的selective scan并不维护同一后验几何。
+
+    **教学例子：** 教学例：D翻倍时，协方差元素从D平方变成4D平方，即使上下文长度不变。
+
+    对照来源：[kernel-ridge-attention](../../../foundation-models/2611.23896-kernel-ridge-attention/README.md) · [mamba](../../../reproductions/2312.00752-mamba/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-19** · Mamba用输入相关步长和读写向量控制SSM状态；KRA额外维护后验协方差来处理相关key方向的干扰。两者都是有界状态，但KRA每头还承担D平方协方差存储，不能仅按线性序列复杂度认为成本相同。 本地组件合同和高成本不复现分别记录。
+
+涉及：[kernel-ridge-attention](../../../foundation-models/2611.23896-kernel-ridge-attention/README.md) · [mamba](../../../reproductions/2312.00752-mamba/README.md)
 
 **2026-11-18** · 本地ranker是确定性一致排序回调，不是模型；true_top只给quota_cuts外层诊断，不进入schedule。没有RankGPT提示、token费用或真实API延迟，机制计数不作NDCG／速度证据。作者提供mixedbread-ai/dealrank链接，但2026-11-18仓库／main commit API返回404，未核实公开源码或许可，不执行外部代码。完整多模型及27B计时矩阵高成本不复现。分组和最后晋级排序必须按原文层级配置核对，不能把所有情况压成一个generic topk。 完整实验高成本不复现，未作能力或Evolve晋级证据。
 
@@ -364,7 +385,7 @@ Alg1先对每alpha取top-kg，按出现次数选M个邻居；Alg2维护candidate
 
 覆盖 31 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 46 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 47 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -414,6 +435,7 @@ Alg1先对每alpha取top-kg，按出现次数选M个邻居；Alg2维护candidate
 - [SIMQ: A Single Graph-based Index for Multi-Vector Query](../../../foundation-models/2611.22079-simq/README.md)
 - [UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval](../../../foundation-models/2611.20758-unigraph/README.md)
 - [Deal With It: On Better Schedules for Listwise Reranking](../../../foundation-models/2611.22392-dealrank/README.md)
+- [Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting](../../../foundation-models/2611.23896-kernel-ridge-attention/README.md)
 
 </details>
 

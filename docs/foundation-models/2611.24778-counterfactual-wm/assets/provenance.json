@@ -1,0 +1,18 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.24778v1",
+  "paper_url": "https://arxiv.org/abs/2611.24778v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-19",
+  "page": 1,
+  "crop_box_pdf_points": [
+    82,
+    365,
+    518,
+    775
+  ],
+  "caption": "Figure1: Observed outcome and same-event counterfactual",
+  "extraction": "Original PDF crop, no semantic editing",
+  "source_pdf_sha256": "a102cc06aa6bbbd1fa4ab0ba08027661e82e212162a92bdb49cc21fd02fda23c",
+  "asset_sha256": "cdd731068ca73b256ee0545973e53bc9e919ce3def4d868c120e8c29b29be923",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result."
+}

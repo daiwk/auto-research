@@ -7,7 +7,7 @@ hide:
 
 # 规划先问何时见反馈，再问要不要展开搜索
 
-[Agent](../index.md) · 更新 2026-11-15 · 22 篇主题资料 / 12 篇重点对照
+[Agent](../index.md) · 更新 2026-11-19 · 24 篇主题资料 / 14 篇重点对照
 
 ReAct 与 ReWOO 改变计划接收观察的时机，ToT 与 LATS 改变候选搜索组织，Jev Lookahead 把后继模拟交给代码，DRAGO 则检查形式计划是否忠实。它们处理不同的不确定性：步骤未知、路线选择、环境可达性与规格错误，不应以搜索次数或本地满分统一排名。
 
@@ -37,6 +37,8 @@ ReAct 与 ReWOO 改变计划接收观察的时机，ToT 与 LATS 改变候选搜
 | [Analysis of Optimality of Large Language Models on Planning Problems](../../../agent-research/2604.02910-planning-optimality/README.md) · [原始来源](https://arxiv.org/abs/2604.02910v1)<br>章节：背景与主要改动、核心机制与公式、原文结果与限制、本地复现 | 只判断计划能否达到目标，会忽略大量无必要动作。论文把LLM规划评测从validity扩展到optimality，在Blocksworld和抽象P*任务中构造具有已知最优长度的课程，分析推理模型随着难度增长的计划冗余。 | LATS分配搜索与rollout预算来寻找行动轨迹；本组件不生成LLM计划，只验证外部计划及计算受限课程gap。搜索分高不能代替真实前置条件验证，合法性分也不能替代最优性。 |
 | [Learning Steerable Clarification Policies with Collaborative Self-play](../../../agent-research/2512.04068-clarification-sgp/README.md) · [原始来源](https://arxiv.org/abs/2512.04068)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 把猜测、澄清、多答案作为受数值成本条件化的动作，按解释均衡reward选序列后再选训练轨迹。 | ReAct据观察继续行动；SGP还问多一次沟通的收益是否抵成本。低成本时多问不等于高成本下也最优，本地选择器不具备对话语义能力。 |
 | [LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks](../../../agent-research/2606.03303-leap-formal-math/README.md) · [原始来源](https://arxiv.org/abs/2606.03303)<br>章节：背景与主要改动、核心公式 | 用持久AND–OR DAG复用已验证lemma，交替非形式blueprint、Lean sketch、compiler反馈与语义分解review；保留v1日期并固定v3核查。 | DRAGO核查形式规格是否忠实且不退化；LEAP还要防止合法分解无进展。形式通过、有用搜索和原任务忠实是三个不同门，均不能把参考答案传给actor。 |
+| [Reducing Inference Cost of Coding Agents with Timeout Cascades](../../../agent-research/2611.24324-timeout-cascades/README.md) · [原始来源](https://arxiv.org/abs/2611.24324v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 小模型先做所有编程题；只有在时限内产生有效且通过测试的patch才直接结束。超时、空patch、语法错误或测试失败，都转给大模型。大模型从原始任务状态重新开始，不继承小模型的编辑、工具输出或推理。 | BATS在任务内显式维护逐工具预算并由外部verifier决定继续或换路；Timeout Cascades在模型尝试级别用完成时长与验证结果决定冷启动fallback。二者的预算、费用和能力证据不相同。 |
+| [Kaer: Security-Aware Replanning for Multi-Agent Systems](../../../agent-research/2611.24839-kaer/README.md) · [原始来源](https://arxiv.org/abs/2611.24839v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 不可信子Agent可把恶意指令夹在失败反馈里，诱导orchestrator授予新权限或改任务。Kaer不让自由文本失败报告进入planner，只传部署前固定的失败模板；planner用固定七种确定性算子修改尚未完成的子任务，最后重新验证任务及Agent策略。 | ReAct让自由文本推理与真实观察交替以调整下一步；Kaer针对多Agent失败反馈收窄重规划信息通道，并用静态策略约束修改。它不是把ReAct观察删掉就得到安全，也不判断成功输出真假。 |
 
 </div>
 
@@ -89,6 +91,18 @@ ReAct让推理与工具观察交替，而SGP在存在私有意图的协作中显
 DRAGO的可解规格可能遗漏原任务目标，因此要求诊断和反退化。LEAP的Lean sketch即使类型正确，也可能将原命题换名作为子lemma，需要语义review指导进展。两个系统都将确定性检查与外部语义判断分开；本地STRIPS核或通用DAG都不能变成Lean证明与自然语言对齐的替代品。
 
 对照来源：[leap-formal-math](../../../agent-research/2606.03303-leap-formal-math/README.md) · [drago](../../../agent-research/2610.22568-drago/README.md)
+
+### Timeout Cascades：先试小模型，再从原始任务冷启动大模型
+
+作者从固定mini-swe-agent的单模型运行轨迹模拟策略，不重新跑级联。500题用于模型能力图；只有466题有两模型完整匹配轨迹，供级联模拟。有效GPU小时按每题runtime乘独占GPU数，即使真实批量有并发也不摊销；它不是集群实际电表成本。边界覆盖时限恰好完成、零时限、早失败、失败测试、双模型失败及非正GPU数。负控确认不能只计大模型时长或摊销GPU数；success标签只在离线评测器，绝不作为真实Agent可见输入。
+
+对照来源：[timeout-cascades](../../../agent-research/2611.24324-timeout-cascades/README.md) · [bats](../../../agent-research/2511.17006-bats/README.md)
+
+### Kaer：有限失败通道与受策略约束的确定性重规划
+
+计划每一步的能力必须同时属于执行Agent能力集和任务策略；数据依赖只能来自较早步骤，接收Agent必须被来源Agent的输出策略允许，除最终步骤外每个产物都要有后继消费者。RE-EXECUTE、REVISE-DIRECTIVE、RESCOPE、REASSIGN、INSERT、PRUNE、REWIRE按序作用在副本，已完成前缀不变。成功输出与progress报告不传planner，但可能影响执行Agent；这不是全链内容安全证明。测试拒绝模板里追加任意指令、Agent伪报no-close-out、改已完成步骤、前向/自依赖、未消费产物、违规输出流和能力升级；合法插入后必须rewire才能通过。模板仍可撒谎，只是影响范围有限；拒绝plan不证明任务能完成。
+
+对照来源：[kaer](../../../agent-research/2611.24839-kaer/README.md) · [react](../../../agent-research/2210.03629-react/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -184,9 +198,37 @@ DRAGO的可解规格可能遗漏原任务目标，因此要求诊断和反退化
 
     对照来源：[leap-formal-math](../../../agent-research/2606.03303-leap-formal-math/README.md) · [drago](../../../agent-research/2610.22568-drago/README.md)
 
+### 它和BATS的预算机制有什么不同？ {#cross-cross-nov19-timeout-cascades}
+
+??? note "展开答案与例子"
+
+    **答案：** BATS逐工具扣账并重规划；这里按模型尝试超时切换。工具额度省下不代表GPU小时下降，GPU小时下降也不保证用户等待更短。
+
+    **教学例子：** 教学例：小模型多等一分钟可能省大模型计算，却让一个请求更慢。
+
+    对照来源：[timeout-cascades](../../../agent-research/2611.24324-timeout-cascades/README.md) · [bats](../../../agent-research/2511.17006-bats/README.md)
+
+### 它相对ReAct改变的是哪一层？ {#cross-cross-nov19-kaer}
+
+??? note "展开答案与例子"
+
+    **答案：** ReAct交替推理与动作观察；Kaer收窄多Agent失败通道并验证计划修改，目标是控制权劫持而非提升单步推理。
+
+    **教学例子：** 教学例：能够根据新观察换路线，不代表不可信观察能授予新工具。
+
+    对照来源：[kaer](../../../agent-research/2611.24839-kaer/README.md) · [react](../../../agent-research/2210.03629-react/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-19** · 实现13种模板ID去重、四项计划策略检查、七种算子和INSERT/PRUNE依赖重编号；操作事务化，仅最终有效计划可返回。使用0-based位置，论文k对应本地k−1。本地严格拒绝任务策略外能力，没有实现原文单独的用户授权扩展、LLM planner、MCP gateway、重试调度或真实Cintra。 完整实验高成本不复现，不作能力证据。
+
+涉及：[kaer](../../../agent-research/2611.24839-kaer/README.md) · [react](../../../agent-research/2210.03629-react/README.md)
+
+**2026-11-19** · Trace严格保存非负时长、GPU数量、有效patch与evaluator测试标签；cascade计算截断小模型费用、冷启动fallback和串行时延，evaluate仅接收完整匹配对。这里只处理合成轨迹数值，不调用模型、不运行SWE-bench、不做真实wall-clock路由，也不实现基于隐藏难度标签的oracle router。 完整实验高成本不复现，不作能力证据。
+
+涉及：[timeout-cascades](../../../agent-research/2611.24324-timeout-cascades/README.md) · [bats](../../../agent-research/2511.17006-bats/README.md)
 
 **2026-11-15** · 补入Google LEAP历史修订v3：区分形式有效、有用分解和题意忠实，保留6月首发与11月修订口径。
 
@@ -216,7 +258,7 @@ DRAGO的可解规格可能遗漏原任务目标，因此要求诊断和反退化
 
 覆盖 16 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 22 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 24 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -242,6 +284,8 @@ DRAGO的可解规格可能遗漏原任务目标，因此要求诊断和反退化
 - [Analysis of Optimality of Large Language Models on Planning Problems](../../../agent-research/2604.02910-planning-optimality/README.md)
 - [Learning Steerable Clarification Policies with Collaborative Self-play](../../../agent-research/2512.04068-clarification-sgp/README.md)
 - [LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks](../../../agent-research/2606.03303-leap-formal-math/README.md)
+- [Reducing Inference Cost of Coding Agents with Timeout Cascades](../../../agent-research/2611.24324-timeout-cascades/README.md)
+- [Kaer: Security-Aware Replanning for Multi-Agent Systems](../../../agent-research/2611.24839-kaer/README.md)
 
 </details>
 

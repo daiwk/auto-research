@@ -7,7 +7,7 @@ hide:
 
 # 评测追问四件事：完成了、稳健吗、靠什么、花多少
 
-[Agent](../index.md) · 更新 2026-11-13 · 49 篇主题资料 / 12 篇重点对照
+[Agent](../index.md) · 更新 2026-11-19 · 50 篇主题资料 / 13 篇重点对照
 
 GAIA测最终任务回答，AgentPerturb检查单目标输入扰动，User Proxy Bench检查用户模拟是否偷省信息获取；AlphaDiana完整记录失败与重试，HDA拆解harness涨分来源，选择性评测则约束自动裁判的错误区域。高分只有在这些协议讲清后才有可解释性。
 
@@ -37,6 +37,7 @@ GAIA测最终任务回答，AgentPerturb检查单目标输入扰动，User Proxy
 | [ReproBridge: Building Reproducibility into ML Research Artifacts](../../../agent-research/2611.08452-reprobridge/README.md) · [原始来源](https://arxiv.org/abs/2611.08452)<br>章节：核心公式、数据协议与代码映射、高成本完整实验 | 将复现的执行知识保存为代码、环境、launcher和指南；评价侧把五次参考的双侧数值兼容与独立执行完整性审计分开。 | 公开任务不含私有参考/成功阈值；本地只有数学与文件证据合同，没有LLM Reproducer或语义Auditor，完整8×H100/多模型任务矩阵高成本不复现。 |
 | [AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level](../../../agent-research/alphaproof-code/README.md) · [原始来源](https://deepmind.google/documents/36/Formal_Verification_of_Signal_4.pdf)<br>章节：核心验证条件、来源核验、高成本完整实验 | 由人类批准规格，再用Lean内核、隔离规格副本及comparator检查顶层定理、所有传递定义和标准公理；证明生成Agent不自行宣布完成。 | 内核证明以可信规格、机器语义和密码学假设为前提，不等于真实意图充分；650万行证明及数小时工具链构建高成本，仅收录不复现。 |
 | [MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games](../../../agent-research/2602.24188-mt-pingeval/README.md) · [原始来源](https://arxiv.org/abs/2602.24188)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 用各方私有视图与固定token总预算区分交互收益、额外输出和多次猜测机会；Name-game按完整记录判定。 | UserProxyBench审计模拟用户是否提前泄露，MT-PingEval测受控信息博弈中的协作。任务成功不替代信息边界合规，更多轮次也不自动代表协作更好。 |
+| [Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling](../../../agent-research/2611.24849-execjudges/README.md) · [原始来源](https://arxiv.org/abs/2611.24849v1)<br>章节：背景与主要改动、核心公式、同主题对照 | 对每个topic独立生成三个轻量Python评审程序，程序回答on-subject/some-answer/exact/dedicated四个证据问题，固定评分函数映射为等级，再对三个分数均值向下取整。LLM负责一次性的程序编写而不是逐文档调用，生成代码必须隔离执行。本地不执行来自网络或LLM的代码。 | FUSE用隐藏真实动机和可验证模拟状态评估社会推理；ExecJudges将检索证据映射为显式等级。确定性聚合能提高可检查性，却不产生正确的证据判断，也不代替隐藏状态评测。 |
 
 </div>
 
@@ -89,6 +90,12 @@ AlphaProof Code把获批规格及依赖隔离，阻止模型把secure偷改成�
 UserProxyBench把用户合同保真与任务reward分开，并审计请求前披露。MT-PingEval用分离数据库或图像建立不对称信息，再固定每玩家token检验轮次。Name-game要比较完整记录而非同名，且应对照无放回随机猜。协议实现没有actor，只有真实模型和tokenizer接入后才能评价协作。
 
 对照来源：[mt-pingeval](../../../agent-research/2602.24188-mt-pingeval/README.md) · [user-proxy-bench](../../../agent-research/2609.38043-userproxybench/README.md)
+
+### ExecJudges：显式证据等级与向下取整共识：机制和证据边界
+
+§3.2：0–3和0–2量表分别实现；没有证据不能由其他布尔项抬高等级。共识是floor不是round或多数票；k=3与取整规则在测试前固定。ExecJudges-L可看少量训练标签，评测必须分开这些样本，不能把gold测试qrels送给生成器。本地只接受显式布尔证据/分数，没有假装实现LLM writer、NLP toolkit或恶意代码沙箱。 FUSE用隐藏真实动机和可验证模拟状态评估社会推理；ExecJudges将检索证据映射为显式等级。确定性聚合能提高可检查性，却不产生正确的证据判断，也不代替隐藏状态评测。
+
+对照来源：[execjudges](../../../agent-research/2611.24849-execjudges/README.md) · [fuse-evaluator](../../../agent-research/2609.17496-fuse-evaluator/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -184,9 +191,23 @@ UserProxyBench把用户合同保真与任务reward分开，并审计请求前披
 
     对照来源：[mt-pingeval](../../../agent-research/2602.24188-mt-pingeval/README.md) · [user-proxy-bench](../../../agent-research/2609.38043-userproxybench/README.md)
 
+### 与FUSE的验证有什么不同？ {#cross-cross-nov19-execjudges}
+
+??? note "展开答案与例子"
+
+    **答案：** ExecJudges映射文本证据，FUSE对隐藏动机模拟状态核验；聚合正确不保证证据判断正确。
+
+    **教学例子：** 教学例：三个程序都误判exact，floor仍可能错；不能当成隐藏动机推断成功。
+
+    对照来源：[execjudges](../../../agent-research/2611.24849-execjudges/README.md) · [fuse-evaluator](../../../agent-research/2609.17496-fuse-evaluator/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-19** · 只运行固定grade mapping和floor聚合的L0接口，未生成或执行评审程序、未下载TREC、未调用模型，不输出相关性准确率。布尔值必须严格bool，整数0/1不会静默当证据。 完整高成本实验不复现，审查DONE。
+
+涉及：[execjudges](../../../agent-research/2611.24849-execjudges/README.md) · [fuse-evaluator](../../../agent-research/2609.17496-fuse-evaluator/README.md)
 
 **2026-11-13** · 补入mt-pingeval历史遗漏，用各方私有视图与固定token总预算区分交互收益、额外输出和多次猜测机会；Name-game按完整记录判定。 UserProxyBench审计模拟用户是否提前泄露，MT-PingEval测受控信息博弈中的协作。任务成功不替代信息边界合规，更多轮次也不自动代表协作更好。
 
@@ -216,7 +237,7 @@ UserProxyBench把用户合同保真与任务reward分开，并审计请求前披
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 49 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 50 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -269,6 +290,7 @@ UserProxyBench把用户合同保真与任务reward分开，并审计请求前披
 - [ARE-bench: Benchmarking Agents&#x27; Research Ability in Real-World Researcher Sessions and Workspaces](../../../agent-research/2611.14364-are-bench/README.md)
 - [AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level](../../../agent-research/alphaproof-code/README.md)
 - [MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games](../../../agent-research/2602.24188-mt-pingeval/README.md)
+- [Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling](../../../agent-research/2611.24849-execjudges/README.md)
 
 </details>
 

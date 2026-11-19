@@ -1,0 +1,18 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.24616v1",
+  "paper_url": "https://arxiv.org/abs/2611.24616v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-19",
+  "page": 4,
+  "crop_box_pdf_points": [
+    54,
+    42,
+    559,
+    280
+  ],
+  "caption": "Figure2: EgoJev coarse-to-fine readout and answer frames",
+  "source_pdf_sha256": "ebcffd08d562a93fbe009e7c6ea04ba1e6f87b300e7e20b0d28d561380572aed",
+  "asset_sha256": "48e4851f0bb655bd5891cb09e9d85585744d40ce84ead170f671a28bb8388331",
+  "extraction": "Original PDF crop; no semantic edits",
+  "copyright": "Copyright retained by original authors; research commentary, not local evidence."
+}

@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:ahe-beta/requirement-not-score": {
+      "source_sha256": "353491ec04011bdb8a2a13b9dd1e4010c5a95004bc5fa7ea6c51d937455ee873",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can passing tests still fail the user?",
+        "answer": "Tests may inspect a correct workspace while the user receives no result, a correction is missed or an unapproved file changes. Interaction evidence must verify those requirements.",
+        "example": "Teaching example: fixing code without delivering a reply is not completed delivery."
+      }
+    },
+    "qa/agent-research:ahe-beta/head-bound-review": {
+      "source_sha256": "19b96e6ad4cd63d2a96f6f1c153d438876de091ebe77159f3f35ec8312e0e73f",
+      "reviewed": true,
+      "fields": {
+        "question": "May approval survive a new code commit?",
+        "answer": "No. Approval binds the current head and the RFC must still match the reviewed design. Old approval cannot cover later edits.",
+        "example": "Teaching example: approval for sha1 must reject a merge at sha2."
+      }
+    },
+    "qa/agent-research:ahe-beta/contrast-harness2": {
+      "source_sha256": "c3b95f063877b6fffe3724be14920a85efafd5cf60e8c553cc0eb369a21bd74e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is it not the same as rubric-free Harness²?",
+        "answer": "Harness² composes candidates using current-task execution contrasts and retains improvement experience. AHE-Beta selects structural changes through session requirements, role separation and review admission.",
+        "example": "Teaching example: comparing two artifacts is not the same evidence as verifying interruption delivery."
+      }
+    },
+    "qa/agent-research:ahe-beta/typed-not-semantic": {
+      "source_sha256": "6f3240dae9af3ceac03385cbbdf0725a9bc13617b8ae27b28f55ab7890f7eb47",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local Evidence type prove absence of gold leakage?",
+        "answer": "No. It restricts the declared delivery surface and excludes explicit gold fields, but strings and external calls still require trusted integration. This is only an L0 protocol.",
+        "example": "Teaching example: an answer hidden inside a runtime_log string is not prevented by this type system."
+      }
+    },
+    "qa/agent-research:timeout-cascades/cold-not-resume": {
+      "source_sha256": "61fadac792c24e008544624a34029096c4dc4a6821f5d4a392e6aa41c495b786",
+      "reviewed": true,
+      "fields": {
+        "question": "Does fallback inherit the small model's edits?",
+        "answer": "No. The trace simulation uses a cold restart from the original task. Edit reuse is an unstudied future optimization, not a default assumption.",
+        "example": "Teaching example: the large model does not continue in the small model's corrupted workspace."
+      }
+    },
+    "qa/agent-research:timeout-cascades/charge-both": {
+      "source_sha256": "fcd46a8f3a8ad9b9d6c32e478d35956881e6bef33b94fee51543882ae8304664",
+      "reviewed": true,
+      "fields": {
+        "question": "How is cost charged after a timeout?",
+        "answer": "Charge capped first-stage runtime times its GPU count plus the full fallback runtime times its GPU count. Sequential latency also includes both attempts.",
+        "example": "Teaching example:30 seconds ×1 GPU plus120 seconds ×4 GPUs is510 GPU-seconds and150 wall seconds."
+      }
+    },
+    "qa/agent-research:timeout-cascades/budget-vs-cascade": {
+      "source_sha256": "b1c9d98f8ac92437d442b19c476af28e9cdd65bfee1af20c7acc13fe10bf358d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does it differ from BATS budgeting?",
+        "answer": "BATS accounts per-tool use and replans. This method switches model attempts on timeout. Fewer tool calls need not reduce GPU hours, and fewer GPU hours need not reduce user latency.",
+        "example": "Teaching example: waiting another minute for a small model may save large-model compute while slowing one request."
+      }
+    },
+    "qa/agent-research:timeout-cascades/matched-not-fill": {
+      "source_sha256": "8de5536b4762159ca8db5390c46fa5fa3385c88422676fd020c2eab83ef6aea4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not fill the34 missing tasks with failures?",
+        "answer": "The model plots use500 tasks but cascade simulation has466 usable pairs. Missing traces do not supply runtime or fallback outcomes; zero filling changes both denominator and cost.",
+        "example": "Teaching example: an unrecorded fallback runtime is not zero seconds."
+      }
+    },
+    "qa/agent-research:kaer/feedback-not-command": {
+      "source_sha256": "3b51916341c32bddaa339a275f01c89a94b5629e0266b911af091d927b6818dc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a failure report an attack surface?",
+        "answer": "The planner revises its plan from feedback. An attacker can turn missing information into an instruction to run a script. Kaer passes only fixed failure conditions.",
+        "example": "Teaching example: missing Q3 revenue permits an input_lacks_required_datum template, not a command to execute an exfiltration script."
+      }
+    },
+    "qa/agent-research:kaer/repair-not-rebuild": {
+      "source_sha256": "2f5bead221d54127c46fc992f94d128b6279bb38b95ba5909f1dc6949adf70a6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why validate policies after using fixed repair operators?",
+        "answer": "A sequence of legitimate operators can still construct an unsafe plan. Final capabilities, data flows, dependencies and output use must be rechecked.",
+        "example": "Teaching example: RESCOPE is a valid operator, but granting terminal to a coder may violate task policy."
+      }
+    },
+    "qa/agent-research:kaer/react-channel": {
+      "source_sha256": "d83086c17bd5483b111e5f483c1454d973e67ffaed6b17b0a3b1fe4bf8c6fa61",
+      "reviewed": true,
+      "fields": {
+        "question": "Which layer differs from ReAct?",
+        "answer": "ReAct alternates reasoning, actions and observations. Kaer narrows multi-agent failure feedback and validates plan revisions, targeting control hijacking rather than stronger single-step reasoning.",
+        "example": "Teaching example: adapting to an observation does not authorize that observation to grant a new tool."
+      }
+    },
+    "qa/agent-research:kaer/copy-before-accept": {
+      "source_sha256": "c9380b60d1cb0ebc9888847bb2b6f980dd723b3d22fe83b5dc8b38f72f9ccda1",
+      "reviewed": true,
+      "fields": {
+        "question": "May a rejected repair leave partial plan edits?",
+        "answer": "No. Operators apply to a copy and adoption occurs only after the final policy check. Completed steps are immutable. INSERT/PRUNE must renumber dependencies.",
+        "example": "Teaching example: inserting before index1 shifts the old step and its dependency indices."
+      }
+    },
+    "qa/agent-research:safe-personal-rsi/verify-not-admit": {
+      "source_sha256": "05bf94527b837660ceb0bec9b5dac167e9f072295bbe0a616b898aca232e2d3f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is violation-free repair verification insufficient for adoption?",
+        "answer": "Verification covers confirmed failures and development utility. Admission additionally checks persistent veto, at least five completed records, maximum risk and utility/cost conditions.",
+        "example": "Teaching example: a repair avoids the old attack but remains insufficient evidence with too few records."
+      }
+    },
+    "qa/agent-research:safe-personal-rsi/risk-denominator": {
+      "source_sha256": "cdc66814761f668b3c49c105e1073cb9a612ad0db762a391a05da71cc9731537",
+      "reviewed": true,
+      "fields": {
+        "question": "Why include benign controls in the risk denominator?",
+        "answer": "The rule uses every development replay for suite-normalized category rates. Final attack rates have a different denominator and cannot be substituted.",
+        "example": "Teaching example:2 same-category violations in20 records yield0.10, not0.50 merely because four records are attacks."
+      }
+    },
+    "qa/agent-research:safe-personal-rsi/max-not-proof": {
+      "source_sha256": "d5ce8f8360720255571f6e2ed40eeaabb18c552bca0d5b3023d3b319c6672cf5",
+      "reviewed": true,
+      "fields": {
+        "question": "Does its safety gate prove no risk increase, unlike Harness²?",
+        "answer": "No. It compares maximum primary-category point estimates; nonmaximal or total primary risk can rise. Harness² execution contrasts are a different, non-domain-risk criterion.",
+        "example": "Teaching example: keeping the maximum at2/20 while another category rises from0 to1/20 may still pass."
+      }
+    },
+    "qa/agent-research:safe-personal-rsi/complete-confirmations": {
+      "source_sha256": "9482f70514488eecde30e9bdf49da521d65de61457367159531e495e753492ae",
+      "reviewed": true,
+      "fields": {
+        "question": "May RQ2 confirm after two violating replays?",
+        "answer": "No. RQ2 requires all three candidate runs and a strict majority; differential confirmation also needs three parent runs with fewer violations. Truncated nonempty majority belongs only to the RQ1 template configuration.",
+        "example": "Teaching example:True,True with a missing third replay is not an RQ2 confirmation."
+      }
+    },
+    "qa/agent-research:rsibench-infra/layer-not-patch": {
+      "source_sha256": "6f71e7f04dc0d76b3b0bb3d291cd3a39ab9a9cbea86e9b20e9d6d4e48321561c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a git patch insufficient?",
+        "answer": "Changes may span engines, libraries, compiled artifacts and other directories. An OCI layer reconstructs all submitted filesystem changes on a clean baseline.",
+        "example": "Teaching example: a Python diff can omit a new compiled kernel or dependency."
+      }
+    },
+    "qa/agent-research:rsibench-infra/independent-benchmark": {
+      "source_sha256": "c6188960317e41804c8cc696b41164ef94edf9672915cb9238759a2610f33a44",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must the Benchmark Job never load the candidate layer?",
+        "answer": "The agent controls it and could alter workload generation, quality checks or scoring. The independent Benchmark Job evaluates the service through exposed interfaces.",
+        "example": "Teaching example: answers written into a verifier directory must not travel into the Benchmark environment through the submission layer."
+      }
+    },
+    "qa/agent-research:rsibench-infra/kernel-not-e2e": {
+      "source_sha256": "3dd72d549dd933d2e908a199afbe7c226ae9bf6d160d542d6c57e08b3e732a6a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the goal differ from Harness² or kernel benchmarks?",
+        "answer": "It checks whether the entire serving/training pipeline becomes faster while preserving quality. Harness task success or kernel speedup cannot establish end-to-end throughput.",
+        "example": "Teaching example: doubling kernel speed has little impact when transfer dominates90% of runtime."
+      }
+    },
+    "qa/agent-research:rsibench-infra/cost-terminal": {
+      "source_sha256": "3ee8e0d48d54c69884540bb2efc7771a7ce3218532f0f873f82872d0f7f0849a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not first run an arbitrary tiny-model substitute?",
+        "answer": "Multi-rank deployment, independent OCI application, task-specific quality gates and production workloads define the protocol. A tiny-model stub cannot validate them, so review closes as high-cost not reproduced.",
+        "example": "Teaching example: timing one local matrix multiplication is not reproducing the20-task RSIBench-Infra suite."
+      }
+    }
+  }
+}

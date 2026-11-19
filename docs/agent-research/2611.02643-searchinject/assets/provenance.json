@@ -1,0 +1,11 @@
+{
+  "figure": 1,
+  "caption": "Fig. 1: SearchInject scores the depth-100 candidate list before context assembly. Rejected pages are omitted, and accepted candidates retain their original relative order. The main evaluation measures target admission; generation behavior is a separate exploratory endpoint.",
+  "source_url": "https://arxiv.org/pdf/2611.02643v1",
+  "source_version": "v1",
+  "source_sha256": "c5a041cc65e18895dc81bc3d2daca1b89233bd2c18708a0253e89f5215357c95",
+  "extraction": "fixed v1 PDF page2, crop[45, 35, 300, 263]; no redraw",
+  "file": "paper-figure-01.png",
+  "asset_sha256": "17a4355b1de3e8e5869912614364a7f4deac8ad225c1e740f4ecd5080f343a50",
+  "copyright": "Original paper authors; no claim of local generation"
+}

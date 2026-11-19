@@ -10,6 +10,10 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 网络架构 | [Counterfactual World Models: JEPAs That Reason About "What If"](2611.24778-counterfactual-wm/README.md) | Brown University / AMI Labs，2026-11-18 | 未发现官方代码 | `counterfactual-wm`：仅低成本组件，完整实验不复现 |
+| 注意力与长上下文 | [Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting](2611.23896-kernel-ridge-attention/README.md) | Independent Researcher，2026-11-18 | 未发现官方代码 | `kernel-ridge-attention`：仅低成本组件，完整实验不复现 |
+| 推理与系统效率 | [LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers](2611.24301-loopcache-interface/README.md) | Peking University，2026-11-18 | [原作者入口](https://github.com/zZzZ9zZ9/LoopCache)；是：[作者仓库](https://github.com/zZzZ9zZ9/LoopCache)，MIT；只读核验HEAD `0ebecb21cc1bfb4a26696496694e25ba9e819e68`，未复制执行上游服务程序。 | `loopcache-interface`：仅低成本组件，完整实验不复现 |
+| 推理与系统效率 | [NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding](2611.23835-narrow-spec/README.md) | NVIDIA，2026-11-18 | 未发现官方代码 | `narrow-spec`：仅低成本组件，完整实验不复现 |
 | 多模态基础模型 | [CascadeJEPA: Enhancing 3D Geometric Representations via Spatially Coupled Cascaded Prediction](2611.22686-cascadejepa/README.md) | Nanyang Technological University，2026-11-17 | 未发现官方代码 | `cascadejepa`：仅低成本组件，完整实验不复现 |
 | 网络架构 | [Communicate the Change: Efficient Expert Parallelism via Activation Compression](2611.22215-echomoe/README.md) | Mila / McGill University，2026-11-17 | [原作者入口](https://github.com/McGill-NLP/EchoMoE)；[作者仓库](https://github.com/McGill-NLP/EchoMoE)；核验HEAD `c211186cdd7ccd9315f5f061c7cc56f6dc725f53`。未复制上游源码；许可证未另行核验。 | `echomoe`：仅低成本组件，完整实验不复现 |
 | 推理与系统效率 | [Deal With It: On Better Schedules for Listwise Reranking](2611.22392-dealrank/README.md) | Mixedbread，2026-11-17 | 未发现官方代码 | `dealrank`：仅低成本组件，完整实验不复现 |

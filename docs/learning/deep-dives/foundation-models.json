@@ -211,6 +211,16 @@
             "同主题对照",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "foundation-models:kernel-ridge-attention",
+          "position": "KRA把历史关联写入固定大小的回归矩阵，同时保留后验协方差。共享可学习Fourier特征形成非线性核；内容相关OU时钟既衰减旧系数，也把协方差恢复到先验，使已经遗忘的方向重新可写。读取发生在当前值写入之后。",
+          "tradeoff": "Mamba用输入相关步长和读写向量控制SSM状态；KRA额外维护后验协方差来处理相关key方向的干扰。两者都是有界状态，但KRA每头还承担D平方协方差存储，不能仅按线性序列复杂度认为成本相同。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -336,6 +346,14 @@
           "papers": [
             "foundation-models:dealrank",
             "foundation-models:hvmap"
+          ]
+        },
+        {
+          "title": "KRA：在遗忘时恢复不确定性，用协方差决定写入方向",
+          "body": "Mamba用输入相关步长和读写向量控制SSM状态；KRA额外维护后验协方差来处理相关key方向的干扰。两者都是有界状态，但KRA每头还承担D平方协方差存储，不能仅按线性序列复杂度认为成本相同。 a、b由同一组cos/sin频率映射，范数为1。P不是可省略的标量门；它会旋转并缩放写入方向。独立dual参考求解内容Gram与OU时间Gram的乘积核，按每个因果prefix核对输出。",
+          "papers": [
+            "foundation-models:kernel-ridge-attention",
+            "foundation-models:mamba"
           ]
         }
       ],
@@ -501,9 +519,19 @@
             "foundation-models:dealrank",
             "foundation-models:hvmap"
           ]
+        },
+        {
+          "id": "nov19-kernel-ridge-attention",
+          "question": "与Mamba相比，多保留了什么状态？",
+          "answer": "除回归系数外还有每头D乘D协方差；它描述已约束方向。Mamba的selective scan并不维护同一后验几何。",
+          "example": "教学例：D翻倍时，协方差元素从D平方变成4D平方，即使上下文长度不变。",
+          "papers": [
+            "foundation-models:kernel-ridge-attention",
+            "foundation-models:mamba"
+          ]
         }
       ],
-      "updated": "2026-11-18",
+      "updated": "2026-11-19",
       "reviewed_papers": [
         "foundation-models:alibi",
         "foundation-models:autonomy-heads",
@@ -550,7 +578,8 @@
         "foundation-models:gaugerope",
         "foundation-models:simq",
         "foundation-models:unigraph",
-        "foundation-models:dealrank"
+        "foundation-models:dealrank",
+        "foundation-models:kernel-ridge-attention"
       ],
       "updates": [
         {
@@ -775,6 +804,18 @@
           "source_revisions": {
             "foundation-models:dealrank": "e6b22b311ed6d91aaf453381d4bf845828e2b8e35a61886e2c0b7e896e22fee3",
             "foundation-models:hvmap": "34c0f79eee9d1fe6fbc2b41e76c1c4671ba6a2346e8a290b93efb9b9ae044d9b"
+          }
+        },
+        {
+          "date": "2026-11-19",
+          "papers": [
+            "foundation-models:kernel-ridge-attention",
+            "foundation-models:mamba"
+          ],
+          "summary": "Mamba用输入相关步长和读写向量控制SSM状态；KRA额外维护后验协方差来处理相关key方向的干扰。两者都是有界状态，但KRA每头还承担D平方协方差存储，不能仅按线性序列复杂度认为成本相同。 本地组件合同和高成本不复现分别记录。",
+          "source_revisions": {
+            "foundation-models:kernel-ridge-attention": "44d055261f665849341526b12537423ee07559cebe19cec23e3ef32cbed78006",
+            "foundation-models:mamba": "cc8e64d103688cf6f1eb766728f173a4c9af31eca88def398193334b5ab90220"
           }
         }
       ]
@@ -1733,6 +1774,16 @@
             "核心公式",
             "同主题比较与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:loopcache-interface",
+          "position": "固定深度的draft可能沿过时轨迹继续推进。LoopCache用新候选相对旧候选的logit差控制替换，并清除依赖旧token的所有后代。推测路径轮转读取同一loop cache，独立KV分支再以正确loop缓存重算；浅层差异较大时才单独读取对应loop的cache。",
+          "tradeoff": "Spool重建固定记录层输入下的递归状态；LoopCache安排loop-specific KV读取并以exact分支纠正近似推测。前者的摘要精确性与后者的目标解码精确性证明对象不同。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1829,6 +1880,14 @@
           "papers": [
             "foundation-models:beyond-bitwidth",
             "foundation-models:awq"
+          ]
+        },
+        {
+          "title": "LoopCache：循环KV调度与有条件草稿更新接口",
+          "body": "Spool重建固定记录层输入下的递归状态；LoopCache安排loop-specific KV读取并以exact分支纠正近似推测。前者的摘要精确性与后者的目标解码精确性证明对象不同。 阈值相等也触发替换；无需未来loop预测来决定当前更新。未来回到旧token的harmful-switch定义只用于分析，不能变成运行时oracle。近似spec cache不能直接提交token，必须等待独立exact分支。",
+          "papers": [
+            "foundation-models:loopcache-interface",
+            "foundation-models:spool"
           ]
         }
       ],
@@ -1954,9 +2013,19 @@
             "foundation-models:beyond-bitwidth",
             "foundation-models:awq"
           ]
+        },
+        {
+          "id": "nov19-loopcache-interface",
+          "question": "与Spool的精确状态重建是同一个承诺吗？",
+          "answer": "不是。Spool对固定记录输入重放状态变换；LoopCache的lossless token提交还依赖完整正确loop KV分支。",
+          "example": "教学例：调度编号正确不意味着已运行目标模型验证。",
+          "papers": [
+            "foundation-models:loopcache-interface",
+            "foundation-models:spool"
+          ]
         }
       ],
-      "updated": "2026-11-18",
+      "updated": "2026-11-19",
       "reviewed_papers": [
         "foundation-models:agentkv",
         "foundation-models:e-means",
@@ -1997,7 +2066,8 @@
         "foundation-models:spool",
         "foundation-models:echomoe",
         "foundation-models:risa",
-        "foundation-models:beyond-bitwidth"
+        "foundation-models:beyond-bitwidth",
+        "foundation-models:loopcache-interface"
       ],
       "updates": [
         {
@@ -2181,6 +2251,18 @@
             "foundation-models:beyond-bitwidth": "e4df76b4fddea7a84a9445f4c7be51963c453fabd12d351f0cd4291b11caeebb",
             "foundation-models:awq": "70f5ef31bcba296079d2bce8e6321adfd8e208f6a58c042b6d691afb8adfc0ee"
           }
+        },
+        {
+          "date": "2026-11-19",
+          "papers": [
+            "foundation-models:loopcache-interface",
+            "foundation-models:spool"
+          ],
+          "summary": "Spool重建固定记录层输入下的递归状态；LoopCache安排loop-specific KV读取并以exact分支纠正近似推测。前者的摘要精确性与后者的目标解码精确性证明对象不同。 本地组件合同和高成本不复现分别记录。",
+          "source_revisions": {
+            "foundation-models:loopcache-interface": "3153657fd45239f535a445cbd69fdbac58199463917094ff51fa0606112fbf90",
+            "foundation-models:spool": "e1973cc17fa472fb3e50fc8b84d171d091b9814f2be479f2555760e6d4b6f092"
+          }
         }
       ]
     },
@@ -2272,6 +2354,16 @@
             "数据协议与代码映射",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:narrow-spec",
+          "position": "把DFlash/EAGLE-3的整个残差宽度设为目标的二分之一或四分之一，并从头训练窄草稿；边界adapter连接目标hidden和共享词表。DFlash输出adapter可与目标head相乘，EAGLE-3输入adapter可折进embedding。head数量和head维度保持不变，因此KV cache不因残差流变窄而自动缩小。",
+          "tradeoff": "LoopSpec改变looped模型的推测/验证流水线；NarrowSpec改变草稿网络的残差宽度，并保持目标verify不变。一个降低等待，一个减少草稿计算，不能用折叠等价证明任一方法的接受率。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -2307,6 +2399,14 @@
           "papers": [
             "foundation-models:real-loss",
             "foundation-models:speculative-decoding"
+          ]
+        },
+        {
+          "title": "NarrowSpec：缩窄整个草稿残差流，而不只是词表投影",
+          "body": "LoopSpec改变looped模型的推测/验证流水线；NarrowSpec改变草稿网络的残差宽度，并保持目标verify不变。一个降低等待，一个减少草稿计算，不能用折叠等价证明任一方法的接受率。 两侧线性映射之间没有额外非线性或norm才能直接折叠。浮点结合顺序变化会改变舍入，不能要求bitwise一致；Q(WlmWout)一般不等于Q(Wlm)Wout，预先量化的head不能据此保证等价。",
+          "papers": [
+            "foundation-models:narrow-spec",
+            "foundation-models:loopspec"
           ]
         }
       ],
@@ -2360,9 +2460,19 @@
             "foundation-models:real-loss",
             "foundation-models:speculative-decoding"
           ]
+        },
+        {
+          "id": "nov19-narrow-spec",
+          "question": "与LoopSpec降低推理开销的方向有什么不同？",
+          "answer": "LoopSpec安排循环深度间的推测与验证；NarrowSpec减少草稿每次前向的残差宽度，不改变目标verify。",
+          "example": "教学例：较窄草稿仍可能因为接受长度变短而抵消每轮节省。",
+          "papers": [
+            "foundation-models:narrow-spec",
+            "foundation-models:loopspec"
+          ]
         }
       ],
-      "updated": "2026-11-12",
+      "updated": "2026-11-19",
       "reviewed_papers": [
         "foundation-models:aspire",
         "foundation-models:data-space-iteration",
@@ -2380,7 +2490,8 @@
         "foundation-models:tadm",
         "foundation-models:windowed-mtp",
         "foundation-models:b3",
-        "foundation-models:real-loss"
+        "foundation-models:real-loss",
+        "foundation-models:narrow-spec"
       ],
       "updates": [
         {
@@ -2441,6 +2552,18 @@
           "summary": "补入真实接受分支的EAL训练目标，将target采样q/p训练权重与draft提案p/q推理校正区分；A100三seed仅验证损失/梯度机制，完整训练成本过高不复现。",
           "source_revisions": {
             "foundation-models:real-loss": "8f341df1e058579ddf183df4bb4ab599bf01787778fae00e9e9efd2a82bd4012"
+          }
+        },
+        {
+          "date": "2026-11-19",
+          "papers": [
+            "foundation-models:narrow-spec",
+            "foundation-models:loopspec"
+          ],
+          "summary": "LoopSpec改变looped模型的推测/验证流水线；NarrowSpec改变草稿网络的残差宽度，并保持目标verify不变。一个降低等待，一个减少草稿计算，不能用折叠等价证明任一方法的接受率。 本地组件合同和高成本不复现分别记录。",
+          "source_revisions": {
+            "foundation-models:narrow-spec": "af0c3da4fb5afdcf2ccda4773e3d22f5e393cdc084f3bf89a8e2b958587c0947",
+            "foundation-models:loopspec": "791bc00fc3c23fb9ccb926cc054f4d82a92d77d6fbdb18a2af907bf23778a23d"
           }
         }
       ]

@@ -1,0 +1,18 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.23417v1",
+  "paper_url": "https://arxiv.org/abs/2611.23417v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-19",
+  "page": 1,
+  "crop_box_pdf_points": [
+    66,
+    365,
+    547,
+    525
+  ],
+  "caption": "Figure1: A scene as a stream of views",
+  "extraction": "Original PDF crop, no semantic editing",
+  "source_pdf_sha256": "c57dc41a396f615a632658aa641a4b3f0b798b626781f2a87d1ea6b1f05bb593",
+  "asset_sha256": "ebb9fe1d8108731bccb1d82d257c8aad968c1c2f8ae47ff6f32858d6b672ebe7",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result."
+}

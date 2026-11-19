@@ -1,0 +1,48 @@
+{
+  "domain": "agent-research",
+  "key": "searchinject",
+  "title": "SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search",
+  "paper_url": "https://arxiv.org/abs/2611.02643v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.02643v1",
+  "reviewed_version": "v1",
+  "published": "2026-11-02",
+  "published_at": "2026-11-02T07:04:42Z",
+  "detail_path": "agent-research/2611.02643-searchinject/README.md",
+  "topic": [
+    "Agent 评测与可靠性",
+    "检索上下文准入"
+  ],
+  "first_author": "Kainan Zhou",
+  "first_author_affiliation": "Google LLC",
+  "verified_priority_organizations": [
+    "Google"
+  ],
+  "code": null,
+  "code_status": "固定v1及关联来源未找到可获取的本论文专用作者代码；依赖仓库不计为本篇开源。",
+  "method_source_sha256": "fbd803cc2d4b2edc0987b99c726f56238e964a894ae598c2b8ebec0901234e40",
+  "adapter": null,
+  "priority": "P0",
+  "intake_class": "historical_directory_backfill",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/pdf/2611.02643v1",
+    "available_resource": "one A100/A30 or local Mac",
+    "paper_configuration": "A full replay lacks fitted parameters, split artifacts and data hashes; the generation follow-up additionally needs two roughly4B models. Missing artifacts and generation cost rule out a full reconstruction/expansion in this batch.",
+    "basis": "完整检测器缺失可复放的拟合参数、分区与数据hash，生成跟进还依赖两个4B级模型。材料缺口与生成成本下不尝试重建/扩展完整实验。",
+    "decision": "成本过高，不复现（审查 DONE）"
+  },
+  "summary": "间接注入先要进入上下文才有机会影响LLM。SearchInject在原top100候选中，用相关性、abuse、instruction概率及两项相关性交互做logistic风险评分；超过冻结阈值才隔离，按原顺序从同一候选池补足top10。它控制暴露，而不是验证下游攻击成功。Google官方目录今天新增，但论文首发11月2日，按历史发现补录，不算今天新论文。 本地边界：显式数值夹具只检查feature顺序、严格>阈值、干净经验约束与refill。无真实payload、SciFact检索、拟合分类器、生成模型或安全认证；更低阈值移除更多候选，也可能补入原rank10外的攻击页。",
+  "local_operator": "auto_research.agent_research.searchinject_components.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.searchinject_components import diagnostic; print(diagnostic(42, device=\"cpu\"))'"
+}

@@ -42,7 +42,9 @@
         "agent-research:era-flat-puct",
         "agent-research:planning-optimality",
         "agent-research:clarification-sgp",
-        "agent-research:leap-formal-math"
+        "agent-research:leap-formal-math",
+        "agent-research:timeout-cascades",
+        "agent-research:kaer"
       ]
     },
     {
@@ -290,7 +292,11 @@
         "agent-research:resolution-hypothesis",
         "agent-research:skillbuffbench",
         "agent-research:gandalf-bvb",
-        "agent-research:self-organized-learning"
+        "agent-research:self-organized-learning",
+        "agent-research:ahe-beta",
+        "agent-research:safe-personal-rsi",
+        "agent-research:rsibench-infra",
+        "agent-research:searchinject"
       ]
     },
     {
@@ -433,7 +439,8 @@
         "agent-research:reprobridge",
         "agent-research:are-bench",
         "agent-research:alphaproof-code",
-        "agent-research:mt-pingeval"
+        "agent-research:mt-pingeval",
+        "agent-research:execjudges"
       ]
     }
   ]

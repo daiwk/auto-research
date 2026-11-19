@@ -138,7 +138,10 @@
         "foundation-models:stratified-retention-protocol",
         "multimodal-models:rslivebench-uav-protocol",
         "foundation-models:wm-quant",
-        "multimodal-models:dwd"
+        "multimodal-models:dwd",
+        "foundation-models:counterfactual-wm",
+        "multimodal-models:autoregressive-view-model",
+        "multimodal-models:jepa-dots"
       ]
     }
   ]

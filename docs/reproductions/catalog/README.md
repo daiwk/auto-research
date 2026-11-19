@@ -10,6 +10,9 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 研究与服务闭环 | [MARS Technical Report](../../recommendation-components/2611.24006-mars-fapo/README.md) | Taobao，2026-11-18 | 未发现官方代码 | `mars-fapo`：仅低成本组件，完整实验不复现 |
+| 研究与服务闭环 | [MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems](../../recommendation-components/2611.23910-mle-agents/README.md) | Meta Platforms，2026-11-18 | 未发现官方代码 | `mle-agents`：仅低成本组件，完整实验不复现 |
+| 排序网络与长序列 | [X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction](../../recommendation-components/2611.24283-xsplit-argus/README.md) | 固定v1未列一作机构（不由其他作者邮箱推断），2026-11-18 | 未发现官方代码 | `xsplit-argus`：仅低成本组件，完整实验不复现 |
 | 训练目标与决策优化 | [COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift](../../recommendation-components/2611.22597-cotti/README.md) | Alibaba Group，2026-11-17 | 未发现官方代码 | `cotti`：仅低成本组件，完整实验不复现 |
 | 广告与商业决策 | [CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation](../../recommendation-components/2611.22418-cutagent/README.md) | JD.com / Tsinghua University，2026-11-17 | 未发现官方代码 | `cutagent` |
 | 检索与匹配 | [From Relevance to Utility: Rubric Alignment in Yuanbao Search](../../recommendation-components/2611.22503-yuanbao-rubric/README.md) | Tencent，2026-11-17 | 未发现官方代码 | `yuanbao-rubric`：仅低成本组件，完整实验不复现 |

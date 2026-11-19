@@ -1,0 +1,18 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.23835v1",
+  "paper_url": "https://arxiv.org/abs/2611.23835v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-19",
+  "page": 3,
+  "crop_box_pdf_points": [
+    62,
+    200,
+    550,
+    442
+  ],
+  "caption": "Figure1: DFlash decode iteration and draft width",
+  "extraction": "Original PDF crop, no semantic editing",
+  "source_pdf_sha256": "04e0a581d7883ce622f266db76aff7dcdd1a92c392f5b6195eb9e2f78c6248af",
+  "asset_sha256": "5535d3c70e3c49acdfb9b3a69cf091fb8bc4f0d58e37a9a26577cae15a022730",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result."
+}

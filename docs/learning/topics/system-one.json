@@ -28,7 +28,9 @@
         "foundation-models:metaencoder",
         "foundation-models:mjev-spatial",
         "foundation-models:pathjev",
-        "multimodal-models:system-one-rerank"
+        "multimodal-models:system-one-rerank",
+        "system-one:jeveration",
+        "system-one:egojev"
       ]
     },
     {

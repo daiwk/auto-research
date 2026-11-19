@@ -7,7 +7,7 @@ hide:
 
 # 教师更强仍可能教错：信息、兼容性与成功行为保护
 
-[LLM 后训练](../index.md) · 更新 2026-11-18 · 55 篇主题资料 / 14 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-19 · 56 篇主题资料 / 15 篇重点对照
 
 教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。
 
@@ -39,6 +39,7 @@ hide:
 | [Learning to Learn from Language Feedback with Social Meta-Learning](../../../post-training/2602.16488-social-meta-learning/README.md) · [原始来源](https://arxiv.org/abs/2602.16488)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 把teacher反馈放进公开多轮历史，以成功轨迹student-only SFT或在线RL训练反馈利用，并另用Qpriming教提问。 | OPSD用特权教师分布监督学生前缀，SML让教师通过对话转移信息；两者的额外知识都不能泄漏给评测student。本地只实现SML离线目标。 |
 | [Behavioral Canaries: Auditing Private Retrieved Context Usage in RL Fine-Tuning](../../../post-training/2604.22191-behavioral-canaries/README.md) · [原始来源](https://arxiv.org/abs/2604.22191v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 用held-out clean/trigger文档对的canary序列logprob差测条件行为影响，再按独立训练策略统计。 | RAGCompass的答案F1只作离线路由蒸馏监督，运行时scorer不读gold；Canaries的配对目标属于审计测量，不能据此给actor答案，也不把有用证据或单次风格变化判作违规。 |
 | [LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation](../../../post-training/2611.20674-leaf-opd/README.md) · [原始来源](https://arxiv.org/abs/2611.20674v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | SS1/SS0.5教师持续监督诊断、teacher-only privileged-context边界、forget/retain分离forward-KL。 | 二者都隔离额外教师上下文，但LCS提供任务兼容成功轨迹纠正失败；LEAF用非披露上下文让teacher压低目标事实概率，并用retain支路保留效用。 |
+| [HINT-WAM: Hindsight-Informed Training for World Action Models](../../../post-training/2611.24789-hint-wam/README.md) · [原始来源](https://arxiv.org/abs/2611.24789v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 只收录同源hindsight teacher、学生ODE状态上的energy-score与BC anchor、成本和限制。无本地模型/算子/指标，不用静态动作样本替代真实WAM蒸馏。 | Video-OPSD用人工证据帧为文本token提供特权自教师监督；HINT-WAM的特权是示范未来，目标是动作chunk分布而非文本token，且teacher必须与学生同一backbone。旧Video-OPSD的证据视图checkpoint审计不等于HINT-WAM训练。 |
 
 </div>
 
@@ -103,6 +104,12 @@ RAGCompass从各检索器证据组带来的答案效用构造候选分布，训�
 不能。forget teacher读取非披露指令，student始终只读原问题和自身生成prefix；retain teacher不带该指令。将指令给学生会改变所研究的参数遗忘问题。 二者都隔离额外教师上下文，但LCS提供任务兼容成功轨迹纠正失败；LEAF用非披露上下文让teacher压低目标事实概率，并用retain支路保留效用。 本轮边界：SS1/SS0.5教师持续监督诊断、teacher-only privileged-context边界、forget/retain分离forward-KL。
 
 对照来源：[leaf-opd](../../../post-training/2611.20674-leaf-opd/README.md) · [lcs-reference-opd](../../../post-training/2611.13135-lcs-reference-opd/README.md)
+
+### 它与Video-OPSD的特权信息和输出相同吗？
+
+Video-OPSD用人工证据帧为文本token提供特权自教师监督；HINT-WAM的特权是示范未来，目标是动作chunk分布而非文本token，且teacher必须与学生同一backbone。旧Video-OPSD的证据视图checkpoint审计不等于HINT-WAM训练。 完整方法需要真实backbone、未来teacher训练和学生ODE轨迹。原文测得8GPU×71.6小时；静态随机动作的energy-score公式不等于该训练链。因此只收录并审查DONE，无待验收GPU或自动重试。
+
+对照来源：[hint-wam](../../../post-training/2611.24789-hint-wam/README.md) · [video-opsd](../../../post-training/2608.27065-video-opsd/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -228,9 +235,23 @@ RAGCompass从各检索器证据组带来的答案效用构造候选分布，训�
 
     对照来源：[leaf-opd](../../../post-training/2611.20674-leaf-opd/README.md) · [lcs-reference-opd](../../../post-training/2611.13135-lcs-reference-opd/README.md)
 
+### 它与Video-OPSD的特权信息和输出相同吗？ {#cross-nov19-hint-wam}
+
+??? note "展开答案与例子"
+
+    **答案：** 不同。Video-OPSD选择证据帧并蒸馏文本token；HINT-WAM读取示范未来并对动作chunk分布蒸馏，同backbone与teacher-only未来隔离是定义条件。
+
+    **教学例子：** 教学例：对文本token加evidence权重不能训练6.02B WAM的动作ODE，也不会提供机器人成功率。
+
+    对照来源：[hint-wam](../../../post-training/2611.24789-hint-wam/README.md) · [video-opsd](../../../post-training/2608.27065-video-opsd/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-19** · 只收录同源hindsight teacher、学生ODE状态上的energy-score与BC anchor、成本和限制。无本地模型/算子/指标，不用静态动作样本替代真实WAM蒸馏。 完整实验高成本不复现；组件或资料不构成能力晋级。
+
+涉及：[hint-wam](../../../post-training/2611.24789-hint-wam/README.md) · [video-opsd](../../../post-training/2608.27065-video-opsd/README.md)
 
 **2026-11-18** · SS1/SS0.5教师持续监督诊断、teacher-only privileged-context边界、forget/retain分离forward-KL。 完整实验高成本不复现；组件诊断不等于能力比较。
 
@@ -264,7 +285,7 @@ RAGCompass从各检索器证据组带来的答案效用构造候选分布，训�
 
 覆盖 47 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 55 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 56 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -323,6 +344,7 @@ RAGCompass从各检索器证据组带来的答案效用构造候选分布，训�
 - [Learning to Learn from Language Feedback with Social Meta-Learning](../../../post-training/2602.16488-social-meta-learning/README.md)
 - [Behavioral Canaries: Auditing Private Retrieved Context Usage in RL Fine-Tuning](../../../post-training/2604.22191-behavioral-canaries/README.md)
 - [LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation](../../../post-training/2611.20674-leaf-opd/README.md)
+- [HINT-WAM: Hindsight-Informed Training for World Action Models](../../../post-training/2611.24789-hint-wam/README.md)
 
 </details>
 

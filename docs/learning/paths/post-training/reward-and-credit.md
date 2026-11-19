@@ -7,7 +7,7 @@ hide:
 
 # 奖励与信用：正确结果该奖励哪些步骤
 
-[LLM 后训练](index.md) / 188 个问题 · 47 篇论文
+[LLM 后训练](index.md) / 196 个问题 · 49 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">188 个问题 · 47 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">196 个问题 · 49 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dcc-aggregation" data-paper-title="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation LLM 后训练 Northwestern Polytechnical University 2026-11-18 等权rubric相加并不代表各维贡献相等：每维满足/不满足样本的平均分差形成reward gain。论文把候选奖励差精确拆成基础满足数量信号、gain imbalance项和残差；把gain全部归一成1反而可能放大小gain维度的噪声。DCC不重新训练judge，也不学习rubric权重。它把当前prompt全部候选×标准的分数放在一起，精确扫描一维双median分簇，用最小绝对偏差确定两个公共clip端点；同成本取最小split。最后在公共区间clip，再按可选标准权重求平均；权重不参与端点拟合。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。CPU精确1D two-medians、共享clip区间、相同分数退化、最小split tie-break与可选权重归约。只处理已存在的合法judge分数，不调用或伪造judge，也不训练GRPO。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 等权聚合为什么不等于标准贡献相等？ 第k维满足与不满足样本的平均分差Δk会隐式乘到满足状态上；即使权重都是1/K，gain更大的标准仍更有影响。简单除以Δk也会放大其残差。 教学例：两维满足/不满足分差分别10和1，等权求和时前者可盖过后者；但把后者放大10倍也同步放大噪声。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-dcc-aggregation-55e188d6" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-eeae628153ead524">等权聚合为什么不等于标准贡献相等？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adcc-aggregation">How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Northwestern Polytechnical University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>第k维满足与不满足样本的平均分差Δk会隐式乘到满足状态上；即使权重都是1/K，gain更大的标准仍更有影响。简单除以Δk也会放大其残差。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两维满足/不满足分差分别10和1，等权求和时前者可盖过后者；但把后者放大10倍也同步放大噪声。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24005v1">原论文</a> · <a href="../../../../post-training/2611.24005-dcc-aggregation/">实现解读</a> · <a href="#qa-eeae628153ead524">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dcc-aggregation" data-paper-title="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation LLM 后训练 Northwestern Polytechnical University 2026-11-18 等权rubric相加并不代表各维贡献相等：每维满足/不满足样本的平均分差形成reward gain。论文把候选奖励差精确拆成基础满足数量信号、gain imbalance项和残差；把gain全部归一成1反而可能放大小gain维度的噪声。DCC不重新训练judge，也不学习rubric权重。它把当前prompt全部候选×标准的分数放在一起，精确扫描一维双median分簇，用最小绝对偏差确定两个公共clip端点；同成本取最小split。最后在公共区间clip，再按可选标准权重求平均；权重不参与端点拟合。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。CPU精确1D two-medians、共享clip区间、相同分数退化、最小split tie-break与可选权重归约。只处理已存在的合法judge分数，不调用或伪造judge，也不训练GRPO。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 DCC端点是每个标准各算一对吗？ 不是。当前prompt的N×K分数共享一次精确two-medians拟合；只在相邻不同分数间split，每簇中心为median，按绝对偏差和最小split tie-break选端点。 教学例：[0,1,2]两个split成本相同，应取split1，中心(0,1.5)，不是每列各自标准化。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-4d4d9849af1742ef">DCC端点是每个标准各算一对吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adcc-aggregation">How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Northwestern Polytechnical University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。当前prompt的N×K分数共享一次精确two-medians拟合；只在相邻不同分数间split，每簇中心为median，按绝对偏差和最小split tie-break选端点。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：[0,1,2]两个split成本相同，应取split1，中心(0,1.5)，不是每列各自标准化。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24005v1">原论文</a> · <a href="../../../../post-training/2611.24005-dcc-aggregation/">实现解读</a> · <a href="#qa-4d4d9849af1742ef">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dcc-aggregation" data-paper-title="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation LLM 后训练 Northwestern Polytechnical University 2026-11-18 等权rubric相加并不代表各维贡献相等：每维满足/不满足样本的平均分差形成reward gain。论文把候选奖励差精确拆成基础满足数量信号、gain imbalance项和残差；把gain全部归一成1反而可能放大小gain维度的噪声。DCC不重新训练judge，也不学习rubric权重。它把当前prompt全部候选×标准的分数放在一起，精确扫描一维双median分簇，用最小绝对偏差确定两个公共clip端点；同成本取最小split。最后在公共区间clip，再按可选标准权重求平均；权重不参与端点拟合。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。CPU精确1D two-medians、共享clip区间、相同分数退化、最小split tie-break与可选权重归约。只处理已存在的合法judge分数，不调用或伪造judge，也不训练GRPO。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 DCC和DynamicRubric都使用rubric，作用点相同吗？ 不同。DynamicRubric生成/更新标准和权重；DCC固定这些语义，只变换已有评分的数值范围。权重只进入最终平均，不改变中心。 教学例：把某维权重从1改成100会改变最终reward，却不会改变DCC为同一分数矩阵拟合的两个端点。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-37cf0e9c2493c856">DCC和DynamicRubric都使用rubric，作用点相同吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adcc-aggregation">How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Northwestern Polytechnical University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同。DynamicRubric生成/更新标准和权重；DCC固定这些语义，只变换已有评分的数值范围。权重只进入最终平均，不改变中心。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把某维权重从1改成100会改变最终reward，却不会改变DCC为同一分数矩阵拟合的两个端点。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24005v1">原论文</a> · <a href="../../../../post-training/2611.24005-dcc-aggregation/">实现解读</a> · <a href="#qa-37cf0e9c2493c856">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dcc-aggregation" data-paper-title="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation LLM 后训练 Northwestern Polytechnical University 2026-11-18 等权rubric相加并不代表各维贡献相等：每维满足/不满足样本的平均分差形成reward gain。论文把候选奖励差精确拆成基础满足数量信号、gain imbalance项和残差；把gain全部归一成1反而可能放大小gain维度的噪声。DCC不重新训练judge，也不学习rubric权重。它把当前prompt全部候选×标准的分数放在一起，精确扫描一维双median分簇，用最小绝对偏差确定两个公共clip端点；同成本取最小split。最后在公共区间clip，再按可选标准权重求平均；权重不参与端点拟合。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。CPU精确1D two-medians、共享clip区间、相同分数退化、最小split tie-break与可选权重归约。只处理已存在的合法judge分数，不调用或伪造judge，也不训练GRPO。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 为什么测试要保留极端值未被clip的反例？ two-medians可让孤立极端值自成一簇，因此共享区间上界就等于该极值。DCC提供条件性的贡献上界，不是保证移除所有outlier或提高任务能力。 教学例：[0,1,100]拟合高中心100；本地明确验这个边界，不把100改成较温和数值后宣称普适鲁棒。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-6ef3f60c4df08687">为什么测试要保留极端值未被clip的反例？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adcc-aggregation">How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Northwestern Polytechnical University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>two-medians可让孤立极端值自成一簇，因此共享区间上界就等于该极值。DCC提供条件性的贡献上界，不是保证移除所有outlier或提高任务能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：[0,1,100]拟合高中心100；本地明确验这个边界，不把100改成较温和数值后宣称普适鲁棒。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24005v1">原论文</a> · <a href="../../../../post-training/2611.24005-dcc-aggregation/">实现解读</a> · <a href="#qa-6ef3f60c4df08687">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:eca-credit" data-paper-title="Evidence-Based Credit Assignment for Search-Augmented Language Models" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Evidence-Based Credit Assignment for Search-Augmented Language Models LLM 后训练 University of the Chinese Academy of Sciences / Tencent 2026-11-18 终止答案全错时，组相对奖励为零，但检索可能已经取得有价值证据。ECA用训练专用冻结策略在仅含问题与去重文档的上下文中，计算参考答案的长度归一化对数似然势函数；生成的思考、查询和其他轨迹不参与打分。ECA-Horizon保留剩余固定搜索窗口的总势差；ECA-Step先逐增量截断，可能破坏望远镜求和。原文将8条轨迹随机分成两个4条fold，以对侧fold的样本标准差做归一化；无新文档的搜索只能保留负信用。辅助项只分配到该次搜索的思考与查询token，不分配到检索观察或最终答案。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。固定G=8、H=3的势函数suffix return、对侧fold样本标准差/0.25 floor、novelty gate、search-local token advantage及无ratio clip的序列求和策略损失。冻结scorer打分、检索器和完整LLM训练未实现。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 全错rollout组为什么仍可能值得学习？ 终止奖励只说明最终答案错误，不区分是否找到关键证据；ECA用训练专用证据势差给搜索行为信用，而非给失败答案奖励。 教学例：两条轨迹均答错，一条文档包含关键实体、另一条重复空结果，其终止优势同为0，证据return却可以不同。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-eca-credit-f7fc33f2" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-ec6beb57e7863782">全错rollout组为什么仍可能值得学习？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aeca-credit">Evidence-Based Credit Assignment for Search-Augmented Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · University of the Chinese Academy of Sciences / Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>终止奖励只说明最终答案错误，不区分是否找到关键证据；ECA用训练专用证据势差给搜索行为信用，而非给失败答案奖励。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两条轨迹均答错，一条文档包含关键实体、另一条重复空结果，其终止优势同为0，证据return却可以不同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23824v1">原论文</a> · <a href="../../../../post-training/2611.23824-eca-credit/">实现解读</a> · <a href="#qa-ec6beb57e7863782">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:eca-credit" data-paper-title="Evidence-Based Credit Assignment for Search-Augmented Language Models" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Evidence-Based Credit Assignment for Search-Augmented Language Models LLM 后训练 University of the Chinese Academy of Sciences / Tencent 2026-11-18 终止答案全错时，组相对奖励为零，但检索可能已经取得有价值证据。ECA用训练专用冻结策略在仅含问题与去重文档的上下文中，计算参考答案的长度归一化对数似然势函数；生成的思考、查询和其他轨迹不参与打分。ECA-Horizon保留剩余固定搜索窗口的总势差；ECA-Step先逐增量截断，可能破坏望远镜求和。原文将8条轨迹随机分成两个4条fold，以对侧fold的样本标准差做归一化；无新文档的搜索只能保留负信用。辅助项只分配到该次搜索的思考与查询token，不分配到检索观察或最终答案。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。固定G=8、H=3的势函数suffix return、对侧fold样本标准差/0.25 floor、novelty gate、search-local token advantage及无ratio clip的序列求和策略损失。冻结scorer打分、检索器和完整LLM训练未实现。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 为什么先clip每步增量不等于clip总收益？ 增量+4、-3、0在c=2、H=3下，逐步clip后相消为0；Horizon保留最终势差+1，return为1/6。二者之后仍有同样的跨fold归一化和clip。 教学例：势函数[-8,-4,-7,-7]的首搜索Horizon=1/6，Step=0；固定H不能改成实际调用次数。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-c91f782b26298b90">为什么先clip每步增量不等于clip总收益？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aeca-credit">Evidence-Based Credit Assignment for Search-Augmented Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · University of the Chinese Academy of Sciences / Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>增量+4、-3、0在c=2、H=3下，逐步clip后相消为0；Horizon保留最终势差+1，return为1/6。二者之后仍有同样的跨fold归一化和clip。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：势函数[-8,-4,-7,-7]的首搜索Horizon=1/6，Step=0；固定H不能改成实际调用次数。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23824v1">原论文</a> · <a href="../../../../post-training/2611.23824-eca-credit/">实现解读</a> · <a href="#qa-c91f782b26298b90">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:eca-credit" data-paper-title="Evidence-Based Credit Assignment for Search-Augmented Language Models" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Evidence-Based Credit Assignment for Search-Augmented Language Models LLM 后训练 University of the Chinese Academy of Sciences / Tencent 2026-11-18 终止答案全错时，组相对奖励为零，但检索可能已经取得有价值证据。ECA用训练专用冻结策略在仅含问题与去重文档的上下文中，计算参考答案的长度归一化对数似然势函数；生成的思考、查询和其他轨迹不参与打分。ECA-Horizon保留剩余固定搜索窗口的总势差；ECA-Step先逐增量截断，可能破坏望远镜求和。原文将8条轨迹随机分成两个4条fold，以对侧fold的样本标准差做归一化；无新文档的搜索只能保留负信用。辅助项只分配到该次搜索的思考与查询token，不分配到检索观察或最终答案。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。固定G=8、H=3的势函数suffix return、对侧fold样本标准差/0.25 floor、novelty gate、search-local token advantage及无ratio clip的序列求和策略损失。冻结scorer打分、检索器和完整LLM训练未实现。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 ECA和OpCredit是否都是同一种过程奖励？ 不是。OpCredit的FTC依赖KG答案邻域与操作局部前沿，ECA依赖冻结策略对去重文本证据的参考答案似然；共享search-local分配原则不代表势函数可替换。 教学例：一段检索文档可提高答案token似然，却没有可直接代入KG一跳邻域的活动实体集合。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-5431d47c7cd9c74c">ECA和OpCredit是否都是同一种过程奖励？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aeca-credit">Evidence-Based Credit Assignment for Search-Augmented Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · University of the Chinese Academy of Sciences / Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。OpCredit的FTC依赖KG答案邻域与操作局部前沿，ECA依赖冻结策略对去重文本证据的参考答案似然；共享search-local分配原则不代表势函数可替换。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一段检索文档可提高答案token似然，却没有可直接代入KG一跳邻域的活动实体集合。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23824v1">原论文</a> · <a href="../../../../post-training/2611.23824-eca-credit/">实现解读</a> · <a href="#qa-5431d47c7cd9c74c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:eca-credit" data-paper-title="Evidence-Based Credit Assignment for Search-Augmented Language Models" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Evidence-Based Credit Assignment for Search-Augmented Language Models LLM 后训练 University of the Chinese Academy of Sciences / Tencent 2026-11-18 终止答案全错时，组相对奖励为零，但检索可能已经取得有价值证据。ECA用训练专用冻结策略在仅含问题与去重文档的上下文中，计算参考答案的长度归一化对数似然势函数；生成的思考、查询和其他轨迹不参与打分。ECA-Horizon保留剩余固定搜索窗口的总势差；ECA-Step先逐增量截断，可能破坏望远镜求和。原文将8条轨迹随机分成两个4条fold，以对侧fold的样本标准差做归一化；无新文档的搜索只能保留负信用。辅助项只分配到该次搜索的思考与查询token，不分配到检索观察或最终答案。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。固定G=8、H=3的势函数suffix return、对侧fold样本标准差/0.25 floor、novelty gate、search-local token advantage及无ratio clip的序列求和策略损失。冻结scorer打分、检索器和完整LLM训练未实现。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 本地组件会把参考答案交给Agent吗？ 不会。组件只接收外部训练势函数数值、奖励和span mask，不实现或评测Agent，也不接收答案文本。参考答案只应供独立训练scorer；推理Actor只能看合法问题、自身历史和观察。 教学例：all-failure负控检查搜索token仍有梯度，最终答案与观察token的辅助梯度为0；这不是QA成功率。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-a57df3335c6773ae">本地组件会把参考答案交给Agent吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aeca-credit">Evidence-Based Credit Assignment for Search-Augmented Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · University of the Chinese Academy of Sciences / Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不会。组件只接收外部训练势函数数值、奖励和span mask，不实现或评测Agent，也不接收答案文本。参考答案只应供独立训练scorer；推理Actor只能看合法问题、自身历史和观察。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：all-failure负控检查搜索token仍有梯度，最终答案与观察token的辅助梯度为0；这不是QA成功率。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23824v1">原论文</a> · <a href="../../../../post-training/2611.23824-eca-credit/">实现解读</a> · <a href="#qa-a57df3335c6773ae">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:design-taste-admission" data-paper-title="Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning LLM 后训练 固定v1未列一作机构（不由其他作者邮箱推断） 2026-11-16 spacing等指标也可被刷分；必须同时通过expert agreement、单原则扰动/修复因果敏感性、hack trap和重复稳定性。未通过的项只作evaluation，不进reward。不能。专家选择哪些低层信号可被准入并做盲评canary，reward只聚合func/design/rubric/pref；build/render/anticheat等是乘性V0门。 完整实验成本过高，不复现（审查 DONE）；l0_interface 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。expert agreement/causal sensitivity/hack resistance/stability四项admission、V0乘性hard gates与已admit分数composite reward；不造浏览器/设计judge能力。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 为什么可计算的网页指标还不能直接当RL reward？ spacing等指标也可被刷分；必须同时通过expert agreement、单原则扰动/修复因果敏感性、hack trap和重复稳定性。未通过的项只作evaluation，不进reward。 教学例：把所有间距压成同值能提高scale conformity，却可能破坏proximity，应由trap抓到。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
 <span id="paper-post-training-design-taste-admission-0e6a4951" class="ar-learning-paper-anchor"></span>

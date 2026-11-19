@@ -1,0 +1,11 @@
+{
+  "figure": 1,
+  "caption": "Figure 1. Relevance assessment with an LLM judge (a) and with ExecJudges (b). The LLM judge is called for every document. ExecJudges calls the LLM once per topic to write programs, and the programs grade all documents.",
+  "source_url": "https://arxiv.org/pdf/2611.24849v1",
+  "source_version": "v1",
+  "source_sha256": "a50ca7fb84fe77110f8ad3c57046edc102c1bbaea50800ddb26ccddd754f556c",
+  "extraction": "fixed v1 PDF page3, crop[48, 80, 558, 245]; no redraw",
+  "file": "paper-figure-01.png",
+  "asset_sha256": "7d58e5ad8fb0a3ccd7b8123aa2bc44ba9f6c9947eaef31fedc5cbcbe72d3e844",
+  "copyright": "Original paper authors; no claim of local generation"
+}

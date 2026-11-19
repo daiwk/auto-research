@@ -7,6 +7,7 @@ queue. Raw captures remain in the local cache; bounded receipts are publishable.
 from __future__ import annotations
 
 from dataclasses import asdict
+import argparse
 from datetime import datetime, timezone
 from hashlib import sha256
 import json
@@ -30,10 +31,22 @@ def write(path, payload):
 
 
 def main():
+    global CACHE
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--start", default="2026-11-16")
+    parser.add_argument("--end", default="2026-11-18")
+    parser.add_argument("--overlap-start", default="2026-11-13")
+    parser.add_argument("--cache-dir", type=Path, default=CACHE)
+    args = parser.parse_args()
+    if not args.overlap_start <= args.start <= args.end:
+        parser.error("overlap-start <= start <= end required")
+    for value in (args.start, args.end, args.overlap_start):
+        datetime.strptime(value, "%Y-%m-%d")
+    CACHE = args.cache_dir.resolve()
     CACHE.mkdir(parents=True, exist_ok=True)
     client = ArxivClient(minimum_interval_seconds=3, maximum_retries=2, cache_dir=CACHE / "arxiv")
     query = " OR ".join("cat:" + category for category in CATEGORIES)
-    floor = "2026-11-13T00:00:00"
+    floor = args.overlap_start + "T00:00:00"
     found, receipts, exhausted = {}, [], False
     for start in range(0, 10000, 200):
         params = {
@@ -81,7 +94,7 @@ def main():
         {
             "schema_version": 1,
             "captured_at": datetime.now(timezone.utc).isoformat(),
-            "requested_window": {"start": "2026-11-16", "end": "2026-11-18"},
+            "requested_window": {"start": args.start, "end": args.end},
             "overlap_start_utc": floor,
             "categories": CATEGORIES,
             "metadata_only": True,

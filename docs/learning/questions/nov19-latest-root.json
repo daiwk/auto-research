@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "recommendation:mle-agents": {
+      "questions": [
+        {
+          "id": "calibrated-objective",
+          "level": "basics",
+          "question": "为什么不用点击AUPRC一直搜索？",
+          "answer": "它曾偏向易预测的直达查询，与线上下游参与不一致，因此用历史线上对齐后加权NE。",
+          "example": "教学例：click NE降.01、downstream升.01时，0.3/0.7目标变差.004。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "probe-reference",
+          "level": "mechanism",
+          "question": "候选应和什么比才能过噪声门槛？",
+          "answer": "与同一轮variance probe比较；超过0.0005的目标下降才形成离线搜索接纳。",
+          "example": "教学例：候选.65胜旧基线.68，但同轮探针.64，仍应拒绝。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "contract-not-launch",
+          "level": "comparison",
+          "question": "MLE Agents和EvoPilot的准入能互代吗？",
+          "answer": "不能。前者校准目标/训练噪声，后者核对两臂实验与产物；都还需要最终人工和线上确认。",
+          "example": "教学例：数据版本不同的两臂即使NE差够大，也不能用噪声门槛盖过协议失败。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "two-completion-signals",
+          "level": "implementation",
+          "question": "为什么完成状态有一条成功还不能接纳？",
+          "answer": "论文要求两条独立状态信号确认完成；崩溃、缺失评估或日志误报不能冒充真实结果。",
+          "example": "教学例：调度器成功而产物未写完时保留未完成，接口不得自动上线。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    },
+    "recommendation:xsplit-argus": {
+      "questions": [
+        {
+          "id": "cache-not-detach",
+          "level": "basics",
+          "question": "历史token缓存意味着训练时冻结compressor吗？",
+          "answer": "不意味着。缓存是服务安排，GT和KD均经decoder反传到共同的历史编码器。",
+          "example": "教学例：KD头误差变化后compressor有梯度，但teacher不能有梯度。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "causal-boundary",
+          "level": "mechanism",
+          "question": "近期历史与缓存cutoff为什么不能只用一个参数？",
+          "answer": "缓存快照可以落后或与近期窗口重叠；训练默认相邻，但服务两者未必相邻，必须独立检查目标前边界。",
+          "example": "教学例：目标t=7、M=2时默认b=4；服务b=5会重叠一个历史事件而不是读取目标。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "argus-not-same-head",
+          "level": "comparison",
+          "question": "为什么不能直接把ARGUS的物品头用到X-split？",
+          "answer": "ARGUS分解反馈和next-item；X-split用候选特征预测点击，另用辅助头匹配teacher原始logit，任务和头不同。",
+          "example": "教学例：把L1 logit误差替成物品softmax CE会改变监督信号。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "future-negative-control",
+          "level": "implementation",
+          "question": "怎样检查反馈泄漏而不是只看shape？",
+          "answer": "改目标及未来事件的反馈/特征，目标预测必须不变且未来梯度为零；仅检查输出维度不够。",
+          "example": "教学例：把t及其后特征加100仍预测不变；改t−1则允许变化。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    },
+    "recommendation:mars-fapo": {
+      "questions": [
+        {
+          "id": "nearline-not-free",
+          "level": "basics",
+          "question": "MARS为什么不增加同步LLM延迟，却不等于免费？",
+          "answer": "LLM近线生成并缓存，在线只消费合法配置；近线推理、刷新和缓存仍耗资源。",
+          "example": "教学例：线上平均少12ms不代表0.6B解码快12ms。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "mask-and-anchor",
+          "level": "mechanism",
+          "question": "ActionMask只学习变化值，为何结构token仍有梯度？",
+          "answer": "mask只限制偏好odds项；chosen全回答生成anchor保持不变，仍监督结构。",
+          "example": "教学例：rejected共享括号梯度为0，chosen括号仍受生成损失约束。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "policy-versus-verifier",
+          "level": "comparison",
+          "question": "MARS和EvoPilot都是Agent，有什么根本区别？",
+          "answer": "MARS训练用户流水线动作；EvoPilot审核模型开发比较证据。配置格式合法不等于实验结论可信。",
+          "example": "教学例：合法Minimal动作不能代替控制/实验模型的数据版本核对。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "posterior-not-causal",
+          "level": "implementation",
+          "question": "缺失历史V2P或强证据与V2P冲突时怎么做？",
+          "answer": "缺失任一估计权重回1；强证据保留业务排序，仅弱证据满足gap才可翻转，且V2P非因果估计。",
+          "example": "教学例：chosen=.1,rejected=.2，强证据不翻转但权重可降低至.2。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    },
+    "agent-research:searchinject": {
+      "questions": [
+        {
+          "id": "exposure-not-hijack",
+          "level": "basics",
+          "question": "暴露率下降是否证明攻击成功率下降？",
+          "answer": "不能。它记录恶意载体进入上下文，仍需定义并验证下游任务劫持；原跟进没有确认的undefended成功。",
+          "example": "教学例：移走83个载体而两臂均零确认攻击，不能计算有效防御率。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "strict-refill",
+          "level": "mechanism",
+          "question": "s等于阈值时保留吗，移除后如何补足？",
+          "answer": "相等保留；仅s>tau隔离，按原top100顺序补到10，不重新排序也不重新检索。",
+          "example": "教学例：.8阈值下.8保留、.9删除，原第11名可能补入。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "different-gates",
+          "level": "comparison",
+          "question": "SearchInject和SilentGuard的门槛是否相同？",
+          "answer": "不是。前者筛选检索上下文，后者验证工具结果不变量；一种通过不证明另一种安全。",
+          "example": "教学例：低风险页面仍可能给出不满足过滤条件的API值。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "calibration-transfer",
+          "level": "implementation",
+          "question": "0.5%经验约束能直接当线上保证吗？",
+          "answer": "不能。阈值冻结后分布变化可能超出；原文test误隔离0.59–0.65%，应保留而非抹掉。",
+          "example": "教学例：calibration1000项最多5项被隔离，test不因此也最多5项。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    },
+    "agent-research:execjudges": {
+      "questions": [
+        {
+          "id": "writer-not-every-document",
+          "level": "basics",
+          "question": "ExecJudges把LLM调用放到哪一步？",
+          "answer": "每topic写独立程序，然后CPU复用程序给所有文档；本地只有映射接口，没有writer。",
+          "example": "教学例：三程序可打分1000文档，不应伪称本地调用了3000次LLM。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "floor-not-vote",
+          "level": "mechanism",
+          "question": "三个等级3,2,3为何最终是2？",
+          "answer": "先算均值8/3，再向下取整；不是多数票3，也不是四舍五入3。",
+          "example": "教学例：1,0,1均值2/3，最终0。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "evidence-versus-hidden-state",
+          "level": "comparison",
+          "question": "与FUSE的验证有什么不同？",
+          "answer": "ExecJudges映射文本证据，FUSE对隐藏动机模拟状态核验；聚合正确不保证证据判断正确。",
+          "example": "教学例：三个程序都误判exact，floor仍可能错；不能当成隐藏动机推断成功。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "qrels-and-code-isolation",
+          "level": "implementation",
+          "question": "完整实现还必须保护哪些边界？",
+          "answer": "测试qrels不进入writer，生成代码要在禁网/禁模型调用的资源沙箱运行；本地不提供这种沙箱。",
+          "example": "教学例：能返回四个bool的Python函数不等于可安全执行不可信代码。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    }
+  }
+}

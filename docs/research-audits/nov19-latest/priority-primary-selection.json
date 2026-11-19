@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-19",
+  "priority_admissions": {
+    "recommendation:mle-agents": "Fixed-v1 byline explicitly Meta Platforms; §1.3 actual productionA/B with guardrail regression preserved.",
+    "multimodal-models:autoregressive-view-model": "Fixed-v1 first author Meta/Oxford; high-cost8Mscene/video campaign review-only.",
+    "agent-research:searchinject": "Fixed-v1 Google LLC first author; newly observed official directory, historicalNov2paper; exposure not attack-success."
+  },
+  "affiliation_corrections": {
+    "foundation-models:counterfactual-wm": "Brown/AMI Labs and NYU/AMI Labs in fixed PDF; familiar names do not make this a Meta paper.",
+    "recommendation:xsplit-argus": "No institution in fixed byline; do not infer Yandex from an earlier ARGUS paper."
+  },
+  "primary_source_exclusions": [
+    {
+      "arxiv_id": "2611.24757",
+      "source_url": "https://arxiv.org/html/2611.24757v1",
+      "source_sha256": "5d10e31dbc60f633b2381f61faa128011c013ca96b8baead4f063fc85fa8d20d",
+      "source_locations": [
+        "§3 method",
+        "§4 synthetic environment",
+        "§5 results"
+      ],
+      "review_scope": "selected_primary_method_and_industrial_evidence",
+      "decision": "not_selected_industrial_online_evidence_gate",
+      "reason": "Policy A/B design is evaluated with simulations, not a new production A/B. Not selected for industrial reproduction; do not promote the title A/B phrase into production evidence.",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "arxiv_id": "2611.24426",
+      "source_url": "https://arxiv.org/html/2611.24426v1",
+      "source_sha256": "ee74339f319e392b8e361bcae8710dfb7b88191a359cbf5ff93f46a90c6d8bed",
+      "source_locations": [
+        "fixed-v1 author byline",
+        "§5 TGB experiments"
+      ],
+      "review_scope": "selected_primary_method_and_industrial_evidence",
+      "decision": "not_selected_industrial_online_evidence_gate",
+      "reason": "DyNA-Mixer reports academic dynamic graph benchmarks, not qualifying industrial online A/B. Not selected in this finite industrial intake.",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    }
+  ],
+  "repository_event_policy": "Push events are not new papers; zero newly-created repos in the three checked official organizations is only a query result, not evidence of no new research.",
+  "all_sources_exhaustive": false
+}

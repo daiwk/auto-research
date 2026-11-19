@@ -1,0 +1,58 @@
+{
+  "domain": "post-training",
+  "key": "dcc-aggregation",
+  "title": "How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation",
+  "paper_url": "https://arxiv.org/abs/2611.24005v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.24005v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.24005-dcc-aggregation/README.md",
+  "first_author": "Zhengyuan Fan",
+  "first_author_affiliation": "Northwestern Polytechnical University",
+  "published": "2026-11-18",
+  "published_at": "2026-11-18T07:56:58Z",
+  "code": null,
+  "code_status": "固定v1及所核作者入口未找到可验证的本篇方法源码发布；所用模型、训练库不算本篇开源。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "reward-and-credit",
+    "后训练算法组件"
+  ],
+  "priority": "P1",
+  "intake_class": "new_submission_announced_after_previous_scan",
+  "implementation_status": "component_only",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.24005v1",
+    "source_sections": [
+      "§3 Eq.1–7 reward decomposition",
+      "§4 Eq.8–13",
+      "Appendix C GRPO configuration"
+    ],
+    "basis": "Appendix C每个GRPO运行用3张96GB RTX PRO 6000（两张policy/rollout、一张judge），7B policy、27B judge，8响应/题，三seed和多聚合对照。完整judge推理与RL矩阵不运行；纯标量聚合无需GPU。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30,
+      "gpu_component_seconds_per_seed_cap": 0
+    }
+  },
+  "summary": "等权rubric相加并不代表各维贡献相等：每维满足/不满足样本的平均分差形成reward gain。论文把候选奖励差精确拆成基础满足数量信号、gain imbalance项和残差；把gain全部归一成1反而可能放大小gain维度的噪声。 CPU精确1D two-medians、共享clip区间、相同分数退化、最小split tie-break与可选权重归约。只处理已存在的合法judge分数，不调用或伪造judge，也不训练GRPO。",
+  "evaluation_tier": "l1_mechanism",
+  "local_operator": "auto_research.post_training.dcc_aggregation.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.dcc_aggregation import diagnostic; print(diagnostic(42))'"
+}

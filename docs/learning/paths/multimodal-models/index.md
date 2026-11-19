@@ -20,7 +20,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="world-state-actions/">世界建模：状态、生成与动作条件</a></h2>
 <p>模型只描述观察，还是能判断动作怎样改变后续状态？</p>
-<p class="ar-learning-topic-meta">129 个问题 · 32 篇论文</p>
+<p class="ar-learning-topic-meta">141 个问题 · 35 篇论文</p>
 </article>
 </div>
 

@@ -1,0 +1,11 @@
+{
+  "figure": 1,
+  "caption": "Figure 1: MLE agents 2.0 progress on Nullstate (weighted NE, lower is better):\n1,097 distinct configurations, 325 kept. Best-so-far staircase annotated with the\ndiscoveries that moved it; the curve flattens after the early wins.",
+  "source_url": "https://arxiv.org/html/2611.23910v1/mle_agent_2_0.png",
+  "source_version": "v1",
+  "source_sha256": "4aa9562bb810c92ff3f697874c16ea8b5e3fb65729c50b4cf7a2207f839d26f5",
+  "extraction": "original HTML image, no redraw",
+  "file": "paper-figure-01.png",
+  "asset_sha256": "db8ff18d4814dc7bd963f352e55319773afe2b4e382a12c34288375ac2b9089e",
+  "copyright": "Original paper authors; no claim of local generation"
+}

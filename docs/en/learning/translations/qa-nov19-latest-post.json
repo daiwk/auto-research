@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:eca-credit/nov19-basics": {
+      "source_sha256": "1029da85cde9168dd4a14d4e7a4c2233f9f45c01b5e2210fe9c369d847b1c3bc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can an all-failure rollout group still be useful?",
+        "answer": "Terminal rewards do not distinguish useful evidence from wasted retrieval. ECA assigns a training-only potential-based signal to search behavior, not a reward for a wrong final answer.",
+        "example": "Teaching example: two wrong answers have zero outcome advantage, but a search that found a key entity can have a different evidence return from repeated empty retrieval."
+      }
+    },
+    "qa/post-training:eca-credit/nov19-mechanism": {
+      "source_sha256": "940d903b8bbbbd3d3673ea41c0724cda7121e63b3e20e682681e1d9f08876009",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is clipping each increment not equivalent to clipping the total gain?",
+        "answer": "For increments +4,-3,0 with c=2,H=3, step clipping cancels to zero while Horizon preserves net gain +1 and returns 1/6. Both still apply the same subsequent cross-fold normalization and clipping.",
+        "example": "Teaching example: potentials [-8,-4,-7,-7] give first-search Horizon=1/6 and Step=0; H remains fixed rather than the actual number of calls."
+      }
+    },
+    "qa/post-training:eca-credit/nov19-comparison": {
+      "source_sha256": "7e8e9f4e651197709014ca180b4a01b56ed3304dafe95a35aff498cbe1b435e2",
+      "reviewed": true,
+      "fields": {
+        "question": "Are ECA and OpCredit the same process reward?",
+        "answer": "No. OpCredit's FTC depends on KG answer neighborhoods and operation-local frontiers, whereas ECA depends on a frozen policy's reference-answer likelihood from deduplicated text. Shared operation-local assignment does not make the potentials interchangeable.",
+        "example": "Teaching example: a retrieved passage can improve answer-token likelihood without defining an active entity frontier in a one-hop KG neighborhood."
+      }
+    },
+    "qa/post-training:eca-credit/nov19-implementation": {
+      "source_sha256": "37b0d9df55176f3a8cbee5a5de413dc9ee26ebad485ef91ff2b787cce5f6157c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local component reveal a reference answer to an agent?",
+        "answer": "No. It accepts external training-potential values, rewards and span masks, not answer text, and implements no evaluated agent. Reference answers belong only to an isolated training scorer; inference actors see legitimate questions, history and observations.",
+        "example": "Teaching example: the all-failure control checks nonzero search-token gradients but zero auxiliary gradients on final-answer and observation tokens; this is not QA accuracy."
+      }
+    },
+    "qa/post-training:mrpd-replay/nov19-basics": {
+      "source_sha256": "6ac4d11ab5575a135c904c23193007c1e22e38f1b64c091d23adfa1cb5fd583b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are expert logs not an ordinary offline mixture?",
+        "answer": "MRPD relies on shared initialization and following expert training order. Logging policies evolve from that common start, helping importance ratios remain close to the clip range. Shuffling changes this curriculum.",
+        "example": "Teaching example: domains A and B consume step0 before step1; a reversed log is rejected, not silently sorted."
+      }
+    },
+    "qa/post-training:mrpd-replay/nov19-mechanism": {
+      "source_sha256": "6e7fb4788e5f17ccd380500b6f2fe25da4e4d592a69f169063fa16b63bc0ab10",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain a tail atom beyond top-k?",
+        "answer": "Student and teacher generally leave different mass outside the selected tokens. A tail atom preserves that difference in a k+1-atom distribution; renormalizing selected atoms alone discards it.",
+        "example": "Teaching example: selected probabilities .5 for teacher and .3 for student leave tails .5/.7; renormalizing each singleton would incorrectly yield zero KL."
+      }
+    },
+    "qa/post-training:mrpd-replay/nov19-comparison": {
+      "source_sha256": "c7609c4e0fbb626324f8a23b5ad1c5d7758299193c117506564d22503b581479",
+      "reviewed": true,
+      "fields": {
+        "question": "Can MRPD's top-k loss replace Streaming OPD's loss?",
+        "answer": "No. MRPD uses coarsened student-to-teacher reverse KL directly, without ratio or clipping on the dense term. Streaming OPD uses a teacher-top-k partial forward-style sum without a tail and clips it nonnegative, on fresh generated segments.",
+        "example": "Teaching example: with the same top1 token, a tail mismatch can make MRPD KL positive while Streaming's clipped partial sum is zero."
+      }
+    },
+    "qa/post-training:mrpd-replay/nov19-implementation": {
+      "source_sha256": "8143d399370080d358f83da2f78ec86e728839ac5da36a22c93e9114e9ef0642",
+      "reviewed": true,
+      "fields": {
+        "question": "What does actual GPU execution establish here?",
+        "answer": "Only that tiny tensor operators, teacher/logging detachment, observation masks and reduction work on CUDA. It does not train Qwen3 or consolidate experts. The author-provided repository returned 404, so obtaining the training source is not claimed.",
+        "example": "Teaching example: responses with one and two model tokens each receive half the sample weight, rather than pooling three tokens."
+      }
+    },
+    "qa/post-training:dcc-aggregation/nov19-basics": {
+      "source_sha256": "4bb114fe52c184e651668120ad998155f65effb19061370cc7f537ad0695f3e1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do equal aggregation weights not imply equal criterion contributions?",
+        "answer": "Each criterion's satisfied-versus-unsatisfied mean gap implicitly multiplies satisfaction. A larger gain remains more influential at equal 1/K weights; dividing by a small gain also magnifies its residual noise.",
+        "example": "Teaching example: gains10 and1 let the first criterion dominate, but amplifying the second by ten also amplifies its noise."
+      }
+    },
+    "qa/post-training:dcc-aggregation/nov19-mechanism": {
+      "source_sha256": "d7dcea687c9a9ae245ea708cfbbf721313ed5ef96c9956384e81a9331e8df664",
+      "reviewed": true,
+      "fields": {
+        "question": "Does DCC fit separate endpoints for every criterion?",
+        "answer": "No. All N-by-K scores for the current prompt share one exact two-medians fit. Splits occur only between distinct adjacent values, centers are medians, and ties select the smallest split.",
+        "example": "Teaching example: [0,1,2] has equal-cost splits, so split1 gives centers(0,1.5), not per-column normalization."
+      }
+    },
+    "qa/post-training:dcc-aggregation/nov19-comparison": {
+      "source_sha256": "0e285c0f1d55ac33613e15e703b77a0f8bb90d9202b200a67a66312cc8465fea",
+      "reviewed": true,
+      "fields": {
+        "question": "Do DCC and DynamicRubric act at the same point?",
+        "answer": "No. DynamicRubric generates or updates criteria and weights; DCC holds those semantics fixed and transforms existing score ranges. Weights enter only the final average, not center estimation.",
+        "example": "Teaching example: changing a criterion weight from1 to100 changes rewards but not the fitted endpoints of the same score matrix."
+      }
+    },
+    "qa/post-training:dcc-aggregation/nov19-implementation": {
+      "source_sha256": "66be10c9ef7685c7ea14b3112369076a6c1f93252a4c3d8c87a423fb249996e1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain a counterexample where an extreme is not clipped?",
+        "answer": "Two-medians can isolate an extreme in its own cluster, making that value the upper endpoint. DCC offers a conditional contribution bound, not universal outlier removal or capability improvement.",
+        "example": "Teaching example: [0,1,100] has high center100. The test preserves this limit rather than claiming universal robustness from a milder example."
+      }
+    },
+    "qa/post-training:led-edits/nov19-basics": {
+      "source_sha256": "986e10a78daeecec13a9334ffb063463328887f4b9e34970657c1aecb79c31b4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are insertions and deletions useful for misalignment?",
+        "answer": "After a missing token, otherwise-correct suffix tokens can remain LCS anchors. Inserting a mask before the right anchor preserves the suffix instead of replacing every shifted position.",
+        "example": "Teaching example: source[a,c,d,extra] and target[a,b,c,d] first insert a mask before c and delete extra, yielding[a,Mask,c,d]."
+      }
+    },
+    "qa/post-training:led-edits/nov19-mechanism": {
+      "source_sha256": "67e78a7461f077ba1979c6299b5043fd601903f492f00b0e1b34acee458ec973",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a gap missing two targets emit two insertions at once?",
+        "answer": "No. Each nonfinal gap assigns at most one Ins to its real right matched anchor per round. Remaining gaps are handled later. A terminal gap has no real right anchor to invent.",
+        "example": "Teaching example: [a,d,x,y] toward[a,b,c,d] yields targets[a,Ins,Del,Del], not simultaneous insertion of b and c before d."
+      }
+    },
+    "qa/post-training:led-edits/nov19-comparison": {
+      "source_sha256": "6215e82cd25322a792e4906c3ecce1af9490764e77b63e41489be65243ca7b28",
+      "reviewed": true,
+      "fields": {
+        "question": "Can LED directly replace ORL residual learning?",
+        "answer": "No. LED reconstructs discrete position-level edit supervision. ORL transports model residual distributions and collects induced states online. Shared exposure-bias motivation does not imply equal states, objectives or inference engines.",
+        "example": "Teaching example: an LCS Ins label supplies neither a full next-round residual probability tensor nor a trained diffusion model."
+      }
+    },
+    "qa/post-training:led-edits/nov19-implementation": {
+      "source_sha256": "692e92fe2a54ced76ecb4162e141be9d776ad6770632ae662c071e44b4186237",
+      "reviewed": true,
+      "fields": {
+        "question": "Does successful two-round local repair verify the twelve benchmarks?",
+        "answer": "No. The program executes deterministic LCS and edit transitions, with a clean target only for label construction. It has no model prediction, diffusion SFT, multi-stage training or benchmark answer generation, so it is an L1 mechanism diagnostic.",
+        "example": "Teaching example: replacing the mask with b using the second-round label checks a transition, not a model's ability to generate b."
+      }
+    },
+    "qa/post-training:hint-wam/nov19-basics": {
+      "source_sha256": "87b5150487eed58c32861793a0e94d4466c756dc8ea8d6b4765b51bcc1370982",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is future video unnecessary at deployment?",
+        "answer": "Future video enters only the frozen training teacher through hindsight modules. The student sees the current frame, instruction and proprioception; teacher modules are discarded. Giving the student future frames changes the task.",
+        "example": "Teaching example: demonstration future can resolve left-object/right-object ambiguity, but a deployed robot cannot observe frames that have not happened."
+      }
+    },
+    "qa/post-training:hint-wam/nov19-mechanism": {
+      "source_sha256": "4775fda3c29876b497cae3fcc88c2642c384dd588a8b34d2797d8138da412cb4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use an energy score rather than only matching mean teacher velocity?",
+        "answer": "Without the teacher's future condition, MSE can favor an average of incompatible modes. Teacher-sample attraction and student-sample repulsion match distributions, while BC limits teacher errors.",
+        "example": "Teaching example: valid actions may go left or right around an obstacle, while their average goes straight into it; this illustrates objective design, not a local robot result."
+      }
+    },
+    "qa/post-training:hint-wam/nov19-comparison": {
+      "source_sha256": "b5ba31a3bc5bcf2e7267c8aac646c603c82cb0f8adb25df00b840a50c3f5239c",
+      "reviewed": true,
+      "fields": {
+        "question": "Are its privileged information and outputs the same as Video-OPSD?",
+        "answer": "No. Video-OPSD selects evidence frames and distills text tokens. HINT-WAM reads demonstration future and distills action-chunk distributions; same-backbone and teacher-only future isolation define the method.",
+        "example": "Teaching example: evidence-weighted text-token loss does not train a6.02B WAM action ODE or provide robot success rates."
+      }
+    },
+    "qa/post-training:hint-wam/nov19-implementation": {
+      "source_sha256": "ae4e675db3201566504bc192390c055354bd9596a3c46c119bb6ea3a08732260",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not call a tiny action toy a reproduction this round?",
+        "answer": "The defining method requires the real backbone, hindsight-teacher training and student ODE trajectories. The reported cost is eight GPUs for71.6 hours. An energy-score formula on static random actions is not that chain, so this is review-only DONE, without pending GPU acceptance or automatic retry.",
+        "example": "Teaching example: computing distances among four2D points does not establish retained LIBERO robot skills."
+      }
+    }
+  }
+}

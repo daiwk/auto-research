@@ -1,0 +1,80 @@
+{
+  "schema_version": 2,
+  "key": "led-edits",
+  "device": "cpu",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "lcs_retains_shifted_anchors": true,
+        "insert_targets_right_anchor_and_delete_surplus": true,
+        "insert_preserves_anchor_and_makes_mask": true,
+        "second_round_recovers_target": true,
+        "masked_fallback_makes_progress": true,
+        "trailing_target_gap_has_no_fictitious_anchor": true
+      },
+      "metrics": {
+        "block_length": 4,
+        "lcs_anchors": 3,
+        "insert_targets": 1,
+        "delete_targets": 1
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "lcs_retains_shifted_anchors": true,
+        "insert_targets_right_anchor_and_delete_surplus": true,
+        "insert_preserves_anchor_and_makes_mask": true,
+        "second_round_recovers_target": true,
+        "masked_fallback_makes_progress": true,
+        "trailing_target_gap_has_no_fictitious_anchor": true
+      },
+      "metrics": {
+        "block_length": 4,
+        "lcs_anchors": 3,
+        "insert_targets": 1,
+        "delete_targets": 1
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "lcs_retains_shifted_anchors": true,
+        "insert_targets_right_anchor_and_delete_surplus": true,
+        "insert_preserves_anchor_and_makes_mask": true,
+        "second_round_recovers_target": true,
+        "masked_fallback_makes_progress": true,
+        "trailing_target_gap_has_no_fictitious_anchor": true
+      },
+      "metrics": {
+        "block_length": 4,
+        "lcs_anchors": 3,
+        "insert_targets": 1,
+        "delete_targets": 1
+      }
+    }
+  ],
+  "source_sha256": {
+    "src/auto_research/post_training/led_edits.py": "efae4f86676cffb04d2dffc776bab340a60537a7db9f1f716f4d346f67b7b118"
+  },
+  "source_commit": null,
+  "provenance_note": "Independent working-tree CPU execution; content hashes identify the code. This is not the later frozen-source batch receipt.",
+  "formal_comparison": false,
+  "capability_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false
+}

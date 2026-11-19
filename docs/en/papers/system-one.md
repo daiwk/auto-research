@@ -8,6 +8,8 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [Jeveration: System One Models Now Generate](<https://arxiv.org/abs/2611.24738v1>) | 2026-11-18 | [English](../../system-one/2611.24738-jeveration/README-en.md) · [Chinese](../../system-one/2611.24738-jeveration/README.md) |
+| [EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions](<https://arxiv.org/abs/2611.24616v1>) | 2026-11-18 | [English](../../system-one/2611.24616-egojev/README-en.md) · [Chinese](../../system-one/2611.24616-egojev/README.md) |
 | [Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox](<https://arxiv.org/abs/2610.32955v1>) | 2026-10-23 | [English](../../system-one/2610.32955-typed-inbox-protocol/README-en.md) · [Chinese](../../system-one/2610.32955-typed-inbox-protocol/README.md) |
 | [Jev-DLC: Decision-Level Continual Learning from Typed Feedback](<https://arxiv.org/abs/2610.31521v1>) | 2026-10-22 | [English](../../system-one/2610.31521-jev-dlc/README-en.md) · [Chinese](../../system-one/2610.31521-jev-dlc/README.md) |
 | [When Multiple Choices Are Correct: Asymmetric Probability Allocation in Jev and Other Decision Models](<https://arxiv.org/abs/2610.29217v1>) | 2026-10-21 | [English](../../system-one/2610.29217-jev-multicorrect/README-en.md) · [Chinese](../../system-one/2610.29217-jev-multicorrect/README.md) |

@@ -1,0 +1,48 @@
+{
+  "domain": "recommendation",
+  "key": "mle-agents",
+  "title": "MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems",
+  "paper_url": "https://arxiv.org/abs/2611.23910v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.23910v1",
+  "reviewed_version": "v1",
+  "published": "2026-11-18",
+  "published_at": "2026-11-18T06:00:43Z",
+  "detail_path": "recommendation-components/2611.23910-mle-agents/README.md",
+  "topic": [
+    "研究与服务闭环",
+    "自动模型研发"
+  ],
+  "first_author": "Matthew Li",
+  "first_author_affiliation": "Meta Platforms",
+  "verified_priority_organizations": [
+    "Meta"
+  ],
+  "code": null,
+  "code_status": "固定v1及关联来源未找到可获取的本论文专用作者代码；依赖仓库不计为本篇开源。",
+  "method_source_sha256": "4aa9562bb810c92ff3f697874c16ea8b5e3fb65729c50b4cf7a2207f839d26f5",
+  "adapter": null,
+  "priority": "P0",
+  "intake_class": "new_paper",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l0_interface",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/pdf/2611.23910v1",
+    "available_resource": "one A100/A30 or local Mac",
+    "paper_configuration": "Section3.3 reports median training/evaluation time3.54hours per candidate. The full campaign completed1252 jobs on hundreds of millions of private examples and production traffic; one GPU cannot reproduce it.",
+    "basis": "§3.3记录候选训练评估中位耗时3.54小时，完整活动1252个完成任务并依赖亿级私有样本和生产流量。单卡不能承担原活动。",
+    "decision": "成本过高，不复现（审查 DONE）"
+  },
+  "summary": "Meta把提假设、改代码、训练和读指标组成有人监督的模型研发循环。2.0每轮名义上并行七个候选和一个方差探针，使用与线上影响校准过的加权NE，而不是只追逐点击AUPRC。失败块名单、结构化输出和只回传近期未采纳赢家控制上下文陈旧；最终模型仍由工程师审核并独立做线上实验。 本地边界：本地只执行目标与完成/准入接口。没有运行Claude研究调用、候选代码生成、私有数据分布式训练或线上A/B，也没有新增可执行Evolve搜索策略。合成输入不代表Meta模型指标。",
+  "local_operator": "auto_research.reproductions.mle_agents_components.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.reproductions.mle_agents_components import diagnostic; print(diagnostic(42, device=\"cpu\"))'"
+}

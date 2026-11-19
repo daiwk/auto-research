@@ -4,6 +4,9 @@
 
 ## 2026
 
+- **2026-11-18** — [EgoJev](../2611.24616-egojev/README.md)：显式决策概率的窗口融合和分位数选帧；CPU后处理组件，完整VLM视频矩阵不复现。
+- **2026-11-18** — [Jeveration](../2611.24738-jeveration/README.md)：共享随机状态的一次前向图像code生成；完整多日训练不复现，仅资料收录。
+
 - **2026-10-23** — [Typed Inbox](../2610.32955-typed-inbox-protocol/README.md)：冻结模型可见快照、整线程隔离，以validation成本选行动阈值；L0协议不是邮箱模型复现。
 - **2026-10-21** — [When Multiple Choices Are Correct](../2610.29217-jev-multicorrect/README.md)：排序正确不等于恢复全部正确选项；本地仅CPU评分、概率精度与validation/test隔离协议，完整付费API实验不复现。
 - **2026-10-20** — [System One多模态重排](../../multimodal-models/2610.28435-system-one-rerank/README.md)：同一图文上下文一次前向读取候选概率；A100真实小VLM接口诊断，不是完整27B评测。

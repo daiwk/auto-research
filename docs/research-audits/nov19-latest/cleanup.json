@@ -1,0 +1,20 @@
+{
+  "cleaned_on": "2026-11-19",
+  "disposable_files_removed": 40,
+  "disposable_bytes_removed": 105179712,
+  "site_build_bytes_removed": 1034885189,
+  "total_bytes_removed": 1140064901,
+  "scope": [
+    "this batch public-paper PDF downloads and rendering previews",
+    "this batch redundant GPU source archive",
+    "completed local site build",
+    "remote batch-only temporary source removed after results retrieved and verified"
+  ],
+  "preserved": [
+    "source and reviewed paper figures",
+    "all actual results including independent pre-fix records",
+    "frozen source proof and GPU receipts",
+    "metadata/HTML/XML caches",
+    "unrelated files and reusable model/data caches"
+  ]
+}

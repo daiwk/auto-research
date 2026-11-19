@@ -7,7 +7,7 @@ hide:
 
 # 类型化读出：从生成句子到候选分布
 
-[结构化决策](index.md) / 36 个问题 · 9 篇论文
+[结构化决策](index.md) / 44 个问题 · 11 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">36 个问题 · 9 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">44 个问题 · 11 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:egojev" data-paper-title="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions" data-learning-pending="false" data-level="basics" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions system-one Harvard University 2026-11-18 同一冻结VLM把带数字标签的候选缩略图放在一个prompt中，读取完整标签的条件概率而不是生成时间文本。粗分布决定细看窗口，细分布先保留窗口粗概率总量，再与对应粗分布做几何平均。最后在时间的分段均匀分布上取中点分位数，分配有限回答帧。 无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。诊断概率是合成算例，不是VLM能力证据；仅L1 CPU后处理；无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。CPU组件仅接受显式给定的候选概率，执行窗口质量/稳定top-k、细层质量缩放、几何融合和分段均匀逆CDF。输入不含gold证据或答案；未实现VLM标签打分、tokenizer、图像预填缓存、label permutation检查、视频解码或回答模型。诊断概率是合成算例，不是VLM能力证据；L1只指后处理机制。  类型化决策 视频证据与帧预算 结构化决策 类型化读出：从生成句子到候选分布 为什么候选分布而不只一个最优帧有用？ 分布同时表示多个可能证据位置，能让回答帧在确信处集中、不确定处展开；单个argmax会丢掉预算分配信息。 教学例：两个窗口各占50%时，8帧应覆盖两边，而非全堆在一个并列最优点。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<span id="paper-system-one-egojev-f4f3b229" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-31f0885d2bb94207">为什么候选分布而不只一个最优帧有用？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=system-one%3Aegojev">EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Harvard University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>分布同时表示多个可能证据位置，能让回答帧在确信处集中、不确定处展开；单个argmax会丢掉预算分配信息。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个窗口各占50%时，8帧应覆盖两边，而非全堆在一个并列最优点。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24616v1">原论文</a> · <a href="../../../../system-one/2611.24616-egojev/">实现解读</a> · <a href="#qa-31f0885d2bb94207">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:egojev" data-paper-title="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions" data-learning-pending="false" data-level="mechanism" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions system-one Harvard University 2026-11-18 同一冻结VLM把带数字标签的候选缩略图放在一个prompt中，读取完整标签的条件概率而不是生成时间文本。粗分布决定细看窗口，细分布先保留窗口粗概率总量，再与对应粗分布做几何平均。最后在时间的分段均匀分布上取中点分位数，分配有限回答帧。 无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。诊断概率是合成算例，不是VLM能力证据；仅L1 CPU后处理；无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。CPU组件仅接受显式给定的候选概率，执行窗口质量/稳定top-k、细层质量缩放、几何融合和分段均匀逆CDF。输入不含gold证据或答案；未实现VLM标签打分、tokenizer、图像预填缓存、label permutation检查、视频解码或回答模型。诊断概率是合成算例，不是VLM能力证据；L1只指后处理机制。  类型化决策 视频证据与帧预算 结构化决策 类型化读出：从生成句子到候选分布 细读概率能直接与粗概率相乘吗？ 先归一每个细读窗口并乘其粗总质量，再做平方根几何融合和全局归一。普通乘积会比原式更尖锐，未细读窗口也不能丢掉。 教学例：一个窗口仅有20%粗质量，即使内部最高概率为1，也不应先变成全视频100%。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-835f1c5c4b08b14c">细读概率能直接与粗概率相乘吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=system-one%3Aegojev">EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Harvard University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先归一每个细读窗口并乘其粗总质量，再做平方根几何融合和全局归一。普通乘积会比原式更尖锐，未细读窗口也不能丢掉。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个窗口仅有20%粗质量，即使内部最高概率为1，也不应先变成全视频100%。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24616v1">原论文</a> · <a href="../../../../system-one/2611.24616-egojev/">实现解读</a> · <a href="#qa-835f1c5c4b08b14c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:egojev" data-paper-title="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions" data-learning-pending="false" data-level="comparison" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions system-one Harvard University 2026-11-18 同一冻结VLM把带数字标签的候选缩略图放在一个prompt中，读取完整标签的条件概率而不是生成时间文本。粗分布决定细看窗口，细分布先保留窗口粗概率总量，再与对应粗分布做几何平均。最后在时间的分段均匀分布上取中点分位数，分配有限回答帧。 无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。诊断概率是合成算例，不是VLM能力证据；仅L1 CPU后处理；无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。CPU组件仅接受显式给定的候选概率，执行窗口质量/稳定top-k、细层质量缩放、几何融合和分段均匀逆CDF。输入不含gold证据或答案；未实现VLM标签打分、tokenizer、图像预填缓存、label permutation检查、视频解码或回答模型。诊断概率是合成算例，不是VLM能力证据；L1只指后处理机制。  类型化决策 视频证据与帧预算 结构化决策 类型化读出：从生成句子到候选分布 与System One多模态重排的候选排序有何不同？ 这里用分布的逆CDF选择时间中点分位数，而不是按概率取top-k；分位数可能在同一高质量bin内取多个不同时间。 教学例：后半段概率为1、总时长10秒、预算2时为6.25和8.75秒，不是两个7.5秒。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-9556f608ecd6322a">与System One多模态重排的候选排序有何不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=system-one%3Aegojev">EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Harvard University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这里用分布的逆CDF选择时间中点分位数，而不是按概率取top-k；分位数可能在同一高质量bin内取多个不同时间。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：后半段概率为1、总时长10秒、预算2时为6.25和8.75秒，不是两个7.5秒。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24616v1">原论文</a> · <a href="../../../../system-one/2611.24616-egojev/">实现解读</a> · <a href="#qa-9556f608ecd6322a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:egojev" data-paper-title="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions" data-learning-pending="false" data-level="implementation" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions system-one Harvard University 2026-11-18 同一冻结VLM把带数字标签的候选缩略图放在一个prompt中，读取完整标签的条件概率而不是生成时间文本。粗分布决定细看窗口，细分布先保留窗口粗概率总量，再与对应粗分布做几何平均。最后在时间的分段均匀分布上取中点分位数，分配有限回答帧。 无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。诊断概率是合成算例，不是VLM能力证据；仅L1 CPU后处理；无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。CPU组件仅接受显式给定的候选概率，执行窗口质量/稳定top-k、细层质量缩放、几何融合和分段均匀逆CDF。输入不含gold证据或答案；未实现VLM标签打分、tokenizer、图像预填缓存、label permutation检查、视频解码或回答模型。诊断概率是合成算例，不是VLM能力证据；L1只指后处理机制。  类型化决策 视频证据与帧预算 结构化决策 类型化读出：从生成句子到候选分布 CPU后处理通过为什么不能宣称62%准确率？ 给定概率并未验证VLM是否找到正确证据；完整方法还需多token标签读出、真实视频与回答评测。合成输入不冒充模型分数。 教学例：手工把证据窗口设为概率1，只能测试分位数公式，不能测试证据识别。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-0ffe193fd15c0c13">CPU后处理通过为什么不能宣称62%准确率？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=system-one%3Aegojev">EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Harvard University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>给定概率并未验证VLM是否找到正确证据；完整方法还需多token标签读出、真实视频与回答评测。合成输入不冒充模型分数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：手工把证据窗口设为概率1，只能测试分位数公式，不能测试证据识别。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24616v1">原论文</a> · <a href="../../../../system-one/2611.24616-egojev/">实现解读</a> · <a href="#qa-0ffe193fd15c0c13">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:jeveration" data-paper-title="Jeveration: System One Models Now Generate" data-learning-pending="false" data-level="basics" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="Jeveration: System One Models Now Generate system-one National University of Singapore 2026-11-18 把图像表示为128个离散code的联合Choice，所有位置共享随机状态，而不是把各位置的边缘分布独立采样。冻结Qwen3.5-4B配共享LoRA与任务head，先学masked图像分布，再以distribution matching和置信纠正训练单步决策；同一checkpoint还做图到图与dense prediction。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录，无模型、head、训练、生成或指标文件。不能用几个共享随机数加线性层假装得到论文的联合图像生成。  类型化决策 联合图像生成 结构化决策 类型化读出：从生成句子到候选分布 为什么逐位置独立采样容易不协调？ 各位置可能选择不同有效图像的局部模式；共享随机状态让它们在同一实现条件下决定，再形成联合混合分布。 教学例：左半边选择白天、右半边选择夜晚都是合理边缘，却不是同一场景。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<span id="paper-system-one-jeveration-85faa22e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-e56bf6c016e5b796">为什么逐位置独立采样容易不协调？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=system-one%3Ajeveration">Jeveration: System One Models Now Generate</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>各位置可能选择不同有效图像的局部模式；共享随机状态让它们在同一实现条件下决定，再形成联合混合分布。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：左半边选择白天、右半边选择夜晚都是合理边缘，却不是同一场景。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24738v1">原论文</a> · <a href="../../../../system-one/2611.24738-jeveration/">实现解读</a> · <a href="#qa-e56bf6c016e5b796">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:jeveration" data-paper-title="Jeveration: System One Models Now Generate" data-learning-pending="false" data-level="mechanism" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="Jeveration: System One Models Now Generate system-one National University of Singapore 2026-11-18 把图像表示为128个离散code的联合Choice，所有位置共享随机状态，而不是把各位置的边缘分布独立采样。冻结Qwen3.5-4B配共享LoRA与任务head，先学masked图像分布，再以distribution matching和置信纠正训练单步决策；同一checkpoint还做图到图与dense prediction。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录，无模型、head、训练、生成或指标文件。不能用几个共享随机数加线性层假装得到论文的联合图像生成。  类型化决策 联合图像生成 结构化决策 类型化读出：从生成句子到候选分布 只把所有位置加同一随机输入是否足够？ 不够。模型可忽略随机状态；原文先学习masked分布，再做distribution matching与纠正监督来教会它使用状态。 教学例：输出恒定图片也可完全忽略随机数，形式上有xi但没有多样性。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-62a879e83ba157cd">只把所有位置加同一随机输入是否足够？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=system-one%3Ajeveration">Jeveration: System One Models Now Generate</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不够。模型可忽略随机状态；原文先学习masked分布，再做distribution matching与纠正监督来教会它使用状态。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：输出恒定图片也可完全忽略随机数，形式上有xi但没有多样性。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24738v1">原论文</a> · <a href="../../../../system-one/2611.24738-jeveration/">实现解读</a> · <a href="#qa-62a879e83ba157cd">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:jeveration" data-paper-title="Jeveration: System One Models Now Generate" data-learning-pending="false" data-level="comparison" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="Jeveration: System One Models Now Generate system-one National University of Singapore 2026-11-18 把图像表示为128个离散code的联合Choice，所有位置共享随机状态，而不是把各位置的边缘分布独立采样。冻结Qwen3.5-4B配共享LoRA与任务head，先学masked图像分布，再以distribution matching和置信纠正训练单步决策；同一checkpoint还做图到图与dense prediction。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录，无模型、head、训练、生成或指标文件。不能用几个共享随机数加线性层假装得到论文的联合图像生成。  类型化决策 联合图像生成 结构化决策 类型化读出：从生成句子到候选分布 与LLM2Jev有限候选Choice多了什么困难？ 整图有多个位置，既要符合提示又要跨位置协调；单个候选softmax没有学习空间联合分布的负担。 教学例：选一张现成图片与生成128个相互一致的code不是同一任务。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-0be71085f208d064">与LLM2Jev有限候选Choice多了什么困难？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=system-one%3Ajeveration">Jeveration: System One Models Now Generate</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>整图有多个位置，既要符合提示又要跨位置协调；单个候选softmax没有学习空间联合分布的负担。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：选一张现成图片与生成128个相互一致的code不是同一任务。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24738v1">原论文</a> · <a href="../../../../system-one/2611.24738-jeveration/">实现解读</a> · <a href="#qa-0be71085f208d064">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:jeveration" data-paper-title="Jeveration: System One Models Now Generate" data-learning-pending="false" data-level="implementation" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="Jeveration: System One Models Now Generate system-one National University of Singapore 2026-11-18 把图像表示为128个离散code的联合Choice，所有位置共享随机状态，而不是把各位置的边缘分布独立采样。冻结Qwen3.5-4B配共享LoRA与任务head，先学masked图像分布，再以distribution matching和置信纠正训练单步决策；同一checkpoint还做图到图与dense prediction。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录，无模型、head、训练、生成或指标文件。不能用几个共享随机数加线性层假装得到论文的联合图像生成。  类型化决策 联合图像生成 结构化决策 类型化读出：从生成句子到候选分布 为什么这次不实现一个随机head就算完成？ 核心是经过两阶段训练的联合图像分布和解码链路，廉价head fixture不能替代。完整实验成本已由原文四卡四天证明。 教学例：随机输出128个token无法验证GenEval或77.8ms端到端结果。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-0f50d6f9331fd2a1">为什么这次不实现一个随机head就算完成？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=system-one%3Ajeveration">Jeveration: System One Models Now Generate</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>核心是经过两阶段训练的联合图像分布和解码链路，廉价head fixture不能替代。完整实验成本已由原文四卡四天证明。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：随机输出128个token无法验证GenEval或77.8ms端到端结果。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24738v1">原论文</a> · <a href="../../../../system-one/2611.24738-jeveration/">实现解读</a> · <a href="#qa-0f50d6f9331fd2a1">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:editjev" data-paper-title="EditJev: System One Routing for Image Editing Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="system-one" data-topic="system-one/typed-readout" data-search="EditJev: System One Routing for Image Editing Models 基础模型 Peking University 2026-10-23 固定使用一个图像编辑器会忽视样本级互补性。EditJev先离线让所有候选产生输出并由judge评分，再将可靠质量差转为pairwise监督；router不生成模型名称，而直接输出固定候选顺序的utility vector。推理无需先运行各编辑器，仅对utility加beta倍固定速度分后选一次argmax。 成本过高，不复现（审查 DONE）。完整方案Qwen3-VL-4B LoRA router，五个编辑器FLUX.2 Klein4B/9B、Kontext、OmniGen2、Qwen-Image-Edit（20B），离线所有候选生成及Qwen3-VL-32B/GPT judge，737 ImgEdit+606 GEdit-En请求和多组消融。论文RTX PRO6000延迟计时不适合伪装成A100本地实测，不下载多套编辑权重或批量调API。本轮已在CPU及真实NVIDIA A100上执行同一冻结版本、42/43/44三个种子：独立机制指标、脱敏GPU凭证。仅验收下述L1组件，不宣称完整模型能力。  System One / JEV 多模态模型路由 结构化决策 类型化读出：从生成句子到候选分布 EditJev预测的是编辑后的图像吗？ 不是。它根据请求预测固定候选编辑器的效用向量，再选择一个编辑器执行。图像生成由被选编辑器完成，路由训练依赖离线多编辑结果的评审监督。 例如用户要改衣服颜色，路由器先选编辑器，而不是自己绘制新衣服。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
 <span id="paper-foundation-models-editjev-bb39e611" class="ar-learning-paper-anchor"></span>

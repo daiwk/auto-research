@@ -5,7 +5,7 @@
     "typed-readout": {
       "title": "同样输出候选分布，读出位置与缓存边界为何不同？",
       "thesis": "类型化决策先把输出空间限定下来，但“无需生成长句”并不指定唯一架构。LLM2Jev读选项标签的语言概率，System One重排读首答案位置的候选字母，MJev-Spatial复用原生注意力Q/K，MetaEncoder则把请求和候选独立编码。先看打分依赖谁，再判断是否可缓存、能否开放检索，以及连续输出怎样离散化。",
-      "updated": "2026-10-27",
+      "updated": "2026-11-19",
       "axes": [
         "评分来自语言词表、原生注意力还是向量相似度",
         "候选是否联合上下文化及哪些表示可以缓存",
@@ -52,6 +52,26 @@
             "核心公式",
             "复现边界"
           ]
+        },
+        {
+          "paper": "system-one:jeveration",
+          "position": "把图像表示为128个离散code的联合Choice，所有位置共享随机状态，而不是把各位置的边缘分布独立采样。冻结Qwen3.5-4B配共享LoRA与任务head，先学masked图像分布，再以distribution matching和置信纠正训练单步决策；同一checkpoint还做图到图与dense prediction。",
+          "tradeoff": "LLM2Jev把候选标签读成有限决策分布；Jeveration还必须协调空间上众多输出，并学会使用共同随机状态。单选候选打分成功，不证明整图联合分布或图像质量。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
+        },
+        {
+          "paper": "system-one:egojev",
+          "position": "同一冻结VLM把带数字标签的候选缩略图放在一个prompt中，读取完整标签的条件概率而不是生成时间文本。粗分布决定细看窗口，细分布先保留窗口粗概率总量，再与对应粗分布做几何平均。最后在时间的分段均匀分布上取中点分位数，分配有限回答帧。",
+          "tradeoff": "System One多模态重排把一个联合候选分布用于排序；EgoJev将分布用于时间预算分配。前者单token字母读出不能不加检查地替代后者多token数字标签概率，frame quantile也不是单纯top-k帧。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -69,6 +89,22 @@
           "body": "MetaEncoder的候选只按自己的内容编码，适合离线建向量索引；System One重排让候选共同进入上下文，换一组对手可能改变其上下文化结果。MetaEncoder闭集请求还可以包含选项，因此候选缓存可复用不等于请求向量对选项变化不变。前者偏向可索引性，后者保留联合比较，不能从接口直接判定准确率胜负。",
           "papers": [
             "foundation-models:metaencoder",
+            "multimodal-models:system-one-rerank"
+          ]
+        },
+        {
+          "title": "Jeveration：以共享随机状态协调一次前向图像决策",
+          "body": "LLM2Jev把候选标签读成有限决策分布；Jeveration还必须协调空间上众多输出，并学会使用共同随机状态。单选候选打分成功，不证明整图联合分布或图像质量。 给定共享xi后可并行选择，但对xi求混合后各位置不再必须独立。仅添加随机噪声不够：原文指出直接监督可忽略该状态。纠正target在训练时重mask最低置信的一半位置，由冻结的第一阶段模型补全；推理仍是一次生成前向，不是把训练辅助步骤算成免费。",
+          "papers": [
+            "system-one:jeveration",
+            "foundation-models:llm2jev"
+          ]
+        },
+        {
+          "title": "EgoJev：以决策分布几何融合与分位数分配视频帧",
+          "body": "System One多模态重排把一个联合候选分布用于排序；EgoJev将分布用于时间预算分配。前者单token字母读出不能不加检查地替代后者多token数字标签概率，frame quantile也不是单纯top-k帧。 细读窗口的局部分布归一后乘该窗口的粗概率总量；未细读窗口均摊其窗口质量。平方根不同于普通乘积，后者过度锐化。k=0直接保留单层粗分布。分位数需在bin内插值而不是一律取bin中心。标签如17]可能多token，完整读出需逐条件概率相乘并含终止]，本地不实现这部分。",
+          "papers": [
+            "system-one:egojev",
             "multimodal-models:system-one-rerank"
           ]
         }
@@ -103,6 +139,26 @@
             "multimodal-models:system-one-rerank",
             "foundation-models:metaencoder"
           ]
+        },
+        {
+          "id": "nov19-jeveration",
+          "question": "与LLM2Jev有限候选Choice多了什么困难？",
+          "answer": "整图有多个位置，既要符合提示又要跨位置协调；单个候选softmax没有学习空间联合分布的负担。",
+          "example": "教学例：选一张现成图片与生成128个相互一致的code不是同一任务。",
+          "papers": [
+            "system-one:jeveration",
+            "foundation-models:llm2jev"
+          ]
+        },
+        {
+          "id": "nov19-egojev",
+          "question": "与System One多模态重排的候选排序有何不同？",
+          "answer": "这里用分布的逆CDF选择时间中点分位数，而不是按概率取top-k；分位数可能在同一高质量bin内取多个不同时间。",
+          "example": "教学例：后半段概率为1、总时长10秒、预算2时为6.25和8.75秒，不是两个7.5秒。",
+          "papers": [
+            "system-one:egojev",
+            "multimodal-models:system-one-rerank"
+          ]
         }
       ],
       "reviewed_papers": [
@@ -114,7 +170,9 @@
         "foundation-models:metaencoder",
         "foundation-models:mjev-spatial",
         "foundation-models:pathjev",
-        "multimodal-models:system-one-rerank"
+        "multimodal-models:system-one-rerank",
+        "system-one:jeveration",
+        "system-one:egojev"
       ],
       "updates": [
         {
@@ -140,6 +198,30 @@
             "foundation-models:metaencoder": "1da67427bf6e35e892b84a7539d8a72c7c5ab9ecee11771fed618ee2fbe2b0ee",
             "foundation-models:mjev-spatial": "1f15f3a42bde2dbe68cfcf97e6e198477415bbe7cc0402669bb3c59425a3bf17",
             "foundation-models:pathjev": "f9e5e3a10bb7f3bc3bcb2dd317150055ad3e3e0698bbf656fced223e7240bb52",
+            "multimodal-models:system-one-rerank": "2540a111fd8bb9ed5a79346d60470b71f76b81759e3a6012e6e5e1f2a7c22efc"
+          }
+        },
+        {
+          "date": "2026-11-19",
+          "papers": [
+            "system-one:jeveration",
+            "foundation-models:llm2jev"
+          ],
+          "summary": "LLM2Jev把候选标签读成有限决策分布；Jeveration还必须协调空间上众多输出，并学会使用共同随机状态。单选候选打分成功，不证明整图联合分布或图像质量。 高成本完整实验不复现，组件与能力证据分开。",
+          "source_revisions": {
+            "system-one:jeveration": "2778cec61fd33d1beebf345e8dd0c31972d3e1a202797960b49dfb61221270c3",
+            "foundation-models:llm2jev": "5fb8241b7b4af53bfcef2035c9ab72427d02fafaf7ef86cc180484a92f681019"
+          }
+        },
+        {
+          "date": "2026-11-19",
+          "papers": [
+            "system-one:egojev",
+            "multimodal-models:system-one-rerank"
+          ],
+          "summary": "System One多模态重排把一个联合候选分布用于排序；EgoJev将分布用于时间预算分配。前者单token字母读出不能不加检查地替代后者多token数字标签概率，frame quantile也不是单纯top-k帧。 高成本完整实验不复现，组件与能力证据分开。",
+          "source_revisions": {
+            "system-one:egojev": "37657219b8d52e742e72ac97cc3b9eb9a1e03ef03d2f9c795be8bbd165d67673",
             "multimodal-models:system-one-rerank": "2540a111fd8bb9ed5a79346d60470b71f76b81759e3a6012e6e5e1f2a7c22efc"
           }
         }

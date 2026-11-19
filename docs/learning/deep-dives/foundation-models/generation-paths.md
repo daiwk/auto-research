@@ -7,7 +7,7 @@ hide:
 
 # 少做串行步骤：验证草稿与学习迭代不是同一条路
 
-[基础模型](../index.md) · 更新 2026-11-12 · 17 篇主题资料 / 8 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-19 · 18 篇主题资料 / 9 篇重点对照
 
 推测解码用便宜提案换昂贵验证批次，精确校正可保持原 target 分布；扩散语言和数据空间迭代则改变生成轨迹或训练目标。比较时先问谁决定最终分布，再问每步做什么、跨步保留什么，以及 NFE 或接受长度能否转成真实时间收益。
 
@@ -33,6 +33,7 @@ hide:
 | [Few-Step Generation via Data-Space Iteration](../../../foundation-models/2610.12102-data-space-iteration/README.md) · [原始来源](https://arxiv.org/abs/2610.12102)<br>章节：背景与主要改动、核心公式、复现边界与 Evolve | 固定一份噪声，在数据预测空间反复精炼；仅当前 refinement 建生成器梯度，teacher/fake 给蒸馏方向。 | 步号不是 flow time，且目标不与语言模型相同；本地缩小图像模型三seed有正有负，像素特征距离不是 Inception FID。 |
 | [Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models](../../../foundation-models/2611.14387-b3/README.md) · [原始来源](https://arxiv.org/abs/2611.14387v1)<br>章节：核心公式、数据协议与代码映射、结果与复现边界 | 在兼容self-editing的扩散解码中重叠当前/未来两块，以块因果mask保护当前输出；用上一拍前沿左侧熵的跨块候选均值控制spawn。 | 门控不是扩散backbone，不能把AR模型直接变双向DLM；候选排除frontier、future-active阶段与EOS，并保留一拍滞后。局部注意力不变不证明整段分布不变、质量或TPS。 |
 | [REAL Loss: Optimizing Real Expected Acceptance Length for Speculative Decoding](../../../foundation-models/2611.14399-real-loss/README.md) · [原始来源](https://arxiv.org/abs/2611.14399)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 从target采样轨迹以q/p构造真实接受分支质量，末步边缘化得到可微EAL训练目标；补充draft训练，不替代拒绝校正verifier。 | 原始投机解码关注保持target分布的推理正确性，REAL关注固定验证过程下如何训练draft；本地只测小张量期望与梯度，不训练35Btarget/完整drafter。 |
+| [NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding](../../../foundation-models/2611.23835-narrow-spec/README.md) · [原始来源](https://arxiv.org/abs/2611.23835v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 把DFlash/EAGLE-3的整个残差宽度设为目标的二分之一或四分之一，并从头训练窄草稿；边界adapter连接目标hidden和共享词表。DFlash输出adapter可与目标head相乘，EAGLE-3输入adapter可折进embedding。head数量和head维度保持不变，因此KV cache不因残差流变窄而自动缩小。 | LoopSpec改变looped模型的推测/验证流水线；NarrowSpec改变草稿网络的残差宽度，并保持目标verify不变。一个降低等待，一个减少草稿计算，不能用折叠等价证明任一方法的接受率。 |
 
 </div>
 
@@ -61,6 +62,12 @@ dQwen3.5把混合attention/RNN骨干改成双向条件并用掩码去噪训练�
 原始Speculative Decoding从draft q提出token，以min(1,p/q)接受并从[p−q]+校正，保证输出target分布。REAL的轨迹却由target p采样，用min(1,q/p)把其质量变成min(p,q)，训练更合适的draft。两者不是替代算法；错误交换比例会分别破坏推理分布或训练目标。一个loss在某点与代理值相同，也不能证明其梯度方向正确。
 
 对照来源：[real-loss](../../../foundation-models/2611.14399-real-loss/README.md) · [speculative-decoding](../../../reproductions/2211.17192-speculative-decoding/README.md)
+
+### NarrowSpec：缩窄整个草稿残差流，而不只是词表投影
+
+LoopSpec改变looped模型的推测/验证流水线；NarrowSpec改变草稿网络的残差宽度，并保持目标verify不变。一个降低等待，一个减少草稿计算，不能用折叠等价证明任一方法的接受率。 两侧线性映射之间没有额外非线性或norm才能直接折叠。浮点结合顺序变化会改变舍入，不能要求bitwise一致；Q(WlmWout)一般不等于Q(Wlm)Wout，预先量化的head不能据此保证等价。
+
+对照来源：[narrow-spec](../../../foundation-models/2611.23835-narrow-spec/README.md) · [loopspec](../../../foundation-models/2609.17184-loopspec/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -116,9 +123,23 @@ dQwen3.5把混合attention/RNN骨干改成双向条件并用掩码去噪训练�
 
     对照来源：[real-loss](../../../foundation-models/2611.14399-real-loss/README.md) · [speculative-decoding](../../../reproductions/2211.17192-speculative-decoding/README.md)
 
+### 与LoopSpec降低推理开销的方向有什么不同？ {#cross-nov19-narrow-spec}
+
+??? note "展开答案与例子"
+
+    **答案：** LoopSpec安排循环深度间的推测与验证；NarrowSpec减少草稿每次前向的残差宽度，不改变目标verify。
+
+    **教学例子：** 教学例：较窄草稿仍可能因为接受长度变短而抵消每轮节省。
+
+    对照来源：[narrow-spec](../../../foundation-models/2611.23835-narrow-spec/README.md) · [loopspec](../../../foundation-models/2609.17184-loopspec/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-19** · LoopSpec改变looped模型的推测/验证流水线；NarrowSpec改变草稿网络的残差宽度，并保持目标verify不变。一个降低等待，一个减少草稿计算，不能用折叠等价证明任一方法的接受率。 本地组件合同和高成本不复现分别记录。
+
+涉及：[narrow-spec](../../../foundation-models/2611.23835-narrow-spec/README.md) · [loopspec](../../../foundation-models/2609.17184-loopspec/README.md)
 
 **2026-11-12** · 补入真实接受分支的EAL训练目标，将target采样q/p训练权重与draft提案p/q推理校正区分；A100三seed仅验证损失/梯度机制，完整训练成本过高不复现。
 
@@ -132,7 +153,7 @@ dQwen3.5把混合attention/RNN骨干改成双向条件并用掩码去噪训练�
 
 覆盖 15 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 17 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 18 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -153,6 +174,7 @@ dQwen3.5把混合attention/RNN骨干改成双向条件并用掩码去噪训练�
 - [Windowed-MTP: Removing the Full-Context Draft-KV Tax at Million-Token Context](../../../reproductions/2607.21535-windowed-mtp/README.md)
 - [Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models](../../../foundation-models/2611.14387-b3/README.md)
 - [REAL Loss: Optimizing Real Expected Acceptance Length for Speculative Decoding](../../../foundation-models/2611.14399-real-loss/README.md)
+- [NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding](../../../foundation-models/2611.23835-narrow-spec/README.md)
 
 </details>
 

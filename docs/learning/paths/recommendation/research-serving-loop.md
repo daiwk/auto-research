@@ -7,7 +7,7 @@ hide:
 
 # 自动研究与高效上线
 
-[搜广推](index.md) / 80 个问题 · 20 篇论文
+[搜广推](index.md) / 88 个问题 · 22 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">80 个问题 · 20 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">88 个问题 · 22 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:mars-fapo" data-paper-title="MARS Technical Report" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="MARS Technical Report 搜广推与 LLM 应用 Taobao 2026-11-18 MARS让近线0.6B策略为用户产生跨召回、粗排、精排和重排的七维配置，经校验后缓存，在线始终不等待LLM。SFT建立合法格式，FAPO把偏好比较集中到实际不同的动作值token，最后GRPO在沙箱回放和冻结奖励模型上继续优化。正文版权行为Taobao，贡献者按名字母排序，不虚构个人一作机构。 成本过高，不复现（审查 DONE）；CPU诊断。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。本地只实现posterior启发式权重、弱证据翻转规则与FAPO张量损失；没有0.6B生成、字段tokenizer、SFT/GRPO、Sandbox、奖励模型、iGraph缓存或实时推荐。结构token仍有生成梯度，rejected非动作token没有偏好梯度。  研究与服务闭环 多阶段推荐编排 搜广推 自动研究与高效上线 MARS为什么不增加同步LLM延迟，却不等于免费？ LLM近线生成并缓存，在线只消费合法配置；近线推理、刷新和缓存仍耗资源。 教学例：线上平均少12ms不代表0.6B解码快12ms。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<span id="paper-recommendation-mars-fapo-56550ed5" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f0778d93ff438c49">MARS为什么不增加同步LLM延迟，却不等于免费？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Amars-fapo">MARS Technical Report</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Taobao</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>LLM近线生成并缓存，在线只消费合法配置；近线推理、刷新和缓存仍耗资源。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：线上平均少12ms不代表0.6B解码快12ms。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24006v1">原论文</a> · <a href="../../../../recommendation-components/2611.24006-mars-fapo/">实现解读</a> · <a href="#qa-f0778d93ff438c49">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:mars-fapo" data-paper-title="MARS Technical Report" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="MARS Technical Report 搜广推与 LLM 应用 Taobao 2026-11-18 MARS让近线0.6B策略为用户产生跨召回、粗排、精排和重排的七维配置，经校验后缓存，在线始终不等待LLM。SFT建立合法格式，FAPO把偏好比较集中到实际不同的动作值token，最后GRPO在沙箱回放和冻结奖励模型上继续优化。正文版权行为Taobao，贡献者按名字母排序，不虚构个人一作机构。 成本过高，不复现（审查 DONE）；CPU诊断。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。本地只实现posterior启发式权重、弱证据翻转规则与FAPO张量损失；没有0.6B生成、字段tokenizer、SFT/GRPO、Sandbox、奖励模型、iGraph缓存或实时推荐。结构token仍有生成梯度，rejected非动作token没有偏好梯度。  研究与服务闭环 多阶段推荐编排 搜广推 自动研究与高效上线 ActionMask只学习变化值，为何结构token仍有梯度？ mask只限制偏好odds项；chosen全回答生成anchor保持不变，仍监督结构。 教学例：rejected共享括号梯度为0，chosen括号仍受生成损失约束。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-967094f5cf7d61af">ActionMask只学习变化值，为何结构token仍有梯度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Amars-fapo">MARS Technical Report</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Taobao</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>mask只限制偏好odds项；chosen全回答生成anchor保持不变，仍监督结构。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：rejected共享括号梯度为0，chosen括号仍受生成损失约束。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24006v1">原论文</a> · <a href="../../../../recommendation-components/2611.24006-mars-fapo/">实现解读</a> · <a href="#qa-967094f5cf7d61af">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:mars-fapo" data-paper-title="MARS Technical Report" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="MARS Technical Report 搜广推与 LLM 应用 Taobao 2026-11-18 MARS让近线0.6B策略为用户产生跨召回、粗排、精排和重排的七维配置，经校验后缓存，在线始终不等待LLM。SFT建立合法格式，FAPO把偏好比较集中到实际不同的动作值token，最后GRPO在沙箱回放和冻结奖励模型上继续优化。正文版权行为Taobao，贡献者按名字母排序，不虚构个人一作机构。 成本过高，不复现（审查 DONE）；CPU诊断。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。本地只实现posterior启发式权重、弱证据翻转规则与FAPO张量损失；没有0.6B生成、字段tokenizer、SFT/GRPO、Sandbox、奖励模型、iGraph缓存或实时推荐。结构token仍有生成梯度，rejected非动作token没有偏好梯度。  研究与服务闭环 多阶段推荐编排 搜广推 自动研究与高效上线 MARS和EvoPilot都是Agent，有什么根本区别？ MARS训练用户流水线动作；EvoPilot审核模型开发比较证据。配置格式合法不等于实验结论可信。 教学例：合法Minimal动作不能代替控制/实验模型的数据版本核对。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e9468abc497a0466">MARS和EvoPilot都是Agent，有什么根本区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Amars-fapo">MARS Technical Report</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Taobao</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>MARS训练用户流水线动作；EvoPilot审核模型开发比较证据。配置格式合法不等于实验结论可信。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：合法Minimal动作不能代替控制/实验模型的数据版本核对。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24006v1">原论文</a> · <a href="../../../../recommendation-components/2611.24006-mars-fapo/">实现解读</a> · <a href="#qa-e9468abc497a0466">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:mars-fapo" data-paper-title="MARS Technical Report" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="MARS Technical Report 搜广推与 LLM 应用 Taobao 2026-11-18 MARS让近线0.6B策略为用户产生跨召回、粗排、精排和重排的七维配置，经校验后缓存，在线始终不等待LLM。SFT建立合法格式，FAPO把偏好比较集中到实际不同的动作值token，最后GRPO在沙箱回放和冻结奖励模型上继续优化。正文版权行为Taobao，贡献者按名字母排序，不虚构个人一作机构。 成本过高，不复现（审查 DONE）；CPU诊断。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。本地只实现posterior启发式权重、弱证据翻转规则与FAPO张量损失；没有0.6B生成、字段tokenizer、SFT/GRPO、Sandbox、奖励模型、iGraph缓存或实时推荐。结构token仍有生成梯度，rejected非动作token没有偏好梯度。  研究与服务闭环 多阶段推荐编排 搜广推 自动研究与高效上线 缺失历史V2P或强证据与V2P冲突时怎么做？ 缺失任一估计权重回1；强证据保留业务排序，仅弱证据满足gap才可翻转，且V2P非因果估计。 教学例：chosen=.1,rejected=.2，强证据不翻转但权重可降低至.2。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e4796d5f722b2b75">缺失历史V2P或强证据与V2P冲突时怎么做？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Amars-fapo">MARS Technical Report</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Taobao</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>缺失任一估计权重回1；强证据保留业务排序，仅弱证据满足gap才可翻转，且V2P非因果估计。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：chosen=.1,rejected=.2，强证据不翻转但权重可降低至.2。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24006v1">原论文</a> · <a href="../../../../recommendation-components/2611.24006-mars-fapo/">实现解读</a> · <a href="#qa-e4796d5f722b2b75">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:mle-agents" data-paper-title="MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems 搜广推与 LLM 应用 Meta Platforms 2026-11-18 Meta把提假设、改代码、训练和读指标组成有人监督的模型研发循环。2.0每轮名义上并行七个候选和一个方差探针，使用与线上影响校准过的加权NE，而不是只追逐点击AUPRC。失败块名单、结构化输出和只回传近期未采纳赢家控制上下文陈旧；最终模型仍由工程师审核并独立做线上实验。 成本过高，不复现（审查 DONE）；CPU诊断。l0_interface：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。本地只执行目标与完成/准入接口。没有运行Claude研究调用、候选代码生成、私有数据分布式训练或线上A/B，也没有新增可执行Evolve搜索策略。合成输入不代表Meta模型指标。  研究与服务闭环 自动模型研发 搜广推 自动研究与高效上线 为什么不用点击AUPRC一直搜索？ 它曾偏向易预测的直达查询，与线上下游参与不一致，因此用历史线上对齐后加权NE。 教学例：click NE降.01、downstream升.01时，0.3/0.7目标变差.004。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<span id="paper-recommendation-mle-agents-2cea5f56" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-bc3d34c95d2ec1df">为什么不用点击AUPRC一直搜索？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Amle-agents">MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Meta Platforms</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它曾偏向易预测的直达查询，与线上下游参与不一致，因此用历史线上对齐后加权NE。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：click NE降.01、downstream升.01时，0.3/0.7目标变差.004。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23910v1">原论文</a> · <a href="../../../../recommendation-components/2611.23910-mle-agents/">实现解读</a> · <a href="#qa-bc3d34c95d2ec1df">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:mle-agents" data-paper-title="MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems 搜广推与 LLM 应用 Meta Platforms 2026-11-18 Meta把提假设、改代码、训练和读指标组成有人监督的模型研发循环。2.0每轮名义上并行七个候选和一个方差探针，使用与线上影响校准过的加权NE，而不是只追逐点击AUPRC。失败块名单、结构化输出和只回传近期未采纳赢家控制上下文陈旧；最终模型仍由工程师审核并独立做线上实验。 成本过高，不复现（审查 DONE）；CPU诊断。l0_interface：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。本地只执行目标与完成/准入接口。没有运行Claude研究调用、候选代码生成、私有数据分布式训练或线上A/B，也没有新增可执行Evolve搜索策略。合成输入不代表Meta模型指标。  研究与服务闭环 自动模型研发 搜广推 自动研究与高效上线 候选应和什么比才能过噪声门槛？ 与同一轮variance probe比较；超过0.0005的目标下降才形成离线搜索接纳。 教学例：候选.65胜旧基线.68，但同轮探针.64，仍应拒绝。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-7c2ace012537327a">候选应和什么比才能过噪声门槛？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Amle-agents">MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Meta Platforms</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>与同一轮variance probe比较；超过0.0005的目标下降才形成离线搜索接纳。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：候选.65胜旧基线.68，但同轮探针.64，仍应拒绝。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23910v1">原论文</a> · <a href="../../../../recommendation-components/2611.23910-mle-agents/">实现解读</a> · <a href="#qa-7c2ace012537327a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:mle-agents" data-paper-title="MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems 搜广推与 LLM 应用 Meta Platforms 2026-11-18 Meta把提假设、改代码、训练和读指标组成有人监督的模型研发循环。2.0每轮名义上并行七个候选和一个方差探针，使用与线上影响校准过的加权NE，而不是只追逐点击AUPRC。失败块名单、结构化输出和只回传近期未采纳赢家控制上下文陈旧；最终模型仍由工程师审核并独立做线上实验。 成本过高，不复现（审查 DONE）；CPU诊断。l0_interface：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。本地只执行目标与完成/准入接口。没有运行Claude研究调用、候选代码生成、私有数据分布式训练或线上A/B，也没有新增可执行Evolve搜索策略。合成输入不代表Meta模型指标。  研究与服务闭环 自动模型研发 搜广推 自动研究与高效上线 MLE Agents和EvoPilot的准入能互代吗？ 不能。前者校准目标/训练噪声，后者核对两臂实验与产物；都还需要最终人工和线上确认。 教学例：数据版本不同的两臂即使NE差够大，也不能用噪声门槛盖过协议失败。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-50921866429446a5">MLE Agents和EvoPilot的准入能互代吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Amle-agents">MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Meta Platforms</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。前者校准目标/训练噪声，后者核对两臂实验与产物；都还需要最终人工和线上确认。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：数据版本不同的两臂即使NE差够大，也不能用噪声门槛盖过协议失败。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23910v1">原论文</a> · <a href="../../../../recommendation-components/2611.23910-mle-agents/">实现解读</a> · <a href="#qa-50921866429446a5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:mle-agents" data-paper-title="MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems 搜广推与 LLM 应用 Meta Platforms 2026-11-18 Meta把提假设、改代码、训练和读指标组成有人监督的模型研发循环。2.0每轮名义上并行七个候选和一个方差探针，使用与线上影响校准过的加权NE，而不是只追逐点击AUPRC。失败块名单、结构化输出和只回传近期未采纳赢家控制上下文陈旧；最终模型仍由工程师审核并独立做线上实验。 成本过高，不复现（审查 DONE）；CPU诊断。l0_interface：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。本地只执行目标与完成/准入接口。没有运行Claude研究调用、候选代码生成、私有数据分布式训练或线上A/B，也没有新增可执行Evolve搜索策略。合成输入不代表Meta模型指标。  研究与服务闭环 自动模型研发 搜广推 自动研究与高效上线 为什么完成状态有一条成功还不能接纳？ 论文要求两条独立状态信号确认完成；崩溃、缺失评估或日志误报不能冒充真实结果。 教学例：调度器成功而产物未写完时保留未完成，接口不得自动上线。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-4fbf5ed387d41e51">为什么完成状态有一条成功还不能接纳？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Amle-agents">MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Meta Platforms</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文要求两条独立状态信号确认完成；崩溃、缺失评估或日志误报不能冒充真实结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：调度器成功而产物未写完时保留未完成，接口不得自动上线。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23910v1">原论文</a> · <a href="../../../../recommendation-components/2611.23910-mle-agents/">实现解读</a> · <a href="#qa-4fbf5ed387d41e51">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:cutagent" data-paper-title="CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation 搜广推与 LLM 应用 JD.com / Tsinghua University 2026-11-17 CutAgent把多模态商品理解与可靠视频制作拆为GeneAgent和VideoAgent，以结构化creative gene连接。Gene规定narrative units和配音／音乐／脚本规则；前者经高CTR SFT和CTR-level GRPO学习规划，后者展开分镜并检索商品素材、做TTS/BGM和渲染，再只修复带时间证据的缺陷。 本篇review-only，完整实验成本过高，不复现（审查DONE）。70K商品每件90–120clips、多模态teacher、8B训练／检索、TTS与渲染、397Bjudge及真实流量均未运行；仅收录审查；高成本完整实验不复现，没有本地能力或算法执行结果。本篇review-only，完整实验成本过高，不复现（审查DONE）。70K商品每件90–120clips、多模态teacher、8B训练／检索、TTS与渲染、397Bjudge及真实流量均未运行；不下载资源，不编造creative-gene规划器、素材检索或本地CTR。  广告与商业决策 创意生成与投放优化 搜广推 自动研究与高效上线 Creative gene为何不是普通最终脚本？ 它是连接规划与制作的结构化中间表示，定义叙事单位和规则，之后还需分镜／素材／配音／渲染。 教学例：有“信任建立”unit不代表成片已包含认证镜头。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
 <span id="paper-recommendation-cutagent-6d59d626" class="ar-learning-paper-anchor"></span>

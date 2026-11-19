@@ -10,6 +10,12 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 执行框架与自改进 | [Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses](2611.24924-ahe-beta/README.md) | Fudan University，2026-11-18 | [原作者入口](https://github.com/Curry09/AHE-Beta/tree/0370ec20a9ad90053a5a50ed21d491eb5480b975)；[作者仓库](https://github.com/Curry09/AHE-Beta/tree/0370ec20a9ad90053a5a50ed21d491eb5480b975)；MIT | `ahe-beta`：仅低成本组件，完整实验不复现 |
+| Agent 评测与可靠性 | [Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling](2611.24849-execjudges/README.md) | Emory University，2026-11-18 | 未发现官方代码 | `execjudges`：仅低成本组件，完整实验不复现 |
+| 规划与搜索 | [Kaer: Security-Aware Replanning for Multi-Agent Systems](2611.24839-kaer/README.md) | Northeastern University，2026-11-18 | 未发现官方代码 | `kaer`：仅低成本组件，完整实验不复现 |
+| 规划与搜索 | [Reducing Inference Cost of Coding Agents with Timeout Cascades](2611.24324-timeout-cascades/README.md) | AMD Singapore，2026-11-18 | 未发现官方代码 | `timeout-cascades`：仅低成本组件，完整实验不复现 |
+| 执行框架与自改进 | [RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?](2611.24395-rsibench-infra/README.md) | ByteDance Seed / Tsinghua University AIR / SIA-Lab，2026-11-18 | 未发现官方代码 | 计划键 `rsibench-infra`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| 执行框架与自改进 | [Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates](2611.23651-safe-personal-rsi/README.md) | Independent，2026-11-18 | 未发现官方代码 | `safe-personal-rsi`：仅低成本组件，完整实验不复现 |
 | 执行框架与自改进 | [Do LLM Agents Still Need to Be Told How to Self-Improve?](2611.23219-self-organized-learning/README.md) | MIT CSAIL，2026-11-17 | 未发现官方代码 | 计划键 `self-organized-learning`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 评测与可靠性 | [SkillBuffBench: Measuring What Agent Skills Contribute across Harnesses, Models, Skill Access Modes and Memory](2611.22017-skillbuffbench/README.md) | University of Oxford, Department of Engineering Science，2026-11-17 | 未发现官方代码 | 计划键 `skillbuffbench`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 评测与可靠性 | [The Resolution Hypothesis: Agent Evolution's Key Is Identifying Improvements](2611.23068-resolution-hypothesis/README.md) | ShanghaiTech University / ByteDance / BIGAI，2026-11-17 | 未发现官方代码 | `resolution-hypothesis`：仅低成本组件，完整实验不复现 |
@@ -40,6 +46,7 @@
 | Harness 与自我改进 | [From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?](2611.05108-continual-autoresearch/README.md) | RBC Borealis / ELLIS Institute Tübingen / Max Planck Institute for Intelligent Systems，2026-11-03 | 未发现官方代码 | `continual-autoresearch`：仅低成本组件，完整实验不复现 |
 | Harness 与自我改进 | [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](2611.05139-meta-square/README.md) | University of Maryland，2026-11-03 | 未发现官方代码 | `meta-square`：仅低成本组件，完整实验不复现 |
 | Agent安全 | [RuntimeTickets: Source-Grounded Security Obligations for Agent Skills](2611.03772-runtime-tickets/README.md) | University of North Carolina at Chapel Hill，2026-11-02 | 未发现官方代码 | `runtime-tickets`：仅低成本组件，完整实验不复现 |
+| Agent 评测与可靠性 | [SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search](2611.02643-searchinject/README.md) | Google LLC，2026-11-02 | 未发现官方代码 | `searchinject`：仅低成本组件，完整实验不复现 |
 | Harness 与自我改进 | [Strategist: Evolving Reasoning with Agents](2611.03618-strategist/README.md) | Princeton University，2026-11-02 | [原作者入口](https://github.com/zlab-princeton/Strategist)；作者官方仓库公开search、blueprint、retrieval、paired_pick和空初始库；已只读核对默认hidden_best与two_percent规则，未执行上游完整搜索 | `strategist`：仅低成本组件，完整实验不复现 |
 | 统一评测与可靠性 | [AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers](2610.39234-agentheal/README.md) | University of Science and Technology of China，2026-10-29 | [原作者入口](https://github.com/Lzzzzzzzzzzy/AgentHeal)；论文链接的作者官方代码与数据仓库公开；已核对agentheal、dataset、dataset_real、scripts与tests目录，未执行上游全部模型评测 | `agentheal`：仅低成本组件，完整实验不复现 |
 | Harness 与自我改进 | [Training LLM Agents to Automate LLM Post-Training with RSI-Dojo](2611.03698-rsi-dojo/README.md) | The Chinese University of Hong Kong，2026-10-29 | 未发现官方代码 | 计划键 `rsi-dojo`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |

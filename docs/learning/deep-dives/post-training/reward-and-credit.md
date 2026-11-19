@@ -7,7 +7,7 @@ hide:
 
 # 奖励从哪里来，信用才该分到哪里
 
-[LLM 后训练](../index.md) · 更新 2026-11-18 · 47 篇主题资料 / 17 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-19 · 49 篇主题资料 / 19 篇重点对照
 
 过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。 CONCUR另处理奖励维度之间的优先级，把门控辅助优势投影到主奖励保序锥；这不是沿时间轴分配token信用。
 
@@ -42,6 +42,8 @@ hide:
 | [Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle](../../../post-training/2611.21538-optimistic-verifier-audit/README.md) · [原始来源](https://arxiv.org/abs/2611.21538v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 小有限状态域的精确MSR antichain、因果precision/recall/F1、代理selection-error和signed/absolute gap；不伪造LLM训练伤害。 | 不是。该论文先在可知真值域测proxy selection-error及gap，预测风险；Bait用probe差做防御变换。精确oracle通常只在特定小域可得，不能据此声称通用Agent真值已解决。 |
 | [Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning](../../../post-training/2611.20612-design-taste-admission/README.md) · [原始来源](https://arxiv.org/abs/2611.20612v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | expert agreement/causal sensitivity/hack resistance/stability四项admission、V0乘性hard gates与已admit分数composite reward；不造浏览器/设计judge能力。 | Bait看private probe奖励偏好并翻转reward；本方法在训练前后筛选和复核候选评判信号。前者依赖probe覆盖，后者依赖专家golden/trap覆盖，均非通用安全保证。 |
 | [GPRM: Global Perspective Process Reward Model](../../../post-training/2611.20755-gprm/README.md) · [原始来源](https://arxiv.org/abs/2611.20755v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 只收录方法和成本；不以字符串parser或固定规则替代4维global PRM。 | Bait对外部reward的probe/policy差做防御变换，不判断推理step；GPRM学习带预测历史和未来trajectory的四维过程模型。二者都要隔离scorer信息，但不能用Bait数值核或标签parser替代PRM。 |
+| [Evidence-Based Credit Assignment for Search-Augmented Language Models](../../../post-training/2611.23824-eca-credit/README.md) · [原始来源](https://arxiv.org/abs/2611.23824v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 固定G=8、H=3的势函数suffix return、对侧fold样本标准差/0.25 floor、novelty gate、search-local token advantage及无ratio clip的序列求和策略损失。冻结scorer打分、检索器和完整LLM训练未实现。 | OpCredit在KG操作上组合复用分支结果的BOC与答案邻域的FTC；ECA在文本检索中用冻结模型对证据的答案似然做势函数。二者都把训练信用对齐到操作span，但不能互换状态定义、势函数或把训练gold放进Actor。 |
+| [How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation](../../../post-training/2611.24005-dcc-aggregation/README.md) · [原始来源](https://arxiv.org/abs/2611.24005v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | CPU精确1D two-medians、共享clip区间、相同分数退化、最小split tie-break与可选权重归约。只处理已存在的合法judge分数，不调用或伪造judge，也不训练GRPO。 | DynamicRubric改变评估维度和权重，并与policy共进化；DCC把rubric、judge和权重视为给定，仅根据当前候选组数值拟合共享clip端点。二者解决评估器适应与分数量纲影响两个不同层次，不可把聚合核当动态judge。 |
 
 </div>
 
@@ -118,6 +120,18 @@ GPR分母是剩余harm，PHR分母是harmful-prompt全部回答。若已知harm�
 离线诊断和Best-of-N已有完整候选，未来信息免费可见；逐步搜索尚无未来，需要先生成continuation再判当前step，成本不能按普通prefix PRM估。 Bait对外部reward的probe/policy差做防御变换，不判断推理step；GPRM学习带预测历史和未来trajectory的四维过程模型。二者都要隔离scorer信息，但不能用Bait数值核或标签parser替代PRM。 本轮边界：只收录方法和成本；不以字符串parser或固定规则替代4维global PRM。
 
 对照来源：[gprm](../../../post-training/2611.20755-gprm/README.md) · [bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md)
+
+### ECA和OpCredit是否都是同一种过程奖励？
+
+OpCredit在KG操作上组合复用分支结果的BOC与答案邻域的FTC；ECA在文本检索中用冻结模型对证据的答案似然做势函数。二者都把训练信用对齐到操作span，但不能互换状态定义、势函数或把训练gold放进Actor。 不会。组件只接收外部训练势函数数值、奖励和span mask，不实现或评测Agent，也不接收答案文本。参考答案只应供独立训练scorer；推理Actor只能看合法问题、自身历史和观察。
+
+对照来源：[eca-credit](../../../post-training/2611.23824-eca-credit/README.md) · [opcredit](../../../post-training/2610.21345-opcredit/README.md)
+
+### DCC和DynamicRubric都使用rubric，作用点相同吗？
+
+DynamicRubric改变评估维度和权重，并与policy共进化；DCC把rubric、judge和权重视为给定，仅根据当前候选组数值拟合共享clip端点。二者解决评估器适应与分数量纲影响两个不同层次，不可把聚合核当动态judge。 two-medians可让孤立极端值自成一簇，因此共享区间上界就等于该极值。DCC提供条件性的贡献上界，不是保证移除所有outlier或提高任务能力。
+
+对照来源：[dcc-aggregation](../../../post-training/2611.24005-dcc-aggregation/README.md) · [dynamic-rubric](../../../reproductions/2607.20083-dynamic-rubric/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -253,9 +267,37 @@ GPR分母是剩余harm，PHR分母是harmful-prompt全部回答。若已知harm�
 
     对照来源：[gprm](../../../post-training/2611.20755-gprm/README.md) · [bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md)
 
+### ECA和OpCredit是否都是同一种过程奖励？ {#cross-nov19-eca-credit}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是。OpCredit的FTC依赖KG答案邻域与操作局部前沿，ECA依赖冻结策略对去重文本证据的参考答案似然；共享search-local分配原则不代表势函数可替换。
+
+    **教学例子：** 教学例：一段检索文档可提高答案token似然，却没有可直接代入KG一跳邻域的活动实体集合。
+
+    对照来源：[eca-credit](../../../post-training/2611.23824-eca-credit/README.md) · [opcredit](../../../post-training/2610.21345-opcredit/README.md)
+
+### DCC和DynamicRubric都使用rubric，作用点相同吗？ {#cross-nov19-dcc-aggregation}
+
+??? note "展开答案与例子"
+
+    **答案：** 不同。DynamicRubric生成/更新标准和权重；DCC固定这些语义，只变换已有评分的数值范围。权重只进入最终平均，不改变中心。
+
+    **教学例子：** 教学例：把某维权重从1改成100会改变最终reward，却不会改变DCC为同一分数矩阵拟合的两个端点。
+
+    对照来源：[dcc-aggregation](../../../post-training/2611.24005-dcc-aggregation/README.md) · [dynamic-rubric](../../../reproductions/2607.20083-dynamic-rubric/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-19** · CPU精确1D two-medians、共享clip区间、相同分数退化、最小split tie-break与可选权重归约。只处理已存在的合法judge分数，不调用或伪造judge，也不训练GRPO。 完整实验高成本不复现；组件或资料不构成能力晋级。
+
+涉及：[dcc-aggregation](../../../post-training/2611.24005-dcc-aggregation/README.md) · [dynamic-rubric](../../../reproductions/2607.20083-dynamic-rubric/README.md)
+
+**2026-11-19** · 固定G=8、H=3的势函数suffix return、对侧fold样本标准差/0.25 floor、novelty gate、search-local token advantage及无ratio clip的序列求和策略损失。冻结scorer打分、检索器和完整LLM训练未实现。 完整实验高成本不复现；组件或资料不构成能力晋级。
+
+涉及：[eca-credit](../../../post-training/2611.23824-eca-credit/README.md) · [opcredit](../../../post-training/2610.21345-opcredit/README.md)
 
 **2026-11-18** · 只收录方法和成本；不以字符串parser或固定规则替代4维global PRM。 完整实验高成本不复现；组件诊断不等于能力比较。
 
@@ -301,7 +343,7 @@ GPR分母是剩余harm，PHR分母是harmful-prompt全部回答。若已知harm�
 
 覆盖 36 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 47 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 49 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -352,6 +394,8 @@ GPR分母是剩余harm，PHR分母是harmful-prompt全部回答。若已知harm�
 - [Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle](../../../post-training/2611.21538-optimistic-verifier-audit/README.md)
 - [Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning](../../../post-training/2611.20612-design-taste-admission/README.md)
 - [GPRM: Global Perspective Process Reward Model](../../../post-training/2611.20755-gprm/README.md)
+- [Evidence-Based Credit Assignment for Search-Augmented Language Models](../../../post-training/2611.23824-eca-credit/README.md)
+- [How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation](../../../post-training/2611.24005-dcc-aggregation/README.md)
 
 </details>
 

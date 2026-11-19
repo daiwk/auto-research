@@ -68,9 +68,1228 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">4906 个问题 · 1224 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">4998 个问题 · 1247 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:jeveration" data-paper-title="Jeveration: System One Models Now Generate" data-learning-pending="false" data-level="basics" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="Jeveration: System One Models Now Generate system-one National University of Singapore 2026-11-18 把图像表示为128个离散code的联合Choice，所有位置共享随机状态，而不是把各位置的边缘分布独立采样。冻结Qwen3.5-4B配共享LoRA与任务head，先学masked图像分布，再以distribution matching和置信纠正训练单步决策；同一checkpoint还做图到图与dense prediction。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录，无模型、head、训练、生成或指标文件。不能用几个共享随机数加线性层假装得到论文的联合图像生成。  类型化决策 联合图像生成 结构化决策 类型化读出：从生成句子到候选分布 为什么逐位置独立采样容易不协调？ 各位置可能选择不同有效图像的局部模式；共享随机状态让它们在同一实现条件下决定，再形成联合混合分布。 教学例：左半边选择白天、右半边选择夜晚都是合理边缘，却不是同一场景。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/system-one/typed-readout/">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<span id="paper-system-one-jeveration-85faa22e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-e56bf6c016e5b796">为什么逐位置独立采样容易不协调？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=system-one%3Ajeveration">Jeveration: System One Models Now Generate</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>各位置可能选择不同有效图像的局部模式；共享随机状态让它们在同一实现条件下决定，再形成联合混合分布。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：左半边选择白天、右半边选择夜晚都是合理边缘，却不是同一场景。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24738v1">原论文</a> · <a href="../../system-one/2611.24738-jeveration/">实现解读</a> · <a href="#qa-e56bf6c016e5b796">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:jeveration" data-paper-title="Jeveration: System One Models Now Generate" data-learning-pending="false" data-level="mechanism" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="Jeveration: System One Models Now Generate system-one National University of Singapore 2026-11-18 把图像表示为128个离散code的联合Choice，所有位置共享随机状态，而不是把各位置的边缘分布独立采样。冻结Qwen3.5-4B配共享LoRA与任务head，先学masked图像分布，再以distribution matching和置信纠正训练单步决策；同一checkpoint还做图到图与dense prediction。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录，无模型、head、训练、生成或指标文件。不能用几个共享随机数加线性层假装得到论文的联合图像生成。  类型化决策 联合图像生成 结构化决策 类型化读出：从生成句子到候选分布 只把所有位置加同一随机输入是否足够？ 不够。模型可忽略随机状态；原文先学习masked分布，再做distribution matching与纠正监督来教会它使用状态。 教学例：输出恒定图片也可完全忽略随机数，形式上有xi但没有多样性。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/system-one/typed-readout/">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-62a879e83ba157cd">只把所有位置加同一随机输入是否足够？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=system-one%3Ajeveration">Jeveration: System One Models Now Generate</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不够。模型可忽略随机状态；原文先学习masked分布，再做distribution matching与纠正监督来教会它使用状态。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：输出恒定图片也可完全忽略随机数，形式上有xi但没有多样性。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24738v1">原论文</a> · <a href="../../system-one/2611.24738-jeveration/">实现解读</a> · <a href="#qa-62a879e83ba157cd">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:jeveration" data-paper-title="Jeveration: System One Models Now Generate" data-learning-pending="false" data-level="implementation" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="Jeveration: System One Models Now Generate system-one National University of Singapore 2026-11-18 把图像表示为128个离散code的联合Choice，所有位置共享随机状态，而不是把各位置的边缘分布独立采样。冻结Qwen3.5-4B配共享LoRA与任务head，先学masked图像分布，再以distribution matching和置信纠正训练单步决策；同一checkpoint还做图到图与dense prediction。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录，无模型、head、训练、生成或指标文件。不能用几个共享随机数加线性层假装得到论文的联合图像生成。  类型化决策 联合图像生成 结构化决策 类型化读出：从生成句子到候选分布 为什么这次不实现一个随机head就算完成？ 核心是经过两阶段训练的联合图像分布和解码链路，廉价head fixture不能替代。完整实验成本已由原文四卡四天证明。 教学例：随机输出128个token无法验证GenEval或77.8ms端到端结果。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/system-one/typed-readout/">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-0f50d6f9331fd2a1">为什么这次不实现一个随机head就算完成？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=system-one%3Ajeveration">Jeveration: System One Models Now Generate</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>核心是经过两阶段训练的联合图像分布和解码链路，廉价head fixture不能替代。完整实验成本已由原文四卡四天证明。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：随机输出128个token无法验证GenEval或77.8ms端到端结果。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24738v1">原论文</a> · <a href="../../system-one/2611.24738-jeveration/">实现解读</a> · <a href="#qa-0f50d6f9331fd2a1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:jeveration" data-paper-title="Jeveration: System One Models Now Generate" data-learning-pending="false" data-level="comparison" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="Jeveration: System One Models Now Generate system-one National University of Singapore 2026-11-18 把图像表示为128个离散code的联合Choice，所有位置共享随机状态，而不是把各位置的边缘分布独立采样。冻结Qwen3.5-4B配共享LoRA与任务head，先学masked图像分布，再以distribution matching和置信纠正训练单步决策；同一checkpoint还做图到图与dense prediction。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录，无模型、head、训练、生成或指标文件。不能用几个共享随机数加线性层假装得到论文的联合图像生成。  类型化决策 联合图像生成 结构化决策 类型化读出：从生成句子到候选分布 与LLM2Jev有限候选Choice多了什么困难？ 整图有多个位置，既要符合提示又要跨位置协调；单个候选softmax没有学习空间联合分布的负担。 教学例：选一张现成图片与生成128个相互一致的code不是同一任务。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/system-one/typed-readout/">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-0be71085f208d064">与LLM2Jev有限候选Choice多了什么困难？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=system-one%3Ajeveration">Jeveration: System One Models Now Generate</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>整图有多个位置，既要符合提示又要跨位置协调；单个候选softmax没有学习空间联合分布的负担。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：选一张现成图片与生成128个相互一致的code不是同一任务。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24738v1">原论文</a> · <a href="../../system-one/2611.24738-jeveration/">实现解读</a> · <a href="#qa-0be71085f208d064">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:egojev" data-paper-title="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions" data-learning-pending="false" data-level="comparison" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions system-one Harvard University 2026-11-18 同一冻结VLM把带数字标签的候选缩略图放在一个prompt中，读取完整标签的条件概率而不是生成时间文本。粗分布决定细看窗口，细分布先保留窗口粗概率总量，再与对应粗分布做几何平均。最后在时间的分段均匀分布上取中点分位数，分配有限回答帧。 无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。诊断概率是合成算例，不是VLM能力证据；仅L1 CPU后处理；无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。CPU组件仅接受显式给定的候选概率，执行窗口质量/稳定top-k、细层质量缩放、几何融合和分段均匀逆CDF。输入不含gold证据或答案；未实现VLM标签打分、tokenizer、图像预填缓存、label permutation检查、视频解码或回答模型。诊断概率是合成算例，不是VLM能力证据；L1只指后处理机制。  类型化决策 视频证据与帧预算 结构化决策 类型化读出：从生成句子到候选分布 与System One多模态重排的候选排序有何不同？ 这里用分布的逆CDF选择时间中点分位数，而不是按概率取top-k；分位数可能在同一高质量bin内取多个不同时间。 教学例：后半段概率为1、总时长10秒、预算2时为6.25和8.75秒，不是两个7.5秒。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/system-one/typed-readout/">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-9556f608ecd6322a">与System One多模态重排的候选排序有何不同？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=system-one%3Aegojev">EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Harvard University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这里用分布的逆CDF选择时间中点分位数，而不是按概率取top-k；分位数可能在同一高质量bin内取多个不同时间。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：后半段概率为1、总时长10秒、预算2时为6.25和8.75秒，不是两个7.5秒。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24616v1">原论文</a> · <a href="../../system-one/2611.24616-egojev/">实现解读</a> · <a href="#qa-9556f608ecd6322a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:egojev" data-paper-title="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions" data-learning-pending="false" data-level="implementation" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions system-one Harvard University 2026-11-18 同一冻结VLM把带数字标签的候选缩略图放在一个prompt中，读取完整标签的条件概率而不是生成时间文本。粗分布决定细看窗口，细分布先保留窗口粗概率总量，再与对应粗分布做几何平均。最后在时间的分段均匀分布上取中点分位数，分配有限回答帧。 无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。诊断概率是合成算例，不是VLM能力证据；仅L1 CPU后处理；无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。CPU组件仅接受显式给定的候选概率，执行窗口质量/稳定top-k、细层质量缩放、几何融合和分段均匀逆CDF。输入不含gold证据或答案；未实现VLM标签打分、tokenizer、图像预填缓存、label permutation检查、视频解码或回答模型。诊断概率是合成算例，不是VLM能力证据；L1只指后处理机制。  类型化决策 视频证据与帧预算 结构化决策 类型化读出：从生成句子到候选分布 CPU后处理通过为什么不能宣称62%准确率？ 给定概率并未验证VLM是否找到正确证据；完整方法还需多token标签读出、真实视频与回答评测。合成输入不冒充模型分数。 教学例：手工把证据窗口设为概率1，只能测试分位数公式，不能测试证据识别。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/system-one/typed-readout/">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-0ffe193fd15c0c13">CPU后处理通过为什么不能宣称62%准确率？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=system-one%3Aegojev">EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Harvard University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>给定概率并未验证VLM是否找到正确证据；完整方法还需多token标签读出、真实视频与回答评测。合成输入不冒充模型分数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：手工把证据窗口设为概率1，只能测试分位数公式，不能测试证据识别。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24616v1">原论文</a> · <a href="../../system-one/2611.24616-egojev/">实现解读</a> · <a href="#qa-0ffe193fd15c0c13">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:egojev" data-paper-title="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions" data-learning-pending="false" data-level="mechanism" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions system-one Harvard University 2026-11-18 同一冻结VLM把带数字标签的候选缩略图放在一个prompt中，读取完整标签的条件概率而不是生成时间文本。粗分布决定细看窗口，细分布先保留窗口粗概率总量，再与对应粗分布做几何平均。最后在时间的分段均匀分布上取中点分位数，分配有限回答帧。 无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。诊断概率是合成算例，不是VLM能力证据；仅L1 CPU后处理；无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。CPU组件仅接受显式给定的候选概率，执行窗口质量/稳定top-k、细层质量缩放、几何融合和分段均匀逆CDF。输入不含gold证据或答案；未实现VLM标签打分、tokenizer、图像预填缓存、label permutation检查、视频解码或回答模型。诊断概率是合成算例，不是VLM能力证据；L1只指后处理机制。  类型化决策 视频证据与帧预算 结构化决策 类型化读出：从生成句子到候选分布 细读概率能直接与粗概率相乘吗？ 先归一每个细读窗口并乘其粗总质量，再做平方根几何融合和全局归一。普通乘积会比原式更尖锐，未细读窗口也不能丢掉。 教学例：一个窗口仅有20%粗质量，即使内部最高概率为1，也不应先变成全视频100%。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/system-one/typed-readout/">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-835f1c5c4b08b14c">细读概率能直接与粗概率相乘吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=system-one%3Aegojev">EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Harvard University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先归一每个细读窗口并乘其粗总质量，再做平方根几何融合和全局归一。普通乘积会比原式更尖锐，未细读窗口也不能丢掉。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个窗口仅有20%粗质量，即使内部最高概率为1，也不应先变成全视频100%。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24616v1">原论文</a> · <a href="../../system-one/2611.24616-egojev/">实现解读</a> · <a href="#qa-835f1c5c4b08b14c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:egojev" data-paper-title="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions" data-learning-pending="false" data-level="basics" data-domain="system-one" data-theme="system-one" data-topic="system-one/typed-readout" data-search="EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions system-one Harvard University 2026-11-18 同一冻结VLM把带数字标签的候选缩略图放在一个prompt中，读取完整标签的条件概率而不是生成时间文本。粗分布决定细看窗口，细分布先保留窗口粗概率总量，再与对应粗分布做几何平均。最后在时间的分段均匀分布上取中点分位数，分配有限回答帧。 无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。诊断概率是合成算例，不是VLM能力证据；仅L1 CPU后处理；无VLM能力证据. 完整实验：成本过高，不复现（审查 DONE）。CPU组件仅接受显式给定的候选概率，执行窗口质量/稳定top-k、细层质量缩放、几何融合和分段均匀逆CDF。输入不含gold证据或答案；未实现VLM标签打分、tokenizer、图像预填缓存、label permutation检查、视频解码或回答模型。诊断概率是合成算例，不是VLM能力证据；L1只指后处理机制。  类型化决策 视频证据与帧预算 结构化决策 类型化读出：从生成句子到候选分布 为什么候选分布而不只一个最优帧有用？ 分布同时表示多个可能证据位置，能让回答帧在确信处集中、不确定处展开；单个argmax会丢掉预算分配信息。 教学例：两个窗口各占50%时，8帧应覆盖两边，而非全堆在一个并列最优点。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/system-one/typed-readout/">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
+<span id="paper-system-one-egojev-f4f3b229" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-31f0885d2bb94207">为什么候选分布而不只一个最优帧有用？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=system-one%3Aegojev">EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Harvard University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>分布同时表示多个可能证据位置，能让回答帧在确信处集中、不确定处展开；单个argmax会丢掉预算分配信息。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个窗口各占50%时，8帧应覆盖两边，而非全堆在一个并列最优点。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24616v1">原论文</a> · <a href="../../system-one/2611.24616-egojev/">实现解读</a> · <a href="#qa-31f0885d2bb94207">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:xsplit-argus" data-paper-title="X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction 搜广推与 LLM 应用 固定v1未列一作机构（不由其他作者邮箱推断） 2026-11-18 将候选无关的旧历史压成因果编码器末K个状态，在线只编码最近M个事件；候选token再对两段记忆做cross-attention。离线缓存是服务时的执行安排，不是训练时detach压缩器。点击监督头与原始logit的L1蒸馏头共享历史表示，但上线只使用监督头。 成本过高，不复现（审查 DONE）；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。输入是显式小型事件/候选特征；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。负控改目标/未来反馈保持预测不变；KD反传到compressor，但不能据此推断NE或ACV收益。  排序网络与长序列 历史压缩与在线复用 搜广推 用户历史与排序骨干 怎样检查反馈泄漏而不是只看shape？ 改目标及未来事件的反馈/特征，目标预测必须不变且未来梯度为零；仅检查输出维度不够。 教学例：把t及其后特征加100仍预测不变；改t−1则允许变化。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/history-ranking-backbones/">搜广推 / 用户历史与排序骨干</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-37bf62c8df1f62b6">怎样检查反馈泄漏而不是只看shape？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Axsplit-argus">X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · 固定v1未列一作机构（不由其他作者邮箱推断）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>改目标及未来事件的反馈/特征，目标预测必须不变且未来梯度为零；仅检查输出维度不够。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把t及其后特征加100仍预测不变；改t−1则允许变化。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24283v1">原论文</a> · <a href="../../recommendation-components/2611.24283-xsplit-argus/">实现解读</a> · <a href="#qa-37bf62c8df1f62b6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:xsplit-argus" data-paper-title="X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction 搜广推与 LLM 应用 固定v1未列一作机构（不由其他作者邮箱推断） 2026-11-18 将候选无关的旧历史压成因果编码器末K个状态，在线只编码最近M个事件；候选token再对两段记忆做cross-attention。离线缓存是服务时的执行安排，不是训练时detach压缩器。点击监督头与原始logit的L1蒸馏头共享历史表示，但上线只使用监督头。 成本过高，不复现（审查 DONE）；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。输入是显式小型事件/候选特征；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。负控改目标/未来反馈保持预测不变；KD反传到compressor，但不能据此推断NE或ACV收益。  排序网络与长序列 历史压缩与在线复用 搜广推 用户历史与排序骨干 近期历史与缓存cutoff为什么不能只用一个参数？ 缓存快照可以落后或与近期窗口重叠；训练默认相邻，但服务两者未必相邻，必须独立检查目标前边界。 教学例：目标t=7、M=2时默认b=4；服务b=5会重叠一个历史事件而不是读取目标。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/history-ranking-backbones/">搜广推 / 用户历史与排序骨干</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-e1d46411bb0df188">近期历史与缓存cutoff为什么不能只用一个参数？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Axsplit-argus">X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · 固定v1未列一作机构（不由其他作者邮箱推断）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>缓存快照可以落后或与近期窗口重叠；训练默认相邻，但服务两者未必相邻，必须独立检查目标前边界。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：目标t=7、M=2时默认b=4；服务b=5会重叠一个历史事件而不是读取目标。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24283v1">原论文</a> · <a href="../../recommendation-components/2611.24283-xsplit-argus/">实现解读</a> · <a href="#qa-e1d46411bb0df188">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:xsplit-argus" data-paper-title="X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction 搜广推与 LLM 应用 固定v1未列一作机构（不由其他作者邮箱推断） 2026-11-18 将候选无关的旧历史压成因果编码器末K个状态，在线只编码最近M个事件；候选token再对两段记忆做cross-attention。离线缓存是服务时的执行安排，不是训练时detach压缩器。点击监督头与原始logit的L1蒸馏头共享历史表示，但上线只使用监督头。 成本过高，不复现（审查 DONE）；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。输入是显式小型事件/候选特征；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。负控改目标/未来反馈保持预测不变；KD反传到compressor，但不能据此推断NE或ACV收益。  排序网络与长序列 历史压缩与在线复用 搜广推 用户历史与排序骨干 历史token缓存意味着训练时冻结compressor吗？ 不意味着。缓存是服务安排，GT和KD均经decoder反传到共同的历史编码器。 教学例：KD头误差变化后compressor有梯度，但teacher不能有梯度。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/history-ranking-backbones/">搜广推 / 用户历史与排序骨干</a></p>
+<span id="paper-recommendation-xsplit-argus-139b8013" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-e30476e653de915c">历史token缓存意味着训练时冻结compressor吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Axsplit-argus">X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · 固定v1未列一作机构（不由其他作者邮箱推断）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不意味着。缓存是服务安排，GT和KD均经decoder反传到共同的历史编码器。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：KD头误差变化后compressor有梯度，但teacher不能有梯度。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24283v1">原论文</a> · <a href="../../recommendation-components/2611.24283-xsplit-argus/">实现解读</a> · <a href="#qa-e30476e653de915c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:xsplit-argus" data-paper-title="X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction 搜广推与 LLM 应用 固定v1未列一作机构（不由其他作者邮箱推断） 2026-11-18 将候选无关的旧历史压成因果编码器末K个状态，在线只编码最近M个事件；候选token再对两段记忆做cross-attention。离线缓存是服务时的执行安排，不是训练时detach压缩器。点击监督头与原始logit的L1蒸馏头共享历史表示，但上线只使用监督头。 成本过高，不复现（审查 DONE）；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。输入是显式小型事件/候选特征；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。负控改目标/未来反馈保持预测不变；KD反传到compressor，但不能据此推断NE或ACV收益。  排序网络与长序列 历史压缩与在线复用 搜广推 用户历史与排序骨干 为什么不能直接把ARGUS的物品头用到X-split？ ARGUS分解反馈和next-item；X-split用候选特征预测点击，另用辅助头匹配teacher原始logit，任务和头不同。 教学例：把L1 logit误差替成物品softmax CE会改变监督信号。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/history-ranking-backbones/">搜广推 / 用户历史与排序骨干</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-2c63bfcfe7c2568a">为什么不能直接把ARGUS的物品头用到X-split？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Axsplit-argus">X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · 固定v1未列一作机构（不由其他作者邮箱推断）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>ARGUS分解反馈和next-item；X-split用候选特征预测点击，另用辅助头匹配teacher原始logit，任务和头不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把L1 logit误差替成物品softmax CE会改变监督信号。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24283v1">原论文</a> · <a href="../../recommendation-components/2611.24283-xsplit-argus/">实现解读</a> · <a href="#qa-2c63bfcfe7c2568a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:mle-agents" data-paper-title="MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems 搜广推与 LLM 应用 Meta Platforms 2026-11-18 Meta把提假设、改代码、训练和读指标组成有人监督的模型研发循环。2.0每轮名义上并行七个候选和一个方差探针，使用与线上影响校准过的加权NE，而不是只追逐点击AUPRC。失败块名单、结构化输出和只回传近期未采纳赢家控制上下文陈旧；最终模型仍由工程师审核并独立做线上实验。 成本过高，不复现（审查 DONE）；CPU诊断。l0_interface：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。本地只执行目标与完成/准入接口。没有运行Claude研究调用、候选代码生成、私有数据分布式训练或线上A/B，也没有新增可执行Evolve搜索策略。合成输入不代表Meta模型指标。  研究与服务闭环 自动模型研发 搜广推 自动研究与高效上线 为什么完成状态有一条成功还不能接纳？ 论文要求两条独立状态信号确认完成；崩溃、缺失评估或日志误报不能冒充真实结果。 教学例：调度器成功而产物未写完时保留未完成，接口不得自动上线。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/research-serving-loop/">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-4fbf5ed387d41e51">为什么完成状态有一条成功还不能接纳？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Amle-agents">MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Meta Platforms</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文要求两条独立状态信号确认完成；崩溃、缺失评估或日志误报不能冒充真实结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：调度器成功而产物未写完时保留未完成，接口不得自动上线。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23910v1">原论文</a> · <a href="../../recommendation-components/2611.23910-mle-agents/">实现解读</a> · <a href="#qa-4fbf5ed387d41e51">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:mle-agents" data-paper-title="MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems 搜广推与 LLM 应用 Meta Platforms 2026-11-18 Meta把提假设、改代码、训练和读指标组成有人监督的模型研发循环。2.0每轮名义上并行七个候选和一个方差探针，使用与线上影响校准过的加权NE，而不是只追逐点击AUPRC。失败块名单、结构化输出和只回传近期未采纳赢家控制上下文陈旧；最终模型仍由工程师审核并独立做线上实验。 成本过高，不复现（审查 DONE）；CPU诊断。l0_interface：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。本地只执行目标与完成/准入接口。没有运行Claude研究调用、候选代码生成、私有数据分布式训练或线上A/B，也没有新增可执行Evolve搜索策略。合成输入不代表Meta模型指标。  研究与服务闭环 自动模型研发 搜广推 自动研究与高效上线 候选应和什么比才能过噪声门槛？ 与同一轮variance probe比较；超过0.0005的目标下降才形成离线搜索接纳。 教学例：候选.65胜旧基线.68，但同轮探针.64，仍应拒绝。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/research-serving-loop/">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-7c2ace012537327a">候选应和什么比才能过噪声门槛？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Amle-agents">MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Meta Platforms</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>与同一轮variance probe比较；超过0.0005的目标下降才形成离线搜索接纳。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：候选.65胜旧基线.68，但同轮探针.64，仍应拒绝。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23910v1">原论文</a> · <a href="../../recommendation-components/2611.23910-mle-agents/">实现解读</a> · <a href="#qa-7c2ace012537327a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:mle-agents" data-paper-title="MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems 搜广推与 LLM 应用 Meta Platforms 2026-11-18 Meta把提假设、改代码、训练和读指标组成有人监督的模型研发循环。2.0每轮名义上并行七个候选和一个方差探针，使用与线上影响校准过的加权NE，而不是只追逐点击AUPRC。失败块名单、结构化输出和只回传近期未采纳赢家控制上下文陈旧；最终模型仍由工程师审核并独立做线上实验。 成本过高，不复现（审查 DONE）；CPU诊断。l0_interface：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。本地只执行目标与完成/准入接口。没有运行Claude研究调用、候选代码生成、私有数据分布式训练或线上A/B，也没有新增可执行Evolve搜索策略。合成输入不代表Meta模型指标。  研究与服务闭环 自动模型研发 搜广推 自动研究与高效上线 MLE Agents和EvoPilot的准入能互代吗？ 不能。前者校准目标/训练噪声，后者核对两臂实验与产物；都还需要最终人工和线上确认。 教学例：数据版本不同的两臂即使NE差够大，也不能用噪声门槛盖过协议失败。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/research-serving-loop/">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-50921866429446a5">MLE Agents和EvoPilot的准入能互代吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Amle-agents">MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Meta Platforms</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。前者校准目标/训练噪声，后者核对两臂实验与产物；都还需要最终人工和线上确认。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：数据版本不同的两臂即使NE差够大，也不能用噪声门槛盖过协议失败。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23910v1">原论文</a> · <a href="../../recommendation-components/2611.23910-mle-agents/">实现解读</a> · <a href="#qa-50921866429446a5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:mle-agents" data-paper-title="MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems 搜广推与 LLM 应用 Meta Platforms 2026-11-18 Meta把提假设、改代码、训练和读指标组成有人监督的模型研发循环。2.0每轮名义上并行七个候选和一个方差探针，使用与线上影响校准过的加权NE，而不是只追逐点击AUPRC。失败块名单、结构化输出和只回传近期未采纳赢家控制上下文陈旧；最终模型仍由工程师审核并独立做线上实验。 成本过高，不复现（审查 DONE）；CPU诊断。l0_interface：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。本地只执行目标与完成/准入接口。没有运行Claude研究调用、候选代码生成、私有数据分布式训练或线上A/B，也没有新增可执行Evolve搜索策略。合成输入不代表Meta模型指标。  研究与服务闭环 自动模型研发 搜广推 自动研究与高效上线 为什么不用点击AUPRC一直搜索？ 它曾偏向易预测的直达查询，与线上下游参与不一致，因此用历史线上对齐后加权NE。 教学例：click NE降.01、downstream升.01时，0.3/0.7目标变差.004。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/research-serving-loop/">搜广推 / 自动研究与高效上线</a></p>
+<span id="paper-recommendation-mle-agents-2cea5f56" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-bc3d34c95d2ec1df">为什么不用点击AUPRC一直搜索？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Amle-agents">MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Meta Platforms</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它曾偏向易预测的直达查询，与线上下游参与不一致，因此用历史线上对齐后加权NE。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：click NE降.01、downstream升.01时，0.3/0.7目标变差.004。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23910v1">原论文</a> · <a href="../../recommendation-components/2611.23910-mle-agents/">实现解读</a> · <a href="#qa-bc3d34c95d2ec1df">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:mars-fapo" data-paper-title="MARS Technical Report" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="MARS Technical Report 搜广推与 LLM 应用 Taobao 2026-11-18 MARS让近线0.6B策略为用户产生跨召回、粗排、精排和重排的七维配置，经校验后缓存，在线始终不等待LLM。SFT建立合法格式，FAPO把偏好比较集中到实际不同的动作值token，最后GRPO在沙箱回放和冻结奖励模型上继续优化。正文版权行为Taobao，贡献者按名字母排序，不虚构个人一作机构。 成本过高，不复现（审查 DONE）；CPU诊断。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。本地只实现posterior启发式权重、弱证据翻转规则与FAPO张量损失；没有0.6B生成、字段tokenizer、SFT/GRPO、Sandbox、奖励模型、iGraph缓存或实时推荐。结构token仍有生成梯度，rejected非动作token没有偏好梯度。  研究与服务闭环 多阶段推荐编排 搜广推 自动研究与高效上线 缺失历史V2P或强证据与V2P冲突时怎么做？ 缺失任一估计权重回1；强证据保留业务排序，仅弱证据满足gap才可翻转，且V2P非因果估计。 教学例：chosen=.1,rejected=.2，强证据不翻转但权重可降低至.2。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/research-serving-loop/">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e4796d5f722b2b75">缺失历史V2P或强证据与V2P冲突时怎么做？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Amars-fapo">MARS Technical Report</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Taobao</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>缺失任一估计权重回1；强证据保留业务排序，仅弱证据满足gap才可翻转，且V2P非因果估计。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：chosen=.1,rejected=.2，强证据不翻转但权重可降低至.2。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24006v1">原论文</a> · <a href="../../recommendation-components/2611.24006-mars-fapo/">实现解读</a> · <a href="#qa-e4796d5f722b2b75">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:mars-fapo" data-paper-title="MARS Technical Report" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="MARS Technical Report 搜广推与 LLM 应用 Taobao 2026-11-18 MARS让近线0.6B策略为用户产生跨召回、粗排、精排和重排的七维配置，经校验后缓存，在线始终不等待LLM。SFT建立合法格式，FAPO把偏好比较集中到实际不同的动作值token，最后GRPO在沙箱回放和冻结奖励模型上继续优化。正文版权行为Taobao，贡献者按名字母排序，不虚构个人一作机构。 成本过高，不复现（审查 DONE）；CPU诊断。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。本地只实现posterior启发式权重、弱证据翻转规则与FAPO张量损失；没有0.6B生成、字段tokenizer、SFT/GRPO、Sandbox、奖励模型、iGraph缓存或实时推荐。结构token仍有生成梯度，rejected非动作token没有偏好梯度。  研究与服务闭环 多阶段推荐编排 搜广推 自动研究与高效上线 MARS和EvoPilot都是Agent，有什么根本区别？ MARS训练用户流水线动作；EvoPilot审核模型开发比较证据。配置格式合法不等于实验结论可信。 教学例：合法Minimal动作不能代替控制/实验模型的数据版本核对。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/research-serving-loop/">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e9468abc497a0466">MARS和EvoPilot都是Agent，有什么根本区别？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Amars-fapo">MARS Technical Report</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Taobao</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>MARS训练用户流水线动作；EvoPilot审核模型开发比较证据。配置格式合法不等于实验结论可信。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：合法Minimal动作不能代替控制/实验模型的数据版本核对。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24006v1">原论文</a> · <a href="../../recommendation-components/2611.24006-mars-fapo/">实现解读</a> · <a href="#qa-e9468abc497a0466">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:mars-fapo" data-paper-title="MARS Technical Report" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="MARS Technical Report 搜广推与 LLM 应用 Taobao 2026-11-18 MARS让近线0.6B策略为用户产生跨召回、粗排、精排和重排的七维配置，经校验后缓存，在线始终不等待LLM。SFT建立合法格式，FAPO把偏好比较集中到实际不同的动作值token，最后GRPO在沙箱回放和冻结奖励模型上继续优化。正文版权行为Taobao，贡献者按名字母排序，不虚构个人一作机构。 成本过高，不复现（审查 DONE）；CPU诊断。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。本地只实现posterior启发式权重、弱证据翻转规则与FAPO张量损失；没有0.6B生成、字段tokenizer、SFT/GRPO、Sandbox、奖励模型、iGraph缓存或实时推荐。结构token仍有生成梯度，rejected非动作token没有偏好梯度。  研究与服务闭环 多阶段推荐编排 搜广推 自动研究与高效上线 MARS为什么不增加同步LLM延迟，却不等于免费？ LLM近线生成并缓存，在线只消费合法配置；近线推理、刷新和缓存仍耗资源。 教学例：线上平均少12ms不代表0.6B解码快12ms。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/research-serving-loop/">搜广推 / 自动研究与高效上线</a></p>
+<span id="paper-recommendation-mars-fapo-56550ed5" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f0778d93ff438c49">MARS为什么不增加同步LLM延迟，却不等于免费？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Amars-fapo">MARS Technical Report</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Taobao</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>LLM近线生成并缓存，在线只消费合法配置；近线推理、刷新和缓存仍耗资源。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：线上平均少12ms不代表0.6B解码快12ms。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24006v1">原论文</a> · <a href="../../recommendation-components/2611.24006-mars-fapo/">实现解读</a> · <a href="#qa-f0778d93ff438c49">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:mars-fapo" data-paper-title="MARS Technical Report" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="MARS Technical Report 搜广推与 LLM 应用 Taobao 2026-11-18 MARS让近线0.6B策略为用户产生跨召回、粗排、精排和重排的七维配置，经校验后缓存，在线始终不等待LLM。SFT建立合法格式，FAPO把偏好比较集中到实际不同的动作值token，最后GRPO在沙箱回放和冻结奖励模型上继续优化。正文版权行为Taobao，贡献者按名字母排序，不虚构个人一作机构。 成本过高，不复现（审查 DONE）；CPU诊断。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。本地只实现posterior启发式权重、弱证据翻转规则与FAPO张量损失；没有0.6B生成、字段tokenizer、SFT/GRPO、Sandbox、奖励模型、iGraph缓存或实时推荐。结构token仍有生成梯度，rejected非动作token没有偏好梯度。  研究与服务闭环 多阶段推荐编排 搜广推 自动研究与高效上线 ActionMask只学习变化值，为何结构token仍有梯度？ mask只限制偏好odds项；chosen全回答生成anchor保持不变，仍监督结构。 教学例：rejected共享括号梯度为0，chosen括号仍受生成损失约束。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/research-serving-loop/">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-967094f5cf7d61af">ActionMask只学习变化值，为何结构token仍有梯度？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Amars-fapo">MARS Technical Report</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Taobao</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>mask只限制偏好odds项；chosen全回答生成anchor保持不变，仍监督结构。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：rejected共享括号梯度为0，chosen括号仍受生成损失约束。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24006v1">原论文</a> · <a href="../../recommendation-components/2611.24006-mars-fapo/">实现解读</a> · <a href="#qa-967094f5cf7d61af">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mrpd-replay" data-paper-title="Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts LLM 后训练 University of Illinois Urbana-Champaign 2026-11-18 MRPD把专家RL训练日志当作随训练步变化的课程，而非混洗后的离线数据池。学生与专家同一SFT初始化；第k步合并各域专家第k步日志，使用日志采样策略的log-prob做importance ratio，重算组相对奖励的非对称clipped PG。最终域专家只在日志prefix上提供分布，不重新采样或调用环境。默认dense项取教师top-256词以及剩余质量构成的tail atom，计算student到teacher的reverse KL； 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。显式chronological log schedule检查、teacher-top-k加tail的reverse KL、日志策略ratio与0.2/0.28非对称clip、response-mean损失和冻结teacher/logging policy梯度。无真实专家日志/训练器/环境集成。  student-trajectory-distillation 后训练算法组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 为什么top-k之外还要一个tail atom？ 教师top-k只保留若干token时，两边剩余概率质量通常不同。tail保留该质量差，构成k+1原子粗粒化分布；对选中token单独重归一化会删除此监督。 教学例：教师选中token概率.5，学生.3，其tail分别.5/.7；若各自对singleton归一化会错误给KL=0。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/student-trajectory-distillation/">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-51a14ab619287270">为什么top-k之外还要一个tail atom？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Amrpd-replay">Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>教师top-k只保留若干token时，两边剩余概率质量通常不同。tail保留该质量差，构成k+1原子粗粒化分布；对选中token单独重归一化会删除此监督。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：教师选中token概率.5，学生.3，其tail分别.5/.7；若各自对singleton归一化会错误给KL=0。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24059v1">原论文</a> · <a href="../../post-training/2611.24059-mrpd-replay/">实现解读</a> · <a href="#qa-51a14ab619287270">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mrpd-replay" data-paper-title="Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts LLM 后训练 University of Illinois Urbana-Champaign 2026-11-18 MRPD把专家RL训练日志当作随训练步变化的课程，而非混洗后的离线数据池。学生与专家同一SFT初始化；第k步合并各域专家第k步日志，使用日志采样策略的log-prob做importance ratio，重算组相对奖励的非对称clipped PG。最终域专家只在日志prefix上提供分布，不重新采样或调用环境。默认dense项取教师top-256词以及剩余质量构成的tail atom，计算student到teacher的reverse KL； 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。显式chronological log schedule检查、teacher-top-k加tail的reverse KL、日志策略ratio与0.2/0.28非对称clip、response-mean损失和冻结teacher/logging policy梯度。无真实专家日志/训练器/环境集成。  student-trajectory-distillation 后训练算法组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 真实GPU执行这里证明了什么？ 只证明小张量算子、teacher/logging detach、工具观察零梯度和归约在CUDA可运行；没有训练Qwen3、多专家合并或验证论文能力。原作者仓库链接本轮404，不能称已取得其训练源码。 教学例：两条响应长度1和2应各占一半样本权重，而不是把3个token合并平均。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/student-trajectory-distillation/">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-d68ba6c54dba2af0">真实GPU执行这里证明了什么？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Amrpd-replay">Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>只证明小张量算子、teacher/logging detach、工具观察零梯度和归约在CUDA可运行；没有训练Qwen3、多专家合并或验证论文能力。原作者仓库链接本轮404，不能称已取得其训练源码。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两条响应长度1和2应各占一半样本权重，而不是把3个token合并平均。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24059v1">原论文</a> · <a href="../../post-training/2611.24059-mrpd-replay/">实现解读</a> · <a href="#qa-d68ba6c54dba2af0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mrpd-replay" data-paper-title="Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts LLM 后训练 University of Illinois Urbana-Champaign 2026-11-18 MRPD把专家RL训练日志当作随训练步变化的课程，而非混洗后的离线数据池。学生与专家同一SFT初始化；第k步合并各域专家第k步日志，使用日志采样策略的log-prob做importance ratio，重算组相对奖励的非对称clipped PG。最终域专家只在日志prefix上提供分布，不重新采样或调用环境。默认dense项取教师top-256词以及剩余质量构成的tail atom，计算student到teacher的reverse KL； 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。显式chronological log schedule检查、teacher-top-k加tail的reverse KL、日志策略ratio与0.2/0.28非对称clip、response-mean损失和冻结teacher/logging policy梯度。无真实专家日志/训练器/环境集成。  student-trajectory-distillation 后训练算法组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 MRPD的top-k损失能替换Streaming OPD损失吗？ 不能。MRPD计算student到teacher的粗粒化reverse KL，dense项不经ratio和clip；Streaming OPD对teacher top-k求部分forward样式和、无tail且另作非负截断，还面向新生成片段。 教学例：相同top1 token下，MRPD的tail mismatch可使KL大于0，而Streaming的被截断部分和可能为0。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/student-trajectory-distillation/">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ce3eb87896b2d9da">MRPD的top-k损失能替换Streaming OPD损失吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Amrpd-replay">Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。MRPD计算student到teacher的粗粒化reverse KL，dense项不经ratio和clip；Streaming OPD对teacher top-k求部分forward样式和、无tail且另作非负截断，还面向新生成片段。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：相同top1 token下，MRPD的tail mismatch可使KL大于0，而Streaming的被截断部分和可能为0。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24059v1">原论文</a> · <a href="../../post-training/2611.24059-mrpd-replay/">实现解读</a> · <a href="#qa-ce3eb87896b2d9da">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mrpd-replay" data-paper-title="Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts LLM 后训练 University of Illinois Urbana-Champaign 2026-11-18 MRPD把专家RL训练日志当作随训练步变化的课程，而非混洗后的离线数据池。学生与专家同一SFT初始化；第k步合并各域专家第k步日志，使用日志采样策略的log-prob做importance ratio，重算组相对奖励的非对称clipped PG。最终域专家只在日志prefix上提供分布，不重新采样或调用环境。默认dense项取教师top-256词以及剩余质量构成的tail atom，计算student到teacher的reverse KL； 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。显式chronological log schedule检查、teacher-top-k加tail的reverse KL、日志策略ratio与0.2/0.28非对称clip、response-mean损失和冻结teacher/logging policy梯度。无真实专家日志/训练器/环境集成。  student-trajectory-distillation 后训练算法组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 为什么专家日志不是普通离线混合数据？ MRPD依赖学生和专家共享初始化，并沿专家训练时序前进；原日志策略从共同起点逐步接近最终专家，使importance ratio有机会维持在clip范围内。混洗改变这个课程。 教学例：域A和B都必须先消费step0再step1；把step1放到最前不会被schedule检查器静默排序修复。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/student-trajectory-distillation/">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<span id="paper-post-training-mrpd-replay-8645d3c1" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d8e7b39f4897836a">为什么专家日志不是普通离线混合数据？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Amrpd-replay">Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>MRPD依赖学生和专家共享初始化，并沿专家训练时序前进；原日志策略从共同起点逐步接近最终专家，使importance ratio有机会维持在clip范围内。混洗改变这个课程。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：域A和B都必须先消费step0再step1；把step1放到最前不会被schedule检查器静默排序修复。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24059v1">原论文</a> · <a href="../../post-training/2611.24059-mrpd-replay/">实现解读</a> · <a href="#qa-d8e7b39f4897836a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:led-edits" data-paper-title="Beyond Replacement: Levenshtein Editing for Diffusion Language Models" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Beyond Replacement: Levenshtein Editing for Diffusion Language Models LLM 后训练 Southern University of Science and Technology / Inclusion AI, Ant Group 2026-11-18 仅允许token替换时，一个遗漏或多余token会让整段后缀错位，需要许多位置分别修复。LED把[Ins]/[Del]加入输出词表、排除在输入词表外：删除当前token，或在其前插入新[Mask]，同时保留该锚点token。每轮之后截成固定B长或右侧补mask。训练监督由当前source和clean target的最长公共子序列重建。匹配锚点之间先按顺序配对替换、多余source标Del；多余target只在非末尾gap的右匹配锚点标一个Ins，每gap每轮最多一个。 完整实验成本过高，不复现（审查 DONE）；没有模型预测、扩散SFT、多阶段训练或基准答案生成，因此只属L1机制诊断。L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。最长公共子序列的固定block edit标签、每gap单次Ins、末尾gap不造锚点、mask阈值fallback、visible-token edit阈值以及同时编辑后截断/补mask。没有扩散模型forward、多阶段SFT或循环重采样decoder。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 一个gap缺两个target时会一次插两个吗？ 不会。每个非末尾gap每轮至多把右匹配锚点的一个标签改为Ins；余下缺口在后续轮次处理。末尾gap没有真实右锚点，不能编造一个。 教学例：[a,d,x,y]到[a,b,c,d]的标签为[a,Ins,Del,Del]，不是在d前一次插入b和c。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/policy-optimization/">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-c3921ba6c1c2de3c">一个gap缺两个target时会一次插两个吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aled-edits">Beyond Replacement: Levenshtein Editing for Diffusion Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Southern University of Science and Technology / Inclusion AI, Ant Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不会。每个非末尾gap每轮至多把右匹配锚点的一个标签改为Ins；余下缺口在后续轮次处理。末尾gap没有真实右锚点，不能编造一个。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：[a,d,x,y]到[a,b,c,d]的标签为[a,Ins,Del,Del]，不是在d前一次插入b和c。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23750v1">原论文</a> · <a href="../../post-training/2611.23750-led-edits/">实现解读</a> · <a href="#qa-c3921ba6c1c2de3c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:led-edits" data-paper-title="Beyond Replacement: Levenshtein Editing for Diffusion Language Models" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Beyond Replacement: Levenshtein Editing for Diffusion Language Models LLM 后训练 Southern University of Science and Technology / Inclusion AI, Ant Group 2026-11-18 仅允许token替换时，一个遗漏或多余token会让整段后缀错位，需要许多位置分别修复。LED把[Ins]/[Del]加入输出词表、排除在输入词表外：删除当前token，或在其前插入新[Mask]，同时保留该锚点token。每轮之后截成固定B长或右侧补mask。训练监督由当前source和clean target的最长公共子序列重建。匹配锚点之间先按顺序配对替换、多余source标Del；多余target只在非末尾gap的右匹配锚点标一个Ins，每gap每轮最多一个。 完整实验成本过高，不复现（审查 DONE）；没有模型预测、扩散SFT、多阶段训练或基准答案生成，因此只属L1机制诊断。L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。最长公共子序列的固定block edit标签、每gap单次Ins、末尾gap不造锚点、mask阈值fallback、visible-token edit阈值以及同时编辑后截断/补mask。没有扩散模型forward、多阶段SFT或循环重采样decoder。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 本地两轮修复成功是否验证论文十二基准？ 不是。当前程序真实执行确定性LCS与单轮编辑，gold target只用于监督标签构造；没有模型预测、扩散SFT、多阶段训练或基准答案生成，因此只属L1机制诊断。 教学例：第二轮把Mask替换为b得到target只是标签变换检查，不是模型自主生成b的能力。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/policy-optimization/">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-44f38ace6ddaa43a">本地两轮修复成功是否验证论文十二基准？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aled-edits">Beyond Replacement: Levenshtein Editing for Diffusion Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Southern University of Science and Technology / Inclusion AI, Ant Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。当前程序真实执行确定性LCS与单轮编辑，gold target只用于监督标签构造；没有模型预测、扩散SFT、多阶段训练或基准答案生成，因此只属L1机制诊断。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第二轮把Mask替换为b得到target只是标签变换检查，不是模型自主生成b的能力。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23750v1">原论文</a> · <a href="../../post-training/2611.23750-led-edits/">实现解读</a> · <a href="#qa-44f38ace6ddaa43a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:led-edits" data-paper-title="Beyond Replacement: Levenshtein Editing for Diffusion Language Models" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Beyond Replacement: Levenshtein Editing for Diffusion Language Models LLM 后训练 Southern University of Science and Technology / Inclusion AI, Ant Group 2026-11-18 仅允许token替换时，一个遗漏或多余token会让整段后缀错位，需要许多位置分别修复。LED把[Ins]/[Del]加入输出词表、排除在输入词表外：删除当前token，或在其前插入新[Mask]，同时保留该锚点token。每轮之后截成固定B长或右侧补mask。训练监督由当前source和clean target的最长公共子序列重建。匹配锚点之间先按顺序配对替换、多余source标Del；多余target只在非末尾gap的右匹配锚点标一个Ins，每gap每轮最多一个。 完整实验成本过高，不复现（审查 DONE）；没有模型预测、扩散SFT、多阶段训练或基准答案生成，因此只属L1机制诊断。L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。最长公共子序列的固定block edit标签、每gap单次Ins、末尾gap不造锚点、mask阈值fallback、visible-token edit阈值以及同时编辑后截断/补mask。没有扩散模型forward、多阶段SFT或循环重采样decoder。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 LED能直接替代ORL的残差学习吗？ 不能。LED在离散token位置上重建插删监督，ORL传递模型残差分布并在线收集状态。共同关注exposure bias，不代表输入状态、训练目标和推理引擎相同。 教学例：LCS输出Ins标签没有提供下一轮完整残差概率张量，也没有训练过扩散模型。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/policy-optimization/">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-50388d138e2625fb">LED能直接替代ORL的残差学习吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aled-edits">Beyond Replacement: Levenshtein Editing for Diffusion Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Southern University of Science and Technology / Inclusion AI, Ant Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。LED在离散token位置上重建插删监督，ORL传递模型残差分布并在线收集状态。共同关注exposure bias，不代表输入状态、训练目标和推理引擎相同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：LCS输出Ins标签没有提供下一轮完整残差概率张量，也没有训练过扩散模型。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23750v1">原论文</a> · <a href="../../post-training/2611.23750-led-edits/">实现解读</a> · <a href="#qa-50388d138e2625fb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:led-edits" data-paper-title="Beyond Replacement: Levenshtein Editing for Diffusion Language Models" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Beyond Replacement: Levenshtein Editing for Diffusion Language Models LLM 后训练 Southern University of Science and Technology / Inclusion AI, Ant Group 2026-11-18 仅允许token替换时，一个遗漏或多余token会让整段后缀错位，需要许多位置分别修复。LED把[Ins]/[Del]加入输出词表、排除在输入词表外：删除当前token，或在其前插入新[Mask]，同时保留该锚点token。每轮之后截成固定B长或右侧补mask。训练监督由当前source和clean target的最长公共子序列重建。匹配锚点之间先按顺序配对替换、多余source标Del；多余target只在非末尾gap的右匹配锚点标一个Ins，每gap每轮最多一个。 完整实验成本过高，不复现（审查 DONE）；没有模型预测、扩散SFT、多阶段训练或基准答案生成，因此只属L1机制诊断。L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。最长公共子序列的固定block edit标签、每gap单次Ins、末尾gap不造锚点、mask阈值fallback、visible-token edit阈值以及同时编辑后截断/补mask。没有扩散模型forward、多阶段SFT或循环重采样decoder。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 为什么插删比只替换更适合修复错位？ 缺失一个token后，后续正确token仍可作为LCS锚点；在右锚点前插入mask能保留后缀，不必把每个后缀位置都重新替换。 教学例：source[a,c,d,extra]、target[a,b,c,d]，先在c前插mask并删extra，得到[a,Mask,c,d]。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/policy-optimization/">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<span id="paper-post-training-led-edits-bc50e931" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-3363df4e4d97353c">为什么插删比只替换更适合修复错位？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aled-edits">Beyond Replacement: Levenshtein Editing for Diffusion Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Southern University of Science and Technology / Inclusion AI, Ant Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>缺失一个token后，后续正确token仍可作为LCS锚点；在右锚点前插入mask能保留后缀，不必把每个后缀位置都重新替换。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：source[a,c,d,extra]、target[a,b,c,d]，先在c前插mask并删extra，得到[a,Mask,c,d]。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23750v1">原论文</a> · <a href="../../post-training/2611.23750-led-edits/">实现解读</a> · <a href="#qa-3363df4e4d97353c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:hint-wam" data-paper-title="HINT-WAM: Hindsight-Informed Training for World Action Models" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="HINT-WAM: Hindsight-Informed Training for World Action Models LLM 后训练 National University of Singapore 2026-11-18 HINT-WAM先SFT动作专家，再冻结同一backbone，只训练hindsight encoder与gated adapters读取示范未来视频。teacher去掉当前帧并保留时间轴，学生与部署策略从来不看未来。最后学生在自身ODE采样轨迹上重新评估少量去噪点，匹配冻结teacher的动作分布。直接velocity MSE可能把学生看不到的多模态未来压成均值。论文用energy score：到teacher单样本的吸引项减去学生样本间排斥项，同时保留behavior-cloning anchor； 完整实验成本过高，不复现（审查 DONE）；仅研究资料，无本地实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录同源hindsight teacher、学生ODE状态上的energy-score与BC anchor、成本和限制。无本地模型/算子/指标，不用静态动作样本替代真实WAM蒸馏。  teacher-and-context 后训练方法资料 LLM 后训练 教师与纠错：额外信息何时能帮到学生 为何用energy score而不是只匹配teacher velocity均值？ 学生看不到teacher的未来条件，MSE最优可能落在互不兼容模式的均值。energy score用teacher样本吸引与student样本间排斥匹配分布，另保留BC限制teacher错误。 教学例：正确动作可能绕左或绕右，均值直行可能碰障碍；本例说明目标设计，不是本地机器人实测。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/teacher-and-context/">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-5181f16e56da46f2">为何用energy score而不是只匹配teacher velocity均值？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Ahint-wam">HINT-WAM: Hindsight-Informed Training for World Action Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>学生看不到teacher的未来条件，MSE最优可能落在互不兼容模式的均值。energy score用teacher样本吸引与student样本间排斥匹配分布，另保留BC限制teacher错误。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：正确动作可能绕左或绕右，均值直行可能碰障碍；本例说明目标设计，不是本地机器人实测。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24789v1">原论文</a> · <a href="../../post-training/2611.24789-hint-wam/">实现解读</a> · <a href="#qa-5181f16e56da46f2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:hint-wam" data-paper-title="HINT-WAM: Hindsight-Informed Training for World Action Models" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="HINT-WAM: Hindsight-Informed Training for World Action Models LLM 后训练 National University of Singapore 2026-11-18 HINT-WAM先SFT动作专家，再冻结同一backbone，只训练hindsight encoder与gated adapters读取示范未来视频。teacher去掉当前帧并保留时间轴，学生与部署策略从来不看未来。最后学生在自身ODE采样轨迹上重新评估少量去噪点，匹配冻结teacher的动作分布。直接velocity MSE可能把学生看不到的多模态未来压成均值。论文用energy score：到teacher单样本的吸引项减去学生样本间排斥项，同时保留behavior-cloning anchor； 完整实验成本过高，不复现（审查 DONE）；仅研究资料，无本地实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录同源hindsight teacher、学生ODE状态上的energy-score与BC anchor、成本和限制。无本地模型/算子/指标，不用静态动作样本替代真实WAM蒸馏。  teacher-and-context 后训练方法资料 LLM 后训练 教师与纠错：额外信息何时能帮到学生 为什么本轮不做一个缩小动作玩具来称已复现？ 完整方法需要真实backbone、未来teacher训练和学生ODE轨迹。原文测得8GPU×71.6小时；静态随机动作的energy-score公式不等于该训练链。因此只收录并审查DONE，无待验收GPU或自动重试。 教学例：能在四个二维点上算距离，不代表已保留机器人在LIBERO旧任务上的能力。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/teacher-and-context/">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-25eaf2208b15561d">为什么本轮不做一个缩小动作玩具来称已复现？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Ahint-wam">HINT-WAM: Hindsight-Informed Training for World Action Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>完整方法需要真实backbone、未来teacher训练和学生ODE轨迹。原文测得8GPU×71.6小时；静态随机动作的energy-score公式不等于该训练链。因此只收录并审查DONE，无待验收GPU或自动重试。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：能在四个二维点上算距离，不代表已保留机器人在LIBERO旧任务上的能力。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24789v1">原论文</a> · <a href="../../post-training/2611.24789-hint-wam/">实现解读</a> · <a href="#qa-25eaf2208b15561d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:hint-wam" data-paper-title="HINT-WAM: Hindsight-Informed Training for World Action Models" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="HINT-WAM: Hindsight-Informed Training for World Action Models LLM 后训练 National University of Singapore 2026-11-18 HINT-WAM先SFT动作专家，再冻结同一backbone，只训练hindsight encoder与gated adapters读取示范未来视频。teacher去掉当前帧并保留时间轴，学生与部署策略从来不看未来。最后学生在自身ODE采样轨迹上重新评估少量去噪点，匹配冻结teacher的动作分布。直接velocity MSE可能把学生看不到的多模态未来压成均值。论文用energy score：到teacher单样本的吸引项减去学生样本间排斥项，同时保留behavior-cloning anchor； 完整实验成本过高，不复现（审查 DONE）；仅研究资料，无本地实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录同源hindsight teacher、学生ODE状态上的energy-score与BC anchor、成本和限制。无本地模型/算子/指标，不用静态动作样本替代真实WAM蒸馏。  teacher-and-context 后训练方法资料 LLM 后训练 教师与纠错：额外信息何时能帮到学生 它与Video-OPSD的特权信息和输出相同吗？ 不同。Video-OPSD选择证据帧并蒸馏文本token；HINT-WAM读取示范未来并对动作chunk分布蒸馏，同backbone与teacher-only未来隔离是定义条件。 教学例：对文本token加evidence权重不能训练6.02B WAM的动作ODE，也不会提供机器人成功率。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/teacher-and-context/">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-3fd12606b3d5185a">它与Video-OPSD的特权信息和输出相同吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Ahint-wam">HINT-WAM: Hindsight-Informed Training for World Action Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同。Video-OPSD选择证据帧并蒸馏文本token；HINT-WAM读取示范未来并对动作chunk分布蒸馏，同backbone与teacher-only未来隔离是定义条件。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：对文本token加evidence权重不能训练6.02B WAM的动作ODE，也不会提供机器人成功率。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24789v1">原论文</a> · <a href="../../post-training/2611.24789-hint-wam/">实现解读</a> · <a href="#qa-3fd12606b3d5185a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:hint-wam" data-paper-title="HINT-WAM: Hindsight-Informed Training for World Action Models" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="HINT-WAM: Hindsight-Informed Training for World Action Models LLM 后训练 National University of Singapore 2026-11-18 HINT-WAM先SFT动作专家，再冻结同一backbone，只训练hindsight encoder与gated adapters读取示范未来视频。teacher去掉当前帧并保留时间轴，学生与部署策略从来不看未来。最后学生在自身ODE采样轨迹上重新评估少量去噪点，匹配冻结teacher的动作分布。直接velocity MSE可能把学生看不到的多模态未来压成均值。论文用energy score：到teacher单样本的吸引项减去学生样本间排斥项，同时保留behavior-cloning anchor； 完整实验成本过高，不复现（审查 DONE）；仅研究资料，无本地实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录同源hindsight teacher、学生ODE状态上的energy-score与BC anchor、成本和限制。无本地模型/算子/指标，不用静态动作样本替代真实WAM蒸馏。  teacher-and-context 后训练方法资料 LLM 后训练 教师与纠错：额外信息何时能帮到学生 学生部署时为什么不需要未来视频？ 未来视频只通过训练期hindsight encoder/adapters进入冻结teacher；student只看当前帧、指令和本体状态，蒸馏结束丢弃teacher模块。把未来交给student会改变任务。 教学例：示范未来可消解抓取左物体/右物体的歧义，但真实机器人执行时不能读取尚未发生的示范帧。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/teacher-and-context/">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<span id="paper-post-training-hint-wam-e62968c6" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-88b40ac676f1130e">学生部署时为什么不需要未来视频？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Ahint-wam">HINT-WAM: Hindsight-Informed Training for World Action Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>未来视频只通过训练期hindsight encoder/adapters进入冻结teacher；student只看当前帧、指令和本体状态，蒸馏结束丢弃teacher模块。把未来交给student会改变任务。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：示范未来可消解抓取左物体/右物体的歧义，但真实机器人执行时不能读取尚未发生的示范帧。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24789v1">原论文</a> · <a href="../../post-training/2611.24789-hint-wam/">实现解读</a> · <a href="#qa-88b40ac676f1130e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:eca-credit" data-paper-title="Evidence-Based Credit Assignment for Search-Augmented Language Models" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Evidence-Based Credit Assignment for Search-Augmented Language Models LLM 后训练 University of the Chinese Academy of Sciences / Tencent 2026-11-18 终止答案全错时，组相对奖励为零，但检索可能已经取得有价值证据。ECA用训练专用冻结策略在仅含问题与去重文档的上下文中，计算参考答案的长度归一化对数似然势函数；生成的思考、查询和其他轨迹不参与打分。ECA-Horizon保留剩余固定搜索窗口的总势差；ECA-Step先逐增量截断，可能破坏望远镜求和。原文将8条轨迹随机分成两个4条fold，以对侧fold的样本标准差做归一化；无新文档的搜索只能保留负信用。辅助项只分配到该次搜索的思考与查询token，不分配到检索观察或最终答案。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。固定G=8、H=3的势函数suffix return、对侧fold样本标准差/0.25 floor、novelty gate、search-local token advantage及无ratio clip的序列求和策略损失。冻结scorer打分、检索器和完整LLM训练未实现。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 为什么先clip每步增量不等于clip总收益？ 增量+4、-3、0在c=2、H=3下，逐步clip后相消为0；Horizon保留最终势差+1，return为1/6。二者之后仍有同样的跨fold归一化和clip。 教学例：势函数[-8,-4,-7,-7]的首搜索Horizon=1/6，Step=0；固定H不能改成实际调用次数。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/reward-and-credit/">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-c91f782b26298b90">为什么先clip每步增量不等于clip总收益？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aeca-credit">Evidence-Based Credit Assignment for Search-Augmented Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · University of the Chinese Academy of Sciences / Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>增量+4、-3、0在c=2、H=3下，逐步clip后相消为0；Horizon保留最终势差+1，return为1/6。二者之后仍有同样的跨fold归一化和clip。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：势函数[-8,-4,-7,-7]的首搜索Horizon=1/6，Step=0；固定H不能改成实际调用次数。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23824v1">原论文</a> · <a href="../../post-training/2611.23824-eca-credit/">实现解读</a> · <a href="#qa-c91f782b26298b90">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:eca-credit" data-paper-title="Evidence-Based Credit Assignment for Search-Augmented Language Models" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Evidence-Based Credit Assignment for Search-Augmented Language Models LLM 后训练 University of the Chinese Academy of Sciences / Tencent 2026-11-18 终止答案全错时，组相对奖励为零，但检索可能已经取得有价值证据。ECA用训练专用冻结策略在仅含问题与去重文档的上下文中，计算参考答案的长度归一化对数似然势函数；生成的思考、查询和其他轨迹不参与打分。ECA-Horizon保留剩余固定搜索窗口的总势差；ECA-Step先逐增量截断，可能破坏望远镜求和。原文将8条轨迹随机分成两个4条fold，以对侧fold的样本标准差做归一化；无新文档的搜索只能保留负信用。辅助项只分配到该次搜索的思考与查询token，不分配到检索观察或最终答案。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。固定G=8、H=3的势函数suffix return、对侧fold样本标准差/0.25 floor、novelty gate、search-local token advantage及无ratio clip的序列求和策略损失。冻结scorer打分、检索器和完整LLM训练未实现。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 本地组件会把参考答案交给Agent吗？ 不会。组件只接收外部训练势函数数值、奖励和span mask，不实现或评测Agent，也不接收答案文本。参考答案只应供独立训练scorer；推理Actor只能看合法问题、自身历史和观察。 教学例：all-failure负控检查搜索token仍有梯度，最终答案与观察token的辅助梯度为0；这不是QA成功率。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/reward-and-credit/">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-a57df3335c6773ae">本地组件会把参考答案交给Agent吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aeca-credit">Evidence-Based Credit Assignment for Search-Augmented Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · University of the Chinese Academy of Sciences / Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不会。组件只接收外部训练势函数数值、奖励和span mask，不实现或评测Agent，也不接收答案文本。参考答案只应供独立训练scorer；推理Actor只能看合法问题、自身历史和观察。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：all-failure负控检查搜索token仍有梯度，最终答案与观察token的辅助梯度为0；这不是QA成功率。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23824v1">原论文</a> · <a href="../../post-training/2611.23824-eca-credit/">实现解读</a> · <a href="#qa-a57df3335c6773ae">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:eca-credit" data-paper-title="Evidence-Based Credit Assignment for Search-Augmented Language Models" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Evidence-Based Credit Assignment for Search-Augmented Language Models LLM 后训练 University of the Chinese Academy of Sciences / Tencent 2026-11-18 终止答案全错时，组相对奖励为零，但检索可能已经取得有价值证据。ECA用训练专用冻结策略在仅含问题与去重文档的上下文中，计算参考答案的长度归一化对数似然势函数；生成的思考、查询和其他轨迹不参与打分。ECA-Horizon保留剩余固定搜索窗口的总势差；ECA-Step先逐增量截断，可能破坏望远镜求和。原文将8条轨迹随机分成两个4条fold，以对侧fold的样本标准差做归一化；无新文档的搜索只能保留负信用。辅助项只分配到该次搜索的思考与查询token，不分配到检索观察或最终答案。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。固定G=8、H=3的势函数suffix return、对侧fold样本标准差/0.25 floor、novelty gate、search-local token advantage及无ratio clip的序列求和策略损失。冻结scorer打分、检索器和完整LLM训练未实现。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 ECA和OpCredit是否都是同一种过程奖励？ 不是。OpCredit的FTC依赖KG答案邻域与操作局部前沿，ECA依赖冻结策略对去重文本证据的参考答案似然；共享search-local分配原则不代表势函数可替换。 教学例：一段检索文档可提高答案token似然，却没有可直接代入KG一跳邻域的活动实体集合。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/reward-and-credit/">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-5431d47c7cd9c74c">ECA和OpCredit是否都是同一种过程奖励？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aeca-credit">Evidence-Based Credit Assignment for Search-Augmented Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · University of the Chinese Academy of Sciences / Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。OpCredit的FTC依赖KG答案邻域与操作局部前沿，ECA依赖冻结策略对去重文本证据的参考答案似然；共享search-local分配原则不代表势函数可替换。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一段检索文档可提高答案token似然，却没有可直接代入KG一跳邻域的活动实体集合。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23824v1">原论文</a> · <a href="../../post-training/2611.23824-eca-credit/">实现解读</a> · <a href="#qa-5431d47c7cd9c74c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:eca-credit" data-paper-title="Evidence-Based Credit Assignment for Search-Augmented Language Models" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Evidence-Based Credit Assignment for Search-Augmented Language Models LLM 后训练 University of the Chinese Academy of Sciences / Tencent 2026-11-18 终止答案全错时，组相对奖励为零，但检索可能已经取得有价值证据。ECA用训练专用冻结策略在仅含问题与去重文档的上下文中，计算参考答案的长度归一化对数似然势函数；生成的思考、查询和其他轨迹不参与打分。ECA-Horizon保留剩余固定搜索窗口的总势差；ECA-Step先逐增量截断，可能破坏望远镜求和。原文将8条轨迹随机分成两个4条fold，以对侧fold的样本标准差做归一化；无新文档的搜索只能保留负信用。辅助项只分配到该次搜索的思考与查询token，不分配到检索观察或最终答案。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。固定G=8、H=3的势函数suffix return、对侧fold样本标准差/0.25 floor、novelty gate、search-local token advantage及无ratio clip的序列求和策略损失。冻结scorer打分、检索器和完整LLM训练未实现。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 全错rollout组为什么仍可能值得学习？ 终止奖励只说明最终答案错误，不区分是否找到关键证据；ECA用训练专用证据势差给搜索行为信用，而非给失败答案奖励。 教学例：两条轨迹均答错，一条文档包含关键实体、另一条重复空结果，其终止优势同为0，证据return却可以不同。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/reward-and-credit/">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-eca-credit-f7fc33f2" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-ec6beb57e7863782">全错rollout组为什么仍可能值得学习？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aeca-credit">Evidence-Based Credit Assignment for Search-Augmented Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · University of the Chinese Academy of Sciences / Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>终止奖励只说明最终答案错误，不区分是否找到关键证据；ECA用训练专用证据势差给搜索行为信用，而非给失败答案奖励。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两条轨迹均答错，一条文档包含关键实体、另一条重复空结果，其终止优势同为0，证据return却可以不同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23824v1">原论文</a> · <a href="../../post-training/2611.23824-eca-credit/">实现解读</a> · <a href="#qa-ec6beb57e7863782">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dcc-aggregation" data-paper-title="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation LLM 后训练 Northwestern Polytechnical University 2026-11-18 等权rubric相加并不代表各维贡献相等：每维满足/不满足样本的平均分差形成reward gain。论文把候选奖励差精确拆成基础满足数量信号、gain imbalance项和残差；把gain全部归一成1反而可能放大小gain维度的噪声。DCC不重新训练judge，也不学习rubric权重。它把当前prompt全部候选×标准的分数放在一起，精确扫描一维双median分簇，用最小绝对偏差确定两个公共clip端点；同成本取最小split。最后在公共区间clip，再按可选标准权重求平均；权重不参与端点拟合。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。CPU精确1D two-medians、共享clip区间、相同分数退化、最小split tie-break与可选权重归约。只处理已存在的合法judge分数，不调用或伪造judge，也不训练GRPO。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 DCC端点是每个标准各算一对吗？ 不是。当前prompt的N×K分数共享一次精确two-medians拟合；只在相邻不同分数间split，每簇中心为median，按绝对偏差和最小split tie-break选端点。 教学例：[0,1,2]两个split成本相同，应取split1，中心(0,1.5)，不是每列各自标准化。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/reward-and-credit/">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-4d4d9849af1742ef">DCC端点是每个标准各算一对吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Adcc-aggregation">How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Northwestern Polytechnical University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。当前prompt的N×K分数共享一次精确two-medians拟合；只在相邻不同分数间split，每簇中心为median，按绝对偏差和最小split tie-break选端点。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：[0,1,2]两个split成本相同，应取split1，中心(0,1.5)，不是每列各自标准化。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24005v1">原论文</a> · <a href="../../post-training/2611.24005-dcc-aggregation/">实现解读</a> · <a href="#qa-4d4d9849af1742ef">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dcc-aggregation" data-paper-title="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation LLM 后训练 Northwestern Polytechnical University 2026-11-18 等权rubric相加并不代表各维贡献相等：每维满足/不满足样本的平均分差形成reward gain。论文把候选奖励差精确拆成基础满足数量信号、gain imbalance项和残差；把gain全部归一成1反而可能放大小gain维度的噪声。DCC不重新训练judge，也不学习rubric权重。它把当前prompt全部候选×标准的分数放在一起，精确扫描一维双median分簇，用最小绝对偏差确定两个公共clip端点；同成本取最小split。最后在公共区间clip，再按可选标准权重求平均；权重不参与端点拟合。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。CPU精确1D two-medians、共享clip区间、相同分数退化、最小split tie-break与可选权重归约。只处理已存在的合法judge分数，不调用或伪造judge，也不训练GRPO。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 为什么测试要保留极端值未被clip的反例？ two-medians可让孤立极端值自成一簇，因此共享区间上界就等于该极值。DCC提供条件性的贡献上界，不是保证移除所有outlier或提高任务能力。 教学例：[0,1,100]拟合高中心100；本地明确验这个边界，不把100改成较温和数值后宣称普适鲁棒。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/reward-and-credit/">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-6ef3f60c4df08687">为什么测试要保留极端值未被clip的反例？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Adcc-aggregation">How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Northwestern Polytechnical University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>two-medians可让孤立极端值自成一簇，因此共享区间上界就等于该极值。DCC提供条件性的贡献上界，不是保证移除所有outlier或提高任务能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：[0,1,100]拟合高中心100；本地明确验这个边界，不把100改成较温和数值后宣称普适鲁棒。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24005v1">原论文</a> · <a href="../../post-training/2611.24005-dcc-aggregation/">实现解读</a> · <a href="#qa-6ef3f60c4df08687">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dcc-aggregation" data-paper-title="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation LLM 后训练 Northwestern Polytechnical University 2026-11-18 等权rubric相加并不代表各维贡献相等：每维满足/不满足样本的平均分差形成reward gain。论文把候选奖励差精确拆成基础满足数量信号、gain imbalance项和残差；把gain全部归一成1反而可能放大小gain维度的噪声。DCC不重新训练judge，也不学习rubric权重。它把当前prompt全部候选×标准的分数放在一起，精确扫描一维双median分簇，用最小绝对偏差确定两个公共clip端点；同成本取最小split。最后在公共区间clip，再按可选标准权重求平均；权重不参与端点拟合。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。CPU精确1D two-medians、共享clip区间、相同分数退化、最小split tie-break与可选权重归约。只处理已存在的合法judge分数，不调用或伪造judge，也不训练GRPO。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 DCC和DynamicRubric都使用rubric，作用点相同吗？ 不同。DynamicRubric生成/更新标准和权重；DCC固定这些语义，只变换已有评分的数值范围。权重只进入最终平均，不改变中心。 教学例：把某维权重从1改成100会改变最终reward，却不会改变DCC为同一分数矩阵拟合的两个端点。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/reward-and-credit/">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-37cf0e9c2493c856">DCC和DynamicRubric都使用rubric，作用点相同吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Adcc-aggregation">How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Northwestern Polytechnical University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同。DynamicRubric生成/更新标准和权重；DCC固定这些语义，只变换已有评分的数值范围。权重只进入最终平均，不改变中心。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把某维权重从1改成100会改变最终reward，却不会改变DCC为同一分数矩阵拟合的两个端点。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24005v1">原论文</a> · <a href="../../post-training/2611.24005-dcc-aggregation/">实现解读</a> · <a href="#qa-37cf0e9c2493c856">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dcc-aggregation" data-paper-title="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation LLM 后训练 Northwestern Polytechnical University 2026-11-18 等权rubric相加并不代表各维贡献相等：每维满足/不满足样本的平均分差形成reward gain。论文把候选奖励差精确拆成基础满足数量信号、gain imbalance项和残差；把gain全部归一成1反而可能放大小gain维度的噪声。DCC不重新训练judge，也不学习rubric权重。它把当前prompt全部候选×标准的分数放在一起，精确扫描一维双median分簇，用最小绝对偏差确定两个公共clip端点；同成本取最小split。最后在公共区间clip，再按可选标准权重求平均；权重不参与端点拟合。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。CPU精确1D two-medians、共享clip区间、相同分数退化、最小split tie-break与可选权重归约。只处理已存在的合法judge分数，不调用或伪造judge，也不训练GRPO。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 等权聚合为什么不等于标准贡献相等？ 第k维满足与不满足样本的平均分差Δk会隐式乘到满足状态上；即使权重都是1/K，gain更大的标准仍更有影响。简单除以Δk也会放大其残差。 教学例：两维满足/不满足分差分别10和1，等权求和时前者可盖过后者；但把后者放大10倍也同步放大噪声。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/reward-and-credit/">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-dcc-aggregation-55e188d6" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-eeae628153ead524">等权聚合为什么不等于标准贡献相等？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Adcc-aggregation">How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Northwestern Polytechnical University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>第k维满足与不满足样本的平均分差Δk会隐式乘到满足状态上；即使权重都是1/K，gain更大的标准仍更有影响。简单除以Δk也会放大其残差。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两维满足/不满足分差分别10和1，等权求和时前者可盖过后者；但把后者放大10倍也同步放大噪声。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24005v1">原论文</a> · <a href="../../post-training/2611.24005-dcc-aggregation/">实现解读</a> · <a href="#qa-eeae628153ead524">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:jepa-dots" data-paper-title="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control 多模态大模型 Z Robotics 2026-11-18 共享视觉骨干之后拆动力学和任务两条latent路径，语言FiLM只进入任务路径。world query只读动力学历史和给定clean动作，policy读历史、goal和noisy动作；多层mask同时阻断间接泄漏。固定参数、观测和给定动作时，换指令不能改变world预测，但policy可以生成不同动作。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料、公式、机构及成本收录，无operator、训练、LIBERO安装、机器人执行、metrics或GPU回执。不得用一个语言无关函数的恒等式fixture冒充完整双latent控制模型。  世界模型 任务与动力学分离 多模态 世界建模：状态、生成与动作条件 39.1M参数为何仍不跑完整实验？ 成本主要还来自多个训练run和40任务的数千闭环episode；参数少不能抵消环境模拟与评测矩阵。 教学例：4000episode各最多600步，单模型上限即240万环境步，尚未算三run消融。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-945082160c96079c">39.1M参数为何仍不跑完整实验？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=multimodal-models%3Ajepa-dots">JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Z Robotics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>成本主要还来自多个训练run和40任务的数千闭环episode；参数少不能抵消环境模拟与评测矩阵。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：4000episode各最多600步，单模型上限即240万环境步，尚未算三run消融。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24062v1">原论文</a> · <a href="../../multimodal-models/2611.24062-jepa-dots/">实现解读</a> · <a href="#qa-945082160c96079c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:jepa-dots" data-paper-title="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control 多模态大模型 Z Robotics 2026-11-18 共享视觉骨干之后拆动力学和任务两条latent路径，语言FiLM只进入任务路径。world query只读动力学历史和给定clean动作，policy读历史、goal和noisy动作；多层mask同时阻断间接泄漏。固定参数、观测和给定动作时，换指令不能改变world预测，但policy可以生成不同动作。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料、公式、机构及成本收录，无operator、训练、LIBERO安装、机器人执行、metrics或GPU回执。不得用一个语言无关函数的恒等式fixture冒充完整双latent控制模型。  世界模型 任务与动力学分离 多模态 世界建模：状态、生成与动作条件 隔离goal token是否足以防止泄漏？ 还需限制中间token的多层信息通路；只在最后一层屏蔽直接goal边，不保证前层信息没进入world可见token。 教学例：history token先读goal，再被world读到，会产生间接语言通道。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-8f46ae596ce78656">隔离goal token是否足以防止泄漏？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=multimodal-models%3Ajepa-dots">JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Z Robotics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>还需限制中间token的多层信息通路；只在最后一层屏蔽直接goal边，不保证前层信息没进入world可见token。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：history token先读goal，再被world读到，会产生间接语言通道。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24062v1">原论文</a> · <a href="../../multimodal-models/2611.24062-jepa-dots/">实现解读</a> · <a href="#qa-8f46ae596ce78656">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:jepa-dots" data-paper-title="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control 多模态大模型 Z Robotics 2026-11-18 共享视觉骨干之后拆动力学和任务两条latent路径，语言FiLM只进入任务路径。world query只读动力学历史和给定clean动作，policy读历史、goal和noisy动作；多层mask同时阻断间接泄漏。固定参数、观测和给定动作时，换指令不能改变world预测，但policy可以生成不同动作。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料、公式、机构及成本收录，无operator、训练、LIBERO安装、机器人执行、metrics或GPU回执。不得用一个语言无关函数的恒等式fixture冒充完整双latent控制模型。  世界模型 任务与动力学分离 多模态 世界建模：状态、生成与动作条件 与LeWAM的world-action联学相比，部署差异是什么？ JEPA Dots world分支只供训练监督，部署执行flow policy；不能因此说它已复现LeWAM通过world模型优化动作的规划链。 教学例：生成8步动作后执行2步再观测，是receding-horizon policy，不等于对world cost做梯度规划。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-d18e12bfa93f2ea4">与LeWAM的world-action联学相比，部署差异是什么？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=multimodal-models%3Ajepa-dots">JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Z Robotics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>JEPA Dots world分支只供训练监督，部署执行flow policy；不能因此说它已复现LeWAM通过world模型优化动作的规划链。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：生成8步动作后执行2步再观测，是receding-horizon policy，不等于对world cost做梯度规划。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24062v1">原论文</a> · <a href="../../multimodal-models/2611.24062-jepa-dots/">实现解读</a> · <a href="#qa-d18e12bfa93f2ea4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:jepa-dots" data-paper-title="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control 多模态大模型 Z Robotics 2026-11-18 共享视觉骨干之后拆动力学和任务两条latent路径，语言FiLM只进入任务路径。world query只读动力学历史和给定clean动作，policy读历史、goal和noisy动作；多层mask同时阻断间接泄漏。固定参数、观测和给定动作时，换指令不能改变world预测，但policy可以生成不同动作。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料、公式、机构及成本收录，无operator、训练、LIBERO安装、机器人执行、metrics或GPU回执。不得用一个语言无关函数的恒等式fixture冒充完整双latent控制模型。  世界模型 任务与动力学分离 多模态 世界建模：状态、生成与动作条件 为什么相同观测和动作下world预测不该因语言改变？ 语言描述的是任务目标，不应改变这些已固定动作的物理后果；因此语言只进入task/policy而非world动力学通路。 教学例：同样向左移动夹爪，指令改成拿杯子不应让固定动作的预测位移突然向右。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<span id="paper-multimodal-models-jepa-dots-ebbd7b0b" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-569ecbc969dd991d">为什么相同观测和动作下world预测不该因语言改变？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=multimodal-models%3Ajepa-dots">JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Z Robotics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>语言描述的是任务目标，不应改变这些已固定动作的物理后果；因此语言只进入task/policy而非world动力学通路。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同样向左移动夹爪，指令改成拿杯子不应让固定动作的预测位移突然向右。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24062v1">原论文</a> · <a href="../../multimodal-models/2611.24062-jepa-dots/">实现解读</a> · <a href="#qa-569ecbc969dd991d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:narrow-spec" data-paper-title="NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/generation-paths" data-search="NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding 基础模型 NVIDIA 2026-11-18 把DFlash/EAGLE-3的整个残差宽度设为目标的二分之一或四分之一，并从头训练窄草稿；边界adapter连接目标hidden和共享词表。DFlash输出adapter可与目标head相乘，EAGLE-3输入adapter可折进embedding。head数量和head维度保持不变，因此KV cache不因残差流变窄而自动缩小。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。仅实现两种边界折叠及输入/输出、hidden梯度一致性；不构造或训练DFlash/EAGLE-3，不运行目标模型、token接受/拒绝或SGLang。量化不交换负控使用说明性均匀量化，不冒充论文NVFP4内核。  推理与系统效率 推测解码与权重折叠 基础模型 生成路径：草稿验证、并行去噪与少步迭代 只缩词表head是否等于NarrowSpec？ 不是。该方法缩整个残差流，包括读写残差的attention/MLP投影；词表head折叠只是边界处理。 教学例：只把head低秩化仍保留原宽度的每层MLP，没执行本文主要干预。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/generation-paths/">基础模型 / 生成路径：草稿验证、并行去噪与少步迭代</a></p>
+<span id="paper-foundation-models-narrow-spec-9b808416" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-759edea1dfe5101a">只缩词表head是否等于NarrowSpec？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Anarrow-spec">NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。该方法缩整个残差流，包括读写残差的attention/MLP投影；词表head折叠只是边界处理。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：只把head低秩化仍保留原宽度的每层MLP，没执行本文主要干预。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23835v1">原论文</a> · <a href="../../foundation-models/2611.23835-narrow-spec/">实现解读</a> · <a href="#qa-759edea1dfe5101a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:narrow-spec" data-paper-title="NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/generation-paths" data-search="NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding 基础模型 NVIDIA 2026-11-18 把DFlash/EAGLE-3的整个残差宽度设为目标的二分之一或四分之一，并从头训练窄草稿；边界adapter连接目标hidden和共享词表。DFlash输出adapter可与目标head相乘，EAGLE-3输入adapter可折进embedding。head数量和head维度保持不变，因此KV cache不因残差流变窄而自动缩小。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。仅实现两种边界折叠及输入/输出、hidden梯度一致性；不构造或训练DFlash/EAGLE-3，不运行目标模型、token接受/拒绝或SGLang。量化不交换负控使用说明性均匀量化，不冒充论文NVFP4内核。  推理与系统效率 推测解码与权重折叠 基础模型 生成路径：草稿验证、并行去噪与少步迭代 与LoopSpec降低推理开销的方向有什么不同？ LoopSpec安排循环深度间的推测与验证；NarrowSpec减少草稿每次前向的残差宽度，不改变目标verify。 教学例：较窄草稿仍可能因为接受长度变短而抵消每轮节省。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/generation-paths/">基础模型 / 生成路径：草稿验证、并行去噪与少步迭代</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e91040e0a45e7c0a">与LoopSpec降低推理开销的方向有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Anarrow-spec">NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>LoopSpec安排循环深度间的推测与验证；NarrowSpec减少草稿每次前向的残差宽度，不改变目标verify。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：较窄草稿仍可能因为接受长度变短而抵消每轮节省。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23835v1">原论文</a> · <a href="../../foundation-models/2611.23835-narrow-spec/">实现解读</a> · <a href="#qa-e91040e0a45e7c0a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:narrow-spec" data-paper-title="NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/generation-paths" data-search="NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding 基础模型 NVIDIA 2026-11-18 把DFlash/EAGLE-3的整个残差宽度设为目标的二分之一或四分之一，并从头训练窄草稿；边界adapter连接目标hidden和共享词表。DFlash输出adapter可与目标head相乘，EAGLE-3输入adapter可折进embedding。head数量和head维度保持不变，因此KV cache不因残差流变窄而自动缩小。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。仅实现两种边界折叠及输入/输出、hidden梯度一致性；不构造或训练DFlash/EAGLE-3，不运行目标模型、token接受/拒绝或SGLang。量化不交换负控使用说明性均匀量化，不冒充论文NVFP4内核。  推理与系统效率 推测解码与权重折叠 基础模型 生成路径：草稿验证、并行去噪与少步迭代 什么时候可以把输出adapter折进LM head？ 当两者是连续线性映射时，按Wlm乘Wout合并；若中间有norm或非线性则不能这样折。 教学例：Wlm ReLU(Wout h)不等于(WlmWout)h。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/generation-paths/">基础模型 / 生成路径：草稿验证、并行去噪与少步迭代</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-12bf04743b9efbcd">什么时候可以把输出adapter折进LM head？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Anarrow-spec">NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>当两者是连续线性映射时，按Wlm乘Wout合并；若中间有norm或非线性则不能这样折。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Wlm ReLU(Wout h)不等于(WlmWout)h。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23835v1">原论文</a> · <a href="../../foundation-models/2611.23835-narrow-spec/">实现解读</a> · <a href="#qa-12bf04743b9efbcd">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:narrow-spec" data-paper-title="NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/generation-paths" data-search="NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding 基础模型 NVIDIA 2026-11-18 把DFlash/EAGLE-3的整个残差宽度设为目标的二分之一或四分之一，并从头训练窄草稿；边界adapter连接目标hidden和共享词表。DFlash输出adapter可与目标head相乘，EAGLE-3输入adapter可折进embedding。head数量和head维度保持不变，因此KV cache不因残差流变窄而自动缩小。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。仅实现两种边界折叠及输入/输出、hidden梯度一致性；不构造或训练DFlash/EAGLE-3，不运行目标模型、token接受/拒绝或SGLang。量化不交换负控使用说明性均匀量化，不冒充论文NVFP4内核。  推理与系统效率 推测解码与权重折叠 基础模型 生成路径：草稿验证、并行去噪与少步迭代 本地折叠成功能否推出KV减半、量化等价和解码提速？ 都不能。原head几何固定；量化与矩阵乘法不交换；端到端速度还需训练后接受率和硬件验证。 教学例：8维残差改4维，但KV heads与head_dim都不变时，KV张量元素数不变。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/generation-paths/">基础模型 / 生成路径：草稿验证、并行去噪与少步迭代</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-c4651411635b0aec">本地折叠成功能否推出KV减半、量化等价和解码提速？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Anarrow-spec">NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>都不能。原head几何固定；量化与矩阵乘法不交换；端到端速度还需训练后接受率和硬件验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：8维残差改4维，但KV heads与head_dim都不变时，KV张量元素数不变。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23835v1">原论文</a> · <a href="../../foundation-models/2611.23835-narrow-spec/">实现解读</a> · <a href="#qa-c4651411635b0aec">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:loopcache-interface" data-paper-title="LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers 基础模型 Peking University 2026-11-18 固定深度的draft可能沿过时轨迹继续推进。LoopCache用新候选相对旧候选的logit差控制替换，并清除依赖旧token的所有后代。推测路径轮转读取同一loop cache，独立KV分支再以正确loop缓存重算；浅层差异较大时才单独读取对应loop的cache。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l0_interface组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。仅实现Eq2–4的阈值更新、循环loop编号、浅层cache选择及最近完整验证周期接口，标记L0。没有模型、实际KV内存、exact verifier、随机采样拒绝或token提交；tokens_committed固定为0是接口边界，不是模型指标。  推理与系统效率 循环模型与KV调度 基础模型 推理压缩：权重、KV 缓存与服务带宽 循环cache调度解决什么瓶颈？ 将单步读取的长前缀cache从多个loop集中为一个；这减少读取来源，不代表推测计算已变为精确。 教学例：R=4时全局步骤依次读取1、2、3、4、1，但spec token当前深度可能是3。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-loopcache-interface-8b8dfb66" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-4f13db93fb4aed34">循环cache调度解决什么瓶颈？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Aloopcache-interface">LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Peking University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>将单步读取的长前缀cache从多个loop集中为一个；这减少读取来源，不代表推测计算已变为精确。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：R=4时全局步骤依次读取1、2、3、4、1，但spec token当前深度可能是3。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24301v1">原论文</a> · <a href="../../foundation-models/2611.24301-loopcache-interface/">实现解读</a> · <a href="#qa-4f13db93fb4aed34">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:loopcache-interface" data-paper-title="LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers 基础模型 Peking University 2026-11-18 固定深度的draft可能沿过时轨迹继续推进。LoopCache用新候选相对旧候选的logit差控制替换，并清除依赖旧token的所有后代。推测路径轮转读取同一loop cache，独立KV分支再以正确loop缓存重算；浅层差异较大时才单独读取对应loop的cache。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l0_interface组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。仅实现Eq2–4的阈值更新、循环loop编号、浅层cache选择及最近完整验证周期接口，标记L0。没有模型、实际KV内存、exact verifier、随机采样拒绝或token提交；tokens_committed固定为0是接口边界，不是模型指标。  推理与系统效率 循环模型与KV调度 基础模型 推理压缩：权重、KV 缓存与服务带宽 与Spool的精确状态重建是同一个承诺吗？ 不是。Spool对固定记录输入重放状态变换；LoopCache的lossless token提交还依赖完整正确loop KV分支。 教学例：调度编号正确不意味着已运行目标模型验证。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-7780f4fe0a1b9698">与Spool的精确状态重建是同一个承诺吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Aloopcache-interface">LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Peking University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。Spool对固定记录输入重放状态变换；LoopCache的lossless token提交还依赖完整正确loop KV分支。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：调度编号正确不意味着已运行目标模型验证。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24301v1">原论文</a> · <a href="../../foundation-models/2611.24301-loopcache-interface/">实现解读</a> · <a href="#qa-7780f4fe0a1b9698">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:loopcache-interface" data-paper-title="LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers 基础模型 Peking University 2026-11-18 固定深度的draft可能沿过时轨迹继续推进。LoopCache用新候选相对旧候选的logit差控制替换，并清除依赖旧token的所有后代。推测路径轮转读取同一loop cache，独立KV分支再以正确loop缓存重算；浅层差异较大时才单独读取对应loop的cache。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l0_interface组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。仅实现Eq2–4的阈值更新、循环loop编号、浅层cache选择及最近完整验证周期接口，标记L0。没有模型、实际KV内存、exact verifier、随机采样拒绝或token提交；tokens_committed固定为0是接口边界，不是模型指标。  推理与系统效率 循环模型与KV调度 基础模型 推理压缩：权重、KV 缓存与服务带宽 替换草稿为什么必须清理后代？ 后代以旧token为条件，旧token换掉后其hidden/cache依赖失效。门槛使用当前新旧logit差，不读取未来是否翻回。 教学例：旧draft=A，后代为B/C；A改D后不能把原B/C接在D后直接验证。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-76174c5029edef1c">替换草稿为什么必须清理后代？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Aloopcache-interface">LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Peking University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>后代以旧token为条件，旧token换掉后其hidden/cache依赖失效。门槛使用当前新旧logit差，不读取未来是否翻回。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：旧draft=A，后代为B/C；A改D后不能把原B/C接在D后直接验证。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24301v1">原论文</a> · <a href="../../foundation-models/2611.24301-loopcache-interface/">实现解读</a> · <a href="#qa-76174c5029edef1c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:loopcache-interface" data-paper-title="LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers 基础模型 Peking University 2026-11-18 固定深度的draft可能沿过时轨迹继续推进。LoopCache用新候选相对旧候选的logit差控制替换，并清除依赖旧token的所有后代。推测路径轮转读取同一loop cache，独立KV分支再以正确loop缓存重算；浅层差异较大时才单独读取对应loop的cache。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l0_interface组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。仅实现Eq2–4的阈值更新、循环loop编号、浅层cache选择及最近完整验证周期接口，标记L0。没有模型、实际KV内存、exact verifier、随机采样拒绝或token提交；tokens_committed固定为0是接口边界，不是模型指标。  推理与系统效率 循环模型与KV调度 基础模型 推理压缩：权重、KV 缓存与服务带宽 接口测试全过为何仍只标L0？ 本地没有token verifier和真实KV执行，不能验证最终分布或lossless输出；只检验决定何时更新、读取哪份cache的合同。 教学例：tokens_committed=0明确表明没有输出能力评测。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f839b7ef9e2edf80">接口测试全过为何仍只标L0？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Aloopcache-interface">LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Peking University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>本地没有token verifier和真实KV执行，不能验证最终分布或lossless输出；只检验决定何时更新、读取哪份cache的合同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：tokens_committed=0明确表明没有输出能力评测。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24301v1">原论文</a> · <a href="../../foundation-models/2611.24301-loopcache-interface/">实现解读</a> · <a href="#qa-f839b7ef9e2edf80">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:kernel-ridge-attention" data-paper-title="Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting 基础模型 Independent Researcher 2026-11-18 KRA把历史关联写入固定大小的回归矩阵，同时保留后验协方差。共享可学习Fourier特征形成非线性核；内容相关OU时钟既衰减旧系数，也把协方差恢复到先验，使已经遗忘的方向重新可写。读取发生在当前值写入之后。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。实现共享Fourier特征、OU预测、协方差引导RLS、inclusive读取及状态续接；不含width4因果卷积前端、完整decoder、手写并行adjoint或融合内核。dual solve只作独立小规模参考，不能当高效推理路径。  注意力与长上下文 递归状态与核回归 基础模型 长上下文：注意力、递归状态与记忆 KRA为何不能用一个学习率乘key替代增益？ 增益由P乘key再归一化，非各向同性P会改变方向，不只是改变长度。 教学例：key=(1,1)，P=diag(0.4,0.2)时写入方向比例为2:1，而非1:1。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/context-and-state/">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-b3e632543b510010">KRA为何不能用一个学习率乘key替代增益？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Akernel-ridge-attention">Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>增益由P乘key再归一化，非各向同性P会改变方向，不只是改变长度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：key=(1,1)，P=diag(0.4,0.2)时写入方向比例为2:1，而非1:1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23896v1">原论文</a> · <a href="../../foundation-models/2611.23896-kernel-ridge-attention/">实现解读</a> · <a href="#qa-b3e632543b510010">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:kernel-ridge-attention" data-paper-title="Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting 基础模型 Independent Researcher 2026-11-18 KRA把历史关联写入固定大小的回归矩阵，同时保留后验协方差。共享可学习Fourier特征形成非线性核；内容相关OU时钟既衰减旧系数，也把协方差恢复到先验，使已经遗忘的方向重新可写。读取发生在当前值写入之后。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。实现共享Fourier特征、OU预测、协方差引导RLS、inclusive读取及状态续接；不含width4因果卷积前端、完整decoder、手写并行adjoint或融合内核。dual solve只作独立小规模参考，不能当高效推理路径。  注意力与长上下文 递归状态与核回归 基础模型 长上下文：注意力、递归状态与记忆 为什么遗忘旧信息时还要补回协方差？ 协方差表示哪些特征方向仍可被新观测约束。只缩小P会让所有方向越来越难写；OU恢复项让遗忘同时恢复可塑性。 教学例：delta=0.5且P=0.1I时，先验为I，预测P为0.775I，不是0.025I。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/context-and-state/">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-kernel-ridge-attention-e4bb886d" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d5f10085919c780c">为什么遗忘旧信息时还要补回协方差？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Akernel-ridge-attention">Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>协方差表示哪些特征方向仍可被新观测约束。只缩小P会让所有方向越来越难写；OU恢复项让遗忘同时恢复可塑性。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：delta=0.5且P=0.1I时，先验为I，预测P为0.775I，不是0.025I。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23896v1">原论文</a> · <a href="../../foundation-models/2611.23896-kernel-ridge-attention/">实现解读</a> · <a href="#qa-d5f10085919c780c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:kernel-ridge-attention" data-paper-title="Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting 基础模型 Independent Researcher 2026-11-18 KRA把历史关联写入固定大小的回归矩阵，同时保留后验协方差。共享可学习Fourier特征形成非线性核；内容相关OU时钟既衰减旧系数，也把协方差恢复到先验，使已经遗忘的方向重新可写。读取发生在当前值写入之后。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。实现共享Fourier特征、OU预测、协方差引导RLS、inclusive读取及状态续接；不含width4因果卷积前端、完整decoder、手写并行adjoint或融合内核。dual solve只作独立小规模参考，不能当高效推理路径。  注意力与长上下文 递归状态与核回归 基础模型 长上下文：注意力、递归状态与记忆 与Mamba相比，多保留了什么状态？ 除回归系数外还有每头D乘D协方差；它描述已约束方向。Mamba的selective scan并不维护同一后验几何。 教学例：D翻倍时，协方差元素从D平方变成4D平方，即使上下文长度不变。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/context-and-state/">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-07bac3cc3b7295bf">与Mamba相比，多保留了什么状态？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Akernel-ridge-attention">Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>除回归系数外还有每头D乘D协方差；它描述已约束方向。Mamba的selective scan并不维护同一后验几何。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：D翻倍时，协方差元素从D平方变成4D平方，即使上下文长度不变。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23896v1">原论文</a> · <a href="../../foundation-models/2611.23896-kernel-ridge-attention/">实现解读</a> · <a href="#qa-07bac3cc3b7295bf">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:kernel-ridge-attention" data-paper-title="Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting 基础模型 Independent Researcher 2026-11-18 KRA把历史关联写入固定大小的回归矩阵，同时保留后验协方差。共享可学习Fourier特征形成非线性核；内容相关OU时钟既衰减旧系数，也把协方差恢复到先验，使已经遗忘的方向重新可写。读取发生在当前值写入之后。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。实现共享Fourier特征、OU预测、协方差引导RLS、inclusive读取及状态续接；不含width4因果卷积前端、完整decoder、手写并行adjoint或融合内核。dual solve只作独立小规模参考，不能当高效推理路径。  注意力与长上下文 递归状态与核回归 基础模型 长上下文：注意力、递归状态与记忆 本地dual一致能证明论文吞吐吗？ 不能。它核对给定feature/clock序列的数学输出；完整网络、并行scan、精度和八卡训练未运行。 教学例：逐prefix矩阵求逆虽可作正确性参考，却比递推更慢。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/context-and-state/">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-6e0afff32b0c07f6">本地dual一致能证明论文吞吐吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Akernel-ridge-attention">Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它核对给定feature/clock序列的数学输出；完整网络、并行scan、精度和八卡训练未运行。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：逐prefix矩阵求逆虽可作正确性参考，却比递推更慢。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23896v1">原论文</a> · <a href="../../foundation-models/2611.23896-kernel-ridge-attention/">实现解读</a> · <a href="#qa-6e0afff32b0c07f6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:counterfactual-wm" data-paper-title="Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Counterfactual World Models: JEPAs That Reason About &quot;What If&quot; 基础模型 Brown University / AMI Labs 2026-11-18 普通world model给动作的平均结果，不能仅凭更准的事实分布识别同一扰动下的个体反事实。本文将实际观测结果作为事件信息，加上同一事实预测器对两个动作的预测差；加性扰动时精确，平滑短时动力学下有交互误差界，但碰撞、乘法故障和弯曲坐标可破坏近似。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。未训练JEPA、加载encoder、采集模拟轨迹或执行规划；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。执行Eq6残差复用和Eq7 readout坐标运输，严格拒绝隐式broadcast；加性系统验证等式，乘法gain fault与非线性readout保留预期失效。未训练JEPA、加载encoder、采集模拟轨迹或执行规划；诊断中的分析函数不冒充训练好的world model。  世界模型与JEPA 反事实预测与可识别性 多模态 世界建模：状态、生成与动作条件 残差复用到底复用了什么？ 复用事实观测与事实预测之差，再加到替代动作预测上；无需恢复真实扰动变量。只在动作与扰动的交互足够小等条件下可靠。 教学例：原预测向东1米，实测1.3米；替代预测向北1米时保留这次事件的0.3米漂移。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-4441583312b3f382">残差复用到底复用了什么？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Acounterfactual-wm">Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Brown University / AMI Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>复用事实观测与事实预测之差，再加到替代动作预测上；无需恢复真实扰动变量。只在动作与扰动的交互足够小等条件下可靠。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：原预测向东1米，实测1.3米；替代预测向北1米时保留这次事件的0.3米漂移。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24778v1">原论文</a> · <a href="../../foundation-models/2611.24778-counterfactual-wm/">实现解读</a> · <a href="#qa-4441583312b3f382">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:counterfactual-wm" data-paper-title="Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Counterfactual World Models: JEPAs That Reason About &quot;What If&quot; 基础模型 Brown University / AMI Labs 2026-11-18 普通world model给动作的平均结果，不能仅凭更准的事实分布识别同一扰动下的个体反事实。本文将实际观测结果作为事件信息，加上同一事实预测器对两个动作的预测差；加性扰动时精确，平滑短时动力学下有交互误差界，但碰撞、乘法故障和弯曲坐标可破坏近似。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。未训练JEPA、加载encoder、采集模拟轨迹或执行规划；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。执行Eq6残差复用和Eq7 readout坐标运输，严格拒绝隐式broadcast；加性系统验证等式，乘法gain fault与非线性readout保留预期失效。未训练JEPA、加载encoder、采集模拟轨迹或执行规划；诊断中的分析函数不冒充训练好的world model。  世界模型与JEPA 反事实预测与可识别性 多模态 世界建模：状态、生成与动作条件 为什么测试里应保留乘法故障的非零误差？ 该故障使扰动与动作相乘，个体动作效应随事件变化，违反共享加性残差条件。清掉误差会掩盖论文已说明的边界。 教学例：实际执行只有命令的50%时，原动作残差不能无条件照搬到两倍命令上。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e06f52cb0a81dd08">为什么测试里应保留乘法故障的非零误差？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Acounterfactual-wm">Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Brown University / AMI Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>该故障使扰动与动作相乘，个体动作效应随事件变化，违反共享加性残差条件。清掉误差会掩盖论文已说明的边界。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：实际执行只有命令的50%时，原动作残差不能无条件照搬到两倍命令上。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24778v1">原论文</a> · <a href="../../foundation-models/2611.24778-counterfactual-wm/">实现解读</a> · <a href="#qa-e06f52cb0a81dd08">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:counterfactual-wm" data-paper-title="Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Counterfactual World Models: JEPAs That Reason About &quot;What If&quot; 基础模型 Brown University / AMI Labs 2026-11-18 普通world model给动作的平均结果，不能仅凭更准的事实分布识别同一扰动下的个体反事实。本文将实际观测结果作为事件信息，加上同一事实预测器对两个动作的预测差；加性扰动时精确，平滑短时动力学下有交互误差界，但碰撞、乘法故障和弯曲坐标可破坏近似。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。未训练JEPA、加载encoder、采集模拟轨迹或执行规划；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。执行Eq6残差复用和Eq7 readout坐标运输，严格拒绝隐式broadcast；加性系统验证等式，乘法gain fault与非线性readout保留预期失效。未训练JEPA、加载encoder、采集模拟轨迹或执行规划；诊断中的分析函数不冒充训练好的world model。  世界模型与JEPA 反事实预测与可识别性 多模态 世界建模：状态、生成与动作条件 与DT-JEPA查询时的信息有什么不同？ DT-JEPA用行动前历史预测未来；CWM需已执行事实动作的结果。允许的信息集和问题不同，不能比较为同一预测任务。 教学例：第一次执行动作前不能拿尚不存在的observed_outcome喂CWM。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-3ea4e66199ef2d91">与DT-JEPA查询时的信息有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Acounterfactual-wm">Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Brown University / AMI Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>DT-JEPA用行动前历史预测未来；CWM需已执行事实动作的结果。允许的信息集和问题不同，不能比较为同一预测任务。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第一次执行动作前不能拿尚不存在的observed_outcome喂CWM。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24778v1">原论文</a> · <a href="../../foundation-models/2611.24778-counterfactual-wm/">实现解读</a> · <a href="#qa-3ea4e66199ef2d91">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:counterfactual-wm" data-paper-title="Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Counterfactual World Models: JEPAs That Reason About &quot;What If&quot; 基础模型 Brown University / AMI Labs 2026-11-18 普通world model给动作的平均结果，不能仅凭更准的事实分布识别同一扰动下的个体反事实。本文将实际观测结果作为事件信息，加上同一事实预测器对两个动作的预测差；加性扰动时精确，平滑短时动力学下有交互误差界，但碰撞、乘法故障和弯曲坐标可破坏近似。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。未训练JEPA、加载encoder、采集模拟轨迹或执行规划；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。执行Eq6残差复用和Eq7 readout坐标运输，严格拒绝隐式broadcast；加性系统验证等式，乘法gain fault与非线性readout保留预期失效。未训练JEPA、加载encoder、采集模拟轨迹或执行规划；诊断中的分析函数不冒充训练好的world model。  世界模型与JEPA 反事实预测与可识别性 多模态 世界建模：状态、生成与动作条件 为什么平均未来预测准确还不等于反事实准确？ 事实分布只给不同动作的边缘结果，没说明两种结果属于同一扰动事件的哪一对。个体反事实需要这份配对结构。 教学例：U与1-U都均匀分布，但观测U=0.2时两种耦合的替代结果分别是0.2和0.8。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<span id="paper-foundation-models-counterfactual-wm-f2e1144d" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-5f79bc24ae17fcbb">为什么平均未来预测准确还不等于反事实准确？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Acounterfactual-wm">Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Brown University / AMI Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>事实分布只给不同动作的边缘结果，没说明两种结果属于同一扰动事件的哪一对。个体反事实需要这份配对结构。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：U与1-U都均匀分布，但观测U=0.2时两种耦合的替代结果分别是0.2和0.8。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24778v1">原论文</a> · <a href="../../foundation-models/2611.24778-counterfactual-wm/">实现解读</a> · <a href="#qa-5f79bc24ae17fcbb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:timeout-cascades" data-paper-title="Reducing Inference Cost of Coding Agents with Timeout Cascades" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Reducing Inference Cost of Coding Agents with Timeout Cascades Agent AMD Singapore 2026-11-18 小模型先做所有编程题；只有在时限内产生有效且通过测试的patch才直接结束。超时、空patch、语法错误或测试失败，都转给大模型。大模型从原始任务状态重新开始，不继承小模型的编辑、工具输出或推理。作者从固定mini-swe-agent的单模型运行轨迹模拟策略，不重新跑级联。500题用于模型能力图；只有466题有两模型完整匹配轨迹，供级联模拟。有效GPU小时按每题runtime乘独占GPU数，即使真实批量有并发也不摊销；它不是集群实际电表成本。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。Trace严格保存非负时长、GPU数量、有效patch与evaluator测试标签；cascade计算截断小模型费用、冷启动fallback和串行时延，evaluate仅接收完整匹配对。这里只处理合成轨迹数值，不调用模型、不运行SWE-bench、不做真实wall-clock路由，也不实现基于隐藏难度标签的oracle router。  规划与搜索 timeout-cascades Agent 规划与搜索：下一步该做什么 为什么不把缺失34题按失败补零？ 完整模型图有500题，级联仅466个可用配对。缺轨迹无法知道时长、验证和fallback结果，补零会改变分母和成本。 教学例：未记录大模型时长不等于它用了0秒。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/planning-and-search/">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-dfa7a27c8d99514b">为什么不把缺失34题按失败补零？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Atimeout-cascades">Reducing Inference Cost of Coding Agents with Timeout Cascades</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · AMD Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>完整模型图有500题，级联仅466个可用配对。缺轨迹无法知道时长、验证和fallback结果，补零会改变分母和成本。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：未记录大模型时长不等于它用了0秒。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24324v1">原论文</a> · <a href="../../agent-research/2611.24324-timeout-cascades/">实现解读</a> · <a href="#qa-dfa7a27c8d99514b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:timeout-cascades" data-paper-title="Reducing Inference Cost of Coding Agents with Timeout Cascades" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Reducing Inference Cost of Coding Agents with Timeout Cascades Agent AMD Singapore 2026-11-18 小模型先做所有编程题；只有在时限内产生有效且通过测试的patch才直接结束。超时、空patch、语法错误或测试失败，都转给大模型。大模型从原始任务状态重新开始，不继承小模型的编辑、工具输出或推理。作者从固定mini-swe-agent的单模型运行轨迹模拟策略，不重新跑级联。500题用于模型能力图；只有466题有两模型完整匹配轨迹，供级联模拟。有效GPU小时按每题runtime乘独占GPU数，即使真实批量有并发也不摊销；它不是集群实际电表成本。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。Trace严格保存非负时长、GPU数量、有效patch与evaluator测试标签；cascade计算截断小模型费用、冷启动fallback和串行时延，evaluate仅接收完整匹配对。这里只处理合成轨迹数值，不调用模型、不运行SWE-bench、不做真实wall-clock路由，也不实现基于隐藏难度标签的oracle router。  规划与搜索 timeout-cascades Agent 规划与搜索：下一步该做什么 fallback会继承小模型已改文件吗？ 论文trace模拟采用冷启动，大模型从原始任务状态开始；继承编辑是未研究的未来优化，不能默认加进去。 教学例：小模型改错文件后，大模型并不是在错误工作区上继续。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/planning-and-search/">Agent / 规划与搜索：下一步该做什么</a></p>
+<span id="paper-agent-research-timeout-cascades-5c2e03fc" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-77ad766e16978cc4">fallback会继承小模型已改文件吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Atimeout-cascades">Reducing Inference Cost of Coding Agents with Timeout Cascades</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · AMD Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文trace模拟采用冷启动，大模型从原始任务状态开始；继承编辑是未研究的未来优化，不能默认加进去。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：小模型改错文件后，大模型并不是在错误工作区上继续。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24324v1">原论文</a> · <a href="../../agent-research/2611.24324-timeout-cascades/">实现解读</a> · <a href="#qa-77ad766e16978cc4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:timeout-cascades" data-paper-title="Reducing Inference Cost of Coding Agents with Timeout Cascades" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Reducing Inference Cost of Coding Agents with Timeout Cascades Agent AMD Singapore 2026-11-18 小模型先做所有编程题；只有在时限内产生有效且通过测试的patch才直接结束。超时、空patch、语法错误或测试失败，都转给大模型。大模型从原始任务状态重新开始，不继承小模型的编辑、工具输出或推理。作者从固定mini-swe-agent的单模型运行轨迹模拟策略，不重新跑级联。500题用于模型能力图；只有466题有两模型完整匹配轨迹，供级联模拟。有效GPU小时按每题runtime乘独占GPU数，即使真实批量有并发也不摊销；它不是集群实际电表成本。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。Trace严格保存非负时长、GPU数量、有效patch与evaluator测试标签；cascade计算截断小模型费用、冷启动fallback和串行时延，evaluate仅接收完整匹配对。这里只处理合成轨迹数值，不调用模型、不运行SWE-bench、不做真实wall-clock路由，也不实现基于隐藏难度标签的oracle router。  规划与搜索 timeout-cascades Agent 规划与搜索：下一步该做什么 小模型超时后费用怎么计？ 先计截断到时限的小模型时长乘其GPU数，再加大模型完整时长乘GPU数；串行延迟也要加两段。 教学例：30秒×1卡后fallback120秒×4卡，共510 GPU秒、150秒墙钟。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/planning-and-search/">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1bf689d76d235016">小模型超时后费用怎么计？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Atimeout-cascades">Reducing Inference Cost of Coding Agents with Timeout Cascades</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · AMD Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先计截断到时限的小模型时长乘其GPU数，再加大模型完整时长乘GPU数；串行延迟也要加两段。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：30秒×1卡后fallback120秒×4卡，共510 GPU秒、150秒墙钟。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24324v1">原论文</a> · <a href="../../agent-research/2611.24324-timeout-cascades/">实现解读</a> · <a href="#qa-1bf689d76d235016">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:timeout-cascades" data-paper-title="Reducing Inference Cost of Coding Agents with Timeout Cascades" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Reducing Inference Cost of Coding Agents with Timeout Cascades Agent AMD Singapore 2026-11-18 小模型先做所有编程题；只有在时限内产生有效且通过测试的patch才直接结束。超时、空patch、语法错误或测试失败，都转给大模型。大模型从原始任务状态重新开始，不继承小模型的编辑、工具输出或推理。作者从固定mini-swe-agent的单模型运行轨迹模拟策略，不重新跑级联。500题用于模型能力图；只有466题有两模型完整匹配轨迹，供级联模拟。有效GPU小时按每题runtime乘独占GPU数，即使真实批量有并发也不摊销；它不是集群实际电表成本。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。Trace严格保存非负时长、GPU数量、有效patch与evaluator测试标签；cascade计算截断小模型费用、冷启动fallback和串行时延，evaluate仅接收完整匹配对。这里只处理合成轨迹数值，不调用模型、不运行SWE-bench、不做真实wall-clock路由，也不实现基于隐藏难度标签的oracle router。  规划与搜索 timeout-cascades Agent 规划与搜索：下一步该做什么 它和BATS的预算机制有什么不同？ BATS逐工具扣账并重规划；这里按模型尝试超时切换。工具额度省下不代表GPU小时下降，GPU小时下降也不保证用户等待更短。 教学例：小模型多等一分钟可能省大模型计算，却让一个请求更慢。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/planning-and-search/">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-bf4bb22fb9e61c18">它和BATS的预算机制有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Atimeout-cascades">Reducing Inference Cost of Coding Agents with Timeout Cascades</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · AMD Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>BATS逐工具扣账并重规划；这里按模型尝试超时切换。工具额度省下不代表GPU小时下降，GPU小时下降也不保证用户等待更短。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：小模型多等一分钟可能省大模型计算，却让一个请求更慢。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24324v1">原论文</a> · <a href="../../agent-research/2611.24324-timeout-cascades/">实现解读</a> · <a href="#qa-bf4bb22fb9e61c18">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:safe-personal-rsi" data-paper-title="Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates Agent Independent 2026-11-18 个人Agent的prompt更新可能提升主动性，却同时改变隐私披露、承诺和执行报告。论文固定模型和runtime，只改指令；先比较候选与父版本寻找反例，再重复确认、回滚定位和修复。修复局部验证后仍须完整admission；没有通过版本就继续用父版本。Appendix I以所有开发重放（含control）为分母，取五个primary风险类别的最大率。确认过的未授权披露case产生持久严重性veto，即使后来修复也拒该attempt； 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。实现Replay评测记录、最大类别风险准入、持久veto、最少重放/完成检查、严格多数确认两种协议与回滚gain-retention的零gain约定。未实现Willow/Kicker、邮件工具、攻击搜索、LLM修复、语义judge、verification回放或OAuth修复。Replay不是给Actor的输入，只有离线evaluator调用。  执行框架与自改进 safe-personal-rsi Agent 运行流程与自进化：改的是哪一层 修复重放没有违例，为何仍不能自动采用？ verification只查已确认反例和开发效用；完整admission还查严重veto、至少5条完整记录、最大风险和效用/成本条件。 教学例：一个修复躲过旧攻击，但记录不足仍是insufficient evidence。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-safe-personal-rsi-fa261cde" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-67dccbd4094e6a43">修复重放没有违例，为何仍不能自动采用？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Asafe-personal-rsi">Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Independent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>verification只查已确认反例和开发效用；完整admission还查严重veto、至少5条完整记录、最大风险和效用/成本条件。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个修复躲过旧攻击，但记录不足仍是insufficient evidence。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23651v1">原论文</a> · <a href="../../agent-research/2611.23651-safe-personal-rsi/">实现解读</a> · <a href="#qa-67dccbd4094e6a43">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:safe-personal-rsi" data-paper-title="Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates Agent Independent 2026-11-18 个人Agent的prompt更新可能提升主动性，却同时改变隐私披露、承诺和执行报告。论文固定模型和runtime，只改指令；先比较候选与父版本寻找反例，再重复确认、回滚定位和修复。修复局部验证后仍须完整admission；没有通过版本就继续用父版本。Appendix I以所有开发重放（含control）为分母，取五个primary风险类别的最大率。确认过的未授权披露case产生持久严重性veto，即使后来修复也拒该attempt； 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。实现Replay评测记录、最大类别风险准入、持久veto、最少重放/完成检查、严格多数确认两种协议与回滚gain-retention的零gain约定。未实现Willow/Kicker、邮件工具、攻击搜索、LLM修复、语义judge、verification回放或OAuth修复。Replay不是给Actor的输入，只有离线evaluator调用。  执行框架与自改进 safe-personal-rsi Agent 运行流程与自进化：改的是哪一层 风险分母为什么包含正常control？ 公式使用所有开发重放做suite-normalized类别率，不是只在攻击子集上算；final attack rate另有分母，不能混用。 教学例：20条含2个同类违例，类别率0.10，不因只有4条攻击改成0.50。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-72d435d046513a15">风险分母为什么包含正常control？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Asafe-personal-rsi">Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Independent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>公式使用所有开发重放做suite-normalized类别率，不是只在攻击子集上算；final attack rate另有分母，不能混用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：20条含2个同类违例，类别率0.10，不因只有4条攻击改成0.50。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23651v1">原论文</a> · <a href="../../agent-research/2611.23651-safe-personal-rsi/">实现解读</a> · <a href="#qa-72d435d046513a15">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:safe-personal-rsi" data-paper-title="Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates Agent Independent 2026-11-18 个人Agent的prompt更新可能提升主动性，却同时改变隐私披露、承诺和执行报告。论文固定模型和runtime，只改指令；先比较候选与父版本寻找反例，再重复确认、回滚定位和修复。修复局部验证后仍须完整admission；没有通过版本就继续用父版本。Appendix I以所有开发重放（含control）为分母，取五个primary风险类别的最大率。确认过的未授权披露case产生持久严重性veto，即使后来修复也拒该attempt； 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。实现Replay评测记录、最大类别风险准入、持久veto、最少重放/完成检查、严格多数确认两种协议与回滚gain-retention的零gain约定。未实现Willow/Kicker、邮件工具、攻击搜索、LLM修复、语义judge、verification回放或OAuth修复。Replay不是给Actor的输入，只有离线evaluator调用。  执行框架与自改进 safe-personal-rsi Agent 运行流程与自进化：改的是哪一层 相比Harness²，它的安全门是否证明风险不会增加？ 不证明。它比较最大primary类别点估计，次大类别甚至总primary风险可增加；Harness²的执行对照又不是这个领域风险门。 教学例：最大类别维持2/20，另一类别0→1/20仍可能准入。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-c09384ec7912995b">相比Harness²，它的安全门是否证明风险不会增加？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Asafe-personal-rsi">Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Independent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不证明。它比较最大primary类别点估计，次大类别甚至总primary风险可增加；Harness²的执行对照又不是这个领域风险门。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：最大类别维持2/20，另一类别0→1/20仍可能准入。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23651v1">原论文</a> · <a href="../../agent-research/2611.23651-safe-personal-rsi/">实现解读</a> · <a href="#qa-c09384ec7912995b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:safe-personal-rsi" data-paper-title="Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates Agent Independent 2026-11-18 个人Agent的prompt更新可能提升主动性，却同时改变隐私披露、承诺和执行报告。论文固定模型和runtime，只改指令；先比较候选与父版本寻找反例，再重复确认、回滚定位和修复。修复局部验证后仍须完整admission；没有通过版本就继续用父版本。Appendix I以所有开发重放（含control）为分母，取五个primary风险类别的最大率。确认过的未授权披露case产生持久严重性veto，即使后来修复也拒该attempt； 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。实现Replay评测记录、最大类别风险准入、持久veto、最少重放/完成检查、严格多数确认两种协议与回滚gain-retention的零gain约定。未实现Willow/Kicker、邮件工具、攻击搜索、LLM修复、语义judge、verification回放或OAuth修复。Replay不是给Actor的输入，只有离线evaluator调用。  执行框架与自改进 safe-personal-rsi Agent 运行流程与自进化：改的是哪一层 两次确认都失败，RQ2能提前称confirmed吗？ 不能。RQ2要求三次候选执行完整且严格多数；差分确认还需三次父重放且父违例更少。非空截断多数只属于RQ1模板配置。 教学例：True,True缺第三次，RQ2返回False而非确认。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-a8b062a50720ca95">两次确认都失败，RQ2能提前称confirmed吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Asafe-personal-rsi">Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Independent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。RQ2要求三次候选执行完整且严格多数；差分确认还需三次父重放且父违例更少。非空截断多数只属于RQ1模板配置。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：True,True缺第三次，RQ2返回False而非确认。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23651v1">原论文</a> · <a href="../../agent-research/2611.23651-safe-personal-rsi/">实现解读</a> · <a href="#qa-a8b062a50720ca95">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsibench-infra" data-paper-title="RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale? Agent ByteDance Seed / Tsinghua University AIR / SIA-Lab 2026-11-18 单算子快不代表端到端训练或服务变快。RSIBench-Infra让Agent从官方可运行baseline出发，跨engine、kernel、instruction修改，但只提交一个OCI filesystem layer。独立Serve/Train Job把同一digest应用到每个rank；Benchmark Job绝不加载候选层，单独做质量门和端到端计时。任务定义含模型、环境、资源和独立verifier。16推理+4训练任务覆盖1–32个加速器、最多4节点；推理模型1.7B–2.8T。 完整实验成本过高，不复现（审查 DONE）；项目页https://rsibench-infra.github.io已核对，未验证论文专用源码仓库公开。deferred_high_cost / review-only；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。仅做原文审查、成本评估、中英文说明和学习材料。没有把OCI字段stub、任意microbenchmark或单卡小模型标成RSIBench-Infra已接入；local_operator=null，不提供可执行Evolve算子。  执行框架与自改进 rsibench-infra Agent 运行流程与自进化：改的是哪一层 为什么不用一个git patch承载优化？ 可改engine、库、编译产物和其他目录，git patch不覆盖全部环境变化；OCI层在干净baseline上重建同一提交。 教学例：只提交Python diff会漏掉新编译kernel或库依赖。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-rsibench-infra-0d987b35" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-0d78a63d459b4fe4">为什么不用一个git patch承载优化？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Arsibench-infra">RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · ByteDance Seed / Tsinghua University AIR / SIA-Lab</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>可改engine、库、编译产物和其他目录，git patch不覆盖全部环境变化；OCI层在干净baseline上重建同一提交。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：只提交Python diff会漏掉新编译kernel或库依赖。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24395v1">原论文</a> · <a href="../../agent-research/2611.24395-rsibench-infra/">实现解读</a> · <a href="#qa-0d78a63d459b4fe4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsibench-infra" data-paper-title="RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale? Agent ByteDance Seed / Tsinghua University AIR / SIA-Lab 2026-11-18 单算子快不代表端到端训练或服务变快。RSIBench-Infra让Agent从官方可运行baseline出发，跨engine、kernel、instruction修改，但只提交一个OCI filesystem layer。独立Serve/Train Job把同一digest应用到每个rank；Benchmark Job绝不加载候选层，单独做质量门和端到端计时。任务定义含模型、环境、资源和独立verifier。16推理+4训练任务覆盖1–32个加速器、最多4节点；推理模型1.7B–2.8T。 完整实验成本过高，不复现（审查 DONE）；项目页https://rsibench-infra.github.io已核对，未验证论文专用源码仓库公开。deferred_high_cost / review-only；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。仅做原文审查、成本评估、中英文说明和学习材料。没有把OCI字段stub、任意microbenchmark或单卡小模型标成RSIBench-Infra已接入；local_operator=null，不提供可执行Evolve算子。  执行框架与自改进 rsibench-infra Agent 运行流程与自进化：改的是哪一层 相比Harness²或kernel评测，它的目标有什么不同？ 这里检查整个模型服务/训练链路在质量门下是否更快；harness任务通过或单kernel提速不证明端到端吞吐提高。 教学例：kernel快2倍但数据传输占90%，整条链路提升仍可能很小。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e2d959f7240088a9">相比Harness²或kernel评测，它的目标有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Arsibench-infra">RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · ByteDance Seed / Tsinghua University AIR / SIA-Lab</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这里检查整个模型服务/训练链路在质量门下是否更快；harness任务通过或单kernel提速不证明端到端吞吐提高。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：kernel快2倍但数据传输占90%，整条链路提升仍可能很小。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24395v1">原论文</a> · <a href="../../agent-research/2611.24395-rsibench-infra/">实现解读</a> · <a href="#qa-e2d959f7240088a9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsibench-infra" data-paper-title="RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale? Agent ByteDance Seed / Tsinghua University AIR / SIA-Lab 2026-11-18 单算子快不代表端到端训练或服务变快。RSIBench-Infra让Agent从官方可运行baseline出发，跨engine、kernel、instruction修改，但只提交一个OCI filesystem layer。独立Serve/Train Job把同一digest应用到每个rank；Benchmark Job绝不加载候选层，单独做质量门和端到端计时。任务定义含模型、环境、资源和独立verifier。16推理+4训练任务覆盖1–32个加速器、最多4节点；推理模型1.7B–2.8T。 完整实验成本过高，不复现（审查 DONE）；项目页https://rsibench-infra.github.io已核对，未验证论文专用源码仓库公开。deferred_high_cost / review-only；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。仅做原文审查、成本评估、中英文说明和学习材料。没有把OCI字段stub、任意microbenchmark或单卡小模型标成RSIBench-Infra已接入；local_operator=null，不提供可执行Evolve算子。  执行框架与自改进 rsibench-infra Agent 运行流程与自进化：改的是哪一层 Benchmark Job为什么不能加载候选OCI层？ 候选层由Agent控制；加载它可能修改workload、质量检查或计分。Benchmark通过服务接口评测，计分代码保持独立。 教学例：候选把测试答案写入验证器目录，不能靠同一层传入Benchmark环境。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-8a9b5b6a76bd3bf9">Benchmark Job为什么不能加载候选OCI层？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Arsibench-infra">RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · ByteDance Seed / Tsinghua University AIR / SIA-Lab</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>候选层由Agent控制；加载它可能修改workload、质量检查或计分。Benchmark通过服务接口评测，计分代码保持独立。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：候选把测试答案写入验证器目录，不能靠同一层传入Benchmark环境。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24395v1">原论文</a> · <a href="../../agent-research/2611.24395-rsibench-infra/">实现解读</a> · <a href="#qa-8a9b5b6a76bd3bf9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsibench-infra" data-paper-title="RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale? Agent ByteDance Seed / Tsinghua University AIR / SIA-Lab 2026-11-18 单算子快不代表端到端训练或服务变快。RSIBench-Infra让Agent从官方可运行baseline出发，跨engine、kernel、instruction修改，但只提交一个OCI filesystem layer。独立Serve/Train Job把同一digest应用到每个rank；Benchmark Job绝不加载候选层，单独做质量门和端到端计时。任务定义含模型、环境、资源和独立verifier。16推理+4训练任务覆盖1–32个加速器、最多4节点；推理模型1.7B–2.8T。 完整实验成本过高，不复现（审查 DONE）；项目页https://rsibench-infra.github.io已核对，未验证论文专用源码仓库公开。deferred_high_cost / review-only；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。仅做原文审查、成本评估、中英文说明和学习材料。没有把OCI字段stub、任意microbenchmark或单卡小模型标成RSIBench-Infra已接入；local_operator=null，不提供可执行Evolve算子。  执行框架与自改进 rsibench-infra Agent 运行流程与自进化：改的是哪一层 为何本库不先缩成小模型跑一遍？ 多rank部署、独立OCI应用、任务特定质量门和生产工作负载是定义性协议；任意小模型stub不能验证它们，故高成本审查终态不复现。 教学例：本地一次矩阵乘计时不是20任务RSIBench-Infra复现。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-7b5d3a8f3d3620a7">为何本库不先缩成小模型跑一遍？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Arsibench-infra">RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · ByteDance Seed / Tsinghua University AIR / SIA-Lab</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>多rank部署、独立OCI应用、任务特定质量门和生产工作负载是定义性协议；任意小模型stub不能验证它们，故高成本审查终态不复现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：本地一次矩阵乘计时不是20任务RSIBench-Infra复现。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24395v1">原论文</a> · <a href="../../agent-research/2611.24395-rsibench-infra/">实现解读</a> · <a href="#qa-7b5d3a8f3d3620a7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:kaer" data-paper-title="Kaer: Security-Aware Replanning for Multi-Agent Systems" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Kaer: Security-Aware Replanning for Multi-Agent Systems Agent Northeastern University 2026-11-18 不可信子Agent可把恶意指令夹在失败反馈里，诱导orchestrator授予新权限或改任务。Kaer不让自由文本失败报告进入planner，只传部署前固定的失败模板；planner用固定七种确定性算子修改尚未完成的子任务，最后重新验证任务及Agent策略。计划每一步的能力必须同时属于执行Agent能力集和任务策略；数据依赖只能来自较早步骤，接收Agent必须被来源Agent的输出策略允许，除最终步骤外每个产物都要有后继消费者。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。实现13种模板ID去重、四项计划策略检查、七种算子和INSERT/PRUNE依赖重编号；操作事务化，仅最终有效计划可返回。使用0-based位置，论文k对应本地k−1。本地严格拒绝任务策略外能力，没有实现原文单独的用户授权扩展、LLM planner、MCP gateway、重试调度或真实Cintra。  规划与搜索 kaer Agent 规划与搜索：下一步该做什么 固定七种修复算子为何还要策略检查？ 算子序列仍可组合成危险计划，所以最终能力、数据流、依赖和产物使用都要重验；算子有限不等于结果必安全。 教学例：RESCOPE是合法算子，但给coder加terminal仍可能违反任务策略。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/planning-and-search/">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-cba867783543810d">固定七种修复算子为何还要策略检查？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Akaer">Kaer: Security-Aware Replanning for Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Northeastern University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>算子序列仍可组合成危险计划，所以最终能力、数据流、依赖和产物使用都要重验；算子有限不等于结果必安全。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：RESCOPE是合法算子，但给coder加terminal仍可能违反任务策略。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24839v1">原论文</a> · <a href="../../agent-research/2611.24839-kaer/">实现解读</a> · <a href="#qa-cba867783543810d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:kaer" data-paper-title="Kaer: Security-Aware Replanning for Multi-Agent Systems" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Kaer: Security-Aware Replanning for Multi-Agent Systems Agent Northeastern University 2026-11-18 不可信子Agent可把恶意指令夹在失败反馈里，诱导orchestrator授予新权限或改任务。Kaer不让自由文本失败报告进入planner，只传部署前固定的失败模板；planner用固定七种确定性算子修改尚未完成的子任务，最后重新验证任务及Agent策略。计划每一步的能力必须同时属于执行Agent能力集和任务策略；数据依赖只能来自较早步骤，接收Agent必须被来源Agent的输出策略允许，除最终步骤外每个产物都要有后继消费者。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。实现13种模板ID去重、四项计划策略检查、七种算子和INSERT/PRUNE依赖重编号；操作事务化，仅最终有效计划可返回。使用0-based位置，论文k对应本地k−1。本地严格拒绝任务策略外能力，没有实现原文单独的用户授权扩展、LLM planner、MCP gateway、重试调度或真实Cintra。  规划与搜索 kaer Agent 规划与搜索：下一步该做什么 它相对ReAct改变的是哪一层？ ReAct交替推理与动作观察；Kaer收窄多Agent失败通道并验证计划修改，目标是控制权劫持而非提升单步推理。 教学例：能够根据新观察换路线，不代表不可信观察能授予新工具。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/planning-and-search/">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-c0157245c47565c7">它相对ReAct改变的是哪一层？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Akaer">Kaer: Security-Aware Replanning for Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Northeastern University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>ReAct交替推理与动作观察；Kaer收窄多Agent失败通道并验证计划修改，目标是控制权劫持而非提升单步推理。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：能够根据新观察换路线，不代表不可信观察能授予新工具。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24839v1">原论文</a> · <a href="../../agent-research/2611.24839-kaer/">实现解读</a> · <a href="#qa-c0157245c47565c7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:kaer" data-paper-title="Kaer: Security-Aware Replanning for Multi-Agent Systems" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Kaer: Security-Aware Replanning for Multi-Agent Systems Agent Northeastern University 2026-11-18 不可信子Agent可把恶意指令夹在失败反馈里，诱导orchestrator授予新权限或改任务。Kaer不让自由文本失败报告进入planner，只传部署前固定的失败模板；planner用固定七种确定性算子修改尚未完成的子任务，最后重新验证任务及Agent策略。计划每一步的能力必须同时属于执行Agent能力集和任务策略；数据依赖只能来自较早步骤，接收Agent必须被来源Agent的输出策略允许，除最终步骤外每个产物都要有后继消费者。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。实现13种模板ID去重、四项计划策略检查、七种算子和INSERT/PRUNE依赖重编号；操作事务化，仅最终有效计划可返回。使用0-based位置，论文k对应本地k−1。本地严格拒绝任务策略外能力，没有实现原文单独的用户授权扩展、LLM planner、MCP gateway、重试调度或真实Cintra。  规划与搜索 kaer Agent 规划与搜索：下一步该做什么 为什么失败报告是攻击入口？ planner据反馈改计划，攻击者可把“缺资料”写成“运行某脚本”，把信息变成授权指令。Kaer仅传固定失败条件。 教学例：缺Q3收入只能报input_lacks_required_datum，不能附带运行窃密脚本的命令。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/planning-and-search/">Agent / 规划与搜索：下一步该做什么</a></p>
+<span id="paper-agent-research-kaer-2bd51ecb" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a2da6aacf7fb5d4f">为什么失败报告是攻击入口？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Akaer">Kaer: Security-Aware Replanning for Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Northeastern University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>planner据反馈改计划，攻击者可把“缺资料”写成“运行某脚本”，把信息变成授权指令。Kaer仅传固定失败条件。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：缺Q3收入只能报input_lacks_required_datum，不能附带运行窃密脚本的命令。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24839v1">原论文</a> · <a href="../../agent-research/2611.24839-kaer/">实现解读</a> · <a href="#qa-a2da6aacf7fb5d4f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:kaer" data-paper-title="Kaer: Security-Aware Replanning for Multi-Agent Systems" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Kaer: Security-Aware Replanning for Multi-Agent Systems Agent Northeastern University 2026-11-18 不可信子Agent可把恶意指令夹在失败反馈里，诱导orchestrator授予新权限或改任务。Kaer不让自由文本失败报告进入planner，只传部署前固定的失败模板；planner用固定七种确定性算子修改尚未完成的子任务，最后重新验证任务及Agent策略。计划每一步的能力必须同时属于执行Agent能力集和任务策略；数据依赖只能来自较早步骤，接收Agent必须被来源Agent的输出策略允许，除最终步骤外每个产物都要有后继消费者。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。实现13种模板ID去重、四项计划策略检查、七种算子和INSERT/PRUNE依赖重编号；操作事务化，仅最终有效计划可返回。使用0-based位置，论文k对应本地k−1。本地严格拒绝任务策略外能力，没有实现原文单独的用户授权扩展、LLM planner、MCP gateway、重试调度或真实Cintra。  规划与搜索 kaer Agent 规划与搜索：下一步该做什么 被拒的修复能留下部分计划修改吗？ 不能。算子作用在副本，只有全部操作后策略通过才采用；已完成步骤不可动。INSERT/PRUNE必须同步改依赖位置。 教学例：插入步骤后旧下标1变2，旧依赖也要重编号。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/planning-and-search/">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e5eb2d96bca72570">被拒的修复能留下部分计划修改吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Akaer">Kaer: Security-Aware Replanning for Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Northeastern University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。算子作用在副本，只有全部操作后策略通过才采用；已完成步骤不可动。INSERT/PRUNE必须同步改依赖位置。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：插入步骤后旧下标1变2，旧依赖也要重编号。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24839v1">原论文</a> · <a href="../../agent-research/2611.24839-kaer/">实现解读</a> · <a href="#qa-e5eb2d96bca72570">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:execjudges" data-paper-title="Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling Agent Emory University 2026-11-18 对每个topic独立生成三个轻量Python评审程序，程序回答on-subject/some-answer/exact/dedicated四个证据问题，固定评分函数映射为等级，再对三个分数均值向下取整。LLM负责一次性的程序编写而不是逐文档调用，生成代码必须隔离执行。本地不执行来自网络或LLM的代码。 成本过高，不复现（审查 DONE）；CPU诊断。l0_interface：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。只运行固定grade mapping和floor聚合的L0接口，未生成或执行评审程序、未下载TREC、未调用模型，不输出相关性准确率。布尔值必须严格bool，整数0/1不会静默当证据。  Agent 评测与可靠性 可执行评审与共识 Agent 评测与可靠性：如何知道真的做对了 ExecJudges把LLM调用放到哪一步？ 每topic写独立程序，然后CPU复用程序给所有文档；本地只有映射接口，没有writer。 教学例：三程序可打分1000文档，不应伪称本地调用了3000次LLM。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/evaluation-and-reliability/">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<span id="paper-agent-research-execjudges-d2ec0966" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-9d93ac8fc489bc7f">ExecJudges把LLM调用放到哪一步？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aexecjudges">Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Emory University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>每topic写独立程序，然后CPU复用程序给所有文档；本地只有映射接口，没有writer。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：三程序可打分1000文档，不应伪称本地调用了3000次LLM。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24849v1">原论文</a> · <a href="../../agent-research/2611.24849-execjudges/">实现解读</a> · <a href="#qa-9d93ac8fc489bc7f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:execjudges" data-paper-title="Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling Agent Emory University 2026-11-18 对每个topic独立生成三个轻量Python评审程序，程序回答on-subject/some-answer/exact/dedicated四个证据问题，固定评分函数映射为等级，再对三个分数均值向下取整。LLM负责一次性的程序编写而不是逐文档调用，生成代码必须隔离执行。本地不执行来自网络或LLM的代码。 成本过高，不复现（审查 DONE）；CPU诊断。l0_interface：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。只运行固定grade mapping和floor聚合的L0接口，未生成或执行评审程序、未下载TREC、未调用模型，不输出相关性准确率。布尔值必须严格bool，整数0/1不会静默当证据。  Agent 评测与可靠性 可执行评审与共识 Agent 评测与可靠性：如何知道真的做对了 完整实现还必须保护哪些边界？ 测试qrels不进入writer，生成代码要在禁网/禁模型调用的资源沙箱运行；本地不提供这种沙箱。 教学例：能返回四个bool的Python函数不等于可安全执行不可信代码。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/evaluation-and-reliability/">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e3caf09b78e7cfaa">完整实现还必须保护哪些边界？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aexecjudges">Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Emory University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>测试qrels不进入writer，生成代码要在禁网/禁模型调用的资源沙箱运行；本地不提供这种沙箱。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：能返回四个bool的Python函数不等于可安全执行不可信代码。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24849v1">原论文</a> · <a href="../../agent-research/2611.24849-execjudges/">实现解读</a> · <a href="#qa-e3caf09b78e7cfaa">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:execjudges" data-paper-title="Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling Agent Emory University 2026-11-18 对每个topic独立生成三个轻量Python评审程序，程序回答on-subject/some-answer/exact/dedicated四个证据问题，固定评分函数映射为等级，再对三个分数均值向下取整。LLM负责一次性的程序编写而不是逐文档调用，生成代码必须隔离执行。本地不执行来自网络或LLM的代码。 成本过高，不复现（审查 DONE）；CPU诊断。l0_interface：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。只运行固定grade mapping和floor聚合的L0接口，未生成或执行评审程序、未下载TREC、未调用模型，不输出相关性准确率。布尔值必须严格bool，整数0/1不会静默当证据。  Agent 评测与可靠性 可执行评审与共识 Agent 评测与可靠性：如何知道真的做对了 三个等级3,2,3为何最终是2？ 先算均值8/3，再向下取整；不是多数票3，也不是四舍五入3。 教学例：1,0,1均值2/3，最终0。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/evaluation-and-reliability/">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-f5d05175b3b0ed71">三个等级3,2,3为何最终是2？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aexecjudges">Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Emory University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先算均值8/3，再向下取整；不是多数票3，也不是四舍五入3。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：1,0,1均值2/3，最终0。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24849v1">原论文</a> · <a href="../../agent-research/2611.24849-execjudges/">实现解读</a> · <a href="#qa-f5d05175b3b0ed71">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:execjudges" data-paper-title="Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling Agent Emory University 2026-11-18 对每个topic独立生成三个轻量Python评审程序，程序回答on-subject/some-answer/exact/dedicated四个证据问题，固定评分函数映射为等级，再对三个分数均值向下取整。LLM负责一次性的程序编写而不是逐文档调用，生成代码必须隔离执行。本地不执行来自网络或LLM的代码。 成本过高，不复现（审查 DONE）；CPU诊断。l0_interface：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。只运行固定grade mapping和floor聚合的L0接口，未生成或执行评审程序、未下载TREC、未调用模型，不输出相关性准确率。布尔值必须严格bool，整数0/1不会静默当证据。  Agent 评测与可靠性 可执行评审与共识 Agent 评测与可靠性：如何知道真的做对了 与FUSE的验证有什么不同？ ExecJudges映射文本证据，FUSE对隐藏动机模拟状态核验；聚合正确不保证证据判断正确。 教学例：三个程序都误判exact，floor仍可能错；不能当成隐藏动机推断成功。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/evaluation-and-reliability/">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-d6779db920fc7948">与FUSE的验证有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aexecjudges">Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Emory University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>ExecJudges映射文本证据，FUSE对隐藏动机模拟状态核验；聚合正确不保证证据判断正确。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：三个程序都误判exact，floor仍可能错；不能当成隐藏动机推断成功。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24849v1">原论文</a> · <a href="../../agent-research/2611.24849-execjudges/">实现解读</a> · <a href="#qa-d6779db920fc7948">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ahe-beta" data-paper-title="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses Agent Fudan University 2026-11-18 AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。开发者只接收被准入的需求及其证据包。证据包只有被引用会话的运行日志、公开任务和执行条件，用户对话、隐藏测试和grader不能传给开发者。RFC先做设计审查，代码再按验收标准审查；合并时批准必须绑定当前PR head，且RFC仍与已审设计一致。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l0_interface；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。只实现类型化Evidence/Requirement交付集、已核实合并需求的covers消解，以及绑定head与RFC的纯merge_eligible判定。没有模拟用户、Triage/Architect/PM语言判断、开发Agent或真正git合并。结构字段不保证字符串内部绝无隐藏答案，所以保持L0，不把类型检查称为语义安全。  执行框架与自改进 ahe-beta Agent 运行流程与自进化：改的是哪一层 本地Evidence类型能证明完全没有gold泄漏吗？ 不能。它只限制公开交付表面并排除显式gold字段，字符串和外部调用仍需可信集成，所以仅是L0协议。 教学例：把答案藏在runtime_log字符串中不是类型系统能排除的。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-8e687d8d4448f153">本地Evidence类型能证明完全没有gold泄漏吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aahe-beta">Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Fudan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它只限制公开交付表面并排除显式gold字段，字符串和外部调用仍需可信集成，所以仅是L0协议。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把答案藏在runtime_log字符串中不是类型系统能排除的。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24924v1">原论文</a> · <a href="../../agent-research/2611.24924-ahe-beta/">实现解读</a> · <a href="#qa-8e687d8d4448f153">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ahe-beta" data-paper-title="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses Agent Fudan University 2026-11-18 AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。开发者只接收被准入的需求及其证据包。证据包只有被引用会话的运行日志、公开任务和执行条件，用户对话、隐藏测试和grader不能传给开发者。RFC先做设计审查，代码再按验收标准审查；合并时批准必须绑定当前PR head，且RFC仍与已审设计一致。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l0_interface；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。只实现类型化Evidence/Requirement交付集、已核实合并需求的covers消解，以及绑定head与RFC的纯merge_eligible判定。没有模拟用户、Triage/Architect/PM语言判断、开发Agent或真正git合并。结构字段不保证字符串内部绝无隐藏答案，所以保持L0，不把类型检查称为语义安全。  执行框架与自改进 ahe-beta Agent 运行流程与自进化：改的是哪一层 为什么测试通过仍可能不满足用户？ 测试可读最终工作区，但用户可能没收到结果、纠正请求未送达，或不允许的文件被修改；这些需求要靠交互记录核实。 教学例：修好代码却没有回复用户，不等于交付完成。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-ahe-beta-fc48846a" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-1cef86a879e7280d">为什么测试通过仍可能不满足用户？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aahe-beta">Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Fudan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>测试可读最终工作区，但用户可能没收到结果、纠正请求未送达，或不允许的文件被修改；这些需求要靠交互记录核实。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：修好代码却没有回复用户，不等于交付完成。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24924v1">原论文</a> · <a href="../../agent-research/2611.24924-ahe-beta/">实现解读</a> · <a href="#qa-1cef86a879e7280d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ahe-beta" data-paper-title="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses Agent Fudan University 2026-11-18 AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。开发者只接收被准入的需求及其证据包。证据包只有被引用会话的运行日志、公开任务和执行条件，用户对话、隐藏测试和grader不能传给开发者。RFC先做设计审查，代码再按验收标准审查；合并时批准必须绑定当前PR head，且RFC仍与已审设计一致。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l0_interface；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。只实现类型化Evidence/Requirement交付集、已核实合并需求的covers消解，以及绑定head与RFC的纯merge_eligible判定。没有模拟用户、Triage/Architect/PM语言判断、开发Agent或真正git合并。结构字段不保证字符串内部绝无隐藏答案，所以保持L0，不把类型检查称为语义安全。  执行框架与自改进 ahe-beta Agent 运行流程与自进化：改的是哪一层 批准过的PR又改了代码，还能沿用批准吗？ 不能。论文合并要求审查绑定当前head，RFC仍匹配审过的设计；旧批准不能覆盖后来改动。 教学例：sha1获批后push sha2，head门必须拒绝。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-b0918a60a72dcac2">批准过的PR又改了代码，还能沿用批准吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aahe-beta">Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Fudan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。论文合并要求审查绑定当前head，RFC仍匹配审过的设计；旧批准不能覆盖后来改动。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：sha1获批后push sha2，head门必须拒绝。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24924v1">原论文</a> · <a href="../../agent-research/2611.24924-ahe-beta/">实现解读</a> · <a href="#qa-b0918a60a72dcac2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ahe-beta" data-paper-title="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses Agent Fudan University 2026-11-18 AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。开发者只接收被准入的需求及其证据包。证据包只有被引用会话的运行日志、公开任务和执行条件，用户对话、隐藏测试和grader不能传给开发者。RFC先做设计审查，代码再按验收标准审查；合并时批准必须绑定当前PR head，且RFC仍与已审设计一致。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l0_interface；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。只实现类型化Evidence/Requirement交付集、已核实合并需求的covers消解，以及绑定head与RFC的纯merge_eligible判定。没有模拟用户、Triage/Architect/PM语言判断、开发Agent或真正git合并。结构字段不保证字符串内部绝无隐藏答案，所以保持L0，不把类型检查称为语义安全。  执行框架与自改进 ahe-beta Agent 运行流程与自进化：改的是哪一层 它和Harness²都不看rubric，为何不是同一算法？ Harness²用当前任务执行对照组合候选，再积累如何改的经验；AHE-Beta以会话需求、角色分工和审查准入选择跨任务结构改动。 教学例：比较两个产物和核实中断控制需求，是两种不同证据。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-acd1540eabbca22e">它和Harness²都不看rubric，为何不是同一算法？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aahe-beta">Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Fudan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Harness²用当前任务执行对照组合候选，再积累如何改的经验；AHE-Beta以会话需求、角色分工和审查准入选择跨任务结构改动。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：比较两个产物和核实中断控制需求，是两种不同证据。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24924v1">原论文</a> · <a href="../../agent-research/2611.24924-ahe-beta/">实现解读</a> · <a href="#qa-acd1540eabbca22e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:autoregressive-view-model" data-paper-title="Autoregressive View Model" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Autoregressive View Model 多模态大模型 Meta / University of Oxford 2026-11-17 AVM不拟合显式3D表示，而在给定相机路径下生成短视图片段。预填图像/视频与历史生成片段统一成为context；检索保持活动上下文有界。先把双向视频DiT微调为N-in-1-out的flow matching，再以自身rollout做因果tuning和蒸馏，让生成内容可回到历史中支持后续重访。Fixed-v1 source. 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅原文方法、机构、成本与边界收录；没有operator、模型加载、训练、合成数据、metrics或GPU回执。不会用通用图像相似度/检索fixture代替14B视频模型的场景持久性。  世界模型 自回归视频与场景持久性 多模态 世界建模：状态、生成与动作条件 没有显式3D表示，AVM怎样保留可用场景信息？ 用预填和历史视图作context，并按当前相机查询检索活动子集；它是生成条件，不是拟合NeRF或高斯场景。 教学例：重访一间屋子时可检索此前生成的门和桌面视角，而不是重建一份完整mesh。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<span id="paper-multimodal-models-autoregressive-view-model-901ae7b6" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-06f6dbaf2649d1d5">没有显式3D表示，AVM怎样保留可用场景信息？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=multimodal-models%3Aautoregressive-view-model">Autoregressive View Model</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Meta / University of Oxford</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>用预填和历史视图作context，并按当前相机查询检索活动子集；它是生成条件，不是拟合NeRF或高斯场景。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：重访一间屋子时可检索此前生成的门和桌面视角，而不是重建一份完整mesh。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23417v1">原论文</a> · <a href="../../multimodal-models/2611.23417-autoregressive-view-model/">实现解读</a> · <a href="#qa-06f6dbaf2649d1d5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:autoregressive-view-model" data-paper-title="Autoregressive View Model" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Autoregressive View Model 多模态大模型 Meta / University of Oxford 2026-11-17 AVM不拟合显式3D表示，而在给定相机路径下生成短视图片段。预填图像/视频与历史生成片段统一成为context；检索保持活动上下文有界。先把双向视频DiT微调为N-in-1-out的flow matching，再以自身rollout做因果tuning和蒸馏，让生成内容可回到历史中支持后续重访。Fixed-v1 source. 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅原文方法、机构、成本与边界收录；没有operator、模型加载、训练、合成数据、metrics或GPU回执。不会用通用图像相似度/检索fixture代替14B视频模型的场景持久性。  世界模型 自回归视频与场景持久性 多模态 世界建模：状态、生成与动作条件 为什么双向训练后还做自身rollout的因果tuning？ 流式后续生成会接触自己产生的历史；只在真实context训练不覆盖这类误差累积。因果tuning和蒸馏处理流式路径与少步采样。 教学例：早期生成的桌腿略偏，后续片段需在这一历史上保持或修正，而非总拿真实桌腿作context。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-6e1b313d7ae3b591">为什么双向训练后还做自身rollout的因果tuning？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=multimodal-models%3Aautoregressive-view-model">Autoregressive View Model</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Meta / University of Oxford</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>流式后续生成会接触自己产生的历史；只在真实context训练不覆盖这类误差累积。因果tuning和蒸馏处理流式路径与少步采样。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：早期生成的桌腿略偏，后续片段需在这一历史上保持或修正，而非总拿真实桌腿作context。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23417v1">原论文</a> · <a href="../../multimodal-models/2611.23417-autoregressive-view-model/">实现解读</a> · <a href="#qa-6e1b313d7ae3b591">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:autoregressive-view-model" data-paper-title="Autoregressive View Model" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Autoregressive View Model 多模态大模型 Meta / University of Oxford 2026-11-17 AVM不拟合显式3D表示，而在给定相机路径下生成短视图片段。预填图像/视频与历史生成片段统一成为context；检索保持活动上下文有界。先把双向视频DiT微调为N-in-1-out的flow matching，再以自身rollout做因果tuning和蒸馏，让生成内容可回到历史中支持后续重访。Fixed-v1 source. 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅原文方法、机构、成本与边界收录；没有operator、模型加载、训练、合成数据、metrics或GPU回执。不会用通用图像相似度/检索fixture代替14B视频模型的场景持久性。  世界模型 自回归视频与场景持久性 多模态 世界建模：状态、生成与动作条件 为什么本轮不加一个检索小样例就算复现？ 检索只是AVM一部分，不能替代14B视频生成、flow训练及自rollout路径。成本门槛要求透明不复现，而不是把便宜影子程序叫完整实现。 教学例：取出相近相机的旧帧不等于生成未见区域或动态物体。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f8376f4ada5931c4">为什么本轮不加一个检索小样例就算复现？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=multimodal-models%3Aautoregressive-view-model">Autoregressive View Model</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Meta / University of Oxford</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>检索只是AVM一部分，不能替代14B视频生成、flow训练及自rollout路径。成本门槛要求透明不复现，而不是把便宜影子程序叫完整实现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：取出相近相机的旧帧不等于生成未见区域或动态物体。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23417v1">原论文</a> · <a href="../../multimodal-models/2611.23417-autoregressive-view-model/">实现解读</a> · <a href="#qa-f8376f4ada5931c4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:autoregressive-view-model" data-paper-title="Autoregressive View Model" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Autoregressive View Model 多模态大模型 Meta / University of Oxford 2026-11-17 AVM不拟合显式3D表示，而在给定相机路径下生成短视图片段。预填图像/视频与历史生成片段统一成为context；检索保持活动上下文有界。先把双向视频DiT微调为N-in-1-out的flow matching，再以自身rollout做因果tuning和蒸馏，让生成内容可回到历史中支持后续重访。Fixed-v1 source. 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅原文方法、机构、成本与边界收录；没有operator、模型加载、训练、合成数据、metrics或GPU回执。不会用通用图像相似度/检索fixture代替14B视频模型的场景持久性。  世界模型 自回归视频与场景持久性 多模态 世界建模：状态、生成与动作条件 场景重访一致是否等于CWM的反事实能力？ 不等于。重访是在相机轨迹和生成历史下维持场景；个体反事实还需同一扰动下不同动作结果的耦合假设。 教学例：门框位置保持不变，不能说明同一阵风下船改航向会到哪里。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-3aa5c4c6e8c08b0d">场景重访一致是否等于CWM的反事实能力？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=multimodal-models%3Aautoregressive-view-model">Autoregressive View Model</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Meta / University of Oxford</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不等于。重访是在相机轨迹和生成历史下维持场景；个体反事实还需同一扰动下不同动作结果的耦合假设。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：门框位置保持不变，不能说明同一阵风下船改航向会到哪里。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23417v1">原论文</a> · <a href="../../multimodal-models/2611.23417-autoregressive-view-model/">实现解读</a> · <a href="#qa-3aa5c4c6e8c08b0d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:searchinject" data-paper-title="SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search Agent Google LLC 2026-11-02 间接注入先要进入上下文才有机会影响LLM。SearchInject在原top100候选中，用相关性、abuse、instruction概率及两项相关性交互做logistic风险评分；超过冻结阈值才隔离，按原顺序从同一候选池补足top10。它控制暴露，而不是验证下游攻击成功。Google官方目录今天新增，但论文首发11月2日，按历史发现补录，不算今天新论文。 成本过高，不复现（审查 DONE）；CPU诊断。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。显式数值夹具只检查feature顺序、严格&gt;阈值、干净经验约束与refill。无真实payload、SciFact检索、拟合分类器、生成模型或安全认证；更低阈值移除更多候选，也可能补入原rank10外的攻击页。  Agent 评测与可靠性 检索上下文准入 Agent 运行流程与自进化：改的是哪一层 s等于阈值时保留吗，移除后如何补足？ 相等保留；仅s&gt;tau隔离，按原top100顺序补到10，不重新排序也不重新检索。 教学例：.8阈值下.8保留、.9删除，原第11名可能补入。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-12bbf65ee27b0e72">s等于阈值时保留吗，移除后如何补足？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Asearchinject">SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Google LLC</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>相等保留；仅s&gt;tau隔离，按原top100顺序补到10，不重新排序也不重新检索。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：.8阈值下.8保留、.9删除，原第11名可能补入。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.02643v1">原论文</a> · <a href="../../agent-research/2611.02643-searchinject/">实现解读</a> · <a href="#qa-12bbf65ee27b0e72">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:searchinject" data-paper-title="SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search Agent Google LLC 2026-11-02 间接注入先要进入上下文才有机会影响LLM。SearchInject在原top100候选中，用相关性、abuse、instruction概率及两项相关性交互做logistic风险评分；超过冻结阈值才隔离，按原顺序从同一候选池补足top10。它控制暴露，而不是验证下游攻击成功。Google官方目录今天新增，但论文首发11月2日，按历史发现补录，不算今天新论文。 成本过高，不复现（审查 DONE）；CPU诊断。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。显式数值夹具只检查feature顺序、严格&gt;阈值、干净经验约束与refill。无真实payload、SciFact检索、拟合分类器、生成模型或安全认证；更低阈值移除更多候选，也可能补入原rank10外的攻击页。  Agent 评测与可靠性 检索上下文准入 Agent 运行流程与自进化：改的是哪一层 暴露率下降是否证明攻击成功率下降？ 不能。它记录恶意载体进入上下文，仍需定义并验证下游任务劫持；原跟进没有确认的undefended成功。 教学例：移走83个载体而两臂均零确认攻击，不能计算有效防御率。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-searchinject-332a1bc3" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-06b0de5f2b48aa73">暴露率下降是否证明攻击成功率下降？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Asearchinject">SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Google LLC</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它记录恶意载体进入上下文，仍需定义并验证下游任务劫持；原跟进没有确认的undefended成功。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：移走83个载体而两臂均零确认攻击，不能计算有效防御率。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.02643v1">原论文</a> · <a href="../../agent-research/2611.02643-searchinject/">实现解读</a> · <a href="#qa-06b0de5f2b48aa73">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:searchinject" data-paper-title="SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search Agent Google LLC 2026-11-02 间接注入先要进入上下文才有机会影响LLM。SearchInject在原top100候选中，用相关性、abuse、instruction概率及两项相关性交互做logistic风险评分；超过冻结阈值才隔离，按原顺序从同一候选池补足top10。它控制暴露，而不是验证下游攻击成功。Google官方目录今天新增，但论文首发11月2日，按历史发现补录，不算今天新论文。 成本过高，不复现（审查 DONE）；CPU诊断。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。显式数值夹具只检查feature顺序、严格&gt;阈值、干净经验约束与refill。无真实payload、SciFact检索、拟合分类器、生成模型或安全认证；更低阈值移除更多候选，也可能补入原rank10外的攻击页。  Agent 评测与可靠性 检索上下文准入 Agent 运行流程与自进化：改的是哪一层 SearchInject和SilentGuard的门槛是否相同？ 不是。前者筛选检索上下文，后者验证工具结果不变量；一种通过不证明另一种安全。 教学例：低风险页面仍可能给出不满足过滤条件的API值。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-749ae8a32ebc973f">SearchInject和SilentGuard的门槛是否相同？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Asearchinject">SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Google LLC</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。前者筛选检索上下文，后者验证工具结果不变量；一种通过不证明另一种安全。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：低风险页面仍可能给出不满足过滤条件的API值。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.02643v1">原论文</a> · <a href="../../agent-research/2611.02643-searchinject/">实现解读</a> · <a href="#qa-749ae8a32ebc973f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:searchinject" data-paper-title="SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search Agent Google LLC 2026-11-02 间接注入先要进入上下文才有机会影响LLM。SearchInject在原top100候选中，用相关性、abuse、instruction概率及两项相关性交互做logistic风险评分；超过冻结阈值才隔离，按原顺序从同一候选池补足top10。它控制暴露，而不是验证下游攻击成功。Google官方目录今天新增，但论文首发11月2日，按历史发现补录，不算今天新论文。 成本过高，不复现（审查 DONE）；CPU诊断。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。显式数值夹具只检查feature顺序、严格&gt;阈值、干净经验约束与refill。无真实payload、SciFact检索、拟合分类器、生成模型或安全认证；更低阈值移除更多候选，也可能补入原rank10外的攻击页。  Agent 评测与可靠性 检索上下文准入 Agent 运行流程与自进化：改的是哪一层 0.5%经验约束能直接当线上保证吗？ 不能。阈值冻结后分布变化可能超出；原文test误隔离0.59–0.65%，应保留而非抹掉。 教学例：calibration1000项最多5项被隔离，test不因此也最多5项。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-7660250f02f4e5cd">0.5%经验约束能直接当线上保证吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Asearchinject">SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Google LLC</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。阈值冻结后分布变化可能超出；原文test误隔离0.59–0.65%，应保留而非抹掉。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：calibration1000项最多5项被隔离，test不因此也最多5项。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.02643v1">原论文</a> · <a href="../../agent-research/2611.02643-searchinject/">实现解读</a> · <a href="#qa-7660250f02f4e5cd">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:yuanbao-rubric" data-paper-title="From Relevance to Utility: Rubric Alignment in Yuanbao Search" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Relevance to Utility: Rubric Alignment in Yuanbao Search 搜广推与 LLM 应用 Tencent 2026-11-17 传统逐文档相关性不等于给下游推理提供有用证据。元宝先生成查询特定的加权正向标准和扣分标准，用蒸馏标签统一训练召回与四头排序，再用集合奖励训练选择器。低于组均值的轨迹并不接受负优势惩罚，而是按奖励差蒸馏组内最佳轨迹。 成本过高，不复现（审查DONE）；诊断检查最佳轨迹有蒸馏梯度、失败轨迹没有模仿梯度、奖励不反传、padding 梯度为零；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。没有运行 rubric 生成、DeepSeek judge、Qwen 编码器或真实搜索。诊断检查最佳轨迹有蒸馏梯度、失败轨迹没有模仿梯度、奖励不反传、padding 梯度为零；它们不是答案准确率。  检索与匹配 大模型与搜索融合 搜广推 候选生成与搜索匹配 组内奖励全部相同时该怎样？ 优势和最佳奖励差都为零；两分支不给虚假策略更新，且padding必须始终无梯度。 教学例：奖励全为2时应为零更新；把padding logp改成极小值也不改变loss。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="../paths/recommendation/retrieval-matching/">搜广推 / 候选生成与搜索匹配</a></p>
 <p class="ar-learning-level">实现细节</p>

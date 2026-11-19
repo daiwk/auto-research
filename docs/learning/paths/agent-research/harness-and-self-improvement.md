@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 292 个问题 · 73 篇论文
+[Agent](index.md) / 308 个问题 · 77 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,168 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">292 个问题 · 73 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">308 个问题 · 77 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ahe-beta" data-paper-title="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses Agent Fudan University 2026-11-18 AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。开发者只接收被准入的需求及其证据包。证据包只有被引用会话的运行日志、公开任务和执行条件，用户对话、隐藏测试和grader不能传给开发者。RFC先做设计审查，代码再按验收标准审查；合并时批准必须绑定当前PR head，且RFC仍与已审设计一致。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l0_interface；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。只实现类型化Evidence/Requirement交付集、已核实合并需求的covers消解，以及绑定head与RFC的纯merge_eligible判定。没有模拟用户、Triage/Architect/PM语言判断、开发Agent或真正git合并。结构字段不保证字符串内部绝无隐藏答案，所以保持L0，不把类型检查称为语义安全。  执行框架与自改进 ahe-beta Agent 运行流程与自进化：改的是哪一层 为什么测试通过仍可能不满足用户？ 测试可读最终工作区，但用户可能没收到结果、纠正请求未送达，或不允许的文件被修改；这些需求要靠交互记录核实。 教学例：修好代码却没有回复用户，不等于交付完成。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-ahe-beta-fc48846a" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-1cef86a879e7280d">为什么测试通过仍可能不满足用户？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aahe-beta">Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Fudan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>测试可读最终工作区，但用户可能没收到结果、纠正请求未送达，或不允许的文件被修改；这些需求要靠交互记录核实。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：修好代码却没有回复用户，不等于交付完成。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24924v1">原论文</a> · <a href="../../../../agent-research/2611.24924-ahe-beta/">实现解读</a> · <a href="#qa-1cef86a879e7280d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ahe-beta" data-paper-title="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses Agent Fudan University 2026-11-18 AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。开发者只接收被准入的需求及其证据包。证据包只有被引用会话的运行日志、公开任务和执行条件，用户对话、隐藏测试和grader不能传给开发者。RFC先做设计审查，代码再按验收标准审查；合并时批准必须绑定当前PR head，且RFC仍与已审设计一致。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l0_interface；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。只实现类型化Evidence/Requirement交付集、已核实合并需求的covers消解，以及绑定head与RFC的纯merge_eligible判定。没有模拟用户、Triage/Architect/PM语言判断、开发Agent或真正git合并。结构字段不保证字符串内部绝无隐藏答案，所以保持L0，不把类型检查称为语义安全。  执行框架与自改进 ahe-beta Agent 运行流程与自进化：改的是哪一层 批准过的PR又改了代码，还能沿用批准吗？ 不能。论文合并要求审查绑定当前head，RFC仍匹配审过的设计；旧批准不能覆盖后来改动。 教学例：sha1获批后push sha2，head门必须拒绝。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-b0918a60a72dcac2">批准过的PR又改了代码，还能沿用批准吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aahe-beta">Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Fudan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。论文合并要求审查绑定当前head，RFC仍匹配审过的设计；旧批准不能覆盖后来改动。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：sha1获批后push sha2，head门必须拒绝。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24924v1">原论文</a> · <a href="../../../../agent-research/2611.24924-ahe-beta/">实现解读</a> · <a href="#qa-b0918a60a72dcac2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ahe-beta" data-paper-title="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses Agent Fudan University 2026-11-18 AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。开发者只接收被准入的需求及其证据包。证据包只有被引用会话的运行日志、公开任务和执行条件，用户对话、隐藏测试和grader不能传给开发者。RFC先做设计审查，代码再按验收标准审查；合并时批准必须绑定当前PR head，且RFC仍与已审设计一致。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l0_interface；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。只实现类型化Evidence/Requirement交付集、已核实合并需求的covers消解，以及绑定head与RFC的纯merge_eligible判定。没有模拟用户、Triage/Architect/PM语言判断、开发Agent或真正git合并。结构字段不保证字符串内部绝无隐藏答案，所以保持L0，不把类型检查称为语义安全。  执行框架与自改进 ahe-beta Agent 运行流程与自进化：改的是哪一层 它和Harness²都不看rubric，为何不是同一算法？ Harness²用当前任务执行对照组合候选，再积累如何改的经验；AHE-Beta以会话需求、角色分工和审查准入选择跨任务结构改动。 教学例：比较两个产物和核实中断控制需求，是两种不同证据。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-acd1540eabbca22e">它和Harness²都不看rubric，为何不是同一算法？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aahe-beta">Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Fudan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Harness²用当前任务执行对照组合候选，再积累如何改的经验；AHE-Beta以会话需求、角色分工和审查准入选择跨任务结构改动。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：比较两个产物和核实中断控制需求，是两种不同证据。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24924v1">原论文</a> · <a href="../../../../agent-research/2611.24924-ahe-beta/">实现解读</a> · <a href="#qa-acd1540eabbca22e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ahe-beta" data-paper-title="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses Agent Fudan University 2026-11-18 AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。开发者只接收被准入的需求及其证据包。证据包只有被引用会话的运行日志、公开任务和执行条件，用户对话、隐藏测试和grader不能传给开发者。RFC先做设计审查，代码再按验收标准审查；合并时批准必须绑定当前PR head，且RFC仍与已审设计一致。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l0_interface；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。只实现类型化Evidence/Requirement交付集、已核实合并需求的covers消解，以及绑定head与RFC的纯merge_eligible判定。没有模拟用户、Triage/Architect/PM语言判断、开发Agent或真正git合并。结构字段不保证字符串内部绝无隐藏答案，所以保持L0，不把类型检查称为语义安全。  执行框架与自改进 ahe-beta Agent 运行流程与自进化：改的是哪一层 本地Evidence类型能证明完全没有gold泄漏吗？ 不能。它只限制公开交付表面并排除显式gold字段，字符串和外部调用仍需可信集成，所以仅是L0协议。 教学例：把答案藏在runtime_log字符串中不是类型系统能排除的。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-8e687d8d4448f153">本地Evidence类型能证明完全没有gold泄漏吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aahe-beta">Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Fudan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它只限制公开交付表面并排除显式gold字段，字符串和外部调用仍需可信集成，所以仅是L0协议。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把答案藏在runtime_log字符串中不是类型系统能排除的。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24924v1">原论文</a> · <a href="../../../../agent-research/2611.24924-ahe-beta/">实现解读</a> · <a href="#qa-8e687d8d4448f153">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsibench-infra" data-paper-title="RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale? Agent ByteDance Seed / Tsinghua University AIR / SIA-Lab 2026-11-18 单算子快不代表端到端训练或服务变快。RSIBench-Infra让Agent从官方可运行baseline出发，跨engine、kernel、instruction修改，但只提交一个OCI filesystem layer。独立Serve/Train Job把同一digest应用到每个rank；Benchmark Job绝不加载候选层，单独做质量门和端到端计时。任务定义含模型、环境、资源和独立verifier。16推理+4训练任务覆盖1–32个加速器、最多4节点；推理模型1.7B–2.8T。 完整实验成本过高，不复现（审查 DONE）；项目页https://rsibench-infra.github.io已核对，未验证论文专用源码仓库公开。deferred_high_cost / review-only；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。仅做原文审查、成本评估、中英文说明和学习材料。没有把OCI字段stub、任意microbenchmark或单卡小模型标成RSIBench-Infra已接入；local_operator=null，不提供可执行Evolve算子。  执行框架与自改进 rsibench-infra Agent 运行流程与自进化：改的是哪一层 为什么不用一个git patch承载优化？ 可改engine、库、编译产物和其他目录，git patch不覆盖全部环境变化；OCI层在干净baseline上重建同一提交。 教学例：只提交Python diff会漏掉新编译kernel或库依赖。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-rsibench-infra-0d987b35" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-0d78a63d459b4fe4">为什么不用一个git patch承载优化？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arsibench-infra">RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · ByteDance Seed / Tsinghua University AIR / SIA-Lab</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>可改engine、库、编译产物和其他目录，git patch不覆盖全部环境变化；OCI层在干净baseline上重建同一提交。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：只提交Python diff会漏掉新编译kernel或库依赖。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24395v1">原论文</a> · <a href="../../../../agent-research/2611.24395-rsibench-infra/">实现解读</a> · <a href="#qa-0d78a63d459b4fe4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsibench-infra" data-paper-title="RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale? Agent ByteDance Seed / Tsinghua University AIR / SIA-Lab 2026-11-18 单算子快不代表端到端训练或服务变快。RSIBench-Infra让Agent从官方可运行baseline出发，跨engine、kernel、instruction修改，但只提交一个OCI filesystem layer。独立Serve/Train Job把同一digest应用到每个rank；Benchmark Job绝不加载候选层，单独做质量门和端到端计时。任务定义含模型、环境、资源和独立verifier。16推理+4训练任务覆盖1–32个加速器、最多4节点；推理模型1.7B–2.8T。 完整实验成本过高，不复现（审查 DONE）；项目页https://rsibench-infra.github.io已核对，未验证论文专用源码仓库公开。deferred_high_cost / review-only；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。仅做原文审查、成本评估、中英文说明和学习材料。没有把OCI字段stub、任意microbenchmark或单卡小模型标成RSIBench-Infra已接入；local_operator=null，不提供可执行Evolve算子。  执行框架与自改进 rsibench-infra Agent 运行流程与自进化：改的是哪一层 Benchmark Job为什么不能加载候选OCI层？ 候选层由Agent控制；加载它可能修改workload、质量检查或计分。Benchmark通过服务接口评测，计分代码保持独立。 教学例：候选把测试答案写入验证器目录，不能靠同一层传入Benchmark环境。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-8a9b5b6a76bd3bf9">Benchmark Job为什么不能加载候选OCI层？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arsibench-infra">RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · ByteDance Seed / Tsinghua University AIR / SIA-Lab</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>候选层由Agent控制；加载它可能修改workload、质量检查或计分。Benchmark通过服务接口评测，计分代码保持独立。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：候选把测试答案写入验证器目录，不能靠同一层传入Benchmark环境。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24395v1">原论文</a> · <a href="../../../../agent-research/2611.24395-rsibench-infra/">实现解读</a> · <a href="#qa-8a9b5b6a76bd3bf9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsibench-infra" data-paper-title="RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale? Agent ByteDance Seed / Tsinghua University AIR / SIA-Lab 2026-11-18 单算子快不代表端到端训练或服务变快。RSIBench-Infra让Agent从官方可运行baseline出发，跨engine、kernel、instruction修改，但只提交一个OCI filesystem layer。独立Serve/Train Job把同一digest应用到每个rank；Benchmark Job绝不加载候选层，单独做质量门和端到端计时。任务定义含模型、环境、资源和独立verifier。16推理+4训练任务覆盖1–32个加速器、最多4节点；推理模型1.7B–2.8T。 完整实验成本过高，不复现（审查 DONE）；项目页https://rsibench-infra.github.io已核对，未验证论文专用源码仓库公开。deferred_high_cost / review-only；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。仅做原文审查、成本评估、中英文说明和学习材料。没有把OCI字段stub、任意microbenchmark或单卡小模型标成RSIBench-Infra已接入；local_operator=null，不提供可执行Evolve算子。  执行框架与自改进 rsibench-infra Agent 运行流程与自进化：改的是哪一层 相比Harness²或kernel评测，它的目标有什么不同？ 这里检查整个模型服务/训练链路在质量门下是否更快；harness任务通过或单kernel提速不证明端到端吞吐提高。 教学例：kernel快2倍但数据传输占90%，整条链路提升仍可能很小。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e2d959f7240088a9">相比Harness²或kernel评测，它的目标有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arsibench-infra">RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · ByteDance Seed / Tsinghua University AIR / SIA-Lab</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这里检查整个模型服务/训练链路在质量门下是否更快；harness任务通过或单kernel提速不证明端到端吞吐提高。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：kernel快2倍但数据传输占90%，整条链路提升仍可能很小。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24395v1">原论文</a> · <a href="../../../../agent-research/2611.24395-rsibench-infra/">实现解读</a> · <a href="#qa-e2d959f7240088a9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsibench-infra" data-paper-title="RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale? Agent ByteDance Seed / Tsinghua University AIR / SIA-Lab 2026-11-18 单算子快不代表端到端训练或服务变快。RSIBench-Infra让Agent从官方可运行baseline出发，跨engine、kernel、instruction修改，但只提交一个OCI filesystem layer。独立Serve/Train Job把同一digest应用到每个rank；Benchmark Job绝不加载候选层，单独做质量门和端到端计时。任务定义含模型、环境、资源和独立verifier。16推理+4训练任务覆盖1–32个加速器、最多4节点；推理模型1.7B–2.8T。 完整实验成本过高，不复现（审查 DONE）；项目页https://rsibench-infra.github.io已核对，未验证论文专用源码仓库公开。deferred_high_cost / review-only；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。仅做原文审查、成本评估、中英文说明和学习材料。没有把OCI字段stub、任意microbenchmark或单卡小模型标成RSIBench-Infra已接入；local_operator=null，不提供可执行Evolve算子。  执行框架与自改进 rsibench-infra Agent 运行流程与自进化：改的是哪一层 为何本库不先缩成小模型跑一遍？ 多rank部署、独立OCI应用、任务特定质量门和生产工作负载是定义性协议；任意小模型stub不能验证它们，故高成本审查终态不复现。 教学例：本地一次矩阵乘计时不是20任务RSIBench-Infra复现。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-7b5d3a8f3d3620a7">为何本库不先缩成小模型跑一遍？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arsibench-infra">RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · ByteDance Seed / Tsinghua University AIR / SIA-Lab</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>多rank部署、独立OCI应用、任务特定质量门和生产工作负载是定义性协议；任意小模型stub不能验证它们，故高成本审查终态不复现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：本地一次矩阵乘计时不是20任务RSIBench-Infra复现。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24395v1">原论文</a> · <a href="../../../../agent-research/2611.24395-rsibench-infra/">实现解读</a> · <a href="#qa-7b5d3a8f3d3620a7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:safe-personal-rsi" data-paper-title="Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates Agent Independent 2026-11-18 个人Agent的prompt更新可能提升主动性，却同时改变隐私披露、承诺和执行报告。论文固定模型和runtime，只改指令；先比较候选与父版本寻找反例，再重复确认、回滚定位和修复。修复局部验证后仍须完整admission；没有通过版本就继续用父版本。Appendix I以所有开发重放（含control）为分母，取五个primary风险类别的最大率。确认过的未授权披露case产生持久严重性veto，即使后来修复也拒该attempt； 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。实现Replay评测记录、最大类别风险准入、持久veto、最少重放/完成检查、严格多数确认两种协议与回滚gain-retention的零gain约定。未实现Willow/Kicker、邮件工具、攻击搜索、LLM修复、语义judge、verification回放或OAuth修复。Replay不是给Actor的输入，只有离线evaluator调用。  执行框架与自改进 safe-personal-rsi Agent 运行流程与自进化：改的是哪一层 修复重放没有违例，为何仍不能自动采用？ verification只查已确认反例和开发效用；完整admission还查严重veto、至少5条完整记录、最大风险和效用/成本条件。 教学例：一个修复躲过旧攻击，但记录不足仍是insufficient evidence。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-safe-personal-rsi-fa261cde" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-67dccbd4094e6a43">修复重放没有违例，为何仍不能自动采用？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asafe-personal-rsi">Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Independent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>verification只查已确认反例和开发效用；完整admission还查严重veto、至少5条完整记录、最大风险和效用/成本条件。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个修复躲过旧攻击，但记录不足仍是insufficient evidence。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23651v1">原论文</a> · <a href="../../../../agent-research/2611.23651-safe-personal-rsi/">实现解读</a> · <a href="#qa-67dccbd4094e6a43">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:safe-personal-rsi" data-paper-title="Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates Agent Independent 2026-11-18 个人Agent的prompt更新可能提升主动性，却同时改变隐私披露、承诺和执行报告。论文固定模型和runtime，只改指令；先比较候选与父版本寻找反例，再重复确认、回滚定位和修复。修复局部验证后仍须完整admission；没有通过版本就继续用父版本。Appendix I以所有开发重放（含control）为分母，取五个primary风险类别的最大率。确认过的未授权披露case产生持久严重性veto，即使后来修复也拒该attempt； 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。实现Replay评测记录、最大类别风险准入、持久veto、最少重放/完成检查、严格多数确认两种协议与回滚gain-retention的零gain约定。未实现Willow/Kicker、邮件工具、攻击搜索、LLM修复、语义judge、verification回放或OAuth修复。Replay不是给Actor的输入，只有离线evaluator调用。  执行框架与自改进 safe-personal-rsi Agent 运行流程与自进化：改的是哪一层 风险分母为什么包含正常control？ 公式使用所有开发重放做suite-normalized类别率，不是只在攻击子集上算；final attack rate另有分母，不能混用。 教学例：20条含2个同类违例，类别率0.10，不因只有4条攻击改成0.50。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-72d435d046513a15">风险分母为什么包含正常control？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asafe-personal-rsi">Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Independent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>公式使用所有开发重放做suite-normalized类别率，不是只在攻击子集上算；final attack rate另有分母，不能混用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：20条含2个同类违例，类别率0.10，不因只有4条攻击改成0.50。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23651v1">原论文</a> · <a href="../../../../agent-research/2611.23651-safe-personal-rsi/">实现解读</a> · <a href="#qa-72d435d046513a15">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:safe-personal-rsi" data-paper-title="Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates Agent Independent 2026-11-18 个人Agent的prompt更新可能提升主动性，却同时改变隐私披露、承诺和执行报告。论文固定模型和runtime，只改指令；先比较候选与父版本寻找反例，再重复确认、回滚定位和修复。修复局部验证后仍须完整admission；没有通过版本就继续用父版本。Appendix I以所有开发重放（含control）为分母，取五个primary风险类别的最大率。确认过的未授权披露case产生持久严重性veto，即使后来修复也拒该attempt； 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。实现Replay评测记录、最大类别风险准入、持久veto、最少重放/完成检查、严格多数确认两种协议与回滚gain-retention的零gain约定。未实现Willow/Kicker、邮件工具、攻击搜索、LLM修复、语义judge、verification回放或OAuth修复。Replay不是给Actor的输入，只有离线evaluator调用。  执行框架与自改进 safe-personal-rsi Agent 运行流程与自进化：改的是哪一层 相比Harness²，它的安全门是否证明风险不会增加？ 不证明。它比较最大primary类别点估计，次大类别甚至总primary风险可增加；Harness²的执行对照又不是这个领域风险门。 教学例：最大类别维持2/20，另一类别0→1/20仍可能准入。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-c09384ec7912995b">相比Harness²，它的安全门是否证明风险不会增加？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asafe-personal-rsi">Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Independent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不证明。它比较最大primary类别点估计，次大类别甚至总primary风险可增加；Harness²的执行对照又不是这个领域风险门。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：最大类别维持2/20，另一类别0→1/20仍可能准入。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23651v1">原论文</a> · <a href="../../../../agent-research/2611.23651-safe-personal-rsi/">实现解读</a> · <a href="#qa-c09384ec7912995b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:safe-personal-rsi" data-paper-title="Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates Agent Independent 2026-11-18 个人Agent的prompt更新可能提升主动性，却同时改变隐私披露、承诺和执行报告。论文固定模型和runtime，只改指令；先比较候选与父版本寻找反例，再重复确认、回滚定位和修复。修复局部验证后仍须完整admission；没有通过版本就继续用父版本。Appendix I以所有开发重放（含control）为分母，取五个primary风险类别的最大率。确认过的未授权披露case产生持久严重性veto，即使后来修复也拒该attempt； 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l1_mechanism；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。实现Replay评测记录、最大类别风险准入、持久veto、最少重放/完成检查、严格多数确认两种协议与回滚gain-retention的零gain约定。未实现Willow/Kicker、邮件工具、攻击搜索、LLM修复、语义judge、verification回放或OAuth修复。Replay不是给Actor的输入，只有离线evaluator调用。  执行框架与自改进 safe-personal-rsi Agent 运行流程与自进化：改的是哪一层 两次确认都失败，RQ2能提前称confirmed吗？ 不能。RQ2要求三次候选执行完整且严格多数；差分确认还需三次父重放且父违例更少。非空截断多数只属于RQ1模板配置。 教学例：True,True缺第三次，RQ2返回False而非确认。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-a8b062a50720ca95">两次确认都失败，RQ2能提前称confirmed吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asafe-personal-rsi">Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Independent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。RQ2要求三次候选执行完整且严格多数；差分确认还需三次父重放且父违例更少。非空截断多数只属于RQ1模板配置。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：True,True缺第三次，RQ2返回False而非确认。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23651v1">原论文</a> · <a href="../../../../agent-research/2611.23651-safe-personal-rsi/">实现解读</a> · <a href="#qa-a8b062a50720ca95">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:gandalf-bvb" data-paper-title="Verifying Agents in Rubric-Graded Environments" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Verifying Agents in Rubric-Graded Environments Agent Handshake AI Research 2026-11-17 复杂任务产物可能是Excel、PowerPoint或应用状态，单纯把文件转成文本会丢公式、布局与跨文件关系。本文不是新做任务的Agent，而是研究判断Agent产物的verifier：BVB包含24投资银行任务、2464个人工判定criteria，用来评测验证器的判断。Gandalf把rubric转成reactive检查任务，自行决定读什么原生文件／工具，直到得出布尔verdict；环境对齐让judge使用只读固定快照工具，domain guidance给全语料通用银行惯例，不含任务答案。 完整实验成本过高，不复现（审查 DONE）；review_only / deferred_high_cost；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本轮review-only，不提供一个空JSON接口冒充reactive verifier，不调用付费模型，也不重建native banking环境。官方Gandalf与BVBv1.0仓库可供后续显式预算实验，但本轮没有运行或审计其全部运行权限。  评测与可靠性 gandalf-bvb Agent 运行流程与自进化：改的是哪一层 BVB的F1能当Agent任务成功率吗？ 不能。它测verifier是否正确发现未满足rubric的criteria，actor可能已失败但judge能正确检出。 教学例：表格公式错误被准确判fail，提高的是judge F1。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-gandalf-bvb-b81b5ad5" class="ar-learning-paper-anchor"></span>
@@ -981,6 +1140,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：增加gold_answer键会报错；把答案藏进trajectory_delta的普通字符串仍需宿主外层隔离，不能因字段名合法就当公共信息。</p>
 <p class="ar-learning-sources">依据：数据协议与实现边界、本地结果与负控；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05139">原论文</a> · <a href="../../../../agent-research/2611.05139-meta-square/">实现解读</a> · <a href="#qa-100b7822cdadf600">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:searchinject" data-paper-title="SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search Agent Google LLC 2026-11-02 间接注入先要进入上下文才有机会影响LLM。SearchInject在原top100候选中，用相关性、abuse、instruction概率及两项相关性交互做logistic风险评分；超过冻结阈值才隔离，按原顺序从同一候选池补足top10。它控制暴露，而不是验证下游攻击成功。Google官方目录今天新增，但论文首发11月2日，按历史发现补录，不算今天新论文。 成本过高，不复现（审查 DONE）；CPU诊断。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。显式数值夹具只检查feature顺序、严格&gt;阈值、干净经验约束与refill。无真实payload、SciFact检索、拟合分类器、生成模型或安全认证；更低阈值移除更多候选，也可能补入原rank10外的攻击页。  Agent 评测与可靠性 检索上下文准入 Agent 运行流程与自进化：改的是哪一层 暴露率下降是否证明攻击成功率下降？ 不能。它记录恶意载体进入上下文，仍需定义并验证下游任务劫持；原跟进没有确认的undefended成功。 教学例：移走83个载体而两臂均零确认攻击，不能计算有效防御率。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-searchinject-332a1bc3" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-06b0de5f2b48aa73">暴露率下降是否证明攻击成功率下降？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asearchinject">SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Google LLC</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它记录恶意载体进入上下文，仍需定义并验证下游任务劫持；原跟进没有确认的undefended成功。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：移走83个载体而两臂均零确认攻击，不能计算有效防御率。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.02643v1">原论文</a> · <a href="../../../../agent-research/2611.02643-searchinject/">实现解读</a> · <a href="#qa-06b0de5f2b48aa73">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:searchinject" data-paper-title="SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search Agent Google LLC 2026-11-02 间接注入先要进入上下文才有机会影响LLM。SearchInject在原top100候选中，用相关性、abuse、instruction概率及两项相关性交互做logistic风险评分；超过冻结阈值才隔离，按原顺序从同一候选池补足top10。它控制暴露，而不是验证下游攻击成功。Google官方目录今天新增，但论文首发11月2日，按历史发现补录，不算今天新论文。 成本过高，不复现（审查 DONE）；CPU诊断。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。显式数值夹具只检查feature顺序、严格&gt;阈值、干净经验约束与refill。无真实payload、SciFact检索、拟合分类器、生成模型或安全认证；更低阈值移除更多候选，也可能补入原rank10外的攻击页。  Agent 评测与可靠性 检索上下文准入 Agent 运行流程与自进化：改的是哪一层 s等于阈值时保留吗，移除后如何补足？ 相等保留；仅s&gt;tau隔离，按原top100顺序补到10，不重新排序也不重新检索。 教学例：.8阈值下.8保留、.9删除，原第11名可能补入。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-12bbf65ee27b0e72">s等于阈值时保留吗，移除后如何补足？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asearchinject">SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Google LLC</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>相等保留；仅s&gt;tau隔离，按原top100顺序补到10，不重新排序也不重新检索。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：.8阈值下.8保留、.9删除，原第11名可能补入。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.02643v1">原论文</a> · <a href="../../../../agent-research/2611.02643-searchinject/">实现解读</a> · <a href="#qa-12bbf65ee27b0e72">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:searchinject" data-paper-title="SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search Agent Google LLC 2026-11-02 间接注入先要进入上下文才有机会影响LLM。SearchInject在原top100候选中，用相关性、abuse、instruction概率及两项相关性交互做logistic风险评分；超过冻结阈值才隔离，按原顺序从同一候选池补足top10。它控制暴露，而不是验证下游攻击成功。Google官方目录今天新增，但论文首发11月2日，按历史发现补录，不算今天新论文。 成本过高，不复现（审查 DONE）；CPU诊断。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。显式数值夹具只检查feature顺序、严格&gt;阈值、干净经验约束与refill。无真实payload、SciFact检索、拟合分类器、生成模型或安全认证；更低阈值移除更多候选，也可能补入原rank10外的攻击页。  Agent 评测与可靠性 检索上下文准入 Agent 运行流程与自进化：改的是哪一层 SearchInject和SilentGuard的门槛是否相同？ 不是。前者筛选检索上下文，后者验证工具结果不变量；一种通过不证明另一种安全。 教学例：低风险页面仍可能给出不满足过滤条件的API值。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-749ae8a32ebc973f">SearchInject和SilentGuard的门槛是否相同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asearchinject">SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Google LLC</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。前者筛选检索上下文，后者验证工具结果不变量；一种通过不证明另一种安全。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：低风险页面仍可能给出不满足过滤条件的API值。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.02643v1">原论文</a> · <a href="../../../../agent-research/2611.02643-searchinject/">实现解读</a> · <a href="#qa-749ae8a32ebc973f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:searchinject" data-paper-title="SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search Agent Google LLC 2026-11-02 间接注入先要进入上下文才有机会影响LLM。SearchInject在原top100候选中，用相关性、abuse、instruction概率及两项相关性交互做logistic风险评分；超过冻结阈值才隔离，按原顺序从同一候选池补足top10。它控制暴露，而不是验证下游攻击成功。Google官方目录今天新增，但论文首发11月2日，按历史发现补录，不算今天新论文。 成本过高，不复现（审查 DONE）；CPU诊断。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。显式数值夹具只检查feature顺序、严格&gt;阈值、干净经验约束与refill。无真实payload、SciFact检索、拟合分类器、生成模型或安全认证；更低阈值移除更多候选，也可能补入原rank10外的攻击页。  Agent 评测与可靠性 检索上下文准入 Agent 运行流程与自进化：改的是哪一层 0.5%经验约束能直接当线上保证吗？ 不能。阈值冻结后分布变化可能超出；原文test误隔离0.59–0.65%，应保留而非抹掉。 教学例：calibration1000项最多5项被隔离，test不因此也最多5项。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-7660250f02f4e5cd">0.5%经验约束能直接当线上保证吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asearchinject">SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Google LLC</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。阈值冻结后分布变化可能超出；原文test误隔离0.59–0.65%，应保留而非抹掉。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：calibration1000项最多5项被隔离，test不因此也最多5项。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.02643v1">原论文</a> · <a href="../../../../agent-research/2611.02643-searchinject/">实现解读</a> · <a href="#qa-7660250f02f4e5cd">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:strategist" data-paper-title="Strategist: Evolving Reasoning with Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Strategist: Evolving Reasoning with Agents Agent Princeton University 2026-11-02 模型权重不是 Agent 的全部：单步回答、投票、分解、审查、多模型路由等推理程序也决定效果和成本。论文不训练执行模型，而让一个 meta-agent 在小开发集上提出并实测这些程序，将它们表示为统一 execute(llm, task) -&gt; str 的 Python blueprint。一个 blueprint 可调用此前已存在的 blueprint，构成无环组合图；与任务提示配对才形成具体策略。 高成本完整实验：成本过高，不复现（审查 DONE）。组件状态：component_only，CPU / L1 控制与数值诊断。组件状态：component_only，CPU / L1 控制与数值诊断。没有运行 LLM 设计器、执行器或真实搜索，不是推理能力比较，也未接入统一 Evolve。高成本完整实验：成本过高，不复现（审查 DONE）。也可使用 Python 接口：  Harness 与自我改进 RSI 推理策略组合与跨任务积累 Agent 运行流程与自进化：改的是哪一层 Strategist积累的是模型参数、当前答案，还是另一种跨任务资产？ 它冻结执行模型，把推理程序表示成有统一execute接口的Python blueprint，并在实测后连同测量卡和训练轨迹经验进入跨任务库。具体任务提示与结构分开；后续任务可组合或复用旧结构，不等于模型经过梯度训练，也不只是当前答案修订。 教学例：一次发现“先做三个候选再独立审查”的流程，可在下一领域换提示继续测试；保存某道题的最终数字并不是可复用blueprint机制。 2026-11-04">

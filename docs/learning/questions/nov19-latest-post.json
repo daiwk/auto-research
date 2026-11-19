@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "post-training:eca-credit": {
+      "questions": [
+        {
+          "id": "nov19-basics",
+          "level": "basics",
+          "question": "全错rollout组为什么仍可能值得学习？",
+          "answer": "终止奖励只说明最终答案错误，不区分是否找到关键证据；ECA用训练专用证据势差给搜索行为信用，而非给失败答案奖励。",
+          "example": "教学例：两条轨迹均答错，一条文档包含关键实体、另一条重复空结果，其终止优势同为0，证据return却可以不同。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "nov19-mechanism",
+          "level": "mechanism",
+          "question": "为什么先clip每步增量不等于clip总收益？",
+          "answer": "增量+4、-3、0在c=2、H=3下，逐步clip后相消为0；Horizon保留最终势差+1，return为1/6。二者之后仍有同样的跨fold归一化和clip。",
+          "example": "教学例：势函数[-8,-4,-7,-7]的首搜索Horizon=1/6，Step=0；固定H不能改成实际调用次数。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "nov19-comparison",
+          "level": "comparison",
+          "question": "ECA和OpCredit是否都是同一种过程奖励？",
+          "answer": "不是。OpCredit的FTC依赖KG答案邻域与操作局部前沿，ECA依赖冻结策略对去重文本证据的参考答案似然；共享search-local分配原则不代表势函数可替换。",
+          "example": "教学例：一段检索文档可提高答案token似然，却没有可直接代入KG一跳邻域的活动实体集合。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "nov19-implementation",
+          "level": "implementation",
+          "question": "本地组件会把参考答案交给Agent吗？",
+          "answer": "不会。组件只接收外部训练势函数数值、奖励和span mask，不实现或评测Agent，也不接收答案文本。参考答案只应供独立训练scorer；推理Actor只能看合法问题、自身历史和观察。",
+          "example": "教学例：all-failure负控检查搜索token仍有梯度，最终答案与观察token的辅助梯度为0；这不是QA成功率。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    },
+    "post-training:mrpd-replay": {
+      "questions": [
+        {
+          "id": "nov19-basics",
+          "level": "basics",
+          "question": "为什么专家日志不是普通离线混合数据？",
+          "answer": "MRPD依赖学生和专家共享初始化，并沿专家训练时序前进；原日志策略从共同起点逐步接近最终专家，使importance ratio有机会维持在clip范围内。混洗改变这个课程。",
+          "example": "教学例：域A和B都必须先消费step0再step1；把step1放到最前不会被schedule检查器静默排序修复。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "nov19-mechanism",
+          "level": "mechanism",
+          "question": "为什么top-k之外还要一个tail atom？",
+          "answer": "教师top-k只保留若干token时，两边剩余概率质量通常不同。tail保留该质量差，构成k+1原子粗粒化分布；对选中token单独重归一化会删除此监督。",
+          "example": "教学例：教师选中token概率.5，学生.3，其tail分别.5/.7；若各自对singleton归一化会错误给KL=0。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "nov19-comparison",
+          "level": "comparison",
+          "question": "MRPD的top-k损失能替换Streaming OPD损失吗？",
+          "answer": "不能。MRPD计算student到teacher的粗粒化reverse KL，dense项不经ratio和clip；Streaming OPD对teacher top-k求部分forward样式和、无tail且另作非负截断，还面向新生成片段。",
+          "example": "教学例：相同top1 token下，MRPD的tail mismatch可使KL大于0，而Streaming的被截断部分和可能为0。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "nov19-implementation",
+          "level": "implementation",
+          "question": "真实GPU执行这里证明了什么？",
+          "answer": "只证明小张量算子、teacher/logging detach、工具观察零梯度和归约在CUDA可运行；没有训练Qwen3、多专家合并或验证论文能力。原作者仓库链接本轮404，不能称已取得其训练源码。",
+          "example": "教学例：两条响应长度1和2应各占一半样本权重，而不是把3个token合并平均。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    },
+    "post-training:dcc-aggregation": {
+      "questions": [
+        {
+          "id": "nov19-basics",
+          "level": "basics",
+          "question": "等权聚合为什么不等于标准贡献相等？",
+          "answer": "第k维满足与不满足样本的平均分差Δk会隐式乘到满足状态上；即使权重都是1/K，gain更大的标准仍更有影响。简单除以Δk也会放大其残差。",
+          "example": "教学例：两维满足/不满足分差分别10和1，等权求和时前者可盖过后者；但把后者放大10倍也同步放大噪声。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "nov19-mechanism",
+          "level": "mechanism",
+          "question": "DCC端点是每个标准各算一对吗？",
+          "answer": "不是。当前prompt的N×K分数共享一次精确two-medians拟合；只在相邻不同分数间split，每簇中心为median，按绝对偏差和最小split tie-break选端点。",
+          "example": "教学例：[0,1,2]两个split成本相同，应取split1，中心(0,1.5)，不是每列各自标准化。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "nov19-comparison",
+          "level": "comparison",
+          "question": "DCC和DynamicRubric都使用rubric，作用点相同吗？",
+          "answer": "不同。DynamicRubric生成/更新标准和权重；DCC固定这些语义，只变换已有评分的数值范围。权重只进入最终平均，不改变中心。",
+          "example": "教学例：把某维权重从1改成100会改变最终reward，却不会改变DCC为同一分数矩阵拟合的两个端点。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "nov19-implementation",
+          "level": "implementation",
+          "question": "为什么测试要保留极端值未被clip的反例？",
+          "answer": "two-medians可让孤立极端值自成一簇，因此共享区间上界就等于该极值。DCC提供条件性的贡献上界，不是保证移除所有outlier或提高任务能力。",
+          "example": "教学例：[0,1,100]拟合高中心100；本地明确验这个边界，不把100改成较温和数值后宣称普适鲁棒。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    },
+    "post-training:led-edits": {
+      "questions": [
+        {
+          "id": "nov19-basics",
+          "level": "basics",
+          "question": "为什么插删比只替换更适合修复错位？",
+          "answer": "缺失一个token后，后续正确token仍可作为LCS锚点；在右锚点前插入mask能保留后缀，不必把每个后缀位置都重新替换。",
+          "example": "教学例：source[a,c,d,extra]、target[a,b,c,d]，先在c前插mask并删extra，得到[a,Mask,c,d]。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "nov19-mechanism",
+          "level": "mechanism",
+          "question": "一个gap缺两个target时会一次插两个吗？",
+          "answer": "不会。每个非末尾gap每轮至多把右匹配锚点的一个标签改为Ins；余下缺口在后续轮次处理。末尾gap没有真实右锚点，不能编造一个。",
+          "example": "教学例：[a,d,x,y]到[a,b,c,d]的标签为[a,Ins,Del,Del]，不是在d前一次插入b和c。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "nov19-comparison",
+          "level": "comparison",
+          "question": "LED能直接替代ORL的残差学习吗？",
+          "answer": "不能。LED在离散token位置上重建插删监督，ORL传递模型残差分布并在线收集状态。共同关注exposure bias，不代表输入状态、训练目标和推理引擎相同。",
+          "example": "教学例：LCS输出Ins标签没有提供下一轮完整残差概率张量，也没有训练过扩散模型。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "nov19-implementation",
+          "level": "implementation",
+          "question": "本地两轮修复成功是否验证论文十二基准？",
+          "answer": "不是。当前程序真实执行确定性LCS与单轮编辑，gold target只用于监督标签构造；没有模型预测、扩散SFT、多阶段训练或基准答案生成，因此只属L1机制诊断。",
+          "example": "教学例：第二轮把Mask替换为b得到target只是标签变换检查，不是模型自主生成b的能力。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    },
+    "post-training:hint-wam": {
+      "questions": [
+        {
+          "id": "nov19-basics",
+          "level": "basics",
+          "question": "学生部署时为什么不需要未来视频？",
+          "answer": "未来视频只通过训练期hindsight encoder/adapters进入冻结teacher；student只看当前帧、指令和本体状态，蒸馏结束丢弃teacher模块。把未来交给student会改变任务。",
+          "example": "教学例：示范未来可消解抓取左物体/右物体的歧义，但真实机器人执行时不能读取尚未发生的示范帧。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "nov19-mechanism",
+          "level": "mechanism",
+          "question": "为何用energy score而不是只匹配teacher velocity均值？",
+          "answer": "学生看不到teacher的未来条件，MSE最优可能落在互不兼容模式的均值。energy score用teacher样本吸引与student样本间排斥匹配分布，另保留BC限制teacher错误。",
+          "example": "教学例：正确动作可能绕左或绕右，均值直行可能碰障碍；本例说明目标设计，不是本地机器人实测。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "nov19-comparison",
+          "level": "comparison",
+          "question": "它与Video-OPSD的特权信息和输出相同吗？",
+          "answer": "不同。Video-OPSD选择证据帧并蒸馏文本token；HINT-WAM读取示范未来并对动作chunk分布蒸馏，同backbone与teacher-only未来隔离是定义条件。",
+          "example": "教学例：对文本token加evidence权重不能训练6.02B WAM的动作ODE，也不会提供机器人成功率。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        },
+        {
+          "id": "nov19-implementation",
+          "level": "implementation",
+          "question": "为什么本轮不做一个缩小动作玩具来称已复现？",
+          "answer": "完整方法需要真实backbone、未来teacher训练和学生ODE轨迹。原文测得8GPU×71.6小时；静态随机动作的energy-score公式不等于该训练链。因此只收录并审查DONE，无待验收GPU或自动重试。",
+          "example": "教学例：能在四个二维点上算距离，不代表已保留机器人在LIBERO旧任务上的能力。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-19"
+        }
+      ]
+    }
+  }
+}

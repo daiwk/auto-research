@@ -7,7 +7,7 @@ hide:
 
 # 世界建模：状态、生成与动作条件
 
-[多模态](index.md) / 129 个问题 · 32 篇论文
+[多模态](index.md) / 141 个问题 · 35 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,168 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">129 个问题 · 32 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">141 个问题 · 35 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:counterfactual-wm" data-paper-title="Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Counterfactual World Models: JEPAs That Reason About &quot;What If&quot; 基础模型 Brown University / AMI Labs 2026-11-18 普通world model给动作的平均结果，不能仅凭更准的事实分布识别同一扰动下的个体反事实。本文将实际观测结果作为事件信息，加上同一事实预测器对两个动作的预测差；加性扰动时精确，平滑短时动力学下有交互误差界，但碰撞、乘法故障和弯曲坐标可破坏近似。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。未训练JEPA、加载encoder、采集模拟轨迹或执行规划；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。执行Eq6残差复用和Eq7 readout坐标运输，严格拒绝隐式broadcast；加性系统验证等式，乘法gain fault与非线性readout保留预期失效。未训练JEPA、加载encoder、采集模拟轨迹或执行规划；诊断中的分析函数不冒充训练好的world model。  世界模型与JEPA 反事实预测与可识别性 多模态 世界建模：状态、生成与动作条件 为什么平均未来预测准确还不等于反事实准确？ 事实分布只给不同动作的边缘结果，没说明两种结果属于同一扰动事件的哪一对。个体反事实需要这份配对结构。 教学例：U与1-U都均匀分布，但观测U=0.2时两种耦合的替代结果分别是0.2和0.8。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<span id="paper-foundation-models-counterfactual-wm-f2e1144d" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-5f79bc24ae17fcbb">为什么平均未来预测准确还不等于反事实准确？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acounterfactual-wm">Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Brown University / AMI Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>事实分布只给不同动作的边缘结果，没说明两种结果属于同一扰动事件的哪一对。个体反事实需要这份配对结构。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：U与1-U都均匀分布，但观测U=0.2时两种耦合的替代结果分别是0.2和0.8。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24778v1">原论文</a> · <a href="../../../../foundation-models/2611.24778-counterfactual-wm/">实现解读</a> · <a href="#qa-5f79bc24ae17fcbb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:counterfactual-wm" data-paper-title="Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Counterfactual World Models: JEPAs That Reason About &quot;What If&quot; 基础模型 Brown University / AMI Labs 2026-11-18 普通world model给动作的平均结果，不能仅凭更准的事实分布识别同一扰动下的个体反事实。本文将实际观测结果作为事件信息，加上同一事实预测器对两个动作的预测差；加性扰动时精确，平滑短时动力学下有交互误差界，但碰撞、乘法故障和弯曲坐标可破坏近似。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。未训练JEPA、加载encoder、采集模拟轨迹或执行规划；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。执行Eq6残差复用和Eq7 readout坐标运输，严格拒绝隐式broadcast；加性系统验证等式，乘法gain fault与非线性readout保留预期失效。未训练JEPA、加载encoder、采集模拟轨迹或执行规划；诊断中的分析函数不冒充训练好的world model。  世界模型与JEPA 反事实预测与可识别性 多模态 世界建模：状态、生成与动作条件 残差复用到底复用了什么？ 复用事实观测与事实预测之差，再加到替代动作预测上；无需恢复真实扰动变量。只在动作与扰动的交互足够小等条件下可靠。 教学例：原预测向东1米，实测1.3米；替代预测向北1米时保留这次事件的0.3米漂移。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-4441583312b3f382">残差复用到底复用了什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acounterfactual-wm">Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Brown University / AMI Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>复用事实观测与事实预测之差，再加到替代动作预测上；无需恢复真实扰动变量。只在动作与扰动的交互足够小等条件下可靠。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：原预测向东1米，实测1.3米；替代预测向北1米时保留这次事件的0.3米漂移。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24778v1">原论文</a> · <a href="../../../../foundation-models/2611.24778-counterfactual-wm/">实现解读</a> · <a href="#qa-4441583312b3f382">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:counterfactual-wm" data-paper-title="Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Counterfactual World Models: JEPAs That Reason About &quot;What If&quot; 基础模型 Brown University / AMI Labs 2026-11-18 普通world model给动作的平均结果，不能仅凭更准的事实分布识别同一扰动下的个体反事实。本文将实际观测结果作为事件信息，加上同一事实预测器对两个动作的预测差；加性扰动时精确，平滑短时动力学下有交互误差界，但碰撞、乘法故障和弯曲坐标可破坏近似。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。未训练JEPA、加载encoder、采集模拟轨迹或执行规划；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。执行Eq6残差复用和Eq7 readout坐标运输，严格拒绝隐式broadcast；加性系统验证等式，乘法gain fault与非线性readout保留预期失效。未训练JEPA、加载encoder、采集模拟轨迹或执行规划；诊断中的分析函数不冒充训练好的world model。  世界模型与JEPA 反事实预测与可识别性 多模态 世界建模：状态、生成与动作条件 与DT-JEPA查询时的信息有什么不同？ DT-JEPA用行动前历史预测未来；CWM需已执行事实动作的结果。允许的信息集和问题不同，不能比较为同一预测任务。 教学例：第一次执行动作前不能拿尚不存在的observed_outcome喂CWM。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-3ea4e66199ef2d91">与DT-JEPA查询时的信息有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acounterfactual-wm">Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Brown University / AMI Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>DT-JEPA用行动前历史预测未来；CWM需已执行事实动作的结果。允许的信息集和问题不同，不能比较为同一预测任务。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第一次执行动作前不能拿尚不存在的observed_outcome喂CWM。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24778v1">原论文</a> · <a href="../../../../foundation-models/2611.24778-counterfactual-wm/">实现解读</a> · <a href="#qa-3ea4e66199ef2d91">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:counterfactual-wm" data-paper-title="Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Counterfactual World Models: JEPAs That Reason About &quot;What If&quot; 基础模型 Brown University / AMI Labs 2026-11-18 普通world model给动作的平均结果，不能仅凭更准的事实分布识别同一扰动下的个体反事实。本文将实际观测结果作为事件信息，加上同一事实预测器对两个动作的预测差；加性扰动时精确，平滑短时动力学下有交互误差界，但碰撞、乘法故障和弯曲坐标可破坏近似。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。未训练JEPA、加载encoder、采集模拟轨迹或执行规划；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。执行Eq6残差复用和Eq7 readout坐标运输，严格拒绝隐式broadcast；加性系统验证等式，乘法gain fault与非线性readout保留预期失效。未训练JEPA、加载encoder、采集模拟轨迹或执行规划；诊断中的分析函数不冒充训练好的world model。  世界模型与JEPA 反事实预测与可识别性 多模态 世界建模：状态、生成与动作条件 为什么测试里应保留乘法故障的非零误差？ 该故障使扰动与动作相乘，个体动作效应随事件变化，违反共享加性残差条件。清掉误差会掩盖论文已说明的边界。 教学例：实际执行只有命令的50%时，原动作残差不能无条件照搬到两倍命令上。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e06f52cb0a81dd08">为什么测试里应保留乘法故障的非零误差？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acounterfactual-wm">Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Brown University / AMI Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>该故障使扰动与动作相乘，个体动作效应随事件变化，违反共享加性残差条件。清掉误差会掩盖论文已说明的边界。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：实际执行只有命令的50%时，原动作残差不能无条件照搬到两倍命令上。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24778v1">原论文</a> · <a href="../../../../foundation-models/2611.24778-counterfactual-wm/">实现解读</a> · <a href="#qa-e06f52cb0a81dd08">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:jepa-dots" data-paper-title="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control 多模态大模型 Z Robotics 2026-11-18 共享视觉骨干之后拆动力学和任务两条latent路径，语言FiLM只进入任务路径。world query只读动力学历史和给定clean动作，policy读历史、goal和noisy动作；多层mask同时阻断间接泄漏。固定参数、观测和给定动作时，换指令不能改变world预测，但policy可以生成不同动作。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料、公式、机构及成本收录，无operator、训练、LIBERO安装、机器人执行、metrics或GPU回执。不得用一个语言无关函数的恒等式fixture冒充完整双latent控制模型。  世界模型 任务与动力学分离 多模态 世界建模：状态、生成与动作条件 为什么相同观测和动作下world预测不该因语言改变？ 语言描述的是任务目标，不应改变这些已固定动作的物理后果；因此语言只进入task/policy而非world动力学通路。 教学例：同样向左移动夹爪，指令改成拿杯子不应让固定动作的预测位移突然向右。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<span id="paper-multimodal-models-jepa-dots-ebbd7b0b" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-569ecbc969dd991d">为什么相同观测和动作下world预测不该因语言改变？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Ajepa-dots">JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Z Robotics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>语言描述的是任务目标，不应改变这些已固定动作的物理后果；因此语言只进入task/policy而非world动力学通路。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同样向左移动夹爪，指令改成拿杯子不应让固定动作的预测位移突然向右。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24062v1">原论文</a> · <a href="../../../../multimodal-models/2611.24062-jepa-dots/">实现解读</a> · <a href="#qa-569ecbc969dd991d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:jepa-dots" data-paper-title="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control 多模态大模型 Z Robotics 2026-11-18 共享视觉骨干之后拆动力学和任务两条latent路径，语言FiLM只进入任务路径。world query只读动力学历史和给定clean动作，policy读历史、goal和noisy动作；多层mask同时阻断间接泄漏。固定参数、观测和给定动作时，换指令不能改变world预测，但policy可以生成不同动作。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料、公式、机构及成本收录，无operator、训练、LIBERO安装、机器人执行、metrics或GPU回执。不得用一个语言无关函数的恒等式fixture冒充完整双latent控制模型。  世界模型 任务与动力学分离 多模态 世界建模：状态、生成与动作条件 隔离goal token是否足以防止泄漏？ 还需限制中间token的多层信息通路；只在最后一层屏蔽直接goal边，不保证前层信息没进入world可见token。 教学例：history token先读goal，再被world读到，会产生间接语言通道。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-8f46ae596ce78656">隔离goal token是否足以防止泄漏？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Ajepa-dots">JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Z Robotics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>还需限制中间token的多层信息通路；只在最后一层屏蔽直接goal边，不保证前层信息没进入world可见token。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：history token先读goal，再被world读到，会产生间接语言通道。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24062v1">原论文</a> · <a href="../../../../multimodal-models/2611.24062-jepa-dots/">实现解读</a> · <a href="#qa-8f46ae596ce78656">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:jepa-dots" data-paper-title="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control 多模态大模型 Z Robotics 2026-11-18 共享视觉骨干之后拆动力学和任务两条latent路径，语言FiLM只进入任务路径。world query只读动力学历史和给定clean动作，policy读历史、goal和noisy动作；多层mask同时阻断间接泄漏。固定参数、观测和给定动作时，换指令不能改变world预测，但policy可以生成不同动作。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料、公式、机构及成本收录，无operator、训练、LIBERO安装、机器人执行、metrics或GPU回执。不得用一个语言无关函数的恒等式fixture冒充完整双latent控制模型。  世界模型 任务与动力学分离 多模态 世界建模：状态、生成与动作条件 与LeWAM的world-action联学相比，部署差异是什么？ JEPA Dots world分支只供训练监督，部署执行flow policy；不能因此说它已复现LeWAM通过world模型优化动作的规划链。 教学例：生成8步动作后执行2步再观测，是receding-horizon policy，不等于对world cost做梯度规划。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-d18e12bfa93f2ea4">与LeWAM的world-action联学相比，部署差异是什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Ajepa-dots">JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Z Robotics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>JEPA Dots world分支只供训练监督，部署执行flow policy；不能因此说它已复现LeWAM通过world模型优化动作的规划链。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：生成8步动作后执行2步再观测，是receding-horizon policy，不等于对world cost做梯度规划。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24062v1">原论文</a> · <a href="../../../../multimodal-models/2611.24062-jepa-dots/">实现解读</a> · <a href="#qa-d18e12bfa93f2ea4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:jepa-dots" data-paper-title="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control 多模态大模型 Z Robotics 2026-11-18 共享视觉骨干之后拆动力学和任务两条latent路径，语言FiLM只进入任务路径。world query只读动力学历史和给定clean动作，policy读历史、goal和noisy动作；多层mask同时阻断间接泄漏。固定参数、观测和给定动作时，换指令不能改变world预测，但policy可以生成不同动作。 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料、公式、机构及成本收录，无operator、训练、LIBERO安装、机器人执行、metrics或GPU回执。不得用一个语言无关函数的恒等式fixture冒充完整双latent控制模型。  世界模型 任务与动力学分离 多模态 世界建模：状态、生成与动作条件 39.1M参数为何仍不跑完整实验？ 成本主要还来自多个训练run和40任务的数千闭环episode；参数少不能抵消环境模拟与评测矩阵。 教学例：4000episode各最多600步，单模型上限即240万环境步，尚未算三run消融。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-945082160c96079c">39.1M参数为何仍不跑完整实验？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Ajepa-dots">JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Z Robotics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>成本主要还来自多个训练run和40任务的数千闭环episode；参数少不能抵消环境模拟与评测矩阵。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：4000episode各最多600步，单模型上限即240万环境步，尚未算三run消融。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24062v1">原论文</a> · <a href="../../../../multimodal-models/2611.24062-jepa-dots/">实现解读</a> · <a href="#qa-945082160c96079c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:autoregressive-view-model" data-paper-title="Autoregressive View Model" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Autoregressive View Model 多模态大模型 Meta / University of Oxford 2026-11-17 AVM不拟合显式3D表示，而在给定相机路径下生成短视图片段。预填图像/视频与历史生成片段统一成为context；检索保持活动上下文有界。先把双向视频DiT微调为N-in-1-out的flow matching，再以自身rollout做因果tuning和蒸馏，让生成内容可回到历史中支持后续重访。Fixed-v1 source. 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅原文方法、机构、成本与边界收录；没有operator、模型加载、训练、合成数据、metrics或GPU回执。不会用通用图像相似度/检索fixture代替14B视频模型的场景持久性。  世界模型 自回归视频与场景持久性 多模态 世界建模：状态、生成与动作条件 没有显式3D表示，AVM怎样保留可用场景信息？ 用预填和历史视图作context，并按当前相机查询检索活动子集；它是生成条件，不是拟合NeRF或高斯场景。 教学例：重访一间屋子时可检索此前生成的门和桌面视角，而不是重建一份完整mesh。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<span id="paper-multimodal-models-autoregressive-view-model-901ae7b6" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-06f6dbaf2649d1d5">没有显式3D表示，AVM怎样保留可用场景信息？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aautoregressive-view-model">Autoregressive View Model</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Meta / University of Oxford</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>用预填和历史视图作context，并按当前相机查询检索活动子集；它是生成条件，不是拟合NeRF或高斯场景。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：重访一间屋子时可检索此前生成的门和桌面视角，而不是重建一份完整mesh。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23417v1">原论文</a> · <a href="../../../../multimodal-models/2611.23417-autoregressive-view-model/">实现解读</a> · <a href="#qa-06f6dbaf2649d1d5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:autoregressive-view-model" data-paper-title="Autoregressive View Model" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Autoregressive View Model 多模态大模型 Meta / University of Oxford 2026-11-17 AVM不拟合显式3D表示，而在给定相机路径下生成短视图片段。预填图像/视频与历史生成片段统一成为context；检索保持活动上下文有界。先把双向视频DiT微调为N-in-1-out的flow matching，再以自身rollout做因果tuning和蒸馏，让生成内容可回到历史中支持后续重访。Fixed-v1 source. 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅原文方法、机构、成本与边界收录；没有operator、模型加载、训练、合成数据、metrics或GPU回执。不会用通用图像相似度/检索fixture代替14B视频模型的场景持久性。  世界模型 自回归视频与场景持久性 多模态 世界建模：状态、生成与动作条件 为什么双向训练后还做自身rollout的因果tuning？ 流式后续生成会接触自己产生的历史；只在真实context训练不覆盖这类误差累积。因果tuning和蒸馏处理流式路径与少步采样。 教学例：早期生成的桌腿略偏，后续片段需在这一历史上保持或修正，而非总拿真实桌腿作context。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-6e1b313d7ae3b591">为什么双向训练后还做自身rollout的因果tuning？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aautoregressive-view-model">Autoregressive View Model</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Meta / University of Oxford</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>流式后续生成会接触自己产生的历史；只在真实context训练不覆盖这类误差累积。因果tuning和蒸馏处理流式路径与少步采样。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：早期生成的桌腿略偏，后续片段需在这一历史上保持或修正，而非总拿真实桌腿作context。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23417v1">原论文</a> · <a href="../../../../multimodal-models/2611.23417-autoregressive-view-model/">实现解读</a> · <a href="#qa-6e1b313d7ae3b591">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:autoregressive-view-model" data-paper-title="Autoregressive View Model" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Autoregressive View Model 多模态大模型 Meta / University of Oxford 2026-11-17 AVM不拟合显式3D表示，而在给定相机路径下生成短视图片段。预填图像/视频与历史生成片段统一成为context；检索保持活动上下文有界。先把双向视频DiT微调为N-in-1-out的flow matching，再以自身rollout做因果tuning和蒸馏，让生成内容可回到历史中支持后续重访。Fixed-v1 source. 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅原文方法、机构、成本与边界收录；没有operator、模型加载、训练、合成数据、metrics或GPU回执。不会用通用图像相似度/检索fixture代替14B视频模型的场景持久性。  世界模型 自回归视频与场景持久性 多模态 世界建模：状态、生成与动作条件 场景重访一致是否等于CWM的反事实能力？ 不等于。重访是在相机轨迹和生成历史下维持场景；个体反事实还需同一扰动下不同动作结果的耦合假设。 教学例：门框位置保持不变，不能说明同一阵风下船改航向会到哪里。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-3aa5c4c6e8c08b0d">场景重访一致是否等于CWM的反事实能力？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aautoregressive-view-model">Autoregressive View Model</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Meta / University of Oxford</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不等于。重访是在相机轨迹和生成历史下维持场景；个体反事实还需同一扰动下不同动作结果的耦合假设。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：门框位置保持不变，不能说明同一阵风下船改航向会到哪里。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23417v1">原论文</a> · <a href="../../../../multimodal-models/2611.23417-autoregressive-view-model/">实现解读</a> · <a href="#qa-3aa5c4c6e8c08b0d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:autoregressive-view-model" data-paper-title="Autoregressive View Model" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Autoregressive View Model 多模态大模型 Meta / University of Oxford 2026-11-17 AVM不拟合显式3D表示，而在给定相机路径下生成短视图片段。预填图像/视频与历史生成片段统一成为context；检索保持活动上下文有界。先把双向视频DiT微调为N-in-1-out的flow matching，再以自身rollout做因果tuning和蒸馏，让生成内容可回到历史中支持后续重访。Fixed-v1 source. 无实现. 完整实验：成本过高，不复现（审查 DONE）。仅资料收录；无实现. 完整实验：成本过高，不复现（审查 DONE）。仅原文方法、机构、成本与边界收录；没有operator、模型加载、训练、合成数据、metrics或GPU回执。不会用通用图像相似度/检索fixture代替14B视频模型的场景持久性。  世界模型 自回归视频与场景持久性 多模态 世界建模：状态、生成与动作条件 为什么本轮不加一个检索小样例就算复现？ 检索只是AVM一部分，不能替代14B视频生成、flow训练及自rollout路径。成本门槛要求透明不复现，而不是把便宜影子程序叫完整实现。 教学例：取出相近相机的旧帧不等于生成未见区域或动态物体。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f8376f4ada5931c4">为什么本轮不加一个检索小样例就算复现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aautoregressive-view-model">Autoregressive View Model</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Meta / University of Oxford</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>检索只是AVM一部分，不能替代14B视频生成、flow训练及自rollout路径。成本门槛要求透明不复现，而不是把便宜影子程序叫完整实现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：取出相近相机的旧帧不等于生成未见区域或动态物体。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23417v1">原论文</a> · <a href="../../../../multimodal-models/2611.23417-autoregressive-view-model/">实现解读</a> · <a href="#qa-f8376f4ada5931c4">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:dwd" data-paper-title="Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers 多模态大模型 Luma AI 2026-11-17 DWD在预训练DiT最后隐状态上并联线性pixel head，原denoising head继续驱动采样，只有最后一个非零time step才由pixel head输出图像/视频。通过分离pixel质量目标与trajectory anchoring，避免让同一输出承担冲突目标。已核方法位置：3.1–3.4, 4.1–4.2。 完整实验成本过高，不复现（审查 DONE）；资料收录，未实现。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。仅资料收录，无operator、训练、metrics、GPU receipt或Evolve映射。线性层加MSE不足以兑现像素质量、少数后缀blocks适配与采样路径，不用便宜影子模型充数。  多模态生成 扩散生成路径 多模态 世界建模：状态、生成与动作条件 DWD输出像素是否意味着每步都在像素空间采样？ 不是。latent DiT仍按原denoising head推进，只有最后一轮pixel head直接读出最终图像/视频。 教学例：中间20步仍更新latent，最后一步才把hidden token映成pixel patch。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
 <span id="paper-multimodal-models-dwd-baf72c78" class="ar-learning-paper-anchor"></span>

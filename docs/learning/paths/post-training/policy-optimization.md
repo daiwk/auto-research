@@ -7,7 +7,7 @@ hide:
 
 # 策略优化：谁在采样，谁在被更新
 
-[LLM 后训练](index.md) / 252 个问题 · 63 篇论文
+[LLM 后训练](index.md) / 256 个问题 · 64 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">252 个问题 · 63 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">256 个问题 · 64 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:led-edits" data-paper-title="Beyond Replacement: Levenshtein Editing for Diffusion Language Models" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Beyond Replacement: Levenshtein Editing for Diffusion Language Models LLM 后训练 Southern University of Science and Technology / Inclusion AI, Ant Group 2026-11-18 仅允许token替换时，一个遗漏或多余token会让整段后缀错位，需要许多位置分别修复。LED把[Ins]/[Del]加入输出词表、排除在输入词表外：删除当前token，或在其前插入新[Mask]，同时保留该锚点token。每轮之后截成固定B长或右侧补mask。训练监督由当前source和clean target的最长公共子序列重建。匹配锚点之间先按顺序配对替换、多余source标Del；多余target只在非末尾gap的右匹配锚点标一个Ins，每gap每轮最多一个。 完整实验成本过高，不复现（审查 DONE）；没有模型预测、扩散SFT、多阶段训练或基准答案生成，因此只属L1机制诊断。L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。最长公共子序列的固定block edit标签、每gap单次Ins、末尾gap不造锚点、mask阈值fallback、visible-token edit阈值以及同时编辑后截断/补mask。没有扩散模型forward、多阶段SFT或循环重采样decoder。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 为什么插删比只替换更适合修复错位？ 缺失一个token后，后续正确token仍可作为LCS锚点；在右锚点前插入mask能保留后缀，不必把每个后缀位置都重新替换。 教学例：source[a,c,d,extra]、target[a,b,c,d]，先在c前插mask并删extra，得到[a,Mask,c,d]。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<span id="paper-post-training-led-edits-bc50e931" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-3363df4e4d97353c">为什么插删比只替换更适合修复错位？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aled-edits">Beyond Replacement: Levenshtein Editing for Diffusion Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Southern University of Science and Technology / Inclusion AI, Ant Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>缺失一个token后，后续正确token仍可作为LCS锚点；在右锚点前插入mask能保留后缀，不必把每个后缀位置都重新替换。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：source[a,c,d,extra]、target[a,b,c,d]，先在c前插mask并删extra，得到[a,Mask,c,d]。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23750v1">原论文</a> · <a href="../../../../post-training/2611.23750-led-edits/">实现解读</a> · <a href="#qa-3363df4e4d97353c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:led-edits" data-paper-title="Beyond Replacement: Levenshtein Editing for Diffusion Language Models" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Beyond Replacement: Levenshtein Editing for Diffusion Language Models LLM 后训练 Southern University of Science and Technology / Inclusion AI, Ant Group 2026-11-18 仅允许token替换时，一个遗漏或多余token会让整段后缀错位，需要许多位置分别修复。LED把[Ins]/[Del]加入输出词表、排除在输入词表外：删除当前token，或在其前插入新[Mask]，同时保留该锚点token。每轮之后截成固定B长或右侧补mask。训练监督由当前source和clean target的最长公共子序列重建。匹配锚点之间先按顺序配对替换、多余source标Del；多余target只在非末尾gap的右匹配锚点标一个Ins，每gap每轮最多一个。 完整实验成本过高，不复现（审查 DONE）；没有模型预测、扩散SFT、多阶段训练或基准答案生成，因此只属L1机制诊断。L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。最长公共子序列的固定block edit标签、每gap单次Ins、末尾gap不造锚点、mask阈值fallback、visible-token edit阈值以及同时编辑后截断/补mask。没有扩散模型forward、多阶段SFT或循环重采样decoder。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 一个gap缺两个target时会一次插两个吗？ 不会。每个非末尾gap每轮至多把右匹配锚点的一个标签改为Ins；余下缺口在后续轮次处理。末尾gap没有真实右锚点，不能编造一个。 教学例：[a,d,x,y]到[a,b,c,d]的标签为[a,Ins,Del,Del]，不是在d前一次插入b和c。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-c3921ba6c1c2de3c">一个gap缺两个target时会一次插两个吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aled-edits">Beyond Replacement: Levenshtein Editing for Diffusion Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Southern University of Science and Technology / Inclusion AI, Ant Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不会。每个非末尾gap每轮至多把右匹配锚点的一个标签改为Ins；余下缺口在后续轮次处理。末尾gap没有真实右锚点，不能编造一个。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：[a,d,x,y]到[a,b,c,d]的标签为[a,Ins,Del,Del]，不是在d前一次插入b和c。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23750v1">原论文</a> · <a href="../../../../post-training/2611.23750-led-edits/">实现解读</a> · <a href="#qa-c3921ba6c1c2de3c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:led-edits" data-paper-title="Beyond Replacement: Levenshtein Editing for Diffusion Language Models" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Beyond Replacement: Levenshtein Editing for Diffusion Language Models LLM 后训练 Southern University of Science and Technology / Inclusion AI, Ant Group 2026-11-18 仅允许token替换时，一个遗漏或多余token会让整段后缀错位，需要许多位置分别修复。LED把[Ins]/[Del]加入输出词表、排除在输入词表外：删除当前token，或在其前插入新[Mask]，同时保留该锚点token。每轮之后截成固定B长或右侧补mask。训练监督由当前source和clean target的最长公共子序列重建。匹配锚点之间先按顺序配对替换、多余source标Del；多余target只在非末尾gap的右匹配锚点标一个Ins，每gap每轮最多一个。 完整实验成本过高，不复现（审查 DONE）；没有模型预测、扩散SFT、多阶段训练或基准答案生成，因此只属L1机制诊断。L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。最长公共子序列的固定block edit标签、每gap单次Ins、末尾gap不造锚点、mask阈值fallback、visible-token edit阈值以及同时编辑后截断/补mask。没有扩散模型forward、多阶段SFT或循环重采样decoder。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 LED能直接替代ORL的残差学习吗？ 不能。LED在离散token位置上重建插删监督，ORL传递模型残差分布并在线收集状态。共同关注exposure bias，不代表输入状态、训练目标和推理引擎相同。 教学例：LCS输出Ins标签没有提供下一轮完整残差概率张量，也没有训练过扩散模型。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-50388d138e2625fb">LED能直接替代ORL的残差学习吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aled-edits">Beyond Replacement: Levenshtein Editing for Diffusion Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Southern University of Science and Technology / Inclusion AI, Ant Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。LED在离散token位置上重建插删监督，ORL传递模型残差分布并在线收集状态。共同关注exposure bias，不代表输入状态、训练目标和推理引擎相同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：LCS输出Ins标签没有提供下一轮完整残差概率张量，也没有训练过扩散模型。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23750v1">原论文</a> · <a href="../../../../post-training/2611.23750-led-edits/">实现解读</a> · <a href="#qa-50388d138e2625fb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:led-edits" data-paper-title="Beyond Replacement: Levenshtein Editing for Diffusion Language Models" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Beyond Replacement: Levenshtein Editing for Diffusion Language Models LLM 后训练 Southern University of Science and Technology / Inclusion AI, Ant Group 2026-11-18 仅允许token替换时，一个遗漏或多余token会让整段后缀错位，需要许多位置分别修复。LED把[Ins]/[Del]加入输出词表、排除在输入词表外：删除当前token，或在其前插入新[Mask]，同时保留该锚点token。每轮之后截成固定B长或右侧补mask。训练监督由当前source和clean target的最长公共子序列重建。匹配锚点之间先按顺序配对替换、多余source标Del；多余target只在非末尾gap的右匹配锚点标一个Ins，每gap每轮最多一个。 完整实验成本过高，不复现（审查 DONE）；没有模型预测、扩散SFT、多阶段训练或基准答案生成，因此只属L1机制诊断。L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。最长公共子序列的固定block edit标签、每gap单次Ins、末尾gap不造锚点、mask阈值fallback、visible-token edit阈值以及同时编辑后截断/补mask。没有扩散模型forward、多阶段SFT或循环重采样decoder。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 本地两轮修复成功是否验证论文十二基准？ 不是。当前程序真实执行确定性LCS与单轮编辑，gold target只用于监督标签构造；没有模型预测、扩散SFT、多阶段训练或基准答案生成，因此只属L1机制诊断。 教学例：第二轮把Mask替换为b得到target只是标签变换检查，不是模型自主生成b的能力。 2026-11-19">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-44f38ace6ddaa43a">本地两轮修复成功是否验证论文十二基准？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aled-edits">Beyond Replacement: Levenshtein Editing for Diffusion Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-19 · Southern University of Science and Technology / Inclusion AI, Ant Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。当前程序真实执行确定性LCS与单轮编辑，gold target只用于监督标签构造；没有模型预测、扩散SFT、多阶段训练或基准答案生成，因此只属L1机制诊断。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第二轮把Mask替换为b得到target只是标签变换检查，不是模型自主生成b的能力。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23750v1">原论文</a> · <a href="../../../../post-training/2611.23750-led-edits/">实现解读</a> · <a href="#qa-44f38ace6ddaa43a">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ash-hint-steering" data-paper-title="Get Hint-Augmented GRPO Done Right Through Activation Steering" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Get Hint-Augmented GRPO Done Right Through Activation Steering LLM 后训练 University of Notre Dame 2026-11-17 训练问题附带reference solution前半hint更易有正reward，但推理没有该hint。ASH学习可注入activation的行为方向，在无hint输入上重现部分偏移。steering loss拟合产生当前hint/plain样本的同一模型。先改model再拟合会用stale对应关系；最后一步只更新steering不改model，避免返回过时向量。 完整实验成本过高，不复现（审查 DONE）；仅方法与成本收录，无本地模型实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录每步先训练steering再GRPO、hint/plain独立归一化advantage及最后一步不更新model的完整顺序；不把DPO公式当实现。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 hint-augmented GRPO有什么训练推理偏移？ 训练问题附带reference solution前半hint更易有正reward，但推理没有该hint。ASH学习可注入activation的行为方向，在无hint输入上重现部分偏移。 教学例：推理时不能悄悄再附gold解答来证明steering有效。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
 <span id="paper-post-training-ash-hint-steering-059515f5" class="ar-learning-paper-anchor"></span>

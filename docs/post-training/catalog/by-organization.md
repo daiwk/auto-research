@@ -394,6 +394,7 @@
 
 ## National University of Singapore
 
+- 2026-11-18 · 一作：Phuong Tuan Dat · [HINT-WAM: Hindsight-Informed Training for World Action Models](../2611.24789-hint-wam/README.md)（`hint-wam`）：HINT-WAM先SFT动作专家，再冻结同一backbone，只训练hindsight encoder与gated adapters读取示范未来视频。teacher去掉当前帧并保留时间轴，学生与部署策略从来不看未来。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-11-03 · 一作：Ria Shekhawat · [Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling](../2611.04792-dars/README.md)（`dars-density`）：期望奖励最大化容易持续强化已密集采样的结果。DARS 在同一条件输入的 rollout 组内估计结果表示密度，以 $r/\rho$ 替换原奖励，再执行常规 GRPO 组优势标准化；不引入 density 网络或替换 policy objective。
 - 2026-10-01 · 一作：Shiu-Hong Kao · [RLCPR: Rethinking Probability-Based Reinforcement Learning From Posterior Concentration](../2610.01458-rlcpr/README.md)（`rlcpr`）：概率奖励在同组推理后验接近时难以区分冗长推理；RLCPR 只对“全组都长、答案后验又集中”的组施加相对长度惩罚。另用直接作答时的 token 平均熵把数据分层，让保留分布偏向低不确定样本。
 - 2026-09-16 · 一作：Yihao Ai · [Trajectory Learnability for Offline On-Policy Distillation](../2609.18321-trajectory-learnability/README.md)（`trajectory-learnability`）：用成功轨迹训练参考模型，以参考与当前策略逐 token 对数似然变化衡量可学性，并据此重加权离线 OPD 轨迹。
@@ -414,6 +415,10 @@
 ## Northeastern University
 
 - 2026-08-06 · 一作：Chenglong Wang · [RRC: Unlocking Generative Reward Models in LLM Reinforcement Learning via Ranking-Based Reward Construction](../2608.06310-rrc/README.md)（`rrc`）：**主题：生成式奖励模型。** 生成式 RM 擅长相对比较，却被传统 RL 强制压成独立标量。
+
+## Northwestern Polytechnical University
+
+- 2026-11-18 · 一作：Zhengyuan Fan · [How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation](../2611.24005-dcc-aggregation/README.md)（`dcc-aggregation`）：等权rubric相加并不代表各维贡献相等：每维满足/不满足样本的平均分差形成reward gain。论文把候选奖励差精确拆成基础满足数量信号、gain imbalance项和残差；把gain全部归一成1反而可能放大小gain维度的噪声。
 
 ## OpenAI
 
@@ -506,6 +511,10 @@
 ## Shanghai Jiao Tong University / Zhongguancun Academy
 
 - 2026-11-09 · 一作：Lin Yao · [DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation](../2611.13249-drd-mopd/README.md)（`drd-mopd`）：多个教师可能提供冲突的领域更新，直接优化一个学生无法区分冲突来自哪一份参数方向。DRD-MOPD 保留冻结基座与多个全参数增量，以域标签选择**哪些增量接受梯度**，而不是在推理时选择哪个教师或专家。
+
+## Southern University of Science and Technology / Inclusion AI, Ant Group
+
+- 2026-11-18 · 一作：Shuaidi Wang · [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](../2611.23750-led-edits/README.md)（`led-edits`）：仅允许token替换时，一个遗漏或多余token会让整段后缀错位，需要许多位置分别修复。LED把[Ins]/[Del]加入输出词表、排除在输入词表外：删除当前token，或在其前插入新[Mask]，同时保留该锚点token。
 
 ## Southwest University
 
@@ -650,6 +659,7 @@
 
 ## University of Illinois Urbana-Champaign
 
+- 2026-11-18 · 一作：Zhenrui Yue · [Replay, Don't Resample: Off-Policy Consolidation of Long-Horizon RL Experts](../2611.24059-mrpd-replay/README.md)（`mrpd-replay`）：MRPD把专家RL训练日志当作随训练步变化的课程，而非混洗后的离线数据池。学生与专家同一SFT初始化；第k步合并各域专家第k步日志，使用日志采样策略的log-prob做importance ratio，重算组相对奖励的非对称clipped PG。
 - 2026-11-16 · 一作：Hao Bai · [Regularized Score Centering](../2611.21791-regularized-score-centering/README.md)（`regularized-score-centering`）：不是。它减去同一history下behavior分布的加权log-policy梯度期望。
 - 2026-11-02 · 一作：Ziyi Chen · [RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs](../2611.02455-rlid/README.md)（`rlid`）：文本策略会把一次动作的优势赋给推理、格式和命令 token。RLiD 将观测、过去反馈形成的记忆和合法菜单编译成输入，单次前向仅在标签之间选动作，再做决策级 RL。
 - 2026-10-27 · 一作：Sirui Chen · [Proposing Better Rollouts for On-Policy Distillation](../2610.36477-mpopd/README.md)（`mpopd`）：普通OPD从学生采样，教师却可能很少走到这些前缀，师生可达区域差距会被后续学生更新放大。MPOPD把采样策略本身作为优化对象：理想提案是学生与教师概率的几何混合，实际训练一个独立proposal近似它，从而生成时只运行proposal。
@@ -733,6 +743,10 @@
 ## University of Wisconsin–Madison
 
 - 2026-11-11 · 一作：Shuibai Zhang · [Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?](../2611.15404-lgpo/README.md)（`lgpo`）：GRPO 的 importance ratio 同时承担采样分布校正与裁剪约束，二者未必对训练稳定性同样重要。作者发现去掉校正而保留约束时可以稳定；完全 on-policy 时比率恰为 1，ratio clipping 却无法及时限制过度确定的分布。
+
+## University of the Chinese Academy of Sciences / Tencent
+
+- 2026-11-18 · 一作：Wen Wang · [Evidence-Based Credit Assignment for Search-Augmented Language Models](../2611.23824-eca-credit/README.md)（`eca-credit`）：终止答案全错时，组相对奖励为零，但检索可能已经取得有价值证据。ECA用训练专用冻结策略在仅含问题与去重文档的上下文中，计算参考答案的长度归一化对数似然势函数；生成的思考、查询和其他轨迹不参与打分。
 
 ## Uppsala University
 
