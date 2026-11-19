@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-19-latest-components",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "maximum_run_seconds": 180,
+  "maximum_cuda_devices": 1,
+  "model_and_dataset_downloads": 0,
+  "api_calls": 0,
+  "automatic_retry": false,
+  "full_experiments_executed": false,
+  "scope": "Seventeen bounded L0/L1 protocol/formula diagnostics only. No pretrained model, generator, paid API, public capability benchmark or Evolve promotion.",
+  "cost_sources": [
+    "foundation-review.json",
+    "post-review.json",
+    "agent-review.json",
+    "root-review.json"
+  ],
+  "components": {
+    "kernel-ridge-attention": {
+      "domain": "foundation-models",
+      "module": "foundation_models/kernel_ridge_attention.py",
+      "evaluation_tier": "l1_mechanism",
+      "cuda": true
+    },
+    "narrow-spec": {
+      "domain": "foundation-models",
+      "module": "foundation_models/narrow_spec.py",
+      "evaluation_tier": "l1_mechanism",
+      "cuda": true
+    },
+    "loopcache-interface": {
+      "domain": "foundation-models",
+      "module": "foundation_models/loopcache_interface.py",
+      "evaluation_tier": "l0_interface",
+      "cuda": false
+    },
+    "counterfactual-wm": {
+      "domain": "foundation-models",
+      "module": "foundation_models/counterfactual_wm.py",
+      "evaluation_tier": "l1_mechanism",
+      "cuda": true
+    },
+    "eca-credit": {
+      "domain": "post-training",
+      "module": "post_training/eca_credit.py",
+      "evaluation_tier": "l1_mechanism",
+      "cuda": true
+    },
+    "mrpd-replay": {
+      "domain": "post-training",
+      "module": "post_training/mrpd_replay.py",
+      "evaluation_tier": "l1_mechanism",
+      "cuda": true
+    },
+    "dcc-aggregation": {
+      "domain": "post-training",
+      "module": "post_training/dcc_aggregation.py",
+      "evaluation_tier": "l1_mechanism",
+      "cuda": false
+    },
+    "led-edits": {
+      "domain": "post-training",
+      "module": "post_training/led_edits.py",
+      "evaluation_tier": "l1_mechanism",
+      "cuda": false
+    },
+    "ahe-beta": {
+      "domain": "agent-research",
+      "module": "agent_research/ahe_beta.py",
+      "evaluation_tier": "l0_interface",
+      "cuda": false
+    },
+    "timeout-cascades": {
+      "domain": "agent-research",
+      "module": "agent_research/timeout_cascades.py",
+      "evaluation_tier": "l1_mechanism",
+      "cuda": false
+    },
+    "kaer": {
+      "domain": "agent-research",
+      "module": "agent_research/kaer.py",
+      "evaluation_tier": "l1_mechanism",
+      "cuda": false
+    },
+    "safe-personal-rsi": {
+      "domain": "agent-research",
+      "module": "agent_research/safe_personal_rsi.py",
+      "evaluation_tier": "l1_mechanism",
+      "cuda": false
+    },
+    "mle-agents": {
+      "domain": "recommendation",
+      "module": "reproductions/mle_agents_components.py",
+      "evaluation_tier": "l0_interface",
+      "cuda": false
+    },
+    "xsplit-argus": {
+      "domain": "recommendation",
+      "module": "reproductions/xsplit_argus_components.py",
+      "evaluation_tier": "l1_mechanism",
+      "cuda": true
+    },
+    "mars-fapo": {
+      "domain": "recommendation",
+      "module": "reproductions/mars_fapo_components.py",
+      "evaluation_tier": "l1_mechanism",
+      "cuda": true
+    },
+    "searchinject": {
+      "domain": "agent-research",
+      "module": "agent_research/searchinject_components.py",
+      "evaluation_tier": "l1_mechanism",
+      "cuda": false
+    },
+    "execjudges": {
+      "domain": "agent-research",
+      "module": "agent_research/execjudges_components.py",
+      "evaluation_tier": "l0_interface",
+      "cuda": false
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "domain": "post-training",
+  "key": "hint-wam",
+  "title": "HINT-WAM: Hindsight-Informed Training for World Action Models",
+  "paper_url": "https://arxiv.org/abs/2611.24789v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.24789v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.24789-hint-wam/README.md",
+  "first_author": "Phuong Tuan Dat",
+  "first_author_affiliation": "National University of Singapore",
+  "published": "2026-11-18",
+  "published_at": "2026-11-18T17:36:15Z",
+  "code": null,
+  "code_status": "固定v1及所核作者入口未找到可验证的本篇方法源码发布；所用模型、训练库不算本篇开源。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "teacher-and-context",
+    "后训练方法资料"
+  ],
+  "priority": "P1",
+  "intake_class": "new_submission_announced_after_previous_scan",
+  "implementation_status": "deferred_high_cost",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.24789v1",
+    "source_sections": [
+      "§3 Eq.1–9 and Algorithm1",
+      "Appendix A architecture",
+      "Appendix B measured training cost"
+    ],
+    "basis": "Appendix A/B明确Wan2.2-TI2V-5B视频专家+1.02B动作专家、8张24GB GPU；LIBERO-90完整流程71.6小时/572 GPU小时，StageB单独33.7小时。单A100/A30或Mac无法承担同等campaign，本轮不下载、不探跑，成本过高，不复现（审查 DONE）。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 0,
+      "gpu_component_seconds_per_seed_cap": 0
+    }
+  },
+  "summary": "HINT-WAM先SFT动作专家，再冻结同一backbone，只训练hindsight encoder与gated adapters读取示范未来视频。teacher去掉当前帧并保留时间轴，学生与部署策略从来不看未来。最后学生在自身ODE采样轨迹上重新评估少量去噪点，匹配冻结teacher的动作分布。 只收录同源hindsight teacher、学生ODE状态上的energy-score与BC anchor、成本和限制。无本地模型/算子/指标，不用静态动作样本替代真实WAM蒸馏。",
+  "evaluation_tier": "review_only",
+  "deferral_reason": "Appendix A/B明确Wan2.2-TI2V-5B视频专家+1.02B动作专家、8张24GB GPU；LIBERO-90完整流程71.6小时/572 GPU小时，StageB单独33.7小时。单A100/A30或Mac无法承担同等campaign，本轮不下载、不探跑，成本过高，不复现（审查 DONE）。 成本过高，不复现（审查 DONE）。"
+}
