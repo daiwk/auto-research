@@ -7,7 +7,7 @@ hide:
 
 # 记忆与技能：让经验可取回、可失效
 
-[Agent](index.md) / 252 个问题 · 63 篇论文
+[Agent](index.md) / 256 个问题 · 64 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">252 个问题 · 63 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">256 个问题 · 64 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:grepmem" data-paper-title="Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents Agent University of Southern California 2026-11-18 GrepMem把有限工作上下文和完整历史分开：压缩时只把活跃上下文换成系统提示、任务与摘要，原始消息、工具调用/输出和摘要仍追加到纯文本日志。第一次压缩之后才开放grep_history，让模型按需用大小写不敏感正则取回遗漏细节。不需要embedding、索引或知识抽取，但“lossless”只指原日志保留，不代表模型每次都能找对或答对。grep按原始记录头与行号返回最早匹配，默认10条、最多30条，offset跳过匹配行而非记录；前后context默认1行、最多3行。 完整实验成本过高，不复现（审查 DONE）；本轮统一冻结源码后由批次runner生成三种子CPU诊断；component_only / l1_mechanism；不是模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本地实现append-only记录、显式摘要压缩、第一次压缩后的grep准入、正则/分页/上下文/原行号、跳过旧grep输出与字符上限。正则在隔离子进程内运行并用硬timeout终止，仅接收输入文本而不打开路径。摘要由调用方明确提供；没有LLM摘要器、GRPO、问题回答或真实历史接入。  记忆与技能 grepmem Agent 记忆与技能：让经验可取回、可失效 GrepMem会让原始会话日志越来越小吗？ 不会。压缩的是工作上下文，消息、工具输出和摘要仍追加到完整日志；lossless是保留内容，不是节省原始日志磁盘。 教学例：摘要省略订单号后可以grep找回，但原始订单文本仍占空间。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<span id="paper-agent-research-grepmem-e87c2c61" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-36cfaa51b053b7be">GrepMem会让原始会话日志越来越小吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Agrepmem">Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · University of Southern California</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不会。压缩的是工作上下文，消息、工具输出和摘要仍追加到完整日志；lossless是保留内容，不是节省原始日志磁盘。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：摘要省略订单号后可以grep找回，但原始订单文本仍占空间。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25123v1">原论文</a> · <a href="../../../../agent-research/2611.25123-grepmem/">实现解读</a> · <a href="#qa-36cfaa51b053b7be">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:grepmem" data-paper-title="Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents Agent University of Southern California 2026-11-18 GrepMem把有限工作上下文和完整历史分开：压缩时只把活跃上下文换成系统提示、任务与摘要，原始消息、工具调用/输出和摘要仍追加到纯文本日志。第一次压缩之后才开放grep_history，让模型按需用大小写不敏感正则取回遗漏细节。不需要embedding、索引或知识抽取，但“lossless”只指原日志保留，不代表模型每次都能找对或答对。grep按原始记录头与行号返回最早匹配，默认10条、最多30条，offset跳过匹配行而非记录；前后context默认1行、最多3行。 完整实验成本过高，不复现（审查 DONE）；本轮统一冻结源码后由批次runner生成三种子CPU诊断；component_only / l1_mechanism；不是模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本地实现append-only记录、显式摘要压缩、第一次压缩后的grep准入、正则/分页/上下文/原行号、跳过旧grep输出与字符上限。正则在隔离子进程内运行并用硬timeout终止，仅接收输入文本而不打开路径。摘要由调用方明确提供；没有LLM摘要器、GRPO、问题回答或真实历史接入。  记忆与技能 grepmem Agent 记忆与技能：让经验可取回、可失效 为什么grep结果本身不再参与下次搜索？ 它只是旧内容的复制，递归检索会膨胀重复命中。原输出仍被记录，但grep跳过该类记录；工具在第一次压缩后才开放。 教学例：第一次查到Alpha，第二次仍只计算原始Alpha，而非再加一份引用。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-8a562bd5783dcac3">为什么grep结果本身不再参与下次搜索？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Agrepmem">Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · University of Southern California</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它只是旧内容的复制，递归检索会膨胀重复命中。原输出仍被记录，但grep跳过该类记录；工具在第一次压缩后才开放。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第一次查到Alpha，第二次仍只计算原始Alpha，而非再加一份引用。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25123v1">原论文</a> · <a href="../../../../agent-research/2611.25123-grepmem/">实现解读</a> · <a href="#qa-8a562bd5783dcac3">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:grepmem" data-paper-title="Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents Agent University of Southern California 2026-11-18 GrepMem把有限工作上下文和完整历史分开：压缩时只把活跃上下文换成系统提示、任务与摘要，原始消息、工具调用/输出和摘要仍追加到纯文本日志。第一次压缩之后才开放grep_history，让模型按需用大小写不敏感正则取回遗漏细节。不需要embedding、索引或知识抽取，但“lossless”只指原日志保留，不代表模型每次都能找对或答对。grep按原始记录头与行号返回最早匹配，默认10条、最多30条，offset跳过匹配行而非记录；前后context默认1行、最多3行。 完整实验成本过高，不复现（审查 DONE）；本轮统一冻结源码后由批次runner生成三种子CPU诊断；component_only / l1_mechanism；不是模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本地实现append-only记录、显式摘要压缩、第一次压缩后的grep准入、正则/分页/上下文/原行号、跳过旧grep输出与字符上限。正则在隔离子进程内运行并用硬timeout终止，仅接收输入文本而不打开路径。摘要由调用方明确提供；没有LLM摘要器、GRPO、问题回答或真实历史接入。  记忆与技能 grepmem Agent 记忆与技能：让经验可取回、可失效 它和MemGPT的记忆结构有什么不同？ MemGPT分层管理与换入换出，GrepMem保留原始文本、按正则取回而不建语义索引；两者都不能仅凭存储单测宣称模型会正确回忆。 教学例：grep订单编号不要求先把订单提炼成一条结构化记忆。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-bf671ac6fe55045d">它和MemGPT的记忆结构有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Agrepmem">Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · University of Southern California</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>MemGPT分层管理与换入换出，GrepMem保留原始文本、按正则取回而不建语义索引；两者都不能仅凭存储单测宣称模型会正确回忆。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：grep订单编号不要求先把订单提炼成一条结构化记忆。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25123v1">原论文</a> · <a href="../../../../agent-research/2611.25123-grepmem/">实现解读</a> · <a href="#qa-bf671ac6fe55045d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:grepmem" data-paper-title="Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents Agent University of Southern California 2026-11-18 GrepMem把有限工作上下文和完整历史分开：压缩时只把活跃上下文换成系统提示、任务与摘要，原始消息、工具调用/输出和摘要仍追加到纯文本日志。第一次压缩之后才开放grep_history，让模型按需用大小写不敏感正则取回遗漏细节。不需要embedding、索引或知识抽取，但“lossless”只指原日志保留，不代表模型每次都能找对或答对。grep按原始记录头与行号返回最早匹配，默认10条、最多30条，offset跳过匹配行而非记录；前后context默认1行、最多3行。 完整实验成本过高，不复现（审查 DONE）；本轮统一冻结源码后由批次runner生成三种子CPU诊断；component_only / l1_mechanism；不是模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本地实现append-only记录、显式摘要压缩、第一次压缩后的grep准入、正则/分页/上下文/原行号、跳过旧grep输出与字符上限。正则在隔离子进程内运行并用硬timeout终止，仅接收输入文本而不打开路径。摘要由调用方明确提供；没有LLM摘要器、GRPO、问题回答或真实历史接入。  记忆与技能 grepmem Agent 记忆与技能：让经验可取回、可失效 实现grep工具时只加max_matches够吗？ 不够。还需要匹配行offset、最多3行context、6K字符上限、300字符行裁剪、非法正则错误和10秒终止；坏正则不能卡住整个Agent。 教学例：带行尾锚点的嵌套重复模式，在长a串后接不匹配字符时可能灾难回溯；搜索worker应超时，正常查询仍能继续。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-62e947c3d890eea2">实现grep工具时只加max_matches够吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Agrepmem">Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · University of Southern California</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不够。还需要匹配行offset、最多3行context、6K字符上限、300字符行裁剪、非法正则错误和10秒终止；坏正则不能卡住整个Agent。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：带行尾锚点的嵌套重复模式，在长a串后接不匹配字符时可能灾难回溯；搜索worker应超时，正常查询仍能继续。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25123v1">原论文</a> · <a href="../../../../agent-research/2611.25123-grepmem/">实现解读</a> · <a href="#qa-62e947c3d890eea2">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:clam-memory" data-paper-title="Instant Weight-Space Consolidation for Long-Term Memory in LLMs" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Instant Weight-Space Consolidation for Long-Term Memory in LLMs Agent University of Maryland, College Park 2026-11-16 CLAM把可积累的参数记忆与逐字检索缓冲分开：冻结LLM提供每层会话activation，hypernetwork在不做测试时梯度下降的情况下写出down_proj LoRA，查询时再配top5会话片段。没有提取调用不等于没有前置训练；能力来自离线context distillation。Read用9层Perceiver cross-attention、每层8slots，slots只看当前会话。 完整实验成本过高，不复现（审查 DONE）；review_only / deferred_high_cost；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本轮review-only，不提供可执行adapter、metrics或GPU验证，不下载权重／合成语料。只把v1的read/carry/decode、两阶段训练、rank与检索协议记录为可核对方法；把随机初始化hypernetwork跑一次不能算完成记忆巩固。  记忆与技能 clam-memory Agent 记忆与技能：让经验可取回、可失效 Instant表示无需训练吗？ 不是。只是不在每个新会话做梯度下降；hypernetwork需预训练初始化再做多会话蒸馏训练。 教学例：服务时一次forward不等于获得这个forward的训练成本为0。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-clam-memory-3cee8389" class="ar-learning-paper-anchor"></span>

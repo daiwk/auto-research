@@ -7,7 +7,7 @@ hide:
 
 # 长上下文不是一条轴：位置、读取与状态压缩
 
-[基础模型](../index.md) · 更新 2026-11-19 · 47 篇主题资料 / 21 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-20 · 49 篇主题资料 / 23 篇重点对照
 
 先问历史以什么形式存在，再问当前 token 怎样读它。RoPE 改变相对位置关系，Mamba 把历史写入递归状态，NSA 在多条读取路径间分工，OpenAttention 为未精读部分保留代理，TTR 则为当前输入求一个压缩表示。这些方法不能只按“支持多长”排成一列。 MERLIN在多个压缩状态之外保留routing key矩统计，改变段间读取权重，而不替换每段内部的递归写入。
 
@@ -46,6 +46,8 @@ hide:
 | [UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval](../../../foundation-models/2611.20758-unigraph/README.md) · [原始来源](https://arxiv.org/abs/2611.20758v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | 分别检索dense和sparse再合并可能过早漏掉仅在混合距离下优秀的向量。UniGraph在多个离散alpha下取近邻，按跨alpha入选频次合并成一个有界出度图；查询时不重构图，直接按自己的alpha遍历。稀疏或稠密guide给出入口，减少到目标区域的混合距离计算。 | HVMap学的是异构库之间的表示转换，UniGraph学不到新的向量映射，而是保留dense/sparse原分量并改变跨权重邻域组织。SCORE2的native/mapped双空间权重与UniGraph的语义／词汇alpha含义不同，不能共享一个未经验证的权重解释。 |
 | [Deal With It: On Better Schedules for Listwise Reranking](../../../foundation-models/2611.22392-dealrank/README.md) · [原始来源](https://arxiv.org/abs/2611.22392v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | 并行listwise重排要把候选分组，每组只晋级固定配额。连续切块会把初始召回前部的好文档挤进同一组，越好的retriever越可能被配额误切。DealRank按retriever名次轮流发牌，使每个前缀在各组尽量平衡，再并行排序、按配额晋级并最终合并，不依赖补救认证轮。 | HVMap改变异构向量候选怎么映射和打分，DealRank不训练表示，而是安排已有候选进入ranker的组合。它们可串在同一检索流水线，但更少调用不是更好向量对齐，SCORE2正确也不能证明listwise配额无损。 |
 | [Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting](../../../foundation-models/2611.23896-kernel-ridge-attention/README.md) · [原始来源](https://arxiv.org/abs/2611.23896v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | KRA把历史关联写入固定大小的回归矩阵，同时保留后验协方差。共享可学习Fourier特征形成非线性核；内容相关OU时钟既衰减旧系数，也把协方差恢复到先验，使已经遗忘的方向重新可写。读取发生在当前值写入之后。 | Mamba用输入相关步长和读写向量控制SSM状态；KRA额外维护后验协方差来处理相关key方向的干扰。两者都是有界状态，但KRA每头还承担D平方协方差存储，不能仅按线性序列复杂度认为成本相同。 |
+| [HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs](../../../foundation-models/2611.26363-hisa/README.md) · [原始来源](https://arxiv.org/abs/2611.26363v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | HiSA不先筛token，而是对每个query-key点积只保留尚未超过角度预算的RoPE频率对。近处key保留更多分量，远处仅保留慢频分量；Q/K投影不变，规则只由位置、RoPE base和预算决定。 | RoFormer保留所有RoPE二维对，使用相对旋转来编码距离；HiSA额外根据距离和频率删掉部分点积项。这是打分规则变化，不等于在既有checkpoint上无训练切换后仍保留能力。与只删整token的策略也不同，后者不能表达同一key只保留慢频分量。 |
+| [Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality](../../../foundation-models/2611.24963-canon-layers-scale/README.md) · [原始来源](https://arxiv.org/abs/2611.24963v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | Canon在层内多个位置加入沿token轴的残差短卷积，显式提供邻近信息。本文把此前小规模合成训练得到的结构判断放到64组1.3B–8B真实语料预训练中检验，并对线性模型使用低秩输出门的GLA5/GDN2。重要贡献还包括对预算、基线调参和可测技能的重新审视。 | Canon的宽4因果残差只提供局部token混合，本身不是长历史状态，也不能独立读取任意远位置；它可插入attention、线性attention或SSM。Mamba除局部卷积外还维护输入选择的递归状态，两者功能不能等同。比较需对齐参数/状态与调参，并另测上下文检索；知识分数更高不推出固定状态已具备attention式远程读取。 |
 
 </div>
 
@@ -146,6 +148,18 @@ Alg1先对每alpha取top-kg，按出现次数选M个邻居；Alg2维护candidate
 Mamba用输入相关步长和读写向量控制SSM状态；KRA额外维护后验协方差来处理相关key方向的干扰。两者都是有界状态，但KRA每头还承担D平方协方差存储，不能仅按线性序列复杂度认为成本相同。 a、b由同一组cos/sin频率映射，范数为1。P不是可省略的标量门；它会旋转并缩放写入方向。独立dual参考求解内容Gram与OU时间Gram的乘积核，按每个因果prefix核对输出。
 
 对照来源：[kernel-ridge-attention](../../../foundation-models/2611.23896-kernel-ridge-attention/README.md) · [mamba](../../../reproductions/2312.00752-mamba/README.md)
+
+### HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs
+
+RoFormer保留所有RoPE二维对，使用相对旋转来编码距离；HiSA额外根据距离和频率删掉部分点积项。这是打分规则变化，不等于在既有checkpoint上无训练切换后仍保留能力。与只删整token的策略也不同，后者不能表达同一key只保留慢频分量。 使用未绕回的相对旋转量，严格小于Phi，不是对2pi取模后比较。分母始终为sqrt(d)，不按剩余维数重标定。没有任何频率对仍有效的key必须退出softmax，而不是留下零logit；因果未来key也必须屏蔽。Phi无穷时恢复dense RoPE。本地位置限定为非负int64范围，uint64在转换前检查上界，其余整数转int64后验证；两个非负int64位置的差在安全范围内，不允许uint8相减回绕造成未来泄漏。
+
+对照来源：[hisa](../../../foundation-models/2611.26363-hisa/README.md) · [rope](../../../reproductions/2104.09864-rope/README.md)
+
+### Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality
+
+Canon的宽4因果残差只提供局部token混合，本身不是长历史状态，也不能独立读取任意远位置；它可插入attention、线性attention或SSM。Mamba除局部卷积外还维护输入选择的递归状态，两者功能不能等同。比较需对齐参数/状态与调参，并另测上下文检索；知识分数更高不推出固定状态已具备attention式远程读取。 Canon是每通道独立、kernel=4、左侧补零的因果卷积，带原hidden残差；A/C在norm后、B在QKV投影后、D覆盖门控MLP两支。线性模型低秩约束作用于SiLU之前的G1G2，激活后门不保证低秩。公开LlamaCanon还用quarter RoPE，不能把其全部差异只归因于卷积。
+
+对照来源：[canon-layers-scale](../../../foundation-models/2611.24963-canon-layers-scale/README.md) · [mamba](../../../reproductions/2312.00752-mamba/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -321,9 +335,37 @@ Mamba用输入相关步长和读写向量控制SSM状态；KRA额外维护后验
 
     对照来源：[kernel-ridge-attention](../../../foundation-models/2611.23896-kernel-ridge-attention/README.md) · [mamba](../../../reproductions/2312.00752-mamba/README.md)
 
+### 与RoFormer保留旋转、再按token截窗口有什么区别？ {#cross-nov20-hisa}
+
+??? note "展开答案与例子"
+
+    **答案：** RoFormer本身使用所有对；整token窗口只能整列删key。HiSA在每个距离对不同频率有不同保留窗口，仍统一除以sqrt(d)。
+
+    **教学例子：** 教学例：d=64但只剩16个分量时仍除以8，不能擅自改成除以4。
+
+    对照来源：[hisa](../../../foundation-models/2611.26363-hisa/README.md) · [rope](../../../reproductions/2104.09864-rope/README.md)
+
+### 30% token节省能否直接称训练快30%？ {#cross-nov20-canon-layers-scale}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。每step计算可能增加，还要固定达到的技能或分数。原文用约13%朴素step开销举例时，0.7乘1.13约0.79，对应约21%时间节省。
+
+    **教学例子：** 教学例：token少30%但每step慢13%，总时长不是原来的70%。
+
+    对照来源：[canon-layers-scale](../../../foundation-models/2611.24963-canon-layers-scale/README.md) · [mamba](../../../reproductions/2312.00752-mamba/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-20** · Canon的宽4因果残差只提供局部token混合，本身不是长历史状态，也不能独立读取任意远位置；它可插入attention、线性attention或SSM。Mamba除局部卷积外还维护输入选择的递归状态，两者功能不能等同。比较需对齐参数/状态与调参，并另测上下文检索；知识分数更高不推出固定状态已具备attention式远程读取。 本地证据层级与完整实验不复现分别记录。
+
+涉及：[canon-layers-scale](../../../foundation-models/2611.24963-canon-layers-scale/README.md) · [mamba](../../../reproductions/2312.00752-mamba/README.md)
+
+**2026-11-20** · RoFormer保留所有RoPE二维对，使用相对旋转来编码距离；HiSA额外根据距离和频率删掉部分点积项。这是打分规则变化，不等于在既有checkpoint上无训练切换后仍保留能力。与只删整token的策略也不同，后者不能表达同一key只保留慢频分量。 本地证据层级与完整实验不复现分别记录。
+
+涉及：[hisa](../../../foundation-models/2611.26363-hisa/README.md) · [rope](../../../reproductions/2104.09864-rope/README.md)
 
 **2026-11-19** · Mamba用输入相关步长和读写向量控制SSM状态；KRA额外维护后验协方差来处理相关key方向的干扰。两者都是有界状态，但KRA每头还承担D平方协方差存储，不能仅按线性序列复杂度认为成本相同。 本地组件合同和高成本不复现分别记录。
 
@@ -385,7 +427,7 @@ Mamba用输入相关步长和读写向量控制SSM状态；KRA额外维护后验
 
 覆盖 31 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 47 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 49 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -436,6 +478,8 @@ Mamba用输入相关步长和读写向量控制SSM状态；KRA额外维护后验
 - [UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval](../../../foundation-models/2611.20758-unigraph/README.md)
 - [Deal With It: On Better Schedules for Listwise Reranking](../../../foundation-models/2611.22392-dealrank/README.md)
 - [Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting](../../../foundation-models/2611.23896-kernel-ridge-attention/README.md)
+- [HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs](../../../foundation-models/2611.26363-hisa/README.md)
+- [Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality](../../../foundation-models/2611.24963-canon-layers-scale/README.md)
 
 </details>
 

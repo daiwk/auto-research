@@ -8,6 +8,7 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [Stop Going in Circles:Loop-Triggered Routing for System 1 Decision Agents](<https://arxiv.org/abs/2611.25363v1>) | 2026-11-19 | [English](../../system-one/2611.25363-looproute/README-en.md) · [Chinese](../../system-one/2611.25363-looproute/README.md) |
 | [Jeveration: System One Models Now Generate](<https://arxiv.org/abs/2611.24738v1>) | 2026-11-18 | [English](../../system-one/2611.24738-jeveration/README-en.md) · [Chinese](../../system-one/2611.24738-jeveration/README.md) |
 | [EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions](<https://arxiv.org/abs/2611.24616v1>) | 2026-11-18 | [English](../../system-one/2611.24616-egojev/README-en.md) · [Chinese](../../system-one/2611.24616-egojev/README.md) |
 | [Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox](<https://arxiv.org/abs/2610.32955v1>) | 2026-10-23 | [English](../../system-one/2610.32955-typed-inbox-protocol/README-en.md) · [Chinese](../../system-one/2610.32955-typed-inbox-protocol/README.md) |

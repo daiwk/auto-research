@@ -12,6 +12,7 @@
 
 | 方向 | 方法 | 机构 | 日期 | 主要方法 | 本地入口 |
 |---|---|---|---|---|---|
+| 决策模型与LLM协作 | [LoopRoute](2611.25363-looproute/README.md) | Sichuan University | 2026-11-19 | Jev默认行动，重复公共state-action对的第三次提案先拦截，再由LLM接管两步；不同环境保留各自计数规则 | L1 CPU控制核；不调用Jev或LLM，完整Agent评测不复现 |
 | 多模态检索 | [EgoJev](2611.24616-egojev/README.md) | Harvard University | 2026-11-18 | 从显式决策概率做粗细窗口几何融合，以逆CDF分位数选帧 | L1 CPU后处理；不运行VLM，完整视频矩阵不复现 |
 | 视觉生成与编辑 | [Jeveration](2611.24738-jeveration/README.md) | National University of Singapore | 2026-11-18 | 共享随机状态协调图像code的单次前向生成与分布匹配训练 | 高成本资料收录；完整训练不复现，不等于TypeSafe Jev官方实现 |
 | 类型化决策协议 | [Typed Inbox](2610.32955-typed-inbox-protocol/README.md) | Independent Researcher | 2026-10-23 | 先脱敏冻结模型可见快照，整线程隔离，以validation行动成本选择阈值；不将字段准确率当最终行动效用 | L0 CPU 协议；不运行邮箱模型，完整实验不复现 |

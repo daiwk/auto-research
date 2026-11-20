@@ -4,20 +4,28 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1247 entries from the shared research manifest. English write-ups available: 1247.
+The catalog lists 1258 entries from the shared research manifest. English write-ups available: 1258.
 
 ## Browse by domain
 
-- [Search, ads, recommendation, and LLM applications](recommendation.md): 339 catalog entries, 339 English write-ups
-- [Foundation models](foundation-models.md): 257 catalog entries, 257 English write-ups
-- [Structured decisions / System One](system-one.md): 9 catalog entries, 9 English write-ups
+- [Search, ads, recommendation, and LLM applications](recommendation.md): 343 catalog entries, 343 English write-ups
+- [Foundation models](foundation-models.md): 259 catalog entries, 259 English write-ups
+- [Structured decisions / System One](system-one.md): 10 catalog entries, 10 English write-ups
 - [Multimodal models](multimodal-models.md): 32 catalog entries, 32 English write-ups
-- [LLM post-training](post-training.md): 289 catalog entries, 289 English write-ups
-- [Agents](agent-research.md): 321 catalog entries, 321 English write-ups
+- [LLM post-training](post-training.md): 291 catalog entries, 291 English write-ups
+- [Agents](agent-research.md): 323 catalog entries, 323 English write-ups
 
 ## Read in English
 
+- [Stop Going in Circles:Loop-Triggered Routing for System 1 Decision Agents](../../system-one/2611.25363-looproute/README-en.md)
+- [Policy Improvement-Guided Replay for Continual Reinforcement Learning](../../post-training/2611.25989-colir-replay/README-en.md)
+- [HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs](../../foundation-models/2611.26363-hisa/README-en.md)
+- [From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation](../../recommendation-components/2611.26096-lser-serving/README-en.md)
+- [DNA: Unlocking Depth Scaling in CTR Models](../../recommendation-components/2611.25659-dna/README-en.md)
+- [Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models](../../recommendation-components/2611.26531-fleet-feature-optimization/README-en.md)
+- [Antom 3-in-1 Transformer: A Payment Foundation Model](../../recommendation-components/2611.25403-antom-3-in-1/README-en.md)
 - [X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction](../../recommendation-components/2611.24283-xsplit-argus/README-en.md)
+- [VisAlloc: Allocating Visual Supervision for On-Policy Self-Distillation](../../post-training/2611.25069-visalloc/README-en.md)
 - [Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates](../../agent-research/2611.23651-safe-personal-rsi/README-en.md)
 - [Replay, Don't Resample: Off-Policy Consolidation of Long-Horizon RL Experts](../../post-training/2611.24059-mrpd-replay/README-en.md)
 - [Reducing Inference Cost of Coding Agents with Timeout Cascades](../../agent-research/2611.24324-timeout-cascades/README-en.md)
@@ -32,10 +40,12 @@ The catalog lists 1247 entries from the shared research manifest. English write-
 - [JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control](../../multimodal-models/2611.24062-jepa-dots/README-en.md)
 - [How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation](../../post-training/2611.24005-dcc-aggregation/README-en.md)
 - [HINT-WAM: Hindsight-Informed Training for World Action Models](../../post-training/2611.24789-hint-wam/README-en.md)
+- [Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents](../../agent-research/2611.25123-grepmem/README-en.md)
 - [Evidence-Based Credit Assignment for Search-Augmented Language Models](../../post-training/2611.23824-eca-credit/README-en.md)
 - [EgoJev: Finding Evidence in Egocentric Video by Reading VLM Decisions](../../system-one/2611.24616-egojev/README-en.md)
 - [Counterfactual World Models: JEPAs That Reason About "What If"](../../foundation-models/2611.24778-counterfactual-wm/README-en.md)
 - [Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling](../../agent-research/2611.24849-execjudges/README-en.md)
+- [BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection](../../agent-research/2611.25088-buggymle-cci/README-en.md)
 - [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](../../post-training/2611.23750-led-edits/README-en.md)
 - [Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses](../../agent-research/2611.24924-ahe-beta/README-en.md)
 - [Verifying Agents in Rubric-Graded Environments](../../agent-research/2611.22841-gandalf-bvb/README-en.md)
@@ -92,6 +102,7 @@ The catalog lists 1247 entries from the shared research manifest. English write-
 - [TriGen: A Generative Paradigm for Trigger-Induced Recommendation](../../recommendation-components/2611.16395-trigen/README-en.md)
 - [Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models](../../post-training/2611.16628-safety-budget-cgrpo/README-en.md)
 - [ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability](../../recommendation-components/2611.16404-resid/README-en.md)
+- [Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality](../../foundation-models/2611.24963-canon-layers-scale/README-en.md)
 - [KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation](../../recommendation-components/2611.16795-kuairec-v2-protocol/README-en.md)
 - [Experience-Handoff Reinforcement Learning for Recursive Self-Improvement](../../agent-research/2611.16409-ace-rl/README-en.md)
 - [CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation](../../agent-research/2611.17316-coremem/README-en.md)

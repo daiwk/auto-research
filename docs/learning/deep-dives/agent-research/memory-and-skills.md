@@ -7,7 +7,7 @@ hide:
 
 # 经验进入长期系统前，要解决存取、价值与准入
 
-[Agent](../index.md) · 更新 2026-11-18 · 63 篇主题资料 / 14 篇重点对照
+[Agent](../index.md) · 更新 2026-11-20 · 64 篇主题资料 / 15 篇重点对照
 
 MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，CMP 管效用如何识别；Voyager 把成功程序变技能，VaG 管技能进入库的风险，SkillRise 用后续任务检验整理价值。存得下、相关、合法和能帮助未来，是四个不同问题。 EMMA再把结构化记忆分配给controller、agent与skill，按失败scope限制单次编辑及下一次实际使用义务。
 
@@ -39,6 +39,7 @@ MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，C
 | [PolicyBank: Evolving Policy Understanding for LLM Agents](../../../agent-research/2604.15505-policybank/README.md) · [原始来源](https://arxiv.org/abs/2604.15505)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 按工具能力存半结构化授权解释，header→ID选择→全文检索，再据外部开发反馈Add/Revise/Omit。 | MemGPT解决有限上下文的分层容量与换入换出，PolicyBank解决spec与requirement差异。容量足够不代表规则正确；本地PolicyBank只有L0合同，语义修复仍缺失。 |
 | [CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation](../../../agent-research/2611.17316-coremem/README.md) · [原始来源](https://arxiv.org/abs/2611.17316v1)<br>章节：背景与主要改动、核心公式 | 在继承repo的后续任务上，以同状态有／无记忆rollout估计价值，并将整体价值通过可追踪首次锚点使用门控到步骤。 | MemPrice分配上下文容量与记忆保真；CoReMem优化未来编码解决率和工作量。token占用、行为步骤和语义效用不是同一目标，局部算子不产生记忆内容。 |
 | [Instant Weight-Space Consolidation for Long-Term Memory in LLMs](../../../agent-research/2611.20759-clam-memory/README.md) · [原始来源](https://arxiv.org/abs/2611.20759v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | CLAM把可积累的参数记忆与逐字检索缓冲分开：冻结LLM提供每层会话activation，hypernetwork在不做测试时梯度下降的情况下写出down_proj LoRA，查询时再配top5会话片段。没有提取调用不等于没有前置训练；能力来自离线context distillation。 | CoReMem通过未来同仓库任务的有／无记忆差估值并训练写入信用；CLAM通过全历史teacher蒸馏把history压进权重。前者是前瞻效用，后者是参数通道，两者都不能用静态摘要相似度冒充任务收益。完整实验成本过高，不复现（审查DONE）。 |
+| [Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents](../../../agent-research/2611.25123-grepmem/README.md) · [原始来源](https://arxiv.org/abs/2611.25123v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | GrepMem把有限工作上下文和完整历史分开：压缩时只把活跃上下文换成系统提示、任务与摘要，原始消息、工具调用/输出和摘要仍追加到纯文本日志。第一次压缩之后才开放grep_history，让模型按需用大小写不敏感正则取回遗漏细节。不需要embedding、索引或知识抽取，但“lossless”只指原日志保留，不代表模型每次都能找对或答对。 | MemGPT以分层内存、page-out/page-in与模型工具调用管理归档；GrepMem不预先抽取归档结构，保留原始轨迹并做词法搜索。两者都可压缩工作上下文，但GrepMem没有减少原始日志占盘；模型是否会选对检索词仍需训练与真实任务评价，本地固定key的旧MemGPT诊断也不能作能力对照。 |
 
 </div>
 
@@ -103,6 +104,12 @@ MemPrice的精确背包把外部估计效用与token大小在容量内折衷，�
 Read用9层Perceiver cross-attention、每层8slots，slots只看当前会话。Carry先对slots做一次8头self-attention，再对每slot产生一个sigmoid门混合旧Q与新x，并LayerNorm。Decode用每层每rank一个query生成rank8 adapter，大小不随会话数增加；合成模型还含固定bias。顺序和门不能被普通均值池化替代。 CoReMem通过未来同仓库任务的有／无记忆差估值并训练写入信用；CLAM通过全历史teacher蒸馏把history压进权重。前者是前瞻效用，后者是参数通道，两者都不能用静态摘要相似度冒充任务收益。完整实验成本过高，不复现（审查DONE）。
 
 对照来源：[clam-memory](../../../agent-research/2611.20759-clam-memory/README.md) · [coremem](../../../agent-research/2611.17316-coremem/README.md)
+
+### GrepMem：压缩工作上下文，但保留可grep的原始历史
+
+grep按原始记录头与行号返回最早匹配，默认10条、最多30条，offset跳过匹配行而非记录；前后context默认1行、最多3行。旧grep结果仍留在原日志，但搜索跳过它们以免递归重复。单次输出上限6K字符，围绕匹配裁到300字符并在完整match边界停止，返回继续offset；非法正则或超过10秒都返回错误。控制测试验证摘要可遗漏原始细节而日志仍保留、只计原始匹配而不递归grep输出、大小写无关、连续offset不漏页；长行与多匹配验证6K上限，灾难性回溯正则会终止worker，随后正常查询仍可用。论文的模型turn预算、自动token估计与forced-answer调用不在这个存储工具组件内，不捏造自动压缩策略或训练效果。
+
+对照来源：[grepmem](../../../agent-research/2611.25123-grepmem/README.md) · [memgpt](../../../agent-research/2310.08560-memgpt/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -218,9 +225,23 @@ Read用9层Perceiver cross-attention、每层8slots，slots只看当前会话。
 
     对照来源：[clam-memory](../../../agent-research/2611.20759-clam-memory/README.md) · [coremem](../../../agent-research/2611.17316-coremem/README.md)
 
+### 它和MemGPT的记忆结构有什么不同？ {#cross-cross-nov20-grepmem}
+
+??? note "展开答案与例子"
+
+    **答案：** MemGPT分层管理与换入换出，GrepMem保留原始文本、按正则取回而不建语义索引；两者都不能仅凭存储单测宣称模型会正确回忆。
+
+    **教学例子：** 教学例：grep订单编号不要求先把订单提炼成一条结构化记忆。
+
+    对照来源：[grepmem](../../../agent-research/2611.25123-grepmem/README.md) · [memgpt](../../../agent-research/2310.08560-memgpt/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-20** · 本地实现append-only记录、显式摘要压缩、第一次压缩后的grep准入、正则/分页/上下文/原行号、跳过旧grep输出与字符上限。正则在隔离子进程内运行并用硬timeout终止，仅接收输入文本而不打开路径。摘要由调用方明确提供；没有LLM摘要器、GRPO、问题回答或真实历史接入。只对合成公开观察做控制测试，不读取本机Codex会话，也不把字符串检索当Agent能力。 完整实验高成本不复现。
+
+涉及：[grepmem](../../../agent-research/2611.25123-grepmem/README.md) · [memgpt](../../../agent-research/2310.08560-memgpt/README.md)
 
 **2026-11-18** · 本轮review-only，不提供可执行adapter、metrics或GPU验证，不下载权重／合成语料。只把v1的read/carry/decode、两阶段训练、rank与检索协议记录为可核对方法；把随机初始化hypernetwork跑一次不能算完成记忆巩固。 完整实验高成本不复现，不作能力证据。
 
@@ -258,7 +279,7 @@ Read用9层Perceiver cross-attention、每层8slots，slots只看当前会话。
 
 覆盖 55 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 63 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 64 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -325,6 +346,7 @@ Read用9层Perceiver cross-attention、每层8slots，slots只看当前会话。
 - [PolicyBank: Evolving Policy Understanding for LLM Agents](../../../agent-research/2604.15505-policybank/README.md)
 - [CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation](../../../agent-research/2611.17316-coremem/README.md)
 - [Instant Weight-Space Consolidation for Long-Term Memory in LLMs](../../../agent-research/2611.20759-clam-memory/README.md)
+- [Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents](../../../agent-research/2611.25123-grepmem/README.md)
 
 </details>
 

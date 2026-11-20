@@ -5,7 +5,9 @@
 ## 2026
 
 - 2026-11 · [Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses](../2611.24924-ahe-beta/README.md)（`ahe-beta`）：AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。
+- 2026-11 · [BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection](../2611.25088-buggymle-cci/README.md)（`buggymle-cci`）：BuggyMLE先审核可运行、指标稳定且对代码变化敏感的ML仓库，再让Injector注入不同规模的错误。Oracle通过逐个恢复变动找最小恢复集合，再把每个改动单独应用到干净仓库，筛出确有独立指标影响的错误。
 - 2026-11 · [Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling](../2611.24849-execjudges/README.md)（`execjudges`）：对每个topic独立生成三个轻量Python评审程序，程序回答on-subject/some-answer/exact/dedicated四个证据问题，固定评分函数映射为等级，再对三个分数均值向下取整。LLM负责一次性的程序编写而不是逐文档调用，生成代码必须隔离执行。
+- 2026-11 · [Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents](../2611.25123-grepmem/README.md)（`grepmem`）：GrepMem把有限工作上下文和完整历史分开：压缩时只把活跃上下文换成系统提示、任务与摘要，原始消息、工具调用/输出和摘要仍追加到纯文本日志。第一次压缩之后才开放grep_history，让模型按需用大小写不敏感正则取回遗漏细节。
 - 2026-11 · [Kaer: Security-Aware Replanning for Multi-Agent Systems](../2611.24839-kaer/README.md)（`kaer`）：不可信子Agent可把恶意指令夹在失败反馈里，诱导orchestrator授予新权限或改任务。Kaer不让自由文本失败报告进入planner，只传部署前固定的失败模板；planner用固定七种确定性算子修改尚未完成的子任务，最后重新验证任务及Agent策略。
 - 2026-11 · [Reducing Inference Cost of Coding Agents with Timeout Cascades](../2611.24324-timeout-cascades/README.md)（`timeout-cascades`）：小模型先做所有编程题；只有在时限内产生有效且通过测试的patch才直接结束。超时、空patch、语法错误或测试失败，都转给大模型。
 - 2026-11 · [RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?](../2611.24395-rsibench-infra/README.md)（`rsibench-infra`）：单算子快不代表端到端训练或服务变快。RSIBench-Infra让Agent从官方可运行baseline出发，跨engine、kernel、instruction修改，但只提交一个OCI filesystem layer。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**

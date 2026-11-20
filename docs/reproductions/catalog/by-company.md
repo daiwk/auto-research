@@ -501,6 +501,7 @@
 - [KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation](../../recommendation-components/2611.16795-kuairec-v2-protocol/README.md)：明确按用户逐日leave-one-out为validation，FullMonth按每日验证实例数加权，并用每请求一份召回列表评价所有行为子集。本地只有有限协议接口，无官方数据、模型或多样性benchmark结果。
 
 ## Alibaba Group
+- [DNA: Unlocking Depth Scaling in CTR Models](../../recommendation-components/2611.25659-dna/README.md)：DNA把请求U与历史S组成候选无关的双流：每层请求和候选F分别读取同一组历史K/V，随后历史token再反向读取刚更新的U。这样下一层看到的是受当前请求塑形的历史，而不是每层重投影同一S0。请求与历史状态可在同一请求的所有候选间共享。 实际执行小型可微attention、组特异投影、token特异SwiGLU、composite请求投影及D-1次update；比较同缓存逐候选/批量结果，检查padding不影响分数、请求确实改变S、history/request梯度与backward有限性。score返回logits而不是点击概率，Eq13的sigmoid用BCEWithLogits稳定合并；本地QKNorm为逐head L2归一化乘可学习缩放。维度和层数缩小，输入是显式生成token，不含HHFT tokenizer、私有CTR训练、512维生产模型、线上服务或吞吐测量。fixture BCE只表示数值链路，不表示CTR能力。
 - [COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift](../../recommendation-components/2611.22597-cotti/README.md)：COTTI把训练时历史偏好连续性和上线时促销概率修正分开。CPC比较同一用户常态/促销双视图并用可微门控调节一致性；RW按相对历史距离重加权但截断其梯度；ABA在冻结预测器的logit上添加事件强度与预测头方差决定的有界修正。 本地边界：本地只运行CPC/RW/ABA张量；没有历史构造、缺失常态视图回退或服务融合策略。保留paid-item新类目召回下降的作者负结果，不能拿整体AUC覆盖探索代价。
 
 ## Taobao
@@ -511,3 +512,12 @@
 
 ## 固定v1未列一作机构（不由其他作者邮箱推断）
 - [X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction](../../recommendation-components/2611.24283-xsplit-argus/README.md)：将候选无关的旧历史压成因果编码器末K个状态，在线只编码最近M个事件；候选token再对两段记忆做cross-attention。离线缓存是服务时的执行安排，不是训练时detach压缩器。点击监督头与原始logit的L1蒸馏头共享历史表示，但上线只使用监督头。 本地边界：输入是显式小型事件/候选特征；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。负控改目标/未来反馈保持预测不变；KD反传到compressor，但不能据此推断NE或ACV收益。
+
+## Ant International
+- [Antom 3-in-1 Transformer: A Payment Foundation Model](../../recommendation-components/2611.25403-antom-3-in-1/README.md)：Antom把用户/卡/设备历史、当前交易字段和滚动用户图分开编码，再用任务query、共享注意力与稀疏专家做多任务融合。序列先做prefix-future对比，图先做视图对比及关系计数重建；下游图encoder冻结，图表示离线生成并按交易时间查询，其余主要模块在线打分。 只收录经核对的生产证据、方法边界、原图和成本；没有本地模型、训练/推理代码、metrics、GPU回执或Evolve operator。公开IBM/图benchmark的存在不补全缺失配置和私有训练链路；不以小型拼接/MLP冒充7B支付基础模型。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
+## Meta, Inc.
+- [Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models](../../recommendation-components/2611.26531-fleet-feature-optimization/README.md)：Meta把特征创建、FI估计、跨任务Pareto分层、多来源混合和有约束搜索连成fleet级流程。LLM提出假设，确定性工具验证；每个模型同时面对自身serving限制和跨模型共享的上游pipeline预算。另一个模型已经使用某特征时，新增使用不一定新增pipeline成本。 仅实现Pareto层、显式quota混合、集合依赖pipeline差值、删除/同类别补回原语和已完成validation trial准入。FI、成本oracle、删除顺序、训练与资源测量都为外部输入。不运行LLM feature proposer、FI估计、异步研究搜索或生产发布；这是CPU机制合同，不是完整Agent优化系统。
+
+## Autodesk
+- [From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation](../../recommendation-components/2611.26096-lser-serving/README.md)：LSER在双塔召回的用户侧融合会话、较长期历史、请求特征与可选LLM语义向量。较重encoder异步nearline计算，在线请求只读取已完成向量并融合/ANN检索。LLM路径并不替代BERT4Rec式encoder，而提供同一时间窗口的补充语义视角。 只实现显式事件的point-in-time切分与已完成缓存向量选择。调用方必须先将events/records隔离为同一user并完成资格过滤与catalog映射；本接口没有user_id权限隔离，不是完整生产防泄漏系统。缺必需向量时显式要求外部cold-start；LLM缺失或关闭时需外部兼容baseline fusion，不能自动改变治疗模型的输入维度。按最大as_of选择和丢弃不完整LLM pair是本地handoff保护约定，不是论文规定的TTL或具体fallback算法。没有BGE/Qwen encoder、16层decoder、InfoNCE训练、私有label receipt、真实embedding store、ANN或模型冷启动。绝不生成假向量，encoder_calls始终为0；这是L0接口而非召回能力。

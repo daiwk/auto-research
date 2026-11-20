@@ -8,6 +8,10 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation](<https://arxiv.org/abs/2611.26096v1>) | 2026-11-19 | [English](../../recommendation-components/2611.26096-lser-serving/README-en.md) · [Chinese](../../recommendation-components/2611.26096-lser-serving/README.md) |
+| [DNA: Unlocking Depth Scaling in CTR Models](<https://arxiv.org/abs/2611.25659v1>) | 2026-11-19 | [English](../../recommendation-components/2611.25659-dna/README-en.md) · [Chinese](../../recommendation-components/2611.25659-dna/README.md) |
+| [Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models](<https://arxiv.org/abs/2611.26531v1>) | 2026-11-19 | [English](../../recommendation-components/2611.26531-fleet-feature-optimization/README-en.md) · [Chinese](../../recommendation-components/2611.26531-fleet-feature-optimization/README.md) |
+| [Antom 3-in-1 Transformer: A Payment Foundation Model](<https://arxiv.org/abs/2611.25403v1>) | 2026-11-19 | [English](../../recommendation-components/2611.25403-antom-3-in-1/README-en.md) · [Chinese](../../recommendation-components/2611.25403-antom-3-in-1/README.md) |
 | [X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction](<https://arxiv.org/abs/2611.24283v1>) | 2026-11-18 | [English](../../recommendation-components/2611.24283-xsplit-argus/README-en.md) · [Chinese](../../recommendation-components/2611.24283-xsplit-argus/README.md) |
 | [MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems](<https://arxiv.org/abs/2611.23910v1>) | 2026-11-18 | [English](../../recommendation-components/2611.23910-mle-agents/README-en.md) · [Chinese](../../recommendation-components/2611.23910-mle-agents/README.md) |
 | [MARS Technical Report](<https://arxiv.org/abs/2611.24006v1>) | 2026-11-18 | [English](../../recommendation-components/2611.24006-mars-fapo/README-en.md) · [Chinese](../../recommendation-components/2611.24006-mars-fapo/README.md) |

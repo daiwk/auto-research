@@ -7,7 +7,7 @@ hide:
 
 # 召回覆盖从哪里来：用户表示、正例组织与负例难度
 
-[搜广推](../index.md) · 更新 2026-11-18 · 40 篇主题资料 / 8 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-20 · 41 篇主题资料 / 9 篇重点对照
 
 候选生成先决定后续排序能看见什么。YouTube DNN说明单用户向量如何进入近邻检索，Airbnb EBR把监督放回搜索—浏览—预订旅程，MIMA让同请求多正例分配给互补兴趣，MDCNS改变负例的难度与多视角监督。这四种改动分别作用于表示、标签、兴趣分工和梯度，不能用召回数变大统一解释。
 
@@ -33,6 +33,7 @@ hide:
 | [From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation](../../../recommendation-components/2611.05997-ured/README.md) · [原始来源](https://arxiv.org/abs/2611.05997)<br>章节：核心公式、数据协议、代码映射与结果边界 | 从既有排序日志回收高分未展示项，按时间建用户池，再按曝光类目筛选。 | 只重用已经被打过分的候选，不创造语义索引里的新命中；依赖历史新鲜度和曝光记录。 |
 | [From Relevance to Utility: Rubric Alignment in Yuanbao Search](../../../recommendation-components/2611.22503-yuanbao-rubric/README.md) · [原始来源](https://arxiv.org/abs/2611.22503v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | 传统逐文档相关性不等于给下游推理提供有用证据。元宝先生成查询特定的加权正向标准和扣分标准，用蒸馏标签统一训练召回与四头排序，再用集合奖励训练选择器。低于组均值的轨迹并不接受负优势惩罚，而是按奖励差蒸馏组内最佳轨迹。 | WeSearch用簇和原子文档匹配收缩候选空间；元宝用rubric统一上游标签和最终集合奖励。两者不是同一种SID/召回架构，局部ADC或双分支loss都不能替代端到端搜索验证。 |
 | [IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu](../../../recommendation-components/2611.20448-intentflow/README.md) · [原始来源](https://arxiv.org/abs/2611.20448v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | 相同图片上的找同款、找搭配和问使用信息需要不同证据，纯视觉相似性不足。IntentFlow将意图层级、可验证三档相关性、agentic数据构造、多模态检索和意图条件重排统一起来。索引固定后只在查询侧进行高层LoRA与六专家残差投影，避免全库重算。 | WeSearch用簇限制候选并原子匹配；IntentFlow先定义请求满足所需证据，再让查询编码适配固定文档空间。一个侧重候选组织，一个侧重意图监督与查询表示，均不能仅凭组件前后向推断线上收益。 |
+| [From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation](../../../recommendation-components/2611.26096-lser-serving/README.md) · [原始来源](https://arxiv.org/abs/2611.26096v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | LSER在双塔召回的用户侧融合会话、较长期历史、请求特征与可选LLM语义向量。较重encoder异步nearline计算，在线请求只读取已完成向量并融合/ANN检索。LLM路径并不替代BERT4Rec式encoder，而提供同一时间窗口的补充语义视角。 | YouTube DNN把聚合观看历史与上下文经非线性用户塔变成召回向量，训练为下一次观看分类；LSER显式区分session/history序列encoder，并可加入LLM辅助语义向量与nearline刷新。两者都能以用户向量查询离线item索引，差异是表征和更新合同，不是把ANN改为LLM逐token生成。原文线上对照是规则引擎，不是YouTube DNN；本地接口不提供两者质量胜负。 |
 
 </div>
 
@@ -73,6 +74,12 @@ WeSearch 先用簇收缩检索空间，再以 OPQ 和特征打分；URED 反过�
 实现Eq16、18–21、24：同一查询门控混合两个共享瓶颈分支（原设置rank8/64），保留冻结基础投影；蒸馏两方向使用相同合法候选并detach教师；CSLS只减去文档对训练query参考库的离线密度项。零初始化up projection是本地稳定初始化约定，原文未明确此初始化，不伪称完整模型配方。 WeSearch用簇限制候选并原子匹配；IntentFlow先定义请求满足所需证据，再让查询编码适配固定文档空间。一个侧重候选组织，一个侧重意图监督与查询表示，均不能仅凭组件前后向推断线上收益。
 
 对照来源：[intentflow](../../../recommendation-components/2611.20448-intentflow/README.md) · [wesearch](../../../recommendation-components/2611.00530-wesearch/README.md)
+
+### From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation
+
+YouTube DNN把聚合观看历史与上下文经非线性用户塔变成召回向量，训练为下一次观看分类；LSER显式区分session/history序列encoder，并可加入LLM辅助语义向量与nearline刷新。两者都能以用户向量查询离线item索引，差异是表征和更新合同，不是把ANN改为LLM逐token生成。原文线上对照是规则引擎，不是YouTube DNN；本地接口不提供两者质量胜负。 session使用已记录的session ID，历史窗口止于session起点；所有事件严格早于label/request cutoff。通道资格、ID映射、回看长度和session规则是外部合同，未公开的receipt schema不能猜造。原文没有给出通用TTL；本地按(as_of,written_at)防异步乱序回退是接口防护，不冒称论文算法。
+
+对照来源：[lser-serving](../../../recommendation-components/2611.26096-lser-serving/README.md) · [youtube-dnn](../../../reproductions/recsys2016-youtube-dnn-youtube-dnn/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -138,9 +145,23 @@ WeSearch 先用簇收缩检索空间，再以 OPQ 和特征打分；URED 反过�
 
     对照来源：[intentflow](../../../recommendation-components/2611.20448-intentflow/README.md) · [wesearch](../../../recommendation-components/2611.00530-wesearch/README.md)
 
+### 与YouTube DNN候选生成相比，LSER新增什么而不是LLM直接生成推荐？ {#cross-nov20-lser-serving}
+
+??? note "展开答案与例子"
+
+    **答案：** YouTube DNN聚合历史/上下文后用用户塔召回；LSER区分短长序列编码，增加可选LLM辅助特征与异步时效合同。两者仍可用用户向量查离线item索引，不是让LLM逐token生成item ID。
+
+    **教学例子：** 教学例：关闭LSER的LLM向量后仍是学习双塔召回，在线A/B也正是这个未启用LLM的版本。
+
+    对照来源：[lser-serving](../../../recommendation-components/2611.26096-lser-serving/README.md) · [youtube-dnn](../../../reproductions/recsys2016-youtube-dnn-youtube-dnn/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-20** · YouTube DNN把聚合观看历史与上下文经非线性用户塔变成召回向量，训练为下一次观看分类；LSER显式区分session/history序列encoder，并可加入LLM辅助语义向量与nearline刷新。两者都能以用户向量查询离线item索引，差异是表征和更新合同，不是把ANN改为LLM逐token生成。原文线上对照是规则引擎，不是YouTube DNN；本地接口不提供两者质量胜负。 原文线上证据与本地合同分开记录。
+
+涉及：[lser-serving](../../../recommendation-components/2611.26096-lser-serving/README.md) · [youtube-dnn](../../../reproductions/recsys2016-youtube-dnn-youtube-dnn/README.md)
 
 **2026-11-18** · 输入仅为外部融合特征和候选分数；没有用规则假装0.8B意图识别器，也未实现完整LoRA/VLM、agentic核验或NDCG权重训练链。文档输入在诊断中保持不变，不意味着语义召回已提升。 完整实验高成本不复现，未作能力或Evolve晋级证据。
 
@@ -162,7 +183,7 @@ WeSearch 先用簇收缩检索空间，再以 OPQ 和特征打分；URED 反过�
 
 覆盖 36 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 40 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 41 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -206,6 +227,7 @@ WeSearch 先用簇收缩检索空间，再以 OPQ 和特征打分；URED 反过�
 - [From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation](../../../recommendation-components/2611.05997-ured/README.md)
 - [From Relevance to Utility: Rubric Alignment in Yuanbao Search](../../../recommendation-components/2611.22503-yuanbao-rubric/README.md)
 - [IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu](../../../recommendation-components/2611.20448-intentflow/README.md)
+- [From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation](../../../recommendation-components/2611.26096-lser-serving/README.md)
 
 </details>
 

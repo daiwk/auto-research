@@ -370,6 +370,10 @@
 
 - 2026-10-09 · 一作：Shi-Yu Tian · [Beyond Domain-Routed Supervision: Cross-Teacher Guarding for Multi-Teacher On-Policy Distillation](../../reproductions/2610.13521-road-mopd/README.md)（`road-mopd`）：多域只路由各自教师，不能防止共享参数更新损害其他能力。Road 用未路由教师在当前目标域的同一学生轨迹上给出兼容性证据，调节 token credit，再求真实辅助梯度，投影目标梯度但保留其范数下限。
 
+## Nanjing University of Aeronautics and Astronautics
+
+- 2026-11-19 · 一作：Qin-Wen Luo · [Policy Improvement-Guided Replay for Continual Reinforcement Learning](../2611.25989-colir-replay/README.md)（`colir-replay`）：持续RL不应只保存旧模型的输出：新策略仍需在历史任务分布上重新行动。CoLiR在任务结束时复用已有rollout，分别取最终策略生成的正确响应和初始策略生成的错误响应；各自补算另一策略的序列log-likelihood，以正确响应被强化和错误响应被压低两个半权重均值排序prompt。
+
 ## Nankai University
 
 - 2026-07-19 · 一作：Chen Wang · [Distilled RL](../2607.17247-distilled-rl/README.md)（`distilled-rl`）：传统 RL 只有序列级奖励，OPD 又会无条件模仿教师。Distilled RL 把教师/学生反向概率比作为 token 级奖励重权重，只在正优势样本上启用教师，并以序列几何均值消除长度尺度偏差。
@@ -799,6 +803,7 @@
 
 ## Zhejiang University
 
+- 2026-11-18 · 一作：Haoran Xu · [VisAlloc: Allocating Visual Supervision for On-Policy Self-Distillation](../2611.25069-visalloc/README.md)（`visalloc`）：VisAlloc把视觉监督分成固定样本筛选和在线token分配。先用几何匹配的正/负裁剪，保留正教师答对、负教师答错且注释质量合格的样本；该筛选发生在优化前。
 - 2026-10-16 · 一作：Kai Tang · [SimOPD: Relational Knowledge Transfer for On-Policy Distillation](../2610.23306-simopd/README.md)（`simopd`）：概率蒸馏只利用输出分布，直接匹配隐状态又要求学生迁就教师的坐标和维数。SimOPD 改为比较回答之间的关系：两模型分别编码同一批学生回答，在自己的空间里计算“当前回答与历史回答有多像”，再匹配这两个相似度分布。
 - 2026-10-15 · 一作：Licheng Pan · [CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF](../2610.21138-clean-rm/README.md)（`clean-rm`）：不同偏好样本的标注噪声不一定相同。CleanRM 用少量干净反馈校准两个方向的样本级噪声率；以语义与恢复偏好的**联合分布**作最优传输，而不是只匹配偏好直方图。
 - 2026-10-15 · 一作：Siqi Chen · [KnowGPO: Knowledge-Grouped Policy Optimization for Search Agents](../2610.22331-knowgpo/README.md)（`knowgpo`）：不同搜索轨迹即使读到了相同事实，也可能使用完全不同的 query、网页和表述，按表面观察匹配会把可比较的步骤拆散。KnowGPO 将问题所需事实拆为原子条件，训练 verifier 检查每步获得了哪些条件。

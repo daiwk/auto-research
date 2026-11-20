@@ -11,14 +11,14 @@ hide:
 
 每个子主题维护一张卡片。新论文进入后，更新对应卡片的比较或结论，并记录这次变化；不必再从头读整批论文。
 
-31 张精读卡片 · 1247 篇主题资料 · 按主题折叠
+31 张精读卡片 · 1258 篇主题资料 · 按主题折叠
 
 <details class="ar-deep-shelf"><summary>搜广推 · 7 张</summary>
 <div class="ar-deep-grid">
 <article class="ar-deep-tile">
 <h2><a href="recommendation/retrieval-matching/">召回覆盖从哪里来：用户表示、正例组织与负例难度</a></h2>
 <p>候选生成先决定后续排序能看见什么。YouTube DNN说明单用户向量如何进入近邻检索，Airbnb EBR把监督放回搜索—浏览—预订旅程，MIMA让同请求多正例分配给互补兴趣，MDCNS改变负例的难度与多视角监督。这四种改动分别作用于表示、标签、兴趣分工和梯度，不能用召回数变大统一解释。</p>
-<p class="ar-learning-topic-meta">8 篇重点对照 · 6 个跨论文问答 · 2026-11-18</p>
+<p class="ar-learning-topic-meta">9 篇重点对照 · 7 个跨论文问答 · 2026-11-20</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="recommendation/content-semantic-ids/">知识、协同向量与语义码：相同内容怎样进入不同推荐接口？</a></h2>
@@ -28,7 +28,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="recommendation/history-ranking-backbones/">DIN、HSTU、LONGER、SlimPer、RankMixer：究竟让谁与谁交互？</a></h2>
 <p>比较排序骨干前先画三条边：历史到历史、候选到历史、字段到字段。DIN按候选激活历史，HSTU在输入窗口内逐层改写历史状态，LONGER先合并再以短查询读长KV，SlimPer反复读取用户池但只传播小知识库，RankMixer则更换异构字段交互。它们可处于同一流水线的不同位置，不能按一个长度变量或一张本地结果表排总名次。</p>
-<p class="ar-learning-topic-meta">6 篇重点对照 · 4 个跨论文问答 · 2026-11-19</p>
+<p class="ar-learning-topic-meta">7 篇重点对照 · 5 个跨论文问答 · 2026-11-20</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="recommendation/generative-retrieval-reasoning/">生成一个物品，先后跨过码本、模型分布与合法目录三道关</a></h2>
@@ -38,7 +38,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="recommendation/feedback-multitask-causality/">从CTR到满意度与uplift：先定义监督对象，再决定怎样共享</a></h2>
 <p>ESMM约束点击—转化漏斗概率，MMoE和PLE安排不同任务怎样共享专家，FLVM尝试把消费、主动参与和正负方向分开，Incrementality则比较采取与不采取动作的潜在结果。预测更多头、共享更多参数或拆出潜因子，都不自动解决因果识别。</p>
-<p class="ar-learning-topic-meta">7 篇重点对照 · 5 个跨论文问答 · 2026-11-18</p>
+<p class="ar-learning-topic-meta">8 篇重点对照 · 6 个跨论文问答 · 2026-11-20</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="recommendation/slates-business-value/">从列表边际价值到出价控制：策略权重与约束</a></h2>
@@ -48,7 +48,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="recommendation/research-serving-loop/">从更便宜的一次前向，到可验证的长期研究闭环</a></h2>
 <p>ROCS减少请求内重复计算，Rec-Distill将昂贵教师知识移到训练，Effective Training Time追踪训练生命周期损耗，FORTE控制特征退役风险，Self-Evolving RecSys把提案、实验和线上反馈接成长期循环。它们优化的时间尺度不同；省GPU、删特征和自动提出方案，都不能直接当作推荐效果提升。</p>
-<p class="ar-learning-topic-meta">8 篇重点对照 · 7 个跨论文问答 · 2026-11-19</p>
+<p class="ar-learning-topic-meta">9 篇重点对照 · 8 个跨论文问答 · 2026-11-20</p>
 </article>
 </div></details>
 
@@ -57,7 +57,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/context-and-state/">长上下文不是一条轴：位置、读取与状态压缩</a></h2>
 <p>先问历史以什么形式存在，再问当前 token 怎样读它。RoPE 改变相对位置关系，Mamba 把历史写入递归状态，NSA 在多条读取路径间分工，OpenAttention 为未精读部分保留代理，TTR 则为当前输入求一个压缩表示。这些方法不能只按“支持多长”排成一列。 MERLIN在多个压缩状态之外保留routing key矩统计，改变段间读取权重，而不替换每段内部的递归写入。</p>
-<p class="ar-learning-topic-meta">21 篇重点对照 · 17 个跨论文问答 · 2026-11-19</p>
+<p class="ar-learning-topic-meta">23 篇重点对照 · 19 个跨论文问答 · 2026-11-20</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/conditional-compute/">按需算力：选择专家、跳过计算，还是查回旧知识</a></h2>
@@ -101,7 +101,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="system-one/adaptive-decisions/">追加推理、跨语言路由与持续反馈，各在哪个时刻改变决策？</a></h2>
 <p>按需决策有三条时间轴：Selective Reasoning在单题内分配推理和读取预算，跨语言级联在不同后端间分配请求，Jev-DLC用已发生反馈影响后续请求。能力评测提供基线边界，却不自动证明任何控制策略有效。所有选择都要在当前测试目标揭晓之前冻结或作出。</p>
-<p class="ar-learning-topic-meta">5 篇重点对照 · 4 个跨论文问答 · 2026-11-18</p>
+<p class="ar-learning-topic-meta">6 篇重点对照 · 5 个跨论文问答 · 2026-11-20</p>
 </article>
 </div></details>
 
@@ -149,12 +149,12 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="post-training/teacher-and-context/">教师更强仍可能教错：信息、兼容性与成功行为保护</a></h2>
 <p>教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。</p>
-<p class="ar-learning-topic-meta">15 篇重点对照 · 13 个跨论文问答 · 2026-11-19</p>
+<p class="ar-learning-topic-meta">16 篇重点对照 · 14 个跨论文问答 · 2026-11-20</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="post-training/data-and-budget/">省掉哪一份算力：选问题、少生成、分枝与有条件重放</a></h2>
 <p>数据与预算方法改变的是训练链路的不同位置。课程重估当前难度，LESSER降低筛选特征成本，STOPD随机少生成并校正，BranchOPD增加关键分枝，Lightning缓存教师，TAR召回被压制的正确模式；少调用一次教师不等于整个训练更便宜。</p>
-<p class="ar-learning-topic-meta">9 篇重点对照 · 6 个跨论文问答 · 2026-11-18</p>
+<p class="ar-learning-topic-meta">10 篇重点对照 · 7 个跨论文问答 · 2026-11-20</p>
 </article>
 </div></details>
 
@@ -168,7 +168,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="agent-research/memory-and-skills/">经验进入长期系统前，要解决存取、价值与准入</a></h2>
 <p>MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，CMP 管效用如何识别；Voyager 把成功程序变技能，VaG 管技能进入库的风险，SkillRise 用后续任务检验整理价值。存得下、相关、合法和能帮助未来，是四个不同问题。 EMMA再把结构化记忆分配给controller、agent与skill，按失败scope限制单次编辑及下一次实际使用义务。</p>
-<p class="ar-learning-topic-meta">14 篇重点对照 · 11 个跨论文问答 · 2026-11-18</p>
+<p class="ar-learning-topic-meta">15 篇重点对照 · 12 个跨论文问答 · 2026-11-20</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/tools-and-collaboration/">从会调用到能交付：工具接口、可靠性与协作合同</a></h2>
@@ -178,7 +178,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="agent-research/harness-and-self-improvement/">自改进先标对象：答案、经验、接口与系统版本</a></h2>
 <p>Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。</p>
-<p class="ar-learning-topic-meta">40 篇重点对照 · 32 个跨论文问答 · 2026-11-19</p>
+<p class="ar-learning-topic-meta">41 篇重点对照 · 33 个跨论文问答 · 2026-11-20</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/agent-policy-learning/">交互学习：统一轨迹之后，信用和教师信息怎样分配</a></h2>

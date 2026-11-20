@@ -7,7 +7,7 @@ hide:
 
 # 长上下文：注意力、递归状态与记忆
 
-[基础模型](index.md) / 188 个问题 · 47 篇论文
+[基础模型](index.md) / 196 个问题 · 49 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">188 个问题 · 47 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">196 个问题 · 49 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:hisa" data-paper-title="HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs 基础模型 EPFL / Swiss Data Science Center (EPFL and ETH Zurich) 2026-11-19 HiSA不先筛token，而是对每个query-key点积只保留尚未超过角度预算的RoPE频率对。近处key保留更多分量，远处仅保留慢频分量；Q/K投影不变，规则只由位置、RoPE base和预算决定。Fixed-v1 primary source L1参考组件，仅机制诊断. 完整实验：成本过高，不复现（审查 DONE）。实现精确Eq3的fp32/fp64小张量参考、因果/越reach屏蔽、带绝对位置的decode对齐与梯度负控。显式物化每pair分数，不是稀疏kernel；不实现FA3 block近似、GQA存储压缩、decoder训练、真实KV allocator或吞吐优化。GPU验收另由主运行器冻结后实跑，不以CPU单测代替。  注意力与长上下文 RoPE与隐藏维稀疏 基础模型 长上下文：注意力、递归状态与记忆 HiSA稀疏的是token还是点积维度？ 主要是每个点积里的RoPE二维频率对；同一key可以只剩慢频部分，而不是整token统一保留或删除。 教学例：一个远处key可舍弃最快的8对而保留后24对；只有最后一对也过期才整key退出。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-hisa-2c94e546" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-34bd6ec6d353ec41">HiSA稀疏的是token还是点积维度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ahisa">HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · EPFL / Swiss Data Science Center (EPFL and ETH Zurich)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>主要是每个点积里的RoPE二维频率对；同一key可以只剩慢频部分，而不是整token统一保留或删除。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个远处key可舍弃最快的8对而保留后24对；只有最后一对也过期才整key退出。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26363v1">原论文</a> · <a href="../../../../foundation-models/2611.26363-hisa/">实现解读</a> · <a href="#qa-34bd6ec6d353ec41">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:hisa" data-paper-title="HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs 基础模型 EPFL / Swiss Data Science Center (EPFL and ETH Zurich) 2026-11-19 HiSA不先筛token，而是对每个query-key点积只保留尚未超过角度预算的RoPE频率对。近处key保留更多分量，远处仅保留慢频分量；Q/K投影不变，规则只由位置、RoPE base和预算决定。Fixed-v1 primary source L1参考组件，仅机制诊断. 完整实验：成本过高，不复现（审查 DONE）。实现精确Eq3的fp32/fp64小张量参考、因果/越reach屏蔽、带绝对位置的decode对齐与梯度负控。显式物化每pair分数，不是稀疏kernel；不实现FA3 block近似、GQA存储压缩、decoder训练、真实KV allocator或吞吐优化。GPU验收另由主运行器冻结后实跑，不以CPU单测代替。  注意力与长上下文 RoPE与隐藏维稀疏 基础模型 长上下文：注意力、递归状态与记忆 旋转已经转完一圈，频率对能重新参与吗？ 不能。门槛比较未绕回的Delta乘theta，而且用严格小于；周期性cos相同不代表该项重新进入。 教学例：theta=1、Phi=1时，距离1已排除；距离7也不会因为7模2pi小于1而恢复。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-3da6924de0878a0e">旋转已经转完一圈，频率对能重新参与吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ahisa">HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · EPFL / Swiss Data Science Center (EPFL and ETH Zurich)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。门槛比较未绕回的Delta乘theta，而且用严格小于；周期性cos相同不代表该项重新进入。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：theta=1、Phi=1时，距离1已排除；距离7也不会因为7模2pi小于1而恢复。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26363v1">原论文</a> · <a href="../../../../foundation-models/2611.26363-hisa/">实现解读</a> · <a href="#qa-3da6924de0878a0e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:hisa" data-paper-title="HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs 基础模型 EPFL / Swiss Data Science Center (EPFL and ETH Zurich) 2026-11-19 HiSA不先筛token，而是对每个query-key点积只保留尚未超过角度预算的RoPE频率对。近处key保留更多分量，远处仅保留慢频分量；Q/K投影不变，规则只由位置、RoPE base和预算决定。Fixed-v1 primary source L1参考组件，仅机制诊断. 完整实验：成本过高，不复现（审查 DONE）。实现精确Eq3的fp32/fp64小张量参考、因果/越reach屏蔽、带绝对位置的decode对齐与梯度负控。显式物化每pair分数，不是稀疏kernel；不实现FA3 block近似、GQA存储压缩、decoder训练、真实KV allocator或吞吐优化。GPU验收另由主运行器冻结后实跑，不以CPU单测代替。  注意力与长上下文 RoPE与隐藏维稀疏 基础模型 长上下文：注意力、递归状态与记忆 与RoFormer保留旋转、再按token截窗口有什么区别？ RoFormer本身使用所有对；整token窗口只能整列删key。HiSA在每个距离对不同频率有不同保留窗口，仍统一除以sqrt(d)。 教学例：d=64但只剩16个分量时仍除以8，不能擅自改成除以4。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-9fbfbf5953650dc8">与RoFormer保留旋转、再按token截窗口有什么区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ahisa">HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · EPFL / Swiss Data Science Center (EPFL and ETH Zurich)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>RoFormer本身使用所有对；整token窗口只能整列删key。HiSA在每个距离对不同频率有不同保留窗口，仍统一除以sqrt(d)。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：d=64但只剩16个分量时仍除以8，不能擅自改成除以4。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26363v1">原论文</a> · <a href="../../../../foundation-models/2611.26363-hisa/">实现解读</a> · <a href="#qa-9fbfbf5953650dc8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:hisa" data-paper-title="HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs 基础模型 EPFL / Swiss Data Science Center (EPFL and ETH Zurich) 2026-11-19 HiSA不先筛token，而是对每个query-key点积只保留尚未超过角度预算的RoPE频率对。近处key保留更多分量，远处仅保留慢频分量；Q/K投影不变，规则只由位置、RoPE base和预算决定。Fixed-v1 primary source L1参考组件，仅机制诊断. 完整实验：成本过高，不复现（审查 DONE）。实现精确Eq3的fp32/fp64小张量参考、因果/越reach屏蔽、带绝对位置的decode对齐与梯度负控。显式物化每pair分数，不是稀疏kernel；不实现FA3 block近似、GQA存储压缩、decoder训练、真实KV allocator或吞吐优化。GPU验收另由主运行器冻结后实跑，不以CPU单测代替。  注意力与长上下文 RoPE与隐藏维稀疏 基础模型 长上下文：注意力、递归状态与记忆 为什么不能把过期key分数写0后照常softmax？ 零logit仍有正概率，会把本应不可见的value读回来。必须将整key屏蔽；完全无可用key的query明确报错。位置差也须用已验证的有符号整数计算，不能让uint8未来差值回绕；uint64越界在转换前拒绝。 教学例：过期value=100、当前value=3；正确输出只读3，零logit会污染它。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3babd2985ca4d7f2">为什么不能把过期key分数写0后照常softmax？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ahisa">HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · EPFL / Swiss Data Science Center (EPFL and ETH Zurich)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>零logit仍有正概率，会把本应不可见的value读回来。必须将整key屏蔽；完全无可用key的query明确报错。位置差也须用已验证的有符号整数计算，不能让uint8未来差值回绕；uint64越界在转换前拒绝。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：过期value=100、当前value=3；正确输出只读3，零logit会污染它。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26363v1">原论文</a> · <a href="../../../../foundation-models/2611.26363-hisa/">实现解读</a> · <a href="#qa-3babd2985ca4d7f2">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:kernel-ridge-attention" data-paper-title="Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting 基础模型 Independent Researcher 2026-11-18 KRA把历史关联写入固定大小的回归矩阵，同时保留后验协方差。共享可学习Fourier特征形成非线性核；内容相关OU时钟既衰减旧系数，也把协方差恢复到先验，使已经遗忘的方向重新可写。读取发生在当前值写入之后。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。实现共享Fourier特征、OU预测、协方差引导RLS、inclusive读取及状态续接；不含width4因果卷积前端、完整decoder、手写并行adjoint或融合内核。dual solve只作独立小规模参考，不能当高效推理路径。  注意力与长上下文 递归状态与核回归 基础模型 长上下文：注意力、递归状态与记忆 为什么遗忘旧信息时还要补回协方差？ 协方差表示哪些特征方向仍可被新观测约束。只缩小P会让所有方向越来越难写；OU恢复项让遗忘同时恢复可塑性。 教学例：delta=0.5且P=0.1I时，先验为I，预测P为0.775I，不是0.025I。 2026-11-19">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
 <span id="paper-foundation-models-kernel-ridge-attention-e4bb886d" class="ar-learning-paper-anchor"></span>
@@ -398,6 +451,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：从没访问到的真近邻不会因安全bound自动出现。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20758v1">原论文</a> · <a href="../../../../foundation-models/2611.20758-unigraph/">实现解读</a> · <a href="#qa-3c8de2ef6cf089b7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:canon-layers-scale" data-paper-title="Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality 基础模型 Allen-Zhu Research 2026-11-12 Canon在层内多个位置加入沿token轴的残差短卷积，显式提供邻近信息。本文把此前小规模合成训练得到的结构判断放到64组1.3B–8B真实语料预训练中检验，并对线性模型使用低秩输出门的GLA5/GDN2。重要贡献还包括对预算、基线调参和可测技能的重新审视。Fixed-v1 primary source 没有可执行复现. 完整实验：成本过高，不复现（审查 DONE）。仅审查收录；没有可执行复现. 完整实验：成本过高，不复现（审查 DONE）。仅固定原文、原图、作者机构、公开代码修订、成本与证据局限收录。没有Canon/GLA5/GDN2实现、metrics、GPU回执或可执行Evolve operator；不另造小卷积demo来声称完成64组预训练。当前作者机构是Allen-Zhu Research；正文明确实验在FAIR at Meta完成，官方代码位于facebookresearch，不能把实验关系改写成当前一作Meta署名。  网络架构 局部混合与规模比较 基础模型 长上下文：注意力、递归状态与记忆 Canon所说horizontal residual连接什么？ 它在同一通道沿时间连接当前token和最近几个token，而不是只在深度方向跳层。 教学例：kernel=4时，时刻t能直接组合t、t-1、t-2、t-3的同一通道。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-canon-layers-scale-8ceb2f65" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-904fd70677180a64">Canon所说horizontal residual连接什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acanon-layers-scale">Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Allen-Zhu Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它在同一通道沿时间连接当前token和最近几个token，而不是只在深度方向跳层。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：kernel=4时，时刻t能直接组合t、t-1、t-2、t-3的同一通道。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24963v1">原论文</a> · <a href="../../../../foundation-models/2611.24963-canon-layers-scale/">实现解读</a> · <a href="#qa-904fd70677180a64">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:canon-layers-scale" data-paper-title="Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality 基础模型 Allen-Zhu Research 2026-11-12 Canon在层内多个位置加入沿token轴的残差短卷积，显式提供邻近信息。本文把此前小规模合成训练得到的结构判断放到64组1.3B–8B真实语料预训练中检验，并对线性模型使用低秩输出门的GLA5/GDN2。重要贡献还包括对预算、基线调参和可测技能的重新审视。Fixed-v1 primary source 没有可执行复现. 完整实验：成本过高，不复现（审查 DONE）。仅审查收录；没有可执行复现. 完整实验：成本过高，不复现（审查 DONE）。仅固定原文、原图、作者机构、公开代码修订、成本与证据局限收录。没有Canon/GLA5/GDN2实现、metrics、GPU回执或可执行Evolve operator；不另造小卷积demo来声称完成64组预训练。当前作者机构是Allen-Zhu Research；正文明确实验在FAIR at Meta完成，官方代码位于facebookresearch，不能把实验关系改写成当前一作Meta署名。  网络架构 局部混合与规模比较 基础模型 长上下文：注意力、递归状态与记忆 GLA5/GDN2的rank16约束能否延伸到激活后的gate？ 不能。低秩约束属于线性乘积G1G2，逐元素SiLU之后不再保证矩阵低秩；不能据此把整个激活门当低秩算子。 教学例：对秩1矩阵逐元素施加非线性，通常可得到更高秩矩阵。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-3fd5674796c131e6">GLA5/GDN2的rank16约束能否延伸到激活后的gate？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acanon-layers-scale">Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Allen-Zhu Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。低秩约束属于线性乘积G1G2，逐元素SiLU之后不再保证矩阵低秩；不能据此把整个激活门当低秩算子。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：对秩1矩阵逐元素施加非线性，通常可得到更高秩矩阵。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24963v1">原论文</a> · <a href="../../../../foundation-models/2611.24963-canon-layers-scale/">实现解读</a> · <a href="#qa-3fd5674796c131e6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:canon-layers-scale" data-paper-title="Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality 基础模型 Allen-Zhu Research 2026-11-12 Canon在层内多个位置加入沿token轴的残差短卷积，显式提供邻近信息。本文把此前小规模合成训练得到的结构判断放到64组1.3B–8B真实语料预训练中检验，并对线性模型使用低秩输出门的GLA5/GDN2。重要贡献还包括对预算、基线调参和可测技能的重新审视。Fixed-v1 primary source 没有可执行复现. 完整实验：成本过高，不复现（审查 DONE）。仅审查收录；没有可执行复现. 完整实验：成本过高，不复现（审查 DONE）。仅固定原文、原图、作者机构、公开代码修订、成本与证据局限收录。没有Canon/GLA5/GDN2实现、metrics、GPU回执或可执行Evolve operator；不另造小卷积demo来声称完成64组预训练。当前作者机构是Allen-Zhu Research；正文明确实验在FAIR at Meta完成，官方代码位于facebookresearch，不能把实验关系改写成当前一作Meta署名。  网络架构 局部混合与规模比较 基础模型 长上下文：注意力、递归状态与记忆 30% token节省能否直接称训练快30%？ 不能。每step计算可能增加，还要固定达到的技能或分数。原文用约13%朴素step开销举例时，0.7乘1.13约0.79，对应约21%时间节省。 教学例：token少30%但每step慢13%，总时长不是原来的70%。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-7d14f55847281b96">30% token节省能否直接称训练快30%？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acanon-layers-scale">Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Allen-Zhu Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。每step计算可能增加，还要固定达到的技能或分数。原文用约13%朴素step开销举例时，0.7乘1.13约0.79，对应约21%时间节省。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：token少30%但每step慢13%，总时长不是原来的70%。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24963v1">原论文</a> · <a href="../../../../foundation-models/2611.24963-canon-layers-scale/">实现解读</a> · <a href="#qa-7d14f55847281b96">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:canon-layers-scale" data-paper-title="Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality 基础模型 Allen-Zhu Research 2026-11-12 Canon在层内多个位置加入沿token轴的残差短卷积，显式提供邻近信息。本文把此前小规模合成训练得到的结构判断放到64组1.3B–8B真实语料预训练中检验，并对线性模型使用低秩输出门的GLA5/GDN2。重要贡献还包括对预算、基线调参和可测技能的重新审视。Fixed-v1 primary source 没有可执行复现. 完整实验：成本过高，不复现（审查 DONE）。仅审查收录；没有可执行复现. 完整实验：成本过高，不复现（审查 DONE）。仅固定原文、原图、作者机构、公开代码修订、成本与证据局限收录。没有Canon/GLA5/GDN2实现、metrics、GPU回执或可执行Evolve operator；不另造小卷积demo来声称完成64组预训练。当前作者机构是Allen-Zhu Research；正文明确实验在FAIR at Meta完成，官方代码位于facebookresearch，不能把实验关系改写成当前一作Meta署名。  网络架构 局部混合与规模比较 基础模型 长上下文：注意力、递归状态与记忆 为什么这次没有为Canon写一个小卷积并报复现完成？ 小卷积不能验收本文关于规模、充分调参和技能差异的中心实证结论。完整64组预训练昂贵，因此明确只收录，不生成proxy指标或Evolve资格。 教学例：32维随机输入上的卷积形状正确，不是8B/1T达到同等MMLU的证据。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-c27ab1b7c93bb888">为什么这次没有为Canon写一个小卷积并报复现完成？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acanon-layers-scale">Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Allen-Zhu Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>小卷积不能验收本文关于规模、充分调参和技能差异的中心实证结论。完整64组预训练昂贵，因此明确只收录，不生成proxy指标或Evolve资格。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：32维随机输入上的卷积形状正确，不是8B/1T达到同等MMLU的证据。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24963v1">原论文</a> · <a href="../../../../foundation-models/2611.24963-canon-layers-scale/">实现解读</a> · <a href="#qa-c27ab1b7c93bb888">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:adindex" data-paper-title="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation 基础模型 Nanjing University / Alibaba Group 2026-11-07 DSA 为每个 query 独立扫描整个因果前缀来选 Top-K。ADIndex 发现相邻 query 的候选有层相关的重叠：先校准各层组大小与候选库容量，再训练一个较少 head 的组索引器。组内先共享一次全前缀扫描，随后原 DSA 仍逐 query 精排，并补入 anchor 后新可见的 token；不是把所有 query 的最终索引强行设为相同。 成本过高，不复现（审查 DONE）。诊断只在 4 个 query、32 个历史 key 上执行 64 步学生优化，检查训练 KL、冻结梯度、因果索引、新可见 token 和回退分支。L1 机制组件：小张量组索引器与候选精排，不是 DeepSeek/GLM 长文能力、SGLang serving 或加速比复现。GroupIndexer 接受外部提供的归一化 query latent、hidden 与严格 anchor 可见的 keys；本地冻结这些输入。teacher_distribution、forward_kl、refine_indices 与 union_capacity 对应教师、蒸馏、精排和容量统计。  注意力与长上下文 稀疏索引与共享候选库 基础模型 长上下文：注意力、递归状态与记忆 ADIndex 共享候选库，是不是让组内所有 query 用相同最终 Top-K？ 不是。组索引器只共享 anchor 可见历史上的候选库；每个 query 还会补入 anchor 后自己新可见的 token，再用原 DSA 分数独立精排。共享的是昂贵全前缀扫描，不是最终注意力位置。 教学例：anchor=31、query=34，共享库可能都是0到31里的位置，但32、33、34必须补进候选，最终Top-K仍可与query=32不同。 2026-11-11">

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-20",
+  "window": {
+    "start": "2026-11-19",
+    "end": "2026-11-20"
+  },
+  "metadata_identities": 1884,
+  "announcement_identities": 1081,
+  "metadata_only_inventory": "metadata-index.json",
+  "priority_source_captures": "priority-source-captures.json",
+  "fixed_intake": "intake-scope.json",
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "coverage_limits": [
+    "Nine configured arXiv categories plus finite official directories/repository events, not every source or affiliation.",
+    "571 initially new metadata identities first published since Nov19 are a selection pool, not an implementation backlog.",
+    "The initial API failed. A missing capture directory also discarded subsequent bulletin writes; both failures are preserved. After the mkdir fix, the independent retry succeeded.",
+    "Metadata recall and current bulletins do not establish full-text review. Only selected primary methods and explicit exclusions were reviewed.",
+    "Unavailable Meta official pages are archived nonblocking exceptions, not evidence of no Meta work.",
+    "BuggyMLE, GrepMem and VisAlloc are Nov18 first releases/Nov20 announcements. Canon first appeared Nov12; its current first-author affiliation is Allen-Zhu Research, with research execution at FAIR/Meta."
+  ]
+}

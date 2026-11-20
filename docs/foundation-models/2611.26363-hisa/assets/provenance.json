@@ -1,0 +1,18 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.26363v1",
+  "paper_url": "https://arxiv.org/abs/2611.26363v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-20",
+  "page": 2,
+  "crop_box_pdf_points": [
+    54,
+    72,
+    544,
+    264
+  ],
+  "caption": "Figure 1: dense, token-sparse and hidden-sparse attention",
+  "extraction": "Original PDF crop, no semantic editing",
+  "source_pdf_sha256": "d868b6530d8c7ddccc96f0c6533c6a7bd240c34a6bcd4ac2251242929ef76ab8",
+  "asset_sha256": "6f6bb78d85333eb10e5f7f4d4a9d66f04a39e3882c0642af1a0e0625d2709e41",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result."
+}

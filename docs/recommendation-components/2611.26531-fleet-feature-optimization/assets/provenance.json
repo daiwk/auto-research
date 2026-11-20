@@ -1,0 +1,18 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.26531v1",
+  "paper_url": "https://arxiv.org/abs/2611.26531v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-20",
+  "page": 2,
+  "crop_box_pdf_points": [
+    52,
+    80,
+    560,
+    255
+  ],
+  "caption": "Figure 1: fleet-aware feature creation, blending and constrained search",
+  "extraction": "Original PDF crop, no semantic editing",
+  "source_pdf_sha256": "e2f1e59223feabf09944c7b09c85c6e2a5aa3ff9cb07975daf4e7306075b2795",
+  "asset_sha256": "659c5f70222ca8b75f1cdd44b4db3adc0f47bdac93a0829f135a518ad262565d",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result."
+}

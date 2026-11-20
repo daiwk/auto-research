@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:hisa/pair-not-token": {
+      "source_sha256": "132fad321a050581a91d15c7271fc0a1af39b3c764057a223b63d6953c881f1c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does HiSA sparsify tokens or dot-product dimensions?",
+        "answer": "Primarily the two-dimensional RoPE pairs within each dot product. A key can retain slow pairs without retaining fast ones; only an entirely expired key leaves attention.",
+        "example": "A distant key may drop the fastest8 pairs while keeping24 slower pairs."
+      }
+    },
+    "qa/foundation-models:hisa/unwrapped-strict-angle": {
+      "source_sha256": "80d7c1daf3852693dacf28933a8ccfc962ba98c656f0508df5ab5543ec53f179",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a pair return after a full rotation?",
+        "answer": "No. The threshold uses the unwrapped distance times frequency and a strict inequality. Periodic cosine values do not reactivate an expired pair.",
+        "example": "With theta1 and Phi1, distance1 is excluded; distance7 is also excluded despite its small wrapped angle."
+      }
+    },
+    "qa/foundation-models:hisa/rope-versus-score": {
+      "source_sha256": "697830b688b5998c4b3f66cec6ef675e16a991386ca3a5a7b3ef999f866f5d32",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from RoFormer plus a token window?",
+        "answer": "RoFormer uses all pairs. A token window drops whole keys; HiSA gives frequency pairs distinct distance windows while keeping the original1/sqrt(d) scale.",
+        "example": "With d64 and only16 surviving components, divide by8, not4."
+      }
+    },
+    "qa/foundation-models:hisa/expired-key-softmax": {
+      "source_sha256": "af09dfe426d9a5fe429cbcfdcf9375e54573c7893a6e79c0b39d44e9cc2a5688",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not leave an expired key at zero logit?",
+        "answer": "Zero logits still receive positive mass and expose expired values. Mask the key and reject queries without reachable causal keys. Position differences also use validated signed integers: uint8 wraparound cannot admit future keys, and out-of-range uint64 is rejected before casting.",
+        "example": "With expired value100 and current value3, the correct read is3; a zero logit contaminates it."
+      }
+    },
+    "qa/foundation-models:canon-layers-scale/horizontal-residual": {
+      "source_sha256": "90b95714449542d4fbb1d3940ce65c760d6c2f51ee29a41902aec446f76bae4e",
+      "reviewed": true,
+      "fields": {
+        "question": "What does a horizontal residual connect?",
+        "answer": "It mixes a channel across nearby token positions, rather than only skipping layers along depth.",
+        "example": "A width4 kernel combines a channel at t, t-1, t-2 and t-3."
+      }
+    },
+    "qa/foundation-models:canon-layers-scale/gate-rank-location": {
+      "source_sha256": "b7eca839c209ddc0d3c857930261ade840aa5f9be24a74277b8a9ae25445c56c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does rank16 also constrain the activated gate?",
+        "answer": "No. The linear product G1G2 is rank-constrained, but elementwise SiLU need not preserve that rank. The complete activated gate is not a low-rank linear operator.",
+        "example": "Applying a nonlinear function elementwise to a rank1 matrix can increase its rank."
+      }
+    },
+    "qa/foundation-models:canon-layers-scale/tokens-versus-time": {
+      "source_sha256": "c78dc0708a8386ee51def0da3a3181ecfe3c9d672644febd38d12dc56873a7d7",
+      "reviewed": true,
+      "fields": {
+        "question": "Is a30% token saving a30% training speedup?",
+        "answer": "No. Per-step cost and the target skill must also match. With the paper's illustrative13% naive step overhead,0.7 times1.13 is about0.79, or roughly21% less time.",
+        "example": "Using30% fewer tokens with13% slower steps does not take70% of the original time."
+      }
+    },
+    "qa/foundation-models:canon-layers-scale/review-not-run": {
+      "source_sha256": "a48e3a8cea3b29d56fd3ba6d41dd8a8db72621c1fb45049a3e36bbc32902ed34",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not mark a small convolution demo as reproduced?",
+        "answer": "It cannot test the paper's central claims about scale, tuning and skills. The costly64-run campaign remains review-only, without proxy metrics or Evolve eligibility.",
+        "example": "A shape-correct32-dimensional convolution says nothing about8B/1T MMLU token savings."
+      }
+    },
+    "qa/recommendation:antom-3-in-1/three-modalities": {
+      "source_sha256": "f3ad8cd01dc5f332a8c2a18c31b35b9e3bb6cc2ccd46f13249fb50abd21e1679",
+      "reviewed": true,
+      "fields": {
+        "question": "What are the three modalities, and is the graph rerun per payment?",
+        "answer": "Sequences, tabular fields and relational graphs. The graph encoder is frozen during adaptation and produces offline representations; online scoring looks up time-eligible graph embeddings.",
+        "example": "A new payment may use prior history and fields, not graph edges created after that payment."
+      }
+    },
+    "qa/recommendation:antom-3-in-1/fixed-budget-ties": {
+      "source_sha256": "250c2c797afc18ad83e3da71f9f0dc0b049a9e228100fb8de4bb3e74df2fd026",
+      "reviewed": true,
+      "fields": {
+        "question": "How are ties handled at a fixed0.5% budget?",
+        "answer": "The appendix fractionally allocates a boundary score group so selected population weight equals q. Ties must not silently expand the intervention budget.",
+        "example": "If10 budget units remain for a tied group of20, allocate0.5 to each, not the whole group."
+      }
+    },
+    "qa/recommendation:antom-3-in-1/portfolio-versus-stage": {
+      "source_sha256": "808ab766aaf67ecd2ccd24e8734b211e1ba5e2f86fb35ad997c2efc403e8c83c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are37.88% and26.09% not repeated estimates of one metric?",
+        "answer": "The former is portfolio overall-loss reduction; the latter is StageII common-date-weighted chargeback-rate reduction. Numerators, aggregation and stages differ.",
+        "example": "Dispute recoveries can change realized loss without changing original chargeback amounts by the same proportion."
+      }
+    },
+    "qa/recommendation:antom-3-in-1/not-open-recipe": {
+      "source_sha256": "05bce1ec2c19bfed92165fd860a04e0e41839654799f4dab021b19ace8948fa0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is the model not reproduced despite public IBM data and A/B evidence?",
+        "answer": "A public evaluation dataset does not reveal pretraining data, architecture and recipe. Section2 explicitly withholds them, so documentation does not replace the defining model with a cheap proxy.",
+        "example": "A three-branch MLP on IBM data cannot validate the private7B model's37.88% production loss reduction."
+      }
+    }
+  }
+}

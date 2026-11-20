@@ -5,7 +5,7 @@
     "retrieval-matching": {
       "title": "召回覆盖从哪里来：用户表示、正例组织与负例难度",
       "thesis": "候选生成先决定后续排序能看见什么。YouTube DNN说明单用户向量如何进入近邻检索，Airbnb EBR把监督放回搜索—浏览—预订旅程，MIMA让同请求多正例分配给互补兴趣，MDCNS改变负例的难度与多视角监督。这四种改动分别作用于表示、标签、兴趣分工和梯度，不能用召回数变大统一解释。",
-      "updated": "2026-11-18",
+      "updated": "2026-11-20",
       "axes": [
         "召回接口：单向量还是多兴趣通道",
         "正例来自下一行为、旅程还是同请求集合",
@@ -93,6 +93,16 @@
             "同主题对照",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "recommendation:lser-serving",
+          "position": "LSER在双塔召回的用户侧融合会话、较长期历史、请求特征与可选LLM语义向量。较重encoder异步nearline计算，在线请求只读取已完成向量并融合/ANN检索。LLM路径并不替代BERT4Rec式encoder，而提供同一时间窗口的补充语义视角。",
+          "tradeoff": "YouTube DNN把聚合观看历史与上下文经非线性用户塔变成召回向量，训练为下一次观看分类；LSER显式区分session/history序列encoder，并可加入LLM辅助语义向量与nearline刷新。两者都能以用户向量查询离线item索引，差异是表征和更新合同，不是把ANN改为LLM逐token生成。原文线上对照是规则引擎，不是YouTube DNN；本地接口不提供两者质量胜负。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -144,6 +154,14 @@
           "papers": [
             "recommendation:intentflow",
             "recommendation:wesearch"
+          ]
+        },
+        {
+          "title": "From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation",
+          "body": "YouTube DNN把聚合观看历史与上下文经非线性用户塔变成召回向量，训练为下一次观看分类；LSER显式区分session/history序列encoder，并可加入LLM辅助语义向量与nearline刷新。两者都能以用户向量查询离线item索引，差异是表征和更新合同，不是把ANN改为LLM逐token生成。原文线上对照是规则引擎，不是YouTube DNN；本地接口不提供两者质量胜负。 session使用已记录的session ID，历史窗口止于session起点；所有事件严格早于label/request cutoff。通道资格、ID映射、回看长度和session规则是外部合同，未公开的receipt schema不能猜造。原文没有给出通用TTL；本地按(as_of,written_at)防异步乱序回退是接口防护，不冒称论文算法。",
+          "papers": [
+            "recommendation:lser-serving",
+            "recommendation:youtube-dnn"
           ]
         }
       ],
@@ -208,6 +226,16 @@
             "recommendation:intentflow",
             "recommendation:wesearch"
           ]
+        },
+        {
+          "id": "nov20-lser-serving",
+          "question": "与YouTube DNN候选生成相比，LSER新增什么而不是LLM直接生成推荐？",
+          "answer": "YouTube DNN聚合历史/上下文后用用户塔召回；LSER区分短长序列编码，增加可选LLM辅助特征与异步时效合同。两者仍可用用户向量查离线item索引，不是让LLM逐token生成item ID。",
+          "example": "教学例：关闭LSER的LLM向量后仍是学习双塔召回，在线A/B也正是这个未启用LLM的版本。",
+          "papers": [
+            "recommendation:lser-serving",
+            "recommendation:youtube-dnn"
+          ]
         }
       ],
       "reviewed_papers": [
@@ -250,7 +278,8 @@
         "recommendation:wesearch",
         "recommendation:ured",
         "recommendation:yuanbao-rubric",
-        "recommendation:intentflow"
+        "recommendation:intentflow",
+        "recommendation:lser-serving"
       ],
       "updates": [
         {
@@ -377,6 +406,18 @@
           "source_revisions": {
             "recommendation:intentflow": "6658557ea90280fdd772b0b094413b79e9554d36af3e4fc3e737902b4e1ebaad",
             "recommendation:wesearch": "b9df98a4ba9bcd275dd5979b9457fb2370b15e4b9b01d2de83309c585075b933"
+          }
+        },
+        {
+          "date": "2026-11-20",
+          "papers": [
+            "recommendation:lser-serving",
+            "recommendation:youtube-dnn"
+          ],
+          "summary": "YouTube DNN把聚合观看历史与上下文经非线性用户塔变成召回向量，训练为下一次观看分类；LSER显式区分session/history序列encoder，并可加入LLM辅助语义向量与nearline刷新。两者都能以用户向量查询离线item索引，差异是表征和更新合同，不是把ANN改为LLM逐token生成。原文线上对照是规则引擎，不是YouTube DNN；本地接口不提供两者质量胜负。 原文线上证据与本地合同分开记录。",
+          "source_revisions": {
+            "recommendation:lser-serving": "a5c7a66bc0a8ea182fe5b30352e5ffd8abea26b977f7510bd2ac3f1c4060e5d8",
+            "recommendation:youtube-dnn": "6fdbc162f51c3c282c0b19893ca9138b7b299fb5c34e21b118524d0311332dc2"
           }
         }
       ]
@@ -683,7 +724,7 @@
     "history-ranking-backbones": {
       "title": "DIN、HSTU、LONGER、SlimPer、RankMixer：究竟让谁与谁交互？",
       "thesis": "比较排序骨干前先画三条边：历史到历史、候选到历史、字段到字段。DIN按候选激活历史，HSTU在输入窗口内逐层改写历史状态，LONGER先合并再以短查询读长KV，SlimPer反复读取用户池但只传播小知识库，RankMixer则更换异构字段交互。它们可处于同一流水线的不同位置，不能按一个长度变量或一张本地结果表排总名次。",
-      "updated": "2026-11-19",
+      "updated": "2026-11-20",
       "axes": [
         "交互对象：历史内部、目标读取还是字段混合",
         "每层传播的状态及原始历史是否持续可读",
@@ -749,6 +790,16 @@
             "核心公式",
             "同主题对照"
           ]
+        },
+        {
+          "paper": "recommendation:dna",
+          "position": "DNA把请求U与历史S组成候选无关的双流：每层请求和候选F分别读取同一组历史K/V，随后历史token再反向读取刚更新的U。这样下一层看到的是受当前请求塑形的历史，而不是每层重投影同一S0。请求与历史状态可在同一请求的所有候选间共享。",
+          "tradeoff": "LONGER先用少量query读取长历史，后续主要在压缩token上计算；DNA不靠删掉历史token，而让每个历史token从少量请求token吸收上下文，下一层继续读更新后的完整S。两者都关注候选共享，但共享的对象和更新时机不同；本地诊断不提供二者推荐指标胜负。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -780,6 +831,14 @@
           "papers": [
             "recommendation:xsplit-argus",
             "recommendation:argus"
+          ]
+        },
+        {
+          "title": "DNA: Unlocking Depth Scaling in CTR Models",
+          "body": "LONGER先用少量query读取长历史，后续主要在压缩token上计算；DNA不靠删掉历史token，而让每个历史token从少量请求token吸收上下文，下一层继续读更新后的完整S。两者都关注候选共享，但共享的对象和更新时机不同；本地诊断不提供二者推荐指标胜负。 共有D次请求read、D次候选read，却只有D-1次历史update，最后一层不再更新无人读取的S。read中各行为组使用不同K/V投影，各非序列token使用独立SwiGLU；update对全部请求token的拼接做composite K/V投影，行为组共享各自FFN，padding置零。QKNorm及head缩放保留。",
+          "papers": [
+            "recommendation:dna",
+            "recommendation:longer"
           ]
         }
       ],
@@ -825,6 +884,16 @@
           "papers": [
             "recommendation:xsplit-argus",
             "recommendation:argus"
+          ]
+        },
+        {
+          "id": "nov20-dna",
+          "question": "与LONGER减少后续长序列计算的方式有何不同？",
+          "answer": "LONGER把信息压到较小query/token路径；DNA保留历史token，让它们从少量请求token更新，并把更新开销在请求内候选间共享。",
+          "example": "教学例：两者都可共享K/V，但这不意味着都在每层删除历史token。",
+          "papers": [
+            "recommendation:dna",
+            "recommendation:longer"
           ]
         }
       ],
@@ -902,7 +971,8 @@
         "recommendation:whale",
         "recommendation:wide-deep",
         "recommendation:zenith",
-        "recommendation:xsplit-argus"
+        "recommendation:xsplit-argus",
+        "recommendation:dna"
       ],
       "updates": [
         {
@@ -1069,6 +1139,18 @@
           "source_revisions": {
             "recommendation:xsplit-argus": "b5b614058f7d5638c79d0da540dcb805491cf139785fd54ba1f6ca6874c96a69",
             "recommendation:argus": "a8e69376692095761a43eae09f99dc06519c68209e297b83758fbb0c4d7754e5"
+          }
+        },
+        {
+          "date": "2026-11-20",
+          "papers": [
+            "recommendation:dna",
+            "recommendation:longer"
+          ],
+          "summary": "LONGER先用少量query读取长历史，后续主要在压缩token上计算；DNA不靠删掉历史token，而让每个历史token从少量请求token吸收上下文，下一层继续读更新后的完整S。两者都关注候选共享，但共享的对象和更新时机不同；本地诊断不提供二者推荐指标胜负。 原文线上证据与本地合同分开记录。",
+          "source_revisions": {
+            "recommendation:dna": "90b1fa83da1fe794609b59f25bf20c44f9e6946f2ccd58fc71e12ab0e4c313eb",
+            "recommendation:longer": "e3c1167c41d992644a63b143c4d2b067a56b3e9329f4c49d07790cc45152ac4d"
           }
         }
       ]
@@ -1651,7 +1733,7 @@
     "feedback-multitask-causality": {
       "title": "从CTR到满意度与uplift：先定义监督对象，再决定怎样共享",
       "thesis": "ESMM约束点击—转化漏斗概率，MMoE和PLE安排不同任务怎样共享专家，FLVM尝试把消费、主动参与和正负方向分开，Incrementality则比较采取与不采取动作的潜在结果。预测更多头、共享更多参数或拆出潜因子，都不自动解决因果识别。",
-      "updated": "2026-11-18",
+      "updated": "2026-11-20",
       "axes": [
         "标签是条件事件、反馈测量还是潜在结果差",
         "任务共享发生在哪些参数和路由上",
@@ -1726,6 +1808,16 @@
             "同主题对照",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "recommendation:antom-3-in-1",
+          "position": "Antom把用户/卡/设备历史、当前交易字段和滚动用户图分开编码，再用任务query、共享注意力与稀疏专家做多任务融合。序列先做prefix-future对比，图先做视图对比及关系计数重建；下游图encoder冻结，图表示离线生成并按交易时间查询，其余主要模块在线打分。",
+          "tradeoff": "MMoE通过每任务gate组合共享专家；Antom在多模态编码之后，用任务query聚合共享信息再路由，并额外查离线图表示。多任务路由这一共性不表示两者可等价替换。原文生产对照是XGB/SAINT，不是MMoE；不能捏造两者实测胜负。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1761,6 +1853,14 @@
           "papers": [
             "recommendation:cotti",
             "recommendation:baff"
+          ]
+        },
+        {
+          "title": "Antom 3-in-1 Transformer: A Payment Foundation Model",
+          "body": "MMoE通过每任务gate组合共享专家；Antom在多模态编码之后，用任务query聚合共享信息再路由，并额外查离线图表示。多任务路由这一共性不表示两者可等价替换。原文生产对照是XGB/SAINT，不是MMoE；不能捏造两者实测胜负。 这里列的是附录A已公开的固定预算评测口径，不是未公开的完整训练loss或router算法。采样数据使用逆纳入权重；预算边界同分交易可共享分数配额，保证总权重仍等于q倍总体。金额损失率的分母是成功交易金额，不是交易笔数。§2明确未公开详细架构、训练配置和数据构造，不能补写猜测的实现。",
+          "papers": [
+            "recommendation:antom-3-in-1",
+            "recommendation:mmoe"
           ]
         }
       ],
@@ -1815,6 +1915,16 @@
             "recommendation:cotti",
             "recommendation:baff"
           ]
+        },
+        {
+          "id": "nov20-antom-3-in-1",
+          "question": "为什么不能把37.88%和26.09%当成同一指标的重复验证？",
+          "answer": "前者是业务组合总体损失率相对变化，后者是II阶段CB率按共同日期重加权的相对变化；分子、样本聚合和阶段不同。",
+          "example": "教学例：赔付争议追回会改变最终损失，但不一定同幅改变原始CB金额。",
+          "papers": [
+            "recommendation:antom-3-in-1",
+            "recommendation:mmoe"
+          ]
         }
       ],
       "reviewed_papers": [
@@ -1854,7 +1964,8 @@
         "recommendation:twitch-mor",
         "recommendation:unimvt",
         "recommendation:kl-mopd",
-        "recommendation:cotti"
+        "recommendation:cotti",
+        "recommendation:antom-3-in-1"
       ],
       "updates": [
         {
@@ -1955,6 +2066,18 @@
           "source_revisions": {
             "recommendation:cotti": "98ca63f3d54543ec2dc479a6fd25bfefadfbe21f01c96dc95ca8bcc2f4b03abc",
             "recommendation:baff": "83a73ccc9f890343e96da156362142298f47f0df4ae60892216503bfc311343f"
+          }
+        },
+        {
+          "date": "2026-11-20",
+          "papers": [
+            "recommendation:antom-3-in-1",
+            "recommendation:mmoe"
+          ],
+          "summary": "MMoE通过每任务gate组合共享专家；Antom在多模态编码之后，用任务query聚合共享信息再路由，并额外查离线图表示。多任务路由这一共性不表示两者可等价替换。原文生产对照是XGB/SAINT，不是MMoE；不能捏造两者实测胜负。 本地证据层级与完整实验不复现分别记录。",
+          "source_revisions": {
+            "recommendation:antom-3-in-1": "c4cea100661ec608c7d77caabeb4bf151e6959410d6aba1d5ba3835a9118cc12",
+            "recommendation:mmoe": "f2d1cf4015ce2210470ee7ec24eae9cd6eb3875193cbfc405bdf572b3e6d20b1"
           }
         }
       ]
@@ -2311,7 +2434,7 @@
     "research-serving-loop": {
       "title": "从更便宜的一次前向，到可验证的长期研究闭环",
       "thesis": "ROCS减少请求内重复计算，Rec-Distill将昂贵教师知识移到训练，Effective Training Time追踪训练生命周期损耗，FORTE控制特征退役风险，Self-Evolving RecSys把提案、实验和线上反馈接成长期循环。它们优化的时间尺度不同；省GPU、删特征和自动提出方案，都不能直接当作推荐效果提升。",
-      "updated": "2026-11-19",
+      "updated": "2026-11-20",
       "axes": [
         "成本属于训练、请求内推理还是长期研发生命周期",
         "复用与删除要求哪些依赖/消费者保持一致",
@@ -2399,6 +2522,16 @@
             "核心公式",
             "同主题对照"
           ]
+        },
+        {
+          "paper": "recommendation:fleet-feature-optimization",
+          "position": "Meta把特征创建、FI估计、跨任务Pareto分层、多来源混合和有约束搜索连成fleet级流程。LLM提出假设，确定性工具验证；每个模型同时面对自身serving限制和跨模型共享的上游pipeline预算。另一个模型已经使用某特征时，新增使用不一定新增pipeline成本。",
+          "tradeoff": "MLE Agents用同轮方差探针对候选研发做目标准入；Fleet侧重特征共享成本与serving可行性。低NE不能覆盖资源超限，低成本也不能绕过NE必须优于基线的准入。两者诊断接口都不能自行证明模型研发或线上收益。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -2442,6 +2575,14 @@
           "papers": [
             "recommendation:mars-fapo",
             "recommendation:evopilot"
+          ]
+        },
+        {
+          "title": "Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models",
+          "body": "MLE Agents用同轮方差探针对候选研发做目标准入；Fleet侧重特征共享成本与serving可行性。低NE不能覆盖资源超限，低成本也不能绕过NE必须优于基线的准入。两者诊断接口都不能自行证明模型研发或线上收益。 FI向量按所有任务的逐维支配关系分层，不先把任务loss相加。多个来源固定顺序取未选特征，论文写round(pi_m N)，却没有规定舍入与末层同分切分；本地将整数quota及层内顺序显式交给调用方。成本使用完整特征集合oracle，不把共享成本猜成各特征价格求和；跨预算的最贵删除顺序也由外部提供。QPS约束必须先变换成1/QPS这种上界口径。",
+          "papers": [
+            "recommendation:fleet-feature-optimization",
+            "recommendation:mle-agents"
           ]
         }
       ],
@@ -2515,6 +2656,16 @@
             "recommendation:mars-fapo",
             "recommendation:evopilot"
           ]
+        },
+        {
+          "id": "nov20-fleet-feature-optimization",
+          "question": "与MLE Agents的方差探针准入相比，本篇多了什么限制？",
+          "answer": "本篇显式处理每模型资源上界和fleet共享pipeline预算；离线NE更好也不能接受超预算trial。它没有替代MLE Agents的同轮噪声参照。",
+          "example": "教学例：NE0.1但inverse-QPS超cap的候选必须让位于NE0.6且可行的候选。",
+          "papers": [
+            "recommendation:fleet-feature-optimization",
+            "recommendation:mle-agents"
+          ]
         }
       ],
       "reviewed_papers": [
@@ -2539,7 +2690,8 @@
         "recommendation:ug-sep",
         "recommendation:cutagent",
         "recommendation:mle-agents",
-        "recommendation:mars-fapo"
+        "recommendation:mars-fapo",
+        "recommendation:fleet-feature-optimization"
       ],
       "updates": [
         {
@@ -2622,6 +2774,18 @@
           "source_revisions": {
             "recommendation:mars-fapo": "111fb9c35ae6ceb7aa1d1d06316e6299db9bd6bf1a67be767f8e07de4ed3f9cb",
             "recommendation:evopilot": "461d4284afa1aa1a754016383d87aca09361b2b6abf0f9dfca423a3b156fdbae"
+          }
+        },
+        {
+          "date": "2026-11-20",
+          "papers": [
+            "recommendation:fleet-feature-optimization",
+            "recommendation:mle-agents"
+          ],
+          "summary": "MLE Agents用同轮方差探针对候选研发做目标准入；Fleet侧重特征共享成本与serving可行性。低NE不能覆盖资源超限，低成本也不能绕过NE必须优于基线的准入。两者诊断接口都不能自行证明模型研发或线上收益。 原文线上证据与本地合同分开记录。",
+          "source_revisions": {
+            "recommendation:fleet-feature-optimization": "92e05986add9227815ff2fc10ef63bd09893a705b350b8cffe07dcf19b157314",
+            "recommendation:mle-agents": "0bd7f4f9ad3821aa4f88f89458e31d2fa7baa94a6f033a272f067ce1e64d75b9"
           }
         }
       ]

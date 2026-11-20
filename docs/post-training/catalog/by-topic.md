@@ -218,6 +218,12 @@
 - [MaD-RL: Matching Distributions for Calibrating LLMs with Reinforcement Learning](../2609.31644-mad-rl/README.md)（`mad-rl`）：逐条最大化正确性奖励可能令输出类别坍缩；MaD-RL为输出的类别频率拟合指定分布，而非仅提高token熵。它将组内频率与目标类别分布构造的L2、forward-KL、reverse-KL或JSD奖励，与任务正确性结合后用于GRPO。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [Reinforcement Learning for Code Optimization](../2607.25970-code-optimization-rl/README.md)（`code-optimization-rl`）：代码正确不等于运行快；直接加入耗时奖励会被小测试、共享worker负载和稀疏优势淹没。作者构造DMC-Optim，用独立服务校准时长，再组合正确性、优化测试和人类参考百分位。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
+### data-and-budget
+
+- [Policy Improvement-Guided Replay for Continual Reinforcement Learning](../2611.25989-colir-replay/README.md)（`colir-replay`）：持续RL不应只保存旧模型的输出：新策略仍需在历史任务分布上重新行动。CoLiR在任务结束时复用已有rollout，分别取最终策略生成的正确响应和初始策略生成的错误响应；各自补算另一策略的序列log-likelihood，以正确响应被强化和错误响应被压低两个半权重均值排序prompt。
+- [TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training](../2611.22206-tailroll/README.md)（`tailroll`）：rollout step常被最长尾response决定，平均load无法反映尾长。TailRoll在chunk边界迁移在途请求，并用完成siblings足够后的终止处理straggler。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons](../2611.20687-sh-opd/README.md)（`sh-opd`）：每个训练batch先抽一个共享生成长度上限，广播给所有rollout worker，生成在EOS或该上限结束；不是先生成完整长答案再裁loss。
+
 ### 偏好优化
 
 - [GAW-PO: Preference Optimization with Gradient-Aligned Token Weights](../2610.01511-gaw-po/README.md)（`gaw-po`）：用拒绝 token 梯度与 preferred update direction 的对齐度调节负权重；越支持优选行为的 token 越少受罚。
@@ -269,6 +275,7 @@
 ### teacher-and-context
 
 - [HINT-WAM: Hindsight-Informed Training for World Action Models](../2611.24789-hint-wam/README.md)（`hint-wam`）：HINT-WAM先SFT动作专家，再冻结同一backbone，只训练hindsight encoder与gated adapters读取示范未来视频。teacher去掉当前帧并保留时间轴，学生与部署策略从来不看未来。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [VisAlloc: Allocating Visual Supervision for On-Policy Self-Distillation](../2611.25069-visalloc/README.md)（`visalloc`）：VisAlloc把视觉监督分成固定样本筛选和在线token分配。先用几何匹配的正/负裁剪，保留正教师答对、负教师答错且注释质量合格的样本；该筛选发生在优化前。
 - [LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation](../2611.20674-leaf-opd/README.md)（`leaf-opd`）：教师独立解码的首token可能强烈拒答，但在学生已生成事实前缀上，后续token抑制可能迅速消失；需要按同一学生轨迹测监督强度和持续性。
 
 ### 后训练数据选择
@@ -378,11 +385,6 @@
 ### 奖励建模与信用分配
 
 - [SCAR: Shapley Credit Assignment for More Efficient RLHF](../2505.20417-scar-shapley-credit/README.md)（`scar-shapley-credit`）：原文Sec.3.2–3.4 Eq.3–6：外部冻结RM对原顺序、未入选位置填空格的文本coalition评分，v(empty)=0；Shapley必须保留负贡献，span credit只给该span末token。完整论文用自适应分段和SHAP/Owen近似。
-
-### data-and-budget
-
-- [TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training](../2611.22206-tailroll/README.md)（`tailroll`）：rollout step常被最长尾response决定，平均load无法反映尾长。TailRoll在chunk边界迁移在途请求，并用完成siblings足够后的终止处理straggler。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
-- [Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons](../2611.20687-sh-opd/README.md)（`sh-opd`）：每个训练batch先抽一个共享生成长度上限，广播给所有rollout worker，生成在EOS或该上限结束；不是先生成完整长答案再裁loss。
 
 ### RL 后训练
 

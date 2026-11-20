@@ -7,7 +7,7 @@ hide:
 
 # 省掉哪一份算力：选问题、少生成、分枝与有条件重放
 
-[LLM 后训练](../index.md) · 更新 2026-11-18 · 41 篇主题资料 / 9 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-20 · 42 篇主题资料 / 10 篇重点对照
 
 数据与预算方法改变的是训练链路的不同位置。课程重估当前难度，LESSER降低筛选特征成本，STOPD随机少生成并校正，BranchOPD增加关键分枝，Lightning缓存教师，TAR召回被压制的正确模式；少调用一次教师不等于整个训练更便宜。
 
@@ -34,6 +34,7 @@ hide:
 | [MAPLE: Metadata Augmented Private Language Evolution](../../../post-training/2603.19258-maple-icl/README.md) · [原始来源](https://arxiv.org/abs/2603.19258)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 用DP metadata条件化初始化，并按分类Hamming选非私有已捐赠示例；局部仅实现后一个选择步骤。 | LESSER按模型梯度特征选训练数据，MAPLE按schema相似性选提示示例，选择单元与目标不同；近邻排序既不保证目标梯度价值，也不建立隐私。 |
 | [Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons](../../../post-training/2611.20687-sh-opd/README.md) · [原始来源](https://arxiv.org/abs/2611.20687v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | power-survival离散分布、每批共享真实生成cap、标准token-mean OPD及隐式位置权重；不作逆概率去偏。 | GRPODropout先完成rollout再按熵贡献筛样本，不能节省同一轮生成；SH-OPD在生成前共享采样cap，改变深度曝光和实际生成预算。现有Dropout真实checkpoint的负结果也说明公式执行不等于能力收益。 |
 | [TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training](../../../post-training/2611.22206-tailroll/README.md) · [原始来源](https://arxiv.org/abs/2611.22206v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 只收录多engine真实在途迁移/单次re-prefill与部分输出loss mask机制；不以离线调度模拟声称系统提速。 | GRPODropout在完成生成后按响应熵贡献筛选，基本不省生成预算；TailRoll可提前终止尾response，并mask其partial loss，改变实际完成样本和系统时序。 |
+| [Policy Improvement-Guided Replay for Continual Reinforcement Learning](../../../post-training/2611.25989-colir-replay/README.md) · [原始来源](https://arxiv.org/abs/2611.25989v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 显式缓存的四组cross-policy序列log-likelihood、候选资格、每任务top-B、任务均匀/任务内均匀抽样和回放KL token门控。保留精确并列时的输入顺序；跨任务抽样本组件显式用有放回策略，论文未指定替换规则。没有VLM评分器、MRCL训练器、GSPO更新或能力评测，不能称为Evolve已接入。 | TAR先从base正确响应构建分散原型bank，按当前策略相对base的压制程度，对旧轨迹和token做门控加权NLL；CoLiR用初始错误与最终正确响应的cross-policy似然变化筛选历史prompt，后续由当前策略生成新响应，并只对replay施加KL。两者都分配历史回放预算，但单位是旧响应行为与历史问题，筛选依据是当前压制与原任务策略改进。比较成本必须分别计入TAR建bank、CoLiR补评分以及后续新rollout；CoLiR构建记忆免额外生成，不等于训练全程不再生成。 |
 
 </div>
 
@@ -68,6 +69,12 @@ SH-OPD明确保留原token-mean目标，接受位置曝光频率的系统性重�
 原方法用stateless in-flight migration，目标engine据prompt和已生成token重建状态，一次re-prefill后续写；有cost gate、reservation、hop limit和迁后核验。 GRPODropout在完成生成后按响应熵贡献筛选，基本不省生成预算；TailRoll可提前终止尾response，并mask其partial loss，改变实际完成样本和系统时序。 本轮边界：只收录多engine真实在途迁移/单次re-prefill与部分输出loss mask机制；不以离线调度模拟声称系统提速。
 
 对照来源：[tailroll](../../../post-training/2611.22206-tailroll/README.md) · [grpo-dropout](../../../post-training/2610.11854-grpo-dropout/README.md)
+
+### CoLiR和TAR都回放历史，为什么不能只比较bank大小？
+
+TAR先从base正确响应构建分散原型bank，按当前策略相对base的压制程度，对旧轨迹和token做门控加权NLL；CoLiR用初始错误与最终正确响应的cross-policy似然变化筛选历史prompt，后续由当前策略生成新响应，并只对replay施加KL。两者都分配历史回放预算，但单位是旧响应行为与历史问题，筛选依据是当前压制与原任务策略改进。比较成本必须分别计入TAR建bank、CoLiR补评分以及后续新rollout；CoLiR构建记忆免额外生成，不等于训练全程不再生成。 最终全对/全错或初始全对的prompt不得填满buffer；新任务和padding的KL梯度必须为0。排序依赖外部训练log-likelihood，不是伪造scorer或Agent成功率。
+
+对照来源：[colir-replay](../../../post-training/2611.25989-colir-replay/README.md) · [tar-adaptive-replay](../../../post-training/2610.24236-tar-adaptive-replay/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -133,9 +140,23 @@ SH-OPD明确保留原token-mean目标，接受位置曝光频率的系统性重�
 
     对照来源：[tailroll](../../../post-training/2611.22206-tailroll/README.md) · [grpo-dropout](../../../post-training/2610.11854-grpo-dropout/README.md)
 
+### CoLiR和TAR都回放历史，为什么不能只比较bank大小？ {#cross-nov20-colir-replay}
+
+??? note "展开答案与例子"
+
+    **答案：** CoLiR存prompt并重新生成当前策略响应，TAR存base已验证正确的原型响应并按当前压制程度门控旧token。选择单位、激活信号和生成成本都不同，同样80个bank条目不是同样80条训练轨迹。
+
+    **教学例子：** 教学例：一道旧题的两条base正确解法可在TAR中分别有非零/零gate；CoLiR若保留这道题，下一次仍可能新生成第三种回答。
+
+    对照来源：[colir-replay](../../../post-training/2611.25989-colir-replay/README.md) · [tar-adaptive-replay](../../../post-training/2610.24236-tar-adaptive-replay/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-20** · 显式缓存的四组cross-policy序列log-likelihood、候选资格、每任务top-B、任务均匀/任务内均匀抽样和回放KL token门控。保留精确并列时的输入顺序；跨任务抽样本组件显式用有放回策略，论文未指定替换规则。没有VLM评分器、MRCL训练器、GSPO更新或能力评测，不能称为Evolve已接入。 完整实验成本过高不复现；组件不构成能力晋级。
+
+涉及：[colir-replay](../../../post-training/2611.25989-colir-replay/README.md) · [tar-adaptive-replay](../../../post-training/2610.24236-tar-adaptive-replay/README.md)
 
 **2026-11-18** · 只收录多engine真实在途迁移/单次re-prefill与部分输出loss mask机制；不以离线调度模拟声称系统提速。 完整实验高成本不复现；组件诊断不等于能力比较。
 
@@ -153,7 +174,7 @@ SH-OPD明确保留原token-mean目标，接受位置曝光频率的系统性重�
 
 覆盖 38 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 41 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 42 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -198,6 +219,7 @@ SH-OPD明确保留原token-mean目标，接受位置曝光频率的系统性重�
 - [MAPLE: Metadata Augmented Private Language Evolution](../../../post-training/2603.19258-maple-icl/README.md)
 - [Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons](../../../post-training/2611.20687-sh-opd/README.md)
 - [TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training](../../../post-training/2611.22206-tailroll/README.md)
+- [Policy Improvement-Guided Replay for Continual Reinforcement Learning](../../../post-training/2611.25989-colir-replay/README.md)
 
 </details>
 

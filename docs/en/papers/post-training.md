@@ -8,6 +8,8 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [Policy Improvement-Guided Replay for Continual Reinforcement Learning](<https://arxiv.org/abs/2611.25989v1>) | 2026-11-19 | [English](../../post-training/2611.25989-colir-replay/README-en.md) · [Chinese](../../post-training/2611.25989-colir-replay/README.md) |
+| [VisAlloc: Allocating Visual Supervision for On-Policy Self-Distillation](<https://arxiv.org/abs/2611.25069v1>) | 2026-11-18 | [English](../../post-training/2611.25069-visalloc/README-en.md) · [Chinese](../../post-training/2611.25069-visalloc/README.md) |
 | [Replay, Don't Resample: Off-Policy Consolidation of Long-Horizon RL Experts](<https://arxiv.org/abs/2611.24059v1>) | 2026-11-18 | [English](../../post-training/2611.24059-mrpd-replay/README-en.md) · [Chinese](../../post-training/2611.24059-mrpd-replay/README.md) |
 | [How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation](<https://arxiv.org/abs/2611.24005v1>) | 2026-11-18 | [English](../../post-training/2611.24005-dcc-aggregation/README-en.md) · [Chinese](../../post-training/2611.24005-dcc-aggregation/README.md) |
 | [HINT-WAM: Hindsight-Informed Training for World Action Models](<https://arxiv.org/abs/2611.24789v1>) | 2026-11-18 | [English](../../post-training/2611.24789-hint-wam/README-en.md) · [Chinese](../../post-training/2611.24789-hint-wam/README.md) |

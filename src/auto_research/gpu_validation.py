@@ -16,6 +16,9 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    **{key: f"docs/gpu-validations/{key}-a100-20261120-latest.json" for key in (
+        "hisa", "colir-replay", "visalloc", "dna",
+    )},
     **{key: f"docs/gpu-validations/{key}-a100-20261119-latest.json" for key in (
         "kernel-ridge-attention", "narrow-spec", "counterfactual-wm", "eca-credit",
         "mrpd-replay", "xsplit-argus", "mars-fapo",

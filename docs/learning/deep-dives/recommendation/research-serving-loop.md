@@ -7,7 +7,7 @@ hide:
 
 # 从更便宜的一次前向，到可验证的长期研究闭环
 
-[搜广推](../index.md) · 更新 2026-11-19 · 22 篇主题资料 / 8 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-20 · 23 篇主题资料 / 9 篇重点对照
 
 ROCS减少请求内重复计算，Rec-Distill将昂贵教师知识移到训练，Effective Training Time追踪训练生命周期损耗，FORTE控制特征退役风险，Self-Evolving RecSys把提案、实验和线上反馈接成长期循环。它们优化的时间尺度不同；省GPU、删特征和自动提出方案，都不能直接当作推荐效果提升。
 
@@ -33,6 +33,7 @@ ROCS减少请求内重复计算，Rec-Distill将昂贵教师知识移到训练�
 | [CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation](../../../recommendation-components/2611.22418-cutagent/README.md) · [原始来源](https://arxiv.org/abs/2611.22418v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | CutAgent把多模态商品理解与可靠视频制作拆为GeneAgent和VideoAgent，以结构化creative gene连接。Gene规定narrative units和配音／音乐／脚本规则；前者经高CTR SFT和CTR-level GRPO学习规划，后者展开分镜并检索商品素材、做TTS/BGM和渲染，再只修复带时间证据的缺陷。 | AgenticRecTune把推荐系统配置方案经实验平台反馈沉淀到SkillHub，CutAgent把广告制作失败修复写成类目／gene条件经验。二者都复用执行经验，但优化对象、反馈和测试权限不同；本篇的LightGBM surrogate不是推荐实验平台，也不能替代真实线上随机分流证据。 |
 | [MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems](../../../recommendation-components/2611.23910-mle-agents/README.md) · [原始来源](https://arxiv.org/abs/2611.23910v1)<br>章节：背景与主要改动、核心公式、同主题对照 | Meta把提假设、改代码、训练和读指标组成有人监督的模型研发循环。2.0每轮名义上并行七个候选和一个方差探针，使用与线上影响校准过的加权NE，而不是只追逐点击AUPRC。失败块名单、结构化输出和只回传近期未采纳赢家控制上下文陈旧；最终模型仍由工程师审核并独立做线上实验。 | EvoPilot先锁定控制/实验两臂的比较合同并拒绝不匹配证据；MLE Agents强调搜索目标与同轮噪声探针。二者都不让“训练结束”自动成为可发布结论，目标校准也不能取代EvoPilot的产物一致性检查。 |
 | [MARS Technical Report](../../../recommendation-components/2611.24006-mars-fapo/README.md) · [原始来源](https://arxiv.org/abs/2611.24006v1)<br>章节：背景与主要改动、核心公式、同主题对照 | MARS让近线0.6B策略为用户产生跨召回、粗排、精排和重排的七维配置，经校验后缓存，在线始终不等待LLM。SFT建立合法格式，FAPO把偏好比较集中到实际不同的动作值token，最后GRPO在沙箱回放和冻结奖励模型上继续优化。正文版权行为Taobao，贡献者按名字母排序，不虚构个人一作机构。 | EvoPilot校验模型开发实验的两臂证据，MARS生成和训练线上流水线配置。MARS的缓存/fallback是服务安全，不能替代开发比较合同；ActionMask loss也不能证明策略已经能生成合法或优质配置。 |
+| [Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models](../../../recommendation-components/2611.26531-fleet-feature-optimization/README.md) · [原始来源](https://arxiv.org/abs/2611.26531v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | Meta把特征创建、FI估计、跨任务Pareto分层、多来源混合和有约束搜索连成fleet级流程。LLM提出假设，确定性工具验证；每个模型同时面对自身serving限制和跨模型共享的上游pipeline预算。另一个模型已经使用某特征时，新增使用不一定新增pipeline成本。 | MLE Agents用同轮方差探针对候选研发做目标准入；Fleet侧重特征共享成本与serving可行性。低NE不能覆盖资源超限，低成本也不能绕过NE必须优于基线的准入。两者诊断接口都不能自行证明模型研发或线上收益。 |
 
 </div>
 
@@ -67,6 +68,12 @@ GeneAgent采用Qwen3-VL-8B，冻结视觉模块、仅语言LoRA；SFT取观测CT
 Eq11–13保留全chosen回答的生成anchor，只有偏好项乘clip(1+2(p+−p−)/p均值,0.2,3)。缺失任一历史V2P时权重为1。只有弱证据且达到相对gap才允许反转chosen/rejected；强证据不反转。动作mask由可信的字段值span/token对齐层提供，必须包含完整变化值而非共享JSON结构；不以脆弱字符串搜索冒充原tokenizer。历史配置V2P是观察统计，不是因果后验。 EvoPilot校验模型开发实验的两臂证据，MARS生成和训练线上流水线配置。MARS的缓存/fallback是服务安全，不能替代开发比较合同；ActionMask loss也不能证明策略已经能生成合法或优质配置。
 
 对照来源：[mars-fapo](../../../recommendation-components/2611.24006-mars-fapo/README.md) · [evopilot](../../../reproductions/2609.21257-evopilot/README.md)
+
+### Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models
+
+MLE Agents用同轮方差探针对候选研发做目标准入；Fleet侧重特征共享成本与serving可行性。低NE不能覆盖资源超限，低成本也不能绕过NE必须优于基线的准入。两者诊断接口都不能自行证明模型研发或线上收益。 FI向量按所有任务的逐维支配关系分层，不先把任务loss相加。多个来源固定顺序取未选特征，论文写round(pi_m N)，却没有规定舍入与末层同分切分；本地将整数quota及层内顺序显式交给调用方。成本使用完整特征集合oracle，不把共享成本猜成各特征价格求和；跨预算的最贵删除顺序也由外部提供。QPS约束必须先变换成1/QPS这种上界口径。
+
+对照来源：[fleet-feature-optimization](../../../recommendation-components/2611.26531-fleet-feature-optimization/README.md) · [mle-agents](../../../recommendation-components/2611.23910-mle-agents/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -142,9 +149,23 @@ Eq11–13保留全chosen回答的生成anchor，只有偏好项乘clip(1+2(p+−
 
     对照来源：[mars-fapo](../../../recommendation-components/2611.24006-mars-fapo/README.md) · [evopilot](../../../reproductions/2609.21257-evopilot/README.md)
 
+### 与MLE Agents的方差探针准入相比，本篇多了什么限制？ {#cross-nov20-fleet-feature-optimization}
+
+??? note "展开答案与例子"
+
+    **答案：** 本篇显式处理每模型资源上界和fleet共享pipeline预算；离线NE更好也不能接受超预算trial。它没有替代MLE Agents的同轮噪声参照。
+
+    **教学例子：** 教学例：NE0.1但inverse-QPS超cap的候选必须让位于NE0.6且可行的候选。
+
+    对照来源：[fleet-feature-optimization](../../../recommendation-components/2611.26531-fleet-feature-optimization/README.md) · [mle-agents](../../../recommendation-components/2611.23910-mle-agents/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-20** · MLE Agents用同轮方差探针对候选研发做目标准入；Fleet侧重特征共享成本与serving可行性。低NE不能覆盖资源超限，低成本也不能绕过NE必须优于基线的准入。两者诊断接口都不能自行证明模型研发或线上收益。 原文线上证据与本地合同分开记录。
+
+涉及：[fleet-feature-optimization](../../../recommendation-components/2611.26531-fleet-feature-optimization/README.md) · [mle-agents](../../../recommendation-components/2611.23910-mle-agents/README.md)
 
 **2026-11-19** · 本地只实现posterior启发式权重、弱证据翻转规则与FAPO张量损失；没有0.6B生成、字段tokenizer、SFT/GRPO、Sandbox、奖励模型、iGraph缓存或实时推荐。结构token仍有生成梯度，rejected非动作token没有偏好梯度。 完整高成本实验不复现，审查DONE。
 
@@ -162,7 +183,7 @@ Eq11–13保留全chosen回答的生成anchor，只有偏好项乘clip(1+2(p+−
 
 覆盖 19 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 22 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 23 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -188,6 +209,7 @@ Eq11–13保留全chosen回答的生成anchor，只有偏好项乘clip(1+2(p+−
 - [CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation](../../../recommendation-components/2611.22418-cutagent/README.md)
 - [MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems](../../../recommendation-components/2611.23910-mle-agents/README.md)
 - [MARS Technical Report](../../../recommendation-components/2611.24006-mars-fapo/README.md)
+- [Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models](../../../recommendation-components/2611.26531-fleet-feature-optimization/README.md)
 
 </details>
 

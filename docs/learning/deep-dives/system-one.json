@@ -343,7 +343,7 @@
     "adaptive-decisions": {
       "title": "追加推理、跨语言路由与持续反馈，各在哪个时刻改变决策？",
       "thesis": "按需决策有三条时间轴：Selective Reasoning在单题内分配推理和读取预算，跨语言级联在不同后端间分配请求，Jev-DLC用已发生反馈影响后续请求。能力评测提供基线边界，却不自动证明任何控制策略有效。所有选择都要在当前测试目标揭晓之前冻结或作出。",
-      "updated": "2026-11-18",
+      "updated": "2026-11-20",
       "axes": [
         "单请求内控制与请求之间的状态更新",
         "熵、校准、错误排序与任务准确率",
@@ -402,6 +402,18 @@
             "结果、负控与边界",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "system-one:looproute",
+          "position": "System One决策模型能快速选动作，但局部选择正确不保证长任务完成。LoopRoute默认把控制权交给冻结Jev；只有同一公开状态下的同一动作已经执行两次，才拦截第三次提案，让LLM按实际环境反馈接管最多两步，然后无额外恢复测试地交回Jev。后续再次卡住可再次接管。",
+          "tradeoff": "Selective Reasoning依据共享读出、benefit gate和答案分布确定性，决定何时生成/读取/停止推理；LoopRoute依据真实环境状态-动作复现，决定是否把控制权短暂交给另一policy。前者的高certainty不代表环境已进展，后者的未重复也不保证动作正确。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -428,6 +440,14 @@
           "papers": [
             "system-one:typed-inbox-protocol",
             "foundation-models:jev-capability"
+          ]
+        },
+        {
+          "title": "LoopRoute：在重复执行前拦截，让LLM只接管两步",
+          "body": "状态key不含不断增长的history或step。ALFWorld用已确认事实和排序后的可行动作；MapReader用当前动作回应、房间描述和inventory；TextWorld用房间、inventory和候选ID到命令映射。ALFWorld只累计决策模型执行，新事实或接管结束会清空；另外两者累计两种policy的执行并保持到episode结束。被拦截提案既不占环境步，也不更新计数。负控区分相同动作但不同状态、未执行提案和真实执行；拒绝未提交transition就再次route，防止重试被当执行。测试ALFWorld不计LLM动作、接管结束清空，以及MapReader/TextWorld计两种动作且不清空。终止立即结束接管；共享key拒绝history/step/gold附加字段。",
+          "papers": [
+            "system-one:looproute",
+            "foundation-models:selective-reasoning"
           ]
         }
       ],
@@ -472,6 +492,16 @@
             "system-one:typed-inbox-protocol",
             "foundation-models:jev-capability"
           ]
+        },
+        {
+          "id": "cross-nov20-looproute",
+          "question": "LoopRoute和Selective Reasoning都省推理，证据一样吗？",
+          "answer": "不一样。一个看环境中的重复执行，另一个看冻结读出与推理收益/确定性；重复不是低置信度，高置信度也不等于任务有进展。",
+          "example": "教学例：模型非常确信地反复开一个锁住的门，仍应触发循环路由。",
+          "papers": [
+            "system-one:looproute",
+            "foundation-models:selective-reasoning"
+          ]
         }
       ],
       "reviewed_papers": [
@@ -479,7 +509,8 @@
         "foundation-models:jev-dlc",
         "foundation-models:jev-regional-transfer",
         "foundation-models:selective-reasoning",
-        "system-one:typed-inbox-protocol"
+        "system-one:typed-inbox-protocol",
+        "system-one:looproute"
       ],
       "updates": [
         {
@@ -508,6 +539,18 @@
           "source_revisions": {
             "system-one:typed-inbox-protocol": "073c22bdb82f313fe1a37a54330b4131e14ae0f5285d26b41d4ab53715ef867e",
             "foundation-models:jev-capability": "9484343eb3f24d2ff8c29ecdb8396472ae1bdf62060678922467f9d94eb10033"
+          }
+        },
+        {
+          "date": "2026-11-20",
+          "papers": [
+            "system-one:looproute",
+            "foundation-models:selective-reasoning"
+          ],
+          "summary": "本地执行公开状态key、pending decision/实际执行分离、第三次提案拦截、准确两步接管及各benchmark计数规则。只接受显式公开字段，不接收gold、奖励或成功标签；new_information由可信外部ALFWorld适配器提供，本地不假装语义核实事实。没有Jev/LLM backend、benchmark环境或实际API请求；控制轨迹只证明路由规则，不证明任务成功率。 完整实验高成本不复现。",
+          "source_revisions": {
+            "system-one:looproute": "71d5f3b07101ae50b5466a1eac27949e003191f2dbc403ffed869143292428f5",
+            "foundation-models:selective-reasoning": "20c8743f26e83c2507091f8b09077a70fd3e41c6e3693892836627e3010e6d6b"
           }
         }
       ]

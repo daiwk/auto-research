@@ -1,0 +1,18 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.25659v1",
+  "paper_url": "https://arxiv.org/abs/2611.25659v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-20",
+  "page": 4,
+  "crop_box_pdf_points": [
+    316,
+    78,
+    560,
+    465
+  ],
+  "caption": "Figure 3: request-shared sequence updates and per-candidate reads",
+  "extraction": "Original PDF crop, no semantic editing",
+  "source_pdf_sha256": "8427369fa40e3d8698f95f80ad847f1429834ca39cdcf75a4ffff2fe25968948",
+  "asset_sha256": "a272e71b2032872db1db44a3385f3d37d7c3f6ae34855527a071bd36266f7451",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result."
+}

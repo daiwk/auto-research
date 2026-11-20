@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-20-latest-components",
+  "seeds": [42, 43, 44],
+  "maximum_run_seconds": 180,
+  "maximum_cuda_devices": 1,
+  "model_and_dataset_downloads": 0,
+  "api_calls": 0,
+  "automatic_retry": false,
+  "full_experiments_executed": false,
+  "scope": "Nine explicit L0/L1 component diagnostics, four CUDA paths. No pretrained model, generator, capability benchmark or Evolve promotion. Synthetic isolated package namespaces avoid executing broad package initializers.",
+  "components": {
+    "buggymle-cci": {"domain": "agent-research", "module": "agent_research/buggymle_cci.py", "evaluation_tier": "l0_interface", "cuda": false},
+    "grepmem": {"domain": "agent-research", "module": "agent_research/grepmem.py", "evaluation_tier": "l1_mechanism", "cuda": false},
+    "looproute": {"domain": "system-one", "module": "system_one/looproute.py", "evaluation_tier": "l1_mechanism", "cuda": false},
+    "hisa": {"domain": "foundation-models", "module": "foundation_models/hisa_components.py", "evaluation_tier": "l1_mechanism", "cuda": true},
+    "colir-replay": {"domain": "post-training", "module": "post_training/colir_replay.py", "evaluation_tier": "l1_mechanism", "cuda": true},
+    "visalloc": {"domain": "post-training", "module": "post_training/visalloc.py", "evaluation_tier": "l1_mechanism", "cuda": true},
+    "fleet-feature-optimization": {"domain": "recommendation", "module": "reproductions/fleet_feature_components.py", "evaluation_tier": "l1_mechanism", "cuda": false},
+    "dna": {"domain": "recommendation", "module": "reproductions/dna_components.py", "evaluation_tier": "l1_mechanism", "cuda": true},
+    "lser-serving": {"domain": "recommendation", "module": "reproductions/lser_protocol_components.py", "evaluation_tier": "l0_interface", "cuda": false}
+  }
+}

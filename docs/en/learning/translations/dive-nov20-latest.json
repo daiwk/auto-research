@@ -1,0 +1,357 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/context-and-state/comparison/foundation-models:hisa": {
+      "source_sha256": "8b88c7b19b7283c56a08f2677c81f1227be25f32ad65375781c5b63624d6d69a",
+      "reviewed": true,
+      "fields": {
+        "position": "HiSA retains selected RoPE frequency pairs inside each query-key dot product rather than selecting whole tokens first. Nearby keys retain more pairs; distant keys retain slower pairs. Q/K projections stay unchanged, and positions, base and angle budget determine the static rule.",
+        "tradeoff": "RoFormer keeps every RoPE pair and encodes relative position by rotation. HiSA additionally removes pair contributions according to distance and frequency. This changes scoring and does not prove that switching an existing checkpoint without training preserves quality. Whole-token eviction cannot express retaining only a key's slow-frequency pairs."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/16": {
+      "source_sha256": "ea2e23fafa404c14de834e16f67914da81d65cccb197036c26ecbca8e80b69c0",
+      "reviewed": true,
+      "fields": {
+        "title": "HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs",
+        "body": "RoFormer keeps every RoPE pair and encodes relative position by rotation. HiSA additionally removes pair contributions according to distance and frequency. This changes scoring and does not prove that switching an existing checkpoint without training preserves quality. Whole-token eviction cannot express retaining only a key's slow-frequency pairs. The rule compares the unwrapped relative angle strictly with Phi, not its remainder modulo2pi. Scaling stays1/sqrt(d), not the number of surviving dimensions. A key with no active pair must leave softmax; a zero logit would still attract probability. Future keys are masked. Infinite Phi recovers dense RoPE. Local positions are nonnegative signed-int64-range integers. uint64 bounds are checked before casting; other integers are converted before subtraction. Differences between nonnegative int64 values cannot overflow, and uint8 wraparound must not expose future keys."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/nov20-hisa": {
+      "source_sha256": "fc9efe6db82f0e9551e37daeb028cf9f63ede235f57c602be7530aa58f80a222",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from RoFormer plus a token window?",
+        "answer": "RoFormer uses all pairs. A token window drops whole keys; HiSA gives frequency pairs distinct distance windows while keeping the original1/sqrt(d) scale.",
+        "example": "With d64 and only16 surviving components, divide by8, not4."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-11-20/15": {
+      "source_sha256": "63c5e425a356e70726d525b0cdb20a690d942802634f36d6192eec7f21764252",
+      "reviewed": true,
+      "fields": {
+        "summary": "RoFormer keeps every RoPE pair and encodes relative position by rotation. HiSA additionally removes pair contributions according to distance and frequency. This changes scoring and does not prove that switching an existing checkpoint without training preserves quality. Whole-token eviction cannot express retaining only a key's slow-frequency pairs. Local evidence and high-cost non-reproduction remain separate."
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:canon-layers-scale": {
+      "source_sha256": "35e5cd01c85f3d7e4cb0c865324359e2c6339596c9907eb83bef8a888bc3ff9b",
+      "reviewed": true,
+      "fields": {
+        "position": "Canon adds residual short convolutions along the token axis at several within-layer locations. This paper tests architecture lessons from smaller synthetic training in64 real-corpus pretraining runs at1.3B–8B parameters, including GLA5/GDN2 with low-rank output gates. Budget alignment, baseline tuning and measurable skills are central to the study.",
+        "tradeoff": "Canon's causal width4 residual supplies local token mixing, not a long-history state or independent access to arbitrary distant positions; it can augment attention, linear attention or SSMs. Mamba also maintains input-selective recurrent state beyond its local convolution. These roles differ. Align parameters/state and tuning, then separately test retrieval: stronger knowledge scores do not establish attention-like remote reads from fixed-size state."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/17": {
+      "source_sha256": "471fa94f5ddebadb50d06216984ff911293fa0811abb7244a24735796f66eedc",
+      "reviewed": true,
+      "fields": {
+        "title": "Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality",
+        "body": "Canon's causal width4 residual supplies local token mixing, not a long-history state or independent access to arbitrary distant positions; it can augment attention, linear attention or SSMs. Mamba also maintains input-selective recurrent state beyond its local convolution. These roles differ. Align parameters/state and tuning, then separately test retrieval: stronger knowledge scores do not establish attention-like remote reads from fixed-size state. Canon is a per-channel causal width4 convolution with left zero padding and a hidden-state residual. A/C follow normalization, B follows QKV projections, and D covers both gated-MLP branches. The rank constraint applies before SiLU; the activated gate need not be low-rank. Released LlamaCanon also uses quarter RoPE, so its differences are not solely convolution."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/nov20-canon-layers-scale": {
+      "source_sha256": "a835755b28998990399e60283ef8ca75f0415f49e99a24adc4bca0f8496c9425",
+      "reviewed": true,
+      "fields": {
+        "question": "Is a30% token saving a30% training speedup?",
+        "answer": "No. Per-step cost and the target skill must also match. With the paper's illustrative13% naive step overhead,0.7 times1.13 is about0.79, or roughly21% less time.",
+        "example": "Using30% fewer tokens with13% slower steps does not take70% of the original time."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-11-20/16": {
+      "source_sha256": "3444c26c7ab1a04d840c65233be0769de5e9df3a95332a45c7c7c255af204d48",
+      "reviewed": true,
+      "fields": {
+        "summary": "Canon's causal width4 residual supplies local token mixing, not a long-history state or independent access to arbitrary distant positions; it can augment attention, linear attention or SSMs. Mamba also maintains input-selective recurrent state beyond its local convolution. These roles differ. Align parameters/state and tuning, then separately test retrieval: stronger knowledge scores do not establish attention-like remote reads from fixed-size state. Local evidence and high-cost non-reproduction remain separate."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/comparison/recommendation:antom-3-in-1": {
+      "source_sha256": "3e63c804c43749dbc6ee3f26ff4f039e8151cd5caf60004623c189879141677d",
+      "reviewed": true,
+      "fields": {
+        "position": "Antom separately encodes user/card/device histories, transaction fields and rolling user graphs. Task queries, shared attention and sparse experts fuse modalities for multiple tasks. Sequence pretraining contrasts prefixes with future summaries; graph pretraining combines view agreement and relation-count reconstruction. The frozen graph encoder runs offline; time-aligned embeddings augment online scoring.",
+        "tradeoff": "MMoE uses task-specific gates over shared experts. Antom first encodes modalities, aggregates them with task queries, routes experts and adds offline graph embeddings. Shared multitask routing does not make them interchangeable. Reported production controls are XGB/SAINT, not MMoE; no measured head-to-head claim is made."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/analysis/4": {
+      "source_sha256": "f4d6052b583e056a9815bb10388ccd9bf86f7880960b787acf5239260ec641f9",
+      "reviewed": true,
+      "fields": {
+        "title": "Antom 3-in-1 Transformer: A Payment Foundation Model",
+        "body": "MMoE uses task-specific gates over shared experts. Antom first encodes modalities, aggregates them with task queries, routes experts and adds offline graph embeddings. Shared multitask routing does not make them interchangeable. Reported production controls are XGB/SAINT, not MMoE; no measured head-to-head claim is made. These are the disclosed AppendixA evaluation definitions, not an invented full training loss or router algorithm. Sampled populations use inverse-inclusion weights, and tied boundary scores share a fractional allocation to keep the budget fixed. Loss rate divides financial loss by successful transaction amount, not transaction count. Section2 withholds detailed architecture, training and dataset construction."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/question/nov20-antom-3-in-1": {
+      "source_sha256": "540a94a1fd7673d05142a3f2025037d13b2be13a3495fab8872562de61766009",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are37.88% and26.09% not repeated estimates of one metric?",
+        "answer": "The former is portfolio overall-loss reduction; the latter is StageII common-date-weighted chargeback-rate reduction. Numerators, aggregation and stages differ.",
+        "example": "Dispute recoveries can change realized loss without changing original chargeback amounts by the same proportion."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/update/2026-11-20/3": {
+      "source_sha256": "3d5630b962a332af3a43cbb802e7fbe5fc777a37b4924035deb0f48b345ab9a1",
+      "reviewed": true,
+      "fields": {
+        "summary": "MMoE uses task-specific gates over shared experts. Antom first encodes modalities, aggregates them with task queries, routes experts and adds offline graph embeddings. Shared multitask routing does not make them interchangeable. Reported production controls are XGB/SAINT, not MMoE; no measured head-to-head claim is made. Local evidence and high-cost non-reproduction remain separate."
+      }
+    },
+    "dive/post-training/data-and-budget/comparison/post-training:colir-replay": {
+      "source_sha256": "1facfdb4d72d9aafda35165cc1a5292d92bd3929640563bfeac27bf433a01ddd",
+      "reviewed": true,
+      "fields": {
+        "position": "Four explicit sets of cached cross-policy sequence log likelihoods, eligibility, per-task top-B selection, task-uniform then prompt-uniform replay and token gating of supplied replay KL. Exact ties retain input order. This component explicitly samples historical tasks with replacement; the paper does not specify that batching policy. No VLM scorer, MRCL trainer, GSPO update, capability evaluation or executable Evolve integration is provided.",
+        "tradeoff": "TAR builds a diverse bank of correct base-policy responses and applies suppression-gated weighted NLL to old trajectories and tokens. CoLiR selects historical prompts from cross-policy likelihood changes on initial incorrect and final correct responses, then generates fresh current-policy responses and applies KL only to replay. Both allocate historical replay budgets, but the units are stored behaviors versus historical questions, and the signals are current suppression versus improvement during the original task. Cost comparisons must separately include TAR bank construction, CoLiR cross-policy scoring and subsequent fresh rollouts. No extra generation for CoLiR memory construction does not mean generation-free training."
+      }
+    },
+    "dive/post-training/data-and-budget/analysis/5": {
+      "source_sha256": "10ee3560dffaa89db6e9eb0b37308d969f819b6c16a7af0d513a6297284f2ab0",
+      "reviewed": true,
+      "fields": {
+        "title": "Why is bank size alone insufficient to compare CoLiR and TAR?",
+        "body": "TAR builds a diverse bank of correct base-policy responses and applies suppression-gated weighted NLL to old trajectories and tokens. CoLiR selects historical prompts from cross-policy likelihood changes on initial incorrect and final correct responses, then generates fresh current-policy responses and applies KL only to replay. Both allocate historical replay budgets, but the units are stored behaviors versus historical questions, and the signals are current suppression versus improvement during the original task. Cost comparisons must separately include TAR bank construction, CoLiR cross-policy scoring and subsequent fresh rollouts. No extra generation for CoLiR memory construction does not mean generation-free training. Do not fill memory with all-correct/all-wrong final groups or all-correct initial groups. New-task and padding KL gradients must be zero. External training log likelihoods are inputs, not a fabricated scorer or agent success rate."
+      }
+    },
+    "dive/post-training/data-and-budget/question/nov20-colir-replay": {
+      "source_sha256": "6a03952def6164b1cc518be4f02fc9d9d18a7bdb998f25bb416447c7be74a79e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is bank size alone insufficient to compare CoLiR and TAR?",
+        "answer": "CoLiR stores prompts and regenerates current-policy responses. TAR stores verified correct base-policy prototypes and gates old tokens by current suppression. Selection units, activation signals and generation costs differ;80 bank entries do not mean the same80 training trajectories.",
+        "example": "Teaching example: two correct base solutions to one old question can have nonzero and zero TAR gates. If CoLiR retains the question, its next rollout may generate a third response."
+      }
+    },
+    "dive/post-training/data-and-budget/update/2026-11-20/4": {
+      "source_sha256": "0b13e68675608f2d816a1ae18741d1b0c69bf2605c5d93dc74cd5bbe0957c2e0",
+      "reviewed": true,
+      "fields": {
+        "summary": "Four explicit sets of cached cross-policy sequence log likelihoods, eligibility, per-task top-B selection, task-uniform then prompt-uniform replay and token gating of supplied replay KL. Exact ties retain input order. This component explicitly samples historical tasks with replacement; the paper does not specify that batching policy. No VLM scorer, MRCL trainer, GSPO update, capability evaluation or executable Evolve integration is provided. High-cost full experiments are not reproduced; components do not establish capability promotion."
+      }
+    },
+    "dive/post-training/teacher-and-context/comparison/post-training:visalloc": {
+      "source_sha256": "5c500ce553364061e830b0a3b17ed864c2ced1a1feae59db213162a7b86b2594",
+      "reviewed": true,
+      "fields": {
+        "position": "Training-verdict filtering, shared-support top100-plus-tail JSD on explicit logits, frozen priors and templates, valid-only quantiles, complete OR/shared gates, conserved inverse-frequency bonus and positive-only JSD with detached importance/correction. Float16/bfloat16 are promoted to float32 before log-softmax, differences and quantile statistics; float64 precision is retained. Random and finite plus/minus60000 controls check finite outputs, frozen teachers and valid student gradients. There is no full-image VLM, crop constructor, answer checker, EMA model update, rollout or trainer. Supplying tensors is not execution of those networks.",
+        "tradeoff": "Existing VAG uses sign consistency between visual contrast and teacher correction to add a bounded term to verifier-based GRPO advantages. VisAlloc instead allocates a continuous base and conserved bonus to positive-teacher JSD. Two-view EMA teachers do not make their objectives interchangeable, nor does this implementation upgrade the review-only VAG entry."
+      }
+    },
+    "dive/post-training/teacher-and-context/analysis/11": {
+      "source_sha256": "8bf408c5a8c45563db050ff41336451740a1da7cffd0be6808fa2fae4911d7b2",
+      "reviewed": true,
+      "fields": {
+        "title": "Are VisAlloc and VAG losses interchangeable because both use two views?",
+        "body": "Existing VAG uses sign consistency between visual contrast and teacher correction to add a bounded term to verifier-based GRPO advantages. VisAlloc instead allocates a continuous base and conserved bonus to positive-teacher JSD. Two-view EMA teachers do not make their objectives interchangeable, nor does this implementation upgrade the review-only VAG entry. Quantiles and redistribution use only valid positions with negative views. Valid response positions without a negative view retain baseline weight1; padding loss and gradients are zero. Teachers and weight construction stay frozen. Promote half precision before log-softmax and subtraction, not after overflow; retain float64 precision."
+      }
+    },
+    "dive/post-training/teacher-and-context/question/nov20-visalloc": {
+      "source_sha256": "f5f26357749072bf7d1a9400f554ef5ddf6b7921998b07977d8e694e16fdf1fb",
+      "reviewed": true,
+      "fields": {
+        "question": "Are VisAlloc and VAG losses interchangeable because both use two views?",
+        "answer": "No. VAG retains verifier advantages with a sign-gated bounded correction. VisAlloc weights positive-teacher JSD with a base and bonus, jointly gated by prior, templates and JSD.",
+        "example": "Teaching example: redistributing VisAlloc bonus changes the shares of JSD gradients with fixed teacher distributions; it does not add a reward to VAG verifier advantages."
+      }
+    },
+    "dive/post-training/teacher-and-context/update/2026-11-20/9": {
+      "source_sha256": "386b496f4a2c37bd10172013cf97d5bbbb5df78274ae5bba9adee2088da29849",
+      "reviewed": true,
+      "fields": {
+        "summary": "Training-verdict filtering, shared-support top100-plus-tail JSD on explicit logits, frozen priors and templates, valid-only quantiles, complete OR/shared gates, conserved inverse-frequency bonus and positive-only JSD with detached importance/correction. Float16/bfloat16 are promoted to float32 before log-softmax, differences and quantile statistics; float64 precision is retained. Random and finite plus/minus60000 controls check finite outputs, frozen teachers and valid student gradients. There is no full-image VLM, crop constructor, answer checker, EMA model update, rollout or trainer. Supplying tensors is not execution of those networks. High-cost full experiments are not reproduced; components do not establish capability promotion."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:buggymle-cci": {
+      "source_sha256": "a162e73ef4211ea690f11f92776ff0b0743c012cdc1a17b26a0a67829d5201d1",
+      "reviewed": true,
+      "fields": {
+        "position": "BuggyMLE audits runnable ML repositories with stable, responsive metrics, then uses an Injector to create controlled mutations. An Oracle first finds a minimal reversion set and then applies each mutation separately to the clean repository to identify individually impactful bugs. Solvers repair multi-file repositories. Execution, metric recovery and per-bug semantic repair are checked separately; compensating through tuning is not equivalent to repairing every bug.",
+        "tradeoff": "MLE-STAR uses retrieval, actual ablations and validation results to improve model code. BuggyMLE builds difficulty tiers from oracle-attributed injected bugs; CCI is a curation/curriculum scale. Selecting an improved solution differs from shaping evaluation/training tasks, and a structural score is not a validation improvement."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/31": {
+      "source_sha256": "9ba1e638926878de952a104342ea892396f6bbea4c24e99d4214e248d3a1f3e4",
+      "reviewed": true,
+      "fields": {
+        "title": "BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection",
+        "body": "CCI uses task-level median structural features on eight reference benchmarks, applies log1p and feature z-scores, averages within repository, dependency and patch groups, then rescales group scores by reference variance. The negative coefficient-weighted sum is raw CCI, followed by fixed reference min-max scaling. A new task must not refit or clip the scale. Figure10 gives coefficients +0.64, -0.34 and -0.99; the positive repository term is a conditional adjustment, not a claim that larger repositories are always harder. Controls preserve the positive repository coefficient, group variance scaling and out-of-reference outputs, check median rather than mean, and return no predicted success without an intercept. NaNs, zero scales and degenerate bounds fail. Table4 calls total_lines_delta net line change; values≤-1 make log1p undefined and are rejected, not silently absolutized or replaced with an undocumented transform."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov20-buggymle-cci": {
+      "source_sha256": "65e9a7b86334b98467bab5363a66c9eb530df4d0d3fae11b2a973e6c2dc5b8d6",
+      "reviewed": true,
+      "fields": {
+        "question": "Can CCI replace MLE-STAR's ablation score?",
+        "answer": "No. CCI models structural difficulty; MLE-STAR uses execution and validation ablations to choose code changes. Structural difficulty is not model quality.",
+        "example": "Teaching example: a difficult cross-file repair does not imply low validation AUC."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-20/31": {
+      "source_sha256": "9a2e0784c82fed4833e2eacaee7ad45f787846d3d1df31f8c024fe8460fd6caf",
+      "reviewed": true,
+      "fields": {
+        "summary": "The local slice implements medians of supplied ten-feature rows, fixed-calibration projection and an optional numerically stable logistic readout. It does not extract ASTs/dependency graphs, run an Injector/Oracle/solver, fit calibration or train models. Complete means, scales, intercept and reference bounds are not released as a loadable artifact, so Calibration is an explicit required input. Diagnostics use synthetic calibration and do not reproduce the author's eight-benchmark CCI. Patch features belong to curation/evaluation; hidden repair patches or their difficulty labels must not be exposed to the evaluated agent. Full experiments not reproduced."
+      }
+    },
+    "dive/system-one/adaptive-decisions/comparison/system-one:looproute": {
+      "source_sha256": "92343a681e059e9dd05d34c2f2181512316a680eceaa017233c0fb767f2a5c27",
+      "reviewed": true,
+      "fields": {
+        "position": "Fast System One action selection does not guarantee long-task completion. LoopRoute normally gives control to frozen Jev. After the same action has executed twice under the same public state, it intercepts the next proposal and lets an LLM take at most two feedback-driven actions. Control then returns without a separate recovery test; later loops can trigger another takeover.",
+        "tradeoff": "Selective Reasoning uses shared readout, a benefit gate and answer-distribution certainty to start, read and stop reasoning. LoopRoute uses recurrence of executed public state/action pairs to hand control briefly to another policy. High certainty is not environment progress, and absence of recurrence is not action correctness."
+      }
+    },
+    "dive/system-one/adaptive-decisions/analysis/3": {
+      "source_sha256": "be20b1570d666171ebe223425bbdcb4bf53f23d089f9dc9067553a570a08cda8",
+      "reviewed": true,
+      "fields": {
+        "title": "Stop Going in Circles:Loop-Triggered Routing for System 1 Decision Agents",
+        "body": "Keys exclude growing history and step counters. ALFWorld uses confirmed facts and sorted admissible actions; MapReader uses the action response, room description and inventory; TextWorld uses room, inventory and the candidate-ID/command map. ALFWorld counts only decision-policy executions and clears on new information or takeover completion. The other adapters count both policies and retain counts throughout the episode. Intercepted proposals consume no environment step and update no count. Controls distinguish the same action in different states, proposals and executions. Routing again before recording a transition fails, preventing retries from counting as execution. Tests cover ALFWorld excluding LLM actions and clearing at handoff, versus both-policy persistent counters elsewhere. Termination immediately ends takeover; public-key schemas reject added history/step/gold fields."
+      }
+    },
+    "dive/system-one/adaptive-decisions/question/cross-nov20-looproute": {
+      "source_sha256": "9dd2b03255dce9d1bab48c4ea08ececb8fb22c2cdbccae322cc12b57f295506c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does it use the same evidence as Selective Reasoning?",
+        "answer": "No. LoopRoute observes recurring executions; Selective Reasoning uses frozen readout and benefit/certainty. Recurrence is not uncertainty, and certainty is not progress.",
+        "example": "Teaching example: confidently reopening a locked door can still trigger recurrence routing."
+      }
+    },
+    "dive/system-one/adaptive-decisions/update/2026-11-20/2": {
+      "source_sha256": "efbe26fe396d24fdb4d97d91aa8e1faf3230e7cad11ef02b498e305fb89ae19c",
+      "reviewed": true,
+      "fields": {
+        "summary": "The local kernel executes public-state keys, separate pending decisions and actual executions, third-proposal interception, exact two-action takeovers and benchmark-specific counters. It takes declared public fields, not gold/reward/success labels. A trusted external ALFWorld adapter supplies new_information; semantic fact verification is not implemented. There is no Jev/LLM backend, benchmark environment or API request. Controlled traces validate routing rules, not task success. Full experiments not reproduced."
+      }
+    },
+    "dive/agent-research/memory-and-skills/comparison/agent-research:grepmem": {
+      "source_sha256": "b29c85fdaf3bc500fada76868acda7a631334841feebf9c87b6088702dcec9dd",
+      "reviewed": true,
+      "fields": {
+        "position": "GrepMem separates bounded working context from complete history. Compaction replaces active context with the system prompt, task and summary, while original messages, tool calls/results and summaries remain in an append-only text log. Only after first compaction can the policy use case-insensitive grep_history to recover omitted details. No embeddings, index or extraction are required. Lossless describes log retention, not guaranteed retrieval or answers.",
+        "tradeoff": "MemGPT manages layered memory and archival paging through model tool calls. GrepMem avoids a pre-extracted archive and lexically searches raw trajectories. Both can compact active context, but GrepMem does not reduce raw-log storage. Selecting useful search terms still needs training and real task evaluation; the older local fixed-key MemGPT diagnostic is not a capability baseline."
+      }
+    },
+    "dive/agent-research/memory-and-skills/analysis/10": {
+      "source_sha256": "89ca5924ac1e15086e53360b3bb1356a444ce3c6dbec6eba2afb0370d6693724",
+      "reviewed": true,
+      "fields": {
+        "title": "Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents",
+        "body": "Search returns oldest matches under original record headers and line numbers:10 by default, at most30, with an offset over matching lines rather than records and up to three context lines. Prior grep outputs remain logged but are skipped by searches to avoid recursive duplication. Responses cap at6K characters, clip lines around matches to300 characters, stop at whole matches and return a continuation offset. Invalid regexes and searches exceeding ten seconds return errors. Controls check omitted summary details remain in the log, grep outputs do not duplicate original matches, case-insensitive search and continuation offsets work, and long lines/many hits respect6K. Catastrophic regex backtracking terminates only the worker and a later normal query still works. Model-turn budgets, token estimation and forced-answer calls are outside this storage/tool slice; no automatic compression policy or training gain is fabricated."
+      }
+    },
+    "dive/agent-research/memory-and-skills/question/cross-nov20-grepmem": {
+      "source_sha256": "e28eac4e8b356ef0b0cc476a39993b264e57b2b7d3da12f066549553fdbcc4ca",
+      "reviewed": true,
+      "fields": {
+        "question": "How does its memory differ from MemGPT?",
+        "answer": "MemGPT manages layers and paging; GrepMem preserves raw text and retrieves through regex without a semantic index. Neither storage unit test proves model recall.",
+        "example": "Teaching example: grepping an order ID needs no prior extraction into a structured memory entry."
+      }
+    },
+    "dive/agent-research/memory-and-skills/update/2026-11-20/9": {
+      "source_sha256": "53f430b4ca27911bc08600df70e5effccdc85ee6fd0ee6f8d77c15eecfce14ba",
+      "reviewed": true,
+      "fields": {
+        "summary": "The local substrate implements append-only records, explicit-summary compaction, post-compaction grep admission, regex/pagination/context/original line numbers, recursive-output exclusion and character limits. Regexes run in a separate worker with a hard timeout over supplied text, never paths. Summaries are explicit caller inputs. There is no LLM summarizer, GRPO, question answering or real-history integration. Tests use synthetic public observations and never read local Codex sessions; string retrieval is not agent capability. Full experiments not reproduced."
+      }
+    },
+    "dive/recommendation/research-serving-loop/comparison/recommendation:fleet-feature-optimization": {
+      "source_sha256": "df7c6a98f144e23e9e5dafb1f49472858818860236cee12236630efafbeda64c",
+      "reviewed": true,
+      "fields": {
+        "position": "Meta combines feature creation, FI estimation, cross-task Pareto layers, multi-source blending and constrained search across a model fleet. LLMs propose hypotheses while deterministic tools validate them. Serving caps are model-specific, but upstream pipeline budgets are shared; another model's existing use can make an addition free for that budget.",
+        "tradeoff": "MLE Agents calibrates candidate admission against a same-round variance probe. Fleet emphasizes shared feature cost and serving feasibility. Better NE cannot override a resource violation, and cheaper candidates still must improve NE. Neither diagnostic interface establishes model-engineering capability or production gains."
+      }
+    },
+    "dive/recommendation/research-serving-loop/analysis/5": {
+      "source_sha256": "32d30369d42b769e013ad73aac9424c3e69928bd94c99c3bd8cd77bfe9e6a61d",
+      "reviewed": true,
+      "fields": {
+        "title": "Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models",
+        "body": "MLE Agents calibrates candidate admission against a same-round variance probe. Fleet emphasizes shared feature cost and serving feasibility. Better NE cannot override a resource violation, and cheaper candidates still must improve NE. Neither diagnostic interface establishes model-engineering capability or production gains. Pareto dominance compares FI dimensions without summing task losses. Ordered sources contribute unselected features. The paper uses round(pi_m N) but does not specify rounding or last-front ties, so integer quotas and tie order are caller inputs. Shared set costs require a real oracle, not additive prices. Cross-budget removal order is external. Convert QPS to an upper-bound quantity such as1/QPS first."
+      }
+    },
+    "dive/recommendation/research-serving-loop/question/nov20-fleet-feature-optimization": {
+      "source_sha256": "5238fc208d466b9443099eacb2b2e4056e9c47b81e40ba52fb6446343e5d2926",
+      "reviewed": true,
+      "fields": {
+        "question": "What differs from MLE Agents' variance-probe admission?",
+        "answer": "Fleet adds model resource caps and shared pipeline budgets. Better validation NE does not admit an infeasible candidate, and these caps do not replace same-round noise calibration.",
+        "example": "A candidate with NE0.1 but excessive inverse-QPS is rejected in favor of a feasible NE0.6 candidate."
+      }
+    },
+    "dive/recommendation/research-serving-loop/update/2026-11-20/4": {
+      "source_sha256": "21bc3278a7a95ac8c5a65ac8552726cdd28b94152b2e583267bfcbff29bf731f",
+      "reviewed": true,
+      "fields": {
+        "summary": "MLE Agents calibrates candidate admission against a same-round variance probe. Fleet emphasizes shared feature cost and serving feasibility. Better NE cannot override a resource violation, and cheaper candidates still must improve NE. Neither diagnostic interface establishes model-engineering capability or production gains. Paper production evidence and local contracts remain separate."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/comparison/recommendation:dna": {
+      "source_sha256": "840b78e717018624a7a02bdcc83b8635e33d97b2b54aad35d1a49f0dbe96bfae",
+      "reviewed": true,
+      "fields": {
+        "position": "DNA couples request U and history S as candidate-independent streams. Each layer lets request U and candidate F separately read the same history K/V, then history tokens read the newly updated U. The next layer sees request-shaped history instead of another projection of fixed S0. Request/history states are shared across candidates within that request.",
+        "tradeoff": "LONGER compresses long-history interaction into a smaller query/token path. DNA retains history tokens and updates each from a few request tokens before the next read. Both exploit candidate sharing, but share different states at different points. Local mechanism checks do not rank their recommendation quality."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/analysis/3": {
+      "source_sha256": "b3749f6d368e4fb16035bda67a52cb646cc8fa9838c88d1f7c8b696082f631e8",
+      "reviewed": true,
+      "fields": {
+        "title": "DNA: Unlocking Depth Scaling in CTR Models",
+        "body": "LONGER compresses long-history interaction into a smaller query/token path. DNA retains history tokens and updates each from a few request tokens before the next read. Both exploit candidate sharing, but share different states at different points. Local mechanism checks do not rank their recommendation quality. Depth D contains D request reads, D candidate reads and D-1 history updates; the final layer does not update an unused S. Reads use group-specific K/V projections and token-specific SwiGLUs. Updates apply composite K/V projections to concatenated request tokens, group-specific FFNs and padding zeroing. QKNorm and head scaling are retained."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/question/nov20-dna": {
+      "source_sha256": "d2d31dea827d0b2682f35aa02044b27661cb5c667c4d4906377b9cf5b396570c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does it differ from LONGER?",
+        "answer": "LONGER concentrates history interaction into a smaller query/token path. DNA retains history tokens, updates them from a few request tokens and amortizes that work over candidates.",
+        "example": "Both can share K/V, but neither shared-K/V fact implies the same token-deletion schedule."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/update/2026-11-20/2": {
+      "source_sha256": "f79f5f920b27856924e67e16172cf8b75eb32f81ab910fc468f875029ee20f24",
+      "reviewed": true,
+      "fields": {
+        "summary": "LONGER compresses long-history interaction into a smaller query/token path. DNA retains history tokens and updates each from a few request tokens before the next read. Both exploit candidate sharing, but share different states at different points. Local mechanism checks do not rank their recommendation quality. Paper production evidence and local contracts remain separate."
+      }
+    },
+    "dive/recommendation/retrieval-matching/comparison/recommendation:lser-serving": {
+      "source_sha256": "c0546ab4832874ed4080f2cf91f4bc795cfc1091b9bc0cd2a7f758853a2bc165",
+      "reviewed": true,
+      "fields": {
+        "position": "LSER fuses session, longer-term history, request features and optional LLM semantic vectors in a retrieval user tower. Expensive encoders refresh nearline asynchronously; request-time work reads available vectors, fuses them and performs ANN retrieval. LLM vectors complement rather than replace the BERT4Rec-style sequence encoder.",
+        "tradeoff": "YouTube DNN transforms aggregated watch history/context through a nonlinear user tower and trains next-watch classification. LSER separately encodes session/history and may add LLM semantic auxiliaries with nearline refresh. Both query an offline item index using user vectors; the difference is representation and freshness, not replacing ANN with token-by-token LLM generation. The paper's online control is rules, not YouTube DNN; local interfaces do not rank their quality."
+      }
+    },
+    "dive/recommendation/retrieval-matching/analysis/6": {
+      "source_sha256": "411c0028d4a275afe760147a307916257ec68dcb989fd63cae6bad92e0adf3bc",
+      "reviewed": true,
+      "fields": {
+        "title": "From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation",
+        "body": "YouTube DNN transforms aggregated watch history/context through a nonlinear user tower and trains next-watch classification. LSER separately encodes session/history and may add LLM semantic auxiliaries with nearline refresh. Both query an offline item index using user vectors; the difference is representation and freshness, not replacing ANN with token-by-token LLM generation. The paper's online control is rules, not YouTube DNN; local interfaces do not rank their quality. Session windows use logged session IDs; history ends at session start, and every event is strictly before the label/request cutoff. Eligibility, ID mapping, lookback and sessionization are external contracts, not invented receipt schemas. The paper prescribes no universal TTL. Choosing by(as_of,written_at) against out-of-order completion is a local interface safeguard."
+      }
+    },
+    "dive/recommendation/retrieval-matching/question/nov20-lser-serving": {
+      "source_sha256": "00714199369b7bd75f85bbe3c43dd4a7ec5918f4f00397b5874a45d57661f3f8",
+      "reviewed": true,
+      "fields": {
+        "question": "What does LSER add beyond YouTube DNN rather than generating recommendations with an LLM?",
+        "answer": "YouTube DNN aggregates history/context into a user tower. LSER separates short/long sequence encoders and adds optional LLM features plus asynchronous freshness. Both can query an offline item index; the LLM does not generate item IDs token by token.",
+        "example": "With LLM vectors disabled, LSER remains learned two-tower retrieval; this is the version used in its online A/B."
+      }
+    },
+    "dive/recommendation/retrieval-matching/update/2026-11-20/5": {
+      "source_sha256": "3a3ff559e663f12631df7f22a1bd8518b027d97bed834b452a12fd39d7921cce",
+      "reviewed": true,
+      "fields": {
+        "summary": "YouTube DNN transforms aggregated watch history/context through a nonlinear user tower and trains next-watch classification. LSER separately encodes session/history and may add LLM semantic auxiliaries with nearline refresh. Both query an offline item index using user vectors; the difference is representation and freshness, not replacing ANN with token-by-token LLM generation. The paper's online control is rules, not YouTube DNN; local interfaces do not rank their quality. Paper production evidence and local contracts remain separate."
+      }
+    }
+  }
+}

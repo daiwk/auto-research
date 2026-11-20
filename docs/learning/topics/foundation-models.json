@@ -66,7 +66,9 @@
         "foundation-models:simq",
         "foundation-models:unigraph",
         "foundation-models:dealrank",
-        "foundation-models:kernel-ridge-attention"
+        "foundation-models:kernel-ridge-attention",
+        "foundation-models:hisa",
+        "foundation-models:canon-layers-scale"
       ]
     },
     {

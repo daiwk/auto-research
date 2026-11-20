@@ -44,6 +44,8 @@ def main():
         datetime.strptime(value, "%Y-%m-%d")
     CACHE = args.cache_dir.resolve()
     CACHE.mkdir(parents=True, exist_ok=True)
+    # Bulletin capture must remain usable when the independent API phase fails.
+    (CACHE / "captures").mkdir(parents=True, exist_ok=True)
     client = ArxivClient(minimum_interval_seconds=3, maximum_retries=2, cache_dir=CACHE / "arxiv")
     query = " OR ".join("cat:" + category for category in CATEGORIES)
     floor = args.overlap_start + "T00:00:00"

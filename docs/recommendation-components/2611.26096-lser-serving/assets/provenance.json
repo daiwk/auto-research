@@ -1,0 +1,18 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.26096v1",
+  "paper_url": "https://arxiv.org/abs/2611.26096v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-20",
+  "page": 7,
+  "crop_box_pdf_points": [
+    52,
+    80,
+    560,
+    275
+  ],
+  "caption": "Figure 2: asynchronous nearline vectors and synchronous retrieval path",
+  "extraction": "Original PDF crop, no semantic editing",
+  "source_pdf_sha256": "54461a4dacbd0b64a20048f2d17d81139b9a907b4eb00c0a5eda9dbcb59a93db",
+  "asset_sha256": "06e69f8dc91c54505da3c205499e59d38f988f2d230ecfa9554a2e3da201aafd",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result."
+}

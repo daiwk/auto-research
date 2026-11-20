@@ -1,0 +1,189 @@
+{
+  "schema_version": 2,
+  "method": "visalloc",
+  "manifest_ref": "post-training:visalloc",
+  "dataset": {
+    "id": "synthetic:nov20-latest-visalloc-component-v1",
+    "kind": "explicit_protocol_or_mechanism_fixtures",
+    "revision": "sha256:95c071b33d5c1ffabdfaa901ee22f2561e9ef873be409ecf6d538c83e6f0241d",
+    "public_capability_benchmark": false,
+    "source": "Seeded small tensors or explicit deterministic evaluator/control cases; no pretrained output or public capability measurement"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "teacher_states_and_old_policy_detached": true,
+        "padding_gradient_zero": true,
+        "student_gradient_present": true,
+        "missing_negative_view_keeps_neutral_weight": true,
+        "valid_mean_weight_one": true,
+        "additional_budget_conserved": true,
+        "tiny_budget_is_not_dropped": true,
+        "inverse_frequency_increases_rare_share": true,
+        "weights_are_detached": true,
+        "fp16_random_finite_frozen_teacher_masked_nonzero_gradient": true,
+        "fp16_extreme_finite_frozen_teacher_masked_nonzero_gradient": true,
+        "bf16_random_finite_frozen_teacher_masked_nonzero_gradient": true,
+        "bf16_extreme_finite_frozen_teacher_masked_nonzero_gradient": true
+      },
+      "metrics": {
+        "loss": 0.19049044783494914,
+        "gradient_norm": 0.006800389919451663,
+        "raw_bonus": 0.6942933879094584,
+        "eligible_tokens": 2,
+        "fp16_random_loss": 0.19636176526546478,
+        "fp16_random_student_gradient_l1": 0.19814705848693848,
+        "fp16_extreme_loss": 0.21576158702373505,
+        "fp16_extreme_student_gradient_l1": 0.274658203125,
+        "bf16_random_loss": 0.16090409457683563,
+        "bf16_random_student_gradient_l1": 0.18568359315395355,
+        "bf16_extreme_loss": 0.21576158702373505,
+        "bf16_extreme_student_gradient_l1": 0.27392578125
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "teacher_states_and_old_policy_detached": true,
+        "padding_gradient_zero": true,
+        "student_gradient_present": true,
+        "missing_negative_view_keeps_neutral_weight": true,
+        "valid_mean_weight_one": true,
+        "additional_budget_conserved": true,
+        "tiny_budget_is_not_dropped": true,
+        "inverse_frequency_increases_rare_share": true,
+        "weights_are_detached": true,
+        "fp16_random_finite_frozen_teacher_masked_nonzero_gradient": true,
+        "fp16_extreme_finite_frozen_teacher_masked_nonzero_gradient": true,
+        "bf16_random_finite_frozen_teacher_masked_nonzero_gradient": true,
+        "bf16_extreme_finite_frozen_teacher_masked_nonzero_gradient": true
+      },
+      "metrics": {
+        "loss": 0.19471377202677195,
+        "gradient_norm": 0.006533676075717572,
+        "raw_bonus": 0.21839727290721522,
+        "eligible_tokens": 2,
+        "fp16_random_loss": 0.1923726350069046,
+        "fp16_random_student_gradient_l1": 0.19778519868850708,
+        "fp16_extreme_loss": 0.21576158702373505,
+        "fp16_extreme_student_gradient_l1": 0.274658203125,
+        "bf16_random_loss": 0.19010233879089355,
+        "bf16_random_student_gradient_l1": 0.19963997602462769,
+        "bf16_extreme_loss": 0.21576158702373505,
+        "bf16_extreme_student_gradient_l1": 0.27392578125
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "teacher_states_and_old_policy_detached": true,
+        "padding_gradient_zero": true,
+        "student_gradient_present": true,
+        "missing_negative_view_keeps_neutral_weight": true,
+        "valid_mean_weight_one": true,
+        "additional_budget_conserved": true,
+        "tiny_budget_is_not_dropped": true,
+        "inverse_frequency_increases_rare_share": true,
+        "weights_are_detached": true,
+        "fp16_random_finite_frozen_teacher_masked_nonzero_gradient": true,
+        "fp16_extreme_finite_frozen_teacher_masked_nonzero_gradient": true,
+        "bf16_random_finite_frozen_teacher_masked_nonzero_gradient": true,
+        "bf16_extreme_finite_frozen_teacher_masked_nonzero_gradient": true
+      },
+      "metrics": {
+        "loss": 0.17552687047728843,
+        "gradient_norm": 0.006374933032397364,
+        "raw_bonus": 0.5110672366833997,
+        "eligible_tokens": 2,
+        "fp16_random_loss": 0.17428171634674072,
+        "fp16_random_student_gradient_l1": 0.20080816745758057,
+        "fp16_extreme_loss": 0.21576158702373505,
+        "fp16_extreme_student_gradient_l1": 0.274658203125,
+        "bf16_random_loss": 0.19429141283035278,
+        "bf16_random_student_gradient_l1": 0.19724780321121216,
+        "bf16_extreme_loss": 0.21576158702373505,
+        "bf16_extreme_student_gradient_l1": 0.27392578125
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "bf16_extreme_loss": 0.21576158702373505,
+    "bf16_extreme_student_gradient_l1": 0.27392578125,
+    "bf16_random_loss": 0.181765948732694,
+    "bf16_random_student_gradient_l1": 0.19419045746326447,
+    "eligible_tokens": 2.0,
+    "fp16_extreme_loss": 0.21576158702373505,
+    "fp16_extreme_student_gradient_l1": 0.274658203125,
+    "fp16_random_loss": 0.1876720388730367,
+    "fp16_random_student_gradient_l1": 0.19891347487767538,
+    "gradient_norm": 0.0065696663425222,
+    "loss": 0.1869103634463365,
+    "raw_bonus": 0.47458596583335777
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Operator/interface controls only; not a complete model, agent, public benchmark or production comparison"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "15c4e1d105fe68c7556734ad50ad6022061dd11a",
+    "accelerator": "CPU",
+    "artifact_path": "docs/post-training/2611.25069-visalloc/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_nov20_latest_components.py": "7fbc325c510e6ed29495ef1a5ed322a227044e1fd658221eb2752dda1ac09bea",
+      "scripts/run_nov18_latest_components.py": "0fe50e8e554f6663b3c8c179654400d10bfbb557ceb9cefb9880da78f164b7c1",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov20-latest/preflight.json": "ea608a4f959fc9f1758a62e342bf6d06a7194cfff54dea764c3797893f06f956",
+      "src/auto_research/post_training/_nov18_contracts.py": "103b12bbdcad9c18fab47f31f66e73a77564e4db05618aec5809658dfcfdf39e",
+      "src/auto_research/agent_research/buggymle_cci.py": "894f0e52dbf05f92290cefd7ba5bbb1696984dc50114346ecb0058a4c652a10f",
+      "src/auto_research/agent_research/grepmem.py": "6d4d57d8ad574ff1f5f4230c3b12c8f1f143b61cf7101fddec831c817a0166a8",
+      "src/auto_research/system_one/looproute.py": "c8e398fb1f79f9c4a2007abf33ce80ff2ca1a38525b2474916cd34f5091e123d",
+      "src/auto_research/foundation_models/hisa_components.py": "ae282f8052a1086af29bf83059c2919a027cd88c3d02c4913b4f9e6ada0f04c7",
+      "src/auto_research/post_training/colir_replay.py": "5584dbcf31797b52fae6cee725a1b0d7c0158f57ae8d65a113253216032efbc6",
+      "src/auto_research/post_training/visalloc.py": "95c071b33d5c1ffabdfaa901ee22f2561e9ef873be409ecf6d538c83e6f0241d",
+      "src/auto_research/reproductions/fleet_feature_components.py": "d90f944930697b16f1a0477ded0416a5645d1d94e7e6ee848417b85aa6a52d67",
+      "src/auto_research/reproductions/dna_components.py": "c27568f4817109e9dda52b2ec615f948dbc998b97c1bde09382c9b1925c803b8",
+      "src/auto_research/reproductions/lser_protocol_components.py": "bc0fd3fe567d0c9503da5c95c01a8dba0d30165521af0053ea8709e2c7d97d56"
+    },
+    "dataset_fingerprint": "sha256:9ee1484e0f2d7d9f734260df977ef88e8f29186f4f18f7505de2b2439763c5f8",
+    "raw_runner_artifact_sha256": "040203482b0b8bd2221cdd0da71635b4517b0d922849b4a14a49c8452ac5549a"
+  }
+}
