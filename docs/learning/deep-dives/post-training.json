@@ -3181,7 +3181,7 @@
           ],
           "summary": "训练用sample verdict过滤、显式logits上的同support top100+tail JSD、冻结prior与模板构建、有效位置分位数、完整OR/shared gates、定预算逆频率bonus、positive-only JSD和detached importance/correction。fp16/bf16在log-softmax、差值与分位数统计前升为fp32，float64保持精度；随机及有限±60000极值负控检查有限输出、冻结教师与有效学生梯度。没有全图VLM、几何裁剪器、教师答案判分、EMA模型更新、rollout或trainer；提供张量不等于执行这些核心网络。 完整实验成本过高不复现；组件不构成能力晋级。",
           "source_revisions": {
-            "post-training:visalloc": "fd1802383ffcafddcacf3fef5efa4b1071f0ea6b945eb3c1744af7dd31b7763e",
+            "post-training:visalloc": "62749cf4095a80d9f090f356d16f3493859fda9648a2e6999e2ce2848d7ae72f",
             "post-training:visually-attributable-opd": "0b6e38a966163901c2b78a8fa2523a4f6c83e68b5fa58b2bdeee298f9fec3848"
           }
         }
@@ -3597,7 +3597,7 @@
           ],
           "summary": "显式缓存的四组cross-policy序列log-likelihood、候选资格、每任务top-B、任务均匀/任务内均匀抽样和回放KL token门控。保留精确并列时的输入顺序；跨任务抽样本组件显式用有放回策略，论文未指定替换规则。没有VLM评分器、MRCL训练器、GSPO更新或能力评测，不能称为Evolve已接入。 完整实验成本过高不复现；组件不构成能力晋级。",
           "source_revisions": {
-            "post-training:colir-replay": "77baa673e65e5fcb7d29a0208b133c6d5950184a4e2abbcec5e9307a9549a50d",
+            "post-training:colir-replay": "b49323cf277810e110f192851ab26765bc97c094f390dfc64aed205ffcfddecd",
             "post-training:tar-adaptive-replay": "d2aaf3b7d71dd8191e8458db6ecb30ec347ac3770f8ad1e8e7864e1ba784c269"
           }
         }

@@ -181,7 +181,7 @@
           "level": "implementation",
           "question": "实现grep工具时只加max_matches够吗？",
           "answer": "不够。还需要匹配行offset、最多3行context、6K字符上限、300字符行裁剪、非法正则错误和10秒终止；坏正则不能卡住整个Agent。",
-          "example": "教学例：(a+)+$遇到长a串会灾难回溯，搜索worker应超时，正常查询仍能继续。",
+          "example": "教学例：带行尾锚点的嵌套重复模式，在长a串后接不匹配字符时可能灾难回溯；搜索worker应超时，正常查询仍能继续。",
           "source_sections": [
             "背景与主要改动",
             "核心公式",

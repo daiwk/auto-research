@@ -101,12 +101,12 @@
       }
     },
     "qa/agent-research:grepmem/bounded-regex": {
-      "source_sha256": "8c7ca82400bb84cb16818977e04ea9953a26155bcc888b9143fe7842d6177829",
+      "source_sha256": "ee60dd79a1ee2954114b93c72b234dba7dab9a08a3a5645f5e71c486b02f1df6",
       "reviewed": true,
       "fields": {
         "question": "Is max_matches enough to bound the tool?",
         "answer": "No. It also needs match offsets, up to three context lines,6K output,300-character line clipping, regex errors and a ten-second stop. A bad pattern must not stall the whole agent.",
-        "example": "Teaching example: catastrophic (a+)+$ backtracking should time out the worker while normal queries remain usable."
+        "example": "Teaching example: a nested repetition with an end-of-line anchor may backtrack catastrophically on a long run of a characters followed by a nonmatching character. The worker should time out while normal queries remain usable."
       }
     }
   }

@@ -1,6 +1,6 @@
 # VisAlloc: Allocating Visual Supervision for On-Policy Self-Distillation
 
-<!-- source-sha256: fd1802383ffcafddcacf3fef5efa4b1071f0ea6b945eb3c1744af7dd31b7763e -->
+<!-- source-sha256: 62749cf4095a80d9f090f356d16f3493859fda9648a2e6999e2ce2848d7ae72f -->
 
 [简体中文](README.md)
 

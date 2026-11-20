@@ -39,7 +39,7 @@
       "automatic_retry": false,
       "automatic_implementation_queue": false,
       "local_module": "src/auto_research/post_training/colir_replay.py",
-      "english_source_sha256": "77baa673e65e5fcb7d29a0208b133c6d5950184a4e2abbcec5e9307a9549a50d"
+      "english_source_sha256": "b49323cf277810e110f192851ab26765bc97c094f390dfc64aed205ffcfddecd"
     },
     {
       "id": "2611.25069",
@@ -70,7 +70,7 @@
       "automatic_retry": false,
       "automatic_implementation_queue": false,
       "local_module": "src/auto_research/post_training/visalloc.py",
-      "english_source_sha256": "fd1802383ffcafddcacf3fef5efa4b1071f0ea6b945eb3c1744af7dd31b7763e"
+      "english_source_sha256": "62749cf4095a80d9f090f356d16f3493859fda9648a2e6999e2ce2848d7ae72f"
     }
   ],
   "not_selected_this_batch": [

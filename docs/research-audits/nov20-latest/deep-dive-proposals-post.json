@@ -7,7 +7,7 @@
       "paper": "post-training:colir-replay",
       "target_card": "post-training/data-and-budget",
       "source_revisions": {
-        "post-training:colir-replay": "77baa673e65e5fcb7d29a0208b133c6d5950184a4e2abbcec5e9307a9549a50d",
+        "post-training:colir-replay": "b49323cf277810e110f192851ab26765bc97c094f390dfc64aed205ffcfddecd",
         "post-training:tar-adaptive-replay": "d2aaf3b7d71dd8191e8458db6ecb30ec347ac3770f8ad1e8e7864e1ba784c269"
       },
       "comparison": {
@@ -66,7 +66,7 @@
       "paper": "post-training:visalloc",
       "target_card": "post-training/teacher-and-context",
       "source_revisions": {
-        "post-training:visalloc": "fd1802383ffcafddcacf3fef5efa4b1071f0ea6b945eb3c1744af7dd31b7763e",
+        "post-training:visalloc": "62749cf4095a80d9f090f356d16f3493859fda9648a2e6999e2ce2848d7ae72f",
         "post-training:visually-attributable-opd": "0b6e38a966163901c2b78a8fa2523a4f6c83e68b5fa58b2bdeee298f9fec3848"
       },
       "comparison": {

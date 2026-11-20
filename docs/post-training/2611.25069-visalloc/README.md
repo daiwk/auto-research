@@ -28,7 +28,7 @@ VisAlloc把视觉监督分成固定样本筛选和在线token分配。先用几�
 
 [![原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.25069v1#page=4)
 
-原论文第4页Figure 2及完整图注，版权归原作者；已视觉检查，无科学内容改动。[原始来源](https://arxiv.org/pdf/2611.25069v1#page=4)；[裁剪与SHA256](assets/provenance.json)。图示属于作者方法，不是本地结果。
+图片来自[原论文](https://arxiv.org/pdf/2611.25069v1#page=4)第4页Figure 2及完整图注，版权归原作者所有；已视觉检查，无科学内容改动。[裁剪与SHA256](assets/provenance.json)。图示属于作者方法，不是本地结果。
 <!-- paper-figure:end -->
 
 ```mermaid

@@ -177,7 +177,7 @@ def main():
 
 [![原论文 Figure {figure}](assets/paper-figure-01.png)]({figure_url})
 
-原论文第{page}页Figure {figure}及完整图注，版权归原作者；已视觉检查，无科学内容改动。[原始来源]({figure_url})；[裁剪与SHA256](assets/provenance.json)。图示属于作者方法，不是本地结果。
+图片来自[原论文]({figure_url})第{page}页Figure {figure}及完整图注，版权归原作者所有；已视觉检查，无科学内容改动。[裁剪与SHA256](assets/provenance.json)。图示属于作者方法，不是本地结果。
 <!-- paper-figure:end -->
 
 ```mermaid

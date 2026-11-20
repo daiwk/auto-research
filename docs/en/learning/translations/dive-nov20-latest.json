@@ -123,7 +123,7 @@
       }
     },
     "dive/post-training/data-and-budget/update/2026-11-20/4": {
-      "source_sha256": "215a03cd5baa8c189f723db3c953b9079ecd3d7dce899d14cd5c57ffb8fedc54",
+      "source_sha256": "0b13e68675608f2d816a1ae18741d1b0c69bf2605c5d93dc74cd5bbe0957c2e0",
       "reviewed": true,
       "fields": {
         "summary": "Four explicit sets of cached cross-policy sequence log likelihoods, eligibility, per-task top-B selection, task-uniform then prompt-uniform replay and token gating of supplied replay KL. Exact ties retain input order. This component explicitly samples historical tasks with replacement; the paper does not specify that batching policy. No VLM scorer, MRCL trainer, GSPO update, capability evaluation or executable Evolve integration is provided. High-cost full experiments are not reproduced; components do not establish capability promotion."
@@ -155,7 +155,7 @@
       }
     },
     "dive/post-training/teacher-and-context/update/2026-11-20/9": {
-      "source_sha256": "094214393f664428c14c1a642a475ed0c0b2ab464fd84c555d2c5442962b8674",
+      "source_sha256": "386b496f4a2c37bd10172013cf97d5bbbb5df78274ae5bba9adee2088da29849",
       "reviewed": true,
       "fields": {
         "summary": "Training-verdict filtering, shared-support top100-plus-tail JSD on explicit logits, frozen priors and templates, valid-only quantiles, complete OR/shared gates, conserved inverse-frequency bonus and positive-only JSD with detached importance/correction. Float16/bfloat16 are promoted to float32 before log-softmax, differences and quantile statistics; float64 precision is retained. Random and finite plus/minus60000 controls check finite outputs, frozen teachers and valid student gradients. There is no full-image VLM, crop constructor, answer checker, EMA model update, rollout or trainer. Supplying tensors is not execution of those networks. High-cost full experiments are not reproduced; components do not establish capability promotion."
