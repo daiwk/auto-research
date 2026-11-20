@@ -7,7 +7,7 @@ hide:
 
 # 按需决策：选择性推理、迁移与持续反馈
 
-[结构化决策](index.md) / 20 个问题 · 5 篇论文
+[结构化决策](index.md) / 24 个问题 · 6 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">20 个问题 · 5 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">24 个问题 · 6 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:looproute" data-paper-title="Stop Going in Circles:Loop-Triggered Routing for System 1 Decision Agents" data-learning-pending="false" data-level="basics" data-domain="system-one" data-theme="system-one" data-topic="system-one/adaptive-decisions" data-search="Stop Going in Circles:Loop-Triggered Routing for System 1 Decision Agents system-one Sichuan University 2026-11-19 System One决策模型能快速选动作，但局部选择正确不保证长任务完成。LoopRoute默认把控制权交给冻结Jev；只有同一公开状态下的同一动作已经执行两次，才拦截第三次提案，让LLM按实际环境反馈接管最多两步，然后无额外恢复测试地交回Jev。后续再次卡住可再次接管。状态key不含不断增长的history或step。ALFWorld用已确认事实和排序后的可行动作；MapReader用当前动作回应、房间描述和inventory；TextWorld用房间、inventory和候选ID到命令映射。 完整实验成本过高，不复现（审查 DONE）；本轮统一冻结源码后由批次runner生成三种子CPU诊断；component_only / l1_mechanism；不是模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本地执行公开状态key、pending decision/实际执行分离、第三次提案拦截、准确两步接管及各benchmark计数规则。只接受显式公开字段，不接收gold、奖励或成功标签；new_information由可信外部ALFWorld适配器提供，本地不假装语义核实事实。没有Jev/LLM backend、benchmark环境或实际API请求；  按需决策 looproute 结构化决策 按需决策：选择性推理、迁移与持续反馈 为什么不能只统计动作重复？ 同一动作在不同状态下可能必要。论文统计选定公开状态key和动作的组合，且key不含永远变化的step/history。 教学例：在两个房间各look一次不等于同地卡死。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">结构化决策 / 按需决策：选择性推理、迁移与持续反馈</a></p>
+<span id="paper-system-one-looproute-4cbf51f7" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-9a5e132504e45f69">为什么不能只统计动作重复？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=system-one%3Alooproute">Stop Going in Circles:Loop-Triggered Routing for System 1 Decision Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Sichuan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>同一动作在不同状态下可能必要。论文统计选定公开状态key和动作的组合，且key不含永远变化的step/history。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：在两个房间各look一次不等于同地卡死。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25363v1">原论文</a> · <a href="../../../../system-one/2611.25363-looproute/">实现解读</a> · <a href="#qa-9a5e132504e45f69">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:looproute" data-paper-title="Stop Going in Circles:Loop-Triggered Routing for System 1 Decision Agents" data-learning-pending="false" data-level="mechanism" data-domain="system-one" data-theme="system-one" data-topic="system-one/adaptive-decisions" data-search="Stop Going in Circles:Loop-Triggered Routing for System 1 Decision Agents system-one Sichuan University 2026-11-19 System One决策模型能快速选动作，但局部选择正确不保证长任务完成。LoopRoute默认把控制权交给冻结Jev；只有同一公开状态下的同一动作已经执行两次，才拦截第三次提案，让LLM按实际环境反馈接管最多两步，然后无额外恢复测试地交回Jev。后续再次卡住可再次接管。状态key不含不断增长的history或step。ALFWorld用已确认事实和排序后的可行动作；MapReader用当前动作回应、房间描述和inventory；TextWorld用房间、inventory和候选ID到命令映射。 完整实验成本过高，不复现（审查 DONE）；本轮统一冻结源码后由批次runner生成三种子CPU诊断；component_only / l1_mechanism；不是模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本地执行公开状态key、pending decision/实际执行分离、第三次提案拦截、准确两步接管及各benchmark计数规则。只接受显式公开字段，不接收gold、奖励或成功标签；new_information由可信外部ALFWorld适配器提供，本地不假装语义核实事实。没有Jev/LLM backend、benchmark环境或实际API请求；  按需决策 looproute 结构化决策 按需决策：选择性推理、迁移与持续反馈 阈值为2时，第二次动作就被拦截吗？ 不是。计数是已执行次数：前两次执行，第三次提案才拦截且不计环境步，随后LLM的第一步已经消耗两步接管预算之一。 教学例：look、look之后再提look，改为LLM的open，余下一步。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">结构化决策 / 按需决策：选择性推理、迁移与持续反馈</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-e48a25a3a71ba518">阈值为2时，第二次动作就被拦截吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=system-one%3Alooproute">Stop Going in Circles:Loop-Triggered Routing for System 1 Decision Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Sichuan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。计数是已执行次数：前两次执行，第三次提案才拦截且不计环境步，随后LLM的第一步已经消耗两步接管预算之一。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：look、look之后再提look，改为LLM的open，余下一步。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25363v1">原论文</a> · <a href="../../../../system-one/2611.25363-looproute/">实现解读</a> · <a href="#qa-e48a25a3a71ba518">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:looproute" data-paper-title="Stop Going in Circles:Loop-Triggered Routing for System 1 Decision Agents" data-learning-pending="false" data-level="comparison" data-domain="system-one" data-theme="system-one" data-topic="system-one/adaptive-decisions" data-search="Stop Going in Circles:Loop-Triggered Routing for System 1 Decision Agents system-one Sichuan University 2026-11-19 System One决策模型能快速选动作，但局部选择正确不保证长任务完成。LoopRoute默认把控制权交给冻结Jev；只有同一公开状态下的同一动作已经执行两次，才拦截第三次提案，让LLM按实际环境反馈接管最多两步，然后无额外恢复测试地交回Jev。后续再次卡住可再次接管。状态key不含不断增长的history或step。ALFWorld用已确认事实和排序后的可行动作；MapReader用当前动作回应、房间描述和inventory；TextWorld用房间、inventory和候选ID到命令映射。 完整实验成本过高，不复现（审查 DONE）；本轮统一冻结源码后由批次runner生成三种子CPU诊断；component_only / l1_mechanism；不是模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本地执行公开状态key、pending decision/实际执行分离、第三次提案拦截、准确两步接管及各benchmark计数规则。只接受显式公开字段，不接收gold、奖励或成功标签；new_information由可信外部ALFWorld适配器提供，本地不假装语义核实事实。没有Jev/LLM backend、benchmark环境或实际API请求；  按需决策 looproute 结构化决策 按需决策：选择性推理、迁移与持续反馈 LoopRoute和Selective Reasoning都省推理，证据一样吗？ 不一样。一个看环境中的重复执行，另一个看冻结读出与推理收益/确定性；重复不是低置信度，高置信度也不等于任务有进展。 教学例：模型非常确信地反复开一个锁住的门，仍应触发循环路由。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">结构化决策 / 按需决策：选择性推理、迁移与持续反馈</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-7fc4075f4b7e0e63">LoopRoute和Selective Reasoning都省推理，证据一样吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=system-one%3Alooproute">Stop Going in Circles:Loop-Triggered Routing for System 1 Decision Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Sichuan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一样。一个看环境中的重复执行，另一个看冻结读出与推理收益/确定性；重复不是低置信度，高置信度也不等于任务有进展。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：模型非常确信地反复开一个锁住的门，仍应触发循环路由。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25363v1">原论文</a> · <a href="../../../../system-one/2611.25363-looproute/">实现解读</a> · <a href="#qa-7fc4075f4b7e0e63">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:looproute" data-paper-title="Stop Going in Circles:Loop-Triggered Routing for System 1 Decision Agents" data-learning-pending="false" data-level="implementation" data-domain="system-one" data-theme="system-one" data-topic="system-one/adaptive-decisions" data-search="Stop Going in Circles:Loop-Triggered Routing for System 1 Decision Agents system-one Sichuan University 2026-11-19 System One决策模型能快速选动作，但局部选择正确不保证长任务完成。LoopRoute默认把控制权交给冻结Jev；只有同一公开状态下的同一动作已经执行两次，才拦截第三次提案，让LLM按实际环境反馈接管最多两步，然后无额外恢复测试地交回Jev。后续再次卡住可再次接管。状态key不含不断增长的history或step。ALFWorld用已确认事实和排序后的可行动作；MapReader用当前动作回应、房间描述和inventory；TextWorld用房间、inventory和候选ID到命令映射。 完整实验成本过高，不复现（审查 DONE）；本轮统一冻结源码后由批次runner生成三种子CPU诊断；component_only / l1_mechanism；不是模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本地执行公开状态key、pending decision/实际执行分离、第三次提案拦截、准确两步接管及各benchmark计数规则。只接受显式公开字段，不接收gold、奖励或成功标签；new_information由可信外部ALFWorld适配器提供，本地不假装语义核实事实。没有Jev/LLM backend、benchmark环境或实际API请求；  按需决策 looproute 结构化决策 按需决策：选择性推理、迁移与持续反馈 能给三个环境共用一套重置规则吗？ 不能。ALFWorld只计决策模型动作，并在新事实或接管结束清空；MapReader/TextWorld计两种policy动作且保持整局。公共的是触发和有限接管结构。 教学例：LLM在同一MapReader状态执行open两次，会被后续计数看到；ALFWorld不累计它们。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">结构化决策 / 按需决策：选择性推理、迁移与持续反馈</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-0f1419a728f2559f">能给三个环境共用一套重置规则吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=system-one%3Alooproute">Stop Going in Circles:Loop-Triggered Routing for System 1 Decision Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Sichuan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。ALFWorld只计决策模型动作，并在新事实或接管结束清空；MapReader/TextWorld计两种policy动作且保持整局。公共的是触发和有限接管结构。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：LLM在同一MapReader状态执行open两次，会被后续计数看到；ALFWorld不累计它们。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25363v1">原论文</a> · <a href="../../../../system-one/2611.25363-looproute/">实现解读</a> · <a href="#qa-0f1419a728f2559f">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="system-one:typed-inbox-protocol" data-paper-title="Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox" data-learning-pending="false" data-level="basics" data-domain="system-one" data-theme="system-one" data-topic="system-one/adaptive-decisions" data-search="Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox system-one Independent researcher, Trento, Italy 2026-10-23 在个人多语言收件箱里，字段分类准确率不一定能转化为安全的动作。论文比较类型化决策模型、TF-IDF＋逻辑回归和生成式LLM，强调先冻结任务、标签与成本，再判断训练是否值得。生产系统遗留的关键词／模型字段不能当金标；联系人的relationship也不宜每封邮件重新推断。协议保存模型实际可见的sender、subject、截断至1500字符的body、日期和channel；敏感值必须先脱敏再存快照。线程按规范化subject＋sender key分组，不能随机按单封邮件切分； 完整私有邮箱与多模型实验高成本不复现（审查 DONE）。component_only／L0协议接口。本地没有邮件分类器、Jev或生成模型，不读取真实邮箱；完整私有邮箱与多模型实验高成本不复现（审查 DONE）。freeze_email先替换调用者显式提供的敏感字符串，再存1500字符正文与SHA256。它不发现未知密码／PII，不能当通用脱敏器。不可变FrozenEmail不接收gold字段。grouped_folds按线程哈希排序、整组分折，不读取标签，因此保证线程隔离但不是原文的类别分层5折。重复email ID直接拒绝。  类型化决策 任务协议与行动成本 结构化决策 按需决策：选择性推理、迁移与持续反馈 为什么不能把生产邮箱已有的type字段当成Typed Inbox金标？ 它混合历史关键词和模型预测，不是独立标注。应先保存模型实际可见且已脱敏的固定快照，再由独立标注协议给标签；否则只是在复刻旧系统的错误。 教学例：旧规则把发票写成广告，训练和评估都用该字段时，新模型也写广告就被错误记为正确。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">结构化决策 / 按需决策：选择性推理、迁移与持续反馈</a></p>
 <span id="paper-system-one-typed-inbox-protocol-d73d262a" class="ar-learning-paper-anchor"></span>

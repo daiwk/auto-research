@@ -7,7 +7,7 @@ hide:
 
 # 从CTR到满意度与uplift：先定义监督对象，再决定怎样共享
 
-[搜广推](../index.md) · 更新 2026-11-18 · 37 篇主题资料 / 7 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-20 · 38 篇主题资料 / 8 篇重点对照
 
 ESMM约束点击—转化漏斗概率，MMoE和PLE安排不同任务怎样共享专家，FLVM尝试把消费、主动参与和正负方向分开，Incrementality则比较采取与不采取动作的潜在结果。预测更多头、共享更多参数或拆出潜因子，都不自动解决因果识别。
 
@@ -32,6 +32,7 @@ ESMM约束点击—转化漏斗概率，MMoE和PLE安排不同任务怎样共享
 | [From Prediction to Incrementality: Causal Optimization for Large-Scale Targeting and Recommendation](../../../reproductions/2608.10182-incrementality/README.md) · [原始来源](https://arxiv.org/abs/2608.10182)<br>章节：背景与主要改动、核心公式、复现边界 | 估计处理/不处理的潜在结果差，再按uplift及不确定度在固定触达预算下分配动作。 | 目标是动作带来的额外价值，不是高响应人群本来的结果；需要可信处理对照和识别条件，本地代理任务不能证明真实用户增量。 |
 | [KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation](../../../recommendation-components/2610.36973-kl-mopd/README.md) · [原始来源](https://arxiv.org/abs/2610.36973v1)<br>章节：背景与主要改动、核心公式 | 一次校准位置级教师差距，以固定alpha最小化两项student\|\|teacher KL。 | 没有初始/当前学生采样器、推荐骨干或语义ID评测，不继承线上收益。 |
 | [COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift](../../../recommendation-components/2611.22597-cotti/README.md) · [原始来源](https://arxiv.org/abs/2611.22597v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | COTTI把训练时历史偏好连续性和上线时促销概率修正分开。CPC比较同一用户常态/促销双视图并用可微门控调节一致性；RW按相对历史距离重加权但截断其梯度；ABA在冻结预测器的logit上添加事件强度与预测头方差决定的有界修正。 | BAFF按竞价策略干扰过滤日志，COTTI按用户历史距离改变促销样本影响；两种权重/过滤都不自动成为因果无偏估计，COTTI的校准也不能证明A/B日志无污染。 |
+| [Antom 3-in-1 Transformer: A Payment Foundation Model](../../../recommendation-components/2611.25403-antom-3-in-1/README.md) · [原始来源](https://arxiv.org/abs/2611.25403v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | Antom把用户/卡/设备历史、当前交易字段和滚动用户图分开编码，再用任务query、共享注意力与稀疏专家做多任务融合。序列先做prefix-future对比，图先做视图对比及关系计数重建；下游图encoder冻结，图表示离线生成并按交易时间查询，其余主要模块在线打分。 | MMoE通过每任务gate组合共享专家；Antom在多模态编码之后，用任务query聚合共享信息再路由，并额外查离线图表示。多任务路由这一共性不表示两者可等价替换。原文生产对照是XGB/SAINT，不是MMoE；不能捏造两者实测胜负。 |
 
 </div>
 
@@ -60,6 +61,12 @@ KL-MOPD把点击/价值的竞争定位到SID位置，而非只合并整物品分
 严格保留Eq6–16：CPC门控用未归一化表示距离并参与反传；RW不裁剪、不均值归一化，权重是正影响量而非可靠性概率；ABA使用预测头多次dropout logit的总体方差，不是全编码器不确定性。事件中心须事先公告、宽度来自历史，幅度只在验证集选；修正只能向上，不能解决过预测。 BAFF按竞价策略干扰过滤日志，COTTI按用户历史距离改变促销样本影响；两种权重/过滤都不自动成为因果无偏估计，COTTI的校准也不能证明A/B日志无污染。
 
 对照来源：[cotti](../../../recommendation-components/2611.22597-cotti/README.md) · [baff](../../../reproductions/2609.08725-baff/README.md)
+
+### Antom 3-in-1 Transformer: A Payment Foundation Model
+
+MMoE通过每任务gate组合共享专家；Antom在多模态编码之后，用任务query聚合共享信息再路由，并额外查离线图表示。多任务路由这一共性不表示两者可等价替换。原文生产对照是XGB/SAINT，不是MMoE；不能捏造两者实测胜负。 这里列的是附录A已公开的固定预算评测口径，不是未公开的完整训练loss或router算法。采样数据使用逆纳入权重；预算边界同分交易可共享分数配额，保证总权重仍等于q倍总体。金额损失率的分母是成功交易金额，不是交易笔数。§2明确未公开详细架构、训练配置和数据构造，不能补写猜测的实现。
+
+对照来源：[antom-3-in-1](../../../recommendation-components/2611.25403-antom-3-in-1/README.md) · [mmoe](../../../reproductions/kdd2018-mmoe-mmoe/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -115,9 +122,23 @@ KL-MOPD把点击/价值的竞争定位到SID位置，而非只合并整物品分
 
     对照来源：[cotti](../../../recommendation-components/2611.22597-cotti/README.md) · [baff](../../../reproductions/2609.08725-baff/README.md)
 
+### 为什么不能把37.88%和26.09%当成同一指标的重复验证？ {#cross-nov20-antom-3-in-1}
+
+??? note "展开答案与例子"
+
+    **答案：** 前者是业务组合总体损失率相对变化，后者是II阶段CB率按共同日期重加权的相对变化；分子、样本聚合和阶段不同。
+
+    **教学例子：** 教学例：赔付争议追回会改变最终损失，但不一定同幅改变原始CB金额。
+
+    对照来源：[antom-3-in-1](../../../recommendation-components/2611.25403-antom-3-in-1/README.md) · [mmoe](../../../reproductions/kdd2018-mmoe-mmoe/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-20** · MMoE通过每任务gate组合共享专家；Antom在多模态编码之后，用任务query聚合共享信息再路由，并额外查离线图表示。多任务路由这一共性不表示两者可等价替换。原文生产对照是XGB/SAINT，不是MMoE；不能捏造两者实测胜负。 本地证据层级与完整实验不复现分别记录。
+
+涉及：[antom-3-in-1](../../../recommendation-components/2611.25403-antom-3-in-1/README.md) · [mmoe](../../../reproductions/kdd2018-mmoe-mmoe/README.md)
 
 **2026-11-18** · 本地只运行CPC/RW/ABA张量；没有历史构造、缺失常态视图回退或服务融合策略。保留paid-item新类目召回下降的作者负结果，不能拿整体AUC覆盖探索代价。 完整实验高成本不复现，未作能力或Evolve晋级证据。
 
@@ -131,7 +152,7 @@ KL-MOPD把点击/价值的竞争定位到SID位置，而非只合并整物品分
 
 覆盖 35 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 37 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 38 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -172,6 +193,7 @@ KL-MOPD把点击/价值的竞争定位到SID位置，而非只合并整物品分
 - [Jointly Optimizing Debiased CTR and Uplift for Coupons Marketing: A Unified Causal Framework](../../../reproductions/2602.12972-unimvt/README.md)
 - [KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation](../../../recommendation-components/2610.36973-kl-mopd/README.md)
 - [COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift](../../../recommendation-components/2611.22597-cotti/README.md)
+- [Antom 3-in-1 Transformer: A Payment Foundation Model](../../../recommendation-components/2611.25403-antom-3-in-1/README.md)
 
 </details>
 

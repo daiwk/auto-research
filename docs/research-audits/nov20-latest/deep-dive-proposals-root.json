@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-20",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "recommendation:fleet-feature-optimization",
+      "target_card": "recommendation/research-serving-loop",
+      "source_revisions": {
+        "recommendation:fleet-feature-optimization": "92e05986add9227815ff2fc10ef63bd09893a705b350b8cffe07dcf19b157314",
+        "recommendation:mle-agents": "0bd7f4f9ad3821aa4f88f89458e31d2fa7baa94a6f033a272f067ce1e64d75b9"
+      },
+      "comparison": {
+        "position": "Meta把特征创建、FI估计、跨任务Pareto分层、多来源混合和有约束搜索连成fleet级流程。LLM提出假设，确定性工具验证；每个模型同时面对自身serving限制和跨模型共享的上游pipeline预算。另一个模型已经使用某特征时，新增使用不一定新增pipeline成本。",
+        "tradeoff": "MLE Agents用同轮方差探针对候选研发做目标准入；Fleet侧重特征共享成本与serving可行性。低NE不能覆盖资源超限，低成本也不能绕过NE必须优于基线的准入。两者诊断接口都不能自行证明模型研发或线上收益。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models",
+        "body": "MLE Agents用同轮方差探针对候选研发做目标准入；Fleet侧重特征共享成本与serving可行性。低NE不能覆盖资源超限，低成本也不能绕过NE必须优于基线的准入。两者诊断接口都不能自行证明模型研发或线上收益。 FI向量按所有任务的逐维支配关系分层，不先把任务loss相加。多个来源固定顺序取未选特征，论文写round(pi_m N)，却没有规定舍入与末层同分切分；本地将整数quota及层内顺序显式交给调用方。成本使用完整特征集合oracle，不把共享成本猜成各特征价格求和；跨预算的最贵删除顺序也由外部提供。QPS约束必须先变换成1/QPS这种上界口径。",
+        "papers": [
+          "recommendation:fleet-feature-optimization",
+          "recommendation:mle-agents"
+        ]
+      },
+      "question": {
+        "id": "nov20-fleet-feature-optimization",
+        "question": "与MLE Agents的方差探针准入相比，本篇多了什么限制？",
+        "answer": "本篇显式处理每模型资源上界和fleet共享pipeline预算；离线NE更好也不能接受超预算trial。它没有替代MLE Agents的同轮噪声参照。",
+        "example": "教学例：NE0.1但inverse-QPS超cap的候选必须让位于NE0.6且可行的候选。",
+        "papers": [
+          "recommendation:fleet-feature-optimization",
+          "recommendation:mle-agents"
+        ]
+      },
+      "update": {
+        "date": "2026-11-20",
+        "papers": [
+          "recommendation:fleet-feature-optimization",
+          "recommendation:mle-agents"
+        ],
+        "summary": "MLE Agents用同轮方差探针对候选研发做目标准入；Fleet侧重特征共享成本与serving可行性。低NE不能覆盖资源超限，低成本也不能绕过NE必须优于基线的准入。两者诊断接口都不能自行证明模型研发或线上收益。 原文线上证据与本地合同分开记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Meta combines feature creation, FI estimation, cross-task Pareto layers, multi-source blending and constrained search across a model fleet. LLMs propose hypotheses while deterministic tools validate them. Serving caps are model-specific, but upstream pipeline budgets are shared; another model's existing use can make an addition free for that budget.",
+          "tradeoff": "MLE Agents calibrates candidate admission against a same-round variance probe. Fleet emphasizes shared feature cost and serving feasibility. Better NE cannot override a resource violation, and cheaper candidates still must improve NE. Neither diagnostic interface establishes model-engineering capability or production gains."
+        },
+        "analysis": {
+          "title": "Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models",
+          "body": "MLE Agents calibrates candidate admission against a same-round variance probe. Fleet emphasizes shared feature cost and serving feasibility. Better NE cannot override a resource violation, and cheaper candidates still must improve NE. Neither diagnostic interface establishes model-engineering capability or production gains. Pareto dominance compares FI dimensions without summing task losses. Ordered sources contribute unselected features. The paper uses round(pi_m N) but does not specify rounding or last-front ties, so integer quotas and tie order are caller inputs. Shared set costs require a real oracle, not additive prices. Cross-budget removal order is external. Convert QPS to an upper-bound quantity such as1/QPS first."
+        },
+        "question": {
+          "question": "What differs from MLE Agents' variance-probe admission?",
+          "answer": "Fleet adds model resource caps and shared pipeline budgets. Better validation NE does not admit an infeasible candidate, and these caps do not replace same-round noise calibration.",
+          "example": "A candidate with NE0.1 but excessive inverse-QPS is rejected in favor of a feasible NE0.6 candidate."
+        },
+        "update": "MLE Agents calibrates candidate admission against a same-round variance probe. Fleet emphasizes shared feature cost and serving feasibility. Better NE cannot override a resource violation, and cheaper candidates still must improve NE. Neither diagnostic interface establishes model-engineering capability or production gains. Paper production evidence and local contracts remain separate."
+      }
+    },
+    {
+      "paper": "recommendation:dna",
+      "target_card": "recommendation/history-ranking-backbones",
+      "source_revisions": {
+        "recommendation:dna": "90b1fa83da1fe794609b59f25bf20c44f9e6946f2ccd58fc71e12ab0e4c313eb",
+        "recommendation:longer": "e3c1167c41d992644a63b143c4d2b067a56b3e9329f4c49d07790cc45152ac4d"
+      },
+      "comparison": {
+        "position": "DNA把请求U与历史S组成候选无关的双流：每层请求和候选F分别读取同一组历史K/V，随后历史token再反向读取刚更新的U。这样下一层看到的是受当前请求塑形的历史，而不是每层重投影同一S0。请求与历史状态可在同一请求的所有候选间共享。",
+        "tradeoff": "LONGER先用少量query读取长历史，后续主要在压缩token上计算；DNA不靠删掉历史token，而让每个历史token从少量请求token吸收上下文，下一层继续读更新后的完整S。两者都关注候选共享，但共享的对象和更新时机不同；本地诊断不提供二者推荐指标胜负。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "DNA: Unlocking Depth Scaling in CTR Models",
+        "body": "LONGER先用少量query读取长历史，后续主要在压缩token上计算；DNA不靠删掉历史token，而让每个历史token从少量请求token吸收上下文，下一层继续读更新后的完整S。两者都关注候选共享，但共享的对象和更新时机不同；本地诊断不提供二者推荐指标胜负。 共有D次请求read、D次候选read，却只有D-1次历史update，最后一层不再更新无人读取的S。read中各行为组使用不同K/V投影，各非序列token使用独立SwiGLU；update对全部请求token的拼接做composite K/V投影，行为组共享各自FFN，padding置零。QKNorm及head缩放保留。",
+        "papers": [
+          "recommendation:dna",
+          "recommendation:longer"
+        ]
+      },
+      "question": {
+        "id": "nov20-dna",
+        "question": "与LONGER减少后续长序列计算的方式有何不同？",
+        "answer": "LONGER把信息压到较小query/token路径；DNA保留历史token，让它们从少量请求token更新，并把更新开销在请求内候选间共享。",
+        "example": "教学例：两者都可共享K/V，但这不意味着都在每层删除历史token。",
+        "papers": [
+          "recommendation:dna",
+          "recommendation:longer"
+        ]
+      },
+      "update": {
+        "date": "2026-11-20",
+        "papers": [
+          "recommendation:dna",
+          "recommendation:longer"
+        ],
+        "summary": "LONGER先用少量query读取长历史，后续主要在压缩token上计算；DNA不靠删掉历史token，而让每个历史token从少量请求token吸收上下文，下一层继续读更新后的完整S。两者都关注候选共享，但共享的对象和更新时机不同；本地诊断不提供二者推荐指标胜负。 原文线上证据与本地合同分开记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "DNA couples request U and history S as candidate-independent streams. Each layer lets request U and candidate F separately read the same history K/V, then history tokens read the newly updated U. The next layer sees request-shaped history instead of another projection of fixed S0. Request/history states are shared across candidates within that request.",
+          "tradeoff": "LONGER compresses long-history interaction into a smaller query/token path. DNA retains history tokens and updates each from a few request tokens before the next read. Both exploit candidate sharing, but share different states at different points. Local mechanism checks do not rank their recommendation quality."
+        },
+        "analysis": {
+          "title": "DNA: Unlocking Depth Scaling in CTR Models",
+          "body": "LONGER compresses long-history interaction into a smaller query/token path. DNA retains history tokens and updates each from a few request tokens before the next read. Both exploit candidate sharing, but share different states at different points. Local mechanism checks do not rank their recommendation quality. Depth D contains D request reads, D candidate reads and D-1 history updates; the final layer does not update an unused S. Reads use group-specific K/V projections and token-specific SwiGLUs. Updates apply composite K/V projections to concatenated request tokens, group-specific FFNs and padding zeroing. QKNorm and head scaling are retained."
+        },
+        "question": {
+          "question": "How does it differ from LONGER?",
+          "answer": "LONGER concentrates history interaction into a smaller query/token path. DNA retains history tokens, updates them from a few request tokens and amortizes that work over candidates.",
+          "example": "Both can share K/V, but neither shared-K/V fact implies the same token-deletion schedule."
+        },
+        "update": "LONGER compresses long-history interaction into a smaller query/token path. DNA retains history tokens and updates each from a few request tokens before the next read. Both exploit candidate sharing, but share different states at different points. Local mechanism checks do not rank their recommendation quality. Paper production evidence and local contracts remain separate."
+      }
+    },
+    {
+      "paper": "recommendation:lser-serving",
+      "target_card": "recommendation/retrieval-matching",
+      "source_revisions": {
+        "recommendation:lser-serving": "a5c7a66bc0a8ea182fe5b30352e5ffd8abea26b977f7510bd2ac3f1c4060e5d8",
+        "recommendation:youtube-dnn": "6fdbc162f51c3c282c0b19893ca9138b7b299fb5c34e21b118524d0311332dc2"
+      },
+      "comparison": {
+        "position": "LSER在双塔召回的用户侧融合会话、较长期历史、请求特征与可选LLM语义向量。较重encoder异步nearline计算，在线请求只读取已完成向量并融合/ANN检索。LLM路径并不替代BERT4Rec式encoder，而提供同一时间窗口的补充语义视角。",
+        "tradeoff": "YouTube DNN把聚合观看历史与上下文经非线性用户塔变成召回向量，训练为下一次观看分类；LSER显式区分session/history序列encoder，并可加入LLM辅助语义向量与nearline刷新。两者都能以用户向量查询离线item索引，差异是表征和更新合同，不是把ANN改为LLM逐token生成。原文线上对照是规则引擎，不是YouTube DNN；本地接口不提供两者质量胜负。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation",
+        "body": "YouTube DNN把聚合观看历史与上下文经非线性用户塔变成召回向量，训练为下一次观看分类；LSER显式区分session/history序列encoder，并可加入LLM辅助语义向量与nearline刷新。两者都能以用户向量查询离线item索引，差异是表征和更新合同，不是把ANN改为LLM逐token生成。原文线上对照是规则引擎，不是YouTube DNN；本地接口不提供两者质量胜负。 session使用已记录的session ID，历史窗口止于session起点；所有事件严格早于label/request cutoff。通道资格、ID映射、回看长度和session规则是外部合同，未公开的receipt schema不能猜造。原文没有给出通用TTL；本地按(as_of,written_at)防异步乱序回退是接口防护，不冒称论文算法。",
+        "papers": [
+          "recommendation:lser-serving",
+          "recommendation:youtube-dnn"
+        ]
+      },
+      "question": {
+        "id": "nov20-lser-serving",
+        "question": "与YouTube DNN候选生成相比，LSER新增什么而不是LLM直接生成推荐？",
+        "answer": "YouTube DNN聚合历史/上下文后用用户塔召回；LSER区分短长序列编码，增加可选LLM辅助特征与异步时效合同。两者仍可用用户向量查离线item索引，不是让LLM逐token生成item ID。",
+        "example": "教学例：关闭LSER的LLM向量后仍是学习双塔召回，在线A/B也正是这个未启用LLM的版本。",
+        "papers": [
+          "recommendation:lser-serving",
+          "recommendation:youtube-dnn"
+        ]
+      },
+      "update": {
+        "date": "2026-11-20",
+        "papers": [
+          "recommendation:lser-serving",
+          "recommendation:youtube-dnn"
+        ],
+        "summary": "YouTube DNN把聚合观看历史与上下文经非线性用户塔变成召回向量，训练为下一次观看分类；LSER显式区分session/history序列encoder，并可加入LLM辅助语义向量与nearline刷新。两者都能以用户向量查询离线item索引，差异是表征和更新合同，不是把ANN改为LLM逐token生成。原文线上对照是规则引擎，不是YouTube DNN；本地接口不提供两者质量胜负。 原文线上证据与本地合同分开记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "LSER fuses session, longer-term history, request features and optional LLM semantic vectors in a retrieval user tower. Expensive encoders refresh nearline asynchronously; request-time work reads available vectors, fuses them and performs ANN retrieval. LLM vectors complement rather than replace the BERT4Rec-style sequence encoder.",
+          "tradeoff": "YouTube DNN transforms aggregated watch history/context through a nonlinear user tower and trains next-watch classification. LSER separately encodes session/history and may add LLM semantic auxiliaries with nearline refresh. Both query an offline item index using user vectors; the difference is representation and freshness, not replacing ANN with token-by-token LLM generation. The paper's online control is rules, not YouTube DNN; local interfaces do not rank their quality."
+        },
+        "analysis": {
+          "title": "From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation",
+          "body": "YouTube DNN transforms aggregated watch history/context through a nonlinear user tower and trains next-watch classification. LSER separately encodes session/history and may add LLM semantic auxiliaries with nearline refresh. Both query an offline item index using user vectors; the difference is representation and freshness, not replacing ANN with token-by-token LLM generation. The paper's online control is rules, not YouTube DNN; local interfaces do not rank their quality. Session windows use logged session IDs; history ends at session start, and every event is strictly before the label/request cutoff. Eligibility, ID mapping, lookback and sessionization are external contracts, not invented receipt schemas. The paper prescribes no universal TTL. Choosing by(as_of,written_at) against out-of-order completion is a local interface safeguard."
+        },
+        "question": {
+          "question": "What does LSER add beyond YouTube DNN rather than generating recommendations with an LLM?",
+          "answer": "YouTube DNN aggregates history/context into a user tower. LSER separates short/long sequence encoders and adds optional LLM features plus asynchronous freshness. Both can query an offline item index; the LLM does not generate item IDs token by token.",
+          "example": "With LLM vectors disabled, LSER remains learned two-tower retrieval; this is the version used in its online A/B."
+        },
+        "update": "YouTube DNN transforms aggregated watch history/context through a nonlinear user tower and trains next-watch classification. LSER separately encodes session/history and may add LLM semantic auxiliaries with nearline refresh. Both query an offline item index using user vectors; the difference is representation and freshness, not replacing ANN with token-by-token LLM generation. The paper's online control is rules, not YouTube DNN; local interfaces do not rank their quality. Paper production evidence and local contracts remain separate."
+      }
+    }
+  ]
+}

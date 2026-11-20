@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 308 个问题 · 77 篇论文
+[Agent](index.md) / 312 个问题 · 78 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">308 个问题 · 77 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">312 个问题 · 78 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ahe-beta" data-paper-title="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses Agent Fudan University 2026-11-18 AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。开发者只接收被准入的需求及其证据包。证据包只有被引用会话的运行日志、公开任务和执行条件，用户对话、隐藏测试和grader不能传给开发者。RFC先做设计审查，代码再按验收标准审查；合并时批准必须绑定当前PR head，且RFC仍与已审设计一致。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l0_interface；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。只实现类型化Evidence/Requirement交付集、已核实合并需求的covers消解，以及绑定head与RFC的纯merge_eligible判定。没有模拟用户、Triage/Architect/PM语言判断、开发Agent或真正git合并。结构字段不保证字符串内部绝无隐藏答案，所以保持L0，不把类型检查称为语义安全。  执行框架与自改进 ahe-beta Agent 运行流程与自进化：改的是哪一层 为什么测试通过仍可能不满足用户？ 测试可读最终工作区，但用户可能没收到结果、纠正请求未送达，或不允许的文件被修改；这些需求要靠交互记录核实。 教学例：修好代码却没有回复用户，不等于交付完成。 2026-11-19">
@@ -80,6 +80,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：把答案藏在runtime_log字符串中不是类型系统能排除的。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.24924v1">原论文</a> · <a href="../../../../agent-research/2611.24924-ahe-beta/">实现解读</a> · <a href="#qa-8e687d8d4448f153">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:buggymle-cci" data-paper-title="BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection Agent Google Research / University of Illinois Urbana-Champaign 2026-11-18 BuggyMLE先审核可运行、指标稳定且对代码变化敏感的ML仓库，再让Injector注入不同规模的错误。Oracle通过逐个恢复变动找最小恢复集合，再把每个改动单独应用到干净仓库，筛出确有独立指标影响的错误。Solver必须在多文件仓库里真实修复；评价同时检查执行、指标恢复和逐错误语义修复，不能把补偿性调参当修好了全部bug。 完整实验成本过高，不复现（审查 DONE）；诊断用合成校准，不能称为复算了作者八benchmark CCI。component_only / l0_interface；不是模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本地仅实现给定十项特征的benchmark中位数、固定校准投影和可选的稳定logistic读数。没有AST/依赖图抽取、Injector、Oracle、LLM solver、校准拟合或模型训练。完整μ/σ、组尺度、截距与参考边界未在原文公开成可直接加载文件，因此API强制调用方显式提供Calibration；  执行框架与自改进 buggymle-cci Agent 运行流程与自进化：改的是哪一层 CCI只看仓库有多大吗？ 不是。十项特征分成repo、dependency和patch三组，论文中patch组对困难度的贡献最大，且repo系数是条件调整。 教学例：一百万行仓库的一行修复，可以比跨二十文件的修改容易。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-buggymle-cci-a34a1dbc" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-21e09584a1bc232e">CCI只看仓库有多大吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Abuggymle-cci">BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Google Research / University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。十项特征分成repo、dependency和patch三组，论文中patch组对困难度的贡献最大，且repo系数是条件调整。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一百万行仓库的一行修复，可以比跨二十文件的修改容易。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25088v1">原论文</a> · <a href="../../../../agent-research/2611.25088-buggymle-cci/">实现解读</a> · <a href="#qa-21e09584a1bc232e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:buggymle-cci" data-paper-title="BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection Agent Google Research / University of Illinois Urbana-Champaign 2026-11-18 BuggyMLE先审核可运行、指标稳定且对代码变化敏感的ML仓库，再让Injector注入不同规模的错误。Oracle通过逐个恢复变动找最小恢复集合，再把每个改动单独应用到干净仓库，筛出确有独立指标影响的错误。Solver必须在多文件仓库里真实修复；评价同时检查执行、指标恢复和逐错误语义修复，不能把补偿性调参当修好了全部bug。 完整实验成本过高，不复现（审查 DONE）；诊断用合成校准，不能称为复算了作者八benchmark CCI。component_only / l0_interface；不是模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本地仅实现给定十项特征的benchmark中位数、固定校准投影和可选的稳定logistic读数。没有AST/依赖图抽取、Injector、Oracle、LLM solver、校准拟合或模型训练。完整μ/σ、组尺度、截距与参考边界未在原文公开成可直接加载文件，因此API强制调用方显式提供Calibration；  执行框架与自改进 buggymle-cci Agent 运行流程与自进化：改的是哪一层 给新任务计算CCI时，为什么不能用新任务重新定标？ 特征和组尺度、系数、min-max边界都来自固定参考benchmark；在新任务上重拟合会改变尺度，让不同任务不可比较。 教学例：每批都把最难题压成1，会掩盖第二批整体更难。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1b55e923d54bb0fd">给新任务计算CCI时，为什么不能用新任务重新定标？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Abuggymle-cci">BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Google Research / University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>特征和组尺度、系数、min-max边界都来自固定参考benchmark；在新任务上重拟合会改变尺度，让不同任务不可比较。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：每批都把最难题压成1，会掩盖第二批整体更难。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25088v1">原论文</a> · <a href="../../../../agent-research/2611.25088-buggymle-cci/">实现解读</a> · <a href="#qa-1b55e923d54bb0fd">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:buggymle-cci" data-paper-title="BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection Agent Google Research / University of Illinois Urbana-Champaign 2026-11-18 BuggyMLE先审核可运行、指标稳定且对代码变化敏感的ML仓库，再让Injector注入不同规模的错误。Oracle通过逐个恢复变动找最小恢复集合，再把每个改动单独应用到干净仓库，筛出确有独立指标影响的错误。Solver必须在多文件仓库里真实修复；评价同时检查执行、指标恢复和逐错误语义修复，不能把补偿性调参当修好了全部bug。 完整实验成本过高，不复现（审查 DONE）；诊断用合成校准，不能称为复算了作者八benchmark CCI。component_only / l0_interface；不是模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本地仅实现给定十项特征的benchmark中位数、固定校准投影和可选的稳定logistic读数。没有AST/依赖图抽取、Injector、Oracle、LLM solver、校准拟合或模型训练。完整μ/σ、组尺度、截距与参考边界未在原文公开成可直接加载文件，因此API强制调用方显式提供Calibration；  执行框架与自改进 buggymle-cci Agent 运行流程与自进化：改的是哪一层 CCI和MLE-STAR的消融分数能互换吗？ 不能。CCI预测结构困难度，MLE-STAR用执行和validation消融选择值得改的代码块；结构困难不等于模型效果差。 教学例：跨文件修复很难，并不说明该模型validation AUC低。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-74db97c1cc92b9af">CCI和MLE-STAR的消融分数能互换吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Abuggymle-cci">BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Google Research / University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。CCI预测结构困难度，MLE-STAR用执行和validation消融选择值得改的代码块；结构困难不等于模型效果差。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：跨文件修复很难，并不说明该模型validation AUC低。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25088v1">原论文</a> · <a href="../../../../agent-research/2611.25088-buggymle-cci/">实现解读</a> · <a href="#qa-74db97c1cc92b9af">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:buggymle-cci" data-paper-title="BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection Agent Google Research / University of Illinois Urbana-Champaign 2026-11-18 BuggyMLE先审核可运行、指标稳定且对代码变化敏感的ML仓库，再让Injector注入不同规模的错误。Oracle通过逐个恢复变动找最小恢复集合，再把每个改动单独应用到干净仓库，筛出确有独立指标影响的错误。Solver必须在多文件仓库里真实修复；评价同时检查执行、指标恢复和逐错误语义修复，不能把补偿性调参当修好了全部bug。 完整实验成本过高，不复现（审查 DONE）；诊断用合成校准，不能称为复算了作者八benchmark CCI。component_only / l0_interface；不是模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本地仅实现给定十项特征的benchmark中位数、固定校准投影和可选的稳定logistic读数。没有AST/依赖图抽取、Injector、Oracle、LLM solver、校准拟合或模型训练。完整μ/σ、组尺度、截距与参考边界未在原文公开成可直接加载文件，因此API强制调用方显式提供Calibration；  执行框架与自改进 buggymle-cci Agent 运行流程与自进化：改的是哪一层 本地接口为什么不直接输出作者的八benchmark成功率？ 完整校准常数没有可加载发布文件；调用方必须给固定参数。合成校准只测试公式，缺截距时成功率返回null，不能补造。 教学例：传入μ=0、σ=1是单测，不是作者拟合参数。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-111c679c6a3f696f">本地接口为什么不直接输出作者的八benchmark成功率？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Abuggymle-cci">BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Google Research / University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>完整校准常数没有可加载发布文件；调用方必须给固定参数。合成校准只测试公式，缺截距时成功率返回null，不能补造。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：传入μ=0、σ=1是单测，不是作者拟合参数。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25088v1">原论文</a> · <a href="../../../../agent-research/2611.25088-buggymle-cci/">实现解读</a> · <a href="#qa-111c679c6a3f696f">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsibench-infra" data-paper-title="RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale? Agent ByteDance Seed / Tsinghua University AIR / SIA-Lab 2026-11-18 单算子快不代表端到端训练或服务变快。RSIBench-Infra让Agent从官方可运行baseline出发，跨engine、kernel、instruction修改，但只提交一个OCI filesystem layer。独立Serve/Train Job把同一digest应用到每个rank；Benchmark Job绝不加载候选层，单独做质量门和端到端计时。任务定义含模型、环境、资源和独立verifier。16推理+4训练任务覆盖1–32个加速器、最多4节点；推理模型1.7B–2.8T。 完整实验成本过高，不复现（审查 DONE）；项目页https://rsibench-infra.github.io已核对，未验证论文专用源码仓库公开。deferred_high_cost / review-only；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。仅做原文审查、成本评估、中英文说明和学习材料。没有把OCI字段stub、任意microbenchmark或单卡小模型标成RSIBench-Infra已接入；local_operator=null，不提供可执行Evolve算子。  执行框架与自改进 rsibench-infra Agent 运行流程与自进化：改的是哪一层 为什么不用一个git patch承载优化？ 可改engine、库、编译产物和其他目录，git patch不覆盖全部环境变化；OCI层在干净baseline上重建同一提交。 教学例：只提交Python diff会漏掉新编译kernel或库依赖。 2026-11-19">

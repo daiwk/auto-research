@@ -10,6 +10,10 @@
 
 - 2026-08-10 · [Cracks in the Foundation: Seemingly Minor Architectural Choices Impact Long Context Extension](../../reproductions/2608.10296-olmpool-long-context/README.md)（`olmpool-long-context`）：以受控 7B 模型池隔离 normalization、GQA、预训练长度和滑窗注意力对长上下文扩展的复合影响。
 
+## Allen-Zhu Research
+
+- 2026-11-12 · [Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality](../../foundation-models/2611.24963-canon-layers-scale/README.md)（`canon-layers-scale`）：Canon在层内多个位置加入沿token轴的残差短卷积，显式提供邻近信息。本文把此前小规模合成训练得到的结构判断放到64组1.3B–8B真实语料预训练中检验，并对线性模型使用低秩输出门的GLA5/GDN2。重要贡献还包括对预算、基线调参和可测技能的重新审视。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## Apple
 
 - 2026-10-09 · [On the Design Space of Continuous Diffusion Language Models](../../reproductions/2610.13834-doublecat-semicat/README.md)（`doublecat-semicat`）：One-hot continuous flow 在接近终点时训练几乎只看见低熵顶点，但推理跟随有熵 denoiser 概率，产生轨迹错配。DoubleCat 在高斯路径内部再插入 simplex prior 到 one-hot 的插值，把训练质量移到更像推理的 simplex 内部。
@@ -97,6 +101,7 @@
 
 ## EPFL
 
+- 2026-11-19 · [HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs](../../foundation-models/2611.26363-hisa/README.md)（`hisa`）：HiSA不先筛token，而是对每个query-key点积只保留尚未超过角度预算的RoPE频率对。近处key保留更多分量，远处仅保留慢频分量；Q/K投影不变，规则只由位置、RoPE base和预算决定。
 - 2026-11-10 · [Mixed Signals: Weight-Space Programming for EEG and ECG](../../foundation-models/2611.13758-mixed-signals-weights/README.md)（`mixed-signals-weights`）：论文让 LLM 通过阅读/写入网络参数解决 EEG/ECG 任务，覆盖读权重、改善、修复和从零写网络。关键区别是 **weight-space programming 不使用梯度下降或迭代拟合**；把 SGD 包装成“编辑器”不能视为等价复现。不同实验的网络、数据权限和 evaluate/probe 预算不同。[§II](https://arxiv.org/html/2611.13758v1#S2)
 
 ## ETH Zurich

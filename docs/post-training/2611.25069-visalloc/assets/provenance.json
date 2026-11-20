@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-20",
+  "figures": [
+    {
+      "file": "paper-figure-01.png",
+      "paper_id": "2611.25069",
+      "version": "v1",
+      "figure": 2,
+      "page_number": 4,
+      "source_url": "https://arxiv.org/pdf/2611.25069v1#page=4",
+      "source_kind": "fixed_v1_pdf_rendered_crop",
+      "pdf_sha256": "4000c60483564c6218c78965b614442aa8e134e0bccc6db799f0945c3b2d9ad3",
+      "image_sha256": "5343ea72ecb59a6dc24360b43c48a62ca02771a1559a26a5c7afc59f6c111b6f",
+      "crop_pdf_points": [
+        67,
+        70,
+        529,
+        438
+      ],
+      "render_scale": 3,
+      "dpi": 216,
+      "caption_included": true,
+      "visual_review_done": true,
+      "scientific_content_modified": false,
+      "attribution": "Original authors retain copyright. Unmodified figure and complete caption are attributed research commentary, not a local result.",
+      "license": "Original fixed-v1 arXiv paper; no code relicensing."
+    }
+  ]
+}

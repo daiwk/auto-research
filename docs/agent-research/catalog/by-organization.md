@@ -284,6 +284,10 @@
 
 - 2026-09-15 · 一作：Amir Taubenfeld · [Verifiable Social Reasoning for LLM Assistants](../2609.17496-fuse-evaluator/README.md)（`fuse-evaluator`）：用隐藏动机可验证的多 Agent 模拟评测用户转述、framing bias 与社会推理。
 
+## Google Research / University of Illinois Urbana-Champaign
+
+- 2026-11-18 · 一作：John Wu · [BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection](../2611.25088-buggymle-cci/README.md)（`buggymle-cci`）：BuggyMLE先审核可运行、指标稳定且对代码变化敏感的ML仓库，再让Injector注入不同规模的错误。Oracle通过逐个恢复变动找最小恢复集合，再把每个改动单独应用到干净仓库，筛出确有独立指标影响的错误。
+
 ## HKU
 
 - 2025-04-04 · 一作：Yuxiang Zheng · [DeepResearcher](../2504.03160-deepresearcher/README.md)（`deepresearcher`）：把 search、browse、证据收集和带引用回答作为一条轨迹，用答案与引用联合奖励训练研究策略。
@@ -850,6 +854,7 @@
 
 ## University of Southern California
 
+- 2026-11-18 · 一作：Ziyan Yang · [Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents](../2611.25123-grepmem/README.md)（`grepmem`）：GrepMem把有限工作上下文和完整历史分开：压缩时只把活跃上下文换成系统提示、任务与摘要，原始消息、工具调用/输出和摘要仍追加到纯文本日志。第一次压缩之后才开放grep_history，让模型按需用大小写不敏感正则取回遗漏细节。
 - 2026-10-08 · 一作：Seyedarmin Azizi · [One Word Opens the Gate: The Option-Channel Attack on Typed Decision Models as Agent Guardrails](../2610.12292-option-channel-attack/README.md)（`option-channel-attack`）：类型化模型对调用方给定的选项输出概率，但选项名字本身也进入模型输入。保持动作、可信策略定义不变，仅把允许选项换成误导性标签，就可能让本来正确的拒绝变成放行。
 
 ## University of Virginia

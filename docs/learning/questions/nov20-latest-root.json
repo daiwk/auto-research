@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "recommendation:fleet-feature-optimization": {
+      "questions": [
+        {
+          "id": "shared-pipeline-cost",
+          "level": "basics",
+          "question": "为什么一个特征可以对模型有代价、对某pipeline预算却零增量？",
+          "answer": "模型仍付embedding/投影等serving代价；但预算内其他模型已消费该特征时，上游生成/存储工作已经发生，不能再算一份同样的pipeline增量。",
+          "example": "教学例：A已用f，B新增f时，共享集合并集不变，但B自身推理FLOPs仍可能增加。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "pareto-before-blend",
+          "level": "mechanism",
+          "question": "为什么先按任务FI作Pareto层，而不是直接求加权和？",
+          "answer": "不同任务的loss尺度/单位会让求和依赖人为权重；Pareto保留任何任务上有不可被同时支配贡献的特征，再由来源混合控制选择。",
+          "example": "教学例：A=(4,1)、B=(1,4)、C=(0,0)，A/B同在首层，C被支配。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "not-ne-alone",
+          "level": "comparison",
+          "question": "与MLE Agents的方差探针准入相比，本篇多了什么限制？",
+          "answer": "本篇显式处理每模型资源上界和fleet共享pipeline预算；离线NE更好也不能接受超预算trial。它没有替代MLE Agents的同轮噪声参照。",
+          "example": "教学例：NE0.1但inverse-QPS超cap的候选必须让位于NE0.6且可行的候选。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "explicit-quota-order",
+          "level": "implementation",
+          "question": "为什么本地不擅自决定round和多预算最贵顺序？",
+          "answer": "固定原文没有完整定义这些离散约定。调用方必须给整数quota、层内顺序和真实成本排序；缺少可补特征或预算仍违规时显式失败，而非静默填充。",
+          "example": "教学例：两个source都把a排首位时，第二source应跳过a；耗尽quota不能悄悄从别的source补满。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        }
+      ]
+    },
+    "recommendation:dna": {
+      "questions": [
+        {
+          "id": "evolving-history",
+          "level": "basics",
+          "question": "为什么多叠几层cross-attention不等于DNA？",
+          "answer": "固定历史基线每层只重投影S0；DNA让历史接收刚更新请求的信息，下一层读的是新的S。",
+          "example": "教学例：同一历史面对两个不同搜索query，可以产生不同S1；固定S0投影没有这种依赖。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "d-minus-one",
+          "level": "mechanism",
+          "question": "DNA-D为什么只有D-1次历史update？",
+          "answer": "每层的两次read先读传入S，再更新供下一层用。末层之后没有read，因此多做一次update不会进入预测链路。",
+          "example": "教学例：D=3时读S0、S1、S2，只需两次update；不是三次。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "longer-distinction",
+          "level": "comparison",
+          "question": "与LONGER减少后续长序列计算的方式有何不同？",
+          "answer": "LONGER把信息压到较小query/token路径；DNA保留历史token，让它们从少量请求token更新，并把更新开销在请求内候选间共享。",
+          "example": "教学例：两者都可共享K/V，但这不意味着都在每层删除历史token。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "no-cross-request-cache",
+          "level": "implementation",
+          "question": "同请求分批候选结果一致，能推出跨请求缓存也安全吗？",
+          "answer": "不能。新的请求U会改变历史状态，旧S/KV可能失效。本地只检验同一已准备request cache的批量与逐候选等价。",
+          "example": "教学例：user历史不变但搜索词变了，必须重建请求条件状态，而不是直接拿上次S2。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        }
+      ]
+    },
+    "recommendation:lser-serving": {
+      "questions": [
+        {
+          "id": "online-llm-disabled",
+          "level": "basics",
+          "question": "论文线上CTR+10.3%证明LLM向量有效吗？",
+          "answer": "不证明。线上实验的LLM辅助特征关闭；它验证从规则引擎迁移到学习召回与nearline路径。LLM增量只在离线对照中隔离。",
+          "example": "教学例：BERT4Rec+nearline赢规则不能自动推导出再打开LLM会在生产继续增益。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "strict-point-in-time",
+          "level": "mechanism",
+          "question": "label时间的同一条点击能否进自己的session输入？",
+          "answer": "不能。事件时间必须严格小于cutoff；session与history在session起点处分开，不使用当前label或未来行为。",
+          "example": "教学例：cutoff=10时，timestamp=10的正例和11的事件都排除，不能用小于等于。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "notellm-versus-user",
+          "level": "comparison",
+          "question": "与YouTube DNN候选生成相比，LSER新增什么而不是LLM直接生成推荐？",
+          "answer": "YouTube DNN聚合历史/上下文后用用户塔召回；LSER区分短长序列编码，增加可选LLM辅助特征与异步时效合同。两者仍可用用户向量查离线item索引，不是让LLM逐token生成item ID。",
+          "example": "教学例：关闭LSER的LLM向量后仍是学习双塔召回，在线A/B也正是这个未启用LLM的版本。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "no-sync-or-fake-vector",
+          "level": "implementation",
+          "question": "nearline刷新尚未完成时，本地接口会同步调用LLM或补零向量吗？",
+          "answer": "都不会。只选择请求时已写入且输入cutoff不超时的记录；必需session/history缺失会显式要求外部cold-start，LLM不完整则交兼容baseline fusion。",
+          "example": "教学例：request=10而written_at=12的向量不可读，即使as_of=9；这不表示论文规定了某固定TTL。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        }
+      ]
+    }
+  }
+}

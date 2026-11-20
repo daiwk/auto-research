@@ -7,7 +7,7 @@ hide:
 
 # 候选生成与搜索匹配
 
-[搜广推](index.md) / 160 个问题 · 40 篇论文
+[搜广推](index.md) / 164 个问题 · 41 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">160 个问题 · 40 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">164 个问题 · 41 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:lser-serving" data-paper-title="From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation 搜广推与 LLM 应用 Autodesk 2026-11-19 LSER在双塔召回的用户侧融合会话、较长期历史、请求特征与可选LLM语义向量。较重encoder异步nearline计算，在线请求只读取已完成向量并融合/ANN检索。LLM路径并不替代BERT4Rec式encoder，而提供同一时间窗口的补充语义视角。Fixed-v1 primary source 完整实验：成本过高，不复现（审查 DONE）。l0_interface: 仅低成本机制/接口诊断，不是完整能力复现。l0_interface: 仅低成本机制/接口诊断，不是完整能力复现。完整实验：成本过高，不复现（审查 DONE）。只实现显式事件的point-in-time切分与已完成缓存向量选择。调用方必须先将events/records隔离为同一user并完成资格过滤与catalog映射；本接口没有user_id权限隔离，不是完整生产防泄漏系统。缺必需向量时显式要求外部cold-start；LLM缺失或关闭时需外部兼容baseline fusion，不能自动改变治疗模型的输入维度。  大模型能力与推荐融合 近线用户表示与召回 搜广推 候选生成与搜索匹配 论文线上CTR+10.3%证明LLM向量有效吗？ 不证明。线上实验的LLM辅助特征关闭；它验证从规则引擎迁移到学习召回与nearline路径。LLM增量只在离线对照中隔离。 教学例：BERT4Rec+nearline赢规则不能自动推导出再打开LLM会在生产继续增益。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<span id="paper-recommendation-lser-serving-5c99505b" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-31e30281396110a0">论文线上CTR+10.3%证明LLM向量有效吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Alser-serving">From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Autodesk</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不证明。线上实验的LLM辅助特征关闭；它验证从规则引擎迁移到学习召回与nearline路径。LLM增量只在离线对照中隔离。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：BERT4Rec+nearline赢规则不能自动推导出再打开LLM会在生产继续增益。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26096v1">原论文</a> · <a href="../../../../recommendation-components/2611.26096-lser-serving/">实现解读</a> · <a href="#qa-31e30281396110a0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:lser-serving" data-paper-title="From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation 搜广推与 LLM 应用 Autodesk 2026-11-19 LSER在双塔召回的用户侧融合会话、较长期历史、请求特征与可选LLM语义向量。较重encoder异步nearline计算，在线请求只读取已完成向量并融合/ANN检索。LLM路径并不替代BERT4Rec式encoder，而提供同一时间窗口的补充语义视角。Fixed-v1 primary source 完整实验：成本过高，不复现（审查 DONE）。l0_interface: 仅低成本机制/接口诊断，不是完整能力复现。l0_interface: 仅低成本机制/接口诊断，不是完整能力复现。完整实验：成本过高，不复现（审查 DONE）。只实现显式事件的point-in-time切分与已完成缓存向量选择。调用方必须先将events/records隔离为同一user并完成资格过滤与catalog映射；本接口没有user_id权限隔离，不是完整生产防泄漏系统。缺必需向量时显式要求外部cold-start；LLM缺失或关闭时需外部兼容baseline fusion，不能自动改变治疗模型的输入维度。  大模型能力与推荐融合 近线用户表示与召回 搜广推 候选生成与搜索匹配 label时间的同一条点击能否进自己的session输入？ 不能。事件时间必须严格小于cutoff；session与history在session起点处分开，不使用当前label或未来行为。 教学例：cutoff=10时，timestamp=10的正例和11的事件都排除，不能用小于等于。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-f9082bffd40d41d2">label时间的同一条点击能否进自己的session输入？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Alser-serving">From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Autodesk</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。事件时间必须严格小于cutoff；session与history在session起点处分开，不使用当前label或未来行为。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：cutoff=10时，timestamp=10的正例和11的事件都排除，不能用小于等于。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26096v1">原论文</a> · <a href="../../../../recommendation-components/2611.26096-lser-serving/">实现解读</a> · <a href="#qa-f9082bffd40d41d2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:lser-serving" data-paper-title="From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation 搜广推与 LLM 应用 Autodesk 2026-11-19 LSER在双塔召回的用户侧融合会话、较长期历史、请求特征与可选LLM语义向量。较重encoder异步nearline计算，在线请求只读取已完成向量并融合/ANN检索。LLM路径并不替代BERT4Rec式encoder，而提供同一时间窗口的补充语义视角。Fixed-v1 primary source 完整实验：成本过高，不复现（审查 DONE）。l0_interface: 仅低成本机制/接口诊断，不是完整能力复现。l0_interface: 仅低成本机制/接口诊断，不是完整能力复现。完整实验：成本过高，不复现（审查 DONE）。只实现显式事件的point-in-time切分与已完成缓存向量选择。调用方必须先将events/records隔离为同一user并完成资格过滤与catalog映射；本接口没有user_id权限隔离，不是完整生产防泄漏系统。缺必需向量时显式要求外部cold-start；LLM缺失或关闭时需外部兼容baseline fusion，不能自动改变治疗模型的输入维度。  大模型能力与推荐融合 近线用户表示与召回 搜广推 候选生成与搜索匹配 与YouTube DNN候选生成相比，LSER新增什么而不是LLM直接生成推荐？ YouTube DNN聚合历史/上下文后用用户塔召回；LSER区分短长序列编码，增加可选LLM辅助特征与异步时效合同。两者仍可用用户向量查离线item索引，不是让LLM逐token生成item ID。 教学例：关闭LSER的LLM向量后仍是学习双塔召回，在线A/B也正是这个未启用LLM的版本。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-02d250e16d18760b">与YouTube DNN候选生成相比，LSER新增什么而不是LLM直接生成推荐？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Alser-serving">From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Autodesk</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>YouTube DNN聚合历史/上下文后用用户塔召回；LSER区分短长序列编码，增加可选LLM辅助特征与异步时效合同。两者仍可用用户向量查离线item索引，不是让LLM逐token生成item ID。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：关闭LSER的LLM向量后仍是学习双塔召回，在线A/B也正是这个未启用LLM的版本。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26096v1">原论文</a> · <a href="../../../../recommendation-components/2611.26096-lser-serving/">实现解读</a> · <a href="#qa-02d250e16d18760b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:lser-serving" data-paper-title="From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation 搜广推与 LLM 应用 Autodesk 2026-11-19 LSER在双塔召回的用户侧融合会话、较长期历史、请求特征与可选LLM语义向量。较重encoder异步nearline计算，在线请求只读取已完成向量并融合/ANN检索。LLM路径并不替代BERT4Rec式encoder，而提供同一时间窗口的补充语义视角。Fixed-v1 primary source 完整实验：成本过高，不复现（审查 DONE）。l0_interface: 仅低成本机制/接口诊断，不是完整能力复现。l0_interface: 仅低成本机制/接口诊断，不是完整能力复现。完整实验：成本过高，不复现（审查 DONE）。只实现显式事件的point-in-time切分与已完成缓存向量选择。调用方必须先将events/records隔离为同一user并完成资格过滤与catalog映射；本接口没有user_id权限隔离，不是完整生产防泄漏系统。缺必需向量时显式要求外部cold-start；LLM缺失或关闭时需外部兼容baseline fusion，不能自动改变治疗模型的输入维度。  大模型能力与推荐融合 近线用户表示与召回 搜广推 候选生成与搜索匹配 nearline刷新尚未完成时，本地接口会同步调用LLM或补零向量吗？ 都不会。只选择请求时已写入且输入cutoff不超时的记录；必需session/history缺失会显式要求外部cold-start，LLM不完整则交兼容baseline fusion。 教学例：request=10而written_at=12的向量不可读，即使as_of=9；这不表示论文规定了某固定TTL。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-30d0490ae82d6b02">nearline刷新尚未完成时，本地接口会同步调用LLM或补零向量吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Alser-serving">From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Autodesk</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>都不会。只选择请求时已写入且输入cutoff不超时的记录；必需session/history缺失会显式要求外部cold-start，LLM不完整则交兼容baseline fusion。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：request=10而written_at=12的向量不可读，即使as_of=9；这不表示论文规定了某固定TTL。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26096v1">原论文</a> · <a href="../../../../recommendation-components/2611.26096-lser-serving/">实现解读</a> · <a href="#qa-30d0490ae82d6b02">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:yuanbao-rubric" data-paper-title="From Relevance to Utility: Rubric Alignment in Yuanbao Search" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Relevance to Utility: Rubric Alignment in Yuanbao Search 搜广推与 LLM 应用 Tencent 2026-11-17 传统逐文档相关性不等于给下游推理提供有用证据。元宝先生成查询特定的加权正向标准和扣分标准，用蒸馏标签统一训练召回与四头排序，再用集合奖励训练选择器。低于组均值的轨迹并不接受负优势惩罚，而是按奖励差蒸馏组内最佳轨迹。 成本过高，不复现（审查DONE）；诊断检查最佳轨迹有蒸馏梯度、失败轨迹没有模仿梯度、奖励不反传、padding 梯度为零；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。没有运行 rubric 生成、DeepSeek judge、Qwen 编码器或真实搜索。诊断检查最佳轨迹有蒸馏梯度、失败轨迹没有模仿梯度、奖励不反传、padding 梯度为零；它们不是答案准确率。  检索与匹配 大模型与搜索融合 搜广推 候选生成与搜索匹配 为什么逐文档相关性不够？ 集合需要覆盖互补信息并避开任一有害证据，单文档高相关不能保证集合效用。 教学例：两篇分别覆盖价格与性能仍可共同满足正向标准，但其中任一含过期价格就触发扣分。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
 <span id="paper-recommendation-yuanbao-rubric-d17191c2" class="ar-learning-paper-anchor"></span>

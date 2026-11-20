@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:hisa": {
+      "questions": [
+        {
+          "id": "pair-not-token",
+          "level": "basics",
+          "question": "HiSA稀疏的是token还是点积维度？",
+          "answer": "主要是每个点积里的RoPE二维频率对；同一key可以只剩慢频部分，而不是整token统一保留或删除。",
+          "example": "教学例：一个远处key可舍弃最快的8对而保留后24对；只有最后一对也过期才整key退出。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "unwrapped-strict-angle",
+          "level": "mechanism",
+          "question": "旋转已经转完一圈，频率对能重新参与吗？",
+          "answer": "不能。门槛比较未绕回的Delta乘theta，而且用严格小于；周期性cos相同不代表该项重新进入。",
+          "example": "教学例：theta=1、Phi=1时，距离1已排除；距离7也不会因为7模2pi小于1而恢复。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "rope-versus-score",
+          "level": "comparison",
+          "question": "与RoFormer保留旋转、再按token截窗口有什么区别？",
+          "answer": "RoFormer本身使用所有对；整token窗口只能整列删key。HiSA在每个距离对不同频率有不同保留窗口，仍统一除以sqrt(d)。",
+          "example": "教学例：d=64但只剩16个分量时仍除以8，不能擅自改成除以4。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "expired-key-softmax",
+          "level": "implementation",
+          "question": "为什么不能把过期key分数写0后照常softmax？",
+          "answer": "零logit仍有正概率，会把本应不可见的value读回来。必须将整key屏蔽；完全无可用key的query明确报错。位置差也须用已验证的有符号整数计算，不能让uint8未来差值回绕；uint64越界在转换前拒绝。",
+          "example": "教学例：过期value=100、当前value=3；正确输出只读3，零logit会污染它。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        }
+      ]
+    },
+    "foundation-models:canon-layers-scale": {
+      "questions": [
+        {
+          "id": "horizontal-residual",
+          "level": "basics",
+          "question": "Canon所说horizontal residual连接什么？",
+          "answer": "它在同一通道沿时间连接当前token和最近几个token，而不是只在深度方向跳层。",
+          "example": "教学例：kernel=4时，时刻t能直接组合t、t-1、t-2、t-3的同一通道。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "gate-rank-location",
+          "level": "mechanism",
+          "question": "GLA5/GDN2的rank16约束能否延伸到激活后的gate？",
+          "answer": "不能。低秩约束属于线性乘积G1G2，逐元素SiLU之后不再保证矩阵低秩；不能据此把整个激活门当低秩算子。",
+          "example": "教学例：对秩1矩阵逐元素施加非线性，通常可得到更高秩矩阵。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "tokens-versus-time",
+          "level": "comparison",
+          "question": "30% token节省能否直接称训练快30%？",
+          "answer": "不能。每step计算可能增加，还要固定达到的技能或分数。原文用约13%朴素step开销举例时，0.7乘1.13约0.79，对应约21%时间节省。",
+          "example": "教学例：token少30%但每step慢13%，总时长不是原来的70%。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "review-not-run",
+          "level": "implementation",
+          "question": "为什么这次没有为Canon写一个小卷积并报复现完成？",
+          "answer": "小卷积不能验收本文关于规模、充分调参和技能差异的中心实证结论。完整64组预训练昂贵，因此明确只收录，不生成proxy指标或Evolve资格。",
+          "example": "教学例：32维随机输入上的卷积形状正确，不是8B/1T达到同等MMLU的证据。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        }
+      ]
+    },
+    "recommendation:antom-3-in-1": {
+      "questions": [
+        {
+          "id": "three-modalities",
+          "level": "basics",
+          "question": "3-in-1指什么，图encoder也每笔交易重跑吗？",
+          "answer": "指交易序列、表格字段和关系图三种模态。图encoder在微调时冻结、离线产出表示，在线只查满足时间条件的图向量。",
+          "example": "教学例：新交易在线编码其历史和字段，但不能用交易发生后才形成的关系图作特征。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "fixed-budget-ties",
+          "level": "mechanism",
+          "question": "固定0.5%干预预算时，同分边界怎么处理？",
+          "answer": "附录按总体权重分配边界的分数配额，使选中权重恰好占q；不能因大量相同历史同分而无意扩大预算。",
+          "example": "教学例：剩10单位预算而同分组有20单位，每个样本分配0.5，不能全选20单位。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "portfolio-versus-stage",
+          "level": "comparison",
+          "question": "为什么不能把37.88%和26.09%当成同一指标的重复验证？",
+          "answer": "前者是业务组合总体损失率相对变化，后者是II阶段CB率按共同日期重加权的相对变化；分子、样本聚合和阶段不同。",
+          "example": "教学例：赔付争议追回会改变最终损失，但不一定同幅改变原始CB金额。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "not-open-recipe",
+          "level": "implementation",
+          "question": "有公开IBM数据和生产A/B，为什么仍不写完整模型复现？",
+          "answer": "公开评测数据不等于公开预训练数据、结构和训练配方。§2明确省略这些细节，因此只收录证据，不用便宜proxy代替定义性模型。",
+          "example": "教学例：在IBM上训练一个三路MLP不能验证私有7B模型的37.88%线上损失改善。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        }
+      ]
+    }
+  }
+}

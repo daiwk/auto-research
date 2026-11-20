@@ -7,7 +7,7 @@ hide:
 
 # 学习信号、多任务与反馈偏差
 
-[搜广推](index.md) / 148 个问题 · 37 篇论文
+[搜广推](index.md) / 152 个问题 · 38 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">148 个问题 · 37 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">152 个问题 · 38 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:antom-3-in-1" data-paper-title="Antom 3-in-1 Transformer: A Payment Foundation Model" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Antom 3-in-1 Transformer: A Payment Foundation Model 搜广推与 LLM 应用 Ant International 2026-11-19 Antom把用户/卡/设备历史、当前交易字段和滚动用户图分开编码，再用任务query、共享注意力与稀疏专家做多任务融合。序列先做prefix-future对比，图先做视图对比及关系计数重建；下游图encoder冻结，图表示离线生成并按交易时间查询，其余主要模块在线打分。Fixed-v1 primary source 没有可执行复现. 完整实验：成本过高，不复现（审查 DONE）。仅审查收录；没有可执行复现. 完整实验：成本过高，不复现（审查 DONE）。只收录经核对的生产证据、方法边界、原图和成本；没有本地模型、训练/推理代码、metrics、GPU回执或Evolve operator。公开IBM/图benchmark的存在不补全缺失配置和私有训练链路；不以小型拼接/MLP冒充7B支付基础模型。  内容理解、审核与风险控制 支付交易风险 搜广推 学习信号、多任务与反馈偏差 3-in-1指什么，图encoder也每笔交易重跑吗？ 指交易序列、表格字段和关系图三种模态。图encoder在微调时冻结、离线产出表示，在线只查满足时间条件的图向量。 教学例：新交易在线编码其历史和字段，但不能用交易发生后才形成的关系图作特征。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<span id="paper-recommendation-antom-3-in-1-f6dcb7f5" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f376988655835379">3-in-1指什么，图encoder也每笔交易重跑吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aantom-3-in-1">Antom 3-in-1 Transformer: A Payment Foundation Model</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Ant International</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>指交易序列、表格字段和关系图三种模态。图encoder在微调时冻结、离线产出表示，在线只查满足时间条件的图向量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：新交易在线编码其历史和字段，但不能用交易发生后才形成的关系图作特征。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25403v1">原论文</a> · <a href="../../../../recommendation-components/2611.25403-antom-3-in-1/">实现解读</a> · <a href="#qa-f376988655835379">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:antom-3-in-1" data-paper-title="Antom 3-in-1 Transformer: A Payment Foundation Model" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Antom 3-in-1 Transformer: A Payment Foundation Model 搜广推与 LLM 应用 Ant International 2026-11-19 Antom把用户/卡/设备历史、当前交易字段和滚动用户图分开编码，再用任务query、共享注意力与稀疏专家做多任务融合。序列先做prefix-future对比，图先做视图对比及关系计数重建；下游图encoder冻结，图表示离线生成并按交易时间查询，其余主要模块在线打分。Fixed-v1 primary source 没有可执行复现. 完整实验：成本过高，不复现（审查 DONE）。仅审查收录；没有可执行复现. 完整实验：成本过高，不复现（审查 DONE）。只收录经核对的生产证据、方法边界、原图和成本；没有本地模型、训练/推理代码、metrics、GPU回执或Evolve operator。公开IBM/图benchmark的存在不补全缺失配置和私有训练链路；不以小型拼接/MLP冒充7B支付基础模型。  内容理解、审核与风险控制 支付交易风险 搜广推 学习信号、多任务与反馈偏差 固定0.5%干预预算时，同分边界怎么处理？ 附录按总体权重分配边界的分数配额，使选中权重恰好占q；不能因大量相同历史同分而无意扩大预算。 教学例：剩10单位预算而同分组有20单位，每个样本分配0.5，不能全选20单位。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-272cf21c0a3a3c1c">固定0.5%干预预算时，同分边界怎么处理？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aantom-3-in-1">Antom 3-in-1 Transformer: A Payment Foundation Model</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Ant International</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>附录按总体权重分配边界的分数配额，使选中权重恰好占q；不能因大量相同历史同分而无意扩大预算。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：剩10单位预算而同分组有20单位，每个样本分配0.5，不能全选20单位。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25403v1">原论文</a> · <a href="../../../../recommendation-components/2611.25403-antom-3-in-1/">实现解读</a> · <a href="#qa-272cf21c0a3a3c1c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:antom-3-in-1" data-paper-title="Antom 3-in-1 Transformer: A Payment Foundation Model" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Antom 3-in-1 Transformer: A Payment Foundation Model 搜广推与 LLM 应用 Ant International 2026-11-19 Antom把用户/卡/设备历史、当前交易字段和滚动用户图分开编码，再用任务query、共享注意力与稀疏专家做多任务融合。序列先做prefix-future对比，图先做视图对比及关系计数重建；下游图encoder冻结，图表示离线生成并按交易时间查询，其余主要模块在线打分。Fixed-v1 primary source 没有可执行复现. 完整实验：成本过高，不复现（审查 DONE）。仅审查收录；没有可执行复现. 完整实验：成本过高，不复现（审查 DONE）。只收录经核对的生产证据、方法边界、原图和成本；没有本地模型、训练/推理代码、metrics、GPU回执或Evolve operator。公开IBM/图benchmark的存在不补全缺失配置和私有训练链路；不以小型拼接/MLP冒充7B支付基础模型。  内容理解、审核与风险控制 支付交易风险 搜广推 学习信号、多任务与反馈偏差 为什么不能把37.88%和26.09%当成同一指标的重复验证？ 前者是业务组合总体损失率相对变化，后者是II阶段CB率按共同日期重加权的相对变化；分子、样本聚合和阶段不同。 教学例：赔付争议追回会改变最终损失，但不一定同幅改变原始CB金额。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-288862733467f54b">为什么不能把37.88%和26.09%当成同一指标的重复验证？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aantom-3-in-1">Antom 3-in-1 Transformer: A Payment Foundation Model</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Ant International</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>前者是业务组合总体损失率相对变化，后者是II阶段CB率按共同日期重加权的相对变化；分子、样本聚合和阶段不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：赔付争议追回会改变最终损失，但不一定同幅改变原始CB金额。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25403v1">原论文</a> · <a href="../../../../recommendation-components/2611.25403-antom-3-in-1/">实现解读</a> · <a href="#qa-288862733467f54b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:antom-3-in-1" data-paper-title="Antom 3-in-1 Transformer: A Payment Foundation Model" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Antom 3-in-1 Transformer: A Payment Foundation Model 搜广推与 LLM 应用 Ant International 2026-11-19 Antom把用户/卡/设备历史、当前交易字段和滚动用户图分开编码，再用任务query、共享注意力与稀疏专家做多任务融合。序列先做prefix-future对比，图先做视图对比及关系计数重建；下游图encoder冻结，图表示离线生成并按交易时间查询，其余主要模块在线打分。Fixed-v1 primary source 没有可执行复现. 完整实验：成本过高，不复现（审查 DONE）。仅审查收录；没有可执行复现. 完整实验：成本过高，不复现（审查 DONE）。只收录经核对的生产证据、方法边界、原图和成本；没有本地模型、训练/推理代码、metrics、GPU回执或Evolve operator。公开IBM/图benchmark的存在不补全缺失配置和私有训练链路；不以小型拼接/MLP冒充7B支付基础模型。  内容理解、审核与风险控制 支付交易风险 搜广推 学习信号、多任务与反馈偏差 有公开IBM数据和生产A/B，为什么仍不写完整模型复现？ 公开评测数据不等于公开预训练数据、结构和训练配方。§2明确省略这些细节，因此只收录证据，不用便宜proxy代替定义性模型。 教学例：在IBM上训练一个三路MLP不能验证私有7B模型的37.88%线上损失改善。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-d53985241b362928">有公开IBM数据和生产A/B，为什么仍不写完整模型复现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aantom-3-in-1">Antom 3-in-1 Transformer: A Payment Foundation Model</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Ant International</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>公开评测数据不等于公开预训练数据、结构和训练配方。§2明确省略这些细节，因此只收录证据，不用便宜proxy代替定义性模型。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：在IBM上训练一个三路MLP不能验证私有7B模型的37.88%线上损失改善。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25403v1">原论文</a> · <a href="../../../../recommendation-components/2611.25403-antom-3-in-1/">实现解读</a> · <a href="#qa-d53985241b362928">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:cotti" data-paper-title="COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift 搜广推与 LLM 应用 Alibaba Group 2026-11-17 COTTI把训练时历史偏好连续性和上线时促销概率修正分开。CPC比较同一用户常态/促销双视图并用可微门控调节一致性；RW按相对历史距离重加权但截断其梯度；ABA在冻结预测器的logit上添加事件强度与预测头方差决定的有界修正。 成本过高，不复现（审查DONE）；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。本地只运行CPC/RW/ABA张量；没有历史构造、缺失常态视图回退或服务融合策略。保留paid-item新类目召回下降的作者负结果，不能拿整体AUC覆盖探索代价。  训练目标与决策优化 分布漂移与校准 搜广推 学习信号、多任务与反馈偏差 为什么ABA不直接训练编码器？ 它是冻结预测器后的事件logit修正；训练表征由CPC和RW承担，避免把校准与表征学习混在一起。 教学例：促销高峰只改ABA的事件幅度，不因此更新历史编码器。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
 <span id="paper-recommendation-cotti-3f90410b" class="ar-learning-paper-anchor"></span>

@@ -7,7 +7,7 @@ hide:
 
 # 教师更强仍可能教错：信息、兼容性与成功行为保护
 
-[LLM 后训练](../index.md) · 更新 2026-11-19 · 56 篇主题资料 / 15 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-20 · 57 篇主题资料 / 16 篇重点对照
 
 教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。
 
@@ -40,6 +40,7 @@ hide:
 | [Behavioral Canaries: Auditing Private Retrieved Context Usage in RL Fine-Tuning](../../../post-training/2604.22191-behavioral-canaries/README.md) · [原始来源](https://arxiv.org/abs/2604.22191v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 用held-out clean/trigger文档对的canary序列logprob差测条件行为影响，再按独立训练策略统计。 | RAGCompass的答案F1只作离线路由蒸馏监督，运行时scorer不读gold；Canaries的配对目标属于审计测量，不能据此给actor答案，也不把有用证据或单次风格变化判作违规。 |
 | [LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation](../../../post-training/2611.20674-leaf-opd/README.md) · [原始来源](https://arxiv.org/abs/2611.20674v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | SS1/SS0.5教师持续监督诊断、teacher-only privileged-context边界、forget/retain分离forward-KL。 | 二者都隔离额外教师上下文，但LCS提供任务兼容成功轨迹纠正失败；LEAF用非披露上下文让teacher压低目标事实概率，并用retain支路保留效用。 |
 | [HINT-WAM: Hindsight-Informed Training for World Action Models](../../../post-training/2611.24789-hint-wam/README.md) · [原始来源](https://arxiv.org/abs/2611.24789v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 只收录同源hindsight teacher、学生ODE状态上的energy-score与BC anchor、成本和限制。无本地模型/算子/指标，不用静态动作样本替代真实WAM蒸馏。 | Video-OPSD用人工证据帧为文本token提供特权自教师监督；HINT-WAM的特权是示范未来，目标是动作chunk分布而非文本token，且teacher必须与学生同一backbone。旧Video-OPSD的证据视图checkpoint审计不等于HINT-WAM训练。 |
+| [VisAlloc: Allocating Visual Supervision for On-Policy Self-Distillation](../../../post-training/2611.25069-visalloc/README.md) · [原始来源](https://arxiv.org/abs/2611.25069v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 训练用sample verdict过滤、显式logits上的同support top100+tail JSD、冻结prior与模板构建、有效位置分位数、完整OR/shared gates、定预算逆频率bonus、positive-only JSD和detached importance/correction。fp16/bf16在log-softmax、差值与分位数统计前升为fp32，float64保持精度；随机及有限±60000极值负控检查有限输出、冻结教师与有效学生梯度。没有全图VLM、几何裁剪器、教师答案判分、EMA模型更新、rollout或trainer；提供张量不等于执行这些核心网络。 | 已有VAG以视觉对比和教师修正的同号门控，给verifier的GRPO advantage加有界项；VisAlloc不以这个同号规则调制verifier，而是给正教师JSD分配连续base和守恒bonus。不能只因都使用双视图EMA教师就复用其loss或把VAG资料条目改成已实现。 |
 
 </div>
 
@@ -110,6 +111,12 @@ RAGCompass从各检索器证据组带来的答案效用构造候选分布，训�
 Video-OPSD用人工证据帧为文本token提供特权自教师监督；HINT-WAM的特权是示范未来，目标是动作chunk分布而非文本token，且teacher必须与学生同一backbone。旧Video-OPSD的证据视图checkpoint审计不等于HINT-WAM训练。 完整方法需要真实backbone、未来teacher训练和学生ODE轨迹。原文测得8GPU×71.6小时；静态随机动作的energy-score公式不等于该训练链。因此只收录并审查DONE，无待验收GPU或自动重试。
 
 对照来源：[hint-wam](../../../post-training/2611.24789-hint-wam/README.md) · [video-opsd](../../../post-training/2608.27065-video-opsd/README.md)
+
+### VisAlloc与VAG都双视图，loss可以通用吗？
+
+已有VAG以视觉对比和教师修正的同号门控，给verifier的GRPO advantage加有界项；VisAlloc不以这个同号规则调制verifier，而是给正教师JSD分配连续base和守恒bonus。不能只因都使用双视图EMA教师就复用其loss或把VAG资料条目改成已实现。 分位数和频率重分配只看有效且有负视图的位置；缺负视图的有效响应仍以weight1做基线蒸馏，padding损失与梯度为0。教师与权重构造必须冻结。半精度需在log-softmax和差值前升fp32，不能等溢出后再cast；float64保持精度。
+
+对照来源：[visalloc](../../../post-training/2611.25069-visalloc/README.md) · [visually-attributable-opd](../../../post-training/2610.26856-vag/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -245,9 +252,23 @@ Video-OPSD用人工证据帧为文本token提供特权自教师监督；HINT-WAM
 
     对照来源：[hint-wam](../../../post-training/2611.24789-hint-wam/README.md) · [video-opsd](../../../post-training/2608.27065-video-opsd/README.md)
 
+### VisAlloc与VAG都双视图，loss可以通用吗？ {#cross-nov20-visalloc}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。VAG保留verifier advantage并同号门控有界修正；VisAlloc对positive-teacher JSD做base/bonus权重，且bonus同时受prior、template、JSD门控制。
+
+    **教学例子：** 教学例：在VisAlloc里teacher分布不变而bonus重分配会改JSD梯度份额；这不是在VAG的verifier优势上加奖励。
+
+    对照来源：[visalloc](../../../post-training/2611.25069-visalloc/README.md) · [visually-attributable-opd](../../../post-training/2610.26856-vag/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-20** · 训练用sample verdict过滤、显式logits上的同support top100+tail JSD、冻结prior与模板构建、有效位置分位数、完整OR/shared gates、定预算逆频率bonus、positive-only JSD和detached importance/correction。fp16/bf16在log-softmax、差值与分位数统计前升为fp32，float64保持精度；随机及有限±60000极值负控检查有限输出、冻结教师与有效学生梯度。没有全图VLM、几何裁剪器、教师答案判分、EMA模型更新、rollout或trainer；提供张量不等于执行这些核心网络。 完整实验成本过高不复现；组件不构成能力晋级。
+
+涉及：[visalloc](../../../post-training/2611.25069-visalloc/README.md) · [visually-attributable-opd](../../../post-training/2610.26856-vag/README.md)
 
 **2026-11-19** · 只收录同源hindsight teacher、学生ODE状态上的energy-score与BC anchor、成本和限制。无本地模型/算子/指标，不用静态动作样本替代真实WAM蒸馏。 完整实验高成本不复现；组件或资料不构成能力晋级。
 
@@ -285,7 +306,7 @@ Video-OPSD用人工证据帧为文本token提供特权自教师监督；HINT-WAM
 
 覆盖 47 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 56 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 57 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -345,6 +366,7 @@ Video-OPSD用人工证据帧为文本token提供特权自教师监督；HINT-WAM
 - [Behavioral Canaries: Auditing Private Retrieved Context Usage in RL Fine-Tuning](../../../post-training/2604.22191-behavioral-canaries/README.md)
 - [LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation](../../../post-training/2611.20674-leaf-opd/README.md)
 - [HINT-WAM: Hindsight-Informed Training for World Action Models](../../../post-training/2611.24789-hint-wam/README.md)
+- [VisAlloc: Allocating Visual Supervision for On-Policy Self-Distillation](../../../post-training/2611.25069-visalloc/README.md)
 
 </details>
 

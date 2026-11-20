@@ -4,6 +4,8 @@
 
 ## 2026
 
+- **2026-11-19** — [LoopRoute](../2611.25363-looproute/README.md)：重复公共state-action对触发两步LLM接管；仅CPU控制核，完整模型评测不复现。
+
 - **2026-11-18** — [EgoJev](../2611.24616-egojev/README.md)：显式决策概率的窗口融合和分位数选帧；CPU后处理组件，完整VLM视频矩阵不复现。
 - **2026-11-18** — [Jeveration](../2611.24738-jeveration/README.md)：共享随机状态的一次前向图像code生成；完整多日训练不复现，仅资料收录。
 

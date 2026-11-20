@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:buggymle-cci/patch-not-size": {
+      "source_sha256": "e20cd26258fb38aade4ea0124605b5268d0beac373465b431522eac76585dd66",
+      "reviewed": true,
+      "fields": {
+        "question": "Does CCI only measure repository size?",
+        "answer": "No. Ten features form repository, dependency and patch groups; patch complexity dominates, and the repository coefficient is conditional.",
+        "example": "Teaching example: a one-line fix in a million-line repository may be easier than a change spanning twenty files."
+      }
+    },
+    "qa/agent-research:buggymle-cci/frozen-scale": {
+      "source_sha256": "826f81f62cef480e9c9847db6bf81ba8c1c4234db1f6f03c4ef712f4fa9fa2c7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must new tasks retain the reference scale?",
+        "answer": "Feature/group scales, coefficients and min-max bounds come from fixed reference benchmarks. Refitting on new tasks changes the scale and prevents comparisons.",
+        "example": "Teaching example: mapping every batch's hardest task to1 hides an overall difficulty increase."
+      }
+    },
+    "qa/agent-research:buggymle-cci/cci-vs-ablation": {
+      "source_sha256": "8daaf775b4c1ab431ae885376e65653de63018eea3bbbd72ec7ff1afb7e6df8e",
+      "reviewed": true,
+      "fields": {
+        "question": "Can CCI replace MLE-STAR's ablation score?",
+        "answer": "No. CCI models structural difficulty; MLE-STAR uses execution and validation ablations to choose code changes. Structural difficulty is not model quality.",
+        "example": "Teaching example: a difficult cross-file repair does not imply low validation AUC."
+      }
+    },
+    "qa/agent-research:buggymle-cci/calibration-not-invented": {
+      "source_sha256": "a2b0e637a7f1b4224afec112fa6f8d946b4a5934e5837ccd4acad2b077cb5f2e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does the interface not output the author's fitted success rates?",
+        "answer": "No loadable complete calibration is released. Callers supply fixed parameters; synthetic calibration tests arithmetic only, and success is null without an intercept.",
+        "example": "Teaching example: μ=0 and σ=1 are test inputs, not the authors' fitted constants."
+      }
+    },
+    "qa/system-one:looproute/pair-not-action": {
+      "source_sha256": "8ab1467110e7b80623f8bde3da7bed2d1a19d0248e40bf6ec9e7ca7875be1094",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not count repeated actions alone?",
+        "answer": "The same action may be needed in different states. Recurrence uses a public state/action pair, excluding ever-changing step/history.",
+        "example": "Teaching example: looking once in each of two rooms is not a loop at one location."
+      }
+    },
+    "qa/system-one:looproute/third-proposal": {
+      "source_sha256": "dae52295400a50b4d6f1e1afb0f0cecf9c4153d09515c23920b5ff74916eb6ae",
+      "reviewed": true,
+      "fields": {
+        "question": "Does threshold2 intercept the second action?",
+        "answer": "No. It counts completed executions: two run, then the third proposal is intercepted without an environment step. The first LLM action consumes one of two takeover slots.",
+        "example": "Teaching example: after look/look, another look is intercepted for LLM open, leaving one slot."
+      }
+    },
+    "qa/system-one:looproute/recurrence-vs-certainty": {
+      "source_sha256": "4906ce0b191ebbf99cd3240c0673ff70f433c8b9c4c7342b867eccd09e33b513",
+      "reviewed": true,
+      "fields": {
+        "question": "Does it use the same evidence as Selective Reasoning?",
+        "answer": "No. LoopRoute observes recurring executions; Selective Reasoning uses frozen readout and benefit/certainty. Recurrence is not uncertainty, and certainty is not progress.",
+        "example": "Teaching example: confidently reopening a locked door can still trigger recurrence routing."
+      }
+    },
+    "qa/system-one:looproute/adapter-specific-counters": {
+      "source_sha256": "8e86903d01cefc1a95c150a3ac8aa1ded68cba406d5afd8e2b1d311031375c30",
+      "reviewed": true,
+      "fields": {
+        "question": "Can all environments share one reset rule?",
+        "answer": "No. ALFWorld counts decision-model actions and clears on new information or handoff. MapReader/TextWorld count both policies throughout the episode. Only the trigger/bounded-handoff framework is shared.",
+        "example": "Teaching example: two LLM open actions count in MapReader but not in ALFWorld."
+      }
+    },
+    "qa/agent-research:grepmem/context-not-disk": {
+      "source_sha256": "ec81b4a98efbb0d774ee9b3e87197cd3c384b1be586028e684b96a19fb2b400d",
+      "reviewed": true,
+      "fields": {
+        "question": "Does GrepMem shrink the raw conversation log?",
+        "answer": "No. It compacts working context while retaining messages, tool results and summaries in a growing log. Lossless means retention, not raw-log disk reduction.",
+        "example": "Teaching example: a summarized-away order ID can be recovered because the original text still occupies storage."
+      }
+    },
+    "qa/agent-research:grepmem/grep-after-compact": {
+      "source_sha256": "24dc8588f63b789e12aa88260e8834934cb57c6ce08bf831ac864bbfb334c486",
+      "reviewed": true,
+      "fields": {
+        "question": "Why exclude earlier grep outputs from later searches?",
+        "answer": "They copy earlier content and would recursively inflate matches. They remain logged but are skipped, and grep is enabled only after first compaction.",
+        "example": "Teaching example: after finding Alpha once, a second query counts the original Alpha, not its quoted copy."
+      }
+    },
+    "qa/agent-research:grepmem/raw-vs-layered": {
+      "source_sha256": "31391b5eaa8fd59277c761a852bd8b382a9d3ab20821372246792e1f70974c65",
+      "reviewed": true,
+      "fields": {
+        "question": "How does its memory differ from MemGPT?",
+        "answer": "MemGPT manages layers and paging; GrepMem preserves raw text and retrieves through regex without a semantic index. Neither storage unit test proves model recall.",
+        "example": "Teaching example: grepping an order ID needs no prior extraction into a structured memory entry."
+      }
+    },
+    "qa/agent-research:grepmem/bounded-regex": {
+      "source_sha256": "8c7ca82400bb84cb16818977e04ea9953a26155bcc888b9143fe7842d6177829",
+      "reviewed": true,
+      "fields": {
+        "question": "Is max_matches enough to bound the tool?",
+        "answer": "No. It also needs match offsets, up to three context lines,6K output,300-character line clipping, regex errors and a ten-second stop. A bad pattern must not stall the whole agent.",
+        "example": "Teaching example: catastrophic (a+)+$ backtracking should time out the worker while normal queries remain usable."
+      }
+    }
+  }
+}

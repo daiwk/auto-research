@@ -1,0 +1,53 @@
+{
+  "key": "buggymle-cci",
+  "domain": "agent-research",
+  "title": "BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection",
+  "first_author": "John Wu",
+  "first_author_affiliation": "Google Research / University of Illinois Urbana-Champaign",
+  "published_at": "2026-11-18T19:26:15Z",
+  "published": "2026-11-18",
+  "announced_on": "2026-11-20",
+  "paper_url": "https://arxiv.org/abs/2611.25088v1",
+  "reviewed_version": "v1",
+  "reviewed_arxiv_id": "2611.25088v1",
+  "reviewed_version_url": "https://arxiv.org/pdf/2611.25088v1",
+  "detail_path": "agent-research/2611.25088-buggymle-cci/README.md",
+  "topic": [
+    "执行框架与自改进",
+    "buggymle-cci"
+  ],
+  "verified_priority_organizations": [
+    "Google"
+  ],
+  "code": null,
+  "code_status": "固定v1及本轮核对来源未发现可核验的论文专用公开方法源码；不把引用依赖算开源。",
+  "code_license": null,
+  "adapter": null,
+  "priority": "P0",
+  "intake_class": "newly_announced",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.agent_research.buggymle_cci.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.buggymle_cci import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l0_interface",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "gpu_validation_artifact": null,
+  "review_done": true,
+  "full_experiment_review_done": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/pdf/2611.25088v1",
+    "available_resource": "one A100 or A30, or local Mac",
+    "basis": "完整研究涉及222仓库、6600+变体、多次完整ML执行、前沿模型Oracle/评审和Qwen3.5-9B的五阶段LoRA SFT/GRPO；评测episode最高8小时。此规模明显超过单A100/A30或Mac廉价验证预算，不下载数据/权重，不启动探跑；本地只运行毫秒级公式控制。",
+    "decision": "成本过高，不复现（审查 DONE）；仅低成本CPU组件。"
+  },
+  "summary": "BuggyMLE先审核可运行、指标稳定且对代码变化敏感的ML仓库，再让Injector注入不同规模的错误。Oracle通过逐个恢复变动找最小恢复集合，再把每个改动单独应用到干净仓库，筛出确有独立指标影响的错误。Solver必须在多文件仓库里真实修复；评价同时检查执行、指标恢复和逐错误语义修复，不能把补偿性调参当修好了全部bug。",
+  "fidelity_note": "本地仅实现给定十项特征的benchmark中位数、固定校准投影和可选的稳定logistic读数。没有AST/依赖图抽取、Injector、Oracle、LLM solver、校准拟合或模型训练。完整μ/σ、组尺度、截距与参考边界未在原文公开成可直接加载文件，因此API强制调用方显式提供Calibration；诊断用合成校准，不能称为复算了作者八benchmark CCI。Patch特征属于构建/评测端，不能把隐藏修复补丁或其困难标签传给被测Agent。",
+  "method_source_sha256": "e4da865d17cc09007ca0d83888afc606f4e2cabe8eb9563feb8933f4b73574f2"
+}

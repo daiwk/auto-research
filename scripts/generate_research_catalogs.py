@@ -345,6 +345,8 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "hisa": ("注意力与长上下文", "稀疏、门控与动态注意力"),
+    "canon-layers-scale": ("网络架构", "卷积与局部混合"),
     "kernel-ridge-attention": ("注意力与长上下文", "线性注意力与状态空间"),
     "narrow-spec": ("推理与系统效率", "推测解码与 KV cache"),
     "loopcache-interface": ("推理与系统效率", "推测解码与 KV cache"),
@@ -914,6 +916,7 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in ("hisa", "canon-layers-scale")},
         **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in (
             "kernel-ridge-attention", "narrow-spec", "loopcache-interface", "counterfactual-wm",
         )},

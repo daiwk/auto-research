@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-20",
+  "requested_window": [
+    "2026-11-19",
+    "2026-11-20"
+  ],
+  "scope": "Finite first-source review; HiSA and Antom are new first releases, Canon is historical announcement/official-Meta-research backfill, not a new algorithm today.",
+  "preflight_before_implementation": true,
+  "available_resource": "one A100 or A30, or local Mac",
+  "large_downloads_authorized_or_needed": false,
+  "watermark_change_claimed": false,
+  "accepted": [
+    {
+      "arxiv_id": "2611.26363",
+      "key": "hisa",
+      "domain": "foundation-models",
+      "identity": "foundation-models:hisa",
+      "title": "HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs",
+      "first_author": "Ambroise Borbely",
+      "first_author_affiliation": "EPFL / Swiss Data Science Center (EPFL and ETH Zurich)",
+      "first_published_at": "2026-11-19T16:31:46Z",
+      "announced_on": "2026-11-20",
+      "priority": "P1",
+      "intake_class": "new_first_release",
+      "reviewed_version": "v1",
+      "reviewed_source_url": "https://arxiv.org/pdf/2611.26363v1",
+      "source_sha256": "d868b6530d8c7ddccc96f0c6533c6a7bd240c34a6bcd4ac2251242929ef76ab8",
+      "sections_read": [
+        "3",
+        "4",
+        "Appendix A–D"
+      ],
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "scope": "Implements exact Eq3 as a small fp32/fp64 tensor reference, causal/out-of-reach masking, positioned decoding parity and gradient controls. It materializes pair scores, not a sparse kernel. There is no FA3 block approximation, GQA cache allocator, trained decoder or throughput optimization. Frozen real-GPU validation is separate; CPU tests do not substitute for it.",
+      "cost_basis": "The paper trains135M/360M models from scratch on2.7B/7.24B tokens using one H200 per run, with tuning, long-context continuation, a three-seed substudy and dense controls. The complete campaign is outside this short single-A100/A30 budget. The tensor component is expected to take under30seconds across three seeds, with no model/data downloads or API calls.",
+      "component_budget": "At most30seconds/three seeds, zero model/data/API; exact small tensor reference.",
+      "requires_gpu_validation": true,
+      "gpu_validation_passed": false,
+      "local_detail_path": "foundation-models/2611.26363-hisa/README.md",
+      "code_url": "https://github.com/ambroise-b/hisa",
+      "upstream_revision": "6224a46e7e439385ce432ce3f600afb88fb1e5a2",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "arxiv_id": "2611.24963",
+      "key": "canon-layers-scale",
+      "domain": "foundation-models",
+      "identity": "foundation-models:canon-layers-scale",
+      "title": "Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality",
+      "first_author": "Zeyuan Allen-Zhu",
+      "first_author_affiliation": "Allen-Zhu Research",
+      "first_published_at": "2026-11-12T18:51:19Z",
+      "announced_on": "2026-11-20",
+      "priority": "P0",
+      "intake_class": "historical_announcement_backfill",
+      "reviewed_version": "v1",
+      "reviewed_source_url": "https://arxiv.org/pdf/2611.24963v1",
+      "source_sha256": "bc4270034f70a8580ec803942c4e6d16a561b64013eecc39f1e3d1e3663a9cea",
+      "sections_read": [
+        "2.1",
+        "3–6",
+        "Appendix A–D",
+        "F"
+      ],
+      "implementation_status": "deferred_high_cost",
+      "evaluation_tier": "review_only",
+      "scope": "Review-only fixed-source documentation, figures, affiliation, code revision, cost and limitations. No Canon/GLA5/GDN2 implementation, metrics, GPU receipt or executable Evolve operator is added. A small convolution demo would not reproduce64 pretraining runs. The current byline is Allen-Zhu Research; experiments were conducted at FAIR at Meta and code is in facebookresearch, not proof of current Meta authorship.",
+      "cost_basis": "The study contains64 from-scratch1.3B/3B/8B runs on1–2T Nemotron-CC tokens, multiple learning rates and evaluations. The paper estimates about100kUSD per8B run. This exceeds one A100/A30 or Mac budget; no checkpoint download or training probe is attempted.",
+      "component_budget": null,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "local_detail_path": "foundation-models/2611.24963-canon-layers-scale/README.md",
+      "code_url": "https://github.com/facebookresearch/PhysicsLM4",
+      "upstream_revision": "75806965208c55e9f7f2e2363d3793d2da75d2e4",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "arxiv_id": "2611.25403",
+      "key": "antom-3-in-1",
+      "domain": "recommendation",
+      "identity": "recommendation:antom-3-in-1",
+      "title": "Antom 3-in-1 Transformer: A Payment Foundation Model",
+      "first_author": "Weiyu Han",
+      "first_author_affiliation": "Ant International",
+      "first_published_at": "2026-11-19T02:47:14Z",
+      "announced_on": "2026-11-20",
+      "priority": "P1",
+      "intake_class": "new_first_release",
+      "reviewed_version": "v1",
+      "reviewed_source_url": "https://arxiv.org/pdf/2611.25403v1",
+      "source_sha256": "1f44cde429752685d74d3d96dbda2769082ca4312f741fdbfe7420a78ba42d68",
+      "sections_read": [
+        "2",
+        "3",
+        "4.1–4.6",
+        "Appendix A/B.2"
+      ],
+      "implementation_status": "deferred_high_cost",
+      "evaluation_tier": "review_only",
+      "scope": "Review-only production evidence, mechanism boundaries, original figure and cost. No local model, training/inference code, metrics, GPU receipt or Evolve operator. Public IBM/graph benchmarks do not supply the missing recipe or private training path. A small concatenation/MLP proxy would not reproduce this7B payment foundation model.",
+      "cost_basis": "The industrial model has about6.92B parameters and1.74B active per route, private transaction/graph pretraining, multiple adaptations and a four-month production trial. Detailed training configuration is also withheld. A faithful low-cost single-A100/A30 reproduction is unavailable; no large model download or probe is attempted.",
+      "component_budget": null,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "local_detail_path": "recommendation-components/2611.25403-antom-3-in-1/README.md",
+      "code_url": null,
+      "upstream_revision": null,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    }
+  ],
+  "unselected_candidates": [
+    {
+      "arxiv_id": "2611.24969",
+      "title": "Global Importance Estimation for KV Cache Eviction",
+      "original_published_at": "2026-11-16T02:29:03Z",
+      "reason": "New bulletin but older nonpriority first release; outside this finite selected implementation scope, not a method rejection."
+    },
+    {
+      "arxiv_id": "2611.25938",
+      "title": "DTS: Delta-Based Tile Scoring for Efficient Long-Context Sparse Attention",
+      "original_published_at": "2026-11-19T11:23:22Z",
+      "reason": "Relevant low-cost candidate, not selected into this bounded batch; no completed implementation claim."
+    },
+    {
+      "arxiv_id": "2611.25172",
+      "title": "MV-JEPA: Post-Training Video Encoders for Cross-View Understanding",
+      "original_published_at": "2026-11-18T20:58:38Z",
+      "reason": "New bulletin overlap; not selected in this fixed scope. Single-GPU9000 updates is not automatically low-cost; no experiment launched."
+    }
+  ],
+  "selection_notes": [
+    "Canon byline is Allen-Zhu Research; FAIR at Meta experiment and official repository relationship are separately recorded.",
+    "Antom production randomization and fixed intervention budget meet evidence selection; missing private recipe still prevents faithful local reproduction.",
+    "No model/data downloads, paid APIs, complete campaigns, proxy capability comparisons or Evolve promotion."
+  ]
+}

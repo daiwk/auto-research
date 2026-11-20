@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:colir-replay/nov20-basics": {
+      "source_sha256": "d699eca2eed0bcef174dc67d535c13fc85b260f025fea239accaf6c7092aa09e",
+      "reviewed": true,
+      "fields": {
+        "question": "Does CoLiR replay old answers?",
+        "answer": "No. Old responses construct the boundary score; memory retains prompts and the current policy samples fresh responses during later tasks.",
+        "example": "Teaching example: retaining a navigation question does not fix the old model's route as the new answer; the current policy still generates its own route."
+      }
+    },
+    "qa/post-training:colir-replay/nov20-mechanism": {
+      "source_sha256": "e8cab8c30d654a63fb2974425fd90dcdfbe2a13622a7646e65c9bd8cf45cd8f0",
+      "reviewed": true,
+      "fields": {
+        "question": "How are unequal response-set sizes weighted?",
+        "answer": "Average final-correct gains and initial-incorrect suppression separately, then give each half the weight; do not pool all responses.",
+        "example": "Teaching example: gains3 and5 and one suppression2 give(4+2)/2=3, not(3+5+2)/3."
+      }
+    },
+    "qa/post-training:colir-replay/nov20-comparison": {
+      "source_sha256": "1833259c9d4f6c3acf82a3c31195266d6be144e3076498fcd405c8bff0833a4c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is bank size alone insufficient to compare CoLiR and TAR?",
+        "answer": "CoLiR stores prompts and regenerates current-policy responses. TAR stores verified correct base-policy prototypes and gates old tokens by current suppression. Selection units, activation signals and generation costs differ;80 bank entries do not mean the same80 training trajectories.",
+        "example": "Teaching example: two correct base solutions to one old question can have nonzero and zero TAR gates. If CoLiR retains the question, its next rollout may generate a third response."
+      }
+    },
+    "qa/post-training:colir-replay/nov20-implementation": {
+      "source_sha256": "4629bfdcadb143ed2dfaaa75a019a45862a3f1fb93a6be91bfa64ec1d45f7c3a",
+      "reviewed": true,
+      "fields": {
+        "question": "What must selection and KL controls verify?",
+        "answer": "Do not fill memory with all-correct/all-wrong final groups or all-correct initial groups. New-task and padding KL gradients must be zero. External training log likelihoods are inputs, not a fabricated scorer or agent success rate.",
+        "example": "Teaching example: with two eligible prompts and budget80, retain two, rather than filling the remaining78 slots with ineligible prompts."
+      }
+    },
+    "qa/post-training:visalloc/nov20-basics": {
+      "source_sha256": "5dd66fbb08e8e06149bbde5c9d5c3f95d572c56b6655f1f97e20129953e1580b",
+      "reviewed": true,
+      "fields": {
+        "question": "Is the negative teacher a second distillation target?",
+        "answer": "No. It informs sample selection, view sensitivity and bonus gates; only the positive teacher targets the loss. Fitting the negative teacher as well changes the algorithm.",
+        "example": "Teaching example: a displaced crop hides the tail fin. Its distribution helps identify sensitive tokens, but is not another distribution the student must imitate."
+      }
+    },
+    "qa/post-training:visalloc/nov20-mechanism": {
+      "source_sha256": "1534a8751d81805f17b97566fa767a79306d0814a777b91e600eeee50ff20627",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must frequency redistribution not increase the total bonus?",
+        "answer": "It moves a fixed E: multiply each bonus by(n+50)^(-1/2), divide by the actual weighted sum and restore E. Zero budget remains zero; an epsilon must neither invent nor erase budget.",
+        "example": "Teaching example: two bonuses of1e-30 still sum to2e-30 after redistribution. The rare token gets a larger share, while the base is unchanged."
+      }
+    },
+    "qa/post-training:visalloc/nov20-comparison": {
+      "source_sha256": "5c37723e23e521834670584c539563730fbbe467d7a8d1a68fd832f9a5240276",
+      "reviewed": true,
+      "fields": {
+        "question": "Are VisAlloc and VAG losses interchangeable because both use two views?",
+        "answer": "No. VAG retains verifier advantages with a sign-gated bounded correction. VisAlloc weights positive-teacher JSD with a base and bonus, jointly gated by prior, templates and JSD.",
+        "example": "Teaching example: redistributing VisAlloc bonus changes the shares of JSD gradients with fixed teacher distributions; it does not add a reward to VAG verifier advantages."
+      }
+    },
+    "qa/post-training:visalloc/nov20-implementation": {
+      "source_sha256": "d81da27f2b273684d5133b5fb2a2b7defe2fefc872346163b6c6f886bc1b002b",
+      "reviewed": true,
+      "fields": {
+        "question": "How are quantiles protected from padding and missing negative views?",
+        "answer": "Quantiles and redistribution use only valid positions with negative views. Valid response positions without a negative view retain baseline weight1; padding loss and gradients are zero. Teachers and weight construction stay frozen. Promote half precision before log-softmax and subtraction, not after overflow; retain float64 precision.",
+        "example": "Teaching example: padded sensitivity1e100 must not move valid thresholds. Finite float16/bfloat16 logits of plus/minus60000 must still yield finite loss and nonzero student gradients. CUDA tensor checks are not4B model training."
+      }
+    }
+  }
+}

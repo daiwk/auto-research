@@ -46,6 +46,7 @@
 ### 执行框架与自改进
 
 - [Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses](../2611.24924-ahe-beta/README.md)（`ahe-beta`）：AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。
+- [BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection](../2611.25088-buggymle-cci/README.md)（`buggymle-cci`）：BuggyMLE先审核可运行、指标稳定且对代码变化敏感的ML仓库，再让Injector注入不同规模的错误。Oracle通过逐个恢复变动找最小恢复集合，再把每个改动单独应用到干净仓库，筛出确有独立指标影响的错误。
 - [RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?](../2611.24395-rsibench-infra/README.md)（`rsibench-infra`）：单算子快不代表端到端训练或服务变快。RSIBench-Infra让Agent从官方可运行baseline出发，跨engine、kernel、instruction修改，但只提交一个OCI filesystem layer。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates](../2611.23651-safe-personal-rsi/README.md)（`safe-personal-rsi`）：个人Agent的prompt更新可能提升主动性，却同时改变隐私披露、承诺和执行报告。论文固定模型和runtime，只改指令；先比较候选与父版本寻找反例，再重复确认、回滚定位和修复。
 - [Do LLM Agents Still Need to Be Told How to Self-Improve?](../2611.23219-self-organized-learning/README.md)（`self-organized-learning`）：本文不先指定GEPA式优化循环，而是给冻结teacher通用自改进目标、文件读写／Bash／gameplay原语与资源预算。teacher可自己造游戏、观察短生命周期player、编辑文本产物，自行决定何时探索、比较和更新。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -100,6 +101,7 @@
 
 ### 记忆与技能
 
+- [Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents](../2611.25123-grepmem/README.md)（`grepmem`）：GrepMem把有限工作上下文和完整历史分开：压缩时只把活跃上下文换成系统提示、任务与摘要，原始消息、工具调用/输出和摘要仍追加到纯文本日志。第一次压缩之后才开放grep_history，让模型按需用大小写不敏感正则取回遗漏细节。
 - [Instant Weight-Space Consolidation for Long-Term Memory in LLMs](../2611.20759-clam-memory/README.md)（`clam-memory`）：CLAM把可积累的参数记忆与逐字检索缓冲分开：冻结LLM提供每层会话activation，hypernetwork在不做测试时梯度下降的情况下写出down_proj LoRA，查询时再配top5会话片段。没有提取调用不等于没有前置训练；能力来自离线context distillation。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ### 技能进化

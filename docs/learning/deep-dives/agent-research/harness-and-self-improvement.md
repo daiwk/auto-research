@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-11-19 · 77 篇主题资料 / 40 篇重点对照
+[Agent](../index.md) · 更新 2026-11-20 · 78 篇主题资料 / 41 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
@@ -65,6 +65,7 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates](../../../agent-research/2611.23651-safe-personal-rsi/README.md) · [原始来源](https://arxiv.org/abs/2611.23651v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 个人Agent的prompt更新可能提升主动性，却同时改变隐私披露、承诺和执行报告。论文固定模型和runtime，只改指令；先比较候选与父版本寻找反例，再重复确认、回滚定位和修复。修复局部验证后仍须完整admission；没有通过版本就继续用父版本。 | Harness²用执行差异优化harness，不要求rubric；Safe Personal RSI对prompt候选显式比较安全/效用并保留父版本。后者有领域风险标签但仍不是安全证明；不能把前者匿名产物选择当后者admission。 |
 | [RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?](../../../agent-research/2611.24395-rsibench-infra/README.md) · [原始来源](https://arxiv.org/abs/2611.24395v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 单算子快不代表端到端训练或服务变快。RSIBench-Infra让Agent从官方可运行baseline出发，跨engine、kernel、instruction修改，但只提交一个OCI filesystem layer。独立Serve/Train Job把同一digest应用到每个rank；Benchmark Job绝不加载候选层，单独做质量门和端到端计时。 | Harness²改模型外执行框架并以任务执行对照积累经验；RSIBench-Infra评价跨栈训练/推理优化，以独立质量门约束端到端加速。优化harness通过数和已验证吞吐收益不是同一个结果，前者不能代替后者硬件链路。 |
 | [SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search](../../../agent-research/2611.02643-searchinject/README.md) · [原始来源](https://arxiv.org/abs/2611.02643v1)<br>章节：背景与主要改动、核心公式、同主题对照 | 间接注入先要进入上下文才有机会影响LLM。SearchInject在原top100候选中，用相关性、abuse、instruction概率及两项相关性交互做logistic风险评分；超过冻结阈值才隔离，按原顺序从同一候选池补足top10。它控制暴露，而不是验证下游攻击成功。Google官方目录今天新增，但论文首发11月2日，按历史发现补录，不算今天新论文。 | SilentGuard核对工具返回值是否满足请求不变量；SearchInject在第三方文本进入上下文之前做风险准入。前者检查语义执行合同，后者检查检索暴露，HTTP200或低暴露率都不能证明最终回答安全。 |
+| [BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection](../../../agent-research/2611.25088-buggymle-cci/README.md) · [原始来源](https://arxiv.org/abs/2611.25088v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | BuggyMLE先审核可运行、指标稳定且对代码变化敏感的ML仓库，再让Injector注入不同规模的错误。Oracle通过逐个恢复变动找最小恢复集合，再把每个改动单独应用到干净仓库，筛出确有独立指标影响的错误。Solver必须在多文件仓库里真实修复；评价同时检查执行、指标恢复和逐错误语义修复，不能把补偿性调参当修好了全部bug。 | MLE-STAR用检索、真实消融与validation结果定位并改进模型代码；BuggyMLE用有Oracle归因的注入错误构建难度阶梯，CCI是评测/课程设计尺度。前者选改进方案，后者塑造训练与评测任务；不能把后者的结构分数当成前者的真实验证收益。 |
 
 </div>
 
@@ -255,6 +256,12 @@ Appendix I以所有开发重放（含control）为分母，取五个primary风�
 §III-C/D：joint模型为class-balanced logistic regression，不能把输出当校准概率。阈值只在calibration集选并冻结；文档重复出现在不同query时按placement计数。原稿未发布abuse/字符与词n-gram词表、IDF、scaler或拟合系数，因此本地明确接收外部特征/系数，只实现score、约束选阈与有序refill，不用关键词规则假装原检测器。 SilentGuard核对工具返回值是否满足请求不变量；SearchInject在第三方文本进入上下文之前做风险准入。前者检查语义执行合同，后者检查检索暴露，HTTP200或低暴露率都不能证明最终回答安全。
 
 对照来源：[searchinject](../../../agent-research/2611.02643-searchinject/README.md) · [silentguard](../../../agent-research/2611.20595-silentguard/README.md)
+
+### BuggyMLE：用代码复杂度分层，而不是把指标恢复当完整修复
+
+CCI在八个参考benchmark上，先取十项结构特征的任务中位数，做log1p和特征z-score，再对repo、dependency、patch三组求均值，并把组分数按参考方差缩放。固定logistic系数的负加权和构成raw CCI，再用参考最小/最大值定标。新任务不能重新拟合或裁剪回[0,1]。Figure10的repo系数为+0.64，dependency为-0.34，patch为-0.99；repo项是给定其他项的条件调整，不支持“仓库越大必然越难”。负控保留正repo系数、组方差缩放和参考区间外结果；验证median不是mean，未给截距时不捏造预测成功率。拒绝NaN、零尺度和退化边界。Table4把total_lines_delta写成净变化，若值≤-1会使log1p无定义，接口明确拒绝，既不取绝对值，也不补造作者未说明的变换。
+
+对照来源：[buggymle-cci](../../../agent-research/2611.25088-buggymle-cci/README.md) · [mle-star](../../../agent-research/2506.15692-mle-star/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -580,9 +587,23 @@ Appendix I以所有开发重放（含control）为分母，取五个primary风�
 
     对照来源：[searchinject](../../../agent-research/2611.02643-searchinject/README.md) · [silentguard](../../../agent-research/2611.20595-silentguard/README.md)
 
+### CCI和MLE-STAR的消融分数能互换吗？ {#cross-cross-nov20-buggymle-cci}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。CCI预测结构困难度，MLE-STAR用执行和validation消融选择值得改的代码块；结构困难不等于模型效果差。
+
+    **教学例子：** 教学例：跨文件修复很难，并不说明该模型validation AUC低。
+
+    对照来源：[buggymle-cci](../../../agent-research/2611.25088-buggymle-cci/README.md) · [mle-star](../../../agent-research/2506.15692-mle-star/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-20** · 本地仅实现给定十项特征的benchmark中位数、固定校准投影和可选的稳定logistic读数。没有AST/依赖图抽取、Injector、Oracle、LLM solver、校准拟合或模型训练。完整μ/σ、组尺度、截距与参考边界未在原文公开成可直接加载文件，因此API强制调用方显式提供Calibration；诊断用合成校准，不能称为复算了作者八benchmark CCI。Patch特征属于构建/评测端，不能把隐藏修复补丁或其困难标签传给被测Agent。 完整实验高成本不复现。
+
+涉及：[buggymle-cci](../../../agent-research/2611.25088-buggymle-cci/README.md) · [mle-star](../../../agent-research/2506.15692-mle-star/README.md)
 
 **2026-11-19** · 显式数值夹具只检查feature顺序、严格>阈值、干净经验约束与refill。无真实payload、SciFact检索、拟合分类器、生成模型或安全认证；更低阈值移除更多候选，也可能补入原rank10外的攻击页。 完整高成本实验不复现，审查DONE。
 
@@ -708,7 +729,7 @@ Appendix I以所有开发重放（含control）为分母，取五个primary风�
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 77 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 78 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -789,6 +810,7 @@ Appendix I以所有开发重放（含control）为分母，取五个primary风�
 - [Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates](../../../agent-research/2611.23651-safe-personal-rsi/README.md)
 - [RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?](../../../agent-research/2611.24395-rsibench-infra/README.md)
 - [SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search](../../../agent-research/2611.02643-searchinject/README.md)
+- [BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection](../../../agent-research/2611.25088-buggymle-cci/README.md)
 
 </details>
 

@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "agent-research:buggymle-cci": {
+      "questions": [
+        {
+          "id": "patch-not-size",
+          "level": "basics",
+          "question": "CCI只看仓库有多大吗？",
+          "answer": "不是。十项特征分成repo、dependency和patch三组，论文中patch组对困难度的贡献最大，且repo系数是条件调整。",
+          "example": "教学例：一百万行仓库的一行修复，可以比跨二十文件的修改容易。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "frozen-scale",
+          "level": "mechanism",
+          "question": "给新任务计算CCI时，为什么不能用新任务重新定标？",
+          "answer": "特征和组尺度、系数、min-max边界都来自固定参考benchmark；在新任务上重拟合会改变尺度，让不同任务不可比较。",
+          "example": "教学例：每批都把最难题压成1，会掩盖第二批整体更难。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "cci-vs-ablation",
+          "level": "comparison",
+          "question": "CCI和MLE-STAR的消融分数能互换吗？",
+          "answer": "不能。CCI预测结构困难度，MLE-STAR用执行和validation消融选择值得改的代码块；结构困难不等于模型效果差。",
+          "example": "教学例：跨文件修复很难，并不说明该模型validation AUC低。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "calibration-not-invented",
+          "level": "implementation",
+          "question": "本地接口为什么不直接输出作者的八benchmark成功率？",
+          "answer": "完整校准常数没有可加载发布文件；调用方必须给固定参数。合成校准只测试公式，缺截距时成功率返回null，不能补造。",
+          "example": "教学例：传入μ=0、σ=1是单测，不是作者拟合参数。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        }
+      ]
+    },
+    "system-one:looproute": {
+      "questions": [
+        {
+          "id": "pair-not-action",
+          "level": "basics",
+          "question": "为什么不能只统计动作重复？",
+          "answer": "同一动作在不同状态下可能必要。论文统计选定公开状态key和动作的组合，且key不含永远变化的step/history。",
+          "example": "教学例：在两个房间各look一次不等于同地卡死。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "third-proposal",
+          "level": "mechanism",
+          "question": "阈值为2时，第二次动作就被拦截吗？",
+          "answer": "不是。计数是已执行次数：前两次执行，第三次提案才拦截且不计环境步，随后LLM的第一步已经消耗两步接管预算之一。",
+          "example": "教学例：look、look之后再提look，改为LLM的open，余下一步。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "recurrence-vs-certainty",
+          "level": "comparison",
+          "question": "LoopRoute和Selective Reasoning都省推理，证据一样吗？",
+          "answer": "不一样。一个看环境中的重复执行，另一个看冻结读出与推理收益/确定性；重复不是低置信度，高置信度也不等于任务有进展。",
+          "example": "教学例：模型非常确信地反复开一个锁住的门，仍应触发循环路由。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "adapter-specific-counters",
+          "level": "implementation",
+          "question": "能给三个环境共用一套重置规则吗？",
+          "answer": "不能。ALFWorld只计决策模型动作，并在新事实或接管结束清空；MapReader/TextWorld计两种policy动作且保持整局。公共的是触发和有限接管结构。",
+          "example": "教学例：LLM在同一MapReader状态执行open两次，会被后续计数看到；ALFWorld不累计它们。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        }
+      ]
+    },
+    "agent-research:grepmem": {
+      "questions": [
+        {
+          "id": "context-not-disk",
+          "level": "basics",
+          "question": "GrepMem会让原始会话日志越来越小吗？",
+          "answer": "不会。压缩的是工作上下文，消息、工具输出和摘要仍追加到完整日志；lossless是保留内容，不是节省原始日志磁盘。",
+          "example": "教学例：摘要省略订单号后可以grep找回，但原始订单文本仍占空间。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "grep-after-compact",
+          "level": "mechanism",
+          "question": "为什么grep结果本身不再参与下次搜索？",
+          "answer": "它只是旧内容的复制，递归检索会膨胀重复命中。原输出仍被记录，但grep跳过该类记录；工具在第一次压缩后才开放。",
+          "example": "教学例：第一次查到Alpha，第二次仍只计算原始Alpha，而非再加一份引用。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "raw-vs-layered",
+          "level": "comparison",
+          "question": "它和MemGPT的记忆结构有什么不同？",
+          "answer": "MemGPT分层管理与换入换出，GrepMem保留原始文本、按正则取回而不建语义索引；两者都不能仅凭存储单测宣称模型会正确回忆。",
+          "example": "教学例：grep订单编号不要求先把订单提炼成一条结构化记忆。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        },
+        {
+          "id": "bounded-regex",
+          "level": "implementation",
+          "question": "实现grep工具时只加max_matches够吗？",
+          "answer": "不够。还需要匹配行offset、最多3行context、6K字符上限、300字符行裁剪、非法正则错误和10秒终止；坏正则不能卡住整个Agent。",
+          "example": "教学例：(a+)+$遇到长a串会灾难回溯，搜索worker应超时，正常查询仍能继续。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-20"
+        }
+      ]
+    }
+  }
+}

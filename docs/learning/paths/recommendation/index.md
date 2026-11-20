@@ -10,7 +10,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="retrieval-matching/">候选生成与搜索匹配</a></h2>
 <p>精排模型再强，能否找回召回阶段漏掉的好内容？</p>
-<p class="ar-learning-topic-meta">160 个问题 · 40 篇论文</p>
+<p class="ar-learning-topic-meta">164 个问题 · 41 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="content-semantic-ids/">语义表征、用户知识与冷启动</a></h2>
@@ -20,7 +20,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="history-ranking-backbones/">用户历史与排序骨干</a></h2>
 <p>计算预算应该花在历史内部、候选与历史，还是异构字段之间？</p>
-<p class="ar-learning-topic-meta">303 个问题 · 74 篇论文</p>
+<p class="ar-learning-topic-meta">307 个问题 · 75 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="generative-retrieval-reasoning/">生成式召回与推理推荐</a></h2>
@@ -30,7 +30,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="feedback-multitask-causality/">学习信号、多任务与反馈偏差</a></h2>
 <p>观察到的点击和转化，究竟能监督哪一个概率或价值？</p>
-<p class="ar-learning-topic-meta">148 个问题 · 37 篇论文</p>
+<p class="ar-learning-topic-meta">152 个问题 · 38 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="slates-business-value/">列表与业务控制：重排、出价和长期价值</a></h2>
@@ -40,7 +40,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="research-serving-loop/">自动研究与高效上线</a></h2>
 <p>一个离线更好的方案，怎样才算在真实请求和持续迭代中可用？</p>
-<p class="ar-learning-topic-meta">88 个问题 · 22 篇论文</p>
+<p class="ar-learning-topic-meta">92 个问题 · 23 篇论文</p>
 </article>
 </div>
 

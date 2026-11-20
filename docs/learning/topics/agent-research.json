@@ -127,7 +127,8 @@
         "agent-research:wikitrace",
         "agent-research:policybank",
         "agent-research:coremem",
-        "agent-research:clam-memory"
+        "agent-research:clam-memory",
+        "agent-research:grepmem"
       ]
     },
     {
@@ -296,7 +297,8 @@
         "agent-research:ahe-beta",
         "agent-research:safe-personal-rsi",
         "agent-research:rsibench-infra",
-        "agent-research:searchinject"
+        "agent-research:searchinject",
+        "agent-research:buggymle-cci"
       ]
     },
     {

@@ -7,7 +7,7 @@ hide:
 
 # 自动研究与高效上线
 
-[搜广推](index.md) / 88 个问题 · 22 篇论文
+[搜广推](index.md) / 92 个问题 · 23 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">88 个问题 · 22 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">92 个问题 · 23 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:fleet-feature-optimization" data-paper-title="Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models 搜广推与 LLM 应用 Meta, Inc. 2026-11-19 Meta把特征创建、FI估计、跨任务Pareto分层、多来源混合和有约束搜索连成fleet级流程。LLM提出假设，确定性工具验证；每个模型同时面对自身serving限制和跨模型共享的上游pipeline预算。另一个模型已经使用某特征时，新增使用不一定新增pipeline成本。Fixed-v1 primary source 完整实验：成本过高，不复现（审查 DONE）。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。完整实验：成本过高，不复现（审查 DONE）。仅实现Pareto层、显式quota混合、集合依赖pipeline差值、删除/同类别补回原语和已完成validation trial准入。FI、成本oracle、删除顺序、训练与资源测量都为外部输入。不运行LLM feature proposer、FI估计、异步研究搜索或生产发布；这是CPU机制合同，不是完整Agent优化系统。  研究与服务闭环 特征工程与成本约束 搜广推 自动研究与高效上线 为什么一个特征可以对模型有代价、对某pipeline预算却零增量？ 模型仍付embedding/投影等serving代价；但预算内其他模型已消费该特征时，上游生成/存储工作已经发生，不能再算一份同样的pipeline增量。 教学例：A已用f，B新增f时，共享集合并集不变，但B自身推理FLOPs仍可能增加。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<span id="paper-recommendation-fleet-feature-optimization-252b2d94" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-e670e86d0e5f6809">为什么一个特征可以对模型有代价、对某pipeline预算却零增量？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Afleet-feature-optimization">Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Meta, Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>模型仍付embedding/投影等serving代价；但预算内其他模型已消费该特征时，上游生成/存储工作已经发生，不能再算一份同样的pipeline增量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A已用f，B新增f时，共享集合并集不变，但B自身推理FLOPs仍可能增加。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26531v1">原论文</a> · <a href="../../../../recommendation-components/2611.26531-fleet-feature-optimization/">实现解读</a> · <a href="#qa-e670e86d0e5f6809">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:fleet-feature-optimization" data-paper-title="Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models 搜广推与 LLM 应用 Meta, Inc. 2026-11-19 Meta把特征创建、FI估计、跨任务Pareto分层、多来源混合和有约束搜索连成fleet级流程。LLM提出假设，确定性工具验证；每个模型同时面对自身serving限制和跨模型共享的上游pipeline预算。另一个模型已经使用某特征时，新增使用不一定新增pipeline成本。Fixed-v1 primary source 完整实验：成本过高，不复现（审查 DONE）。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。完整实验：成本过高，不复现（审查 DONE）。仅实现Pareto层、显式quota混合、集合依赖pipeline差值、删除/同类别补回原语和已完成validation trial准入。FI、成本oracle、删除顺序、训练与资源测量都为外部输入。不运行LLM feature proposer、FI估计、异步研究搜索或生产发布；这是CPU机制合同，不是完整Agent优化系统。  研究与服务闭环 特征工程与成本约束 搜广推 自动研究与高效上线 为什么先按任务FI作Pareto层，而不是直接求加权和？ 不同任务的loss尺度/单位会让求和依赖人为权重；Pareto保留任何任务上有不可被同时支配贡献的特征，再由来源混合控制选择。 教学例：A=(4,1)、B=(1,4)、C=(0,0)，A/B同在首层，C被支配。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1e3111773c353f69">为什么先按任务FI作Pareto层，而不是直接求加权和？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Afleet-feature-optimization">Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Meta, Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同任务的loss尺度/单位会让求和依赖人为权重；Pareto保留任何任务上有不可被同时支配贡献的特征，再由来源混合控制选择。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A=(4,1)、B=(1,4)、C=(0,0)，A/B同在首层，C被支配。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26531v1">原论文</a> · <a href="../../../../recommendation-components/2611.26531-fleet-feature-optimization/">实现解读</a> · <a href="#qa-1e3111773c353f69">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:fleet-feature-optimization" data-paper-title="Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models 搜广推与 LLM 应用 Meta, Inc. 2026-11-19 Meta把特征创建、FI估计、跨任务Pareto分层、多来源混合和有约束搜索连成fleet级流程。LLM提出假设，确定性工具验证；每个模型同时面对自身serving限制和跨模型共享的上游pipeline预算。另一个模型已经使用某特征时，新增使用不一定新增pipeline成本。Fixed-v1 primary source 完整实验：成本过高，不复现（审查 DONE）。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。完整实验：成本过高，不复现（审查 DONE）。仅实现Pareto层、显式quota混合、集合依赖pipeline差值、删除/同类别补回原语和已完成validation trial准入。FI、成本oracle、删除顺序、训练与资源测量都为外部输入。不运行LLM feature proposer、FI估计、异步研究搜索或生产发布；这是CPU机制合同，不是完整Agent优化系统。  研究与服务闭环 特征工程与成本约束 搜广推 自动研究与高效上线 与MLE Agents的方差探针准入相比，本篇多了什么限制？ 本篇显式处理每模型资源上界和fleet共享pipeline预算；离线NE更好也不能接受超预算trial。它没有替代MLE Agents的同轮噪声参照。 教学例：NE0.1但inverse-QPS超cap的候选必须让位于NE0.6且可行的候选。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e74d1245e6a7fbc1">与MLE Agents的方差探针准入相比，本篇多了什么限制？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Afleet-feature-optimization">Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Meta, Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>本篇显式处理每模型资源上界和fleet共享pipeline预算；离线NE更好也不能接受超预算trial。它没有替代MLE Agents的同轮噪声参照。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：NE0.1但inverse-QPS超cap的候选必须让位于NE0.6且可行的候选。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26531v1">原论文</a> · <a href="../../../../recommendation-components/2611.26531-fleet-feature-optimization/">实现解读</a> · <a href="#qa-e74d1245e6a7fbc1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:fleet-feature-optimization" data-paper-title="Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models 搜广推与 LLM 应用 Meta, Inc. 2026-11-19 Meta把特征创建、FI估计、跨任务Pareto分层、多来源混合和有约束搜索连成fleet级流程。LLM提出假设，确定性工具验证；每个模型同时面对自身serving限制和跨模型共享的上游pipeline预算。另一个模型已经使用某特征时，新增使用不一定新增pipeline成本。Fixed-v1 primary source 完整实验：成本过高，不复现（审查 DONE）。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。完整实验：成本过高，不复现（审查 DONE）。仅实现Pareto层、显式quota混合、集合依赖pipeline差值、删除/同类别补回原语和已完成validation trial准入。FI、成本oracle、删除顺序、训练与资源测量都为外部输入。不运行LLM feature proposer、FI估计、异步研究搜索或生产发布；这是CPU机制合同，不是完整Agent优化系统。  研究与服务闭环 特征工程与成本约束 搜广推 自动研究与高效上线 为什么本地不擅自决定round和多预算最贵顺序？ 固定原文没有完整定义这些离散约定。调用方必须给整数quota、层内顺序和真实成本排序；缺少可补特征或预算仍违规时显式失败，而非静默填充。 教学例：两个source都把a排首位时，第二source应跳过a；耗尽quota不能悄悄从别的source补满。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-0f139ad2bb49cfbe">为什么本地不擅自决定round和多预算最贵顺序？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Afleet-feature-optimization">Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Meta, Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>固定原文没有完整定义这些离散约定。调用方必须给整数quota、层内顺序和真实成本排序；缺少可补特征或预算仍违规时显式失败，而非静默填充。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个source都把a排首位时，第二source应跳过a；耗尽quota不能悄悄从别的source补满。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26531v1">原论文</a> · <a href="../../../../recommendation-components/2611.26531-fleet-feature-optimization/">实现解读</a> · <a href="#qa-0f139ad2bb49cfbe">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:mars-fapo" data-paper-title="MARS Technical Report" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="MARS Technical Report 搜广推与 LLM 应用 Taobao 2026-11-18 MARS让近线0.6B策略为用户产生跨召回、粗排、精排和重排的七维配置，经校验后缓存，在线始终不等待LLM。SFT建立合法格式，FAPO把偏好比较集中到实际不同的动作值token，最后GRPO在沙箱回放和冻结奖励模型上继续优化。正文版权行为Taobao，贡献者按名字母排序，不虚构个人一作机构。 成本过高，不复现（审查 DONE）；CPU诊断。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。本地只实现posterior启发式权重、弱证据翻转规则与FAPO张量损失；没有0.6B生成、字段tokenizer、SFT/GRPO、Sandbox、奖励模型、iGraph缓存或实时推荐。结构token仍有生成梯度，rejected非动作token没有偏好梯度。  研究与服务闭环 多阶段推荐编排 搜广推 自动研究与高效上线 MARS为什么不增加同步LLM延迟，却不等于免费？ LLM近线生成并缓存，在线只消费合法配置；近线推理、刷新和缓存仍耗资源。 教学例：线上平均少12ms不代表0.6B解码快12ms。 2026-11-19">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
 <span id="paper-recommendation-mars-fapo-56550ed5" class="ar-learning-paper-anchor"></span>

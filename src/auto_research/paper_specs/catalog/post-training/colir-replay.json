@@ -1,0 +1,60 @@
+{
+  "domain": "post-training",
+  "key": "colir-replay",
+  "title": "Policy Improvement-Guided Replay for Continual Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2611.25989v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.25989v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.25989-colir-replay/README.md",
+  "first_author": "Qin-Wen Luo",
+  "first_author_affiliation": "Nanjing University of Aeronautics and Astronautics",
+  "published": "2026-11-19",
+  "published_at": "2026-11-19T12:12:19Z",
+  "code": null,
+  "code_status": "固定v1作者入口和全文未找到可验证的本篇官方源码发布；引用的GSPO/CPO代码不等于CoLiR源码。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "data-and-budget",
+    "后训练算法组件"
+  ],
+  "priority": "P1",
+  "intake_class": "new_submission",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "gpu_validation_artifact": "docs/gpu-validations/colir-replay-a100-20261120-latest.json",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.25989v1",
+    "source_sections": [
+      "PDF p1 byline",
+      "Section4.3 Eq.15 and eligibility",
+      "Section5.1",
+      "AppendixB.3 Table6"
+    ],
+    "basis": "原文使用Qwen3-VL-2B/4B/8B，五个任务每任务600步、每步32题×8响应，另有九种方法和OOD评测。单一模型配置的名义采样槽为5×600×32×8=768000，实际生成量需训练日志确认，不能把这个计算当实测；全部矩阵远超单A100/A30的秒级组件预算。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30,
+      "gpu_component_seconds_per_seed_cap": 30
+    }
+  },
+  "summary": "持续RL不应只保存旧模型的输出：新策略仍需在历史任务分布上重新行动。CoLiR在任务结束时复用已有rollout，分别取最终策略生成的正确响应和初始策略生成的错误响应；各自补算另一策略的序列log-likelihood，以正确响应被强化和错误响应被压低两个半权重均值排序prompt。不是按答案长度平均，也不是只看正确率提升。 显式缓存的四组cross-policy序列log-likelihood、候选资格、每任务top-B、任务均匀/任务内均匀抽样和回放KL token门控。保留精确并列时的输入顺序；跨任务抽样本组件显式用有放回策略，论文未指定替换规则。没有VLM评分器、MRCL训练器、GSPO更新或能力评测，不能称为Evolve已接入。",
+  "local_operator": "auto_research.post_training.colir_replay.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.colir_replay import diagnostic; print(diagnostic(42))'"
+}

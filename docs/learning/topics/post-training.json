@@ -348,7 +348,8 @@
         "post-training:social-meta-learning",
         "post-training:behavioral-canaries",
         "post-training:leaf-opd",
-        "post-training:hint-wam"
+        "post-training:hint-wam",
+        "post-training:visalloc"
       ]
     },
     {
@@ -409,7 +410,8 @@
         "post-training:raft",
         "post-training:maple-icl",
         "post-training:sh-opd",
-        "post-training:tailroll"
+        "post-training:tailroll",
+        "post-training:colir-replay"
       ]
     }
   ]

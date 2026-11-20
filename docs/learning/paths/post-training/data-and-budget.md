@@ -7,7 +7,7 @@ hide:
 
 # 数据与预算：下一份算力花在哪里
 
-[LLM 后训练](index.md) / 164 个问题 · 41 篇论文
+[LLM 后训练](index.md) / 168 个问题 · 42 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">164 个问题 · 41 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">168 个问题 · 42 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:colir-replay" data-paper-title="Policy Improvement-Guided Replay for Continual Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="Policy Improvement-Guided Replay for Continual Reinforcement Learning LLM 后训练 Nanjing University of Aeronautics and Astronautics 2026-11-19 持续RL不应只保存旧模型的输出：新策略仍需在历史任务分布上重新行动。CoLiR在任务结束时复用已有rollout，分别取最终策略生成的正确响应和初始策略生成的错误响应；各自补算另一策略的序列log-likelihood，以正确响应被强化和错误响应被压低两个半权重均值排序prompt。不是按答案长度平均，也不是只看正确率提升。仅保留最终组有对有错、且初始组至少有一条错误响应的prompt，每个历史任务最多80条。以后对历史任务均匀分配回放，再由当前策略重新生成响应；不是直接重放旧响应。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。显式缓存的四组cross-policy序列log-likelihood、候选资格、每任务top-B、任务均匀/任务内均匀抽样和回放KL token门控。保留精确并列时的输入顺序；跨任务抽样本组件显式用有放回策略，论文未指定替换规则。没有VLM评分器、MRCL训练器、GSPO更新或能力评测，不能称为Evolve已接入。  data-and-budget 后训练算法组件 LLM 后训练 数据与预算：下一份算力花在哪里 CoLiR回放的是旧答案吗？ 不是。旧响应只用于任务边界的对比分数；记忆存prompt，新任务训练中由当前策略对这些prompt重新采样。 教学例：保存一道导航题，不把旧模型的一条路径当新策略的固定答案；新策略仍必须自己生成路径。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<span id="paper-post-training-colir-replay-61799d0c" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-4be0ec0a73788eff">CoLiR回放的是旧答案吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acolir-replay">Policy Improvement-Guided Replay for Continual Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Nanjing University of Aeronautics and Astronautics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。旧响应只用于任务边界的对比分数；记忆存prompt，新任务训练中由当前策略对这些prompt重新采样。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：保存一道导航题，不把旧模型的一条路径当新策略的固定答案；新策略仍必须自己生成路径。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25989v1">原论文</a> · <a href="../../../../post-training/2611.25989-colir-replay/">实现解读</a> · <a href="#qa-4be0ec0a73788eff">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:colir-replay" data-paper-title="Policy Improvement-Guided Replay for Continual Reinforcement Learning" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="Policy Improvement-Guided Replay for Continual Reinforcement Learning LLM 后训练 Nanjing University of Aeronautics and Astronautics 2026-11-19 持续RL不应只保存旧模型的输出：新策略仍需在历史任务分布上重新行动。CoLiR在任务结束时复用已有rollout，分别取最终策略生成的正确响应和初始策略生成的错误响应；各自补算另一策略的序列log-likelihood，以正确响应被强化和错误响应被压低两个半权重均值排序prompt。不是按答案长度平均，也不是只看正确率提升。仅保留最终组有对有错、且初始组至少有一条错误响应的prompt，每个历史任务最多80条。以后对历史任务均匀分配回放，再由当前策略重新生成响应；不是直接重放旧响应。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。显式缓存的四组cross-policy序列log-likelihood、候选资格、每任务top-B、任务均匀/任务内均匀抽样和回放KL token门控。保留精确并列时的输入顺序；跨任务抽样本组件显式用有放回策略，论文未指定替换规则。没有VLM评分器、MRCL训练器、GSPO更新或能力评测，不能称为Evolve已接入。  data-and-budget 后训练算法组件 LLM 后训练 数据与预算：下一份算力花在哪里 两个均值的样本数不同时如何计算？ 先分别平均最终正确响应的log似然增益和初始错误响应的抑制，再各乘1/2；不能合并所有响应后平均。 教学例：两条正确响应增益3和5，一条错误响应抑制2，得分(4+2)/2=3，而不是(3+5+2)/3。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-e49ad5dc1f7b0577">两个均值的样本数不同时如何计算？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acolir-replay">Policy Improvement-Guided Replay for Continual Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Nanjing University of Aeronautics and Astronautics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先分别平均最终正确响应的log似然增益和初始错误响应的抑制，再各乘1/2；不能合并所有响应后平均。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两条正确响应增益3和5，一条错误响应抑制2，得分(4+2)/2=3，而不是(3+5+2)/3。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25989v1">原论文</a> · <a href="../../../../post-training/2611.25989-colir-replay/">实现解读</a> · <a href="#qa-e49ad5dc1f7b0577">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:colir-replay" data-paper-title="Policy Improvement-Guided Replay for Continual Reinforcement Learning" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="Policy Improvement-Guided Replay for Continual Reinforcement Learning LLM 后训练 Nanjing University of Aeronautics and Astronautics 2026-11-19 持续RL不应只保存旧模型的输出：新策略仍需在历史任务分布上重新行动。CoLiR在任务结束时复用已有rollout，分别取最终策略生成的正确响应和初始策略生成的错误响应；各自补算另一策略的序列log-likelihood，以正确响应被强化和错误响应被压低两个半权重均值排序prompt。不是按答案长度平均，也不是只看正确率提升。仅保留最终组有对有错、且初始组至少有一条错误响应的prompt，每个历史任务最多80条。以后对历史任务均匀分配回放，再由当前策略重新生成响应；不是直接重放旧响应。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。显式缓存的四组cross-policy序列log-likelihood、候选资格、每任务top-B、任务均匀/任务内均匀抽样和回放KL token门控。保留精确并列时的输入顺序；跨任务抽样本组件显式用有放回策略，论文未指定替换规则。没有VLM评分器、MRCL训练器、GSPO更新或能力评测，不能称为Evolve已接入。  data-and-budget 后训练算法组件 LLM 后训练 数据与预算：下一份算力花在哪里 CoLiR和TAR都回放历史，为什么不能只比较bank大小？ CoLiR存prompt并重新生成当前策略响应，TAR存base已验证正确的原型响应并按当前压制程度门控旧token。选择单位、激活信号和生成成本都不同，同样80个bank条目不是同样80条训练轨迹。 教学例：一道旧题的两条base正确解法可在TAR中分别有非零/零gate；CoLiR若保留这道题，下一次仍可能新生成第三种回答。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-9f40395eebaff55f">CoLiR和TAR都回放历史，为什么不能只比较bank大小？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acolir-replay">Policy Improvement-Guided Replay for Continual Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Nanjing University of Aeronautics and Astronautics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>CoLiR存prompt并重新生成当前策略响应，TAR存base已验证正确的原型响应并按当前压制程度门控旧token。选择单位、激活信号和生成成本都不同，同样80个bank条目不是同样80条训练轨迹。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一道旧题的两条base正确解法可在TAR中分别有非零/零gate；CoLiR若保留这道题，下一次仍可能新生成第三种回答。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25989v1">原论文</a> · <a href="../../../../post-training/2611.25989-colir-replay/">实现解读</a> · <a href="#qa-9f40395eebaff55f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:colir-replay" data-paper-title="Policy Improvement-Guided Replay for Continual Reinforcement Learning" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="Policy Improvement-Guided Replay for Continual Reinforcement Learning LLM 后训练 Nanjing University of Aeronautics and Astronautics 2026-11-19 持续RL不应只保存旧模型的输出：新策略仍需在历史任务分布上重新行动。CoLiR在任务结束时复用已有rollout，分别取最终策略生成的正确响应和初始策略生成的错误响应；各自补算另一策略的序列log-likelihood，以正确响应被强化和错误响应被压低两个半权重均值排序prompt。不是按答案长度平均，也不是只看正确率提升。仅保留最终组有对有错、且初始组至少有一条错误响应的prompt，每个历史任务最多80条。以后对历史任务均匀分配回放，再由当前策略重新生成响应；不是直接重放旧响应。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。显式缓存的四组cross-policy序列log-likelihood、候选资格、每任务top-B、任务均匀/任务内均匀抽样和回放KL token门控。保留精确并列时的输入顺序；跨任务抽样本组件显式用有放回策略，论文未指定替换规则。没有VLM评分器、MRCL训练器、GSPO更新或能力评测，不能称为Evolve已接入。  data-and-budget 后训练算法组件 LLM 后训练 数据与预算：下一份算力花在哪里 筛选与KL负控需要验证什么？ 最终全对/全错或初始全对的prompt不得填满buffer；新任务和padding的KL梯度必须为0。排序依赖外部训练log-likelihood，不是伪造scorer或Agent成功率。 教学例：只有2条合格题、budget80时仅保留2条；不能用78条不合格题补齐。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-36ad76d184fc085c">筛选与KL负控需要验证什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acolir-replay">Policy Improvement-Guided Replay for Continual Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Nanjing University of Aeronautics and Astronautics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>最终全对/全错或初始全对的prompt不得填满buffer；新任务和padding的KL梯度必须为0。排序依赖外部训练log-likelihood，不是伪造scorer或Agent成功率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：只有2条合格题、budget80时仅保留2条；不能用78条不合格题补齐。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25989v1">原论文</a> · <a href="../../../../post-training/2611.25989-colir-replay/">实现解读</a> · <a href="#qa-36ad76d184fc085c">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:tailroll" data-paper-title="TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training LLM 后训练 École de technologie supérieure, Canada 2026-11-17 rollout step常被最长尾response决定，平均load无法反映尾长。TailRoll在chunk边界迁移在途请求，并用完成siblings足够后的终止处理straggler。原方法用stateless in-flight migration，目标engine据prompt和已生成token重建状态，一次re-prefill后续写；有cost gate、reservation、hop limit和迁后核验。 完整实验成本过高，不复现（审查 DONE）；仅方法与成本收录，无本地模型实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录多engine真实在途迁移/单次re-prefill与部分输出loss mask机制；不以离线调度模拟声称系统提速。  data-and-budget 后训练算法组件 LLM 后训练 数据与预算：下一份算力花在哪里 只均衡平均负载为何仍会等待很久？ rollout step常被最长尾response决定，平均load无法反映尾长。TailRoll在chunk边界迁移在途请求，并用完成siblings足够后的终止处理straggler。 教学例：三个engine都很快空闲，第四个只剩一个超长回答，平均负载低仍会阻塞step。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
 <span id="paper-post-training-tailroll-0bfd8822" class="ar-learning-paper-anchor"></span>

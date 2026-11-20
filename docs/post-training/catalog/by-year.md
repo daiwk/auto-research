@@ -4,11 +4,13 @@
 
 ## 2026
 
+- 2026-11 · [Policy Improvement-Guided Replay for Continual Reinforcement Learning](../2611.25989-colir-replay/README.md)（`colir-replay`）：持续RL不应只保存旧模型的输出：新策略仍需在历史任务分布上重新行动。CoLiR在任务结束时复用已有rollout，分别取最终策略生成的正确响应和初始策略生成的错误响应；各自补算另一策略的序列log-likelihood，以正确响应被强化和错误响应被压低两个半权重均值排序prompt。
 - 2026-11 · [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](../2611.23750-led-edits/README.md)（`led-edits`）：仅允许token替换时，一个遗漏或多余token会让整段后缀错位，需要许多位置分别修复。LED把[Ins]/[Del]加入输出词表、排除在输入词表外：删除当前token，或在其前插入新[Mask]，同时保留该锚点token。
 - 2026-11 · [Evidence-Based Credit Assignment for Search-Augmented Language Models](../2611.23824-eca-credit/README.md)（`eca-credit`）：终止答案全错时，组相对奖励为零，但检索可能已经取得有价值证据。ECA用训练专用冻结策略在仅含问题与去重文档的上下文中，计算参考答案的长度归一化对数似然势函数；生成的思考、查询和其他轨迹不参与打分。
 - 2026-11 · [HINT-WAM: Hindsight-Informed Training for World Action Models](../2611.24789-hint-wam/README.md)（`hint-wam`）：HINT-WAM先SFT动作专家，再冻结同一backbone，只训练hindsight encoder与gated adapters读取示范未来视频。teacher去掉当前帧并保留时间轴，学生与部署策略从来不看未来。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-11 · [How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation](../2611.24005-dcc-aggregation/README.md)（`dcc-aggregation`）：等权rubric相加并不代表各维贡献相等：每维满足/不满足样本的平均分差形成reward gain。论文把候选奖励差精确拆成基础满足数量信号、gain imbalance项和残差；把gain全部归一成1反而可能放大小gain维度的噪声。
 - 2026-11 · [Replay, Don't Resample: Off-Policy Consolidation of Long-Horizon RL Experts](../2611.24059-mrpd-replay/README.md)（`mrpd-replay`）：MRPD把专家RL训练日志当作随训练步变化的课程，而非混洗后的离线数据池。学生与专家同一SFT初始化；第k步合并各域专家第k步日志，使用日志采样策略的log-prob做importance ratio，重算组相对奖励的非对称clipped PG。
+- 2026-11 · [VisAlloc: Allocating Visual Supervision for On-Policy Self-Distillation](../2611.25069-visalloc/README.md)（`visalloc`）：VisAlloc把视觉监督分成固定样本筛选和在线token分配。先用几何匹配的正/负裁剪，保留正教师答对、负教师答错且注释质量合格的样本；该筛选发生在优化前。
 - 2026-11 · [Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching](../2611.23229-ambient-sft/README.md)（`ambient-sft`）：目标不是复制base全部细节，而是在小数据SFT时保留其粗粒度分布；升温降低对错误细节的信任，clean CE仍提供新任务方向。
 - 2026-11 · [Get Hint-Augmented GRPO Done Right Through Activation Steering](../2611.23124-ash-hint-steering/README.md)（`ash-hint-steering`）：训练问题附带reference solution前半hint更易有正reward，但推理没有该hint。ASH学习可注入activation的行为方向，在无hint输入上重现部分偏移。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-11 · [Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data](../2611.22210-mpg-dpo/README.md)（`mpg-dpo`）：用户反馈保留的方向生成偏好cone，dual generators形成W；以偏序筛除确定被支配回答，再选择尚有规则trade-off的回答对，避免先拍定单一权重。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**

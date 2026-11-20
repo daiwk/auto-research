@@ -10,6 +10,10 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 内容理解、审核与风险控制 | [Antom 3-in-1 Transformer: A Payment Foundation Model](../../recommendation-components/2611.25403-antom-3-in-1/README.md) | Ant International，2026-11-19 | 未发现官方代码 | 计划键 `antom-3-in-1`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| 研究与服务闭环 | [Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models](../../recommendation-components/2611.26531-fleet-feature-optimization/README.md) | Meta, Inc.，2026-11-19 | 未发现官方代码 | `fleet-feature-optimization`：仅低成本组件，完整实验不复现 |
+| 排序网络与长序列 | [DNA: Unlocking Depth Scaling in CTR Models](../../recommendation-components/2611.25659-dna/README.md) | Alibaba Group，2026-11-19 | 未发现官方代码 | `dna`：仅低成本组件，完整实验不复现 |
+| 大模型能力与推荐融合 | [From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation](../../recommendation-components/2611.26096-lser-serving/README.md) | Autodesk，2026-11-19 | 未发现官方代码 | `lser-serving`：仅低成本组件，完整实验不复现 |
 | 研究与服务闭环 | [MARS Technical Report](../../recommendation-components/2611.24006-mars-fapo/README.md) | Taobao，2026-11-18 | 未发现官方代码 | `mars-fapo`：仅低成本组件，完整实验不复现 |
 | 研究与服务闭环 | [MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems](../../recommendation-components/2611.23910-mle-agents/README.md) | Meta Platforms，2026-11-18 | 未发现官方代码 | `mle-agents`：仅低成本组件，完整实验不复现 |
 | 排序网络与长序列 | [X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction](../../recommendation-components/2611.24283-xsplit-argus/README.md) | 固定v1未列一作机构（不由其他作者邮箱推断），2026-11-18 | 未发现官方代码 | `xsplit-argus`：仅低成本组件，完整实验不复现 |

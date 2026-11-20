@@ -1,0 +1,18 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.25403v1",
+  "paper_url": "https://arxiv.org/abs/2611.25403v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-20",
+  "page": 3,
+  "crop_box_pdf_points": [
+    70,
+    60,
+    545,
+    385
+  ],
+  "caption": "Figure 1: sequence, tabular and graph inputs with task-conditioned fusion",
+  "extraction": "Original PDF crop, no semantic editing",
+  "source_pdf_sha256": "1f44cde429752685d74d3d96dbda2769082ca4312f741fdbfe7420a78ba42d68",
+  "asset_sha256": "15b4f2ed45e6a8298efd75c6f627babe7d98e42c31e65f07a0e8f950647f7d88",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result."
+}

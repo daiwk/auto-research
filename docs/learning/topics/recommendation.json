@@ -60,7 +60,8 @@
         "recommendation:zorro",
         "recommendation:ured",
         "recommendation:yuanbao-rubric",
-        "recommendation:intentflow"
+        "recommendation:intentflow",
+        "recommendation:lser-serving"
       ]
     },
     {
@@ -234,7 +235,8 @@
         "recommendation:whale",
         "recommendation:wide-deep",
         "recommendation:zenith",
-        "recommendation:xsplit-argus"
+        "recommendation:xsplit-argus",
+        "recommendation:dna"
       ]
     },
     {
@@ -378,7 +380,8 @@
         "recommendation:twitch-mor",
         "recommendation:unimvt",
         "recommendation:kl-mopd",
-        "recommendation:cotti"
+        "recommendation:cotti",
+        "recommendation:antom-3-in-1"
       ]
     },
     {
@@ -479,7 +482,8 @@
         "recommendation:ug-sep",
         "recommendation:cutagent",
         "recommendation:mle-agents",
-        "recommendation:mars-fapo"
+        "recommendation:mars-fapo",
+        "recommendation:fleet-feature-optimization"
       ]
     }
   ]

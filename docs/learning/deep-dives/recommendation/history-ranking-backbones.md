@@ -7,7 +7,7 @@ hide:
 
 # DIN、HSTU、LONGER、SlimPer、RankMixer：究竟让谁与谁交互？
 
-[搜广推](../index.md) · 更新 2026-11-19 · 74 篇主题资料 / 6 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-20 · 75 篇主题资料 / 7 篇重点对照
 
 比较排序骨干前先画三条边：历史到历史、候选到历史、字段到字段。DIN按候选激活历史，HSTU在输入窗口内逐层改写历史状态，LONGER先合并再以短查询读长KV，SlimPer反复读取用户池但只传播小知识库，RankMixer则更换异构字段交互。它们可处于同一流水线的不同位置，不能按一个长度变量或一张本地结果表排总名次。
 
@@ -31,6 +31,7 @@ hide:
 | [SlimPer: Make Personalization Model Slim and Smart](../../../reproductions/2607.12281-slimper/README.md) · [原始来源](https://arxiv.org/abs/2607.12281)<br>章节：背景与主要改动、核心公式、复现边界 | 候选相关的固定槽位知识库逐层Select–Match–Refine，每层重新读取共享用户token池，层间传播小KB而非全历史隐状态。 | 用户池仍随历史长度增长，初始编码可有局部上下文交互；共享的是候选无关用户编码，不是不同候选的最终KB。本地短历史没有验证生产长序列QPS。 |
 | [RankMixer: Scaling Up Ranking Models in Industrial Recommenders](../../../reproductions/2507.15551-rankmixer/README.md) · [原始来源](https://arxiv.org/abs/2507.15551)<br>章节：背景与主要改动、核心公式、本地复现 | 异构feature tokens按head/token做固定重排，输出位置各有独立FFN；用不同分量相遇后学习组合，替代字段交互中的attention。 | token数与head/宽度约束必须匹配；这不禁止上游历史模块使用attention，也不自动处理超长行为压缩。Sparse路由和本地实现状态需另看，不能泛化全模型无attention。 |
 | [X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction](../../../recommendation-components/2611.24283-xsplit-argus/README.md) · [原始来源](https://arxiv.org/abs/2611.24283v1)<br>章节：背景与主要改动、核心公式、同主题对照 | 将候选无关的旧历史压成因果编码器末K个状态，在线只编码最近M个事件；候选token再对两段记忆做cross-attention。离线缓存是服务时的执行安排，不是训练时detach压缩器。点击监督头与原始logit的L1蒸馏头共享历史表示，但上线只使用监督头。 | ARGUS前作按反馈→物品分解下一事件分布；X-split重点是候选无关历史缓存和候选特定点击logit蒸馏，目标排列与预测头不能照搬。二者的本地负结果/诊断也不能互相当作能力对照。 |
+| [DNA: Unlocking Depth Scaling in CTR Models](../../../recommendation-components/2611.25659-dna/README.md) · [原始来源](https://arxiv.org/abs/2611.25659v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | DNA把请求U与历史S组成候选无关的双流：每层请求和候选F分别读取同一组历史K/V，随后历史token再反向读取刚更新的U。这样下一层看到的是受当前请求塑形的历史，而不是每层重投影同一S0。请求与历史状态可在同一请求的所有候选间共享。 | LONGER先用少量query读取长历史，后续主要在压缩token上计算；DNA不靠删掉历史token，而让每个历史token从少量请求token吸收上下文，下一层继续读更新后的完整S。两者都关注候选共享，但共享的对象和更新时机不同；本地诊断不提供二者推荐指标胜负。 |
 
 </div>
 
@@ -53,6 +54,12 @@ DIN的兴趣池化已读取候选；SlimPer的KB从item/cross信息出发，不�
 Eq1–11：历史编码因果且候选无关；训练memory只选目标之前状态。默认b(t)=max(0,t−1−M)，服务缓存cutoff允许与最近事件重叠或留缺口。训练runtime共享全序列因果局部attention，服务只重算最近M条，左边界/有效感受野并不相同。KD是原始logit的L1，不是BCE或KL；仅负标签抬到epsilon，教师完全detach。小网络缩小层数/维度，保留真实attention、双头与梯度。 ARGUS前作按反馈→物品分解下一事件分布；X-split重点是候选无关历史缓存和候选特定点击logit蒸馏，目标排列与预测头不能照搬。二者的本地负结果/诊断也不能互相当作能力对照。
 
 对照来源：[xsplit-argus](../../../recommendation-components/2611.24283-xsplit-argus/README.md) · [argus](../../../reproductions/2507.15994-argus/README.md)
+
+### DNA: Unlocking Depth Scaling in CTR Models
+
+LONGER先用少量query读取长历史，后续主要在压缩token上计算；DNA不靠删掉历史token，而让每个历史token从少量请求token吸收上下文，下一层继续读更新后的完整S。两者都关注候选共享，但共享的对象和更新时机不同；本地诊断不提供二者推荐指标胜负。 共有D次请求read、D次候选read，却只有D-1次历史update，最后一层不再更新无人读取的S。read中各行为组使用不同K/V投影，各非序列token使用独立SwiGLU；update对全部请求token的拼接做composite K/V投影，行为组共享各自FFN，padding置零。QKNorm及head缩放保留。
+
+对照来源：[dna](../../../recommendation-components/2611.25659-dna/README.md) · [longer](../../../reproductions/2505.04421-longer/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -98,9 +105,23 @@ Eq1–11：历史编码因果且候选无关；训练memory只选目标之前状
 
     对照来源：[xsplit-argus](../../../recommendation-components/2611.24283-xsplit-argus/README.md) · [argus](../../../reproductions/2507.15994-argus/README.md)
 
+### 与LONGER减少后续长序列计算的方式有何不同？ {#cross-nov20-dna}
+
+??? note "展开答案与例子"
+
+    **答案：** LONGER把信息压到较小query/token路径；DNA保留历史token，让它们从少量请求token更新，并把更新开销在请求内候选间共享。
+
+    **教学例子：** 教学例：两者都可共享K/V，但这不意味着都在每层删除历史token。
+
+    对照来源：[dna](../../../recommendation-components/2611.25659-dna/README.md) · [longer](../../../reproductions/2505.04421-longer/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-20** · LONGER先用少量query读取长历史，后续主要在压缩token上计算；DNA不靠删掉历史token，而让每个历史token从少量请求token吸收上下文，下一层继续读更新后的完整S。两者都关注候选共享，但共享的对象和更新时机不同；本地诊断不提供二者推荐指标胜负。 原文线上证据与本地合同分开记录。
+
+涉及：[dna](../../../recommendation-components/2611.25659-dna/README.md) · [longer](../../../reproductions/2505.04421-longer/README.md)
 
 **2026-11-19** · 输入是显式小型事件/候选特征；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。负控改目标/未来反馈保持预测不变；KD反传到compressor，但不能据此推断NE或ACV收益。 完整高成本实验不复现，审查DONE。
 
@@ -110,7 +131,7 @@ Eq1–11：历史编码因果且候选无关；训练memory只选目标之前状
 
 覆盖 73 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 74 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 75 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -188,6 +209,7 @@ Eq1–11：历史编码因果且候选无关；训练memory只选目标之前状
 - [Wide &amp; Deep Learning for Recommender Systems](../../../reproductions/1606.07792-wide-deep/README.md)
 - [Zenith: Scaling up Ranking Models for Billion-scale Livestreaming Recommendation](../../../reproductions/2601.21285-zenith/README.md)
 - [X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction](../../../recommendation-components/2611.24283-xsplit-argus/README.md)
+- [DNA: Unlocking Depth Scaling in CTR Models](../../../recommendation-components/2611.25659-dna/README.md)
 
 </details>
 

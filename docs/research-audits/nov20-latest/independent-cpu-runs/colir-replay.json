@@ -1,0 +1,87 @@
+{
+  "schema_version": 2,
+  "key": "colir-replay",
+  "device": "cpu",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "exact_contrastive_score": true,
+        "mixed_final_and_initial_negative_required": true,
+        "selection_preserves_only_eligible_prompt_ids": true,
+        "no_silent_padding_of_memory": true,
+        "uniform_sampler_stays_in_memory": true,
+        "new_task_and_masked_kl_gradient_zero": true,
+        "replay_valid_kl_gradient_present": true,
+        "selection_has_no_autograd": true
+      },
+      "metrics": {
+        "selected_prompts": 2,
+        "eligible_prompts": 2,
+        "highest_score": 0.5000000074505806,
+        "replay_kl_sum": 0.6302669602920183
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "exact_contrastive_score": true,
+        "mixed_final_and_initial_negative_required": true,
+        "selection_preserves_only_eligible_prompt_ids": true,
+        "no_silent_padding_of_memory": true,
+        "uniform_sampler_stays_in_memory": true,
+        "new_task_and_masked_kl_gradient_zero": true,
+        "replay_valid_kl_gradient_present": true,
+        "selection_has_no_autograd": true
+      },
+      "metrics": {
+        "selected_prompts": 2,
+        "eligible_prompts": 2,
+        "highest_score": 0.5000000074505806,
+        "replay_kl_sum": 1.6649373385520603
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "exact_contrastive_score": true,
+        "mixed_final_and_initial_negative_required": true,
+        "selection_preserves_only_eligible_prompt_ids": true,
+        "no_silent_padding_of_memory": true,
+        "uniform_sampler_stays_in_memory": true,
+        "new_task_and_masked_kl_gradient_zero": true,
+        "replay_valid_kl_gradient_present": true,
+        "selection_has_no_autograd": true
+      },
+      "metrics": {
+        "selected_prompts": 2,
+        "eligible_prompts": 2,
+        "highest_score": 0.5000000074505806,
+        "replay_kl_sum": 1.1516000554875205
+      }
+    }
+  ],
+  "source_sha256": {
+    "src/auto_research/post_training/colir_replay.py": "5584dbcf31797b52fae6cee725a1b0d7c0158f57ae8d65a113253216032efbc6",
+    "src/auto_research/post_training/_nov18_contracts.py": "103b12bbdcad9c18fab47f31f66e73a77564e4db05618aec5809658dfcfdf39e"
+  },
+  "source_commit": null,
+  "provenance_note": "Independent working-tree CPU run; actual content hashes, not the later frozen-source batch run.",
+  "formal_comparison": false,
+  "capability_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false
+}

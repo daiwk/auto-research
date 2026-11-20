@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:fleet-feature-optimization/shared-pipeline-cost": {
+      "source_sha256": "eccb8a8c28b51ef4ca1145eeda73e382064bea8fbb2bd429b947caa7cc5c3d6a",
+      "reviewed": true,
+      "fields": {
+        "question": "How can a feature add serving cost but no pipeline cost?",
+        "answer": "The model still pays embedding/projection work, but upstream generation/storage may already be paid by another model under that shared budget.",
+        "example": "If A already uses f, adding f to B leaves the shared union unchanged while B's inference FLOPs may rise."
+      }
+    },
+    "qa/recommendation:fleet-feature-optimization/pareto-before-blend": {
+      "source_sha256": "eac4f1a13ccad822f6828a910575dbd47641ac7a807ba104dcb10acbca3cc532",
+      "reviewed": true,
+      "fields": {
+        "question": "Why Pareto layers instead of a weighted task-FI sum?",
+        "answer": "Task losses differ in scale and units. Pareto layers retain features that cannot be dominated on all tasks before source blending chooses among them.",
+        "example": "For A(4,1), B(1,4), C(0,0), A/B share the first front and C is dominated."
+      }
+    },
+    "qa/recommendation:fleet-feature-optimization/not-ne-alone": {
+      "source_sha256": "d4cf408a3b7cee704db733bd70dd8c5d4ef335bc742c8e2adb33d7320d7c93a2",
+      "reviewed": true,
+      "fields": {
+        "question": "What differs from MLE Agents' variance-probe admission?",
+        "answer": "Fleet adds model resource caps and shared pipeline budgets. Better validation NE does not admit an infeasible candidate, and these caps do not replace same-round noise calibration.",
+        "example": "A candidate with NE0.1 but excessive inverse-QPS is rejected in favor of a feasible NE0.6 candidate."
+      }
+    },
+    "qa/recommendation:fleet-feature-optimization/explicit-quota-order": {
+      "source_sha256": "ed98717797ddce6e8b0f6b22b10f790dfe9c6ff7a49a440deb6d56c616fd8bbf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are rounding and cost order explicit inputs?",
+        "answer": "The fixed paper leaves those discrete conventions incomplete. Callers supply quotas, within-front order and real cost priorities; exhaustion or infeasibility is reported rather than silently padded.",
+        "example": "If two sources rank a first, the second skips a; source exhaustion is not silently refilled from elsewhere."
+      }
+    },
+    "qa/recommendation:dna/evolving-history": {
+      "source_sha256": "d11b52d4f67b679d847a0eeeeca4a19d41aeaaab93de796d5b3ced8eac32199b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is deeper cross-attention not already DNA?",
+        "answer": "A fixed-history stack reprojects S0 at every layer. DNA lets history absorb the newly updated request, so later layers read a changed S.",
+        "example": "The same history under two search queries may produce different S1; projecting fixed S0 cannot do this."
+      }
+    },
+    "qa/recommendation:dna/d-minus-one": {
+      "source_sha256": "e4659514309074f52ed2b492be6d4ea126c835bc3aa36894c67149e0e6edbd84",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does DNA-D have only D-1 history updates?",
+        "answer": "Both reads consume incoming S, and each update prepares the next layer. No read follows the final layer, so another update would not affect prediction.",
+        "example": "D3 reads S0, S1 and S2 and requires only two updates."
+      }
+    },
+    "qa/recommendation:dna/longer-distinction": {
+      "source_sha256": "f4375233b3db0d71cc01403fe9e6194811b5c061421af55f79b59ded625b2c87",
+      "reviewed": true,
+      "fields": {
+        "question": "How does it differ from LONGER?",
+        "answer": "LONGER concentrates history interaction into a smaller query/token path. DNA retains history tokens, updates them from a few request tokens and amortizes that work over candidates.",
+        "example": "Both can share K/V, but neither shared-K/V fact implies the same token-deletion schedule."
+      }
+    },
+    "qa/recommendation:dna/no-cross-request-cache": {
+      "source_sha256": "bcddd602f9ad09bfda38b8a40e7d14df953b8834a039361d090deb45457bab71",
+      "reviewed": true,
+      "fields": {
+        "question": "Does within-request batching parity justify cross-request reuse?",
+        "answer": "No. A new U can change history states and invalidate prior S/KV. The local control covers only batch versus individual candidates using the same prepared request cache.",
+        "example": "Even with unchanged user history, a new search query requires new request-conditioned states."
+      }
+    },
+    "qa/recommendation:lser-serving/online-llm-disabled": {
+      "source_sha256": "34448e320f43d703c6c1548e1b1506c8762a6407f7b869a16af8fb572b6dc2e5",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the10.3% online CTR lift validate LLM vectors?",
+        "answer": "No. LLM features were disabled in that experiment. It validates rules-to-learned retrieval and nearline serving; LLM incrementality is isolated offline only.",
+        "example": "BERT4Rec plus nearline beating rules does not prove that enabling LLM vectors adds a production lift."
+      }
+    },
+    "qa/recommendation:lser-serving/strict-point-in-time": {
+      "source_sha256": "85e792fba01869c5531cd8a67e8fe2e3b74c1f1728e8ab9295186aa053bd5197",
+      "reviewed": true,
+      "fields": {
+        "question": "May a labeled click enter its own session input?",
+        "answer": "No. Event time must be strictly below the cutoff. Session and history split at session start and exclude the current label and future behavior.",
+        "example": "With cutoff10, events at10 and11 are both excluded; a less-than-or-equal check leaks the label."
+      }
+    },
+    "qa/recommendation:lser-serving/notellm-versus-user": {
+      "source_sha256": "9034f6d941367bbfb7f38ee2599c9a5536dd28179a319fba092ea89c49af73b4",
+      "reviewed": true,
+      "fields": {
+        "question": "What does LSER add beyond YouTube DNN rather than generating recommendations with an LLM?",
+        "answer": "YouTube DNN aggregates history/context into a user tower. LSER separates short/long sequence encoders and adds optional LLM features plus asynchronous freshness. Both can query an offline item index; the LLM does not generate item IDs token by token.",
+        "example": "With LLM vectors disabled, LSER remains learned two-tower retrieval; this is the version used in its online A/B."
+      }
+    },
+    "qa/recommendation:lser-serving/no-sync-or-fake-vector": {
+      "source_sha256": "f3eb27cefef07bae7f60142aadf67e076fc74c52c58b0083fec66c9846cc1a66",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a pending refresh call an LLM or invent zero vectors?",
+        "answer": "Neither. Select only records written by request time with admissible input cutoffs. Missing session/history explicitly requires external cold start; incomplete LLM pairs require compatible baseline fusion.",
+        "example": "At request10 a vector written_at12 is unavailable even with as_of9; this does not impose a paper-prescribed TTL."
+      }
+    }
+  }
+}

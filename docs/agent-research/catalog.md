@@ -11,7 +11,9 @@
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | 执行框架与自改进 | [Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses](2611.24924-ahe-beta/README.md) | Fudan University，2026-11-18 | [原作者入口](https://github.com/Curry09/AHE-Beta/tree/0370ec20a9ad90053a5a50ed21d491eb5480b975)；[作者仓库](https://github.com/Curry09/AHE-Beta/tree/0370ec20a9ad90053a5a50ed21d491eb5480b975)；MIT | `ahe-beta`：仅低成本组件，完整实验不复现 |
+| 执行框架与自改进 | [BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection](2611.25088-buggymle-cci/README.md) | Google Research / University of Illinois Urbana-Champaign，2026-11-18 | 未发现官方代码 | `buggymle-cci`：仅低成本组件，完整实验不复现 |
 | Agent 评测与可靠性 | [Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling](2611.24849-execjudges/README.md) | Emory University，2026-11-18 | 未发现官方代码 | `execjudges`：仅低成本组件，完整实验不复现 |
+| 记忆与技能 | [Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents](2611.25123-grepmem/README.md) | University of Southern California，2026-11-18 | [原作者入口](https://github.com/limenlp/GrepMem/tree/b7e3744c2f7489feac4060b379be6936960dc7bd)；[原作者仓库固定提交](https://github.com/limenlp/GrepMem/tree/b7e3744c2f7489feac4060b379be6936960dc7bd)；MIT | `grepmem`：仅低成本组件，完整实验不复现 |
 | 规划与搜索 | [Kaer: Security-Aware Replanning for Multi-Agent Systems](2611.24839-kaer/README.md) | Northeastern University，2026-11-18 | 未发现官方代码 | `kaer`：仅低成本组件，完整实验不复现 |
 | 规划与搜索 | [Reducing Inference Cost of Coding Agents with Timeout Cascades](2611.24324-timeout-cascades/README.md) | AMD Singapore，2026-11-18 | 未发现官方代码 | `timeout-cascades`：仅低成本组件，完整实验不复现 |
 | 执行框架与自改进 | [RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?](2611.24395-rsibench-infra/README.md) | ByteDance Seed / Tsinghua University AIR / SIA-Lab，2026-11-18 | 未发现官方代码 | 计划键 `rsibench-infra`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |

@@ -2,6 +2,10 @@
 
 论文按第一作者所属机构聚合；产品和社区项目单独标明，避免把开源作者误写成论文机构。
 
+## Sichuan University
+
+- [LoopRoute](../2611.25363-looproute/README.md)（2026-11-19，一作Zeming Yu）：公共state-action重复对触发两步LLM接管，拦截提案不算已执行；CPU控制核不运行模型，不宣传节省磁盘或Agent能力提升。
+
 ## Harvard University
 
 - [EgoJev](../2611.24616-egojev/README.md)（2026-11-18，一作Chunggi Lee）：决策概率读出、粗细窗口几何融合与分位数选帧；本地仅CPU后处理，不运行VLM，完整视频实验不复现。

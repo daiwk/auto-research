@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-20",
+  "all_sources_exhaustive": false,
+  "priority_admissions": {
+    "agent-research:buggymle-cci": "Fixedv1 first author Google Research/UIUC; CCI calibration interface only, no bug-injection campaign or 9B training.",
+    "recommendation:fleet-feature-optimization": "Fixedv1 Meta first author and production A/B; preserve unnamed metric and missing traffic/CI details; deterministic component only.",
+    "foundation-models:canon-layers-scale": "Historical Meta research-execution provenance and official facebookresearch code; current byline Allen-Zhu Research, not relabeled as current Meta affiliation."
+  },
+  "important_attribution_limits": [
+    "LSER online A/B did not enable LLM auxiliary features; offline9.6pp HR@10 is not relative lift or online LLM attribution.",
+    "Antom overall37.88% loss reduction differs from phase-II same-budget chargeback28.28% and common-date26.09%; no CI is invented.",
+    "GrepMem retains a growing original log and is not Codex disk compaction or a reader for this user's conversation."
+  ],
+  "official_directory_delta_reviews": [
+    {
+      "source_url": "https://research.google/pubs/a-multi-environment-formal-verification-methodology-for-catching-latency-induced-rtl-hangs/",
+      "source_sha256": "7dc7fc3b972d9a0c0bd3c89a6406ab0520b1529a07dbbbe4d44d116b3afbb9b9",
+      "review_scope": "official_title_and_abstract_only",
+      "decision": "not_selected_this_finite_intake",
+      "reason": "Official abstract concerns hardware verification/DFT, general safe coding, or Bayesian time-series inference, outside the current LLM/recommendation/Agent method intake.",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "source_url": "https://research.google/pubs/a-weighted-hierarchical-approach-to-testpoint-configuration-driving-efficient-dft-convergence/",
+      "source_sha256": "0b8af6fe5fd17e4921ee64033c8423f606d6845544246b8db6e1e1e661515f16",
+      "review_scope": "official_title_and_abstract_only",
+      "decision": "not_selected_this_finite_intake",
+      "reason": "Official abstract concerns hardware verification/DFT, general safe coding, or Bayesian time-series inference, outside the current LLM/recommendation/Agent method intake.",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "source_url": "https://research.google/pubs/detecting-crosstalk-induced-static-noise-defects-with-a-custom-test-flow/",
+      "source_sha256": "474f0e543e64a32a1107dc2663b453e8f7b081858d53f898751eb6f20956ec3c",
+      "review_scope": "official_title_and_abstract_only",
+      "decision": "not_selected_this_finite_intake",
+      "reason": "Official abstract concerns hardware verification/DFT, general safe coding, or Bayesian time-series inference, outside the current LLM/recommendation/Agent method intake.",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "source_url": "https://research.google/pubs/from-prompt-to-probe-left-shifting-soc-debug-with-generative-ai/",
+      "source_sha256": "b5566cb2d5432e9b0dfa6b0c345c16f80442aeaf308f2bc784497b0303acfd17",
+      "review_scope": "official_title_and_abstract_only",
+      "decision": "not_selected_this_finite_intake",
+      "reason": "LLM application/evaluation case study; the captured official page does not supply a separately specified executable core or accessible full-method artifact for this batch. This is not a claim of no value or full-text rejection.",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "source_url": "https://research.google/pubs/i-want-to-be-pushed-i-want-to-grow-enabling-social-workers-to-design-evaluations-of-llm-augmentation-in-their-work/",
+      "source_sha256": "9849ad1bfd63b75b7f9acc18aef73521ec3db3349845bb695dd84952b59adfc7",
+      "review_scope": "official_title_and_abstract_only",
+      "decision": "not_selected_this_finite_intake",
+      "reason": "LLM application/evaluation case study; the captured official page does not supply a separately specified executable core or accessible full-method artifact for this batch. This is not a claim of no value or full-text rejection.",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "source_url": "https://research.google/pubs/multi-tiered-physical-aware-formal-ensuring-latency-robustness-in-power-management-architecture-and-design/",
+      "source_sha256": "63cb984eb5df9744116e8e11392d1c9658d44e4c01dca1812af6dc40c0bed9b6",
+      "review_scope": "official_title_and_abstract_only",
+      "decision": "not_selected_this_finite_intake",
+      "reason": "Official abstract concerns hardware verification/DFT, general safe coding, or Bayesian time-series inference, outside the current LLM/recommendation/Agent method intake.",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "source_url": "https://research.google/pubs/optimizing-ppa-with-atpg-qor-a-custom-testpoints-reclustering-approach-for-reduced-congestion-and-leakage-with-improved-test-qor/",
+      "source_sha256": "ae5f62c969fc5175daead314949665101ea2a58093a517c521e8b1a37766ad78",
+      "review_scope": "official_title_and_abstract_only",
+      "decision": "not_selected_this_finite_intake",
+      "reason": "Official abstract concerns hardware verification/DFT, general safe coding, or Bayesian time-series inference, outside the current LLM/recommendation/Agent method intake.",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "source_url": "https://research.google/pubs/safe-coding-rigorous-modular-reasoning-about-software-safety-2/",
+      "source_sha256": "b7ccb9640fc188577391b29a080370e22f38fdf436839c586e40eb9f6768e0c1",
+      "review_scope": "official_title_and_abstract_only",
+      "decision": "not_selected_this_finite_intake",
+      "reason": "Official abstract concerns hardware verification/DFT, general safe coding, or Bayesian time-series inference, outside the current LLM/recommendation/Agent method intake.",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "source_url": "https://research.google/pubs/scalable-bayesian-inference-for-time-series-via-divide-and-conquer/",
+      "source_sha256": "93a86abceb44c4faab73c6b9b20d2232c9b761528d3932544365c2d9c9345ddb",
+      "review_scope": "official_title_and_abstract_only",
+      "decision": "not_selected_this_finite_intake",
+      "reason": "Official abstract concerns hardware verification/DFT, general safe coding, or Bayesian time-series inference, outside the current LLM/recommendation/Agent method intake.",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "source_url": "https://research.google/pubs/vclp-dft-dashboard-for-efficient-extraction-of-dft-related-electrical-violations-in-multi-power-domain-scan-stitching/",
+      "source_sha256": "b8b55b65a35227fd48d5a8285b0c2b58eff694aa32172d3abfc3a9f05bbbc46b",
+      "review_scope": "official_title_and_abstract_only",
+      "decision": "not_selected_this_finite_intake",
+      "reason": "Official abstract concerns hardware verification/DFT, general safe coding, or Bayesian time-series inference, outside the current LLM/recommendation/Agent method intake.",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "domain": "post-training",
+  "key": "visalloc",
+  "title": "VisAlloc: Allocating Visual Supervision for On-Policy Self-Distillation",
+  "paper_url": "https://arxiv.org/abs/2611.25069v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.25069v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.25069-visalloc/README.md",
+  "first_author": "Haoran Xu",
+  "first_author_affiliation": "Zhejiang University",
+  "published": "2026-11-18",
+  "published_at": "2026-11-18T19:12:00Z",
+  "code": "https://github.com/Kaelyn01/VisAlloc",
+  "code_status": "[作者公开源码](https://github.com/Kaelyn01/VisAlloc)，Apache-2.0；核对固定commit `212b5f6f88645815d1369876f7801c58a5cad24a` 的actor和weight helper，未执行上游训练。",
+  "code_license": "Apache-2.0",
+  "upstream_revision": "212b5f6f88645815d1369876f7801c58a5cad24a",
+  "adapter": null,
+  "topic": [
+    "teacher-and-context",
+    "后训练算法组件"
+  ],
+  "priority": "P1",
+  "intake_class": "announcement_overlap_backfill",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "gpu_validation_artifact": "docs/gpu-validations/visalloc-a100-20261120-latest.json",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.25069v1",
+    "source_sections": [
+      "PDF p1 byline",
+      "Section3 Eq.1-15",
+      "AppendixA",
+      "fixed upstream actor and visalloc_utils"
+    ],
+    "basis": "官方固定commit默认每节点4GPU，Qwen3.5-4B/9B、5795保留图像、96题×8rollouts、60步、1024生成token，另需冻结prior和gpt-oss-120b评测judge。名义训练响应槽为96×8×60=46080/模型配置，不是本地实测；单A100/A30不承担完整双模型矩阵。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30,
+      "gpu_component_seconds_per_seed_cap": 30
+    }
+  },
+  "summary": "VisAlloc把视觉监督分成固定样本筛选和在线token分配。先用几何匹配的正/负裁剪，保留正教师答对、负教师答错且注释质量合格的样本；该筛选发生在优化前。训练时学生从全图生成响应，同一个detached EMA教师在同一学生prefix上分别读证据中心裁剪和空间移位裁剪，负教师不是第二个蒸馏目标。 训练用sample verdict过滤、显式logits上的同support top100+tail JSD、冻结prior与模板构建、有效位置分位数、完整OR/shared gates、定预算逆频率bonus、positive-only JSD和detached importance/correction。fp16/bf16在log-softmax、差值与分位数统计前升为fp32，float64保持精度；随机及有限±60000极值负控检查有限输出、冻结教师与有效学生梯度。没有全图VLM、几何裁剪器、教师答案判分、EMA模型更新、rollout或trainer；提供张量不等于执行这些核心网络。",
+  "local_operator": "auto_research.post_training.visalloc.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.visalloc import diagnostic; print(diagnostic(42))'"
+}

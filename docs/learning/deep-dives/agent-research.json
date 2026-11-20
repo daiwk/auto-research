@@ -670,6 +670,18 @@
             "结果、负控与边界",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "agent-research:grepmem",
+          "position": "GrepMem把有限工作上下文和完整历史分开：压缩时只把活跃上下文换成系统提示、任务与摘要，原始消息、工具调用/输出和摘要仍追加到纯文本日志。第一次压缩之后才开放grep_history，让模型按需用大小写不敏感正则取回遗漏细节。不需要embedding、索引或知识抽取，但“lossless”只指原日志保留，不代表模型每次都能找对或答对。",
+          "tradeoff": "MemGPT以分层内存、page-out/page-in与模型工具调用管理归档；GrepMem不预先抽取归档结构，保留原始轨迹并做词法搜索。两者都可压缩工作上下文，但GrepMem没有减少原始日志占盘；模型是否会选对检索词仍需训练与真实任务评价，本地固定key的旧MemGPT诊断也不能作能力对照。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -753,6 +765,14 @@
           "papers": [
             "agent-research:clam-memory",
             "agent-research:coremem"
+          ]
+        },
+        {
+          "title": "GrepMem：压缩工作上下文，但保留可grep的原始历史",
+          "body": "grep按原始记录头与行号返回最早匹配，默认10条、最多30条，offset跳过匹配行而非记录；前后context默认1行、最多3行。旧grep结果仍留在原日志，但搜索跳过它们以免递归重复。单次输出上限6K字符，围绕匹配裁到300字符并在完整match边界停止，返回继续offset；非法正则或超过10秒都返回错误。控制测试验证摘要可遗漏原始细节而日志仍保留、只计原始匹配而不递归grep输出、大小写无关、连续offset不漏页；长行与多匹配验证6K上限，灾难性回溯正则会终止worker，随后正常查询仍可用。论文的模型turn预算、自动token估计与forced-answer调用不在这个存储工具组件内，不捏造自动压缩策略或训练效果。",
+          "papers": [
+            "agent-research:grepmem",
+            "agent-research:memgpt"
           ]
         }
       ],
@@ -866,9 +886,19 @@
             "agent-research:clam-memory",
             "agent-research:coremem"
           ]
+        },
+        {
+          "id": "cross-nov20-grepmem",
+          "question": "它和MemGPT的记忆结构有什么不同？",
+          "answer": "MemGPT分层管理与换入换出，GrepMem保留原始文本、按正则取回而不建语义索引；两者都不能仅凭存储单测宣称模型会正确回忆。",
+          "example": "教学例：grep订单编号不要求先把订单提炼成一条结构化记忆。",
+          "papers": [
+            "agent-research:grepmem",
+            "agent-research:memgpt"
+          ]
         }
       ],
-      "updated": "2026-11-18",
+      "updated": "2026-11-20",
       "reviewed_papers": [
         "agent-research:cache-engineering",
         "agent-research:tokenworth",
@@ -932,7 +962,8 @@
         "agent-research:lisa",
         "agent-research:policybank",
         "agent-research:coremem",
-        "agent-research:clam-memory"
+        "agent-research:clam-memory",
+        "agent-research:grepmem"
       ],
       "updates": [
         {
@@ -1141,6 +1172,18 @@
           "source_revisions": {
             "agent-research:clam-memory": "2498570013ef8dd02107142113500affe63d865299686419b948181fbaf1f125",
             "agent-research:coremem": "928dc32cc32d12de7ca6c54a6ebb6b7568a1cd04a013a0b96f744deb9207b209"
+          }
+        },
+        {
+          "date": "2026-11-20",
+          "papers": [
+            "agent-research:grepmem",
+            "agent-research:memgpt"
+          ],
+          "summary": "本地实现append-only记录、显式摘要压缩、第一次压缩后的grep准入、正则/分页/上下文/原行号、跳过旧grep输出与字符上限。正则在隔离子进程内运行并用硬timeout终止，仅接收输入文本而不打开路径。摘要由调用方明确提供；没有LLM摘要器、GRPO、问题回答或真实历史接入。只对合成公开观察做控制测试，不读取本机Codex会话，也不把字符串检索当Agent能力。 完整实验高成本不复现。",
+          "source_revisions": {
+            "agent-research:grepmem": "577f2b1b106591e9094f1a1901e01ce3592ab70c1e184636e2a0c24c7e27d511",
+            "agent-research:memgpt": "468b0f83c09cf59f74f1961de490d034f5f454baae55fa2a36fcb391aa4407f3"
           }
         }
       ]
@@ -2009,6 +2052,18 @@
             "核心公式",
             "同主题对照"
           ]
+        },
+        {
+          "paper": "agent-research:buggymle-cci",
+          "position": "BuggyMLE先审核可运行、指标稳定且对代码变化敏感的ML仓库，再让Injector注入不同规模的错误。Oracle通过逐个恢复变动找最小恢复集合，再把每个改动单独应用到干净仓库，筛出确有独立指标影响的错误。Solver必须在多文件仓库里真实修复；评价同时检查执行、指标恢复和逐错误语义修复，不能把补偿性调参当修好了全部bug。",
+          "tradeoff": "MLE-STAR用检索、真实消融与validation结果定位并改进模型代码；BuggyMLE用有Oracle归因的注入错误构建难度阶梯，CCI是评测/课程设计尺度。前者选改进方案，后者塑造训练与评测任务；不能把后者的结构分数当成前者的真实验证收益。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -2269,6 +2324,14 @@
           "papers": [
             "agent-research:searchinject",
             "agent-research:silentguard"
+          ]
+        },
+        {
+          "title": "BuggyMLE：用代码复杂度分层，而不是把指标恢复当完整修复",
+          "body": "CCI在八个参考benchmark上，先取十项结构特征的任务中位数，做log1p和特征z-score，再对repo、dependency、patch三组求均值，并把组分数按参考方差缩放。固定logistic系数的负加权和构成raw CCI，再用参考最小/最大值定标。新任务不能重新拟合或裁剪回[0,1]。Figure10的repo系数为+0.64，dependency为-0.34，patch为-0.99；repo项是给定其他项的条件调整，不支持“仓库越大必然越难”。负控保留正repo系数、组方差缩放和参考区间外结果；验证median不是mean，未给截距时不捏造预测成功率。拒绝NaN、零尺度和退化边界。Table4把total_lines_delta写成净变化，若值≤-1会使log1p无定义，接口明确拒绝，既不取绝对值，也不补造作者未说明的变换。",
+          "papers": [
+            "agent-research:buggymle-cci",
+            "agent-research:mle-star"
           ]
         }
       ],
@@ -2595,9 +2658,19 @@
             "agent-research:searchinject",
             "agent-research:silentguard"
           ]
+        },
+        {
+          "id": "cross-nov20-buggymle-cci",
+          "question": "CCI和MLE-STAR的消融分数能互换吗？",
+          "answer": "不能。CCI预测结构困难度，MLE-STAR用执行和validation消融选择值得改的代码块；结构困难不等于模型效果差。",
+          "example": "教学例：跨文件修复很难，并不说明该模型validation AUC低。",
+          "papers": [
+            "agent-research:buggymle-cci",
+            "agent-research:mle-star"
+          ]
         }
       ],
-      "updated": "2026-11-19",
+      "updated": "2026-11-20",
       "reviewed_papers": [
         "agent-research:verified-quantum-wiki",
         "agent-research:rsi-opt",
@@ -2675,7 +2748,8 @@
         "agent-research:ahe-beta",
         "agent-research:safe-personal-rsi",
         "agent-research:rsibench-infra",
-        "agent-research:searchinject"
+        "agent-research:searchinject",
+        "agent-research:buggymle-cci"
       ],
       "updates": [
         {
@@ -3136,6 +3210,18 @@
           "source_revisions": {
             "agent-research:searchinject": "44387036c581852d1b2ac0bf5a615cdcca0a93909ad769b51321314a9ddf0e66",
             "agent-research:silentguard": "7b65bd17259f9c4392abfdb9ca98ba7e0bdcbadbe4f3e34da25ef08880be7c9b"
+          }
+        },
+        {
+          "date": "2026-11-20",
+          "papers": [
+            "agent-research:buggymle-cci",
+            "agent-research:mle-star"
+          ],
+          "summary": "本地仅实现给定十项特征的benchmark中位数、固定校准投影和可选的稳定logistic读数。没有AST/依赖图抽取、Injector、Oracle、LLM solver、校准拟合或模型训练。完整μ/σ、组尺度、截距与参考边界未在原文公开成可直接加载文件，因此API强制调用方显式提供Calibration；诊断用合成校准，不能称为复算了作者八benchmark CCI。Patch特征属于构建/评测端，不能把隐藏修复补丁或其困难标签传给被测Agent。 完整实验高成本不复现。",
+          "source_revisions": {
+            "agent-research:buggymle-cci": "21b72be85c8b4ccd6506776531e3572b49cd6e700458a330a8aa371db379025e",
+            "agent-research:mle-star": "0e19c6eefc25b30757aba285ba8a67cc663f771b9a9300611b0066d15ed854fe"
           }
         }
       ]

@@ -221,6 +221,26 @@
             "核心公式",
             "同主题比较与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:hisa",
+          "position": "HiSA不先筛token，而是对每个query-key点积只保留尚未超过角度预算的RoPE频率对。近处key保留更多分量，远处仅保留慢频分量；Q/K投影不变，规则只由位置、RoPE base和预算决定。",
+          "tradeoff": "RoFormer保留所有RoPE二维对，使用相对旋转来编码距离；HiSA额外根据距离和频率删掉部分点积项。这是打分规则变化，不等于在既有checkpoint上无训练切换后仍保留能力。与只删整token的策略也不同，后者不能表达同一key只保留慢频分量。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:canon-layers-scale",
+          "position": "Canon在层内多个位置加入沿token轴的残差短卷积，显式提供邻近信息。本文把此前小规模合成训练得到的结构判断放到64组1.3B–8B真实语料预训练中检验，并对线性模型使用低秩输出门的GLA5/GDN2。重要贡献还包括对预算、基线调参和可测技能的重新审视。",
+          "tradeoff": "Canon的宽4因果残差只提供局部token混合，本身不是长历史状态，也不能独立读取任意远位置；它可插入attention、线性attention或SSM。Mamba除局部卷积外还维护输入选择的递归状态，两者功能不能等同。比较需对齐参数/状态与调参，并另测上下文检索；知识分数更高不推出固定状态已具备attention式远程读取。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -353,6 +373,22 @@
           "body": "Mamba用输入相关步长和读写向量控制SSM状态；KRA额外维护后验协方差来处理相关key方向的干扰。两者都是有界状态，但KRA每头还承担D平方协方差存储，不能仅按线性序列复杂度认为成本相同。 a、b由同一组cos/sin频率映射，范数为1。P不是可省略的标量门；它会旋转并缩放写入方向。独立dual参考求解内容Gram与OU时间Gram的乘积核，按每个因果prefix核对输出。",
           "papers": [
             "foundation-models:kernel-ridge-attention",
+            "foundation-models:mamba"
+          ]
+        },
+        {
+          "title": "HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs",
+          "body": "RoFormer保留所有RoPE二维对，使用相对旋转来编码距离；HiSA额外根据距离和频率删掉部分点积项。这是打分规则变化，不等于在既有checkpoint上无训练切换后仍保留能力。与只删整token的策略也不同，后者不能表达同一key只保留慢频分量。 使用未绕回的相对旋转量，严格小于Phi，不是对2pi取模后比较。分母始终为sqrt(d)，不按剩余维数重标定。没有任何频率对仍有效的key必须退出softmax，而不是留下零logit；因果未来key也必须屏蔽。Phi无穷时恢复dense RoPE。本地位置限定为非负int64范围，uint64在转换前检查上界，其余整数转int64后验证；两个非负int64位置的差在安全范围内，不允许uint8相减回绕造成未来泄漏。",
+          "papers": [
+            "foundation-models:hisa",
+            "foundation-models:rope"
+          ]
+        },
+        {
+          "title": "Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality",
+          "body": "Canon的宽4因果残差只提供局部token混合，本身不是长历史状态，也不能独立读取任意远位置；它可插入attention、线性attention或SSM。Mamba除局部卷积外还维护输入选择的递归状态，两者功能不能等同。比较需对齐参数/状态与调参，并另测上下文检索；知识分数更高不推出固定状态已具备attention式远程读取。 Canon是每通道独立、kernel=4、左侧补零的因果卷积，带原hidden残差；A/C在norm后、B在QKV投影后、D覆盖门控MLP两支。线性模型低秩约束作用于SiLU之前的G1G2，激活后门不保证低秩。公开LlamaCanon还用quarter RoPE，不能把其全部差异只归因于卷积。",
+          "papers": [
+            "foundation-models:canon-layers-scale",
             "foundation-models:mamba"
           ]
         }
@@ -529,9 +565,29 @@
             "foundation-models:kernel-ridge-attention",
             "foundation-models:mamba"
           ]
+        },
+        {
+          "id": "nov20-hisa",
+          "question": "与RoFormer保留旋转、再按token截窗口有什么区别？",
+          "answer": "RoFormer本身使用所有对；整token窗口只能整列删key。HiSA在每个距离对不同频率有不同保留窗口，仍统一除以sqrt(d)。",
+          "example": "教学例：d=64但只剩16个分量时仍除以8，不能擅自改成除以4。",
+          "papers": [
+            "foundation-models:hisa",
+            "foundation-models:rope"
+          ]
+        },
+        {
+          "id": "nov20-canon-layers-scale",
+          "question": "30% token节省能否直接称训练快30%？",
+          "answer": "不能。每step计算可能增加，还要固定达到的技能或分数。原文用约13%朴素step开销举例时，0.7乘1.13约0.79，对应约21%时间节省。",
+          "example": "教学例：token少30%但每step慢13%，总时长不是原来的70%。",
+          "papers": [
+            "foundation-models:canon-layers-scale",
+            "foundation-models:mamba"
+          ]
         }
       ],
-      "updated": "2026-11-19",
+      "updated": "2026-11-20",
       "reviewed_papers": [
         "foundation-models:alibi",
         "foundation-models:autonomy-heads",
@@ -579,7 +635,9 @@
         "foundation-models:simq",
         "foundation-models:unigraph",
         "foundation-models:dealrank",
-        "foundation-models:kernel-ridge-attention"
+        "foundation-models:kernel-ridge-attention",
+        "foundation-models:hisa",
+        "foundation-models:canon-layers-scale"
       ],
       "updates": [
         {
@@ -815,6 +873,30 @@
           "summary": "Mamba用输入相关步长和读写向量控制SSM状态；KRA额外维护后验协方差来处理相关key方向的干扰。两者都是有界状态，但KRA每头还承担D平方协方差存储，不能仅按线性序列复杂度认为成本相同。 本地组件合同和高成本不复现分别记录。",
           "source_revisions": {
             "foundation-models:kernel-ridge-attention": "44d055261f665849341526b12537423ee07559cebe19cec23e3ef32cbed78006",
+            "foundation-models:mamba": "cc8e64d103688cf6f1eb766728f173a4c9af31eca88def398193334b5ab90220"
+          }
+        },
+        {
+          "date": "2026-11-20",
+          "papers": [
+            "foundation-models:hisa",
+            "foundation-models:rope"
+          ],
+          "summary": "RoFormer保留所有RoPE二维对，使用相对旋转来编码距离；HiSA额外根据距离和频率删掉部分点积项。这是打分规则变化，不等于在既有checkpoint上无训练切换后仍保留能力。与只删整token的策略也不同，后者不能表达同一key只保留慢频分量。 本地证据层级与完整实验不复现分别记录。",
+          "source_revisions": {
+            "foundation-models:hisa": "5dce7b6058eed71dee471347b54c680de28be219743ffa138cc6453357037d47",
+            "foundation-models:rope": "964852564f2b9b0eeb0f9bc32648346062e0332df0e647922752dc5b5bee54c7"
+          }
+        },
+        {
+          "date": "2026-11-20",
+          "papers": [
+            "foundation-models:canon-layers-scale",
+            "foundation-models:mamba"
+          ],
+          "summary": "Canon的宽4因果残差只提供局部token混合，本身不是长历史状态，也不能独立读取任意远位置；它可插入attention、线性attention或SSM。Mamba除局部卷积外还维护输入选择的递归状态，两者功能不能等同。比较需对齐参数/状态与调参，并另测上下文检索；知识分数更高不推出固定状态已具备attention式远程读取。 本地证据层级与完整实验不复现分别记录。",
+          "source_revisions": {
+            "foundation-models:canon-layers-scale": "e8ac3b1fffface324e4d6e5116ddbc1bde5c0916141952f4378fb46f29558a6c",
             "foundation-models:mamba": "cc8e64d103688cf6f1eb766728f173a4c9af31eca88def398193334b5ab90220"
           }
         }

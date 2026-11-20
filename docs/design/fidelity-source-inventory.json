@@ -13059,6 +13059,16 @@
         "fingerprint": "38d82b80ad2cfc1f412ef9a7f845def210d3ddb9daed4bb747fe8dc7bbb7baa0"
       }
     ],
+    "src/auto_research/system_one/looproute.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "record_execution",
+        "line": 91,
+        "qualified_name": "LoopRouter.record_execution",
+        "expression": "self.remaining -= 1",
+        "fingerprint": "8d4fd8aad5ac452f9cbd9a622ef758821614cfc402447aa54132311f1b7e1a1a"
+      }
+    ],
     "src/auto_research/system_one/regional_transfer.py": [
       {
         "kind": "label_access_requires_role_review",

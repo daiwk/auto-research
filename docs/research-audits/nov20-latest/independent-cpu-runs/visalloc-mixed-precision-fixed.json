@@ -1,0 +1,126 @@
+{
+  "schema_version": 2,
+  "key": "visalloc",
+  "device": "cpu",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "teacher_states_and_old_policy_detached": true,
+        "padding_gradient_zero": true,
+        "student_gradient_present": true,
+        "missing_negative_view_keeps_neutral_weight": true,
+        "valid_mean_weight_one": true,
+        "additional_budget_conserved": true,
+        "tiny_budget_is_not_dropped": true,
+        "inverse_frequency_increases_rare_share": true,
+        "weights_are_detached": true,
+        "fp16_random_finite_frozen_teacher_masked_nonzero_gradient": true,
+        "fp16_extreme_finite_frozen_teacher_masked_nonzero_gradient": true,
+        "bf16_random_finite_frozen_teacher_masked_nonzero_gradient": true,
+        "bf16_extreme_finite_frozen_teacher_masked_nonzero_gradient": true
+      },
+      "metrics": {
+        "loss": 0.19049044783494914,
+        "gradient_norm": 0.006800389919451663,
+        "raw_bonus": 0.6942933879094584,
+        "eligible_tokens": 2,
+        "fp16_random_loss": 0.19636176526546478,
+        "fp16_random_student_gradient_l1": 0.19814705848693848,
+        "fp16_extreme_loss": 0.21576158702373505,
+        "fp16_extreme_student_gradient_l1": 0.274658203125,
+        "bf16_random_loss": 0.16090409457683563,
+        "bf16_random_student_gradient_l1": 0.18568359315395355,
+        "bf16_extreme_loss": 0.21576158702373505,
+        "bf16_extreme_student_gradient_l1": 0.27392578125
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "teacher_states_and_old_policy_detached": true,
+        "padding_gradient_zero": true,
+        "student_gradient_present": true,
+        "missing_negative_view_keeps_neutral_weight": true,
+        "valid_mean_weight_one": true,
+        "additional_budget_conserved": true,
+        "tiny_budget_is_not_dropped": true,
+        "inverse_frequency_increases_rare_share": true,
+        "weights_are_detached": true,
+        "fp16_random_finite_frozen_teacher_masked_nonzero_gradient": true,
+        "fp16_extreme_finite_frozen_teacher_masked_nonzero_gradient": true,
+        "bf16_random_finite_frozen_teacher_masked_nonzero_gradient": true,
+        "bf16_extreme_finite_frozen_teacher_masked_nonzero_gradient": true
+      },
+      "metrics": {
+        "loss": 0.19471377202677195,
+        "gradient_norm": 0.006533676075717572,
+        "raw_bonus": 0.21839727290721522,
+        "eligible_tokens": 2,
+        "fp16_random_loss": 0.1923726350069046,
+        "fp16_random_student_gradient_l1": 0.19778519868850708,
+        "fp16_extreme_loss": 0.21576158702373505,
+        "fp16_extreme_student_gradient_l1": 0.274658203125,
+        "bf16_random_loss": 0.19010233879089355,
+        "bf16_random_student_gradient_l1": 0.19963997602462769,
+        "bf16_extreme_loss": 0.21576158702373505,
+        "bf16_extreme_student_gradient_l1": 0.27392578125
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "teacher_states_and_old_policy_detached": true,
+        "padding_gradient_zero": true,
+        "student_gradient_present": true,
+        "missing_negative_view_keeps_neutral_weight": true,
+        "valid_mean_weight_one": true,
+        "additional_budget_conserved": true,
+        "tiny_budget_is_not_dropped": true,
+        "inverse_frequency_increases_rare_share": true,
+        "weights_are_detached": true,
+        "fp16_random_finite_frozen_teacher_masked_nonzero_gradient": true,
+        "fp16_extreme_finite_frozen_teacher_masked_nonzero_gradient": true,
+        "bf16_random_finite_frozen_teacher_masked_nonzero_gradient": true,
+        "bf16_extreme_finite_frozen_teacher_masked_nonzero_gradient": true
+      },
+      "metrics": {
+        "loss": 0.17552687047728843,
+        "gradient_norm": 0.006374933032397364,
+        "raw_bonus": 0.5110672366833997,
+        "eligible_tokens": 2,
+        "fp16_random_loss": 0.17428171634674072,
+        "fp16_random_student_gradient_l1": 0.20080816745758057,
+        "fp16_extreme_loss": 0.21576158702373505,
+        "fp16_extreme_student_gradient_l1": 0.274658203125,
+        "bf16_random_loss": 0.19429141283035278,
+        "bf16_random_student_gradient_l1": 0.19724780321121216,
+        "bf16_extreme_loss": 0.21576158702373505,
+        "bf16_extreme_student_gradient_l1": 0.27392578125
+      }
+    }
+  ],
+  "source_sha256": {
+    "src/auto_research/post_training/visalloc.py": "95c071b33d5c1ffabdfaa901ee22f2561e9ef873be409ecf6d538c83e6f0241d",
+    "src/auto_research/post_training/_nov18_contracts.py": "103b12bbdcad9c18fab47f31f66e73a77564e4db05618aec5809658dfcfdf39e"
+  },
+  "source_commit": null,
+  "provenance_note": "Independent working-tree CPU run; actual content hashes, not the later frozen-source batch run.",
+  "formal_comparison": false,
+  "capability_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-20-latest-components",
+  "requested_window": {"start": "2026-11-19", "end": "2026-11-20"},
+  "overlap_start": "2026-11-18",
+  "accepted_papers": [
+    "agent-research:buggymle-cci", "agent-research:grepmem", "system-one:looproute",
+    "foundation-models:hisa", "foundation-models:canon-layers-scale",
+    "post-training:colir-replay", "post-training:visalloc",
+    "recommendation:fleet-feature-optimization", "recommendation:dna", "recommendation:lser-serving",
+    "recommendation:antom-3-in-1"
+  ],
+  "component_papers": [
+    "agent-research:buggymle-cci", "agent-research:grepmem", "system-one:looproute",
+    "foundation-models:hisa", "post-training:colir-replay", "post-training:visalloc",
+    "recommendation:fleet-feature-optimization", "recommendation:dna", "recommendation:lser-serving"
+  ],
+  "review_only_papers": ["foundation-models:canon-layers-scale", "recommendation:antom-3-in-1"],
+  "scope_note": "Finite high-value incremental intake, not full-method review of all recalled papers. Original publication, announcement, directory observation and GitHub events remain distinct.",
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "cost_policy": "High-cost full experiments are not reproduced; review DONE, terminal and no automatic retry or implementation queue. Low-cost components do not promote capability evidence."
+}

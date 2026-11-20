@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-20",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "post-training:colir-replay",
+      "target_card": "post-training/data-and-budget",
+      "source_revisions": {
+        "post-training:colir-replay": "77baa673e65e5fcb7d29a0208b133c6d5950184a4e2abbcec5e9307a9549a50d",
+        "post-training:tar-adaptive-replay": "d2aaf3b7d71dd8191e8458db6ecb30ec347ac3770f8ad1e8e7864e1ba784c269"
+      },
+      "comparison": {
+        "position": "显式缓存的四组cross-policy序列log-likelihood、候选资格、每任务top-B、任务均匀/任务内均匀抽样和回放KL token门控。保留精确并列时的输入顺序；跨任务抽样本组件显式用有放回策略，论文未指定替换规则。没有VLM评分器、MRCL训练器、GSPO更新或能力评测，不能称为Evolve已接入。",
+        "tradeoff": "TAR先从base正确响应构建分散原型bank，按当前策略相对base的压制程度，对旧轨迹和token做门控加权NLL；CoLiR用初始错误与最终正确响应的cross-policy似然变化筛选历史prompt，后续由当前策略生成新响应，并只对replay施加KL。两者都分配历史回放预算，但单位是旧响应行为与历史问题，筛选依据是当前压制与原任务策略改进。比较成本必须分别计入TAR建bank、CoLiR补评分以及后续新rollout；CoLiR构建记忆免额外生成，不等于训练全程不再生成。",
+        "sections": [
+          "背景与主要改动",
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "CoLiR和TAR都回放历史，为什么不能只比较bank大小？",
+        "body": "TAR先从base正确响应构建分散原型bank，按当前策略相对base的压制程度，对旧轨迹和token做门控加权NLL；CoLiR用初始错误与最终正确响应的cross-policy似然变化筛选历史prompt，后续由当前策略生成新响应，并只对replay施加KL。两者都分配历史回放预算，但单位是旧响应行为与历史问题，筛选依据是当前压制与原任务策略改进。比较成本必须分别计入TAR建bank、CoLiR补评分以及后续新rollout；CoLiR构建记忆免额外生成，不等于训练全程不再生成。 最终全对/全错或初始全对的prompt不得填满buffer；新任务和padding的KL梯度必须为0。排序依赖外部训练log-likelihood，不是伪造scorer或Agent成功率。",
+        "papers": [
+          "post-training:colir-replay",
+          "post-training:tar-adaptive-replay"
+        ]
+      },
+      "question": {
+        "id": "nov20-colir-replay",
+        "question": "CoLiR和TAR都回放历史，为什么不能只比较bank大小？",
+        "answer": "CoLiR存prompt并重新生成当前策略响应，TAR存base已验证正确的原型响应并按当前压制程度门控旧token。选择单位、激活信号和生成成本都不同，同样80个bank条目不是同样80条训练轨迹。",
+        "example": "教学例：一道旧题的两条base正确解法可在TAR中分别有非零/零gate；CoLiR若保留这道题，下一次仍可能新生成第三种回答。",
+        "papers": [
+          "post-training:colir-replay",
+          "post-training:tar-adaptive-replay"
+        ]
+      },
+      "update": {
+        "date": "2026-11-20",
+        "papers": [
+          "post-training:colir-replay",
+          "post-training:tar-adaptive-replay"
+        ],
+        "summary": "显式缓存的四组cross-policy序列log-likelihood、候选资格、每任务top-B、任务均匀/任务内均匀抽样和回放KL token门控。保留精确并列时的输入顺序；跨任务抽样本组件显式用有放回策略，论文未指定替换规则。没有VLM评分器、MRCL训练器、GSPO更新或能力评测，不能称为Evolve已接入。 完整实验成本过高不复现；组件不构成能力晋级。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Four explicit sets of cached cross-policy sequence log likelihoods, eligibility, per-task top-B selection, task-uniform then prompt-uniform replay and token gating of supplied replay KL. Exact ties retain input order. This component explicitly samples historical tasks with replacement; the paper does not specify that batching policy. No VLM scorer, MRCL trainer, GSPO update, capability evaluation or executable Evolve integration is provided.",
+          "tradeoff": "TAR builds a diverse bank of correct base-policy responses and applies suppression-gated weighted NLL to old trajectories and tokens. CoLiR selects historical prompts from cross-policy likelihood changes on initial incorrect and final correct responses, then generates fresh current-policy responses and applies KL only to replay. Both allocate historical replay budgets, but the units are stored behaviors versus historical questions, and the signals are current suppression versus improvement during the original task. Cost comparisons must separately include TAR bank construction, CoLiR cross-policy scoring and subsequent fresh rollouts. No extra generation for CoLiR memory construction does not mean generation-free training."
+        },
+        "analysis": {
+          "title": "Why is bank size alone insufficient to compare CoLiR and TAR?",
+          "body": "TAR builds a diverse bank of correct base-policy responses and applies suppression-gated weighted NLL to old trajectories and tokens. CoLiR selects historical prompts from cross-policy likelihood changes on initial incorrect and final correct responses, then generates fresh current-policy responses and applies KL only to replay. Both allocate historical replay budgets, but the units are stored behaviors versus historical questions, and the signals are current suppression versus improvement during the original task. Cost comparisons must separately include TAR bank construction, CoLiR cross-policy scoring and subsequent fresh rollouts. No extra generation for CoLiR memory construction does not mean generation-free training. Do not fill memory with all-correct/all-wrong final groups or all-correct initial groups. New-task and padding KL gradients must be zero. External training log likelihoods are inputs, not a fabricated scorer or agent success rate."
+        },
+        "question": {
+          "question": "Why is bank size alone insufficient to compare CoLiR and TAR?",
+          "answer": "CoLiR stores prompts and regenerates current-policy responses. TAR stores verified correct base-policy prototypes and gates old tokens by current suppression. Selection units, activation signals and generation costs differ;80 bank entries do not mean the same80 training trajectories.",
+          "example": "Teaching example: two correct base solutions to one old question can have nonzero and zero TAR gates. If CoLiR retains the question, its next rollout may generate a third response."
+        },
+        "update": "Four explicit sets of cached cross-policy sequence log likelihoods, eligibility, per-task top-B selection, task-uniform then prompt-uniform replay and token gating of supplied replay KL. Exact ties retain input order. This component explicitly samples historical tasks with replacement; the paper does not specify that batching policy. No VLM scorer, MRCL trainer, GSPO update, capability evaluation or executable Evolve integration is provided. High-cost full experiments are not reproduced; components do not establish capability promotion."
+      }
+    },
+    {
+      "paper": "post-training:visalloc",
+      "target_card": "post-training/teacher-and-context",
+      "source_revisions": {
+        "post-training:visalloc": "fd1802383ffcafddcacf3fef5efa4b1071f0ea6b945eb3c1744af7dd31b7763e",
+        "post-training:visually-attributable-opd": "0b6e38a966163901c2b78a8fa2523a4f6c83e68b5fa58b2bdeee298f9fec3848"
+      },
+      "comparison": {
+        "position": "训练用sample verdict过滤、显式logits上的同support top100+tail JSD、冻结prior与模板构建、有效位置分位数、完整OR/shared gates、定预算逆频率bonus、positive-only JSD和detached importance/correction。fp16/bf16在log-softmax、差值与分位数统计前升为fp32，float64保持精度；随机及有限±60000极值负控检查有限输出、冻结教师与有效学生梯度。没有全图VLM、几何裁剪器、教师答案判分、EMA模型更新、rollout或trainer；提供张量不等于执行这些核心网络。",
+        "tradeoff": "已有VAG以视觉对比和教师修正的同号门控，给verifier的GRPO advantage加有界项；VisAlloc不以这个同号规则调制verifier，而是给正教师JSD分配连续base和守恒bonus。不能只因都使用双视图EMA教师就复用其loss或把VAG资料条目改成已实现。",
+        "sections": [
+          "背景与主要改动",
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "VisAlloc与VAG都双视图，loss可以通用吗？",
+        "body": "已有VAG以视觉对比和教师修正的同号门控，给verifier的GRPO advantage加有界项；VisAlloc不以这个同号规则调制verifier，而是给正教师JSD分配连续base和守恒bonus。不能只因都使用双视图EMA教师就复用其loss或把VAG资料条目改成已实现。 分位数和频率重分配只看有效且有负视图的位置；缺负视图的有效响应仍以weight1做基线蒸馏，padding损失与梯度为0。教师与权重构造必须冻结。半精度需在log-softmax和差值前升fp32，不能等溢出后再cast；float64保持精度。",
+        "papers": [
+          "post-training:visalloc",
+          "post-training:visually-attributable-opd"
+        ]
+      },
+      "question": {
+        "id": "nov20-visalloc",
+        "question": "VisAlloc与VAG都双视图，loss可以通用吗？",
+        "answer": "不能。VAG保留verifier advantage并同号门控有界修正；VisAlloc对positive-teacher JSD做base/bonus权重，且bonus同时受prior、template、JSD门控制。",
+        "example": "教学例：在VisAlloc里teacher分布不变而bonus重分配会改JSD梯度份额；这不是在VAG的verifier优势上加奖励。",
+        "papers": [
+          "post-training:visalloc",
+          "post-training:visually-attributable-opd"
+        ]
+      },
+      "update": {
+        "date": "2026-11-20",
+        "papers": [
+          "post-training:visalloc",
+          "post-training:visually-attributable-opd"
+        ],
+        "summary": "训练用sample verdict过滤、显式logits上的同support top100+tail JSD、冻结prior与模板构建、有效位置分位数、完整OR/shared gates、定预算逆频率bonus、positive-only JSD和detached importance/correction。fp16/bf16在log-softmax、差值与分位数统计前升为fp32，float64保持精度；随机及有限±60000极值负控检查有限输出、冻结教师与有效学生梯度。没有全图VLM、几何裁剪器、教师答案判分、EMA模型更新、rollout或trainer；提供张量不等于执行这些核心网络。 完整实验成本过高不复现；组件不构成能力晋级。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Training-verdict filtering, shared-support top100-plus-tail JSD on explicit logits, frozen priors and templates, valid-only quantiles, complete OR/shared gates, conserved inverse-frequency bonus and positive-only JSD with detached importance/correction. Float16/bfloat16 are promoted to float32 before log-softmax, differences and quantile statistics; float64 precision is retained. Random and finite plus/minus60000 controls check finite outputs, frozen teachers and valid student gradients. There is no full-image VLM, crop constructor, answer checker, EMA model update, rollout or trainer. Supplying tensors is not execution of those networks.",
+          "tradeoff": "Existing VAG uses sign consistency between visual contrast and teacher correction to add a bounded term to verifier-based GRPO advantages. VisAlloc instead allocates a continuous base and conserved bonus to positive-teacher JSD. Two-view EMA teachers do not make their objectives interchangeable, nor does this implementation upgrade the review-only VAG entry."
+        },
+        "analysis": {
+          "title": "Are VisAlloc and VAG losses interchangeable because both use two views?",
+          "body": "Existing VAG uses sign consistency between visual contrast and teacher correction to add a bounded term to verifier-based GRPO advantages. VisAlloc instead allocates a continuous base and conserved bonus to positive-teacher JSD. Two-view EMA teachers do not make their objectives interchangeable, nor does this implementation upgrade the review-only VAG entry. Quantiles and redistribution use only valid positions with negative views. Valid response positions without a negative view retain baseline weight1; padding loss and gradients are zero. Teachers and weight construction stay frozen. Promote half precision before log-softmax and subtraction, not after overflow; retain float64 precision."
+        },
+        "question": {
+          "question": "Are VisAlloc and VAG losses interchangeable because both use two views?",
+          "answer": "No. VAG retains verifier advantages with a sign-gated bounded correction. VisAlloc weights positive-teacher JSD with a base and bonus, jointly gated by prior, templates and JSD.",
+          "example": "Teaching example: redistributing VisAlloc bonus changes the shares of JSD gradients with fixed teacher distributions; it does not add a reward to VAG verifier advantages."
+        },
+        "update": "Training-verdict filtering, shared-support top100-plus-tail JSD on explicit logits, frozen priors and templates, valid-only quantiles, complete OR/shared gates, conserved inverse-frequency bonus and positive-only JSD with detached importance/correction. Float16/bfloat16 are promoted to float32 before log-softmax, differences and quantile statistics; float64 precision is retained. Random and finite plus/minus60000 controls check finite outputs, frozen teachers and valid student gradients. There is no full-image VLM, crop constructor, answer checker, EMA model update, rollout or trainer. Supplying tensors is not execution of those networks. High-cost full experiments are not reproduced; components do not establish capability promotion."
+      }
+    }
+  ]
+}

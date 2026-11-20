@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-20",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "foundation-models:hisa",
+      "target_card": "foundation-models/context-and-state",
+      "source_revisions": {
+        "foundation-models:hisa": "5dce7b6058eed71dee471347b54c680de28be219743ffa138cc6453357037d47",
+        "foundation-models:rope": "964852564f2b9b0eeb0f9bc32648346062e0332df0e647922752dc5b5bee54c7"
+      },
+      "comparison": {
+        "position": "HiSA不先筛token，而是对每个query-key点积只保留尚未超过角度预算的RoPE频率对。近处key保留更多分量，远处仅保留慢频分量；Q/K投影不变，规则只由位置、RoPE base和预算决定。",
+        "tradeoff": "RoFormer保留所有RoPE二维对，使用相对旋转来编码距离；HiSA额外根据距离和频率删掉部分点积项。这是打分规则变化，不等于在既有checkpoint上无训练切换后仍保留能力。与只删整token的策略也不同，后者不能表达同一key只保留慢频分量。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs",
+        "body": "RoFormer保留所有RoPE二维对，使用相对旋转来编码距离；HiSA额外根据距离和频率删掉部分点积项。这是打分规则变化，不等于在既有checkpoint上无训练切换后仍保留能力。与只删整token的策略也不同，后者不能表达同一key只保留慢频分量。 使用未绕回的相对旋转量，严格小于Phi，不是对2pi取模后比较。分母始终为sqrt(d)，不按剩余维数重标定。没有任何频率对仍有效的key必须退出softmax，而不是留下零logit；因果未来key也必须屏蔽。Phi无穷时恢复dense RoPE。本地位置限定为非负int64范围，uint64在转换前检查上界，其余整数转int64后验证；两个非负int64位置的差在安全范围内，不允许uint8相减回绕造成未来泄漏。",
+        "papers": [
+          "foundation-models:hisa",
+          "foundation-models:rope"
+        ]
+      },
+      "question": {
+        "id": "nov20-hisa",
+        "question": "与RoFormer保留旋转、再按token截窗口有什么区别？",
+        "answer": "RoFormer本身使用所有对；整token窗口只能整列删key。HiSA在每个距离对不同频率有不同保留窗口，仍统一除以sqrt(d)。",
+        "example": "教学例：d=64但只剩16个分量时仍除以8，不能擅自改成除以4。",
+        "papers": [
+          "foundation-models:hisa",
+          "foundation-models:rope"
+        ]
+      },
+      "update": {
+        "date": "2026-11-20",
+        "papers": [
+          "foundation-models:hisa",
+          "foundation-models:rope"
+        ],
+        "summary": "RoFormer保留所有RoPE二维对，使用相对旋转来编码距离；HiSA额外根据距离和频率删掉部分点积项。这是打分规则变化，不等于在既有checkpoint上无训练切换后仍保留能力。与只删整token的策略也不同，后者不能表达同一key只保留慢频分量。 本地证据层级与完整实验不复现分别记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "HiSA retains selected RoPE frequency pairs inside each query-key dot product rather than selecting whole tokens first. Nearby keys retain more pairs; distant keys retain slower pairs. Q/K projections stay unchanged, and positions, base and angle budget determine the static rule.",
+          "tradeoff": "RoFormer keeps every RoPE pair and encodes relative position by rotation. HiSA additionally removes pair contributions according to distance and frequency. This changes scoring and does not prove that switching an existing checkpoint without training preserves quality. Whole-token eviction cannot express retaining only a key's slow-frequency pairs."
+        },
+        "analysis": {
+          "title": "HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs",
+          "body": "RoFormer keeps every RoPE pair and encodes relative position by rotation. HiSA additionally removes pair contributions according to distance and frequency. This changes scoring and does not prove that switching an existing checkpoint without training preserves quality. Whole-token eviction cannot express retaining only a key's slow-frequency pairs. The rule compares the unwrapped relative angle strictly with Phi, not its remainder modulo2pi. Scaling stays1/sqrt(d), not the number of surviving dimensions. A key with no active pair must leave softmax; a zero logit would still attract probability. Future keys are masked. Infinite Phi recovers dense RoPE. Local positions are nonnegative signed-int64-range integers. uint64 bounds are checked before casting; other integers are converted before subtraction. Differences between nonnegative int64 values cannot overflow, and uint8 wraparound must not expose future keys."
+        },
+        "question": {
+          "question": "How does this differ from RoFormer plus a token window?",
+          "answer": "RoFormer uses all pairs. A token window drops whole keys; HiSA gives frequency pairs distinct distance windows while keeping the original1/sqrt(d) scale.",
+          "example": "With d64 and only16 surviving components, divide by8, not4."
+        },
+        "update": "RoFormer keeps every RoPE pair and encodes relative position by rotation. HiSA additionally removes pair contributions according to distance and frequency. This changes scoring and does not prove that switching an existing checkpoint without training preserves quality. Whole-token eviction cannot express retaining only a key's slow-frequency pairs. Local evidence and high-cost non-reproduction remain separate."
+      }
+    },
+    {
+      "paper": "foundation-models:canon-layers-scale",
+      "target_card": "foundation-models/context-and-state",
+      "source_revisions": {
+        "foundation-models:canon-layers-scale": "e8ac3b1fffface324e4d6e5116ddbc1bde5c0916141952f4378fb46f29558a6c",
+        "foundation-models:mamba": "cc8e64d103688cf6f1eb766728f173a4c9af31eca88def398193334b5ab90220"
+      },
+      "comparison": {
+        "position": "Canon在层内多个位置加入沿token轴的残差短卷积，显式提供邻近信息。本文把此前小规模合成训练得到的结构判断放到64组1.3B–8B真实语料预训练中检验，并对线性模型使用低秩输出门的GLA5/GDN2。重要贡献还包括对预算、基线调参和可测技能的重新审视。",
+        "tradeoff": "Canon的宽4因果残差只提供局部token混合，本身不是长历史状态，也不能独立读取任意远位置；它可插入attention、线性attention或SSM。Mamba除局部卷积外还维护输入选择的递归状态，两者功能不能等同。比较需对齐参数/状态与调参，并另测上下文检索；知识分数更高不推出固定状态已具备attention式远程读取。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality",
+        "body": "Canon的宽4因果残差只提供局部token混合，本身不是长历史状态，也不能独立读取任意远位置；它可插入attention、线性attention或SSM。Mamba除局部卷积外还维护输入选择的递归状态，两者功能不能等同。比较需对齐参数/状态与调参，并另测上下文检索；知识分数更高不推出固定状态已具备attention式远程读取。 Canon是每通道独立、kernel=4、左侧补零的因果卷积，带原hidden残差；A/C在norm后、B在QKV投影后、D覆盖门控MLP两支。线性模型低秩约束作用于SiLU之前的G1G2，激活后门不保证低秩。公开LlamaCanon还用quarter RoPE，不能把其全部差异只归因于卷积。",
+        "papers": [
+          "foundation-models:canon-layers-scale",
+          "foundation-models:mamba"
+        ]
+      },
+      "question": {
+        "id": "nov20-canon-layers-scale",
+        "question": "30% token节省能否直接称训练快30%？",
+        "answer": "不能。每step计算可能增加，还要固定达到的技能或分数。原文用约13%朴素step开销举例时，0.7乘1.13约0.79，对应约21%时间节省。",
+        "example": "教学例：token少30%但每step慢13%，总时长不是原来的70%。",
+        "papers": [
+          "foundation-models:canon-layers-scale",
+          "foundation-models:mamba"
+        ]
+      },
+      "update": {
+        "date": "2026-11-20",
+        "papers": [
+          "foundation-models:canon-layers-scale",
+          "foundation-models:mamba"
+        ],
+        "summary": "Canon的宽4因果残差只提供局部token混合，本身不是长历史状态，也不能独立读取任意远位置；它可插入attention、线性attention或SSM。Mamba除局部卷积外还维护输入选择的递归状态，两者功能不能等同。比较需对齐参数/状态与调参，并另测上下文检索；知识分数更高不推出固定状态已具备attention式远程读取。 本地证据层级与完整实验不复现分别记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Canon adds residual short convolutions along the token axis at several within-layer locations. This paper tests architecture lessons from smaller synthetic training in64 real-corpus pretraining runs at1.3B–8B parameters, including GLA5/GDN2 with low-rank output gates. Budget alignment, baseline tuning and measurable skills are central to the study.",
+          "tradeoff": "Canon's causal width4 residual supplies local token mixing, not a long-history state or independent access to arbitrary distant positions; it can augment attention, linear attention or SSMs. Mamba also maintains input-selective recurrent state beyond its local convolution. These roles differ. Align parameters/state and tuning, then separately test retrieval: stronger knowledge scores do not establish attention-like remote reads from fixed-size state."
+        },
+        "analysis": {
+          "title": "Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality",
+          "body": "Canon's causal width4 residual supplies local token mixing, not a long-history state or independent access to arbitrary distant positions; it can augment attention, linear attention or SSMs. Mamba also maintains input-selective recurrent state beyond its local convolution. These roles differ. Align parameters/state and tuning, then separately test retrieval: stronger knowledge scores do not establish attention-like remote reads from fixed-size state. Canon is a per-channel causal width4 convolution with left zero padding and a hidden-state residual. A/C follow normalization, B follows QKV projections, and D covers both gated-MLP branches. The rank constraint applies before SiLU; the activated gate need not be low-rank. Released LlamaCanon also uses quarter RoPE, so its differences are not solely convolution."
+        },
+        "question": {
+          "question": "Is a30% token saving a30% training speedup?",
+          "answer": "No. Per-step cost and the target skill must also match. With the paper's illustrative13% naive step overhead,0.7 times1.13 is about0.79, or roughly21% less time.",
+          "example": "Using30% fewer tokens with13% slower steps does not take70% of the original time."
+        },
+        "update": "Canon's causal width4 residual supplies local token mixing, not a long-history state or independent access to arbitrary distant positions; it can augment attention, linear attention or SSMs. Mamba also maintains input-selective recurrent state beyond its local convolution. These roles differ. Align parameters/state and tuning, then separately test retrieval: stronger knowledge scores do not establish attention-like remote reads from fixed-size state. Local evidence and high-cost non-reproduction remain separate."
+      }
+    },
+    {
+      "paper": "recommendation:antom-3-in-1",
+      "target_card": "recommendation/feedback-multitask-causality",
+      "source_revisions": {
+        "recommendation:antom-3-in-1": "c4cea100661ec608c7d77caabeb4bf151e6959410d6aba1d5ba3835a9118cc12",
+        "recommendation:mmoe": "f2d1cf4015ce2210470ee7ec24eae9cd6eb3875193cbfc405bdf572b3e6d20b1"
+      },
+      "comparison": {
+        "position": "Antom把用户/卡/设备历史、当前交易字段和滚动用户图分开编码，再用任务query、共享注意力与稀疏专家做多任务融合。序列先做prefix-future对比，图先做视图对比及关系计数重建；下游图encoder冻结，图表示离线生成并按交易时间查询，其余主要模块在线打分。",
+        "tradeoff": "MMoE通过每任务gate组合共享专家；Antom在多模态编码之后，用任务query聚合共享信息再路由，并额外查离线图表示。多任务路由这一共性不表示两者可等价替换。原文生产对照是XGB/SAINT，不是MMoE；不能捏造两者实测胜负。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "Antom 3-in-1 Transformer: A Payment Foundation Model",
+        "body": "MMoE通过每任务gate组合共享专家；Antom在多模态编码之后，用任务query聚合共享信息再路由，并额外查离线图表示。多任务路由这一共性不表示两者可等价替换。原文生产对照是XGB/SAINT，不是MMoE；不能捏造两者实测胜负。 这里列的是附录A已公开的固定预算评测口径，不是未公开的完整训练loss或router算法。采样数据使用逆纳入权重；预算边界同分交易可共享分数配额，保证总权重仍等于q倍总体。金额损失率的分母是成功交易金额，不是交易笔数。§2明确未公开详细架构、训练配置和数据构造，不能补写猜测的实现。",
+        "papers": [
+          "recommendation:antom-3-in-1",
+          "recommendation:mmoe"
+        ]
+      },
+      "question": {
+        "id": "nov20-antom-3-in-1",
+        "question": "为什么不能把37.88%和26.09%当成同一指标的重复验证？",
+        "answer": "前者是业务组合总体损失率相对变化，后者是II阶段CB率按共同日期重加权的相对变化；分子、样本聚合和阶段不同。",
+        "example": "教学例：赔付争议追回会改变最终损失，但不一定同幅改变原始CB金额。",
+        "papers": [
+          "recommendation:antom-3-in-1",
+          "recommendation:mmoe"
+        ]
+      },
+      "update": {
+        "date": "2026-11-20",
+        "papers": [
+          "recommendation:antom-3-in-1",
+          "recommendation:mmoe"
+        ],
+        "summary": "MMoE通过每任务gate组合共享专家；Antom在多模态编码之后，用任务query聚合共享信息再路由，并额外查离线图表示。多任务路由这一共性不表示两者可等价替换。原文生产对照是XGB/SAINT，不是MMoE；不能捏造两者实测胜负。 本地证据层级与完整实验不复现分别记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Antom separately encodes user/card/device histories, transaction fields and rolling user graphs. Task queries, shared attention and sparse experts fuse modalities for multiple tasks. Sequence pretraining contrasts prefixes with future summaries; graph pretraining combines view agreement and relation-count reconstruction. The frozen graph encoder runs offline; time-aligned embeddings augment online scoring.",
+          "tradeoff": "MMoE uses task-specific gates over shared experts. Antom first encodes modalities, aggregates them with task queries, routes experts and adds offline graph embeddings. Shared multitask routing does not make them interchangeable. Reported production controls are XGB/SAINT, not MMoE; no measured head-to-head claim is made."
+        },
+        "analysis": {
+          "title": "Antom 3-in-1 Transformer: A Payment Foundation Model",
+          "body": "MMoE uses task-specific gates over shared experts. Antom first encodes modalities, aggregates them with task queries, routes experts and adds offline graph embeddings. Shared multitask routing does not make them interchangeable. Reported production controls are XGB/SAINT, not MMoE; no measured head-to-head claim is made. These are the disclosed AppendixA evaluation definitions, not an invented full training loss or router algorithm. Sampled populations use inverse-inclusion weights, and tied boundary scores share a fractional allocation to keep the budget fixed. Loss rate divides financial loss by successful transaction amount, not transaction count. Section2 withholds detailed architecture, training and dataset construction."
+        },
+        "question": {
+          "question": "Why are37.88% and26.09% not repeated estimates of one metric?",
+          "answer": "The former is portfolio overall-loss reduction; the latter is StageII common-date-weighted chargeback-rate reduction. Numerators, aggregation and stages differ.",
+          "example": "Dispute recoveries can change realized loss without changing original chargeback amounts by the same proportion."
+        },
+        "update": "MMoE uses task-specific gates over shared experts. Antom first encodes modalities, aggregates them with task queries, routes experts and adds offline graph embeddings. Shared multitask routing does not make them interchangeable. Reported production controls are XGB/SAINT, not MMoE; no measured head-to-head claim is made. Local evidence and high-cost non-reproduction remain separate."
+      }
+    }
+  ]
+}

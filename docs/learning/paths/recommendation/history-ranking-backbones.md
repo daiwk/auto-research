@@ -7,7 +7,7 @@ hide:
 
 # 用户历史与排序骨干
 
-[搜广推](index.md) / 303 个问题 · 74 篇论文
+[搜广推](index.md) / 307 个问题 · 75 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">303 个问题 · 74 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">307 个问题 · 75 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:dna" data-paper-title="DNA: Unlocking Depth Scaling in CTR Models" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="DNA: Unlocking Depth Scaling in CTR Models 搜广推与 LLM 应用 Alibaba Group 2026-11-19 DNA把请求U与历史S组成候选无关的双流：每层请求和候选F分别读取同一组历史K/V，随后历史token再反向读取刚更新的U。这样下一层看到的是受当前请求塑形的历史，而不是每层重投影同一S0。请求与历史状态可在同一请求的所有候选间共享。Fixed-v1 primary source 完整实验：成本过高，不复现（审查 DONE）。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。完整实验：成本过高，不复现（审查 DONE）。实际执行小型可微attention、组特异投影、token特异SwiGLU、composite请求投影及D-1次update；比较同缓存逐候选/批量结果，检查padding不影响分数、请求确实改变S、history/request梯度与backward有限性。score返回logits而不是点击概率，Eq13的sigmoid用BCEWithLogits稳定合并；  排序网络与长序列 请求条件历史更新 搜广推 用户历史与排序骨干 为什么多叠几层cross-attention不等于DNA？ 固定历史基线每层只重投影S0；DNA让历史接收刚更新请求的信息，下一层读的是新的S。 教学例：同一历史面对两个不同搜索query，可以产生不同S1；固定S0投影没有这种依赖。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
+<span id="paper-recommendation-dna-a5f55260" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-c3a422df2c0fc0d2">为什么多叠几层cross-attention不等于DNA？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Adna">DNA: Unlocking Depth Scaling in CTR Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Alibaba Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>固定历史基线每层只重投影S0；DNA让历史接收刚更新请求的信息，下一层读的是新的S。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一历史面对两个不同搜索query，可以产生不同S1；固定S0投影没有这种依赖。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25659v1">原论文</a> · <a href="../../../../recommendation-components/2611.25659-dna/">实现解读</a> · <a href="#qa-c3a422df2c0fc0d2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:dna" data-paper-title="DNA: Unlocking Depth Scaling in CTR Models" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="DNA: Unlocking Depth Scaling in CTR Models 搜广推与 LLM 应用 Alibaba Group 2026-11-19 DNA把请求U与历史S组成候选无关的双流：每层请求和候选F分别读取同一组历史K/V，随后历史token再反向读取刚更新的U。这样下一层看到的是受当前请求塑形的历史，而不是每层重投影同一S0。请求与历史状态可在同一请求的所有候选间共享。Fixed-v1 primary source 完整实验：成本过高，不复现（审查 DONE）。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。完整实验：成本过高，不复现（审查 DONE）。实际执行小型可微attention、组特异投影、token特异SwiGLU、composite请求投影及D-1次update；比较同缓存逐候选/批量结果，检查padding不影响分数、请求确实改变S、history/request梯度与backward有限性。score返回logits而不是点击概率，Eq13的sigmoid用BCEWithLogits稳定合并；  排序网络与长序列 请求条件历史更新 搜广推 用户历史与排序骨干 DNA-D为什么只有D-1次历史update？ 每层的两次read先读传入S，再更新供下一层用。末层之后没有read，因此多做一次update不会进入预测链路。 教学例：D=3时读S0、S1、S2，只需两次update；不是三次。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-c7bbbd36ca451e81">DNA-D为什么只有D-1次历史update？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Adna">DNA: Unlocking Depth Scaling in CTR Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Alibaba Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>每层的两次read先读传入S，再更新供下一层用。末层之后没有read，因此多做一次update不会进入预测链路。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：D=3时读S0、S1、S2，只需两次update；不是三次。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25659v1">原论文</a> · <a href="../../../../recommendation-components/2611.25659-dna/">实现解读</a> · <a href="#qa-c7bbbd36ca451e81">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:dna" data-paper-title="DNA: Unlocking Depth Scaling in CTR Models" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="DNA: Unlocking Depth Scaling in CTR Models 搜广推与 LLM 应用 Alibaba Group 2026-11-19 DNA把请求U与历史S组成候选无关的双流：每层请求和候选F分别读取同一组历史K/V，随后历史token再反向读取刚更新的U。这样下一层看到的是受当前请求塑形的历史，而不是每层重投影同一S0。请求与历史状态可在同一请求的所有候选间共享。Fixed-v1 primary source 完整实验：成本过高，不复现（审查 DONE）。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。完整实验：成本过高，不复现（审查 DONE）。实际执行小型可微attention、组特异投影、token特异SwiGLU、composite请求投影及D-1次update；比较同缓存逐候选/批量结果，检查padding不影响分数、请求确实改变S、history/request梯度与backward有限性。score返回logits而不是点击概率，Eq13的sigmoid用BCEWithLogits稳定合并；  排序网络与长序列 请求条件历史更新 搜广推 用户历史与排序骨干 与LONGER减少后续长序列计算的方式有何不同？ LONGER把信息压到较小query/token路径；DNA保留历史token，让它们从少量请求token更新，并把更新开销在请求内候选间共享。 教学例：两者都可共享K/V，但这不意味着都在每层删除历史token。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-6c5dca0199dc2fc7">与LONGER减少后续长序列计算的方式有何不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Adna">DNA: Unlocking Depth Scaling in CTR Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Alibaba Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>LONGER把信息压到较小query/token路径；DNA保留历史token，让它们从少量请求token更新，并把更新开销在请求内候选间共享。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两者都可共享K/V，但这不意味着都在每层删除历史token。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25659v1">原论文</a> · <a href="../../../../recommendation-components/2611.25659-dna/">实现解读</a> · <a href="#qa-6c5dca0199dc2fc7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:dna" data-paper-title="DNA: Unlocking Depth Scaling in CTR Models" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="DNA: Unlocking Depth Scaling in CTR Models 搜广推与 LLM 应用 Alibaba Group 2026-11-19 DNA把请求U与历史S组成候选无关的双流：每层请求和候选F分别读取同一组历史K/V，随后历史token再反向读取刚更新的U。这样下一层看到的是受当前请求塑形的历史，而不是每层重投影同一S0。请求与历史状态可在同一请求的所有候选间共享。Fixed-v1 primary source 完整实验：成本过高，不复现（审查 DONE）。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。完整实验：成本过高，不复现（审查 DONE）。实际执行小型可微attention、组特异投影、token特异SwiGLU、composite请求投影及D-1次update；比较同缓存逐候选/批量结果，检查padding不影响分数、请求确实改变S、history/request梯度与backward有限性。score返回logits而不是点击概率，Eq13的sigmoid用BCEWithLogits稳定合并；  排序网络与长序列 请求条件历史更新 搜广推 用户历史与排序骨干 同请求分批候选结果一致，能推出跨请求缓存也安全吗？ 不能。新的请求U会改变历史状态，旧S/KV可能失效。本地只检验同一已准备request cache的批量与逐候选等价。 教学例：user历史不变但搜索词变了，必须重建请求条件状态，而不是直接拿上次S2。 2026-11-20">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-277577fd6be43a9d">同请求分批候选结果一致，能推出跨请求缓存也安全吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Adna">DNA: Unlocking Depth Scaling in CTR Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-20 · Alibaba Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。新的请求U会改变历史状态，旧S/KV可能失效。本地只检验同一已准备request cache的批量与逐候选等价。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：user历史不变但搜索词变了，必须重建请求条件状态，而不是直接拿上次S2。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25659v1">原论文</a> · <a href="../../../../recommendation-components/2611.25659-dna/">实现解读</a> · <a href="#qa-277577fd6be43a9d">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:xsplit-argus" data-paper-title="X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction 搜广推与 LLM 应用 固定v1未列一作机构（不由其他作者邮箱推断） 2026-11-18 将候选无关的旧历史压成因果编码器末K个状态，在线只编码最近M个事件；候选token再对两段记忆做cross-attention。离线缓存是服务时的执行安排，不是训练时detach压缩器。点击监督头与原始logit的L1蒸馏头共享历史表示，但上线只使用监督头。 成本过高，不复现（审查 DONE）；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。l1_mechanism：低成本组件/接口诊断，不是完整模型能力证据，不接入Evolve晋级。输入是显式小型事件/候选特征；未训练teacher或复现词表、每日缓存、RTB数据和生产服务。负控改目标/未来反馈保持预测不变；KD反传到compressor，但不能据此推断NE或ACV收益。  排序网络与长序列 历史压缩与在线复用 搜广推 用户历史与排序骨干 历史token缓存意味着训练时冻结compressor吗？ 不意味着。缓存是服务安排，GT和KD均经decoder反传到共同的历史编码器。 教学例：KD头误差变化后compressor有梯度，但teacher不能有梯度。 2026-11-19">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
 <span id="paper-recommendation-xsplit-argus-139b8013" class="ar-learning-paper-anchor"></span>

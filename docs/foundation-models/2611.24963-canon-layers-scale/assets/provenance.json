@@ -1,0 +1,18 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.24963v1",
+  "paper_url": "https://arxiv.org/abs/2611.24963v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-20",
+  "page": 26,
+  "crop_box_pdf_points": [
+    72,
+    365,
+    542,
+    522
+  ],
+  "caption": "Figure 12: Canon horizontal residual connections and four insertion points",
+  "extraction": "Original PDF crop, no semantic editing",
+  "source_pdf_sha256": "bc4270034f70a8580ec803942c4e6d16a561b64013eecc39f1e3d1e3663a9cea",
+  "asset_sha256": "db57068dca3b32f96a85003c89c3d34f116b75667f23ca242cc3155a4c2b991d",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result."
+}

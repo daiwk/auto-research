@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-20",
+  "owner": "nov20_post",
+  "window": {
+    "start": "2026-11-18",
+    "end": "2026-11-20",
+    "whole_end_day_claimed": false
+  },
+  "coverage": "Two selected source-bound methods; neither all-source exhaustion nor a review-watermark advance.",
+  "google_meta_authorship": "Neither fixed-v1 first-author byline is Google/Meta; model providers are not author affiliations.",
+  "accepted": [
+    {
+      "id": "2611.25989",
+      "key": "colir-replay",
+      "title": "Policy Improvement-Guided Replay for Continual Reinforcement Learning",
+      "first_author": "Qin-Wen Luo",
+      "affiliation": "Nanjing University of Aeronautics and Astronautics",
+      "published_at": "2026-11-19T12:12:19Z",
+      "announced_on": "2026-11-20",
+      "reviewed_version": "v1",
+      "source_url": "https://arxiv.org/html/2611.25989v1",
+      "pdf_sha256": "43bf49b5b3528115b5cd723ea61a454593360c9a46214daf634db3e2c3b7ecca",
+      "sections": [
+        "PDF p1 byline",
+        "Section4.3 Eq.15 and eligibility",
+        "Section5.1",
+        "AppendixB.3 Table6"
+      ],
+      "gpu": true,
+      "tier": "l1_mechanism",
+      "scope": "显式缓存的四组cross-policy序列log-likelihood、候选资格、每任务top-B、任务均匀/任务内均匀抽样和回放KL token门控。保留精确并列时的输入顺序；跨任务抽样本组件显式用有放回策略，论文未指定替换规则。没有VLM评分器、MRCL训练器、GSPO更新或能力评测，不能称为Evolve已接入。",
+      "cost": "原文使用Qwen3-VL-2B/4B/8B，五个任务每任务600步、每步32题×8响应，另有九种方法和OOD评测。单一模型配置的名义采样槽为5×600×32×8=768000，实际生成量需训练日志确认，不能把这个计算当实测；全部矩阵远超单A100/A30的秒级组件预算。",
+      "code": null,
+      "upstream_revision": null,
+      "repository_status_before_batch": "not_in_manifest_or_ledger_by_arxiv_id",
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "local_module": "src/auto_research/post_training/colir_replay.py",
+      "english_source_sha256": "77baa673e65e5fcb7d29a0208b133c6d5950184a4e2abbcec5e9307a9549a50d"
+    },
+    {
+      "id": "2611.25069",
+      "key": "visalloc",
+      "title": "VisAlloc: Allocating Visual Supervision for On-Policy Self-Distillation",
+      "first_author": "Haoran Xu",
+      "affiliation": "Zhejiang University",
+      "published_at": "2026-11-18T19:12:00Z",
+      "announced_on": "2026-11-20",
+      "reviewed_version": "v1",
+      "source_url": "https://arxiv.org/html/2611.25069v1",
+      "pdf_sha256": "4000c60483564c6218c78965b614442aa8e134e0bccc6db799f0945c3b2d9ad3",
+      "sections": [
+        "PDF p1 byline",
+        "Section3 Eq.1-15",
+        "AppendixA",
+        "fixed upstream actor and visalloc_utils"
+      ],
+      "gpu": true,
+      "tier": "l1_mechanism",
+      "scope": "训练用sample verdict过滤、显式logits上的同support top100+tail JSD、冻结prior与模板构建、有效位置分位数、完整OR/shared gates、定预算逆频率bonus、positive-only JSD和detached importance/correction。fp16/bf16在log-softmax、差值与分位数统计前升为fp32，float64保持精度；随机及有限±60000极值负控检查有限输出、冻结教师与有效学生梯度。没有全图VLM、几何裁剪器、教师答案判分、EMA模型更新、rollout或trainer；提供张量不等于执行这些核心网络。",
+      "cost": "官方固定commit默认每节点4GPU，Qwen3.5-4B/9B、5795保留图像、96题×8rollouts、60步、1024生成token，另需冻结prior和gpt-oss-120b评测judge。名义训练响应槽为96×8×60=46080/模型配置，不是本地实测；单A100/A30不承担完整双模型矩阵。",
+      "code": "https://github.com/Kaelyn01/VisAlloc",
+      "upstream_revision": "212b5f6f88645815d1369876f7801c58a5cad24a",
+      "repository_status_before_batch": "not_in_manifest_or_ledger_by_arxiv_id",
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "local_module": "src/auto_research/post_training/visalloc.py",
+      "english_source_sha256": "fd1802383ffcafddcacf3fef5efa4b1071f0ea6b945eb3c1744af7dd31b7763e"
+    }
+  ],
+  "not_selected_this_batch": [
+    {
+      "id": "2611.25135",
+      "title": "Calibrated Decision Rewards",
+      "first_author_affiliation": "FuturixAI",
+      "status": "candidate_only_not_accepted",
+      "reason": "Bounded two-method intake; full dual-GPU26.1B judge/100-step campaign high-cost. No implementation or high-cost review-DONE catalog entry claimed here."
+    },
+    {
+      "id": "2611.23673",
+      "title": "Communicative On-Policy Distillation",
+      "first_author_affiliation": "Peking University",
+      "status": "candidate_only_not_accepted",
+      "reason": "Fixed PDF byline/method checked;4B/9B students,6400 long-horizon episodes and external DeepSeek-V4.1-Flash adviser. No code/terminal-environment implementation claimed in this two-method intake."
+    }
+  ]
+}

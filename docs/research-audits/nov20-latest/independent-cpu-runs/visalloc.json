@@ -1,0 +1,90 @@
+{
+  "schema_version": 2,
+  "key": "visalloc",
+  "device": "cpu",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "teacher_states_and_old_policy_detached": true,
+        "padding_gradient_zero": true,
+        "student_gradient_present": true,
+        "missing_negative_view_keeps_neutral_weight": true,
+        "valid_mean_weight_one": true,
+        "additional_budget_conserved": true,
+        "tiny_budget_is_not_dropped": true,
+        "inverse_frequency_increases_rare_share": true,
+        "weights_are_detached": true
+      },
+      "metrics": {
+        "loss": 0.19049044783494914,
+        "gradient_norm": 0.006800389919451663,
+        "raw_bonus": 0.6942933879094584,
+        "eligible_tokens": 2
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "teacher_states_and_old_policy_detached": true,
+        "padding_gradient_zero": true,
+        "student_gradient_present": true,
+        "missing_negative_view_keeps_neutral_weight": true,
+        "valid_mean_weight_one": true,
+        "additional_budget_conserved": true,
+        "tiny_budget_is_not_dropped": true,
+        "inverse_frequency_increases_rare_share": true,
+        "weights_are_detached": true
+      },
+      "metrics": {
+        "loss": 0.19471377202677195,
+        "gradient_norm": 0.006533676075717572,
+        "raw_bonus": 0.21839727290721522,
+        "eligible_tokens": 2
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "teacher_states_and_old_policy_detached": true,
+        "padding_gradient_zero": true,
+        "student_gradient_present": true,
+        "missing_negative_view_keeps_neutral_weight": true,
+        "valid_mean_weight_one": true,
+        "additional_budget_conserved": true,
+        "tiny_budget_is_not_dropped": true,
+        "inverse_frequency_increases_rare_share": true,
+        "weights_are_detached": true
+      },
+      "metrics": {
+        "loss": 0.17552687047728843,
+        "gradient_norm": 0.006374933032397364,
+        "raw_bonus": 0.5110672366833997,
+        "eligible_tokens": 2
+      }
+    }
+  ],
+  "source_sha256": {
+    "src/auto_research/post_training/visalloc.py": "0b228ed033b0293cb7cf35bf2776ac1ac166aa0f299f0cc69c271b54bbc3ee17",
+    "src/auto_research/post_training/_nov18_contracts.py": "103b12bbdcad9c18fab47f31f66e73a77564e4db05618aec5809658dfcfdf39e"
+  },
+  "source_commit": null,
+  "provenance_note": "Independent working-tree CPU run; actual content hashes, not the later frozen-source batch run.",
+  "formal_comparison": false,
+  "capability_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false
+}
