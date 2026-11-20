@@ -37,10 +37,20 @@ def _positions(positions, length, device):
         or positions.dtype == torch.bool
         or positions.is_floating_point()
         or positions.is_complex()
-        or (positions < 0).any()
-        or (positions[1:] <= positions[:-1]).any()
     ):
         raise ValueError("strictly increasing nonnegative integer positions required")
+    # uint64 comparisons are not implemented on every PyTorch backend. Inspect
+    # unsigned values before casting, rather than accepting int64 wraparound.
+    if positions.dtype == torch.uint64 and any(
+        value > torch.iinfo(torch.int64).max for value in positions.detach().cpu().tolist()
+    ):
+        raise ValueError("positions exceed the supported signed int64 range")
+    # uint8 subtraction would wrap a future key's negative distance around.
+    positions = positions.to(torch.int64)
+    if (positions < 0).any() or (positions[1:] <= positions[:-1]).any():
+        raise ValueError("strictly increasing nonnegative int64-range positions required")
+    # Both operands are now in [0, INT64_MAX], so every difference is in
+    # [-INT64_MAX, INT64_MAX]; subtraction cannot overflow signed int64.
     return positions
 
 
@@ -149,6 +159,16 @@ def diagnostic(seed, device="cpu"):
                         angle_budget=1.0)
     active = pair_mask(positions, positions, 8)
     keep_fraction = active.sum().item() / (9 * 10 / 2 * 4)
+    unsigned_mask = pair_mask(torch.tensor([0], device=device, dtype=torch.uint8),
+                              torch.tensor([0, 1], device=device, dtype=torch.uint8), 8)
+    largest = torch.iinfo(torch.int64).max
+    signed_mask = pair_mask(torch.tensor([0, largest], device=device),
+                            torch.tensor([0, largest], device=device), 8)
+    unsigned_overflow_rejected = False
+    try:
+        pair_mask(torch.tensor([2**63], device=device, dtype=torch.uint64), [0], 8)
+    except ValueError:
+        unsigned_overflow_rejected = True
     dense_error = (infinite - dense).abs().max().item()
     continuation_error = (decoded - sparse[:, :, -1:]).abs().max().item()
     future_error = (perturbed[:, :, :5] - sparse[:, :, :5]).abs().max().item()
@@ -167,6 +187,10 @@ def diagnostic(seed, device="cpu"):
             "finite_nonzero_query_gradient": bool(torch.isfinite(gradient).all())
             and gradient.abs().sum().item() > 0,
             "nontrivial_static_pair_sparsity": 0 < keep_fraction < 1,
+            "unsigned_future_distance_does_not_wrap": not unsigned_mask[0, 1].any().item(),
+            "signed_distance_extremes_stay_causal": not signed_mask[0, 1].any().item()
+            and not signed_mask[1, 0].any().item() and signed_mask[1, 1].all().item(),
+            "uint64_out_of_range_rejected_before_cast": unsigned_overflow_rejected,
         },
         "metrics": {
             "dense_limit_max_abs_error": dense_error,

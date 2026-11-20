@@ -12,6 +12,16 @@ from ._nov18_contracts import receipt, scalar, seeded, tensor
 REQUIRES_GPU_VALIDATION = True
 
 
+def _working(value):
+    """Upstream computes gating/JSD statistics in fp32, retaining fp64 inputs.
+
+    Promote BEFORE log_softmax or subtraction: finite fp16 logits can have an
+    unrepresentable half-precision log-probability gap (e.g. +60000/-60000).
+    The cast remains differentiable back to the original student tensor.
+    """
+    return value.float() if value.dtype in {torch.float16, torch.bfloat16} else value
+
+
 def _mask(value, shape, device):
     if (not isinstance(value, torch.Tensor) or value.dtype != torch.bool
             or value.shape != shape or value.device != device):
@@ -50,8 +60,9 @@ def coarsened_jsd(student_logits, positive_logits, negative_logits, *, k=100):
         tensor(x, name, shape=student_logits.shape, device=student_logits.device)
     if type(k) is not int or not 1 <= k < student_logits.shape[-1]:
         raise ValueError("integer 1 <= k < vocabulary required for top-k plus tail")
-    p = student_logits.log_softmax(-1)
-    q, n = positive_logits.detach().log_softmax(-1), negative_logits.detach().log_softmax(-1)
+    p = _working(student_logits).log_softmax(-1)
+    q = _working(positive_logits.detach()).log_softmax(-1)
+    n = _working(negative_logits.detach()).log_softmax(-1)
     support = p.detach().topk(k, dim=-1).indices
     pc, qc, nc = [_tail(x.gather(-1, support)) for x in [p, q, n]]
     return _jsd(pc, qc), _jsd(qc, nc), p, q, n
@@ -68,6 +79,9 @@ def frozen_priors(token_ids, student_logp, positive_logp, negative_logp, valid_m
         raise ValueError("positive integer vocabulary and prior response-group size required")
     _ids(token_ids, shape, vocab_size, device)
     _mask(valid_mask, shape, device)
+    student_logp, positive_logp, negative_logp = [
+        _working(x) for x in [student_logp, positive_logp, negative_logp]
+    ]
     selected = torch.zeros_like(valid_mask)
     with torch.no_grad():
         d, err = (positive_logp-negative_logp).abs(), (student_logp-positive_logp).abs()
@@ -98,6 +112,7 @@ def redistribute_bonus(bonus, counts, token_ids, valid_mask):
     _mask(valid_mask, bonus.shape, bonus.device)
     if bool((bonus < 0).any()) or bool((counts < 0).any()):
         raise ValueError("nonnegative bonus and frozen counts required")
+    bonus, counts = _working(bonus), _working(counts)
     b = torch.where(valid_mask, bonus, 0.)
     total = b.sum()
     if total.item() == 0:
@@ -125,6 +140,11 @@ def allocation(token_ids, student_logp, positive_logp, negative_logp,
     if any(not isinstance(pair, tuple) or len(pair) != 2
            or any(type(x) is not int or not 0 <= x < len(rates) for x in pair) for pair in template_pairs):
         raise ValueError("valid frozen template bigrams required")
+    student_logp, positive_logp, negative_logp, student_positive_jsd, teacher_jsd = [
+        _working(x) for x in [student_logp, positive_logp, negative_logp,
+                             student_positive_jsd, teacher_jsd]
+    ]
+    rates, counts = _working(rates), _working(counts)
     with torch.no_grad():
         if not bool(valid_mask.any()):
             zero = torch.zeros_like(student_logp)
@@ -173,10 +193,40 @@ def loss(student_logits, positive_logits, negative_logits, token_ids, old_logp,
     tensor(correction, "rollout_correction", shape=shape, device=device)
     if bool((correction < 0).any()):
         raise ValueError("nonnegative rollout correction required")
-    ratio = torch.where(response_mask, realized[0]-old_logp.detach(), 0.).exp().clamp(max=2)
-    coefficient = (weights*ratio*correction).detach()
+    ratio = torch.where(response_mask, realized[0]-_working(old_logp.detach()), 0.).exp().clamp(max=2)
+    coefficient = (weights*ratio*_working(correction)).detach()
     result = torch.where(response_mask, coefficient*j, 0.).sum()/response_mask.sum()
     return result, weights, info
+
+
+def _mixed_precision_control(generator, device, dtype, *, extreme):
+    shape = (1, 4, 128)
+    if extreme:
+        source = torch.full(shape, -60000., dtype=torch.float32)
+        source[..., :2] = 60000.
+        positive = source.clone()
+        negative = source.clone()
+        positive[..., 1] = 58000.
+        negative[..., 0] = 58000.
+    else:
+        source, positive, negative = [torch.randn(shape, generator=generator) for _ in range(3)]
+    s, p, n = [x.to(device=device, dtype=dtype).requires_grad_()
+               for x in [source, positive, negative]]
+    ids = torch.tensor([[0, 1, 0, 1]], device=device)
+    mask = torch.tensor([[True, True, True, False]], device=device)
+    old = _working(s.detach()).log_softmax(-1).gather(-1, ids[..., None]).squeeze(-1).requires_grad_()
+    rates = torch.full((128,), .3, dtype=dtype, device=device)
+    counts = torch.ones(128, dtype=dtype, device=device)
+    value, weights, info = loss(s, p, n, ids, old, mask,
+                                torch.tensor([True], device=device), rates, counts)
+    value.backward()
+    finite = bool(torch.isfinite(value) and torch.isfinite(weights).all()
+                  and torch.isfinite(s.grad).all()
+                  and all(torch.isfinite(x).all() for x in info.values()
+                          if isinstance(x, torch.Tensor)))
+    check = finite and bool(s.grad[mask].abs().sum() > 0) and bool((s.grad[~mask] == 0).all())
+    check = check and p.grad is None and n.grad is None and old.grad is None
+    return check, value.item(), s.grad.float().abs().sum().item()
 
 
 def diagnostic(seed, device="cpu"):
@@ -196,6 +246,14 @@ def diagnostic(seed, device="cpu"):
     b = torch.tensor([[1e-30, 1e-30]], dtype=torch.float64, device=device)
     red = redistribute_bonus(b, torch.tensor([0., 1000.], dtype=b.dtype, device=device),
                              torch.tensor([[0, 1]], device=device), torch.ones_like(b, dtype=torch.bool))
+    precision_checks, precision_metrics = {}, {}
+    for name, dtype in [("fp16", torch.float16), ("bf16", torch.bfloat16)]:
+        for mode in ["random", "extreme"]:
+            checked, loss_value, grad_l1 = _mixed_precision_control(g, device, dtype, extreme=mode == "extreme")
+            prefix = name+"_"+mode
+            precision_checks[prefix+"_finite_frozen_teacher_masked_nonzero_gradient"] = checked
+            precision_metrics[prefix+"_loss"] = loss_value
+            precision_metrics[prefix+"_student_gradient_l1"] = grad_l1
     return receipt(seed, "l1_mechanism", {
         "teacher_states_and_old_policy_detached": q.grad is None and n.grad is None and old.grad is None,
         "padding_gradient_zero": bool((p.grad[~mask] == 0).all()),
@@ -206,5 +264,7 @@ def diagnostic(seed, device="cpu"):
         "tiny_budget_is_not_dropped": abs(red.sum().item()/b.sum().item()-1) < 1e-12,
         "inverse_frequency_increases_rare_share": red[0, 0].item() > red[0, 1].item(),
         "weights_are_detached": not weights.requires_grad,
+        **precision_checks,
     }, {"loss": value.item(), "gradient_norm": p.grad.norm().item(),
-        "raw_bonus": info["bonus"].sum().item(), "eligible_tokens": info["eligible"].sum().item()})
+        "raw_bonus": info["bonus"].sum().item(), "eligible_tokens": info["eligible"].sum().item(),
+        **precision_metrics})

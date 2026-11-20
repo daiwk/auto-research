@@ -180,3 +180,32 @@ def test_visalloc_loss_freezes_coefficients_and_keeps_baseline_without_negative_
     assert torch.isfinite(value) and (w == 1).all()
     assert (s.grad[~mask] == 0).all() and s.grad[mask].abs().sum() > 0
     assert all(x.grad is None for x in [p, n, old, rates, counts, correction])
+
+
+@pytest.mark.parametrize("dtype", [torch.float16, torch.bfloat16])
+@pytest.mark.parametrize("extreme", [False, True])
+def test_visalloc_half_precision_promotes_before_logsoftmax_and_gaps(dtype, extreme):
+    checked, loss_value, gradient = va._mixed_precision_control(
+        torch.Generator().manual_seed(42), "cpu", dtype, extreme=extreme)
+    assert checked
+    assert torch.isfinite(torch.tensor(loss_value)) and gradient > 0
+
+
+@pytest.mark.parametrize("dtype", [torch.float16, torch.bfloat16])
+def test_visalloc_public_statistics_accept_half_extreme_gaps(dtype):
+    args = list(_allocation_inputs())
+    args[1] = torch.full((1, 6), -60000., dtype=dtype)
+    args[2] = torch.full((1, 6), 60000., dtype=dtype)
+    args[3] = torch.full((1, 6), -60000., dtype=dtype)
+    args[4], args[5], args[7], args[8] = [args[i].to(dtype) for i in [4, 5, 7, 8]]
+    weights, info = va.allocation(*args)
+    assert weights.dtype == torch.float32
+    assert torch.isfinite(weights).all() and torch.isfinite(info["tau"])
+    rates, counts, _ = va.frozen_priors(args[0], args[1], args[2], args[3], args[6], vocab_size=6)
+    assert rates.dtype == torch.float32 and torch.isfinite(rates).all() and counts.sum() == 6
+
+
+def test_visalloc_keeps_float64_statistical_precision():
+    args = _allocation_inputs()
+    weights, info = va.allocation(*args)
+    assert weights.dtype == torch.float64 and info["tau"].dtype == torch.float64

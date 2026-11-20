@@ -43,6 +43,26 @@ def test_strict_boundary_uses_unwrapped_angle_not_modulo():
     assert not hisa.pair_mask([7], [0], 2)[0, 0, 0]
 
 
+def test_unsigned_positions_do_not_wrap_future_distance():
+    q = torch.tensor([0], dtype=torch.uint8)
+    k = torch.tensor([0, 1], dtype=torch.uint8)
+    mask = hisa.pair_mask(q, k, 8)
+    assert mask[0, 0].all()
+    assert not mask[0, 1].any()
+    # Values outside signed int64 range are rejected rather than wrapping.
+    with pytest.raises(ValueError):
+        hisa.pair_mask(torch.tensor([2**63], dtype=torch.uint64), [0], 8)
+
+
+def test_nonnegative_signed_int64_extremes_have_safe_differences():
+    largest = torch.iinfo(torch.int64).max
+    mask = hisa.pair_mask(torch.tensor([0, largest]), torch.tensor([0, largest]), 8)
+    assert not mask[0, 1].any() and not mask[1, 0].any()
+    assert mask[0, 0].all() and mask[1, 1].all()
+    with pytest.raises(ValueError):
+        hisa.pair_mask(torch.tensor([-largest - 1]), [largest], 8)
+
+
 def test_single_pair_literal_rope_rotation():
     q = torch.tensor([1.0, 2.0], dtype=torch.float64).reshape(1, 1, 1, 2)
     k = torch.tensor([3.0, 4.0], dtype=torch.float64).reshape(1, 1, 1, 2)
