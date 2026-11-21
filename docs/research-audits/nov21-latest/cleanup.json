@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-21",
+  "scope": "This run's strict-build site, inspected page previews and small source-transfer archive only",
+  "removed": [
+    {
+      "path": ".cache/nov21-latest/site-final",
+      "files": 7550,
+      "logical_bytes": 1050552621,
+      "allocated_bytes": 1066070016
+    },
+    {
+      "path": ".cache/nov21-latest/gpu-source-3b147143.tar.gz",
+      "files": 1,
+      "logical_bytes": 70863,
+      "allocated_bytes": 73728
+    },
+    {
+      "path": ".cache/nov21-latest/agent-primary/2609.40195-page4.png",
+      "files": 1,
+      "logical_bytes": 400285,
+      "allocated_bytes": 401408
+    },
+    {
+      "path": ".cache/nov21-latest/agent-primary/2609.40195-page3.png",
+      "files": 1,
+      "logical_bytes": 388352,
+      "allocated_bytes": 389120
+    },
+    {
+      "path": ".cache/nov21-latest/agent-primary/2611.26427-page5.png",
+      "files": 1,
+      "logical_bytes": 547973,
+      "allocated_bytes": 548864
+    },
+    {
+      "path": ".cache/nov21-latest/agent-primary/2611.26132-page4.png",
+      "files": 1,
+      "logical_bytes": 405386,
+      "allocated_bytes": 405504
+    },
+    {
+      "path": ".cache/nov21-latest/foundation/2611.26020-page6.png",
+      "files": 1,
+      "logical_bytes": 146766,
+      "allocated_bytes": 147456
+    },
+    {
+      "path": ".cache/nov21-latest/foundation/2611.25172-page3.png",
+      "files": 1,
+      "logical_bytes": 126137,
+      "allocated_bytes": 126976
+    },
+    {
+      "path": ".cache/nov21-latest/post-primary/2611.25597-page5.png",
+      "files": 1,
+      "logical_bytes": 133555,
+      "allocated_bytes": 135168
+    },
+    {
+      "path": ".cache/nov21-latest/post-primary/2611.26413-page8.png",
+      "files": 1,
+      "logical_bytes": 139841,
+      "allocated_bytes": 143360
+    },
+    {
+      "path": ".cache/nov21-latest/post-primary/2611.25597-page4.png",
+      "files": 1,
+      "logical_bytes": 168965,
+      "allocated_bytes": 172032
+    },
+    {
+      "path": ".cache/nov21-latest/post-primary/2611.25597-page1.png",
+      "files": 1,
+      "logical_bytes": 126521,
+      "allocated_bytes": 126976
+    },
+    {
+      "path": ".cache/nov21-latest/post-primary/2611.25597-page3.png",
+      "files": 1,
+      "logical_bytes": 134866,
+      "allocated_bytes": 135168
+    },
+    {
+      "path": ".cache/nov21-latest/post-primary/2611.26413-page13.png",
+      "files": 1,
+      "logical_bytes": 102039,
+      "allocated_bytes": 102400
+    },
+    {
+      "path": ".cache/nov21-latest/post-primary/2611.26413-page3.png",
+      "files": 1,
+      "logical_bytes": 141749,
+      "allocated_bytes": 143360
+    },
+    {
+      "path": ".cache/nov21-latest/post-primary/2611.26413-page1.png",
+      "files": 1,
+      "logical_bytes": 124722,
+      "allocated_bytes": 126976
+    },
+    {
+      "path": ".cache/nov21-latest/post-primary/2611.26413-page5.png",
+      "files": 1,
+      "logical_bytes": 128069,
+      "allocated_bytes": 131072
+    },
+    {
+      "path": ".cache/nov21-latest/post-primary/2611.26413-page4.png",
+      "files": 1,
+      "logical_bytes": 135032,
+      "allocated_bytes": 135168
+    },
+    {
+      "path": ".cache/nov21-latest/post-primary/2611.26413-page7.png",
+      "files": 1,
+      "logical_bytes": 125339,
+      "allocated_bytes": 126976
+    }
+  ],
+  "reclaimed_allocated_bytes": 1069641728,
+  "removed_logical_bytes": 1054099081,
+  "remote_execution_directory_cleaned": true,
+  "models_or_datasets_downloaded": 0,
+  "preserved": [
+    "all Git checkouts and source",
+    "all actual CPU/CUDA results and rejected invocation history",
+    "frozen proof and GPU receipt",
+    "original figure assets and provenance",
+    "primary PDFs/HTML, compressed responses and initial receipts",
+    "public data/checkpoint caches",
+    "Codex conversation storage and configuration"
+  ]
+}

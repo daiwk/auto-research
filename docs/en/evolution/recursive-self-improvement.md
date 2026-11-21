@@ -1,6 +1,6 @@
 # Recursive self-improvement (RSI)
 
-<!-- source-sha256: 2ca906642dfa74dced7263754bdd7e70f7a60ac701816c3b39479f71c6dfe41c -->
+<!-- source-sha256: 83bf10beec7e40edbd1945476a506ddc0178f0b0e260c728dd0bb7864c3bd0aa -->
 
 [简体中文](../../evolution/recursive-self-improvement.md)
 
@@ -31,6 +31,12 @@ A model writing a reflection is not enough. **Persist the change**, **inherit it
 ## Papers and evaluation leads
 
 The entries below distinguish local mechanisms from candidates still to review. An external paper is not a local reproduction.
+
+### November 21: Change research observations, not the acceptance target
+
+[Sage-Evolve-Preview / AdaObs](../../agent-research/2611.26132-sage-evolve/README-en.md) separates a fixed anchor from the current active observation. After a plateau, it refines diagnostics, adds a harder tier of the same task, then adds a related task, while retaining the fixed anchor regression bound. Failure memory concerns a concrete gap/configuration, not a permanent ban on an entire lever. Changing observations resets the EMA history; scores on different scales must not be subtracted directly.
+
+The local CPU component accepts explicit validation scores and implements marginal returns and first-feasible proposal selection. It does not execute an LLM researcher, data generation, SFT or a unified Evolve chain. The complete 35B/64-H200 campaign is high-cost, not reproduced, review DONE. Inclusion here does not establish sustained self-improvement.
 
 ### November 13: Historical autonomous-research and algorithm-discovery backfills
 

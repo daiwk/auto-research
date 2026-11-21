@@ -11495,6 +11495,42 @@
         "fingerprint": "98d4e5502f5492aebfe3261d697e9b58b1febabdf5518bc06607d20d3404aab7"
       }
     ],
+    "src/auto_research/foundation_models/e_rwsc.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "observe",
+        "line": 129,
+        "qualified_name": "ERWSC.observe",
+        "expression": "state.log_wealth += math.log1p(increment)",
+        "fingerprint": "cc94fee35b82972cb57ddfd100afebd1de91f2f3f94923dcbe63f780d0c38835"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "observe",
+        "line": 130,
+        "qualified_name": "ERWSC.observe",
+        "expression": "state.post_appearance_agreements += agreement",
+        "fingerprint": "5ed4047bbf2a08c259dbf3070027fd078f08eae3a0fde4d60751f4d4fdf49b7f"
+      }
+    ],
+    "src/auto_research/foundation_models/frontier_replay.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "acquire",
+        "line": 210,
+        "qualified_name": "CheckpointPool.acquire",
+        "expression": "row.leases += 1",
+        "fingerprint": "3fc5f4681cd9568123f833f5c3a2700e9ae5b6486b1de9dad19f6a745d7aa0c2"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "release",
+        "line": 218,
+        "qualified_name": "CheckpointPool.release",
+        "expression": "row.leases -= 1",
+        "fingerprint": "08d2aad1068ffebe58f63ea7cfb224b195ed5f71f1e27000a25e078c65598bec"
+      }
+    ],
     "src/auto_research/foundation_models/mixed_signals_weights.py": [
       {
         "kind": "state_update_not_execution_evidence",

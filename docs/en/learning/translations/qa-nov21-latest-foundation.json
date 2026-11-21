@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:frontier-replay/exact-boundary": {
+      "source_sha256": "114ab1af6127f3260339bcbe4118fd5b51ec5bcbf35cebee2372857192d01c6f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can resident KV pages still fail to reuse a hybrid prefix?",
+        "answer": "Recurrent state is overwritten in place. Resumption needs the exact matching checkpoint; a later state cannot simply be truncated to an earlier one.",
+        "example": "Illustration: KV reaches640tokens but the nearest state is at528; the native model must recompute the remainder."
+      }
+    },
+    "qa/foundation-models:frontier-replay/distinct-restore": {
+      "source_sha256": "e03e0fb71105cf892ad2bd9f9a5ec9ec9adaa62aa473a6319401f958da4cb5a2",
+      "reviewed": true,
+      "fields": {
+        "question": "Do two restores by one request make a checkpoint proven?",
+        "answer": "No. Promotion needs at least two distinct restoring requests, or an already-known branch. Otherwise ordinary single-successor conversation anchors would all become protected.",
+        "example": "Illustration: repeated restores by b remain tier2; restores by both b and c qualify for tier3."
+      }
+    },
+    "qa/foundation-models:frontier-replay/decode-versus-prefill": {
+      "source_sha256": "dce918a0124fcbe9988f2c5fd525b36df84bf207c5e3f0d05eb42189374b5935",
+      "reviewed": true,
+      "fields": {
+        "question": "Do FrontierReplay and ReplaySSM solve the same problem because both log inputs?",
+        "answer": "No. ReplaySSM targets decode-state writes, output-only computation and speculative rollback; FrontierReplay targets checkpoint production and retention at prefill structural boundaries. Similar algebra does not share serving policies, precision contracts or evidence.",
+        "example": "Illustration: a correct sixteen-step decode refresh does not prove that a next-turn template boundary was saved and remains reachable."
+      }
+    },
+    "qa/foundation-models:frontier-replay/publish-after-completion": {
+      "source_sha256": "b71123dbc74c6e1536cd562280405b9920f5c643db6e76355b65a520c4a17950",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must lookup exclude a checkpoint immediately after prepare?",
+        "answer": "Prepare only reserves a slot; device writes may be incomplete. Publication before completion could expose partial state. This component publishes only explicit success, removes failed reservations and never evicts leased anchors.",
+        "example": "Illustration: a pending640-token state must miss; failure removes it rather than publishing zero state."
+      }
+    },
+    "qa/foundation-models:mv-jepa/heldout-not-extra-input": {
+      "source_sha256": "53bef0a1c8b8103622f6735a37d0a707b5874d2cb0003b175f5225abbab88a75",
+      "reviewed": true,
+      "fields": {
+        "question": "Is the held-out view an extra camera input to the student?",
+        "answer": "No. Only the teacher turns it into a target. The student and predictor infer it from other contexts, and inference does not require that additional observation.",
+        "example": "Illustration: provide front and side views, while a hidden back view supplies targets only at the loss."
+      }
+    },
+    "qa/foundation-models:mv-jepa/token-normalization": {
+      "source_sha256": "c64790d00caec8c1e7c0ce837bc583fc76a0eda872653602855379add603aced",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not average a loss for each view before applying Eq4?",
+        "answer": "Views may have different mask counts. The paper weights supervised tokens equally, not views, and normalizes each example before batch averaging.",
+        "example": "Illustration: contexts with one and three masked tokens plus four held-out tokens create eight equally weighted targets, not three equally weighted groups."
+      }
+    },
+    "qa/foundation-models:mv-jepa/time-jepa-targets": {
+      "source_sha256": "ae5a32394303c132ffaa4bff9132c7350e0fb80d2d6db55a6a59ba58bbe5c3cc",
+      "reviewed": true,
+      "fields": {
+        "question": "Can MV-JEPA and Time-JEPA swap their additional targets?",
+        "answer": "No. MV-JEPA predicts cross-camera latents through a joint-view predictor; Time-JEPA aligns physical sequences through an unmasked regression branch. Neither target should become a student input.",
+        "example": "Illustration: a velocity scalar belongs to a physical head; back-view tokens belong to held-out queries. Replacing labels does not preserve the task."
+      }
+    },
+    "qa/foundation-models:mv-jepa/leak-gradient-control": {
+      "source_sha256": "cb0971628c91add649ab92205a471d3a82c1ab41117e2793dd2f45dfc5d39ae7",
+      "reviewed": true,
+      "fields": {
+        "question": "How do we test that held-out and masked context observations do not leak?",
+        "answer": "With fixed view IDs, changing held-out values or masked context tokens must leave predictor outputs unchanged. Teacher targets/loss may change, but held-out inputs must receive no gradient. Teacher parameters remain gradient-free and update only by explicit EMA.",
+        "example": "Illustration: multiplying held-out tokens by30 may change targets but not predictions; changing predictions reveals input leakage."
+      }
+    }
+  }
+}

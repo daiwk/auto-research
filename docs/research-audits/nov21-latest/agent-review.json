@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-21",
+  "scope": "Two Nov19-first-release overlap additions and one Sep30 Meta historical repository addition; no new-Nov21 or exhaustive claim.",
+  "implementation_preflight_completed": true,
+  "available_resource": "one A100 or A30 or Mac; CPU-only bounded kernels here",
+  "reviews": [
+    {
+      "id": "2611.26132",
+      "key": "sage-evolve",
+      "identity": "agent-research:sage-evolve",
+      "published_at": "2026-11-19T13:52:46Z",
+      "announced_on": "2026-11-20",
+      "first_author": "Yinhao Tang",
+      "first_author_affiliation": "University of Science and Technology of China / Shanghai AI Laboratory",
+      "source_url": "https://arxiv.org/pdf/2611.26132v1",
+      "source_sha256": "cf995cfa97d2cadafa569d2b3b7ef570de4baef1bfe5cd12d1d6e71438e81e1a",
+      "locations": [
+        "§3.1 Eq.1-2",
+        "§3.2 Eq.3",
+        "Appendix B.1 Eq.4 and defaults",
+        "Appendix B.2 Algorithm1",
+        "Appendix B.5 Table5 and compute"
+      ],
+      "code": null,
+      "code_status": "No paper-specific method source was found in fixed v1 or reviewed sources; cited benchmark repositories are not a method release.",
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "scope": "The local slice executes acceptance gates on explicit scores, marginal-return arithmetic, EMA/plateau detection, immutable observation records, first-feasible supplied proposals in L1/L2/L3 order, cumulative tier/task validation, gap-specific failed-configuration filtering and reference-rate tier selection. The first MR initializes the EMA and input order resolves tied proposals: explicit deterministic local conventions. MR requires a positive supplied retained-example count and rejects a zero denominator. Because the paper does not fully define rejected-increment data accounting, attempted examples are not silently called retained; callers may supply a defined MR directly. No LLM analysis/planning/production, data generation, contamination checker, SFT, scheduler or harness editor executes. Proposal feasibility and semantic diagnosis remain external.",
+      "cost_basis": "The paper uses full-parameter SFT of Qwen3.5-35B-A3B,256K-token samples/packs,64H200s and roughly12hours per iteration, with up to eight concurrent runs. Evaluations allow64K generation and up to1M-token sessions. This clearly exceeds oneA100/A30 or a Mac, so full training/evaluation is not reproduced, without weight downloads or trial runs. Only the small CPU control kernel executes.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "requires_gpu_validation": false,
+      "review_done": true
+    },
+    {
+      "id": "2611.26427",
+      "key": "memfolder",
+      "identity": "agent-research:memfolder",
+      "published_at": "2026-11-19T17:05:55Z",
+      "announced_on": "2026-11-20",
+      "first_author": "Xuyang Liu",
+      "first_author_affiliation": "Sichuan University",
+      "source_url": "https://arxiv.org/pdf/2611.26427v1",
+      "source_sha256": "cdc705a88afbf523814dc05927c251977b8dd6fbc32cbfc5dcf3c6ff2abb47eb",
+      "locations": [
+        "§3.3 Eq.1 and affinity",
+        "§3.4 blind verification and fallback",
+        "Table1 retention denominator",
+        "Appendix A.1 defaults",
+        "Figure2"
+      ],
+      "code": "https://github.com/xuyang-liu16/MemFolder/tree/4226577050b468f60ec273f2199b61e20a19efbd",
+      "code_status": "Yes: [fixed author repository commit](https://github.com/xuyang-liu16/MemFolder/tree/4226577050b468f60ec273f2199b61e20a19efbd). The repository API reports no recognized license; MIT is not invented.",
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "scope": "The local RecordFolder grouping kernel consumes explicit embeddings and grounded entity sets: normalization, DPC/novelty anchors, full-window variances, IDF affinity, positive-gain candidates, actual SciPy Hungarian matching and chain reassignment. Inputs must be chronological and contain at most512 records. Population variance with ddof0,Python rounding,input-order ties and anchors pinned to their own groups under duplicate embeddings are explicit deterministic conventions where the paper leaves details open. There is no LLM entity extraction, alias merging,text consolidation,ContextFolder,embedding model or downstream QA. Callers supply grounded labels and chronological order; lexical Jaccard is not substituted for semantic embeddings. No paths or Codex conversations are read, and no user files are automatically removed or compressed.",
+      "cost_basis": "The full study runs on twoA100-80GBs with GPT-4o-mini extraction/merging/judging,GPT-4o multimodal evaluation,OpenAI embeddings,multiple memory frameworks and five text/multimodal evaluation settings repeated three times. Rebuilding the stores and API matrix exceeds this batch's single-A100/A30 or Mac component budget. Full experiments are not reproduced: no data/weight downloads or paid calls are launched. Only small CPU grouping matrices execute.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "requires_gpu_validation": false,
+      "review_done": true
+    },
+    {
+      "id": "2609.40195",
+      "key": "memlife",
+      "identity": "agent-research:memlife",
+      "published_at": "2026-09-30T17:11:33Z",
+      "announced_on": null,
+      "first_author": "Guangzhi Xiong",
+      "first_author_affiliation": "Meta Reality Labs / University of Virginia（Work done at Meta）",
+      "source_url": "https://arxiv.org/pdf/2609.40195v1",
+      "source_sha256": "25ca0e50a08719a2b89b1ea010510cb5b8dd826d751618a6d2ac3ddf7e2b0f11",
+      "locations": [
+        "§3.1 Eq.1-3 causal cutoff",
+        "§3.3 Eq.7-12 FIRM and macro statistics",
+        "Appendix B.3 trace replay",
+        "Appendix B.4 Eq.15-16 clipping and whitening",
+        "fixed official memlife/memopt/advantage.py"
+      ],
+      "code": "https://github.com/facebookresearch/MemLife/tree/4d987734f65832eb950fb8e7c346d7e69cc2ce16",
+      "code_status": "Yes: [fixed official Meta commit](https://github.com/facebookresearch/MemLife/tree/4d987734f65832eb950fb8e7c346d7e69cc2ce16),CC-BY-NC-4.0 code/data. Local arithmetic is independently derived from paper equations, not copied from that repository.",
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "scope": "The local slice takes explicit probability/reward arrays and response masks for the Eq.7 margin,FIRM product,Eq.11-12 macro statistics,clipping/group-token recentering/global whitening,and Eq.16 scalar loss from supplied ratios,advantages and KL. An independently derived NumPy float64 protocol uses normalization epsilon1e-6,whitening epsilon1e-8 and sample-variance correction1; bitwise trainer equivalence is not claimed. Empty candidates are excluded fromG,empty groups output zero,and fewer than two valid batch tokens are rejected. Bounded unit-vector SearchMemory/FetchMemory first filter full interval containment and end<=query_time,then rank and return chronologically. Single-subject filtering is a local isolation contract,not the paper's mixed-subject LVQA benchmark or caller authentication. No video/embedding model,VLM judge,writer/reader,training-data construction,cached-reader trace collection,RL trainer or Evolve integration is implemented.",
+      "cost_basis": "The fixed paper evaluates9B writer/reader and27B transfer combinations over long video histories,trains for three epochs,and rebuilds memories and reader traces. The pinned official repository's full setup requires one eight-GPU training node and one eight-GPU evaluation node. This is not an affordable equivalent on oneA100/A30 or a Mac. Full training/benchmarks are not reproduced; no weights/videos or trial runs are launched,only small CPU array controls.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "requires_gpu_validation": false,
+      "review_done": true,
+      "upstream_arithmetic_reference": {
+        "commit": "4d987734f65832eb950fb8e7c346d7e69cc2ce16",
+        "path": "memlife/memopt/advantage.py",
+        "source_sha256": "2e923aab26d10c167c97795d03935353f88eebe6fa6ef71474b9de7f1f65f94d",
+        "implementation_copied": false,
+        "note": "Read to resolve empty-candidate and post-clip token-recentering details; local implementation independently derived from equations."
+      },
+      "numeric_review_fixes_before_freeze": [
+        "Out-of-range finite FIRM rewards are rejected before variance arithmetic; finite padding is erased before deviations.",
+        "Finite ratio/advantage or KL overflow fails closed at objective intermediates/final loss, with unit regressions and actual diagnostic checks."
+      ]
+    }
+  ],
+  "p2_dispositions": []
+}

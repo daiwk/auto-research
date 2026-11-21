@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/html/2611.25597v1",
+  "source_url": "https://arxiv.org/pdf/2611.25597v1#page=5",
+  "source_sha256": "bec1bb13cc504250d4baadadc78051de4d0c7d3b075f392b3af30e865fb20789",
+  "pdf_page": 5,
+  "figure": "Figure 1",
+  "caption": "DFRL pipeline with RLOO as an example: context, parameter predictions, downstream optimization, observed-parameter decision regret, and policy update. The shared hindsight optimum cancels in RLOO advantages.",
+  "crop_pdf_points": [
+    66,
+    60,
+    530,
+    373
+  ],
+  "render_scale": 2,
+  "asset_sha256": "fdaa67e4e6860e113684831c9e64c81ae3fa6f47b7a285fa72583c2523b0b5b7",
+  "image_sha256": "fdaa67e4e6860e113684831c9e64c81ae3fa6f47b7a285fa72583c2523b0b5b7",
+  "visually_reviewed": true,
+  "scientific_content_modified": false,
+  "copyright": "Copyright remains with original authors; original screenshot with attribution."
+}

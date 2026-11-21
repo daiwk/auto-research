@@ -25,7 +25,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="compression-and-cache/">推理压缩：权重、KV 缓存与服务带宽</a></h2>
 <p>显存或时延不够时，真正占资源的是模型权重、历史状态，还是服务搬运？</p>
-<p class="ar-learning-topic-meta">164 个问题 · 41 篇论文</p>
+<p class="ar-learning-topic-meta">168 个问题 · 42 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="generation-paths/">生成路径：草稿验证、并行去噪与少步迭代</a></h2>
@@ -35,7 +35,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="evaluation-and-evidence/">能力证据：评测采样、读出与可靠性</a></h2>
 <p>怎样确认高分来自目标能力，而非语言、输入顺序、读出方式或统计偏差？</p>
-<p class="ar-learning-topic-meta">104 个问题 · 26 篇论文</p>
+<p class="ar-learning-topic-meta">108 个问题 · 27 篇论文</p>
 </article>
 </div>
 

@@ -1,0 +1,53 @@
+{
+  "key": "memlife",
+  "domain": "agent-research",
+  "title": "MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories",
+  "first_author": "Guangzhi Xiong",
+  "first_author_affiliation": "Meta Reality Labs / University of Virginia（Work done at Meta）",
+  "published_at": "2026-09-30T17:11:33Z",
+  "published": "2026-09-30",
+  "announced_on": null,
+  "paper_url": "https://arxiv.org/abs/2609.40195v1",
+  "reviewed_version": "v1",
+  "reviewed_arxiv_id": "2609.40195v1",
+  "reviewed_version_url": "https://arxiv.org/pdf/2609.40195v1",
+  "detail_path": "agent-research/2609.40195-memlife/README.md",
+  "topic": [
+    "记忆与技能",
+    "memlife"
+  ],
+  "verified_priority_organizations": [
+    "Meta"
+  ],
+  "code": "https://github.com/facebookresearch/MemLife/tree/4d987734f65832eb950fb8e7c346d7e69cc2ce16",
+  "code_status": "是：[Meta官方固定提交](https://github.com/facebookresearch/MemLife/tree/4d987734f65832eb950fb8e7c346d7e69cc2ce16)，代码/数据为CC-BY-NC-4.0；本地按论文公式独立实现，未复制该仓库代码。",
+  "code_license": "CC-BY-NC-4.0",
+  "adapter": null,
+  "priority": "P0",
+  "intake_class": "historical_repository_backfill",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.agent_research.memlife.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.memlife import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "gpu_validation_artifact": null,
+  "review_done": true,
+  "full_experiment_review_done": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/pdf/2609.40195v1",
+    "available_resource": "one A100 or A30, or local Mac",
+    "basis": "固定论文以9B writer/reader和27B迁移组合处理长时视频，writer训练3个epoch并每轮重建记忆和reader trace；官方固定仓库完整训练要求一个8卡训练节点及一个8卡评估节点。单A100/A30或Mac不能廉价等价复现实验矩阵，完整训练和benchmark直接不复现；不下载权重或视频、不启动试跑，只做小数组CPU控制。",
+    "decision": "成本过高，不复现（审查 DONE）；仅低成本CPU组件。"
+  },
+  "summary": "MemLife先把每段第一视角视频和语音写成有时间锚点、实体落地的第一人称文本，再由reader按问题进行语义搜索和时间区间读取。MemOpt只训练writer，reader保持冻结；FIRM将逐token的faithfulness、逐候选的informativeness和retrievability相乘。前者看源视频是否支持内容，后两者分别看回答所需事实是否被保留、已缓存reader动作能否找回该候选，不把完整reader成败混成一个写入奖励。",
+  "fidelity_note": "本地只接收显式概率/奖励数组与response mask，执行Eq.7的概率差、FIRM乘积、Eq.11-12宏统计、clip/组内token重心化/全局whitening和Eq.16已给ratio/advantage/KL的标量loss算术。独立NumPy float64实现，normalization epsilon=1e-6，whitening epsilon=1e-8、样本方差correction=1作为显式数值协议；不声称与外部trainer逐bit相同。空候选从G排除，空group输出0；全batch少于2个有效token则拒绝，不补造whitening。另有最多512条的显式unit-vector SearchMemory/FetchMemory：先按end≤query_time及区间完整包含过滤，再排序；返回按时间排列。单subject过滤是本地隔离合同，不是论文LVQA混合受试者基准，也不认证调用者身份。没有视频/embedding模型、VLM评审、writer/reader、训练数据构建、cached reader trace生成、RL训练或Evolve接入。",
+  "method_source_sha256": "25ca0e50a08719a2b89b1ea010510cb5b8dd826d751618a6d2ac3ddf7e2b0f11"
+}

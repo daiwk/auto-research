@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 312 个问题 · 78 篇论文
+[Agent](index.md) / 316 个问题 · 79 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">312 个问题 · 78 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">316 个问题 · 79 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sage-evolve" data-paper-title="Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement Agent University of Science and Technology of China / Shanghai AI Laboratory 2026-11-19 AdaObs区分固定anchor目标和引导当前研究的active observation。每轮仍在固定anchor上验收；训练进展停滞时，先细分已有输出的错误诊断，再增加同任务的困难层，最后累计加入同能力方向的相关任务。它改变的是发现训练缺口的观察，不是为了提高分数而改评分器、换掉原目标或把测试答案放进训练。同一观测阶段内，边际收益按每新增1万条保留样本的分数变化计算，用α=0.3做EMA；最近3次平滑值全部严格小于0.1才判平台。更换观测必须清空该历史。 成本过高，不复现（审查 DONE）。可行性和语义诊断由调用方负责。component_only / L1 CPU机制组件，diagnostic_only=true。这是11月19日首发、11月20日公告的重叠池补漏，不算11月21日新论文。高成本完整实验不复现（审查 DONE），不是能力复现或已接入Evolve。本地只执行显式分数的增量验收、边际收益算术、EMA/平台判定、不可变观测结构、按L1→L2→L3选首个可行的显式提案、累计层/任务检查、具体gap配置负例过滤和参考通过率选层。首个MR初始化EMA，等分提案按输入顺序，是明确的本地确定性约定。MR函数要求正的显式保留样本数，拒绝0分母；  执行框架与自改进 sage-evolve Agent 运行流程与自进化：改的是哪一层 active observation变了，目标是不是也变了？ 不是。anchor是始终保留的验收目标；active只改变当前看哪些细分错误、难度或相关任务，帮助发现下一批训练增量。 教学例：原目标是长文问答，可新增8-needle诊断，但不能删除原题只报更容易题的分数。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-sage-evolve-26bc5688" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-8b246af6e0ff1fa0">active observation变了，目标是不是也变了？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asage-evolve">Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · University of Science and Technology of China / Shanghai AI Laboratory</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。anchor是始终保留的验收目标；active只改变当前看哪些细分错误、难度或相关任务，帮助发现下一批训练增量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：原目标是长文问答，可新增8-needle诊断，但不能删除原题只报更容易题的分数。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26132v1">原论文</a> · <a href="../../../../agent-research/2611.26132-sage-evolve/">实现解读</a> · <a href="#qa-8b246af6e0ff1fa0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sage-evolve" data-paper-title="Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement Agent University of Science and Technology of China / Shanghai AI Laboratory 2026-11-19 AdaObs区分固定anchor目标和引导当前研究的active observation。每轮仍在固定anchor上验收；训练进展停滞时，先细分已有输出的错误诊断，再增加同任务的困难层，最后累计加入同能力方向的相关任务。它改变的是发现训练缺口的观察，不是为了提高分数而改评分器、换掉原目标或把测试答案放进训练。同一观测阶段内，边际收益按每新增1万条保留样本的分数变化计算，用α=0.3做EMA；最近3次平滑值全部严格小于0.1才判平台。更换观测必须清空该历史。 成本过高，不复现（审查 DONE）。可行性和语义诊断由调用方负责。component_only / L1 CPU机制组件，diagnostic_only=true。这是11月19日首发、11月20日公告的重叠池补漏，不算11月21日新论文。高成本完整实验不复现（审查 DONE），不是能力复现或已接入Evolve。本地只执行显式分数的增量验收、边际收益算术、EMA/平台判定、不可变观测结构、按L1→L2→L3选首个可行的显式提案、累计层/任务检查、具体gap配置负例过滤和参考通过率选层。首个MR初始化EMA，等分提案按输入顺序，是明确的本地确定性约定。MR函数要求正的显式保留样本数，拒绝0分母；  执行框架与自改进 sage-evolve Agent 运行流程与自进化：改的是哪一层 为什么切换观测后必须重置边际收益历史？ 不同观测的分数不是同一标尺。把较难任务较低的分数直接减掉旧任务分数，会把换测量工具当模型退化。 教学例：旧active为80、新active为40，不表示训练损失了40分；应重新建立同phase比较。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-16da759547b0b01d">为什么切换观测后必须重置边际收益历史？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asage-evolve">Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · University of Science and Technology of China / Shanghai AI Laboratory</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同观测的分数不是同一标尺。把较难任务较低的分数直接减掉旧任务分数，会把换测量工具当模型退化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：旧active为80、新active为40，不表示训练损失了40分；应重新建立同phase比较。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26132v1">原论文</a> · <a href="../../../../agent-research/2611.26132-sage-evolve/">实现解读</a> · <a href="#qa-16da759547b0b01d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sage-evolve" data-paper-title="Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement Agent University of Science and Technology of China / Shanghai AI Laboratory 2026-11-19 AdaObs区分固定anchor目标和引导当前研究的active observation。每轮仍在固定anchor上验收；训练进展停滞时，先细分已有输出的错误诊断，再增加同任务的困难层，最后累计加入同能力方向的相关任务。它改变的是发现训练缺口的观察，不是为了提高分数而改评分器、换掉原目标或把测试答案放进训练。同一观测阶段内，边际收益按每新增1万条保留样本的分数变化计算，用α=0.3做EMA；最近3次平滑值全部严格小于0.1才判平台。更换观测必须清空该历史。 成本过高，不复现（审查 DONE）。可行性和语义诊断由调用方负责。component_only / L1 CPU机制组件，diagnostic_only=true。这是11月19日首发、11月20日公告的重叠池补漏，不算11月21日新论文。高成本完整实验不复现（审查 DONE），不是能力复现或已接入Evolve。本地只执行显式分数的增量验收、边际收益算术、EMA/平台判定、不可变观测结构、按L1→L2→L3选首个可行的显式提案、累计层/任务检查、具体gap配置负例过滤和参考通过率选层。首个MR初始化EMA，等分提案按输入顺序，是明确的本地确定性约定。MR函数要求正的显式保留样本数，拒绝0分母；  执行框架与自改进 sage-evolve Agent 运行流程与自进化：改的是哪一层 AdaObs和Harness²都自进化，改的是同一层吗？ 不是。Harness²改固定模型外的执行方式；AdaObs固定anchor、改变发现训练缺口的观测，并在完整研究中重训模型。两种本地诊断都不能冒充Agent能力收益。 教学例：把失败按上下文长度分桶是改观测，增加工具重试规则是改Harness。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-10283d72cd87cf2a">AdaObs和Harness²都自进化，改的是同一层吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asage-evolve">Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · University of Science and Technology of China / Shanghai AI Laboratory</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。Harness²改固定模型外的执行方式；AdaObs固定anchor、改变发现训练缺口的观测，并在完整研究中重训模型。两种本地诊断都不能冒充Agent能力收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把失败按上下文长度分桶是改观测，增加工具重试规则是改Harness。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26132v1">原论文</a> · <a href="../../../../agent-research/2611.26132-sage-evolve/">实现解读</a> · <a href="#qa-10283d72cd87cf2a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sage-evolve" data-paper-title="Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement Agent University of Science and Technology of China / Shanghai AI Laboratory 2026-11-19 AdaObs区分固定anchor目标和引导当前研究的active observation。每轮仍在固定anchor上验收；训练进展停滞时，先细分已有输出的错误诊断，再增加同任务的困难层，最后累计加入同能力方向的相关任务。它改变的是发现训练缺口的观察，不是为了提高分数而改评分器、换掉原目标或把测试答案放进训练。同一观测阶段内，边际收益按每新增1万条保留样本的分数变化计算，用α=0.3做EMA；最近3次平滑值全部严格小于0.1才判平台。更换观测必须清空该历史。 成本过高，不复现（审查 DONE）。可行性和语义诊断由调用方负责。component_only / L1 CPU机制组件，diagnostic_only=true。这是11月19日首发、11月20日公告的重叠池补漏，不算11月21日新论文。高成本完整实验不复现（审查 DONE），不是能力复现或已接入Evolve。本地只执行显式分数的增量验收、边际收益算术、EMA/平台判定、不可变观测结构、按L1→L2→L3选首个可行的显式提案、累计层/任务检查、具体gap配置负例过滤和参考通过率选层。首个MR初始化EMA，等分提案按输入顺序，是明确的本地确定性约定。MR函数要求正的显式保留样本数，拒绝0分母；  执行框架与自改进 sage-evolve Agent 运行流程与自进化：改的是哪一层 一个L1诊断方案失败，能直接跳到L2吗？ 不能据此封禁所有L1。负例记忆记录当前gap下的具体refinement配置，仍应先检查其他可行L1；没有可行L1才升级。 教学例：按格式分桶没找到新缺口，不代表按长度分桶也无效；换gap后也不能沿用旧封禁。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-6818fc66c8dca8af">一个L1诊断方案失败，能直接跳到L2吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asage-evolve">Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · University of Science and Technology of China / Shanghai AI Laboratory</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能据此封禁所有L1。负例记忆记录当前gap下的具体refinement配置，仍应先检查其他可行L1；没有可行L1才升级。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：按格式分桶没找到新缺口，不代表按长度分桶也无效；换gap后也不能沿用旧封禁。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26132v1">原论文</a> · <a href="../../../../agent-research/2611.26132-sage-evolve/">实现解读</a> · <a href="#qa-6818fc66c8dca8af">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ahe-beta" data-paper-title="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses Agent Fudan University 2026-11-18 AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。开发者只接收被准入的需求及其证据包。证据包只有被引用会话的运行日志、公开任务和执行条件，用户对话、隐藏测试和grader不能传给开发者。RFC先做设计审查，代码再按验收标准审查；合并时批准必须绑定当前PR head，且RFC仍与已审设计一致。 完整实验成本过高，不复现（审查 DONE）；CPU三种子诊断仅为合成控制核记录，不是模型成功率。component_only / l0_interface；不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。只实现类型化Evidence/Requirement交付集、已核实合并需求的covers消解，以及绑定head与RFC的纯merge_eligible判定。没有模拟用户、Triage/Architect/PM语言判断、开发Agent或真正git合并。结构字段不保证字符串内部绝无隐藏答案，所以保持L0，不把类型检查称为语义安全。  执行框架与自改进 ahe-beta Agent 运行流程与自进化：改的是哪一层 为什么测试通过仍可能不满足用户？ 测试可读最终工作区，但用户可能没收到结果、纠正请求未送达，或不允许的文件被修改；这些需求要靠交互记录核实。 教学例：修好代码却没有回复用户，不等于交付完成。 2026-11-19">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-ahe-beta-fc48846a" class="ar-learning-paper-anchor"></span>

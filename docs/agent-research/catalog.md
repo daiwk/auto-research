@@ -10,6 +10,8 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 记忆与技能 | [MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management](2611.26427-memfolder/README.md) | Sichuan University，2026-11-19 | [原作者入口](https://github.com/xuyang-liu16/MemFolder/tree/4226577050b468f60ec273f2199b61e20a19efbd)；是：[原作者固定仓库提交](https://github.com/xuyang-liu16/MemFolder/tree/4226577050b468f60ec273f2199b61e20a19efbd)；仓库API未识别明确许可证，不擅自标注MIT。 | `memfolder`：仅低成本组件，完整实验不复现 |
+| 执行框架与自改进 | [Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement](2611.26132-sage-evolve/README.md) | University of Science and Technology of China / Shanghai AI Laboratory，2026-11-19 | 未发现官方代码 | `sage-evolve`：仅低成本组件，完整实验不复现 |
 | 执行框架与自改进 | [Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses](2611.24924-ahe-beta/README.md) | Fudan University，2026-11-18 | [原作者入口](https://github.com/Curry09/AHE-Beta/tree/0370ec20a9ad90053a5a50ed21d491eb5480b975)；[作者仓库](https://github.com/Curry09/AHE-Beta/tree/0370ec20a9ad90053a5a50ed21d491eb5480b975)；MIT | `ahe-beta`：仅低成本组件，完整实验不复现 |
 | 执行框架与自改进 | [BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection](2611.25088-buggymle-cci/README.md) | Google Research / University of Illinois Urbana-Champaign，2026-11-18 | 未发现官方代码 | `buggymle-cci`：仅低成本组件，完整实验不复现 |
 | Agent 评测与可靠性 | [Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling](2611.24849-execjudges/README.md) | Emory University，2026-11-18 | 未发现官方代码 | `execjudges`：仅低成本组件，完整实验不复现 |
@@ -140,6 +142,7 @@
 | Agent 验证 | [VeriHarness: Scaling Agentic Verification for Long-Horizon Tasks](2610.00972-veriharness/README.md) | Google Cloud AI Research，2026-10-01 | 未发现官方代码 | `veriharness` |
 | Jev | [JevSpawn: Adaptive Agentic Inference through Compositional Action Spaces](2610.00437-jev-spawn/README.md) | 原文首页未列第一作者机构，2026-09-30 | 未发现官方代码 | `jev-spawn` |
 | Agent 记忆 | [MemFit: Efficient Long-Term Agentic Memory](2610.00872-memfit/README.md) | 原文首页未列第一作者机构，2026-09-30 | 未发现官方代码 | `memfit` |
+| 记忆与技能 | [MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories](2609.40195-memlife/README.md) | Meta Reality Labs / University of Virginia（Work done at Meta），2026-09-30 | [原作者入口](https://github.com/facebookresearch/MemLife/tree/4d987734f65832eb950fb8e7c346d7e69cc2ce16)；是：[Meta官方固定提交](https://github.com/facebookresearch/MemLife/tree/4d987734f65832eb950fb8e7c346d7e69cc2ce16)，代码/数据为CC-BY-NC-4.0；本地按论文公式独立实现，未复制该仓库代码。 | `memlife`：仅低成本组件，完整实验不复现 |
 | RSI | [Self-Evolving Coding Rules for AI Coding Agents](2610.00650-rule-evolve/README.md) | 原文首页未列第一作者机构，2026-09-30 | 未发现官方代码 | `rule-evolve` |
 | 上下文管理 | [Context Language Models](2609.37725-context-lm/README.md) | University of Washington / Meta Superintelligence Labs，2026-09-29 | [已开源](https://github.com/facebookresearch/context-language-models) | `context-lm` |
 | Harness 设计 | [Learning Meta-Skills for Agent Harness Design in Test-Time AI4AI](2609.38143-meta-skills/README.md) | Apodex / University of Illinois Urbana-Champaign，2026-09-29 | [已开源](https://github.com/qiancheng-apodex/MetaSkill-AI4AI) | `meta-skills` |

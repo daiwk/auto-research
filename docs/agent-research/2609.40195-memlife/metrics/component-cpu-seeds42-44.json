@@ -1,0 +1,148 @@
+{
+  "schema_version": 2,
+  "method": "memlife",
+  "manifest_ref": "agent-research:memlife",
+  "dataset": {
+    "id": "synthetic:nov21-overlap-memlife-component-v1",
+    "kind": "explicit_protocol_or_mechanism_fixtures",
+    "revision": "sha256:155845e6469e301412e503d07a25a5839bfc5804163e060c64d585e69b62e8be",
+    "public_capability_benchmark": false,
+    "source": "Seeded small tensors or explicit deterministic evaluator/control cases; no pretrained output or public capability measurement"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "device": "cpu",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "group_mean": 0.5,
+        "group_variance": 0.25,
+        "eligible_entries": 1,
+        "response_tokens": 4
+      },
+      "checks": {
+        "candidate_macro_not_token_pool": true,
+        "group_centered_deviation": true,
+        "token_mask_recenter": true,
+        "padding_zero": true,
+        "flat_group_zero": true,
+        "zero_dimension_gates_product": true,
+        "out_of_range_reward_rejected": true,
+        "finite_input_objective_overflow_rejected": true,
+        "causal_and_subject_filter": true,
+        "fetch_interval_contains_segment": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "device": "cpu",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "group_mean": 0.5,
+        "group_variance": 0.25,
+        "eligible_entries": 1,
+        "response_tokens": 4
+      },
+      "checks": {
+        "candidate_macro_not_token_pool": true,
+        "group_centered_deviation": true,
+        "token_mask_recenter": true,
+        "padding_zero": true,
+        "flat_group_zero": true,
+        "zero_dimension_gates_product": true,
+        "out_of_range_reward_rejected": true,
+        "finite_input_objective_overflow_rejected": true,
+        "causal_and_subject_filter": true,
+        "fetch_interval_contains_segment": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "device": "cpu",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "group_mean": 0.5,
+        "group_variance": 0.25,
+        "eligible_entries": 1,
+        "response_tokens": 4
+      },
+      "checks": {
+        "candidate_macro_not_token_pool": true,
+        "group_centered_deviation": true,
+        "token_mask_recenter": true,
+        "padding_zero": true,
+        "flat_group_zero": true,
+        "zero_dimension_gates_product": true,
+        "out_of_range_reward_rejected": true,
+        "finite_input_objective_overflow_rejected": true,
+        "causal_and_subject_filter": true,
+        "fetch_interval_contains_segment": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "eligible_entries": 1.0,
+    "group_mean": 0.5,
+    "group_variance": 0.25,
+    "response_tokens": 4.0
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Operator/interface controls only; not a complete model, agent, public benchmark or production comparison"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "3b147143ff4e0e9e098f2964dce0fec7120da8a8",
+    "accelerator": "CPU",
+    "artifact_path": "docs/agent-research/2609.40195-memlife/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_nov21_latest_components.py": "13ef2fc61f7b6d7dd23d3f9c6afd77d86f574c191a9b08bb303097013d3fcabf",
+      "scripts/run_nov18_latest_components.py": "0fe50e8e554f6663b3c8c179654400d10bfbb557ceb9cefb9880da78f164b7c1",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov21-latest/preflight.json": "c1705b0c8472f7a2d2e1f02544067d46784bf958789fd7ee526783371ddfc3e2",
+      "src/auto_research/foundation_models/frontier_replay.py": "bf3613a78c682a1693457d2ab8feb5a8b533104497161340f61a375e2ac15248",
+      "src/auto_research/foundation_models/mv_jepa.py": "1a7f674ab37036b207a9b759f8595926f4531d29522a1291ccd8460da980e8ca",
+      "src/auto_research/agent_research/sage_evolve.py": "4c8572f73f3717dfd4488c8ad3960d5d929dc83253384bdf4c841a3f938eb1c7",
+      "src/auto_research/agent_research/memfolder.py": "9492350142246424902bb0fa61cb65b4ad6feee95c64ec1d159034042a951d50",
+      "src/auto_research/post_training/dfrl.py": "a4849643e8f5880ea617e1f950d408ef2643e3927c890f7f14cb1d17cb4a3f7e",
+      "src/auto_research/foundation_models/e_rwsc.py": "29846f83048306fea090979ed109e122b10447eefe8aea200125a83d337e55ec",
+      "src/auto_research/agent_research/memlife.py": "155845e6469e301412e503d07a25a5839bfc5804163e060c64d585e69b62e8be"
+    },
+    "dataset_fingerprint": "sha256:45c5d1a9fe9a9caa0d043e619519984ef5df2865022d13727d72ad609c3d624f",
+    "raw_runner_artifact_sha256": "a540ac651dc653a08209ce3aefe3876bbfa046a74cd43d480282174608c03748"
+  }
+}

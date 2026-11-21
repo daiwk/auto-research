@@ -4,6 +4,7 @@
 
 ## 2026
 
+- 2026-11 · [Decision-Focused Reinforcement Learning for LLM Post-Training](../2611.25597-dfrl/README.md)（`dfrl`）：预测误差小不保证由预测触发的决策成本低。DFRL把LLM生成的参数预测交给下游优化器，以真实观测参数评估该决策，再把负决策regret用于后训练；不对优化器求导。
 - 2026-11 · [Policy Improvement-Guided Replay for Continual Reinforcement Learning](../2611.25989-colir-replay/README.md)（`colir-replay`）：持续RL不应只保存旧模型的输出：新策略仍需在历史任务分布上重新行动。CoLiR在任务结束时复用已有rollout，分别取最终策略生成的正确响应和初始策略生成的错误响应；各自补算另一策略的序列log-likelihood，以正确响应被强化和错误响应被压低两个半权重均值排序prompt。
 - 2026-11 · [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](../2611.23750-led-edits/README.md)（`led-edits`）：仅允许token替换时，一个遗漏或多余token会让整段后缀错位，需要许多位置分别修复。LED把[Ins]/[Del]加入输出词表、排除在输入词表外：删除当前token，或在其前插入新[Mask]，同时保留该锚点token。
 - 2026-11 · [Evidence-Based Credit Assignment for Search-Augmented Language Models](../2611.23824-eca-credit/README.md)（`eca-credit`）：终止答案全错时，组相对奖励为零，但检索可能已经取得有价值证据。ECA用训练专用冻结策略在仅含问题与去重文档的上下文中，计算参考答案的长度归一化对数似然势函数；生成的思考、查询和其他轨迹不参与打分。

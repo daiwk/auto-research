@@ -578,6 +578,7 @@
 
 ## The University of Texas at Austin
 
+- 2026-11-19 · 一作：Haotian Zhai · [Decision-Focused Reinforcement Learning for LLM Post-Training](../2611.25597-dfrl/README.md)（`dfrl`）：预测误差小不保证由预测触发的决策成本低。DFRL把LLM生成的参数预测交给下游优化器，以真实观测参数评估该决策，再把负决策regret用于后训练；不对优化器求导。
 - 2026-07-21 · 一作：Hanqing Zhu · [ISO: An RLVR-Native Optimization Stack](../2607.19331-iso-rlvr/README.md)（`iso-rlvr`）：固定预训练权重奇异值，仅优化输入/输出 singular frames；同时提供无数据 specialist merger。
 
 ## Tianjin University

@@ -4,23 +4,28 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1258 entries from the shared research manifest. English write-ups available: 1258.
+The catalog lists 1265 entries from the shared research manifest. English write-ups available: 1265.
 
 ## Browse by domain
 
 - [Search, ads, recommendation, and LLM applications](recommendation.md): 343 catalog entries, 343 English write-ups
-- [Foundation models](foundation-models.md): 259 catalog entries, 259 English write-ups
+- [Foundation models](foundation-models.md): 262 catalog entries, 262 English write-ups
 - [Structured decisions / System One](system-one.md): 10 catalog entries, 10 English write-ups
 - [Multimodal models](multimodal-models.md): 32 catalog entries, 32 English write-ups
-- [LLM post-training](post-training.md): 291 catalog entries, 291 English write-ups
-- [Agents](agent-research.md): 323 catalog entries, 323 English write-ups
+- [LLM post-training](post-training.md): 292 catalog entries, 292 English write-ups
+- [Agents](agent-research.md): 326 catalog entries, 326 English write-ups
 
 ## Read in English
 
 - [Stop Going in Circles:Loop-Triggered Routing for System 1 Decision Agents](../../system-one/2611.25363-looproute/README-en.md)
+- [Sequential Anytime Valid Tests for Efficient Inference-Time Alignment](../../foundation-models/2611.26413-e-rwsc/README-en.md)
+- [Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement](../../agent-research/2611.26132-sage-evolve/README-en.md)
 - [Policy Improvement-Guided Replay for Continual Reinforcement Learning](../../post-training/2611.25989-colir-replay/README-en.md)
+- [MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management](../../agent-research/2611.26427-memfolder/README-en.md)
 - [HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs](../../foundation-models/2611.26363-hisa/README-en.md)
+- [FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models](../../foundation-models/2611.26020-frontier-replay/README-en.md)
 - [From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation](../../recommendation-components/2611.26096-lser-serving/README-en.md)
+- [Decision-Focused Reinforcement Learning for LLM Post-Training](../../post-training/2611.25597-dfrl/README-en.md)
 - [DNA: Unlocking Depth Scaling in CTR Models](../../recommendation-components/2611.25659-dna/README-en.md)
 - [Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models](../../recommendation-components/2611.26531-fleet-feature-optimization/README-en.md)
 - [Antom 3-in-1 Transformer: A Payment Foundation Model](../../recommendation-components/2611.25403-antom-3-in-1/README-en.md)
@@ -31,6 +36,7 @@ The catalog lists 1258 entries from the shared research manifest. English write-
 - [Reducing Inference Cost of Coding Agents with Timeout Cascades](../../agent-research/2611.24324-timeout-cascades/README-en.md)
 - [RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?](../../agent-research/2611.24395-rsibench-infra/README-en.md)
 - [NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding](../../foundation-models/2611.23835-narrow-spec/README-en.md)
+- [MV-JEPA: Post-Training Video Encoders for Cross-View Understanding](../../foundation-models/2611.25172-mv-jepa/README-en.md)
 - [MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems](../../recommendation-components/2611.23910-mle-agents/README-en.md)
 - [MARS Technical Report](../../recommendation-components/2611.24006-mars-fapo/README-en.md)
 - [LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers](../../foundation-models/2611.24301-loopcache-interface/README-en.md)
@@ -480,6 +486,7 @@ The catalog lists 1258 entries from the shared research manifest. English write-
 - [T2SPO: Trajectory-to-Step Policy Optimization for Agentic Reinforcement Learning](../../post-training/2610.00388-t2spo/README-en.md)
 - [Self-Evolving Coding Rules for AI Coding Agents](../../agent-research/2610.00650-rule-evolve/README-en.md)
 - [SHARPO: Segment-Level Credit Assignment for Agentic Reinforcement Learning](../../post-training/2610.00838-sharpo/README-en.md)
+- [MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories](../../agent-research/2609.40195-memlife/README-en.md)
 - [MemFit: Efficient Long-Term Agentic Memory](../../agent-research/2610.00872-memfit/README-en.md)
 - [JevSpawn: Adaptive Agentic Inference through Compositional Action Spaces](../../agent-research/2610.00437-jev-spawn/README-en.md)
 - [HAWK: Rethinking Multimodal Drafting for Speculative Decoding](../../foundation-models/2610.00623-hawk/README-en.md)

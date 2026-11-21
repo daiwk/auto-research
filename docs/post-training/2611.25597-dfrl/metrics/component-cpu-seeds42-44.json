@@ -1,0 +1,176 @@
+{
+  "schema_version": 2,
+  "method": "dfrl",
+  "manifest_ref": "post-training:dfrl",
+  "dataset": {
+    "id": "synthetic:nov21-overlap-dfrl-component-v1",
+    "kind": "explicit_protocol_or_mechanism_fixtures",
+    "revision": "sha256:a4849643e8f5880ea617e1f950d408ef2643e3927c890f7f14cb1d17cb4a3f7e",
+    "public_capability_benchmark": false,
+    "source": "Seeded small tensors or explicit deterministic evaluator/control cases; no pretrained output or public capability measurement"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "device": "cpu",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "checks": {
+        "enumerated_rloo_matches_analytic_score_gradient": true,
+        "batch_correction_expectation_recovers_exact_gradient": true,
+        "uncorrected_cheap_estimate_is_a_distinct_biased_control": true,
+        "unselected_batch_never_calls_exact_solver": true,
+        "selected_batch_calls_exact_supplier_once_for_every_instance": true,
+        "probability_one_recovers_exact_advantages": true,
+        "warm_start_obeys_declared_boundary": true,
+        "hindsight_constant_cancels": true
+      },
+      "controls": {
+        "enumerated_rloo_matches_analytic_score_gradient": true,
+        "batch_correction_expectation_recovers_exact_gradient": true,
+        "uncorrected_cheap_estimate_is_a_distinct_biased_control": true,
+        "unselected_batch_never_calls_exact_solver": true,
+        "selected_batch_calls_exact_supplier_once_for_every_instance": true,
+        "probability_one_recovers_exact_advantages": true,
+        "warm_start_obeys_declared_boundary": true,
+        "hindsight_constant_cancels": true
+      },
+      "metrics": {
+        "analytic_gradient_max_abs_error": 2.220446049250313e-16,
+        "corrected_gradient_max_abs_error": 2.220446049250313e-16,
+        "uncorrected_gradient_max_abs_error": 0.6371096968079779,
+        "expected_exact_solves_per_batch": 1.0,
+        "knapsack_items": 3
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "device": "cpu",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "checks": {
+        "enumerated_rloo_matches_analytic_score_gradient": true,
+        "batch_correction_expectation_recovers_exact_gradient": true,
+        "uncorrected_cheap_estimate_is_a_distinct_biased_control": true,
+        "unselected_batch_never_calls_exact_solver": true,
+        "selected_batch_calls_exact_supplier_once_for_every_instance": true,
+        "probability_one_recovers_exact_advantages": true,
+        "warm_start_obeys_declared_boundary": true,
+        "hindsight_constant_cancels": true
+      },
+      "controls": {
+        "enumerated_rloo_matches_analytic_score_gradient": true,
+        "batch_correction_expectation_recovers_exact_gradient": true,
+        "uncorrected_cheap_estimate_is_a_distinct_biased_control": true,
+        "unselected_batch_never_calls_exact_solver": true,
+        "selected_batch_calls_exact_supplier_once_for_every_instance": true,
+        "probability_one_recovers_exact_advantages": true,
+        "warm_start_obeys_declared_boundary": true,
+        "hindsight_constant_cancels": true
+      },
+      "metrics": {
+        "analytic_gradient_max_abs_error": 1.0547118733938987e-15,
+        "corrected_gradient_max_abs_error": 9.43689570931383e-16,
+        "uncorrected_gradient_max_abs_error": 1.125346644680247,
+        "expected_exact_solves_per_batch": 1.0,
+        "knapsack_items": 3
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "device": "cpu",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "checks": {
+        "enumerated_rloo_matches_analytic_score_gradient": true,
+        "batch_correction_expectation_recovers_exact_gradient": true,
+        "uncorrected_cheap_estimate_is_a_distinct_biased_control": true,
+        "unselected_batch_never_calls_exact_solver": true,
+        "selected_batch_calls_exact_supplier_once_for_every_instance": true,
+        "probability_one_recovers_exact_advantages": true,
+        "warm_start_obeys_declared_boundary": true,
+        "hindsight_constant_cancels": true
+      },
+      "controls": {
+        "enumerated_rloo_matches_analytic_score_gradient": true,
+        "batch_correction_expectation_recovers_exact_gradient": true,
+        "uncorrected_cheap_estimate_is_a_distinct_biased_control": true,
+        "unselected_batch_never_calls_exact_solver": true,
+        "selected_batch_calls_exact_supplier_once_for_every_instance": true,
+        "probability_one_recovers_exact_advantages": true,
+        "warm_start_obeys_declared_boundary": true,
+        "hindsight_constant_cancels": true
+      },
+      "metrics": {
+        "analytic_gradient_max_abs_error": 2.220446049250313e-16,
+        "corrected_gradient_max_abs_error": 3.3306690738754696e-16,
+        "uncorrected_gradient_max_abs_error": 0.9891794287159051,
+        "expected_exact_solves_per_batch": 1.0,
+        "knapsack_items": 3
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "analytic_gradient_max_abs_error": 4.996003610813204e-16,
+    "corrected_gradient_max_abs_error": 4.996003610813204e-16,
+    "expected_exact_solves_per_batch": 1.0,
+    "knapsack_items": 3.0,
+    "uncorrected_gradient_max_abs_error": 0.9172119234013767
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Operator/interface controls only; not a complete model, agent, public benchmark or production comparison"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "3b147143ff4e0e9e098f2964dce0fec7120da8a8",
+    "accelerator": "CPU",
+    "artifact_path": "docs/post-training/2611.25597-dfrl/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_nov21_latest_components.py": "13ef2fc61f7b6d7dd23d3f9c6afd77d86f574c191a9b08bb303097013d3fcabf",
+      "scripts/run_nov18_latest_components.py": "0fe50e8e554f6663b3c8c179654400d10bfbb557ceb9cefb9880da78f164b7c1",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov21-latest/preflight.json": "c1705b0c8472f7a2d2e1f02544067d46784bf958789fd7ee526783371ddfc3e2",
+      "src/auto_research/foundation_models/frontier_replay.py": "bf3613a78c682a1693457d2ab8feb5a8b533104497161340f61a375e2ac15248",
+      "src/auto_research/foundation_models/mv_jepa.py": "1a7f674ab37036b207a9b759f8595926f4531d29522a1291ccd8460da980e8ca",
+      "src/auto_research/agent_research/sage_evolve.py": "4c8572f73f3717dfd4488c8ad3960d5d929dc83253384bdf4c841a3f938eb1c7",
+      "src/auto_research/agent_research/memfolder.py": "9492350142246424902bb0fa61cb65b4ad6feee95c64ec1d159034042a951d50",
+      "src/auto_research/post_training/dfrl.py": "a4849643e8f5880ea617e1f950d408ef2643e3927c890f7f14cb1d17cb4a3f7e",
+      "src/auto_research/foundation_models/e_rwsc.py": "29846f83048306fea090979ed109e122b10447eefe8aea200125a83d337e55ec",
+      "src/auto_research/agent_research/memlife.py": "155845e6469e301412e503d07a25a5839bfc5804163e060c64d585e69b62e8be"
+    },
+    "dataset_fingerprint": "sha256:740bdf7c911b37ee46630aa5fd511a8f07c35c295eb1a5220228de5991b7b242",
+    "raw_runner_artifact_sha256": "a540ac651dc653a08209ce3aefe3876bbfa046a74cd43d480282174608c03748"
+  }
+}

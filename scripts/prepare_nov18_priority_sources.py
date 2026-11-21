@@ -5,6 +5,7 @@ from __future__ import annotations
 from concurrent.futures import ThreadPoolExecutor
 import argparse
 from datetime import datetime, timezone
+import gzip
 import hashlib
 import json
 from pathlib import Path
@@ -23,9 +24,48 @@ def paper_links(links):
     return {url for url in normalized if re.fullmatch(r"/pubs/[^/?]+/", url)}
 
 
-def capture(url):
+def directory_delta(baseline, current, *, comparison_complete):
+    """Observed additions survive partial recall; missing pages prove no removal."""
+    return {
+        "baseline_urls": len(baseline), "current_urls": len(current),
+        "comparison_complete": comparison_complete,
+        "added": sorted(current - baseline),
+        "removed": sorted(baseline - current) if comparison_complete else [],
+        "unobserved_baseline_urls": len(baseline - current),
+    }
+
+
+def html_bytes(raw):
+    """Decode transport gzip without changing the retained response bytes."""
+    return gzip.decompress(raw) if raw.startswith(b"\x1f\x8b") else raw
+
+
+def parsed_capture_fields(raw):
     from bs4 import BeautifulSoup
 
+    decoded = html_bytes(raw)
+    soup = BeautifulSoup(decoded, "html.parser")
+    links = sorted({a["href"] for a in soup.select("a[href]")})
+    return {"links": links, "decoded_sha256": hashlib.sha256(decoded).hexdigest(),
+            "transport_gzip_decoded": decoded is not raw,
+            "parse_complete": soup.find("html") is not None and bool(links)}
+
+
+def refresh_capture(row):
+    """Reparse this exact cached response; never infer empty from a failure."""
+    if "capture" not in row:
+        return row
+    try:
+        raw = (CACHE / row["capture"]).read_bytes()
+        if hashlib.sha256(raw).hexdigest() != row["sha256"]:
+            raise ValueError("cached response fingerprint changed")
+        return row | parsed_capture_fields(raw)
+    except Exception as error:
+        return row | {"parse_complete": False, "status": "source_exception_archived",
+                      "blocking": False, "automatic_retry": False, "error_type": type(error).__name__}
+
+
+def capture(url):
     name = hashlib.sha256(url.encode()).hexdigest()[:20] + ".html"
     try:
         with urlopen(
@@ -34,7 +74,6 @@ def capture(url):
             raw = response.read()
             status = response.status
         (CACHE / name).write_bytes(raw)
-        soup = BeautifulSoup(raw, "html.parser")
         return {
             "url": url,
             "http_status": status,
@@ -42,7 +81,7 @@ def capture(url):
             "sha256": hashlib.sha256(raw).hexdigest(),
             "bytes": len(raw),
             "capture": name,
-            "links": sorted({a["href"] for a in soup.select("a[href]")}),
+            **parsed_capture_fields(raw),
         }
     except Exception as error:
         return {
@@ -102,7 +141,7 @@ def main():
     previous = None
     if args.reconcile_captures:
         previous = json.loads((AUDIT / "priority-source-captures.json").read_text())
-        captures = previous["pages"]
+        captures = [refresh_capture(row) for row in previous["pages"]]
     else:
         with ThreadPoolExecutor(max_workers=4) as pool:
             captures = list(pool.map(capture, urls))
@@ -116,7 +155,7 @@ def main():
             baseline.update(
                 paper_links(
                     a["href"]
-                    for a in BeautifulSoup(cached.read_bytes(), "html.parser").select("a[href]")
+                    for a in BeautifulSoup(html_bytes(cached.read_bytes()), "html.parser").select("a[href]")
                 )
             )
     # The exact old URL inventory also appears in records; use it when capture names differ.
@@ -131,7 +170,7 @@ def main():
         baseline.update(
             paper_links(
                 a["href"]
-                for a in BeautifulSoup(cached.read_bytes(), "html.parser").select("a[href]")
+                for a in BeautifulSoup(html_bytes(cached.read_bytes()), "html.parser").select("a[href]")
             )
         )
     for row in captures:
@@ -199,6 +238,8 @@ def main():
                     ],
                 }
             )
+    google_pages = [row for row in captures if "research.google/pubs/?" in row["url"]]
+    comparable = bool(google_pages) and all(row.get("parse_complete") is True for row in google_pages)
     payload = {
         "schema_version": 1,
         "checked_on": args.end,
@@ -212,18 +253,14 @@ def main():
             ).read_bytes()
         ).hexdigest(),
         "pages": captures,
-        "google_directory_delta": {
-            "baseline_urls": len(baseline),
-            "current_urls": len(current),
-            "added": added,
-            "removed": sorted(baseline - current),
-        },
+        "google_directory_delta": directory_delta(baseline, current, comparison_complete=comparable),
         "added_details": detail_captures,
         "repository_events": repositories,
         "limitations": [
             "Official membership and familiar author names are recall signals, never byline proof.",
             "Repository push dates are not publication dates or evidence of a new algorithm.",
             "An unavailable directory is archived nonblocking, not evidence of zero new papers.",
+            "A transport200 response without a valid parsed HTML link inventory is incomplete, not an empty directory. Raw compressed response hashes are preserved separately from decoded hashes.",
         ],
     }
     (AUDIT / "priority-source-captures.json").write_text(

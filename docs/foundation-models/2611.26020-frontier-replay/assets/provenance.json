@@ -1,0 +1,20 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.26020v1#page=6",
+  "paper_url": "https://arxiv.org/abs/2611.26020v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-21",
+  "page": 6,
+  "crop_box_pdf_points": [
+    53,
+    75,
+    562,
+    322
+  ],
+  "caption": "Figure 5: FrontierReplay architecture.",
+  "caption_note": "Full original caption is retained in the crop; this text is its short title, not a substituted local caption.",
+  "extraction": "Original PDF crop including original caption; no semantic editing",
+  "visually_reviewed": true,
+  "source_pdf_sha256": "ae9cc1d279a219942860597b97ec8488a78ff27fd2d030e76e23ba1e8fa73eaa",
+  "asset_sha256": "dfd3a3b06340ed57aa24a7d18dc7a59e5e5ae358a61583eab43bc5e266b14675",
+  "copyright": "Copyright belongs to the original authors."
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-21",
+  "window": {
+    "start": "2026-11-20",
+    "end": "2026-11-21"
+  },
+  "metadata_identities": 883,
+  "announcement_identities": 1081,
+  "first_releases_since_requested_start": 0,
+  "announcement_identity_delta_from_previous_batch": 0,
+  "metadata_only_inventory": "metadata-index.json",
+  "fixed_intake": "intake-scope.json",
+  "primary_priority_review": "priority-primary-selection.json",
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "priority_directory_transport_exceptions": 54,
+  "priority_directory_parse_complete": 2,
+  "google_directory_comparison_complete": false,
+  "repository_event_queries": 6,
+  "capture_repair": {
+    "initial_receipt": "priority-source-captures-initial.json",
+    "initial_receipt_sha256": "8466dc6ba7b3e1cd592bef81ec9eacd473cf1bf0d2bd1918151a8bc9a989b292",
+    "initial_nonempty_parsed_pages": 0,
+    "repair": "Decode transport gzip, retain original raw hashes and bytes, and reparse cached responses without a network retry. Incomplete Google directories do not imply baseline papers were removed."
+  },
+  "coverage_limits": [
+    "The current official bulletins are still datedNov20. No Nov20/21 first release was verified in this captured nine-category pool, not a claim that no new paper exists anywhere.",
+    "Six selected papers come from the previous announcement overlap: five first appearedNov19 and MV-JEPA first appearedNov18. Meta MemLife is a Sep30 historical backfill surfaced by official repository events. None is newly published today.",
+    "Recall counts and unseen metadata are not an implementation backlog or a full-method review claim.",
+    "Google/Meta are prioritized, but membership, familiar author names, upcoming catalog years and repository pushes are not proof of fixed-version affiliation or publication date.",
+    "Meta whole-page policy improvement explicitly reports offline estimates, not quantified productionA/B; it is not admitted by silently weakening the recommendation selection gate.",
+    "Unavailable or incomplete official directories remain archived source exceptions, not evidence that no Google/Meta work exists."
+  ]
+}

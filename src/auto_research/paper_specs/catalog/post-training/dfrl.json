@@ -1,0 +1,59 @@
+{
+  "domain": "post-training",
+  "key": "dfrl",
+  "title": "Decision-Focused Reinforcement Learning for LLM Post-Training",
+  "paper_url": "https://arxiv.org/abs/2611.25597v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.25597v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.25597-dfrl/README.md",
+  "first_author": "Haotian Zhai",
+  "first_author_affiliation": "The University of Texas at Austin",
+  "published": "2026-11-19",
+  "published_at": "2026-11-19T06:44:35Z",
+  "code": null,
+  "code_status": "截至2026-11-21，固定v1作者入口与全文未找到已核实的本篇方法源码仓库；引用项目不等于本篇开源。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "policy-optimization",
+    "CPU机制组件"
+  ],
+  "priority": "P1",
+  "intake_class": "overlap_new_selection",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.25597v1",
+    "source_sections": [
+      "PDF p1 byline",
+      "Section3 Eq.4-13",
+      "AppendixB.3",
+      "AppendixB.5"
+    ],
+    "basis": "AppendixB.5使用Qwen3.5-4B、4013个SFT实例，四个non-thinking RL条件各64更新×16实例×8响应=8192条训练响应，并有学习率选择、reasoning教师/额外SFT与评测；另有三合成问题、多种子与一小时预算实验。完整矩阵远超本轮30秒/seed的CPU定义核预算。8192是论文配置计算，不是本机实测；不下载模型、H&M或调用教师。",
+    "available_resource": "One A100 or A30, or local Mac; this implementation is CPU-only",
+    "decision": "High-cost full experiments not reproduced; review DONE, no automatic retry.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30
+    }
+  },
+  "summary": "预测误差小不保证由预测触发的决策成本低。DFRL把LLM生成的参数预测交给下游优化器，以真实观测参数评估该决策，再把负决策regret用于后训练；不对优化器求导。它是目标/反馈框架，不是另一个替代RLOO的策略优化器。对同一实例独立生成K≥2条预测时，RLOO的实例内leave-one-out baseline抵消共同的hindsight最优成本，因此更新不必额外求真实参数下的最优解。 纯stdlib、CPU-only的实际成本RLOO优势、单批共享Bernoulli逆概率校正与lazy整批精确成本回调、显式warm-start边界、小规模枚举knapsack。诊断对三个可采样参数预测的真实可行决策计算观测成本，穷举两个独立categorical样本的score-gradient期望并与解析梯度比较；偏置cheap成本仅为明确的负控输入，不冒充训练好的估计器。没有LLM、token生成、参数JSON解析器、H&M处理、Adam训练或能力评测；非Evolve算子。",
+  "local_operator": "auto_research.post_training.dfrl.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.dfrl import diagnostic; print(diagnostic(42))'",
+  "method_source_sha256": "bec1bb13cc504250d4baadadc78051de4d0c7d3b075f392b3af30e865fb20789"
+}

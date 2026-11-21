@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:frontier-replay": {
+      "questions": [
+        {
+          "id": "exact-boundary",
+          "level": "basics",
+          "question": "为什么有KV页仍可能无法复用整段混合模型前缀？",
+          "answer": "递归状态是覆盖更新的。即使KV页还在，恢复位置也必须有完全对应的递归检查点；不能把较晚状态截短成较早状态。",
+          "example": "教学例：KV覆盖到640token，但最近状态只在528；原生服务仍需从528重算到640。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "distinct-restore",
+          "level": "mechanism",
+          "question": "一个request恢复同一检查点两次，就算proven了吗？",
+          "answer": "不算。需要至少两个不同恢复request，或者它本来就是已知分叉；否则每条会话的祖先都会被单次后继访问永久保护。",
+          "example": "教学例：request b重复restore只留tier2；b和c都restore后才进入tier3。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "decode-versus-prefill",
+          "level": "comparison",
+          "question": "FrontierReplay和ReplaySSM都记录输入，解决的是同一个问题吗？",
+          "answer": "不是。ReplaySSM围绕decode状态写回、output-only和投机回滚；FrontierReplay围绕prefill结构边界的检查点产生与保留。相似代数不代表服务策略、精度或证据可直接共用。",
+          "example": "教学例：16步decode刷新正确，不能证明下一会话的模板边界已保存、仍驻留且可命中。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "publish-after-completion",
+          "level": "implementation",
+          "question": "为什么不能在prepare后立即把检查点放进lookup？",
+          "answer": "prepare只预留位置，设备写入尚未完成；提前公开会让其他request读到部分状态。这里只在显式成功完成后发布，失败则撤销，lease未释放的锚点不可驱逐。",
+          "example": "教学例：pending的640状态必须查不到；失败后删除，不能用全零状态代替成功检查点。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        }
+      ]
+    },
+    "foundation-models:mv-jepa": {
+      "questions": [
+        {
+          "id": "heldout-not-extra-input",
+          "level": "basics",
+          "question": "held-out视图是多给student一台摄像头吗？",
+          "answer": "不是。它只由teacher产生目标；student和predictor必须根据其他context视图推断它，推理时也不要求该额外观察。",
+          "example": "教学例：遮住背面照片，只给正面和侧面；背面latent只在loss端使用。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "token-normalization",
+          "level": "mechanism",
+          "question": "为什么Eq4不能先对每个view的loss求平均？",
+          "answer": "mask数量可能不同；论文给每个监督token同等权重，而不是每个view同等权重。还要先逐example归一化，再平均batch。",
+          "example": "教学例：两个context各1和3个mask，加held-out4个token；总共8个目标等权，不是三组各占三分之一。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "time-jepa-targets",
+          "level": "comparison",
+          "question": "MV-JEPA和Time-JEPA都用额外监督，目标能互换吗？",
+          "answer": "不能。前者是跨摄像头latent并需要联合view predictor；后者是对齐物理时序并有unmasked回归分支。二者训练目标都不应变成student输入。",
+          "example": "教学例：速度标量属于Time-JEPA物理head，背面视图的一组token属于MV-JEPA held-out query；换标签不等于同一任务。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "leak-gradient-control",
+          "level": "implementation",
+          "question": "怎样检查held-out和masked context没有偷进student？",
+          "answer": "固定view ID，任意改held-out内容或被mask的context token，predictor输出应不变；这些改动可改变teacher目标/loss，但不能产生held-out输入梯度。teacher参数也必须无梯度，只做显式EMA。",
+          "example": "教学例：把held-out token乘30后，预测不变而目标可变；若预测变化，就有训练输入泄漏。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        }
+      ]
+    }
+  }
+}

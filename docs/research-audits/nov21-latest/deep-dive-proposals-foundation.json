@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-21",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "foundation-models:frontier-replay",
+      "target_card": "foundation-models/compression-and-cache",
+      "source_revisions": {
+        "foundation-models:frontier-replay": "045606d01bae6c42450d164dd7e2d22553327ebfb1c5ad0fa1552d0c55fb77a8",
+        "foundation-models:replayssm": "484da6cd97e204eb4fe6bab2d3a05149d52677a41c78bb1cb4e1e0dc9b5244ff"
+      },
+      "comparison": {
+        "position": "混合模型的attention KV可按页复用，但递归状态只在保存过的精确位置恢复。FrontierReplay先根据已观察到的模板稳定尾、已完成turn和分叉点规划检查点；原生prefill不断开，之后只重放短窗递归输入生成精确状态。保留策略优先保护仍在执行的请求锚点和已证明可复用的分叉，而非只看历史频率。",
+        "tradeoff": "ReplaySSM主要减少decode/投机时的逐token矩阵状态写回，把输入缓存、output-only读取和接受回滚联动；FrontierReplay主要为下一次prefill的结构边界补造精确检查点，并管理哪些状态值得保留。前者的周期刷新和高低精度anchor不是后者的会话frontier保留策略。本地ReplaySSM已有独立Triton证据，但不能把那份执行回执借给本页的host策略，更不能把两种输入日志视为可互换。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models",
+        "body": "ReplaySSM主要减少decode/投机时的逐token矩阵状态写回，把输入缓存、output-only读取和接受回滚联动；FrontierReplay主要为下一次prefill的结构边界补造精确检查点，并管理哪些状态值得保留。前者的周期刷新和高低精度anchor不是后者的会话frontier保留策略。本地ReplaySSM已有独立Triton证据，但不能把那份执行回执借给本页的host策略，更不能把两种输入日志视为可互换。 正文§4.3使用16-token页；native chunk end必须已经16对齐，不能静默向下取整来虚构该位置已有状态。完成turn可按原文取decode已经经过的最后页边界，结构目标仍可向下对齐后请求回放。分叉至少256token，回放窗最多1024token；缺少活锚点/日志页则退化为exact cut。Falcon-H1不在1568token以下保存或恢复状态。§4.4分层为dead=-1、superseded=0、natural=1、未用template/turn=2、proven=3、running=4；两次来自同一request的restore不能晋升proven。只有完成事件后才公开新检查点，失败/未完成状态不能命中；lease保护正在用的锚点。长前缀额外保护稳定尾之前一个prefill预算内、深度至少4096的最深natural检查点。",
+        "papers": [
+          "foundation-models:frontier-replay",
+          "foundation-models:replayssm"
+        ]
+      },
+      "question": {
+        "id": "nov21-frontier-replay",
+        "question": "FrontierReplay和ReplaySSM都记录输入，解决的是同一个问题吗？",
+        "answer": "不是。ReplaySSM围绕decode状态写回、output-only和投机回滚；FrontierReplay围绕prefill结构边界的检查点产生与保留。相似代数不代表服务策略、精度或证据可直接共用。",
+        "example": "教学例：16步decode刷新正确，不能证明下一会话的模板边界已保存、仍驻留且可命中。",
+        "papers": [
+          "foundation-models:frontier-replay",
+          "foundation-models:replayssm"
+        ]
+      },
+      "update": {
+        "date": "2026-11-21",
+        "papers": [
+          "foundation-models:frontier-replay",
+          "foundation-models:replayssm"
+        ],
+        "summary": "ReplaySSM主要减少decode/投机时的逐token矩阵状态写回，把输入缓存、output-only读取和接受回滚联动；FrontierReplay主要为下一次prefill的结构边界补造精确检查点，并管理哪些状态值得保留。前者的周期刷新和高低精度anchor不是后者的会话frontier保留策略。本地ReplaySSM已有独立Triton证据，但不能把那份执行回执借给本页的host策略，更不能把两种输入日志视为可互换。 本地组件证据与完整实验不复现分开记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Attention KV is reusable by page, but hybrid recurrent state can resume only at an exactly saved position. FrontierReplay plans checkpoints from observed template-stable ends, finished turns and branch junctions. Native prefill remains uncut; short-window state-only replay later materializes exact states. Retention protects active anchors and proven branches instead of relying only on historical frequency.",
+          "tradeoff": "ReplaySSM reduces per-token matrix-state writes during decoding/speculation through input caching, output-only reads and acceptance rollback. FrontierReplay instead materializes exact checkpoints at structural boundaries for subsequent prefill and decides which states remain useful. Periodic refresh and split-precision anchors are not conversation-frontier retention. Existing standalone Triton evidence for local ReplaySSM cannot certify this host-policy component; the two input logs are not interchangeable."
+        },
+        "analysis": {
+          "title": "FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models",
+          "body": "ReplaySSM reduces per-token matrix-state writes during decoding/speculation through input caching, output-only reads and acceptance rollback. FrontierReplay instead materializes exact checkpoints at structural boundaries for subsequent prefill and decides which states remain useful. Periodic refresh and split-precision anchors are not conversation-frontier retention. Existing standalone Triton evidence for local ReplaySSM cannot certify this host-policy component; the two input logs are not interchangeable. Section4.3 uses16-token pages. Native chunk ends must already be16-aligned: silently rounding them down would invent an exposed state. Completed turns may use the last page passed during decode, while structural targets may be rounded down and still require replay. Branch depths are at least256, and the replay window is1024tokens. Missing live anchors or log pages force an exact cut. Falcon-H1 never saves/restores below1568tokens. Section4.4 tiers are dead−1, superseded0, natural1, unused template/turn2, proven3 and running4. Repeated restores by one request do not prove reuse. A checkpoint becomes visible only after completion; failed or pending states cannot hit, and leases protect in-use anchors. Long-prefix protection selects the deepest natural checkpoint within one prefill budget before the stable end, at depth at least4096."
+        },
+        "question": {
+          "question": "Do FrontierReplay and ReplaySSM solve the same problem because both log inputs?",
+          "answer": "No. ReplaySSM targets decode-state writes, output-only computation and speculative rollback; FrontierReplay targets checkpoint production and retention at prefill structural boundaries. Similar algebra does not share serving policies, precision contracts or evidence.",
+          "example": "Illustration: a correct sixteen-step decode refresh does not prove that a next-turn template boundary was saved and remains reachable."
+        },
+        "update": "ReplaySSM reduces per-token matrix-state writes during decoding/speculation through input caching, output-only reads and acceptance rollback. FrontierReplay instead materializes exact checkpoints at structural boundaries for subsequent prefill and decides which states remain useful. Periodic refresh and split-precision anchors are not conversation-frontier retention. Existing standalone Triton evidence for local ReplaySSM cannot certify this host-policy component; the two input logs are not interchangeable. Local component evidence remains separate from high-cost non-reproduction."
+      }
+    },
+    {
+      "paper": "foundation-models:mv-jepa",
+      "target_card": "multimodal-models/world-state-actions",
+      "source_revisions": {
+        "foundation-models:mv-jepa": "6b68e252224045e8d7e1a5ecaa0c06ae2c256dafc9fb954bfe3c1f9085ab981a",
+        "foundation-models:time-jepa": "5296b20ff5697af84daff8219ef1698640500e3b84af2b471f75c6078f336b3d"
+      },
+      "comparison": {
+        "position": "MV-JEPA直接后训练已有JEPA视频编码器，强化不同摄像头视角之间的对象/时刻对应。共享student分别编码各context view的可见token；联合predictor利用所有context特征，既重建被mask的context位置，又预测一个完全held-out视图。held-out图像/特征从不进入student或predictor，只提供teacher目标；推理仍可独立编码单视角。",
+        "tradeoff": "Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行masked潜变量预测和unmasked物理态回归；MV-JEPA用另一个摄像头的latent作held-out目标，并让联合predictor从多个独立context视图推断。两者都不能把训练目标喂回推理输入，但MV-JEPA的跨view query不是Time-JEPA的传感器head；重放保持表征和物理时序对齐也是不同验收。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "MV-JEPA: Post-Training Video Encoders for Cross-View Understanding",
+        "body": "Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行masked潜变量预测和unmasked物理态回归；MV-JEPA用另一个摄像头的latent作held-out目标，并让联合predictor从多个独立context视图推断。两者都不能把训练目标喂回推理输入，但MV-JEPA的跨view query不是Time-JEPA的传感器head；重放保持表征和物理时序对齐也是不同验收。 完整context和held-out由EMA teacher编码，经逐token LayerNorm并stop-gradient。context视图分配互异随机view ID，held-out使用专属ID；masked-context和held-out使用两种不同mask embedding。Eq4对masked-context和全部held-out目标token等权，先逐example归一化，再对batch取均值，不能按view等权或全batch微平均。每epoch随机打散152次多视图与148次原始单视图replay，共享online encoder和predictor；optimizer后按0.99925更新teacher。",
+        "papers": [
+          "foundation-models:mv-jepa",
+          "foundation-models:time-jepa"
+        ]
+      },
+      "question": {
+        "id": "nov21-mv-jepa",
+        "question": "MV-JEPA和Time-JEPA都用额外监督，目标能互换吗？",
+        "answer": "不能。前者是跨摄像头latent并需要联合view predictor；后者是对齐物理时序并有unmasked回归分支。二者训练目标都不应变成student输入。",
+        "example": "教学例：速度标量属于Time-JEPA物理head，背面视图的一组token属于MV-JEPA held-out query；换标签不等于同一任务。",
+        "papers": [
+          "foundation-models:mv-jepa",
+          "foundation-models:time-jepa"
+        ]
+      },
+      "update": {
+        "date": "2026-11-21",
+        "papers": [
+          "foundation-models:mv-jepa",
+          "foundation-models:time-jepa"
+        ],
+        "summary": "Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行masked潜变量预测和unmasked物理态回归；MV-JEPA用另一个摄像头的latent作held-out目标，并让联合predictor从多个独立context视图推断。两者都不能把训练目标喂回推理输入，但MV-JEPA的跨view query不是Time-JEPA的传感器head；重放保持表征和物理时序对齐也是不同验收。 本地组件证据与完整实验不复现分开记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "MV-JEPA post-trains a pretrained JEPA video encoder for object and moment correspondence across camera views. A shared student independently encodes visible tokens from each context view. A joint predictor reconstructs masked context positions and predicts an entirely held-out view. Held-out pixels/features never enter the student or predictor; they only supply teacher targets. Single-view inference remains independent.",
+          "tradeoff": "Time-JEPA supplies physical time-series targets through masked latent prediction and unmasked physical-state regression on one online encoder. MV-JEPA instead predicts another camera's latent targets through a joint predictor over independently encoded context views. Both keep training targets out of inference inputs, but cross-view queries are not Time-JEPA's sensor head; replay-based retention and physical-time alignment require different checks."
+        },
+        "analysis": {
+          "title": "MV-JEPA: Post-Training Video Encoders for Cross-View Understanding",
+          "body": "Time-JEPA supplies physical time-series targets through masked latent prediction and unmasked physical-state regression on one online encoder. MV-JEPA instead predicts another camera's latent targets through a joint predictor over independently encoded context views. Both keep training targets out of inference inputs, but cross-view queries are not Time-JEPA's sensor head; replay-based retention and physical-time alignment require different checks. The EMA teacher encodes full context and held-out observations; targets receive per-token LayerNorm and stop-gradient. Contexts receive distinct randomly assigned view IDs, while held-out queries have a reserved ID; the two query types use separate mask embeddings. Eq4 gives equal weight to masked-context and all held-out target tokens, normalizing each example before averaging the batch. It is neither view-wise averaging nor a batch-wide micro-average. Each epoch shuffles152multiview and148original single-view replay updates with shared online encoder/predictor. Teacher EMA follows the optimizer at momentum0.99925."
+        },
+        "question": {
+          "question": "Can MV-JEPA and Time-JEPA swap their additional targets?",
+          "answer": "No. MV-JEPA predicts cross-camera latents through a joint-view predictor; Time-JEPA aligns physical sequences through an unmasked regression branch. Neither target should become a student input.",
+          "example": "Illustration: a velocity scalar belongs to a physical head; back-view tokens belong to held-out queries. Replacing labels does not preserve the task."
+        },
+        "update": "Time-JEPA supplies physical time-series targets through masked latent prediction and unmasked physical-state regression on one online encoder. MV-JEPA instead predicts another camera's latent targets through a joint predictor over independently encoded context views. Both keep training targets out of inference inputs, but cross-view queries are not Time-JEPA's sensor head; replay-based retention and physical-time alignment require different checks. Local component evidence remains separate from high-cost non-reproduction."
+      }
+    }
+  ]
+}

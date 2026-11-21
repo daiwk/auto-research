@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-21",
+  "all_sources_exhaustive": false,
+  "priority_admissions": [
+    {"identity": "agent-research:memlife", "source_url": "https://arxiv.org/html/2609.40195v1", "first_publication": "2026-09-30T17:11:33Z", "verified_first_author_affiliation": "Meta Reality Labs / University of Virginia; work done at Meta", "upstream_url": "https://github.com/facebookresearch/MemLife", "upstream_commit": "4d987734f65832eb950fb8e7c346d7e69cc2ce16", "selection_class": "historical_official_repository_backfill", "full_experiment_status": "not_reproduced_high_cost", "scope": "Explicit FIRM reward/normalization and causal-time component only, not a VLM memory writer, reader, training campaign or QA benchmark."}
+  ],
+  "existing_terminal_priority_candidates": [
+    {"arxiv_id": "2611.13442", "title": "ForeSpark", "upstream_url": "https://github.com/facebookresearch/ForeSpark", "observed_upstream_commit": "66077334d562e1f919c1eb7fea7371de5836e173", "existing_review": "nov15-review-closure/meta-primary-reviews.json", "decision": "preserve_existing_high_cost_terminal_review_no_automatic_reproduction_retry", "reason": "Previously source-reviewed and terminal under the cost gate. A new push observation is not a new publication or authority to resume the high-cost serving/training campaign."}
+  ],
+  "selected_primary_reviews": [
+    {
+      "arxiv_id": "2611.25527v1",
+      "title": "Learning Generative Ranking Policies for Whole-Page Optimization",
+      "source_url": "https://arxiv.org/pdf/2611.25527v1",
+      "first_publication": "2026-11-19T05:27:22Z",
+      "verified_first_author_affiliation": "Meta Platforms, Inc.",
+      "review_scope": "Fixed-v1 author byline, sections3-4, Tables2-3, page6 footnote and timing appendix; not an abstract-only rejection",
+      "decision": "not_selected_under_existing_production_evidence_gate",
+      "reason": "Whole-page policy improvement is a concrete algorithm, but the reported industrial lift is an offline referee estimate on logged fixed candidate pools. The paper explicitly disclaims expected online benefit; batch-amortized A100 generation timing is not online latency. No quantified production A/B or approved full-traffic exception was verified. Google/Meta priority does not waive this selection gate.",
+      "component_implemented": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "arxiv_id": "2611.26249v1",
+      "title": "Beyond Covers and Titles: Evidence-First Ranking for Robust Cold-Start Recommendation",
+      "source_url": "https://arxiv.org/html/2611.26249v1",
+      "verified_first_author_affiliation": "Royal Melbourne Institute of Technology",
+      "review_scope": "Fixed-v1 byline, threat model, method and evaluation sections",
+      "decision": "not_selected_under_existing_production_evidence_gate",
+      "reason": "Academic offline MicroLens and simulated platform-channel evaluation are not quantified production A/B evidence. No selection exception was requested.",
+      "component_implemented": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "title": "How Google Duplex evolved to also call businesses for you in Gemini",
+      "source_url": "https://research.google/blog/how-google-duplex-evolved-to-also-call-businesses-for-you-in-gemini/",
+      "published": "2026-11-20",
+      "review_scope": "Official Google Research architecture/product blog",
+      "decision": "not_a_new_independently_specified_paper_method",
+      "reason": "Describes deployed conversational architecture evolution, but does not publish a new independently specified algorithm, checkpoint or benchmark to reproduce. Do not fabricate a Gemini calling implementation from the product overview.",
+      "component_implemented": false,
+      "automatic_implementation_queue": false
+    }
+  ],
+  "supplemental_official_directory_checks": [
+    {"source_url": "https://research.google/pubs/", "result": "Accessible; catalog year including forthcoming2027 work is not a first-publication date. Finite directory inspection is not all-Google affiliation coverage."},
+    {"source_url": "https://deepmind.google/research/publications/", "result": "Accessible selected publications directory; latest displayed item is dated2026-10-27. Directory freshness is not proof of no new DeepMind work."},
+    {"source_url": "https://ai.meta.com/research/publications/", "result": "Returned content-unavailable message; archive a nonblocking source exception, not zero Meta papers."},
+    {"source_url": "https://ai.meta.com/research/", "result": "Fetch timeout; nonblocking archived source exception, not zero Meta papers."}
+  ]
+}

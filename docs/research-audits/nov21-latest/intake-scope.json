@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-21-overlap-components",
+  "requested_window": {"start": "2026-11-20", "end": "2026-11-21"},
+  "overlap_start": "2026-11-19",
+  "accepted_papers": [
+    "foundation-models:frontier-replay",
+    "foundation-models:mv-jepa",
+    "agent-research:sage-evolve",
+    "agent-research:memfolder",
+    "post-training:dfrl",
+    "foundation-models:e-rwsc",
+    "agent-research:memlife"
+  ],
+  "component_papers": [
+    "foundation-models:frontier-replay",
+    "foundation-models:mv-jepa",
+    "agent-research:sage-evolve",
+    "agent-research:memfolder",
+    "post-training:dfrl",
+    "foundation-models:e-rwsc",
+    "agent-research:memlife"
+  ],
+  "review_only_papers": [],
+  "new_first_releases_since_previous_batch": 0,
+  "selection_class": "six_overlap_selections_and_one_historical_official_repository_backfill",
+  "scope_note": "The official current bulletins remain dated Nov20 and metadata contains no verified first release on Nov20 or Nov21. Six are explicit recent overlap selections; official repository events additionally surfaced the previously uncatalogued Sep30 Meta MemLife. None is newly published today. ForeSpark already has a terminal high-cost review and is not automatically reopened because its repository was pushed. Other recalled identities are not an implementation backlog.",
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "cost_policy": "No pretrained resource downloads, API calls or full training. High-cost complete campaigns are not reproduced, review DONE, terminal and no automatic retry. Tiny component diagnostics cannot establish capability or Evolve promotion."
+}

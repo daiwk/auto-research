@@ -956,7 +956,7 @@
     "world-state-actions": {
       "title": "会预测下一幕，还不等于会行动或保持同一个世界",
       "thesis": "世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。",
-      "updated": "2026-11-19",
+      "updated": "2026-11-21",
       "reviewed_papers": [
         "foundation-models:alps",
         "multimodal-models:aw0",
@@ -992,7 +992,8 @@
         "multimodal-models:dwd",
         "foundation-models:counterfactual-wm",
         "multimodal-models:autoregressive-view-model",
-        "multimodal-models:jepa-dots"
+        "multimodal-models:jepa-dots",
+        "foundation-models:mv-jepa"
       ],
       "axes": [
         "学习对象：未来latent、动作分布、视觉转移、持久几何",
@@ -1191,6 +1192,16 @@
             "核心公式",
             "同主题比较与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:mv-jepa",
+          "position": "MV-JEPA直接后训练已有JEPA视频编码器，强化不同摄像头视角之间的对象/时刻对应。共享student分别编码各context view的可见token；联合predictor利用所有context特征，既重建被mask的context位置，又预测一个完全held-out视图。held-out图像/特征从不进入student或predictor，只提供teacher目标；推理仍可独立编码单视角。",
+          "tradeoff": "Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行masked潜变量预测和unmasked物理态回归；MV-JEPA用另一个摄像头的latent作held-out目标，并让联合predictor从多个独立context视图推断。两者都不能把训练目标喂回推理输入，但MV-JEPA的跨view query不是Time-JEPA的传感器head；重放保持表征和物理时序对齐也是不同验收。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1314,6 +1325,14 @@
           "papers": [
             "multimodal-models:jepa-dots",
             "foundation-models:lewam"
+          ]
+        },
+        {
+          "title": "MV-JEPA: Post-Training Video Encoders for Cross-View Understanding",
+          "body": "Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行masked潜变量预测和unmasked物理态回归；MV-JEPA用另一个摄像头的latent作held-out目标，并让联合predictor从多个独立context视图推断。两者都不能把训练目标喂回推理输入，但MV-JEPA的跨view query不是Time-JEPA的传感器head；重放保持表征和物理时序对齐也是不同验收。 完整context和held-out由EMA teacher编码，经逐token LayerNorm并stop-gradient。context视图分配互异随机view ID，held-out使用专属ID；masked-context和held-out使用两种不同mask embedding。Eq4对masked-context和全部held-out目标token等权，先逐example归一化，再对batch取均值，不能按view等权或全batch微平均。每epoch随机打散152次多视图与148次原始单视图replay，共享online encoder和predictor；optimizer后按0.99925更新teacher。",
+          "papers": [
+            "foundation-models:mv-jepa",
+            "foundation-models:time-jepa"
           ]
         }
       ],
@@ -1477,6 +1496,16 @@
           "papers": [
             "multimodal-models:jepa-dots",
             "foundation-models:lewam"
+          ]
+        },
+        {
+          "id": "nov21-mv-jepa",
+          "question": "MV-JEPA和Time-JEPA都用额外监督，目标能互换吗？",
+          "answer": "不能。前者是跨摄像头latent并需要联合view predictor；后者是对齐物理时序并有unmasked回归分支。二者训练目标都不应变成student输入。",
+          "example": "教学例：速度标量属于Time-JEPA物理head，背面视图的一组token属于MV-JEPA held-out query；换标签不等于同一任务。",
+          "papers": [
+            "foundation-models:mv-jepa",
+            "foundation-models:time-jepa"
           ]
         }
       ],
@@ -1683,6 +1712,18 @@
           "source_revisions": {
             "multimodal-models:jepa-dots": "6ac91a29f242096ab4dc5ff7bd067052897606bccd38a70c3f80aa4f6fd29192",
             "foundation-models:lewam": "5e991ab90d6400d319dbccbf83e7ff06f2749baa45a5e10a79ea26b235f1ed45"
+          }
+        },
+        {
+          "date": "2026-11-21",
+          "papers": [
+            "foundation-models:mv-jepa",
+            "foundation-models:time-jepa"
+          ],
+          "summary": "Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行masked潜变量预测和unmasked物理态回归；MV-JEPA用另一个摄像头的latent作held-out目标，并让联合predictor从多个独立context视图推断。两者都不能把训练目标喂回推理输入，但MV-JEPA的跨view query不是Time-JEPA的传感器head；重放保持表征和物理时序对齐也是不同验收。 本地组件证据与完整实验不复现分开记录。",
+          "source_revisions": {
+            "foundation-models:mv-jepa": "6b68e252224045e8d7e1a5ecaa0c06ae2c256dafc9fb954bfe3c1f9085ab981a",
+            "foundation-models:time-jepa": "5296b20ff5697af84daff8219ef1698640500e3b84af2b471f75c6078f336b3d"
           }
         }
       ]

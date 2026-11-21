@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/html/2611.26413v1",
+  "source_url": "https://arxiv.org/pdf/2611.26413v1#page=13",
+  "source_sha256": "ea8f062f7f57748fb8b0e0464e5ed2f128a205492ae15e6ded0e70726fb48de9",
+  "pdf_page": 13,
+  "figure": "Algorithm 2",
+  "caption": "Algorithm2 e-RWSC: predictable bets precede the next sample, each observed answer has its own e-process, first appearances initialize without a bet, and exhausted budgets return an uncertified RWSC fallback.",
+  "crop_pdf_points": [
+    106,
+    420,
+    530,
+    735
+  ],
+  "render_scale": 2,
+  "asset_sha256": "077939ed0f55ac85e0f163377313bbc9d4433984934b4215a913791bb620a1e6",
+  "image_sha256": "077939ed0f55ac85e0f163377313bbc9d4433984934b4215a913791bb620a1e6",
+  "visually_reviewed": true,
+  "scientific_content_modified": false,
+  "copyright": "Copyright remains with original authors; original screenshot with attribution."
+}

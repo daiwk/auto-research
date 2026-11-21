@@ -1,0 +1,60 @@
+{
+  "domain": "foundation-models",
+  "key": "e-rwsc",
+  "title": "Sequential Anytime Valid Tests for Efficient Inference-Time Alignment",
+  "paper_url": "https://arxiv.org/abs/2611.26413v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.26413v1",
+  "reviewed_version": "v1",
+  "detail_path": "foundation-models/2611.26413-e-rwsc/README.md",
+  "first_author": "Vishesh Kumar Singh",
+  "first_author_affiliation": "Indian Institute of Technology Kanpur",
+  "published": "2026-11-19",
+  "published_at": "2026-11-19T17:00:42Z",
+  "code": null,
+  "code_status": "截至2026-11-21，固定v1作者入口与全文未找到已核实的本篇方法源码仓库；引用项目不等于本篇开源。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "evaluation-and-evidence",
+    "CPU机制组件"
+  ],
+  "priority": "P1",
+  "intake_class": "overlap_new_selection",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.26413v1",
+    "source_sections": [
+      "PDF p1 byline",
+      "Section2 Eq.1-2",
+      "Section3 Eq.6-10",
+      "AppendixA Algorithm2",
+      "AppendixD Table5-6"
+    ],
+    "basis": "AppendixD在作者RTX6000Ada测量中，每题固定512候选约3657.7GPU秒、e-RWSC平均约1400.8GPU秒，另有多模型、多reward model、多基准矩阵。这是作者硬件的测量，不是本机A100/A30时间预测；完整生成/打分实验直接不复现。本轮只执行廉价CPU停止核，不下载3B/8B或更大模型。",
+    "available_resource": "One A100 or A30, or local Mac; this implementation is CPU-only",
+    "decision": "High-cost full experiments not reproduced; review DONE, no automatic retry.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30
+    }
+  },
+  "summary": "固定N的Best-of-N对容易题也花满预算；只追踪当前领先答案的SPRT会反复换假设，不能直接沿用Wald错误保证。e-RWSC按答案分别保留e-process，以过去响应的reward-weighted self-consistency质量和首现后的匹配次数构造可预测Kelly下注。新答案第一次出现只登记为单位资本，不把这个由定义强制成功的样本计作证据。所有旧答案的下注先于下一条响应/奖励计算，领先者改变也不重置资本。 纯stdlib、CPU-only的RWSC聚合、前缀可预测下注、逐答案log资本与首现权重、首次出现跳过、认证终止和显式未认证预算回退。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。没有LLM、reward model、答案解析或公开benchmark运行；不把合成流叫模型输出，不接Evolve晋级。",
+  "local_operator": "auto_research.foundation_models.e_rwsc.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.e_rwsc import diagnostic; print(diagnostic(42))'",
+  "method_source_sha256": "ea8f062f7f57748fb8b0e0464e5ed2f128a205492ae15e6ded0e70726fb48de9"
+}
