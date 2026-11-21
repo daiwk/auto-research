@@ -1,6 +1,6 @@
 # HILL: Jointly Learning a Hierarchical Index for Retrieval Foundation Models
 
-<!-- source-sha256: 5bd1536f8df578feb94c2da8ea95057fbef1c1423ab33a475464e92232dda39f -->
+<!-- source-sha256: 9bca6bb2c46bddaecca5041ab1042c637b19130897580ef85228efc0fcf662cd -->
 
 [简体中文](README.md)
 
@@ -56,7 +56,7 @@ The pseudo-item $\bar c=\sum_k a_kc_k$ enters MoNN with the user. The next level
 ### Paper results
 
 - Recall@20, NDCG@20, and compute are compared on Gowalla, Yelp 2018, Amazon-Book, and Meta internal data.
-- Meta Ads production A/B: two-layer `MoNN Medium → MoNN Small` raises the online ads metric 2.57% versus MoNN Small; Small/Small raises it 1.22%.
+- In the Meta Ads production A/B test, single-layer `MoNN Small` was the baseline. Two-layer `MoNN Medium → MoNN Small` improved the online ads metric by 1.22%, and `MoNN Large → MoNN Small` improved it by 2.57% ([Table 8](https://arxiv.org/html/2604.12965v1#S4.SS5)).
 - The service covers daily Facebook and Instagram ads recommendation; production models and logs were not released.
 
 ## Local reproduction

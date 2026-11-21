@@ -5,7 +5,7 @@
     "retrieval-matching": {
       "title": "召回覆盖从哪里来：用户表示、正例组织与负例难度",
       "thesis": "候选生成先决定后续排序能看见什么。YouTube DNN说明单用户向量如何进入近邻检索，Airbnb EBR把监督放回搜索—浏览—预订旅程，MIMA让同请求多正例分配给互补兴趣，MDCNS改变负例的难度与多视角监督。这四种改动分别作用于表示、标签、兴趣分工和梯度，不能用召回数变大统一解释。",
-      "updated": "2026-11-20",
+      "updated": "2026-11-21",
       "axes": [
         "召回接口：单向量还是多兴趣通道",
         "正例来自下一行为、旅程还是同请求集合",
@@ -418,6 +418,16 @@
           "source_revisions": {
             "recommendation:lser-serving": "a5c7a66bc0a8ea182fe5b30352e5ffd8abea26b977f7510bd2ac3f1c4060e5d8",
             "recommendation:youtube-dnn": "6fdbc162f51c3c282c0b19893ca9138b7b299fb5c34e21b118524d0311332dc2"
+          }
+        },
+        {
+          "date": "2026-11-21",
+          "papers": [
+            "recommendation:hill-index"
+          ],
+          "summary": "复核 HILL 原文表 8：单层 MoNN Small 是基线，Medium → Small 的线上广告指标提升 1.22%，Large → Small 提升 2.57%。这项更正不改变召回机制对比，也不是本地复现结果。",
+          "source_revisions": {
+            "recommendation:hill-index": "9bca6bb2c46bddaecca5041ab1042c637b19130897580ef85228efc0fcf662cd"
           }
         }
       ]

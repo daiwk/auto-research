@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/recommendation/retrieval-matching/update/2026-11-21/6": {
+      "source_sha256": "2ce1907063f8b922f183c4b84366c57b6549ec01101815e0beeadd7cd33d8628",
+      "reviewed": true,
+      "fields": {
+        "summary": "Rechecked HILL Table 8: single-layer MoNN Small is the baseline. Medium → Small improves the online ads metric by 1.22%, and Large → Small by 2.57%. This correction does not change the retrieval-method comparison and is not a local reproduction result."
+      }
+    }
+  }
+}
