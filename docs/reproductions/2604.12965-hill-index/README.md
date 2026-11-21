@@ -52,7 +52,7 @@ $$
 ### 论文离线与线上效果
 
 - 论文在 Gowalla、Yelp 2018、Amazon-Book 以及 Meta 内部数据上比较 Recall@20/NDCG@20 和计算成本。
-- Meta Ads production A/B 中，两层 `MoNN Medium → MoNN Small` 相对 MoNN Small 的 online ads metric 提升 `2.57%`；Small/Small 组合提升 `1.22%`。
+- Meta Ads 线上 A/B 以单层 `MoNN Small` 为基线，两层 `MoNN Medium → MoNN Small` 的线上广告指标提升 `1.22%`，`MoNN Large → MoNN Small` 提升 `2.57%`（[原文表 8](https://arxiv.org/html/2604.12965v1#S4.SS5)）。
 - 服务覆盖 Facebook 与 Instagram 的日常广告推荐；公开论文没有释放生产模型或日志。
 
 ## 本地复现

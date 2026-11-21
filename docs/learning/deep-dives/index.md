@@ -18,7 +18,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="recommendation/retrieval-matching/">召回覆盖从哪里来：用户表示、正例组织与负例难度</a></h2>
 <p>候选生成先决定后续排序能看见什么。YouTube DNN说明单用户向量如何进入近邻检索，Airbnb EBR把监督放回搜索—浏览—预订旅程，MIMA让同请求多正例分配给互补兴趣，MDCNS改变负例的难度与多视角监督。这四种改动分别作用于表示、标签、兴趣分工和梯度，不能用召回数变大统一解释。</p>
-<p class="ar-learning-topic-meta">9 篇重点对照 · 7 个跨论文问答 · 2026-11-20</p>
+<p class="ar-learning-topic-meta">9 篇重点对照 · 7 个跨论文问答 · 2026-11-21</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="recommendation/content-semantic-ids/">知识、协同向量与语义码：相同内容怎样进入不同推荐接口？</a></h2>
