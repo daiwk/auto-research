@@ -21,7 +21,7 @@ hide:
 
 <!-- learning-topics:start -->
 
-6 个主题 · 31 个子主题 · 5042 个问题 / 1258 篇论文
+6 个主题 · 31 个子主题 · 5070 个问题 / 1265 篇论文
 
 <div class="ar-learning-topics">
 <article class="ar-learning-topic-tile">
@@ -41,14 +41,14 @@ hide:
 <article class="ar-learning-topic-tile">
 <h2><a href="paths/foundation-models/">基础模型</a></h2>
 <p>理解模型怎样读取上下文、分配计算和训练预算，以及压缩、生成与能力评测的取舍。</p>
-<p class="ar-learning-topic-meta">6 个子主题 · 788 问 / 197 篇</p>
+<p class="ar-learning-topic-meta">6 个子主题 · 796 问 / 199 篇</p>
 <details><summary>展开子主题问题库</summary><ul>
 <li><a href="paths/foundation-models/context-and-state/">长上下文：注意力、递归状态与记忆</a><span>196 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/context-and-state/">精读对比</a></span></li>
 <li><a href="paths/foundation-models/conditional-compute/">按需计算：专家、弹性深宽与查表记忆</a><span>108 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/conditional-compute/">精读对比</a></span></li>
 <li><a href="paths/foundation-models/training-budget/">训练预算：数据配比、目标与优化器</a><span>144 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/training-budget/">精读对比</a></span></li>
-<li><a href="paths/foundation-models/compression-and-cache/">推理压缩：权重、KV 缓存与服务带宽</a><span>164 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/compression-and-cache/">精读对比</a></span></li>
+<li><a href="paths/foundation-models/compression-and-cache/">推理压缩：权重、KV 缓存与服务带宽</a><span>168 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/compression-and-cache/">精读对比</a></span></li>
 <li><a href="paths/foundation-models/generation-paths/">生成路径：草稿验证、并行去噪与少步迭代</a><span>72 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/generation-paths/">精读对比</a></span></li>
-<li><a href="paths/foundation-models/evaluation-and-evidence/">能力证据：评测采样、读出与可靠性</a><span>104 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/evaluation-and-evidence/">精读对比</a></span></li>
+<li><a href="paths/foundation-models/evaluation-and-evidence/">能力证据：评测采样、读出与可靠性</a><span>108 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/evaluation-and-evidence/">精读对比</a></span></li>
 </ul></details>
 </article>
 <article class="ar-learning-topic-tile">
@@ -64,20 +64,20 @@ hide:
 <article class="ar-learning-topic-tile">
 <h2><a href="paths/multimodal-models/">多模态</a></h2>
 <p>围绕三件事学习：对齐不同模态、分配视觉证据预算、预测状态与动作的后果。</p>
-<p class="ar-learning-topic-meta">3 个子主题 · 338 问 / 84 篇</p>
+<p class="ar-learning-topic-meta">3 个子主题 · 342 问 / 85 篇</p>
 <details><summary>展开子主题问题库</summary><ul>
 <li><a href="paths/multimodal-models/alignment-interfaces/">跨模态对齐：表征、连接器与监督</a><span>125 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/alignment-interfaces/">精读对比</a></span></li>
 <li><a href="paths/multimodal-models/visual-evidence-budget/">视觉证据预算：选 Token、选帧与按需回看</a><span>72 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/visual-evidence-budget/">精读对比</a></span></li>
-<li><a href="paths/multimodal-models/world-state-actions/">世界建模：状态、生成与动作条件</a><span>141 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/world-state-actions/">精读对比</a></span></li>
+<li><a href="paths/multimodal-models/world-state-actions/">世界建模：状态、生成与动作条件</a><span>145 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/world-state-actions/">精读对比</a></span></li>
 </ul></details>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="paths/post-training/">LLM 后训练</a></h2>
 <p>先分清反馈来自哪里，再看策略更新、步骤信用、教师监督，以及数据和算力如何分配。</p>
-<p class="ar-learning-topic-meta">6 个子主题 · 1164 问 / 291 篇</p>
+<p class="ar-learning-topic-meta">6 个子主题 · 1168 问 / 292 篇</p>
 <details><summary>展开子主题问题库</summary><ul>
 <li><a href="paths/post-training/preference-and-alignment/">偏好与对齐：先看反馈长什么样</a><span>128 问<a class="ar-learning-deep-link" href="deep-dives/post-training/preference-and-alignment/">精读对比</a></span></li>
-<li><a href="paths/post-training/policy-optimization/">策略优化：谁在采样，谁在被更新</a><span>256 问<a class="ar-learning-deep-link" href="deep-dives/post-training/policy-optimization/">精读对比</a></span></li>
+<li><a href="paths/post-training/policy-optimization/">策略优化：谁在采样，谁在被更新</a><span>260 问<a class="ar-learning-deep-link" href="deep-dives/post-training/policy-optimization/">精读对比</a></span></li>
 <li><a href="paths/post-training/reward-and-credit/">奖励与信用：正确结果该奖励哪些步骤</a><span>196 问<a class="ar-learning-deep-link" href="deep-dives/post-training/reward-and-credit/">精读对比</a></span></li>
 <li><a href="paths/post-training/student-trajectory-distillation/">轨迹蒸馏：学生、提案与前缀分布</a><span>188 问<a class="ar-learning-deep-link" href="deep-dives/post-training/student-trajectory-distillation/">精读对比</a></span></li>
 <li><a href="paths/post-training/teacher-and-context/">教师与纠错：额外信息何时能帮到学生</a><span>228 问<a class="ar-learning-deep-link" href="deep-dives/post-training/teacher-and-context/">精读对比</a></span></li>
@@ -87,12 +87,12 @@ hide:
 <article class="ar-learning-topic-tile">
 <h2><a href="paths/agent-research/">Agent</a></h2>
 <p>从下一步行动到完整执行流程：依次学习规划、记忆、工具协作、自进化、训练与独立评测。</p>
-<p class="ar-learning-topic-meta">6 个子主题 · 1293 问 / 323 篇</p>
+<p class="ar-learning-topic-meta">6 个子主题 · 1305 问 / 326 篇</p>
 <details><summary>展开子主题问题库</summary><ul>
 <li><a href="paths/agent-research/planning-and-search/">规划与搜索：下一步该做什么</a><span>96 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/planning-and-search/">精读对比</a></span></li>
-<li><a href="paths/agent-research/memory-and-skills/">记忆与技能：让经验可取回、可失效</a><span>256 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/memory-and-skills/">精读对比</a></span></li>
+<li><a href="paths/agent-research/memory-and-skills/">记忆与技能：让经验可取回、可失效</a><span>264 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/memory-and-skills/">精读对比</a></span></li>
 <li><a href="paths/agent-research/tools-and-collaboration/">工具与协作执行：把计划变成可检查的动作</a><span>209 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/tools-and-collaboration/">精读对比</a></span></li>
-<li><a href="paths/agent-research/harness-and-self-improvement/">运行流程与自进化：改的是哪一层</a><span>312 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/harness-and-self-improvement/">精读对比</a></span></li>
+<li><a href="paths/agent-research/harness-and-self-improvement/">运行流程与自进化：改的是哪一层</a><span>316 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/harness-and-self-improvement/">精读对比</a></span></li>
 <li><a href="paths/agent-research/agent-policy-learning/">交互策略学习：把轨迹反馈变成更新</a><span>220 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/agent-policy-learning/">精读对比</a></span></li>
 <li><a href="paths/agent-research/evaluation-and-reliability/">评测与可靠性：如何知道真的做对了</a><span>200 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/evaluation-and-reliability/">精读对比</a></span></li>
 </ul></details>
@@ -108,14 +108,14 @@ hide:
 <!-- learning-recent:start -->
 
 <div class="ar-learning-recent"><ul>
-<li><a href="all/#qa-e48a25a3a71ba518">阈值为2时，第二次动作就被拦截吗？</a><span>2026-11-20 · looproute</span></li>
-<li><a href="all/#qa-7fc4075f4b7e0e63">LoopRoute和Selective Reasoning都省推理，证据一样吗？</a><span>2026-11-20 · looproute</span></li>
-<li><a href="all/#qa-9a5e132504e45f69">为什么不能只统计动作重复？</a><span>2026-11-20 · looproute</span></li>
-<li><a href="all/#qa-0f1419a728f2559f">能给三个环境共用一套重置规则吗？</a><span>2026-11-20 · looproute</span></li>
-<li><a href="all/#qa-f9082bffd40d41d2">label时间的同一条点击能否进自己的session输入？</a><span>2026-11-20 · lser-serving</span></li>
-<li><a href="all/#qa-31e30281396110a0">论文线上CTR+10.3%证明LLM向量有效吗？</a><span>2026-11-20 · lser-serving</span></li>
-<li><a href="all/#qa-02d250e16d18760b">与YouTube DNN候选生成相比，LSER新增什么而不是LLM直接生成推荐？</a><span>2026-11-20 · lser-serving</span></li>
-<li><a href="all/#qa-30d0490ae82d6b02">nearline刷新尚未完成时，本地接口会同步调用LLM或补零向量吗？</a><span>2026-11-20 · lser-serving</span></li>
+<li><a href="all/#qa-633ec9880197247b">reward correction为什么只抛一次硬币？</a><span>2026-11-21 · dfrl</span></li>
+<li><a href="all/#qa-fbe5b20162c83480">没有选中精确反馈时还能先算exact成本吗？</a><span>2026-11-21 · dfrl</span></li>
+<li><a href="all/#qa-51e2adc1ca64f6ed">DFRL是替代RLOO的另一种优化器吗？</a><span>2026-11-21 · dfrl</span></li>
+<li><a href="all/#qa-1bfb2c09f93b1c80">为什么预测更准不一定决策更好？</a><span>2026-11-21 · dfrl</span></li>
+<li><a href="all/#qa-5bfdaf13be8a94da">为什么不能在prepare后立即把检查点放进lookup？</a><span>2026-11-21 · frontier-replay</span></li>
+<li><a href="all/#qa-1984489c761e1cfb">为什么有KV页仍可能无法复用整段混合模型前缀？</a><span>2026-11-21 · frontier-replay</span></li>
+<li><a href="all/#qa-b1fb2dbcbc4af256">一个request恢复同一检查点两次，就算proven了吗？</a><span>2026-11-21 · frontier-replay</span></li>
+<li><a href="all/#qa-b22a234eecee7b4b">FrontierReplay和ReplaySSM都记录输入，解决的是同一个问题吗？</a><span>2026-11-21 · frontier-replay</span></li>
 </ul></div>
 
 <!-- learning-recent:end -->

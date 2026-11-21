@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "attempts": [
+    {"device": "cpu", "source_commit_argument": "HEAD", "frozen_commit": "3b147143ff4e0e9e098f2964dce0fec7120da8a8", "result": "rejected_before_component_execution", "reason": "Runner requires the exact immutable commit string, not a symbolic ref. The frozen-source equality gate rejected HEAD; no raw result was created, no component or training was run.", "resolution": "Use the actual full frozen commit for the bounded execution; keep this rejected invocation as a separate fact."},
+    {"device": "cpu", "source_commit_argument": "3b147143ff4e0e9e098f2964dce0fec7120da8a8", "result": "passed_bounded_component_diagnostics", "raw_artifact": "raw-cpu.json", "components": 7, "seeds": [42, 43, 44], "elapsed_seconds": 2.9915276248939335, "full_experiments_executed": false},
+    {"device": "cuda", "accelerator": "NVIDIA A100-SXM4-80GB", "source_commit_argument": "3b147143ff4e0e9e098f2964dce0fec7120da8a8", "result": "passed_bounded_component_diagnostics", "raw_artifact": "raw-cuda.json", "components": 1, "seeds": [42, 43, 44], "elapsed_seconds": 1.3761421516537666, "full_experiments_executed": false}
+  ]
+}

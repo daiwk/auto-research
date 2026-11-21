@@ -8,8 +8,11 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [Sequential Anytime Valid Tests for Efficient Inference-Time Alignment](<https://arxiv.org/abs/2611.26413v1>) | 2026-11-19 | [English](../../foundation-models/2611.26413-e-rwsc/README-en.md) · [Chinese](../../foundation-models/2611.26413-e-rwsc/README.md) |
 | [HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs](<https://arxiv.org/abs/2611.26363v1>) | 2026-11-19 | [English](../../foundation-models/2611.26363-hisa/README-en.md) · [Chinese](../../foundation-models/2611.26363-hisa/README.md) |
+| [FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models](<https://arxiv.org/abs/2611.26020v1>) | 2026-11-19 | [English](../../foundation-models/2611.26020-frontier-replay/README-en.md) · [Chinese](../../foundation-models/2611.26020-frontier-replay/README.md) |
 | [NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding](<https://arxiv.org/abs/2611.23835v1>) | 2026-11-18 | [English](../../foundation-models/2611.23835-narrow-spec/README-en.md) · [Chinese](../../foundation-models/2611.23835-narrow-spec/README.md) |
+| [MV-JEPA: Post-Training Video Encoders for Cross-View Understanding](<https://arxiv.org/abs/2611.25172v1>) | 2026-11-18 | [English](../../foundation-models/2611.25172-mv-jepa/README-en.md) · [Chinese](../../foundation-models/2611.25172-mv-jepa/README.md) |
 | [LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers](<https://arxiv.org/abs/2611.24301v1>) | 2026-11-18 | [English](../../foundation-models/2611.24301-loopcache-interface/README-en.md) · [Chinese](../../foundation-models/2611.24301-loopcache-interface/README.md) |
 | [Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting](<https://arxiv.org/abs/2611.23896v1>) | 2026-11-18 | [English](../../foundation-models/2611.23896-kernel-ridge-attention/README-en.md) · [Chinese](../../foundation-models/2611.23896-kernel-ridge-attention/README.md) |
 | [Counterfactual World Models: JEPAs That Reason About "What If"](<https://arxiv.org/abs/2611.24778v1>) | 2026-11-18 | [English](../../foundation-models/2611.24778-counterfactual-wm/README-en.md) · [Chinese](../../foundation-models/2611.24778-counterfactual-wm/README.md) |

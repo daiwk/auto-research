@@ -7,7 +7,7 @@ hide:
 
 # 能力证据：评测采样、读出与可靠性
 
-[基础模型](index.md) / 104 个问题 · 26 篇论文
+[基础模型](index.md) / 108 个问题 · 27 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">104 个问题 · 26 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">108 个问题 · 27 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:e-rwsc" data-paper-title="Sequential Anytime Valid Tests for Efficient Inference-Time Alignment" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Sequential Anytime Valid Tests for Efficient Inference-Time Alignment 基础模型 Indian Institute of Technology Kanpur 2026-11-19 固定N的Best-of-N对容易题也花满预算；只追踪当前领先答案的SPRT会反复换假设，不能直接沿用Wald错误保证。e-RWSC按答案分别保留e-process，以过去响应的reward-weighted self-consistency质量和首现后的匹配次数构造可预测Kelly下注。新答案第一次出现只登记为单位资本，不把这个由定义强制成功的样本计作证据。所有旧答案的下注先于下一条响应/奖励计算，领先者改变也不重置资本。答案按首现rank分配可求和权重1/[j(j+1)]； 完整实验成本过高，不复现（审查 DONE）。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU，无CUDA宣传路径；不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）。纯stdlib、CPU-only的RWSC聚合、前缀可预测下注、逐答案log资本与首现权重、首次出现跳过、认证终止和显式未认证预算回退。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。  evaluation-and-evidence CPU机制组件 基础模型 能力证据：评测采样、读出与可靠性 e-RWSC证书是在证明答案正确吗？ 不是。它在固定政策iid抽样假设下控制误认证非多数答案的概率，认证的是政策分布中的占优概率，而不读取或判断真实答案。 教学例：假设政策几乎总把2+2回答成5，5也可能很快获得多数证书；这不让5变成正确答案。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<span id="paper-foundation-models-e-rwsc-c9c79f68" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-8e14a057271edf45">e-RWSC证书是在证明答案正确吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ae-rwsc">Sequential Anytime Valid Tests for Efficient Inference-Time Alignment</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · Indian Institute of Technology Kanpur</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。它在固定政策iid抽样假设下控制误认证非多数答案的概率，认证的是政策分布中的占优概率，而不读取或判断真实答案。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：假设政策几乎总把2+2回答成5，5也可能很快获得多数证书；这不让5变成正确答案。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26413v1">原论文</a> · <a href="../../../../foundation-models/2611.26413-e-rwsc/">实现解读</a> · <a href="#qa-8e14a057271edf45">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:e-rwsc" data-paper-title="Sequential Anytime Valid Tests for Efficient Inference-Time Alignment" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Sequential Anytime Valid Tests for Efficient Inference-Time Alignment 基础模型 Indian Institute of Technology Kanpur 2026-11-19 固定N的Best-of-N对容易题也花满预算；只追踪当前领先答案的SPRT会反复换假设，不能直接沿用Wald错误保证。e-RWSC按答案分别保留e-process，以过去响应的reward-weighted self-consistency质量和首现后的匹配次数构造可预测Kelly下注。新答案第一次出现只登记为单位资本，不把这个由定义强制成功的样本计作证据。所有旧答案的下注先于下一条响应/奖励计算，领先者改变也不重置资本。答案按首现rank分配可求和权重1/[j(j+1)]； 完整实验成本过高，不复现（审查 DONE）。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU，无CUDA宣传路径；不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）。纯stdlib、CPU-only的RWSC聚合、前缀可预测下注、逐答案log资本与首现权重、首次出现跳过、认证终止和显式未认证预算回退。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。  evaluation-and-evidence CPU机制组件 基础模型 能力证据：评测采样、读出与可靠性 为什么新答案第一次出现不能立即增长资本？ 首现时这个样本等于该答案是由定义强制的，不是此前可预测下注的随机成功；因此只登记E=1和Z=0，从下一条响应才开始结算。 教学例：第一个答案出现后资本仍为1，rank1权重为1/2；不能把第一次出现当作一次押中而直接加大证据。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-3f0719a9c424720e">为什么新答案第一次出现不能立即增长资本？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ae-rwsc">Sequential Anytime Valid Tests for Efficient Inference-Time Alignment</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · Indian Institute of Technology Kanpur</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>首现时这个样本等于该答案是由定义强制的，不是此前可预测下注的随机成功；因此只登记E=1和Z=0，从下一条响应才开始结算。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第一个答案出现后资本仍为1，rank1权重为1/2；不能把第一次出现当作一次押中而直接加大证据。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26413v1">原论文</a> · <a href="../../../../foundation-models/2611.26413-e-rwsc/">实现解读</a> · <a href="#qa-3f0719a9c424720e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:e-rwsc" data-paper-title="Sequential Anytime Valid Tests for Efficient Inference-Time Alignment" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Sequential Anytime Valid Tests for Efficient Inference-Time Alignment 基础模型 Indian Institute of Technology Kanpur 2026-11-19 固定N的Best-of-N对容易题也花满预算；只追踪当前领先答案的SPRT会反复换假设，不能直接沿用Wald错误保证。e-RWSC按答案分别保留e-process，以过去响应的reward-weighted self-consistency质量和首现后的匹配次数构造可预测Kelly下注。新答案第一次出现只登记为单位资本，不把这个由定义强制成功的样本计作证据。所有旧答案的下注先于下一条响应/奖励计算，领先者改变也不重置资本。答案按首现rank分配可求和权重1/[j(j+1)]； 完整实验成本过高，不复现（审查 DONE）。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU，无CUDA宣传路径；不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）。纯stdlib、CPU-only的RWSC聚合、前缀可预测下注、逐答案log资本与首现权重、首次出现跳过、认证终止和显式未认证预算回退。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。  evaluation-and-evidence CPU机制组件 基础模型 能力证据：评测采样、读出与可靠性 答案直方图均匀，是否就满足iid保证？ 不满足。LLM Stochasticity说明边缘分布平衡仍可有确定性时序依赖；e-RWSC的固定政策独立抽样假设不能靠均匀图或随机提示替代。 教学例：0、1、2、3无限循环时各值频率相等，但下一值可由上一值确定；这不是四分类iid采样。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-c3cb30eb4c2f23a7">答案直方图均匀，是否就满足iid保证？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ae-rwsc">Sequential Anytime Valid Tests for Efficient Inference-Time Alignment</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · Indian Institute of Technology Kanpur</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不满足。LLM Stochasticity说明边缘分布平衡仍可有确定性时序依赖；e-RWSC的固定政策独立抽样假设不能靠均匀图或随机提示替代。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：0、1、2、3无限循环时各值频率相等，但下一值可由上一值确定；这不是四分类iid采样。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26413v1">原论文</a> · <a href="../../../../foundation-models/2611.26413-e-rwsc/">实现解读</a> · <a href="#qa-c3cb30eb4c2f23a7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:e-rwsc" data-paper-title="Sequential Anytime Valid Tests for Efficient Inference-Time Alignment" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Sequential Anytime Valid Tests for Efficient Inference-Time Alignment 基础模型 Indian Institute of Technology Kanpur 2026-11-19 固定N的Best-of-N对容易题也花满预算；只追踪当前领先答案的SPRT会反复换假设，不能直接沿用Wald错误保证。e-RWSC按答案分别保留e-process，以过去响应的reward-weighted self-consistency质量和首现后的匹配次数构造可预测Kelly下注。新答案第一次出现只登记为单位资本，不把这个由定义强制成功的样本计作证据。所有旧答案的下注先于下一条响应/奖励计算，领先者改变也不重置资本。答案按首现rank分配可求和权重1/[j(j+1)]； 完整实验成本过高，不复现（审查 DONE）。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU，无CUDA宣传路径；不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）。纯stdlib、CPU-only的RWSC聚合、前缀可预测下注、逐答案log资本与首现权重、首次出现跳过、认证终止和显式未认证预算回退。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。  evaluation-and-evidence CPU机制组件 基础模型 能力证据：评测采样、读出与可靠性 达到Nmax但没跨界，可以标为已认证吗？ 不能。返回的是reward-weighted self-consistency回退，certified必须为false。还要检查当前下注只看旧前缀，新响应的答案和极端reward都不能倒灌到刚才的stake。 教学例：两个进程共享同一过去前缀，下一奖励分别是正一百万和负一百万；它们结算本步前的下注必须相同，预算用尽也不会补发证书。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-c373f2d89d20ace5">达到Nmax但没跨界，可以标为已认证吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ae-rwsc">Sequential Anytime Valid Tests for Efficient Inference-Time Alignment</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · Indian Institute of Technology Kanpur</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。返回的是reward-weighted self-consistency回退，certified必须为false。还要检查当前下注只看旧前缀，新响应的答案和极端reward都不能倒灌到刚才的stake。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个进程共享同一过去前缀，下一奖励分别是正一百万和负一百万；它们结算本步前的下注必须相同，预算用尽也不会补发证书。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26413v1">原论文</a> · <a href="../../../../foundation-models/2611.26413-e-rwsc/">实现解读</a> · <a href="#qa-c373f2d89d20ace5">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:mixed-signals-weights" data-paper-title="Mixed Signals: Weight-Space Programming for EEG and ECG" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Mixed Signals: Weight-Space Programming for EEG and ECG 基础模型 EPFL 2026-11-10 论文让 LLM 通过阅读/写入网络参数解决 EEG/ECG 任务，覆盖读权重、改善、修复和从零写网络。关键区别是 weight-space programming 不使用梯度下降或迭代拟合；把 SGD 包装成“编辑器”不能视为等价复现。不同实验的网络、数据权限和 evaluate/probe 预算不同。§II 成本过高，不复现（审查 DONE），不调用付费模型、不启动完整编辑矩阵，不自动重试。诊断里的 nn.Linear(4,2) 只是自定义测试 harness，不是论文 TinyEEGNet；L0 接口：实现外部权重补丁、practice 调用预算和评价算术。没有调用 LLM，没有复现 TinyEEGNet/ECGResNet，没有患者数据，不声称模型会理解或修复网络。apply_weight_patch 只编辑显式传入的已注册参数，不接受任意 Python 程序或 buffer；PracticeBudget 只封装外部 practice callback；测试 labels 仅传给评价函数，不传给编辑提供方。  网络架构 权重空间编程与可解释性 基础模型 能力证据：评测采样、读出与可靠性 Mixed Signals中的权重空间编程，为什么不能直接用SGD实现？ 其研究问题是LLM能否通过推理读取或写入权重，规则排除梯度下降与迭代拟合。SGD能优化网络但回答不同问题；本地只实现外部补丁接口，未伪装一个LLM编辑器。 教学例：把loss.backward和optimizer.step藏在edit函数中，仍是梯度训练，不是WSP。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
 <span id="paper-foundation-models-mixed-signals-weights-57c6ef40" class="ar-learning-paper-anchor"></span>

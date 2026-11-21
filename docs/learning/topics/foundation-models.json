@@ -229,7 +229,8 @@
         "foundation-models:echomoe",
         "foundation-models:risa",
         "foundation-models:beyond-bitwidth",
-        "foundation-models:loopcache-interface"
+        "foundation-models:loopcache-interface",
+        "foundation-models:frontier-replay"
       ]
     },
     {
@@ -311,7 +312,8 @@
         "foundation-models:tokenization-premium",
         "foundation-models:runway-inference-protocol",
         "foundation-models:mixed-signals-weights",
-        "foundation-models:efficient-evals-tensor"
+        "foundation-models:efficient-evals-tensor",
+        "foundation-models:e-rwsc"
       ]
     }
   ]

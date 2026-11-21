@@ -7,7 +7,7 @@ hide:
 
 # 会预测下一幕，还不等于会行动或保持同一个世界
 
-[多模态](../index.md) · 更新 2026-11-19 · 35 篇主题资料 / 19 篇重点对照
+[多模态](../index.md) · 更新 2026-11-21 · 36 篇主题资料 / 20 篇重点对照
 
 世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。
 
@@ -44,6 +44,7 @@ hide:
 | [Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;](../../../foundation-models/2611.24778-counterfactual-wm/README.md) · [原始来源](https://arxiv.org/abs/2611.24778v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 普通world model给动作的平均结果，不能仅凭更准的事实分布识别同一扰动下的个体反事实。本文将实际观测结果作为事件信息，加上同一事实预测器对两个动作的预测差；加性扰动时精确，平滑短时动力学下有交互误差界，但碰撞、乘法故障和弯曲坐标可破坏近似。 | DT-JEPA在历史下预测未来latent分布并用于决策，真实未来只在训练目标出现；CWM在一个事实结果已经可见后推断同一事件的替代动作结果。不能让CWM提前使用尚未观测的未来，亦不能把DT-JEPA的均值直接称个体反事实。 |
 | [Autoregressive View Model](../../../multimodal-models/2611.23417-autoregressive-view-model/README.md) · [原始来源](https://arxiv.org/abs/2611.23417v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | AVM不拟合显式3D表示，而在给定相机路径下生成短视图片段。预填图像/视频与历史生成片段统一成为context；检索保持活动上下文有界。先把双向视频DiT微调为N-in-1-out的flow matching，再以自身rollout做因果tuning和蒸馏，让生成内容可回到历史中支持后续重访。 | CWM在一个事实事件之后改变动作并复用同一扰动残差；AVM沿相机轨迹继续生成并检索历史视图。二者都使用world model语汇，但AVM的场景重访一致性不证明同一扰动反事实可识别。 |
 | [JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control](../../../multimodal-models/2611.24062-jepa-dots/README.md) · [原始来源](https://arxiv.org/abs/2611.24062v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 共享视觉骨干之后拆动力学和任务两条latent路径，语言FiLM只进入任务路径。world query只读动力学历史和给定clean动作，policy读历史、goal和noisy动作；多层mask同时阻断间接泄漏。固定参数、观测和给定动作时，换指令不能改变world预测，但policy可以生成不同动作。 | LeWAM联合world/action并用预测模型规划；JEPA Dots强调语言目标与动力学给定动作输入的隔离，部署world分支不参与动作搜索。相同masked-MoT背景不代表推理链相同。 |
+| [MV-JEPA: Post-Training Video Encoders for Cross-View Understanding](../../../foundation-models/2611.25172-mv-jepa/README.md) · [原始来源](https://arxiv.org/abs/2611.25172v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | MV-JEPA直接后训练已有JEPA视频编码器，强化不同摄像头视角之间的对象/时刻对应。共享student分别编码各context view的可见token；联合predictor利用所有context特征，既重建被mask的context位置，又预测一个完全held-out视图。held-out图像/特征从不进入student或predictor，只提供teacher目标；推理仍可独立编码单视角。 | Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行masked潜变量预测和unmasked物理态回归；MV-JEPA用另一个摄像头的latent作held-out目标，并让联合predictor从多个独立context视图推断。两者都不能把训练目标喂回推理输入，但MV-JEPA的跨view query不是Time-JEPA的传感器head；重放保持表征和物理时序对齐也是不同验收。 |
 
 </div>
 
@@ -138,6 +139,12 @@ CWM在一个事实事件之后改变动作并复用同一扰动残差；AVM沿�
 LeWAM联合world/action并用预测模型规划；JEPA Dots强调语言目标与动力学给定动作输入的隔离，部署world分支不参与动作搜索。相同masked-MoT背景不代表推理链相同。 不变性约束的是forward信息通路，不是说共享骨干训练后两种latent统计独立。world预测分支只在训练监督中使用，部署是action flow生成8动作、执行前2个后重规划，不是用world model在线搜索动作。
 
 对照来源：[jepa-dots](../../../multimodal-models/2611.24062-jepa-dots/README.md) · [lewam](../../../reproductions/2610.12818-lewam/README.md)
+
+### MV-JEPA: Post-Training Video Encoders for Cross-View Understanding
+
+Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行masked潜变量预测和unmasked物理态回归；MV-JEPA用另一个摄像头的latent作held-out目标，并让联合predictor从多个独立context视图推断。两者都不能把训练目标喂回推理输入，但MV-JEPA的跨view query不是Time-JEPA的传感器head；重放保持表征和物理时序对齐也是不同验收。 完整context和held-out由EMA teacher编码，经逐token LayerNorm并stop-gradient。context视图分配互异随机view ID，held-out使用专属ID；masked-context和held-out使用两种不同mask embedding。Eq4对masked-context和全部held-out目标token等权，先逐example归一化，再对batch取均值，不能按view等权或全batch微平均。每epoch随机打散152次多视图与148次原始单视图replay，共享online encoder和predictor；optimizer后按0.99925更新teacher。
+
+对照来源：[mv-jepa](../../../foundation-models/2611.25172-mv-jepa/README.md) · [time-jepa](../../../foundation-models/2610.23982-time-jepa/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -303,9 +310,23 @@ LeWAM联合world/action并用预测模型规划；JEPA Dots强调语言目标与
 
     对照来源：[jepa-dots](../../../multimodal-models/2611.24062-jepa-dots/README.md) · [lewam](../../../reproductions/2610.12818-lewam/README.md)
 
+### MV-JEPA和Time-JEPA都用额外监督，目标能互换吗？ {#cross-nov21-mv-jepa}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。前者是跨摄像头latent并需要联合view predictor；后者是对齐物理时序并有unmasked回归分支。二者训练目标都不应变成student输入。
+
+    **教学例子：** 教学例：速度标量属于Time-JEPA物理head，背面视图的一组token属于MV-JEPA held-out query；换标签不等于同一任务。
+
+    对照来源：[mv-jepa](../../../foundation-models/2611.25172-mv-jepa/README.md) · [time-jepa](../../../foundation-models/2610.23982-time-jepa/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-21** · Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行masked潜变量预测和unmasked物理态回归；MV-JEPA用另一个摄像头的latent作held-out目标，并让联合predictor从多个独立context视图推断。两者都不能把训练目标喂回推理输入，但MV-JEPA的跨view query不是Time-JEPA的传感器head；重放保持表征和物理时序对齐也是不同验收。 本地组件证据与完整实验不复现分开记录。
+
+涉及：[mv-jepa](../../../foundation-models/2611.25172-mv-jepa/README.md) · [time-jepa](../../../foundation-models/2610.23982-time-jepa/README.md)
 
 **2026-11-19** · LeWAM联合world/action并用预测模型规划；JEPA Dots强调语言目标与动力学给定动作输入的隔离，部署world分支不参与动作搜索。相同masked-MoT背景不代表推理链相同。 高成本完整实验不复现，组件与能力证据分开。
 
@@ -363,7 +384,7 @@ LeWAM联合world/action并用预测模型规划；JEPA Dots强调语言目标与
 
 覆盖 22 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 35 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 36 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -402,6 +423,7 @@ LeWAM联合world/action并用预测模型规划；JEPA Dots强调语言目标与
 - [Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;](../../../foundation-models/2611.24778-counterfactual-wm/README.md)
 - [Autoregressive View Model](../../../multimodal-models/2611.23417-autoregressive-view-model/README.md)
 - [JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control](../../../multimodal-models/2611.24062-jepa-dots/README.md)
+- [MV-JEPA: Post-Training Video Encoders for Cross-View Understanding](../../../foundation-models/2611.25172-mv-jepa/README.md)
 
 </details>
 

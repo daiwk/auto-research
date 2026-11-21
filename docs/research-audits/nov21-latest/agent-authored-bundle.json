@@ -1,0 +1,308 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-21",
+  "papers": {
+    "agent-research:sage-evolve": {
+      "questions": [
+        {
+          "id": "anchor-vs-active",
+          "level": "basics",
+          "question": "active observation变了，目标是不是也变了？",
+          "answer": "不是。anchor是始终保留的验收目标；active只改变当前看哪些细分错误、难度或相关任务，帮助发现下一批训练增量。",
+          "example": "教学例：原目标是长文问答，可新增8-needle诊断，但不能删除原题只报更容易题的分数。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "phase-reset",
+          "level": "mechanism",
+          "question": "为什么切换观测后必须重置边际收益历史？",
+          "answer": "不同观测的分数不是同一标尺。把较难任务较低的分数直接减掉旧任务分数，会把换测量工具当模型退化。",
+          "example": "教学例：旧active为80、新active为40，不表示训练损失了40分；应重新建立同phase比较。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "observation-vs-harness",
+          "level": "comparison",
+          "question": "AdaObs和Harness²都自进化，改的是同一层吗？",
+          "answer": "不是。Harness²改固定模型外的执行方式；AdaObs固定anchor、改变发现训练缺口的观测，并在完整研究中重训模型。两种本地诊断都不能冒充Agent能力收益。",
+          "example": "教学例：把失败按上下文长度分桶是改观测，增加工具重试规则是改Harness。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "concrete-failure",
+          "level": "implementation",
+          "question": "一个L1诊断方案失败，能直接跳到L2吗？",
+          "answer": "不能据此封禁所有L1。负例记忆记录当前gap下的具体refinement配置，仍应先检查其他可行L1；没有可行L1才升级。",
+          "example": "教学例：按格式分桶没找到新缺口，不代表按长度分桶也无效；换gap后也不能沿用旧封禁。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        }
+      ]
+    },
+    "agent-research:memfolder": {
+      "questions": [
+        {
+          "id": "two-compression-axes",
+          "level": "basics",
+          "question": "记录减少一半，上下文token就一定减少一半吗？",
+          "answer": "不一定。合并后每条可能变长；RecordFolder减少检索单元数，ContextFolder才另外压缩每组文本，二者成本轴不同。",
+          "example": "教学例：两条各20token合成一条40token，记录少50%，文本并未缩短。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "rare-entity-affinity",
+          "level": "mechanism",
+          "question": "为什么所有记录都有的实体反而不应提高亲和？",
+          "answer": "IDF权重log(N/df)在df=N时为0，它不区分事件；没有共享实体质量时alpha=0，亲和退回cosine。",
+          "example": "教学例：每条都出现“用户”不能把所有经历连成一个事件，稀有项目名才可能区分相关记录。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "chain-versus-tree",
+          "level": "comparison",
+          "question": "MemFolder的时间链和MemForest的事件树能互换吗？",
+          "answer": "不能。MemFolder匹配约束每节点最多一入一出，无锚点链整体分组；MemForest保留事件树层次并用anchor邻域传播。数据结构和检索假设不同。",
+          "example": "教学例：一个父事件分出两条子事件可在树中表达，不能直接塞进无分支匹配链。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "matching-not-greedy",
+          "level": "implementation",
+          "question": "为什么不能把Hungarian换成逐条挑最大gain？",
+          "answer": "局部最大会占掉其他节点唯一可用的后继。最大总gain必须同时满足一入一出；本地用真正Hungarian，未用贪心捷径。",
+          "example": "教学例：0→2为0.9、0→3为0.8、1→2为0.8；贪心拿0.9，总体匹配却能拿1.6。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        }
+      ]
+    },
+    "agent-research:memlife": {
+      "questions": [
+        {
+          "id": "three-reward-dimensions",
+          "level": "basics",
+          "question": "记忆忠实于视频，就一定能回答未来问题吗？",
+          "answer": "不一定。它还可能漏掉关键事实或在大检索库中找不到。FIRM分别衡量faithfulness、informativeness、retrievability，三者相乘而非只看最终答案。",
+          "example": "教学例：准确写“我进了房间”很忠实，但若没写钥匙放在哪，就无法回答钥匙位置。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "macro-deviation",
+          "level": "mechanism",
+          "question": "为什么方差不能改成每条候选围绕自身均值的方差？",
+          "answer": "informativeness和retrievability在一条候选中是常数，它们的差异主要在候选之间；围绕自身均值会把这个信号删掉。Eq.11围绕同一group均值再做长度公平宏平均。",
+          "example": "教学例：一条全1、一条全0的候选，各自内部方差都为0，但group显然有不同质量，正确方差为0.25。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "writer-vs-folding",
+          "level": "comparison",
+          "question": "MemOpt和MemFolder都优化记忆，优化的对象一样吗？",
+          "answer": "不一样。MemOpt分解训练奖励以改writer输出；MemFolder整理和压缩已有记录。不能把检索单元变少等同于writer更忠实或更会保留事实。",
+          "example": "教学例：把两条记忆合为一组是结构整理，降低幻觉token的训练credit是写入器优化。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "causal-before-rank",
+          "level": "implementation",
+          "question": "能先在全部记忆里top-k，再过滤未来和其他subject吗？",
+          "answer": "不能。未来或不属于当前隔离scope的高分项会挤掉合法结果。应先用end≤query_time和显式subject/区间限定候选，再做相似度排序；这只是本地隔离接口，不是身份认证。",
+          "example": "教学例：明天的片段相似度1、昨天为0.8，k=1时先top-k再过滤会错误返回空，而正确结果是昨天的片段。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-21"
+        }
+      ]
+    }
+  },
+  "english_question_units": {
+    "qa/agent-research:sage-evolve/anchor-vs-active": {
+      "source_sha256": "adb282c0e5aef62ce53dd4e56ce9b5754f80fb074595fe719b4c326e872ea378",
+      "reviewed": true,
+      "fields": {
+        "question": "Does changing the active observation change the objective?",
+        "answer": "No. The anchor remains the acceptance objective; the active view exposes diagnostic groups, tiers or related tasks to guide the next training increment.",
+        "example": "Teaching example: add an eight-needle diagnostic to long-document QA without replacing the original evaluation with easier questions."
+      }
+    },
+    "qa/agent-research:sage-evolve/phase-reset": {
+      "source_sha256": "632c8be62f339e6e178a45194fd060a428055567c6db97ed8f0c10e5adc8285d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reset marginal-return history after changing observations?",
+        "answer": "Scores under different observations are not comparable. Subtracting an old easier-task score from a harder-task score confuses measurement change with model regression.",
+        "example": "Teaching example: moving from an80-point old view to a40-point new view is not a measured40-point training loss; start within-phase comparisons again."
+      }
+    },
+    "qa/agent-research:sage-evolve/observation-vs-harness": {
+      "source_sha256": "8b9e3edf2874b55f1701d6bd9d31449d02531542f99a20a1048fd689fe72024f",
+      "reviewed": true,
+      "fields": {
+        "question": "Do AdaObs and Harness² evolve the same layer?",
+        "answer": "No. Harness² edits execution around a fixed model. AdaObs keeps the anchor fixed, changes how training gaps are observed and retrains models in the full study. Neither local diagnostic demonstrates capability gains.",
+        "example": "Teaching example: grouping failures by context length changes observation; adding a tool retry rule changes the harness."
+      }
+    },
+    "qa/agent-research:sage-evolve/concrete-failure": {
+      "source_sha256": "54fd89ba5a0cd77d4510799634d464c22d17e8d9efa6b42ed73a81d4bb6dc431",
+      "reviewed": true,
+      "fields": {
+        "question": "Does one failed L1 diagnostic rule out L1 entirely?",
+        "answer": "No. Negative memory records a concrete refinement for a current gap. Other feasible L1 options remain eligible; escalation follows only when no L1 option remains.",
+        "example": "Teaching example: uninformative format groups do not invalidate length groups, and a failure for one gap should not blacklist another gap."
+      }
+    },
+    "qa/agent-research:memfolder/two-compression-axes": {
+      "source_sha256": "ac919fc24aacf22821ee4b816a0f55707b5ca1a0c59833086e8b132ed871fc7e",
+      "reviewed": true,
+      "fields": {
+        "question": "Does halving records necessarily halve context tokens?",
+        "answer": "No. A merged record can be longer. RecordFolder reduces retrieval units; ContextFolder separately compresses each group's text.",
+        "example": "Teaching example: merging two20-token records into one40-token record halves count but saves no text tokens."
+      }
+    },
+    "qa/agent-research:memfolder/rare-entity-affinity": {
+      "source_sha256": "d984ce20ed7dfddb094524c8594e1806eadc25546807951ee4f27da70e28ebe7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why should an entity in every record add no affinity?",
+        "answer": "Its IDF log(N/df) is zero when df=N because it does not distinguish events. With no shared entity mass,alpha is zero and affinity returns to cosine.",
+        "example": "Teaching example: the word user in every record should not link all experiences; a rare project name may identify related ones."
+      }
+    },
+    "qa/agent-research:memfolder/chain-versus-tree": {
+      "source_sha256": "cb7cf46cbb5950c1d095fa701f78b98642eff1e71cdf899f089ebdbf4b11384b",
+      "reviewed": true,
+      "fields": {
+        "question": "Can MemFolder's temporal chains replace MemForest's event trees?",
+        "answer": "No. MemFolder permits at most one incoming/outgoing edge and reassigns anchor-free chains together. MemForest preserves event-tree hierarchy and retrieves through anchor neighborhoods.",
+        "example": "Teaching example: a parent event with two child events fits a tree but not a nonbranching matched chain."
+      }
+    },
+    "qa/agent-research:memfolder/matching-not-greedy": {
+      "source_sha256": "4245b654528a67c621f3af5e1946fdf3f8493fb651e3efabd2581e58d99b967f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not greedily take the largest link gain?",
+        "answer": "A local maximum can consume another predecessor's only useful successor. Maximum total gain must respect incoming/outgoing constraints; the local code uses actual Hungarian matching.",
+        "example": "Teaching example: gains0→2=.9,0→3=.8,1→2=.8 give greedy.9 versus a globally compatible total1.6."
+      }
+    },
+    "qa/agent-research:memlife/three-reward-dimensions": {
+      "source_sha256": "13b292f24acd06f8dcb5e42a0b1e10e7958ddbaf0b63e81afb77c3bfd82aa974",
+      "reviewed": true,
+      "fields": {
+        "question": "Is a faithful memory necessarily useful for future questions?",
+        "answer": "No. It may omit a key fact or remain undiscoverable in a large store. FIRM separately scores faithfulness,informativeness and retrievability and multiplies them.",
+        "example": "Teaching example: I entered the room can be faithful while omitting where the keys were placed."
+      }
+    },
+    "qa/agent-research:memlife/macro-deviation": {
+      "source_sha256": "7ec9d3468ed791f4026678f1a920525609e8508bf3bc125a859b55663f546999",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not use within-candidate variance?",
+        "answer": "Informativeness and retrievability are constant within a candidate,so their signal lies between candidates. Eq.11 retains it by measuring deviations around the shared group mean before macro averaging.",
+        "example": "Teaching example: all-one and all-zero candidates each have zero internal variance,but the correct group variance is.25."
+      }
+    },
+    "qa/agent-research:memlife/writer-vs-folding": {
+      "source_sha256": "ff441ca45898175d7a5e46532b7e5bad0f8f6037cb26403181b282d8f180d19f",
+      "reviewed": true,
+      "fields": {
+        "question": "Do MemOpt and MemFolder optimize the same object?",
+        "answer": "No. MemOpt decomposes training rewards to improve writer outputs;MemFolder organizes and compresses existing records. Fewer retrieval units do not prove greater faithfulness or fact retention.",
+        "example": "Teaching example: grouping two records changes structure;lowering credit for a hallucinated token optimizes the writer."
+      }
+    },
+    "qa/agent-research:memlife/causal-before-rank": {
+      "source_sha256": "878eb25d890076be1f21b03d1bb417d78c9f608c4630303d98539b2ce49f077e",
+      "reviewed": true,
+      "fields": {
+        "question": "May search rank all memories before filtering scope and time?",
+        "answer": "No. Future or out-of-scope high scores can displace eligible results. Filter end<=query_time and explicit subject/interval first,then rank. This local isolation interface is not identity authentication.",
+        "example": "Teaching example: with tomorrow scoring1 and yesterday.8,ranking top1 before filtering wrongly returns nothing rather than yesterday."
+      }
+    }
+  }
+}

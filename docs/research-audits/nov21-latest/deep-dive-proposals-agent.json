@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-21",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "agent-research:sage-evolve",
+      "target_card": "agent-research/harness-and-self-improvement",
+      "source_revisions": {
+        "agent-research:sage-evolve": "215b157cedab8a5a9798cbeabe4734d6e121d2d7ee52054df314488ec887b176",
+        "agent-research:harness2": "c738a9266c1647b8f5cc0e50a0055d1aecf1fcf783ee78de3405c2e84850f48a"
+      },
+      "comparison": {
+        "position": "AdaObs区分固定anchor目标和引导当前研究的active observation。每轮仍在固定anchor上验收；训练进展停滞时，先细分已有输出的错误诊断，再增加同任务的困难层，最后累计加入同能力方向的相关任务。它改变的是发现训练缺口的观察，不是为了提高分数而改评分器、换掉原目标或把测试答案放进训练。",
+        "tradeoff": "Harness²固定模型权重，用参考执行、候选执行对照和组合改任务Harness，并保存跨任务经验；AdaObs的完整研究会更新模型权重，固定anchor而改变active observation，平台检测针对数据边际收益。两者都用记忆避免重复，但“哪种执行框架更好”和“当前观察能否揭示新训练缺口”不是同一个选择问题；本地Harness²也是机制替身诊断，不能拿两者本地控制通过率比较Agent能力。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "同主题比较与边界",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "Sage-Evolve / AdaObs：保持目标不变，平台期先改变观察方式",
+        "body": "同一观测阶段内，边际收益按每新增1万条保留样本的分数变化计算，用α=0.3做EMA；最近3次平滑值全部严格小于0.1才判平台。更换观测必须清空该历史。候选增量须让active或anchor至少一个严格改善，且anchor下降不超过0.5分。L2用独立参考模型，在通过率[0.2,0.6]内选最难层，保留旧层；L3保留旧任务。负例记忆排除的是当前gap下的具体配置，不是失败过一次就封禁整个L1。原文的训练每次从M0加base与累计增量重训，本地没有把它改成继续微调前一轮checkpoint。负控包括恰好等于epsilon不能触发平台、跨phase误用分数被拒绝、切换phase清零、一次具体L1失败后同层其他方案仍可选、不同gap不共用封禁、L2/L3不得丢弃旧成员或一次改多个轴、anchor回退0.5分包含边界而0.501分拒绝。CPU控制只证明规则，不证明自动科研会找到更好的训练数据；不接入Evolve晋级。",
+        "papers": [
+          "agent-research:sage-evolve",
+          "agent-research:harness2"
+        ]
+      },
+      "question": {
+        "id": "cross-nov21-sage-evolve",
+        "question": "AdaObs和Harness²都自进化，改的是同一层吗？",
+        "answer": "不是。Harness²改固定模型外的执行方式；AdaObs固定anchor、改变发现训练缺口的观测，并在完整研究中重训模型。两种本地诊断都不能冒充Agent能力收益。",
+        "example": "教学例：把失败按上下文长度分桶是改观测，增加工具重试规则是改Harness。",
+        "papers": [
+          "agent-research:sage-evolve",
+          "agent-research:harness2"
+        ]
+      },
+      "update": {
+        "date": "2026-11-21",
+        "papers": [
+          "agent-research:sage-evolve",
+          "agent-research:harness2"
+        ],
+        "summary": "本地只执行显式分数的增量验收、边际收益算术、EMA/平台判定、不可变观测结构、按L1→L2→L3选首个可行的显式提案、累计层/任务检查、具体gap配置负例过滤和参考通过率选层。首个MR初始化EMA，等分提案按输入顺序，是明确的本地确定性约定。MR函数要求正的显式保留样本数，拒绝0分母；原文未完全展开拒绝增量的Δd口径，因此不擅自把尝试样本当保留样本，调用方也可直接向monitor提供已定义的MR。没有LLM Analyze/Plan/Produce、数据生成、污染检查器、SFT、集群调度或Harness编辑器；可行性和语义诊断由调用方负责。 完整实验高成本不复现。"
+      },
+      "english": {
+        "comparison": {
+          "position": "AdaObs separates the fixed anchor objective from the active observation guiding research. Every checkpoint is still checked on the anchor. At a plateau, it first refines diagnostics on existing outputs, then adds a harder tier of the same task, and finally adds a related task in the same capability direction. It changes how training gaps are observed, not the scoring rules, the original objective or test-answer access.",
+          "tradeoff": "Harness² holds model weights fixed and improves task harnesses through reference/candidate execution contrasts and composition, preserving cross-task lessons. Full AdaObs updates model weights while holding the anchor fixed and adapting observations; plateaus concern marginal data returns. Both use memory to avoid repetition, but choosing a harness differs from exposing a new training gap. The local Harness² slice is also a mechanism diagnostic, so their control pass rates cannot compare agent capability."
+        },
+        "analysis": {
+          "title": "Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement",
+          "body": "Within one observation phase, marginal return is score change per10,000 retained examples. An EMA with alpha0.3 triggers a plateau only when all three trailing smoothed values are strictly below0.1; changing observations resets that history. A candidate must strictly improve active or anchor score while losing at most0.5 anchor points. L2 selects the hardest tier with held-out reference pass rate in[0.2,0.6], retaining older tiers; L3 retains older tasks. Failure memory excludes a concrete configuration for the current gap, not an entire lever. The paper retrains from M0 on base data plus retained increments; no warm-start replacement is claimed locally. Controls keep equality with epsilon outside the plateau, reject cross-phase score use, reset history on a phase change, preserve other L1 options after one concrete failure and isolate failures by gap. L2/L3 may not discard prior members or change several axes. Exactly0.5 anchor regression is allowed, while0.501 is rejected. CPU controls establish rules, not successful autonomous data discovery or Evolve promotion."
+        },
+        "question": {
+          "question": "Do AdaObs and Harness² evolve the same layer?",
+          "answer": "No. Harness² edits execution around a fixed model. AdaObs keeps the anchor fixed, changes how training gaps are observed and retrains models in the full study. Neither local diagnostic demonstrates capability gains.",
+          "example": "Teaching example: grouping failures by context length changes observation; adding a tool retry rule changes the harness."
+        },
+        "update": "The local slice executes acceptance gates on explicit scores, marginal-return arithmetic, EMA/plateau detection, immutable observation records, first-feasible supplied proposals in L1/L2/L3 order, cumulative tier/task validation, gap-specific failed-configuration filtering and reference-rate tier selection. The first MR initializes the EMA and input order resolves tied proposals: explicit deterministic local conventions. MR requires a positive supplied retained-example count and rejects a zero denominator. Because the paper does not fully define rejected-increment data accounting, attempted examples are not silently called retained; callers may supply a defined MR directly. No LLM analysis/planning/production, data generation, contamination checker, SFT, scheduler or harness editor executes. Proposal feasibility and semantic diagnosis remain external. Full experiments are not reproduced."
+      }
+    },
+    {
+      "paper": "agent-research:memfolder",
+      "target_card": "agent-research/memory-and-skills",
+      "source_revisions": {
+        "agent-research:memfolder": "d734549ed4d09f71761fbb06873671b0677c35cd80f31b200c16d77ec4e4b392",
+        "agent-research:memforest": "79e6f34f132ccb1c98b9baa128d33288f17dd8e61036ba1d7b183ef43157b814"
+      },
+      "comparison": {
+        "position": "MemFolder把记录数和取回上下文长度分开处理。RecordFolder先用LLM统一实体，再以密度峰选首锚点、以相对已有锚点的novelty渐进选互补锚点；语义/实体亲和与时间链修正分组，最后由LLM按时间合并。ContextFolder沿用这些分组，按事实重要性和token比例编码，通过看不到源记录和预期答案的blind reader检查可恢复性。分组不是摘要生成，校验也不是无损保证。",
+        "tradeoff": "MemForest按事件构建最大生成树并渐进合并，检索时从anchor传播到时间邻域；MemFolder先以全局互补锚点确定目标组数，再用实体/语义gain和Hungarian非分支时间链修正组，并另加独立的ContextFolder编码层。二者都保留结构，但树形层次与一入一出的链不等价。现有本地MemForest用词项重叠近似语义，本地MemFolder只收显式embedding，因此不能凭两者单测数值宣称谁的模型记忆更好。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "同主题比较与边界",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "MemFolder：用互补锚点和非分支时间链减少检索单元",
+        "body": "实体权重为log(N/df)，共有的实体权重可为0；weighted Jaccard与cosine按共享实体质量和两种信号方差自适应混合。方差先在整个W窗口的前后记录对上计算，再筛正gain和每后继最多d条候选边；gain相对的是后继与初始锚点的cosine。Hungarian最大化总gain，各节点最多一入一出，锚点不可有入边，所以没有分叉或时间环。有锚点的链留在该组，无锚点链按整链cosine总和选组，未匹配项保留原分组。负控包括全记录恰好分配一次、重复embedding仍保留K个非空组、N=1、所有实体共有时退化为cosine、在筛边前计算窗口方差、时间边向前且锚点无入边、每节点最多一入一出，以及一个greedy得0.9而Hungarian得1.6的显式矩阵单测。后者仅是组合优化单测，不是记忆准确率。上下文验证可能误判源事实，且原文回退可选择缺失required facts的较短候选，不能把ContextFolder宣传为无损存储。",
+        "papers": [
+          "agent-research:memfolder",
+          "agent-research:memforest"
+        ]
+      },
+      "question": {
+        "id": "cross-nov21-memfolder",
+        "question": "MemFolder的时间链和MemForest的事件树能互换吗？",
+        "answer": "不能。MemFolder匹配约束每节点最多一入一出，无锚点链整体分组；MemForest保留事件树层次并用anchor邻域传播。数据结构和检索假设不同。",
+        "example": "教学例：一个父事件分出两条子事件可在树中表达，不能直接塞进无分支匹配链。",
+        "papers": [
+          "agent-research:memfolder",
+          "agent-research:memforest"
+        ]
+      },
+      "update": {
+        "date": "2026-11-21",
+        "papers": [
+          "agent-research:memfolder",
+          "agent-research:memforest"
+        ],
+        "summary": "本地实现显式embedding和已ground实体集合上的RecordFolder分组核，包括归一化、DPC/novelty锚点、全窗口方差、IDF亲和、正gain候选、SciPy真正Hungarian和链级重新归组；仅接收按时间排序的输入，最多512条。用总体方差ddof=0、Python round、相同分数按输入顺序、重复embedding的锚点固定保留本组，是论文未完全指定时公开的确定性约定。没有LLM实体提取、实体别名合并、文本合并、ContextFolder、embedding模型或下游问答；调用方负责提供已ground标签和时间顺序，不用词项Jaccard冒充语义embedding。不接收文件路径，不读取Codex会话，也不自动删除或压缩用户文件。 完整实验高成本不复现。"
+      },
+      "english": {
+        "comparison": {
+          "position": "MemFolder treats record count and retrieved-context length separately. RecordFolder grounds entities with an LLM, selects a density-peak first anchor and progressively chooses complementary anchors through novelty relative to those already selected. Semantic/entity affinity and temporal chains refine groups before chronological LLM consolidation. ContextFolder reuses groups, encodes facts under importance and token-ratio constraints, and tests recoverability with a blind reader that cannot see source records or expected answers. Grouping is not summary generation, and verification is not a losslessness guarantee.",
+          "tradeoff": "MemForest builds event-level maximum-spanning trees and progressively merges nodes, retrieving temporal neighbors through anchor-guided propagation. MemFolder first fixes target groups using global complementary anchors,then refines them through entity/semantic gains and Hungarian nonbranching chains,and adds a separate ContextFolder encoding layer. Both preserve structure,but a hierarchy is not a one-in/one-out chain. Local MemForest approximates semantics through lexical overlap while local MemFolder takes supplied embeddings; their unit-test numbers cannot establish a memory-quality winner."
+        },
+        "analysis": {
+          "title": "MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management",
+          "body": "Entity weights are log(N/df), so an entity common to every record can have zero weight. Shared entity mass and both signal variances adaptively mix weighted Jaccard with cosine. Variances are computed over every earlier/later pair in the W-window before positive-gain filtering and the d-edge-per-successor cap. Gain is measured against the successor's initial-anchor cosine. Hungarian matching maximizes total gain with at most one incoming and outgoing edge, and no incoming anchor edge. Thus links form forward nonbranching chains: anchored chains stay together, anchor-free chains choose the maximum summed cosine group, and unmatched records retain their initial group. Controls assign every record once,preserve K nonempty groups under duplicate embeddings,handle N1,reduce to cosine for universally common entities,and estimate window variance before filtering. Links must point forward,avoid incoming anchor edges and be nonbranching. A supplied-matrix unit test distinguishes greedy gain0.9 from Hungarian gain1.6; it is not memory accuracy. Verification can misjudge source facts, and the paper's fallback may choose a shorter candidate missing required facts, so ContextFolder must not be described as lossless storage."
+        },
+        "question": {
+          "question": "Can MemFolder's temporal chains replace MemForest's event trees?",
+          "answer": "No. MemFolder permits at most one incoming/outgoing edge and reassigns anchor-free chains together. MemForest preserves event-tree hierarchy and retrieves through anchor neighborhoods.",
+          "example": "Teaching example: a parent event with two child events fits a tree but not a nonbranching matched chain."
+        },
+        "update": "The local RecordFolder grouping kernel consumes explicit embeddings and grounded entity sets: normalization, DPC/novelty anchors, full-window variances, IDF affinity, positive-gain candidates, actual SciPy Hungarian matching and chain reassignment. Inputs must be chronological and contain at most512 records. Population variance with ddof0,Python rounding,input-order ties and anchors pinned to their own groups under duplicate embeddings are explicit deterministic conventions where the paper leaves details open. There is no LLM entity extraction, alias merging,text consolidation,ContextFolder,embedding model or downstream QA. Callers supply grounded labels and chronological order; lexical Jaccard is not substituted for semantic embeddings. No paths or Codex conversations are read, and no user files are automatically removed or compressed. Full experiments are not reproduced."
+      }
+    },
+    {
+      "paper": "agent-research:memlife",
+      "target_card": "agent-research/memory-and-skills",
+      "source_revisions": {
+        "agent-research:memlife": "052bca04c8531bc8aee8775449296e3b4905bead5cf9e61a95d5f93d3faad6ea",
+        "agent-research:memfolder": "d734549ed4d09f71761fbb06873671b0677c35cd80f31b200c16d77ec4e4b392"
+      },
+      "comparison": {
+        "position": "MemLife先把每段第一视角视频和语音写成有时间锚点、实体落地的第一人称文本，再由reader按问题进行语义搜索和时间区间读取。MemOpt只训练writer，reader保持冻结；FIRM将逐token的faithfulness、逐候选的informativeness和retrievability相乘。前者看源视频是否支持内容，后两者分别看回答所需事实是否被保留、已缓存reader动作能否找回该候选，不把完整reader成败混成一个写入奖励。",
+        "tradeoff": "MemFolder主要改变已有记忆如何分组、合并与编码，MemOpt则改变writer生成什么文本以及如何分配训练credit；前者的结构压缩和后者的写入奖励不互相替代。MemFolder的ContextFolder blind reader看不到源记录/预期答案；MemOpt训练评审可用源视频和训练问答，但这些信息不得流向被评测reader。二者本地都是L1数学组件，不能把分组数或优势方差当QA准确率比较。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "同主题比较与边界",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "MemLife / MemOpt：把忠实、信息保留和可检索性分解给记忆写入器",
+        "body": "Eq.11先对每个候选的response token求均值，再对候选做宏平均，避免长记忆独占基线。方差是每个候选围绕同一group均值的token偏差平方再宏平均，不能改成候选内部方差，否则丢掉informativeness/retrievability的候选间信号。Eq.12归一化后先clip到±3，再按组中有效response token加权重心化，最后全局masked whitening；prompt和padding始终排除。KL属于Eq.16 loss项，不进入FIRM奖励或优势统计。训练reward可用训练问答，问题独立的writer与被评测reader不可读测试答案。长度不等候选构造宏均值0.5而token池均值0.25，检验group方差0.25而非候选内方差0；稀疏离群值检验clip后重心化。有效response奖励限定[0,1]；极大有限padding先归零，有限输入的ratio乘advantage或KL项溢出也明确拒绝，不能输出inf或把溢出方差伪装成零优势。负控还包括全平group、空候选/padding、无效概率、KL只影响独立loss、不改变奖励、严格未来片段和其他subject在检索前排除、恰好query_time的片段可用。所有输入是合成显式控制值，没有任何gold QA或视频内容输入reader；通过率不是长视频QA能力。",
+        "papers": [
+          "agent-research:memlife",
+          "agent-research:memfolder"
+        ]
+      },
+      "question": {
+        "id": "cross-nov21-memlife",
+        "question": "MemOpt和MemFolder都优化记忆，优化的对象一样吗？",
+        "answer": "不一样。MemOpt分解训练奖励以改writer输出；MemFolder整理和压缩已有记录。不能把检索单元变少等同于writer更忠实或更会保留事实。",
+        "example": "教学例：把两条记忆合为一组是结构整理，降低幻觉token的训练credit是写入器优化。",
+        "papers": [
+          "agent-research:memlife",
+          "agent-research:memfolder"
+        ]
+      },
+      "update": {
+        "date": "2026-11-21",
+        "papers": [
+          "agent-research:memlife",
+          "agent-research:memfolder"
+        ],
+        "summary": "本地只接收显式概率/奖励数组与response mask，执行Eq.7的概率差、FIRM乘积、Eq.11-12宏统计、clip/组内token重心化/全局whitening和Eq.16已给ratio/advantage/KL的标量loss算术。独立NumPy float64实现，normalization epsilon=1e-6，whitening epsilon=1e-8、样本方差correction=1作为显式数值协议；不声称与外部trainer逐bit相同。空候选从G排除，空group输出0；全batch少于2个有效token则拒绝，不补造whitening。另有最多512条的显式unit-vector SearchMemory/FetchMemory：先按end≤query_time及区间完整包含过滤，再排序；返回按时间排列。单subject过滤是本地隔离合同，不是论文LVQA混合受试者基准，也不认证调用者身份。没有视频/embedding模型、VLM评审、writer/reader、训练数据构建、cached reader trace生成、RL训练或Evolve接入。 完整实验高成本不复现。"
+      },
+      "english": {
+        "comparison": {
+          "position": "MemLife writes video frames and speech into time-anchored,entity-grounded first-person episodes,then lets a reader search semantically and fetch intervals. MemOpt trains only the writer while freezing the reader. FIRM multiplies token-level faithfulness with candidate-level informativeness and retrievability: source grounding,retention of answer-relevant facts,and recovery through cached reader actions are assessed separately instead of conflating writer quality with an entire reader trajectory's success.",
+          "tradeoff": "MemFolder mainly changes how existing memories are grouped,merged and encoded;MemOpt changes what a writer generates and how training credit is assigned. Structural compression and writer rewards do not substitute for one another. ContextFolder's blind reader cannot see source records/expected answers;MemOpt training judges may use source video and training QA,but those inputs must not reach the evaluated reader. Both local slices areL1 mathematics,so group counts or advantage variances cannot compare QA accuracy."
+        },
+        "analysis": {
+          "title": "MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories",
+          "body": "Eq.11 averages response tokens within each candidate before macro-averaging candidates,preventing long memories from dominating the baseline. Variance macro-averages token deviations around the same group mean,not each candidate's own mean; the latter would discard between-candidate informativeness/retrievability signal. Eq.12 normalization is clipped to plus/minus3,then response-token-recentered within each group,and finally globally mask-whitened. Prompt/padding positions stay excluded. KL is an Eq.16 loss term,not part of FIRM or advantage statistics. Training QA may construct training rewards,but the question-independent writer and evaluated reader cannot read test answers. Unequal-length candidates distinguish a macro mean.5 from pooled-token mean.25,and group variance.25 from zero within-candidate variance. Sparse outliers check post-clip recentering. Valid response rewards are restricted to[0,1];extreme finite padding is erased before arithmetic,and overflow from finite ratios times advantages or KL terms is rejected rather than returning infinity or disguising an overflowed variance as zero advantage. Further controls cover flat groups,empty candidates/padding,invalid probabilities,KL affecting only the separate loss,and future/other-subject entries excluded before ranking while exact-cutoff entries remain available. Inputs are explicit synthetic controls,no gold QA or video is passed to a reader,and pass rates are not video-QA capability."
+        },
+        "question": {
+          "question": "Do MemOpt and MemFolder optimize the same object?",
+          "answer": "No. MemOpt decomposes training rewards to improve writer outputs;MemFolder organizes and compresses existing records. Fewer retrieval units do not prove greater faithfulness or fact retention.",
+          "example": "Teaching example: grouping two records changes structure;lowering credit for a hallucinated token optimizes the writer."
+        },
+        "update": "The local slice takes explicit probability/reward arrays and response masks for the Eq.7 margin,FIRM product,Eq.11-12 macro statistics,clipping/group-token recentering/global whitening,and Eq.16 scalar loss from supplied ratios,advantages and KL. An independently derived NumPy float64 protocol uses normalization epsilon1e-6,whitening epsilon1e-8 and sample-variance correction1; bitwise trainer equivalence is not claimed. Empty candidates are excluded fromG,empty groups output zero,and fewer than two valid batch tokens are rejected. Bounded unit-vector SearchMemory/FetchMemory first filter full interval containment and end<=query_time,then rank and return chronologically. Single-subject filtering is a local isolation contract,not the paper's mixed-subject LVQA benchmark or caller authentication. No video/embedding model,VLM judge,writer/reader,training-data construction,cached-reader trace collection,RL trainer or Evolve integration is implemented. Full experiments are not reproduced."
+      }
+    }
+  ]
+}

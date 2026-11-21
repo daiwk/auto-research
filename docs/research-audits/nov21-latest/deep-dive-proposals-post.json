@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-21",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "post-training:dfrl",
+      "target_card": "post-training/policy-optimization",
+      "source_revisions": {
+        "post-training:dfrl": "897844a59cfe062c84c423073f75dd192b69ce998bdab4331fa01a47bce6ff39",
+        "post-training:rloo": "07ebf63638eb93c804d3122a7c60995c0a29db5eb1ab2023b10546f87a50a0a1"
+      },
+      "comparison": {
+        "position": "纯stdlib、CPU-only的实际成本RLOO优势、单批共享Bernoulli逆概率校正与lazy整批精确成本回调、显式warm-start边界、小规模枚举knapsack。诊断对三个可采样参数预测的真实可行决策计算观测成本，穷举两个独立categorical样本的score-gradient期望并与解析梯度比较；偏置cheap成本仅为明确的负控输入，不冒充训练好的估计器。没有LLM、token生成、参数JSON解析器、H&M处理、Adam训练或能力评测；非Evolve算子。",
+        "tradeoff": "已有RLOO实现把整条response作为action，用其他response的奖励均值作baseline，并可加KL shaping。DFRL在这里指定奖励来自下游真实决策成本；其文中RLOO分析抵消共同hindsight常数，reward correction用整批开关减少昂贵反馈调用。RLOO没有自动定义什么是业务regret；DFRL也没有使任意归一化、clipping或候选相关baseline都保持无偏。两者是目标/反馈与估计器两个维度，而非互斥算法。",
+        "sections": [
+          "背景与主要改动",
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "DFRL是替代RLOO的另一种优化器吗？",
+        "body": "已有RLOO实现把整条response作为action，用其他response的奖励均值作baseline，并可加KL shaping。DFRL在这里指定奖励来自下游真实决策成本；其文中RLOO分析抵消共同hindsight常数，reward correction用整批开关减少昂贵反馈调用。RLOO没有自动定义什么是业务regret；DFRL也没有使任意归一化、clipping或候选相关baseline都保持无偏。两者是目标/反馈与估计器两个维度，而非互斥算法。 不能把先求全批exact再屏蔽当作节省求解。本地I=0分支不调用lazy exact回调；I=1只调用一次整批supplier。p必须大于0且不大于1，p很小时方差和溢出风险需显式处理。",
+        "papers": [
+          "post-training:dfrl",
+          "post-training:rloo"
+        ]
+      },
+      "question": {
+        "id": "nov21-dfrl",
+        "question": "DFRL是替代RLOO的另一种优化器吗？",
+        "answer": "不是。DFRL指定决策regret目标和反馈，RLOO可作为其无偏score-gradient估计器。相同实例的hindsight最优成本在baseline中抵消，但任意优势标准化或KL shaping都会改变原文分析的目标/更新。",
+        "example": "教学例：成本2和5给优势3和负3；同时减去共同hindsight成本1，优势仍是3和负3，不需要多求一次真实参数下的最优解。",
+        "papers": [
+          "post-training:dfrl",
+          "post-training:rloo"
+        ]
+      },
+      "update": {
+        "date": "2026-11-21",
+        "papers": [
+          "post-training:dfrl",
+          "post-training:rloo"
+        ],
+        "summary": "纯stdlib、CPU-only的实际成本RLOO优势、单批共享Bernoulli逆概率校正与lazy整批精确成本回调、显式warm-start边界、小规模枚举knapsack。诊断对三个可采样参数预测的真实可行决策计算观测成本，穷举两个独立categorical样本的score-gradient期望并与解析梯度比较；偏置cheap成本仅为明确的负控输入，不冒充训练好的估计器。没有LLM、token生成、参数JSON解析器、H&M处理、Adam训练或能力评测；非Evolve算子。 完整实验成本过高不复现；组件不构成能力晋级。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Pure-standard-library, CPU-only realized-cost RLOO advantages, one-batch Bernoulli inverse-probability correction with a lazy whole-batch exact-cost callback, an explicit warm-start boundary, and tiny exact knapsack enumeration. Diagnostics compute observed costs of real feasible decisions for three sampleable parameter predictions, enumerate the score-gradient expectation of two independent categorical samples, and compare it with the analytic gradient. Biased cheap costs are explicit negative-control inputs, not a trained estimator. No LLM, token generation, parameter-JSON parser, H&M pipeline, Adam training, capability evaluation or Evolve operator is supplied.",
+          "tradeoff": "Existing RLOO treats a complete response as an action, baselines its reward against the other responses, and may add KL shaping. DFRL specifies downstream realized decision cost as feedback; its RLOO analysis cancels the common hindsight constant, and batch-switch reward correction reduces expensive feedback calls. RLOO does not define business regret automatically, and DFRL does not make arbitrary normalization, clipping or candidate-dependent baselines unbiased. They concern an objective/feedback pipeline and an estimator, not mutually exclusive algorithms."
+        },
+        "analysis": {
+          "title": "Is DFRL another optimizer replacing RLOO?",
+          "body": "Existing RLOO treats a complete response as an action, baselines its reward against the other responses, and may add KL shaping. DFRL specifies downstream realized decision cost as feedback; its RLOO analysis cancels the common hindsight constant, and batch-switch reward correction reduces expensive feedback calls. RLOO does not define business regret automatically, and DFRL does not make arbitrary normalization, clipping or candidate-dependent baselines unbiased. They concern an objective/feedback pipeline and an estimator, not mutually exclusive algorithms. Solving every exact problem and masking afterward does not save solves. The local I=0 branch never calls the lazy callback; I=1 calls the whole-batch supplier once. Require0<p<=1 and handle variance and overflow at small p explicitly."
+        },
+        "question": {
+          "question": "Is DFRL another optimizer replacing RLOO?",
+          "answer": "No. DFRL specifies a decision-regret objective and feedback, while RLOO can estimate its score gradient. The shared hindsight optimum cancels from the baseline; arbitrary advantage standardization or KL shaping changes the analyzed objective or update.",
+          "example": "Teaching example: costs2 and5 yield advantages3 and minus3. Subtracting the same hindsight cost1 leaves them unchanged, avoiding another solve under observed parameters."
+        },
+        "update": "Pure-standard-library, CPU-only realized-cost RLOO advantages, one-batch Bernoulli inverse-probability correction with a lazy whole-batch exact-cost callback, an explicit warm-start boundary, and tiny exact knapsack enumeration. Diagnostics compute observed costs of real feasible decisions for three sampleable parameter predictions, enumerate the score-gradient expectation of two independent categorical samples, and compare it with the analytic gradient. Biased cheap costs are explicit negative-control inputs, not a trained estimator. No LLM, token generation, parameter-JSON parser, H&M pipeline, Adam training, capability evaluation or Evolve operator is supplied. High-cost full experiments are not reproduced; components do not establish capability promotion."
+      }
+    },
+    {
+      "paper": "foundation-models:e-rwsc",
+      "target_card": "foundation-models/evaluation-and-evidence",
+      "source_revisions": {
+        "foundation-models:e-rwsc": "6f7990a337b89868094a0642455db0f632db53c314f586f5bb8d5bd885496a30",
+        "foundation-models:llm-stochasticity": "9c879b4c31cbbb96adda8b1bc5011027c39a1ccb1d26863d6fbc924bfddf4c6a"
+      },
+      "comparison": {
+        "position": "纯stdlib、CPU-only的RWSC聚合、前缀可预测下注、逐答案log资本与首现权重、首次出现跳过、认证终止和显式未认证预算回退。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。没有LLM、reward model、答案解析或公开benchmark运行；不把合成流叫模型输出，不接Evolve晋级。",
+        "tradeoff": "LLM Stochasticity区分边缘分布拟合与时序依赖；e-RWSC的保证需要固定政策的iid响应，不能由平衡答案直方图或“请随机回答”提示推导。前者的统计诊断可暴露某些依赖，却不能证明后者的全部假设。e-RWSC也不估计答案是否符合现实：即使输入真独立，政策总偏向错误答案时仍可快速发多数证书。",
+        "sections": [
+          "背景与主要改动",
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "答案直方图均匀，是否就满足iid保证？",
+        "body": "LLM Stochasticity区分边缘分布拟合与时序依赖；e-RWSC的保证需要固定政策的iid响应，不能由平衡答案直方图或“请随机回答”提示推导。前者的统计诊断可暴露某些依赖，却不能证明后者的全部假设。e-RWSC也不估计答案是否符合现实：即使输入真独立，政策总偏向错误答案时仍可快速发多数证书。 不能。返回的是reward-weighted self-consistency回退，certified必须为false。还要检查当前下注只看旧前缀，新响应的答案和极端reward都不能倒灌到刚才的stake。",
+        "papers": [
+          "foundation-models:e-rwsc",
+          "foundation-models:llm-stochasticity"
+        ]
+      },
+      "question": {
+        "id": "nov21-e-rwsc",
+        "question": "答案直方图均匀，是否就满足iid保证？",
+        "answer": "不满足。LLM Stochasticity说明边缘分布平衡仍可有确定性时序依赖；e-RWSC的固定政策独立抽样假设不能靠均匀图或随机提示替代。",
+        "example": "教学例：0、1、2、3无限循环时各值频率相等，但下一值可由上一值确定；这不是四分类iid采样。",
+        "papers": [
+          "foundation-models:e-rwsc",
+          "foundation-models:llm-stochasticity"
+        ]
+      },
+      "update": {
+        "date": "2026-11-21",
+        "papers": [
+          "foundation-models:e-rwsc",
+          "foundation-models:llm-stochasticity"
+        ],
+        "summary": "纯stdlib、CPU-only的RWSC聚合、前缀可预测下注、逐答案log资本与首现权重、首次出现跳过、认证终止和显式未认证预算回退。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。没有LLM、reward model、答案解析或公开benchmark运行；不把合成流叫模型输出，不接Evolve晋级。 完整实验成本过高不复现；组件不构成能力晋级。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Pure-standard-library, CPU-only RWSC aggregation, prefix-predictable betting, per-answer log capital and first-appearance weights, skipped first appearances, certified stopping and explicit uncertified budget fallback. Diagnostics use declared synthetic answer/reward streams to check causality, no reset on leader changes, certification of a wrong but concentrated answer, extreme-score softmax and uniform ties. No LLM, reward model, answer extractor, public benchmark run or Evolve promotion is provided; synthetic streams are not model outputs.",
+          "tradeoff": "LLM Stochasticity distinguishes marginal distribution fit from temporal dependence. e-RWSC requires iid responses from a fixed policy; a balanced answer histogram or a prompt asking for randomness does not establish that assumption. Statistical diagnostics can expose some dependence but do not prove every certification assumption. e-RWSC also does not establish factual truth: even genuinely independent draws from a policy concentrated on a wrong answer can certify that majority quickly."
+        },
+        "analysis": {
+          "title": "Does a uniform answer histogram establish iid sampling?",
+          "body": "LLM Stochasticity distinguishes marginal distribution fit from temporal dependence. e-RWSC requires iid responses from a fixed policy; a balanced answer histogram or a prompt asking for randomness does not establish that assumption. Statistical diagnostics can expose some dependence but do not prove every certification assumption. e-RWSC also does not establish factual truth: even genuinely independent draws from a policy concentrated on a wrong answer can certify that majority quickly. No. It is a reward-weighted self-consistency fallback with certified=false. Also check that each stake uses only the old prefix: the incoming answer or an extreme reward cannot influence the stake just being settled."
+        },
+        "question": {
+          "question": "Does a uniform answer histogram establish iid sampling?",
+          "answer": "No. LLM Stochasticity shows that balanced marginal frequencies can coexist with deterministic temporal dependence. A histogram or randomness prompt cannot replace e-RWSC's fixed-policy independent-sampling assumption.",
+          "example": "Teaching example: an endless0,1,2,3 cycle has equal frequencies, yet each next value is determined by its predecessor; it is not iid categorical sampling."
+        },
+        "update": "Pure-standard-library, CPU-only RWSC aggregation, prefix-predictable betting, per-answer log capital and first-appearance weights, skipped first appearances, certified stopping and explicit uncertified budget fallback. Diagnostics use declared synthetic answer/reward streams to check causality, no reset on leader changes, certification of a wrong but concentrated answer, extreme-score softmax and uniform ties. No LLM, reward model, answer extractor, public benchmark run or Evolve promotion is provided; synthetic streams are not model outputs. High-cost full experiments are not reproduced; components do not establish capability promotion."
+      }
+    }
+  ]
+}

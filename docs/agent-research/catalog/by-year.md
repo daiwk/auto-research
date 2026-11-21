@@ -4,6 +4,8 @@
 
 ## 2026
 
+- 2026-11 · [MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management](../2611.26427-memfolder/README.md)（`memfolder`）：MemFolder把记录数和取回上下文长度分开处理。RecordFolder先用LLM统一实体，再以密度峰选首锚点、以相对已有锚点的novelty渐进选互补锚点；语义/实体亲和与时间链修正分组，最后由LLM按时间合并。
+- 2026-11 · [Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement](../2611.26132-sage-evolve/README.md)（`sage-evolve`）：AdaObs区分固定anchor目标和引导当前研究的active observation。每轮仍在固定anchor上验收；训练进展停滞时，先细分已有输出的错误诊断，再增加同任务的困难层，最后累计加入同能力方向的相关任务。
 - 2026-11 · [Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses](../2611.24924-ahe-beta/README.md)（`ahe-beta`）：AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。
 - 2026-11 · [BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection](../2611.25088-buggymle-cci/README.md)（`buggymle-cci`）：BuggyMLE先审核可运行、指标稳定且对代码变化敏感的ML仓库，再让Injector注入不同规模的错误。Oracle通过逐个恢复变动找最小恢复集合，再把每个改动单独应用到干净仓库，筛出确有独立指标影响的错误。
 - 2026-11 · [Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling](../2611.24849-execjudges/README.md)（`execjudges`）：对每个topic独立生成三个轻量Python评审程序，程序回答on-subject/some-answer/exact/dedicated四个证据问题，固定评分函数映射为等级，再对三个分数均值向下取整。LLM负责一次性的程序编写而不是逐文档调用，生成代码必须隔离执行。
@@ -134,6 +136,7 @@
 - 2026-10 · [VeriHarness: Scaling Agentic Verification for Long-Horizon Tasks](../2610.00972-veriharness/README.md)（`veriharness`）：同一基础模型得到 workspace、证据工具和可复用验证技能；disagreement resolver 查证冲突 claim，consensus challenger 主动质疑共同 claim 和遗漏要求。
 - 2026-09 · [JevSpawn: Adaptive Agentic Inference through Compositional Action Spaces](../2610.00437-jev-spawn/README.md)（`jev-spawn`）：先从自然语言任务构造有限 compositional action space，以 Jev 分布并行保留多个分支；反馈更新后验并保留备选以支持恢复。
 - 2026-09 · [MemFit: Efficient Long-Term Agentic Memory](../2610.00872-memfit/README.md)（`memfit`）：原始 turn 追加写入不改写，只用 segment summary 建索引；读取融合 lexical、semantic 与 rerank 信号，避免昂贵 LLM 写入。
+- 2026-09 · [MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories](../2609.40195-memlife/README.md)（`memlife`）：MemLife先把每段第一视角视频和语音写成有时间锚点、实体落地的第一人称文本，再由reader按问题进行语义搜索和时间区间读取。MemOpt只训练writer，reader保持冻结；FIRM将逐token的faithfulness、逐候选的informativeness和retrievability相乘。
 - 2026-09 · [Self-Evolving Coding Rules for AI Coding Agents](../2610.00650-rule-evolve/README.md)（`rule-evolve`）：维护 coding rule 候选池，由 mutator 生成变体，再只用隔离 validation evaluator 选择并回写更优规则。
 - 2026-09 · [Context Language Models](../2609.37725-context-lm/README.md)（`context-lm`）：把上下文视为模型可直接编辑的文件，使保留、删除和重组信息成为模型行为，而不是外部 harness 的固定策略；多 Agent 各自维护 context file，服务端从第一个不匹配 token 起重新 prefill。
 - 2026-09 · [Learning Meta-Skills for Agent Harness Design in Test-Time AI4AI](../2609.38143-meta-skills/README.md)（`meta-skills`）：从开发任务的 harness 执行反馈中提炼包含 when、provide、use 的 meta-skill，再冻结技能库；测试任务只检索相关 meta-skill 来构建新 harness，不用测试结果反向修改技能库。

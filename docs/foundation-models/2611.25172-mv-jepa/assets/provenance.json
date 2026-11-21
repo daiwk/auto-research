@@ -1,0 +1,20 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.25172v1#page=3",
+  "paper_url": "https://arxiv.org/abs/2611.25172v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-21",
+  "page": 3,
+  "crop_box_pdf_points": [
+    107,
+    82,
+    505,
+    368
+  ],
+  "caption": "Figure 1: MV-JEPA overview.",
+  "caption_note": "Full original caption is retained in the crop; this text is its short title, not a substituted local caption.",
+  "extraction": "Original PDF crop including original caption; no semantic editing",
+  "visually_reviewed": true,
+  "source_pdf_sha256": "29d70a0606d89201b8c4fa3c12a483eb78c5a58412e30b03e5468d51d1431170",
+  "asset_sha256": "076b7dc8d0d9b42873ec3f49b5e91d56cf543bee0c2e98f68e0bf2b5c748c003",
+  "copyright": "Copyright belongs to the original authors."
+}

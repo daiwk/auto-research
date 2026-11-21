@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-21",
+  "reviews_are_not_capability_measurements": true,
+  "pre_freeze_corrections": [
+    {"component": "frontier-replay", "finding": "An unaligned native chunk end1001 was rounded down to992, incorrectly suppressing replay of structural target1000.", "kind": "independent_source_review_counterexample_not_a_GPU_result", "resolution": "Native chunk ends must already be16-aligned. Unaligned1001 raises; structural1000 still plans replay992; actual native992 may skip replay. Finished-turn flooring remains separately justified by decode page progression.", "actual_diagnostic_control": "native_chunk_state_requires_exact_page_alignment", "status": "fixed_before_execution_source_freeze"},
+    {"component": "e-rwsc", "finding": "The equal-score zero-variance convention was described as continuous, but standardized rewards have no unique continuous extension at a constant vector.", "resolution": "Documented as an explicit uniform tie convention, not a continuity theorem. No estimator math was changed.", "status": "corrected_before_execution_source_freeze"},
+    {"components": ["frontier-replay", "mv-jepa"], "finding": "The standalone source modules initially omitted the runner's explicit GPU-validation contract constant.", "resolution": "Added False for CPU-only FrontierReplay and True for MV-JEPA, with contract assertions. No broader package initializer is loaded by the frozen runner.", "status": "fixed_before_execution_source_freeze"},
+    {"component": "priority-source-capture", "finding": "Transport-gzip responses were parsed as raw HTML, producing zero links; failed Google directory pages could also make baseline links appear removed.", "resolution": "Preserve initial receipt and raw bytes, decode gzip before parsing, reparse cached responses only, and suppress removal claims when directory comparison is incomplete.", "tests": "tests/test_nov21_priority_sources.py", "status": "fixed_and_real_cached_responses_reparsed"},
+    {"component": "memlife", "kind": "actual_independent_CPU_counterexample_before_freeze_not_a_capability_experiment", "findings": ["Finite ratio1e308 times negative advantage-10 returned an infinite MemOpt loss.", "Direct reward inputs around plus/minus1e200 yielded infinite group variance and zero advantages."], "resolution": "Require valid FIRM response rewards in[0,1], zero padding before statistics, and reject nonfinite surrogate/KL/terms/final loss. Dedicated tests and actual diagnostic boolean controls cover both counterexamples.", "status": "fixed_before_execution_source_freeze"}
+  ],
+  "independent_method_review": [
+    {"components": ["dfrl", "e-rwsc"], "scope": "Fixed primary equations and algorithm pseudocode versus independent implementation and tests", "blocking_findings_after_corrections": 0},
+    {"components": ["frontier-replay", "mv-jepa"], "scope": "Fixed primary host-policy/exact-boundary and cross-view target/loss/replay/EMA contracts", "blocking_findings_after_corrections": 0},
+    {"components": ["memlife"], "scope": "Fixed-v1 Eq7–12/B.4 and explicit causal/subject access; primary formulas reviewed independently, numeric counterexamples reproduced and corrected", "blocking_findings_after_corrections": 0}
+  ]
+}

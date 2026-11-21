@@ -1,0 +1,122 @@
+{
+  "schema_version": 2,
+  "batch": "2026-11-21-overlap-components",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "device": "cuda",
+  "accelerator": "NVIDIA A100-SXM4-80GB",
+  "source_sha256": {
+    "scripts/run_nov21_latest_components.py": "13ef2fc61f7b6d7dd23d3f9c6afd77d86f574c191a9b08bb303097013d3fcabf",
+    "scripts/run_nov18_latest_components.py": "0fe50e8e554f6663b3c8c179654400d10bfbb557ceb9cefb9880da78f164b7c1",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "docs/research-audits/nov21-latest/preflight.json": "c1705b0c8472f7a2d2e1f02544067d46784bf958789fd7ee526783371ddfc3e2",
+    "src/auto_research/foundation_models/frontier_replay.py": "bf3613a78c682a1693457d2ab8feb5a8b533104497161340f61a375e2ac15248",
+    "src/auto_research/foundation_models/mv_jepa.py": "1a7f674ab37036b207a9b759f8595926f4531d29522a1291ccd8460da980e8ca",
+    "src/auto_research/agent_research/sage_evolve.py": "4c8572f73f3717dfd4488c8ad3960d5d929dc83253384bdf4c841a3f938eb1c7",
+    "src/auto_research/agent_research/memfolder.py": "9492350142246424902bb0fa61cb65b4ad6feee95c64ec1d159034042a951d50",
+    "src/auto_research/post_training/dfrl.py": "a4849643e8f5880ea617e1f950d408ef2643e3927c890f7f14cb1d17cb4a3f7e",
+    "src/auto_research/foundation_models/e_rwsc.py": "29846f83048306fea090979ed109e122b10447eefe8aea200125a83d337e55ec",
+    "src/auto_research/agent_research/memlife.py": "155845e6469e301412e503d07a25a5839bfc5804163e060c64d585e69b62e8be"
+  },
+  "code_commit": "3b147143ff4e0e9e098f2964dce0fec7120da8a8",
+  "components": {
+    "mv-jepa": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cuda",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "multiview_token_l1": 0.7436184883117676,
+            "single_view_replay_l1": 0.9073654413223267,
+            "online_gradient_l1": 0.24483642261475325,
+            "heldout_prediction_leak_delta": 0.0,
+            "masked_prediction_leak_delta": 0.0,
+            "ema_max_error": 0.0
+          },
+          "checks": {
+            "heldout_is_target_only": true,
+            "masked_context_tokens_cannot_reach_student": true,
+            "independent_context_encoder_receives_gradient": true,
+            "joint_predictor_receives_gradient": true,
+            "teacher_frozen": true,
+            "target_layernorm_detached": true,
+            "ema_after_online_step": true,
+            "exact_replay_mix": true,
+            "shared_single_view_replay_executes": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 43,
+          "device": "cuda",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "multiview_token_l1": 1.0304267406463623,
+            "single_view_replay_l1": 0.9282423257827759,
+            "online_gradient_l1": 0.26797667401842773,
+            "heldout_prediction_leak_delta": 0.0,
+            "masked_prediction_leak_delta": 0.0,
+            "ema_max_error": 0.0
+          },
+          "checks": {
+            "heldout_is_target_only": true,
+            "masked_context_tokens_cannot_reach_student": true,
+            "independent_context_encoder_receives_gradient": true,
+            "joint_predictor_receives_gradient": true,
+            "teacher_frozen": true,
+            "target_layernorm_detached": true,
+            "ema_after_online_step": true,
+            "exact_replay_mix": true,
+            "shared_single_view_replay_executes": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 44,
+          "device": "cuda",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "multiview_token_l1": 1.1979365348815918,
+            "single_view_replay_l1": 1.0129783153533936,
+            "online_gradient_l1": 0.35157378227449954,
+            "heldout_prediction_leak_delta": 0.0,
+            "masked_prediction_leak_delta": 0.0,
+            "ema_max_error": 0.0
+          },
+          "checks": {
+            "heldout_is_target_only": true,
+            "masked_context_tokens_cannot_reach_student": true,
+            "independent_context_encoder_receives_gradient": true,
+            "joint_predictor_receives_gradient": true,
+            "teacher_frozen": true,
+            "target_layernorm_detached": true,
+            "ema_after_online_step": true,
+            "exact_replay_mix": true,
+            "shared_single_view_replay_executes": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    }
+  },
+  "elapsed_seconds": 1.3761421516537666,
+  "diagnostic_only": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiments_executed": false,
+  "pretrained_model_calls": 0,
+  "api_calls": 0,
+  "automatic_retry": false
+}

@@ -450,6 +450,10 @@
 
 - 2023-02-09 · 一作：Timo Schick · [Toolformer](../2302.04761-toolformer/README.md)（`toolformer`）：手工标注工具调用昂贵，纯 prompting 又难以让较小模型稳定决定何时调用。Toolformer 先用少量 demonstration 采样 API call，再比较插入真实返回值、隐藏返回值和完全不调用时的后续 token loss，只保留确实有用的调用并继续语言模型训练。
 
+## Meta Reality Labs / University of Virginia（Work done at Meta）
+
+- 2026-09-30 · 一作：Guangzhi Xiong · [MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories](../2609.40195-memlife/README.md)（`memlife`）：MemLife先把每段第一视角视频和语音写成有时间锚点、实体落地的第一人称文本，再由reader按问题进行语义搜索和时间区间读取。MemOpt只训练writer，reader保持冻结；FIRM将逐token的faithfulness、逐候选的informativeness和retrievability相乘。
+
 ## Meta Superintelligence Labs
 
 - 2026-09-29 · 一作：Paras Dahal · [Thinking Before Thinking: Scaling Agentic Inference Through Meta-Reasoning](../2609.38147-meta-reasoning/README.md)（`meta-reasoning`）：把对象级工作交给 worker，把控制本身拆成 Assess、Propose、Evaluate 和 Dispatch；控制器只携带紧凑状态，通过持久 artifact memory 复用既有工作，并在统一调用预算内决定继续、分叉或停止。
@@ -628,6 +632,7 @@
 
 ## Sichuan University
 
+- 2026-11-19 · 一作：Xuyang Liu · [MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management](../2611.26427-memfolder/README.md)（`memfolder`）：MemFolder把记录数和取回上下文长度分开处理。RecordFolder先用LLM统一实体，再以密度峰选首锚点、以相对已有锚点的novelty渐进选互补锚点；语义/实体亲和与时间链修正分组，最后由LLM按时间合并。
 - 2026-08-28 · 一作：Shuo Liu · [Imagine Before Acting: Prospective Skill Identification for LLM Agents](../../reproductions/2609.01642-skilldreamer/README.md)（`skilldreamer`）：任务描述主要说目标，技能文档主要写程序性知识。直接相似度容易优先找到背景相近、但不能解决当前能力缺口的技能；检索到了也未必会在执行时调用。
 
 ## Simular
@@ -851,6 +856,10 @@
 - 2026-07-28 · 一作：Yu Wang · [CAST](../2607.25308-cast/README.md)（`cast`）：把求解器状态价值的相邻差分变成 solver advantage，为稀疏结果奖励补充 turn 级 credit。
 - 2026-04-20 · 一作：Daoyu Wang · [StepPO](../2604.18401-steppo/README.md)（`steppo`）：Agent 的自然决策单位是“观察—动作”的 environment step，token-level MDP 会让动作粒度和信用粒度错位。StepPO 将交互重写为 step-level MDP，在 step boundary 估值和做 GAE，并把 step 内 token ratio 聚合后再裁剪。
 - 2025-11-18 · 一作：Mingyue Cheng · [Agent-R1](../2511.14460-agent-r1/README.md)（`agent-r1`）：把每次 agent/environment 交互作为独立 transition，以可插拔上下文管理、环境接口与优化器支持 token 或 step 级信用。
+
+## University of Science and Technology of China / Shanghai AI Laboratory
+
+- 2026-11-19 · 一作：Yinhao Tang · [Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement](../2611.26132-sage-evolve/README.md)（`sage-evolve`）：AdaObs区分固定anchor目标和引导当前研究的active observation。每轮仍在固定anchor上验收；训练进展停滞时，先细分已有输出的错误诊断，再增加同任务的困难层，最后累计加入同能力方向的相关任务。
 
 ## University of Southern California
 

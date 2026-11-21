@@ -7,7 +7,7 @@ hide:
 
 # 策略优化：谁在采样，谁在被更新
 
-[LLM 后训练](index.md) / 256 个问题 · 64 篇论文
+[LLM 后训练](index.md) / 260 个问题 · 65 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">256 个问题 · 64 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">260 个问题 · 65 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dfrl" data-paper-title="Decision-Focused Reinforcement Learning for LLM Post-Training" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Decision-Focused Reinforcement Learning for LLM Post-Training LLM 后训练 The University of Texas at Austin 2026-11-19 预测误差小不保证由预测触发的决策成本低。DFRL把LLM生成的参数预测交给下游优化器，以真实观测参数评估该决策，再把负决策regret用于后训练；不对优化器求导。它是目标/反馈框架，不是另一个替代RLOO的策略优化器。对同一实例独立生成K≥2条预测时，RLOO的实例内leave-one-out baseline抵消共同的hindsight最优成本，因此更新不必额外求真实参数下的最优解。 完整实验成本过高，不复现（审查 DONE）。诊断对三个可采样参数预测的真实可行决策计算观测成本，穷举两个独立categorical样本的score-gradient期望并与解析梯度比较；L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU，无CUDA宣传路径；不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）。纯stdlib、CPU-only的实际成本RLOO优势、单批共享Bernoulli逆概率校正与lazy整批精确成本回调、显式warm-start边界、小规模枚举knapsack。  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 为什么预测更准不一定决策更好？ 优化器只在可行决策间选择；预测误差若跨过改变最优决策的边界，会有大regret，别处较大的误差却可能不改决策。DFRL直接奖励诱导决策的真实成本，而非每维预测误差。 教学例：容量只能选一件商品时，两件商品利润接近，微小的排序翻转可选错商品；把两件利润都等量平移虽增大MSE，却可能不改选择。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<span id="paper-post-training-dfrl-a11a1eb3" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-1bfb2c09f93b1c80">为什么预测更准不一定决策更好？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adfrl">Decision-Focused Reinforcement Learning for LLM Post-Training</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · The University of Texas at Austin</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>优化器只在可行决策间选择；预测误差若跨过改变最优决策的边界，会有大regret，别处较大的误差却可能不改决策。DFRL直接奖励诱导决策的真实成本，而非每维预测误差。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：容量只能选一件商品时，两件商品利润接近，微小的排序翻转可选错商品；把两件利润都等量平移虽增大MSE，却可能不改选择。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25597v1">原论文</a> · <a href="../../../../post-training/2611.25597-dfrl/">实现解读</a> · <a href="#qa-1bfb2c09f93b1c80">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dfrl" data-paper-title="Decision-Focused Reinforcement Learning for LLM Post-Training" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Decision-Focused Reinforcement Learning for LLM Post-Training LLM 后训练 The University of Texas at Austin 2026-11-19 预测误差小不保证由预测触发的决策成本低。DFRL把LLM生成的参数预测交给下游优化器，以真实观测参数评估该决策，再把负决策regret用于后训练；不对优化器求导。它是目标/反馈框架，不是另一个替代RLOO的策略优化器。对同一实例独立生成K≥2条预测时，RLOO的实例内leave-one-out baseline抵消共同的hindsight最优成本，因此更新不必额外求真实参数下的最优解。 完整实验成本过高，不复现（审查 DONE）。诊断对三个可采样参数预测的真实可行决策计算观测成本，穷举两个独立categorical样本的score-gradient期望并与解析梯度比较；L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU，无CUDA宣传路径；不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）。纯stdlib、CPU-only的实际成本RLOO优势、单批共享Bernoulli逆概率校正与lazy整批精确成本回调、显式warm-start边界、小规模枚举knapsack。  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 reward correction为什么只抛一次硬币？ Eq.12对整批M×K共享I；I=1时计算该批全部精确优势，并以1/p校正便宜优势，否则整批跳过精确求解。实例内baseline仍分别计算，不能把不同实例混在一起。 教学例：M=2、K=2、p=1/4时，一次更新要么做4次精确求解，要么0次，期望1次；这不是每条独立抽一次的原文实现。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-633ec9880197247b">reward correction为什么只抛一次硬币？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adfrl">Decision-Focused Reinforcement Learning for LLM Post-Training</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · The University of Texas at Austin</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Eq.12对整批M×K共享I；I=1时计算该批全部精确优势，并以1/p校正便宜优势，否则整批跳过精确求解。实例内baseline仍分别计算，不能把不同实例混在一起。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：M=2、K=2、p=1/4时，一次更新要么做4次精确求解，要么0次，期望1次；这不是每条独立抽一次的原文实现。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25597v1">原论文</a> · <a href="../../../../post-training/2611.25597-dfrl/">实现解读</a> · <a href="#qa-633ec9880197247b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dfrl" data-paper-title="Decision-Focused Reinforcement Learning for LLM Post-Training" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Decision-Focused Reinforcement Learning for LLM Post-Training LLM 后训练 The University of Texas at Austin 2026-11-19 预测误差小不保证由预测触发的决策成本低。DFRL把LLM生成的参数预测交给下游优化器，以真实观测参数评估该决策，再把负决策regret用于后训练；不对优化器求导。它是目标/反馈框架，不是另一个替代RLOO的策略优化器。对同一实例独立生成K≥2条预测时，RLOO的实例内leave-one-out baseline抵消共同的hindsight最优成本，因此更新不必额外求真实参数下的最优解。 完整实验成本过高，不复现（审查 DONE）。诊断对三个可采样参数预测的真实可行决策计算观测成本，穷举两个独立categorical样本的score-gradient期望并与解析梯度比较；L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU，无CUDA宣传路径；不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）。纯stdlib、CPU-only的实际成本RLOO优势、单批共享Bernoulli逆概率校正与lazy整批精确成本回调、显式warm-start边界、小规模枚举knapsack。  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 DFRL是替代RLOO的另一种优化器吗？ 不是。DFRL指定决策regret目标和反馈，RLOO可作为其无偏score-gradient估计器。相同实例的hindsight最优成本在baseline中抵消，但任意优势标准化或KL shaping都会改变原文分析的目标/更新。 教学例：成本2和5给优势3和负3；同时减去共同hindsight成本1，优势仍是3和负3，不需要多求一次真实参数下的最优解。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-51e2adc1ca64f6ed">DFRL是替代RLOO的另一种优化器吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adfrl">Decision-Focused Reinforcement Learning for LLM Post-Training</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · The University of Texas at Austin</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。DFRL指定决策regret目标和反馈，RLOO可作为其无偏score-gradient估计器。相同实例的hindsight最优成本在baseline中抵消，但任意优势标准化或KL shaping都会改变原文分析的目标/更新。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：成本2和5给优势3和负3；同时减去共同hindsight成本1，优势仍是3和负3，不需要多求一次真实参数下的最优解。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25597v1">原论文</a> · <a href="../../../../post-training/2611.25597-dfrl/">实现解读</a> · <a href="#qa-51e2adc1ca64f6ed">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dfrl" data-paper-title="Decision-Focused Reinforcement Learning for LLM Post-Training" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Decision-Focused Reinforcement Learning for LLM Post-Training LLM 后训练 The University of Texas at Austin 2026-11-19 预测误差小不保证由预测触发的决策成本低。DFRL把LLM生成的参数预测交给下游优化器，以真实观测参数评估该决策，再把负决策regret用于后训练；不对优化器求导。它是目标/反馈框架，不是另一个替代RLOO的策略优化器。对同一实例独立生成K≥2条预测时，RLOO的实例内leave-one-out baseline抵消共同的hindsight最优成本，因此更新不必额外求真实参数下的最优解。 完整实验成本过高，不复现（审查 DONE）。诊断对三个可采样参数预测的真实可行决策计算观测成本，穷举两个独立categorical样本的score-gradient期望并与解析梯度比较；L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU，无CUDA宣传路径；不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）。纯stdlib、CPU-only的实际成本RLOO优势、单批共享Bernoulli逆概率校正与lazy整批精确成本回调、显式warm-start边界、小规模枚举knapsack。  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 没有选中精确反馈时还能先算exact成本吗？ 不能把先求全批exact再屏蔽当作节省求解。本地I=0分支不调用lazy exact回调；I=1只调用一次整批supplier。p必须大于0且不大于1，p很小时方差和溢出风险需显式处理。 教学例：便宜优势为0、精确优势为4、p=1/4时，选中返回16，未选中返回0，期望4；每批返回16不是稳定收益或收敛保证。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-fbe5b20162c83480">没有选中精确反馈时还能先算exact成本吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adfrl">Decision-Focused Reinforcement Learning for LLM Post-Training</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · The University of Texas at Austin</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能把先求全批exact再屏蔽当作节省求解。本地I=0分支不调用lazy exact回调；I=1只调用一次整批supplier。p必须大于0且不大于1，p很小时方差和溢出风险需显式处理。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：便宜优势为0、精确优势为4、p=1/4时，选中返回16，未选中返回0，期望4；每批返回16不是稳定收益或收敛保证。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.25597v1">原论文</a> · <a href="../../../../post-training/2611.25597-dfrl/">实现解读</a> · <a href="#qa-fbe5b20162c83480">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:led-edits" data-paper-title="Beyond Replacement: Levenshtein Editing for Diffusion Language Models" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Beyond Replacement: Levenshtein Editing for Diffusion Language Models LLM 后训练 Southern University of Science and Technology / Inclusion AI, Ant Group 2026-11-18 仅允许token替换时，一个遗漏或多余token会让整段后缀错位，需要许多位置分别修复。LED把[Ins]/[Del]加入输出词表、排除在输入词表外：删除当前token，或在其前插入新[Mask]，同时保留该锚点token。每轮之后截成固定B长或右侧补mask。训练监督由当前source和clean target的最长公共子序列重建。匹配锚点之间先按顺序配对替换、多余source标Del；多余target只在非末尾gap的右匹配锚点标一个Ins，每gap每轮最多一个。 完整实验成本过高，不复现（审查 DONE）；没有模型预测、扩散SFT、多阶段训练或基准答案生成，因此只属L1机制诊断。L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。最长公共子序列的固定block edit标签、每gap单次Ins、末尾gap不造锚点、mask阈值fallback、visible-token edit阈值以及同时编辑后截断/补mask。没有扩散模型forward、多阶段SFT或循环重采样decoder。  policy-optimization 后训练算法组件 LLM 后训练 策略优化：谁在采样，谁在被更新 为什么插删比只替换更适合修复错位？ 缺失一个token后，后续正确token仍可作为LCS锚点；在右锚点前插入mask能保留后缀，不必把每个后缀位置都重新替换。 教学例：source[a,c,d,extra]、target[a,b,c,d]，先在c前插mask并删extra，得到[a,Mask,c,d]。 2026-11-19">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
 <span id="paper-post-training-led-edits-bc50e931" class="ar-learning-paper-anchor"></span>

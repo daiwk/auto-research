@@ -141,7 +141,8 @@
         "multimodal-models:dwd",
         "foundation-models:counterfactual-wm",
         "multimodal-models:autoregressive-view-model",
-        "multimodal-models:jepa-dots"
+        "multimodal-models:jepa-dots",
+        "foundation-models:mv-jepa"
       ]
     }
   ]

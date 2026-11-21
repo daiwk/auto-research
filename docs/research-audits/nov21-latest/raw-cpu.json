@@ -1,0 +1,668 @@
+{
+  "schema_version": 2,
+  "batch": "2026-11-21-overlap-components",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "device": "cpu",
+  "accelerator": "CPU",
+  "source_sha256": {
+    "scripts/run_nov21_latest_components.py": "13ef2fc61f7b6d7dd23d3f9c6afd77d86f574c191a9b08bb303097013d3fcabf",
+    "scripts/run_nov18_latest_components.py": "0fe50e8e554f6663b3c8c179654400d10bfbb557ceb9cefb9880da78f164b7c1",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "docs/research-audits/nov21-latest/preflight.json": "c1705b0c8472f7a2d2e1f02544067d46784bf958789fd7ee526783371ddfc3e2",
+    "src/auto_research/foundation_models/frontier_replay.py": "bf3613a78c682a1693457d2ab8feb5a8b533104497161340f61a375e2ac15248",
+    "src/auto_research/foundation_models/mv_jepa.py": "1a7f674ab37036b207a9b759f8595926f4531d29522a1291ccd8460da980e8ca",
+    "src/auto_research/agent_research/sage_evolve.py": "4c8572f73f3717dfd4488c8ad3960d5d929dc83253384bdf4c841a3f938eb1c7",
+    "src/auto_research/agent_research/memfolder.py": "9492350142246424902bb0fa61cb65b4ad6feee95c64ec1d159034042a951d50",
+    "src/auto_research/post_training/dfrl.py": "a4849643e8f5880ea617e1f950d408ef2643e3927c890f7f14cb1d17cb4a3f7e",
+    "src/auto_research/foundation_models/e_rwsc.py": "29846f83048306fea090979ed109e122b10447eefe8aea200125a83d337e55ec",
+    "src/auto_research/agent_research/memlife.py": "155845e6469e301412e503d07a25a5839bfc5804163e060c64d585e69b62e8be"
+  },
+  "code_commit": "3b147143ff4e0e9e098f2964dce0fec7120da8a8",
+  "components": {
+    "frontier-replay": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "planned_replay_targets": 2,
+            "planned_exact_cuts": 1,
+            "distinct_restore_requests": 2,
+            "reclaim_slots": 15
+          },
+          "checks": {
+            "pending_checkpoint_not_visible": true,
+            "distinct_requests_required_for_proven": true,
+            "natural_cannot_evict_useful_state": true,
+            "dead_checkpoint_evicted_first": true,
+            "failed_publication_not_visible": true,
+            "structural_targets_and_bounded_window": true,
+            "no_anchor_falls_back_to_exact_cut": true,
+            "reclaim_respects_working_floor": true,
+            "falcon_restore_floor": true,
+            "native_chunk_state_requires_exact_page_alignment": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "planned_replay_targets": 2,
+            "planned_exact_cuts": 1,
+            "distinct_restore_requests": 2,
+            "reclaim_slots": 15
+          },
+          "checks": {
+            "pending_checkpoint_not_visible": true,
+            "distinct_requests_required_for_proven": true,
+            "natural_cannot_evict_useful_state": true,
+            "dead_checkpoint_evicted_first": true,
+            "failed_publication_not_visible": true,
+            "structural_targets_and_bounded_window": true,
+            "no_anchor_falls_back_to_exact_cut": true,
+            "reclaim_respects_working_floor": true,
+            "falcon_restore_floor": true,
+            "native_chunk_state_requires_exact_page_alignment": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "planned_replay_targets": 2,
+            "planned_exact_cuts": 1,
+            "distinct_restore_requests": 2,
+            "reclaim_slots": 15
+          },
+          "checks": {
+            "pending_checkpoint_not_visible": true,
+            "distinct_requests_required_for_proven": true,
+            "natural_cannot_evict_useful_state": true,
+            "dead_checkpoint_evicted_first": true,
+            "failed_publication_not_visible": true,
+            "structural_targets_and_bounded_window": true,
+            "no_anchor_falls_back_to_exact_cut": true,
+            "reclaim_respects_working_floor": true,
+            "falcon_restore_floor": true,
+            "native_chunk_state_requires_exact_page_alignment": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "mv-jepa": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "multiview_token_l1": 0.7487120628356934,
+            "single_view_replay_l1": 0.7962051630020142,
+            "online_gradient_l1": 0.1989228724851273,
+            "heldout_prediction_leak_delta": 0.0,
+            "masked_prediction_leak_delta": 0.0,
+            "ema_max_error": 0.0
+          },
+          "checks": {
+            "heldout_is_target_only": true,
+            "masked_context_tokens_cannot_reach_student": true,
+            "independent_context_encoder_receives_gradient": true,
+            "joint_predictor_receives_gradient": true,
+            "teacher_frozen": true,
+            "target_layernorm_detached": true,
+            "ema_after_online_step": true,
+            "exact_replay_mix": true,
+            "shared_single_view_replay_executes": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "multiview_token_l1": 0.9602169990539551,
+            "single_view_replay_l1": 0.8383393883705139,
+            "online_gradient_l1": 0.13582303165458143,
+            "heldout_prediction_leak_delta": 0.0,
+            "masked_prediction_leak_delta": 0.0,
+            "ema_max_error": 0.0
+          },
+          "checks": {
+            "heldout_is_target_only": true,
+            "masked_context_tokens_cannot_reach_student": true,
+            "independent_context_encoder_receives_gradient": true,
+            "joint_predictor_receives_gradient": true,
+            "teacher_frozen": true,
+            "target_layernorm_detached": true,
+            "ema_after_online_step": true,
+            "exact_replay_mix": true,
+            "shared_single_view_replay_executes": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "multiview_token_l1": 1.2272958755493164,
+            "single_view_replay_l1": 1.0118873119354248,
+            "online_gradient_l1": 0.442189397290349,
+            "heldout_prediction_leak_delta": 0.0,
+            "masked_prediction_leak_delta": 0.0,
+            "ema_max_error": 0.0
+          },
+          "checks": {
+            "heldout_is_target_only": true,
+            "masked_context_tokens_cannot_reach_student": true,
+            "independent_context_encoder_receives_gradient": true,
+            "joint_predictor_receives_gradient": true,
+            "teacher_frozen": true,
+            "target_layernorm_detached": true,
+            "ema_after_online_step": true,
+            "exact_replay_mix": true,
+            "shared_single_view_replay_executes": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "sage-evolve": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "score_points_per_10k": 0.5,
+            "retained_gate_cases": 2,
+            "rejected_gate_cases": 2
+          },
+          "checks": {
+            "three_point_plateau": true,
+            "phase_change_resets_ema": true,
+            "cross_phase_rejected": true,
+            "failed_config_not_entire_lever": true,
+            "gap_specific_memory": true,
+            "hardest_in_band": true,
+            "anchor_tolerance_inclusive": true,
+            "anchor_improvement_retained": true,
+            "anchor_regression_rejected": true,
+            "no_gain_rejected": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "score_points_per_10k": 0.5,
+            "retained_gate_cases": 2,
+            "rejected_gate_cases": 2
+          },
+          "checks": {
+            "three_point_plateau": true,
+            "phase_change_resets_ema": true,
+            "cross_phase_rejected": true,
+            "failed_config_not_entire_lever": true,
+            "gap_specific_memory": true,
+            "hardest_in_band": true,
+            "anchor_tolerance_inclusive": true,
+            "anchor_improvement_retained": true,
+            "anchor_regression_rejected": true,
+            "no_gain_rejected": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "score_points_per_10k": 0.5,
+            "retained_gate_cases": 2,
+            "rejected_gate_cases": 2
+          },
+          "checks": {
+            "three_point_plateau": true,
+            "phase_change_resets_ema": true,
+            "cross_phase_rejected": true,
+            "failed_config_not_entire_lever": true,
+            "gap_specific_memory": true,
+            "hardest_in_band": true,
+            "anchor_tolerance_inclusive": true,
+            "anchor_improvement_retained": true,
+            "anchor_regression_rejected": true,
+            "no_gain_rejected": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "memfolder": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "input_records": 6,
+            "output_groups": 3,
+            "matched_links": 2,
+            "variance_pairs": 15
+          },
+          "checks": {
+            "all_records_once": true,
+            "anchors_preserved": true,
+            "forward_links_only": true,
+            "nonbranching": true,
+            "no_entities_reduces_to_cosine": true,
+            "variances_before_filtering": true,
+            "duplicate_groups_nonempty": true,
+            "singleton_identity": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "input_records": 6,
+            "output_groups": 3,
+            "matched_links": 2,
+            "variance_pairs": 15
+          },
+          "checks": {
+            "all_records_once": true,
+            "anchors_preserved": true,
+            "forward_links_only": true,
+            "nonbranching": true,
+            "no_entities_reduces_to_cosine": true,
+            "variances_before_filtering": true,
+            "duplicate_groups_nonempty": true,
+            "singleton_identity": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "input_records": 6,
+            "output_groups": 3,
+            "matched_links": 2,
+            "variance_pairs": 15
+          },
+          "checks": {
+            "all_records_once": true,
+            "anchors_preserved": true,
+            "forward_links_only": true,
+            "nonbranching": true,
+            "no_entities_reduces_to_cosine": true,
+            "variances_before_filtering": true,
+            "duplicate_groups_nonempty": true,
+            "singleton_identity": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "dfrl": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "enumerated_rloo_matches_analytic_score_gradient": true,
+            "batch_correction_expectation_recovers_exact_gradient": true,
+            "uncorrected_cheap_estimate_is_a_distinct_biased_control": true,
+            "unselected_batch_never_calls_exact_solver": true,
+            "selected_batch_calls_exact_supplier_once_for_every_instance": true,
+            "probability_one_recovers_exact_advantages": true,
+            "warm_start_obeys_declared_boundary": true,
+            "hindsight_constant_cancels": true
+          },
+          "controls": {
+            "enumerated_rloo_matches_analytic_score_gradient": true,
+            "batch_correction_expectation_recovers_exact_gradient": true,
+            "uncorrected_cheap_estimate_is_a_distinct_biased_control": true,
+            "unselected_batch_never_calls_exact_solver": true,
+            "selected_batch_calls_exact_supplier_once_for_every_instance": true,
+            "probability_one_recovers_exact_advantages": true,
+            "warm_start_obeys_declared_boundary": true,
+            "hindsight_constant_cancels": true
+          },
+          "metrics": {
+            "analytic_gradient_max_abs_error": 2.220446049250313e-16,
+            "corrected_gradient_max_abs_error": 2.220446049250313e-16,
+            "uncorrected_gradient_max_abs_error": 0.6371096968079779,
+            "expected_exact_solves_per_batch": 1.0,
+            "knapsack_items": 3
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "enumerated_rloo_matches_analytic_score_gradient": true,
+            "batch_correction_expectation_recovers_exact_gradient": true,
+            "uncorrected_cheap_estimate_is_a_distinct_biased_control": true,
+            "unselected_batch_never_calls_exact_solver": true,
+            "selected_batch_calls_exact_supplier_once_for_every_instance": true,
+            "probability_one_recovers_exact_advantages": true,
+            "warm_start_obeys_declared_boundary": true,
+            "hindsight_constant_cancels": true
+          },
+          "controls": {
+            "enumerated_rloo_matches_analytic_score_gradient": true,
+            "batch_correction_expectation_recovers_exact_gradient": true,
+            "uncorrected_cheap_estimate_is_a_distinct_biased_control": true,
+            "unselected_batch_never_calls_exact_solver": true,
+            "selected_batch_calls_exact_supplier_once_for_every_instance": true,
+            "probability_one_recovers_exact_advantages": true,
+            "warm_start_obeys_declared_boundary": true,
+            "hindsight_constant_cancels": true
+          },
+          "metrics": {
+            "analytic_gradient_max_abs_error": 1.0547118733938987e-15,
+            "corrected_gradient_max_abs_error": 9.43689570931383e-16,
+            "uncorrected_gradient_max_abs_error": 1.125346644680247,
+            "expected_exact_solves_per_batch": 1.0,
+            "knapsack_items": 3
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "enumerated_rloo_matches_analytic_score_gradient": true,
+            "batch_correction_expectation_recovers_exact_gradient": true,
+            "uncorrected_cheap_estimate_is_a_distinct_biased_control": true,
+            "unselected_batch_never_calls_exact_solver": true,
+            "selected_batch_calls_exact_supplier_once_for_every_instance": true,
+            "probability_one_recovers_exact_advantages": true,
+            "warm_start_obeys_declared_boundary": true,
+            "hindsight_constant_cancels": true
+          },
+          "controls": {
+            "enumerated_rloo_matches_analytic_score_gradient": true,
+            "batch_correction_expectation_recovers_exact_gradient": true,
+            "uncorrected_cheap_estimate_is_a_distinct_biased_control": true,
+            "unselected_batch_never_calls_exact_solver": true,
+            "selected_batch_calls_exact_supplier_once_for_every_instance": true,
+            "probability_one_recovers_exact_advantages": true,
+            "warm_start_obeys_declared_boundary": true,
+            "hindsight_constant_cancels": true
+          },
+          "metrics": {
+            "analytic_gradient_max_abs_error": 2.220446049250313e-16,
+            "corrected_gradient_max_abs_error": 3.3306690738754696e-16,
+            "uncorrected_gradient_max_abs_error": 0.9891794287159051,
+            "expected_exact_solves_per_batch": 1.0,
+            "knapsack_items": 3
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "e-rwsc": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "first_appearance_does_not_bet_on_its_forced_success": true,
+            "fixed_concentrated_policy_can_certify_a_wrong_answer": true,
+            "budget_fallback_is_explicitly_uncertified": true,
+            "budget_is_not_silently_extended": true,
+            "bets_use_only_previous_prefix_not_new_reward_or_answer": true,
+            "leader_shift_does_not_reset_old_answer_evidence": true,
+            "positive_affine_reward_transform_preserves_masses": true,
+            "equal_rewards_use_uniform_response_weights": true,
+            "large_finite_rewards_do_not_overflow_softmax": true
+          },
+          "controls": {
+            "first_appearance_does_not_bet_on_its_forced_success": true,
+            "fixed_concentrated_policy_can_certify_a_wrong_answer": true,
+            "budget_fallback_is_explicitly_uncertified": true,
+            "budget_is_not_silently_extended": true,
+            "bets_use_only_previous_prefix_not_new_reward_or_answer": true,
+            "leader_shift_does_not_reset_old_answer_evidence": true,
+            "positive_affine_reward_transform_preserves_masses": true,
+            "equal_rewards_use_uniform_response_weights": true,
+            "large_finite_rewards_do_not_overflow_softmax": true
+          },
+          "metrics": {
+            "concentrated_stream_stopping_samples": 7,
+            "uncertified_fallback_samples": 24,
+            "active_answer_count": 2,
+            "affine_mass_max_abs_error": 0.0
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "first_appearance_does_not_bet_on_its_forced_success": true,
+            "fixed_concentrated_policy_can_certify_a_wrong_answer": true,
+            "budget_fallback_is_explicitly_uncertified": true,
+            "budget_is_not_silently_extended": true,
+            "bets_use_only_previous_prefix_not_new_reward_or_answer": true,
+            "leader_shift_does_not_reset_old_answer_evidence": true,
+            "positive_affine_reward_transform_preserves_masses": true,
+            "equal_rewards_use_uniform_response_weights": true,
+            "large_finite_rewards_do_not_overflow_softmax": true
+          },
+          "controls": {
+            "first_appearance_does_not_bet_on_its_forced_success": true,
+            "fixed_concentrated_policy_can_certify_a_wrong_answer": true,
+            "budget_fallback_is_explicitly_uncertified": true,
+            "budget_is_not_silently_extended": true,
+            "bets_use_only_previous_prefix_not_new_reward_or_answer": true,
+            "leader_shift_does_not_reset_old_answer_evidence": true,
+            "positive_affine_reward_transform_preserves_masses": true,
+            "equal_rewards_use_uniform_response_weights": true,
+            "large_finite_rewards_do_not_overflow_softmax": true
+          },
+          "metrics": {
+            "concentrated_stream_stopping_samples": 7,
+            "uncertified_fallback_samples": 24,
+            "active_answer_count": 2,
+            "affine_mass_max_abs_error": 0.0
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "first_appearance_does_not_bet_on_its_forced_success": true,
+            "fixed_concentrated_policy_can_certify_a_wrong_answer": true,
+            "budget_fallback_is_explicitly_uncertified": true,
+            "budget_is_not_silently_extended": true,
+            "bets_use_only_previous_prefix_not_new_reward_or_answer": true,
+            "leader_shift_does_not_reset_old_answer_evidence": true,
+            "positive_affine_reward_transform_preserves_masses": true,
+            "equal_rewards_use_uniform_response_weights": true,
+            "large_finite_rewards_do_not_overflow_softmax": true
+          },
+          "controls": {
+            "first_appearance_does_not_bet_on_its_forced_success": true,
+            "fixed_concentrated_policy_can_certify_a_wrong_answer": true,
+            "budget_fallback_is_explicitly_uncertified": true,
+            "budget_is_not_silently_extended": true,
+            "bets_use_only_previous_prefix_not_new_reward_or_answer": true,
+            "leader_shift_does_not_reset_old_answer_evidence": true,
+            "positive_affine_reward_transform_preserves_masses": true,
+            "equal_rewards_use_uniform_response_weights": true,
+            "large_finite_rewards_do_not_overflow_softmax": true
+          },
+          "metrics": {
+            "concentrated_stream_stopping_samples": 7,
+            "uncertified_fallback_samples": 24,
+            "active_answer_count": 2,
+            "affine_mass_max_abs_error": 0.0
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "memlife": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "group_mean": 0.5,
+            "group_variance": 0.25,
+            "eligible_entries": 1,
+            "response_tokens": 4
+          },
+          "checks": {
+            "candidate_macro_not_token_pool": true,
+            "group_centered_deviation": true,
+            "token_mask_recenter": true,
+            "padding_zero": true,
+            "flat_group_zero": true,
+            "zero_dimension_gates_product": true,
+            "out_of_range_reward_rejected": true,
+            "finite_input_objective_overflow_rejected": true,
+            "causal_and_subject_filter": true,
+            "fetch_interval_contains_segment": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "group_mean": 0.5,
+            "group_variance": 0.25,
+            "eligible_entries": 1,
+            "response_tokens": 4
+          },
+          "checks": {
+            "candidate_macro_not_token_pool": true,
+            "group_centered_deviation": true,
+            "token_mask_recenter": true,
+            "padding_zero": true,
+            "flat_group_zero": true,
+            "zero_dimension_gates_product": true,
+            "out_of_range_reward_rejected": true,
+            "finite_input_objective_overflow_rejected": true,
+            "causal_and_subject_filter": true,
+            "fetch_interval_contains_segment": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "group_mean": 0.5,
+            "group_variance": 0.25,
+            "eligible_entries": 1,
+            "response_tokens": 4
+          },
+          "checks": {
+            "candidate_macro_not_token_pool": true,
+            "group_centered_deviation": true,
+            "token_mask_recenter": true,
+            "padding_zero": true,
+            "flat_group_zero": true,
+            "zero_dimension_gates_product": true,
+            "out_of_range_reward_rejected": true,
+            "finite_input_objective_overflow_rejected": true,
+            "causal_and_subject_filter": true,
+            "fetch_interval_contains_segment": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    }
+  },
+  "elapsed_seconds": 2.9915276248939335,
+  "diagnostic_only": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiments_executed": false,
+  "pretrained_model_calls": 0,
+  "api_calls": 0,
+  "automatic_retry": false
+}

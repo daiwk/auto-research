@@ -172,6 +172,7 @@
 
 ### policy-optimization
 
+- [Decision-Focused Reinforcement Learning for LLM Post-Training](../2611.25597-dfrl/README.md)（`dfrl`）：预测误差小不保证由预测触发的决策成本低。DFRL把LLM生成的参数预测交给下游优化器，以真实观测参数评估该决策，再把负决策regret用于后训练；不对优化器求导。
 - [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](../2611.23750-led-edits/README.md)（`led-edits`）：仅允许token替换时，一个遗漏或多余token会让整段后缀错位，需要许多位置分别修复。LED把[Ins]/[Del]加入输出词表、排除在输入词表外：删除当前token，或在其前插入新[Mask]，同时保留该锚点token。
 - [Get Hint-Augmented GRPO Done Right Through Activation Steering](../2611.23124-ash-hint-steering/README.md)（`ash-hint-steering`）：训练问题附带reference solution前半hint更易有正reward，但推理没有该hint。ASH学习可注入activation的行为方向，在无hint输入上重现部分偏移。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [Regularized Score Centering](../2611.21791-regularized-score-centering/README.md)（`regularized-score-centering`）：不是。它减去同一history下behavior分布的加权log-policy梯度期望。

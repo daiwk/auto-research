@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-21",
+  "owner": "nov21_post_review",
+  "coverage": "Two selected Nov19 overlap methods; no Nov20/21 first-release or exhaustive-coverage claim.",
+  "google_meta_authorship": "Neither fixed-v1 first author is Google/Meta; cited models do not establish affiliation.",
+  "accepted": [
+    {
+      "id": "2611.25597",
+      "key": "dfrl",
+      "domain": "post-training",
+      "title": "Decision-Focused Reinforcement Learning for LLM Post-Training",
+      "first_author": "Haotian Zhai",
+      "affiliation": "The University of Texas at Austin",
+      "published_at": "2026-11-19T06:44:35Z",
+      "announced_on": "2026-11-20",
+      "selected_on": "2026-11-21",
+      "intake_class": "overlap_new_selection",
+      "reviewed_version": "v1",
+      "source_url": "https://arxiv.org/html/2611.25597v1",
+      "pdf_sha256": "bec1bb13cc504250d4baadadc78051de4d0c7d3b075f392b3af30e865fb20789",
+      "html_sha256": "c2b1b177e0e8e6982eceaa959b78c0c7543ffd239e66f635c506695c4599d0b0",
+      "sections": [
+        "PDF p1 byline",
+        "Section3 Eq.4-13",
+        "AppendixB.3",
+        "AppendixB.5"
+      ],
+      "gpu": false,
+      "tier": "l1_mechanism",
+      "scope": "纯stdlib、CPU-only的实际成本RLOO优势、单批共享Bernoulli逆概率校正与lazy整批精确成本回调、显式warm-start边界、小规模枚举knapsack。诊断对三个可采样参数预测的真实可行决策计算观测成本，穷举两个独立categorical样本的score-gradient期望并与解析梯度比较；偏置cheap成本仅为明确的负控输入，不冒充训练好的估计器。没有LLM、token生成、参数JSON解析器、H&M处理、Adam训练或能力评测；非Evolve算子。",
+      "cost": "AppendixB.5使用Qwen3.5-4B、4013个SFT实例，四个non-thinking RL条件各64更新×16实例×8响应=8192条训练响应，并有学习率选择、reasoning教师/额外SFT与评测；另有三合成问题、多种子与一小时预算实验。完整矩阵远超本轮30秒/seed的CPU定义核预算。8192是论文配置计算，不是本机实测；不下载模型、H&M或调用教师。",
+      "code": null,
+      "upstream_revision": null,
+      "review_done": true,
+      "repository_status_before_batch": "not_in_manifest_or_ledger_by_arxiv_id",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "local_module": "src/auto_research/post_training/dfrl.py",
+      "english_source_sha256": "897844a59cfe062c84c423073f75dd192b69ce998bdab4331fa01a47bce6ff39"
+    },
+    {
+      "id": "2611.26413",
+      "key": "e-rwsc",
+      "domain": "foundation-models",
+      "title": "Sequential Anytime Valid Tests for Efficient Inference-Time Alignment",
+      "first_author": "Vishesh Kumar Singh",
+      "affiliation": "Indian Institute of Technology Kanpur",
+      "published_at": "2026-11-19T17:00:42Z",
+      "announced_on": "2026-11-20",
+      "selected_on": "2026-11-21",
+      "intake_class": "overlap_new_selection",
+      "reviewed_version": "v1",
+      "source_url": "https://arxiv.org/html/2611.26413v1",
+      "pdf_sha256": "ea8f062f7f57748fb8b0e0464e5ed2f128a205492ae15e6ded0e70726fb48de9",
+      "html_sha256": "e69d1b20b226ef84c0977ade55277c475cc25ebcadbc4cfdbfe99f218701874f",
+      "sections": [
+        "PDF p1 byline",
+        "Section2 Eq.1-2",
+        "Section3 Eq.6-10",
+        "AppendixA Algorithm2",
+        "AppendixD Table5-6"
+      ],
+      "gpu": false,
+      "tier": "l1_mechanism",
+      "scope": "纯stdlib、CPU-only的RWSC聚合、前缀可预测下注、逐答案log资本与首现权重、首次出现跳过、认证终止和显式未认证预算回退。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。没有LLM、reward model、答案解析或公开benchmark运行；不把合成流叫模型输出，不接Evolve晋级。",
+      "cost": "AppendixD在作者RTX6000Ada测量中，每题固定512候选约3657.7GPU秒、e-RWSC平均约1400.8GPU秒，另有多模型、多reward model、多基准矩阵。这是作者硬件的测量，不是本机A100/A30时间预测；完整生成/打分实验直接不复现。本轮只执行廉价CPU停止核，不下载3B/8B或更大模型。",
+      "code": null,
+      "upstream_revision": null,
+      "review_done": true,
+      "repository_status_before_batch": "not_in_manifest_or_ledger_by_arxiv_id",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "local_module": "src/auto_research/foundation_models/e_rwsc.py",
+      "english_source_sha256": "6f7990a337b89868094a0642455db0f632db53c314f586f5bb8d5bd885496a30"
+    }
+  ],
+  "not_selected_this_batch": [
+    {
+      "id": "2611.26510",
+      "title": "AutoMaster",
+      "decision": "not_selected_this_finite_intake",
+      "reason": "Useful autonomous Skill-FT system, but a serving/control interface would omit the defining teacher/rollout/SFT loop; selected two independent executable objective/stopping cores instead.",
+      "automatic_retry": false
+    },
+    {
+      "id": "2611.25391",
+      "title": "HOPD",
+      "decision": "not_selected_this_finite_intake",
+      "reason": "Domain-specific continual SAR MLLM and historical-teacher loop; avoid a generic-KL placeholder or another expensive source-by-source training matrix this batch.",
+      "automatic_retry": false
+    }
+  ]
+}

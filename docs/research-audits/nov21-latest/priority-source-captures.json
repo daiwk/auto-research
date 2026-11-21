@@ -1,0 +1,973 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-21",
+  "window": {
+    "start": "2026-11-20",
+    "end": "2026-11-21"
+  },
+  "scope": "Fresh finite official directory and repository-event delta; not affiliation or method exhaustion.",
+  "all_sources_exhaustive": false,
+  "baseline": "nov15-review-closure/google-source-review.json",
+  "baseline_sha256": "b156404f43e0956a40844a25ef04c31f33eaa58736ed5d1c99b19993c34d384f",
+  "pages": [
+    {
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=2",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=3",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=4",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=5",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=6",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=10",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=11",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=12",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=13",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=14",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=15",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=16",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=17",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=18",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=19",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=2",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=20",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=21",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=22",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=23",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=24",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=25",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=26",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=27",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=28",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=29",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=3",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=30",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=31",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=32",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=33",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=34",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=35",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=36",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=37",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=38",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=39",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=4",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=40",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=41",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=42",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=43",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=44",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=45",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=5",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=6",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=7",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=8",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=9",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://research.google/blog/2026/11/",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://deepmind.google/research/publications/",
+      "http_status": 200,
+      "retrieved_at": "2026-11-21T02:49:45.416667+00:00",
+      "sha256": "768a987eb4216551e9ef3d9bd69740637dd0b62661c55ec997ccf998f98a73d0",
+      "bytes": 24358,
+      "capture": "6fd8482399ae6f625b52.html",
+      "links": [
+        "#",
+        "#page-content",
+        "/",
+        "/about/",
+        "/accelerators/",
+        "/blog/",
+        "/blog/alphaearth-foundations-helps-map-our-planet-in-unprecedented-detail/",
+        "/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/",
+        "/careers/",
+        "/frontier-safety/",
+        "/models/",
+        "/models/gemini-audio/",
+        "/models/gemini-image/",
+        "/models/gemini-omni/",
+        "/models/gemini-robotics/",
+        "/models/gemini/",
+        "/models/gemma/",
+        "/models/genie/",
+        "/models/lyria/",
+        "/models/veo/",
+        "/national-partnerships-for-ai/",
+        "/research/",
+        "/research/evals/",
+        "/research/projects/",
+        "/research/publications/",
+        "/research/publications/page/2/",
+        "/research/publications/page/3/",
+        "/research/publications/page/9/",
+        "/responsibility-and-safety/",
+        "/science/",
+        "/science/alphafold/",
+        "/science/alphagenome/",
+        "/science/weathernext/",
+        "/the-podcast/",
+        "https://about.google/",
+        "https://about.google/products/",
+        "https://ai.google/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://ai.google/gemini-for-science?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://aistudio.google.com/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://aistudio.google.com/prompts/new_chat?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://antigravity.google/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://antigravity.google/use-cases/science?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://deepmind.google/about/",
+        "https://deepmind.google/accelerators/",
+        "https://deepmind.google/blog/",
+        "https://deepmind.google/blog/alphaearth-foundations-helps-map-our-planet-in-unprecedented-detail/",
+        "https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/",
+        "https://deepmind.google/blog/sima-2-an-agent-that-plays-reasons-and-learns-with-you-in-virtual-3d-worlds/",
+        "https://deepmind.google/careers/",
+        "https://deepmind.google/education/",
+        "https://deepmind.google/frontier-safety/",
+        "https://deepmind.google/models/",
+        "https://deepmind.google/models/gemini-audio/",
+        "https://deepmind.google/models/gemini-image/",
+        "https://deepmind.google/models/gemini-omni/",
+        "https://deepmind.google/models/gemini-robotics/",
+        "https://deepmind.google/models/gemini/",
+        "https://deepmind.google/models/gemma/",
+        "https://deepmind.google/models/genie/",
+        "https://deepmind.google/models/lyria/",
+        "https://deepmind.google/models/veo/",
+        "https://deepmind.google/national-partnerships-for-ai/",
+        "https://deepmind.google/research/",
+        "https://deepmind.google/research/alphago/",
+        "https://deepmind.google/research/evals/",
+        "https://deepmind.google/research/publications/",
+        "https://deepmind.google/research/publications/118955/",
+        "https://deepmind.google/research/publications/122591/",
+        "https://deepmind.google/research/publications/137741/",
+        "https://deepmind.google/research/publications/146950/",
+        "https://deepmind.google/research/publications/149262/",
+        "https://deepmind.google/research/publications/149959/",
+        "https://deepmind.google/research/publications/157938/",
+        "https://deepmind.google/research/publications/193694/",
+        "https://deepmind.google/research/publications/203490/",
+        "https://deepmind.google/research/publications/224297/",
+        "https://deepmind.google/research/publications/224397/",
+        "https://deepmind.google/research/publications/225507/",
+        "https://deepmind.google/research/publications/225819/",
+        "https://deepmind.google/research/publications/231466/",
+        "https://deepmind.google/research/publications/231971/",
+        "https://deepmind.google/research/publications/238239/",
+        "https://deepmind.google/research/publications/239142/",
+        "https://deepmind.google/research/publications/239849/",
+        "https://deepmind.google/research/publications/240658/",
+        "https://deepmind.google/research/publications/248131/",
+        "https://deepmind.google/research/publications/250558/",
+        "https://deepmind.google/research/publications/252981/",
+        "https://deepmind.google/research/publications/253391/",
+        "https://deepmind.google/research/publications/260459/",
+        "https://deepmind.google/research/publications/260960/",
+        "https://deepmind.google/research/publications/264392/",
+        "https://deepmind.google/research/publications/265605/",
+        "https://deepmind.google/research/publications/270149/",
+        "https://deepmind.google/research/publications/279443/",
+        "https://deepmind.google/research/publications/94006/",
+        "https://deepmind.google/responsibility-and-safety/",
+        "https://deepmind.google/science/",
+        "https://deepmind.google/science/alphafold/",
+        "https://deepmind.google/science/alphagenome/",
+        "https://deepmind.google/science/weathernext/",
+        "https://deepmind.google/the-podcast/",
+        "https://deepmind.google?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://gemini.google.com/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://gemini.google/business?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=nav",
+        "https://github.com/google-deepmind",
+        "https://institute.deepmind.com/",
+        "https://labs.google/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://labs.google/science?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://policies.google.com/privacy",
+        "https://policies.google.com/terms",
+        "https://research.google?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://www.google.com/?utm_source=ai.google&utm_medium=referral",
+        "https://www.instagram.com/googledeepmind",
+        "https://www.linkedin.com/company/googledeepmind/",
+        "https://www.youtube.com/@googledeepmind",
+        "https://x.com/googledeepmind"
+      ],
+      "decoded_sha256": "124ccf538d7697c195503a5c7a3284e524413c13c104db1fbf001a9c78616674",
+      "transport_gzip_decoded": true,
+      "parse_complete": true
+    },
+    {
+      "url": "https://deepmind.google/blog/",
+      "http_status": 200,
+      "retrieved_at": "2026-11-21T02:49:45.419813+00:00",
+      "sha256": "7011fe122cc5a053edb2881a6fc4d141574af7d4d8b5b711f5493d1ceac096c6",
+      "bytes": 29785,
+      "capture": "dd5d9b8662f33e9fcdfb.html",
+      "links": [
+        "#",
+        "#page-content",
+        "/",
+        "/about/",
+        "/accelerators/",
+        "/blog/",
+        "/blog/accelerating-antimicrobial-discovery/",
+        "/blog/advancing-private-ai-compute-with-secure-server-side-memory/",
+        "/blog/agentic-cheminformatics-with-google-antigravity/",
+        "/blog/alphaearth-foundations-helps-map-our-planet-in-unprecedented-detail/",
+        "/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/",
+        "/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+        "/blog/beyond-tree-cover-mapping-the-worlds-forest-types/",
+        "/blog/gemini-robotics-2-5-accelerates-real-world-physical-intelligence/",
+        "/blog/genie-4-a-new-generation-of-world-simulation/",
+        "/blog/introducing-alphaproof-code/",
+        "/blog/introducing-synthid-bio/",
+        "/blog/on-device-ai-scam-detection-mddi/",
+        "/blog/opening-the-datasets-behind-our-ai-weather-models/",
+        "/blog/page/2/",
+        "/blog/page/20/",
+        "/blog/page/3/",
+        "/blog/speeding-up-planning-decisions-with-ai/",
+        "/careers/",
+        "/frontier-safety/",
+        "/models/",
+        "/models/gemini-audio/",
+        "/models/gemini-image/",
+        "/models/gemini-omni/",
+        "/models/gemini-robotics/",
+        "/models/gemini/",
+        "/models/gemma/",
+        "/models/genie/",
+        "/models/lyria/",
+        "/models/veo/",
+        "/national-partnerships-for-ai/",
+        "/research/",
+        "/research/evals/",
+        "/research/projects/",
+        "/research/publications/",
+        "/responsibility-and-safety/",
+        "/science/",
+        "/science/alphafold/",
+        "/science/alphagenome/",
+        "/science/weathernext/",
+        "/the-podcast/",
+        "https://about.google/",
+        "https://about.google/products/",
+        "https://ai.google/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://ai.google/gemini-for-science?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://aistudio.google.com/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://aistudio.google.com/prompts/new_chat?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://antigravity.google/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://antigravity.google/use-cases/science?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-with-live-avatar/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech/",
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/genie-4-now-available-project-genie/",
+        "https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://blog.google/innovation-and-ai/technology/safety-security/gemini-4-model-safety-security/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://deepmind.google/about/",
+        "https://deepmind.google/accelerators/",
+        "https://deepmind.google/blog/",
+        "https://deepmind.google/blog/alphaearth-foundations-helps-map-our-planet-in-unprecedented-detail/",
+        "https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/",
+        "https://deepmind.google/blog/sima-2-an-agent-that-plays-reasons-and-learns-with-you-in-virtual-3d-worlds/",
+        "https://deepmind.google/careers/",
+        "https://deepmind.google/education/",
+        "https://deepmind.google/frontier-safety/",
+        "https://deepmind.google/models/",
+        "https://deepmind.google/models/gemini-audio/",
+        "https://deepmind.google/models/gemini-image/",
+        "https://deepmind.google/models/gemini-omni/",
+        "https://deepmind.google/models/gemini-robotics/",
+        "https://deepmind.google/models/gemini/",
+        "https://deepmind.google/models/gemma/",
+        "https://deepmind.google/models/genie/",
+        "https://deepmind.google/models/lyria/",
+        "https://deepmind.google/models/veo/",
+        "https://deepmind.google/national-partnerships-for-ai/",
+        "https://deepmind.google/research/",
+        "https://deepmind.google/research/alphago/",
+        "https://deepmind.google/research/evals/",
+        "https://deepmind.google/research/publications/",
+        "https://deepmind.google/responsibility-and-safety/",
+        "https://deepmind.google/science/",
+        "https://deepmind.google/science/alphafold/",
+        "https://deepmind.google/science/alphagenome/",
+        "https://deepmind.google/science/weathernext/",
+        "https://deepmind.google/the-podcast/",
+        "https://deepmind.google?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://developers.googleblog.com/gemini-4-argon-for-robotics?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://gemini.google.com/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://gemini.google/business?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=nav",
+        "https://github.com/google-deepmind",
+        "https://institute.deepmind.com/",
+        "https://labs.google/?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://labs.google/science?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://policies.google.com/privacy",
+        "https://policies.google.com/terms",
+        "https://research.google?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+        "https://www.google.com/?utm_source=ai.google&utm_medium=referral",
+        "https://www.instagram.com/googledeepmind",
+        "https://www.linkedin.com/company/googledeepmind/",
+        "https://www.youtube.com/@googledeepmind",
+        "https://x.com/googledeepmind"
+      ],
+      "decoded_sha256": "366592c1ab984f4226ef99e10cbedc19716bbf337798459b10e2af284cd154b4",
+      "transport_gzip_decoded": true,
+      "parse_complete": true
+    },
+    {
+      "url": "https://ai.meta.com/research/",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    },
+    {
+      "url": "https://ai.meta.com/research/publications/",
+      "status": "source_exception_archived",
+      "blocking": false,
+      "automatic_retry": false,
+      "error_type": "URLError"
+    }
+  ],
+  "google_directory_delta": {
+    "baseline_urls": 663,
+    "current_urls": 0,
+    "comparison_complete": false,
+    "added": [],
+    "removed": [],
+    "unobserved_baseline_urls": 663
+  },
+  "added_details": [],
+  "repository_events": [
+    {
+      "organization": "google-research",
+      "event": "created",
+      "query": "org:google-research created:2026-11-20..2026-11-21",
+      "sha256": "4af480b8ee5b87b369a76c49bd22c9a783908272ebffbe97898f8ab0f0772a5f",
+      "total_count": 0,
+      "incomplete_results": false,
+      "items": []
+    },
+    {
+      "organization": "google-research",
+      "event": "pushed",
+      "query": "org:google-research pushed:2026-11-20..2026-11-21",
+      "sha256": "877fe10ed39fd5c2c452aa25529d202aa0d5660a5ea7fe7c46e527958a6cebfd",
+      "total_count": 5,
+      "incomplete_results": false,
+      "items": [
+        {
+          "full_name": "google-research/google-research",
+          "html_url": "https://github.com/google-research/google-research",
+          "description": "Google Research",
+          "created_at": "2018-10-04T18:42:48Z",
+          "pushed_at": "2026-11-20T22:58:37Z"
+        },
+        {
+          "full_name": "google-research/tabfm",
+          "html_url": "https://github.com/google-research/tabfm",
+          "description": "TabFM (Tabular Foundation Model) is a pretrained tabular foundation model developed by Google Research for tabular data regression and classification. ",
+          "created_at": "2026-06-16T21:06:19Z",
+          "pushed_at": "2026-11-20T17:31:40Z"
+        },
+        {
+          "full_name": "google-research/mseb",
+          "html_url": "https://github.com/google-research/mseb",
+          "description": null,
+          "created_at": "2025-05-13T18:19:15Z",
+          "pushed_at": "2026-11-21T02:42:33Z"
+        },
+        {
+          "full_name": "google-research/opengrm",
+          "html_url": "https://github.com/google-research/opengrm",
+          "description": "Formal grammars and related representations",
+          "created_at": "2026-06-01T10:15:05Z",
+          "pushed_at": "2026-11-20T22:57:58Z"
+        },
+        {
+          "full_name": "google-research/nmr-otoc",
+          "html_url": "https://github.com/google-research/nmr-otoc",
+          "description": "End-to-end simulation of Out-of-Time-Order Correlators (OTOCs) in solid-state NMR spin systems from protein structures",
+          "created_at": "2026-11-11T21:58:14Z",
+          "pushed_at": "2026-11-20T18:54:01Z"
+        }
+      ]
+    },
+    {
+      "organization": "google-deepmind",
+      "event": "created",
+      "query": "org:google-deepmind created:2026-11-20..2026-11-21",
+      "sha256": "4af480b8ee5b87b369a76c49bd22c9a783908272ebffbe97898f8ab0f0772a5f",
+      "total_count": 0,
+      "incomplete_results": false,
+      "items": []
+    },
+    {
+      "organization": "google-deepmind",
+      "event": "pushed",
+      "query": "org:google-deepmind pushed:2026-11-20..2026-11-21",
+      "sha256": "734e0a9d571171930d31ed7414647a72ffb7635a52b09434d13558e347acacd0",
+      "total_count": 12,
+      "incomplete_results": false,
+      "items": [
+        {
+          "full_name": "google-deepmind/mujoco",
+          "html_url": "https://github.com/google-deepmind/mujoco",
+          "description": "Multi-Joint dynamics with Contact. A general purpose physics simulator.",
+          "created_at": "2021-08-27T12:25:48Z",
+          "pushed_at": "2026-11-21T00:55:35Z"
+        },
+        {
+          "full_name": "google-deepmind/mujoco_playground",
+          "html_url": "https://github.com/google-deepmind/mujoco_playground",
+          "description": "An open-source library for sim and real robot demos on top of MuJoCo.",
+          "created_at": "2024-12-03T22:39:09Z",
+          "pushed_at": "2026-11-21T00:39:14Z"
+        },
+        {
+          "full_name": "google-deepmind/mujoco_warp",
+          "html_url": "https://github.com/google-deepmind/mujoco_warp",
+          "description": "GPU-optimized version of the MuJoCo physics simulator, designed for NVIDIA hardware.",
+          "created_at": "2025-03-17T22:35:01Z",
+          "pushed_at": "2026-11-20T16:59:47Z"
+        },
+        {
+          "full_name": "google-deepmind/formal-conjectures",
+          "html_url": "https://github.com/google-deepmind/formal-conjectures",
+          "description": "A collection of formalized statements of conjectures in Lean.",
+          "created_at": "2025-05-12T08:22:05Z",
+          "pushed_at": "2026-11-20T17:44:24Z"
+        },
+        {
+          "full_name": "google-deepmind/torax",
+          "html_url": "https://github.com/google-deepmind/torax",
+          "description": "TORAX: Tokamak transport simulation in JAX",
+          "created_at": "2024-03-05T14:20:02Z",
+          "pushed_at": "2026-11-20T16:19:38Z"
+        },
+        {
+          "full_name": "google-deepmind/kfac-jax",
+          "html_url": "https://github.com/google-deepmind/kfac-jax",
+          "description": "Second Order Optimization and Curvature Estimation with K-FAC in JAX.",
+          "created_at": "2022-03-18T10:19:24Z",
+          "pushed_at": "2026-11-20T17:56:50Z"
+        },
+        {
+          "full_name": "google-deepmind/code-verification",
+          "html_url": "https://github.com/google-deepmind/code-verification",
+          "description": "Verifying Signal's security at the machine-code level",
+          "created_at": "2026-10-26T16:27:08Z",
+          "pushed_at": "2026-11-20T00:08:57Z"
+        },
+        {
+          "full_name": "google-deepmind/onetwo",
+          "html_url": "https://github.com/google-deepmind/onetwo",
+          "description": null,
+          "created_at": "2024-03-25T08:30:11Z",
+          "pushed_at": "2026-11-20T18:01:51Z"
+        },
+        {
+          "full_name": "google-deepmind/robotics-antigravity-plugin",
+          "html_url": "https://github.com/google-deepmind/robotics-antigravity-plugin",
+          "description": "GDM Robotics Skills for agentic robotics workflows across simulation and real robots.",
+          "created_at": "2026-11-16T18:50:28Z",
+          "pushed_at": "2026-11-20T11:48:47Z"
+        },
+        {
+          "full_name": "google-deepmind/fusion_surrogates",
+          "html_url": "https://github.com/google-deepmind/fusion_surrogates",
+          "description": "A library of surrogate transport models for tokamak fusion.",
+          "created_at": "2025-02-26T18:46:26Z",
+          "pushed_at": "2026-11-20T14:36:13Z"
+        },
+        {
+          "full_name": "google-deepmind/reaf-sim",
+          "html_url": "https://github.com/google-deepmind/reaf-sim",
+          "description": "native MuJoCo environment authoring framework built for robotics",
+          "created_at": "2026-07-28T23:19:02Z",
+          "pushed_at": "2026-11-21T00:40:12Z"
+        },
+        {
+          "full_name": "google-deepmind/reaf",
+          "html_url": "https://github.com/google-deepmind/reaf",
+          "description": "Robotics Environment Authoring Framework",
+          "created_at": "2025-08-14T09:04:43Z",
+          "pushed_at": "2026-11-20T15:10:41Z"
+        }
+      ]
+    },
+    {
+      "organization": "facebookresearch",
+      "event": "created",
+      "query": "org:facebookresearch created:2026-11-20..2026-11-21",
+      "sha256": "4af480b8ee5b87b369a76c49bd22c9a783908272ebffbe97898f8ab0f0772a5f",
+      "total_count": 0,
+      "incomplete_results": false,
+      "items": []
+    },
+    {
+      "organization": "facebookresearch",
+      "event": "pushed",
+      "query": "org:facebookresearch pushed:2026-11-20..2026-11-21",
+      "sha256": "9ba698f17a7e188072d4bf13fa917e1cd8eda2e2a979a5b04f03cd43c14ec49f",
+      "total_count": 19,
+      "incomplete_results": false,
+      "items": [
+        {
+          "full_name": "facebookresearch/faiss",
+          "html_url": "https://github.com/facebookresearch/faiss",
+          "description": "A library for efficient similarity search and clustering of dense vectors.",
+          "created_at": "2017-02-07T16:07:05Z",
+          "pushed_at": "2026-11-20T17:42:58Z"
+        },
+        {
+          "full_name": "facebookresearch/fairchem",
+          "html_url": "https://github.com/facebookresearch/fairchem",
+          "description": "FAIR Chemistry's library of machine learning methods for chemistry ",
+          "created_at": "2019-09-26T04:47:27Z",
+          "pushed_at": "2026-11-20T19:52:34Z"
+        },
+        {
+          "full_name": "facebookresearch/projectaria_tools",
+          "html_url": "https://github.com/facebookresearch/projectaria_tools",
+          "description": "projectaria_tools is an C++/Python open-source toolkit to interact with Project Aria data. ",
+          "created_at": "2023-06-15T06:06:29Z",
+          "pushed_at": "2026-11-20T05:42:08Z"
+        },
+        {
+          "full_name": "facebookresearch/project_superdex",
+          "html_url": "https://github.com/facebookresearch/project_superdex",
+          "description": "SuperDex brings together a purpose-built physics engine, robotics authoring tools, and a scalable reinforcement learning interface in a unified simulation platform, with VR-based teleoperation and additional capabilities planned for future releases.",
+          "created_at": "2026-08-20T02:04:05Z",
+          "pushed_at": "2026-11-21T00:46:56Z"
+        },
+        {
+          "full_name": "facebookresearch/spider",
+          "html_url": "https://github.com/facebookresearch/spider",
+          "description": "A general physic-based retargeting framework.",
+          "created_at": "2025-12-09T23:20:01Z",
+          "pushed_at": "2026-11-21T02:31:34Z"
+        },
+        {
+          "full_name": "facebookresearch/vrs",
+          "html_url": "https://github.com/facebookresearch/vrs",
+          "description": "VRS is a file format optimized to record & playback streams of sensor data, such as images, audio samples, and any other discrete sensors (IMU, temperature, etc), stored in per-device streams of timestamped records.",
+          "created_at": "2021-09-08T03:09:54Z",
+          "pushed_at": "2026-11-21T02:43:41Z"
+        },
+        {
+          "full_name": "facebookresearch/momentum",
+          "html_url": "https://github.com/facebookresearch/momentum",
+          "description": "A library for human kinematic motion and numerical optimization solvers to apply human motion",
+          "created_at": "2024-06-14T16:03:53Z",
+          "pushed_at": "2026-11-20T22:55:24Z"
+        },
+        {
+          "full_name": "facebookresearch/spdl",
+          "html_url": "https://github.com/facebookresearch/spdl",
+          "description": "Scalable and Performant Data Loading",
+          "created_at": "2024-06-27T19:57:35Z",
+          "pushed_at": "2026-11-20T23:08:06Z"
+        },
+        {
+          "full_name": "facebookresearch/neuroai",
+          "html_url": "https://github.com/facebookresearch/neuroai",
+          "description": "Python suite for neuroscience research across all modalities.",
+          "created_at": "2026-04-14T12:59:23Z",
+          "pushed_at": "2026-11-20T19:23:10Z"
+        },
+        {
+          "full_name": "facebookresearch/atlas-lean",
+          "html_url": "https://github.com/facebookresearch/atlas-lean",
+          "description": "Large scale formalized mathematics",
+          "created_at": "2026-05-26T22:31:48Z",
+          "pushed_at": "2026-11-21T02:50:48Z"
+        },
+        {
+          "full_name": "facebookresearch/DCPerf",
+          "html_url": "https://github.com/facebookresearch/DCPerf",
+          "description": "DCPerf benchmark suite for hyperscale cloud applications",
+          "created_at": "2021-08-09T17:00:50Z",
+          "pushed_at": "2026-11-21T00:49:05Z"
+        },
+        {
+          "full_name": "facebookresearch/DRTK",
+          "html_url": "https://github.com/facebookresearch/DRTK",
+          "description": "Differentiable Rendering Toolkit",
+          "created_at": "2024-03-08T17:27:57Z",
+          "pushed_at": "2026-11-20T14:45:47Z"
+        },
+        {
+          "full_name": "facebookresearch/autoform-bot",
+          "html_url": "https://github.com/facebookresearch/autoform-bot",
+          "description": "Autoform Bot",
+          "created_at": "2026-05-26T22:37:11Z",
+          "pushed_at": "2026-11-20T11:54:17Z"
+        },
+        {
+          "full_name": "facebookresearch/exca",
+          "html_url": "https://github.com/facebookresearch/exca",
+          "description": "Exca - Execution and caching tool for python",
+          "created_at": "2024-11-18T14:36:25Z",
+          "pushed_at": "2026-11-20T16:43:35Z"
+        },
+        {
+          "full_name": "facebookresearch/logact",
+          "html_url": "https://github.com/facebookresearch/logact",
+          "description": "Hardening Agentic Systems via a Shared Log Design",
+          "created_at": "2026-09-25T19:36:42Z",
+          "pushed_at": "2026-11-20T23:33:35Z"
+        },
+        {
+          "full_name": "facebookresearch/ForeSpark",
+          "html_url": "https://github.com/facebookresearch/ForeSpark",
+          "description": "Official implementation of \"ForeSpark: Joint Draft and Verification Budget Scheduling for Parallel Speculative Decoding\"",
+          "created_at": "2026-11-11T23:57:30Z",
+          "pushed_at": "2026-11-20T21:04:15Z"
+        },
+        {
+          "full_name": "facebookresearch/lean_kernel_verify",
+          "html_url": "https://github.com/facebookresearch/lean_kernel_verify",
+          "description": "Compiler-based safety checker for GPU kernels. It lowers the real compiler's IR into a small kernel IR and decides specs in Lean 4 (bounds, hangs, exactly-once writes, barrier protocol, races) with no hand-written model. Specs and frontends plug in independently; today Triton/TLX and CuTe DSL on NVIDIA Blackwell.",
+          "created_at": "2026-10-20T04:49:48Z",
+          "pushed_at": "2026-11-20T22:50:59Z"
+        },
+        {
+          "full_name": "facebookresearch/benchmarking-with-surrogates-paper",
+          "html_url": "https://github.com/facebookresearch/benchmarking-with-surrogates-paper",
+          "description": "Code and benchmark datasets for reproducing \"How Surrogate Fidelity and Dataset Size Shape Benchmarking Conclusions: A Case Study in Ads Ranking\" (BPOD 2026, IEEE BigData 2026).",
+          "created_at": "2026-05-08T19:15:38Z",
+          "pushed_at": "2026-11-20T19:11:39Z"
+        },
+        {
+          "full_name": "facebookresearch/MemLife",
+          "html_url": "https://github.com/facebookresearch/MemLife",
+          "description": "Source implementation and dataset for paper \"MemLife Curating and Reasoning over Long-Term Egocentric Video Memories\"",
+          "created_at": "2026-10-30T17:54:15Z",
+          "pushed_at": "2026-11-20T07:01:07Z"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Official membership and familiar author names are recall signals, never byline proof.",
+    "Repository push dates are not publication dates or evidence of a new algorithm.",
+    "An unavailable directory is archived nonblocking, not evidence of zero new papers.",
+    "A transport200 response without a valid parsed HTML link inventory is incomplete, not an empty directory. Raw compressed response hashes are preserved separately from decoded hashes."
+  ]
+}

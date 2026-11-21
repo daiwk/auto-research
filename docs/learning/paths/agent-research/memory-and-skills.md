@@ -7,7 +7,7 @@ hide:
 
 # 记忆与技能：让经验可取回、可失效
 
-[Agent](index.md) / 256 个问题 · 64 篇论文
+[Agent](index.md) / 264 个问题 · 66 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">256 个问题 · 64 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">264 个问题 · 66 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memfolder" data-paper-title="MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management Agent Sichuan University 2026-11-19 MemFolder把记录数和取回上下文长度分开处理。RecordFolder先用LLM统一实体，再以密度峰选首锚点、以相对已有锚点的novelty渐进选互补锚点；语义/实体亲和与时间链修正分组，最后由LLM按时间合并。ContextFolder沿用这些分组，按事实重要性和token比例编码，通过看不到源记录和预期答案的blind reader检查可恢复性。分组不是摘要生成，校验也不是无损保证。实体权重为log(N/df)，共有的实体权重可为0； 成本过高，不复现（审查 DONE）。批次冻结源码后的统一runner生成42/43/44三种子CPU诊断，三种子不改变L1层级，也不是三个独立模型训练。component_only / L1 CPU机制组件，diagnostic_only=true。这是11月19日首发、11月20日公告的重叠池补漏，不算11月21日新论文。高成本完整实验不复现（审查 DONE），不是能力复现或已接入Evolve。本地实现显式embedding和已ground实体集合上的RecordFolder分组核，包括归一化、DPC/novelty锚点、全窗口方差、IDF亲和、正gain候选、SciPy真正Hungarian和链级重新归组；  记忆与技能 memfolder Agent 记忆与技能：让经验可取回、可失效 记录减少一半，上下文token就一定减少一半吗？ 不一定。合并后每条可能变长；RecordFolder减少检索单元数，ContextFolder才另外压缩每组文本，二者成本轴不同。 教学例：两条各20token合成一条40token，记录少50%，文本并未缩短。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<span id="paper-agent-research-memfolder-b329805a" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-2a2cc2a97c44bbc8">记录减少一半，上下文token就一定减少一半吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemfolder">MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · Sichuan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一定。合并后每条可能变长；RecordFolder减少检索单元数，ContextFolder才另外压缩每组文本，二者成本轴不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两条各20token合成一条40token，记录少50%，文本并未缩短。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26427v1">原论文</a> · <a href="../../../../agent-research/2611.26427-memfolder/">实现解读</a> · <a href="#qa-2a2cc2a97c44bbc8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memfolder" data-paper-title="MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management Agent Sichuan University 2026-11-19 MemFolder把记录数和取回上下文长度分开处理。RecordFolder先用LLM统一实体，再以密度峰选首锚点、以相对已有锚点的novelty渐进选互补锚点；语义/实体亲和与时间链修正分组，最后由LLM按时间合并。ContextFolder沿用这些分组，按事实重要性和token比例编码，通过看不到源记录和预期答案的blind reader检查可恢复性。分组不是摘要生成，校验也不是无损保证。实体权重为log(N/df)，共有的实体权重可为0； 成本过高，不复现（审查 DONE）。批次冻结源码后的统一runner生成42/43/44三种子CPU诊断，三种子不改变L1层级，也不是三个独立模型训练。component_only / L1 CPU机制组件，diagnostic_only=true。这是11月19日首发、11月20日公告的重叠池补漏，不算11月21日新论文。高成本完整实验不复现（审查 DONE），不是能力复现或已接入Evolve。本地实现显式embedding和已ground实体集合上的RecordFolder分组核，包括归一化、DPC/novelty锚点、全窗口方差、IDF亲和、正gain候选、SciPy真正Hungarian和链级重新归组；  记忆与技能 memfolder Agent 记忆与技能：让经验可取回、可失效 为什么所有记录都有的实体反而不应提高亲和？ IDF权重log(N/df)在df=N时为0，它不区分事件；没有共享实体质量时alpha=0，亲和退回cosine。 教学例：每条都出现“用户”不能把所有经历连成一个事件，稀有项目名才可能区分相关记录。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-a0a5cf5807fa453c">为什么所有记录都有的实体反而不应提高亲和？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemfolder">MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · Sichuan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>IDF权重log(N/df)在df=N时为0，它不区分事件；没有共享实体质量时alpha=0，亲和退回cosine。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：每条都出现“用户”不能把所有经历连成一个事件，稀有项目名才可能区分相关记录。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26427v1">原论文</a> · <a href="../../../../agent-research/2611.26427-memfolder/">实现解读</a> · <a href="#qa-a0a5cf5807fa453c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memfolder" data-paper-title="MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management Agent Sichuan University 2026-11-19 MemFolder把记录数和取回上下文长度分开处理。RecordFolder先用LLM统一实体，再以密度峰选首锚点、以相对已有锚点的novelty渐进选互补锚点；语义/实体亲和与时间链修正分组，最后由LLM按时间合并。ContextFolder沿用这些分组，按事实重要性和token比例编码，通过看不到源记录和预期答案的blind reader检查可恢复性。分组不是摘要生成，校验也不是无损保证。实体权重为log(N/df)，共有的实体权重可为0； 成本过高，不复现（审查 DONE）。批次冻结源码后的统一runner生成42/43/44三种子CPU诊断，三种子不改变L1层级，也不是三个独立模型训练。component_only / L1 CPU机制组件，diagnostic_only=true。这是11月19日首发、11月20日公告的重叠池补漏，不算11月21日新论文。高成本完整实验不复现（审查 DONE），不是能力复现或已接入Evolve。本地实现显式embedding和已ground实体集合上的RecordFolder分组核，包括归一化、DPC/novelty锚点、全窗口方差、IDF亲和、正gain候选、SciPy真正Hungarian和链级重新归组；  记忆与技能 memfolder Agent 记忆与技能：让经验可取回、可失效 MemFolder的时间链和MemForest的事件树能互换吗？ 不能。MemFolder匹配约束每节点最多一入一出，无锚点链整体分组；MemForest保留事件树层次并用anchor邻域传播。数据结构和检索假设不同。 教学例：一个父事件分出两条子事件可在树中表达，不能直接塞进无分支匹配链。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-278fc368e2512957">MemFolder的时间链和MemForest的事件树能互换吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemfolder">MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · Sichuan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。MemFolder匹配约束每节点最多一入一出，无锚点链整体分组；MemForest保留事件树层次并用anchor邻域传播。数据结构和检索假设不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个父事件分出两条子事件可在树中表达，不能直接塞进无分支匹配链。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26427v1">原论文</a> · <a href="../../../../agent-research/2611.26427-memfolder/">实现解读</a> · <a href="#qa-278fc368e2512957">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memfolder" data-paper-title="MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management Agent Sichuan University 2026-11-19 MemFolder把记录数和取回上下文长度分开处理。RecordFolder先用LLM统一实体，再以密度峰选首锚点、以相对已有锚点的novelty渐进选互补锚点；语义/实体亲和与时间链修正分组，最后由LLM按时间合并。ContextFolder沿用这些分组，按事实重要性和token比例编码，通过看不到源记录和预期答案的blind reader检查可恢复性。分组不是摘要生成，校验也不是无损保证。实体权重为log(N/df)，共有的实体权重可为0； 成本过高，不复现（审查 DONE）。批次冻结源码后的统一runner生成42/43/44三种子CPU诊断，三种子不改变L1层级，也不是三个独立模型训练。component_only / L1 CPU机制组件，diagnostic_only=true。这是11月19日首发、11月20日公告的重叠池补漏，不算11月21日新论文。高成本完整实验不复现（审查 DONE），不是能力复现或已接入Evolve。本地实现显式embedding和已ground实体集合上的RecordFolder分组核，包括归一化、DPC/novelty锚点、全窗口方差、IDF亲和、正gain候选、SciPy真正Hungarian和链级重新归组；  记忆与技能 memfolder Agent 记忆与技能：让经验可取回、可失效 为什么不能把Hungarian换成逐条挑最大gain？ 局部最大会占掉其他节点唯一可用的后继。最大总gain必须同时满足一入一出；本地用真正Hungarian，未用贪心捷径。 教学例：0→2为0.9、0→3为0.8、1→2为0.8；贪心拿0.9，总体匹配却能拿1.6。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-61f65e23cafac3fe">为什么不能把Hungarian换成逐条挑最大gain？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemfolder">MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · Sichuan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>局部最大会占掉其他节点唯一可用的后继。最大总gain必须同时满足一入一出；本地用真正Hungarian，未用贪心捷径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：0→2为0.9、0→3为0.8、1→2为0.8；贪心拿0.9，总体匹配却能拿1.6。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26427v1">原论文</a> · <a href="../../../../agent-research/2611.26427-memfolder/">实现解读</a> · <a href="#qa-61f65e23cafac3fe">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:grepmem" data-paper-title="Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents Agent University of Southern California 2026-11-18 GrepMem把有限工作上下文和完整历史分开：压缩时只把活跃上下文换成系统提示、任务与摘要，原始消息、工具调用/输出和摘要仍追加到纯文本日志。第一次压缩之后才开放grep_history，让模型按需用大小写不敏感正则取回遗漏细节。不需要embedding、索引或知识抽取，但“lossless”只指原日志保留，不代表模型每次都能找对或答对。grep按原始记录头与行号返回最早匹配，默认10条、最多30条，offset跳过匹配行而非记录；前后context默认1行、最多3行。 完整实验成本过高，不复现（审查 DONE）；本轮统一冻结源码后由批次runner生成三种子CPU诊断；component_only / l1_mechanism；不是模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不作为Evolve晋级证据。本地实现append-only记录、显式摘要压缩、第一次压缩后的grep准入、正则/分页/上下文/原行号、跳过旧grep输出与字符上限。正则在隔离子进程内运行并用硬timeout终止，仅接收输入文本而不打开路径。摘要由调用方明确提供；没有LLM摘要器、GRPO、问题回答或真实历史接入。  记忆与技能 grepmem Agent 记忆与技能：让经验可取回、可失效 GrepMem会让原始会话日志越来越小吗？ 不会。压缩的是工作上下文，消息、工具输出和摘要仍追加到完整日志；lossless是保留内容，不是节省原始日志磁盘。 教学例：摘要省略订单号后可以grep找回，但原始订单文本仍占空间。 2026-11-20">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-grepmem-e87c2c61" class="ar-learning-paper-anchor"></span>
@@ -1299,6 +1352,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如给三条记录预设语义分后排序正确，验证的是组合函数；尚未测试模型能否从自然语言算出可靠的这些分数。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00872">原论文</a> · <a href="../../../../agent-research/2610.00872-memfit/">实现解读</a> · <a href="#qa-499b4408c327aeaf">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memlife" data-paper-title="MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories Agent Meta Reality Labs / University of Virginia（Work done at Meta） 2026-09-30 MemLife先把每段第一视角视频和语音写成有时间锚点、实体落地的第一人称文本，再由reader按问题进行语义搜索和时间区间读取。MemOpt只训练writer，reader保持冻结；FIRM将逐token的faithfulness、逐候选的informativeness和retrievability相乘。前者看源视频是否支持内容，后两者分别看回答所需事实是否被保留、已缓存reader动作能否找回该候选，不把完整reader成败混成一个写入奖励。 成本过高，不复现（审查 DONE）。批次冻结源码后的统一runner生成42/43/44三种子CPU诊断，三种子不改变L1层级，也不是三个独立模型训练。component_only / L1 CPU机制组件，diagnostic_only=true。这是9月30日首发、11月21日官方仓库事件发现的历史补漏，不算本日新论文。高成本完整实验不复现（审查 DONE），不是能力复现或已接入Evolve。  记忆与技能 memlife Agent 记忆与技能：让经验可取回、可失效 记忆忠实于视频，就一定能回答未来问题吗？ 不一定。它还可能漏掉关键事实或在大检索库中找不到。FIRM分别衡量faithfulness、informativeness、retrievability，三者相乘而非只看最终答案。 教学例：准确写“我进了房间”很忠实，但若没写钥匙放在哪，就无法回答钥匙位置。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<span id="paper-agent-research-memlife-f25f359d" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d69289deeb3f0a47">记忆忠实于视频，就一定能回答未来问题吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemlife">MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · Meta Reality Labs / University of Virginia（Work done at Meta）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一定。它还可能漏掉关键事实或在大检索库中找不到。FIRM分别衡量faithfulness、informativeness、retrievability，三者相乘而非只看最终答案。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：准确写“我进了房间”很忠实，但若没写钥匙放在哪，就无法回答钥匙位置。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.40195v1">原论文</a> · <a href="../../../../agent-research/2609.40195-memlife/">实现解读</a> · <a href="#qa-d69289deeb3f0a47">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memlife" data-paper-title="MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories Agent Meta Reality Labs / University of Virginia（Work done at Meta） 2026-09-30 MemLife先把每段第一视角视频和语音写成有时间锚点、实体落地的第一人称文本，再由reader按问题进行语义搜索和时间区间读取。MemOpt只训练writer，reader保持冻结；FIRM将逐token的faithfulness、逐候选的informativeness和retrievability相乘。前者看源视频是否支持内容，后两者分别看回答所需事实是否被保留、已缓存reader动作能否找回该候选，不把完整reader成败混成一个写入奖励。 成本过高，不复现（审查 DONE）。批次冻结源码后的统一runner生成42/43/44三种子CPU诊断，三种子不改变L1层级，也不是三个独立模型训练。component_only / L1 CPU机制组件，diagnostic_only=true。这是9月30日首发、11月21日官方仓库事件发现的历史补漏，不算本日新论文。高成本完整实验不复现（审查 DONE），不是能力复现或已接入Evolve。  记忆与技能 memlife Agent 记忆与技能：让经验可取回、可失效 为什么方差不能改成每条候选围绕自身均值的方差？ informativeness和retrievability在一条候选中是常数，它们的差异主要在候选之间；围绕自身均值会把这个信号删掉。Eq.11围绕同一group均值再做长度公平宏平均。 教学例：一条全1、一条全0的候选，各自内部方差都为0，但group显然有不同质量，正确方差为0.25。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-45f4aea824aa3696">为什么方差不能改成每条候选围绕自身均值的方差？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemlife">MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · Meta Reality Labs / University of Virginia（Work done at Meta）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>informativeness和retrievability在一条候选中是常数，它们的差异主要在候选之间；围绕自身均值会把这个信号删掉。Eq.11围绕同一group均值再做长度公平宏平均。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一条全1、一条全0的候选，各自内部方差都为0，但group显然有不同质量，正确方差为0.25。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.40195v1">原论文</a> · <a href="../../../../agent-research/2609.40195-memlife/">实现解读</a> · <a href="#qa-45f4aea824aa3696">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memlife" data-paper-title="MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories Agent Meta Reality Labs / University of Virginia（Work done at Meta） 2026-09-30 MemLife先把每段第一视角视频和语音写成有时间锚点、实体落地的第一人称文本，再由reader按问题进行语义搜索和时间区间读取。MemOpt只训练writer，reader保持冻结；FIRM将逐token的faithfulness、逐候选的informativeness和retrievability相乘。前者看源视频是否支持内容，后两者分别看回答所需事实是否被保留、已缓存reader动作能否找回该候选，不把完整reader成败混成一个写入奖励。 成本过高，不复现（审查 DONE）。批次冻结源码后的统一runner生成42/43/44三种子CPU诊断，三种子不改变L1层级，也不是三个独立模型训练。component_only / L1 CPU机制组件，diagnostic_only=true。这是9月30日首发、11月21日官方仓库事件发现的历史补漏，不算本日新论文。高成本完整实验不复现（审查 DONE），不是能力复现或已接入Evolve。  记忆与技能 memlife Agent 记忆与技能：让经验可取回、可失效 MemOpt和MemFolder都优化记忆，优化的对象一样吗？ 不一样。MemOpt分解训练奖励以改writer输出；MemFolder整理和压缩已有记录。不能把检索单元变少等同于writer更忠实或更会保留事实。 教学例：把两条记忆合为一组是结构整理，降低幻觉token的训练credit是写入器优化。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-b44e9b0efe416f37">MemOpt和MemFolder都优化记忆，优化的对象一样吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemlife">MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · Meta Reality Labs / University of Virginia（Work done at Meta）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一样。MemOpt分解训练奖励以改writer输出；MemFolder整理和压缩已有记录。不能把检索单元变少等同于writer更忠实或更会保留事实。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把两条记忆合为一组是结构整理，降低幻觉token的训练credit是写入器优化。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.40195v1">原论文</a> · <a href="../../../../agent-research/2609.40195-memlife/">实现解读</a> · <a href="#qa-b44e9b0efe416f37">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memlife" data-paper-title="MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories Agent Meta Reality Labs / University of Virginia（Work done at Meta） 2026-09-30 MemLife先把每段第一视角视频和语音写成有时间锚点、实体落地的第一人称文本，再由reader按问题进行语义搜索和时间区间读取。MemOpt只训练writer，reader保持冻结；FIRM将逐token的faithfulness、逐候选的informativeness和retrievability相乘。前者看源视频是否支持内容，后两者分别看回答所需事实是否被保留、已缓存reader动作能否找回该候选，不把完整reader成败混成一个写入奖励。 成本过高，不复现（审查 DONE）。批次冻结源码后的统一runner生成42/43/44三种子CPU诊断，三种子不改变L1层级，也不是三个独立模型训练。component_only / L1 CPU机制组件，diagnostic_only=true。这是9月30日首发、11月21日官方仓库事件发现的历史补漏，不算本日新论文。高成本完整实验不复现（审查 DONE），不是能力复现或已接入Evolve。  记忆与技能 memlife Agent 记忆与技能：让经验可取回、可失效 能先在全部记忆里top-k，再过滤未来和其他subject吗？ 不能。未来或不属于当前隔离scope的高分项会挤掉合法结果。应先用end≤query_time和显式subject/区间限定候选，再做相似度排序；这只是本地隔离接口，不是身份认证。 教学例：明天的片段相似度1、昨天为0.8，k=1时先top-k再过滤会错误返回空，而正确结果是昨天的片段。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-8df72ab734c2f648">能先在全部记忆里top-k，再过滤未来和其他subject吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemlife">MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · Meta Reality Labs / University of Virginia（Work done at Meta）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。未来或不属于当前隔离scope的高分项会挤掉合法结果。应先用end≤query_time和显式subject/区间限定候选，再做相似度排序；这只是本地隔离接口，不是身份认证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：明天的片段相似度1、昨天为0.8，k=1时先top-k再过滤会错误返回空，而正确结果是昨天的片段。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.40195v1">原论文</a> · <a href="../../../../agent-research/2609.40195-memlife/">实现解读</a> · <a href="#qa-8df72ab734c2f648">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:context-lm" data-paper-title="Context Language Models" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Context Language Models Agent University of Washington / Meta Superintelligence Labs 2026-09-29 把上下文视为模型可直接编辑的文件，使保留、删除和重组信息成为模型行为，而不是外部 harness 的固定策略；多 Agent 各自维护 context file，服务端从第一个不匹配 token 起重新 prefill。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 context-file 编辑和 suffix cache 边界；未训练 Qwen3.5-9B，也未运行 24 小时 Agent swarm。执行 context-file 编辑和 suffix cache 边界；未训练 Qwen3.5-9B，也未运行 24 小时 Agent swarm。本地对照口径：基线为论文机制关闭或默认状态，实验组为开启对应核心算子；本批只验证不变量和状态转换，跨模型相对变化不适用。  上下文管理 Agent RL 多 Agent Agent 记忆与技能：让经验可取回、可失效 context file 为什么是模型行为的一部分，而不是固定外部摘要？ 模型可以直接决定保留、删除、重组上下文文件，后续行动读取它编辑后的状态。传统固定 harness 由外部规则决定何时压缩和保留什么，行为责任不同；让模型编辑也带来丢失关键约束的风险，仍要有容量与执行合同。 例如模型发现旧日志无用可主动删该段并保留结论，而不是等外部长度阈值统一摘要整段历史。 2026-10-27">

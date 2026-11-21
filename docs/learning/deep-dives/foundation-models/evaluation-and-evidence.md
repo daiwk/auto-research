@@ -7,7 +7,7 @@ hide:
 
 # 能力证据：准确打分、节省观测与解释预测
 
-[基础模型](../index.md) · 更新 2026-11-18 · 26 篇主题资料 / 18 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-21 · 27 篇主题资料 / 19 篇重点对照
 
 先区分“正确答案怎样定义”“下一题测谁”“多个裁判怎样融合”和“预测怎样解释”。XLGoBench、ProEval、FUSE、TCAB 与 DetectorScope 分别改变这些环节；观测更少或解释可加，不等于被测能力本身更强。XLA from the Trenches还提醒：评分之前，编译后程序本身就可能静默偏离原始数值语义，不能把编译成功当作执行正确。
 
@@ -43,6 +43,7 @@ hide:
 | [Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving](../../../foundation-models/2611.12737-runway-inference-protocol/README.md) · [原始来源](https://arxiv.org/abs/2611.12737v2)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界 | 在原样AIPerf前后构建配置/缓存身份、声明式SLA和每成功请求成本，明确缓存命中只复用既有证据。 | XLA from the Trenches验证目标TPU编译数值正确性；Runway验证某serving配置是否满足指标和契约。CPU协议既不证明TPU语义，也不测CUDA吞吐；模型/引擎名字相同不能保证缓存身份相同。 |
 | [Mixed Signals: Weight-Space Programming for EEG and ECG](../../../foundation-models/2611.13758-mixed-signals-weights/README.md) · [原始来源](https://arxiv.org/abs/2611.13758v1)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 用原子参数补丁和受限practice反馈表达WSP接口，测试标签留在外部评价器，不用SGD替代推理编辑。 | AMS从固定激活读出结构差异，不写参数也不认证安全；WSP问能否推理改权重。当前L0线性harness不含LLM、TinyEEGNet或被试数据。 |
 | [Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization](../../../foundation-models/2603.02029-efficient-evals-tensor/README.md) · [原始来源](https://arxiv.org/abs/2603.02029v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | 本文将模型、prompt和rater三者的能力张量作低rank CP分解，先用大量廉价autorater评分学共享表示，再冻结表示、只拟合人类rater向量及有序cutoff。它保留prompt异质性和rater偏好差异，不把某个自动judge分数直接当人类真值。2026-11-16是Google官方代码新仓库，不是论文首发；v1首发为2026-03-02 16:12:46 UTC。 | ProEval用其他模型历史逐题分数建立GP先验并主动决定下一题；本篇用多rater廉价数据学prompt/model表示再做人类对齐。前者的采样后验不等于后者的rater偏差校准，条件置信界也不能无条件覆盖共享表示估计误差。 |
+| [Sequential Anytime Valid Tests for Efficient Inference-Time Alignment](../../../foundation-models/2611.26413-e-rwsc/README.md) · [原始来源](https://arxiv.org/abs/2611.26413v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 纯stdlib、CPU-only的RWSC聚合、前缀可预测下注、逐答案log资本与首现权重、首次出现跳过、认证终止和显式未认证预算回退。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。没有LLM、reward model、答案解析或公开benchmark运行；不把合成流叫模型输出，不接Evolve晋级。 | LLM Stochasticity区分边缘分布拟合与时序依赖；e-RWSC的保证需要固定政策的iid响应，不能由平衡答案直方图或“请随机回答”提示推导。前者的统计诊断可暴露某些依赖，却不能证明后者的全部假设。e-RWSC也不估计答案是否符合现实：即使输入真独立，政策总偏向错误答案时仍可快速发多数证书。 |
 
 </div>
 
@@ -137,6 +138,12 @@ AMS的方向/漂移是检测信号，存在结构保持攻击盲区；Mixed Sign
 §3的ordinal likelihood支持单侧评分和成对能力差及平局；首尾类别用0/1 CDF边界。第二阶段只给human向量／cutoff梯度，模型和prompt因子冻结。条件Wald区间把第一阶段表示当高精度固定量，并用Bonferroni处理多比较；Sigma是渐近协方差，需除m。可选全参数human fine-tune可能改善点预测，却使这些条件区间失效，不能两种好处同时声称。 ProEval用其他模型历史逐题分数建立GP先验并主动决定下一题；本篇用多rater廉价数据学prompt/model表示再做人类对齐。前者的采样后验不等于后者的rater偏差校准，条件置信界也不能无条件覆盖共享表示估计误差。
 
 对照来源：[efficient-evals-tensor](../../../foundation-models/2603.02029-efficient-evals-tensor/README.md) · [proeval](../../../foundation-models/2604.23099-proeval/README.md)
+
+### 答案直方图均匀，是否就满足iid保证？
+
+LLM Stochasticity区分边缘分布拟合与时序依赖；e-RWSC的保证需要固定政策的iid响应，不能由平衡答案直方图或“请随机回答”提示推导。前者的统计诊断可暴露某些依赖，却不能证明后者的全部假设。e-RWSC也不估计答案是否符合现实：即使输入真独立，政策总偏向错误答案时仍可快速发多数证书。 不能。返回的是reward-weighted self-consistency回退，certified必须为false。还要检查当前下注只看旧前缀，新响应的答案和极端reward都不能倒灌到刚才的stake。
+
+对照来源：[e-rwsc](../../../foundation-models/2611.26413-e-rwsc/README.md) · [llm-stochasticity](../../../foundation-models/2604.06543-llm-stochasticity/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -302,9 +309,23 @@ AMS的方向/漂移是检测信号，存在结构保持攻击盲区；Mixed Sign
 
     对照来源：[efficient-evals-tensor](../../../foundation-models/2603.02029-efficient-evals-tensor/README.md) · [proeval](../../../foundation-models/2604.23099-proeval/README.md)
 
+### 答案直方图均匀，是否就满足iid保证？ {#cross-nov21-e-rwsc}
+
+??? note "展开答案与例子"
+
+    **答案：** 不满足。LLM Stochasticity说明边缘分布平衡仍可有确定性时序依赖；e-RWSC的固定政策独立抽样假设不能靠均匀图或随机提示替代。
+
+    **教学例子：** 教学例：0、1、2、3无限循环时各值频率相等，但下一值可由上一值确定；这不是四分类iid采样。
+
+    对照来源：[e-rwsc](../../../foundation-models/2611.26413-e-rwsc/README.md) · [llm-stochasticity](../../../foundation-models/2604.06543-llm-stochasticity/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-21** · 纯stdlib、CPU-only的RWSC聚合、前缀可预测下注、逐答案log资本与首现权重、首次出现跳过、认证终止和显式未认证预算回退。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。没有LLM、reward model、答案解析或公开benchmark运行；不把合成流叫模型输出，不接Evolve晋级。 完整实验成本过高不复现；组件不构成能力晋级。
+
+涉及：[e-rwsc](../../../foundation-models/2611.26413-e-rwsc/README.md) · [llm-stochasticity](../../../foundation-models/2604.06543-llm-stochasticity/README.md)
 
 **2026-11-18** · 官方google-research/efficient_evals固定b4421d929d1078631ee890f8e4a776442c816d36、Apache2.0。本地只执行CP、ordinal概率、冻结human NLL和外部Sigma的条件区间算术；不含完整Adam/BFGS拟合、30切分或真实评分重收集。上游CPU notebook估约1小时，完整多judge矩阵高成本不复现，CUDA只验算子。 完整实验高成本不复现，未作能力或Evolve晋级证据。
 
@@ -362,7 +383,7 @@ AMS的方向/漂移是检测信号，存在结构保持攻击盲区；Mixed Sign
 
 覆盖 13 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 26 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 27 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -392,6 +413,7 @@ AMS的方向/漂移是检测信号，存在结构保持攻击盲区；Mixed Sign
 - [Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving](../../../foundation-models/2611.12737-runway-inference-protocol/README.md)
 - [Mixed Signals: Weight-Space Programming for EEG and ECG](../../../foundation-models/2611.13758-mixed-signals-weights/README.md)
 - [Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization](../../../foundation-models/2603.02029-efficient-evals-tensor/README.md)
+- [Sequential Anytime Valid Tests for Efficient Inference-Time Alignment](../../../foundation-models/2611.26413-e-rwsc/README.md)
 
 </details>
 

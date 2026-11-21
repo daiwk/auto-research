@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "post-training:dfrl": {
+      "questions": [
+        {
+          "id": "nov21-basics",
+          "level": "basics",
+          "question": "为什么预测更准不一定决策更好？",
+          "answer": "优化器只在可行决策间选择；预测误差若跨过改变最优决策的边界，会有大regret，别处较大的误差却可能不改决策。DFRL直接奖励诱导决策的真实成本，而非每维预测误差。",
+          "example": "教学例：容量只能选一件商品时，两件商品利润接近，微小的排序翻转可选错商品；把两件利润都等量平移虽增大MSE，却可能不改选择。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "nov21-mechanism",
+          "level": "mechanism",
+          "question": "reward correction为什么只抛一次硬币？",
+          "answer": "Eq.12对整批M×K共享I；I=1时计算该批全部精确优势，并以1/p校正便宜优势，否则整批跳过精确求解。实例内baseline仍分别计算，不能把不同实例混在一起。",
+          "example": "教学例：M=2、K=2、p=1/4时，一次更新要么做4次精确求解，要么0次，期望1次；这不是每条独立抽一次的原文实现。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "nov21-comparison",
+          "level": "comparison",
+          "question": "DFRL是替代RLOO的另一种优化器吗？",
+          "answer": "不是。DFRL指定决策regret目标和反馈，RLOO可作为其无偏score-gradient估计器。相同实例的hindsight最优成本在baseline中抵消，但任意优势标准化或KL shaping都会改变原文分析的目标/更新。",
+          "example": "教学例：成本2和5给优势3和负3；同时减去共同hindsight成本1，优势仍是3和负3，不需要多求一次真实参数下的最优解。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "nov21-implementation",
+          "level": "implementation",
+          "question": "没有选中精确反馈时还能先算exact成本吗？",
+          "answer": "不能把先求全批exact再屏蔽当作节省求解。本地I=0分支不调用lazy exact回调；I=1只调用一次整批supplier。p必须大于0且不大于1，p很小时方差和溢出风险需显式处理。",
+          "example": "教学例：便宜优势为0、精确优势为4、p=1/4时，选中返回16，未选中返回0，期望4；每批返回16不是稳定收益或收敛保证。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-21"
+        }
+      ]
+    },
+    "foundation-models:e-rwsc": {
+      "questions": [
+        {
+          "id": "nov21-basics",
+          "level": "basics",
+          "question": "e-RWSC证书是在证明答案正确吗？",
+          "answer": "不是。它在固定政策iid抽样假设下控制误认证非多数答案的概率，认证的是政策分布中的占优概率，而不读取或判断真实答案。",
+          "example": "教学例：假设政策几乎总把2+2回答成5，5也可能很快获得多数证书；这不让5变成正确答案。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "nov21-mechanism",
+          "level": "mechanism",
+          "question": "为什么新答案第一次出现不能立即增长资本？",
+          "answer": "首现时这个样本等于该答案是由定义强制的，不是此前可预测下注的随机成功；因此只登记E=1和Z=0，从下一条响应才开始结算。",
+          "example": "教学例：第一个答案出现后资本仍为1，rank1权重为1/2；不能把第一次出现当作一次押中而直接加大证据。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "nov21-comparison",
+          "level": "comparison",
+          "question": "答案直方图均匀，是否就满足iid保证？",
+          "answer": "不满足。LLM Stochasticity说明边缘分布平衡仍可有确定性时序依赖；e-RWSC的固定政策独立抽样假设不能靠均匀图或随机提示替代。",
+          "example": "教学例：0、1、2、3无限循环时各值频率相等，但下一值可由上一值确定；这不是四分类iid采样。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "nov21-implementation",
+          "level": "implementation",
+          "question": "达到Nmax但没跨界，可以标为已认证吗？",
+          "answer": "不能。返回的是reward-weighted self-consistency回退，certified必须为false。还要检查当前下注只看旧前缀，新响应的答案和极端reward都不能倒灌到刚才的stake。",
+          "example": "教学例：两个进程共享同一过去前缀，下一奖励分别是正一百万和负一百万；它们结算本步前的下注必须相同，预算用尽也不会补发证书。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-21"
+        }
+      ]
+    }
+  }
+}

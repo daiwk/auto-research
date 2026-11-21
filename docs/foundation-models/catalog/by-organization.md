@@ -37,6 +37,7 @@
 
 ## Beijing Institute of Technology
 
+- 2026-11-19 · [FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models](../../foundation-models/2611.26020-frontier-replay/README.md)（`frontier-replay`）：混合模型的attention KV可按页复用，但递归状态只在保存过的精确位置恢复。FrontierReplay先根据已观察到的模板稳定尾、已完成turn和分叉点规划检查点；原生prefill不断开，之后只重放短窗递归输入生成精确状态。保留策略优先保护仍在执行的请求锚点和已证明可复用的分叉，而非只看历史频率。
 - 2026-11-17 · [FM-Mamba: An Efficient Native 2D Selective State Space Model with Stability-Aware Discretization](../../foundation-models/2611.22061-fm-mamba/README.md)（`fm-mamba`）：原生2D FM状态同时接收上、左与左上三个前驱，不通过展平扫描把二维关系退化为一条链。两个输入相关步长分别控制两个轴；a0/(a1a2)决定是否需要给步长施加上界。 [已核方法位置](https://arxiv.org/html/2611.22061v1#S3)：3.1–3.3, 4.1。
 
 ## Beijing University of Posts and Telecommunications
@@ -230,6 +231,10 @@
 
 - 2026-07-23 · [Anti-Periodic Positional Encoding: Möbius Boundary Conditions Make In-Context Retrieval Reliable](../../reproductions/2607.21405-mobius-rope/README.md)（`mobius-rope`）：标准 RoPE 的随机种子会显著影响长距离 needle retrieval。论文为部分 attention heads 使用反周期频率梯度，使跨完整训练窗口的旋转恒为 $-I$；其余 heads 保留标准 RoPE，以维持语言建模能力。
 - 2026-07-23 · [Naju: A Native Discrete State-Space Model with Independent Retention and Writing for Long-Sequence Memory](../../reproductions/2607.21000-naju/README.md)（`naju`）：Mamba 从连续时间系统离散化得到转移，单一耦合门也容易形成“强保留就难写入”的约束。Naju 直接参数化离散 pole，将 retain gate 和 write gate 分开，并保留 token-dependent $B/C$ 方向、短程因果卷积、直接 feedthrough 与输出调制。
+
+## Indian Institute of Technology Kanpur
+
+- 2026-11-19 · [Sequential Anytime Valid Tests for Efficient Inference-Time Alignment](../../foundation-models/2611.26413-e-rwsc/README.md)（`e-rwsc`）：固定N的Best-of-N对容易题也花满预算；只追踪当前领先答案的SPRT会反复换假设，不能直接沿用Wald错误保证。e-RWSC按答案分别保留e-process，以过去响应的reward-weighted self-consistency质量和首现后的匹配次数构造可预测Kelly下注。新答案第一次出现只登记为单位资本，不把这个由定义强制成功的样本计作证据。所有旧答案的下注先于下一条响应/奖励计算，领先者改变也不重置资本。
 
 ## Indian Institute of Technology Madras
 
@@ -670,6 +675,10 @@
 ## University of Minnesota
 
 - 2025-10-02 · [Detecting Post-generation Edits to Watermarked LLM Outputs via Combinatorial Watermarking](../../foundation-models/2510.01637-combinatorial-watermark/README.md)（`combinatorial-watermark`）：固定v1 Section3 Eqs2–5：调用方提供真实secret分区与base logits；bias δ到当前pattern tag后softmax。Iw(t)对所有cyclic phases检查，global mean；local在完整interior t=w−1..T−w平均w个covering windows。全局>=threshold、局部<threshold，阈值需在calibration控制TypeI。binary周期整周期删除可以不可检测，不能承诺完美定位。
+
+## University of Minnesota, Twin Cities
+
+- 2026-11-18 · [MV-JEPA: Post-Training Video Encoders for Cross-View Understanding](../../foundation-models/2611.25172-mv-jepa/README.md)（`mv-jepa`）：MV-JEPA直接后训练已有JEPA视频编码器，强化不同摄像头视角之间的对象/时刻对应。共享student分别编码各context view的可见token；联合predictor利用所有context特征，既重建被mask的context位置，又预测一个完全held-out视图。held-out图像/特征从不进入student或predictor，只提供teacher目标；推理仍可独立编码单视角。
 
 ## University of Modena and Reggio Emilia
 

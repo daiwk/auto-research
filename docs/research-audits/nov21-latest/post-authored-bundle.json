@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-21",
+  "papers": {
+    "post-training:dfrl": {
+      "questions": [
+        {
+          "id": "nov21-basics",
+          "level": "basics",
+          "question": "为什么预测更准不一定决策更好？",
+          "answer": "优化器只在可行决策间选择；预测误差若跨过改变最优决策的边界，会有大regret，别处较大的误差却可能不改决策。DFRL直接奖励诱导决策的真实成本，而非每维预测误差。",
+          "example": "教学例：容量只能选一件商品时，两件商品利润接近，微小的排序翻转可选错商品；把两件利润都等量平移虽增大MSE，却可能不改选择。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "nov21-mechanism",
+          "level": "mechanism",
+          "question": "reward correction为什么只抛一次硬币？",
+          "answer": "Eq.12对整批M×K共享I；I=1时计算该批全部精确优势，并以1/p校正便宜优势，否则整批跳过精确求解。实例内baseline仍分别计算，不能把不同实例混在一起。",
+          "example": "教学例：M=2、K=2、p=1/4时，一次更新要么做4次精确求解，要么0次，期望1次；这不是每条独立抽一次的原文实现。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "nov21-comparison",
+          "level": "comparison",
+          "question": "DFRL是替代RLOO的另一种优化器吗？",
+          "answer": "不是。DFRL指定决策regret目标和反馈，RLOO可作为其无偏score-gradient估计器。相同实例的hindsight最优成本在baseline中抵消，但任意优势标准化或KL shaping都会改变原文分析的目标/更新。",
+          "example": "教学例：成本2和5给优势3和负3；同时减去共同hindsight成本1，优势仍是3和负3，不需要多求一次真实参数下的最优解。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "nov21-implementation",
+          "level": "implementation",
+          "question": "没有选中精确反馈时还能先算exact成本吗？",
+          "answer": "不能把先求全批exact再屏蔽当作节省求解。本地I=0分支不调用lazy exact回调；I=1只调用一次整批supplier。p必须大于0且不大于1，p很小时方差和溢出风险需显式处理。",
+          "example": "教学例：便宜优势为0、精确优势为4、p=1/4时，选中返回16，未选中返回0，期望4；每批返回16不是稳定收益或收敛保证。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-21"
+        }
+      ]
+    },
+    "foundation-models:e-rwsc": {
+      "questions": [
+        {
+          "id": "nov21-basics",
+          "level": "basics",
+          "question": "e-RWSC证书是在证明答案正确吗？",
+          "answer": "不是。它在固定政策iid抽样假设下控制误认证非多数答案的概率，认证的是政策分布中的占优概率，而不读取或判断真实答案。",
+          "example": "教学例：假设政策几乎总把2+2回答成5，5也可能很快获得多数证书；这不让5变成正确答案。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "nov21-mechanism",
+          "level": "mechanism",
+          "question": "为什么新答案第一次出现不能立即增长资本？",
+          "answer": "首现时这个样本等于该答案是由定义强制的，不是此前可预测下注的随机成功；因此只登记E=1和Z=0，从下一条响应才开始结算。",
+          "example": "教学例：第一个答案出现后资本仍为1，rank1权重为1/2；不能把第一次出现当作一次押中而直接加大证据。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "nov21-comparison",
+          "level": "comparison",
+          "question": "答案直方图均匀，是否就满足iid保证？",
+          "answer": "不满足。LLM Stochasticity说明边缘分布平衡仍可有确定性时序依赖；e-RWSC的固定政策独立抽样假设不能靠均匀图或随机提示替代。",
+          "example": "教学例：0、1、2、3无限循环时各值频率相等，但下一值可由上一值确定；这不是四分类iid采样。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-21"
+        },
+        {
+          "id": "nov21-implementation",
+          "level": "implementation",
+          "question": "达到Nmax但没跨界，可以标为已认证吗？",
+          "answer": "不能。返回的是reward-weighted self-consistency回退，certified必须为false。还要检查当前下注只看旧前缀，新响应的答案和极端reward都不能倒灌到刚才的stake。",
+          "example": "教学例：两个进程共享同一过去前缀，下一奖励分别是正一百万和负一百万；它们结算本步前的下注必须相同，预算用尽也不会补发证书。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-21"
+        }
+      ]
+    }
+  },
+  "english_question_units": {
+    "qa/post-training:dfrl/nov21-basics": {
+      "source_sha256": "efb7c4bc00a27acc60f2954d1e106cb48f054454dd9720c2bd8858c4c635c483",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a more accurate prediction induce a worse decision?",
+        "answer": "An optimizer chooses among feasible decisions. Error crossing a decision boundary can cause large regret, while larger error elsewhere may leave the decision unchanged. DFRL rewards realized induced decision cost rather than coordinate-wise prediction error.",
+        "example": "Teaching example: with capacity for one item and nearly tied profits, a small ranking reversal changes the chosen item. Shifting both predicted profits equally increases MSE but may leave the choice unchanged."
+      }
+    },
+    "qa/post-training:dfrl/nov21-mechanism": {
+      "source_sha256": "d38e298c63da45d8b2c5331d66f1c72f0c9461a434f6d89327e8ec5c72063a9c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does reward correction use one coin flip?",
+        "answer": "Equation12 shares I across the whole M-by-K batch. I=1 obtains every exact advantage and corrects cheap advantages by1/p; otherwise all exact solves are skipped. Baselines remain within each instance, not across instances.",
+        "example": "Teaching example: with M=2,K=2,p=1/4, an update makes either four exact solves or zero, averaging one. Independent per-response coins are not the specified implementation."
+      }
+    },
+    "qa/post-training:dfrl/nov21-comparison": {
+      "source_sha256": "a0f0c9f77470b612c0621315738314281453ac3877186bc53d1f9a40cf90e0ee",
+      "reviewed": true,
+      "fields": {
+        "question": "Is DFRL another optimizer replacing RLOO?",
+        "answer": "No. DFRL specifies a decision-regret objective and feedback, while RLOO can estimate its score gradient. The shared hindsight optimum cancels from the baseline; arbitrary advantage standardization or KL shaping changes the analyzed objective or update.",
+        "example": "Teaching example: costs2 and5 yield advantages3 and minus3. Subtracting the same hindsight cost1 leaves them unchanged, avoiding another solve under observed parameters."
+      }
+    },
+    "qa/post-training:dfrl/nov21-implementation": {
+      "source_sha256": "dfe26caa5021913e78559e90250e5fe6b42112280cf31f65c338d728a45fcbda",
+      "reviewed": true,
+      "fields": {
+        "question": "Can exact costs be computed before deciding to skip them?",
+        "answer": "Solving every exact problem and masking afterward does not save solves. The local I=0 branch never calls the lazy callback; I=1 calls the whole-batch supplier once. Require0<p<=1 and handle variance and overflow at small p explicitly.",
+        "example": "Teaching example: with cheap advantage0, exact advantage4 and p=1/4, selected batches return16 and unselected batches0, averaging4. A batch value16 is neither stable gain nor a convergence guarantee."
+      }
+    },
+    "qa/foundation-models:e-rwsc/nov21-basics": {
+      "source_sha256": "cfd628a9a0ef02279c412c06173a077d7e3854974c5a4ba70424b26e00da08fa",
+      "reviewed": true,
+      "fields": {
+        "question": "Does an e-RWSC certificate prove the answer is correct?",
+        "answer": "No. Under iid sampling from a fixed policy, it controls false certification of a non-majority answer. It certifies dominance in the policy distribution, without reading or judging the gold answer.",
+        "example": "Teaching example: if a policy almost always answers5 to2+2,5 can quickly obtain a majority certificate without becoming correct."
+      }
+    },
+    "qa/foundation-models:e-rwsc/nov21-mechanism": {
+      "source_sha256": "d83b02f8b3b87619447af63af9646dc145dbd370b1c45983d2b28a4c6f6bbf03",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must first appearance not immediately grow capital?",
+        "answer": "The answer matching its first observation is forced by the definition, not a success of a previously predictable bet. Initialize E=1 and Z=0, then settle bets starting at the next response.",
+        "example": "Teaching example: after the first answer appears, its capital remains1 with rank-one weight1/2. Counting its appearance as a successful wager invents evidence."
+      }
+    },
+    "qa/foundation-models:e-rwsc/nov21-comparison": {
+      "source_sha256": "0221579ed94b3550e444a2fca484e6df9764b9a4fd7b75b7974e3df61f29b54d",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a uniform answer histogram establish iid sampling?",
+        "answer": "No. LLM Stochasticity shows that balanced marginal frequencies can coexist with deterministic temporal dependence. A histogram or randomness prompt cannot replace e-RWSC's fixed-policy independent-sampling assumption.",
+        "example": "Teaching example: an endless0,1,2,3 cycle has equal frequencies, yet each next value is determined by its predecessor; it is not iid categorical sampling."
+      }
+    },
+    "qa/foundation-models:e-rwsc/nov21-implementation": {
+      "source_sha256": "85eb32f218cb13d2a3aa00449a6fa5c2319589b9d8b2966bf0fd16e4b13f8301",
+      "reviewed": true,
+      "fields": {
+        "question": "Can an Nmax-exhausted answer be labeled certified?",
+        "answer": "No. It is a reward-weighted self-consistency fallback with certified=false. Also check that each stake uses only the old prefix: the incoming answer or an extreme reward cannot influence the stake just being settled.",
+        "example": "Teaching example: two processes share a prefix but their next rewards are plus and minus one million. Their pre-settlement stakes must match; exhausting the budget does not create a certificate."
+      }
+    }
+  },
+  "integration_owner": "root"
+}

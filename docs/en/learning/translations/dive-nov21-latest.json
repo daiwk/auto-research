@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:frontier-replay": {
+      "source_sha256": "8c181dded72f94a660ca1c494846fc4a42f3699cdd73e473f4a5a1f0ea534bcd",
+      "reviewed": true,
+      "fields": {
+        "position": "Attention KV is reusable by page, but hybrid recurrent state can resume only at an exactly saved position. FrontierReplay plans checkpoints from observed template-stable ends, finished turns and branch junctions. Native prefill remains uncut; short-window state-only replay later materializes exact states. Retention protects active anchors and proven branches instead of relying only on historical frequency.",
+        "tradeoff": "ReplaySSM reduces per-token matrix-state writes during decoding/speculation through input caching, output-only reads and acceptance rollback. FrontierReplay instead materializes exact checkpoints at structural boundaries for subsequent prefill and decides which states remain useful. Periodic refresh and split-precision anchors are not conversation-frontier retention. Existing standalone Triton evidence for local ReplaySSM cannot certify this host-policy component; the two input logs are not interchangeable."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/analysis/12": {
+      "source_sha256": "35a642787ef598ae9a7021b2ad07470aa77167c6279088c78cc1696186033d6f",
+      "reviewed": true,
+      "fields": {
+        "title": "FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models",
+        "body": "ReplaySSM reduces per-token matrix-state writes during decoding/speculation through input caching, output-only reads and acceptance rollback. FrontierReplay instead materializes exact checkpoints at structural boundaries for subsequent prefill and decides which states remain useful. Periodic refresh and split-precision anchors are not conversation-frontier retention. Existing standalone Triton evidence for local ReplaySSM cannot certify this host-policy component; the two input logs are not interchangeable. Section4.3 uses16-token pages. Native chunk ends must already be16-aligned: silently rounding them down would invent an exposed state. Completed turns may use the last page passed during decode, while structural targets may be rounded down and still require replay. Branch depths are at least256, and the replay window is1024tokens. Missing live anchors or log pages force an exact cut. Falcon-H1 never saves/restores below1568tokens. Section4.4 tiers are dead−1, superseded0, natural1, unused template/turn2, proven3 and running4. Repeated restores by one request do not prove reuse. A checkpoint becomes visible only after completion; failed or pending states cannot hit, and leases protect in-use anchors. Long-prefix protection selects the deepest natural checkpoint within one prefill budget before the stable end, at depth at least4096."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/question/nov21-frontier-replay": {
+      "source_sha256": "a8ef5ec3b18b35854c2b6ab21903dcb29b75eb7b0d4d43d3bcfd9efef6692e47",
+      "reviewed": true,
+      "fields": {
+        "question": "Do FrontierReplay and ReplaySSM solve the same problem because both log inputs?",
+        "answer": "No. ReplaySSM targets decode-state writes, output-only computation and speculative rollback; FrontierReplay targets checkpoint production and retention at prefill structural boundaries. Similar algebra does not share serving policies, precision contracts or evidence.",
+        "example": "Illustration: a correct sixteen-step decode refresh does not prove that a next-turn template boundary was saved and remains reachable."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/update/2026-11-21/12": {
+      "source_sha256": "e491a8399c697f6755a0adfb3df25b08b13dd77bc397435b42649f137d2a44de",
+      "reviewed": true,
+      "fields": {
+        "summary": "ReplaySSM reduces per-token matrix-state writes during decoding/speculation through input caching, output-only reads and acceptance rollback. FrontierReplay instead materializes exact checkpoints at structural boundaries for subsequent prefill and decides which states remain useful. Periodic refresh and split-precision anchors are not conversation-frontier retention. Existing standalone Triton evidence for local ReplaySSM cannot certify this host-policy component; the two input logs are not interchangeable. Local component evidence remains separate from high-cost non-reproduction."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/comparison/foundation-models:mv-jepa": {
+      "source_sha256": "886ee080513d29e6012d408564b8594829a8984f46a97f1974f54698b6bdaa3c",
+      "reviewed": true,
+      "fields": {
+        "position": "MV-JEPA post-trains a pretrained JEPA video encoder for object and moment correspondence across camera views. A shared student independently encodes visible tokens from each context view. A joint predictor reconstructs masked context positions and predicts an entirely held-out view. Held-out pixels/features never enter the student or predictor; they only supply teacher targets. Single-view inference remains independent.",
+        "tradeoff": "Time-JEPA supplies physical time-series targets through masked latent prediction and unmasked physical-state regression on one online encoder. MV-JEPA instead predicts another camera's latent targets through a joint predictor over independently encoded context views. Both keep training targets out of inference inputs, but cross-view queries are not Time-JEPA's sensor head; replay-based retention and physical-time alignment require different checks."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/analysis/15": {
+      "source_sha256": "da6144e05b89a893c0d513ff61339aee9b20ba65271059fae05348d74ab1bbe3",
+      "reviewed": true,
+      "fields": {
+        "title": "MV-JEPA: Post-Training Video Encoders for Cross-View Understanding",
+        "body": "Time-JEPA supplies physical time-series targets through masked latent prediction and unmasked physical-state regression on one online encoder. MV-JEPA instead predicts another camera's latent targets through a joint predictor over independently encoded context views. Both keep training targets out of inference inputs, but cross-view queries are not Time-JEPA's sensor head; replay-based retention and physical-time alignment require different checks. The EMA teacher encodes full context and held-out observations; targets receive per-token LayerNorm and stop-gradient. Contexts receive distinct randomly assigned view IDs, while held-out queries have a reserved ID; the two query types use separate mask embeddings. Eq4 gives equal weight to masked-context and all held-out target tokens, normalizing each example before averaging the batch. It is neither view-wise averaging nor a batch-wide micro-average. Each epoch shuffles152multiview and148original single-view replay updates with shared online encoder/predictor. Teacher EMA follows the optimizer at momentum0.99925."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/question/nov21-mv-jepa": {
+      "source_sha256": "e6921392018652eed0df907804fa39c1a73cbdfac0ad92990f9deb9f97214ae9",
+      "reviewed": true,
+      "fields": {
+        "question": "Can MV-JEPA and Time-JEPA swap their additional targets?",
+        "answer": "No. MV-JEPA predicts cross-camera latents through a joint-view predictor; Time-JEPA aligns physical sequences through an unmasked regression branch. Neither target should become a student input.",
+        "example": "Illustration: a velocity scalar belongs to a physical head; back-view tokens belong to held-out queries. Replacing labels does not preserve the task."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/update/2026-11-21/14": {
+      "source_sha256": "3866974973a46dc255a235a1eb9c260a1c38b21a08950f44f0332e77da8439ee",
+      "reviewed": true,
+      "fields": {
+        "summary": "Time-JEPA supplies physical time-series targets through masked latent prediction and unmasked physical-state regression on one online encoder. MV-JEPA instead predicts another camera's latent targets through a joint predictor over independently encoded context views. Both keep training targets out of inference inputs, but cross-view queries are not Time-JEPA's sensor head; replay-based retention and physical-time alignment require different checks. Local component evidence remains separate from high-cost non-reproduction."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:sage-evolve": {
+      "source_sha256": "0da29e63287906aaa6cb0d7ce092134721c2ab41f10c7cac4c2873ceed52613c",
+      "reviewed": true,
+      "fields": {
+        "position": "AdaObs separates the fixed anchor objective from the active observation guiding research. Every checkpoint is still checked on the anchor. At a plateau, it first refines diagnostics on existing outputs, then adds a harder tier of the same task, and finally adds a related task in the same capability direction. It changes how training gaps are observed, not the scoring rules, the original objective or test-answer access.",
+        "tradeoff": "Harness² holds model weights fixed and improves task harnesses through reference/candidate execution contrasts and composition, preserving cross-task lessons. Full AdaObs updates model weights while holding the anchor fixed and adapting observations; plateaus concern marginal data returns. Both use memory to avoid repetition, but choosing a harness differs from exposing a new training gap. The local Harness² slice is also a mechanism diagnostic, so their control pass rates cannot compare agent capability."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/32": {
+      "source_sha256": "502e07afb58460ee15d838a31d960e5502061b1518675b0cb82696177d0f142f",
+      "reviewed": true,
+      "fields": {
+        "title": "Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement",
+        "body": "Within one observation phase, marginal return is score change per10,000 retained examples. An EMA with alpha0.3 triggers a plateau only when all three trailing smoothed values are strictly below0.1; changing observations resets that history. A candidate must strictly improve active or anchor score while losing at most0.5 anchor points. L2 selects the hardest tier with held-out reference pass rate in[0.2,0.6], retaining older tiers; L3 retains older tasks. Failure memory excludes a concrete configuration for the current gap, not an entire lever. The paper retrains from M0 on base data plus retained increments; no warm-start replacement is claimed locally. Controls keep equality with epsilon outside the plateau, reject cross-phase score use, reset history on a phase change, preserve other L1 options after one concrete failure and isolate failures by gap. L2/L3 may not discard prior members or change several axes. Exactly0.5 anchor regression is allowed, while0.501 is rejected. CPU controls establish rules, not successful autonomous data discovery or Evolve promotion."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov21-sage-evolve": {
+      "source_sha256": "9672675473baf87d4460ea0b4a8cb8842f3a70741e60ae6aa73ad9eab5613e68",
+      "reviewed": true,
+      "fields": {
+        "question": "Do AdaObs and Harness² evolve the same layer?",
+        "answer": "No. Harness² edits execution around a fixed model. AdaObs keeps the anchor fixed, changes how training gaps are observed and retrains models in the full study. Neither local diagnostic demonstrates capability gains.",
+        "example": "Teaching example: grouping failures by context length changes observation; adding a tool retry rule changes the harness."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-21/32": {
+      "source_sha256": "870f2ef5bb63576503686ea6ec6b8955ea0a8aead4552f9a36e0ad252a59f653",
+      "reviewed": true,
+      "fields": {
+        "summary": "The local slice executes acceptance gates on explicit scores, marginal-return arithmetic, EMA/plateau detection, immutable observation records, first-feasible supplied proposals in L1/L2/L3 order, cumulative tier/task validation, gap-specific failed-configuration filtering and reference-rate tier selection. The first MR initializes the EMA and input order resolves tied proposals: explicit deterministic local conventions. MR requires a positive supplied retained-example count and rejects a zero denominator. Because the paper does not fully define rejected-increment data accounting, attempted examples are not silently called retained; callers may supply a defined MR directly. No LLM analysis/planning/production, data generation, contamination checker, SFT, scheduler or harness editor executes. Proposal feasibility and semantic diagnosis remain external. Full experiments are not reproduced."
+      }
+    },
+    "dive/agent-research/memory-and-skills/comparison/agent-research:memfolder": {
+      "source_sha256": "e772d20b2d045c841bbd8eca1873095b4d6efb518a67d88c840e5b02b5f2da76",
+      "reviewed": true,
+      "fields": {
+        "position": "MemFolder treats record count and retrieved-context length separately. RecordFolder grounds entities with an LLM, selects a density-peak first anchor and progressively chooses complementary anchors through novelty relative to those already selected. Semantic/entity affinity and temporal chains refine groups before chronological LLM consolidation. ContextFolder reuses groups, encodes facts under importance and token-ratio constraints, and tests recoverability with a blind reader that cannot see source records or expected answers. Grouping is not summary generation, and verification is not a losslessness guarantee.",
+        "tradeoff": "MemForest builds event-level maximum-spanning trees and progressively merges nodes, retrieving temporal neighbors through anchor-guided propagation. MemFolder first fixes target groups using global complementary anchors,then refines them through entity/semantic gains and Hungarian nonbranching chains,and adds a separate ContextFolder encoding layer. Both preserve structure,but a hierarchy is not a one-in/one-out chain. Local MemForest approximates semantics through lexical overlap while local MemFolder takes supplied embeddings; their unit-test numbers cannot establish a memory-quality winner."
+      }
+    },
+    "dive/agent-research/memory-and-skills/analysis/11": {
+      "source_sha256": "b22d5aee6a587f2b8e82ebc9099acd620058519b165b33440e5323a341a6b3e7",
+      "reviewed": true,
+      "fields": {
+        "title": "MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management",
+        "body": "Entity weights are log(N/df), so an entity common to every record can have zero weight. Shared entity mass and both signal variances adaptively mix weighted Jaccard with cosine. Variances are computed over every earlier/later pair in the W-window before positive-gain filtering and the d-edge-per-successor cap. Gain is measured against the successor's initial-anchor cosine. Hungarian matching maximizes total gain with at most one incoming and outgoing edge, and no incoming anchor edge. Thus links form forward nonbranching chains: anchored chains stay together, anchor-free chains choose the maximum summed cosine group, and unmatched records retain their initial group. Controls assign every record once,preserve K nonempty groups under duplicate embeddings,handle N1,reduce to cosine for universally common entities,and estimate window variance before filtering. Links must point forward,avoid incoming anchor edges and be nonbranching. A supplied-matrix unit test distinguishes greedy gain0.9 from Hungarian gain1.6; it is not memory accuracy. Verification can misjudge source facts, and the paper's fallback may choose a shorter candidate missing required facts, so ContextFolder must not be described as lossless storage."
+      }
+    },
+    "dive/agent-research/memory-and-skills/question/cross-nov21-memfolder": {
+      "source_sha256": "2c1f196e3f1b47a37d0d935305b41f3e3066e49e85de97652d196c85ae371400",
+      "reviewed": true,
+      "fields": {
+        "question": "Can MemFolder's temporal chains replace MemForest's event trees?",
+        "answer": "No. MemFolder permits at most one incoming/outgoing edge and reassigns anchor-free chains together. MemForest preserves event-tree hierarchy and retrieves through anchor neighborhoods.",
+        "example": "Teaching example: a parent event with two child events fits a tree but not a nonbranching matched chain."
+      }
+    },
+    "dive/agent-research/memory-and-skills/update/2026-11-21/10": {
+      "source_sha256": "2ccce0bb19914512c42d5606e10164b1b1cdc21ae28699cc0a63b083366b464a",
+      "reviewed": true,
+      "fields": {
+        "summary": "The local RecordFolder grouping kernel consumes explicit embeddings and grounded entity sets: normalization, DPC/novelty anchors, full-window variances, IDF affinity, positive-gain candidates, actual SciPy Hungarian matching and chain reassignment. Inputs must be chronological and contain at most512 records. Population variance with ddof0,Python rounding,input-order ties and anchors pinned to their own groups under duplicate embeddings are explicit deterministic conventions where the paper leaves details open. There is no LLM entity extraction, alias merging,text consolidation,ContextFolder,embedding model or downstream QA. Callers supply grounded labels and chronological order; lexical Jaccard is not substituted for semantic embeddings. No paths or Codex conversations are read, and no user files are automatically removed or compressed. Full experiments are not reproduced."
+      }
+    },
+    "dive/agent-research/memory-and-skills/comparison/agent-research:memlife": {
+      "source_sha256": "6096b0bdaa66ac1134db232b92a548939b37925c9b5a934a91d28733dc0cf5c4",
+      "reviewed": true,
+      "fields": {
+        "position": "MemLife writes video frames and speech into time-anchored,entity-grounded first-person episodes,then lets a reader search semantically and fetch intervals. MemOpt trains only the writer while freezing the reader. FIRM multiplies token-level faithfulness with candidate-level informativeness and retrievability: source grounding,retention of answer-relevant facts,and recovery through cached reader actions are assessed separately instead of conflating writer quality with an entire reader trajectory's success.",
+        "tradeoff": "MemFolder mainly changes how existing memories are grouped,merged and encoded;MemOpt changes what a writer generates and how training credit is assigned. Structural compression and writer rewards do not substitute for one another. ContextFolder's blind reader cannot see source records/expected answers;MemOpt training judges may use source video and training QA,but those inputs must not reach the evaluated reader. Both local slices areL1 mathematics,so group counts or advantage variances cannot compare QA accuracy."
+      }
+    },
+    "dive/agent-research/memory-and-skills/analysis/12": {
+      "source_sha256": "2bb994fc041a12fb157acd883c0aad378c48074c594dc9b0696f660fb09252d1",
+      "reviewed": true,
+      "fields": {
+        "title": "MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories",
+        "body": "Eq.11 averages response tokens within each candidate before macro-averaging candidates,preventing long memories from dominating the baseline. Variance macro-averages token deviations around the same group mean,not each candidate's own mean; the latter would discard between-candidate informativeness/retrievability signal. Eq.12 normalization is clipped to plus/minus3,then response-token-recentered within each group,and finally globally mask-whitened. Prompt/padding positions stay excluded. KL is an Eq.16 loss term,not part of FIRM or advantage statistics. Training QA may construct training rewards,but the question-independent writer and evaluated reader cannot read test answers. Unequal-length candidates distinguish a macro mean.5 from pooled-token mean.25,and group variance.25 from zero within-candidate variance. Sparse outliers check post-clip recentering. Valid response rewards are restricted to[0,1];extreme finite padding is erased before arithmetic,and overflow from finite ratios times advantages or KL terms is rejected rather than returning infinity or disguising an overflowed variance as zero advantage. Further controls cover flat groups,empty candidates/padding,invalid probabilities,KL affecting only the separate loss,and future/other-subject entries excluded before ranking while exact-cutoff entries remain available. Inputs are explicit synthetic controls,no gold QA or video is passed to a reader,and pass rates are not video-QA capability."
+      }
+    },
+    "dive/agent-research/memory-and-skills/question/cross-nov21-memlife": {
+      "source_sha256": "3b842936ef6aa41fa2ca7d71792016a8e13523f54feb9ef48979d4cd825e8f97",
+      "reviewed": true,
+      "fields": {
+        "question": "Do MemOpt and MemFolder optimize the same object?",
+        "answer": "No. MemOpt decomposes training rewards to improve writer outputs;MemFolder organizes and compresses existing records. Fewer retrieval units do not prove greater faithfulness or fact retention.",
+        "example": "Teaching example: grouping two records changes structure;lowering credit for a hallucinated token optimizes the writer."
+      }
+    },
+    "dive/agent-research/memory-and-skills/update/2026-11-21/11": {
+      "source_sha256": "31b38598c87637e91394b72e9d99770ad55d950fd17969d8d38131a474db6e5f",
+      "reviewed": true,
+      "fields": {
+        "summary": "The local slice takes explicit probability/reward arrays and response masks for the Eq.7 margin,FIRM product,Eq.11-12 macro statistics,clipping/group-token recentering/global whitening,and Eq.16 scalar loss from supplied ratios,advantages and KL. An independently derived NumPy float64 protocol uses normalization epsilon1e-6,whitening epsilon1e-8 and sample-variance correction1; bitwise trainer equivalence is not claimed. Empty candidates are excluded fromG,empty groups output zero,and fewer than two valid batch tokens are rejected. Bounded unit-vector SearchMemory/FetchMemory first filter full interval containment and end<=query_time,then rank and return chronologically. Single-subject filtering is a local isolation contract,not the paper's mixed-subject LVQA benchmark or caller authentication. No video/embedding model,VLM judge,writer/reader,training-data construction,cached-reader trace collection,RL trainer or Evolve integration is implemented. Full experiments are not reproduced."
+      }
+    },
+    "dive/post-training/policy-optimization/comparison/post-training:dfrl": {
+      "source_sha256": "80f2c0865a57897c1c53cfaf7d520faf34b97e1a64e4c586dcd743f4993dcd4c",
+      "reviewed": true,
+      "fields": {
+        "position": "Pure-standard-library, CPU-only realized-cost RLOO advantages, one-batch Bernoulli inverse-probability correction with a lazy whole-batch exact-cost callback, an explicit warm-start boundary, and tiny exact knapsack enumeration. Diagnostics compute observed costs of real feasible decisions for three sampleable parameter predictions, enumerate the score-gradient expectation of two independent categorical samples, and compare it with the analytic gradient. Biased cheap costs are explicit negative-control inputs, not a trained estimator. No LLM, token generation, parameter-JSON parser, H&M pipeline, Adam training, capability evaluation or Evolve operator is supplied.",
+        "tradeoff": "Existing RLOO treats a complete response as an action, baselines its reward against the other responses, and may add KL shaping. DFRL specifies downstream realized decision cost as feedback; its RLOO analysis cancels the common hindsight constant, and batch-switch reward correction reduces expensive feedback calls. RLOO does not define business regret automatically, and DFRL does not make arbitrary normalization, clipping or candidate-dependent baselines unbiased. They concern an objective/feedback pipeline and an estimator, not mutually exclusive algorithms."
+      }
+    },
+    "dive/post-training/policy-optimization/analysis/11": {
+      "source_sha256": "afa399a7e66cb73ae771f769d20f3f1735e20bdce59d7fac0a353ab5c672747c",
+      "reviewed": true,
+      "fields": {
+        "title": "Is DFRL another optimizer replacing RLOO?",
+        "body": "Existing RLOO treats a complete response as an action, baselines its reward against the other responses, and may add KL shaping. DFRL specifies downstream realized decision cost as feedback; its RLOO analysis cancels the common hindsight constant, and batch-switch reward correction reduces expensive feedback calls. RLOO does not define business regret automatically, and DFRL does not make arbitrary normalization, clipping or candidate-dependent baselines unbiased. They concern an objective/feedback pipeline and an estimator, not mutually exclusive algorithms. Solving every exact problem and masking afterward does not save solves. The local I=0 branch never calls the lazy callback; I=1 calls the whole-batch supplier once. Require0<p<=1 and handle variance and overflow at small p explicitly."
+      }
+    },
+    "dive/post-training/policy-optimization/question/nov21-dfrl": {
+      "source_sha256": "fc947e82ceab5bd181b177c012c7a94e105ccf6c7e90a9164c51538df9de2c4b",
+      "reviewed": true,
+      "fields": {
+        "question": "Is DFRL another optimizer replacing RLOO?",
+        "answer": "No. DFRL specifies a decision-regret objective and feedback, while RLOO can estimate its score gradient. The shared hindsight optimum cancels from the baseline; arbitrary advantage standardization or KL shaping changes the analyzed objective or update.",
+        "example": "Teaching example: costs2 and5 yield advantages3 and minus3. Subtracting the same hindsight cost1 leaves them unchanged, avoiding another solve under observed parameters."
+      }
+    },
+    "dive/post-training/policy-optimization/update/2026-11-21/11": {
+      "source_sha256": "808a6acf2ca6da28419919f2dfedf21a0374638211b1611be6dce890434fb884",
+      "reviewed": true,
+      "fields": {
+        "summary": "Pure-standard-library, CPU-only realized-cost RLOO advantages, one-batch Bernoulli inverse-probability correction with a lazy whole-batch exact-cost callback, an explicit warm-start boundary, and tiny exact knapsack enumeration. Diagnostics compute observed costs of real feasible decisions for three sampleable parameter predictions, enumerate the score-gradient expectation of two independent categorical samples, and compare it with the analytic gradient. Biased cheap costs are explicit negative-control inputs, not a trained estimator. No LLM, token generation, parameter-JSON parser, H&M pipeline, Adam training, capability evaluation or Evolve operator is supplied. High-cost full experiments are not reproduced; components do not establish capability promotion."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:e-rwsc": {
+      "source_sha256": "3a7bde2b7c3eb29516c624104ab57999c537db5c10ee0a1f2ed088045e045cc6",
+      "reviewed": true,
+      "fields": {
+        "position": "Pure-standard-library, CPU-only RWSC aggregation, prefix-predictable betting, per-answer log capital and first-appearance weights, skipped first appearances, certified stopping and explicit uncertified budget fallback. Diagnostics use declared synthetic answer/reward streams to check causality, no reset on leader changes, certification of a wrong but concentrated answer, extreme-score softmax and uniform ties. No LLM, reward model, answer extractor, public benchmark run or Evolve promotion is provided; synthetic streams are not model outputs.",
+        "tradeoff": "LLM Stochasticity distinguishes marginal distribution fit from temporal dependence. e-RWSC requires iid responses from a fixed policy; a balanced answer histogram or a prompt asking for randomness does not establish that assumption. Statistical diagnostics can expose some dependence but do not prove every certification assumption. e-RWSC also does not establish factual truth: even genuinely independent draws from a policy concentrated on a wrong answer can certify that majority quickly."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/analysis/15": {
+      "source_sha256": "4abb478c5f925f759be0e9df4958ddf390692fc450a3b6cd56f7bf5ff0a9a8ef",
+      "reviewed": true,
+      "fields": {
+        "title": "Does a uniform answer histogram establish iid sampling?",
+        "body": "LLM Stochasticity distinguishes marginal distribution fit from temporal dependence. e-RWSC requires iid responses from a fixed policy; a balanced answer histogram or a prompt asking for randomness does not establish that assumption. Statistical diagnostics can expose some dependence but do not prove every certification assumption. e-RWSC also does not establish factual truth: even genuinely independent draws from a policy concentrated on a wrong answer can certify that majority quickly. No. It is a reward-weighted self-consistency fallback with certified=false. Also check that each stake uses only the old prefix: the incoming answer or an extreme reward cannot influence the stake just being settled."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/nov21-e-rwsc": {
+      "source_sha256": "1a95f3f9854c9b1bb2977c4b853c8a4395e3bdd480181bfdb1da47e49ed7d918",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a uniform answer histogram establish iid sampling?",
+        "answer": "No. LLM Stochasticity shows that balanced marginal frequencies can coexist with deterministic temporal dependence. A histogram or randomness prompt cannot replace e-RWSC's fixed-policy independent-sampling assumption.",
+        "example": "Teaching example: an endless0,1,2,3 cycle has equal frequencies, yet each next value is determined by its predecessor; it is not iid categorical sampling."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/update/2026-11-21/14": {
+      "source_sha256": "f7f404c848facd61cae528ad77b17710123804cf4a6d416d59dd9731ebe13279",
+      "reviewed": true,
+      "fields": {
+        "summary": "Pure-standard-library, CPU-only RWSC aggregation, prefix-predictable betting, per-answer log capital and first-appearance weights, skipped first appearances, certified stopping and explicit uncertified budget fallback. Diagnostics use declared synthetic answer/reward streams to check causality, no reset on leader changes, certification of a wrong but concentrated answer, extreme-score softmax and uniform ties. No LLM, reward model, answer extractor, public benchmark run or Evolve promotion is provided; synthetic streams are not model outputs. High-cost full experiments are not reproduced; components do not establish capability promotion."
+      }
+    }
+  }
+}

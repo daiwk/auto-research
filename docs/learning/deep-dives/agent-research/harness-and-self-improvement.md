@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-11-20 · 78 篇主题资料 / 41 篇重点对照
+[Agent](../index.md) · 更新 2026-11-21 · 79 篇主题资料 / 42 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
@@ -66,6 +66,7 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?](../../../agent-research/2611.24395-rsibench-infra/README.md) · [原始来源](https://arxiv.org/abs/2611.24395v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 单算子快不代表端到端训练或服务变快。RSIBench-Infra让Agent从官方可运行baseline出发，跨engine、kernel、instruction修改，但只提交一个OCI filesystem layer。独立Serve/Train Job把同一digest应用到每个rank；Benchmark Job绝不加载候选层，单独做质量门和端到端计时。 | Harness²改模型外执行框架并以任务执行对照积累经验；RSIBench-Infra评价跨栈训练/推理优化，以独立质量门约束端到端加速。优化harness通过数和已验证吞吐收益不是同一个结果，前者不能代替后者硬件链路。 |
 | [SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search](../../../agent-research/2611.02643-searchinject/README.md) · [原始来源](https://arxiv.org/abs/2611.02643v1)<br>章节：背景与主要改动、核心公式、同主题对照 | 间接注入先要进入上下文才有机会影响LLM。SearchInject在原top100候选中，用相关性、abuse、instruction概率及两项相关性交互做logistic风险评分；超过冻结阈值才隔离，按原顺序从同一候选池补足top10。它控制暴露，而不是验证下游攻击成功。Google官方目录今天新增，但论文首发11月2日，按历史发现补录，不算今天新论文。 | SilentGuard核对工具返回值是否满足请求不变量；SearchInject在第三方文本进入上下文之前做风险准入。前者检查语义执行合同，后者检查检索暴露，HTTP200或低暴露率都不能证明最终回答安全。 |
 | [BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection](../../../agent-research/2611.25088-buggymle-cci/README.md) · [原始来源](https://arxiv.org/abs/2611.25088v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | BuggyMLE先审核可运行、指标稳定且对代码变化敏感的ML仓库，再让Injector注入不同规模的错误。Oracle通过逐个恢复变动找最小恢复集合，再把每个改动单独应用到干净仓库，筛出确有独立指标影响的错误。Solver必须在多文件仓库里真实修复；评价同时检查执行、指标恢复和逐错误语义修复，不能把补偿性调参当修好了全部bug。 | MLE-STAR用检索、真实消融与validation结果定位并改进模型代码；BuggyMLE用有Oracle归因的注入错误构建难度阶梯，CCI是评测/课程设计尺度。前者选改进方案，后者塑造训练与评测任务；不能把后者的结构分数当成前者的真实验证收益。 |
+| [Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement](../../../agent-research/2611.26132-sage-evolve/README.md) · [原始来源](https://arxiv.org/abs/2611.26132v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验 | AdaObs区分固定anchor目标和引导当前研究的active observation。每轮仍在固定anchor上验收；训练进展停滞时，先细分已有输出的错误诊断，再增加同任务的困难层，最后累计加入同能力方向的相关任务。它改变的是发现训练缺口的观察，不是为了提高分数而改评分器、换掉原目标或把测试答案放进训练。 | Harness²固定模型权重，用参考执行、候选执行对照和组合改任务Harness，并保存跨任务经验；AdaObs的完整研究会更新模型权重，固定anchor而改变active observation，平台检测针对数据边际收益。两者都用记忆避免重复，但“哪种执行框架更好”和“当前观察能否揭示新训练缺口”不是同一个选择问题；本地Harness²也是机制替身诊断，不能拿两者本地控制通过率比较Agent能力。 |
 
 </div>
 
@@ -262,6 +263,12 @@ Appendix I以所有开发重放（含control）为分母，取五个primary风�
 CCI在八个参考benchmark上，先取十项结构特征的任务中位数，做log1p和特征z-score，再对repo、dependency、patch三组求均值，并把组分数按参考方差缩放。固定logistic系数的负加权和构成raw CCI，再用参考最小/最大值定标。新任务不能重新拟合或裁剪回[0,1]。Figure10的repo系数为+0.64，dependency为-0.34，patch为-0.99；repo项是给定其他项的条件调整，不支持“仓库越大必然越难”。负控保留正repo系数、组方差缩放和参考区间外结果；验证median不是mean，未给截距时不捏造预测成功率。拒绝NaN、零尺度和退化边界。Table4把total_lines_delta写成净变化，若值≤-1会使log1p无定义，接口明确拒绝，既不取绝对值，也不补造作者未说明的变换。
 
 对照来源：[buggymle-cci](../../../agent-research/2611.25088-buggymle-cci/README.md) · [mle-star](../../../agent-research/2506.15692-mle-star/README.md)
+
+### Sage-Evolve / AdaObs：保持目标不变，平台期先改变观察方式
+
+同一观测阶段内，边际收益按每新增1万条保留样本的分数变化计算，用α=0.3做EMA；最近3次平滑值全部严格小于0.1才判平台。更换观测必须清空该历史。候选增量须让active或anchor至少一个严格改善，且anchor下降不超过0.5分。L2用独立参考模型，在通过率[0.2,0.6]内选最难层，保留旧层；L3保留旧任务。负例记忆排除的是当前gap下的具体配置，不是失败过一次就封禁整个L1。原文的训练每次从M0加base与累计增量重训，本地没有把它改成继续微调前一轮checkpoint。负控包括恰好等于epsilon不能触发平台、跨phase误用分数被拒绝、切换phase清零、一次具体L1失败后同层其他方案仍可选、不同gap不共用封禁、L2/L3不得丢弃旧成员或一次改多个轴、anchor回退0.5分包含边界而0.501分拒绝。CPU控制只证明规则，不证明自动科研会找到更好的训练数据；不接入Evolve晋级。
+
+对照来源：[sage-evolve](../../../agent-research/2611.26132-sage-evolve/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -597,9 +604,23 @@ CCI在八个参考benchmark上，先取十项结构特征的任务中位数，�
 
     对照来源：[buggymle-cci](../../../agent-research/2611.25088-buggymle-cci/README.md) · [mle-star](../../../agent-research/2506.15692-mle-star/README.md)
 
+### AdaObs和Harness²都自进化，改的是同一层吗？ {#cross-cross-nov21-sage-evolve}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是。Harness²改固定模型外的执行方式；AdaObs固定anchor、改变发现训练缺口的观测，并在完整研究中重训模型。两种本地诊断都不能冒充Agent能力收益。
+
+    **教学例子：** 教学例：把失败按上下文长度分桶是改观测，增加工具重试规则是改Harness。
+
+    对照来源：[sage-evolve](../../../agent-research/2611.26132-sage-evolve/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-21** · 本地只执行显式分数的增量验收、边际收益算术、EMA/平台判定、不可变观测结构、按L1→L2→L3选首个可行的显式提案、累计层/任务检查、具体gap配置负例过滤和参考通过率选层。首个MR初始化EMA，等分提案按输入顺序，是明确的本地确定性约定。MR函数要求正的显式保留样本数，拒绝0分母；原文未完全展开拒绝增量的Δd口径，因此不擅自把尝试样本当保留样本，调用方也可直接向monitor提供已定义的MR。没有LLM Analyze/Plan/Produce、数据生成、污染检查器、SFT、集群调度或Harness编辑器；可行性和语义诊断由调用方负责。 完整实验高成本不复现。
+
+涉及：[sage-evolve](../../../agent-research/2611.26132-sage-evolve/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
 
 **2026-11-20** · 本地仅实现给定十项特征的benchmark中位数、固定校准投影和可选的稳定logistic读数。没有AST/依赖图抽取、Injector、Oracle、LLM solver、校准拟合或模型训练。完整μ/σ、组尺度、截距与参考边界未在原文公开成可直接加载文件，因此API强制调用方显式提供Calibration；诊断用合成校准，不能称为复算了作者八benchmark CCI。Patch特征属于构建/评测端，不能把隐藏修复补丁或其困难标签传给被测Agent。 完整实验高成本不复现。
 
@@ -729,7 +750,7 @@ CCI在八个参考benchmark上，先取十项结构特征的任务中位数，�
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 78 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 79 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -811,6 +832,7 @@ CCI在八个参考benchmark上，先取十项结构特征的任务中位数，�
 - [RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?](../../../agent-research/2611.24395-rsibench-infra/README.md)
 - [SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search](../../../agent-research/2611.02643-searchinject/README.md)
 - [BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection](../../../agent-research/2611.25088-buggymle-cci/README.md)
+- [Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement](../../../agent-research/2611.26132-sage-evolve/README.md)
 
 </details>
 

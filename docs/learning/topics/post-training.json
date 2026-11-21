@@ -136,7 +136,8 @@
         "post-training:specal",
         "post-training:regularized-score-centering",
         "post-training:ash-hint-steering",
-        "post-training:led-edits"
+        "post-training:led-edits",
+        "post-training:dfrl"
       ]
     },
     {

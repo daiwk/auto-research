@@ -128,7 +128,9 @@
         "agent-research:policybank",
         "agent-research:coremem",
         "agent-research:clam-memory",
-        "agent-research:grepmem"
+        "agent-research:grepmem",
+        "agent-research:memfolder",
+        "agent-research:memlife"
       ]
     },
     {
@@ -298,7 +300,8 @@
         "agent-research:safe-personal-rsi",
         "agent-research:rsibench-infra",
         "agent-research:searchinject",
-        "agent-research:buggymle-cci"
+        "agent-research:buggymle-cci",
+        "agent-research:sage-evolve"
       ]
     },
     {

@@ -1,0 +1,178 @@
+{
+  "schema_version": 2,
+  "method": "e-rwsc",
+  "manifest_ref": "foundation-models:e-rwsc",
+  "dataset": {
+    "id": "synthetic:nov21-overlap-e-rwsc-component-v1",
+    "kind": "explicit_protocol_or_mechanism_fixtures",
+    "revision": "sha256:29846f83048306fea090979ed109e122b10447eefe8aea200125a83d337e55ec",
+    "public_capability_benchmark": false,
+    "source": "Seeded small tensors or explicit deterministic evaluator/control cases; no pretrained output or public capability measurement"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "device": "cpu",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "checks": {
+        "first_appearance_does_not_bet_on_its_forced_success": true,
+        "fixed_concentrated_policy_can_certify_a_wrong_answer": true,
+        "budget_fallback_is_explicitly_uncertified": true,
+        "budget_is_not_silently_extended": true,
+        "bets_use_only_previous_prefix_not_new_reward_or_answer": true,
+        "leader_shift_does_not_reset_old_answer_evidence": true,
+        "positive_affine_reward_transform_preserves_masses": true,
+        "equal_rewards_use_uniform_response_weights": true,
+        "large_finite_rewards_do_not_overflow_softmax": true
+      },
+      "controls": {
+        "first_appearance_does_not_bet_on_its_forced_success": true,
+        "fixed_concentrated_policy_can_certify_a_wrong_answer": true,
+        "budget_fallback_is_explicitly_uncertified": true,
+        "budget_is_not_silently_extended": true,
+        "bets_use_only_previous_prefix_not_new_reward_or_answer": true,
+        "leader_shift_does_not_reset_old_answer_evidence": true,
+        "positive_affine_reward_transform_preserves_masses": true,
+        "equal_rewards_use_uniform_response_weights": true,
+        "large_finite_rewards_do_not_overflow_softmax": true
+      },
+      "metrics": {
+        "concentrated_stream_stopping_samples": 7,
+        "uncertified_fallback_samples": 24,
+        "active_answer_count": 2,
+        "affine_mass_max_abs_error": 0.0
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "device": "cpu",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "checks": {
+        "first_appearance_does_not_bet_on_its_forced_success": true,
+        "fixed_concentrated_policy_can_certify_a_wrong_answer": true,
+        "budget_fallback_is_explicitly_uncertified": true,
+        "budget_is_not_silently_extended": true,
+        "bets_use_only_previous_prefix_not_new_reward_or_answer": true,
+        "leader_shift_does_not_reset_old_answer_evidence": true,
+        "positive_affine_reward_transform_preserves_masses": true,
+        "equal_rewards_use_uniform_response_weights": true,
+        "large_finite_rewards_do_not_overflow_softmax": true
+      },
+      "controls": {
+        "first_appearance_does_not_bet_on_its_forced_success": true,
+        "fixed_concentrated_policy_can_certify_a_wrong_answer": true,
+        "budget_fallback_is_explicitly_uncertified": true,
+        "budget_is_not_silently_extended": true,
+        "bets_use_only_previous_prefix_not_new_reward_or_answer": true,
+        "leader_shift_does_not_reset_old_answer_evidence": true,
+        "positive_affine_reward_transform_preserves_masses": true,
+        "equal_rewards_use_uniform_response_weights": true,
+        "large_finite_rewards_do_not_overflow_softmax": true
+      },
+      "metrics": {
+        "concentrated_stream_stopping_samples": 7,
+        "uncertified_fallback_samples": 24,
+        "active_answer_count": 2,
+        "affine_mass_max_abs_error": 0.0
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "device": "cpu",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "checks": {
+        "first_appearance_does_not_bet_on_its_forced_success": true,
+        "fixed_concentrated_policy_can_certify_a_wrong_answer": true,
+        "budget_fallback_is_explicitly_uncertified": true,
+        "budget_is_not_silently_extended": true,
+        "bets_use_only_previous_prefix_not_new_reward_or_answer": true,
+        "leader_shift_does_not_reset_old_answer_evidence": true,
+        "positive_affine_reward_transform_preserves_masses": true,
+        "equal_rewards_use_uniform_response_weights": true,
+        "large_finite_rewards_do_not_overflow_softmax": true
+      },
+      "controls": {
+        "first_appearance_does_not_bet_on_its_forced_success": true,
+        "fixed_concentrated_policy_can_certify_a_wrong_answer": true,
+        "budget_fallback_is_explicitly_uncertified": true,
+        "budget_is_not_silently_extended": true,
+        "bets_use_only_previous_prefix_not_new_reward_or_answer": true,
+        "leader_shift_does_not_reset_old_answer_evidence": true,
+        "positive_affine_reward_transform_preserves_masses": true,
+        "equal_rewards_use_uniform_response_weights": true,
+        "large_finite_rewards_do_not_overflow_softmax": true
+      },
+      "metrics": {
+        "concentrated_stream_stopping_samples": 7,
+        "uncertified_fallback_samples": 24,
+        "active_answer_count": 2,
+        "affine_mass_max_abs_error": 0.0
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "active_answer_count": 2.0,
+    "affine_mass_max_abs_error": 0.0,
+    "concentrated_stream_stopping_samples": 7.0,
+    "uncertified_fallback_samples": 24.0
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Operator/interface controls only; not a complete model, agent, public benchmark or production comparison"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "3b147143ff4e0e9e098f2964dce0fec7120da8a8",
+    "accelerator": "CPU",
+    "artifact_path": "docs/foundation-models/2611.26413-e-rwsc/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_nov21_latest_components.py": "13ef2fc61f7b6d7dd23d3f9c6afd77d86f574c191a9b08bb303097013d3fcabf",
+      "scripts/run_nov18_latest_components.py": "0fe50e8e554f6663b3c8c179654400d10bfbb557ceb9cefb9880da78f164b7c1",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov21-latest/preflight.json": "c1705b0c8472f7a2d2e1f02544067d46784bf958789fd7ee526783371ddfc3e2",
+      "src/auto_research/foundation_models/frontier_replay.py": "bf3613a78c682a1693457d2ab8feb5a8b533104497161340f61a375e2ac15248",
+      "src/auto_research/foundation_models/mv_jepa.py": "1a7f674ab37036b207a9b759f8595926f4531d29522a1291ccd8460da980e8ca",
+      "src/auto_research/agent_research/sage_evolve.py": "4c8572f73f3717dfd4488c8ad3960d5d929dc83253384bdf4c841a3f938eb1c7",
+      "src/auto_research/agent_research/memfolder.py": "9492350142246424902bb0fa61cb65b4ad6feee95c64ec1d159034042a951d50",
+      "src/auto_research/post_training/dfrl.py": "a4849643e8f5880ea617e1f950d408ef2643e3927c890f7f14cb1d17cb4a3f7e",
+      "src/auto_research/foundation_models/e_rwsc.py": "29846f83048306fea090979ed109e122b10447eefe8aea200125a83d337e55ec",
+      "src/auto_research/agent_research/memlife.py": "155845e6469e301412e503d07a25a5839bfc5804163e060c64d585e69b62e8be"
+    },
+    "dataset_fingerprint": "sha256:875cd176973f6249121fca47b25acedd9eab571da70aeb16d3ab88db19267484",
+    "raw_runner_artifact_sha256": "a540ac651dc653a08209ce3aefe3876bbfa046a74cd43d480282174608c03748"
+  }
+}

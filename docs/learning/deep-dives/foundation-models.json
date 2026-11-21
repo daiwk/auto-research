@@ -1866,6 +1866,16 @@
             "核心公式",
             "同主题比较与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:frontier-replay",
+          "position": "混合模型的attention KV可按页复用，但递归状态只在保存过的精确位置恢复。FrontierReplay先根据已观察到的模板稳定尾、已完成turn和分叉点规划检查点；原生prefill不断开，之后只重放短窗递归输入生成精确状态。保留策略优先保护仍在执行的请求锚点和已证明可复用的分叉，而非只看历史频率。",
+          "tradeoff": "ReplaySSM主要减少decode/投机时的逐token矩阵状态写回，把输入缓存、output-only读取和接受回滚联动；FrontierReplay主要为下一次prefill的结构边界补造精确检查点，并管理哪些状态值得保留。前者的周期刷新和高低精度anchor不是后者的会话frontier保留策略。本地ReplaySSM已有独立Triton证据，但不能把那份执行回执借给本页的host策略，更不能把两种输入日志视为可互换。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1970,6 +1980,14 @@
           "papers": [
             "foundation-models:loopcache-interface",
             "foundation-models:spool"
+          ]
+        },
+        {
+          "title": "FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models",
+          "body": "ReplaySSM主要减少decode/投机时的逐token矩阵状态写回，把输入缓存、output-only读取和接受回滚联动；FrontierReplay主要为下一次prefill的结构边界补造精确检查点，并管理哪些状态值得保留。前者的周期刷新和高低精度anchor不是后者的会话frontier保留策略。本地ReplaySSM已有独立Triton证据，但不能把那份执行回执借给本页的host策略，更不能把两种输入日志视为可互换。 正文§4.3使用16-token页；native chunk end必须已经16对齐，不能静默向下取整来虚构该位置已有状态。完成turn可按原文取decode已经经过的最后页边界，结构目标仍可向下对齐后请求回放。分叉至少256token，回放窗最多1024token；缺少活锚点/日志页则退化为exact cut。Falcon-H1不在1568token以下保存或恢复状态。§4.4分层为dead=-1、superseded=0、natural=1、未用template/turn=2、proven=3、running=4；两次来自同一request的restore不能晋升proven。只有完成事件后才公开新检查点，失败/未完成状态不能命中；lease保护正在用的锚点。长前缀额外保护稳定尾之前一个prefill预算内、深度至少4096的最深natural检查点。",
+          "papers": [
+            "foundation-models:frontier-replay",
+            "foundation-models:replayssm"
           ]
         }
       ],
@@ -2105,9 +2123,19 @@
             "foundation-models:loopcache-interface",
             "foundation-models:spool"
           ]
+        },
+        {
+          "id": "nov21-frontier-replay",
+          "question": "FrontierReplay和ReplaySSM都记录输入，解决的是同一个问题吗？",
+          "answer": "不是。ReplaySSM围绕decode状态写回、output-only和投机回滚；FrontierReplay围绕prefill结构边界的检查点产生与保留。相似代数不代表服务策略、精度或证据可直接共用。",
+          "example": "教学例：16步decode刷新正确，不能证明下一会话的模板边界已保存、仍驻留且可命中。",
+          "papers": [
+            "foundation-models:frontier-replay",
+            "foundation-models:replayssm"
+          ]
         }
       ],
-      "updated": "2026-11-19",
+      "updated": "2026-11-21",
       "reviewed_papers": [
         "foundation-models:agentkv",
         "foundation-models:e-means",
@@ -2149,7 +2177,8 @@
         "foundation-models:echomoe",
         "foundation-models:risa",
         "foundation-models:beyond-bitwidth",
-        "foundation-models:loopcache-interface"
+        "foundation-models:loopcache-interface",
+        "foundation-models:frontier-replay"
       ],
       "updates": [
         {
@@ -2344,6 +2373,18 @@
           "source_revisions": {
             "foundation-models:loopcache-interface": "3153657fd45239f535a445cbd69fdbac58199463917094ff51fa0606112fbf90",
             "foundation-models:spool": "e1973cc17fa472fb3e50fc8b84d171d091b9814f2be479f2555760e6d4b6f092"
+          }
+        },
+        {
+          "date": "2026-11-21",
+          "papers": [
+            "foundation-models:frontier-replay",
+            "foundation-models:replayssm"
+          ],
+          "summary": "ReplaySSM主要减少decode/投机时的逐token矩阵状态写回，把输入缓存、output-only读取和接受回滚联动；FrontierReplay主要为下一次prefill的结构边界补造精确检查点，并管理哪些状态值得保留。前者的周期刷新和高低精度anchor不是后者的会话frontier保留策略。本地ReplaySSM已有独立Triton证据，但不能把那份执行回执借给本页的host策略，更不能把两种输入日志视为可互换。 本地组件证据与完整实验不复现分开记录。",
+          "source_revisions": {
+            "foundation-models:frontier-replay": "045606d01bae6c42450d164dd7e2d22553327ebfb1c5ad0fa1552d0c55fb77a8",
+            "foundation-models:replayssm": "484da6cd97e204eb4fe6bab2d3a05149d52677a41c78bb1cb4e1e0dc9b5244ff"
           }
         }
       ]
@@ -2845,6 +2886,16 @@
             "同主题对照",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "foundation-models:e-rwsc",
+          "position": "纯stdlib、CPU-only的RWSC聚合、前缀可预测下注、逐答案log资本与首现权重、首次出现跳过、认证终止和显式未认证预算回退。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。没有LLM、reward model、答案解析或公开benchmark运行；不把合成流叫模型输出，不接Evolve晋级。",
+          "tradeoff": "LLM Stochasticity区分边缘分布拟合与时序依赖；e-RWSC的保证需要固定政策的iid响应，不能由平衡答案直方图或“请随机回答”提示推导。前者的统计诊断可暴露某些依赖，却不能证明后者的全部假设。e-RWSC也不估计答案是否符合现实：即使输入真独立，政策总偏向错误答案时仍可快速发多数证书。",
+          "sections": [
+            "背景与主要改动",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -2967,6 +3018,14 @@
           "papers": [
             "foundation-models:efficient-evals-tensor",
             "foundation-models:proeval"
+          ]
+        },
+        {
+          "title": "答案直方图均匀，是否就满足iid保证？",
+          "body": "LLM Stochasticity区分边缘分布拟合与时序依赖；e-RWSC的保证需要固定政策的iid响应，不能由平衡答案直方图或“请随机回答”提示推导。前者的统计诊断可暴露某些依赖，却不能证明后者的全部假设。e-RWSC也不估计答案是否符合现实：即使输入真独立，政策总偏向错误答案时仍可快速发多数证书。 不能。返回的是reward-weighted self-consistency回退，certified必须为false。还要检查当前下注只看旧前缀，新响应的答案和极端reward都不能倒灌到刚才的stake。",
+          "papers": [
+            "foundation-models:e-rwsc",
+            "foundation-models:llm-stochasticity"
           ]
         }
       ],
@@ -3130,9 +3189,19 @@
             "foundation-models:efficient-evals-tensor",
             "foundation-models:proeval"
           ]
+        },
+        {
+          "id": "nov21-e-rwsc",
+          "question": "答案直方图均匀，是否就满足iid保证？",
+          "answer": "不满足。LLM Stochasticity说明边缘分布平衡仍可有确定性时序依赖；e-RWSC的固定政策独立抽样假设不能靠均匀图或随机提示替代。",
+          "example": "教学例：0、1、2、3无限循环时各值频率相等，但下一值可由上一值确定；这不是四分类iid采样。",
+          "papers": [
+            "foundation-models:e-rwsc",
+            "foundation-models:llm-stochasticity"
+          ]
         }
       ],
-      "updated": "2026-11-18",
+      "updated": "2026-11-21",
       "reviewed_papers": [
         "foundation-models:activation-model-scanner",
         "foundation-models:combinatorial-watermark",
@@ -3159,7 +3228,8 @@
         "foundation-models:tokenization-premium",
         "foundation-models:runway-inference-protocol",
         "foundation-models:mixed-signals-weights",
-        "foundation-models:efficient-evals-tensor"
+        "foundation-models:efficient-evals-tensor",
+        "foundation-models:e-rwsc"
       ],
       "updates": [
         {
@@ -3348,6 +3418,18 @@
           "source_revisions": {
             "foundation-models:efficient-evals-tensor": "10f8c79451154b1ea1ba119c7e34e291104f752ec5db55faa5f969a7c5a4bdfc",
             "foundation-models:proeval": "cc148ceb5167cf0b909f04441d1ab4d47b382022debe81d65496c74d579492c9"
+          }
+        },
+        {
+          "date": "2026-11-21",
+          "papers": [
+            "foundation-models:e-rwsc",
+            "foundation-models:llm-stochasticity"
+          ],
+          "summary": "纯stdlib、CPU-only的RWSC聚合、前缀可预测下注、逐答案log资本与首现权重、首次出现跳过、认证终止和显式未认证预算回退。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。没有LLM、reward model、答案解析或公开benchmark运行；不把合成流叫模型输出，不接Evolve晋级。 完整实验成本过高不复现；组件不构成能力晋级。",
+          "source_revisions": {
+            "foundation-models:e-rwsc": "6f7990a337b89868094a0642455db0f632db53c314f586f5bb8d5bd885496a30",
+            "foundation-models:llm-stochasticity": "9c879b4c31cbbb96adda8b1bc5011027c39a1ccb1d26863d6fbc924bfddf4c6a"
           }
         }
       ]

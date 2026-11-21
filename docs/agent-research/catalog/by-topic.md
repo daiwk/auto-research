@@ -45,6 +45,7 @@
 
 ### 执行框架与自改进
 
+- [Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement](../2611.26132-sage-evolve/README.md)（`sage-evolve`）：AdaObs区分固定anchor目标和引导当前研究的active observation。每轮仍在固定anchor上验收；训练进展停滞时，先细分已有输出的错误诊断，再增加同任务的困难层，最后累计加入同能力方向的相关任务。
 - [Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses](../2611.24924-ahe-beta/README.md)（`ahe-beta`）：AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。
 - [BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection](../2611.25088-buggymle-cci/README.md)（`buggymle-cci`）：BuggyMLE先审核可运行、指标稳定且对代码变化敏感的ML仓库，再让Injector注入不同规模的错误。Oracle通过逐个恢复变动找最小恢复集合，再把每个改动单独应用到干净仓库，筛出确有独立指标影响的错误。
 - [RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?](../2611.24395-rsibench-infra/README.md)（`rsibench-infra`）：单算子快不代表端到端训练或服务变快。RSIBench-Infra让Agent从官方可运行baseline出发，跨engine、kernel、instruction修改，但只提交一个OCI filesystem layer。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -101,8 +102,10 @@
 
 ### 记忆与技能
 
+- [MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management](../2611.26427-memfolder/README.md)（`memfolder`）：MemFolder把记录数和取回上下文长度分开处理。RecordFolder先用LLM统一实体，再以密度峰选首锚点、以相对已有锚点的novelty渐进选互补锚点；语义/实体亲和与时间链修正分组，最后由LLM按时间合并。
 - [Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents](../2611.25123-grepmem/README.md)（`grepmem`）：GrepMem把有限工作上下文和完整历史分开：压缩时只把活跃上下文换成系统提示、任务与摘要，原始消息、工具调用/输出和摘要仍追加到纯文本日志。第一次压缩之后才开放grep_history，让模型按需用大小写不敏感正则取回遗漏细节。
 - [Instant Weight-Space Consolidation for Long-Term Memory in LLMs](../2611.20759-clam-memory/README.md)（`clam-memory`）：CLAM把可积累的参数记忆与逐字检索缓冲分开：冻结LLM提供每层会话activation，hypernetwork在不做测试时梯度下降的情况下写出down_proj LoRA，查询时再配top5会话片段。没有提取调用不等于没有前置训练；能力来自离线context distillation。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories](../2609.40195-memlife/README.md)（`memlife`）：MemLife先把每段第一视角视频和语音写成有时间锚点、实体落地的第一人称文本，再由reader按问题进行语义搜索和时间区间读取。MemOpt只训练writer，reader保持冻结；FIRM将逐token的faithfulness、逐候选的informativeness和retrievability相乘。
 
 ### 技能进化
 

@@ -10,6 +10,7 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| policy-optimization | [Decision-Focused Reinforcement Learning for LLM Post-Training](2611.25597-dfrl/README.md) | The University of Texas at Austin，2026-11-19 | 未发现官方代码 | `dfrl`：仅低成本组件，完整实验不复现 |
 | data-and-budget | [Policy Improvement-Guided Replay for Continual Reinforcement Learning](2611.25989-colir-replay/README.md) | Nanjing University of Aeronautics and Astronautics，2026-11-19 | 未发现官方代码 | `colir-replay`：仅低成本组件，完整实验不复现 |
 | policy-optimization | [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](2611.23750-led-edits/README.md) | Southern University of Science and Technology / Inclusion AI, Ant Group，2026-11-18 | 未发现官方代码 | `led-edits`：仅低成本组件，完整实验不复现 |
 | reward-and-credit | [Evidence-Based Credit Assignment for Search-Augmented Language Models](2611.23824-eca-credit/README.md) | University of the Chinese Academy of Sciences / Tencent，2026-11-18 | 未发现官方代码 | `eca-credit`：仅低成本组件，完整实验不复现 |

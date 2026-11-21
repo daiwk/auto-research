@@ -7,7 +7,7 @@ hide:
 
 # 同一个GRPO名字之外：优势尺度、裁剪单位与训推失配
 
-[LLM 后训练](../index.md) · 更新 2026-11-19 · 64 篇主题资料 / 16 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-21 · 65 篇主题资料 / 17 篇重点对照
 
 GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。
 
@@ -41,6 +41,7 @@ GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比�
 | [Regularized Score Centering](../../../post-training/2611.21791-regularized-score-centering/README.md) · [原始来源](https://arxiv.org/abs/2611.21791v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 独立auxiliary actions的加权score center、detached TIS权重、独立KL cap的reverse-KL梯度估计；不是reward减均值。 | RSC专门惩罚learner相对产生本批数据的behavior分布的reverse KL，参考随sampler刷新；GRPO常以较固定pretrained reference约束。行为概率不能被另一个reference概率替换。 |
 | [Get Hint-Augmented GRPO Done Right Through Activation Steering](../../../post-training/2611.23124-ash-hint-steering/README.md) · [原始来源](https://arxiv.org/abs/2611.23124v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 只收录每步先训练steering再GRPO、hint/plain独立归一化advantage及最后一步不更新model的完整顺序；不把DPO公式当实现。 | GRPO消除critic但仍依赖同组相对reward；ASH在hint/plain双组上分别标准化，在GRPO之前另训activation steering并在最终步停model更新，防止返回stale向量。旧GRPO候选成功率不能当无hint生成能力。 |
 | [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](../../../post-training/2611.23750-led-edits/README.md) · [原始来源](https://arxiv.org/abs/2611.23750v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 最长公共子序列的固定block edit标签、每gap单次Ins、末尾gap不造锚点、mask阈值fallback、visible-token edit阈值以及同时编辑后截断/补mask。没有扩散模型forward、多阶段SFT或循环重采样decoder。 | ORL让扩散模型在自身诱导的残差状态上学习并需专用推理链；LED改变离散序列的长度对齐与edit监督，插删由LCS提供标签。二者都处理训练/推理状态差异，但残差分布不等于编辑动作，两个review边界也不能互相补成完整模型。 |
+| [Decision-Focused Reinforcement Learning for LLM Post-Training](../../../post-training/2611.25597-dfrl/README.md) · [原始来源](https://arxiv.org/abs/2611.25597v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 纯stdlib、CPU-only的实际成本RLOO优势、单批共享Bernoulli逆概率校正与lazy整批精确成本回调、显式warm-start边界、小规模枚举knapsack。诊断对三个可采样参数预测的真实可行决策计算观测成本，穷举两个独立categorical样本的score-gradient期望并与解析梯度比较；偏置cheap成本仅为明确的负控输入，不冒充训练好的估计器。没有LLM、token生成、参数JSON解析器、H&amp;M处理、Adam训练或能力评测；非Evolve算子。 | 已有RLOO实现把整条response作为action，用其他response的奖励均值作baseline，并可加KL shaping。DFRL在这里指定奖励来自下游真实决策成本；其文中RLOO分析抵消共同hindsight常数，reward correction用整批开关减少昂贵反馈调用。RLOO没有自动定义什么是业务regret；DFRL也没有使任意归一化、clipping或候选相关baseline都保持无偏。两者是目标/反馈与估计器两个维度，而非互斥算法。 |
 
 </div>
 
@@ -111,6 +112,12 @@ steering loss拟合产生当前hint/plain样本的同一模型。先改model再�
 ORL让扩散模型在自身诱导的残差状态上学习并需专用推理链；LED改变离散序列的长度对齐与edit监督，插删由LCS提供标签。二者都处理训练/推理状态差异，但残差分布不等于编辑动作，两个review边界也不能互相补成完整模型。 不是。当前程序真实执行确定性LCS与单轮编辑，gold target只用于监督标签构造；没有模型预测、扩散SFT、多阶段训练或基准答案生成，因此只属L1机制诊断。
 
 对照来源：[led-edits](../../../post-training/2611.23750-led-edits/README.md) · [orl-diffusion](../../../post-training/2610.20687-orl-diffusion/README.md)
+
+### DFRL是替代RLOO的另一种优化器吗？
+
+已有RLOO实现把整条response作为action，用其他response的奖励均值作baseline，并可加KL shaping。DFRL在这里指定奖励来自下游真实决策成本；其文中RLOO分析抵消共同hindsight常数，reward correction用整批开关减少昂贵反馈调用。RLOO没有自动定义什么是业务regret；DFRL也没有使任意归一化、clipping或候选相关baseline都保持无偏。两者是目标/反馈与估计器两个维度，而非互斥算法。 不能把先求全批exact再屏蔽当作节省求解。本地I=0分支不调用lazy exact回调；I=1只调用一次整批supplier。p必须大于0且不大于1，p很小时方差和溢出风险需显式处理。
+
+对照来源：[dfrl](../../../post-training/2611.25597-dfrl/README.md) · [rloo](../../../post-training/2402.14740-rloo/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -236,9 +243,23 @@ ORL让扩散模型在自身诱导的残差状态上学习并需专用推理链�
 
     对照来源：[led-edits](../../../post-training/2611.23750-led-edits/README.md) · [orl-diffusion](../../../post-training/2610.20687-orl-diffusion/README.md)
 
+### DFRL是替代RLOO的另一种优化器吗？ {#cross-nov21-dfrl}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是。DFRL指定决策regret目标和反馈，RLOO可作为其无偏score-gradient估计器。相同实例的hindsight最优成本在baseline中抵消，但任意优势标准化或KL shaping都会改变原文分析的目标/更新。
+
+    **教学例子：** 教学例：成本2和5给优势3和负3；同时减去共同hindsight成本1，优势仍是3和负3，不需要多求一次真实参数下的最优解。
+
+    对照来源：[dfrl](../../../post-training/2611.25597-dfrl/README.md) · [rloo](../../../post-training/2402.14740-rloo/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-21** · 纯stdlib、CPU-only的实际成本RLOO优势、单批共享Bernoulli逆概率校正与lazy整批精确成本回调、显式warm-start边界、小规模枚举knapsack。诊断对三个可采样参数预测的真实可行决策计算观测成本，穷举两个独立categorical样本的score-gradient期望并与解析梯度比较；偏置cheap成本仅为明确的负控输入，不冒充训练好的估计器。没有LLM、token生成、参数JSON解析器、H&M处理、Adam训练或能力评测；非Evolve算子。 完整实验成本过高不复现；组件不构成能力晋级。
+
+涉及：[dfrl](../../../post-training/2611.25597-dfrl/README.md) · [rloo](../../../post-training/2402.14740-rloo/README.md)
 
 **2026-11-19** · 最长公共子序列的固定block edit标签、每gap单次Ins、末尾gap不造锚点、mask阈值fallback、visible-token edit阈值以及同时编辑后截断/补mask。没有扩散模型forward、多阶段SFT或循环重采样decoder。 完整实验高成本不复现；组件或资料不构成能力晋级。
 
@@ -284,7 +305,7 @@ ORL让扩散模型在自身诱导的残差状态上学习并需专用推理链�
 
 覆盖 54 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 64 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 65 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -352,6 +373,7 @@ ORL让扩散模型在自身诱导的残差状态上学习并需专用推理链�
 - [Regularized Score Centering](../../../post-training/2611.21791-regularized-score-centering/README.md)
 - [Get Hint-Augmented GRPO Done Right Through Activation Steering](../../../post-training/2611.23124-ash-hint-steering/README.md)
 - [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](../../../post-training/2611.23750-led-edits/README.md)
+- [Decision-Focused Reinforcement Learning for LLM Post-Training](../../../post-training/2611.25597-dfrl/README.md)
 
 </details>
 

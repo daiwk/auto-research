@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩：权重、KV 缓存与服务带宽
 
-[基础模型](index.md) / 164 个问题 · 41 篇论文
+[基础模型](index.md) / 168 个问题 · 42 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">164 个问题 · 41 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">168 个问题 · 42 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:frontier-replay" data-paper-title="FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models 基础模型 Beijing Institute of Technology 2026-11-19 混合模型的attention KV可按页复用，但递归状态只在保存过的精确位置恢复。FrontierReplay先根据已观察到的模板稳定尾、已完成turn和分叉点规划检查点；原生prefill不断开，之后只重放短窗递归输入生成精确状态。保留策略优先保护仍在执行的请求锚点和已证明可复用的分叉，而非只看历史频率。 完整实验：成本过高，不复现（审查 DONE）。源绑定的实际诊断由本批runner单独记录；L1策略/训练连线组件，不是完整论文复现。完整实验：成本过高，不复现（审查 DONE）。实现纯CPU host-policy组件：观察边界规划、显式pending/completion发布、lease、分层准入/驱逐、长前缀保护和每16请求的回收决策。KV驻留、已观察progress、稳定尾与非自身驱逐信号均由调用方显式提供；没有自主观察真实服务或用户日志。状态槽只是合成token前缀元数据，不是模型状态。  推理与系统效率 混合模型前缀缓存与检查点 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么有KV页仍可能无法复用整段混合模型前缀？ 递归状态是覆盖更新的。即使KV页还在，恢复位置也必须有完全对应的递归检查点；不能把较晚状态截短成较早状态。 教学例：KV覆盖到640token，但最近状态只在528；原生服务仍需从528重算到640。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-frontier-replay-ca5d4620" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-1984489c761e1cfb">为什么有KV页仍可能无法复用整段混合模型前缀？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Afrontier-replay">FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · Beijing Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>递归状态是覆盖更新的。即使KV页还在，恢复位置也必须有完全对应的递归检查点；不能把较晚状态截短成较早状态。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：KV覆盖到640token，但最近状态只在528；原生服务仍需从528重算到640。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26020v1">原论文</a> · <a href="../../../../foundation-models/2611.26020-frontier-replay/">实现解读</a> · <a href="#qa-1984489c761e1cfb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:frontier-replay" data-paper-title="FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models 基础模型 Beijing Institute of Technology 2026-11-19 混合模型的attention KV可按页复用，但递归状态只在保存过的精确位置恢复。FrontierReplay先根据已观察到的模板稳定尾、已完成turn和分叉点规划检查点；原生prefill不断开，之后只重放短窗递归输入生成精确状态。保留策略优先保护仍在执行的请求锚点和已证明可复用的分叉，而非只看历史频率。 完整实验：成本过高，不复现（审查 DONE）。源绑定的实际诊断由本批runner单独记录；L1策略/训练连线组件，不是完整论文复现。完整实验：成本过高，不复现（审查 DONE）。实现纯CPU host-policy组件：观察边界规划、显式pending/completion发布、lease、分层准入/驱逐、长前缀保护和每16请求的回收决策。KV驻留、已观察progress、稳定尾与非自身驱逐信号均由调用方显式提供；没有自主观察真实服务或用户日志。状态槽只是合成token前缀元数据，不是模型状态。  推理与系统效率 混合模型前缀缓存与检查点 基础模型 推理压缩：权重、KV 缓存与服务带宽 一个request恢复同一检查点两次，就算proven了吗？ 不算。需要至少两个不同恢复request，或者它本来就是已知分叉；否则每条会话的祖先都会被单次后继访问永久保护。 教学例：request b重复restore只留tier2；b和c都restore后才进入tier3。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-b1fb2dbcbc4af256">一个request恢复同一检查点两次，就算proven了吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Afrontier-replay">FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · Beijing Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不算。需要至少两个不同恢复request，或者它本来就是已知分叉；否则每条会话的祖先都会被单次后继访问永久保护。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：request b重复restore只留tier2；b和c都restore后才进入tier3。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26020v1">原论文</a> · <a href="../../../../foundation-models/2611.26020-frontier-replay/">实现解读</a> · <a href="#qa-b1fb2dbcbc4af256">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:frontier-replay" data-paper-title="FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models 基础模型 Beijing Institute of Technology 2026-11-19 混合模型的attention KV可按页复用，但递归状态只在保存过的精确位置恢复。FrontierReplay先根据已观察到的模板稳定尾、已完成turn和分叉点规划检查点；原生prefill不断开，之后只重放短窗递归输入生成精确状态。保留策略优先保护仍在执行的请求锚点和已证明可复用的分叉，而非只看历史频率。 完整实验：成本过高，不复现（审查 DONE）。源绑定的实际诊断由本批runner单独记录；L1策略/训练连线组件，不是完整论文复现。完整实验：成本过高，不复现（审查 DONE）。实现纯CPU host-policy组件：观察边界规划、显式pending/completion发布、lease、分层准入/驱逐、长前缀保护和每16请求的回收决策。KV驻留、已观察progress、稳定尾与非自身驱逐信号均由调用方显式提供；没有自主观察真实服务或用户日志。状态槽只是合成token前缀元数据，不是模型状态。  推理与系统效率 混合模型前缀缓存与检查点 基础模型 推理压缩：权重、KV 缓存与服务带宽 FrontierReplay和ReplaySSM都记录输入，解决的是同一个问题吗？ 不是。ReplaySSM围绕decode状态写回、output-only和投机回滚；FrontierReplay围绕prefill结构边界的检查点产生与保留。相似代数不代表服务策略、精度或证据可直接共用。 教学例：16步decode刷新正确，不能证明下一会话的模板边界已保存、仍驻留且可命中。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-b22a234eecee7b4b">FrontierReplay和ReplaySSM都记录输入，解决的是同一个问题吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Afrontier-replay">FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · Beijing Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。ReplaySSM围绕decode状态写回、output-only和投机回滚；FrontierReplay围绕prefill结构边界的检查点产生与保留。相似代数不代表服务策略、精度或证据可直接共用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：16步decode刷新正确，不能证明下一会话的模板边界已保存、仍驻留且可命中。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26020v1">原论文</a> · <a href="../../../../foundation-models/2611.26020-frontier-replay/">实现解读</a> · <a href="#qa-b22a234eecee7b4b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:frontier-replay" data-paper-title="FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models 基础模型 Beijing Institute of Technology 2026-11-19 混合模型的attention KV可按页复用，但递归状态只在保存过的精确位置恢复。FrontierReplay先根据已观察到的模板稳定尾、已完成turn和分叉点规划检查点；原生prefill不断开，之后只重放短窗递归输入生成精确状态。保留策略优先保护仍在执行的请求锚点和已证明可复用的分叉，而非只看历史频率。 完整实验：成本过高，不复现（审查 DONE）。源绑定的实际诊断由本批runner单独记录；L1策略/训练连线组件，不是完整论文复现。完整实验：成本过高，不复现（审查 DONE）。实现纯CPU host-policy组件：观察边界规划、显式pending/completion发布、lease、分层准入/驱逐、长前缀保护和每16请求的回收决策。KV驻留、已观察progress、稳定尾与非自身驱逐信号均由调用方显式提供；没有自主观察真实服务或用户日志。状态槽只是合成token前缀元数据，不是模型状态。  推理与系统效率 混合模型前缀缓存与检查点 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么不能在prepare后立即把检查点放进lookup？ prepare只预留位置，设备写入尚未完成；提前公开会让其他request读到部分状态。这里只在显式成功完成后发布，失败则撤销，lease未释放的锚点不可驱逐。 教学例：pending的640状态必须查不到；失败后删除，不能用全零状态代替成功检查点。 2026-11-21">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-5bfdaf13be8a94da">为什么不能在prepare后立即把检查点放进lookup？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Afrontier-replay">FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-21 · Beijing Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>prepare只预留位置，设备写入尚未完成；提前公开会让其他request读到部分状态。这里只在显式成功完成后发布，失败则撤销，lease未释放的锚点不可驱逐。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：pending的640状态必须查不到；失败后删除，不能用全零状态代替成功检查点。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.26020v1">原论文</a> · <a href="../../../../foundation-models/2611.26020-frontier-replay/">实现解读</a> · <a href="#qa-5bfdaf13be8a94da">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:loopcache-interface" data-paper-title="LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers 基础模型 Peking University 2026-11-18 固定深度的draft可能沿过时轨迹继续推进。LoopCache用新候选相对旧候选的logit差控制替换，并清除依赖旧token的所有后代。推测路径轮转读取同一loop cache，独立KV分支再以正确loop缓存重算；浅层差异较大时才单独读取对应loop的cache。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。本地生成小张量/接口案例仅为诊断，不是公开能力benchmark；l0_interface组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。仅实现Eq2–4的阈值更新、循环loop编号、浅层cache选择及最近完整验证周期接口，标记L0。没有模型、实际KV内存、exact verifier、随机采样拒绝或token提交；tokens_committed固定为0是接口边界，不是模型指标。  推理与系统效率 循环模型与KV调度 基础模型 推理压缩：权重、KV 缓存与服务带宽 循环cache调度解决什么瓶颈？ 将单步读取的长前缀cache从多个loop集中为一个；这减少读取来源，不代表推测计算已变为精确。 教学例：R=4时全局步骤依次读取1、2、3、4、1，但spec token当前深度可能是3。 2026-11-19">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-loopcache-interface-8b8dfb66" class="ar-learning-paper-anchor"></span>

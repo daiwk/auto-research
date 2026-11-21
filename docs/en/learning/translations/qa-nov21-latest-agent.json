@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:sage-evolve/anchor-vs-active": {
+      "source_sha256": "adb282c0e5aef62ce53dd4e56ce9b5754f80fb074595fe719b4c326e872ea378",
+      "reviewed": true,
+      "fields": {
+        "question": "Does changing the active observation change the objective?",
+        "answer": "No. The anchor remains the acceptance objective; the active view exposes diagnostic groups, tiers or related tasks to guide the next training increment.",
+        "example": "Teaching example: add an eight-needle diagnostic to long-document QA without replacing the original evaluation with easier questions."
+      }
+    },
+    "qa/agent-research:sage-evolve/phase-reset": {
+      "source_sha256": "632c8be62f339e6e178a45194fd060a428055567c6db97ed8f0c10e5adc8285d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reset marginal-return history after changing observations?",
+        "answer": "Scores under different observations are not comparable. Subtracting an old easier-task score from a harder-task score confuses measurement change with model regression.",
+        "example": "Teaching example: moving from an80-point old view to a40-point new view is not a measured40-point training loss; start within-phase comparisons again."
+      }
+    },
+    "qa/agent-research:sage-evolve/observation-vs-harness": {
+      "source_sha256": "8b9e3edf2874b55f1701d6bd9d31449d02531542f99a20a1048fd689fe72024f",
+      "reviewed": true,
+      "fields": {
+        "question": "Do AdaObs and Harness² evolve the same layer?",
+        "answer": "No. Harness² edits execution around a fixed model. AdaObs keeps the anchor fixed, changes how training gaps are observed and retrains models in the full study. Neither local diagnostic demonstrates capability gains.",
+        "example": "Teaching example: grouping failures by context length changes observation; adding a tool retry rule changes the harness."
+      }
+    },
+    "qa/agent-research:sage-evolve/concrete-failure": {
+      "source_sha256": "54fd89ba5a0cd77d4510799634d464c22d17e8d9efa6b42ed73a81d4bb6dc431",
+      "reviewed": true,
+      "fields": {
+        "question": "Does one failed L1 diagnostic rule out L1 entirely?",
+        "answer": "No. Negative memory records a concrete refinement for a current gap. Other feasible L1 options remain eligible; escalation follows only when no L1 option remains.",
+        "example": "Teaching example: uninformative format groups do not invalidate length groups, and a failure for one gap should not blacklist another gap."
+      }
+    },
+    "qa/agent-research:memfolder/two-compression-axes": {
+      "source_sha256": "ac919fc24aacf22821ee4b816a0f55707b5ca1a0c59833086e8b132ed871fc7e",
+      "reviewed": true,
+      "fields": {
+        "question": "Does halving records necessarily halve context tokens?",
+        "answer": "No. A merged record can be longer. RecordFolder reduces retrieval units; ContextFolder separately compresses each group's text.",
+        "example": "Teaching example: merging two20-token records into one40-token record halves count but saves no text tokens."
+      }
+    },
+    "qa/agent-research:memfolder/rare-entity-affinity": {
+      "source_sha256": "d984ce20ed7dfddb094524c8594e1806eadc25546807951ee4f27da70e28ebe7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why should an entity in every record add no affinity?",
+        "answer": "Its IDF log(N/df) is zero when df=N because it does not distinguish events. With no shared entity mass,alpha is zero and affinity returns to cosine.",
+        "example": "Teaching example: the word user in every record should not link all experiences; a rare project name may identify related ones."
+      }
+    },
+    "qa/agent-research:memfolder/chain-versus-tree": {
+      "source_sha256": "cb7cf46cbb5950c1d095fa701f78b98642eff1e71cdf899f089ebdbf4b11384b",
+      "reviewed": true,
+      "fields": {
+        "question": "Can MemFolder's temporal chains replace MemForest's event trees?",
+        "answer": "No. MemFolder permits at most one incoming/outgoing edge and reassigns anchor-free chains together. MemForest preserves event-tree hierarchy and retrieves through anchor neighborhoods.",
+        "example": "Teaching example: a parent event with two child events fits a tree but not a nonbranching matched chain."
+      }
+    },
+    "qa/agent-research:memfolder/matching-not-greedy": {
+      "source_sha256": "4245b654528a67c621f3af5e1946fdf3f8493fb651e3efabd2581e58d99b967f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not greedily take the largest link gain?",
+        "answer": "A local maximum can consume another predecessor's only useful successor. Maximum total gain must respect incoming/outgoing constraints; the local code uses actual Hungarian matching.",
+        "example": "Teaching example: gains0→2=.9,0→3=.8,1→2=.8 give greedy.9 versus a globally compatible total1.6."
+      }
+    },
+    "qa/agent-research:memlife/three-reward-dimensions": {
+      "source_sha256": "13b292f24acd06f8dcb5e42a0b1e10e7958ddbaf0b63e81afb77c3bfd82aa974",
+      "reviewed": true,
+      "fields": {
+        "question": "Is a faithful memory necessarily useful for future questions?",
+        "answer": "No. It may omit a key fact or remain undiscoverable in a large store. FIRM separately scores faithfulness,informativeness and retrievability and multiplies them.",
+        "example": "Teaching example: I entered the room can be faithful while omitting where the keys were placed."
+      }
+    },
+    "qa/agent-research:memlife/macro-deviation": {
+      "source_sha256": "7ec9d3468ed791f4026678f1a920525609e8508bf3bc125a859b55663f546999",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not use within-candidate variance?",
+        "answer": "Informativeness and retrievability are constant within a candidate,so their signal lies between candidates. Eq.11 retains it by measuring deviations around the shared group mean before macro averaging.",
+        "example": "Teaching example: all-one and all-zero candidates each have zero internal variance,but the correct group variance is.25."
+      }
+    },
+    "qa/agent-research:memlife/writer-vs-folding": {
+      "source_sha256": "ff441ca45898175d7a5e46532b7e5bad0f8f6037cb26403181b282d8f180d19f",
+      "reviewed": true,
+      "fields": {
+        "question": "Do MemOpt and MemFolder optimize the same object?",
+        "answer": "No. MemOpt decomposes training rewards to improve writer outputs;MemFolder organizes and compresses existing records. Fewer retrieval units do not prove greater faithfulness or fact retention.",
+        "example": "Teaching example: grouping two records changes structure;lowering credit for a hallucinated token optimizes the writer."
+      }
+    },
+    "qa/agent-research:memlife/causal-before-rank": {
+      "source_sha256": "878eb25d890076be1f21b03d1bb417d78c9f608c4630303d98539b2ce49f077e",
+      "reviewed": true,
+      "fields": {
+        "question": "May search rank all memories before filtering scope and time?",
+        "answer": "No. Future or out-of-scope high scores can displace eligible results. Filter end<=query_time and explicit subject/interval first,then rank. This local isolation interface is not identity authentication.",
+        "example": "Teaching example: with tomorrow scoring1 and yesterday.8,ranking top1 before filtering wrongly returns nothing rather than yesterday."
+      }
+    }
+  }
+}

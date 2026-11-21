@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-21-overlap-components",
+  "seeds": [42, 43, 44],
+  "maximum_run_seconds": 180,
+  "maximum_cuda_devices": 1,
+  "model_and_dataset_downloads": 0,
+  "api_calls": 0,
+  "automatic_retry": false,
+  "full_experiments_executed": false,
+  "cost_basis": "Seven independent small deterministic/tensor components; only MV-JEPA requires one CUDA device. No pretrained backbone, multi-view video dataset, SFT campaign, long rollout or benchmark matrix is launched. Complete paper campaigns are review DONE/not reproduced under their recorded scale.",
+  "components": {
+    "frontier-replay": {"domain": "foundation-models", "module": "foundation_models/frontier_replay.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "mv-jepa": {"domain": "foundation-models", "module": "foundation_models/mv_jepa.py", "cuda": true, "evaluation_tier": "l1_mechanism"},
+    "sage-evolve": {"domain": "agent-research", "module": "agent_research/sage_evolve.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "memfolder": {"domain": "agent-research", "module": "agent_research/memfolder.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "dfrl": {"domain": "post-training", "module": "post_training/dfrl.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "e-rwsc": {"domain": "foundation-models", "module": "foundation_models/e_rwsc.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "memlife": {"domain": "agent-research", "module": "agent_research/memlife.py", "cuda": false, "evaluation_tier": "l1_mechanism"}
+  }
+}

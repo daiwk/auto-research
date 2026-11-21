@@ -7,7 +7,7 @@ hide:
 
 # 经验进入长期系统前，要解决存取、价值与准入
 
-[Agent](../index.md) · 更新 2026-11-20 · 64 篇主题资料 / 15 篇重点对照
+[Agent](../index.md) · 更新 2026-11-21 · 66 篇主题资料 / 17 篇重点对照
 
 MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，CMP 管效用如何识别；Voyager 把成功程序变技能，VaG 管技能进入库的风险，SkillRise 用后续任务检验整理价值。存得下、相关、合法和能帮助未来，是四个不同问题。 EMMA再把结构化记忆分配给controller、agent与skill，按失败scope限制单次编辑及下一次实际使用义务。
 
@@ -40,6 +40,8 @@ MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，C
 | [CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation](../../../agent-research/2611.17316-coremem/README.md) · [原始来源](https://arxiv.org/abs/2611.17316v1)<br>章节：背景与主要改动、核心公式 | 在继承repo的后续任务上，以同状态有／无记忆rollout估计价值，并将整体价值通过可追踪首次锚点使用门控到步骤。 | MemPrice分配上下文容量与记忆保真；CoReMem优化未来编码解决率和工作量。token占用、行为步骤和语义效用不是同一目标，局部算子不产生记忆内容。 |
 | [Instant Weight-Space Consolidation for Long-Term Memory in LLMs](../../../agent-research/2611.20759-clam-memory/README.md) · [原始来源](https://arxiv.org/abs/2611.20759v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | CLAM把可积累的参数记忆与逐字检索缓冲分开：冻结LLM提供每层会话activation，hypernetwork在不做测试时梯度下降的情况下写出down_proj LoRA，查询时再配top5会话片段。没有提取调用不等于没有前置训练；能力来自离线context distillation。 | CoReMem通过未来同仓库任务的有／无记忆差估值并训练写入信用；CLAM通过全历史teacher蒸馏把history压进权重。前者是前瞻效用，后者是参数通道，两者都不能用静态摘要相似度冒充任务收益。完整实验成本过高，不复现（审查DONE）。 |
 | [Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents](../../../agent-research/2611.25123-grepmem/README.md) · [原始来源](https://arxiv.org/abs/2611.25123v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | GrepMem把有限工作上下文和完整历史分开：压缩时只把活跃上下文换成系统提示、任务与摘要，原始消息、工具调用/输出和摘要仍追加到纯文本日志。第一次压缩之后才开放grep_history，让模型按需用大小写不敏感正则取回遗漏细节。不需要embedding、索引或知识抽取，但“lossless”只指原日志保留，不代表模型每次都能找对或答对。 | MemGPT以分层内存、page-out/page-in与模型工具调用管理归档；GrepMem不预先抽取归档结构，保留原始轨迹并做词法搜索。两者都可压缩工作上下文，但GrepMem没有减少原始日志占盘；模型是否会选对检索词仍需训练与真实任务评价，本地固定key的旧MemGPT诊断也不能作能力对照。 |
+| [MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management](../../../agent-research/2611.26427-memfolder/README.md) · [原始来源](https://arxiv.org/abs/2611.26427v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验 | MemFolder把记录数和取回上下文长度分开处理。RecordFolder先用LLM统一实体，再以密度峰选首锚点、以相对已有锚点的novelty渐进选互补锚点；语义/实体亲和与时间链修正分组，最后由LLM按时间合并。ContextFolder沿用这些分组，按事实重要性和token比例编码，通过看不到源记录和预期答案的blind reader检查可恢复性。分组不是摘要生成，校验也不是无损保证。 | MemForest按事件构建最大生成树并渐进合并，检索时从anchor传播到时间邻域；MemFolder先以全局互补锚点确定目标组数，再用实体/语义gain和Hungarian非分支时间链修正组，并另加独立的ContextFolder编码层。二者都保留结构，但树形层次与一入一出的链不等价。现有本地MemForest用词项重叠近似语义，本地MemFolder只收显式embedding，因此不能凭两者单测数值宣称谁的模型记忆更好。 |
+| [MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories](../../../agent-research/2609.40195-memlife/README.md) · [原始来源](https://arxiv.org/abs/2609.40195v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验 | MemLife先把每段第一视角视频和语音写成有时间锚点、实体落地的第一人称文本，再由reader按问题进行语义搜索和时间区间读取。MemOpt只训练writer，reader保持冻结；FIRM将逐token的faithfulness、逐候选的informativeness和retrievability相乘。前者看源视频是否支持内容，后两者分别看回答所需事实是否被保留、已缓存reader动作能否找回该候选，不把完整reader成败混成一个写入奖励。 | MemFolder主要改变已有记忆如何分组、合并与编码，MemOpt则改变writer生成什么文本以及如何分配训练credit；前者的结构压缩和后者的写入奖励不互相替代。MemFolder的ContextFolder blind reader看不到源记录/预期答案；MemOpt训练评审可用源视频和训练问答，但这些信息不得流向被评测reader。二者本地都是L1数学组件，不能把分组数或优势方差当QA准确率比较。 |
 
 </div>
 
@@ -110,6 +112,18 @@ Read用9层Perceiver cross-attention、每层8slots，slots只看当前会话。
 grep按原始记录头与行号返回最早匹配，默认10条、最多30条，offset跳过匹配行而非记录；前后context默认1行、最多3行。旧grep结果仍留在原日志，但搜索跳过它们以免递归重复。单次输出上限6K字符，围绕匹配裁到300字符并在完整match边界停止，返回继续offset；非法正则或超过10秒都返回错误。控制测试验证摘要可遗漏原始细节而日志仍保留、只计原始匹配而不递归grep输出、大小写无关、连续offset不漏页；长行与多匹配验证6K上限，灾难性回溯正则会终止worker，随后正常查询仍可用。论文的模型turn预算、自动token估计与forced-answer调用不在这个存储工具组件内，不捏造自动压缩策略或训练效果。
 
 对照来源：[grepmem](../../../agent-research/2611.25123-grepmem/README.md) · [memgpt](../../../agent-research/2310.08560-memgpt/README.md)
+
+### MemFolder：用互补锚点和非分支时间链减少检索单元
+
+实体权重为log(N/df)，共有的实体权重可为0；weighted Jaccard与cosine按共享实体质量和两种信号方差自适应混合。方差先在整个W窗口的前后记录对上计算，再筛正gain和每后继最多d条候选边；gain相对的是后继与初始锚点的cosine。Hungarian最大化总gain，各节点最多一入一出，锚点不可有入边，所以没有分叉或时间环。有锚点的链留在该组，无锚点链按整链cosine总和选组，未匹配项保留原分组。负控包括全记录恰好分配一次、重复embedding仍保留K个非空组、N=1、所有实体共有时退化为cosine、在筛边前计算窗口方差、时间边向前且锚点无入边、每节点最多一入一出，以及一个greedy得0.9而Hungarian得1.6的显式矩阵单测。后者仅是组合优化单测，不是记忆准确率。上下文验证可能误判源事实，且原文回退可选择缺失required facts的较短候选，不能把ContextFolder宣传为无损存储。
+
+对照来源：[memfolder](../../../agent-research/2611.26427-memfolder/README.md) · [memforest](../../../agent-research/2609.08273-memforest/README.md)
+
+### MemLife / MemOpt：把忠实、信息保留和可检索性分解给记忆写入器
+
+Eq.11先对每个候选的response token求均值，再对候选做宏平均，避免长记忆独占基线。方差是每个候选围绕同一group均值的token偏差平方再宏平均，不能改成候选内部方差，否则丢掉informativeness/retrievability的候选间信号。Eq.12归一化后先clip到±3，再按组中有效response token加权重心化，最后全局masked whitening；prompt和padding始终排除。KL属于Eq.16 loss项，不进入FIRM奖励或优势统计。训练reward可用训练问答，问题独立的writer与被评测reader不可读测试答案。长度不等候选构造宏均值0.5而token池均值0.25，检验group方差0.25而非候选内方差0；稀疏离群值检验clip后重心化。有效response奖励限定[0,1]；极大有限padding先归零，有限输入的ratio乘advantage或KL项溢出也明确拒绝，不能输出inf或把溢出方差伪装成零优势。负控还包括全平group、空候选/padding、无效概率、KL只影响独立loss、不改变奖励、严格未来片段和其他subject在检索前排除、恰好query_time的片段可用。所有输入是合成显式控制值，没有任何gold QA或视频内容输入reader；通过率不是长视频QA能力。
+
+对照来源：[memlife](../../../agent-research/2609.40195-memlife/README.md) · [memfolder](../../../agent-research/2611.26427-memfolder/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -235,9 +249,37 @@ grep按原始记录头与行号返回最早匹配，默认10条、最多30条，
 
     对照来源：[grepmem](../../../agent-research/2611.25123-grepmem/README.md) · [memgpt](../../../agent-research/2310.08560-memgpt/README.md)
 
+### MemFolder的时间链和MemForest的事件树能互换吗？ {#cross-cross-nov21-memfolder}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。MemFolder匹配约束每节点最多一入一出，无锚点链整体分组；MemForest保留事件树层次并用anchor邻域传播。数据结构和检索假设不同。
+
+    **教学例子：** 教学例：一个父事件分出两条子事件可在树中表达，不能直接塞进无分支匹配链。
+
+    对照来源：[memfolder](../../../agent-research/2611.26427-memfolder/README.md) · [memforest](../../../agent-research/2609.08273-memforest/README.md)
+
+### MemOpt和MemFolder都优化记忆，优化的对象一样吗？ {#cross-cross-nov21-memlife}
+
+??? note "展开答案与例子"
+
+    **答案：** 不一样。MemOpt分解训练奖励以改writer输出；MemFolder整理和压缩已有记录。不能把检索单元变少等同于writer更忠实或更会保留事实。
+
+    **教学例子：** 教学例：把两条记忆合为一组是结构整理，降低幻觉token的训练credit是写入器优化。
+
+    对照来源：[memlife](../../../agent-research/2609.40195-memlife/README.md) · [memfolder](../../../agent-research/2611.26427-memfolder/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-21** · 本地只接收显式概率/奖励数组与response mask，执行Eq.7的概率差、FIRM乘积、Eq.11-12宏统计、clip/组内token重心化/全局whitening和Eq.16已给ratio/advantage/KL的标量loss算术。独立NumPy float64实现，normalization epsilon=1e-6，whitening epsilon=1e-8、样本方差correction=1作为显式数值协议；不声称与外部trainer逐bit相同。空候选从G排除，空group输出0；全batch少于2个有效token则拒绝，不补造whitening。另有最多512条的显式unit-vector SearchMemory/FetchMemory：先按end≤query_time及区间完整包含过滤，再排序；返回按时间排列。单subject过滤是本地隔离合同，不是论文LVQA混合受试者基准，也不认证调用者身份。没有视频/embedding模型、VLM评审、writer/reader、训练数据构建、cached reader trace生成、RL训练或Evolve接入。 完整实验高成本不复现。
+
+涉及：[memlife](../../../agent-research/2609.40195-memlife/README.md) · [memfolder](../../../agent-research/2611.26427-memfolder/README.md)
+
+**2026-11-21** · 本地实现显式embedding和已ground实体集合上的RecordFolder分组核，包括归一化、DPC/novelty锚点、全窗口方差、IDF亲和、正gain候选、SciPy真正Hungarian和链级重新归组；仅接收按时间排序的输入，最多512条。用总体方差ddof=0、Python round、相同分数按输入顺序、重复embedding的锚点固定保留本组，是论文未完全指定时公开的确定性约定。没有LLM实体提取、实体别名合并、文本合并、ContextFolder、embedding模型或下游问答；调用方负责提供已ground标签和时间顺序，不用词项Jaccard冒充语义embedding。不接收文件路径，不读取Codex会话，也不自动删除或压缩用户文件。 完整实验高成本不复现。
+
+涉及：[memfolder](../../../agent-research/2611.26427-memfolder/README.md) · [memforest](../../../agent-research/2609.08273-memforest/README.md)
 
 **2026-11-20** · 本地实现append-only记录、显式摘要压缩、第一次压缩后的grep准入、正则/分页/上下文/原行号、跳过旧grep输出与字符上限。正则在隔离子进程内运行并用硬timeout终止，仅接收输入文本而不打开路径。摘要由调用方明确提供；没有LLM摘要器、GRPO、问题回答或真实历史接入。只对合成公开观察做控制测试，不读取本机Codex会话，也不把字符串检索当Agent能力。 完整实验高成本不复现。
 
@@ -279,7 +321,7 @@ grep按原始记录头与行号返回最早匹配，默认10条、最多30条，
 
 覆盖 55 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 64 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 66 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -347,6 +389,8 @@ grep按原始记录头与行号返回最早匹配，默认10条、最多30条，
 - [CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation](../../../agent-research/2611.17316-coremem/README.md)
 - [Instant Weight-Space Consolidation for Long-Term Memory in LLMs](../../../agent-research/2611.20759-clam-memory/README.md)
 - [Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents](../../../agent-research/2611.25123-grepmem/README.md)
+- [MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management](../../../agent-research/2611.26427-memfolder/README.md)
+- [MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories](../../../agent-research/2609.40195-memlife/README.md)
 
 </details>
 
