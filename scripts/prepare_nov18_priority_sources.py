@@ -7,6 +7,7 @@ import argparse
 from datetime import datetime, timezone
 import gzip
 import hashlib
+from html.parser import HTMLParser
 import json
 from pathlib import Path
 import re
@@ -40,15 +41,35 @@ def html_bytes(raw):
     return gzip.decompress(raw) if raw.startswith(b"\x1f\x8b") else raw
 
 
-def parsed_capture_fields(raw):
-    from bs4 import BeautifulSoup
+class DirectoryLinks(HTMLParser):
+    """Read link inventories without optional scraping dependencies."""
 
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.links = set()
+        self.has_html = False
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "html":
+            self.has_html = True
+        if tag == "a":
+            for key, value in attrs:
+                if key == "href" and value is not None:
+                    self.links.add(value)
+                    break
+
+    handle_startendtag = handle_starttag
+
+
+def parsed_capture_fields(raw):
     decoded = html_bytes(raw)
-    soup = BeautifulSoup(decoded, "html.parser")
-    links = sorted({a["href"] for a in soup.select("a[href]")})
+    parser = DirectoryLinks()
+    parser.feed(decoded.decode("utf-8-sig", errors="replace"))
+    parser.close()
+    links = sorted(parser.links)
     return {"links": links, "decoded_sha256": hashlib.sha256(decoded).hexdigest(),
             "transport_gzip_decoded": decoded is not raw,
-            "parse_complete": soup.find("html") is not None and bool(links)}
+            "parse_complete": parser.has_html and bool(links)}
 
 
 def refresh_capture(row):
@@ -95,8 +116,6 @@ def capture(url):
 
 def main():
     global CACHE, AUDIT
-    from bs4 import BeautifulSoup
-
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--start", default="2026-11-16")
     parser.add_argument("--end", default="2026-11-18")
@@ -153,10 +172,7 @@ def main():
         cached = ROOT / ".cache/nov15-closure/google" / ("page-" + str(page["page"]) + ".html")
         if cached.exists():
             baseline.update(
-                paper_links(
-                    a["href"]
-                    for a in BeautifulSoup(html_bytes(cached.read_bytes()), "html.parser").select("a[href]")
-                )
+                paper_links(parsed_capture_fields(cached.read_bytes())["links"])
             )
     # The exact old URL inventory also appears in records; use it when capture names differ.
     for row in old["google"]["records"]:
@@ -168,10 +184,7 @@ def main():
         if not cached.name.startswith(("page", "directory", "google-page", "google-first")):
             continue
         baseline.update(
-            paper_links(
-                a["href"]
-                for a in BeautifulSoup(html_bytes(cached.read_bytes()), "html.parser").select("a[href]")
-            )
+            paper_links(parsed_capture_fields(cached.read_bytes())["links"])
         )
     for row in captures:
         if "research.google/pubs/?" in row["url"]:

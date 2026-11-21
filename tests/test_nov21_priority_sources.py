@@ -3,6 +3,9 @@
 import gzip
 import hashlib
 import json
+from pathlib import Path
+import subprocess
+import sys
 
 import prepare_nov18_priority_sources as capture
 
@@ -23,6 +26,31 @@ def test_transport_gzip_and_plain_html_have_the_same_link_inventory():
 def test_non_html_or_unavailable_message_is_not_a_complete_empty_directory():
     for raw in (b'Sorry, this content is not available', b'<html><body>Unavailable</body></html>'):
         assert capture.parsed_capture_fields(raw)["parse_complete"] is False
+
+
+def test_link_inventory_handles_case_entities_and_non_links():
+    raw = b'''<!doctype html><HTML><body>
+    <A HREF="/paper/?a=1&amp;b=2">One</A><a href='/paper/?a=1&amp;b=2'>Duplicate</a>
+    <a>No href</a><script>const fake = '<a href="/not-a-link/">';</script>
+    <a href="/self-closing/" /><a href=/unquoted/>Unquoted</a>
+    </body></HTML>'''
+    parsed = capture.parsed_capture_fields(raw)
+    assert parsed["parse_complete"] is True
+    assert parsed["links"] == ["/paper/?a=1&b=2", "/self-closing/", "/unquoted/"]
+
+
+def test_capture_parser_runs_without_site_packages():
+    script = Path(capture.__file__).resolve()
+    code = (
+        "import gzip, runpy; module = runpy.run_path(" + repr(str(script)) + "); "
+        "raw = " + repr(HTML) + "; "
+        "plain = module['parsed_capture_fields'](raw); "
+        "compressed = module['parsed_capture_fields'](gzip.compress(raw)); "
+        "assert plain['parse_complete'] and compressed['parse_complete']; "
+        "assert plain['links'] == compressed['links'] == ['/research/publications/paper/']"
+    )
+    result = subprocess.run([sys.executable, "-I", "-S", "-c", code], capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
 
 
 def test_cached_reparse_preserves_original_compressed_response_and_receipt(tmp_path, monkeypatch):
