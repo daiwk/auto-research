@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-23-latest-components",
+  "seeds": [42, 43, 44],
+  "maximum_run_seconds": 180,
+  "maximum_cuda_devices": 1,
+  "model_and_dataset_downloads": 0,
+  "api_calls": 0,
+  "automatic_retry": false,
+  "full_experiments_executed": false,
+  "cost_basis": "Seven bounded component/scoring diagnostics, with AIMuon alone on one real A100/A30. No model, benchmark video, student/teacher, rollout, H100/H20 campaign or provider call. Complete campaigns are terminal high-cost review DONE, not reproduced. Per-seed component budget is an estimate capped at30 seconds, not a full-experiment timing claim.",
+  "components": {
+    "aimuon": {"domain": "foundation-models", "module": "foundation_models/aimuon.py", "cuda": true, "evaluation_tier": "l1_mechanism"},
+    "spot-bench": {"domain": "foundation-models", "module": "foundation_models/spot_bench.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "disco": {"domain": "foundation-models", "module": "foundation_models/disco.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "dwe": {"domain": "post-training", "module": "post_training/dwe.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "retokenization-update": {"domain": "post-training", "module": "post_training/retokenization_update.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "acting-to-learning": {"domain": "agent-research", "module": "agent_research/acting_to_learning.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "r2-tool-redundancy": {"domain": "agent-research", "module": "agent_research/r2_tool_redundancy.py", "cuda": false, "evaluation_tier": "l1_mechanism"}
+  }
+}
