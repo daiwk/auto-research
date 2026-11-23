@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-23-latest-components",
+  "requested_window": {"start": "2026-11-22", "end": "2026-11-23"},
+  "overlap_start": "2026-11-19",
+  "accepted_papers": ["foundation-models:aimuon", "foundation-models:spot-bench", "foundation-models:disco", "post-training:dwe", "post-training:retokenization-update", "post-training:ctrl", "agent-research:acting-to-learning", "agent-research:r2-tool-redundancy", "agent-research:coevobench"],
+  "component_papers": ["foundation-models:aimuon", "foundation-models:spot-bench", "foundation-models:disco", "post-training:dwe", "post-training:retokenization-update", "agent-research:acting-to-learning", "agent-research:r2-tool-redundancy"],
+  "review_only_papers": ["post-training:ctrl", "agent-research:coevobench"],
+  "selection_class": "eight_newly_captured_Nov20_first_releases_and_one_historical_Google_directory_backfill",
+  "scope_note": "Eight papers first appearedNov20 and were newly captured relative to the Nov21 metadata inventory; this is not eight Nov23 publications. SPOT-Bench first appearedApr27 and is a Google-directory historical backfill, reviewingNov5v2. No Nov21-23 first release was verified in this finite nine-category capture; current bulletins still dateNov20 and do not include these new metadata identities. Do not infer their announcement date from submission or discovery. Recall inventories are not an implementation backlog.",
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "cost_policy": "One A100 or A30 or Mac; no large resource downloads, APIs, full training or long rollout. High-cost complete experiments are not reproduced, review DONE, terminal/no automatic retry. Only the seven explicit L1 components are implemented; no capability reproduction or Evolve promotion."
+}

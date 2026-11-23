@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-23",
+  "window": {
+    "start": "2026-11-22",
+    "end": "2026-11-23"
+  },
+  "metadata_identities": 1260,
+  "announcement_identities": 1081,
+  "newly_captured_first_releases_since_previous_capture": 160,
+  "first_releases_in_requested_window": 0,
+  "announcement_identity_delta_from_previous_batch": 0,
+  "official_directory_pages": 56,
+  "parse_complete_pages": 54,
+  "repository_event_queries": 6,
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "review_watermark_unchanged": "2026-11-15",
+  "primary_priority_review": "priority-primary-selection.json",
+  "limits": [
+    "Nov20 first releases were newly captured onNov23; they are not Nov23 publications.",
+    "Bulletins still dateNov20 and do not establish announcement dates for metadata-only selections.",
+    "This is a finite selection, not full-method review of1260 records or an implementation backlog.",
+    "Directory differences compare finite inventories againstNov15, not first publication dates or global deletion.",
+    "Two Meta landing pages lack a complete parsed publication inventory; this is not evidence of zero new Meta work.",
+    "Google/Meta bylines, original dates and full-text/official code are verified for selected papers; source-only leads with no full algorithm remain archived limitations, not invented implementations."
+  ]
+}

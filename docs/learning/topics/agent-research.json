@@ -301,7 +301,8 @@
         "agent-research:rsibench-infra",
         "agent-research:searchinject",
         "agent-research:buggymle-cci",
-        "agent-research:sage-evolve"
+        "agent-research:sage-evolve",
+        "agent-research:coevobench"
       ]
     },
     {
@@ -376,7 +377,9 @@
         "agent-research:search-r1",
         "agent-research:loop",
         "agent-research:instruct-to-act",
-        "agent-research:ace-rl"
+        "agent-research:ace-rl",
+        "agent-research:acting-to-learning",
+        "agent-research:r2-tool-redundancy"
       ]
     },
     {

@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-23",
+  "scope": "Finite Nov20 first-release selection; no all-source exhaustiveness or Nov15 watermark advancement claimed.",
+  "requested_window": [
+    "2026-11-20",
+    "2026-11-23"
+  ],
+  "preflight_before_implementation": true,
+  "available_resource": "one A100 or A30, or local Mac",
+  "large_downloads_authorized_or_needed": false,
+  "watermark_change_claimed": false,
+  "accepted": [
+    {
+      "arxiv_id": "2611.27104",
+      "identity": "foundation-models:disco",
+      "key": "disco",
+      "domain": "foundation-models",
+      "title": "Reliable Behavior Discovery via False Discovery Rate Control",
+      "first_author": "David Madras",
+      "first_author_affiliation": "Google DeepMind",
+      "first_published_at": "2026-11-20T04:25:13Z",
+      "announced_on": null,
+      "intake_class": "new_first_release_in_window",
+      "reviewed_version": "v1",
+      "reviewed_source_url": "https://arxiv.org/pdf/2611.27104v1",
+      "source_sha256": "09c96036b297ca9313645025a24c8f8b0ee1a5dccf1a4acc55449f65e61ffa22",
+      "html_sha256": "19d231843089678d5957b3f359e9571cb14cdee545c4f535fc634cec0320b40b",
+      "sections_read": [
+        "1-4 Algorithm2, Eq1-8, Theorems1-2",
+        "5-6",
+        "K",
+        "L.1-L.2"
+      ],
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "scope": "CPU-only unboosted binary-bin Algorithm2, exact finite-null path enumeration and Theorems1/2; no models, datasets, LLM discovery/judging, three-bin boosting or capability evidence.",
+      "cost_basis": "Appendix L Tables12-13: 900/600/400/400/400 discovery queries per method across five tasks, plus100 independent verification queries per candidate, with proprietary text/image models. Appendix K adds200 hyperparameter runs per method and1000 fresh-seed runs. Full multi-model/API campaign not attempted; local three-seed scalar component budget below10seconds is an estimate, no data/checkpoint/API downloads.",
+      "local_detail_path": "foundation-models/2611.27104-disco/README.md",
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "code_url": "https://github.com/google-deepmind/disco",
+      "code_status": "论文声明源码位于google-deepmind/disco，但2026-11-23官方GitHub入口HTTP404；可访问代码及commit未核实，不能据此断言作者未发布。",
+      "upstream_revision": null,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    }
+  ],
+  "selection_notes": [
+    "Google DeepMind prioritized; original submission date verified on official arXiv.",
+    "Paper-linked code entry is unavailable (HTTP404); no upstream commit invented.",
+    "No second foundation/JEPA implementation added; bounded scope remains one paper.",
+    "No paid API, checkpoint/data download, full campaign, CUDA path or Evolve promotion."
+  ]
+}

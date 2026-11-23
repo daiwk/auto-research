@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:acting-to-learning/success-vs-learning": {
+      "source_sha256": "e3b5ca7eaf30b32a5dabc6fd983d24d06e7a68b3241f0fcdd9c1015aec733cb6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why select among successful records?",
+        "answer": "Success describes the original interaction, not the student's marginal learning value. The study fixes pools and update budgets to compare selection rather than equating collection success with learning gain.",
+        "example": "Teaching example: one missing cleaning action may teach more than100repetitions of a familiar pickup; this is illustrative, not a measured result."
+      }
+    },
+    "qa/agent-research:acting-to-learning/checkpoint-before-family": {
+      "source_sha256": "ccc5cb096d90dff475653568bb5a2e08f24cee13eccd0dff4baaf548a5cf4933",
+      "reviewed": true,
+      "fields": {
+        "question": "Why average checkpoints before maximizing families?",
+        "answer": "The score accumulates evidence for one family across checkpoints before selecting a family. Reversing the order can combine incompatible per-checkpoint winners.",
+        "example": "Teaching example: familyA has scores1,-1 andB has-1,1; the specified score is0, while per-checkpoint maximization incorrectly gives1."
+      }
+    },
+    "qa/agent-research:acting-to-learning/ace-selection-space": {
+      "source_sha256": "d414c24530af10119f23bebab47f823144f14fe9b2503a501bf8ce4ab605ba7d",
+      "reviewed": true,
+      "fields": {
+        "question": "What does this study control beyond ACE Lens?",
+        "answer": "It separates the ranking rule from its admissible selection space. Global random and high-NLL share the gradient selector's freedom to change coverage, avoiding a confound from unequal freedom.",
+        "example": "Teaching example: if gradient selects256records globally, random must also have global freedom rather than being forced to preserve old task quotas."
+      }
+    },
+    "qa/agent-research:acting-to-learning/cold-start-no-query": {
+      "source_sha256": "45b1256b0c01c85bca38caad768aefe57efa503e238cbdc4434c7b4b91c3f559",
+      "reviewed": true,
+      "fields": {
+        "question": "May final students start from feature-warmup weights?",
+        "answer": "Not under this protocol. Warmup provides features only; final students restart from the original base with fresh LoRA. Public support actions are not evaluation-query answers, which must remain outside scoring.",
+        "example": "Teaching example: compute scores at four warmup checkpoints, discard that adapter, then train selector arms from paired original initializations."
+      }
+    },
+    "qa/agent-research:r2-tool-redundancy/less-calls-not-capability": {
+      "source_sha256": "6bf6911b54bb522ae61f197e2f9c8697ceffbf23dd6ac78684c1623424374b61",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not directly reward fewer calls?",
+        "answer": "Wrong trajectories may use no tools. R² keeps correctness supervision and compares efficiency only among correct trajectories for the same question. Fewer calls alone prove neither task success nor tool skill.",
+        "example": "Teaching example: one wrong zero-call output and correct one-/three-call outputs; only the two correct outputs receive relative efficiency credit."
+      }
+    },
+    "qa/agent-research:r2-tool-redundancy/same-reasoning-vfd": {
+      "source_sha256": "adc2b258222931ea8073b55337133e31ea12b4931e74f15a03e5482a446639bd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why score the same reasoning rather than regenerate it?",
+        "answer": "VFD measures additional likelihood support for already generated text, avoiding a confound from random regeneration. Only current feedback changes; other history stays. Low VFD signals potential redundancy, not proven causal necessity.",
+        "example": "Teaching example: if actual and alternative crops both give the same window mean log probability-.4,VFD is0; probabilities of different answers are not this comparison."
+      }
+    },
+    "qa/agent-research:r2-tool-redundancy/adastep-vs-vfd": {
+      "source_sha256": "482f52cfa7bee9ab98ee3673e2180353b82673ea6ad1861aed13dac48b38cbc7",
+      "reviewed": true,
+      "fields": {
+        "question": "Can R² and AdaStep exchange their statistics?",
+        "answer": "No. AdaStep uses action-group return variance at a shared state to estimate credit reliability. R² uses same-text feedback likelihood differences for costs, then compares correct outputs only. Their conditioning and normalization differ.",
+        "example": "Teaching example: a repeated crop may have near-zeroVFD despite stable later returns; stability does not make the observation nonredundant."
+      }
+    },
+    "qa/agent-research:r2-tool-redundancy/missing-score-vs-ineligible": {
+      "source_sha256": "cafb496ad8a919097679e955a785cd2bc71995035383850d9d9bec68a99bcc5d",
+      "reviewed": true,
+      "fields": {
+        "question": "Are missing scores and no eligible calls both zero cost?",
+        "answer": "No. C.3 assignsz=1to an otherwise eligible complete call with unavailable score. Only an empty eligible set has zero redundancy cost. Failed/incomplete calls are excluded before sampling.",
+        "example": "Teaching example: samplingNonefrom three eligible calls estimates3redundant calls; if no call returns an eligible crop, the redundancy term is0."
+      }
+    },
+    "qa/agent-research:coevobench/benchmark-not-algorithm": {
+      "source_sha256": "d42bc325e170ae99b952c965db9a6029821b7aadbdc3aeadc8db02ddd816e621",
+      "reviewed": true,
+      "fields": {
+        "question": "Is CoEvoBench itself an evolution algorithm?",
+        "answer": "No.It supplies common starting systems,model/harness action spaces,budgets and isolated evaluation to measure the researcher's feedback-driven decisions.Different researchers may follow different routes.",
+        "example": "Teaching example: one researcher may submitBaseafter an interface fix;another may edit tools then train.Both are evaluated under one protocol,without mandatory alternation."
+      }
+    },
+    "qa/agent-research:coevobench/coupled-levers": {
+      "source_sha256": "50e8fc0de598eb297d63964ced8d174666925d85fb9f75f7347bfab3d36bd30d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not add weight and harness gains?",
+        "answer": "Weights learn behavior under a particular harness.Changing interfaces,history or tools may reverse a training gain.Cross-evaluation must hold one component fixed while varying the other.",
+        "example": "Teaching example: a paper case goes fromfiveextra solved tasks tofourfewer after a harness change;retraining on refreshed trajectories restores a gain.These are author observations,not local results."
+      }
+    },
+    "qa/agent-research:coevobench/adaobs-vs-benchmark": {
+      "source_sha256": "282bb96abce54843d0a29fa7ba6b623ba7ca0c40e03a7f23c6df9cf8dd2b3a07",
+      "reviewed": true,
+      "fields": {
+        "question": "What does CoEvoBench leave to the researcher compared with Sage-Evolve?",
+        "answer": "Sage specifies a fixed-anchor/adaptive-observation strategy.CoEvo supplies protected development/final-evaluation contracts and lets the researcher choose weight or harness interventions.It benchmarks research decisions rather than prescribing that strategy.",
+        "example": "Teaching example: length-bucket diagnostics change a Sage-style observation;the CoEvo researcher must additionally decide whether to fix a parser,retrain,or abandon training."
+      }
+    },
+    "qa/agent-research:coevobench/toy-not-rsi": {
+      "source_sha256": "4304cb5d65ebaad1382e585d95416727f4d0e12d0cdffba00e7265d5a118d302",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a no-GPU toy smoke run reproduce RSI cheaply?",
+        "answer": "No.The upstream toy is a lifecycle fixture for workspace,broker and shutdown,not an autonomous researcher,model update or held-out capability score.The full study is terminally cost-deferred here;fixtures are not promoted.",
+        "example": "Teaching example:deadline cleanup validates operations;changing research direction after negative feedback and improving on separate Testtasks is the capability being evaluated."
+      }
+    }
+  }
+}

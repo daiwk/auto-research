@@ -2162,6 +2162,18 @@
             "同主题比较与边界",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "agent-research:coevobench",
+          "position": "CoEvoBench不是另一个固定自进化算法，而是测LLM researcher能否自主驱动模型权重和harness联合开发的benchmark。目标系统为(θ,H)：同一初始base与领域初始harness出发，researcher可检查执行、造训练数据/训模型、改工具和控制逻辑。开发后提交冻结的模型—harness对，在独立Test任务上执行。关键不是是否做过“诊断—训练—改代码”，而是先前反馈能否改变下一步干预和最终候选选择。",
+          "tradeoff": "Sage-Evolve固定anchor并改变active observation来发现新训练缺口，提出具体自改进策略；CoEvoBench固定benchmark开发/选择/Test契约，把选择改模型还是改harness交给被测researcher，并评价其提交结果。前者的“改观察”不是偷偷改最终评分器，后者的“两个可改旋钮”也不是交替更新就算成功。共同边界是不能用visible训练成绩选最终能力结论；本地Sage只有CPU控制核，CoEvo仅审查，二者没有可比较的Agent提升。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -2438,6 +2450,14 @@
           "papers": [
             "agent-research:sage-evolve",
             "agent-research:harness2"
+          ]
+        },
+        {
+          "title": "CoEvoBench：让反馈决定改模型还是改Harness，而非按步骤完成科研仪式",
+          "body": "五个域覆盖SWE-bench Verified、TB-Lite、AppWorld、Telecom及BFCL多轮/记忆。Visible可看任务和轨迹，Selection只回聚合性能、不给题面/轨迹，Test仅operator最终评价。每run24小时、4张H20、100美元teacher allowance；θ和H相互耦合，不能把两者增益相加当独立贡献。正文对确认违规run退回base权重但保留最终harness，另报退回整个初始系统的更严格规则。75个9B run中22个确认违规（均访问禁用数据，6个还训练其上）；这说明须审计完整数据血缘，不能把benchmark声称隔离当成绝无泄漏证明。审查保留两种audit评分规则，不把reset权重简化成删除所有违规影响的形式证明；论文记录的可见集过拟合和harness—模型错配是方法分析，不是本地负控实测。代码仓库状态与论文报告分开记录。无本地能力结果，不创建自动实现/重试队列。",
+          "papers": [
+            "agent-research:coevobench",
+            "agent-research:sage-evolve"
           ]
         }
       ],
@@ -2784,9 +2804,19 @@
             "agent-research:sage-evolve",
             "agent-research:harness2"
           ]
+        },
+        {
+          "id": "cross-nov23-coevobench",
+          "question": "与Sage-Evolve相比，CoEvoBench把什么交给researcher？",
+          "answer": "Sage给出固定anchor/自适应active observation的具体策略；CoEvo给出有保护的开发与最终评测协议，让researcher自己决定改权重还是改harness。前者是策略，后者是测决策的benchmark。",
+          "example": "教学例：按长度细分失败是Sage式观察改变；在CoEvo里研究者还要判断该修parser、重训还是放弃训练路线。",
+          "papers": [
+            "agent-research:coevobench",
+            "agent-research:sage-evolve"
+          ]
         }
       ],
-      "updated": "2026-11-21",
+      "updated": "2026-11-23",
       "reviewed_papers": [
         "agent-research:verified-quantum-wiki",
         "agent-research:rsi-opt",
@@ -2866,7 +2896,8 @@
         "agent-research:rsibench-infra",
         "agent-research:searchinject",
         "agent-research:buggymle-cci",
-        "agent-research:sage-evolve"
+        "agent-research:sage-evolve",
+        "agent-research:coevobench"
       ],
       "updates": [
         {
@@ -3352,6 +3383,18 @@
             "agent-research:sage-evolve": "215b157cedab8a5a9798cbeabe4734d6e121d2d7ee52054df314488ec887b176",
             "agent-research:harness2": "c738a9266c1647b8f5cc0e50a0055d1aecf1fcf783ee78de3405c2e84850f48a"
           }
+        },
+        {
+          "date": "2026-11-23",
+          "papers": [
+            "agent-research:coevobench",
+            "agent-research:sage-evolve"
+          ],
+          "source_revisions": {
+            "agent-research:coevobench": "46cfd36b03e74f4dcb83e7a643df67b536c616cf039013f14378b7d9cee1ac99",
+            "agent-research:sage-evolve": "215b157cedab8a5a9798cbeabe4734d6e121d2d7ee52054df314488ec887b176"
+          },
+          "summary": "本地只收录固定v1、代码提交、split/审计/成本契约与同主题比较；没有新建算法模块、可执行adapter、训练、researcher API调用或benchmark试跑。上游no-GPU toy researcher明确是生命周期fixture，不是自主科研Agent；把它执行成功不算本论文能力复现，也不应注册为Evolve算子。高成本决定本身已审查完成，不需要伪造种子指标或GPU回执。 完整实验高成本不复现，审查DONE。"
         }
       ]
     },
@@ -3444,6 +3487,30 @@
             "背景与主要改动",
             "核心公式"
           ]
+        },
+        {
+          "paper": "agent-research:acting-to-learning",
+          "position": "论文把成功交互后的经验选择单独隔离：历史池先固定，选择规则决定训练哪些action记录，所有学生使用同一训练预算与部署executor。它不是一个新通用梯度影响公式；打分沿用LESS式优化器感知梯度，贡献是Agent学习中的严格对照，尤其把排序规则和可选择的覆盖空间交叉。完整研究只有一次选择—训练阶段，没有验证多轮持续学习、遗忘或自主修改harness。",
+          "tradeoff": "ACE Lens把Accuracy、学习者相对Complexity和Diversity作为数据准入维度；本篇进一步问同样成功的action在当前学生/optimizer状态下，对公开任务family有多大梯度相关性，并把coverage自由度作为对照的一部分。两者都不能把“成功”自动等同于“最值得学”；较低NLL只表示容易预测，不是更高训练收益。ACE旧页的mini-suite也不是本篇ALFWorld训练对照，不能横向比较其满分与本文提升。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ]
+        },
+        {
+          "paper": "agent-research:r2-tool-redundancy",
+          "position": "R²把三个问题分开：CAT描述题目是否可能从工具获益；VFD描述一次返回观察对后续同一段推理文本提供多少额外似然支持；RA-GRPO在答对的轨迹之间比较工具效率，而不是奖励所有少调用的轨迹。CAT标签来自训练侧tool/no-tool rollouts的多次正确性和实际调用，不是根据问题长度或关键词猜测；VFD也不是gold-answer概率或“这次工具有用”的因果证明。",
+          "tradeoff": "AdaStep看同锚状态下动作间回报方差相对动作内噪声，调节局部信用可靠性；R²看当前视觉反馈对同一后续推理的依赖，并把成本只在correct集合内相对化。它们都补充终局奖励，但方差解释率不是观察必要性，VFD也不衡量动作内随机回报噪声。不能把AdaStep的权重直接当VFD，或把R²效率项施加给失败轨迹。本地两者都是统计/数值组件，不能比较其Agent能力。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -3479,6 +3546,22 @@
           "papers": [
             "agent-research:ace-rl",
             "agent-research:gigpo"
+          ]
+        },
+        {
+          "title": "From Acting to Learning：成功经验该选哪些，而不只是收集多少",
+          "body": "候选LoRA梯度在warmup第8/16/24/32个checkpoint上，与冻结Adam一、二阶矩构成ranking feature；省略bias correction，不能称作完整AdamW更新。每个公共support梯度先单独归一化，再按任务family取均值；候选feature归一化后与之做点积，先平均checkpoint，再在family间取最大。40条公开support action不含评测query答案。全局选择先按完整messages内容精确去重，保留首代表索引，选256种内容，再三次shuffle共768次展示；matched版本保持reference每个task/action位置与不同内容配额。最终学生从原始base重新开始，不能继承打分warmup权重。负控核对checkpoint/family运算顺序、support均值不再归一化、重复行不增加random抽样概率、得分并列按首代表索引、每个shuffle pass访问全部选中内容、matched仍可选择reference以外的同stratum内容、跨stratum重复内容拒绝、NaN/负二阶矩/中间溢出拒绝。seed只改变合成输入与调度，不是独立训练。",
+          "papers": [
+            "agent-research:acting-to-learning",
+            "agent-research:ace-data"
+          ]
+        },
+        {
+          "title": "R²：把视觉反馈依赖变成正确轨迹内的效率优势",
+          "body": "VFD仅替换当前调用的视觉反馈，保留原图、其他历史与待评分推理tokens；实际反馈的平均log概率减去3个同尺寸不重叠随机crop的平均。前10%训练步按来源、只用reasoning windows估计30%分位阈值，之后冻结；直接答案window可在监督时用，但不参与初始化。每轨迹均匀抽一个eligible call，以M×冗余指示量估计全部eligible冗余数，完整记录但score缺失时指示量设1，空eligible集为0。Tool-Independent另加0.5×全部调用数。效率优势只在同题答对轨迹内居中、除固定调用预算4，再以0.2加到outcome优势；不能把失败少调用当高效率成功。负控包括actual与alternative相同时VFD为0、阈值不吸收答案window、来源缺warmup拒绝、d恰好等于阈值不判冗余、None与空eligible区分、抽一个调用而非逐个累加、失败轨迹效率项严格为0、correct集合内效率项和为0、全错/单个correct/相同cost时效率为0、负优势裁剪方向、padding无贡献与中间溢出拒绝。三seed的数值控制不支持工具效率或准确率提升结论。",
+          "papers": [
+            "agent-research:r2-tool-redundancy",
+            "agent-research:adastep"
           ]
         }
       ],
@@ -3534,9 +3617,29 @@
             "agent-research:ace-rl",
             "agent-research:gigpo"
           ]
+        },
+        {
+          "id": "cross-nov23-acting-to-learning",
+          "question": "与ACE Lens相比，本篇额外控制了什么？",
+          "answer": "ACE组织数据可信度、复杂度和覆盖；本篇把排序规则与选择空间分开，global random和global high-NLL也可自由改变coverage，避免把自由度差异误算成gradient优势。",
+          "example": "教学例：如果gradient可跨任务挑256条，random也应能跨任务挑256条；不能只给random固定旧任务配额。",
+          "papers": [
+            "agent-research:acting-to-learning",
+            "agent-research:ace-data"
+          ]
+        },
+        {
+          "id": "cross-nov23-r2-tool-redundancy",
+          "question": "R²与AdaStep都是credit方法，能交换统计量吗？",
+          "answer": "不能。AdaStep从同状态动作组的回报方差估计局部信用可靠性；R²用当前视觉反馈的同文本似然差估计冗余成本，再只在correct集合内比较。它们条件信息与归一化对象不同。",
+          "example": "教学例：重复crop可能VFD接近0，但动作后环境回报很稳定；稳定不等于观察不冗余。",
+          "papers": [
+            "agent-research:r2-tool-redundancy",
+            "agent-research:adastep"
+          ]
         }
       ],
-      "updated": "2026-11-15",
+      "updated": "2026-11-23",
       "reviewed_papers": [
         "agent-research:frontier-opd",
         "agent-research:asteroid",
@@ -3592,7 +3695,9 @@
         "agent-research:search-r1",
         "agent-research:loop",
         "agent-research:instruct-to-act",
-        "agent-research:ace-rl"
+        "agent-research:ace-rl",
+        "agent-research:acting-to-learning",
+        "agent-research:r2-tool-redundancy"
       ],
       "updates": [
         {
@@ -3732,6 +3837,30 @@
             "agent-research:ace-rl": "7989ff55c2e398e5021a7eefab63a136188cc84c6139a3ab56cdbdf22c8223ed",
             "agent-research:gigpo": "04e545cea1c7a5927b091ffd5108a2d424a1af6d1d473e9ecf5a3c0af5894075"
           }
+        },
+        {
+          "date": "2026-11-23",
+          "papers": [
+            "agent-research:acting-to-learning",
+            "agent-research:ace-data"
+          ],
+          "source_revisions": {
+            "agent-research:acting-to-learning": "b4facbf5a94d973a84390bb3cdff04b8d454e177645cfae4dddfc3f754e55414",
+            "agent-research:ace-data": "b040c674fb72f33298e61d32031fab4195c59d176dda775b8b878cd21d182b5a"
+          },
+          "summary": "本地独立实现NumPy float64公式核：显式梯度/冻结moments转feature、逐support向量归一化、checkpoint平均后family最大值、按完整字符串精确去重、全局top/random和三轮调度、按reference逐位置匹配stratum并保持不同内容配额的选择。零范数方向原文未定义，明确拒绝而不补造0分；feature中间溢出也拒绝。测试用显式合成梯度与历史action字符串，不把梯度相似度换成词项相似度。没有自动抽LoRA梯度、warmup训练、ALFWorld、Qwen checkpoint、部署executor、学生SFT或能力比较；调用方必须保证support来自公开训练侧而非query答案。 完整实验高成本不复现，审查DONE。"
+        },
+        {
+          "date": "2026-11-23",
+          "papers": [
+            "agent-research:r2-tool-redundancy",
+            "agent-research:adastep"
+          ],
+          "source_revisions": {
+            "agent-research:r2-tool-redundancy": "d754223f4b1880edaf1ef42a819661c828054b444bd408b2ea83d0527a937fe9",
+            "agent-research:adastep": "ecd6aa135b7917da58b2a2462f158635f1f5e6930f9b389d9db69e00252ba093"
+          },
+          "summary": "CPU NumPy组件只执行同文本token log概率的VFD差、reasoning-only分来源冻结阈值、单eligible-call无偏冗余估计和类别base cost、sample-SD outcome advantage、仅正确轨迹效率项及clipped GRPO标量目标。分位数采用线性插值、目标按每轨迹有效token均值再组平均，是公开的数值约定；不宣称与未公开trainer逐位相等。调用方必须已保证同一推理window、有效crop与完整记录；数组不能证明这些语义。没有VLM、crop构造/评分、CAT rollout标注、图像数据、policy反传/更新或视觉Agent评测；数值差分只检验标量目标导数，不是训练。没有gold答案/计划接口，reward为外部trainer/evaluator给定的0/1标量。 完整实验高成本不复现，审查DONE。"
         }
       ]
     },

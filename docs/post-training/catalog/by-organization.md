@@ -565,6 +565,7 @@
 
 ## The Hong Kong University of Science and Technology (Guangzhou)
 
+- 2026-11-20 · 一作：Ruijia Yang · [CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency](../2611.27119-ctrl/README.md)（`ctrl`）：CTRL让每张GPU同时驻留learner rank和持续rollout shard，在CUDA MPS下共享SM。为腾出显存，优化器和immutable policy版本保存在host，learner仅流式装入有限层窗口。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-11-16 · 一作：Zirui Pang · [LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation](../2611.20674-leaf-opd/README.md)（`leaf-opd`）：教师独立解码的首token可能强烈拒答，但在学生已生成事实前缀上，后续token抑制可能迅速消失；需要按同一学生轨迹测监督强度和持续性。
 
 ## The Ohio State University
@@ -679,6 +680,10 @@
 
 - 2026-09-29 · 一作：Hongyang Li · [Unlocking the Critic: Reward-Free Policy Optimization for LLM Post-Training](../2609.37119-rfpo/README.md)（`rfpo`）：冻结已校准 critic，把前缀成功概率同时作为 rollout reward、GAE baseline 和未完成轨迹预报，并在去长度偏置后二值化，降低策略利用 critic 偏差的风险。
 
+## University of Maine at Presque Isle
+
+- 2026-11-20 · 一作：Zhe Dong · [How Far Does Lossless Re-tokenization Move an RLVR Update?](../2611.27083-retokenization-update/README.md)（`retokenization-update`）：研究对象不是奖励变化，而是同一rollout的token ID变化。保留文本、reward、advantage和checkpoint，仅将可拆token替换成两个拼回原文本的词表项。
+
 ## University of Maryland
 
 - 2026-06-02 · 一作：Rishanth Rajendhran · [POLARIS: Guiding Small Models to Write Long Stories](../2606.04095-polaris-hri/README.md)（`polaris-hri`）：核固定v2 Section3.2 Eq5和作者fixed verl core：policy-only mean/sample-std，Aref=0.4 min(1,t/15)(rref−μ)/(σ+1e-6)，step0为0；K5+1，clip0.2、KL关闭，token-mean。相同external rubric给policy和ref评分。
@@ -720,6 +725,7 @@
 
 ## University of Science and Technology of China
 
+- 2026-11-20 · 一作：Yuyang Zhang · [Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation](../2611.27131-dwe/README.md)（`dwe`）：DWE不改变蒸馏教师、采样者或KL目标，而是在相同输入和参数下估计输出头的完整梯度。softmax的logit梯度和为零，正负部分各有质量m；分别归一化后配成等量异号的坐标对。
 - 2026-09-28 · 一作：Qiyong Zhong · [MAS-OPD: On-Policy Distillation for Multi-Agent Systems](../2609.34234-mas-opd/README.md)（`mas-opd`）：以目标角色与非目标角色 teacher 信号差构造 role advantage，并把协作冲突归因只提供给 teacher 形成 privileged coordination supervision。
 - 2026-08-04 · 一作：Ranxu Zhang · [ADRS](../2608.03223-adrs/README.md)（`adrs`）：privileged teacher 的高置信并不必然与真实任务回报一致。ADRS 在每个交互 step 内标准化教师分数，以教师置信与 realized return 的相关性形成 TVA gate，再把 gated token signal 写入原生 reward-to-advantage 路径，推理时无需技能。
 - 2026-07-11 · 一作：Kexin Huang · [ARMOR](../2607.10481-armor/README.md)（`armor`）：单纯 reverse-KL 只能被动惩罚偏离，无法保证 reference 中已有有效解法仍被覆盖。ARMOR 从冻结 reference 主动采样 anchor trajectories，与当前策略 rollout 混合优化，用数据而不是辅助 KL 项稳定长程 RL。

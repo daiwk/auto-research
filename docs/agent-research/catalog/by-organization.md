@@ -139,6 +139,10 @@
 
 - 2026-07-30 · 一作：MaoXun Huang · [MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems](../2607.28527-manta/README.md)（`manta`）：根据任务先验初始化通信拓扑，运行中监控协作 trace，并有界调整角色、边、顺序、可见性和验证路径。
 
+## Country Garden Services AI Lab / Omni AI
+
+- 2026-11-20 · 一作：Yaoyuan Yan · [From Acting to Learning: Experience Selection toward Continually Learning Agents](../2611.27159-acting-to-learning/README.md)（`acting-to-learning`）：论文把成功交互后的经验选择单独隔离：历史池先固定，选择规则决定训练哪些action记录，所有学生使用同一训练预算与部署executor。它不是一个新通用梯度影响公式；打分沿用LESS式优化器感知梯度，贡献是Agent学习中的严格对照，尤其把排序规则和可选择的覆盖空间交叉。
+
 ## Cribl AI
 
 - 2026-10-08 · 一作：Babak Barazandeh · [OnTrack: Real-Time Monitoring and Intervention in LLM Agent Trajectories via Streaming Structure-Aware Optimal Transport](../2610.12375-ontrack/README.md)（`ontrack`）：Agent 最终失败时，单个答案分数解释不了中间发生了什么。OnTrack 把事件组织成带依赖边的图，将当前执行前缀和成功参考轨迹作非平衡结构化对齐；无参考时则明确退化为循环、重试和信息停滞检测。
@@ -720,6 +724,7 @@
 
 ## Tsinghua University
 
+- 2026-11-20 · 一作：Yilin Zhao · [$R^2$: Recognizing and Reducing Redundant Visual Tool Use](../2611.27070-r2-tool-redundancy/README.md)（`r2-tool-redundancy`）：R²把三个问题分开：CAT描述题目是否可能从工具获益；VFD描述一次返回观察对后续同一段推理文本提供多少额外似然支持；RA-GRPO在答对的轨迹之间比较工具效率，而不是奖励所有少调用的轨迹。CAT标签来自训练侧tool/no-tool rollouts的多次正确性和实际调用，不是根据问题长度或关键词猜测；VFD也不是gold-answer概率或“这次工具有用”的因果证明。
 - 2026-10-23 · 一作：Zheng Jiang · [Frontier-OPD: Discovering the Edge of Agent Capability and Teaching Agents to Go Beyond](../2610.32802-frontier-opd/README.md)（`frontier-opd`）：同一个环境观测可能经不同历史反复到达，直接按访问次数或 token 数平均会让循环轨迹主导教师介入判断。Frontier-OPD 先在轨迹内、再在轨迹间聚合有符号师生分歧，对不同状态选原历史代表；教师桥与学生续跑须通过同长窗口比较后才接纳，状态共享不能替代真实历史或任务成功评测。
 - 2026-10-23 · 一作：Yuhua Jiang · [HarnessMM: Recursive Self-Improvement for Harness Token Efficiency](../2610.32813-harnessmm/README.md)（`harnessmm`）：Agent 在得到工具反馈后经常再调用模型，即使上一轮推理已确定下一步命令。HarnessMM 的 EDG 只保存先前确实完成语义解析的动作及完整字面参数；GDR 检查前置任务完成、public guard 真和参数闭合，再选一个合格节点或 abstain。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-10-20 · 一作：Tianyu Fu · [Cache Engineering for Agents](../2610.28577-cache-engineering/README.md)（`cache-engineering`）：删改早期对话文本会使后续KV失效，重prefill又产生费用。作者保留逻辑文本，直接drop旧工具响应的KV，必要时repos重设保留键的位置；缓存状态取决于操作发生的历史，不能只根据最终token前缀判断是否可复用。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -926,6 +931,10 @@
 - 2026-09-15 · 一作：Bofan Chen · [Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents](../2609.17653-evoskill-gui/README.md)（`evoskill-gui`）：把 GUI 技能拆成可编辑组件，执行失败后由信息隔离 critic 反思，并只修改责任组件，验证后的技能可跨任务复用。
 - 2026-07-29 · 一作：Zhiyuan Yao · [SkillRise](../2607.26784-skillrise/README.md)（`skillrise`）：标准 Agent RL 把任务视为独立 episode，外部 skill bank 又把抽取、检索和执行缠在一起。SkillRise 把相关但不同的任务排成由易到难的序列，让同一 policy 交替求解当前任务与整理一个直接传给下一任务的 skill document；求解阶段由当前结果监督，整理阶段由折扣后的下游任务结果监督。
 - 2023-03-30 · 一作：Yongliang Shen · [HuggingGPT](../2303.17580-hugginggpt/README.md)（`hugginggpt`）：单个 LLM 难以覆盖视觉、语音和其他专业任务，而模型社区已有大量专家。HuggingGPT 让 ChatGPT 充当控制器：先把请求拆成带依赖的子任务，再按 Hugging Face 模型描述匹配专家，按拓扑顺序执行，最后把多模型输出组织为用户答案。
+
+## Zhejiang University / Alibaba Group / Shanghai Jiao Tong University
+
+- 2026-11-20 · 一作：Chuan Xiao · [CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?](../2611.27116-coevobench/README.md)（`coevobench`）：CoEvoBench不是另一个固定自进化算法，而是测LLM researcher能否自主驱动模型权重和harness联合开发的benchmark。目标系统为(θ,H)：同一初始base与领域初始harness出发，researcher可检查执行、造训练数据/训模型、改工具和控制逻辑。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ## not listed in paper
 

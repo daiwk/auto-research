@@ -7,7 +7,7 @@ hide:
 
 # 能力证据：评测采样、读出与可靠性
 
-[基础模型](index.md) / 108 个问题 · 27 篇论文
+[基础模型](index.md) / 116 个问题 · 29 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">108 个问题 · 27 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">116 个问题 · 29 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:disco" data-paper-title="Reliable Behavior Discovery via False Discovery Rate Control" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Reliable Behavior Discovery via False Discovery Rate Control 基础模型 Google DeepMind 2026-11-20 行为发现寻找的是可重复的输入—输出规律，而不是几条显眼失败案例。不断挑选假设、查询模型、观察结果再换假设会产生选择偏差；即使每个单项检验都控制错误，也不能直接保证最终发现集合的FDR。DISCO通过冻结e-process和限制选择器只能看粗分箱状态，允许最终以实际测试假设数运行eBH，而不总以保守的预设上界加权。每次为一个假设生成独立查询批，取得有效p值并更新其e-process。达到或累计轮就冻结，不能再查询。二分箱版本只把低于阈值的A、高于或等于阈值的H及轮数历史交给选择器； 完整实验：成本过高，不复现（审查 DONE）。诊断只使用明确给定的合成p值流与已知null分布，检查冻结、预算、接口隔离、边界、无条件与条件证书。L1统计核心组件，diagnostic only；不是LLM行为发现能力或完整论文复现。纯CPU，不接Evolve晋级。完整实验：成本过高，不复现（审查 DONE）。实现log_p_to_e、Eq.2 step-up、Disco的冻结与粗状态选择接口、Eq.4小型有限null分布的路径枚举，以及Theorem 1/2的未boosted二分箱证书。路径枚举是对所给有限分布的穷举，使用浮点求和；不是未经置信校正的Monte Carlo估计。  评测与可靠性 行为发现与错误发现率控制 基础模型 能力证据：评测采样、读出与可靠性 DISCO为什么不能把几条明显失败案例直接算成可靠的行为发现？ 行为发现声称的是可重复的输入—输出规律，不是存在一个失败案例。FDR约束最终被拒绝假设集合中的误发现比例的期望；挑出最惊讶的例子没有给出这个多重检验保证。 教学例：发现集合有10条规律，其中2条其实不存在，则该次FDP为2/10；FDR还要对发现过程的重复运行取期望，不能把这一个比例当已知真值。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<span id="paper-foundation-models-disco-c89868ac" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-2ae92d64ffbb2471">DISCO为什么不能把几条明显失败案例直接算成可靠的行为发现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adisco">Reliable Behavior Discovery via False Discovery Rate Control</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>行为发现声称的是可重复的输入—输出规律，不是存在一个失败案例。FDR约束最终被拒绝假设集合中的误发现比例的期望；挑出最惊讶的例子没有给出这个多重检验保证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：发现集合有10条规律，其中2条其实不存在，则该次FDP为2/10；FDR还要对发现过程的重复运行取期望，不能把这一个比例当已知真值。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27104v1">原论文</a> · <a href="../../../../foundation-models/2611.27104-disco/">实现解读</a> · <a href="#qa-2ae92d64ffbb2471">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:disco" data-paper-title="Reliable Behavior Discovery via False Discovery Rate Control" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Reliable Behavior Discovery via False Discovery Rate Control 基础模型 Google DeepMind 2026-11-20 行为发现寻找的是可重复的输入—输出规律，而不是几条显眼失败案例。不断挑选假设、查询模型、观察结果再换假设会产生选择偏差；即使每个单项检验都控制错误，也不能直接保证最终发现集合的FDR。DISCO通过冻结e-process和限制选择器只能看粗分箱状态，允许最终以实际测试假设数运行eBH，而不总以保守的预设上界加权。每次为一个假设生成独立查询批，取得有效p值并更新其e-process。达到或累计轮就冻结，不能再查询。二分箱版本只把低于阈值的A、高于或等于阈值的H及轮数历史交给选择器； 完整实验：成本过高，不复现（审查 DONE）。诊断只使用明确给定的合成p值流与已知null分布，检查冻结、预算、接口隔离、边界、无条件与条件证书。L1统计核心组件，diagnostic only；不是LLM行为发现能力或完整论文复现。纯CPU，不接Evolve晋级。完整实验：成本过高，不复现（审查 DONE）。实现log_p_to_e、Eq.2 step-up、Disco的冻结与粗状态选择接口、Eq.4小型有限null分布的路径枚举，以及Theorem 1/2的未boosted二分箱证书。路径枚举是对所给有限分布的穷举，使用浮点求和；不是未经置信校正的Monte Carlo估计。  评测与可靠性 行为发现与错误发现率控制 基础模型 能力证据：评测采样、读出与可靠性 为什么二分箱DISCO的假设选择器不能顺便看精确e值或原始模型输出？ 允许按实际K做最终eBH的论证需要分箱历史把某个null假设的财富过程与其余探索选择隔开。额外输出可能改变未来选题和假设池规模，破坏该论证；不能只保留冻结规则而偷偷开放精确证据。 教学例：e_max=50时，财富2和20都只显示A。同样轮数、同样A历史必须产生同一选择器视图；根据20比2更接近门槛而改选题，不属于这里的二分箱接口。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-e239af9cb12d934c">为什么二分箱DISCO的假设选择器不能顺便看精确e值或原始模型输出？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adisco">Reliable Behavior Discovery via False Discovery Rate Control</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>允许按实际K做最终eBH的论证需要分箱历史把某个null假设的财富过程与其余探索选择隔开。额外输出可能改变未来选题和假设池规模，破坏该论证；不能只保留冻结规则而偷偷开放精确证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：e_max=50时，财富2和20都只显示A。同样轮数、同样A历史必须产生同一选择器视图；根据20比2更接近门槛而改选题，不属于这里的二分箱接口。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27104v1">原论文</a> · <a href="../../../../foundation-models/2611.27104-disco/">实现解读</a> · <a href="#qa-e239af9cb12d934c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:disco" data-paper-title="Reliable Behavior Discovery via False Discovery Rate Control" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Reliable Behavior Discovery via False Discovery Rate Control 基础模型 Google DeepMind 2026-11-20 行为发现寻找的是可重复的输入—输出规律，而不是几条显眼失败案例。不断挑选假设、查询模型、观察结果再换假设会产生选择偏差；即使每个单项检验都控制错误，也不能直接保证最终发现集合的FDR。DISCO通过冻结e-process和限制选择器只能看粗分箱状态，允许最终以实际测试假设数运行eBH，而不总以保守的预设上界加权。每次为一个假设生成独立查询批，取得有效p值并更新其e-process。达到或累计轮就冻结，不能再查询。二分箱版本只把低于阈值的A、高于或等于阈值的H及轮数历史交给选择器； 完整实验：成本过高，不复现（审查 DONE）。诊断只使用明确给定的合成p值流与已知null分布，检查冻结、预算、接口隔离、边界、无条件与条件证书。L1统计核心组件，diagnostic only；不是LLM行为发现能力或完整论文复现。纯CPU，不接Evolve晋级。完整实验：成本过高，不复现（审查 DONE）。实现log_p_to_e、Eq.2 step-up、Disco的冻结与粗状态选择接口、Eq.4小型有限null分布的路径枚举，以及Theorem 1/2的未boosted二分箱证书。路径枚举是对所给有限分布的穷举，使用浮点求和；不是未经置信校正的Monte Carlo估计。  评测与可靠性 行为发现与错误发现率控制 基础模型 能力证据：评测采样、读出与可靠性 DISCO和e-RWSC都累积e-process，为什么不能共用一种成功证书？ e-RWSC认证同一题某答案在固定政策iid采样中的多数概率，不保证答案正确。DISCO控制多个行为假设最终集合的误发现比例，并有自适应假设池的分箱、冻结和校正约束。认证对象与错误定义不同。 教学例：某LLM每次都答错同一个答案，e-RWSC仍可能很快发多数证书；这不证明十个新提出的行为规律有九个真的存在，也不能代替DISCO的FDR证书。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-afa1eb041ec0bd40">DISCO和e-RWSC都累积e-process，为什么不能共用一种成功证书？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adisco">Reliable Behavior Discovery via False Discovery Rate Control</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>e-RWSC认证同一题某答案在固定政策iid采样中的多数概率，不保证答案正确。DISCO控制多个行为假设最终集合的误发现比例，并有自适应假设池的分箱、冻结和校正约束。认证对象与错误定义不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某LLM每次都答错同一个答案，e-RWSC仍可能很快发多数证书；这不证明十个新提出的行为规律有九个真的存在，也不能代替DISCO的FDR证书。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27104v1">原论文</a> · <a href="../../../../foundation-models/2611.27104-disco/">实现解读</a> · <a href="#qa-afa1eb041ec0bd40">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:disco" data-paper-title="Reliable Behavior Discovery via False Discovery Rate Control" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Reliable Behavior Discovery via False Discovery Rate Control 基础模型 Google DeepMind 2026-11-20 行为发现寻找的是可重复的输入—输出规律，而不是几条显眼失败案例。不断挑选假设、查询模型、观察结果再换假设会产生选择偏差；即使每个单项检验都控制错误，也不能直接保证最终发现集合的FDR。DISCO通过冻结e-process和限制选择器只能看粗分箱状态，允许最终以实际测试假设数运行eBH，而不总以保守的预设上界加权。每次为一个假设生成独立查询批，取得有效p值并更新其e-process。达到或累计轮就冻结，不能再查询。二分箱版本只把低于阈值的A、高于或等于阈值的H及轮数历史交给选择器； 完整实验：成本过高，不复现（审查 DONE）。诊断只使用明确给定的合成p值流与已知null分布，检查冻结、预算、接口隔离、边界、无条件与条件证书。L1统计核心组件，diagnostic only；不是LLM行为发现能力或完整论文复现。纯CPU，不接Evolve晋级。完整实验：成本过高，不复现（审查 DONE）。实现log_p_to_e、Eq.2 step-up、Disco的冻结与粗状态选择接口、Eq.4小型有限null分布的路径枚举，以及Theorem 1/2的未boosted二分箱证书。路径枚举是对所给有限分布的穷举，使用浮点求和；不是未经置信校正的Monte Carlo估计。  评测与可靠性 行为发现与错误发现率控制 基础模型 能力证据：评测采样、读出与可靠性 实现时怎样避免把DISCO的post-hoc证书误报成无条件FDR保证？ 分开输出epsilon、delta与条件标志。Theorem2用alpha/epsilon选择最终level，约束没有null退出时的条件FDR；delta描述该条件失败风险。不能套用Theorem1的(alpha-delta)/epsilon公式，也不能把未经误差校正的Monte Carlo均值当严格null上界。 教学例：alpha=0.1、epsilon=0.5、delta=0.02时，pre-hoc校正level为0.16；post-hoc的level为0.2，但必须保留条件限定和0.02风险项。两者数值相近不代表保证相同。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-5e5e9d4f92845f58">实现时怎样避免把DISCO的post-hoc证书误报成无条件FDR保证？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adisco">Reliable Behavior Discovery via False Discovery Rate Control</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>分开输出epsilon、delta与条件标志。Theorem2用alpha/epsilon选择最终level，约束没有null退出时的条件FDR；delta描述该条件失败风险。不能套用Theorem1的(alpha-delta)/epsilon公式，也不能把未经误差校正的Monte Carlo均值当严格null上界。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：alpha=0.1、epsilon=0.5、delta=0.02时，pre-hoc校正level为0.16；post-hoc的level为0.2，但必须保留条件限定和0.02风险项。两者数值相近不代表保证相同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27104v1">原论文</a> · <a href="../../../../foundation-models/2611.27104-disco/">实现解读</a> · <a href="#qa-5e5e9d4f92845f58">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:e-rwsc" data-paper-title="Sequential Anytime Valid Tests for Efficient Inference-Time Alignment" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Sequential Anytime Valid Tests for Efficient Inference-Time Alignment 基础模型 Indian Institute of Technology Kanpur 2026-11-19 固定N的Best-of-N对容易题也花满预算；只追踪当前领先答案的SPRT会反复换假设，不能直接沿用Wald错误保证。e-RWSC按答案分别保留e-process，以过去响应的reward-weighted self-consistency质量和首现后的匹配次数构造可预测Kelly下注。新答案第一次出现只登记为单位资本，不把这个由定义强制成功的样本计作证据。所有旧答案的下注先于下一条响应/奖励计算，领先者改变也不重置资本。答案按首现rank分配可求和权重1/[j(j+1)]； 完整实验成本过高，不复现（审查 DONE）。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU，无CUDA宣传路径；不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）。纯stdlib、CPU-only的RWSC聚合、前缀可预测下注、逐答案log资本与首现权重、首次出现跳过、认证终止和显式未认证预算回退。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。  evaluation-and-evidence CPU机制组件 基础模型 能力证据：评测采样、读出与可靠性 e-RWSC证书是在证明答案正确吗？ 不是。它在固定政策iid抽样假设下控制误认证非多数答案的概率，认证的是政策分布中的占优概率，而不读取或判断真实答案。 教学例：假设政策几乎总把2+2回答成5，5也可能很快获得多数证书；这不让5变成正确答案。 2026-11-21">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
 <span id="paper-foundation-models-e-rwsc-c9c79f68" class="ar-learning-paper-anchor"></span>
@@ -769,6 +822,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>[A,A,B,...]虽有八个条目，实际不同状态不足八个，应被拒绝。</p>
 <p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.30788v1">原论文</a> · <a href="../../../../foundation-models/2605.30788-xlgobench/">实现解读</a> · <a href="#qa-7c3c5ef680fb6a56">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:spot-bench" data-paper-title="Don&#x27;t Pause! Every prediction matters in a streaming video" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Don&#x27;t Pause! Every prediction matters in a streaming video 基础模型 National University of Singapore 2026-04-27 SPOT-Bench针对持续视频流：每个输出都会影响分数，不只在暂停询问时读一个答案。人工可接受时间窗是gold slot，窗内timeliness为1，窗外采用早侧较宽、晚侧较窄的Gaussian尾。语义正确且时间有效的响应按时间顺序被开放slot吸收，每slot最多K次并只保留最好timeliness；过量或不匹配输出为FP，空slot为FN。T-F1以加权TP衡量及时性、覆盖和过度回应。Ctrl-SPOT则是另一个完整流式控制器，组合持久query状态、长短期KV、检索与dead-time总结； 成本过高，不复现（审查 DONE）；三seed CPU产物见机制诊断。L1机制/计分组件，diagnostic only，不是完整论文能力复现。高成本完整实验不复现（审查 DONE），不接Evolve晋级。纯CPU、stdlib的非对称timeliness、按原时间索引语义矩阵、开放slot逐时吸收与K关闭、加权P/R/F1。合成trace负控包括错误语义、空输出、7次重复超过K=5、多slot重叠和早晚惩罚；完美合成trace得1只是定义检查，不是任何Agent能力。无Ctrl-SPOT的持久query/CPU-GPU KV/检索/总结，无视频、LLM或付费judge调用，不接Evolve晋级。  多模态基础模型 流式视频评测 基础模型 能力证据：评测采样、读出与可靠性 为何暂停后答对不等于流式表现好？ 暂停协议不测空闲时间乱答、重复回应或延迟。SPOT让全程每次输出影响及时性与FP/FN。 教学例：事件发生时说对一次，但每秒又重复十次；暂停准确率仍可满分，T-F1会惩罚K预算外重复。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<span id="paper-foundation-models-spot-bench-58585e74" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-563ec500a5fba7b3">为何暂停后答对不等于流式表现好？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aspot-bench">Don&#x27;t Pause! Every prediction matters in a streaming video</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>暂停协议不测空闲时间乱答、重复回应或延迟。SPOT让全程每次输出影响及时性与FP/FN。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：事件发生时说对一次，但每秒又重复十次；暂停准确率仍可满分，T-F1会惩罚K预算外重复。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.24317v2">原论文</a> · <a href="../../../../foundation-models/2604.24317-spot-bench/">实现解读</a> · <a href="#qa-563ec500a5fba7b3">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:spot-bench" data-paper-title="Don&#x27;t Pause! Every prediction matters in a streaming video" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Don&#x27;t Pause! Every prediction matters in a streaming video 基础模型 National University of Singapore 2026-04-27 SPOT-Bench针对持续视频流：每个输出都会影响分数，不只在暂停询问时读一个答案。人工可接受时间窗是gold slot，窗内timeliness为1，窗外采用早侧较宽、晚侧较窄的Gaussian尾。语义正确且时间有效的响应按时间顺序被开放slot吸收，每slot最多K次并只保留最好timeliness；过量或不匹配输出为FP，空slot为FN。T-F1以加权TP衡量及时性、覆盖和过度回应。Ctrl-SPOT则是另一个完整流式控制器，组合持久query状态、长短期KV、检索与dead-time总结； 成本过高，不复现（审查 DONE）；三seed CPU产物见机制诊断。L1机制/计分组件，diagnostic only，不是完整论文能力复现。高成本完整实验不复现（审查 DONE），不接Evolve晋级。纯CPU、stdlib的非对称timeliness、按原时间索引语义矩阵、开放slot逐时吸收与K关闭、加权P/R/F1。合成trace负控包括错误语义、空输出、7次重复超过K=5、多slot重叠和早晚惩罚；完美合成trace得1只是定义检查，不是任何Agent能力。无Ctrl-SPOT的持久query/CPU-GPU KV/检索/总结，无视频、LLM或付费judge调用，不接Evolve晋级。  多模态基础模型 流式视频评测 基础模型 能力证据：评测采样、读出与可靠性 K=5代表选全流最好的五个答案吗？ 不是。每slot依时间先后吸收前5个有效语义匹配，再关闭并只保留其中最好时间分；之后不能用未来答案追补。 教学例：K=1时略早的首个正确响应已关闭slot，后来完美定时响应会成为FP；K=2则能改善该slot的最佳分。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1b22a3f99bd6001c">K=5代表选全流最好的五个答案吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aspot-bench">Don&#x27;t Pause! Every prediction matters in a streaming video</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。每slot依时间先后吸收前5个有效语义匹配，再关闭并只保留其中最好时间分；之后不能用未来答案追补。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：K=1时略早的首个正确响应已关闭slot，后来完美定时响应会成为FP；K=2则能改善该slot的最佳分。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.24317v2">原论文</a> · <a href="../../../../foundation-models/2604.24317-spot-bench/">实现解读</a> · <a href="#qa-1b22a3f99bd6001c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:spot-bench" data-paper-title="Don&#x27;t Pause! Every prediction matters in a streaming video" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Don&#x27;t Pause! Every prediction matters in a streaming video 基础模型 National University of Singapore 2026-04-27 SPOT-Bench针对持续视频流：每个输出都会影响分数，不只在暂停询问时读一个答案。人工可接受时间窗是gold slot，窗内timeliness为1，窗外采用早侧较宽、晚侧较窄的Gaussian尾。语义正确且时间有效的响应按时间顺序被开放slot吸收，每slot最多K次并只保留最好timeliness；过量或不匹配输出为FP，空slot为FN。T-F1以加权TP衡量及时性、覆盖和过度回应。Ctrl-SPOT则是另一个完整流式控制器，组合持久query状态、长短期KV、检索与dead-time总结； 成本过高，不复现（审查 DONE）；三seed CPU产物见机制诊断。L1机制/计分组件，diagnostic only，不是完整论文能力复现。高成本完整实验不复现（审查 DONE），不接Evolve晋级。纯CPU、stdlib的非对称timeliness、按原时间索引语义矩阵、开放slot逐时吸收与K关闭、加权P/R/F1。合成trace负控包括错误语义、空输出、7次重复超过K=5、多slot重叠和早晚惩罚；完美合成trace得1只是定义检查，不是任何Agent能力。无Ctrl-SPOT的持久query/CPU-GPU KV/检索/总结，无视频、LLM或付费judge调用，不接Evolve晋级。  多模态基础模型 流式视频评测 基础模型 能力证据：评测采样、读出与可靠性 T-F1=1是否像e-RWSC证书一样有统计保证？ 不是。T-F1只是给定trace/标注/语义匹配的离线分数。e-RWSC也只在固定政策iid假设下证明多数占优，不证明真实正确。 教学例：手工给一个正确时刻和True语义标签就可得1；这没有执行任何视觉模型，也不是Agent能力。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-69c8f9b6df3b844b">T-F1=1是否像e-RWSC证书一样有统计保证？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aspot-bench">Don&#x27;t Pause! Every prediction matters in a streaming video</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。T-F1只是给定trace/标注/语义匹配的离线分数。e-RWSC也只在固定政策iid假设下证明多数占优，不证明真实正确。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：手工给一个正确时刻和True语义标签就可得1；这没有执行任何视觉模型，也不是Agent能力。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.24317v2">原论文</a> · <a href="../../../../foundation-models/2604.24317-spot-bench/">实现解读</a> · <a href="#qa-69c8f9b6df3b844b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:spot-bench" data-paper-title="Don&#x27;t Pause! Every prediction matters in a streaming video" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Don&#x27;t Pause! Every prediction matters in a streaming video 基础模型 National University of Singapore 2026-04-27 SPOT-Bench针对持续视频流：每个输出都会影响分数，不只在暂停询问时读一个答案。人工可接受时间窗是gold slot，窗内timeliness为1，窗外采用早侧较宽、晚侧较窄的Gaussian尾。语义正确且时间有效的响应按时间顺序被开放slot吸收，每slot最多K次并只保留最好timeliness；过量或不匹配输出为FP，空slot为FN。T-F1以加权TP衡量及时性、覆盖和过度回应。Ctrl-SPOT则是另一个完整流式控制器，组合持久query状态、长短期KV、检索与dead-time总结； 成本过高，不复现（审查 DONE）；三seed CPU产物见机制诊断。L1机制/计分组件，diagnostic only，不是完整论文能力复现。高成本完整实验不复现（审查 DONE），不接Evolve晋级。纯CPU、stdlib的非对称timeliness、按原时间索引语义矩阵、开放slot逐时吸收与K关闭、加权P/R/F1。合成trace负控包括错误语义、空输出、7次重复超过K=5、多slot重叠和早晚惩罚；完美合成trace得1只是定义检查，不是任何Agent能力。无Ctrl-SPOT的持久query/CPU-GPU KV/检索/总结，无视频、LLM或付费judge调用，不接Evolve晋级。  多模态基础模型 流式视频评测 基础模型 能力证据：评测采样、读出与可靠性 同一响应能否匹配多个slot，评测gold能给policy吗？ 本地按固定v2 Algorithm1及作者代码允许多个开放slot吸收同一响应，不用口述closest规则替换。gold与semantic矩阵只给离线scorer，不能回传被评估policy。 教学例：两个重叠slot都语义匹配时，该响应可令TP slots为2；这也说明slot数不能误当响应数。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-cf1581923486da19">同一响应能否匹配多个slot，评测gold能给policy吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aspot-bench">Don&#x27;t Pause! Every prediction matters in a streaming video</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>本地按固定v2 Algorithm1及作者代码允许多个开放slot吸收同一响应，不用口述closest规则替换。gold与semantic矩阵只给离线scorer，不能回传被评估policy。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个重叠slot都语义匹配时，该响应可令TP slots为2；这也说明slot数不能误当响应数。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.24317v2">原论文</a> · <a href="../../../../foundation-models/2604.24317-spot-bench/">实现解读</a> · <a href="#qa-cf1581923486da19">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:proeval" data-paper-title="ProEval: Proactive Failure Discovery and Efficient Performance Estimation for Generative AI Evaluation" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="ProEval: Proactive Failure Discovery and Efficient Performance Estimation for Generative AI Evaluation 基础模型 Google DeepMind 2026-04-25 昂贵模型或评审器不适合每次全量评分。ProEval复用历史模型之间逐题表现的相关性，形成目标模型的概率评分替身；目标分数只在对应题被选中后传入更新。主源：v1 §2.1–2.4 Eq2、5、7、10、12。 完整多基准/API实验成本过高，不复现（审查DONE）；仅4份历史评分数学夹具和4题目标分数；采集器只得到已查询分数，不接受整个隐藏目标数组。独立测试逐候选比较解析方差减少与真正增加一次观测后的方差之差。记录位于metrics/component-cpu-seed42.json，diagnostic_only=true，无真实LLM评价、正式能力或evolve晋级声明。  模型评测 历史分数迁移与主动采样 基础模型 能力证据：评测采样、读出与可靠性 ProEval 为什么复用历史逐题评分来减少新模型评价调用？ 历史模型之间的题目相关性可形成新目标模型的概率评分替身，有限查询逐步更新后验，再估计总体分数及不确定性。它节省实际评分，但估计并不等于已问过全部题。 示意：只查询几题后，用历史相关结构预测其它题，但仍需报告剩余方差。 2026-10-27">

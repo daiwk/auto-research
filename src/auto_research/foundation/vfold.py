@@ -144,7 +144,11 @@ def attach_finish_hooks(model):
     handles = []
     for layer in model.model.layers:
         def finished(module, args, kwargs, output):
-            cache = kwargs.get("past_key_values")
+            # Transformers attention renamed past_key_values to cache. Avoid
+            # truthiness: an empty cache is still the active cache object.
+            cache = kwargs.get("cache")
+            if cache is None:
+                cache = kwargs.get("past_key_values")
             if cache is not None and hasattr(cache, "finish_layer"):
                 cache.finish_layer(module.layer_idx)
         handles.append(layer.self_attn.register_forward_hook(finished, with_kwargs=True))

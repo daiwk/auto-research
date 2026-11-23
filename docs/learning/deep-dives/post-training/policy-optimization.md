@@ -7,7 +7,7 @@ hide:
 
 # 同一个GRPO名字之外：优势尺度、裁剪单位与训推失配
 
-[LLM 后训练](../index.md) · 更新 2026-11-21 · 65 篇主题资料 / 17 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-23 · 66 篇主题资料 / 18 篇重点对照
 
 GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。
 
@@ -42,6 +42,7 @@ GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比�
 | [Get Hint-Augmented GRPO Done Right Through Activation Steering](../../../post-training/2611.23124-ash-hint-steering/README.md) · [原始来源](https://arxiv.org/abs/2611.23124v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 只收录每步先训练steering再GRPO、hint/plain独立归一化advantage及最后一步不更新model的完整顺序；不把DPO公式当实现。 | GRPO消除critic但仍依赖同组相对reward；ASH在hint/plain双组上分别标准化，在GRPO之前另训activation steering并在最终步停model更新，防止返回stale向量。旧GRPO候选成功率不能当无hint生成能力。 |
 | [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](../../../post-training/2611.23750-led-edits/README.md) · [原始来源](https://arxiv.org/abs/2611.23750v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 最长公共子序列的固定block edit标签、每gap单次Ins、末尾gap不造锚点、mask阈值fallback、visible-token edit阈值以及同时编辑后截断/补mask。没有扩散模型forward、多阶段SFT或循环重采样decoder。 | ORL让扩散模型在自身诱导的残差状态上学习并需专用推理链；LED改变离散序列的长度对齐与edit监督，插删由LCS提供标签。二者都处理训练/推理状态差异，但残差分布不等于编辑动作，两个review边界也不能互相补成完整模型。 |
 | [Decision-Focused Reinforcement Learning for LLM Post-Training](../../../post-training/2611.25597-dfrl/README.md) · [原始来源](https://arxiv.org/abs/2611.25597v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 纯stdlib、CPU-only的实际成本RLOO优势、单批共享Bernoulli逆概率校正与lazy整批精确成本回调、显式warm-start边界、小规模枚举knapsack。诊断对三个可采样参数预测的真实可行决策计算观测成本，穷举两个独立categorical样本的score-gradient期望并与解析梯度比较；偏置cheap成本仅为明确的负控输入，不冒充训练好的估计器。没有LLM、token生成、参数JSON解析器、H&amp;M处理、Adam训练或能力评测；非Evolve算子。 | 已有RLOO实现把整条response作为action，用其他response的奖励均值作baseline，并可加KL shaping。DFRL在这里指定奖励来自下游真实决策成本；其文中RLOO分析抵消共同hindsight常数，reward correction用整批开关减少昂贵反馈调用。RLOO没有自动定义什么是业务regret；DFRL也没有使任意归一化、clipping或候选相关baseline都保持无偏。两者是目标/反馈与估计器两个维度，而非互斥算法。 |
+| [How Far Does Lossless Re-tokenization Move an RLVR Update?](../../../post-training/2611.27083-retokenization-update/README.md) · [原始来源](https://arxiv.org/abs/2611.27083v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 纯CPU prefix-softmax表从同一正的完整字符串分布按chain rule初始化，执行λ_t(e_token−π_row)完整梯度；检验未访问行、coarse未采样logit和字符串分布差异。独立实现c及ratio-of-means R，但不把两套独立tabular参数假装成共享LLM参数来计算R；R函数仅接受调用方已在同一参数空间测得的更新。包含均匀分布非零一致步的对称正控，避免过度概括定理。没有真实BPE、LoRA、AdamW、rollout或修复算法；这是一项机制诊断，不是后训练能力实现。 | DFRL改变奖励来自何种下游决策成本，RLOO消去同一实例共有常数；本篇固定奖励和优势，检查编码怎样改变score-gradient。baseline消去共同regret常数并不使不同token路径的Jacobian相同；不能把reward不变误写成更新不变。 |
 
 </div>
 
@@ -118,6 +119,12 @@ ORL让扩散模型在自身诱导的残差状态上学习并需专用推理链�
 已有RLOO实现把整条response作为action，用其他response的奖励均值作baseline，并可加KL shaping。DFRL在这里指定奖励来自下游真实决策成本；其文中RLOO分析抵消共同hindsight常数，reward correction用整批开关减少昂贵反馈调用。RLOO没有自动定义什么是业务regret；DFRL也没有使任意归一化、clipping或候选相关baseline都保持无偏。两者是目标/反馈与估计器两个维度，而非互斥算法。 不能把先求全批exact再屏蔽当作节省求解。本地I=0分支不调用lazy exact回调；I=1只调用一次整批supplier。p必须大于0且不大于1，p很小时方差和溢出风险需显式处理。
 
 对照来源：[dfrl](../../../post-training/2611.25597-dfrl/README.md) · [rloo](../../../post-training/2402.14740-rloo/README.md)
+
+### RLOO消去共同常数是否也消去重分词漂移？
+
+DFRL改变奖励来自何种下游决策成本，RLOO消去同一实例共有常数；本篇固定奖励和优势，检查编码怎样改变score-gradient。baseline消去共同regret常数并不使不同token路径的Jacobian相同；不能把reward不变误写成更新不变。 来源：§2 Eq.1–2、§4 Proposition1及AppendixE。采样ab时，coarse完整score步为λ(e_ab−π)；fine只更新root和a后继行，b行不动，所以fine的ba/bb比不变。若π(ba)≠π(bb)，共同更新仅能为零；均匀分布的对称例外不满足这个前提，不能宣称所有分布绝无非零一致步。论文AppendixE还明确区分仅更新sampled-logit的较弱模拟器，本地使用完整softmax梯度而非该替代。
+
+对照来源：[retokenization-update](../../../post-training/2611.27083-retokenization-update/README.md) · [dfrl](../../../post-training/2611.25597-dfrl/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -253,9 +260,23 @@ ORL让扩散模型在自身诱导的残差状态上学习并需专用推理链�
 
     对照来源：[dfrl](../../../post-training/2611.25597-dfrl/README.md) · [rloo](../../../post-training/2402.14740-rloo/README.md)
 
+### RLOO消去共同常数是否也消去重分词漂移？ {#cross-nov23-retokenization-update}
+
+??? note "展开答案与例子"
+
+    **答案：** 不会。DFRL的hindsight成本作为同实例常数在优势中抵消；重分词改变乘在优势上的score-gradient。奖励轴的抵消与参数化轴的不变性是两回事。
+
+    **教学例子：** 教学例：同一优势1分别乘两个不同方向的score向量，结果仍不同；给两者reward同时减10不会让向量重合。
+
+    对照来源：[retokenization-update](../../../post-training/2611.27083-retokenization-update/README.md) · [dfrl](../../../post-training/2611.25597-dfrl/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-23** · DFRL改变奖励来自何种下游决策成本，RLOO消去同一实例共有常数；本篇固定奖励和优势，检查编码怎样改变score-gradient。baseline消去共同regret常数并不使不同token路径的Jacobian相同；不能把reward不变误写成更新不变。 L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU、无CUDA路径，不作为Evolve晋级证据。 完整实验成本过高不复现，审查DONE。
+
+涉及：[retokenization-update](../../../post-training/2611.27083-retokenization-update/README.md) · [dfrl](../../../post-training/2611.25597-dfrl/README.md)
 
 **2026-11-21** · 纯stdlib、CPU-only的实际成本RLOO优势、单批共享Bernoulli逆概率校正与lazy整批精确成本回调、显式warm-start边界、小规模枚举knapsack。诊断对三个可采样参数预测的真实可行决策计算观测成本，穷举两个独立categorical样本的score-gradient期望并与解析梯度比较；偏置cheap成本仅为明确的负控输入，不冒充训练好的估计器。没有LLM、token生成、参数JSON解析器、H&M处理、Adam训练或能力评测；非Evolve算子。 完整实验成本过高不复现；组件不构成能力晋级。
 
@@ -305,7 +326,7 @@ ORL让扩散模型在自身诱导的残差状态上学习并需专用推理链�
 
 覆盖 54 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 65 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 66 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -374,6 +395,7 @@ ORL让扩散模型在自身诱导的残差状态上学习并需专用推理链�
 - [Get Hint-Augmented GRPO Done Right Through Activation Steering](../../../post-training/2611.23124-ash-hint-steering/README.md)
 - [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](../../../post-training/2611.23750-led-edits/README.md)
 - [Decision-Focused Reinforcement Learning for LLM Post-Training](../../../post-training/2611.25597-dfrl/README.md)
+- [How Far Does Lossless Re-tokenization Move an RLVR Update?](../../../post-training/2611.27083-retokenization-update/README.md)
 
 </details>
 

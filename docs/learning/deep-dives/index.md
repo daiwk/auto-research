@@ -11,7 +11,7 @@ hide:
 
 每个子主题维护一张卡片。新论文进入后，更新对应卡片的比较或结论，并记录这次变化；不必再从头读整批论文。
 
-31 张精读卡片 · 1265 篇主题资料 · 按主题折叠
+31 张精读卡片 · 1274 篇主题资料 · 按主题折叠
 
 <details class="ar-deep-shelf"><summary>搜广推 · 7 张</summary>
 <div class="ar-deep-grid">
@@ -67,7 +67,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/training-budget/">训练预算：改数据、改更新方向，还是改比较口径</a></h2>
 <p>同一预算内训练得更好，可能来自更合适的数据、逐样本处理、更有效更新或更低状态开销。DoReMi、Mixing Laws、DataOrchestra、Muon 和 ECO 改动不同环节；Muon Paired Budget 则提醒先冻结选参规则，再分别回答等数据和等时间问题。ProLand改变LoRA乘积空间的更新几何，GAVAGAI则给captioning增加显式词区域对齐目标，二者不能仅因都改善训练就混为一类。</p>
-<p class="ar-learning-topic-meta">14 篇重点对照 · 10 个跨论文问答 · 2026-11-18</p>
+<p class="ar-learning-topic-meta">15 篇重点对照 · 11 个跨论文问答 · 2026-11-23</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/compression-and-cache/">推理压缩先找瓶颈：权重、KV 内容与缓存层级</a></h2>
@@ -82,7 +82,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/evaluation-and-evidence/">能力证据：准确打分、节省观测与解释预测</a></h2>
 <p>先区分“正确答案怎样定义”“下一题测谁”“多个裁判怎样融合”和“预测怎样解释”。XLGoBench、ProEval、FUSE、TCAB 与 DetectorScope 分别改变这些环节；观测更少或解释可加，不等于被测能力本身更强。XLA from the Trenches还提醒：评分之前，编译后程序本身就可能静默偏离原始数值语义，不能把编译成功当作执行正确。</p>
-<p class="ar-learning-topic-meta">19 篇重点对照 · 17 个跨论文问答 · 2026-11-21</p>
+<p class="ar-learning-topic-meta">21 篇重点对照 · 19 个跨论文问答 · 2026-11-23</p>
 </article>
 </div></details>
 
@@ -134,7 +134,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="post-training/policy-optimization/">同一个GRPO名字之外：优势尺度、裁剪单位与训推失配</a></h2>
 <p>GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。</p>
-<p class="ar-learning-topic-meta">17 篇重点对照 · 13 个跨论文问答 · 2026-11-21</p>
+<p class="ar-learning-topic-meta">18 篇重点对照 · 14 个跨论文问答 · 2026-11-23</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="post-training/reward-and-credit/">奖励从哪里来，信用才该分到哪里</a></h2>
@@ -144,7 +144,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="post-training/student-trajectory-distillation/">轨迹蒸馏：采样者、提案与散度方向分开看</a></h2>
 <p>“on-policy”描述监督发生在哪些状态，FKL/RKL/JSD描述在这些状态怎样比较分布。GKD和MiniLLM建立这两个轴，DrOPD、AP-OPD再调整纠错位置或强度，Semi-OPD与学习信号诊断则提醒：离线复用和残余损失各有不同含义。 MPOPD再把采样者变成可学习proposal：几何混合是提案target，学生仍向教师做RKL，二者不能混成同一个蒸馏分布。</p>
-<p class="ar-learning-topic-meta">13 篇重点对照 · 10 个跨论文问答 · 2026-11-19</p>
+<p class="ar-learning-topic-meta">14 篇重点对照 · 11 个跨论文问答 · 2026-11-23</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="post-training/teacher-and-context/">教师更强仍可能教错：信息、兼容性与成功行为保护</a></h2>
@@ -154,7 +154,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="post-training/data-and-budget/">省掉哪一份算力：选问题、少生成、分枝与有条件重放</a></h2>
 <p>数据与预算方法改变的是训练链路的不同位置。课程重估当前难度，LESSER降低筛选特征成本，STOPD随机少生成并校正，BranchOPD增加关键分枝，Lightning缓存教师，TAR召回被压制的正确模式；少调用一次教师不等于整个训练更便宜。</p>
-<p class="ar-learning-topic-meta">10 篇重点对照 · 7 个跨论文问答 · 2026-11-20</p>
+<p class="ar-learning-topic-meta">11 篇重点对照 · 8 个跨论文问答 · 2026-11-23</p>
 </article>
 </div></details>
 
@@ -178,12 +178,12 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="agent-research/harness-and-self-improvement/">自改进先标对象：答案、经验、接口与系统版本</a></h2>
 <p>Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。</p>
-<p class="ar-learning-topic-meta">42 篇重点对照 · 34 个跨论文问答 · 2026-11-21</p>
+<p class="ar-learning-topic-meta">43 篇重点对照 · 35 个跨论文问答 · 2026-11-23</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/agent-policy-learning/">交互学习：统一轨迹之后，信用和教师信息怎样分配</a></h2>
 <p>Agent Lightning先把执行整理成可训练transition；GiGPO、AdaStep和DepGPO分别利用重复状态、回报方差与命令依赖分配信用；Frontier-OPD和ASTEROID则改变教师数据怎样进入学生学习。记录成轨迹只是入口，训练目标和可见信息才定义算法。</p>
-<p class="ar-learning-topic-meta">8 篇重点对照 · 5 个跨论文问答 · 2026-11-15</p>
+<p class="ar-learning-topic-meta">10 篇重点对照 · 7 个跨论文问答 · 2026-11-23</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/evaluation-and-reliability/">评测追问四件事：完成了、稳健吗、靠什么、花多少</a></h2>

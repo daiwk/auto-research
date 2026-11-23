@@ -8,6 +8,9 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [How Far Does Lossless Re-tokenization Move an RLVR Update?](<https://arxiv.org/abs/2611.27083v1>) | 2026-11-20 | [English](../../post-training/2611.27083-retokenization-update/README-en.md) · [Chinese](../../post-training/2611.27083-retokenization-update/README.md) |
+| [Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation](<https://arxiv.org/abs/2611.27131v1>) | 2026-11-20 | [English](../../post-training/2611.27131-dwe/README-en.md) · [Chinese](../../post-training/2611.27131-dwe/README.md) |
+| [CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency](<https://arxiv.org/abs/2611.27119v1>) | 2026-11-20 | [English](../../post-training/2611.27119-ctrl/README-en.md) · [Chinese](../../post-training/2611.27119-ctrl/README.md) |
 | [Policy Improvement-Guided Replay for Continual Reinforcement Learning](<https://arxiv.org/abs/2611.25989v1>) | 2026-11-19 | [English](../../post-training/2611.25989-colir-replay/README-en.md) · [Chinese](../../post-training/2611.25989-colir-replay/README.md) |
 | [Decision-Focused Reinforcement Learning for LLM Post-Training](<https://arxiv.org/abs/2611.25597v1>) | 2026-11-19 | [English](../../post-training/2611.25597-dfrl/README-en.md) · [Chinese](../../post-training/2611.25597-dfrl/README.md) |
 | [VisAlloc: Allocating Visual Supervision for On-Policy Self-Distillation](<https://arxiv.org/abs/2611.25069v1>) | 2026-11-18 | [English](../../post-training/2611.25069-visalloc/README-en.md) · [Chinese](../../post-training/2611.25069-visalloc/README.md) |

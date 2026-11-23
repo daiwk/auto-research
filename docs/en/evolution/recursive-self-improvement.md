@@ -1,6 +1,6 @@
 # Recursive self-improvement (RSI)
 
-<!-- source-sha256: 83bf10beec7e40edbd1945476a506ddc0178f0b0e260c728dd0bb7864c3bd0aa -->
+<!-- source-sha256: b52ed48b2b474e504d777ffba6465528f4be77ac1aa74914005ccf2741bc9568 -->
 
 [简体中文](../../evolution/recursive-self-improvement.md)
 
@@ -31,6 +31,12 @@ A model writing a reflection is not enough. **Persist the change**, **inherit it
 ## Papers and evaluation leads
 
 The entries below distinguish local mechanisms from candidates still to review. An external paper is not a local reproduction.
+
+### November23: Experience selection and recursive co-evolution evaluation
+
+[From Acting to Learning](../../agent-research/2611.27159-acting-to-learning/README-en.md) studies which past experiences should support the next learning round. The local component only scores explicit external gradients with optimizer-aware features, deduplicates selections, and implements global/quota scheduling. It generates no trajectories, trains no student, and does not let an agent autonomously change its research strategy. Experience selection is a data-side loop component, not completed continual self-improvement.
+
+[CoEvoBench](../../agent-research/2611.27116-coevobench/README-en.md) separately evaluates a research agent and the target system it modifies. Its upstream toy-researcher lifecycle fixture is not real RSI. The complete multi-domain, multi-researcher campaign with four GPUs and24hours per run is high-cost, not reproduced (review DONE). Local delivery is bilingual documentation, original figures and evaluation limits, without an executable Evolve operator or fabricated capability metric.
 
 ### November 21: Change research observations, not the acceptance target
 

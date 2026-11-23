@@ -7,7 +7,7 @@ hide:
 
 # 轨迹蒸馏：学生、提案与前缀分布
 
-[LLM 后训练](index.md) / 188 个问题 · 47 篇论文
+[LLM 后训练](index.md) / 192 个问题 · 48 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">188 个问题 · 47 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">192 个问题 · 48 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dwe" data-paper-title="Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation LLM 后训练 University of Science and Technology of China 2026-11-20 DWE不改变蒸馏教师、采样者或KL目标，而是在相同输入和参数下估计输出头的完整梯度。softmax的logit梯度和为零，正负部分各有质量m；分别归一化后配成等量异号的坐标对。以学生初始输出头的首主成分构造固定词表顺序，用同一quantile耦合正负坐标，再在K个等宽区间分别取样。每token最多2K行参与输出头反传，期望保留原梯度。 完整实验成本过高，不复现（审查 DONE）；本轮针对性测试已实际执行三种子CPU诊断；L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU、无CUDA路径，不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯stdlib CPU实现完整正负配对、centered PCA固定顺序、共享分层quantile、forward/reverse KL logit梯度、仅选中行的hidden/weight梯度。小矩阵以多坐标起点的power iteration估计首主成分，与上游随机PCA实现不同但保留论文定义的几何顺序机制。  student-trajectory-distillation CPU机制组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 为什么DWE要同时抽一个正坐标和一个负坐标？ softmax logit梯度和为零，正负质量相同。每对赋予+m与−m保留零和约束，在相同坐标预算下去掉IS随机正负数量分配的方差；不是简单保留top-k。 教学例：g=(0.4,−0.3,−0.1)时m=0.4，每次正坐标固定为第1项，负坐标以0.75/0.25选择后两项，平均恢复g。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<span id="paper-post-training-dwe-f816adba" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-81b0a0eb46942f82">为什么DWE要同时抽一个正坐标和一个负坐标？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adwe">Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>softmax logit梯度和为零，正负质量相同。每对赋予+m与−m保留零和约束，在相同坐标预算下去掉IS随机正负数量分配的方差；不是简单保留top-k。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：g=(0.4,−0.3,−0.1)时m=0.4，每次正坐标固定为第1项，负坐标以0.75/0.25选择后两项，平均恢复g。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27131v1">原论文</a> · <a href="../../../../post-training/2611.27131-dwe/">实现解读</a> · <a href="#qa-81b0a0eb46942f82">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dwe" data-paper-title="Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation LLM 后训练 University of Science and Technology of China 2026-11-20 DWE不改变蒸馏教师、采样者或KL目标，而是在相同输入和参数下估计输出头的完整梯度。softmax的logit梯度和为零，正负部分各有质量m；分别归一化后配成等量异号的坐标对。以学生初始输出头的首主成分构造固定词表顺序，用同一quantile耦合正负坐标，再在K个等宽区间分别取样。每token最多2K行参与输出头反传，期望保留原梯度。 完整实验成本过高，不复现（审查 DONE）；本轮针对性测试已实际执行三种子CPU诊断；L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU、无CUDA路径，不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯stdlib CPU实现完整正负配对、centered PCA固定顺序、共享分层quantile、forward/reverse KL logit梯度、仅选中行的hidden/weight梯度。小矩阵以多坐标起点的power iteration估计首主成分，与上游随机PCA实现不同但保留论文定义的几何顺序机制。  student-trajectory-distillation CPU机制组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 几何顺序与分层quantile各解决什么问题？ 固定PCA顺序让正负坐标在输出行投影上靠近，以减少Wᵀĝ误差；K个区间各取一个quantile减少抽样覆盖不均。正负CDF必须共用同一quantile，不能各自独立抽样还声称几何耦合。 教学例：K=2时分别从(0,0.5)和(0.5,1)取样，每次用同一U查询正、负CDF；两个U独立，而同一对的两侧共享U。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-31b776cabbdf084e">几何顺序与分层quantile各解决什么问题？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adwe">Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>固定PCA顺序让正负坐标在输出行投影上靠近，以减少Wᵀĝ误差；K个区间各取一个quantile减少抽样覆盖不均。正负CDF必须共用同一quantile，不能各自独立抽样还声称几何耦合。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：K=2时分别从(0,0.5)和(0.5,1)取样，每次用同一U查询正、负CDF；两个U独立，而同一对的两侧共享U。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27131v1">原论文</a> · <a href="../../../../post-training/2611.27131-dwe/">实现解读</a> · <a href="#qa-31b776cabbdf084e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dwe" data-paper-title="Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation LLM 后训练 University of Science and Technology of China 2026-11-20 DWE不改变蒸馏教师、采样者或KL目标，而是在相同输入和参数下估计输出头的完整梯度。softmax的logit梯度和为零，正负部分各有质量m；分别归一化后配成等量异号的坐标对。以学生初始输出头的首主成分构造固定词表顺序，用同一quantile耦合正负坐标，再在K个等宽区间分别取样。每token最多2K行参与输出头反传，期望保留原梯度。 完整实验成本过高，不复现（审查 DONE）；本轮针对性测试已实际执行三种子CPU诊断；L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU、无CUDA路径，不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯stdlib CPU实现完整正负配对、centered PCA固定顺序、共享分层quantile、forward/reverse KL logit梯度、仅选中行的hidden/weight梯度。小矩阵以多坐标起点的power iteration估计首主成分，与上游随机PCA实现不同但保留论文定义的几何顺序机制。  student-trajectory-distillation CPU机制组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 DWE与SimOPD都叫蒸馏改进，改变的是同一轴吗？ 不是。SimOPD匹配回答关系分布，改变监督内容；DWE保持已有KL目标，只用无偏稀疏估计替换输出头反传。两者理论上可组合，但组件通过不证明联合LLM训练或能力收益。 教学例：换成相似度bank的KL是换目标；同一token KL用8对坐标估计其梯度是换估计器。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-c895b66a30e02f76">DWE与SimOPD都叫蒸馏改进，改变的是同一轴吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adwe">Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。SimOPD匹配回答关系分布，改变监督内容；DWE保持已有KL目标，只用无偏稀疏估计替换输出头反传。两者理论上可组合，但组件通过不证明联合LLM训练或能力收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：换成相似度bank的KL是换目标；同一token KL用8对坐标估计其梯度是换估计器。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27131v1">原论文</a> · <a href="../../../../post-training/2611.27131-dwe/">实现解读</a> · <a href="#qa-c895b66a30e02f76">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dwe" data-paper-title="Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation LLM 后训练 University of Science and Technology of China 2026-11-20 DWE不改变蒸馏教师、采样者或KL目标，而是在相同输入和参数下估计输出头的完整梯度。softmax的logit梯度和为零，正负部分各有质量m；分别归一化后配成等量异号的坐标对。以学生初始输出头的首主成分构造固定词表顺序，用同一quantile耦合正负坐标，再在K个等宽区间分别取样。每token最多2K行参与输出头反传，期望保留原梯度。 完整实验成本过高，不复现（审查 DONE）；本轮针对性测试已实际执行三种子CPU诊断；L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU、无CUDA路径，不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯stdlib CPU实现完整正负配对、centered PCA固定顺序、共享分层quantile、forward/reverse KL logit梯度、仅选中行的hidden/weight梯度。小矩阵以多坐标起点的power iteration估计首主成分，与上游随机PCA实现不同但保留论文定义的几何顺序机制。  student-trajectory-distillation CPU机制组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 2.20×能否作为本地端到端OPD加速指标？ 不能。它是作者输出头局部结果，作者端到端update平均只减少1.53%。本地仅CPU小矩阵完整公式、精确期望和chain-rule诊断，没有模型生成、GPU内核或吞吐实验。 教学例：若生成与teacher backbone已占一半以上时间，即使某一反传子阶段加倍，也不会把整个update时间减半。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-ada648156bc7a2e8">2.20×能否作为本地端到端OPD加速指标？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adwe">Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它是作者输出头局部结果，作者端到端update平均只减少1.53%。本地仅CPU小矩阵完整公式、精确期望和chain-rule诊断，没有模型生成、GPU内核或吞吐实验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：若生成与teacher backbone已占一半以上时间，即使某一反传子阶段加倍，也不会把整个update时间减半。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27131v1">原论文</a> · <a href="../../../../post-training/2611.27131-dwe/">实现解读</a> · <a href="#qa-ada648156bc7a2e8">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mrpd-replay" data-paper-title="Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts LLM 后训练 University of Illinois Urbana-Champaign 2026-11-18 MRPD把专家RL训练日志当作随训练步变化的课程，而非混洗后的离线数据池。学生与专家同一SFT初始化；第k步合并各域专家第k步日志，使用日志采样策略的log-prob做importance ratio，重算组相对奖励的非对称clipped PG。最终域专家只在日志prefix上提供分布，不重新采样或调用环境。默认dense项取教师top-256词以及剩余质量构成的tail atom，计算student到teacher的reverse KL； 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。显式chronological log schedule检查、teacher-top-k加tail的reverse KL、日志策略ratio与0.2/0.28非对称clip、response-mean损失和冻结teacher/logging policy梯度。无真实专家日志/训练器/环境集成。  student-trajectory-distillation 后训练算法组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 为什么专家日志不是普通离线混合数据？ MRPD依赖学生和专家共享初始化，并沿专家训练时序前进；原日志策略从共同起点逐步接近最终专家，使importance ratio有机会维持在clip范围内。混洗改变这个课程。 教学例：域A和B都必须先消费step0再step1；把step1放到最前不会被schedule检查器静默排序修复。 2026-11-19">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
 <span id="paper-post-training-mrpd-replay-8645d3c1" class="ar-learning-paper-anchor"></span>

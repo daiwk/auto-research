@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/html/2611.27119v1",
+  "source_url": "https://arxiv.org/pdf/2611.27119v1#page=1",
+  "original_html_asset_url": "https://arxiv.org/html/2611.27119v1/intro_modes.png",
+  "figure": "Figure 1",
+  "caption": "Figure 1: Execution layouts in the running example over two steady-state steps, drawn to each system's mean step time, with SM activity beneath. Host slot v0 is the reference policy.",
+  "source_sha256": "be5de73a2fc70d13aa37d16b4c7a16c5560bb0e1474f91c1e41329b68d7c225a",
+  "pdf_page": 1,
+  "crop_pdf_points": [315, 174, 562, 511],
+  "render_scale": 4,
+  "width_pixels": 988,
+  "height_pixels": 1348,
+  "asset_sha256": "3461c50d30f6d0bb43252718d376dc5d5533b9f4674dfd27e56fae61c9d6bcff",
+  "image_sha256": "3461c50d30f6d0bb43252718d376dc5d5533b9f4674dfd27e56fae61c9d6bcff",
+  "visually_reviewed": true,
+  "scientific_content_modified": false,
+  "transformation": "Rendered directly from fixed-v1 PDF page 1 at scale 4; complete Figure 1 and complete original caption retained without scientific-content edits.",
+  "copyright": "Copyright remains with original authors; original figure with attribution."
+}

@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:disco": {
+      "questions": [
+        {
+          "id": "patterns-not-cases",
+          "level": "basics",
+          "question": "DISCO为什么不能把几条明显失败案例直接算成可靠的行为发现？",
+          "answer": "行为发现声称的是可重复的输入—输出规律，不是存在一个失败案例。FDR约束最终被拒绝假设集合中的误发现比例的期望；挑出最惊讶的例子没有给出这个多重检验保证。",
+          "example": "教学例：发现集合有10条规律，其中2条其实不存在，则该次FDP为2/10；FDR还要对发现过程的重复运行取期望，不能把这一个比例当已知真值。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "coarsened-selection",
+          "level": "mechanism",
+          "question": "为什么二分箱DISCO的假设选择器不能顺便看精确e值或原始模型输出？",
+          "answer": "允许按实际K做最终eBH的论证需要分箱历史把某个null假设的财富过程与其余探索选择隔开。额外输出可能改变未来选题和假设池规模，破坏该论证；不能只保留冻结规则而偷偷开放精确证据。",
+          "example": "教学例：e_max=50时，财富2和20都只显示A。同样轮数、同样A历史必须产生同一选择器视图；根据20比2更接近门槛而改选题，不属于这里的二分箱接口。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "majority-vs-discoveries",
+          "level": "comparison",
+          "question": "DISCO和e-RWSC都累积e-process，为什么不能共用一种成功证书？",
+          "answer": "e-RWSC认证同一题某答案在固定政策iid采样中的多数概率，不保证答案正确。DISCO控制多个行为假设最终集合的误发现比例，并有自适应假设池的分箱、冻结和校正约束。认证对象与错误定义不同。",
+          "example": "教学例：某LLM每次都答错同一个答案，e-RWSC仍可能很快发多数证书；这不证明十个新提出的行为规律有九个真的存在，也不能代替DISCO的FDR证书。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "conditional-certificate",
+          "level": "implementation",
+          "question": "实现时怎样避免把DISCO的post-hoc证书误报成无条件FDR保证？",
+          "answer": "分开输出epsilon、delta与条件标志。Theorem2用alpha/epsilon选择最终level，约束没有null退出时的条件FDR；delta描述该条件失败风险。不能套用Theorem1的(alpha-delta)/epsilon公式，也不能把未经误差校正的Monte Carlo均值当严格null上界。",
+          "example": "教学例：alpha=0.1、epsilon=0.5、delta=0.02时，pre-hoc校正level为0.16；post-hoc的level为0.2，但必须保留条件限定和0.02风险项。两者数值相近不代表保证相同。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-23"
+        }
+      ]
+    }
+  }
+}

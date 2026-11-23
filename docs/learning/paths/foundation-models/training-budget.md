@@ -7,7 +7,7 @@ hide:
 
 # 训练预算：数据配比、目标与优化器
 
-[基础模型](index.md) / 144 个问题 · 36 篇论文
+[基础模型](index.md) / 148 个问题 · 37 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">144 个问题 · 36 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">148 个问题 · 37 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:aimuon" data-paper-title="Accelerating Muon with Spectral Residual Correction" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Accelerating Muon with Spectral Residual Correction 基础模型 Tsinghua University 2026-11-20 AIMuon不改普通EMA动量，而改参数子问题：先更新M，再算E=G−M，分别对M与E做谱变换，以各自核范数估计决定相对权重。把残差混进动量后只做一次变换通常不等价，因为矩阵符号映射非线性。实用Algorithm1用两次五步BF16 Newton–Schulz近似，并用内积绝对值估计核范数，不做额外SVD；最后把合成步的Frobenius范数匹配到同M的Muon，权重衰减解耦。理论收敛结论针对未归一化、精确矩阵符号版本，不自动覆盖这个BF16实用算法。 完整矩阵直接成本过高不复现；仅矩阵参数的函数式Algorithm1、NS5和20步合成二次矩阵损失autograd诊断。L1机制/计分组件，diagnostic only，不是完整论文能力复现。高成本完整实验不复现（审查 DONE），不接Evolve晋级。仅矩阵参数的函数式Algorithm1、NS5和20步合成二次矩阵损失autograd诊断。检查相同动量的步长匹配、c=0退回Muon、独立变换不等于预混合、零矩阵、转置和BF16溢出拒绝；没有语言模型预训练、FineWeb读取、超参数搜索或Evolve算子。CPU与真实A100三seed的指标是数值/机制诊断，不是模型能力比较。  预训练与数据 谱残差优化 基础模型 训练预算：数据配比、目标与优化器 AIMuon改的是动量还是参数步？ 保留普通EMA，改参数子问题得到独立残差谱方向。不是Nesterov动量，也不是把当前梯度直接加到Muon结果。 教学例：β=0.9、旧M=0时，新M=0.1G，E=0.9G；必须先更新M再算E。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<span id="paper-foundation-models-aimuon-487c5031" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-080cf9ffcec53012">AIMuon改的是动量还是参数步？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aaimuon">Accelerating Muon with Spectral Residual Correction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>保留普通EMA，改参数子问题得到独立残差谱方向。不是Nesterov动量，也不是把当前梯度直接加到Muon结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：β=0.9、旧M=0时，新M=0.1G，E=0.9G；必须先更新M再算E。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27077v1">原论文</a> · <a href="../../../../foundation-models/2611.27077-aimuon/">实现解读</a> · <a href="#qa-080cf9ffcec53012">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:aimuon" data-paper-title="Accelerating Muon with Spectral Residual Correction" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Accelerating Muon with Spectral Residual Correction 基础模型 Tsinghua University 2026-11-20 AIMuon不改普通EMA动量，而改参数子问题：先更新M，再算E=G−M，分别对M与E做谱变换，以各自核范数估计决定相对权重。把残差混进动量后只做一次变换通常不等价，因为矩阵符号映射非线性。实用Algorithm1用两次五步BF16 Newton–Schulz近似，并用内积绝对值估计核范数，不做额外SVD；最后把合成步的Frobenius范数匹配到同M的Muon，权重衰减解耦。理论收敛结论针对未归一化、精确矩阵符号版本，不自动覆盖这个BF16实用算法。 完整矩阵直接成本过高不复现；仅矩阵参数的函数式Algorithm1、NS5和20步合成二次矩阵损失autograd诊断。L1机制/计分组件，diagnostic only，不是完整论文能力复现。高成本完整实验不复现（审查 DONE），不接Evolve晋级。仅矩阵参数的函数式Algorithm1、NS5和20步合成二次矩阵损失autograd诊断。检查相同动量的步长匹配、c=0退回Muon、独立变换不等于预混合、零矩阵、转置和BF16溢出拒绝；没有语言模型预训练、FineWeb读取、超参数搜索或Evolve算子。CPU与真实A100三seed的指标是数值/机制诊断，不是模型能力比较。  预训练与数据 谱残差优化 基础模型 训练预算：数据配比、目标与优化器 为何分别变换残差，再做步长匹配？ 矩阵符号变换非线性，分别变换后加权一般不等于先混合再变换。RMS匹配去掉共同尺度，却保留核范数比带来的方向变化。 教学例：两个不同奇异向量方向的矩阵相加后，其polar方向不等于两个polar方向的和；归一到同范数也不会使它们相同。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-84bd075fa97b4587">为何分别变换残差，再做步长匹配？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aaimuon">Accelerating Muon with Spectral Residual Correction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>矩阵符号变换非线性，分别变换后加权一般不等于先混合再变换。RMS匹配去掉共同尺度，却保留核范数比带来的方向变化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个不同奇异向量方向的矩阵相加后，其polar方向不等于两个polar方向的和；归一到同范数也不会使它们相同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27077v1">原论文</a> · <a href="../../../../foundation-models/2611.27077-aimuon/">实现解读</a> · <a href="#qa-84bd075fa97b4587">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:aimuon" data-paper-title="Accelerating Muon with Spectral Residual Correction" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Accelerating Muon with Spectral Residual Correction 基础模型 Tsinghua University 2026-11-20 AIMuon不改普通EMA动量，而改参数子问题：先更新M，再算E=G−M，分别对M与E做谱变换，以各自核范数估计决定相对权重。把残差混进动量后只做一次变换通常不等价，因为矩阵符号映射非线性。实用Algorithm1用两次五步BF16 Newton–Schulz近似，并用内积绝对值估计核范数，不做额外SVD；最后把合成步的Frobenius范数匹配到同M的Muon，权重衰减解耦。理论收敛结论针对未归一化、精确矩阵符号版本，不自动覆盖这个BF16实用算法。 完整矩阵直接成本过高不复现；仅矩阵参数的函数式Algorithm1、NS5和20步合成二次矩阵损失autograd诊断。L1机制/计分组件，diagnostic only，不是完整论文能力复现。高成本完整实验不复现（审查 DONE），不接Evolve晋级。仅矩阵参数的函数式Algorithm1、NS5和20步合成二次矩阵损失autograd诊断。检查相同动量的步长匹配、c=0退回Muon、独立变换不等于预混合、零矩阵、转置和BF16溢出拒绝；没有语言模型预训练、FineWeb读取、超参数搜索或Evolve算子。CPU与真实A100三seed的指标是数值/机制诊断，不是模型能力比较。  预训练与数据 谱残差优化 基础模型 训练预算：数据配比、目标与优化器 AIMuon能替代AF-Muon的tied embedding处理吗？ 不能直接推断。AF-Muon管词表support/cap及向量更新；AIMuon只定义矩阵谱残差。组合需要明确参数分工和真实验证。 教学例：一个训练step中只出现两个词，词表输入梯度稀疏；矩阵残差修正不会自动给未出现词定义support约束。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-12818af5334b372f">AIMuon能替代AF-Muon的tied embedding处理吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aaimuon">Accelerating Muon with Spectral Residual Correction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能直接推断。AF-Muon管词表support/cap及向量更新；AIMuon只定义矩阵谱残差。组合需要明确参数分工和真实验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个训练step中只出现两个词，词表输入梯度稀疏；矩阵残差修正不会自动给未出现词定义support约束。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27077v1">原论文</a> · <a href="../../../../foundation-models/2611.27077-aimuon/">实现解读</a> · <a href="#qa-12818af5334b372f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:aimuon" data-paper-title="Accelerating Muon with Spectral Residual Correction" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Accelerating Muon with Spectral Residual Correction 基础模型 Tsinghua University 2026-11-20 AIMuon不改普通EMA动量，而改参数子问题：先更新M，再算E=G−M，分别对M与E做谱变换，以各自核范数估计决定相对权重。把残差混进动量后只做一次变换通常不等价，因为矩阵符号映射非线性。实用Algorithm1用两次五步BF16 Newton–Schulz近似，并用内积绝对值估计核范数，不做额外SVD；最后把合成步的Frobenius范数匹配到同M的Muon，权重衰减解耦。理论收敛结论针对未归一化、精确矩阵符号版本，不自动覆盖这个BF16实用算法。 完整矩阵直接成本过高不复现；仅矩阵参数的函数式Algorithm1、NS5和20步合成二次矩阵损失autograd诊断。L1机制/计分组件，diagnostic only，不是完整论文能力复现。高成本完整实验不复现（审查 DONE），不接Evolve晋级。仅矩阵参数的函数式Algorithm1、NS5和20步合成二次矩阵损失autograd诊断。检查相同动量的步长匹配、c=0退回Muon、独立变换不等于预混合、零矩阵、转置和BF16溢出拒绝；没有语言模型预训练、FineWeb读取、超参数搜索或Evolve算子。CPU与真实A100三seed的指标是数值/机制诊断，不是模型能力比较。  预训练与数据 谱残差优化 基础模型 训练预算：数据配比、目标与优化器 步数减少是否等于训练时间减少？ 不是。每step多一次NS5有成本；论文同token预算的AIMuon训练时间反而更长。微型损失下降更不能证明LLM预训练收益。 教学例：少10%步骤但每步贵20%，总时间是0.9×1.2=1.08倍；这是教学算例，不是论文实测。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f7bc5265ae8de308">步数减少是否等于训练时间减少？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aaimuon">Accelerating Muon with Spectral Residual Correction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。每step多一次NS5有成本；论文同token预算的AIMuon训练时间反而更长。微型损失下降更不能证明LLM预训练收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：少10%步骤但每步贵20%，总时间是0.9×1.2=1.08倍；这是教学算例，不是论文实测。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27077v1">原论文</a> · <a href="../../../../foundation-models/2611.27077-aimuon/">实现解读</a> · <a href="#qa-f7bc5265ae8de308">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:lara-plus-plus" data-paper-title="The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale 基础模型 Concordia University / Mila 2026-11-17 本文重新核查核化attention的真实效率，并用确定性proposal均值代替随机采样、相似性聚类代替连续切块改善LARA质量。与复杂度口号不同，cluster数量随序列增长时k-center成本为二次；近softmax质量不等于比FlashAttention快。已核方法位置：7, Appendix E.1。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行固定源码的deterministic clustering、proposal means、mis-opt自归一重要性权重与value聚合；不执行逐层蒸馏、ImageNet/YFCC15M训练或FLA高效内核。  注意力与长上下文 核注意力与蒸馏 基础模型 训练预算：数据配比、目标与优化器 恢复接近softmax的准确率，是否解决核注意力实际效率问题？ 没有。原文LARA++仍有importance权重与聚类开销，甚至是较慢核化方案；质量恢复和系统提速需分别测量。 教学例：cluster数量取N/8时，贪心分组不是固定cluster数下的线性成本。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
 <span id="paper-foundation-models-lara-plus-plus-d79ad020" class="ar-learning-paper-anchor"></span>

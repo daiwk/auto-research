@@ -20,7 +20,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="training-budget/">训练预算：数据配比、目标与优化器</a></h2>
 <p>有限训练预算应该先改数据、更新方向，还是模型规模？</p>
-<p class="ar-learning-topic-meta">144 个问题 · 36 篇论文</p>
+<p class="ar-learning-topic-meta">148 个问题 · 37 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="compression-and-cache/">推理压缩：权重、KV 缓存与服务带宽</a></h2>
@@ -35,7 +35,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="evaluation-and-evidence/">能力证据：评测采样、读出与可靠性</a></h2>
 <p>怎样确认高分来自目标能力，而非语言、输入顺序、读出方式或统计偏差？</p>
-<p class="ar-learning-topic-meta">108 个问题 · 27 篇论文</p>
+<p class="ar-learning-topic-meta">116 个问题 · 29 篇论文</p>
 </article>
 </div>
 

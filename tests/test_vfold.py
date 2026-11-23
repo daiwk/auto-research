@@ -96,6 +96,66 @@ def test_no_compression_when_entire_context_protected():
     torch.testing.assert_close(banks.materialize(1), y)
 
 
+@pytest.mark.parametrize("cache_keyword", ["past_key_values", "cache"])
+def test_finish_hooks_merge_after_real_attention_consumes_values_for_both_cache_keywords(cache_keyword):
+    from auto_research.foundation.vfold import attach_finish_hooks
+
+    events = []
+
+    class ObservedBanks(ValueBanks):
+        def finish_layer(self, layer):
+            events.append(("finish", layer))
+            super().finish_layer(layer)
+
+    class Attention(torch.nn.Module):
+        def __init__(self, layer_idx):
+            super().__init__()
+            self.layer_idx = layer_idx
+
+        def forward(self, values, **kwargs):
+            banks = kwargs[cache_keyword]
+            _, current = banks.update(self.layer_idx, values, values)
+            # Consume the actual current values before the forward hook merges
+            # the pair, as attention does on prefill and subsequent decoding.
+            output = current.sum(dim=-2)
+            events.append(("consume", self.layer_idx))
+            return output
+
+    model = torch.nn.Module()
+    model.model = torch.nn.Module()
+    model.model.layers = torch.nn.ModuleList()
+    for index in range(2):
+        layer = torch.nn.Module()
+        layer.self_attn = Attention(index)
+        model.model.layers.append(layer)
+    banks = ObservedBanks(2, sink=1, recent=2)
+    a = torch.arange(12.).reshape(1, 1, 6, 2)
+    b = a + 10
+    handles = attach_finish_hooks(model)
+    try:
+        for index, value in enumerate((a, b)):
+            output = model.model.layers[index].self_attn(value, **{cache_keyword: banks})
+            torch.testing.assert_close(output, value.sum(dim=-2))
+        assert events == [("consume", 0), ("finish", 0), ("consume", 1), ("finish", 1)]
+        assert not banks.pending and not banks.consumed
+        torch.testing.assert_close(banks.shared[0], (a[..., 1:4, :] + b[..., 1:4, :]) / 2)
+
+        # The next decode must not encounter an unfinished prefill. Its output
+        # consumes the prior folded values plus its own, still-unmerged token.
+        previous = [banks.materialize(index).clone() for index in range(2)]
+        events.clear()
+        for index, scalar in enumerate((50., 100.)):
+            value = torch.full((1, 1, 1, 2), scalar)
+            output = model.model.layers[index].self_attn(value, **{cache_keyword: banks})
+            torch.testing.assert_close(output, torch.cat((previous[index], value), -2).sum(dim=-2))
+        assert events == [("consume", 0), ("finish", 0), ("consume", 1), ("finish", 1)]
+        assert not banks.pending and not banks.consumed
+        assert all(banks.keys[index].shape[-2] == 7 for index in range(2))
+    finally:
+        for handle in handles:
+            handle.remove()
+
+
 @pytest.mark.parametrize("key_only_initialization", [False, True])
 def test_real_qwen_cache_bridge_decodes_protected_prefix_exactly(key_only_initialization):
     pytest.importorskip("transformers")

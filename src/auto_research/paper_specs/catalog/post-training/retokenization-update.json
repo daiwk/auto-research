@@ -1,0 +1,63 @@
+{
+  "domain": "post-training",
+  "key": "retokenization-update",
+  "title": "How Far Does Lossless Re-tokenization Move an RLVR Update?",
+  "paper_url": "https://arxiv.org/abs/2611.27083v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.27083v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.27083-retokenization-update/README.md",
+  "first_author": "Zhe Dong",
+  "first_author_affiliation": "University of Maine at Presque Isle",
+  "published": "2026-11-20",
+  "published_at": "2026-11-20T03:53:22Z",
+  "updated_at": "2026-11-20T03:53:22Z",
+  "discovered_on": "2026-11-23",
+  "reviewed_on": "2026-11-23",
+  "announced_on": null,
+  "code": null,
+  "code_status": "截至2026-11-23，固定v1全文和官方abstract未找到已核实的本篇源码仓库URL；文内称代码附带数据不等于已核验发布入口。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "policy-optimization",
+    "CPU机制组件"
+  ],
+  "priority": "P1",
+  "intake_class": "nov20_first_publication_discovered_nov23",
+  "implementation_status": "component_only",
+  "component_implemented": true,
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.27083v1",
+    "source_sections": [
+      "Section4.1",
+      "AppendixC"
+    ],
+    "basis": "AppendixC的配对探针覆盖0.5B/1.7B/8B/8B四模型、多剂量/位置/目标，单cell有8/32/64 warmup、16/32/64 batch、每update4个inner epoch；预注册0.5B训练18对×2臂×300更新=10800更新，另采样及评测。该数是配置计算，不是本机耗时测量；完整矩阵在单A100/A30或Mac预算下成本过高，不下载权重、不做长时试探。只执行四字符串CPU表格定理与测量算术。",
+    "available_resource": "One A100 or A30, or local Mac; local components CPU only",
+    "decision": "成本过高，不复现（审查 DONE）；无自动重试。",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30
+    }
+  },
+  "summary": "研究对象不是奖励变化，而是同一rollout的token ID变化。保留文本、reward、advantage和checkpoint，仅将可拆token替换成两个拼回原文本的词表项。论文从共享参数checkpoint比较canonical、re-encoded和不同batch的更新，另在每种分词各自一套prefix-softmax表上证明：未访问prefix的条件概率比保持不变，但整词softmax的未采样logit仍被完整梯度改变。",
+  "fidelity_note": "纯CPU prefix-softmax表从同一正的完整字符串分布按chain rule初始化，执行λ_t(e_token−π_row)完整梯度；检验未访问行、coarse未采样logit和字符串分布差异。独立实现c及ratio-of-means R，但不把两套独立tabular参数假装成共享LLM参数来计算R；R函数仅接受调用方已在同一参数空间测得的更新。包含均匀分布非零一致步的对称正控，避免过度概括定理。没有真实BPE、LoRA、AdamW、rollout或修复算法；这是一项机制诊断，不是后训练能力实现。",
+  "method_source_sha256": "2ad7eb06e6f8f7b5a638fa2871a76d8a39431b6db9835cd866d129d0e22e0583",
+  "local_operator": "auto_research.post_training.retokenization_update.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.retokenization_update import diagnostic; print(diagnostic(42))'"
+}

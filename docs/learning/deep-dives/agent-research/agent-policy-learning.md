@@ -7,7 +7,7 @@ hide:
 
 # 交互学习：统一轨迹之后，信用和教师信息怎样分配
 
-[Agent](../index.md) · 更新 2026-11-15 · 55 篇主题资料 / 8 篇重点对照
+[Agent](../index.md) · 更新 2026-11-23 · 57 篇主题资料 / 10 篇重点对照
 
 Agent Lightning先把执行整理成可训练transition；GiGPO、AdaStep和DepGPO分别利用重复状态、回报方差与命令依赖分配信用；Frontier-OPD和ASTEROID则改变教师数据怎样进入学生学习。记录成轨迹只是入口，训练目标和可见信息才定义算法。
 
@@ -33,6 +33,8 @@ Agent Lightning先把执行整理成可训练transition；GiGPO、AdaStep和DepG
 | [Asymmetric On-Policy Distillation Learns In-Context Exploration](../../../agent-research/2610.30105-asteroid/README.md) · [原始来源](https://arxiv.org/abs/2610.30105v1)<br>章节：背景与主要改动、核心公式、保留的定义机制与缩小边界 | 学生先收探索历史，再在同隐藏任务收专家完整成功轨迹，训练学生据自身历史预测专家动作。 | BAMDP跨episode与一般POMDP takeover不可混用；本地是单步三门、真实小模型训练诊断，非多步机器人能力。 |
 | [Decoupling Planning and Control for Instructable Agents](../../../agent-research/2608.26788-instruct-to-act/README.md) · [原始来源](https://arxiv.org/abs/2608.26788)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 用自身rollout后标指令区间，BC监督已标动作、stop监督完成端点；保留Dreamer其他目标。 | AgentLightning解耦执行与RL训练transition，Instruct-to-Act解耦规划与高频控制。两种解耦不是同一接口，标签正确也不能补缺失RSSM和环境学习。 |
 | [Experience-Handoff Reinforcement Learning for Recursive Self-Improvement](../../../agent-research/2611.16409-ace-rl/README.md) · [原始来源](https://arxiv.org/abs/2611.16409v1)<br>章节：背景与主要改动、核心公式 | 按任务、种子、反思来源建立三角色比较组，交接物信用取自全新actor的下游表现，联合生成token-mean更新共享模型。 | GiGPO在轨迹与共享anchor-state层分macro/micro信用；ACE-RL比较的是生成交接物的角色来源，不是state合流。没有真实actor环境时只能验证公式和控制合同。 |
+| [From Acting to Learning: Experience Selection toward Continually Learning Agents](../../../agent-research/2611.27159-acting-to-learning/README.md) · [原始来源](https://arxiv.org/abs/2611.27159v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验 | 论文把成功交互后的经验选择单独隔离：历史池先固定，选择规则决定训练哪些action记录，所有学生使用同一训练预算与部署executor。它不是一个新通用梯度影响公式；打分沿用LESS式优化器感知梯度，贡献是Agent学习中的严格对照，尤其把排序规则和可选择的覆盖空间交叉。完整研究只有一次选择—训练阶段，没有验证多轮持续学习、遗忘或自主修改harness。 | ACE Lens把Accuracy、学习者相对Complexity和Diversity作为数据准入维度；本篇进一步问同样成功的action在当前学生/optimizer状态下，对公开任务family有多大梯度相关性，并把coverage自由度作为对照的一部分。两者都不能把“成功”自动等同于“最值得学”；较低NLL只表示容易预测，不是更高训练收益。ACE旧页的mini-suite也不是本篇ALFWorld训练对照，不能横向比较其满分与本文提升。 |
+| [$R^2$: Recognizing and Reducing Redundant Visual Tool Use](../../../agent-research/2611.27070-r2-tool-redundancy/README.md) · [原始来源](https://arxiv.org/abs/2611.27070v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验 | R²把三个问题分开：CAT描述题目是否可能从工具获益；VFD描述一次返回观察对后续同一段推理文本提供多少额外似然支持；RA-GRPO在答对的轨迹之间比较工具效率，而不是奖励所有少调用的轨迹。CAT标签来自训练侧tool/no-tool rollouts的多次正确性和实际调用，不是根据问题长度或关键词猜测；VFD也不是gold-answer概率或“这次工具有用”的因果证明。 | AdaStep看同锚状态下动作间回报方差相对动作内噪声，调节局部信用可靠性；R²看当前视觉反馈对同一后续推理的依赖，并把成本只在correct集合内相对化。它们都补充终局奖励，但方差解释率不是观察必要性，VFD也不衡量动作内随机回报噪声。不能把AdaStep的权重直接当VFD，或把R²效率项施加给失败轨迹。本地两者都是统计/数值组件，不能比较其Agent能力。 |
 
 </div>
 
@@ -61,6 +63,18 @@ AgentLightning把异构执行记录变成可归因transition；Instruct-to-Act�
 GiGPO把轨迹整体reward和同一anchor-state动作差异分开；ACE-RL让actor任务、reflector种子和curator反思各自成组，编辑价值来自新的执行而非文字评分。即使两者都中心化reward，来源、counterfactual和信息边界也不同。singleton过滤与token归约还会改变哪些角色被训练，不能用一个通用group-normalize替代。
 
 对照来源：[ace-rl](../../../agent-research/2611.16409-ace-rl/README.md) · [gigpo](../../../agent-research/2505.10978-gigpo/README.md)
+
+### From Acting to Learning：成功经验该选哪些，而不只是收集多少
+
+候选LoRA梯度在warmup第8/16/24/32个checkpoint上，与冻结Adam一、二阶矩构成ranking feature；省略bias correction，不能称作完整AdamW更新。每个公共support梯度先单独归一化，再按任务family取均值；候选feature归一化后与之做点积，先平均checkpoint，再在family间取最大。40条公开support action不含评测query答案。全局选择先按完整messages内容精确去重，保留首代表索引，选256种内容，再三次shuffle共768次展示；matched版本保持reference每个task/action位置与不同内容配额。最终学生从原始base重新开始，不能继承打分warmup权重。负控核对checkpoint/family运算顺序、support均值不再归一化、重复行不增加random抽样概率、得分并列按首代表索引、每个shuffle pass访问全部选中内容、matched仍可选择reference以外的同stratum内容、跨stratum重复内容拒绝、NaN/负二阶矩/中间溢出拒绝。seed只改变合成输入与调度，不是独立训练。
+
+对照来源：[acting-to-learning](../../../agent-research/2611.27159-acting-to-learning/README.md) · [ace-data](../../../agent-research/2608.27260-ace-data/README.md)
+
+### R²：把视觉反馈依赖变成正确轨迹内的效率优势
+
+VFD仅替换当前调用的视觉反馈，保留原图、其他历史与待评分推理tokens；实际反馈的平均log概率减去3个同尺寸不重叠随机crop的平均。前10%训练步按来源、只用reasoning windows估计30%分位阈值，之后冻结；直接答案window可在监督时用，但不参与初始化。每轨迹均匀抽一个eligible call，以M×冗余指示量估计全部eligible冗余数，完整记录但score缺失时指示量设1，空eligible集为0。Tool-Independent另加0.5×全部调用数。效率优势只在同题答对轨迹内居中、除固定调用预算4，再以0.2加到outcome优势；不能把失败少调用当高效率成功。负控包括actual与alternative相同时VFD为0、阈值不吸收答案window、来源缺warmup拒绝、d恰好等于阈值不判冗余、None与空eligible区分、抽一个调用而非逐个累加、失败轨迹效率项严格为0、correct集合内效率项和为0、全错/单个correct/相同cost时效率为0、负优势裁剪方向、padding无贡献与中间溢出拒绝。三seed的数值控制不支持工具效率或准确率提升结论。
+
+对照来源：[r2-tool-redundancy](../../../agent-research/2611.27070-r2-tool-redundancy/README.md) · [adastep](../../../agent-research/2610.03223-adastep/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -116,9 +130,37 @@ GiGPO把轨迹整体reward和同一anchor-state动作差异分开；ACE-RL让act
 
     对照来源：[ace-rl](../../../agent-research/2611.16409-ace-rl/README.md) · [gigpo](../../../agent-research/2505.10978-gigpo/README.md)
 
+### 与ACE Lens相比，本篇额外控制了什么？ {#cross-cross-nov23-acting-to-learning}
+
+??? note "展开答案与例子"
+
+    **答案：** ACE组织数据可信度、复杂度和覆盖；本篇把排序规则与选择空间分开，global random和global high-NLL也可自由改变coverage，避免把自由度差异误算成gradient优势。
+
+    **教学例子：** 教学例：如果gradient可跨任务挑256条，random也应能跨任务挑256条；不能只给random固定旧任务配额。
+
+    对照来源：[acting-to-learning](../../../agent-research/2611.27159-acting-to-learning/README.md) · [ace-data](../../../agent-research/2608.27260-ace-data/README.md)
+
+### R²与AdaStep都是credit方法，能交换统计量吗？ {#cross-cross-nov23-r2-tool-redundancy}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。AdaStep从同状态动作组的回报方差估计局部信用可靠性；R²用当前视觉反馈的同文本似然差估计冗余成本，再只在correct集合内比较。它们条件信息与归一化对象不同。
+
+    **教学例子：** 教学例：重复crop可能VFD接近0，但动作后环境回报很稳定；稳定不等于观察不冗余。
+
+    对照来源：[r2-tool-redundancy](../../../agent-research/2611.27070-r2-tool-redundancy/README.md) · [adastep](../../../agent-research/2610.03223-adastep/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-23** · CPU NumPy组件只执行同文本token log概率的VFD差、reasoning-only分来源冻结阈值、单eligible-call无偏冗余估计和类别base cost、sample-SD outcome advantage、仅正确轨迹效率项及clipped GRPO标量目标。分位数采用线性插值、目标按每轨迹有效token均值再组平均，是公开的数值约定；不宣称与未公开trainer逐位相等。调用方必须已保证同一推理window、有效crop与完整记录；数组不能证明这些语义。没有VLM、crop构造/评分、CAT rollout标注、图像数据、policy反传/更新或视觉Agent评测；数值差分只检验标量目标导数，不是训练。没有gold答案/计划接口，reward为外部trainer/evaluator给定的0/1标量。 完整实验高成本不复现，审查DONE。
+
+涉及：[r2-tool-redundancy](../../../agent-research/2611.27070-r2-tool-redundancy/README.md) · [adastep](../../../agent-research/2610.03223-adastep/README.md)
+
+**2026-11-23** · 本地独立实现NumPy float64公式核：显式梯度/冻结moments转feature、逐support向量归一化、checkpoint平均后family最大值、按完整字符串精确去重、全局top/random和三轮调度、按reference逐位置匹配stratum并保持不同内容配额的选择。零范数方向原文未定义，明确拒绝而不补造0分；feature中间溢出也拒绝。测试用显式合成梯度与历史action字符串，不把梯度相似度换成词项相似度。没有自动抽LoRA梯度、warmup训练、ALFWorld、Qwen checkpoint、部署executor、学生SFT或能力比较；调用方必须保证support来自公开训练侧而非query答案。 完整实验高成本不复现，审查DONE。
+
+涉及：[acting-to-learning](../../../agent-research/2611.27159-acting-to-learning/README.md) · [ace-data](../../../agent-research/2608.27260-ace-data/README.md)
 
 **2026-11-15** · 按任务、种子、反思来源建立三角色比较组，交接物信用取自全新actor的下游表现，联合生成token-mean更新共享模型。 GiGPO在轨迹与共享anchor-state层分macro/micro信用；ACE-RL比较的是生成交接物的角色来源，不是state合流。没有真实actor环境时只能验证公式和控制合同。
 
@@ -132,7 +174,7 @@ GiGPO把轨迹整体reward和同一anchor-state动作差异分开；ACE-RL让act
 
 覆盖 53 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 55 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 57 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -191,6 +233,8 @@ GiGPO把轨迹整体reward和同一anchor-state动作差异分开；ACE-RL让act
 - [LOOP](../../../agent-research/2502.01600-loop/README.md)
 - [Decoupling Planning and Control for Instructable Agents](../../../agent-research/2608.26788-instruct-to-act/README.md)
 - [Experience-Handoff Reinforcement Learning for Recursive Self-Improvement](../../../agent-research/2611.16409-ace-rl/README.md)
+- [From Acting to Learning: Experience Selection toward Continually Learning Agents](../../../agent-research/2611.27159-acting-to-learning/README.md)
+- [$R^2$: Recognizing and Reducing Redundant Visual Tool Use](../../../agent-research/2611.27070-r2-tool-redundancy/README.md)
 
 </details>
 

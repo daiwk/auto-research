@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:disco/patterns-not-cases": {
+      "source_sha256": "d93e2009aec7e97fe3dc98d1fb48d452027e6f9d12ad16ade415ee32ac85d8be",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are salient failure examples not automatically reliable DISCO discoveries?",
+        "answer": "A behavior discovery claims a repeatable input-output pattern, not the existence of one failure. FDR controls the expected false fraction in the final rejected-hypothesis set; selecting surprising examples alone supplies no such multiple-testing guarantee.",
+        "example": "Illustration: two nonexistent patterns among ten discoveries give FDP=2/10 for that run. FDR additionally averages over repeated discovery runs; one fraction is not its known value."
+      }
+    },
+    "qa/foundation-models:disco/coarsened-selection": {
+      "source_sha256": "0cefd35bf1e6ac1984d4e1ef9f72c1ab2855f6d847e6e4e2d3bdcb9bc96a86e8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must a binary-bin DISCO selector not also inspect exact wealth or model outputs?",
+        "answer": "The observed-K argument uses bin histories to separate a null hypothesis's wealth from other exploration choices. Extra outputs can alter future hypotheses and pool size, breaking that argument. Freezing alone does not permit an exact-evidence side channel.",
+        "example": "Illustration: with e_max=50, wealth 2 and 20 both reveal A. Equal update counts and A histories yield identical selector views; selecting differently because 20 is nearer the boundary violates this binary-bin interface."
+      }
+    },
+    "qa/foundation-models:disco/majority-vs-discoveries": {
+      "source_sha256": "4db33a2f4ff9c4937e5af4d75745bb1341b0692853c30dc933e65dba792a33cf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can DISCO and e-RWSC not share one success certificate despite both using e-processes?",
+        "answer": "e-RWSC certifies one answer's majority probability under a fixed policy's iid sampling, not correctness. DISCO controls false discoveries across a final collection of behavioral hypotheses and constrains adaptive pool selection through coarsening, freezing and correction. Their certified objects and errors differ.",
+        "example": "Illustration: a model that always gives the same wrong answer can quickly obtain an e-RWSC majority certificate. That does not establish that nine of ten proposed behavioral patterns exist or replace DISCO's FDR certificate."
+      }
+    },
+    "qa/foundation-models:disco/conditional-certificate": {
+      "source_sha256": "d9aa8dfdaa30146a1bd98e34f6776119e8f660b5b7bc43e5920b98e831304319",
+      "reviewed": true,
+      "fields": {
+        "question": "How do we avoid reporting DISCO's post-hoc certificate as unconditional FDR control?",
+        "answer": "Output epsilon, delta and the conditional flag separately. Theorem2 uses alpha/epsilon for conditional FDR given no true-null exit; delta quantifies failure of that condition. Do not substitute Theorem1's (alpha-delta)/epsilon or treat uncorrected Monte Carlo means as rigorous null bounds.",
+        "example": "Illustration: alpha=0.1, epsilon=0.5 and delta=0.02 give pre-hoc level 0.16. The post-hoc level is 0.2, but its condition and 0.02 risk term remain explicit. Similar values do not make the guarantees identical."
+      }
+    }
+  }
+}

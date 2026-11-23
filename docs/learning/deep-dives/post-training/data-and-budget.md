@@ -7,7 +7,7 @@ hide:
 
 # 省掉哪一份算力：选问题、少生成、分枝与有条件重放
 
-[LLM 后训练](../index.md) · 更新 2026-11-20 · 42 篇主题资料 / 10 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-23 · 43 篇主题资料 / 11 篇重点对照
 
 数据与预算方法改变的是训练链路的不同位置。课程重估当前难度，LESSER降低筛选特征成本，STOPD随机少生成并校正，BranchOPD增加关键分枝，Lightning缓存教师，TAR召回被压制的正确模式；少调用一次教师不等于整个训练更便宜。
 
@@ -35,6 +35,7 @@ hide:
 | [Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons](../../../post-training/2611.20687-sh-opd/README.md) · [原始来源](https://arxiv.org/abs/2611.20687v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | power-survival离散分布、每批共享真实生成cap、标准token-mean OPD及隐式位置权重；不作逆概率去偏。 | GRPODropout先完成rollout再按熵贡献筛样本，不能节省同一轮生成；SH-OPD在生成前共享采样cap，改变深度曝光和实际生成预算。现有Dropout真实checkpoint的负结果也说明公式执行不等于能力收益。 |
 | [TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training](../../../post-training/2611.22206-tailroll/README.md) · [原始来源](https://arxiv.org/abs/2611.22206v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 只收录多engine真实在途迁移/单次re-prefill与部分输出loss mask机制；不以离线调度模拟声称系统提速。 | GRPODropout在完成生成后按响应熵贡献筛选，基本不省生成预算；TailRoll可提前终止尾response，并mask其partial loss，改变实际完成样本和系统时序。 |
 | [Policy Improvement-Guided Replay for Continual Reinforcement Learning](../../../post-training/2611.25989-colir-replay/README.md) · [原始来源](https://arxiv.org/abs/2611.25989v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 显式缓存的四组cross-policy序列log-likelihood、候选资格、每任务top-B、任务均匀/任务内均匀抽样和回放KL token门控。保留精确并列时的输入顺序；跨任务抽样本组件显式用有放回策略，论文未指定替换规则。没有VLM评分器、MRCL训练器、GSPO更新或能力评测，不能称为Evolve已接入。 | TAR先从base正确响应构建分散原型bank，按当前策略相对base的压制程度，对旧轨迹和token做门控加权NLL；CoLiR用初始错误与最终正确响应的cross-policy似然变化筛选历史prompt，后续由当前策略生成新响应，并只对replay施加KL。两者都分配历史回放预算，但单位是旧响应行为与历史问题，筛选依据是当前压制与原任务策略改进。比较成本必须分别计入TAR建bank、CoLiR补评分以及后续新rollout；CoLiR构建记忆免额外生成，不等于训练全程不再生成。 |
+| [CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency](../../../post-training/2611.27119-ctrl/README.md) · [原始来源](https://arxiv.org/abs/2611.27119v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 本篇仅收录和成本审查：没有本地CTRL实现、CUDA路径、benchmark、指标回执或Evolve算子。未将paper公式或CPU时序fixture宣传为CUDA共驻留系统。保存固定版本事实、机制、原图及失败/不占优条件，不生成伪实验metrics。 | CoLiR选择应回放哪些历史prompt、后续由当前策略生成新响应；CTRL决定同一批训练与生成怎样共享硬件和发布时间。一个是数据预算/记忆选择，一个是系统布局/版本合同，互不替代。免额外生成来构建CoLiR记忆也不消除训练rollout成本，不能据此把CTRL系统加速直接叠乘。 |
 
 </div>
 
@@ -75,6 +76,12 @@ SH-OPD明确保留原token-mean目标，接受位置曝光频率的系统性重�
 TAR先从base正确响应构建分散原型bank，按当前策略相对base的压制程度，对旧轨迹和token做门控加权NLL；CoLiR用初始错误与最终正确响应的cross-policy似然变化筛选历史prompt，后续由当前策略生成新响应，并只对replay施加KL。两者都分配历史回放预算，但单位是旧响应行为与历史问题，筛选依据是当前压制与原任务策略改进。比较成本必须分别计入TAR建bank、CoLiR补评分以及后续新rollout；CoLiR构建记忆免额外生成，不等于训练全程不再生成。 最终全对/全错或初始全对的prompt不得填满buffer；新任务和padding的KL梯度必须为0。排序依赖外部训练log-likelihood，不是伪造scorer或Agent成功率。
 
 对照来源：[colir-replay](../../../post-training/2611.25989-colir-replay/README.md) · [tar-adaptive-replay](../../../post-training/2610.24236-tar-adaptive-replay/README.md)
+
+### CTRL能与CoLiR回放预算直接相乘算总加速吗？
+
+CoLiR选择应回放哪些历史prompt、后续由当前策略生成新响应；CTRL决定同一批训练与生成怎样共享硬件和发布时间。一个是数据预算/记忆选择，一个是系统布局/版本合同，互不替代。免额外生成来构建CoLiR记忆也不消除训练rollout成本，不能据此把CTRL系统加速直接叠乘。 来源：§3.3 Eq.1及publication gate、§3.4 Eq.3。b(y)是包括跨刷新续写时的最早behavior版本，而非最终完成时版本。publication g在仍有dispatch p且g−p+1≥T的请求时等待；FIFO消费与W≤T warmup一起支撑陈旧度界。P的下界指导测量和SM share选择，不保证下界可达，也不是CPU调度模拟可以证实的吞吐收益。
+
+对照来源：[ctrl](../../../post-training/2611.27119-ctrl/README.md) · [colir-replay](../../../post-training/2611.25989-colir-replay/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -150,9 +157,23 @@ TAR先从base正确响应构建分散原型bank，按当前策略相对base的�
 
     对照来源：[colir-replay](../../../post-training/2611.25989-colir-replay/README.md) · [tar-adaptive-replay](../../../post-training/2610.24236-tar-adaptive-replay/README.md)
 
+### CTRL能与CoLiR回放预算直接相乘算总加速吗？ {#cross-nov23-ctrl}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。CoLiR改变保存与采样哪些历史prompt，CTRL改变训练和生成的硬件布局与publication。两者开销与瓶颈可能重叠，必须做真实联合系统对照；本轮两者组件都不提供这种证据。
+
+    **教学例子：** 教学例：少生成一批响应后learner可能变成瓶颈，原先为长rollout找到的SM share未必仍最优。
+
+    对照来源：[ctrl](../../../post-training/2611.27119-ctrl/README.md) · [colir-replay](../../../post-training/2611.25989-colir-replay/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-23** · CoLiR选择应回放哪些历史prompt、后续由当前策略生成新响应；CTRL决定同一批训练与生成怎样共享硬件和发布时间。一个是数据预算/记忆选择，一个是系统布局/版本合同，互不替代。免额外生成来构建CoLiR记忆也不消除训练rollout成本，不能据此把CTRL系统加速直接叠乘。 仅收录、无本地系统实现、无CUDA验收；成本过高，不复现（审查 DONE）。 完整实验成本过高不复现，审查DONE。
+
+涉及：[ctrl](../../../post-training/2611.27119-ctrl/README.md) · [colir-replay](../../../post-training/2611.25989-colir-replay/README.md)
 
 **2026-11-20** · 显式缓存的四组cross-policy序列log-likelihood、候选资格、每任务top-B、任务均匀/任务内均匀抽样和回放KL token门控。保留精确并列时的输入顺序；跨任务抽样本组件显式用有放回策略，论文未指定替换规则。没有VLM评分器、MRCL训练器、GSPO更新或能力评测，不能称为Evolve已接入。 完整实验成本过高不复现；组件不构成能力晋级。
 
@@ -174,7 +195,7 @@ TAR先从base正确响应构建分散原型bank，按当前策略相对base的�
 
 覆盖 38 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 42 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 43 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -220,6 +241,7 @@ TAR先从base正确响应构建分散原型bank，按当前策略相对base的�
 - [Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons](../../../post-training/2611.20687-sh-opd/README.md)
 - [TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training](../../../post-training/2611.22206-tailroll/README.md)
 - [Policy Improvement-Guided Replay for Continual Reinforcement Learning](../../../post-training/2611.25989-colir-replay/README.md)
+- [CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency](../../../post-training/2611.27119-ctrl/README.md)
 
 </details>
 

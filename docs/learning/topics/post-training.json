@@ -137,7 +137,8 @@
         "post-training:regularized-score-centering",
         "post-training:ash-hint-steering",
         "post-training:led-edits",
-        "post-training:dfrl"
+        "post-training:dfrl",
+        "post-training:retokenization-update"
       ]
     },
     {
@@ -273,7 +274,8 @@
         "post-training:cord-rollout",
         "post-training:drd-mopd",
         "post-training:streaming-opd",
-        "post-training:mrpd-replay"
+        "post-training:mrpd-replay",
+        "post-training:dwe"
       ]
     },
     {
@@ -412,7 +414,8 @@
         "post-training:maple-icl",
         "post-training:sh-opd",
         "post-training:tailroll",
-        "post-training:colir-replay"
+        "post-training:colir-replay",
+        "post-training:ctrl"
       ]
     }
   ]

@@ -172,6 +172,7 @@
 
 ### policy-optimization
 
+- [How Far Does Lossless Re-tokenization Move an RLVR Update?](../2611.27083-retokenization-update/README.md)（`retokenization-update`）：研究对象不是奖励变化，而是同一rollout的token ID变化。保留文本、reward、advantage和checkpoint，仅将可拆token替换成两个拼回原文本的词表项。
 - [Decision-Focused Reinforcement Learning for LLM Post-Training](../2611.25597-dfrl/README.md)（`dfrl`）：预测误差小不保证由预测触发的决策成本低。DFRL把LLM生成的参数预测交给下游优化器，以真实观测参数评估该决策，再把负决策regret用于后训练；不对优化器求导。
 - [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](../2611.23750-led-edits/README.md)（`led-edits`）：仅允许token替换时，一个遗漏或多余token会让整段后缀错位，需要许多位置分别修复。LED把[Ins]/[Del]加入输出词表、排除在输入词表外：删除当前token，或在其前插入新[Mask]，同时保留该锚点token。
 - [Get Hint-Augmented GRPO Done Right Through Activation Steering](../2611.23124-ash-hint-steering/README.md)（`ash-hint-steering`）：训练问题附带reference solution前半hint更易有正reward，但推理没有该hint。ASH学习可注入activation的行为方向，在无hint输入上重现部分偏移。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -221,6 +222,7 @@
 
 ### data-and-budget
 
+- [CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency](../2611.27119-ctrl/README.md)（`ctrl`）：CTRL让每张GPU同时驻留learner rank和持续rollout shard，在CUDA MPS下共享SM。为腾出显存，优化器和immutable policy版本保存在host，learner仅流式装入有限层窗口。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [Policy Improvement-Guided Replay for Continual Reinforcement Learning](../2611.25989-colir-replay/README.md)（`colir-replay`）：持续RL不应只保存旧模型的输出：新策略仍需在历史任务分布上重新行动。CoLiR在任务结束时复用已有rollout，分别取最终策略生成的正确响应和初始策略生成的错误响应；各自补算另一策略的序列log-likelihood，以正确响应被强化和错误响应被压低两个半权重均值排序prompt。
 - [TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training](../2611.22206-tailroll/README.md)（`tailroll`）：rollout step常被最长尾response决定，平均load无法反映尾长。TailRoll在chunk边界迁移在途请求，并用完成siblings足够后的终止处理straggler。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons](../2611.20687-sh-opd/README.md)（`sh-opd`）：每个训练batch先抽一个共享生成长度上限，广播给所有rollout worker，生成在EOS或该上限结束；不是先生成完整长答案再裁loss。
@@ -251,6 +253,12 @@
 - [Multi-Reward Hacking: From Aggregation-Induced Drift to Trust-Anchored Defense](../2610.21404-tag-reward-gating/README.md)（`tag-reward-gating`）：正确性和简短、低时延等奖励相加时，容易获取的辅助奖励可能主导 GRPO：总奖励上涨，主要任务却变差。TAG 不是简单降低辅助权重，而是先从同一基线分别优化每个奖励，观察哪个探针对基线的分布漂移最小，再将该奖励选为 anchor。
 - [Training Reasoning Models to Generate Diverse Scientific Ideas](../2610.22324-diverge-ideation/README.md)（`diverge-ideation`）：独立采样多个高分想法可能反复得到同一个方向。论文让模型在一次生成中写出整组想法，每个新想法都能看到前面写过的内容，再按整组质量和相互差异训练。
 - [Failure Is the Mother of Success: Recovering Supervision with Grounding Hindsight](../2610.21018-rshd/README.md)（`rshd`）：一组 GRPO rollout 全部失败时，组内 advantage 全为0。RSHD 不把参考答案告诉模型，而让同一策略根据失败响应写纠错 note，再用 note 生成**新的** replay。
+
+### student-trajectory-distillation
+
+- [Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation](../2611.27131-dwe/README.md)（`dwe`）：DWE不改变蒸馏教师、采样者或KL目标，而是在相同输入和参数下估计输出头的完整梯度。softmax的logit梯度和为零，正负部分各有质量m；分别归一化后配成等量异号的坐标对。
+- [Replay, Don't Resample: Off-Policy Consolidation of Long-Horizon RL Experts](../2611.24059-mrpd-replay/README.md)（`mrpd-replay`）：MRPD把专家RL训练日志当作随训练步变化的课程，而非混洗后的离线数据池。学生与专家同一SFT初始化；第k步合并各域专家第k步日志，使用日志采样策略的log-prob做importance ratio，重算组相对奖励的非对称clipped PG。
+- [Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption](../2611.22298-streaming-opd/README.md)（`streaming-opd`）：token局部teacher监督只依赖已生成prefix，不依赖未来token。片段可先进入candidate pool，等监督预算凑齐才更新，而不必每片段一次更新或等整答案结束。
 
 ### post-training
 
@@ -294,11 +302,6 @@
 ### 后训练算法组件
 
 - [MOER: Mix-Policy Optimization under Expert Prefix Guidance with Selective Rollback](../2610.30873-moer/README.md)（`moer`）：既有混合策略训练直接加入完整专家解法，可能削弱探索；专家前缀引导虽允许学生续写，却可能把错误续写继续作为监督。MOER 逐步缩短专家 CoT 前缀：成功则保留前缀加续写，失败则回滚到已有的完整、已验证专家轨迹。
-
-### student-trajectory-distillation
-
-- [Replay, Don't Resample: Off-Policy Consolidation of Long-Horizon RL Experts](../2611.24059-mrpd-replay/README.md)（`mrpd-replay`）：MRPD把专家RL训练日志当作随训练步变化的课程，而非混洗后的离线数据池。学生与专家同一SFT初始化；第k步合并各域专家第k步日志，使用日志采样策略的log-prob做importance ratio，重算组相对奖励的非对称clipped PG。
-- [Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption](../2611.22298-streaming-opd/README.md)（`streaming-opd`）：token局部teacher监督只依赖已生成prefix，不依赖未来token。片段可先进入candidate pool，等监督预算凑齐才更新，而不必每片段一次更新或等整答案结束。
 
 ### DPO 偏好/优化尺度解耦
 

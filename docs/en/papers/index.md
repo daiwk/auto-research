@@ -4,19 +4,27 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1265 entries from the shared research manifest. English write-ups available: 1265.
+The catalog lists 1274 entries from the shared research manifest. English write-ups available: 1274.
 
 ## Browse by domain
 
 - [Search, ads, recommendation, and LLM applications](recommendation.md): 343 catalog entries, 343 English write-ups
-- [Foundation models](foundation-models.md): 262 catalog entries, 262 English write-ups
+- [Foundation models](foundation-models.md): 265 catalog entries, 265 English write-ups
 - [Structured decisions / System One](system-one.md): 10 catalog entries, 10 English write-ups
 - [Multimodal models](multimodal-models.md): 32 catalog entries, 32 English write-ups
-- [LLM post-training](post-training.md): 292 catalog entries, 292 English write-ups
-- [Agents](agent-research.md): 326 catalog entries, 326 English write-ups
+- [LLM post-training](post-training.md): 295 catalog entries, 295 English write-ups
+- [Agents](agent-research.md): 329 catalog entries, 329 English write-ups
 
 ## Read in English
 
+- [Reliable Behavior Discovery via False Discovery Rate Control](../../foundation-models/2611.27104-disco/README-en.md)
+- [How Far Does Lossless Re-tokenization Move an RLVR Update?](../../post-training/2611.27083-retokenization-update/README-en.md)
+- [From Acting to Learning: Experience Selection toward Continually Learning Agents](../../agent-research/2611.27159-acting-to-learning/README-en.md)
+- [Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation](../../post-training/2611.27131-dwe/README-en.md)
+- [CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?](../../agent-research/2611.27116-coevobench/README-en.md)
+- [CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency](../../post-training/2611.27119-ctrl/README-en.md)
+- [Accelerating Muon with Spectral Residual Correction](../../foundation-models/2611.27077-aimuon/README-en.md)
+- [$R^2$: Recognizing and Reducing Redundant Visual Tool Use](../../agent-research/2611.27070-r2-tool-redundancy/README-en.md)
 - [Stop Going in Circles:Loop-Triggered Routing for System 1 Decision Agents](../../system-one/2611.25363-looproute/README-en.md)
 - [Sequential Anytime Valid Tests for Efficient Inference-Time Alignment](../../foundation-models/2611.26413-e-rwsc/README-en.md)
 - [Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement](../../agent-research/2611.26132-sage-evolve/README-en.md)
@@ -963,6 +971,7 @@ The catalog lists 1265 entries from the shared research manifest. English write-
 - [Optimized Deferral for Imbalanced Settings](../../foundation-models/2604.27723-mild/README-en.md)
 - [Mind the Gap: Structure-Aware Consistency in Preference Learning](../../post-training/2604.27733-sa-dpo/README-en.md)
 - [From Local Indices to Global Identifiers: Generative Reranking via Global Action Space](../../reproductions/2604.25291-glorank/README-en.md)
+- [Don't Pause&#33; Every prediction matters in a streaming video](../../foundation-models/2604.24317-spot-bench/README-en.md)
 - [Co-Director: Agentic Generative Video Storytelling](../../agent-research/2604.24842-co-director/README-en.md)
 - [Beyond Static Collision Handling: Adaptive Semantic ID Learning for Multimodal Recommendation at Industrial Scale](../../reproductions/2604.23522-adasid/README-en.md)
 - [ProEval: Proactive Failure Discovery and Efficient Performance Estimation for Generative AI Evaluation](../../foundation-models/2604.23099-proeval/README-en.md)

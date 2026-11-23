@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/html/2611.27083v1",
+  "source_url": "https://arxiv.org/html/2611.27083v1/fig_teaser.svg",
+  "figure": "Figure 1",
+  "caption": "Figure 1: identical decoded text after splitting one token; earliest/random/latest edit policies yield different update displacements.",
+  "source_sha256": "87d272c37ef884e65d05d654596137483d5ee895da6809b6a56bc475df8df47e",
+  "asset_sha256": "1c42d0213f72487313ea67abf7ed4f4e52950cbf9aa85aa6ed5753b452094e10",
+  "image_sha256": "1c42d0213f72487313ea67abf7ed4f4e52950cbf9aa85aa6ed5753b452094e10",
+  "visually_reviewed": true,
+  "scientific_content_modified": false,
+  "transformation": "Original SVG retained; PNG rasterization via PyMuPDF at scale2",
+  "copyright": "Copyright remains with original authors; original figure with attribution."
+}

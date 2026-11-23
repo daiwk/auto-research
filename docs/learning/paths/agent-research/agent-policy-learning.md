@@ -7,7 +7,7 @@ hide:
 
 # 交互策略学习：把轨迹反馈变成更新
 
-[Agent](index.md) / 220 个问题 · 55 篇论文
+[Agent](index.md) / 228 个问题 · 57 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">220 个问题 · 55 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">228 个问题 · 57 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:acting-to-learning" data-paper-title="From Acting to Learning: Experience Selection toward Continually Learning Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="From Acting to Learning: Experience Selection toward Continually Learning Agents Agent Country Garden Services AI Lab / Omni AI 2026-11-20 论文把成功交互后的经验选择单独隔离：历史池先固定，选择规则决定训练哪些action记录，所有学生使用同一训练预算与部署executor。它不是一个新通用梯度影响公式；打分沿用LESS式优化器感知梯度，贡献是Agent学习中的严格对照，尤其把排序规则和可选择的覆盖空间交叉。完整研究只有一次选择—训练阶段，没有验证多轮持续学习、遗忘或自主修改harness。候选LoRA梯度在warmup第8/16/24/32个checkpoint上，与冻结Adam一、二阶矩构成ranking feature； 成本过高，不复现（审查 DONE）。component_only / L1 CPU公式与调度诊断，diagnostic_only=true。不是Agent能力复现或Evolve集成。首发为2026-11-20，发现/审查为2026-11-23，不称11月23日新首发。本地独立实现NumPy float64公式核：显式梯度/冻结moments转feature、逐support向量归一化、checkpoint平均后family最大值、按完整字符串精确去重、全局top/random和三轮调度、按reference逐位置匹配stratum并保持不同内容配额的选择。零范数方向原文未定义，明确拒绝而不补造0分；  Agent 策略学习 acting-to-learning Agent 交互策略学习：把轨迹反馈变成更新 既然记录都成功，为什么还要选择？ 成功只说明当时动作完成了任务；重复、容易预测的记录未必补上学生缺口。论文在固定经验池与训练预算下比较选择规则，而不把采集成功率当学生学习收益。 教学例：重复100次熟悉的拿杯子动作，可能不如补一条学生缺失的清洁动作；这只是示意，不是本文测量。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<span id="paper-agent-research-acting-to-learning-404dedab" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-21c34f4e157809bc">既然记录都成功，为什么还要选择？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aacting-to-learning">From Acting to Learning: Experience Selection toward Continually Learning Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Country Garden Services AI Lab / Omni AI</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>成功只说明当时动作完成了任务；重复、容易预测的记录未必补上学生缺口。论文在固定经验池与训练预算下比较选择规则，而不把采集成功率当学生学习收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：重复100次熟悉的拿杯子动作，可能不如补一条学生缺失的清洁动作；这只是示意，不是本文测量。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27159v1">原论文</a> · <a href="../../../../agent-research/2611.27159-acting-to-learning/">实现解读</a> · <a href="#qa-21c34f4e157809bc">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:acting-to-learning" data-paper-title="From Acting to Learning: Experience Selection toward Continually Learning Agents" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="From Acting to Learning: Experience Selection toward Continually Learning Agents Agent Country Garden Services AI Lab / Omni AI 2026-11-20 论文把成功交互后的经验选择单独隔离：历史池先固定，选择规则决定训练哪些action记录，所有学生使用同一训练预算与部署executor。它不是一个新通用梯度影响公式；打分沿用LESS式优化器感知梯度，贡献是Agent学习中的严格对照，尤其把排序规则和可选择的覆盖空间交叉。完整研究只有一次选择—训练阶段，没有验证多轮持续学习、遗忘或自主修改harness。候选LoRA梯度在warmup第8/16/24/32个checkpoint上，与冻结Adam一、二阶矩构成ranking feature； 成本过高，不复现（审查 DONE）。component_only / L1 CPU公式与调度诊断，diagnostic_only=true。不是Agent能力复现或Evolve集成。首发为2026-11-20，发现/审查为2026-11-23，不称11月23日新首发。本地独立实现NumPy float64公式核：显式梯度/冻结moments转feature、逐support向量归一化、checkpoint平均后family最大值、按完整字符串精确去重、全局top/random和三轮调度、按reference逐位置匹配stratum并保持不同内容配额的选择。零范数方向原文未定义，明确拒绝而不补造0分；  Agent 策略学习 acting-to-learning Agent 交互策略学习：把轨迹反馈变成更新 为什么不能每个checkpoint先挑最高family再平均？ 原公式先对同一family跨checkpoint累积，再取family最大值；反过来会把不同时间各自最有利的family拼成不存在的一致相关性。 教学例：family A在两个checkpoint为1和-1，B为-1和1；正确分数是0，逐checkpoint取max却会得到1。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-82ccdee6e45e6f53">为什么不能每个checkpoint先挑最高family再平均？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aacting-to-learning">From Acting to Learning: Experience Selection toward Continually Learning Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Country Garden Services AI Lab / Omni AI</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原公式先对同一family跨checkpoint累积，再取family最大值；反过来会把不同时间各自最有利的family拼成不存在的一致相关性。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：family A在两个checkpoint为1和-1，B为-1和1；正确分数是0，逐checkpoint取max却会得到1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27159v1">原论文</a> · <a href="../../../../agent-research/2611.27159-acting-to-learning/">实现解读</a> · <a href="#qa-82ccdee6e45e6f53">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:acting-to-learning" data-paper-title="From Acting to Learning: Experience Selection toward Continually Learning Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="From Acting to Learning: Experience Selection toward Continually Learning Agents Agent Country Garden Services AI Lab / Omni AI 2026-11-20 论文把成功交互后的经验选择单独隔离：历史池先固定，选择规则决定训练哪些action记录，所有学生使用同一训练预算与部署executor。它不是一个新通用梯度影响公式；打分沿用LESS式优化器感知梯度，贡献是Agent学习中的严格对照，尤其把排序规则和可选择的覆盖空间交叉。完整研究只有一次选择—训练阶段，没有验证多轮持续学习、遗忘或自主修改harness。候选LoRA梯度在warmup第8/16/24/32个checkpoint上，与冻结Adam一、二阶矩构成ranking feature； 成本过高，不复现（审查 DONE）。component_only / L1 CPU公式与调度诊断，diagnostic_only=true。不是Agent能力复现或Evolve集成。首发为2026-11-20，发现/审查为2026-11-23，不称11月23日新首发。本地独立实现NumPy float64公式核：显式梯度/冻结moments转feature、逐support向量归一化、checkpoint平均后family最大值、按完整字符串精确去重、全局top/random和三轮调度、按reference逐位置匹配stratum并保持不同内容配额的选择。零范数方向原文未定义，明确拒绝而不补造0分；  Agent 策略学习 acting-to-learning Agent 交互策略学习：把轨迹反馈变成更新 与ACE Lens相比，本篇额外控制了什么？ ACE组织数据可信度、复杂度和覆盖；本篇把排序规则与选择空间分开，global random和global high-NLL也可自由改变coverage，避免把自由度差异误算成gradient优势。 教学例：如果gradient可跨任务挑256条，random也应能跨任务挑256条；不能只给random固定旧任务配额。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-d4f07a017829396d">与ACE Lens相比，本篇额外控制了什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aacting-to-learning">From Acting to Learning: Experience Selection toward Continually Learning Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Country Garden Services AI Lab / Omni AI</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>ACE组织数据可信度、复杂度和覆盖；本篇把排序规则与选择空间分开，global random和global high-NLL也可自由改变coverage，避免把自由度差异误算成gradient优势。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：如果gradient可跨任务挑256条，random也应能跨任务挑256条；不能只给random固定旧任务配额。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27159v1">原论文</a> · <a href="../../../../agent-research/2611.27159-acting-to-learning/">实现解读</a> · <a href="#qa-d4f07a017829396d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:acting-to-learning" data-paper-title="From Acting to Learning: Experience Selection toward Continually Learning Agents" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="From Acting to Learning: Experience Selection toward Continually Learning Agents Agent Country Garden Services AI Lab / Omni AI 2026-11-20 论文把成功交互后的经验选择单独隔离：历史池先固定，选择规则决定训练哪些action记录，所有学生使用同一训练预算与部署executor。它不是一个新通用梯度影响公式；打分沿用LESS式优化器感知梯度，贡献是Agent学习中的严格对照，尤其把排序规则和可选择的覆盖空间交叉。完整研究只有一次选择—训练阶段，没有验证多轮持续学习、遗忘或自主修改harness。候选LoRA梯度在warmup第8/16/24/32个checkpoint上，与冻结Adam一、二阶矩构成ranking feature； 成本过高，不复现（审查 DONE）。component_only / L1 CPU公式与调度诊断，diagnostic_only=true。不是Agent能力复现或Evolve集成。首发为2026-11-20，发现/审查为2026-11-23，不称11月23日新首发。本地独立实现NumPy float64公式核：显式梯度/冻结moments转feature、逐support向量归一化、checkpoint平均后family最大值、按完整字符串精确去重、全局top/random和三轮调度、按reference逐位置匹配stratum并保持不同内容配额的选择。零范数方向原文未定义，明确拒绝而不补造0分；  Agent 策略学习 acting-to-learning Agent 交互策略学习：把轨迹反馈变成更新 打分warmup权重能作为最终学生起点吗？ 不能在复刻该协议时这样做。warmup只提供feature，最终学生从原base和新LoRA重新开始；公开support action不等于评测query答案，后者不能进入打分器。 教学例：先在4个warmup checkpoint算score，选择内容后丢弃warmup adapter，再按相同初始化训练各selector。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-2d9157c974daf663">打分warmup权重能作为最终学生起点吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aacting-to-learning">From Acting to Learning: Experience Selection toward Continually Learning Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Country Garden Services AI Lab / Omni AI</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能在复刻该协议时这样做。warmup只提供feature，最终学生从原base和新LoRA重新开始；公开support action不等于评测query答案，后者不能进入打分器。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：先在4个warmup checkpoint算score，选择内容后丢弃warmup adapter，再按相同初始化训练各selector。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27159v1">原论文</a> · <a href="../../../../agent-research/2611.27159-acting-to-learning/">实现解读</a> · <a href="#qa-2d9157c974daf663">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:r2-tool-redundancy" data-paper-title="$R^2$: Recognizing and Reducing Redundant Visual Tool Use" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="$R^2$: Recognizing and Reducing Redundant Visual Tool Use Agent Tsinghua University 2026-11-20 R²把三个问题分开：CAT描述题目是否可能从工具获益；VFD描述一次返回观察对后续同一段推理文本提供多少额外似然支持；RA-GRPO在答对的轨迹之间比较工具效率，而不是奖励所有少调用的轨迹。CAT标签来自训练侧tool/no-tool rollouts的多次正确性和实际调用，不是根据问题长度或关键词猜测；VFD也不是gold-answer概率或“这次工具有用”的因果证明。VFD仅替换当前调用的视觉反馈，保留原图、其他历史与待评分推理tokens； 成本过高，不复现（审查 DONE）。component_only / L1 CPU公式与调度诊断，diagnostic_only=true。不是Agent能力复现或Evolve集成。首发为2026-11-20，发现/审查为2026-11-23，不称11月23日新首发。CPU NumPy组件只执行同文本token log概率的VFD差、reasoning-only分来源冻结阈值、单eligible-call无偏冗余估计和类别base cost、sample-SD outcome advantage、仅正确轨迹效率项及clipped GRPO标量目标。  Agent 策略学习 r2-tool-redundancy Agent 交互策略学习：把轨迹反馈变成更新 工具调用越少就越好，为什么不直接奖励少调用？ 失败轨迹也可能一次工具都没用。R²先保留正确性监督，再只在同题正确轨迹中比较成本；少调用本身不证明能解决任务或会用工具。 教学例：一条答错但0调用、两条答对分别1/3调用；效率奖励只能比较后两条，不能给答错轨迹加分。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<span id="paper-agent-research-r2-tool-redundancy-d0a0c881" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d0b551a272cfb3e0">工具调用越少就越好，为什么不直接奖励少调用？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ar2-tool-redundancy">$R^2$: Recognizing and Reducing Redundant Visual Tool Use</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>失败轨迹也可能一次工具都没用。R²先保留正确性监督，再只在同题正确轨迹中比较成本；少调用本身不证明能解决任务或会用工具。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一条答错但0调用、两条答对分别1/3调用；效率奖励只能比较后两条，不能给答错轨迹加分。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27070v1">原论文</a> · <a href="../../../../agent-research/2611.27070-r2-tool-redundancy/">实现解读</a> · <a href="#qa-d0b551a272cfb3e0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:r2-tool-redundancy" data-paper-title="$R^2$: Recognizing and Reducing Redundant Visual Tool Use" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="$R^2$: Recognizing and Reducing Redundant Visual Tool Use Agent Tsinghua University 2026-11-20 R²把三个问题分开：CAT描述题目是否可能从工具获益；VFD描述一次返回观察对后续同一段推理文本提供多少额外似然支持；RA-GRPO在答对的轨迹之间比较工具效率，而不是奖励所有少调用的轨迹。CAT标签来自训练侧tool/no-tool rollouts的多次正确性和实际调用，不是根据问题长度或关键词猜测；VFD也不是gold-answer概率或“这次工具有用”的因果证明。VFD仅替换当前调用的视觉反馈，保留原图、其他历史与待评分推理tokens； 成本过高，不复现（审查 DONE）。component_only / L1 CPU公式与调度诊断，diagnostic_only=true。不是Agent能力复现或Evolve集成。首发为2026-11-20，发现/审查为2026-11-23，不称11月23日新首发。CPU NumPy组件只执行同文本token log概率的VFD差、reasoning-only分来源冻结阈值、单eligible-call无偏冗余估计和类别base cost、sample-SD outcome advantage、仅正确轨迹效率项及clipped GRPO标量目标。  Agent 策略学习 r2-tool-redundancy Agent 交互策略学习：把轨迹反馈变成更新 VFD为什么固定同一段后续推理，不重新生成？ 它比较当前观察对已经生成的同一文本提供的额外似然支持，避免把随机重生成的文字差异混进来；只替换当前反馈，其他历史仍保留。低VFD是冗余信号，不是因果必要性证明。 教学例：原crop和随机crop都让同一推理段log概率为-0.4，则VFD为0；不能把不同答案的概率相减冒充该指标。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-8aebb84e4d0d7cc2">VFD为什么固定同一段后续推理，不重新生成？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ar2-tool-redundancy">$R^2$: Recognizing and Reducing Redundant Visual Tool Use</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它比较当前观察对已经生成的同一文本提供的额外似然支持，避免把随机重生成的文字差异混进来；只替换当前反馈，其他历史仍保留。低VFD是冗余信号，不是因果必要性证明。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：原crop和随机crop都让同一推理段log概率为-0.4，则VFD为0；不能把不同答案的概率相减冒充该指标。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27070v1">原论文</a> · <a href="../../../../agent-research/2611.27070-r2-tool-redundancy/">实现解读</a> · <a href="#qa-8aebb84e4d0d7cc2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:r2-tool-redundancy" data-paper-title="$R^2$: Recognizing and Reducing Redundant Visual Tool Use" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="$R^2$: Recognizing and Reducing Redundant Visual Tool Use Agent Tsinghua University 2026-11-20 R²把三个问题分开：CAT描述题目是否可能从工具获益；VFD描述一次返回观察对后续同一段推理文本提供多少额外似然支持；RA-GRPO在答对的轨迹之间比较工具效率，而不是奖励所有少调用的轨迹。CAT标签来自训练侧tool/no-tool rollouts的多次正确性和实际调用，不是根据问题长度或关键词猜测；VFD也不是gold-answer概率或“这次工具有用”的因果证明。VFD仅替换当前调用的视觉反馈，保留原图、其他历史与待评分推理tokens； 成本过高，不复现（审查 DONE）。component_only / L1 CPU公式与调度诊断，diagnostic_only=true。不是Agent能力复现或Evolve集成。首发为2026-11-20，发现/审查为2026-11-23，不称11月23日新首发。CPU NumPy组件只执行同文本token log概率的VFD差、reasoning-only分来源冻结阈值、单eligible-call无偏冗余估计和类别base cost、sample-SD outcome advantage、仅正确轨迹效率项及clipped GRPO标量目标。  Agent 策略学习 r2-tool-redundancy Agent 交互策略学习：把轨迹反馈变成更新 R²与AdaStep都是credit方法，能交换统计量吗？ 不能。AdaStep从同状态动作组的回报方差估计局部信用可靠性；R²用当前视觉反馈的同文本似然差估计冗余成本，再只在correct集合内比较。它们条件信息与归一化对象不同。 教学例：重复crop可能VFD接近0，但动作后环境回报很稳定；稳定不等于观察不冗余。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-99d3299d55076b8e">R²与AdaStep都是credit方法，能交换统计量吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ar2-tool-redundancy">$R^2$: Recognizing and Reducing Redundant Visual Tool Use</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。AdaStep从同状态动作组的回报方差估计局部信用可靠性；R²用当前视觉反馈的同文本似然差估计冗余成本，再只在correct集合内比较。它们条件信息与归一化对象不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：重复crop可能VFD接近0，但动作后环境回报很稳定；稳定不等于观察不冗余。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27070v1">原论文</a> · <a href="../../../../agent-research/2611.27070-r2-tool-redundancy/">实现解读</a> · <a href="#qa-99d3299d55076b8e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:r2-tool-redundancy" data-paper-title="$R^2$: Recognizing and Reducing Redundant Visual Tool Use" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="$R^2$: Recognizing and Reducing Redundant Visual Tool Use Agent Tsinghua University 2026-11-20 R²把三个问题分开：CAT描述题目是否可能从工具获益；VFD描述一次返回观察对后续同一段推理文本提供多少额外似然支持；RA-GRPO在答对的轨迹之间比较工具效率，而不是奖励所有少调用的轨迹。CAT标签来自训练侧tool/no-tool rollouts的多次正确性和实际调用，不是根据问题长度或关键词猜测；VFD也不是gold-answer概率或“这次工具有用”的因果证明。VFD仅替换当前调用的视觉反馈，保留原图、其他历史与待评分推理tokens； 成本过高，不复现（审查 DONE）。component_only / L1 CPU公式与调度诊断，diagnostic_only=true。不是Agent能力复现或Evolve集成。首发为2026-11-20，发现/审查为2026-11-23，不称11月23日新首发。CPU NumPy组件只执行同文本token log概率的VFD差、reasoning-only分来源冻结阈值、单eligible-call无偏冗余估计和类别base cost、sample-SD outcome advantage、仅正确轨迹效率项及clipped GRPO标量目标。  Agent 策略学习 r2-tool-redundancy Agent 交互策略学习：把轨迹反馈变成更新 score缺失和没有eligible调用可以都记0吗？ 不可以。附录C.3规定：记录完整但score不可用的抽中eligible调用记z=1；空eligible集合才冗余成本为0。失败/记录不完整调用先排除，不应伪装成缺失score的完整调用。 教学例：3个eligible里抽到一个None，估计冗余数为3；如果3次调用全部无有效crop，eligible为空，冗余项才为0。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-7e0c1c9ae2974e01">score缺失和没有eligible调用可以都记0吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ar2-tool-redundancy">$R^2$: Recognizing and Reducing Redundant Visual Tool Use</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不可以。附录C.3规定：记录完整但score不可用的抽中eligible调用记z=1；空eligible集合才冗余成本为0。失败/记录不完整调用先排除，不应伪装成缺失score的完整调用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：3个eligible里抽到一个None，估计冗余数为3；如果3次调用全部无有效crop，eligible为空，冗余项才为0。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27070v1">原论文</a> · <a href="../../../../agent-research/2611.27070-r2-tool-redundancy/">实现解读</a> · <a href="#qa-7e0c1c9ae2974e01">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ace-rl" data-paper-title="Experience-Handoff Reinforcement Learning for Recursive Self-Improvement" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Experience-Handoff Reinforcement Learning for Recursive Self-Improvement Agent New York University 2026-11-12 普通结果RL把尝试压成一个分数，丢失错误日志等细粒度经验；固定ACE harness虽能写playbook，却没有训练“写什么经验”。ACE-RL固定scaffold，以一个共享模型分别扮演actor、reflector和curator，并让编辑后全新环境actor的回报评价交接物，而不是让judge主观评分反思文本。每次环境都重置到同一任务；仅task-local playbook跨尝试，推理时权重冻结。 完整实验成本过高，不复现（审查 DONE）。component_only／L1机制诊断，未训练Agent。component_only／L1机制诊断，未训练Agent。完整实验成本过高，不复现（审查 DONE）。本地不是AppWorld／SWE环境接入，也不声称已获得RSI能力。RoleSample保存task／seed／reflection来源；role_advantages显式执行两种过滤。apply_edits接收已解析ADD／UPDATE／REMOVE，局部ID从0起、操作完成后去重重编号，token预算必须由外部tokenizer给出整数ID，不用字符数冒充。  Agent 策略学习 经验交接与角色信用 RSI Agent 交互策略学习：把轨迹反馈变成更新 ACE-RL的RSI是在测试时不断训练模型或改harness吗？ 不是。训练时共享模型学习actor、reflector和curator；推理时权重冻结，ACE scaffold固定，仅同一任务的playbook在尝试间交接。 教学例：下一次尝试收到新测试经验，不代表模型权重刚做了一步梯度更新。 2026-11-15">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-ace-rl-4ff25fea" class="ar-learning-paper-anchor"></span>

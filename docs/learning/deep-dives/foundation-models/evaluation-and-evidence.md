@@ -7,7 +7,7 @@ hide:
 
 # 能力证据：准确打分、节省观测与解释预测
 
-[基础模型](../index.md) · 更新 2026-11-21 · 27 篇主题资料 / 19 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-23 · 29 篇主题资料 / 21 篇重点对照
 
 先区分“正确答案怎样定义”“下一题测谁”“多个裁判怎样融合”和“预测怎样解释”。XLGoBench、ProEval、FUSE、TCAB 与 DetectorScope 分别改变这些环节；观测更少或解释可加，不等于被测能力本身更强。XLA from the Trenches还提醒：评分之前，编译后程序本身就可能静默偏离原始数值语义，不能把编译成功当作执行正确。
 
@@ -44,6 +44,8 @@ hide:
 | [Mixed Signals: Weight-Space Programming for EEG and ECG](../../../foundation-models/2611.13758-mixed-signals-weights/README.md) · [原始来源](https://arxiv.org/abs/2611.13758v1)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 用原子参数补丁和受限practice反馈表达WSP接口，测试标签留在外部评价器，不用SGD替代推理编辑。 | AMS从固定激活读出结构差异，不写参数也不认证安全；WSP问能否推理改权重。当前L0线性harness不含LLM、TinyEEGNet或被试数据。 |
 | [Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization](../../../foundation-models/2603.02029-efficient-evals-tensor/README.md) · [原始来源](https://arxiv.org/abs/2603.02029v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | 本文将模型、prompt和rater三者的能力张量作低rank CP分解，先用大量廉价autorater评分学共享表示，再冻结表示、只拟合人类rater向量及有序cutoff。它保留prompt异质性和rater偏好差异，不把某个自动judge分数直接当人类真值。2026-11-16是Google官方代码新仓库，不是论文首发；v1首发为2026-03-02 16:12:46 UTC。 | ProEval用其他模型历史逐题分数建立GP先验并主动决定下一题；本篇用多rater廉价数据学prompt/model表示再做人类对齐。前者的采样后验不等于后者的rater偏差校准，条件置信界也不能无条件覆盖共享表示估计误差。 |
 | [Sequential Anytime Valid Tests for Efficient Inference-Time Alignment](../../../foundation-models/2611.26413-e-rwsc/README.md) · [原始来源](https://arxiv.org/abs/2611.26413v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 纯stdlib、CPU-only的RWSC聚合、前缀可预测下注、逐答案log资本与首现权重、首次出现跳过、认证终止和显式未认证预算回退。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。没有LLM、reward model、答案解析或公开benchmark运行；不把合成流叫模型输出，不接Evolve晋级。 | LLM Stochasticity区分边缘分布拟合与时序依赖；e-RWSC的保证需要固定政策的iid响应，不能由平衡答案直方图或“请随机回答”提示推导。前者的统计诊断可暴露某些依赖，却不能证明后者的全部假设。e-RWSC也不估计答案是否符合现实：即使输入真独立，政策总偏向错误答案时仍可快速发多数证书。 |
+| [Reliable Behavior Discovery via False Discovery Rate Control](../../../foundation-models/2611.27104-disco/README.md) · [原始来源](https://arxiv.org/abs/2611.27104v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | DISCO以冻结e-process与粗分箱选择接口控制行为发现集合的FDR，允许最终使用实际假设数；本地仅有未boosted二分箱统计核心。 | e-RWSC认证单题某答案的政策多数概率，不等于正确性；DISCO控制多行为假设集合的误发现比例，并为自适应假设池施加分箱、冻结与null分布校正约束。相同的e-process工具不使两类错误和证书等价。 |
+| [Don&#x27;t Pause! Every prediction matters in a streaming video](../../../foundation-models/2604.24317-spot-bench/README.md) · [原始来源](https://arxiv.org/abs/2604.24317v2)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 纯CPU、stdlib的非对称timeliness、按原时间索引语义矩阵、开放slot逐时吸收与K关闭、加权P/R/F1。合成trace负控包括错误语义、空输出、7次重复超过K=5、多slot重叠和早晚惩罚；完美合成trace得1只是定义检查，不是任何Agent能力。无Ctrl-SPOT的持久query/CPU-GPU KV/检索/总结，无视频、LLM或付费judge调用，不接Evolve晋级。 | e-RWSC依据固定政策iid答案流，检验的是多数占优而非答案真实正确；SPOT的slot则用评测gold时间和显式语义匹配计及时性，不提供在线显著性证书。两者都可在输入完美时给出漂亮数值，但一个是采样分布假设下的停止证据，一个是给定trace的离线计分，不能混作模型能力。 |
 
 </div>
 
@@ -144,6 +146,18 @@ AMS的方向/漂移是检测信号，存在结构保持攻击盲区；Mixed Sign
 LLM Stochasticity区分边缘分布拟合与时序依赖；e-RWSC的保证需要固定政策的iid响应，不能由平衡答案直方图或“请随机回答”提示推导。前者的统计诊断可暴露某些依赖，却不能证明后者的全部假设。e-RWSC也不估计答案是否符合现实：即使输入真独立，政策总偏向错误答案时仍可快速发多数证书。 不能。返回的是reward-weighted self-consistency回退，certified必须为false。还要检查当前下注只看旧前缀，新响应的答案和极端reward都不能倒灌到刚才的stake。
 
 对照来源：[e-rwsc](../../../foundation-models/2611.26413-e-rwsc/README.md) · [llm-stochasticity](../../../foundation-models/2604.06543-llm-stochasticity/README.md)
+
+### DISCO与e-RWSC：发现集合错误不等于单题多数
+
+e-RWSC认证单题某答案的政策多数概率，不等于正确性；DISCO控制多行为假设集合的误发现比例，并为自适应假设池施加分箱、冻结与null分布校正约束。相同的e-process工具不使两类错误和证书等价。 DISCO的pre-hoc证书给出无条件epsilon-alpha加delta界；post-hoc证书依赖无null退出条件，须同时保留delta失败概率。有限null路径穷举只验收本地公式与接口，不验证真实LLM的p值有效性，也不替代原文三分箱/boosted发现器及独立复验。
+
+对照来源：[disco](../../../foundation-models/2611.27104-disco/README.md) · [e-rwsc](../../../foundation-models/2611.26413-e-rwsc/README.md)
+
+### T-F1=1是否像e-RWSC证书一样有统计保证？
+
+e-RWSC依据固定政策iid答案流，检验的是多数占优而非答案真实正确；SPOT的slot则用评测gold时间和显式语义匹配计及时性，不提供在线显著性证书。两者都可在输入完美时给出漂亮数值，但一个是采样分布假设下的停止证据，一个是给定trace的离线计分，不能混作模型能力。
+
+对照来源：[spot-bench](../../../foundation-models/2604.24317-spot-bench/README.md) · [e-rwsc](../../../foundation-models/2611.26413-e-rwsc/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -319,9 +333,37 @@ LLM Stochasticity区分边缘分布拟合与时序依赖；e-RWSC的保证需要
 
     对照来源：[e-rwsc](../../../foundation-models/2611.26413-e-rwsc/README.md) · [llm-stochasticity](../../../foundation-models/2604.06543-llm-stochasticity/README.md)
 
+### DISCO和e-RWSC都累积e-process，为什么不能共用一种成功证书？ {#cross-nov23-disco}
+
+??? note "展开答案与例子"
+
+    **答案：** e-RWSC认证同一题某答案在固定政策iid采样中的多数概率，不保证答案正确。DISCO控制多个行为假设最终集合的误发现比例，并有自适应假设池的分箱、冻结和校正约束。认证对象与错误定义不同。
+
+    **教学例子：** 教学例：某LLM每次都答错同一个答案，e-RWSC仍可能很快发多数证书；这不证明十个新提出的行为规律有九个真的存在，也不能代替DISCO的FDR证书。
+
+    对照来源：[disco](../../../foundation-models/2611.27104-disco/README.md) · [e-rwsc](../../../foundation-models/2611.26413-e-rwsc/README.md)
+
+### T-F1=1是否像e-RWSC证书一样有统计保证？ {#cross-nov23-spot-bench}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是。T-F1只是给定trace/标注/语义匹配的离线分数。e-RWSC也只在固定政策iid假设下证明多数占优，不证明真实正确。
+
+    **教学例子：** 教学例：手工给一个正确时刻和True语义标签就可得1；这没有执行任何视觉模型，也不是Agent能力。
+
+    对照来源：[spot-bench](../../../foundation-models/2604.24317-spot-bench/README.md) · [e-rwsc](../../../foundation-models/2611.26413-e-rwsc/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-23** · 纯CPU、stdlib的非对称timeliness、按原时间索引语义矩阵、开放slot逐时吸收与K关闭、加权P/R/F1。合成trace负控包括错误语义、空输出、7次重复超过K=5、多slot重叠和早晚惩罚；完美合成trace得1只是定义检查，不是任何Agent能力。无Ctrl-SPOT的持久query/CPU-GPU KV/检索/总结，无视频、LLM或付费judge调用，不接Evolve晋级。
+
+涉及：[spot-bench](../../../foundation-models/2604.24317-spot-bench/README.md) · [e-rwsc](../../../foundation-models/2611.26413-e-rwsc/README.md)
+
+**2026-11-23** · e-RWSC认证单题某答案的政策多数概率，不等于正确性；DISCO控制多行为假设集合的误发现比例，并为自适应假设池施加分箱、冻结与null分布校正约束。相同的e-process工具不使两类错误和证书等价。 DISCO的pre-hoc证书给出无条件epsilon-alpha加delta界；post-hoc证书依赖无null退出条件，须同时保留delta失败概率。有限null路径穷举只验收本地公式与接口，不验证真实LLM的p值有效性，也不替代原文三分箱/boosted发现器及独立复验。 完整API发现/复验矩阵成本过高，不复现（审查DONE）；不进入自动重试。
+
+涉及：[disco](../../../foundation-models/2611.27104-disco/README.md) · [e-rwsc](../../../foundation-models/2611.26413-e-rwsc/README.md)
 
 **2026-11-21** · 纯stdlib、CPU-only的RWSC聚合、前缀可预测下注、逐答案log资本与首现权重、首次出现跳过、认证终止和显式未认证预算回退。诊断使用明确的合成答案/奖励流，检查因果顺序、领先变化不重置、错误答案也可能被认证、softmax极值和均匀tie。没有LLM、reward model、答案解析或公开benchmark运行；不把合成流叫模型输出，不接Evolve晋级。 完整实验成本过高不复现；组件不构成能力晋级。
 
@@ -383,7 +425,7 @@ LLM Stochasticity区分边缘分布拟合与时序依赖；e-RWSC的保证需要
 
 覆盖 13 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 27 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 29 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -414,6 +456,8 @@ LLM Stochasticity区分边缘分布拟合与时序依赖；e-RWSC的保证需要
 - [Mixed Signals: Weight-Space Programming for EEG and ECG](../../../foundation-models/2611.13758-mixed-signals-weights/README.md)
 - [Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization](../../../foundation-models/2603.02029-efficient-evals-tensor/README.md)
 - [Sequential Anytime Valid Tests for Efficient Inference-Time Alignment](../../../foundation-models/2611.26413-e-rwsc/README.md)
+- [Reliable Behavior Discovery via False Discovery Rate Control](../../../foundation-models/2611.27104-disco/README.md)
+- [Don&#x27;t Pause! Every prediction matters in a streaming video](../../../foundation-models/2604.24317-spot-bench/README.md)
 
 </details>
 

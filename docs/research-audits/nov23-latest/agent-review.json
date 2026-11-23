@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-23",
+  "scope": "Three Nov20 first releases discovered Nov23, no Nov21-23 first release or exhaustive claim",
+  "implementation_preflight_completed": true,
+  "available_resource": "one A100/A30 or Mac; only bounded CPU formulas execute",
+  "reviews": [
+    {
+      "id": "2611.27159",
+      "key": "acting-to-learning",
+      "identity": "agent-research:acting-to-learning",
+      "published_at": "2026-11-20T05:45:48Z",
+      "updated_at": "2026-11-20T05:45:48Z",
+      "announced_on": null,
+      "discovered_on": "2026-11-23",
+      "first_author": "Yaoyuan Yan",
+      "first_author_affiliation": "Country Garden Services AI Lab / Omni AI",
+      "source_url": "https://arxiv.org/pdf/2611.27159v1",
+      "source_sha256": "026d8420aa7bfa7e63d17c5f7b54f3c24353460894cb770a45bc095d7ba05cd2",
+      "tex_source_sha256": "b52e1e278a10826c2e422d5097b3f25a3495e115117e28c9bfaef803e9efb71d",
+      "locations": [
+        "Problem and Selection Procedure: optimizer-aware score and Algorithm 1",
+        "Experimental Design: student, shared executor and task groups",
+        "Costs and Limitations",
+        "Reproducibility appendix"
+      ],
+      "code": null,
+      "code_status": "No paper-specific source repository was found or verified in fixed v1. The paper says records are versioned but supplies no verifiable repository link; LESS and ALFWorld dependencies are not this paper's release.",
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "scope": "The independent NumPy float64 slice implements explicit-gradient/frozen-moment features, individually normalized support gradients, checkpoint averaging before family maximization, exact full-string deduplication, global top/random selection with three replay passes, and reference-position/stratum distinct-content quotas. Undefined zero-norm directions and intermediate feature overflow are rejected, not assigned invented scores. Synthetic gradients and historical-action strings exercise the formulas; lexical similarity does not replace gradients. No LoRA extraction, warmup training, ALFWorld, Qwen checkpoint, deployment executor, student SFT or capability comparison runs. Callers must ensure support is public training-side information rather than query answers.",
+      "cost_basis": "The source uses Qwen3-4B-Instruct-2507 revision cdbee75f17c01a7cc42f958dc650907174af0554,rank16LoRA,192updates,768presentations and2048-token sequences per student. Pools contain721/732action records and418/508contents. Reported costs are62.146GPU-hours for the main study,17.419for64additional students and24.240for reserved evaluation of97checkpoints: at least103.805GPU-hours, excluding earlier collection. The full multi-arm matrix exceeds this batch's short one-A100/A30-or-Mac budget; no weights/data or trial training are launched. CPU array controls are estimated to take seconds; measured timing belongs to the shared runner receipt.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "requires_gpu_validation": false,
+      "review_done": true,
+      "source_revisions": {
+        "agent-research:acting-to-learning": "8a7002db8dd9de26ea1bea240aca3ea6a1cb66f339e02ab8a5f9e568a7957daa",
+        "agent-research:ace-data": "b040c674fb72f33298e61d32031fab4195c59d176dda775b8b878cd21d182b5a"
+      }
+    },
+    {
+      "id": "2611.27070",
+      "key": "r2-tool-redundancy",
+      "identity": "agent-research:r2-tool-redundancy",
+      "published_at": "2026-11-20T03:38:36Z",
+      "updated_at": "2026-11-20T03:38:36Z",
+      "announced_on": null,
+      "discovered_on": "2026-11-23",
+      "first_author": "Yilin Zhao",
+      "first_author_affiliation": "Tsinghua University",
+      "source_url": "https://arxiv.org/pdf/2611.27070v1",
+      "source_sha256": "58e172716fdb16f089b11b856ca8a7e35ad97552491237ba548851e4fba083d6",
+      "tex_source_sha256": "1c02f70e9b02f66d76c94a19008b1dc7a95a53853beaaf4d568f61b4a3fcb693",
+      "locations": [
+        "§3.1 CAT",
+        "§3.2 Eq.1-10",
+        "Appendix C.1 Tables9-10",
+        "Appendix C.3 Table12",
+        "Appendix E all-tool-avoidance caveat"
+      ],
+      "code": null,
+      "code_status": "No verified paper-specific method source link was found in fixed-v1 text or TeX. Referenced open models and training frameworks are not a release of this method.",
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "scope": "The CPU NumPy slice computes same-text token-log-probability VFD, reasoning-only source-frozen thresholds, one-eligible-call redundancy estimation and category base costs, sample-SD outcome advantages, correct-only efficiency terms and a clipped GRPO scalar. Linear quantile interpolation and mean-valid-tokens-per-trajectory then group averaging are explicit local conventions, not bitwise equivalence to an unreleased trainer. Callers must supply aligned reasoning windows, valid crops and complete records; arrays cannot establish those semantics. No VLM, crop construction/scoring, CAT rollout labeling, images, policy backprop/update or visual-agent evaluation runs. Finite differences check a scalar derivative, not training. There is no gold-answer/plan interface;binary rewards are external trainer/evaluator inputs.",
+      "cost_basis": "The paper uses Qwen3-VL-8B-Instruct,3254examples,406steps,eight questions by eight trajectories per step,8192output tokens and up to20480training context tokens. Eight H100s for about13hours total about104H100GPU-hours, before CAT construction, repeated VFD scoring and seven-benchmark evaluation. This clearly exceeds oneA100/A30or a Mac. Full visual RL/evaluation is not reproduced, with no weight/image downloads or trial runs; only small CPU explicit-array controls execute, estimated in seconds pending runner timing.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "requires_gpu_validation": false,
+      "review_done": true,
+      "source_revisions": {
+        "agent-research:r2-tool-redundancy": "4a0abfba9ba3e3fed8f58ba20a0c0a3d2a852742f3a482dc48896700901d6bbf",
+        "agent-research:adastep": "ecd6aa135b7917da58b2a2462f158635f1f5e6930f9b389d9db69e00252ba093"
+      }
+    },
+    {
+      "id": "2611.27116",
+      "key": "coevobench",
+      "identity": "agent-research:coevobench",
+      "published_at": "2026-11-20T04:40:59Z",
+      "updated_at": "2026-11-20T04:40:59Z",
+      "announced_on": null,
+      "discovered_on": "2026-11-23",
+      "first_author": "Chuan Xiao",
+      "first_author_affiliation": "Zhejiang University / Alibaba Group / Shanghai Jiao Tong University",
+      "source_url": "https://arxiv.org/pdf/2611.27116v1",
+      "source_sha256": "7555e5f8f2041a7ea2fa8904643a73ab21f986f5685b12fafefd9451fd8a45b8",
+      "tex_source_sha256": "2d238f23000bce65bea1f4f08e8bddb1e6d86671b12eede7646c9ff06416300b",
+      "locations": [
+        "§3.1-3.4 Eq.1-7",
+        "§4 Table1",
+        "§5 model-harness coupling",
+        "Appendix11 resources",
+        "Appendix19 audit",
+        "fixed upstream README no-GPU smoke caveat"
+      ],
+      "code": "https://github.com/AlibabaResearch/CoEvoBench/tree/d39a924c8985806933c94777d8e969d6e756262c",
+      "code_status": "Yes: [fixed AlibabaResearch commit](https://github.com/AlibabaResearch/CoEvoBench/tree/d39a924c8985806933c94777d8e969d6e756262c),MIT. Its README also discloses acceptance/integrity gaps in current images and final-scoring interfaces; release is not local end-to-end validation.",
+      "implementation_status": "deferred_high_cost",
+      "evaluation_tier": null,
+      "scope": "Local delivery is review-only: fixed-v1/code metadata,split/audit/cost contracts and a same-topic comparison.No algorithm module,executable adapter,training,researcher API call or benchmark trial is created.The upstream no-GPU toy researcher is explicitly a lifecycle fixture,not an autonomous researcher.Running it cannot reproduce this paper's capability or justify an Evolve operator.A completed high-cost review requires no invented seed metrics or GPU receipt.",
+      "cost_basis": "Each development run is budgeted up to4H20s for24hours(96H20GPU-hours),plus100dollars for a teacher;these are protocol limits,not local measurements.The full matrix spans five researchers,five domains,three runs and two target families(Qwen3.5-9B-Base/MiniCPM5-2B-Base),with container/environment building,training,serving and isolated final evaluation.A2B model fitting oneA100/A30does not make long rollouts and the multi-arm research campaign cheap or equivalent.With oneA100/A30or a Mac available,the full study is terminally not reproduced.No checkpoints/large data,Docker/GPU,toy cost probes,teacher or researcher calls are launched.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "requires_gpu_validation": false,
+      "review_done": true,
+      "source_revisions": {
+        "agent-research:coevobench": "ac05343d0de00c0dcc8931acbf724010e063699b70ca04eedf3ab416526bfc4f",
+        "agent-research:sage-evolve": "215b157cedab8a5a9798cbeabe4734d6e121d2d7ee52054df314488ec887b176"
+      }
+    }
+  ],
+  "p2_dispositions": []
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "adapter_key": "vfold-cache-keyword-compat",
+  "validated_at": "2026-11-23",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB",
+    "count": 1
+  },
+  "command": [
+    "python3",
+    "scripts/run_nov23_vfold_compat.py",
+    "--device",
+    "cuda",
+    "--source-commit",
+    "303d275911c15cfbacd639c8409b2c463a31d1c9",
+    "--output",
+    "raw-vfold-compat-cuda.json"
+  ],
+  "dataset": {
+    "id": "synthetic:vfold-hook-cache-keywords-v1",
+    "revision": "sha256:6b2286a7ae51102680fc04f48378890d29580944c9ca6f2429e56c59345f7e8e",
+    "capability_benchmark": false
+  },
+  "checkpoint": {
+    "public_id": "none-small-tensor-regression",
+    "revision": "303d275911c15cfbacd639c8409b2c463a31d1c9",
+    "pretrained": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "metrics": {
+    "max_attention_error": 0.0,
+    "completed_cache_pairs": 18
+  },
+  "scope": "Actual finish hook and value banks on CUDA tensors, both keyword lifecycles; not HF/Qwen model inference or full VFold results. Original VFold paper receipt remains unchanged.",
+  "provenance": {
+    "commit": "303d275911c15cfbacd639c8409b2c463a31d1c9",
+    "artifact_path": "docs/gpu-validations/vfold-cache-keyword-compat-a100-20261123.json",
+    "executed_source_sha256": {
+      "scripts/run_nov23_vfold_compat.py": "6b2286a7ae51102680fc04f48378890d29580944c9ca6f2429e56c59345f7e8e",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/foundation/vfold.py": "e32bd3cd01cb215f3a734cec4535f513f3ee719420bf85b10e2eb235694087a7"
+    },
+    "raw_artifact_path": "docs/research-audits/nov23-latest/raw-vfold-compat-cuda.json",
+    "raw_sha256": "e030b44f902d0885b94d55b34395e89423715a652543b9fcd2039765604f1b76"
+  }
+}

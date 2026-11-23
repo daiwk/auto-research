@@ -7,7 +7,7 @@ hide:
 
 # 轨迹蒸馏：采样者、提案与散度方向分开看
 
-[LLM 后训练](../index.md) · 更新 2026-11-19 · 47 篇主题资料 / 13 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-23 · 48 篇主题资料 / 14 篇重点对照
 
 “on-policy”描述监督发生在哪些状态，FKL/RKL/JSD描述在这些状态怎样比较分布。GKD和MiniLLM建立这两个轴，DrOPD、AP-OPD再调整纠错位置或强度，Semi-OPD与学习信号诊断则提醒：离线复用和残余损失各有不同含义。 MPOPD再把采样者变成可学习proposal：几何混合是提案target，学生仍向教师做RKL，二者不能混成同一个蒸馏分布。
 
@@ -38,6 +38,7 @@ hide:
 | [DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation](../../../post-training/2611.13249-drd-mopd/README.md) · [原始来源](https://arxiv.org/abs/2611.13249v1)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 冻结base加全部全参数delta形成唯一学生，域标签只路由更新；Own/Other/Alternate/SingleComponent使用独立AdamW状态，所有域先在同一W计算梯度。 | 参数更新路由不同于DrOPD的token散度门，也不等于推理MoE；未选delta不能执行动量/计数/weight decay。作者未发布本篇训练实现与checkpoint，本地不实现教师或OPD rollout。 |
 | [Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption](../../../post-training/2611.22298-streaming-opd/README.md) · [原始来源](https://arxiv.org/abs/2611.22298v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 保留完整因果prefix的新片段loss mask/version记录、teacher top-k不重归一化截断clip损失、按监督权重归约。 | OPDLM把AR教师与双向扩散学生的状态/目标对齐；Streaming OPD仍沿因果prefix计分，只改变交付和消费时序。旧OPDLM候选诊断不是实际扩散decoder，当前prefix/损失核也不是异步服务性能证据。 |
 | [Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts](../../../post-training/2611.24059-mrpd-replay/README.md) · [原始来源](https://arxiv.org/abs/2611.24059v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 显式chronological log schedule检查、teacher-top-k加tail的reverse KL、日志策略ratio与0.2/0.28非对称clip、response-mean损失和冻结teacher/logging policy梯度。无真实专家日志/训练器/环境集成。 | Streaming OPD在新学生生成prefix上拆开生成、交付、更新时钟，top-k部分KL不补tail且作截断；MRPD不生成新轨迹，按专家日志顺序重放，top-k和tail合成完整粗粒化分布，并使用reverse KL。二者不能仅因都写top-k而共用损失。 |
+| [Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation](../../../post-training/2611.27131-dwe/README.md) · [原始来源](https://arxiv.org/abs/2611.27131v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 纯stdlib CPU实现完整正负配对、centered PCA固定顺序、共享分层quantile、forward/reverse KL logit梯度、仅选中行的hidden/weight梯度。小矩阵以多坐标起点的power iteration估计首主成分，与上游随机PCA实现不同但保留论文定义的几何顺序机制。精确积分所有CDF区间检验无偏性，有限差分独立核对KL梯度；top-coordinate丢弃是有偏负控。没有Transformer、CUDA kernel、真实teacher cache、学生生成、能力benchmark或吞吐测量。 | SimOPD在各自表示空间匹配回答间的相似度分布，改变监督目标；DWE保持既定KL目标，只改变反向梯度估计和输出行计算。二者可在设计上组合，但SimOPD的关系分布不是DWE已经支持的真实LLM路径；本轮也未验证联合训练。 |
 
 </div>
 
@@ -96,6 +97,12 @@ Divergence-Routed OPD用师生分歧决定哪些token位置增加FKL，改变监
 Streaming OPD在新学生生成prefix上拆开生成、交付、更新时钟，top-k部分KL不补tail且作截断；MRPD不生成新轨迹，按专家日志顺序重放，top-k和tail合成完整粗粒化分布，并使用reverse KL。二者不能仅因都写top-k而共用损失。 只证明小张量算子、teacher/logging detach、工具观察零梯度和归约在CUDA可运行；没有训练Qwen3、多专家合并或验证论文能力。原作者仓库链接本轮404，不能称已取得其训练源码。
 
 对照来源：[mrpd-replay](../../../post-training/2611.24059-mrpd-replay/README.md) · [streaming-opd](../../../post-training/2611.22298-streaming-opd/README.md)
+
+### DWE与SimOPD都叫蒸馏改进，改变的是同一轴吗？
+
+SimOPD在各自表示空间匹配回答间的相似度分布，改变监督目标；DWE保持既定KL目标，只改变反向梯度估计和输出行计算。二者可在设计上组合，但SimOPD的关系分布不是DWE已经支持的真实LLM路径；本轮也未验证联合训练。 来源：§2 Eq.2–3；§3 Eq.4–15。U_k独立均匀分布于((k−1)/K,k/K)，正负CDF共用U_k。反传实际计算Wᵀĝ与ĝhᵀ；不能先做完整稠密反传再屏蔽。reverse KL的logit梯度为p_i[log(p_i/q_i)−KL(p‖q)]，同样和为零。固定顺序可近似几何，但不是每步重排或把教师/学生词表ID混用。
+
+对照来源：[dwe](../../../post-training/2611.27131-dwe/README.md) · [simopd](../../../post-training/2610.23306-simopd/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -201,9 +208,23 @@ Streaming OPD在新学生生成prefix上拆开生成、交付、更新时钟，t
 
     对照来源：[mrpd-replay](../../../post-training/2611.24059-mrpd-replay/README.md) · [streaming-opd](../../../post-training/2611.22298-streaming-opd/README.md)
 
+### DWE与SimOPD都叫蒸馏改进，改变的是同一轴吗？ {#cross-nov23-dwe}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是。SimOPD匹配回答关系分布，改变监督内容；DWE保持已有KL目标，只用无偏稀疏估计替换输出头反传。两者理论上可组合，但组件通过不证明联合LLM训练或能力收益。
+
+    **教学例子：** 教学例：换成相似度bank的KL是换目标；同一token KL用8对坐标估计其梯度是换估计器。
+
+    对照来源：[dwe](../../../post-training/2611.27131-dwe/README.md) · [simopd](../../../post-training/2610.23306-simopd/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-23** · SimOPD在各自表示空间匹配回答间的相似度分布，改变监督目标；DWE保持既定KL目标，只改变反向梯度估计和输出行计算。二者可在设计上组合，但SimOPD的关系分布不是DWE已经支持的真实LLM路径；本轮也未验证联合训练。 L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU、无CUDA路径，不作为Evolve晋级证据。 完整实验成本过高不复现，审查DONE。
+
+涉及：[dwe](../../../post-training/2611.27131-dwe/README.md) · [simopd](../../../post-training/2610.23306-simopd/README.md)
 
 **2026-11-19** · 显式chronological log schedule检查、teacher-top-k加tail的reverse KL、日志策略ratio与0.2/0.28非对称clip、response-mean损失和冻结teacher/logging policy梯度。无真实专家日志/训练器/环境集成。 完整实验高成本不复现；组件或资料不构成能力晋级。
 
@@ -237,7 +258,7 @@ Streaming OPD在新学生生成prefix上拆开生成、交付、更新时钟，t
 
 覆盖 40 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 47 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 48 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -288,6 +309,7 @@ Streaming OPD在新学生生成prefix上拆开生成、交付、更新时钟，t
 - [DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation](../../../post-training/2611.13249-drd-mopd/README.md)
 - [Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption](../../../post-training/2611.22298-streaming-opd/README.md)
 - [Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts](../../../post-training/2611.24059-mrpd-replay/README.md)
+- [Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation](../../../post-training/2611.27131-dwe/README.md)
 
 </details>
 

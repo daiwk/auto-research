@@ -1,0 +1,62 @@
+{
+  "domain": "post-training",
+  "key": "ctrl",
+  "title": "CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency",
+  "paper_url": "https://arxiv.org/abs/2611.27119v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.27119v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.27119-ctrl/README.md",
+  "first_author": "Ruijia Yang",
+  "first_author_affiliation": "The Hong Kong University of Science and Technology (Guangzhou)",
+  "published": "2026-11-20",
+  "published_at": "2026-11-20T04:42:26Z",
+  "updated_at": "2026-11-20T04:42:26Z",
+  "discovered_on": "2026-11-23",
+  "reviewed_on": "2026-11-23",
+  "announced_on": null,
+  "code": null,
+  "code_status": "截至2026-11-23，固定v1全文与官方作者入口未找到已核实的CTRL源码仓库；引用verl/vLLM/Slime不等于本篇开源。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "data-and-budget",
+    "系统成本审查"
+  ],
+  "priority": "P1",
+  "intake_class": "nov20_first_publication_discovered_nov23",
+  "implementation_status": "deferred_high_cost",
+  "component_implemented": false,
+  "evaluation_tier": null,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.27119v1",
+    "source_sections": [
+      "Section4.1",
+      "Section4.2-4.5"
+    ],
+    "basis": "§4.1默认4×H100 80GB、4×A800 80GB或4×RTX4090 24GB，双CPU host 1–2TiB RAM；另含8×H100扩展、Qwen3-8B/14B、DAPO-Math/MBPP、24工作负载、多share/布局及三seed。单A100/A30或Mac无法忠实验证该完整系统矩阵；不做MPS试跑、不启动多GPU训练、不下载权重。本篇成本过高，不复现（审查 DONE），无自动重试。",
+    "available_resource": "One A100 or A30, or local Mac; local components CPU only",
+    "decision": "成本过高，不复现（审查 DONE）；无自动重试。",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 0
+    }
+  },
+  "summary": "CTRL让每张GPU同时驻留learner rank和持续rollout shard，在CUDA MPS下共享SM。为腾出显存，优化器和immutable policy版本保存在host，learner仅流式装入有限层窗口。训练ready batch后才在发布前等待到期cohort，避免先暴露全部rollout tail；更新完成和对rollout发布是两个事件。刷新时保留partial响应、旧采样logp及最早behavior版本。",
+  "fidelity_note": "本篇仅收录和成本审查：没有本地CTRL实现、CUDA路径、benchmark、指标回执或Evolve算子。未将paper公式或CPU时序fixture宣传为CUDA共驻留系统。保存固定版本事实、机制、原图及失败/不占优条件，不生成伪实验metrics。",
+  "method_source_sha256": "bcd52b30ada5b99c48079bf4bdedaa8f90f18b86f6ea94067e019443e4851a45",
+  "deferral_reason": "成本过高，不复现（审查 DONE）。 §4.1默认4×H100 80GB、4×A800 80GB或4×RTX4090 24GB，双CPU host 1–2TiB RAM；另含8×H100扩展、Qwen3-8B/14B、DAPO-Math/MBPP、24工作负载、多share/布局及三seed。单A100/A30或Mac无法忠实验证该完整系统矩阵；不做MPS试跑、不启动多GPU训练、不下载权重。本篇成本过高，不复现（审查 DONE），无自动重试。"
+}

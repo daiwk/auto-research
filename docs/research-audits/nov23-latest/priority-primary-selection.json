@@ -1,0 +1,400 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-23",
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "directory_baseline": "Nov15 finite Google inventory, not previous-publication time",
+  "directory_comparison_complete": true,
+  "google_added_directory_urls": [
+    {
+      "source_url": "https://research.google/pubs/a-multi-environment-formal-verification-methodology-for-catching-latency-induced-rtl-hangs/",
+      "capture_sha256": "0a1489ebb1743015c811aee5a71d6b8216aa9440d0e97ebea9911f2f55724d1e",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-23",
+      "decision": "outside_this_finite_paper_intake",
+      "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/a-weighted-hierarchical-approach-to-testpoint-configuration-driving-efficient-dft-convergence/",
+      "capture_sha256": "a9d2fb95a7d294601d17f003afcc0f62223e5232b928f596496ec4b770f9c711",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-23",
+      "decision": "outside_this_finite_paper_intake",
+      "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/beyond-the-structural-filter-ai-assisted-inductive-refinement-for-scalable-formal-sign-off-of-multi-stage-arbitration-logic/",
+      "capture_sha256": "a6263ce01347aa9bdf1384e34d89e493c94ae0de5a02e74c446a0a1b25aea0a4",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-23",
+      "decision": "source_limitation_archived",
+      "reason": "Read the official page including its extended method description. LLM-assisted proprietary SoC verification is potentially relevant, but the page supplies no independently accessible full technical paper/code/data link or verified original publication date. Do not invent an LLM/RTL implementation from a workflow paragraph; not a completed full-method review or a claim that no novel algorithm exists.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/covering-a-polyomino-shaped-stain-with-non-overlapping-stickers-of-the-same-shape/",
+      "capture_sha256": "9b677461c3529e49d622e48a2ed1196ec73ab5907e37f0a7e80485ee8ad630de",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-23",
+      "decision": "outside_this_finite_paper_intake",
+      "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/detecting-crosstalk-induced-static-noise-defects-with-a-custom-test-flow/",
+      "capture_sha256": "34296e158879652c3610085469da257ea9f8ff2606aaa09bca7369fcb696a052",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-23",
+      "decision": "outside_this_finite_paper_intake",
+      "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/dont-pause-every-predictions-matter-in-a-streaming-video/",
+      "capture_sha256": "6bca63775f06497691fcd2894cb93c7b5fd1a96bd5b4a65777d17ede9f472411",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-23",
+      "decision": "selected_historical_directory_backfill",
+      "reason": "Fixed arXiv2604.24317v2 byline is first-author NUS, Yale Song Google. OriginalApr27, revisionNov5, discoveredNov23; Algorithm1/Eq2 scorer accepted, no full streaming controller/benchmark.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/from-prompt-to-probe-left-shifting-soc-debug-with-generative-ai/",
+      "capture_sha256": "09bb141ae09c0e108e731b8564b0f47bc0f581d622e070103dd789184e9f3a83",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-23",
+      "decision": "source_limitation_archived",
+      "reason": "Read the official page including its extended method description. LLM-assisted proprietary SoC verification is potentially relevant, but the page supplies no independently accessible full technical paper/code/data link or verified original publication date. Do not invent an LLM/RTL implementation from a workflow paragraph; not a completed full-method review or a claim that no novel algorithm exists.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/multi-tiered-physical-aware-formal-ensuring-latency-robustness-in-power-management-architecture-and-design/",
+      "capture_sha256": "6a0b5be5d736395ae9397cee497547e6a1695ae274ae3397b2529e498aea5625",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-23",
+      "decision": "outside_this_finite_paper_intake",
+      "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/navigating-the-cutting-edge-a-collaborative-approach-to-ufs-50-pre-silicon-maturity/",
+      "capture_sha256": "f56b192a7afbb235d5c9a6db79169f7dab1beaba1c1bf6cc09b0beb81ea6d6f9",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-23",
+      "decision": "outside_this_finite_paper_intake",
+      "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/optimizing-ppa-with-atpg-qor-a-custom-testpoints-reclustering-approach-for-reduced-congestion-and-leakage-with-improved-test-qor/",
+      "capture_sha256": "5e292291c7a52e0eb0269edb80c41c3c1d79301fb199e175960e1d2179befb47",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-23",
+      "decision": "outside_this_finite_paper_intake",
+      "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/safe-coding-rigorous-modular-reasoning-about-software-safety-2/",
+      "capture_sha256": "811ee265923dc9479345ab1c97809a8764d3e206e8b3e597f0fe37c1a1f0b5e7",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-23",
+      "decision": "outside_this_finite_paper_intake",
+      "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/scalable-bayesian-inference-for-time-series-via-divide-and-conquer/",
+      "capture_sha256": "6f16babba2f3a39e08e31c76146c10f15b7fcccae48a02be222a979f12ecb271",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-23",
+      "decision": "outside_this_finite_paper_intake",
+      "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/searchinject-retrieval-exposure-control-for-indirect-prompt-injection-in-language-model-search/",
+      "capture_sha256": "a0824a26cd0c902431164b9238bbb9c07179231a686eb774e7e43b7980773d9c",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-23",
+      "decision": "already_cataloged",
+      "reason": "SearchInject was cataloged inNov19; finite directory difference againstNov15 does not reopen a completed selection.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/vclp-dft-dashboard-for-efficient-extraction-of-dft-related-electrical-violations-in-multi-power-domain-scan-stitching/",
+      "capture_sha256": "55944c81c2a011aa751c22726912f2166e6fac0e315a75933a180a543c97a2d3",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-23",
+      "decision": "outside_this_finite_paper_intake",
+      "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+      "automatic_retry": false
+    }
+  ],
+  "repository_observations": [
+    {
+      "repository": "google-research/google-research",
+      "event": "pushed",
+      "source_url": "https://github.com/google-research/google-research",
+      "observed_pushed_at": "2026-11-21T15:37:23Z",
+      "observed_created_at": "2018-10-04T18:42:48Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "google-research/weatherbenchX",
+      "event": "pushed",
+      "source_url": "https://github.com/google-research/weatherbenchX",
+      "observed_pushed_at": "2026-11-21T12:05:36Z",
+      "observed_created_at": "2024-11-29T11:40:01Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "google-research/swirl-dynamics",
+      "event": "pushed",
+      "source_url": "https://github.com/google-research/swirl-dynamics",
+      "observed_pushed_at": "2026-11-22T09:28:54Z",
+      "observed_created_at": "2023-02-15T17:52:29Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "google-research/openfst",
+      "event": "pushed",
+      "source_url": "https://github.com/google-research/openfst",
+      "observed_pushed_at": "2026-11-21T12:16:18Z",
+      "observed_created_at": "2025-12-11T12:32:06Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "google-research/mseb",
+      "event": "pushed",
+      "source_url": "https://github.com/google-research/mseb",
+      "observed_pushed_at": "2026-11-21T02:42:33Z",
+      "observed_created_at": "2025-05-13T18:19:15Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "google-deepmind/extract_frag_trees",
+      "event": "created",
+      "source_url": "https://github.com/google-deepmind/extract_frag_trees",
+      "observed_pushed_at": "2026-11-21T20:22:00Z",
+      "observed_created_at": "2026-11-21T20:08:24Z",
+      "decision": "outside_research_domain",
+      "reason": "Official README describes a Java exporter of SIRIUS chemistry fragmentation trees, not a new LLM/world-model algorithm. No chemistry runtime download or reproduction."
+    },
+    {
+      "repository": "google-deepmind/mujoco",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/mujoco",
+      "observed_pushed_at": "2026-11-22T14:41:28Z",
+      "observed_created_at": "2021-08-27T12:25:48Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "google-deepmind/mujoco_playground",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/mujoco_playground",
+      "observed_pushed_at": "2026-11-21T09:27:38Z",
+      "observed_created_at": "2024-12-03T22:39:09Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "google-deepmind/mujoco_mpc",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/mujoco_mpc",
+      "observed_pushed_at": "2026-11-21T21:55:30Z",
+      "observed_created_at": "2022-12-01T11:39:35Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "google-deepmind/formal-conjectures",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/formal-conjectures",
+      "observed_pushed_at": "2026-11-21T21:30:21Z",
+      "observed_created_at": "2025-05-12T08:22:05Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "google-deepmind/reaf-sim",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/reaf-sim",
+      "observed_pushed_at": "2026-11-21T09:27:56Z",
+      "observed_created_at": "2026-07-28T23:19:02Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "google-deepmind/extract_frag_trees",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/extract_frag_trees",
+      "observed_pushed_at": "2026-11-21T20:22:00Z",
+      "observed_created_at": "2026-11-21T20:08:24Z",
+      "decision": "outside_research_domain",
+      "reason": "Official README describes a Java exporter of SIRIUS chemistry fragmentation trees, not a new LLM/world-model algorithm. No chemistry runtime download or reproduction."
+    },
+    {
+      "repository": "facebookresearch/faiss",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/faiss",
+      "observed_pushed_at": "2026-11-22T23:00:17Z",
+      "observed_created_at": "2017-02-07T16:07:05Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "facebookresearch/MHR",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/MHR",
+      "observed_pushed_at": "2026-11-22T21:59:53Z",
+      "observed_created_at": "2025-09-07T22:12:57Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "facebookresearch/balance",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/balance",
+      "observed_pushed_at": "2026-11-22T07:34:25Z",
+      "observed_created_at": "2022-11-15T15:04:10Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "facebookresearch/spider",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/spider",
+      "observed_pushed_at": "2026-11-21T02:31:34Z",
+      "observed_created_at": "2025-12-09T23:20:01Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "facebookresearch/vrs",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/vrs",
+      "observed_pushed_at": "2026-11-22T07:38:55Z",
+      "observed_created_at": "2021-09-08T03:09:54Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "facebookresearch/momentum",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/momentum",
+      "observed_pushed_at": "2026-11-22T23:42:03Z",
+      "observed_created_at": "2024-06-14T16:03:53Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "facebookresearch/atlas-lean",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/atlas-lean",
+      "observed_pushed_at": "2026-11-23T02:47:47Z",
+      "observed_created_at": "2026-05-26T22:31:48Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "facebookresearch/DCPerf",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/DCPerf",
+      "observed_pushed_at": "2026-11-21T00:49:05Z",
+      "observed_created_at": "2021-08-09T17:00:50Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "facebookresearch/autoform-bot",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/autoform-bot",
+      "observed_pushed_at": "2026-11-22T21:04:31Z",
+      "observed_created_at": "2026-05-26T22:37:11Z",
+      "decision": "existing_catalog_no_new_method_verified",
+      "reason": "Existing LogAct/AutoformBench catalog identity; repository push alone does not establish a changed defining method or authorize reopening a terminal experiment."
+    },
+    {
+      "repository": "facebookresearch/veripy",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/veripy",
+      "observed_pushed_at": "2026-11-21T04:45:38Z",
+      "observed_created_at": "2022-05-25T01:44:51Z",
+      "decision": "repository_event_only_not_a_new_paper",
+      "reason": "Repository activity is a recall signal, not a paper publication date; general tooling/domain libraries are not automatically catalog papers."
+    },
+    {
+      "repository": "facebookresearch/parq",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/parq",
+      "observed_pushed_at": "2026-11-22T00:37:36Z",
+      "observed_created_at": "2025-02-10T17:14:13Z",
+      "decision": "outside_window_historical_identity_only",
+      "reason": "Official README links arXiv2503.15748; official abstract verifies original2025-03-19T23:38:49Z with no later revision. A Nov22 repository push is not a2026/Nov23 first release. Historical method is not reviewed/implemented in this bounded fresh intake; do not claim it already reproduced."
+    },
+    {
+      "repository": "facebookresearch/logact",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/logact",
+      "observed_pushed_at": "2026-11-23T01:31:18Z",
+      "observed_created_at": "2026-09-25T19:36:42Z",
+      "decision": "existing_catalog_no_new_method_verified",
+      "reason": "Existing LogAct/AutoformBench catalog identity; repository push alone does not establish a changed defining method or authorize reopening a terminal experiment."
+    },
+    {
+      "repository": "facebookresearch/lean_kernel_verify",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/lean_kernel_verify",
+      "observed_pushed_at": "2026-11-21T19:06:07Z",
+      "observed_created_at": "2026-10-20T04:49:48Z",
+      "decision": "source_only_tooling_lead_archived",
+      "reason": "Read official README: compiler/Lean tool, case-input-specific proofs not general safety; public end-to-end frontends still require internal Buck2 monorepo. No standalone paper identity verified here, no claimed A100/Blackwell parity or integration. Archive source-only tooling lead; not a completed reproduction."
+    }
+  ],
+  "selected_priority_papers": [
+    {
+      "identity": "foundation-models:disco",
+      "priority": "P0",
+      "evidence": "Fixedv1 allsix authors Google DeepMind; originalNov20T04:25:13Z. Binary/unboosted statistical component only. Claimed upstream repository is unavailable; no fabricated code SHA."
+    },
+    {
+      "identity": "foundation-models:spot-bench",
+      "priority": "P0",
+      "evidence": "Google directory and fixedv2 Google coauthor; first-author affiliation remains NUS. Apr27 historical backfill, not a Nov23 new publication."
+    }
+  ],
+  "source_exceptions": [
+    {
+      "url": "https://ai.meta.com/research/",
+      "http_status": 200,
+      "sha256": "72de905b86bf05c506b89df8e07c64a8ddef4a859fec83640fdccf3ce1ae9e28",
+      "capture": "a9d72a37dea2e2a913eb.html",
+      "parse_complete": false,
+      "error_type": null
+    },
+    {
+      "url": "https://ai.meta.com/research/publications/",
+      "http_status": 200,
+      "sha256": "de23e0c264ff944ee66adb95a36d8b8613ad646ba1147b3f87d843d0d73f88a0",
+      "capture": "6215fb19a98209f86f48.html",
+      "parse_complete": false,
+      "error_type": null
+    }
+  ],
+  "notes": [
+    "Two incomplete Meta landing-page inventories cannot prove zero new Meta work.",
+    "The DeepMind selected publication directory is not an exhaustive chronological feed.",
+    "Google official source entries without an accessible full paper remain archived limitations, not invented implementations or blanket non-algorithm rejections.",
+    "No new qualifying industrial production-A/B method was verified in this finite intake; the earlier Meta whole-page ranking offline-only decision is not silently waived."
+  ],
+  "raw_directory_receipt_sha256": "1bbc6beab31d3da296c0196460a98c575389c57ada206a6ff9a89df7faf7f26a"
+}

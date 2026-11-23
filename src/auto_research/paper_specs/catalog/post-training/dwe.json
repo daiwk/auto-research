@@ -1,0 +1,63 @@
+{
+  "domain": "post-training",
+  "key": "dwe",
+  "title": "Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation",
+  "paper_url": "https://arxiv.org/abs/2611.27131v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.27131v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.27131-dwe/README.md",
+  "first_author": "Yuyang Zhang",
+  "first_author_affiliation": "University of Science and Technology of China",
+  "published": "2026-11-20",
+  "published_at": "2026-11-20T05:06:05Z",
+  "updated_at": "2026-11-20T05:06:05Z",
+  "discovered_on": "2026-11-23",
+  "reviewed_on": "2026-11-23",
+  "announced_on": null,
+  "code": "https://github.com/dwe-lab/DWE",
+  "code_status": "已核实原作者仓库；固定提交481223f3704607b2c9cb21741bfd3fde8822299b，README声明Apache-2.0许可。仅阅读，未运行上游代码。",
+  "code_license": "Apache-2.0",
+  "upstream_revision": "481223f3704607b2c9cb21741bfd3fde8822299b",
+  "adapter": null,
+  "topic": [
+    "student-trajectory-distillation",
+    "CPU机制组件"
+  ],
+  "priority": "P1",
+  "intake_class": "nov20_first_publication_discovered_nov23",
+  "implementation_status": "component_only",
+  "component_implemented": true,
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.27131v1",
+    "source_sections": [
+      "Section4.1",
+      "AppendixB"
+    ],
+    "basis": "§4.1及AppendixB.1使用0.6B/1.7B/4B学生与4B/8B/32B教师、每配置80M FineWeb-Edu token、1×H100 80GB和三种子，训练计时排除teacher cache构建。OPD为1.7B学生/4B教师、100更新×256题、最大8192token；Table10每更新约688.54秒，单方法单seed约19.1小时（配置算术，不是本机实测），另有13benchmark长生成。相对单A100/A30或Mac预算完整实验成本过高，不下载、不试跑。",
+    "available_resource": "One A100 or A30, or local Mac; local components CPU only",
+    "decision": "成本过高，不复现（审查 DONE）；无自动重试。",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30
+    }
+  },
+  "summary": "DWE不改变蒸馏教师、采样者或KL目标，而是在相同输入和参数下估计输出头的完整梯度。softmax的logit梯度和为零，正负部分各有质量m；分别归一化后配成等量异号的坐标对。以学生初始输出头的首主成分构造固定词表顺序，用同一quantile耦合正负坐标，再在K个等宽区间分别取样。每token最多2K行参与输出头反传，期望保留原梯度。",
+  "fidelity_note": "纯stdlib CPU实现完整正负配对、centered PCA固定顺序、共享分层quantile、forward/reverse KL logit梯度、仅选中行的hidden/weight梯度。小矩阵以多坐标起点的power iteration估计首主成分，与上游随机PCA实现不同但保留论文定义的几何顺序机制。精确积分所有CDF区间检验无偏性，有限差分独立核对KL梯度；top-coordinate丢弃是有偏负控。没有Transformer、CUDA kernel、真实teacher cache、学生生成、能力benchmark或吞吐测量。",
+  "method_source_sha256": "320818ca5f497adace818d2093afd6bd785b0cb559b13713e38dc8a93f0a0eab",
+  "local_operator": "auto_research.post_training.dwe.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.dwe import diagnostic; print(diagnostic(42))'"
+}

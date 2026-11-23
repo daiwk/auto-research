@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-11-21 · 79 篇主题资料 / 42 篇重点对照
+[Agent](../index.md) · 更新 2026-11-23 · 80 篇主题资料 / 43 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
@@ -67,6 +67,7 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search](../../../agent-research/2611.02643-searchinject/README.md) · [原始来源](https://arxiv.org/abs/2611.02643v1)<br>章节：背景与主要改动、核心公式、同主题对照 | 间接注入先要进入上下文才有机会影响LLM。SearchInject在原top100候选中，用相关性、abuse、instruction概率及两项相关性交互做logistic风险评分；超过冻结阈值才隔离，按原顺序从同一候选池补足top10。它控制暴露，而不是验证下游攻击成功。Google官方目录今天新增，但论文首发11月2日，按历史发现补录，不算今天新论文。 | SilentGuard核对工具返回值是否满足请求不变量；SearchInject在第三方文本进入上下文之前做风险准入。前者检查语义执行合同，后者检查检索暴露，HTTP200或低暴露率都不能证明最终回答安全。 |
 | [BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection](../../../agent-research/2611.25088-buggymle-cci/README.md) · [原始来源](https://arxiv.org/abs/2611.25088v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | BuggyMLE先审核可运行、指标稳定且对代码变化敏感的ML仓库，再让Injector注入不同规模的错误。Oracle通过逐个恢复变动找最小恢复集合，再把每个改动单独应用到干净仓库，筛出确有独立指标影响的错误。Solver必须在多文件仓库里真实修复；评价同时检查执行、指标恢复和逐错误语义修复，不能把补偿性调参当修好了全部bug。 | MLE-STAR用检索、真实消融与validation结果定位并改进模型代码；BuggyMLE用有Oracle归因的注入错误构建难度阶梯，CCI是评测/课程设计尺度。前者选改进方案，后者塑造训练与评测任务；不能把后者的结构分数当成前者的真实验证收益。 |
 | [Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement](../../../agent-research/2611.26132-sage-evolve/README.md) · [原始来源](https://arxiv.org/abs/2611.26132v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验 | AdaObs区分固定anchor目标和引导当前研究的active observation。每轮仍在固定anchor上验收；训练进展停滞时，先细分已有输出的错误诊断，再增加同任务的困难层，最后累计加入同能力方向的相关任务。它改变的是发现训练缺口的观察，不是为了提高分数而改评分器、换掉原目标或把测试答案放进训练。 | Harness²固定模型权重，用参考执行、候选执行对照和组合改任务Harness，并保存跨任务经验；AdaObs的完整研究会更新模型权重，固定anchor而改变active observation，平台检测针对数据边际收益。两者都用记忆避免重复，但“哪种执行框架更好”和“当前观察能否揭示新训练缺口”不是同一个选择问题；本地Harness²也是机制替身诊断，不能拿两者本地控制通过率比较Agent能力。 |
+| [CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?](../../../agent-research/2611.27116-coevobench/README.md) · [原始来源](https://arxiv.org/abs/2611.27116v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验 | CoEvoBench不是另一个固定自进化算法，而是测LLM researcher能否自主驱动模型权重和harness联合开发的benchmark。目标系统为(θ,H)：同一初始base与领域初始harness出发，researcher可检查执行、造训练数据/训模型、改工具和控制逻辑。开发后提交冻结的模型—harness对，在独立Test任务上执行。关键不是是否做过“诊断—训练—改代码”，而是先前反馈能否改变下一步干预和最终候选选择。 | Sage-Evolve固定anchor并改变active observation来发现新训练缺口，提出具体自改进策略；CoEvoBench固定benchmark开发/选择/Test契约，把选择改模型还是改harness交给被测researcher，并评价其提交结果。前者的“改观察”不是偷偷改最终评分器，后者的“两个可改旋钮”也不是交替更新就算成功。共同边界是不能用visible训练成绩选最终能力结论；本地Sage只有CPU控制核，CoEvo仅审查，二者没有可比较的Agent提升。 |
 
 </div>
 
@@ -269,6 +270,12 @@ CCI在八个参考benchmark上，先取十项结构特征的任务中位数，�
 同一观测阶段内，边际收益按每新增1万条保留样本的分数变化计算，用α=0.3做EMA；最近3次平滑值全部严格小于0.1才判平台。更换观测必须清空该历史。候选增量须让active或anchor至少一个严格改善，且anchor下降不超过0.5分。L2用独立参考模型，在通过率[0.2,0.6]内选最难层，保留旧层；L3保留旧任务。负例记忆排除的是当前gap下的具体配置，不是失败过一次就封禁整个L1。原文的训练每次从M0加base与累计增量重训，本地没有把它改成继续微调前一轮checkpoint。负控包括恰好等于epsilon不能触发平台、跨phase误用分数被拒绝、切换phase清零、一次具体L1失败后同层其他方案仍可选、不同gap不共用封禁、L2/L3不得丢弃旧成员或一次改多个轴、anchor回退0.5分包含边界而0.501分拒绝。CPU控制只证明规则，不证明自动科研会找到更好的训练数据；不接入Evolve晋级。
 
 对照来源：[sage-evolve](../../../agent-research/2611.26132-sage-evolve/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### CoEvoBench：让反馈决定改模型还是改Harness，而非按步骤完成科研仪式
+
+五个域覆盖SWE-bench Verified、TB-Lite、AppWorld、Telecom及BFCL多轮/记忆。Visible可看任务和轨迹，Selection只回聚合性能、不给题面/轨迹，Test仅operator最终评价。每run24小时、4张H20、100美元teacher allowance；θ和H相互耦合，不能把两者增益相加当独立贡献。正文对确认违规run退回base权重但保留最终harness，另报退回整个初始系统的更严格规则。75个9B run中22个确认违规（均访问禁用数据，6个还训练其上）；这说明须审计完整数据血缘，不能把benchmark声称隔离当成绝无泄漏证明。审查保留两种audit评分规则，不把reset权重简化成删除所有违规影响的形式证明；论文记录的可见集过拟合和harness—模型错配是方法分析，不是本地负控实测。代码仓库状态与论文报告分开记录。无本地能力结果，不创建自动实现/重试队列。
+
+对照来源：[coevobench](../../../agent-research/2611.27116-coevobench/README.md) · [sage-evolve](../../../agent-research/2611.26132-sage-evolve/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -614,9 +621,23 @@ CCI在八个参考benchmark上，先取十项结构特征的任务中位数，�
 
     对照来源：[sage-evolve](../../../agent-research/2611.26132-sage-evolve/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
 
+### 与Sage-Evolve相比，CoEvoBench把什么交给researcher？ {#cross-cross-nov23-coevobench}
+
+??? note "展开答案与例子"
+
+    **答案：** Sage给出固定anchor/自适应active observation的具体策略；CoEvo给出有保护的开发与最终评测协议，让researcher自己决定改权重还是改harness。前者是策略，后者是测决策的benchmark。
+
+    **教学例子：** 教学例：按长度细分失败是Sage式观察改变；在CoEvo里研究者还要判断该修parser、重训还是放弃训练路线。
+
+    对照来源：[coevobench](../../../agent-research/2611.27116-coevobench/README.md) · [sage-evolve](../../../agent-research/2611.26132-sage-evolve/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-23** · 本地只收录固定v1、代码提交、split/审计/成本契约与同主题比较；没有新建算法模块、可执行adapter、训练、researcher API调用或benchmark试跑。上游no-GPU toy researcher明确是生命周期fixture，不是自主科研Agent；把它执行成功不算本论文能力复现，也不应注册为Evolve算子。高成本决定本身已审查完成，不需要伪造种子指标或GPU回执。 完整实验高成本不复现，审查DONE。
+
+涉及：[coevobench](../../../agent-research/2611.27116-coevobench/README.md) · [sage-evolve](../../../agent-research/2611.26132-sage-evolve/README.md)
 
 **2026-11-21** · 本地只执行显式分数的增量验收、边际收益算术、EMA/平台判定、不可变观测结构、按L1→L2→L3选首个可行的显式提案、累计层/任务检查、具体gap配置负例过滤和参考通过率选层。首个MR初始化EMA，等分提案按输入顺序，是明确的本地确定性约定。MR函数要求正的显式保留样本数，拒绝0分母；原文未完全展开拒绝增量的Δd口径，因此不擅自把尝试样本当保留样本，调用方也可直接向monitor提供已定义的MR。没有LLM Analyze/Plan/Produce、数据生成、污染检查器、SFT、集群调度或Harness编辑器；可行性和语义诊断由调用方负责。 完整实验高成本不复现。
 
@@ -750,7 +771,7 @@ CCI在八个参考benchmark上，先取十项结构特征的任务中位数，�
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 79 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 80 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -833,6 +854,7 @@ CCI在八个参考benchmark上，先取十项结构特征的任务中位数，�
 - [SearchInject: Retrieval Exposure Control for Indirect Prompt Injection in Language-Model Search](../../../agent-research/2611.02643-searchinject/README.md)
 - [BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection](../../../agent-research/2611.25088-buggymle-cci/README.md)
 - [Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement](../../../agent-research/2611.26132-sage-evolve/README.md)
+- [CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?](../../../agent-research/2611.27116-coevobench/README.md)
 
 </details>
 

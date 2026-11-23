@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "scope": "Actual VFold finish-hook/value-bank lifecycle on real tiny tensors; no real HF/model forward or benchmark",
+  "device": "cuda",
+  "accelerator": "NVIDIA A100-SXM4-80GB",
+  "code_commit": "303d275911c15cfbacd639c8409b2c463a31d1c9",
+  "source_sha256": {
+    "scripts/run_nov23_vfold_compat.py": "6b2286a7ae51102680fc04f48378890d29580944c9ca6f2429e56c59345f7e8e",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "src/auto_research/foundation/vfold.py": "e32bd3cd01cb215f3a734cec4535f513f3ee719420bf85b10e2eb235694087a7"
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "checks": {
+        "both_cache_keyword_lifecycles_complete": true,
+        "actual_attention_matches_uncompressed": true
+      },
+      "metrics": {
+        "max_attention_error": 0.0,
+        "completed_pairs": 6
+      }
+    },
+    {
+      "seed": 43,
+      "checks": {
+        "both_cache_keyword_lifecycles_complete": true,
+        "actual_attention_matches_uncompressed": true
+      },
+      "metrics": {
+        "max_attention_error": 0.0,
+        "completed_pairs": 6
+      }
+    },
+    {
+      "seed": 44,
+      "checks": {
+        "both_cache_keyword_lifecycles_complete": true,
+        "actual_attention_matches_uncompressed": true
+      },
+      "metrics": {
+        "max_attention_error": 0.0,
+        "completed_pairs": 6
+      }
+    }
+  ],
+  "elapsed_seconds": 0.22460367530584335,
+  "pretrained_model_calls": 0,
+  "api_calls": 0,
+  "full_experiments_executed": false,
+  "automatic_retry": false
+}
