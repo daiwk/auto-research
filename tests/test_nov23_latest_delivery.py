@@ -92,3 +92,18 @@ def test_google_priority_and_source_exceptions_are_explicit():
     assert spot["first_author_affiliation"]=="National University of Singapore" and spot["published"]=="2026-04-27"
     disco=next(r for r in load(AUDIT/"task-scope.json")["papers"] if r["key"]=="disco")
     assert disco["upstream_revision"] is None
+
+
+def test_cache_keyword_fix_has_separate_bound_cpu_and_real_cuda_evidence():
+    frozen=load(AUDIT/"frozen-vfold-compat-sources.json")
+    verify_sources(ROOT,frozen["commit"],frozen["source_sha256"],frozen["proof"])
+    for device in ("cpu","cuda"):
+        raw=load(AUDIT/f"raw-vfold-compat-{device}.json")
+        assert raw["code_commit"]==frozen["commit"] and raw["source_sha256"]==frozen["source_sha256"]
+        assert raw["device"]==device and raw["seeds"]==[42,43,44]
+        assert raw["full_experiments_executed"] is False and raw["pretrained_model_calls"]==0
+        assert all(all(row["checks"].values()) for row in raw["per_seed"])
+    assert raw["accelerator"].startswith(("NVIDIA A100","NVIDIA A30"))
+    receipt=load(ROOT/"docs/gpu-validations/vfold-cache-keyword-compat-a100-20261123.json")
+    assert "not HF/Qwen" in receipt["scope"] and receipt["diagnostic_only"] is True
+    assert (ROOT/"docs/gpu-validations/vfold-a100-20261011.json").is_file()

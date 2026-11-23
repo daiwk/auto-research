@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "first_ci": {"workflow_run": 45105850713, "passed": 8557, "failed": 2, "skipped": 18, "failure": "Existing real-Qwen VFold decode tests: the finish hook did not receive the renamed cache keyword."},
+  "primary_api_source": "https://github.com/huggingface/transformers/blob/main/src/transformers/models/qwen3/modeling_qwen3.py",
+  "verified_ci_dependency": "transformers 5.24.0",
+  "cause": "Attention now passes cache rather than past_key_values. The post-attention hook only recognized the old name, leaving paired values pending before decode.",
+  "fix": "Accept a non-None cache first, otherwise the legacy past_key_values; never test an empty cache by truthiness. Do not merge before attention consumes the full current values.",
+  "regression": "Both keyword spellings use a real torch Module and actual value-bank lifecycle; original random-initialized Qwen CPU logits/cache assertions remain unweakened. Ten local VFold tests passed.",
+  "gpu_scope": "Separate source-frozen small CUDA tensor regression executes the actual finish hook and value banks for both spellings and prefill/decode with three seeds. It is not an HF/Qwen GPU forward or a full VFold experiment; no Transformers/checkpoint download is required.",
+  "supplemental_receipt": "../../gpu-validations/vfold-cache-keyword-compat-a100-20261123.json",
+  "original_paper_receipt_preserved": true,
+  "seven_paper_component_execution_sources_unchanged": true,
+  "full_experiments_executed": false
+}

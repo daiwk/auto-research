@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "removed": [
+    {
+      "path": ".cache/nov23-latest/vfold-compat-source.tar.gz",
+      "allocated_bytes": 32768
+    }
+  ],
+  "protected_files_verified": 7,
+  "protected_content_unchanged": true,
+  "remote_temporary_directory": "Removed after raw result fetch and source/GPU validation",
+  "no_checkpoint_or_environment_created": true
+}

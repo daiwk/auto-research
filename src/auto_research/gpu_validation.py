@@ -16,6 +16,7 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    "vfold-cache-keyword-compat": "docs/gpu-validations/vfold-cache-keyword-compat-a100-20261123.json",
     "aimuon": "docs/gpu-validations/aimuon-a100-20261123-latest.json",
     "mv-jepa": "docs/gpu-validations/mv-jepa-a100-20261121-latest.json",
     **{key: f"docs/gpu-validations/{key}-a100-20261120-latest.json" for key in (
