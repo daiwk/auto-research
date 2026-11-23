@@ -10,6 +10,8 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 预训练与数据 | [Accelerating Muon with Spectral Residual Correction](2611.27077-aimuon/README.md) | Tsinghua University，2026-11-20 | 未发现官方代码 | `aimuon`：仅低成本组件，完整实验不复现 |
+| 推理与系统效率 | [Reliable Behavior Discovery via False Discovery Rate Control](2611.27104-disco/README.md) | Google DeepMind，2026-11-20 | [原作者入口](https://github.com/google-deepmind/disco)；论文声明源码位于google-deepmind/disco，但2026-11-23官方GitHub入口HTTP404；可访问代码及commit未核实，不能据此断言作者未发布。 | `disco`：仅低成本组件，完整实验不复现 |
 | 推理与系统效率 | [FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models](2611.26020-frontier-replay/README.md) | Beijing Institute of Technology，2026-11-19 | 未发现官方代码 | `frontier-replay`：仅低成本组件，完整实验不复现 |
 | 注意力与长上下文 | [HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs](2611.26363-hisa/README.md) | EPFL / Swiss Data Science Center (EPFL and ETH Zurich)，2026-11-19 | [原作者入口](https://github.com/ambroise-b/hisa)；已发布原作者源码：[https://github.com/ambroise-b/hisa](https://github.com/ambroise-b/hisa)；Apache-2.0；已核对修订6224a46e7e439385ce432ce3f600afb88fb1e5a2。 | `hisa`：仅低成本组件，完整实验不复现 |
 | 推理与系统效率 | [Sequential Anytime Valid Tests for Efficient Inference-Time Alignment](2611.26413-e-rwsc/README.md) | Indian Institute of Technology Kanpur，2026-11-19 | 未发现官方代码 | `e-rwsc`：仅低成本组件，完整实验不复现 |
@@ -232,6 +234,7 @@
 | 网络架构 | [Memory Grafting: Scaling Language Model Pre-training via Offline Conditional Memory](../reproductions/2605.20948-memory-grafting/README.md) | Tsinghua University / Microsoft Research Asia，2026-05-20 | 未发现官方代码 | `memory-grafting` |
 | 企业 LLM | [Customizing an LLM for Enterprise Software Engineering](2605.16517-gemini-for-google/README.md) | Google，2026-05-15 | 未发现官方代码 | `gemini-for-google` |
 | 模型路由 | [Optimized Deferral for Imbalanced Settings](2604.27723-mild/README.md) | Google Research，2026-04-30 | 未发现官方代码 | `mild`：仅低成本组件，完整实验不复现 |
+| 多模态基础模型 | [Don't Pause! Every prediction matters in a streaming video](2604.24317-spot-bench/README.md) | National University of Singapore，2026-04-27 | [原作者入口](https://github.com/dibschat/SPOT-Bench)；是：[原作者SPOT-Bench](https://github.com/dibschat/SPOT-Bench)，固定12ab7f6c215d22c651bbbfde33c09ea5b6a4f101，MIT；本地独立实现并核对evals/metrics.py，不下载视频或执行上游模型。 | `spot-bench`：仅低成本组件，完整实验不复现 |
 | 模型评测 | [ProEval: Proactive Failure Discovery and Efficient Performance Estimation for Generative AI Evaluation](2604.23099-proeval/README.md) | Google DeepMind，2026-04-25 | [原作者入口](https://github.com/google-deepmind/proeval)；作者原文明确链接公开仓库；本地未执行上游训练 | `proeval`：仅低成本组件，完整实验不复现 |
 | 推理与系统效率 | [FUSE: Ensembling Verifiers with Zero Labeled Data](2604.18547-fuse-verifiers/README.md) | Stanford University，2026-04-20 | 未发现官方代码 | 计划键 `fuse-verifiers`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 网络架构 | [A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation](2604.14403-ecg-rag/README.md) | University of Massachusetts Amherst，2026-04-15 | 未发现官方代码 | `ecg-rag`：仅低成本组件，完整实验不复现 |

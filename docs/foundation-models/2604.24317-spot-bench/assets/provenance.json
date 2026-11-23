@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/html/2604.24317v2",
+  "source_url": "https://arxiv.org/pdf/2604.24317v2#page=6",
+  "source_sha256": "4990122722ee70f8c5aa9f374c326c39d7e886c329ca434f4d61d599cff93e79",
+  "pdf_page": 6,
+  "figure": "Figure 3",
+  "caption": "Streaming evaluation protocol: matched slots, false positives, false negatives and the asymmetric early/late timeliness kernel.",
+  "crop_pdf_points": [
+    104,
+    75,
+    510,
+    178
+  ],
+  "render_scale": 2,
+  "asset_sha256": "2f5be93cd16052d957c7e693e4b1a3140a63b0c7cb4cc4413fde3dc6e7c5322a",
+  "visually_reviewed": true,
+  "scientific_content_modified": false,
+  "copyright": "Original authors; attributed original screenshot."
+}

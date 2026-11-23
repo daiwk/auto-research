@@ -4,6 +4,9 @@
 
 ## 2026
 
+- 2026-11 · [CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency](../2611.27119-ctrl/README.md)（`ctrl`）：CTRL让每张GPU同时驻留learner rank和持续rollout shard，在CUDA MPS下共享SM。为腾出显存，优化器和immutable policy版本保存在host，learner仅流式装入有限层窗口。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- 2026-11 · [Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation](../2611.27131-dwe/README.md)（`dwe`）：DWE不改变蒸馏教师、采样者或KL目标，而是在相同输入和参数下估计输出头的完整梯度。softmax的logit梯度和为零，正负部分各有质量m；分别归一化后配成等量异号的坐标对。
+- 2026-11 · [How Far Does Lossless Re-tokenization Move an RLVR Update?](../2611.27083-retokenization-update/README.md)（`retokenization-update`）：研究对象不是奖励变化，而是同一rollout的token ID变化。保留文本、reward、advantage和checkpoint，仅将可拆token替换成两个拼回原文本的词表项。
 - 2026-11 · [Decision-Focused Reinforcement Learning for LLM Post-Training](../2611.25597-dfrl/README.md)（`dfrl`）：预测误差小不保证由预测触发的决策成本低。DFRL把LLM生成的参数预测交给下游优化器，以真实观测参数评估该决策，再把负决策regret用于后训练；不对优化器求导。
 - 2026-11 · [Policy Improvement-Guided Replay for Continual Reinforcement Learning](../2611.25989-colir-replay/README.md)（`colir-replay`）：持续RL不应只保存旧模型的输出：新策略仍需在历史任务分布上重新行动。CoLiR在任务结束时复用已有rollout，分别取最终策略生成的正确响应和初始策略生成的错误响应；各自补算另一策略的序列log-likelihood，以正确响应被强化和错误响应被压低两个半权重均值排序prompt。
 - 2026-11 · [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](../2611.23750-led-edits/README.md)（`led-edits`）：仅允许token替换时，一个遗漏或多余token会让整段后缀错位，需要许多位置分别修复。LED把[Ins]/[Del]加入输出词表、排除在输入词表外：删除当前token，或在其前插入新[Mask]，同时保留该锚点token。

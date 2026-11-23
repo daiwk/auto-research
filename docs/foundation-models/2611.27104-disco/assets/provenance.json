@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/abs/2611.27104v1",
+  "source_url": "https://arxiv.org/pdf/2611.27104v1#page=2",
+  "source_sha256": "09c96036b297ca9313645025a24c8f8b0ee1a5dccf1a4acc55449f65e61ffa22",
+  "source_pdf_sha256": "09c96036b297ca9313645025a24c8f8b0ee1a5dccf1a4acc55449f65e61ffa22",
+  "pdf_page": 2,
+  "page": 2,
+  "figure": "Figure 1",
+  "caption": "Original Figure 1: DISCO behavior-discovery loop; complete original caption retained.",
+  "crop_pdf_points": [
+    58,
+    85,
+    298,
+    423
+  ],
+  "crop_box_pdf_points": [
+    58,
+    85,
+    298,
+    423
+  ],
+  "render_scale": 3,
+  "retrieved_on": "2026-11-23",
+  "reviewed_version": "v1",
+  "asset_sha256": "c279daab2c7fd145e5848ab5f6e967bddd0458c7262cf581bb16b517490d0996",
+  "image_sha256": "c279daab2c7fd145e5848ab5f6e967bddd0458c7262cf581bb16b517490d0996",
+  "extraction": "Original fixed-v1 PDF crop including the complete original caption",
+  "visually_reviewed": true,
+  "scientific_content_modified": false,
+  "copyright": "Copyright belongs to the original authors."
+}

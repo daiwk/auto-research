@@ -169,7 +169,8 @@
         "foundation-models:continuousbench",
         "foundation-models:archspace",
         "foundation-models:lara-plus-plus",
-        "foundation-models:latent-feedback-scaling"
+        "foundation-models:latent-feedback-scaling",
+        "foundation-models:aimuon"
       ]
     },
     {
@@ -313,7 +314,9 @@
         "foundation-models:runway-inference-protocol",
         "foundation-models:mixed-signals-weights",
         "foundation-models:efficient-evals-tensor",
-        "foundation-models:e-rwsc"
+        "foundation-models:e-rwsc",
+        "foundation-models:disco",
+        "foundation-models:spot-bench"
       ]
     }
   ]

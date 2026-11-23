@@ -508,7 +508,7 @@
     "policy-optimization": {
       "title": "同一个GRPO名字之外：优势尺度、裁剪单位与训推失配",
       "thesis": "GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。",
-      "updated": "2026-11-21",
+      "updated": "2026-11-23",
       "reviewed_papers": [
         "post-training:rcea",
         "post-training:rlid",
@@ -574,7 +574,8 @@
         "post-training:regularized-score-centering",
         "post-training:ash-hint-steering",
         "post-training:led-edits",
-        "post-training:dfrl"
+        "post-training:dfrl",
+        "post-training:retokenization-update"
       ],
       "axes": [
         "优势尺度：组均值、组标准差、长度归一化",
@@ -754,6 +755,16 @@
             "与已有方法的关系",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "post-training:retokenization-update",
+          "position": "纯CPU prefix-softmax表从同一正的完整字符串分布按chain rule初始化，执行λ_t(e_token−π_row)完整梯度；检验未访问行、coarse未采样logit和字符串分布差异。独立实现c及ratio-of-means R，但不把两套独立tabular参数假装成共享LLM参数来计算R；R函数仅接受调用方已在同一参数空间测得的更新。包含均匀分布非零一致步的对称正控，避免过度概括定理。没有真实BPE、LoRA、AdamW、rollout或修复算法；这是一项机制诊断，不是后训练能力实现。",
+          "tradeoff": "DFRL改变奖励来自何种下游决策成本，RLOO消去同一实例共有常数；本篇固定奖励和优势，检查编码怎样改变score-gradient。baseline消去共同regret常数并不使不同token路径的Jacobian相同；不能把reward不变误写成更新不变。",
+          "sections": [
+            "背景与主要改动",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -854,6 +865,14 @@
           "papers": [
             "post-training:dfrl",
             "post-training:rloo"
+          ]
+        },
+        {
+          "title": "RLOO消去共同常数是否也消去重分词漂移？",
+          "body": "DFRL改变奖励来自何种下游决策成本，RLOO消去同一实例共有常数；本篇固定奖励和优势，检查编码怎样改变score-gradient。baseline消去共同regret常数并不使不同token路径的Jacobian相同；不能把reward不变误写成更新不变。 来源：§2 Eq.1–2、§4 Proposition1及AppendixE。采样ab时，coarse完整score步为λ(e_ab−π)；fine只更新root和a后继行，b行不动，所以fine的ba/bb比不变。若π(ba)≠π(bb)，共同更新仅能为零；均匀分布的对称例外不满足这个前提，不能宣称所有分布绝无非零一致步。论文AppendixE还明确区分仅更新sampled-logit的较弱模拟器，本地使用完整softmax梯度而非该替代。",
+          "papers": [
+            "post-training:retokenization-update",
+            "post-training:dfrl"
           ]
         }
       ],
@@ -989,6 +1008,16 @@
           "papers": [
             "post-training:dfrl",
             "post-training:rloo"
+          ]
+        },
+        {
+          "id": "nov23-retokenization-update",
+          "question": "RLOO消去共同常数是否也消去重分词漂移？",
+          "answer": "不会。DFRL的hindsight成本作为同实例常数在优势中抵消；重分词改变乘在优势上的score-gradient。奖励轴的抵消与参数化轴的不变性是两回事。",
+          "example": "教学例：同一优势1分别乘两个不同方向的score向量，结果仍不同；给两者reward同时减10不会让向量重合。",
+          "papers": [
+            "post-training:retokenization-update",
+            "post-training:dfrl"
           ]
         }
       ],
@@ -1231,6 +1260,18 @@
           "source_revisions": {
             "post-training:dfrl": "897844a59cfe062c84c423073f75dd192b69ce998bdab4331fa01a47bce6ff39",
             "post-training:rloo": "07ebf63638eb93c804d3122a7c60995c0a29db5eb1ab2023b10546f87a50a0a1"
+          }
+        },
+        {
+          "date": "2026-11-23",
+          "papers": [
+            "post-training:retokenization-update",
+            "post-training:dfrl"
+          ],
+          "summary": "DFRL改变奖励来自何种下游决策成本，RLOO消去同一实例共有常数；本篇固定奖励和优势，检查编码怎样改变score-gradient。baseline消去共同regret常数并不使不同token路径的Jacobian相同；不能把reward不变误写成更新不变。 L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU、无CUDA路径，不作为Evolve晋级证据。 完整实验成本过高不复现，审查DONE。",
+          "source_revisions": {
+            "post-training:retokenization-update": "414fe7e23ed0cb58275987eb2d1b5e73c1946d9eb1eecc8297d0c79292bdcdb9",
+            "post-training:dfrl": "897844a59cfe062c84c423073f75dd192b69ce998bdab4331fa01a47bce6ff39"
           }
         }
       ]
@@ -1992,7 +2033,7 @@
     "student-trajectory-distillation": {
       "title": "轨迹蒸馏：采样者、提案与散度方向分开看",
       "thesis": "“on-policy”描述监督发生在哪些状态，FKL/RKL/JSD描述在这些状态怎样比较分布。GKD和MiniLLM建立这两个轴，DrOPD、AP-OPD再调整纠错位置或强度，Semi-OPD与学习信号诊断则提醒：离线复用和残余损失各有不同含义。 MPOPD再把采样者变成可学习proposal：几何混合是提案target，学生仍向教师做RKL，二者不能混成同一个蒸馏分布。",
-      "updated": "2026-11-19",
+      "updated": "2026-11-23",
       "reviewed_papers": [
         "post-training:shuffled-opsd",
         "post-training:specopd",
@@ -2040,7 +2081,8 @@
         "post-training:cord-rollout",
         "post-training:drd-mopd",
         "post-training:streaming-opd",
-        "post-training:mrpd-replay"
+        "post-training:mrpd-replay",
+        "post-training:dwe"
       ],
       "axes": [
         "状态来源：教师示范、当前学生、初始学生固定轨迹",
@@ -2177,6 +2219,16 @@
             "与已有方法的关系",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "post-training:dwe",
+          "position": "纯stdlib CPU实现完整正负配对、centered PCA固定顺序、共享分层quantile、forward/reverse KL logit梯度、仅选中行的hidden/weight梯度。小矩阵以多坐标起点的power iteration估计首主成分，与上游随机PCA实现不同但保留论文定义的几何顺序机制。精确积分所有CDF区间检验无偏性，有限差分独立核对KL梯度；top-coordinate丢弃是有偏负控。没有Transformer、CUDA kernel、真实teacher cache、学生生成、能力benchmark或吞吐测量。",
+          "tradeoff": "SimOPD在各自表示空间匹配回答间的相似度分布，改变监督目标；DWE保持既定KL目标，只改变反向梯度估计和输出行计算。二者可在设计上组合，但SimOPD的关系分布不是DWE已经支持的真实LLM路径；本轮也未验证联合训练。",
+          "sections": [
+            "背景与主要改动",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -2254,6 +2306,14 @@
           "papers": [
             "post-training:mrpd-replay",
             "post-training:streaming-opd"
+          ]
+        },
+        {
+          "title": "DWE与SimOPD都叫蒸馏改进，改变的是同一轴吗？",
+          "body": "SimOPD在各自表示空间匹配回答间的相似度分布，改变监督目标；DWE保持既定KL目标，只改变反向梯度估计和输出行计算。二者可在设计上组合，但SimOPD的关系分布不是DWE已经支持的真实LLM路径；本轮也未验证联合训练。 来源：§2 Eq.2–3；§3 Eq.4–15。U_k独立均匀分布于((k−1)/K,k/K)，正负CDF共用U_k。反传实际计算Wᵀĝ与ĝhᵀ；不能先做完整稠密反传再屏蔽。reverse KL的logit梯度为p_i[log(p_i/q_i)−KL(p‖q)]，同样和为零。固定顺序可近似几何，但不是每步重排或把教师/学生词表ID混用。",
+          "papers": [
+            "post-training:dwe",
+            "post-training:simopd"
           ]
         }
       ],
@@ -2360,6 +2420,16 @@
           "papers": [
             "post-training:mrpd-replay",
             "post-training:streaming-opd"
+          ]
+        },
+        {
+          "id": "nov23-dwe",
+          "question": "DWE与SimOPD都叫蒸馏改进，改变的是同一轴吗？",
+          "answer": "不是。SimOPD匹配回答关系分布，改变监督内容；DWE保持已有KL目标，只用无偏稀疏估计替换输出头反传。两者理论上可组合，但组件通过不证明联合LLM训练或能力收益。",
+          "example": "教学例：换成相似度bank的KL是换目标；同一token KL用8对坐标估计其梯度是换估计器。",
+          "papers": [
+            "post-training:dwe",
+            "post-training:simopd"
           ]
         }
       ],
@@ -2532,6 +2602,18 @@
           "source_revisions": {
             "post-training:mrpd-replay": "d6fd4cb967ed5da07b26e1a2be058067588d926517ce97f941f0f4880df8901e",
             "post-training:streaming-opd": "d1d113d64cd6d0a49407520af48c62e17235118dcd1455cfd973ce328d260e24"
+          }
+        },
+        {
+          "date": "2026-11-23",
+          "papers": [
+            "post-training:dwe",
+            "post-training:simopd"
+          ],
+          "summary": "SimOPD在各自表示空间匹配回答间的相似度分布，改变监督目标；DWE保持既定KL目标，只改变反向梯度估计和输出行计算。二者可在设计上组合，但SimOPD的关系分布不是DWE已经支持的真实LLM路径；本轮也未验证联合训练。 L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU、无CUDA路径，不作为Evolve晋级证据。 完整实验成本过高不复现，审查DONE。",
+          "source_revisions": {
+            "post-training:dwe": "48e7185b2ab6a4e58919f8a244caa11dd5e569a2b82826f7b1e98141b226b342",
+            "post-training:simopd": "80aedc14d94e4d836ea201d78ce845120210026bfa57b3d441d9eafbab532516"
           }
         }
       ]
@@ -3231,7 +3313,7 @@
     "data-and-budget": {
       "title": "省掉哪一份算力：选问题、少生成、分枝与有条件重放",
       "thesis": "数据与预算方法改变的是训练链路的不同位置。课程重估当前难度，LESSER降低筛选特征成本，STOPD随机少生成并校正，BranchOPD增加关键分枝，Lightning缓存教师，TAR召回被压制的正确模式；少调用一次教师不等于整个训练更便宜。",
-      "updated": "2026-11-20",
+      "updated": "2026-11-23",
       "reviewed_papers": [
         "post-training:ask-to-distill",
         "post-training:tar-adaptive-replay",
@@ -3274,7 +3356,8 @@
         "post-training:maple-icl",
         "post-training:sh-opd",
         "post-training:tailroll",
-        "post-training:colir-replay"
+        "post-training:colir-replay",
+        "post-training:ctrl"
       ],
       "axes": [
         "选择对象：问题、token位置、后缀、历史轨迹",
@@ -3383,6 +3466,16 @@
             "与已有方法的关系",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "post-training:ctrl",
+          "position": "本篇仅收录和成本审查：没有本地CTRL实现、CUDA路径、benchmark、指标回执或Evolve算子。未将paper公式或CPU时序fixture宣传为CUDA共驻留系统。保存固定版本事实、机制、原图及失败/不占优条件，不生成伪实验metrics。",
+          "tradeoff": "CoLiR选择应回放哪些历史prompt、后续由当前策略生成新响应；CTRL决定同一批训练与生成怎样共享硬件和发布时间。一个是数据预算/记忆选择，一个是系统布局/版本合同，互不替代。免额外生成来构建CoLiR记忆也不消除训练rollout成本，不能据此把CTRL系统加速直接叠乘。",
+          "sections": [
+            "背景与主要改动",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -3434,6 +3527,14 @@
           "papers": [
             "post-training:colir-replay",
             "post-training:tar-adaptive-replay"
+          ]
+        },
+        {
+          "title": "CTRL能与CoLiR回放预算直接相乘算总加速吗？",
+          "body": "CoLiR选择应回放哪些历史prompt、后续由当前策略生成新响应；CTRL决定同一批训练与生成怎样共享硬件和发布时间。一个是数据预算/记忆选择，一个是系统布局/版本合同，互不替代。免额外生成来构建CoLiR记忆也不消除训练rollout成本，不能据此把CTRL系统加速直接叠乘。 来源：§3.3 Eq.1及publication gate、§3.4 Eq.3。b(y)是包括跨刷新续写时的最早behavior版本，而非最终完成时版本。publication g在仍有dispatch p且g−p+1≥T的请求时等待；FIFO消费与W≤T warmup一起支撑陈旧度界。P的下界指导测量和SM share选择，不保证下界可达，也不是CPU调度模拟可以证实的吞吐收益。",
+          "papers": [
+            "post-training:ctrl",
+            "post-training:colir-replay"
           ]
         }
       ],
@@ -3506,6 +3607,16 @@
           "papers": [
             "post-training:colir-replay",
             "post-training:tar-adaptive-replay"
+          ]
+        },
+        {
+          "id": "nov23-ctrl",
+          "question": "CTRL能与CoLiR回放预算直接相乘算总加速吗？",
+          "answer": "不能。CoLiR改变保存与采样哪些历史prompt，CTRL改变训练和生成的硬件布局与publication。两者开销与瓶颈可能重叠，必须做真实联合系统对照；本轮两者组件都不提供这种证据。",
+          "example": "教学例：少生成一批响应后learner可能变成瓶颈，原先为长rollout找到的SM share未必仍最优。",
+          "papers": [
+            "post-training:ctrl",
+            "post-training:colir-replay"
           ]
         }
       ],
@@ -3640,6 +3751,18 @@
           "source_revisions": {
             "post-training:colir-replay": "b49323cf277810e110f192851ab26765bc97c094f390dfc64aed205ffcfddecd",
             "post-training:tar-adaptive-replay": "d2aaf3b7d71dd8191e8458db6ecb30ec347ac3770f8ad1e8e7864e1ba784c269"
+          }
+        },
+        {
+          "date": "2026-11-23",
+          "papers": [
+            "post-training:ctrl",
+            "post-training:colir-replay"
+          ],
+          "summary": "CoLiR选择应回放哪些历史prompt、后续由当前策略生成新响应；CTRL决定同一批训练与生成怎样共享硬件和发布时间。一个是数据预算/记忆选择，一个是系统布局/版本合同，互不替代。免额外生成来构建CoLiR记忆也不消除训练rollout成本，不能据此把CTRL系统加速直接叠乘。 仅收录、无本地系统实现、无CUDA验收；成本过高，不复现（审查 DONE）。 完整实验成本过高不复现，审查DONE。",
+          "source_revisions": {
+            "post-training:ctrl": "2e8ebbc76609c6fbfd4f3c0f9fcfc80ddab1c06412478058206b8d2c43297ef4",
+            "post-training:colir-replay": "b49323cf277810e110f192851ab26765bc97c094f390dfc64aed205ffcfddecd"
           }
         }
       ]

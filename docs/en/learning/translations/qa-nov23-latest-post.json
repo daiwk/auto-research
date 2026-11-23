@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:dwe/nov23-basics": {
+      "source_sha256": "b3c649b779cea523c307573c5a5ec0011683b5fbe6786c620e3b182a8712dd44",
+      "reviewed": true,
+      "fields": {
+        "question": "Why sample one positive and one negative coordinate?",
+        "answer": "Softmax logit gradients sum to zero, so both signs have equal mass. Assigning +m and −m per pair preserves zero sum and removes IS's random sign-allocation variance at a matched coordinate budget; it is not top-k truncation.",
+        "example": "Teaching example: for g=(0.4,−0.3,−0.1), m=0.4. Always select the first positive coordinate; choose the two negative coordinates with probabilities0.75/0.25. The mean recovers g."
+      }
+    },
+    "qa/post-training:dwe/nov23-mechanism": {
+      "source_sha256": "6d07c1d793baa3dc1d40a7d881f0ac5a2ecd6833f845691836494e8a4c736807",
+      "reviewed": true,
+      "fields": {
+        "question": "What do geometry ordering and stratified quantiles each address?",
+        "answer": "A fixed PCA order pairs nearby output-row projections to reduce Wᵀĝ error. One quantile per stratum improves coverage. Positive and negative CDFs share a quantile; independent draws do not implement that geometric coupling.",
+        "example": "Teaching example: with K=2, draw separately from(0,0.5) and(0.5,1), querying both CDFs at the same U for each pair. The two U values are independent; the two signs within a pair share U."
+      }
+    },
+    "qa/post-training:dwe/nov23-comparison": {
+      "source_sha256": "ef3e5599b137488490f12631db63bd5fade05e8fb685af07e253a3f55fc55fab",
+      "reviewed": true,
+      "fields": {
+        "question": "Do DWE and SimOPD change the same distillation axis?",
+        "answer": "No. SimOPD changes supervision to relational answer distributions. DWE retains an existing KL objective and substitutes an unbiased sparse output-head estimator. Possible composition does not establish joint LLM training or capability gains.",
+        "example": "Teaching example: replacing token KL with similarity-bank KL changes the objective; estimating that same token KL with eight coordinate pairs changes its estimator."
+      }
+    },
+    "qa/post-training:dwe/nov23-implementation": {
+      "source_sha256": "9b0bac45e447e9132e7d407ea58e9b30f178eadd7719542f4ee895a1ac20b1bb",
+      "reviewed": true,
+      "fields": {
+        "question": "Can2.20× be reported as local end-to-end OPD speedup?",
+        "answer": "No. It is an authors' output-head result; their end-to-end mean update time falls only1.53%. Local CPU matrices check equations, exact expectations and chain-rule products, without generation, GPU kernels or throughput experiments.",
+        "example": "Teaching example: when generation and teacher backbones already consume more than half the update, doubling one backward substage cannot halve total update time."
+      }
+    },
+    "qa/post-training:retokenization-update/nov23-basics": {
+      "source_sha256": "8e8014bc12a7f0042771a38dd0e45f166b377d0a6fb018c766ef4247b8085c9d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can identical text and reward produce different updates?",
+        "answer": "A model assigns probabilities to token paths, not just decoded strings. Splitting tokens changes visited prefixes and score gradients; fixed rewards and advantages do not fix that Jacobian.",
+        "example": "Teaching example: The and T followed by he decode identically, but the parameter derivatives of logπ(The|prefix) and logπ(T|prefix)+logπ(he|prefix,T) need not match."
+      }
+    },
+    "qa/post-training:retokenization-update/nov23-mechanism": {
+      "source_sha256": "24b7ade026d1373667e7f4f92faf4599e50f52772131aac2b7e5a9c67011e6a0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain the full gradient on unsampled logits?",
+        "answer": "The coarse step λ(e_ab−π) moves every unsampled logit, changing log odds ba/bb by−λ[π(ba)−π(bb)]. The fine policy never visits its b row, so those conditional odds stay fixed. Updating only the sampled logit is the weaker simulator distinguished in the paper.",
+        "example": "Teaching example: with π(ba)=0.3, π(bb)=0.4 and λ=0.2, coarse log odds increase0.02 while fine log odds do not change. This is a mechanism calculation, not an LLM performance loss."
+      }
+    },
+    "qa/post-training:retokenization-update/nov23-comparison": {
+      "source_sha256": "b8169c99edf80e26de385aa179225c5368d9ca83a033b5d9c9b95acb093f2b01",
+      "reviewed": true,
+      "fields": {
+        "question": "Does RLOO's constant cancellation remove retokenization drift?",
+        "answer": "No. DFRL's shared hindsight-cost constant cancels within advantages. Retokenization changes the score-gradient multiplied by those advantages. Cancellation on the reward axis is not parameterization invariance.",
+        "example": "Teaching example: advantage1 multiplying two different score vectors still gives different updates. Subtracting10 from both rewards does not align those vectors."
+      }
+    },
+    "qa/post-training:retokenization-update/nov23-implementation": {
+      "source_sha256": "c326a40ccdf33c88446115ed6d1c5cb68158e59b51137df88518ba6b735deb50",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not report the paper's R from two independent tabular tables?",
+        "answer": "R requires canonical, re-encoded and different-batch updates in one parameter space from the same checkpoint, using a ratio of mean distances. Separate tabular parameterizations have different dimensions/semantics; compare their string distributions instead. The local R utility does not fabricate LM updates.",
+        "example": "Teaching example: equal-norm opposite updates give c=2 and orthogonal updates give√2. Two zero updates have a zero denominator and must be rejected, not assigned zero drift."
+      }
+    },
+    "qa/post-training:ctrl/nov23-basics": {
+      "source_sha256": "9783bf8130525709d58bd7b617d430d3bf9a8e943170284ece58ce15031023ae",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is CTRL more than placing two processes on one GPU?",
+        "answer": "Residency is a memory layout. MPS enables cross-process kernel concurrency, while host optimizer state, a bounded layer window and immutable-version publication make learner and rollout coexist.",
+        "example": "Teaching example: with MPS disabled, models can remain resident while kernels execute serially; that is not overlapped training and generation."
+      }
+    },
+    "qa/post-training:ctrl/nov23-mechanism": {
+      "source_sha256": "d024caf7c1c7b409120d8b94fc3ca5cf98dbdb769225ad5cfad2fa900915843e",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a resumed response use its final version for staleness?",
+        "answer": "No. b(y) is the earliest behavior version, and existing tokens retain their sampling log probabilities. Ready batches train before the publication gate waits; FIFO and warmup conditions jointly bound consumed-sample staleness.",
+        "example": "Teaching example: a response starts under v3 and resumes under v5. Its earliest version remains3; replacing it with5 hides two versions of staleness."
+      }
+    },
+    "qa/post-training:ctrl/nov23-comparison": {
+      "source_sha256": "c166f98ea2a2f680e286dc4dc586b810495fe3e920e2e7502f88ef831d6342a0",
+      "reviewed": true,
+      "fields": {
+        "question": "Can CTRL and CoLiR savings simply be multiplied?",
+        "answer": "No. CoLiR chooses stored and replayed historical prompts; CTRL changes hardware layout and publication for training/generation. Costs and bottlenecks can overlap, requiring a real combined-system control absent here.",
+        "example": "Teaching example: after removing a rollout batch, the learner may become the bottleneck, so an SM share tuned for long rollout may no longer be optimal."
+      }
+    },
+    "qa/post-training:ctrl/nov23-implementation": {
+      "source_sha256": "48c048bcb86eb0080df04180d3a3670352c814dba79c324d7e2bbd46d0994d10",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not provide a CPU timing simulation as a system reproduction?",
+        "answer": "Its defining costs involve CUDA MPS concurrency, streamed weights, host transfers and multi-GPU layouts. Invented CPU timings cannot validate them. Four-GPU/1–2TiB host configurations exceed the one-A100/A30-or-Mac budget, so this is review DONE without download or trial.",
+        "example": "Teaching example: Table3's RTX4090 MBPP N=64 co-residency reaches only0.86× split throughput. Taking the maximum of two invented phase times misses contention and non-winning layouts."
+      }
+    }
+  }
+}

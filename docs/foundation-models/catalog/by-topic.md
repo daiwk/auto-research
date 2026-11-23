@@ -202,12 +202,9 @@
 
 ## 预训练与数据
 
-### 训练预算与扩展规律
-
-- [ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research](../../foundation-models/2611.17332-archspace/README.md)（`archspace`）：复用基线的最佳超参可能掩盖新架构优势；中途checkpoint的排序也可能在完整学习率衰减后反转。ArchSpace把架构提案、相同数据/tokenizer的预算梯度比较、较长训练和可审查记录连起来。比较从复用基线最优点，到IsoFLOP规模搜索，再到同时搜索LR/BS逐级加严；验证损失按11个域等权，不让大域主导。[§3—4](https://arxiv.org/html/2611.17332v1#S3)
-
 ### 优化器与训练稳定性
 
+- [Accelerating Muon with Spectral Residual Correction](../../foundation-models/2611.27077-aimuon/README.md)（`aimuon`）：AIMuon不改普通EMA动量，而改参数子问题：先更新M，再算E=G−M，分别对M与E做谱变换，以各自核范数估计决定相对权重。把残差混进动量后只做一次变换通常不等价，因为矩阵符号映射非线性。实用Algorithm1用两次五步BF16 Newton–Schulz近似，并用内积绝对值估计核范数，不做额外SVD；最后把合成步的Frobenius范数匹配到同M的Muon，权重衰减解耦。理论收敛结论针对未归一化、精确矩阵符号版本，不自动覆盖这个BF16实用算法。
 - [Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding](../../foundation-models/2611.13545-stochastic-rounding/README.md)（`stochastic-rounding`）：FP32 主权重在训练中发生小变化，转为 BF16 后却可能仍落在同一格点，导致 rollout 策略看不到更新。BF16 在一般正规数区间的格距比 FP16 大八倍，因此相似的小步长可表现出不同的有效更新速度。随机舍入按到相邻格点的距离选上下端点，在条件期望上保留主权重变化，而不是强行放大学习率。
 - [T-MUON: Tensorizing Muon via t-SVD for Large Language Model Pre-training](../../foundation-models/2610.24938-t-muon/README.md)（`t-muon`）：普通 Muon 逐矩阵求 polar。本文先把结构相关矩阵放进三阶张量，再在第三轴变换域分别求 polar；这不是把张量任意展平后运行普通 Muon。分组方式与变换方式是两个独立选择：论文比较相邻层、QKV、单矩阵的 head、QKV 的 head-stack。
 - [BMuon: Budgeting Muon's Spectral Geometry for Structured Compressibility](../../foundation-models/2610.23571-bmuon/README.md)（`bmuon`）：Muon的spectral-norm更新不一定产生容易按隐藏通道剪枝的权重。BMuon不在前向额外加gate，也不只是对训练好的Muon模型剪枝；它让**所有MLP块的隐藏通道共享同一分配预算**，并在每个通道的输入行/输出列两侧共同改变更新几何。
@@ -218,6 +215,10 @@
 - [TACO: Ternary Absolute-max Column-wise One-sparse Optimizer for LLM Fine-Tuning](../../foundation-models/2610.02199-taco-optimizer/README.md)（`taco-optimizer`）：每个二维权重列只保留绝对值最大的梯度分量及符号，形成 column-wise one-sparse steepest direction；低精度列状态替代逐参数 dense optimizer state。
 - [Musec: MomentUm SpEctral Clipping for Stable Muon-type Training](../../foundation-models/2609.11655-musec/README.md)（`musec`）：对 Muon momentum 的奇异值做平滑谱裁剪，避免硬截断不连续，同时限制不稳定大方向。
 - [ECO: Quantized Training without Full-Precision Master Weights](../../foundation-models/2601.22101-eco-optimizer/README.md)（`eco-optimizer`）：低精度训练通常仍保留高精度 master weights 累积微小更新。ECO 直接在量化权重上更新，将本次重量化误差注入已有动量，避免再保存主权重或持久误差缓冲；Adam 必须使用逐元素有效步长，不能把 SGDM 的标量系数照搬过去。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
+### 训练预算与扩展规律
+
+- [ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research](../../foundation-models/2611.17332-archspace/README.md)（`archspace`）：复用基线的最佳超参可能掩盖新架构优势；中途checkpoint的排序也可能在完整学习率衰减后反转。ArchSpace把架构提案、相同数据/tokenizer的预算梯度比较、较长训练和可审查记录连起来。比较从复用基线最优点，到IsoFLOP规模搜索，再到同时搜索LR/BS逐级加严；验证损失按11个域等权，不让大域主导。[§3—4](https://arxiv.org/html/2611.17332v1#S3)
 
 ### 优化器与参数高效微调
 
@@ -390,6 +391,10 @@
 
 - [Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction](../../reproductions/2608.12209-gas/README.md)（`gas`）：常规 MLLM 只用文本 next-token loss，视觉结构只能被语言间接监督；统一理解/生成模型又会把生成参数和开销留到部署阶段。GAS 把生成改成纯训练期辅助任务：理解分支与生成分支共享较低层视觉路径，上层 Transformer 参数解耦；生成分支在与 LLM 输入相同的连续视觉空间自回归预测目标图像 embedding。
 
+### 多模态评测与表示学习
+
+- [Don't Pause! Every prediction matters in a streaming video](../../foundation-models/2604.24317-spot-bench/README.md)（`spot-bench`）：SPOT-Bench针对持续视频流：每个输出都会影响分数，不只在暂停询问时读一个答案。人工可接受时间窗是gold slot，窗内timeliness为1，窗外采用早侧较宽、晚侧较窄的Gaussian尾。语义正确且时间有效的响应按时间顺序被开放slot吸收，每slot最多K次并只保留最好timeliness；过量或不匹配输出为FP，空slot为FN。T-F1以加权TP衡量及时性、覆盖和过度回应。Ctrl-SPOT则是另一个完整流式控制器，组合持久query状态、长短期KV、检索与dead-time总结；本地只做评测器，不冒充控制器。
+
 ### 移动轨迹与地点表征
 
 - [Mobility-Embedded POIs: Learning What A Place Is and How It Is Used from Human Movement](../../foundation-models/2601.21149-me-pois/README.md)（`me-pois`）：原方法用访问序列编码器连接短期轨迹与长期地点原型，并把高频地点的时段分布跨空间尺度传给稀疏地点；文本语义作为另一条对齐监督。冻结预训练表征后，再训练地图属性探针。主要机制与公式见[原文 §3.2–3.6](https://arxiv.org/html/2601.21149v1#S3.SS2)。
@@ -403,6 +408,14 @@
 - [BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models](../../reproductions/2301.12597-blip2/README.md)（`blip2`）：BLIP-2 冻结已有视觉 encoder 和 LLM，只训练轻量 Q-Former。固定数量的可学习 query 通过 cross-attention 从视觉 token 提取与语言最相关的信息；第一阶段做图文表征学习，第二阶段将 query 输出投影成冻结 LLM 的 soft visual prompt。
 
 ## 推理与系统效率
+
+### 能力评测与推理协议
+
+- [Reliable Behavior Discovery via False Discovery Rate Control](../../foundation-models/2611.27104-disco/README.md)（`disco`）：行为发现寻找的是可重复的输入—输出规律，而不是几条显眼失败案例。不断挑选假设、查询模型、观察结果再换假设会产生选择偏差；即使每个单项检验都控制错误，也不能直接保证最终发现集合的FDR。DISCO通过冻结e-process和限制选择器只能看粗分箱状态，允许最终以实际测试假设数$K_{obs}$运行eBH，而不总以保守的预设上界加权。
+- [Sequential Anytime Valid Tests for Efficient Inference-Time Alignment](../../foundation-models/2611.26413-e-rwsc/README.md)（`e-rwsc`）：固定N的Best-of-N对容易题也花满预算；只追踪当前领先答案的SPRT会反复换假设，不能直接沿用Wald错误保证。e-RWSC按答案分别保留e-process，以过去响应的reward-weighted self-consistency质量和首现后的匹配次数构造可预测Kelly下注。新答案第一次出现只登记为单位资本，不把这个由定义强制成功的样本计作证据。所有旧答案的下注先于下一条响应/奖励计算，领先者改变也不重置资本。
+- [Specialized Decision Models vs. General-Purpose LLMs: Benchmarking Jev Across Knowledge, Reasoning, and Multilingual Tasks](../../system-one/2610.11978-jev-capability/README.md)（`jev-capability`）：论文用有限候选选择评估 Jev 的知识、推理和多语言能力。每题只提交问题与候选，运行一次；数学任务表现弱于知识任务。原文中的供应商分数与作者实测并非统一提示协议，本地实现因此分别记录，不混成可比排名。本文是评测研究，不提供新架构或训练目标。
+- [Words Speak Louder Than Order: A Behavioral Evaluation of Gemma 4](../../foundation-models/2609.30716-gemma-priority-protocol/README.md)（`gemma-priority-protocol`）：论文把双文档冲突中的词偏好、来源措辞和呈现顺序分别测量。方法与资源已核：四路交叉、十种提示条件、跨条件共同保留集，以及未筛选敏感性分析。研究范围是单模型、短上下文、英文单词选择；不是新的训练算法，也不是神经回路证据。
+- [Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization](../../foundation-models/2603.02029-efficient-evals-tensor/README.md)（`efficient-evals-tensor`）：本文将模型、prompt和rater三者的能力张量作低rank CP分解，先用大量廉价autorater评分学共享表示，再冻结表示、只拟合人类rater向量及有序cutoff。它保留prompt异质性和rater偏好差异，不把某个自动judge分数直接当人类真值。2026-11-16是Google官方代码新仓库，不是论文首发；v1首发为2026-03-02 16:12:46 UTC。
 
 ### 推测解码与 KV cache
 
@@ -426,13 +439,6 @@
 - [C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference](../../reproductions/2607.17715-c2kv/README.md)（`c2kv`）：以 compression tokens 和结构化 attention 学习位置无关、可拼接的压缩 KV manifold，并联合训练压缩与复用。
 - [Medusa: Simple LLM Inference Acceleration Framework with Multiple Decoding Heads](../../reproductions/2401.10774-medusa/README.md)（`medusa`）：在冻结或联合微调的 backbone 上增加多个 future-token heads，以 tree attention 同时验证候选分支，减少串行解码步数。
 - [Fast Inference from Transformers via Speculative Decoding](../../reproductions/2211.17192-speculative-decoding/README.md)（`speculative-decoding`）：小 draft model 并行提出多个 token，target model 一次验证整个块；拒绝时从校正后的残差分布采样，从而严格保持 target 分布。
-
-### 能力评测与推理协议
-
-- [Sequential Anytime Valid Tests for Efficient Inference-Time Alignment](../../foundation-models/2611.26413-e-rwsc/README.md)（`e-rwsc`）：固定N的Best-of-N对容易题也花满预算；只追踪当前领先答案的SPRT会反复换假设，不能直接沿用Wald错误保证。e-RWSC按答案分别保留e-process，以过去响应的reward-weighted self-consistency质量和首现后的匹配次数构造可预测Kelly下注。新答案第一次出现只登记为单位资本，不把这个由定义强制成功的样本计作证据。所有旧答案的下注先于下一条响应/奖励计算，领先者改变也不重置资本。
-- [Specialized Decision Models vs. General-Purpose LLMs: Benchmarking Jev Across Knowledge, Reasoning, and Multilingual Tasks](../../system-one/2610.11978-jev-capability/README.md)（`jev-capability`）：论文用有限候选选择评估 Jev 的知识、推理和多语言能力。每题只提交问题与候选，运行一次；数学任务表现弱于知识任务。原文中的供应商分数与作者实测并非统一提示协议，本地实现因此分别记录，不混成可比排名。本文是评测研究，不提供新架构或训练目标。
-- [Words Speak Louder Than Order: A Behavioral Evaluation of Gemma 4](../../foundation-models/2609.30716-gemma-priority-protocol/README.md)（`gemma-priority-protocol`）：论文把双文档冲突中的词偏好、来源措辞和呈现顺序分别测量。方法与资源已核：四路交叉、十种提示条件、跨条件共同保留集，以及未筛选敏感性分析。研究范围是单模型、短上下文、英文单词选择；不是新的训练算法，也不是神经回路证据。
-- [Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization](../../foundation-models/2603.02029-efficient-evals-tensor/README.md)（`efficient-evals-tensor`）：本文将模型、prompt和rater三者的能力张量作低rank CP分解，先用大量廉价autorater评分学共享表示，再冻结表示、只拟合人类rater向量及有序cutoff。它保留prompt异质性和rater偏好差异，不把某个自动judge分数直接当人类真值。2026-11-16是Google官方代码新仓库，不是论文首发；v1首发为2026-03-02 16:12:46 UTC。
 
 ### 基础模型检索与排序
 

@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-23",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "foundation-models:disco",
+      "target_card": "foundation-models/evaluation-and-evidence",
+      "source_revisions": {
+        "foundation-models:disco": "761817fd02758f3cdefae54a2375c5dbf1777ce7bf636363ea586127b9a4ca92",
+        "foundation-models:e-rwsc": "6f7990a337b89868094a0642455db0f632db53c314f586f5bb8d5bd885496a30"
+      },
+      "comparison": {
+        "position": "DISCO以冻结e-process与粗分箱选择接口控制行为发现集合的FDR，允许最终使用实际假设数；本地仅有未boosted二分箱统计核心。",
+        "tradeoff": "e-RWSC认证单题某答案的政策多数概率，不等于正确性；DISCO控制多行为假设集合的误发现比例，并为自适应假设池施加分箱、冻结与null分布校正约束。相同的e-process工具不使两类错误和证书等价。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "DISCO与e-RWSC：发现集合错误不等于单题多数",
+        "body": "e-RWSC认证单题某答案的政策多数概率，不等于正确性；DISCO控制多行为假设集合的误发现比例，并为自适应假设池施加分箱、冻结与null分布校正约束。相同的e-process工具不使两类错误和证书等价。 DISCO的pre-hoc证书给出无条件epsilon-alpha加delta界；post-hoc证书依赖无null退出条件，须同时保留delta失败概率。有限null路径穷举只验收本地公式与接口，不验证真实LLM的p值有效性，也不替代原文三分箱/boosted发现器及独立复验。",
+        "papers": [
+          "foundation-models:disco",
+          "foundation-models:e-rwsc"
+        ]
+      },
+      "question": {
+        "id": "nov23-disco",
+        "question": "DISCO和e-RWSC都累积e-process，为什么不能共用一种成功证书？",
+        "answer": "e-RWSC认证同一题某答案在固定政策iid采样中的多数概率，不保证答案正确。DISCO控制多个行为假设最终集合的误发现比例，并有自适应假设池的分箱、冻结和校正约束。认证对象与错误定义不同。",
+        "example": "教学例：某LLM每次都答错同一个答案，e-RWSC仍可能很快发多数证书；这不证明十个新提出的行为规律有九个真的存在，也不能代替DISCO的FDR证书。",
+        "papers": [
+          "foundation-models:disco",
+          "foundation-models:e-rwsc"
+        ]
+      },
+      "update": {
+        "date": "2026-11-23",
+        "papers": [
+          "foundation-models:disco",
+          "foundation-models:e-rwsc"
+        ],
+        "summary": "e-RWSC认证单题某答案的政策多数概率，不等于正确性；DISCO控制多行为假设集合的误发现比例，并为自适应假设池施加分箱、冻结与null分布校正约束。相同的e-process工具不使两类错误和证书等价。 DISCO的pre-hoc证书给出无条件epsilon-alpha加delta界；post-hoc证书依赖无null退出条件，须同时保留delta失败概率。有限null路径穷举只验收本地公式与接口，不验证真实LLM的p值有效性，也不替代原文三分箱/boosted发现器及独立复验。 完整API发现/复验矩阵成本过高，不复现（审查DONE）；不进入自动重试。"
+      },
+      "english": {
+        "comparison": {
+          "position": "DISCO freezes e-processes and coarsens hypothesis-selection feedback to control collection-level FDR with observed pool size. Local code covers only the unboosted binary-bin statistical core.",
+          "tradeoff": "e-RWSC certifies one answer's policy-majority probability, not correctness. DISCO controls false discoveries across behavioral hypotheses and constrains adaptive pool size through coarsening, freezing and null-law correction. Shared e-process machinery does not equate their errors or certificates."
+        },
+        "analysis": {
+          "title": "DISCO vs e-RWSC: collection errors are not single-question majorities",
+          "body": "e-RWSC certifies one answer's policy-majority probability, not correctness. DISCO controls false discoveries across behavioral hypotheses and constrains adaptive pool size through coarsening, freezing and null-law correction. Shared e-process machinery does not equate their errors or certificates. DISCO's pre-hoc certificate is an unconditional epsilon-alpha-plus-delta bound. Its post-hoc certificate is conditional on no true-null exit and must retain the delta failure term. Finite null-path enumeration checks local formulas and interfaces, not real-LLM p-value validity, the three-bin/boosted discoverer or independent replication."
+        },
+        "question": {
+          "question": "Why can DISCO and e-RWSC not share one success certificate despite both using e-processes?",
+          "answer": "e-RWSC certifies one answer's majority probability under a fixed policy's iid sampling, not correctness. DISCO controls false discoveries across a final collection of behavioral hypotheses and constrains adaptive pool selection through coarsening, freezing and correction. Their certified objects and errors differ.",
+          "example": "Illustration: a model that always gives the same wrong answer can quickly obtain an e-RWSC majority certificate. That does not establish that nine of ten proposed behavioral patterns exist or replace DISCO's FDR certificate."
+        },
+        "update": "e-RWSC certifies one answer's policy-majority probability, not correctness. DISCO controls false discoveries across behavioral hypotheses and constrains adaptive pool size through coarsening, freezing and null-law correction. Shared e-process machinery does not equate their errors or certificates. DISCO's pre-hoc certificate is an unconditional epsilon-alpha-plus-delta bound. Its post-hoc certificate is conditional on no true-null exit and must retain the delta failure term. Finite null-path enumeration checks local formulas and interfaces, not real-LLM p-value validity, the three-bin/boosted discoverer or independent replication. The complete API discovery/replication campaign is too expensive, not reproduced (review DONE), and excluded from automatic retries."
+      }
+    }
+  ]
+}

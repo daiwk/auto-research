@@ -1,0 +1,136 @@
+{
+  "schema_version": 2,
+  "method": "spot-bench",
+  "manifest_ref": "foundation-models:spot-bench",
+  "dataset": {
+    "id": "synthetic:nov23-overlap-spot-bench-component-v1",
+    "kind": "explicit_protocol_or_mechanism_fixtures",
+    "revision": "sha256:4b8204be61f1dc41d6a21bb9237b4fc4bfee102cb1a377ba52756236ccb1561d",
+    "public_capability_benchmark": false,
+    "source": "Seeded small tensors or explicit deterministic evaluator/control cases; no pretrained output or public capability measurement"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "perfect_trace_scores_one": true,
+        "occupancy_excess_is_false_positive": true,
+        "spam_penalty_is_not_capability": true,
+        "wrong_semantics_never_matches": true,
+        "late_is_penalized_more_than_early": true,
+        "literal_algorithm1_can_fill_two_slots": true,
+        "no_predictions_leaves_false_negative": true
+      },
+      "metrics": {
+        "synthetic_perfect_trace_f1": 1.0,
+        "synthetic_spam_trace_f1": 0.5,
+        "early_fractional_credit": 0.7959102829515173,
+        "late_fractional_credit": 0.40128826788898336
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "perfect_trace_scores_one": true,
+        "occupancy_excess_is_false_positive": true,
+        "spam_penalty_is_not_capability": true,
+        "wrong_semantics_never_matches": true,
+        "late_is_penalized_more_than_early": true,
+        "literal_algorithm1_can_fill_two_slots": true,
+        "no_predictions_leaves_false_negative": true
+      },
+      "metrics": {
+        "synthetic_perfect_trace_f1": 1.0,
+        "synthetic_spam_trace_f1": 0.5,
+        "early_fractional_credit": 0.7959102829515173,
+        "late_fractional_credit": 0.40128826788898336
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "perfect_trace_scores_one": true,
+        "occupancy_excess_is_false_positive": true,
+        "spam_penalty_is_not_capability": true,
+        "wrong_semantics_never_matches": true,
+        "late_is_penalized_more_than_early": true,
+        "literal_algorithm1_can_fill_two_slots": true,
+        "no_predictions_leaves_false_negative": true
+      },
+      "metrics": {
+        "synthetic_perfect_trace_f1": 1.0,
+        "synthetic_spam_trace_f1": 0.5,
+        "early_fractional_credit": 0.7959102829515173,
+        "late_fractional_credit": 0.40128826788898336
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "early_fractional_credit": 0.7959102829515173,
+    "late_fractional_credit": 0.40128826788898336,
+    "synthetic_perfect_trace_f1": 1.0,
+    "synthetic_spam_trace_f1": 0.5
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Operator/interface controls only; not a complete model, agent, public benchmark or production comparison"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "acc48ec54ed47013155637372db9985760c3a2de",
+    "accelerator": "CPU",
+    "artifact_path": "docs/foundation-models/2604.24317-spot-bench/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_nov23_latest_components.py": "8053959ebe64f20001ac99fd08c960442227ef3cb8c1f770041d70ed4ae4ba1c",
+      "scripts/run_nov18_latest_components.py": "0fe50e8e554f6663b3c8c179654400d10bfbb557ceb9cefb9880da78f164b7c1",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov23-latest/preflight.json": "13266c5e7f437111111889487c374aa94527f4d9e4f096dfa119027ce6b5382a",
+      "src/auto_research/foundation_models/aimuon.py": "24f68cf193bcf5bf879d15556a9fadf853304d31645b53cf2bef26a95d0c8a6b",
+      "src/auto_research/foundation_models/spot_bench.py": "4b8204be61f1dc41d6a21bb9237b4fc4bfee102cb1a377ba52756236ccb1561d",
+      "src/auto_research/foundation_models/disco.py": "f0d740e878bcbcbfb1657cabff5d5451e38ec677ba0806eeefe30f85b75ffd80",
+      "src/auto_research/post_training/dwe.py": "21464f17a37349d40a7e5a235785dad953c949a97f37f8aa800b89cf2a09d229",
+      "src/auto_research/post_training/retokenization_update.py": "2700cc475ab14baec4e7d29bb0b55d4351d86f6b8781441816b52dda65db3820",
+      "src/auto_research/agent_research/acting_to_learning.py": "4906c83275af0a805fe0666f7d0cb099dd1311bdc35e99a34041a27006132d67",
+      "src/auto_research/agent_research/r2_tool_redundancy.py": "479f0128b277515384eddc36423efa62b7f19d95b3ec458a0c7d598517688ddb"
+    },
+    "dataset_fingerprint": "sha256:8132e21d00f22e80c7e499c594a89c00c688353fa7c752a62ee9eb778d60a9c0",
+    "raw_runner_artifact_sha256": "04ab88f656eac7ac27f8553139fc316aff5d2f66ea8ec6d3323572d5e4697000"
+  }
+}

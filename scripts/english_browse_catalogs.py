@@ -97,6 +97,7 @@ Agent 评测与可靠性 = Agent evaluation and reliability
 偏好与对齐 = Preferences and alignment
 音频与多模态接口 = Audio and multimodal interfaces
 多模态评测与数据 = Multimodal evaluation and data
+多模态评测与表示学习 = Multimodal evaluation and representation learning
 跨模态对齐与检索 = Cross-modal alignment and retrieval
 L0 CPU 协议；不运行邮箱模型，完整实验不复现 = L0 CPU protocol; no inbox model; full experiments not reproduced
 生成式推荐与语义ID = Generative recommendation and semantic IDs

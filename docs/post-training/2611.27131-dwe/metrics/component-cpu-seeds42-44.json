@@ -1,0 +1,172 @@
+{
+  "schema_version": 2,
+  "method": "dwe",
+  "manifest_ref": "post-training:dwe",
+  "dataset": {
+    "id": "synthetic:nov23-overlap-dwe-component-v1",
+    "kind": "explicit_protocol_or_mechanism_fixtures",
+    "revision": "sha256:21464f17a37349d40a7e5a235785dad953c949a97f37f8aa800b89cf2a09d229",
+    "public_capability_benchmark": false,
+    "source": "Seeded small tensors or explicit deterministic evaluator/control cases; no pretrained output or public capability measurement"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "device": "cpu",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "checks": {
+        "exact_quantile_integral_is_unbiased": true,
+        "expected_sparse_chain_rule_matches_dense": true,
+        "sample_preserves_zero_sum": true,
+        "sample_uses_at_most_two_rows_per_pair": true,
+        "top_coordinate_discard_is_biased_control": true,
+        "zero_gradient_has_no_sparse_rows": true
+      },
+      "controls": {
+        "exact_quantile_integral_is_unbiased": true,
+        "expected_sparse_chain_rule_matches_dense": true,
+        "sample_preserves_zero_sum": true,
+        "sample_uses_at_most_two_rows_per_pair": true,
+        "top_coordinate_discard_is_biased_control": true,
+        "zero_gradient_has_no_sparse_rows": true
+      },
+      "metrics": {
+        "exact_expectation_max_abs_error": 5.551115123125783e-17,
+        "paired_zero_sum_abs_error": 0.0,
+        "top4_discard_max_abs_bias": 0.11762012699926962,
+        "selected_rows": 2,
+        "vocabulary": 8,
+        "hidden_width": 3,
+        "pairs": 2
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "device": "cpu",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "checks": {
+        "exact_quantile_integral_is_unbiased": true,
+        "expected_sparse_chain_rule_matches_dense": true,
+        "sample_preserves_zero_sum": true,
+        "sample_uses_at_most_two_rows_per_pair": true,
+        "top_coordinate_discard_is_biased_control": true,
+        "zero_gradient_has_no_sparse_rows": true
+      },
+      "controls": {
+        "exact_quantile_integral_is_unbiased": true,
+        "expected_sparse_chain_rule_matches_dense": true,
+        "sample_preserves_zero_sum": true,
+        "sample_uses_at_most_two_rows_per_pair": true,
+        "top_coordinate_discard_is_biased_control": true,
+        "zero_gradient_has_no_sparse_rows": true
+      },
+      "metrics": {
+        "exact_expectation_max_abs_error": 2.7755575615628914e-17,
+        "paired_zero_sum_abs_error": 0.0,
+        "top4_discard_max_abs_bias": 0.06410369813289005,
+        "selected_rows": 4,
+        "vocabulary": 8,
+        "hidden_width": 3,
+        "pairs": 2
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "device": "cpu",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "checks": {
+        "exact_quantile_integral_is_unbiased": true,
+        "expected_sparse_chain_rule_matches_dense": true,
+        "sample_preserves_zero_sum": true,
+        "sample_uses_at_most_two_rows_per_pair": true,
+        "top_coordinate_discard_is_biased_control": true,
+        "zero_gradient_has_no_sparse_rows": true
+      },
+      "controls": {
+        "exact_quantile_integral_is_unbiased": true,
+        "expected_sparse_chain_rule_matches_dense": true,
+        "sample_preserves_zero_sum": true,
+        "sample_uses_at_most_two_rows_per_pair": true,
+        "top_coordinate_discard_is_biased_control": true,
+        "zero_gradient_has_no_sparse_rows": true
+      },
+      "metrics": {
+        "exact_expectation_max_abs_error": 2.7755575615628914e-17,
+        "paired_zero_sum_abs_error": 0.0,
+        "top4_discard_max_abs_bias": 0.03167078204464639,
+        "selected_rows": 4,
+        "vocabulary": 8,
+        "hidden_width": 3,
+        "pairs": 2
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "exact_expectation_max_abs_error": 3.700743415417188e-17,
+    "hidden_width": 3.0,
+    "paired_zero_sum_abs_error": 0.0,
+    "pairs": 2.0,
+    "selected_rows": 3.3333333333333335,
+    "top4_discard_max_abs_bias": 0.07113153572560202,
+    "vocabulary": 8.0
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Operator/interface controls only; not a complete model, agent, public benchmark or production comparison"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "acc48ec54ed47013155637372db9985760c3a2de",
+    "accelerator": "CPU",
+    "artifact_path": "docs/post-training/2611.27131-dwe/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_nov23_latest_components.py": "8053959ebe64f20001ac99fd08c960442227ef3cb8c1f770041d70ed4ae4ba1c",
+      "scripts/run_nov18_latest_components.py": "0fe50e8e554f6663b3c8c179654400d10bfbb557ceb9cefb9880da78f164b7c1",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov23-latest/preflight.json": "13266c5e7f437111111889487c374aa94527f4d9e4f096dfa119027ce6b5382a",
+      "src/auto_research/foundation_models/aimuon.py": "24f68cf193bcf5bf879d15556a9fadf853304d31645b53cf2bef26a95d0c8a6b",
+      "src/auto_research/foundation_models/spot_bench.py": "4b8204be61f1dc41d6a21bb9237b4fc4bfee102cb1a377ba52756236ccb1561d",
+      "src/auto_research/foundation_models/disco.py": "f0d740e878bcbcbfb1657cabff5d5451e38ec677ba0806eeefe30f85b75ffd80",
+      "src/auto_research/post_training/dwe.py": "21464f17a37349d40a7e5a235785dad953c949a97f37f8aa800b89cf2a09d229",
+      "src/auto_research/post_training/retokenization_update.py": "2700cc475ab14baec4e7d29bb0b55d4351d86f6b8781441816b52dda65db3820",
+      "src/auto_research/agent_research/acting_to_learning.py": "4906c83275af0a805fe0666f7d0cb099dd1311bdc35e99a34041a27006132d67",
+      "src/auto_research/agent_research/r2_tool_redundancy.py": "479f0128b277515384eddc36423efa62b7f19d95b3ec458a0c7d598517688ddb"
+    },
+    "dataset_fingerprint": "sha256:243da858f4253f9d16d045d846b0cb7038f78cecc918ebdcffda5caf9f2f5e48",
+    "raw_runner_artifact_sha256": "04ab88f656eac7ac27f8553139fc316aff5d2f66ea8ec6d3323572d5e4697000"
+  }
+}

@@ -28,6 +28,12 @@ flowchart LR
 
 以下按“已实现的局部机制”和“待复核候选”区分，不把外部论文直接标为本地复现。
 
+### 2026-11-23：经验选取与递归共进化评测
+
+[From Acting to Learning](../agent-research/2611.27159-acting-to-learning/README.md)研究哪些历史经验值得用于下一轮学习。本地只执行显式外部梯度的优化器感知评分、选择去重和global/quota调度；没有生成轨迹、训练学生或让Agent自主改变研究策略。经验筛选是闭环中的数据侧组件，不等于已实现持续自我改进。
+
+[CoEvoBench](../agent-research/2611.27116-coevobench/README.md)把研究Agent和它修改的目标系统分开评测，不能把上游toy researcher生命周期fixture当作真实RSI。完整多域、多研究者、每run四卡与24小时配置成本过高，不复现（审查 DONE）；本地仅双语资料、原图与评测边界，没有可执行Evolve算子或伪造能力指标。
+
 ### 2026-11-21：改变研究观察，不更换验收目标
 
 [Sage-Evolve-Preview / AdaObs](../agent-research/2611.26132-sage-evolve/README.md)将固定anchor与当前active observation分开：停滞后按诊断细化、同任务难度层、相关任务的顺序改变观察，仍守住固定anchor的回退上限。失败记忆针对具体gap与配置，不是一种方法失败就永久封禁整个层级；切换观察后重置EMA历史，不能把不同量尺的分数直接相减。

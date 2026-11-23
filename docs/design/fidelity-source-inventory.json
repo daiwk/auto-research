@@ -11495,6 +11495,32 @@
         "fingerprint": "98d4e5502f5492aebfe3261d697e9b58b1febabdf5518bc06607d20d3404aab7"
       }
     ],
+    "src/auto_research/foundation_models/disco.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "observe",
+        "line": 220,
+        "qualified_name": "Disco.observe",
+        "expression": "row.log_e += increment",
+        "fingerprint": "33eeea0651ddec3964bd8755692253dcc900232a11c38a3bb285c59f9f54164f"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "observe",
+        "line": 221,
+        "qualified_name": "Disco.observe",
+        "expression": "row.updates += 1",
+        "fingerprint": "a57b69ab30af2648e03bc0fff26d4fcfeab079eaaa2fbe4aaeb9aae92ced5917"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "observe",
+        "line": 224,
+        "qualified_name": "Disco.observe",
+        "expression": "self.queries_used += queries",
+        "fingerprint": "2bc44dd00391b15835bcdedc63193f320489c2545f979914c8d0f727bd68fab8"
+      }
+    ],
     "src/auto_research/foundation_models/e_rwsc.py": [
       {
         "kind": "state_update_not_execution_evidence",

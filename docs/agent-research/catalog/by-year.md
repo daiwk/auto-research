@@ -4,6 +4,9 @@
 
 ## 2026
 
+- 2026-11 · [$R^2$: Recognizing and Reducing Redundant Visual Tool Use](../2611.27070-r2-tool-redundancy/README.md)（`r2-tool-redundancy`）：R²把三个问题分开：CAT描述题目是否可能从工具获益；VFD描述一次返回观察对后续同一段推理文本提供多少额外似然支持；RA-GRPO在答对的轨迹之间比较工具效率，而不是奖励所有少调用的轨迹。CAT标签来自训练侧tool/no-tool rollouts的多次正确性和实际调用，不是根据问题长度或关键词猜测；VFD也不是gold-answer概率或“这次工具有用”的因果证明。
+- 2026-11 · [CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?](../2611.27116-coevobench/README.md)（`coevobench`）：CoEvoBench不是另一个固定自进化算法，而是测LLM researcher能否自主驱动模型权重和harness联合开发的benchmark。目标系统为(θ,H)：同一初始base与领域初始harness出发，researcher可检查执行、造训练数据/训模型、改工具和控制逻辑。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- 2026-11 · [From Acting to Learning: Experience Selection toward Continually Learning Agents](../2611.27159-acting-to-learning/README.md)（`acting-to-learning`）：论文把成功交互后的经验选择单独隔离：历史池先固定，选择规则决定训练哪些action记录，所有学生使用同一训练预算与部署executor。它不是一个新通用梯度影响公式；打分沿用LESS式优化器感知梯度，贡献是Agent学习中的严格对照，尤其把排序规则和可选择的覆盖空间交叉。
 - 2026-11 · [MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management](../2611.26427-memfolder/README.md)（`memfolder`）：MemFolder把记录数和取回上下文长度分开处理。RecordFolder先用LLM统一实体，再以密度峰选首锚点、以相对已有锚点的novelty渐进选互补锚点；语义/实体亲和与时间链修正分组，最后由LLM按时间合并。
 - 2026-11 · [Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement](../2611.26132-sage-evolve/README.md)（`sage-evolve`）：AdaObs区分固定anchor目标和引导当前研究的active observation。每轮仍在固定anchor上验收；训练进展停滞时，先细分已有输出的错误诊断，再增加同任务的困难层，最后累计加入同能力方向的相关任务。
 - 2026-11 · [Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses](../2611.24924-ahe-beta/README.md)（`ahe-beta`）：AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。

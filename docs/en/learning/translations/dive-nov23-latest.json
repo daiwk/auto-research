@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:disco": {
+      "source_sha256": "cc9d05f01e5dbde04e9009c441938fd4e09b5910b861b263e306115a87c132ce",
+      "reviewed": true,
+      "fields": {
+        "position": "DISCO freezes e-processes and coarsens hypothesis-selection feedback to control collection-level FDR with observed pool size. Local code covers only the unboosted binary-bin statistical core.",
+        "tradeoff": "e-RWSC certifies one answer's policy-majority probability, not correctness. DISCO controls false discoveries across behavioral hypotheses and constrains adaptive pool size through coarsening, freezing and null-law correction. Shared e-process machinery does not equate their errors or certificates."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/analysis/16": {
+      "source_sha256": "aa3e97d9b5f43ed32f99183ad38c86255e4f6c74f792a1763625e113b10e387d",
+      "reviewed": true,
+      "fields": {
+        "title": "DISCO vs e-RWSC: collection errors are not single-question majorities",
+        "body": "e-RWSC certifies one answer's policy-majority probability, not correctness. DISCO controls false discoveries across behavioral hypotheses and constrains adaptive pool size through coarsening, freezing and null-law correction. Shared e-process machinery does not equate their errors or certificates. DISCO's pre-hoc certificate is an unconditional epsilon-alpha-plus-delta bound. Its post-hoc certificate is conditional on no true-null exit and must retain the delta failure term. Finite null-path enumeration checks local formulas and interfaces, not real-LLM p-value validity, the three-bin/boosted discoverer or independent replication."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/nov23-disco": {
+      "source_sha256": "de84f0c6222bf562af1d9e35cb4e79e1df52ad78218fc87b01566f28acfbae60",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can DISCO and e-RWSC not share one success certificate despite both using e-processes?",
+        "answer": "e-RWSC certifies one answer's majority probability under a fixed policy's iid sampling, not correctness. DISCO controls false discoveries across a final collection of behavioral hypotheses and constrains adaptive pool selection through coarsening, freezing and correction. Their certified objects and errors differ.",
+        "example": "Illustration: a model that always gives the same wrong answer can quickly obtain an e-RWSC majority certificate. That does not establish that nine of ten proposed behavioral patterns exist or replace DISCO's FDR certificate."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/update/2026-11-23/15": {
+      "source_sha256": "612aef140035022f030a04b37a4cf2cbc5477624075d74e276692259b2c94504",
+      "reviewed": true,
+      "fields": {
+        "summary": "e-RWSC certifies one answer's policy-majority probability, not correctness. DISCO controls false discoveries across behavioral hypotheses and constrains adaptive pool size through coarsening, freezing and null-law correction. Shared e-process machinery does not equate their errors or certificates. DISCO's pre-hoc certificate is an unconditional epsilon-alpha-plus-delta bound. Its post-hoc certificate is conditional on no true-null exit and must retain the delta failure term. Finite null-path enumeration checks local formulas and interfaces, not real-LLM p-value validity, the three-bin/boosted discoverer or independent replication. The complete API discovery/replication campaign is too expensive, not reproduced (review DONE), and excluded from automatic retries."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/comparison/agent-research:acting-to-learning": {
+      "source_sha256": "3fcf2a411be0725c2af832ac2435c06681d0a526e1c4df53a649ba0fd7a356be",
+      "reviewed": true,
+      "fields": {
+        "position": "The paper isolates experience selection after successful interaction: historical pools are fixed, a selector chooses action records, and students share a training budget and deployment executor. The score follows LESS rather than introducing a new general influence formula. Its contribution is the controlled agent-learning comparison, especially crossing ranking criteria with coverage freedom. Only one selection-and-training stage is studied; multi-round continual learning, forgetting and autonomous harness editing are not evaluated.",
+        "tradeoff": "ACE Lens organizes admission around Accuracy, learner-relative Complexity and Diversity. This paper instead ranks already successful actions by optimizer-aware gradient relevance to public task families and controls coverage freedom explicitly. Both distinguish success from learning value; low NLL means predictability, not necessarily greater training benefit. The older ACE mini-suite is not the paper's ALFWorld training comparison and cannot be ranked against its gains."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/analysis/4": {
+      "source_sha256": "e3c721f3e7c5f0151b11649a86af54abcf28e6ac6e1cec7024a0e45581e67a4e",
+      "reviewed": true,
+      "fields": {
+        "title": "From Acting to Learning: Experience Selection toward Continually Learning Agents",
+        "body": "At warmup checkpoints8/16/24/32, candidate LoRA gradients combine with frozen first/second Adam moments into a ranking feature. Bias correction is omitted, so this is not a full AdamW update. Each public-support gradient is unit-normalized before its family mean; normalized candidate features are dotted with these means, averaged across checkpoints, then maximized across families. Forty public support actions contain no evaluation-query answers. Global selection exactly deduplicates complete message contents, keeps first representative indices, selects256 contents and replays three shuffled passes for768 presentations. Matched selection preserves every reference task/action position and distinct-content quota. Final students restart from the original base, not warmup weights. Controls check checkpoint/family order, no renormalization of the support mean, unchanged random sampling under duplicate rows, first-index score ties, complete shuffled passes, matched access to nonreference contents in the same stratum, rejection of cross-stratum duplicate contents, and rejection of NaNs, negative second moments and intermediate overflow. Seeds change synthetic inputs and schedules, not independently trained models."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/question/cross-nov23-acting-to-learning": {
+      "source_sha256": "684a677798e0571d103ea68a7201e441c5909ace9da475e9b7bb40b57e7d9140",
+      "reviewed": true,
+      "fields": {
+        "question": "What does this study control beyond ACE Lens?",
+        "answer": "It separates the ranking rule from its admissible selection space. Global random and high-NLL share the gradient selector's freedom to change coverage, avoiding a confound from unequal freedom.",
+        "example": "Teaching example: if gradient selects256records globally, random must also have global freedom rather than being forced to preserve old task quotas."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/update/2026-11-23/3": {
+      "source_sha256": "f0835acae7562c396ef941ae5f994ba5d36c18327c0666cb307e0cbdb877ff84",
+      "reviewed": true,
+      "fields": {
+        "summary": "The independent NumPy float64 slice implements explicit-gradient/frozen-moment features, individually normalized support gradients, checkpoint averaging before family maximization, exact full-string deduplication, global top/random selection with three replay passes, and reference-position/stratum distinct-content quotas. Undefined zero-norm directions and intermediate feature overflow are rejected, not assigned invented scores. Synthetic gradients and historical-action strings exercise the formulas; lexical similarity does not replace gradients. No LoRA extraction, warmup training, ALFWorld, Qwen checkpoint, deployment executor, student SFT or capability comparison runs. Callers must ensure support is public training-side information rather than query answers. Full experiments are terminally not reproduced."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/comparison/agent-research:r2-tool-redundancy": {
+      "source_sha256": "b7b8111e355edf755bcb63daf70176418adfc8615ec4445fa2723382f10a9ed5",
+      "reviewed": true,
+      "fields": {
+        "position": "R² separates sample-level tool utility(CAT), the additional likelihood support an observation supplies to the same subsequent reasoning window(VFD), and efficiency comparisons among correct trajectories(RA-GRPO). CAT uses training-side tool/no-tool rollouts and actual invocations, not question-length or keyword heuristics. VFD is neither a gold-answer score nor a causal proof that a call is necessary.",
+        "tradeoff": "AdaStep weights local credit by between-action return variance relative to within-action noise at a shared anchor state. R² estimates dependence on a current visual observation and relativizes costs only within the correct set. Both supplement outcome rewards, but explained variance is not observation necessity, and VFD does not estimate stochastic return noise. AdaStep weights cannot substitute for VFD, nor may R² efficiency reward failures. Both local slices are statistical/numerical components rather than comparable agent-capability evaluations."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/analysis/5": {
+      "source_sha256": "ae666c2c9c7a8eeca69e19b956c87a7583b16f62b36a87ce7b4a7c763c083968",
+      "reviewed": true,
+      "fields": {
+        "title": "$R^2$: Recognizing and Reducing Redundant Visual Tool Use",
+        "body": "VFD replaces only the current feedback while retaining the source image, other history and scored reasoning tokens. It subtracts mean log probability under three same-sized nonoverlapping random crops from that under actual feedback. During the first10%of training, source-specific30th-percentile thresholds use reasoning windows only, then freeze. Direct-answer windows may be scored later but cannot initialize thresholds. One uniformly sampled eligible call estimates the redundant count byMtimes its indicator; unavailable scores with complete records set the indicator to1, and empty eligible sets cost0. Tool-Independent adds0.5times all calls. Efficiency advantages are centered only among correct trajectories, divided by fixed call budget4, and added with weight0.2 to outcome advantages. Cheap failures receive no efficiency reward. Controls cover zero VFD for identical feedback scores, exclusion of answer windows from calibration, rejection of missing-source warmup, strict threshold inequality, unavailable-score versus empty-eligible behavior, one-call sampling rather than full counting, zero efficiency terms for failures, zero-sum correct-set efficiency, all-wrong/single-correct/equal-cost cases, negative-advantage clipping, padding exclusion and intermediate-overflow rejection. Three seeds of numerical controls do not establish tool-efficiency or accuracy gains."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/question/cross-nov23-r2-tool-redundancy": {
+      "source_sha256": "3ace533d953d39584eb97a09d0c92f04a9e2fbbbee76d7d635fd44f3d332fd5b",
+      "reviewed": true,
+      "fields": {
+        "question": "Can R² and AdaStep exchange their statistics?",
+        "answer": "No. AdaStep uses action-group return variance at a shared state to estimate credit reliability. R² uses same-text feedback likelihood differences for costs, then compares correct outputs only. Their conditioning and normalization differ.",
+        "example": "Teaching example: a repeated crop may have near-zeroVFD despite stable later returns; stability does not make the observation nonredundant."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/update/2026-11-23/4": {
+      "source_sha256": "b9919ab8d111695bef3bebbe9341ef0df9a0a847e14902e4836758abe5646e9a",
+      "reviewed": true,
+      "fields": {
+        "summary": "The CPU NumPy slice computes same-text token-log-probability VFD, reasoning-only source-frozen thresholds, one-eligible-call redundancy estimation and category base costs, sample-SD outcome advantages, correct-only efficiency terms and a clipped GRPO scalar. Linear quantile interpolation and mean-valid-tokens-per-trajectory then group averaging are explicit local conventions, not bitwise equivalence to an unreleased trainer. Callers must supply aligned reasoning windows, valid crops and complete records; arrays cannot establish those semantics. No VLM, crop construction/scoring, CAT rollout labeling, images, policy backprop/update or visual-agent evaluation runs. Finite differences check a scalar derivative, not training. There is no gold-answer/plan interface;binary rewards are external trainer/evaluator inputs. Full experiments are terminally not reproduced."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:coevobench": {
+      "source_sha256": "7769bf425a8deca39b13ab0d59471427940b63eff2031279d051ac5015ea3ec2",
+      "reviewed": true,
+      "fields": {
+        "position": "CoEvoBench is a benchmark of autonomous model-harness co-development, not another fixed evolution algorithm. A target system is(theta,H), starting from common base weights and a domain-specific initial harness. The LLM researcher may inspect executions, construct training data/update weights, and edit tools/control logic. A nominated frozen pair is evaluated on separate Test tasks. The question is whether feedback changes the next intervention and final choice, not whether a researcher merely completes diagnosis/training/code-editing stages.",
+        "tradeoff": "Sage-Evolve is a specific strategy that keeps an anchor while changing active observations to expose training gaps.CoEvoBench instead fixes development/Selection/Test contracts,lets the evaluated researcher decide whether to edit weights or harness,and scores the nominated system.Changing observations is not changing final graders,and access to two levers does not make fixed alternation successful co-evolution.Both require evidence beyond visible training performance.The local Sage slice is a CPU control kernel and CoEvo is review-only;neither supplies comparable agent gains."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/33": {
+      "source_sha256": "690f570f3166080600e58431462df93d5e99a1c6fb9e2645ce66385bbcd5ba18",
+      "reviewed": true,
+      "fields": {
+        "title": "CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?",
+        "body": "Five domains cover SWE-bench Verified,TB-Lite,AppWorld,Telecom,and BFCL multi-turn/memory. Visible exposes tasks/traces;Selection returns aggregate scores without task contents/traces;Test is operator-only. Each run gets24hours,fourH20s and a100-dollar teacher allowance. Weights and harness are coupled, so their gains are not additive independent contributions. The main rule resets confirmed-violation runs to base weights while retaining their final harness; a stricter alternative resets the whole system. Among759B runs,22confirmed violations all accessed prohibited data and six trained on it. Full data-lineage audits remain essential; intended isolation is not proof that leakage never occurred. The review preserves both audit scoring rules and does not treat resetting weights as a formal proof that every consequence of prohibited access disappears.Visible-set overfitting and model-harness mismatch are author analyses,not locally measured controls.Repository acceptance status is distinct from paper-reported experiments.No local capability result or automatic implementation/retry queue is created."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov23-coevobench": {
+      "source_sha256": "fce9dd71d2f397e02e1f89488e6251798dbc76382f2e8254032a4125f2b91d1c",
+      "reviewed": true,
+      "fields": {
+        "question": "What does CoEvoBench leave to the researcher compared with Sage-Evolve?",
+        "answer": "Sage specifies a fixed-anchor/adaptive-observation strategy.CoEvo supplies protected development/final-evaluation contracts and lets the researcher choose weight or harness interventions.It benchmarks research decisions rather than prescribing that strategy.",
+        "example": "Teaching example: length-bucket diagnostics change a Sage-style observation;the CoEvo researcher must additionally decide whether to fix a parser,retrain,or abandon training."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-23/33": {
+      "source_sha256": "3bf0010b0861f705cd5525a5a57dfa2f5c5bd1b0e93e5eed63150b23e44acda6",
+      "reviewed": true,
+      "fields": {
+        "summary": "Local delivery is review-only: fixed-v1/code metadata,split/audit/cost contracts and a same-topic comparison.No algorithm module,executable adapter,training,researcher API call or benchmark trial is created.The upstream no-GPU toy researcher is explicitly a lifecycle fixture,not an autonomous researcher.Running it cannot reproduce this paper's capability or justify an Evolve operator.A completed high-cost review requires no invented seed metrics or GPU receipt. Full experiments are terminally not reproduced."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/comparison/post-training:dwe": {
+      "source_sha256": "5854e3273c826eed872cd6779e871a34f6dc5c2c3c0a20d2c27ee3369f006013",
+      "reviewed": true,
+      "fields": {
+        "position": "Pure-standard-library CPU code executes positive/negative pairing, a centered-PCA cached order, shared stratified quantiles, forward/reverse-KL logit gradients and selected-row hidden/weight gradients. Multiple-start power iteration on tiny matrices differs from upstream randomized PCA but preserves the paper's principal-direction mechanism. Exact integration over all CDF intervals checks unbiasedness; finite differences independently verify KL gradients. Discarded top-coordinate gradients are a biased negative control. No Transformer, CUDA kernel, real teacher cache, student generation, capability benchmark or throughput measurement is provided.",
+        "tradeoff": "SimOPD matches answer-to-answer similarity distributions in separate representation spaces, changing supervision. DWE retains a chosen KL objective and changes its backward estimator and row computation. They could be composed in principle, but this does not establish a real LLM integration or joint-training result."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/analysis/9": {
+      "source_sha256": "b1a20032b04c04cf8841b4720bf2458ee9b5690d5905f6ddedc394663aa5f786",
+      "reviewed": true,
+      "fields": {
+        "title": "Do DWE and SimOPD change the same distillation axis?",
+        "body": "SimOPD matches answer-to-answer similarity distributions in separate representation spaces, changing supervision. DWE retains a chosen KL objective and changes its backward estimator and row computation. They could be composed in principle, but this does not establish a real LLM integration or joint-training result. Sources: Section 2, Eqs.2–3; Section 3, Eqs.4–15. Each U_k is independent uniform on ((k−1)/K,k/K), shared between the positive and negative CDFs. Backpropagation computes Wᵀĝ and ĝhᵀ from selected rows; masking a previously computed dense backward pass does not implement its savings. Reverse-KL gradients p_i[log(p_i/q_i)−KL(p‖q)] also sum to zero. The cached order approximates geometry; it is not rebuilt each step, and teacher/student token IDs must align."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/question/nov23-dwe": {
+      "source_sha256": "19605b4cfd1b12ad37def1cc8f9202441b748f626c829f1ff4591a7e772ddd6c",
+      "reviewed": true,
+      "fields": {
+        "question": "Do DWE and SimOPD change the same distillation axis?",
+        "answer": "No. SimOPD changes supervision to relational answer distributions. DWE retains an existing KL objective and substitutes an unbiased sparse output-head estimator. Possible composition does not establish joint LLM training or capability gains.",
+        "example": "Teaching example: replacing token KL with similarity-bank KL changes the objective; estimating that same token KL with eight coordinate pairs changes its estimator."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/update/2026-11-23/8": {
+      "source_sha256": "a6bf3ab32dd510782082a4f0c777b290994375c2d7cb25eed91bda5aa891a55c",
+      "reviewed": true,
+      "fields": {
+        "summary": "SimOPD matches answer-to-answer similarity distributions in separate representation spaces, changing supervision. DWE retains a chosen KL objective and changes its backward estimator and row computation. They could be composed in principle, but this does not establish a real LLM integration or joint-training result. L1 core-mechanism component, diagnostic only; not LLM capability or a full reproduction. CPU only, with no CUDA path or Evolve promotion evidence. Full experiments are high-cost and not reproduced, review DONE."
+      }
+    },
+    "dive/post-training/policy-optimization/comparison/post-training:retokenization-update": {
+      "source_sha256": "b61d0c547b861a412ee9e114f671b26c898b175a9c0be843695bed2ceed78762",
+      "reviewed": true,
+      "fields": {
+        "position": "CPU prefix-softmax tables are initialized by the chain rule from one strictly positive complete string distribution and execute full λ_t(e_token−π_row) gradients. Checks cover unvisited rows, coarse unsampled logits and the resulting string distributions. The c and ratio-of-means R utilities are implemented separately; independent tabular parameter spaces are never presented as shared LLM parameters for R. R accepts externally measured updates in one common parameter space. A nonzero matching step under a uniform distribution is a symmetric positive control. No real BPE, LoRA, AdamW, rollout generation or repair algorithm is provided. This is a mechanism diagnostic, not a post-training capability.",
+        "tradeoff": "DFRL changes downstream decision-cost feedback, and RLOO cancels a shared within-instance constant. This paper holds rewards and advantages fixed and asks how encoding changes score gradients. Baseline cancellation does not equalize different token-path Jacobians; unchanged rewards do not imply unchanged updates."
+      }
+    },
+    "dive/post-training/policy-optimization/analysis/12": {
+      "source_sha256": "d24cf7e106c2134e87a6d4cab313e52d075415c5323fecaf733d2aaf232d9efd",
+      "reviewed": true,
+      "fields": {
+        "title": "Does RLOO's constant cancellation remove retokenization drift?",
+        "body": "DFRL changes downstream decision-cost feedback, and RLOO cancels a shared within-instance constant. This paper holds rewards and advantages fixed and asks how encoding changes score gradients. Baseline cancellation does not equalize different token-path Jacobians; unchanged rewards do not imply unchanged updates. Sources: Section2, Eqs.1–2; Section4, Proposition1; AppendixE. Sampling ab gives the coarse full-score step λ(e_ab−π). The fine policy updates only the root and a-successor rows, leaving the b row and ba/bb odds fixed. When π(ba)≠π(bb), agreement requires a zero step. The uniform symmetric exception violates that premise, so a universal no-nonzero-step claim would be false. AppendixE separately describes a weaker sampled-logit-only simulator; local code uses the full softmax gradient instead."
+      }
+    },
+    "dive/post-training/policy-optimization/question/nov23-retokenization-update": {
+      "source_sha256": "5bf9a92db877fc556a8359a9b392ba0a05b23159dad17ceb1e4f78319ba63cad",
+      "reviewed": true,
+      "fields": {
+        "question": "Does RLOO's constant cancellation remove retokenization drift?",
+        "answer": "No. DFRL's shared hindsight-cost constant cancels within advantages. Retokenization changes the score-gradient multiplied by those advantages. Cancellation on the reward axis is not parameterization invariance.",
+        "example": "Teaching example: advantage1 multiplying two different score vectors still gives different updates. Subtracting10 from both rewards does not align those vectors."
+      }
+    },
+    "dive/post-training/policy-optimization/update/2026-11-23/12": {
+      "source_sha256": "faf89be9bba6f28055aea66a37bee91914a8db2a36b0bdba6f72de0c74c4ca29",
+      "reviewed": true,
+      "fields": {
+        "summary": "DFRL changes downstream decision-cost feedback, and RLOO cancels a shared within-instance constant. This paper holds rewards and advantages fixed and asks how encoding changes score gradients. Baseline cancellation does not equalize different token-path Jacobians; unchanged rewards do not imply unchanged updates. L1 core-mechanism component, diagnostic only; not LLM capability or a full reproduction. CPU only, with no CUDA path or Evolve promotion evidence. Full experiments are high-cost and not reproduced, review DONE."
+      }
+    },
+    "dive/post-training/data-and-budget/comparison/post-training:ctrl": {
+      "source_sha256": "89df78b9ec9a766adb174bbfdfb23374264f90688b7af36f5b83bd1f6b098394",
+      "reviewed": true,
+      "fields": {
+        "position": "Review-only catalog entry and cost assessment: no local CTRL implementation, CUDA path, benchmark, metric receipt or Evolve operator. Neither equations nor CPU timing fixtures are presented as a CUDA co-residency system. Fixed-version facts, mechanism, original figure and non-winning regimes are preserved without fabricated metrics.",
+        "tradeoff": "CoLiR selects historical prompts and later regenerates responses with the current policy. CTRL controls hardware sharing and publication for training and generation. Data-budget/memory selection and system-layout/version contracts are separate axes. Reusing rollouts to build CoLiR memory does not remove later generation cost, so its savings cannot simply multiply CTRL's system speedups."
+      }
+    },
+    "dive/post-training/data-and-budget/analysis/6": {
+      "source_sha256": "275aba848799adabce2bd8bcf58d8ff7e11dd725b5aabc5a7fa70e19be2b72b6",
+      "reviewed": true,
+      "fields": {
+        "title": "Can CTRL and CoLiR savings simply be multiplied?",
+        "body": "CoLiR selects historical prompts and later regenerates responses with the current policy. CTRL controls hardware sharing and publication for training and generation. Data-budget/memory selection and system-layout/version contracts are separate axes. Reusing rollouts to build CoLiR memory does not remove later generation cost, so its savings cannot simply multiply CTRL's system speedups. Sources: Section3.3, Eq.1 and publication gate; Section3.4, Eq.3. b(y) is the earliest behavior version, including across resumed generation, not the completion version. Publication of g waits while requests dispatched at p satisfy g−p+1≥T; FIFO consumption with W≤T warmup closes the staleness bound. The lower bound on P guides measurement and SM-share selection. It does not guarantee attainability or permit a CPU scheduling sketch to establish throughput gains."
+      }
+    },
+    "dive/post-training/data-and-budget/question/nov23-ctrl": {
+      "source_sha256": "384bd7a04f66a6a60505aa2728438f6d2922945ae795087add38c6a86405824b",
+      "reviewed": true,
+      "fields": {
+        "question": "Can CTRL and CoLiR savings simply be multiplied?",
+        "answer": "No. CoLiR chooses stored and replayed historical prompts; CTRL changes hardware layout and publication for training/generation. Costs and bottlenecks can overlap, requiring a real combined-system control absent here.",
+        "example": "Teaching example: after removing a rollout batch, the learner may become the bottleneck, so an SM share tuned for long rollout may no longer be optimal."
+      }
+    },
+    "dive/post-training/data-and-budget/update/2026-11-23/5": {
+      "source_sha256": "df964184c5565fa2482b8621a318eb48fa224efe645ddfc9b2375193dc200e59",
+      "reviewed": true,
+      "fields": {
+        "summary": "CoLiR selects historical prompts and later regenerates responses with the current policy. CTRL controls hardware sharing and publication for training and generation. Data-budget/memory selection and system-layout/version contracts are separate axes. Reusing rollouts to build CoLiR memory does not remove later generation cost, so its savings cannot simply multiply CTRL's system speedups. Review only, with no local system implementation or CUDA validation. High cost: not reproduced, review DONE. Full experiments are high-cost and not reproduced, review DONE."
+      }
+    },
+    "dive/foundation-models/training-budget/comparison/foundation-models:aimuon": {
+      "source_sha256": "91562b66fe55a6b165a5d149f4dfbf09df5c9112edd4f397a09cdcadc0db7715",
+      "reviewed": true,
+      "fields": {
+        "position": "Only the functional matrix-parameter Algorithm1, NS5, and a20-step synthetic quadratic-matrix autograd diagnostic are implemented. Controls cover same-momentum magnitude matching, c=0 recovery of Muon, separate-versus-premixed transforms, zeros, transposition and BF16 overflow rejection. There is no LM pretraining, FineWeb reader, hyperparameter search or Evolve operator. CPU and real-A100 three-seed evidence is numerical/mechanism diagnosis, not a model capability comparison.",
+        "tradeoff": "AF-Muon addresses sparse-input/dense-output conflicts in tied embeddings through vocabulary support/cap directions and vector RMS updates without AdamW. AIMuon instead changes matrix spectral residual directions; it does not solve vocabulary support or replace AF-Muon's parameter partition. Matching magnitude removes a pure-scale explanation but does not guarantee a better direction."
+      }
+    },
+    "dive/foundation-models/training-budget/analysis/9": {
+      "source_sha256": "3e4b9ef292c2bb7c143c1a7f202edfb5c7b71944e2189aa573a2e74b7fd3d4eb",
+      "reviewed": true,
+      "fields": {
+        "title": "Does AIMuon replace AF-Muon's tied-embedding treatment?",
+        "body": "AF-Muon addresses sparse-input/dense-output conflicts in tied embeddings through vocabulary support/cap directions and vector RMS updates without AdamW. AIMuon instead changes matrix spectral residual directions; it does not solve vocabulary support or replace AF-Muon's parameter partition. Matching magnitude removes a pure-scale explanation but does not guarantee a better direction."
+      }
+    },
+    "dive/foundation-models/training-budget/question/nov23-aimuon": {
+      "source_sha256": "00783f61b0a86d05d24dff211e4d5314a8ca839ce4e16b6da6dc18bd0f25625a",
+      "reviewed": true,
+      "fields": {
+        "question": "Does AIMuon replace AF-Muon's tied-embedding treatment?",
+        "answer": "Not by itself. AF-Muon handles vocabulary support/caps and vector updates; AIMuon defines matrix spectral residuals. Combining them needs an explicit parameter partition and real verification.",
+        "example": "Teaching example: if a step contains two vocabulary entries, a spectral residual does not automatically define support constraints for unseen entries."
+      }
+    },
+    "dive/foundation-models/training-budget/update/2026-11-23/8": {
+      "source_sha256": "bf087b9f386e1d8f7e884fe1dd07edfd29ea55135fece9344eee61fdcceb68d3",
+      "reviewed": true,
+      "fields": {
+        "summary": "Only the functional matrix-parameter Algorithm1, NS5, and a20-step synthetic quadratic-matrix autograd diagnostic are implemented. Controls cover same-momentum magnitude matching, c=0 recovery of Muon, separate-versus-premixed transforms, zeros, transposition and BF16 overflow rejection. There is no LM pretraining, FineWeb reader, hyperparameter search or Evolve operator. CPU and real-A100 three-seed evidence is numerical/mechanism diagnosis, not a model capability comparison."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:spot-bench": {
+      "source_sha256": "03f29a918ae4f89d9c08b89c3667376693cdd0385942c3ccb90de94dae1f3883",
+      "reviewed": true,
+      "fields": {
+        "position": "Pure-CPU standard-library asymmetric timeliness, semantic matrices indexed by original predictions, chronological open-slot absorption and K-closing, and weighted precision/recall/F1. Synthetic controls cover wrong semantics, no outputs, seven repeats exceeding K=5, overlapping slots and asymmetric penalties. A perfect synthetic trace scoring1 checks a definition, not agent capability. Persistent queries, CPU/GPU KV, retrieval and summaries of Ctrl-SPOT are absent, as are video, LLM and paid-judge calls or Evolve promotion.",
+        "tradeoff": "e-RWSC assumes iid responses from a fixed policy and certifies majority dominance rather than truth. SPOT slots use gold evaluation times and explicit semantic matches to score timeliness, without an online significance certificate. Both can produce attractive values on ideal inputs, but one is stopping evidence under sampling assumptions and the other offline scoring of supplied traces; neither may be conflated with model capability."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/analysis/17": {
+      "source_sha256": "f19e9301871a4bf933e394416fe5b8bc5fd4fb0fa34130d448bdce974c5ce97c",
+      "reviewed": true,
+      "fields": {
+        "title": "Does T-F1=1 carry an e-RWSC-like statistical guarantee?",
+        "body": "e-RWSC assumes iid responses from a fixed policy and certifies majority dominance rather than truth. SPOT slots use gold evaluation times and explicit semantic matches to score timeliness, without an online significance certificate. Both can produce attractive values on ideal inputs, but one is stopping evidence under sampling assumptions and the other offline scoring of supplied traces; neither may be conflated with model capability."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/nov23-spot-bench": {
+      "source_sha256": "538ba8cac7ccdfabbfd3fb2756eed30c8b1c105a283ef7a34c03c7c177a7c728",
+      "reviewed": true,
+      "fields": {
+        "question": "Does T-F1=1 carry an e-RWSC-like statistical guarantee?",
+        "answer": "No. T-F1 is offline scoring of supplied traces, annotations and semantic matches. e-RWSC itself certifies only majority dominance under fixed-policy iid assumptions, not truth.",
+        "example": "Teaching example: a hand-authored timestamp and True semantic label can score1 without running a vision model or demonstrating agent capability."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/update/2026-11-23/16": {
+      "source_sha256": "7fe172e29019f81c1dc4220d7849315b6d2f3b4adf43b00e02a9bb6c12d76d83",
+      "reviewed": true,
+      "fields": {
+        "summary": "Pure-CPU standard-library asymmetric timeliness, semantic matrices indexed by original predictions, chronological open-slot absorption and K-closing, and weighted precision/recall/F1. Synthetic controls cover wrong semantics, no outputs, seven repeats exceeding K=5, overlapping slots and asymmetric penalties. A perfect synthetic trace scoring1 checks a definition, not agent capability. Persistent queries, CPU/GPU KV, retrieval and summaries of Ctrl-SPOT are absent, as are video, LLM and paid-judge calls or Evolve promotion."
+      }
+    }
+  }
+}

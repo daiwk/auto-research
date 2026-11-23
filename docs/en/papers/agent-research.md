@@ -8,6 +8,9 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [From Acting to Learning: Experience Selection toward Continually Learning Agents](<https://arxiv.org/abs/2611.27159v1>) | 2026-11-20 | [English](../../agent-research/2611.27159-acting-to-learning/README-en.md) · [Chinese](../../agent-research/2611.27159-acting-to-learning/README.md) |
+| [CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?](<https://arxiv.org/abs/2611.27116v1>) | 2026-11-20 | [English](../../agent-research/2611.27116-coevobench/README-en.md) · [Chinese](../../agent-research/2611.27116-coevobench/README.md) |
+| [$R^2$: Recognizing and Reducing Redundant Visual Tool Use](<https://arxiv.org/abs/2611.27070v1>) | 2026-11-20 | [English](../../agent-research/2611.27070-r2-tool-redundancy/README-en.md) · [Chinese](../../agent-research/2611.27070-r2-tool-redundancy/README.md) |
 | [Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement](<https://arxiv.org/abs/2611.26132v1>) | 2026-11-19 | [English](../../agent-research/2611.26132-sage-evolve/README-en.md) · [Chinese](../../agent-research/2611.26132-sage-evolve/README.md) |
 | [MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management](<https://arxiv.org/abs/2611.26427v1>) | 2026-11-19 | [English](../../agent-research/2611.26427-memfolder/README-en.md) · [Chinese](../../agent-research/2611.26427-memfolder/README.md) |
 | [Safe Personal RSI: Evaluating and Repairing Personal-Agent Updates](<https://arxiv.org/abs/2611.23651v1>) | 2026-11-18 | [English](../../agent-research/2611.23651-safe-personal-rsi/README-en.md) · [Chinese](../../agent-research/2611.23651-safe-personal-rsi/README.md) |

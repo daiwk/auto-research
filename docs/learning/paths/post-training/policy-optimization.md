@@ -7,7 +7,7 @@ hide:
 
 # 策略优化：谁在采样，谁在被更新
 
-[LLM 后训练](index.md) / 260 个问题 · 65 篇论文
+[LLM 后训练](index.md) / 264 个问题 · 66 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">260 个问题 · 65 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">264 个问题 · 66 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:retokenization-update" data-paper-title="How Far Does Lossless Re-tokenization Move an RLVR Update?" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="How Far Does Lossless Re-tokenization Move an RLVR Update? LLM 后训练 University of Maine at Presque Isle 2026-11-20 研究对象不是奖励变化，而是同一rollout的token ID变化。保留文本、reward、advantage和checkpoint，仅将可拆token替换成两个拼回原文本的词表项。论文从共享参数checkpoint比较canonical、re-encoded和不同batch的更新，另在每种分词各自一套prefix-softmax表上证明：未访问prefix的条件概率比保持不变，但整词softmax的未采样logit仍被完整梯度改变。 完整实验成本过高，不复现（审查 DONE）；这是一项机制诊断，不是后训练能力实现。L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU、无CUDA路径，不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU prefix-softmax表从同一正的完整字符串分布按chain rule初始化，执行λ_t(e_token−π_row)完整梯度；检验未访问行、coarse未采样logit和字符串分布差异。独立实现c及ratio-of-means R，但不把两套独立tabular参数假装成共享LLM参数来计算R；  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 文本与reward相同为什么更新仍会不同？ 模型对token路径而不只对解码字符串分配概率。拆token改变访问prefix与score-gradient；固定reward和advantage不能固定该Jacobian。 教学例：The与T、he解码相同，但logπ(The|prefix)和logπ(T|prefix)+logπ(he|prefix,T)的参数导数不必相同。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<span id="paper-post-training-retokenization-update-7ee85b71" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-cc642067b1a75f35">文本与reward相同为什么更新仍会不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aretokenization-update">How Far Does Lossless Re-tokenization Move an RLVR Update?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · University of Maine at Presque Isle</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>模型对token路径而不只对解码字符串分配概率。拆token改变访问prefix与score-gradient；固定reward和advantage不能固定该Jacobian。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：The与T、he解码相同，但logπ(The|prefix)和logπ(T|prefix)+logπ(he|prefix,T)的参数导数不必相同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27083v1">原论文</a> · <a href="../../../../post-training/2611.27083-retokenization-update/">实现解读</a> · <a href="#qa-cc642067b1a75f35">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:retokenization-update" data-paper-title="How Far Does Lossless Re-tokenization Move an RLVR Update?" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="How Far Does Lossless Re-tokenization Move an RLVR Update? LLM 后训练 University of Maine at Presque Isle 2026-11-20 研究对象不是奖励变化，而是同一rollout的token ID变化。保留文本、reward、advantage和checkpoint，仅将可拆token替换成两个拼回原文本的词表项。论文从共享参数checkpoint比较canonical、re-encoded和不同batch的更新，另在每种分词各自一套prefix-softmax表上证明：未访问prefix的条件概率比保持不变，但整词softmax的未采样logit仍被完整梯度改变。 完整实验成本过高，不复现（审查 DONE）；这是一项机制诊断，不是后训练能力实现。L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU、无CUDA路径，不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU prefix-softmax表从同一正的完整字符串分布按chain rule初始化，执行λ_t(e_token−π_row)完整梯度；检验未访问行、coarse未采样logit和字符串分布差异。独立实现c及ratio-of-means R，但不把两套独立tabular参数假装成共享LLM参数来计算R；  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 tabular论证为什么必须保留未采样logit的完整梯度？ coarse步λ(e_ab−π)会移动所有未采样logit，使ba/bb的log比变化−λ[π(ba)−π(bb)]；fine没有访问b行，所以该条件比不变。只改sampled-logit会换成论文明确区分的较弱模拟器。 教学例：π(ba)=0.3、π(bb)=0.4、λ=0.2时coarse log比增加0.02，fine增加0；这是计算出的机制差，不是LLM性能损失。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-3814f76a7e732c0c">tabular论证为什么必须保留未采样logit的完整梯度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aretokenization-update">How Far Does Lossless Re-tokenization Move an RLVR Update?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · University of Maine at Presque Isle</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>coarse步λ(e_ab−π)会移动所有未采样logit，使ba/bb的log比变化−λ[π(ba)−π(bb)]；fine没有访问b行，所以该条件比不变。只改sampled-logit会换成论文明确区分的较弱模拟器。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：π(ba)=0.3、π(bb)=0.4、λ=0.2时coarse log比增加0.02，fine增加0；这是计算出的机制差，不是LLM性能损失。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27083v1">原论文</a> · <a href="../../../../post-training/2611.27083-retokenization-update/">实现解读</a> · <a href="#qa-3814f76a7e732c0c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:retokenization-update" data-paper-title="How Far Does Lossless Re-tokenization Move an RLVR Update?" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="How Far Does Lossless Re-tokenization Move an RLVR Update? LLM 后训练 University of Maine at Presque Isle 2026-11-20 研究对象不是奖励变化，而是同一rollout的token ID变化。保留文本、reward、advantage和checkpoint，仅将可拆token替换成两个拼回原文本的词表项。论文从共享参数checkpoint比较canonical、re-encoded和不同batch的更新，另在每种分词各自一套prefix-softmax表上证明：未访问prefix的条件概率比保持不变，但整词softmax的未采样logit仍被完整梯度改变。 完整实验成本过高，不复现（审查 DONE）；这是一项机制诊断，不是后训练能力实现。L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU、无CUDA路径，不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU prefix-softmax表从同一正的完整字符串分布按chain rule初始化，执行λ_t(e_token−π_row)完整梯度；检验未访问行、coarse未采样logit和字符串分布差异。独立实现c及ratio-of-means R，但不把两套独立tabular参数假装成共享LLM参数来计算R；  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 RLOO消去共同常数是否也消去重分词漂移？ 不会。DFRL的hindsight成本作为同实例常数在优势中抵消；重分词改变乘在优势上的score-gradient。奖励轴的抵消与参数化轴的不变性是两回事。 教学例：同一优势1分别乘两个不同方向的score向量，结果仍不同；给两者reward同时减10不会让向量重合。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-b34c6a37988bc977">RLOO消去共同常数是否也消去重分词漂移？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aretokenization-update">How Far Does Lossless Re-tokenization Move an RLVR Update?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · University of Maine at Presque Isle</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不会。DFRL的hindsight成本作为同实例常数在优势中抵消；重分词改变乘在优势上的score-gradient。奖励轴的抵消与参数化轴的不变性是两回事。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一优势1分别乘两个不同方向的score向量，结果仍不同；给两者reward同时减10不会让向量重合。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27083v1">原论文</a> · <a href="../../../../post-training/2611.27083-retokenization-update/">实现解读</a> · <a href="#qa-b34c6a37988bc977">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:retokenization-update" data-paper-title="How Far Does Lossless Re-tokenization Move an RLVR Update?" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="How Far Does Lossless Re-tokenization Move an RLVR Update? LLM 后训练 University of Maine at Presque Isle 2026-11-20 研究对象不是奖励变化，而是同一rollout的token ID变化。保留文本、reward、advantage和checkpoint，仅将可拆token替换成两个拼回原文本的词表项。论文从共享参数checkpoint比较canonical、re-encoded和不同batch的更新，另在每种分词各自一套prefix-softmax表上证明：未访问prefix的条件概率比保持不变，但整词softmax的未采样logit仍被完整梯度改变。 完整实验成本过高，不复现（审查 DONE）；这是一项机制诊断，不是后训练能力实现。L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU、无CUDA路径，不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU prefix-softmax表从同一正的完整字符串分布按chain rule初始化，执行λ_t(e_token−π_row)完整梯度；检验未访问行、coarse未采样logit和字符串分布差异。独立实现c及ratio-of-means R，但不把两套独立tabular参数假装成共享LLM参数来计算R；  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 为什么不能把两个tabular表直接拿来报告论文的R？ R要求canonical、re-encoded和不同batch更新处于同一参数空间，从同一checkpoint测量，并用距离均值之比。两种分词各自的tabular参数维数/语义不同，只能比较字符串分布；本地R工具不伪造真实LM更新。 教学例：同范数反向更新的c=2，正交为√2；两个零更新的分母为0必须拒绝，而不是填0宣称无漂移。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-758884e434fa705f">为什么不能把两个tabular表直接拿来报告论文的R？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aretokenization-update">How Far Does Lossless Re-tokenization Move an RLVR Update?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · University of Maine at Presque Isle</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>R要求canonical、re-encoded和不同batch更新处于同一参数空间，从同一checkpoint测量，并用距离均值之比。两种分词各自的tabular参数维数/语义不同，只能比较字符串分布；本地R工具不伪造真实LM更新。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同范数反向更新的c=2，正交为√2；两个零更新的分母为0必须拒绝，而不是填0宣称无漂移。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27083v1">原论文</a> · <a href="../../../../post-training/2611.27083-retokenization-update/">实现解读</a> · <a href="#qa-758884e434fa705f">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dfrl" data-paper-title="Decision-Focused Reinforcement Learning for LLM Post-Training" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Decision-Focused Reinforcement Learning for LLM Post-Training LLM 后训练 The University of Texas at Austin 2026-11-19 预测误差小不保证由预测触发的决策成本低。DFRL把LLM生成的参数预测交给下游优化器，以真实观测参数评估该决策，再把负决策regret用于后训练；不对优化器求导。它是目标/反馈框架，不是另一个替代RLOO的策略优化器。对同一实例独立生成K≥2条预测时，RLOO的实例内leave-one-out baseline抵消共同的hindsight最优成本，因此更新不必额外求真实参数下的最优解。 完整实验成本过高，不复现（审查 DONE）。诊断对三个可采样参数预测的真实可行决策计算观测成本，穷举两个独立categorical样本的score-gradient期望并与解析梯度比较；L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU，无CUDA宣传路径；不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）。纯stdlib、CPU-only的实际成本RLOO优势、单批共享Bernoulli逆概率校正与lazy整批精确成本回调、显式warm-start边界、小规模枚举knapsack。  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 为什么预测更准不一定决策更好？ 优化器只在可行决策间选择；预测误差若跨过改变最优决策的边界，会有大regret，别处较大的误差却可能不改决策。DFRL直接奖励诱导决策的真实成本，而非每维预测误差。 教学例：容量只能选一件商品时，两件商品利润接近，微小的排序翻转可选错商品；把两件利润都等量平移虽增大MSE，却可能不改选择。 2026-11-21">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
 <span id="paper-post-training-dfrl-a11a1eb3" class="ar-learning-paper-anchor"></span>

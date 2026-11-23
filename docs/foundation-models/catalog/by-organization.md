@@ -156,6 +156,7 @@
 
 ## Google DeepMind
 
+- 2026-11-20 · [Reliable Behavior Discovery via False Discovery Rate Control](../../foundation-models/2611.27104-disco/README.md)（`disco`）：行为发现寻找的是可重复的输入—输出规律，而不是几条显眼失败案例。不断挑选假设、查询模型、观察结果再换假设会产生选择偏差；即使每个单项检验都控制错误，也不能直接保证最终发现集合的FDR。DISCO通过冻结e-process和限制选择器只能看粗分箱状态，允许最终以实际测试假设数$K_{obs}$运行eBH，而不总以保守的预设上界加权。
 - 2026-07-23 · [Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks](../../foundation-models/2607.21366-hope-hilbert/README.md)（`hope-hilbert`）：单看输入权重大小，可能把“函数完全相同、只是参数重新缩放”的神经元排出不同重要性。HOPE把一个神经元写成激活函数与输出向量的秩1张量：它在所有输入上的作用方向，比参数坐标本身更接近需要保留的功能。
 - 2026-05-29 · [XLGoBench: Detecting cross-lingual skill gaps with algorithmic tasks](../../foundation-models/2605.30788-xlgobench/README.md)（`xlgobench`）：固定v1 Section2+AppendixC：SLT财富/系数整数−9..9并jumbled chain；DSA状态/动作数相同；PrDSA15动作、传播完整状态概率、top8集合顺序无关；GraphSP唯一最短路（本地rho0 backbone+bypass固定例）；T-RankHamiltonian DAG+transitive edges、nodes:edges1:3。callback只收task/problem白名单深拷贝，score完整JSON，无LLMjudge。
 - 2026-04-25 · [ProEval: Proactive Failure Discovery and Efficient Performance Estimation for Generative AI Evaluation](../../foundation-models/2604.23099-proeval/README.md)（`proeval`）：昂贵模型或评审器不适合每次全量评分。ProEval复用历史模型之间逐题表现的相关性，形成目标模型的概率评分替身；目标分数只在对应题被选中后传入更新。主源：[v1 §2.1–2.4 Eq2、5、7、10、12](https://arxiv.org/html/2604.23099v1#S2)。
@@ -408,6 +409,7 @@
 ## National University of Singapore
 
 - 2026-09-10 · [Musec: MomentUm SpEctral Clipping for Stable Muon-type Training](../../foundation-models/2609.11655-musec/README.md)（`musec`）：对 Muon momentum 的奇异值做平滑谱裁剪，避免硬截断不连续，同时限制不稳定大方向。
+- 2026-04-27 · [Don't Pause! Every prediction matters in a streaming video](../../foundation-models/2604.24317-spot-bench/README.md)（`spot-bench`）：SPOT-Bench针对持续视频流：每个输出都会影响分数，不只在暂停询问时读一个答案。人工可接受时间窗是gold slot，窗内timeliness为1，窗外采用早侧较宽、晚侧较窄的Gaussian尾。语义正确且时间有效的响应按时间顺序被开放slot吸收，每slot最多K次并只保留最好timeliness；过量或不匹配输出为FP，空slot为FN。T-F1以加权TP衡量及时性、覆盖和过度回应。Ctrl-SPOT则是另一个完整流式控制器，组合持久query状态、长短期KV、检索与dead-time总结；本地只做评测器，不冒充控制器。
 - 2026-04-08 · [The Illusion of Stochasticity in LLMs](../../foundation-models/2604.06543-llm-stochasticity/README.md)（`llm-stochasticity`）：要求LLM“随机选一个数”不等价于访问可靠随机源。论文比较不同模型、离散/连续目标分布、逐次和批量提示，发现明显类别偏好、历史排斥和周期性；看起来均匀的直方图也可能来自确定性序列。
 
 ## New York University
@@ -587,6 +589,7 @@
 
 ## Tsinghua University
 
+- 2026-11-20 · [Accelerating Muon with Spectral Residual Correction](../../foundation-models/2611.27077-aimuon/README.md)（`aimuon`）：AIMuon不改普通EMA动量，而改参数子问题：先更新M，再算E=G−M，分别对M与E做谱变换，以各自核范数估计决定相对权重。把残差混进动量后只做一次变换通常不等价，因为矩阵符号映射非线性。实用Algorithm1用两次五步BF16 Newton–Schulz近似，并用内积绝对值估计核范数，不做额外SVD；最后把合成步的Frobenius范数匹配到同M的Muon，权重衰减解耦。理论收敛结论针对未归一化、精确矩阵符号版本，不自动覆盖这个BF16实用算法。
 - 2026-11-17 · [InfuseLoop: Cross-Trajectory Latent Injection for Scalable Parallel Looped Transformers](../../foundation-models/2611.22426-infuseloop/README.md)（`infuseloop`）：并行loop在同一执行周期同时推进多个预测轨迹。InfuseLoop让第r轮聚合上一周期已完成、但来自更浅loop的状态，而非仅传递本轨迹前一轮。未来轨迹位置不等于未来未生成token，合法性由执行周期决定。 [已核方法位置](https://arxiv.org/html/2611.22426v1#S3)：3.1–3.4, 4.1, Appendix A。
 - 2026-10-16 · [Persistent Planar Memory for Video World Models](../../foundation-models/2610.23795-ppmem/README.md)（`ppmem`）：长视频生成若只保存少量历史帧，跨视角回访容易遗忘场景；持续保存全部像素点云又非常大。PPMem把场景记忆压成可光栅化的平面primitive，在视频生成过程中由同一骨干联合预测，再通过持久pool向后续chunk反馈深度。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-10-10 · [The Company a Question Keeps: Auditing Open Jev-Style Models for Retrieval](../../system-one/2610.14631-request-audit/README.md)（`jev-request-audit`）：合法结构化输出不能保证问题彼此独立。论文分离三种干预：增加请求问题时保持证据和目标命题不变；增加证据时保持原目标、候选资格不变；增加可选候选时保持全部显示证据不变。这样可以区分问题 schema 依赖、真实上下文改变和候选归一化效应。

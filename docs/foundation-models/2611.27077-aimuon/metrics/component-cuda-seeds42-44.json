@@ -1,0 +1,136 @@
+{
+  "schema_version": 2,
+  "method": "aimuon",
+  "manifest_ref": "foundation-models:aimuon",
+  "dataset": {
+    "id": "synthetic:nov23-overlap-aimuon-component-v1",
+    "kind": "explicit_protocol_or_mechanism_fixtures",
+    "revision": "sha256:24f68cf193bcf5bf879d15556a9fadf853304d31645b53cf2bef26a95d0c8a6b",
+    "public_capability_benchmark": false,
+    "source": "Seeded small tensors or explicit deterministic evaluator/control cases; no pretrained output or public capability measurement"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "actual_autograd_quadratic_decreases": true,
+        "separate_transforms_differ_from_pre_mixing": true,
+        "rms_matches_same_momentum_muon": true,
+        "zero_correction_recovers_muon": true,
+        "zero_gradient_and_momentum_stay_zero": true,
+        "transpose_path_retains_shape": true,
+        "all_finite": true
+      },
+      "metrics": {
+        "initial_quadratic_loss": 1.020136833190918,
+        "final_quadratic_loss": 0.7176828384399414,
+        "update_frobenius_norm": 1.8408478498458862,
+        "premix_direction_gap": 1.1763867139816284
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "actual_autograd_quadratic_decreases": true,
+        "separate_transforms_differ_from_pre_mixing": true,
+        "rms_matches_same_momentum_muon": true,
+        "zero_correction_recovers_muon": true,
+        "zero_gradient_and_momentum_stay_zero": true,
+        "transpose_path_retains_shape": true,
+        "all_finite": true
+      },
+      "metrics": {
+        "initial_quadratic_loss": 1.0559368133544922,
+        "final_quadratic_loss": 0.7413754463195801,
+        "update_frobenius_norm": 1.7496538162231445,
+        "premix_direction_gap": 1.1081278324127197
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "actual_autograd_quadratic_decreases": true,
+        "separate_transforms_differ_from_pre_mixing": true,
+        "rms_matches_same_momentum_muon": true,
+        "zero_correction_recovers_muon": true,
+        "zero_gradient_and_momentum_stay_zero": true,
+        "transpose_path_retains_shape": true,
+        "all_finite": true
+      },
+      "metrics": {
+        "initial_quadratic_loss": 1.064561128616333,
+        "final_quadratic_loss": 0.7607816457748413,
+        "update_frobenius_norm": 1.6677850484848022,
+        "premix_direction_gap": 1.1816776990890503
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    }
+  ],
+  "metrics": {
+    "final_quadratic_loss": 0.7399466435114542,
+    "initial_quadratic_loss": 1.0468782583872478,
+    "premix_direction_gap": 1.1553974151611328,
+    "update_frobenius_norm": 1.752762238184611
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Operator/interface controls only; not a complete model, agent, public benchmark or production comparison"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "acc48ec54ed47013155637372db9985760c3a2de",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "artifact_path": "docs/foundation-models/2611.27077-aimuon/metrics/component-cuda-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_nov23_latest_components.py": "8053959ebe64f20001ac99fd08c960442227ef3cb8c1f770041d70ed4ae4ba1c",
+      "scripts/run_nov18_latest_components.py": "0fe50e8e554f6663b3c8c179654400d10bfbb557ceb9cefb9880da78f164b7c1",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov23-latest/preflight.json": "13266c5e7f437111111889487c374aa94527f4d9e4f096dfa119027ce6b5382a",
+      "src/auto_research/foundation_models/aimuon.py": "24f68cf193bcf5bf879d15556a9fadf853304d31645b53cf2bef26a95d0c8a6b",
+      "src/auto_research/foundation_models/spot_bench.py": "4b8204be61f1dc41d6a21bb9237b4fc4bfee102cb1a377ba52756236ccb1561d",
+      "src/auto_research/foundation_models/disco.py": "f0d740e878bcbcbfb1657cabff5d5451e38ec677ba0806eeefe30f85b75ffd80",
+      "src/auto_research/post_training/dwe.py": "21464f17a37349d40a7e5a235785dad953c949a97f37f8aa800b89cf2a09d229",
+      "src/auto_research/post_training/retokenization_update.py": "2700cc475ab14baec4e7d29bb0b55d4351d86f6b8781441816b52dda65db3820",
+      "src/auto_research/agent_research/acting_to_learning.py": "4906c83275af0a805fe0666f7d0cb099dd1311bdc35e99a34041a27006132d67",
+      "src/auto_research/agent_research/r2_tool_redundancy.py": "479f0128b277515384eddc36423efa62b7f19d95b3ec458a0c7d598517688ddb"
+    },
+    "dataset_fingerprint": "sha256:3ef5bc56377d01d17382b8a47ff5158d736ec26c66f14c41f2fc7cc93f1d88f2",
+    "raw_runner_artifact_sha256": "7ae24f86c1fa0d22a427d1d8cecb2375a9a6d99f065ddc2bfca6bb9484cd7946"
+  }
+}

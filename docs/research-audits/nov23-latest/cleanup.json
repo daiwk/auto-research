@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "scope": "Six exact run-owned generated-site, page-preview and transfer-package paths only",
+  "removed": [
+    {
+      "path": ".cache/nov23-latest/site-final",
+      "files": 7635,
+      "logical_bytes": 1057502090,
+      "allocated_bytes": 1073221632
+    },
+    {
+      "path": ".cache/nov23-latest/gpu-source-acc48ec5.tar.gz",
+      "files": 1,
+      "logical_bytes": 67170,
+      "allocated_bytes": 69632
+    },
+    {
+      "path": ".cache/nov23-latest/root-primary/aimuon-page8.png",
+      "files": 1,
+      "logical_bytes": 129491,
+      "allocated_bytes": 131072
+    },
+    {
+      "path": ".cache/nov23-latest/root-primary/aimuon-page6.png",
+      "files": 1,
+      "logical_bytes": 78338,
+      "allocated_bytes": 81920
+    },
+    {
+      "path": ".cache/nov23-latest/root-primary/spot-page4.png",
+      "files": 1,
+      "logical_bytes": 144274,
+      "allocated_bytes": 147456
+    },
+    {
+      "path": ".cache/nov23-latest/root-primary/spot-page6.png",
+      "files": 1,
+      "logical_bytes": 156298,
+      "allocated_bytes": 159744
+    }
+  ],
+  "allocated_bytes_reclaimed": 1073811456,
+  "protected_files_verified": 61,
+  "protected_content_unchanged": true,
+  "remote_temporary_run_directory": "Removed after actual raw-CUDA fetch and validation; no remote jobs remain",
+  "additional_agent_report": "Agent author separately removed roughly2MB of inspected full-page previews; estimate excluded from exact byte total",
+  "preserved": [
+    "all code and Git checkouts",
+    "all actual and failed experiment evidence",
+    "frozen proofs and GPU receipts",
+    "original figures and raw official sources",
+    "reusable public model/data caches",
+    "Codex records/configuration"
+  ]
+}

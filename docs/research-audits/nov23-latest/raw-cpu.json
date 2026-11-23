@@ -1,0 +1,713 @@
+{
+  "schema_version": 2,
+  "batch": "2026-11-23-latest-components",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "device": "cpu",
+  "accelerator": "CPU",
+  "source_sha256": {
+    "scripts/run_nov23_latest_components.py": "8053959ebe64f20001ac99fd08c960442227ef3cb8c1f770041d70ed4ae4ba1c",
+    "scripts/run_nov18_latest_components.py": "0fe50e8e554f6663b3c8c179654400d10bfbb557ceb9cefb9880da78f164b7c1",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "docs/research-audits/nov23-latest/preflight.json": "13266c5e7f437111111889487c374aa94527f4d9e4f096dfa119027ce6b5382a",
+    "src/auto_research/foundation_models/aimuon.py": "24f68cf193bcf5bf879d15556a9fadf853304d31645b53cf2bef26a95d0c8a6b",
+    "src/auto_research/foundation_models/spot_bench.py": "4b8204be61f1dc41d6a21bb9237b4fc4bfee102cb1a377ba52756236ccb1561d",
+    "src/auto_research/foundation_models/disco.py": "f0d740e878bcbcbfb1657cabff5d5451e38ec677ba0806eeefe30f85b75ffd80",
+    "src/auto_research/post_training/dwe.py": "21464f17a37349d40a7e5a235785dad953c949a97f37f8aa800b89cf2a09d229",
+    "src/auto_research/post_training/retokenization_update.py": "2700cc475ab14baec4e7d29bb0b55d4351d86f6b8781441816b52dda65db3820",
+    "src/auto_research/agent_research/acting_to_learning.py": "4906c83275af0a805fe0666f7d0cb099dd1311bdc35e99a34041a27006132d67",
+    "src/auto_research/agent_research/r2_tool_redundancy.py": "479f0128b277515384eddc36423efa62b7f19d95b3ec458a0c7d598517688ddb"
+  },
+  "code_commit": "acc48ec54ed47013155637372db9985760c3a2de",
+  "components": {
+    "aimuon": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "actual_autograd_quadratic_decreases": true,
+            "separate_transforms_differ_from_pre_mixing": true,
+            "rms_matches_same_momentum_muon": true,
+            "zero_correction_recovers_muon": true,
+            "zero_gradient_and_momentum_stay_zero": true,
+            "transpose_path_retains_shape": true,
+            "all_finite": true
+          },
+          "metrics": {
+            "initial_quadratic_loss": 1.020136833190918,
+            "final_quadratic_loss": 0.7176999449729919,
+            "update_frobenius_norm": 1.859426736831665,
+            "premix_direction_gap": 1.1958492994308472
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "actual_autograd_quadratic_decreases": true,
+            "separate_transforms_differ_from_pre_mixing": true,
+            "rms_matches_same_momentum_muon": true,
+            "zero_correction_recovers_muon": true,
+            "zero_gradient_and_momentum_stay_zero": true,
+            "transpose_path_retains_shape": true,
+            "all_finite": true
+          },
+          "metrics": {
+            "initial_quadratic_loss": 1.0559368133544922,
+            "final_quadratic_loss": 0.7406095862388611,
+            "update_frobenius_norm": 1.7408208847045898,
+            "premix_direction_gap": 1.081365942955017
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "actual_autograd_quadratic_decreases": true,
+            "separate_transforms_differ_from_pre_mixing": true,
+            "rms_matches_same_momentum_muon": true,
+            "zero_correction_recovers_muon": true,
+            "zero_gradient_and_momentum_stay_zero": true,
+            "transpose_path_retains_shape": true,
+            "all_finite": true
+          },
+          "metrics": {
+            "initial_quadratic_loss": 1.0645610094070435,
+            "final_quadratic_loss": 0.7607163786888123,
+            "update_frobenius_norm": 1.6545900106430054,
+            "premix_direction_gap": 1.1881746053695679
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "spot-bench": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "perfect_trace_scores_one": true,
+            "occupancy_excess_is_false_positive": true,
+            "spam_penalty_is_not_capability": true,
+            "wrong_semantics_never_matches": true,
+            "late_is_penalized_more_than_early": true,
+            "literal_algorithm1_can_fill_two_slots": true,
+            "no_predictions_leaves_false_negative": true
+          },
+          "metrics": {
+            "synthetic_perfect_trace_f1": 1.0,
+            "synthetic_spam_trace_f1": 0.5,
+            "early_fractional_credit": 0.7959102829515173,
+            "late_fractional_credit": 0.40128826788898336
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "perfect_trace_scores_one": true,
+            "occupancy_excess_is_false_positive": true,
+            "spam_penalty_is_not_capability": true,
+            "wrong_semantics_never_matches": true,
+            "late_is_penalized_more_than_early": true,
+            "literal_algorithm1_can_fill_two_slots": true,
+            "no_predictions_leaves_false_negative": true
+          },
+          "metrics": {
+            "synthetic_perfect_trace_f1": 1.0,
+            "synthetic_spam_trace_f1": 0.5,
+            "early_fractional_credit": 0.7959102829515173,
+            "late_fractional_credit": 0.40128826788898336
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "perfect_trace_scores_one": true,
+            "occupancy_excess_is_false_positive": true,
+            "spam_penalty_is_not_capability": true,
+            "wrong_semantics_never_matches": true,
+            "late_is_penalized_more_than_early": true,
+            "literal_algorithm1_can_fill_two_slots": true,
+            "no_predictions_leaves_false_negative": true
+          },
+          "metrics": {
+            "synthetic_perfect_trace_f1": 1.0,
+            "synthetic_spam_trace_f1": 0.5,
+            "early_fractional_credit": 0.7959102829515173,
+            "late_fractional_credit": 0.40128826788898336
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "disco": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "selector_has_only_coarse_data": true,
+            "freezes_on_exit_and_limit": true,
+            "bounded_queries": true,
+            "post_hoc_remains_conditional": true,
+            "exact_null_calibration": true,
+            "no_cuda_or_model_claim": true
+          },
+          "controls": {
+            "selector_has_only_coarse_data": true,
+            "freezes_on_exit_and_limit": true,
+            "bounded_queries": true,
+            "post_hoc_remains_conditional": true,
+            "exact_null_calibration": true,
+            "no_cuda_or_model_claim": true
+          },
+          "metrics": {
+            "hypotheses": 3,
+            "queries_used": 5,
+            "rejections": 2,
+            "post_hoc_epsilon": 0.19636963696369636,
+            "null_exit_probability": 0.0001
+          },
+          "certificate": {
+            "kind": "post_hoc",
+            "alpha_star": 0.5092436974789917,
+            "epsilon": 0.19636963696369636,
+            "delta": 0.00030000000000000003,
+            "bound": 0.1,
+            "conditional_on_no_null_exit": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "selector_has_only_coarse_data": true,
+            "freezes_on_exit_and_limit": true,
+            "bounded_queries": true,
+            "post_hoc_remains_conditional": true,
+            "exact_null_calibration": true,
+            "no_cuda_or_model_claim": true
+          },
+          "controls": {
+            "selector_has_only_coarse_data": true,
+            "freezes_on_exit_and_limit": true,
+            "bounded_queries": true,
+            "post_hoc_remains_conditional": true,
+            "exact_null_calibration": true,
+            "no_cuda_or_model_claim": true
+          },
+          "metrics": {
+            "hypotheses": 3,
+            "queries_used": 5,
+            "rejections": 2,
+            "post_hoc_epsilon": 0.19636963696369636,
+            "null_exit_probability": 0.0001
+          },
+          "certificate": {
+            "kind": "post_hoc",
+            "alpha_star": 0.5092436974789917,
+            "epsilon": 0.19636963696369636,
+            "delta": 0.00030000000000000003,
+            "bound": 0.1,
+            "conditional_on_no_null_exit": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "selector_has_only_coarse_data": true,
+            "freezes_on_exit_and_limit": true,
+            "bounded_queries": true,
+            "post_hoc_remains_conditional": true,
+            "exact_null_calibration": true,
+            "no_cuda_or_model_claim": true
+          },
+          "controls": {
+            "selector_has_only_coarse_data": true,
+            "freezes_on_exit_and_limit": true,
+            "bounded_queries": true,
+            "post_hoc_remains_conditional": true,
+            "exact_null_calibration": true,
+            "no_cuda_or_model_claim": true
+          },
+          "metrics": {
+            "hypotheses": 3,
+            "queries_used": 5,
+            "rejections": 2,
+            "post_hoc_epsilon": 0.19636963696369636,
+            "null_exit_probability": 0.0001
+          },
+          "certificate": {
+            "kind": "post_hoc",
+            "alpha_star": 0.5092436974789917,
+            "epsilon": 0.19636963696369636,
+            "delta": 0.00030000000000000003,
+            "bound": 0.1,
+            "conditional_on_no_null_exit": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "dwe": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "exact_quantile_integral_is_unbiased": true,
+            "expected_sparse_chain_rule_matches_dense": true,
+            "sample_preserves_zero_sum": true,
+            "sample_uses_at_most_two_rows_per_pair": true,
+            "top_coordinate_discard_is_biased_control": true,
+            "zero_gradient_has_no_sparse_rows": true
+          },
+          "controls": {
+            "exact_quantile_integral_is_unbiased": true,
+            "expected_sparse_chain_rule_matches_dense": true,
+            "sample_preserves_zero_sum": true,
+            "sample_uses_at_most_two_rows_per_pair": true,
+            "top_coordinate_discard_is_biased_control": true,
+            "zero_gradient_has_no_sparse_rows": true
+          },
+          "metrics": {
+            "exact_expectation_max_abs_error": 5.551115123125783e-17,
+            "paired_zero_sum_abs_error": 0.0,
+            "top4_discard_max_abs_bias": 0.11762012699926962,
+            "selected_rows": 2,
+            "vocabulary": 8,
+            "hidden_width": 3,
+            "pairs": 2
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "exact_quantile_integral_is_unbiased": true,
+            "expected_sparse_chain_rule_matches_dense": true,
+            "sample_preserves_zero_sum": true,
+            "sample_uses_at_most_two_rows_per_pair": true,
+            "top_coordinate_discard_is_biased_control": true,
+            "zero_gradient_has_no_sparse_rows": true
+          },
+          "controls": {
+            "exact_quantile_integral_is_unbiased": true,
+            "expected_sparse_chain_rule_matches_dense": true,
+            "sample_preserves_zero_sum": true,
+            "sample_uses_at_most_two_rows_per_pair": true,
+            "top_coordinate_discard_is_biased_control": true,
+            "zero_gradient_has_no_sparse_rows": true
+          },
+          "metrics": {
+            "exact_expectation_max_abs_error": 2.7755575615628914e-17,
+            "paired_zero_sum_abs_error": 0.0,
+            "top4_discard_max_abs_bias": 0.06410369813289005,
+            "selected_rows": 4,
+            "vocabulary": 8,
+            "hidden_width": 3,
+            "pairs": 2
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "exact_quantile_integral_is_unbiased": true,
+            "expected_sparse_chain_rule_matches_dense": true,
+            "sample_preserves_zero_sum": true,
+            "sample_uses_at_most_two_rows_per_pair": true,
+            "top_coordinate_discard_is_biased_control": true,
+            "zero_gradient_has_no_sparse_rows": true
+          },
+          "controls": {
+            "exact_quantile_integral_is_unbiased": true,
+            "expected_sparse_chain_rule_matches_dense": true,
+            "sample_preserves_zero_sum": true,
+            "sample_uses_at_most_two_rows_per_pair": true,
+            "top_coordinate_discard_is_biased_control": true,
+            "zero_gradient_has_no_sparse_rows": true
+          },
+          "metrics": {
+            "exact_expectation_max_abs_error": 2.7755575615628914e-17,
+            "paired_zero_sum_abs_error": 0.0,
+            "top4_discard_max_abs_bias": 0.03167078204464639,
+            "selected_rows": 4,
+            "vocabulary": 8,
+            "hidden_width": 3,
+            "pairs": 2
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "retokenization-update": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "same_initial_string_distribution": true,
+            "unvisited_prefix_row_is_untouched": true,
+            "fine_unsampled_sibling_log_ratio_is_fixed": true,
+            "coarse_log_ratio_matches_full_gradient_equation": true,
+            "nonzero_steps_disagree_despite_identical_strings": true,
+            "same_update_distance_is_zero": true,
+            "ratio_is_common_scale_invariant": true
+          },
+          "controls": {
+            "same_initial_string_distribution": true,
+            "unvisited_prefix_row_is_untouched": true,
+            "fine_unsampled_sibling_log_ratio_is_fixed": true,
+            "coarse_log_ratio_matches_full_gradient_equation": true,
+            "nonzero_steps_disagree_despite_identical_strings": true,
+            "same_update_distance_is_zero": true,
+            "ratio_is_common_scale_invariant": true
+          },
+          "metrics": {
+            "initial_distribution_max_abs_error": 5.551115123125783e-17,
+            "coarse_unsampled_log_ratio_change": -0.0052803965308450135,
+            "fine_unsampled_log_ratio_change": -1.942890293094024e-16,
+            "full_gradient_identity_abs_error": 2.6020852139652106e-18,
+            "string_total_variation": 0.02615482327532069,
+            "strings": 4,
+            "word_length": 2
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "same_initial_string_distribution": true,
+            "unvisited_prefix_row_is_untouched": true,
+            "fine_unsampled_sibling_log_ratio_is_fixed": true,
+            "coarse_log_ratio_matches_full_gradient_equation": true,
+            "nonzero_steps_disagree_despite_identical_strings": true,
+            "same_update_distance_is_zero": true,
+            "ratio_is_common_scale_invariant": true
+          },
+          "controls": {
+            "same_initial_string_distribution": true,
+            "unvisited_prefix_row_is_untouched": true,
+            "fine_unsampled_sibling_log_ratio_is_fixed": true,
+            "coarse_log_ratio_matches_full_gradient_equation": true,
+            "nonzero_steps_disagree_despite_identical_strings": true,
+            "same_update_distance_is_zero": true,
+            "ratio_is_common_scale_invariant": true
+          },
+          "metrics": {
+            "initial_distribution_max_abs_error": 5.551115123125783e-17,
+            "coarse_unsampled_log_ratio_change": 0.029758344667883296,
+            "fine_unsampled_log_ratio_change": -2.220446049250313e-16,
+            "full_gradient_identity_abs_error": 3.8163916471489756e-17,
+            "string_total_variation": 0.006471914925075019,
+            "strings": 4,
+            "word_length": 2
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "same_initial_string_distribution": true,
+            "unvisited_prefix_row_is_untouched": true,
+            "fine_unsampled_sibling_log_ratio_is_fixed": true,
+            "coarse_log_ratio_matches_full_gradient_equation": true,
+            "nonzero_steps_disagree_despite_identical_strings": true,
+            "same_update_distance_is_zero": true,
+            "ratio_is_common_scale_invariant": true
+          },
+          "controls": {
+            "same_initial_string_distribution": true,
+            "unvisited_prefix_row_is_untouched": true,
+            "fine_unsampled_sibling_log_ratio_is_fixed": true,
+            "coarse_log_ratio_matches_full_gradient_equation": true,
+            "nonzero_steps_disagree_despite_identical_strings": true,
+            "same_update_distance_is_zero": true,
+            "ratio_is_common_scale_invariant": true
+          },
+          "metrics": {
+            "initial_distribution_max_abs_error": 0.0,
+            "coarse_unsampled_log_ratio_change": -0.04914444847558319,
+            "fine_unsampled_log_ratio_change": 0.0,
+            "full_gradient_identity_abs_error": 9.020562075079397e-17,
+            "string_total_variation": 0.009555009953545454,
+            "strings": 4,
+            "word_length": 2
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "acting-to-learning": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "checks": {
+            "scores_finite": true,
+            "three_complete_passes": true,
+            "first_duplicate_representative": true,
+            "matched_stratum_positions": true,
+            "matched_distinct_quotas": true,
+            "zero_direction_rejected": true,
+            "seed_replay_stable": true
+          },
+          "selected_representatives": [
+            5,
+            2,
+            3
+          ],
+          "metrics": {
+            "checkpoint_count": 4,
+            "candidate_count": 8,
+            "selected_content_count": 3,
+            "replay_presentations": 9,
+            "matched_presentations": 8,
+            "mean_relevance_score": 0.07607336237064949
+          },
+          "training_executed": false,
+          "agent_evaluation_executed": false,
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "checks": {
+            "scores_finite": true,
+            "three_complete_passes": true,
+            "first_duplicate_representative": true,
+            "matched_stratum_positions": true,
+            "matched_distinct_quotas": true,
+            "zero_direction_rejected": true,
+            "seed_replay_stable": true
+          },
+          "selected_representatives": [
+            1,
+            6,
+            3
+          ],
+          "metrics": {
+            "checkpoint_count": 4,
+            "candidate_count": 8,
+            "selected_content_count": 3,
+            "replay_presentations": 9,
+            "matched_presentations": 8,
+            "mean_relevance_score": -0.086011955459034
+          },
+          "training_executed": false,
+          "agent_evaluation_executed": false,
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "checks": {
+            "scores_finite": true,
+            "three_complete_passes": true,
+            "first_duplicate_representative": true,
+            "matched_stratum_positions": true,
+            "matched_distinct_quotas": true,
+            "zero_direction_rejected": true,
+            "seed_replay_stable": true
+          },
+          "selected_representatives": [
+            6,
+            7,
+            0
+          ],
+          "metrics": {
+            "checkpoint_count": 4,
+            "candidate_count": 8,
+            "selected_content_count": 3,
+            "replay_presentations": 9,
+            "matched_presentations": 8,
+            "mean_relevance_score": 0.15060640474580733
+          },
+          "training_executed": false,
+          "agent_evaluation_executed": false,
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "r2-tool-redundancy": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "checks": {
+            "vfd_same_window_difference": true,
+            "reasoning_only_threshold": true,
+            "single_uniform_eligible_call": true,
+            "failed_trajectories_no_efficiency_reward": true,
+            "correct_efficiency_zero_sum": true,
+            "unclipped_numeric_derivative": true,
+            "empty_eligible_set_zero_redundancy": true,
+            "missing_complete_score_redundant": true
+          },
+          "metrics": {
+            "vfd": 0.3999999999999998,
+            "threshold": 0.19,
+            "sampled_eligible_index": 0,
+            "trajectory_cost": 5.0,
+            "numeric_objective_derivative": 0.12075317357140847
+          },
+          "training_executed": false,
+          "visual_agent_evaluation_executed": false,
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "checks": {
+            "vfd_same_window_difference": true,
+            "reasoning_only_threshold": true,
+            "single_uniform_eligible_call": true,
+            "failed_trajectories_no_efficiency_reward": true,
+            "correct_efficiency_zero_sum": true,
+            "unclipped_numeric_derivative": true,
+            "empty_eligible_set_zero_redundancy": true,
+            "missing_complete_score_redundant": true
+          },
+          "metrics": {
+            "vfd": 0.3999999999999998,
+            "threshold": 0.19,
+            "sampled_eligible_index": 1,
+            "trajectory_cost": 2.0,
+            "numeric_objective_derivative": 0.12075317357140847
+          },
+          "training_executed": false,
+          "visual_agent_evaluation_executed": false,
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "checks": {
+            "vfd_same_window_difference": true,
+            "reasoning_only_threshold": true,
+            "single_uniform_eligible_call": true,
+            "failed_trajectories_no_efficiency_reward": true,
+            "correct_efficiency_zero_sum": true,
+            "unclipped_numeric_derivative": true,
+            "empty_eligible_set_zero_redundancy": true,
+            "missing_complete_score_redundant": true
+          },
+          "metrics": {
+            "vfd": 0.3999999999999998,
+            "threshold": 0.19,
+            "sampled_eligible_index": 2,
+            "trajectory_cost": 5.0,
+            "numeric_objective_derivative": 0.12075317357140847
+          },
+          "training_executed": false,
+          "visual_agent_evaluation_executed": false,
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    }
+  },
+  "elapsed_seconds": 0.1499103750102222,
+  "diagnostic_only": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiments_executed": false,
+  "pretrained_model_calls": 0,
+  "api_calls": 0,
+  "automatic_retry": false
+}

@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:aimuon": {
+      "questions": [
+        {
+          "id": "nov23-basics",
+          "level": "basics",
+          "question": "AIMuon改的是动量还是参数步？",
+          "answer": "保留普通EMA，改参数子问题得到独立残差谱方向。不是Nesterov动量，也不是把当前梯度直接加到Muon结果。",
+          "example": "教学例：β=0.9、旧M=0时，新M=0.1G，E=0.9G；必须先更新M再算E。",
+          "added": "2026-11-23",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov23-mechanism",
+          "level": "mechanism",
+          "question": "为何分别变换残差，再做步长匹配？",
+          "answer": "矩阵符号变换非线性，分别变换后加权一般不等于先混合再变换。RMS匹配去掉共同尺度，却保留核范数比带来的方向变化。",
+          "example": "教学例：两个不同奇异向量方向的矩阵相加后，其polar方向不等于两个polar方向的和；归一到同范数也不会使它们相同。",
+          "added": "2026-11-23",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov23-comparison",
+          "level": "comparison",
+          "question": "AIMuon能替代AF-Muon的tied embedding处理吗？",
+          "answer": "不能直接推断。AF-Muon管词表support/cap及向量更新；AIMuon只定义矩阵谱残差。组合需要明确参数分工和真实验证。",
+          "example": "教学例：一个训练step中只出现两个词，词表输入梯度稀疏；矩阵残差修正不会自动给未出现词定义support约束。",
+          "added": "2026-11-23",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov23-implementation",
+          "level": "implementation",
+          "question": "步数减少是否等于训练时间减少？",
+          "answer": "不是。每step多一次NS5有成本；论文同token预算的AIMuon训练时间反而更长。微型损失下降更不能证明LLM预训练收益。",
+          "example": "教学例：少10%步骤但每步贵20%，总时间是0.9×1.2=1.08倍；这是教学算例，不是论文实测。",
+          "added": "2026-11-23",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        }
+      ]
+    },
+    "foundation-models:spot-bench": {
+      "questions": [
+        {
+          "id": "nov23-basics",
+          "level": "basics",
+          "question": "为何暂停后答对不等于流式表现好？",
+          "answer": "暂停协议不测空闲时间乱答、重复回应或延迟。SPOT让全程每次输出影响及时性与FP/FN。",
+          "example": "教学例：事件发生时说对一次，但每秒又重复十次；暂停准确率仍可满分，T-F1会惩罚K预算外重复。",
+          "added": "2026-11-23",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov23-mechanism",
+          "level": "mechanism",
+          "question": "K=5代表选全流最好的五个答案吗？",
+          "answer": "不是。每slot依时间先后吸收前5个有效语义匹配，再关闭并只保留其中最好时间分；之后不能用未来答案追补。",
+          "example": "教学例：K=1时略早的首个正确响应已关闭slot，后来完美定时响应会成为FP；K=2则能改善该slot的最佳分。",
+          "added": "2026-11-23",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov23-comparison",
+          "level": "comparison",
+          "question": "T-F1=1是否像e-RWSC证书一样有统计保证？",
+          "answer": "不是。T-F1只是给定trace/标注/语义匹配的离线分数。e-RWSC也只在固定政策iid假设下证明多数占优，不证明真实正确。",
+          "example": "教学例：手工给一个正确时刻和True语义标签就可得1；这没有执行任何视觉模型，也不是Agent能力。",
+          "added": "2026-11-23",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov23-implementation",
+          "level": "implementation",
+          "question": "同一响应能否匹配多个slot，评测gold能给policy吗？",
+          "answer": "本地按固定v2 Algorithm1及作者代码允许多个开放slot吸收同一响应，不用口述closest规则替换。gold与semantic矩阵只给离线scorer，不能回传被评估policy。",
+          "example": "教学例：两个重叠slot都语义匹配时，该响应可令TP slots为2；这也说明slot数不能误当响应数。",
+          "added": "2026-11-23",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        }
+      ]
+    }
+  },
+  "english_question_units": {
+    "qa/foundation-models:aimuon/nov23-basics": {
+      "source_sha256": "6df67a2f53ef5c0868463becc645ce63fb88d8e7c6513e5aba81ae3203e87bc3",
+      "reviewed": true,
+      "fields": {
+        "question": "Does AIMuon change momentum or the parameter step?",
+        "answer": "It retains ordinary EMA and derives an independent spectral residual direction from the parameter subproblem, rather than Nesterov momentum or a raw-gradient add-on.",
+        "example": "Teaching example: with β=.9 and old M=0, new M=.1G and E=.9G; update M before forming E."
+      }
+    },
+    "qa/foundation-models:aimuon/nov23-mechanism": {
+      "source_sha256": "2d74fc33e08719c153c467c0aa6bda89852a73b7f6a2401a939f631f697394cd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why transform the residual separately before magnitude matching?",
+        "answer": "Matrix-sign is nonlinear, so weighted separately transformed signals generally differ from a transformed mixture. RMS matching removes common scale, not relative nuclear-norm-induced directional changes.",
+        "example": "Teaching example: matrices with different singular-vector directions generally have a polar sum different from the polar of their sum, even after equal-norm rescaling."
+      }
+    },
+    "qa/foundation-models:aimuon/nov23-comparison": {
+      "source_sha256": "e08dfb8342ac219c702625900b24438dff44f1c49e12129a366ce3543dfda614",
+      "reviewed": true,
+      "fields": {
+        "question": "Does AIMuon replace AF-Muon's tied-embedding treatment?",
+        "answer": "Not by itself. AF-Muon handles vocabulary support/caps and vector updates; AIMuon defines matrix spectral residuals. Combining them needs an explicit parameter partition and real verification.",
+        "example": "Teaching example: if a step contains two vocabulary entries, a spectral residual does not automatically define support constraints for unseen entries."
+      }
+    },
+    "qa/foundation-models:aimuon/nov23-implementation": {
+      "source_sha256": "91d919018215b9bb3601947f7ad7ba0dcfce9a4a364af3837a5dd6cf140d9a23",
+      "reviewed": true,
+      "fields": {
+        "question": "Do fewer steps imply less training time?",
+        "answer": "No. The extra NS5 costs work per step; matched-token AIMuon runs take longer in the paper. A decreasing tiny quadratic loss also does not establish LM pretraining gains.",
+        "example": "Teaching example:10% fewer steps at20% greater per-step cost means1.08 times the time; this is illustrative arithmetic, not a paper measurement."
+      }
+    },
+    "qa/foundation-models:spot-bench/nov23-basics": {
+      "source_sha256": "f1633bfca5092fd7312e49f5862ae6db1e2df828345ecf3b249e2df0e33608de",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does correctness after pausing not establish streaming quality?",
+        "answer": "Pause protocols omit dead-time spam, repeated replies and delay. SPOT accounts for every response through timing and FP/FN.",
+        "example": "Teaching example: one correct event reply followed by ten repeats can keep paused accuracy perfect while reducing T-F1 beyond the occupancy budget."
+      }
+    },
+    "qa/foundation-models:spot-bench/nov23-mechanism": {
+      "source_sha256": "d0fefea4b6660f84385df9decf53100cf8dbe9fbb93f22b4ac2684caf9c3f7ee",
+      "reviewed": true,
+      "fields": {
+        "question": "Does K=5 choose the best five answers over the entire stream?",
+        "answer": "No. Each slot chronologically absorbs its first five valid semantic matches, closes, and retains their best timing credit. Later answers cannot replace them.",
+        "example": "Teaching example: at K=1 an early correct response closes a slot and a later perfectly timed response is an FP; K=2 can improve the slot's best credit."
+      }
+    },
+    "qa/foundation-models:spot-bench/nov23-comparison": {
+      "source_sha256": "b719ea42fff45c8f6938791f9c6a806af35cf14af3690fe3fcf02093039335af",
+      "reviewed": true,
+      "fields": {
+        "question": "Does T-F1=1 carry an e-RWSC-like statistical guarantee?",
+        "answer": "No. T-F1 is offline scoring of supplied traces, annotations and semantic matches. e-RWSC itself certifies only majority dominance under fixed-policy iid assumptions, not truth.",
+        "example": "Teaching example: a hand-authored timestamp and True semantic label can score1 without running a vision model or demonstrating agent capability."
+      }
+    },
+    "qa/foundation-models:spot-bench/nov23-implementation": {
+      "source_sha256": "37959aff0db20aeb538b053297f070a763b0f836dec2b111275635120fed6b6f",
+      "reviewed": true,
+      "fields": {
+        "question": "Can one response fill multiple slots, and may the policy see evaluation gold?",
+        "answer": "The local scorer follows fixed-v2 Algorithm1 and author code, allowing multiple open slots rather than substituting prose's closest-slot rule. Gold and semantic matrices remain evaluator-only, not policy feedback.",
+        "example": "Teaching example: two overlapping semantically matching slots may yield two TP slots from one response, showing why slot counts differ from response counts."
+      }
+    }
+  }
+}

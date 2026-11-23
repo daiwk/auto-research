@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 316 个问题 · 79 篇论文
+[Agent](index.md) / 320 个问题 · 80 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">316 个问题 · 79 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">320 个问题 · 80 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:coevobench" data-paper-title="CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems? Agent Zhejiang University / Alibaba Group / Shanghai Jiao Tong University 2026-11-20 CoEvoBench不是另一个固定自进化算法，而是测LLM researcher能否自主驱动模型权重和harness联合开发的benchmark。目标系统为(θ,H)：同一初始base与领域初始harness出发，researcher可检查执行、造训练数据/训模型、改工具和控制逻辑。开发后提交冻结的模型—harness对，在独立Test任务上执行。关键不是是否做过“诊断—训练—改代码”，而是先前反馈能否改变下一步干预和最终候选选择。 成本过高，不复现（审查 DONE）。deferred_high_cost / 资料收录，未实现、未运行；deferred_high_cost / 资料收录，未实现、未运行；成本过高，不复现（审查 DONE）。首发为2026-11-20，发现/审查为2026-11-23，不称11月23日新首发。本地只收录固定v1、代码提交、split/审计/成本契约与同主题比较；没有新建算法模块、可执行adapter、训练、researcher API调用或benchmark试跑。上游no-GPU toy researcher明确是生命周期fixture，不是自主科研Agent；  执行框架与自改进 coevobench Agent 运行流程与自进化：改的是哪一层 CoEvoBench本身是一套自动自进化算法吗？ 不是。它提供共同起点、可修改模型/harness的动作空间、预算和隔离评价，测researcher如何根据反馈决定下一步；不同被测researcher可走不同开发路线。 教学例：一个researcher只修格式接口后提交base，另一个先改工具再训模型，都可在同一协议下评价，而不是强制轮流训练/改代码。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-coevobench-d56b6b70" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-8ec645418e556793">CoEvoBench本身是一套自动自进化算法吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acoevobench">CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Zhejiang University / Alibaba Group / Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。它提供共同起点、可修改模型/harness的动作空间、预算和隔离评价，测researcher如何根据反馈决定下一步；不同被测researcher可走不同开发路线。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个researcher只修格式接口后提交base，另一个先改工具再训模型，都可在同一协议下评价，而不是强制轮流训练/改代码。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27116v1">原论文</a> · <a href="../../../../agent-research/2611.27116-coevobench/">实现解读</a> · <a href="#qa-8ec645418e556793">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:coevobench" data-paper-title="CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems? Agent Zhejiang University / Alibaba Group / Shanghai Jiao Tong University 2026-11-20 CoEvoBench不是另一个固定自进化算法，而是测LLM researcher能否自主驱动模型权重和harness联合开发的benchmark。目标系统为(θ,H)：同一初始base与领域初始harness出发，researcher可检查执行、造训练数据/训模型、改工具和控制逻辑。开发后提交冻结的模型—harness对，在独立Test任务上执行。关键不是是否做过“诊断—训练—改代码”，而是先前反馈能否改变下一步干预和最终候选选择。 成本过高，不复现（审查 DONE）。deferred_high_cost / 资料收录，未实现、未运行；deferred_high_cost / 资料收录，未实现、未运行；成本过高，不复现（审查 DONE）。首发为2026-11-20，发现/审查为2026-11-23，不称11月23日新首发。本地只收录固定v1、代码提交、split/审计/成本契约与同主题比较；没有新建算法模块、可执行adapter、训练、researcher API调用或benchmark试跑。上游no-GPU toy researcher明确是生命周期fixture，不是自主科研Agent；  执行框架与自改进 coevobench Agent 运行流程与自进化：改的是哪一层 为什么不能把模型收益与Harness收益简单相加？ 模型是在特定harness轨迹上学到行为的。换接口、history或工具后，原训练权重的收益可能反转；必须交叉评价同一权重/不同harness与同一harness/不同权重。 教学例：旧harness下训练比base多解5题，换harness后少解4题；重新收集新harness轨迹再训才恢复正收益。数字是论文case，不是本地实验。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-c26b5a62564ae532">为什么不能把模型收益与Harness收益简单相加？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acoevobench">CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Zhejiang University / Alibaba Group / Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>模型是在特定harness轨迹上学到行为的。换接口、history或工具后，原训练权重的收益可能反转；必须交叉评价同一权重/不同harness与同一harness/不同权重。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：旧harness下训练比base多解5题，换harness后少解4题；重新收集新harness轨迹再训才恢复正收益。数字是论文case，不是本地实验。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27116v1">原论文</a> · <a href="../../../../agent-research/2611.27116-coevobench/">实现解读</a> · <a href="#qa-c26b5a62564ae532">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:coevobench" data-paper-title="CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems? Agent Zhejiang University / Alibaba Group / Shanghai Jiao Tong University 2026-11-20 CoEvoBench不是另一个固定自进化算法，而是测LLM researcher能否自主驱动模型权重和harness联合开发的benchmark。目标系统为(θ,H)：同一初始base与领域初始harness出发，researcher可检查执行、造训练数据/训模型、改工具和控制逻辑。开发后提交冻结的模型—harness对，在独立Test任务上执行。关键不是是否做过“诊断—训练—改代码”，而是先前反馈能否改变下一步干预和最终候选选择。 成本过高，不复现（审查 DONE）。deferred_high_cost / 资料收录，未实现、未运行；deferred_high_cost / 资料收录，未实现、未运行；成本过高，不复现（审查 DONE）。首发为2026-11-20，发现/审查为2026-11-23，不称11月23日新首发。本地只收录固定v1、代码提交、split/审计/成本契约与同主题比较；没有新建算法模块、可执行adapter、训练、researcher API调用或benchmark试跑。上游no-GPU toy researcher明确是生命周期fixture，不是自主科研Agent；  执行框架与自改进 coevobench Agent 运行流程与自进化：改的是哪一层 与Sage-Evolve相比，CoEvoBench把什么交给researcher？ Sage给出固定anchor/自适应active observation的具体策略；CoEvo给出有保护的开发与最终评测协议，让researcher自己决定改权重还是改harness。前者是策略，后者是测决策的benchmark。 教学例：按长度细分失败是Sage式观察改变；在CoEvo里研究者还要判断该修parser、重训还是放弃训练路线。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-6d04695adf1b14e8">与Sage-Evolve相比，CoEvoBench把什么交给researcher？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acoevobench">CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Zhejiang University / Alibaba Group / Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Sage给出固定anchor/自适应active observation的具体策略；CoEvo给出有保护的开发与最终评测协议，让researcher自己决定改权重还是改harness。前者是策略，后者是测决策的benchmark。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：按长度细分失败是Sage式观察改变；在CoEvo里研究者还要判断该修parser、重训还是放弃训练路线。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27116v1">原论文</a> · <a href="../../../../agent-research/2611.27116-coevobench/">实现解读</a> · <a href="#qa-6d04695adf1b14e8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:coevobench" data-paper-title="CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems? Agent Zhejiang University / Alibaba Group / Shanghai Jiao Tong University 2026-11-20 CoEvoBench不是另一个固定自进化算法，而是测LLM researcher能否自主驱动模型权重和harness联合开发的benchmark。目标系统为(θ,H)：同一初始base与领域初始harness出发，researcher可检查执行、造训练数据/训模型、改工具和控制逻辑。开发后提交冻结的模型—harness对，在独立Test任务上执行。关键不是是否做过“诊断—训练—改代码”，而是先前反馈能否改变下一步干预和最终候选选择。 成本过高，不复现（审查 DONE）。deferred_high_cost / 资料收录，未实现、未运行；deferred_high_cost / 资料收录，未实现、未运行；成本过高，不复现（审查 DONE）。首发为2026-11-20，发现/审查为2026-11-23，不称11月23日新首发。本地只收录固定v1、代码提交、split/审计/成本契约与同主题比较；没有新建算法模块、可执行adapter、训练、researcher API调用或benchmark试跑。上游no-GPU toy researcher明确是生命周期fixture，不是自主科研Agent；  执行框架与自改进 coevobench Agent 运行流程与自进化：改的是哪一层 上游no-GPU toy跑通能算低成本RSI复现吗？ 不能。上游明确toy是生命周期fixture，只检查workspace、broker与退出；没有自主researcher、模型更新或真实held-out任务得分。本轮完整实验高成本终态，只做审查，不把fixture晋级。 教学例：定时器到期能清理容器是运维验收；researcher从负结果改路线并在独立Test改善才是该benchmark要测的能力。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-347758c75b29497c">上游no-GPU toy跑通能算低成本RSI复现吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acoevobench">CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · Zhejiang University / Alibaba Group / Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。上游明确toy是生命周期fixture，只检查workspace、broker与退出；没有自主researcher、模型更新或真实held-out任务得分。本轮完整实验高成本终态，只做审查，不把fixture晋级。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：定时器到期能清理容器是运维验收；researcher从负结果改路线并在独立Test改善才是该benchmark要测的能力。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27116v1">原论文</a> · <a href="../../../../agent-research/2611.27116-coevobench/">实现解读</a> · <a href="#qa-347758c75b29497c">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sage-evolve" data-paper-title="Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement Agent University of Science and Technology of China / Shanghai AI Laboratory 2026-11-19 AdaObs区分固定anchor目标和引导当前研究的active observation。每轮仍在固定anchor上验收；训练进展停滞时，先细分已有输出的错误诊断，再增加同任务的困难层，最后累计加入同能力方向的相关任务。它改变的是发现训练缺口的观察，不是为了提高分数而改评分器、换掉原目标或把测试答案放进训练。同一观测阶段内，边际收益按每新增1万条保留样本的分数变化计算，用α=0.3做EMA；最近3次平滑值全部严格小于0.1才判平台。更换观测必须清空该历史。 成本过高，不复现（审查 DONE）。可行性和语义诊断由调用方负责。component_only / L1 CPU机制组件，diagnostic_only=true。这是11月19日首发、11月20日公告的重叠池补漏，不算11月21日新论文。高成本完整实验不复现（审查 DONE），不是能力复现或已接入Evolve。本地只执行显式分数的增量验收、边际收益算术、EMA/平台判定、不可变观测结构、按L1→L2→L3选首个可行的显式提案、累计层/任务检查、具体gap配置负例过滤和参考通过率选层。首个MR初始化EMA，等分提案按输入顺序，是明确的本地确定性约定。MR函数要求正的显式保留样本数，拒绝0分母；  执行框架与自改进 sage-evolve Agent 运行流程与自进化：改的是哪一层 active observation变了，目标是不是也变了？ 不是。anchor是始终保留的验收目标；active只改变当前看哪些细分错误、难度或相关任务，帮助发现下一批训练增量。 教学例：原目标是长文问答，可新增8-needle诊断，但不能删除原题只报更容易题的分数。 2026-11-21">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-sage-evolve-26bc5688" class="ar-learning-paper-anchor"></span>

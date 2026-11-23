@@ -10,6 +10,9 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| data-and-budget | [CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency](2611.27119-ctrl/README.md) | The Hong Kong University of Science and Technology (Guangzhou)，2026-11-20 | 未发现官方代码 | 计划键 `ctrl`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| student-trajectory-distillation | [Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation](2611.27131-dwe/README.md) | University of Science and Technology of China，2026-11-20 | [原作者入口](https://github.com/dwe-lab/DWE)；已核实原作者仓库；固定提交481223f3704607b2c9cb21741bfd3fde8822299b，README声明Apache-2.0许可。仅阅读，未运行上游代码。 | `dwe`：仅低成本组件，完整实验不复现 |
+| policy-optimization | [How Far Does Lossless Re-tokenization Move an RLVR Update?](2611.27083-retokenization-update/README.md) | University of Maine at Presque Isle，2026-11-20 | 未发现官方代码 | `retokenization-update`：仅低成本组件，完整实验不复现 |
 | policy-optimization | [Decision-Focused Reinforcement Learning for LLM Post-Training](2611.25597-dfrl/README.md) | The University of Texas at Austin，2026-11-19 | 未发现官方代码 | `dfrl`：仅低成本组件，完整实验不复现 |
 | data-and-budget | [Policy Improvement-Guided Replay for Continual Reinforcement Learning](2611.25989-colir-replay/README.md) | Nanjing University of Aeronautics and Astronautics，2026-11-19 | 未发现官方代码 | `colir-replay`：仅低成本组件，完整实验不复现 |
 | policy-optimization | [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](2611.23750-led-edits/README.md) | Southern University of Science and Technology / Inclusion AI, Ant Group，2026-11-18 | 未发现官方代码 | `led-edits`：仅低成本组件，完整实验不复现 |

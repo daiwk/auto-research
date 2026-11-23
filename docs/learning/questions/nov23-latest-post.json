@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "post-training:dwe": {
+      "questions": [
+        {
+          "id": "nov23-basics",
+          "level": "basics",
+          "question": "为什么DWE要同时抽一个正坐标和一个负坐标？",
+          "answer": "softmax logit梯度和为零，正负质量相同。每对赋予+m与−m保留零和约束，在相同坐标预算下去掉IS随机正负数量分配的方差；不是简单保留top-k。",
+          "example": "教学例：g=(0.4,−0.3,−0.1)时m=0.4，每次正坐标固定为第1项，负坐标以0.75/0.25选择后两项，平均恢复g。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "nov23-mechanism",
+          "level": "mechanism",
+          "question": "几何顺序与分层quantile各解决什么问题？",
+          "answer": "固定PCA顺序让正负坐标在输出行投影上靠近，以减少Wᵀĝ误差；K个区间各取一个quantile减少抽样覆盖不均。正负CDF必须共用同一quantile，不能各自独立抽样还声称几何耦合。",
+          "example": "教学例：K=2时分别从(0,0.5)和(0.5,1)取样，每次用同一U查询正、负CDF；两个U独立，而同一对的两侧共享U。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "nov23-comparison",
+          "level": "comparison",
+          "question": "DWE与SimOPD都叫蒸馏改进，改变的是同一轴吗？",
+          "answer": "不是。SimOPD匹配回答关系分布，改变监督内容；DWE保持已有KL目标，只用无偏稀疏估计替换输出头反传。两者理论上可组合，但组件通过不证明联合LLM训练或能力收益。",
+          "example": "教学例：换成相似度bank的KL是换目标；同一token KL用8对坐标估计其梯度是换估计器。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "nov23-implementation",
+          "level": "implementation",
+          "question": "2.20×能否作为本地端到端OPD加速指标？",
+          "answer": "不能。它是作者输出头局部结果，作者端到端update平均只减少1.53%。本地仅CPU小矩阵完整公式、精确期望和chain-rule诊断，没有模型生成、GPU内核或吞吐实验。",
+          "example": "教学例：若生成与teacher backbone已占一半以上时间，即使某一反传子阶段加倍，也不会把整个update时间减半。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-23"
+        }
+      ]
+    },
+    "post-training:retokenization-update": {
+      "questions": [
+        {
+          "id": "nov23-basics",
+          "level": "basics",
+          "question": "文本与reward相同为什么更新仍会不同？",
+          "answer": "模型对token路径而不只对解码字符串分配概率。拆token改变访问prefix与score-gradient；固定reward和advantage不能固定该Jacobian。",
+          "example": "教学例：The与T、he解码相同，但logπ(The|prefix)和logπ(T|prefix)+logπ(he|prefix,T)的参数导数不必相同。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "nov23-mechanism",
+          "level": "mechanism",
+          "question": "tabular论证为什么必须保留未采样logit的完整梯度？",
+          "answer": "coarse步λ(e_ab−π)会移动所有未采样logit，使ba/bb的log比变化−λ[π(ba)−π(bb)]；fine没有访问b行，所以该条件比不变。只改sampled-logit会换成论文明确区分的较弱模拟器。",
+          "example": "教学例：π(ba)=0.3、π(bb)=0.4、λ=0.2时coarse log比增加0.02，fine增加0；这是计算出的机制差，不是LLM性能损失。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "nov23-comparison",
+          "level": "comparison",
+          "question": "RLOO消去共同常数是否也消去重分词漂移？",
+          "answer": "不会。DFRL的hindsight成本作为同实例常数在优势中抵消；重分词改变乘在优势上的score-gradient。奖励轴的抵消与参数化轴的不变性是两回事。",
+          "example": "教学例：同一优势1分别乘两个不同方向的score向量，结果仍不同；给两者reward同时减10不会让向量重合。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "nov23-implementation",
+          "level": "implementation",
+          "question": "为什么不能把两个tabular表直接拿来报告论文的R？",
+          "answer": "R要求canonical、re-encoded和不同batch更新处于同一参数空间，从同一checkpoint测量，并用距离均值之比。两种分词各自的tabular参数维数/语义不同，只能比较字符串分布；本地R工具不伪造真实LM更新。",
+          "example": "教学例：同范数反向更新的c=2，正交为√2；两个零更新的分母为0必须拒绝，而不是填0宣称无漂移。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-23"
+        }
+      ]
+    },
+    "post-training:ctrl": {
+      "questions": [
+        {
+          "id": "nov23-basics",
+          "level": "basics",
+          "question": "CTRL的共驻留为什么不等于只把两个进程放到同卡？",
+          "answer": "同卡resident只是内存布局，MPS才允许不同进程kernel真正并发；还需host optimizer、有限层窗口与不可变版本发布合同来容纳训练和rollout。",
+          "example": "教学例：关闭MPS后两个模型仍留在显存，但kernel轮流执行，不能把这叫训练与生成重叠加速。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "nov23-mechanism",
+          "level": "mechanism",
+          "question": "跨刷新续写时用最终版本记录staleness行吗？",
+          "answer": "不行。b(y)是最早behavior版本，已有token的采样logp也必须保留。训练ready batch后再等待publication gate，FIFO与warmup条件共同限制实际消费样本的陈旧度。",
+          "example": "教学例：响应先由v3写一半、再由v5续写，b(y)仍为3；把它改成5会少算两代陈旧度。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "nov23-comparison",
+          "level": "comparison",
+          "question": "CTRL能与CoLiR回放预算直接相乘算总加速吗？",
+          "answer": "不能。CoLiR改变保存与采样哪些历史prompt，CTRL改变训练和生成的硬件布局与publication。两者开销与瓶颈可能重叠，必须做真实联合系统对照；本轮两者组件都不提供这种证据。",
+          "example": "教学例：少生成一批响应后learner可能变成瓶颈，原先为长rollout找到的SM share未必仍最优。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "nov23-implementation",
+          "level": "implementation",
+          "question": "为什么本篇不提供CPU时序模拟作系统复现？",
+          "answer": "定义性成本来自CUDA MPS并发、流式权重、host传输和多GPU布局，CPU假时序不能验证它们。原文默认四卡和1–2TiB host RAM，远超可用单A100/A30或Mac，所以仅收录成本审查DONE，不下载或探跑。",
+          "example": "教学例：Table3的RTX4090 MBPP N=64共驻留只有split的0.86×；简单把两个时间取max会漏掉资源争用和布局不占优。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-23"
+        }
+      ]
+    }
+  }
+}

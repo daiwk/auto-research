@@ -7,7 +7,7 @@ hide:
 
 # 训练预算：改数据、改更新方向，还是改比较口径
 
-[基础模型](../index.md) · 更新 2026-11-18 · 36 篇主题资料 / 14 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-23 · 37 篇主题资料 / 15 篇重点对照
 
 同一预算内训练得更好，可能来自更合适的数据、逐样本处理、更有效更新或更低状态开销。DoReMi、Mixing Laws、DataOrchestra、Muon 和 ECO 改动不同环节；Muon Paired Budget 则提醒先冻结选参规则，再分别回答等数据和等时间问题。ProLand改变LoRA乘积空间的更新几何，GAVAGAI则给captioning增加显式词区域对齐目标，二者不能仅因都改善训练就混为一类。
 
@@ -39,6 +39,7 @@ hide:
 | [ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research](../../../foundation-models/2611.17332-archspace/README.md) · [原始来源](https://arxiv.org/abs/2611.17332v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 固定数据和tokenizer，用FLOPs/token、训练token数及LR/BS耦合曲面比较架构；最终衰减checkpoint和11域等权validation是比较协议的一部分。 | Data Mixing Laws改变域比例并从pilot拟合配比；ArchSpace控制架构规模与LR/BS。两类曲面系数不能交换，公开算术复算也不等于重新拟合或执行自动架构搜索。 |
 | [The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale](../../../foundation-models/2611.22947-lara-plus-plus/README.md) · [原始来源](https://arxiv.org/abs/2611.22947v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 本文重新核查核化attention的真实效率，并用确定性proposal均值代替随机采样、相似性聚类代替连续切块改善LARA质量。与复杂度口号不同，cluster数量随序列增长时k-center成本为二次；近softmax质量不等于比FlashAttention快。 | LazyFlash保持前向dense而稀疏反向；LARA++近似前向softmax并需要蒸馏适配。两者改变的计算与误差对象不同，不能都归纳成“线性attention更快”。 |
 | [Latent Feedback Is a Compute and Data Amplifier](../../../foundation-models/2611.20404-latent-feedback-scaling/README.md) · [原始来源](https://arxiv.org/abs/2611.20404v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | latent feedback把上一token的顶层状态注入下一token输入，花更多每token计算。本文不只在相同token数比较，而让普通Transformer把相同FLOPs用于更多epoch，并同时控制unique数据和模型规模。 | ArchSpace比较架构/超参的匹配预算曲面；本篇专门研究重复数据及feedback的额外计算。两种拟合系数不可交换，单独输出预测loss不等于已训练候选。 |
+| [Accelerating Muon with Spectral Residual Correction](../../../foundation-models/2611.27077-aimuon/README.md) · [原始来源](https://arxiv.org/abs/2611.27077v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 仅矩阵参数的函数式Algorithm1、NS5和20步合成二次矩阵损失autograd诊断。检查相同动量的步长匹配、c=0退回Muon、独立变换不等于预混合、零矩阵、转置和BF16溢出拒绝；没有语言模型预训练、FineWeb读取、超参数搜索或Evolve算子。CPU与真实A100三seed的指标是数值/机制诊断，不是模型能力比较。 | AF-Muon处理tied embedding上稀疏输入与稠密输出的冲突，以support/cap词表方向和一维RMS去掉AdamW；AIMuon改变的是矩阵参数的谱残差方向，不解决共享词表support问题，也不能自动替代AF-Muon全参数分工。相同步长只排除纯尺度效应，不保证新方向一定更优。 |
 
 </div>
 
@@ -97,6 +98,12 @@ LazyFlash保持前向dense而稀疏反向；LARA++近似前向softmax并需要�
 ArchSpace比较架构/超参的匹配预算曲面；本篇专门研究重复数据及feedback的额外计算。两种拟合系数不可交换，单独输出预测loss不等于已训练候选。 R<1时有效数据改为RU；R>=1时重复收益逐渐饱和。capacity multiplier与每token额外计算成本不同，loss预测依赖重新拟合和外推验证，不是重复token越多越省的无条件结论。
 
 对照来源：[latent-feedback-scaling](../../../foundation-models/2611.20404-latent-feedback-scaling/README.md) · [archspace](../../../foundation-models/2611.17332-archspace/README.md)
+
+### AIMuon能替代AF-Muon的tied embedding处理吗？
+
+AF-Muon处理tied embedding上稀疏输入与稠密输出的冲突，以support/cap词表方向和一维RMS去掉AdamW；AIMuon改变的是矩阵参数的谱残差方向，不解决共享词表support问题，也不能自动替代AF-Muon全参数分工。相同步长只排除纯尺度效应，不保证新方向一定更优。
+
+对照来源：[aimuon](../../../foundation-models/2611.27077-aimuon/README.md) · [af-muon](../../../foundation-models/2610.01395-af-muon/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -202,9 +209,23 @@ ArchSpace比较架构/超参的匹配预算曲面；本篇专门研究重复数�
 
     对照来源：[latent-feedback-scaling](../../../foundation-models/2611.20404-latent-feedback-scaling/README.md) · [archspace](../../../foundation-models/2611.17332-archspace/README.md)
 
+### AIMuon能替代AF-Muon的tied embedding处理吗？ {#cross-nov23-aimuon}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能直接推断。AF-Muon管词表support/cap及向量更新；AIMuon只定义矩阵谱残差。组合需要明确参数分工和真实验证。
+
+    **教学例子：** 教学例：一个训练step中只出现两个词，词表输入梯度稀疏；矩阵残差修正不会自动给未出现词定义support约束。
+
+    对照来源：[aimuon](../../../foundation-models/2611.27077-aimuon/README.md) · [af-muon](../../../foundation-models/2610.01395-af-muon/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-23** · 仅矩阵参数的函数式Algorithm1、NS5和20步合成二次矩阵损失autograd诊断。检查相同动量的步长匹配、c=0退回Muon、独立变换不等于预混合、零矩阵、转置和BF16溢出拒绝；没有语言模型预训练、FineWeb读取、超参数搜索或Evolve算子。CPU与真实A100三seed的指标是数值/机制诊断，不是模型能力比较。
+
+涉及：[aimuon](../../../foundation-models/2611.27077-aimuon/README.md) · [af-muon](../../../foundation-models/2610.01395-af-muon/README.md)
 
 **2026-11-18** · ArchSpace比较架构/超参的匹配预算曲面；本篇专门研究重复数据及feedback的额外计算。两种拟合系数不可交换，单独输出预测loss不等于已训练候选。 本地边界与完整高成本不复现分别记录。
 
@@ -238,7 +259,7 @@ ArchSpace比较架构/超参的匹配预算曲面；本篇专门研究重复数�
 
 覆盖 28 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 36 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 37 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -278,6 +299,7 @@ ArchSpace比较架构/超参的匹配预算曲面；本篇专门研究重复数�
 - [ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research](../../../foundation-models/2611.17332-archspace/README.md)
 - [The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale](../../../foundation-models/2611.22947-lara-plus-plus/README.md)
 - [Latent Feedback Is a Compute and Data Amplifier](../../../foundation-models/2611.20404-latent-feedback-scaling/README.md)
+- [Accelerating Muon with Spectral Residual Correction](../../../foundation-models/2611.27077-aimuon/README.md)
 
 </details>
 

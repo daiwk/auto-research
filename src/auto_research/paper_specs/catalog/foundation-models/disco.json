@@ -1,0 +1,62 @@
+{
+  "domain": "foundation-models",
+  "key": "disco",
+  "title": "Reliable Behavior Discovery via False Discovery Rate Control",
+  "paper_url": "https://arxiv.org/abs/2611.27104v1",
+  "reviewed_version_url": "https://arxiv.org/pdf/2611.27104v1",
+  "reviewed_version": "v1",
+  "published": "2026-11-20",
+  "published_at": "2026-11-20T04:25:13Z",
+  "announced_on": null,
+  "detail_path": "foundation-models/2611.27104-disco/README.md",
+  "topic": [
+    "评测与可靠性",
+    "行为发现与错误发现率控制"
+  ],
+  "first_author": "David Madras",
+  "first_author_affiliation": "Google DeepMind",
+  "affiliation_evidence": "Fixed-v1 PDF first-page byline: all six authors have affiliation1, Google DeepMind.",
+  "verified_priority_organizations": [
+    "Google DeepMind"
+  ],
+  "code": "https://github.com/google-deepmind/disco",
+  "code_status": "论文声明源码位于google-deepmind/disco，但2026-11-23官方GitHub入口HTTP404；可访问代码及commit未核实，不能据此断言作者未发布。",
+  "code_license": null,
+  "upstream_revision": null,
+  "method_source_sha256": "09c96036b297ca9313645025a24c8f8b0ee1a5dccf1a4acc55449f65e61ffa22",
+  "adapter": null,
+  "priority": "P0",
+  "intake_class": "new_first_release_in_window",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "local_operator": "auto_research.foundation_models.disco.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.disco import diagnostic; print(diagnostic(42))'",
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "gpu_validation_artifact": null,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/pdf/2611.27104v1",
+    "sections": [
+      "5",
+      "6",
+      "K",
+      "L.1-L.2"
+    ],
+    "available_resource": "one A100 or A30, or local Mac",
+    "paper_configuration": "Appendix L Tables12-13: 900/600/400/400/400 discovery queries per method across five tasks, plus100 independent verification queries per candidate, with proprietary text/image models. Appendix K adds200 hyperparameter runs per method and1000 fresh-seed runs. Full multi-model/API campaign not attempted; local three-seed scalar component budget below10seconds is an estimate, no data/checkpoint/API downloads.",
+    "estimated_cost_basis": "Read-only fixed-v1 configuration; no full-model campaign or API probe attempted.",
+    "decision": "成本过高，不复现（审查 DONE）；仅验收低成本CPU统计组件"
+  },
+  "summary": "DISCO以冻结e-process与粗分箱选择接口控制行为发现集合的FDR，允许最终使用实际假设数；本地仅有未boosted二分箱统计核心。 CPU-only unboosted binary-bin Algorithm2, exact finite-null path enumeration and Theorems1/2; no models, datasets, LLM discovery/judging, three-bin boosting or capability evidence.",
+  "discovered_on": "2026-11-23",
+  "reviewed_on": "2026-11-23"
+}

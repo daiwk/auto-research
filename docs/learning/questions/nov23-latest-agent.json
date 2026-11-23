@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "agent-research:acting-to-learning": {
+      "questions": [
+        {
+          "id": "success-vs-learning",
+          "level": "basics",
+          "question": "既然记录都成功，为什么还要选择？",
+          "answer": "成功只说明当时动作完成了任务；重复、容易预测的记录未必补上学生缺口。论文在固定经验池与训练预算下比较选择规则，而不把采集成功率当学生学习收益。",
+          "example": "教学例：重复100次熟悉的拿杯子动作，可能不如补一条学生缺失的清洁动作；这只是示意，不是本文测量。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "checkpoint-before-family",
+          "level": "mechanism",
+          "question": "为什么不能每个checkpoint先挑最高family再平均？",
+          "answer": "原公式先对同一family跨checkpoint累积，再取family最大值；反过来会把不同时间各自最有利的family拼成不存在的一致相关性。",
+          "example": "教学例：family A在两个checkpoint为1和-1，B为-1和1；正确分数是0，逐checkpoint取max却会得到1。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "ace-selection-space",
+          "level": "comparison",
+          "question": "与ACE Lens相比，本篇额外控制了什么？",
+          "answer": "ACE组织数据可信度、复杂度和覆盖；本篇把排序规则与选择空间分开，global random和global high-NLL也可自由改变coverage，避免把自由度差异误算成gradient优势。",
+          "example": "教学例：如果gradient可跨任务挑256条，random也应能跨任务挑256条；不能只给random固定旧任务配额。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "cold-start-no-query",
+          "level": "implementation",
+          "question": "打分warmup权重能作为最终学生起点吗？",
+          "answer": "不能在复刻该协议时这样做。warmup只提供feature，最终学生从原base和新LoRA重新开始；公开support action不等于评测query答案，后者不能进入打分器。",
+          "example": "教学例：先在4个warmup checkpoint算score，选择内容后丢弃warmup adapter，再按相同初始化训练各selector。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-23"
+        }
+      ]
+    },
+    "agent-research:r2-tool-redundancy": {
+      "questions": [
+        {
+          "id": "less-calls-not-capability",
+          "level": "basics",
+          "question": "工具调用越少就越好，为什么不直接奖励少调用？",
+          "answer": "失败轨迹也可能一次工具都没用。R²先保留正确性监督，再只在同题正确轨迹中比较成本；少调用本身不证明能解决任务或会用工具。",
+          "example": "教学例：一条答错但0调用、两条答对分别1/3调用；效率奖励只能比较后两条，不能给答错轨迹加分。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "same-reasoning-vfd",
+          "level": "mechanism",
+          "question": "VFD为什么固定同一段后续推理，不重新生成？",
+          "answer": "它比较当前观察对已经生成的同一文本提供的额外似然支持，避免把随机重生成的文字差异混进来；只替换当前反馈，其他历史仍保留。低VFD是冗余信号，不是因果必要性证明。",
+          "example": "教学例：原crop和随机crop都让同一推理段log概率为-0.4，则VFD为0；不能把不同答案的概率相减冒充该指标。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "adastep-vs-vfd",
+          "level": "comparison",
+          "question": "R²与AdaStep都是credit方法，能交换统计量吗？",
+          "answer": "不能。AdaStep从同状态动作组的回报方差估计局部信用可靠性；R²用当前视觉反馈的同文本似然差估计冗余成本，再只在correct集合内比较。它们条件信息与归一化对象不同。",
+          "example": "教学例：重复crop可能VFD接近0，但动作后环境回报很稳定；稳定不等于观察不冗余。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "missing-score-vs-ineligible",
+          "level": "implementation",
+          "question": "score缺失和没有eligible调用可以都记0吗？",
+          "answer": "不可以。附录C.3规定：记录完整但score不可用的抽中eligible调用记z=1；空eligible集合才冗余成本为0。失败/记录不完整调用先排除，不应伪装成缺失score的完整调用。",
+          "example": "教学例：3个eligible里抽到一个None，估计冗余数为3；如果3次调用全部无有效crop，eligible为空，冗余项才为0。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-23"
+        }
+      ]
+    },
+    "agent-research:coevobench": {
+      "questions": [
+        {
+          "id": "benchmark-not-algorithm",
+          "level": "basics",
+          "question": "CoEvoBench本身是一套自动自进化算法吗？",
+          "answer": "不是。它提供共同起点、可修改模型/harness的动作空间、预算和隔离评价，测researcher如何根据反馈决定下一步；不同被测researcher可走不同开发路线。",
+          "example": "教学例：一个researcher只修格式接口后提交base，另一个先改工具再训模型，都可在同一协议下评价，而不是强制轮流训练/改代码。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "coupled-levers",
+          "level": "mechanism",
+          "question": "为什么不能把模型收益与Harness收益简单相加？",
+          "answer": "模型是在特定harness轨迹上学到行为的。换接口、history或工具后，原训练权重的收益可能反转；必须交叉评价同一权重/不同harness与同一harness/不同权重。",
+          "example": "教学例：旧harness下训练比base多解5题，换harness后少解4题；重新收集新harness轨迹再训才恢复正收益。数字是论文case，不是本地实验。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "adaobs-vs-benchmark",
+          "level": "comparison",
+          "question": "与Sage-Evolve相比，CoEvoBench把什么交给researcher？",
+          "answer": "Sage给出固定anchor/自适应active observation的具体策略；CoEvo给出有保护的开发与最终评测协议，让researcher自己决定改权重还是改harness。前者是策略，后者是测决策的benchmark。",
+          "example": "教学例：按长度细分失败是Sage式观察改变；在CoEvo里研究者还要判断该修parser、重训还是放弃训练路线。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-23"
+        },
+        {
+          "id": "toy-not-rsi",
+          "level": "implementation",
+          "question": "上游no-GPU toy跑通能算低成本RSI复现吗？",
+          "answer": "不能。上游明确toy是生命周期fixture，只检查workspace、broker与退出；没有自主researcher、模型更新或真实held-out任务得分。本轮完整实验高成本终态，只做审查，不把fixture晋级。",
+          "example": "教学例：定时器到期能清理容器是运维验收；researcher从负结果改路线并在独立Test改善才是该benchmark要测的能力。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-23"
+        }
+      ]
+    }
+  }
+}

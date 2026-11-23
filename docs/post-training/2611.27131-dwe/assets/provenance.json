@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/html/2611.27131v1",
+  "source_url": "https://arxiv.org/html/2611.27131v1/dwe-mechanism.svg",
+  "figure": "Figure 1",
+  "caption": "Figure 1: paired gradient construction, fixed geometric order, stratified shared quantiles and sparse backpropagation.",
+  "source_sha256": "ac3d0498263b17ddb1bc7fc6e8b310399b16513b0d47185451fa57ba1c857702",
+  "asset_sha256": "113e4e054c4e463901b86e72b7af0abc5d3ae35217a20926f95bf61bff4eed4c",
+  "image_sha256": "113e4e054c4e463901b86e72b7af0abc5d3ae35217a20926f95bf61bff4eed4c",
+  "visually_reviewed": true,
+  "scientific_content_modified": false,
+  "transformation": "Original SVG retained; PNG rasterization via PyMuPDF at scale2",
+  "copyright": "Copyright remains with original authors; original figure with attribution."
+}

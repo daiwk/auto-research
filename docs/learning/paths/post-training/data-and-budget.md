@@ -7,7 +7,7 @@ hide:
 
 # 数据与预算：下一份算力花在哪里
 
-[LLM 后训练](index.md) / 168 个问题 · 42 篇论文
+[LLM 后训练](index.md) / 172 个问题 · 43 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">168 个问题 · 42 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">172 个问题 · 43 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ctrl" data-paper-title="CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency LLM 后训练 The Hong Kong University of Science and Technology (Guangzhou) 2026-11-20 CTRL让每张GPU同时驻留learner rank和持续rollout shard，在CUDA MPS下共享SM。为腾出显存，优化器和immutable policy版本保存在host，learner仅流式装入有限层窗口。训练ready batch后才在发布前等待到期cohort，避免先暴露全部rollout tail；更新完成和对rollout发布是两个事件。刷新时保留partial响应、旧采样logp及最早behavior版本。 成本过高，不复现（审查 DONE）。未运行本论文实验，无本地metrics；仅收录、无本地系统实现、无CUDA验收；成本过高，不复现（审查 DONE）。完整实验成本过高，不复现（审查 DONE）；不自动重试。本篇仅收录和成本审查：没有本地CTRL实现、CUDA路径、benchmark、指标回执或Evolve算子。未将paper公式或CPU时序fixture宣传为CUDA共驻留系统。保存固定版本事实、机制、原图及失败/不占优条件，不生成伪实验metrics。  data-and-budget 系统成本审查 LLM 后训练 数据与预算：下一份算力花在哪里 CTRL的共驻留为什么不等于只把两个进程放到同卡？ 同卡resident只是内存布局，MPS才允许不同进程kernel真正并发；还需host optimizer、有限层窗口与不可变版本发布合同来容纳训练和rollout。 教学例：关闭MPS后两个模型仍留在显存，但kernel轮流执行，不能把这叫训练与生成重叠加速。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<span id="paper-post-training-ctrl-c3948efb" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-21ad6418b6b091de">CTRL的共驻留为什么不等于只把两个进程放到同卡？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Actrl">CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · The Hong Kong University of Science and Technology (Guangzhou)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>同卡resident只是内存布局，MPS才允许不同进程kernel真正并发；还需host optimizer、有限层窗口与不可变版本发布合同来容纳训练和rollout。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：关闭MPS后两个模型仍留在显存，但kernel轮流执行，不能把这叫训练与生成重叠加速。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27119v1">原论文</a> · <a href="../../../../post-training/2611.27119-ctrl/">实现解读</a> · <a href="#qa-21ad6418b6b091de">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ctrl" data-paper-title="CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency LLM 后训练 The Hong Kong University of Science and Technology (Guangzhou) 2026-11-20 CTRL让每张GPU同时驻留learner rank和持续rollout shard，在CUDA MPS下共享SM。为腾出显存，优化器和immutable policy版本保存在host，learner仅流式装入有限层窗口。训练ready batch后才在发布前等待到期cohort，避免先暴露全部rollout tail；更新完成和对rollout发布是两个事件。刷新时保留partial响应、旧采样logp及最早behavior版本。 成本过高，不复现（审查 DONE）。未运行本论文实验，无本地metrics；仅收录、无本地系统实现、无CUDA验收；成本过高，不复现（审查 DONE）。完整实验成本过高，不复现（审查 DONE）；不自动重试。本篇仅收录和成本审查：没有本地CTRL实现、CUDA路径、benchmark、指标回执或Evolve算子。未将paper公式或CPU时序fixture宣传为CUDA共驻留系统。保存固定版本事实、机制、原图及失败/不占优条件，不生成伪实验metrics。  data-and-budget 系统成本审查 LLM 后训练 数据与预算：下一份算力花在哪里 跨刷新续写时用最终版本记录staleness行吗？ 不行。b(y)是最早behavior版本，已有token的采样logp也必须保留。训练ready batch后再等待publication gate，FIFO与warmup条件共同限制实际消费样本的陈旧度。 教学例：响应先由v3写一半、再由v5续写，b(y)仍为3；把它改成5会少算两代陈旧度。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-9e13ced7a4b28b59">跨刷新续写时用最终版本记录staleness行吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Actrl">CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · The Hong Kong University of Science and Technology (Guangzhou)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不行。b(y)是最早behavior版本，已有token的采样logp也必须保留。训练ready batch后再等待publication gate，FIFO与warmup条件共同限制实际消费样本的陈旧度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：响应先由v3写一半、再由v5续写，b(y)仍为3；把它改成5会少算两代陈旧度。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27119v1">原论文</a> · <a href="../../../../post-training/2611.27119-ctrl/">实现解读</a> · <a href="#qa-9e13ced7a4b28b59">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ctrl" data-paper-title="CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency LLM 后训练 The Hong Kong University of Science and Technology (Guangzhou) 2026-11-20 CTRL让每张GPU同时驻留learner rank和持续rollout shard，在CUDA MPS下共享SM。为腾出显存，优化器和immutable policy版本保存在host，learner仅流式装入有限层窗口。训练ready batch后才在发布前等待到期cohort，避免先暴露全部rollout tail；更新完成和对rollout发布是两个事件。刷新时保留partial响应、旧采样logp及最早behavior版本。 成本过高，不复现（审查 DONE）。未运行本论文实验，无本地metrics；仅收录、无本地系统实现、无CUDA验收；成本过高，不复现（审查 DONE）。完整实验成本过高，不复现（审查 DONE）；不自动重试。本篇仅收录和成本审查：没有本地CTRL实现、CUDA路径、benchmark、指标回执或Evolve算子。未将paper公式或CPU时序fixture宣传为CUDA共驻留系统。保存固定版本事实、机制、原图及失败/不占优条件，不生成伪实验metrics。  data-and-budget 系统成本审查 LLM 后训练 数据与预算：下一份算力花在哪里 CTRL能与CoLiR回放预算直接相乘算总加速吗？ 不能。CoLiR改变保存与采样哪些历史prompt，CTRL改变训练和生成的硬件布局与publication。两者开销与瓶颈可能重叠，必须做真实联合系统对照；本轮两者组件都不提供这种证据。 教学例：少生成一批响应后learner可能变成瓶颈，原先为长rollout找到的SM share未必仍最优。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-c0b33386ca07a5ac">CTRL能与CoLiR回放预算直接相乘算总加速吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Actrl">CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · The Hong Kong University of Science and Technology (Guangzhou)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。CoLiR改变保存与采样哪些历史prompt，CTRL改变训练和生成的硬件布局与publication。两者开销与瓶颈可能重叠，必须做真实联合系统对照；本轮两者组件都不提供这种证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：少生成一批响应后learner可能变成瓶颈，原先为长rollout找到的SM share未必仍最优。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27119v1">原论文</a> · <a href="../../../../post-training/2611.27119-ctrl/">实现解读</a> · <a href="#qa-c0b33386ca07a5ac">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ctrl" data-paper-title="CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency LLM 后训练 The Hong Kong University of Science and Technology (Guangzhou) 2026-11-20 CTRL让每张GPU同时驻留learner rank和持续rollout shard，在CUDA MPS下共享SM。为腾出显存，优化器和immutable policy版本保存在host，learner仅流式装入有限层窗口。训练ready batch后才在发布前等待到期cohort，避免先暴露全部rollout tail；更新完成和对rollout发布是两个事件。刷新时保留partial响应、旧采样logp及最早behavior版本。 成本过高，不复现（审查 DONE）。未运行本论文实验，无本地metrics；仅收录、无本地系统实现、无CUDA验收；成本过高，不复现（审查 DONE）。完整实验成本过高，不复现（审查 DONE）；不自动重试。本篇仅收录和成本审查：没有本地CTRL实现、CUDA路径、benchmark、指标回执或Evolve算子。未将paper公式或CPU时序fixture宣传为CUDA共驻留系统。保存固定版本事实、机制、原图及失败/不占优条件，不生成伪实验metrics。  data-and-budget 系统成本审查 LLM 后训练 数据与预算：下一份算力花在哪里 为什么本篇不提供CPU时序模拟作系统复现？ 定义性成本来自CUDA MPS并发、流式权重、host传输和多GPU布局，CPU假时序不能验证它们。原文默认四卡和1–2TiB host RAM，远超可用单A100/A30或Mac，所以仅收录成本审查DONE，不下载或探跑。 教学例：Table3的RTX4090 MBPP N=64共驻留只有split的0.86×；简单把两个时间取max会漏掉资源争用和布局不占优。 2026-11-23">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-bc1a10948d937be0">为什么本篇不提供CPU时序模拟作系统复现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Actrl">CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-23 · The Hong Kong University of Science and Technology (Guangzhou)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>定义性成本来自CUDA MPS并发、流式权重、host传输和多GPU布局，CPU假时序不能验证它们。原文默认四卡和1–2TiB host RAM，远超可用单A100/A30或Mac，所以仅收录成本审查DONE，不下载或探跑。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Table3的RTX4090 MBPP N=64共驻留只有split的0.86×；简单把两个时间取max会漏掉资源争用和布局不占优。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.27119v1">原论文</a> · <a href="../../../../post-training/2611.27119-ctrl/">实现解读</a> · <a href="#qa-bc1a10948d937be0">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:colir-replay" data-paper-title="Policy Improvement-Guided Replay for Continual Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="Policy Improvement-Guided Replay for Continual Reinforcement Learning LLM 后训练 Nanjing University of Aeronautics and Astronautics 2026-11-19 持续RL不应只保存旧模型的输出：新策略仍需在历史任务分布上重新行动。CoLiR在任务结束时复用已有rollout，分别取最终策略生成的正确响应和初始策略生成的错误响应；各自补算另一策略的序列log-likelihood，以正确响应被强化和错误响应被压低两个半权重均值排序prompt。不是按答案长度平均，也不是只看正确率提升。仅保留最终组有对有错、且初始组至少有一条错误响应的prompt，每个历史任务最多80条。以后对历史任务均匀分配回放，再由当前策略重新生成响应；不是直接重放旧响应。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。显式缓存的四组cross-policy序列log-likelihood、候选资格、每任务top-B、任务均匀/任务内均匀抽样和回放KL token门控。保留精确并列时的输入顺序；跨任务抽样本组件显式用有放回策略，论文未指定替换规则。没有VLM评分器、MRCL训练器、GSPO更新或能力评测，不能称为Evolve已接入。  data-and-budget 后训练算法组件 LLM 后训练 数据与预算：下一份算力花在哪里 CoLiR回放的是旧答案吗？ 不是。旧响应只用于任务边界的对比分数；记忆存prompt，新任务训练中由当前策略对这些prompt重新采样。 教学例：保存一道导航题，不把旧模型的一条路径当新策略的固定答案；新策略仍必须自己生成路径。 2026-11-20">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
 <span id="paper-post-training-colir-replay-61799d0c" class="ar-learning-paper-anchor"></span>

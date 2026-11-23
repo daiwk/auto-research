@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "proposals": [
+    {
+      "paper": "foundation-models:aimuon",
+      "target_card": "foundation-models/training-budget",
+      "source_revisions": {
+        "foundation-models:aimuon": "dec9b4992d9408a7f103ac077db88f861e82b84c3df80684f4e96154645ca5bf",
+        "foundation-models:af-muon": "eff4e72c1ef53b275691373df114f5a6beb42bdf5cc0c140192bd863ebaf7fd9"
+      },
+      "comparison": {
+        "position": "仅矩阵参数的函数式Algorithm1、NS5和20步合成二次矩阵损失autograd诊断。检查相同动量的步长匹配、c=0退回Muon、独立变换不等于预混合、零矩阵、转置和BF16溢出拒绝；没有语言模型预训练、FineWeb读取、超参数搜索或Evolve算子。CPU与真实A100三seed的指标是数值/机制诊断，不是模型能力比较。",
+        "tradeoff": "AF-Muon处理tied embedding上稀疏输入与稠密输出的冲突，以support/cap词表方向和一维RMS去掉AdamW；AIMuon改变的是矩阵参数的谱残差方向，不解决共享词表support问题，也不能自动替代AF-Muon全参数分工。相同步长只排除纯尺度效应，不保证新方向一定更优。",
+        "sections": [
+          "背景与主要改动",
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "AIMuon能替代AF-Muon的tied embedding处理吗？",
+        "body": "AF-Muon处理tied embedding上稀疏输入与稠密输出的冲突，以support/cap词表方向和一维RMS去掉AdamW；AIMuon改变的是矩阵参数的谱残差方向，不解决共享词表support问题，也不能自动替代AF-Muon全参数分工。相同步长只排除纯尺度效应，不保证新方向一定更优。",
+        "papers": [
+          "foundation-models:aimuon",
+          "foundation-models:af-muon"
+        ]
+      },
+      "question": {
+        "id": "nov23-aimuon",
+        "question": "AIMuon能替代AF-Muon的tied embedding处理吗？",
+        "answer": "不能直接推断。AF-Muon管词表support/cap及向量更新；AIMuon只定义矩阵谱残差。组合需要明确参数分工和真实验证。",
+        "example": "教学例：一个训练step中只出现两个词，词表输入梯度稀疏；矩阵残差修正不会自动给未出现词定义support约束。",
+        "papers": [
+          "foundation-models:aimuon",
+          "foundation-models:af-muon"
+        ]
+      },
+      "update": {
+        "date": "2026-11-23",
+        "papers": [
+          "foundation-models:aimuon",
+          "foundation-models:af-muon"
+        ],
+        "summary": "仅矩阵参数的函数式Algorithm1、NS5和20步合成二次矩阵损失autograd诊断。检查相同动量的步长匹配、c=0退回Muon、独立变换不等于预混合、零矩阵、转置和BF16溢出拒绝；没有语言模型预训练、FineWeb读取、超参数搜索或Evolve算子。CPU与真实A100三seed的指标是数值/机制诊断，不是模型能力比较。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Only the functional matrix-parameter Algorithm1, NS5, and a20-step synthetic quadratic-matrix autograd diagnostic are implemented. Controls cover same-momentum magnitude matching, c=0 recovery of Muon, separate-versus-premixed transforms, zeros, transposition and BF16 overflow rejection. There is no LM pretraining, FineWeb reader, hyperparameter search or Evolve operator. CPU and real-A100 three-seed evidence is numerical/mechanism diagnosis, not a model capability comparison.",
+          "tradeoff": "AF-Muon addresses sparse-input/dense-output conflicts in tied embeddings through vocabulary support/cap directions and vector RMS updates without AdamW. AIMuon instead changes matrix spectral residual directions; it does not solve vocabulary support or replace AF-Muon's parameter partition. Matching magnitude removes a pure-scale explanation but does not guarantee a better direction."
+        },
+        "analysis": {
+          "title": "Does AIMuon replace AF-Muon's tied-embedding treatment?",
+          "body": "AF-Muon addresses sparse-input/dense-output conflicts in tied embeddings through vocabulary support/cap directions and vector RMS updates without AdamW. AIMuon instead changes matrix spectral residual directions; it does not solve vocabulary support or replace AF-Muon's parameter partition. Matching magnitude removes a pure-scale explanation but does not guarantee a better direction."
+        },
+        "question": {
+          "question": "Does AIMuon replace AF-Muon's tied-embedding treatment?",
+          "answer": "Not by itself. AF-Muon handles vocabulary support/caps and vector updates; AIMuon defines matrix spectral residuals. Combining them needs an explicit parameter partition and real verification.",
+          "example": "Teaching example: if a step contains two vocabulary entries, a spectral residual does not automatically define support constraints for unseen entries."
+        },
+        "update": "Only the functional matrix-parameter Algorithm1, NS5, and a20-step synthetic quadratic-matrix autograd diagnostic are implemented. Controls cover same-momentum magnitude matching, c=0 recovery of Muon, separate-versus-premixed transforms, zeros, transposition and BF16 overflow rejection. There is no LM pretraining, FineWeb reader, hyperparameter search or Evolve operator. CPU and real-A100 three-seed evidence is numerical/mechanism diagnosis, not a model capability comparison."
+      }
+    },
+    {
+      "paper": "foundation-models:spot-bench",
+      "target_card": "foundation-models/evaluation-and-evidence",
+      "source_revisions": {
+        "foundation-models:spot-bench": "288a15162e800fa0dc10d1bb27c69c97d66b39cf07cff0a099b2effa9fe63950",
+        "foundation-models:e-rwsc": "6f7990a337b89868094a0642455db0f632db53c314f586f5bb8d5bd885496a30"
+      },
+      "comparison": {
+        "position": "纯CPU、stdlib的非对称timeliness、按原时间索引语义矩阵、开放slot逐时吸收与K关闭、加权P/R/F1。合成trace负控包括错误语义、空输出、7次重复超过K=5、多slot重叠和早晚惩罚；完美合成trace得1只是定义检查，不是任何Agent能力。无Ctrl-SPOT的持久query/CPU-GPU KV/检索/总结，无视频、LLM或付费judge调用，不接Evolve晋级。",
+        "tradeoff": "e-RWSC依据固定政策iid答案流，检验的是多数占优而非答案真实正确；SPOT的slot则用评测gold时间和显式语义匹配计及时性，不提供在线显著性证书。两者都可在输入完美时给出漂亮数值，但一个是采样分布假设下的停止证据，一个是给定trace的离线计分，不能混作模型能力。",
+        "sections": [
+          "背景与主要改动",
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "T-F1=1是否像e-RWSC证书一样有统计保证？",
+        "body": "e-RWSC依据固定政策iid答案流，检验的是多数占优而非答案真实正确；SPOT的slot则用评测gold时间和显式语义匹配计及时性，不提供在线显著性证书。两者都可在输入完美时给出漂亮数值，但一个是采样分布假设下的停止证据，一个是给定trace的离线计分，不能混作模型能力。",
+        "papers": [
+          "foundation-models:spot-bench",
+          "foundation-models:e-rwsc"
+        ]
+      },
+      "question": {
+        "id": "nov23-spot-bench",
+        "question": "T-F1=1是否像e-RWSC证书一样有统计保证？",
+        "answer": "不是。T-F1只是给定trace/标注/语义匹配的离线分数。e-RWSC也只在固定政策iid假设下证明多数占优，不证明真实正确。",
+        "example": "教学例：手工给一个正确时刻和True语义标签就可得1；这没有执行任何视觉模型，也不是Agent能力。",
+        "papers": [
+          "foundation-models:spot-bench",
+          "foundation-models:e-rwsc"
+        ]
+      },
+      "update": {
+        "date": "2026-11-23",
+        "papers": [
+          "foundation-models:spot-bench",
+          "foundation-models:e-rwsc"
+        ],
+        "summary": "纯CPU、stdlib的非对称timeliness、按原时间索引语义矩阵、开放slot逐时吸收与K关闭、加权P/R/F1。合成trace负控包括错误语义、空输出、7次重复超过K=5、多slot重叠和早晚惩罚；完美合成trace得1只是定义检查，不是任何Agent能力。无Ctrl-SPOT的持久query/CPU-GPU KV/检索/总结，无视频、LLM或付费judge调用，不接Evolve晋级。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Pure-CPU standard-library asymmetric timeliness, semantic matrices indexed by original predictions, chronological open-slot absorption and K-closing, and weighted precision/recall/F1. Synthetic controls cover wrong semantics, no outputs, seven repeats exceeding K=5, overlapping slots and asymmetric penalties. A perfect synthetic trace scoring1 checks a definition, not agent capability. Persistent queries, CPU/GPU KV, retrieval and summaries of Ctrl-SPOT are absent, as are video, LLM and paid-judge calls or Evolve promotion.",
+          "tradeoff": "e-RWSC assumes iid responses from a fixed policy and certifies majority dominance rather than truth. SPOT slots use gold evaluation times and explicit semantic matches to score timeliness, without an online significance certificate. Both can produce attractive values on ideal inputs, but one is stopping evidence under sampling assumptions and the other offline scoring of supplied traces; neither may be conflated with model capability."
+        },
+        "analysis": {
+          "title": "Does T-F1=1 carry an e-RWSC-like statistical guarantee?",
+          "body": "e-RWSC assumes iid responses from a fixed policy and certifies majority dominance rather than truth. SPOT slots use gold evaluation times and explicit semantic matches to score timeliness, without an online significance certificate. Both can produce attractive values on ideal inputs, but one is stopping evidence under sampling assumptions and the other offline scoring of supplied traces; neither may be conflated with model capability."
+        },
+        "question": {
+          "question": "Does T-F1=1 carry an e-RWSC-like statistical guarantee?",
+          "answer": "No. T-F1 is offline scoring of supplied traces, annotations and semantic matches. e-RWSC itself certifies only majority dominance under fixed-policy iid assumptions, not truth.",
+          "example": "Teaching example: a hand-authored timestamp and True semantic label can score1 without running a vision model or demonstrating agent capability."
+        },
+        "update": "Pure-CPU standard-library asymmetric timeliness, semantic matrices indexed by original predictions, chronological open-slot absorption and K-closing, and weighted precision/recall/F1. Synthetic controls cover wrong semantics, no outputs, seven repeats exceeding K=5, overlapping slots and asymmetric penalties. A perfect synthetic trace scoring1 checks a definition, not agent capability. Persistent queries, CPU/GPU KV, retrieval and summaries of Ctrl-SPOT are absent, as are video, LLM and paid-judge calls or Evolve promotion."
+      }
+    }
+  ]
+}

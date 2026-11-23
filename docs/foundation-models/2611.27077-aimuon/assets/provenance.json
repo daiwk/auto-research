@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/html/2611.27077v1",
+  "source_url": "https://arxiv.org/pdf/2611.27077v1#page=6",
+  "source_sha256": "bc8e6f4ba2f1f7101d9694b0cf4b0057122a010e85b9e005216589a6d3577291",
+  "pdf_page": 6,
+  "figure": "Algorithm 1",
+  "caption": "AIMuon: EMA momentum, independently transformed gradient residual, nuclear-norm weighting and Muon-matched update magnitude.",
+  "crop_pdf_points": [
+    105,
+    45,
+    510,
+    295
+  ],
+  "render_scale": 2,
+  "asset_sha256": "7a0f5f0d6b000a0d60da9d7e15cf5f4f406fe1f411839df6e6c83dd7782c46f6",
+  "visually_reviewed": true,
+  "scientific_content_modified": false,
+  "copyright": "Original authors; attributed original screenshot."
+}

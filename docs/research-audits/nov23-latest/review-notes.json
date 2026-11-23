@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "method_review_is_not_capability_evidence": true,
+  "reviews": [
+    {"owner": "foundation reviewer", "scope": "AIMuon fixed-v1 Algorithm1 and AppendixC.2 versus independent local implementation", "finding": "The initial epsilon1e-8 differed from paper1e-12 at small gradient magnitudes; corrected before source freeze and actual CPU/CUDA runs. Added a literal small-gradient equation regression. BF16 NS5, update order, independent transforms and decoupled decay were checked.", "resolution": "fixed_before_freeze"},
+    {"owner": "foundation reviewer", "scope": "SPOT fixed-v2 Algorithm1/Eq2 and pinned author metrics.py", "finding": "Reviewed multi-slot absorption without a break, K-closing, original prediction-index semantic matrices and occupied-slot TP. Reviewer reports1000 randomized finite-trace comparisons without differences; this is scorer checking, not benchmark capability. Added closed/open-slot, wrong-semantics and zero-credit controls.", "resolution": "reviewed_with_explicit_scope", "boundary": "At a zero score from floating underflow and threshold0, the local scorer follows the paper's positive-T condition rather than treating a zero-credit response as occupying a slot. No full-domain bit-identical upstream claim."},
+    {"owner": "post-training reviewer", "scope": "Acting-to-Learning and R2 fixed-paper formulas and agent modules", "finding": "Checked optimizer-aware gradient features, global/quota scheduling, VFD/RA-GRPO equations, no gold-reading path and explicit external rollout/gradient inputs. Numeric overflow checks and finite metrics are retained. No model-policy training is claimed.", "resolution": "no_blocking_method_issue"},
+    {"owner": "agent reviewer", "scope": "DWE Section3/AppendixA and retokenization AppendixE", "finding": "Checked positive/negative pairing, centered leading-PC ordering, shared stratified quantiles, complete sparse chain rule, full prefix-softmax score gradients and the symmetry exception. Neither sparse-output sanity nor sampled-logit-only arithmetic is advertised as full policy-gradient capability.", "resolution": "no_blocking_method_issue"},
+    {"owner": "root", "scope": "DISCO statistical contract and all nine cost dispositions", "finding": "Binary unboosted e-process API exposes only coarsened selector views, explicitly assumes valid query-invariant memoryless p-values and calculates finite-law bounds by exact enumeration, not uncorrected Monte Carlo. Full three-bin/boosted LLM discovery remains unimplemented. CTRL/CoEvoBench are review-only, not fake metrics or CPU substitutes for GPU systems.", "resolution": "accepted_bounded_components_and_terminal_cost_reviews"}
+  ],
+  "execution_sources_frozen_at": "acc48ec54ed47013155637372db9985760c3a2de",
+  "full_experiments_executed": false,
+  "automatic_retry": false
+}
