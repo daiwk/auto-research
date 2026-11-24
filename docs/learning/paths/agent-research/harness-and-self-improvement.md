@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 320 个问题 · 80 篇论文
+[Agent](index.md) / 328 个问题 · 82 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">320 个问题 · 80 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">328 个问题 · 82 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:morse" data-paper-title="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research Agent Carnegie Mellon University 2026-11-23 流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。核心是研究—实现—验证的自主Editor与可扩展服务，不是固定候选列表或门控公式本身。20轮accuracy后5轮efficiency。 成本过高，不复现（审查 DONE）；deferred_high_cost / 仅资料收录，未实现、未运行。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。仅资料收录与成本审查：固定v1、来源/元数据、访问边界、成本和同主题比较。没有本地算法模块、Editor、研究broker、视频服务、harness代码演化、benchmark、GPU试跑或Evolve operator。不能实现几个gate后称已复现MORSE，也不需要给review-only制造三seed指标或GPU receipt。  执行框架与自改进 系统成本审查 Agent 运行流程与自进化：改的是哪一层 MORSE比已有闭环harness自改进多了什么？ Editor不仅靠已有知识想修复，还从反复失败出发在线查论文/模型/code，并能请求host批准的新感知能力；核心不是多写一个反思提示。 教学例：短暂手物交互反复漏记，Editor查到动作分类模型后请求服务，再改记忆的写入和读取方式。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-morse-460f33ed" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-fce58fab22209ee6">MORSE比已有闭环harness自改进多了什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amorse">MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Editor不仅靠已有知识想修复，还从反复失败出发在线查论文/模型/code，并能请求host批准的新感知能力；核心不是多写一个反思提示。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：短暂手物交互反复漏记，Editor查到动作分类模型后请求服务，再改记忆的写入和读取方式。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30011v1">原论文</a> · <a href="../../../../agent-research/2611.30011-morse/">实现解读</a> · <a href="#qa-fce58fab22209ee6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:morse" data-paper-title="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research Agent Carnegie Mellon University 2026-11-23 流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。核心是研究—实现—验证的自主Editor与可扩展服务，不是固定候选列表或门控公式本身。20轮accuracy后5轮efficiency。 成本过高，不复现（审查 DONE）；deferred_high_cost / 仅资料收录，未实现、未运行。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。仅资料收录与成本审查：固定v1、来源/元数据、访问边界、成本和同主题比较。没有本地算法模块、Editor、研究broker、视频服务、harness代码演化、benchmark、GPU试跑或Evolve operator。不能实现几个gate后称已复现MORSE，也不需要给review-only制造三seed指标或GPU receipt。  执行框架与自改进 系统成本审查 Agent 运行流程与自进化：改的是哪一层 每轮损失都很小，efficiency阶段还需累计损失约束吗？ 需要。只限制相对父代的损失会逐轮积累退化；原文另相对efficiency入口harness限制总概率和正确数损失。 教学例：每轮掉0.003连续5轮会掉0.015；总容忍只有0.008，后续不能因单轮合格就继续放行。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-30c55064d19e0a7d">每轮损失都很小，efficiency阶段还需累计损失约束吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amorse">MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>需要。只限制相对父代的损失会逐轮积累退化；原文另相对efficiency入口harness限制总概率和正确数损失。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：每轮掉0.003连续5轮会掉0.015；总容忍只有0.008，后续不能因单轮合格就继续放行。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30011v1">原论文</a> · <a href="../../../../agent-research/2611.30011-morse/">实现解读</a> · <a href="#qa-30c55064d19e0a7d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:morse" data-paper-title="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research Agent Carnegie Mellon University 2026-11-23 流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。核心是研究—实现—验证的自主Editor与可扩展服务，不是固定候选列表或门控公式本身。20轮accuracy后5轮efficiency。 成本过高，不复现（审查 DONE）；deferred_high_cost / 仅资料收录，未实现、未运行。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。仅资料收录与成本审查：固定v1、来源/元数据、访问边界、成本和同主题比较。没有本地算法模块、Editor、研究broker、视频服务、harness代码演化、benchmark、GPU试跑或Evolve operator。不能实现几个gate后称已复现MORSE，也不需要给review-only制造三seed指标或GPU receipt。  执行框架与自改进 系统成本审查 Agent 运行流程与自进化：改的是哪一层 与Harness²都改harness，能共用一个选择器解释吗？ 不能。Harness²匿名选择已执行最终产物，跨任务重启初始harness；MORSE持续head并按私有validation质量/延迟筛选，还扩展host批准感知服务。对象和反馈不同。 教学例：匿名挑两个报告不是按正确选项概率筛视频记忆程序；装了VideoMAE也不等于已被最终harness采用。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-4b610d69af2c1f3f">与Harness²都改harness，能共用一个选择器解释吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amorse">MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。Harness²匿名选择已执行最终产物，跨任务重启初始harness；MORSE持续head并按私有validation质量/延迟筛选，还扩展host批准感知服务。对象和反馈不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：匿名挑两个报告不是按正确选项概率筛视频记忆程序；装了VideoMAE也不等于已被最终harness采用。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30011v1">原论文</a> · <a href="../../../../agent-research/2611.30011-morse/">实现解读</a> · <a href="#qa-4b610d69af2c1f3f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:morse" data-paper-title="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research Agent Carnegie Mellon University 2026-11-23 流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。核心是研究—实现—验证的自主Editor与可扩展服务，不是固定候选列表或门控公式本身。20轮accuracy后5轮efficiency。 成本过高，不复现（审查 DONE）；deferred_high_cost / 仅资料收录，未实现、未运行。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。仅资料收录与成本审查：固定v1、来源/元数据、访问边界、成本和同主题比较。没有本地算法模块、Editor、研究broker、视频服务、harness代码演化、benchmark、GPU试跑或Evolve operator。不能实现几个gate后称已复现MORSE，也不需要给review-only制造三seed指标或GPU receipt。  执行框架与自改进 系统成本审查 Agent 运行流程与自进化：改的是哪一层 64帧上限是否保证总memory恒定？ 不是。另有16秒近期窗口，text和embeddings没有host全局上限。复述成本时应分别记录pixels、文本、向量和服务调用，不能只报frame cap。 教学例：历史帧保持64张，但每分钟新增一条caption仍会让文本随视频时长增长。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-90fe7172b9ccce88">64帧上限是否保证总memory恒定？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amorse">MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。另有16秒近期窗口，text和embeddings没有host全局上限。复述成本时应分别记录pixels、文本、向量和服务调用，不能只报frame cap。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：历史帧保持64张，但每分钟新增一条caption仍会让文本随视频时长增长。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30011v1">原论文</a> · <a href="../../../../agent-research/2611.30011-morse/">实现解读</a> · <a href="#qa-90fe7172b9ccce88">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:transport-safe-audit" data-paper-title="Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing Agent Efrei Research Lab, Université Paris-Panthéon-Assas / CEDRIC, Conservatoire National des Arts et Métiers 2026-11-23 不同Agent产生不同轨迹；即使裁判在给定(X,Y)时看不到Agent身份，其sensitivity/specificity的平均值也会随成功/失败轨迹分布改变。论文连接scalar transport偏差、支持与识别、随机人工audit、anytime monitoring和rank sets；这些统计工具本身不是新发明。主要证据是semi-synthetic，公共Agent数据的既有分析未在本文独立重跑，不据此声称轨迹长度有因果作用。 成本过高，不复现（审查 DONE）；component_only / L1 CPU数学机制诊断，diagnostic_only=true；不是Agent能力复现。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。本地是evaluator侧标准库算术：scalar transport偏差、带显式fold声明的AIPW、finite-strata bounded allocation、支持缺失outer set、严格区间rank sets和log-space hedged e-process。plan先提交m与φ再随机决定audit；  评测与可靠性 CPU机制组件 Agent 运行流程与自进化：改的是哪一层 judge不看Agent名字，校准就能通用吗？ 不一定。它可在给定轨迹X与成功Y时blind，但不同Agent的成功/失败轨迹X分布不同，导致平均sensitivity/specificity改变；scalar纠正于是有transport偏差。 教学例：judge对短轨迹很准、对长失败常误判；更常生成长轨迹的Agent即使匿名也不能直接用旧平均错误率。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-transport-safe-audit-9119b375" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-7a5fba1c524c5299">judge不看Agent名字，校准就能通用吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atransport-safe-audit">Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Efrei Research Lab, Université Paris-Panthéon-Assas / CEDRIC, Conservatoire National des Arts et Métiers</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一定。它可在给定轨迹X与成功Y时blind，但不同Agent的成功/失败轨迹X分布不同，导致平均sensitivity/specificity改变；scalar纠正于是有transport偏差。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：judge对短轨迹很准、对长失败常误判；更常生成长轨迹的Agent即使匿名也不能直接用旧平均错误率。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30742v1">原论文</a> · <a href="../../../../agent-research/2611.30742-transport-safe-audit/">实现解读</a> · <a href="#qa-7a5fba1c524c5299">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:transport-safe-audit" data-paper-title="Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing Agent Efrei Research Lab, Université Paris-Panthéon-Assas / CEDRIC, Conservatoire National des Arts et Métiers 2026-11-23 不同Agent产生不同轨迹；即使裁判在给定(X,Y)时看不到Agent身份，其sensitivity/specificity的平均值也会随成功/失败轨迹分布改变。论文连接scalar transport偏差、支持与识别、随机人工audit、anytime monitoring和rank sets；这些统计工具本身不是新发明。主要证据是semi-synthetic，公共Agent数据的既有分析未在本文独立重跑，不据此声称轨迹长度有因果作用。 成本过高，不复现（审查 DONE）；component_only / L1 CPU数学机制诊断，diagnostic_only=true；不是Agent能力复现。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。本地是evaluator侧标准库算术：scalar transport偏差、带显式fold声明的AIPW、finite-strata bounded allocation、支持缺失outer set、严格区间rank sets和log-space hedged e-process。plan先提交m与φ再随机决定audit；  评测与可靠性 CPU机制组件 Agent 运行流程与自进化：改的是哪一层 AIPW估计超过1应强行裁到1吗？ 不能把裁剪当该design-unbiased估计器。R/φ校正可使有限样本超出[0,1]，但其随机audit期望正确；裁剪会改变期望。报告不确定性与界，不伪造合理外观。 教学例：m=0、φ=0.1、抽中且Y=1时单条校正为10；未抽中为0，期望仍是1。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-7e1c02d419c49c27">AIPW估计超过1应强行裁到1吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atransport-safe-audit">Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Efrei Research Lab, Université Paris-Panthéon-Assas / CEDRIC, Conservatoire National des Arts et Métiers</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能把裁剪当该design-unbiased估计器。R/φ校正可使有限样本超出[0,1]，但其随机audit期望正确；裁剪会改变期望。报告不确定性与界，不伪造合理外观。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：m=0、φ=0.1、抽中且Y=1时单条校正为10；未抽中为0，期望仍是1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30742v1">原论文</a> · <a href="../../../../agent-research/2611.30742-transport-safe-audit/">实现解读</a> · <a href="#qa-7e1c02d419c49c27">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:transport-safe-audit" data-paper-title="Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing Agent Efrei Research Lab, Université Paris-Panthéon-Assas / CEDRIC, Conservatoire National des Arts et Métiers 2026-11-23 不同Agent产生不同轨迹；即使裁判在给定(X,Y)时看不到Agent身份，其sensitivity/specificity的平均值也会随成功/失败轨迹分布改变。论文连接scalar transport偏差、支持与识别、随机人工audit、anytime monitoring和rank sets；这些统计工具本身不是新发明。主要证据是semi-synthetic，公共Agent数据的既有分析未在本文独立重跑，不据此声称轨迹长度有因果作用。 成本过高，不复现（审查 DONE）；component_only / L1 CPU数学机制诊断，diagnostic_only=true；不是Agent能力复现。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。本地是evaluator侧标准库算术：scalar transport偏差、带显式fold声明的AIPW、finite-strata bounded allocation、支持缺失outer set、严格区间rank sets和log-space hedged e-process。plan先提交m与φ再随机决定audit；  评测与可靠性 CPU机制组件 Agent 运行流程与自进化：改的是哪一层 与CoEvo的数据隔离审计，哪一个能替代哪一个？ 都不能。CoEvo限制任务/答案访问和训练血缘；本篇校正裁判测量误差。没有泄漏仍可judge偏差；校正judge也不能让读过gold的Agent重新成为合格评测对象。 教学例：一个没见测试答案的Agent被错误裁判低估，需要audit；一个见过测试答案的Agent即使judge完全准确也已污染。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-be1463389f2f5b12">与CoEvo的数据隔离审计，哪一个能替代哪一个？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atransport-safe-audit">Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Efrei Research Lab, Université Paris-Panthéon-Assas / CEDRIC, Conservatoire National des Arts et Métiers</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>都不能。CoEvo限制任务/答案访问和训练血缘；本篇校正裁判测量误差。没有泄漏仍可judge偏差；校正judge也不能让读过gold的Agent重新成为合格评测对象。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个没见测试答案的Agent被错误裁判低估，需要audit；一个见过测试答案的Agent即使judge完全准确也已污染。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30742v1">原论文</a> · <a href="../../../../agent-research/2611.30742-transport-safe-audit/">实现解读</a> · <a href="#qa-be1463389f2f5b12">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:transport-safe-audit" data-paper-title="Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing Agent Efrei Research Lab, Université Paris-Panthéon-Assas / CEDRIC, Conservatoire National des Arts et Métiers 2026-11-23 不同Agent产生不同轨迹；即使裁判在给定(X,Y)时看不到Agent身份，其sensitivity/specificity的平均值也会随成功/失败轨迹分布改变。论文连接scalar transport偏差、支持与识别、随机人工audit、anytime monitoring和rank sets；这些统计工具本身不是新发明。主要证据是semi-synthetic，公共Agent数据的既有分析未在本文独立重跑，不据此声称轨迹长度有因果作用。 成本过高，不复现（审查 DONE）；component_only / L1 CPU数学机制诊断，diagnostic_only=true；不是Agent能力复现。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。本地是evaluator侧标准库算术：scalar transport偏差、带显式fold声明的AIPW、finite-strata bounded allocation、支持缺失outer set、严格区间rank sets和log-space hedged e-process。plan先提交m与φ再随机决定audit；  评测与可靠性 CPU机制组件 Agent 运行流程与自进化：改的是哪一层 看到当前label后再调audit概率，或者更新Agent后继续同一e-process，可以吗？ 不可以。预测/audit规则须依赖过去，当前label不能回流；稳定target要求冻结Agent与独立任务。更新模型、混Agent或固定小样本无放回抽取不自动满足。网格反演也不能冒充连续CS。 教学例：先定φ=0.2再随机audit合法；看到失败才把本条φ改成1会破坏已声明设计概率。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-829707ebb4733bec">看到当前label后再调audit概率，或者更新Agent后继续同一e-process，可以吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atransport-safe-audit">Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Efrei Research Lab, Université Paris-Panthéon-Assas / CEDRIC, Conservatoire National des Arts et Métiers</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不可以。预测/audit规则须依赖过去，当前label不能回流；稳定target要求冻结Agent与独立任务。更新模型、混Agent或固定小样本无放回抽取不自动满足。网格反演也不能冒充连续CS。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：先定φ=0.2再随机audit合法；看到失败才把本条φ改成1会破坏已声明设计概率。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30742v1">原论文</a> · <a href="../../../../agent-research/2611.30742-transport-safe-audit/">实现解读</a> · <a href="#qa-829707ebb4733bec">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:coevobench" data-paper-title="CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems? Agent Zhejiang University / Alibaba Group / Shanghai Jiao Tong University 2026-11-20 CoEvoBench不是另一个固定自进化算法，而是测LLM researcher能否自主驱动模型权重和harness联合开发的benchmark。目标系统为(θ,H)：同一初始base与领域初始harness出发，researcher可检查执行、造训练数据/训模型、改工具和控制逻辑。开发后提交冻结的模型—harness对，在独立Test任务上执行。关键不是是否做过“诊断—训练—改代码”，而是先前反馈能否改变下一步干预和最终候选选择。 成本过高，不复现（审查 DONE）。deferred_high_cost / 资料收录，未实现、未运行；deferred_high_cost / 资料收录，未实现、未运行；成本过高，不复现（审查 DONE）。首发为2026-11-20，发现/审查为2026-11-23，不称11月23日新首发。本地只收录固定v1、代码提交、split/审计/成本契约与同主题比较；没有新建算法模块、可执行adapter、训练、researcher API调用或benchmark试跑。上游no-GPU toy researcher明确是生命周期fixture，不是自主科研Agent；  执行框架与自改进 coevobench Agent 运行流程与自进化：改的是哪一层 CoEvoBench本身是一套自动自进化算法吗？ 不是。它提供共同起点、可修改模型/harness的动作空间、预算和隔离评价，测researcher如何根据反馈决定下一步；不同被测researcher可走不同开发路线。 教学例：一个researcher只修格式接口后提交base，另一个先改工具再训模型，都可在同一协议下评价，而不是强制轮流训练/改代码。 2026-11-23">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-coevobench-d56b6b70" class="ar-learning-paper-anchor"></span>

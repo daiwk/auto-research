@@ -88,6 +88,9 @@
 - [KAR](../2306.10933-kar/README.md)：让 LLM 生成用户偏好和物品事实知识，再由 hybrid-expert adapter 融合进推荐器。
 - [M6-Rec](../2205.08084-m6rec/README.md)：把多种推荐任务统一成自然语言形式，并以 option-adapter 轻量适配预训练模型。
 
+### 研究Agent与自动实验
+- [Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents](../../recommendation-components/2611.29613-weight-coding/README.md)：Weight Coding把已训练权重本身变成可执行编辑对象，固定架构、特征和服务逻辑。LLM Agent先扫描单模块编辑，按独立filter日期排除方向翻转，再直接改值、搜索或重新搜索组合后的参数。编辑原语包括缩放、重置、移除分支、压缩、快照插值、概念方向平移；编辑支持大小不等于独立自由度。原论文的GPU缓存引擎只重算被影响模块及下游，搜索阶段不反传目标模型。 本地CPU参考只实现Table1的缩放、显式reference重置、投影置零、插值、方向平移，以及§3.4反向配对Gaussian ES、centered rank、Adam上升和validation选步。没有compression、LLM假设生成、缓存生产引擎、TorchScript编辑、真实检索模型或线上A/B。原文未公布Adam细节和ties规则，本地显式采用(.9,.999)、epsilon=1e-8和平均并列rank；不能声称恢复私有实现。每seed20步×16对，synthetic quadratic仅查机制；不接Evolve晋级。
+
 ## 生成、排序与冷启动
 - [UNIQUE](../2609.23718-unique/README.md)：以反馈双塔更新平面码本，让 code 提名与目标相关排序共享早融合用户前缀。
 - [ANGLE](../2609.18296-angle/README.md)：以层次文本标识、三目标联合训练和请求侧动态约束实现一步广告检索。

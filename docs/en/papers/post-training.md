@@ -8,6 +8,8 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [Verifiable On-Policy Distillation](<https://arxiv.org/abs/2611.30325v1>) | 2026-11-23 | [English](../../post-training/2611.30325-vopd/README-en.md) · [Chinese](../../post-training/2611.30325-vopd/README.md) |
+| [Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences](<https://arxiv.org/abs/2611.30135v1>) | 2026-11-23 | [English](../../post-training/2611.30135-shpo/README-en.md) · [Chinese](../../post-training/2611.30135-shpo/README.md) |
 | [How Far Does Lossless Re-tokenization Move an RLVR Update?](<https://arxiv.org/abs/2611.27083v1>) | 2026-11-20 | [English](../../post-training/2611.27083-retokenization-update/README-en.md) · [Chinese](../../post-training/2611.27083-retokenization-update/README.md) |
 | [Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation](<https://arxiv.org/abs/2611.27131v1>) | 2026-11-20 | [English](../../post-training/2611.27131-dwe/README-en.md) · [Chinese](../../post-training/2611.27131-dwe/README.md) |
 | [CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency](<https://arxiv.org/abs/2611.27119v1>) | 2026-11-20 | [English](../../post-training/2611.27119-ctrl/README-en.md) · [Chinese](../../post-training/2611.27119-ctrl/README.md) |

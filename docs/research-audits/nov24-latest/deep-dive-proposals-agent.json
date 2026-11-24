@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-24",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "agent-research:ooas",
+      "target_card": "agent-research/agent-policy-learning",
+      "source_revisions": {
+        "agent-research:ooas": "165271aa805a2ba8cd12f79d8003ac2e27e586d1d372982113c0f1c69b3243de",
+        "agent-research:acting-to-learning": "b4facbf5a94d973a84390bb3cdff04b8d454e177645cfae4dddfc3f754e55414"
+      },
+      "comparison": {
+        "position": "OOAS把activation steering候选选择建模为逐turn多臂bandit。每轮先见所有候选的reward hint，选一个策略；任务结束只见已选序列的加和reward，不见逐轮贡献。它不是猜哪条编辑会通过隐藏测试，而是在聚合反馈粒度下修正累计hint误差。论文理论要求reward向量、hint和任务划分预先固定、独立于学习者随机数；真实编码Agent的状态依赖轨迹不自动满足该假设。",
+        "tradeoff": "From Acting to Learning在固定历史池里选SFT action记录，选择后冷启动学生；OOAS在任务执行中选steering臂，并在任务结束后修正hint。前者的梯度相关性不是后者的reward预测，后者的共享noise也不是经验重放的shuffle。两者都必须分开选择信息与最终评测；本地均没有真实Agent能力比较。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "同主题比较与边界",
+          "完整实验与成本决定"
+        ]
+      },
+      "analysis": {
+        "title": "OOAS：只看到任务总回报，也能用逐轮hint学习策略",
+        "body": "分布不是softmax：FTRL同时使用Tsallis项和log barrier。turn t把已完成任务score、当前任务此前hint和本轮hint乘已过turn数相加，再求内点最优分布。每任务只抽一次K个Exp(1)噪声，所有turn共享，以argmin ξ/p选臂。整任务都选同一臂k的概率ρ由各turn概率比的最大值计算，不能用边缘概率相乘；只有该事件发生时才以Z/ρ修正此臂，发生切臂则残差修正全0，但所有臂仍加hint之和。Alg2用可观察potential gap的有符号累积触发严格大于阈值的doubling，重启score与gap，不把负gap裁为0。负控覆盖KKT残差、分布平移不变、共享noise的整任务事件概率不等于独立概率乘积、切臂时无残差归因、每turn的hint倍率、任务长度上限、重复begin/finish拒绝、aggregate越界不丢pending状态、保留负potential gap及重启后score归零。使用分析事件分区核对importance权重，不用少量Monte Carlo冒充无偏证明。",
+        "papers": [
+          "agent-research:ooas",
+          "agent-research:acting-to-learning"
+        ]
+      },
+      "question": {
+        "id": "cross-nov24-ooas",
+        "question": "与From Acting to Learning都做选择，选择的对象和时点相同吗？",
+        "answer": "不同。旧文选历史action用于后续SFT；OOAS在当前执行turn选steering策略，结束后用aggregate更新。不能用离线gradient score直接替代hint并宣称有同样regret保证。",
+        "example": "教学例：挑256条清洁经验是训练数据选择；本轮选Cap=1.5还是2.0是在线干预选择。",
+        "papers": [
+          "agent-research:ooas",
+          "agent-research:acting-to-learning"
+        ]
+      },
+      "update": {
+        "date": "2026-11-24",
+        "papers": [
+          "agent-research:ooas",
+          "agent-research:acting-to-learning"
+        ],
+        "source_revisions": {
+          "agent-research:ooas": "165271aa805a2ba8cd12f79d8003ac2e27e586d1d372982113c0f1c69b3243de",
+          "agent-research:acting-to-learning": "b4facbf5a94d973a84390bb3cdff04b8d454e177645cfae4dddfc3f754e55414"
+        },
+        "summary": "独立标准库CPU核实际解FTRL的KKT方程：Gk+α/√pk+β/pk为共同乘子，通过平移score与二分求解，而非softmax替身；实现共享Exp采样、ρ、聚合残差、potential和Alg2重启。begin→choose→finish只接受当前hint和最终aggregate，不接受turn reward向量或gold答案/计划。噪声注入只供数学控制。没有LLM、activation probe、TACT干预、代码执行器、真实任务分数或Evolve映射。数值求根是有公差的float64近似，不声称无限精度理论实现。 完整campaign终态不复现，审查DONE。"
+      },
+      "english": {
+        "comparison": {
+          "position": "OOAS models activation-steering selection as a turn-level bandit. Each turn reveals reward hints for all candidate policies; only the selected sequence's aggregate reward arrives at task completion. The method corrects cumulative hint errors without observing individual rewards. Its theory assumes reward vectors, hints and the task partition are fixed independently of learner randomization. Stateful coding-agent trajectories do not automatically satisfy that assumption.",
+          "tradeoff": "From Acting to Learning selects SFT action records from fixed history pools and cold-starts students. OOAS selects steering arms during execution and corrects hints after each task. Gradient relevance is not a reward hint, and shared task noise is not replay shuffling. Both require separation of selection information from final evaluation; neither local slice compares agent capability."
+        },
+        "analysis": {
+          "title": "Optimistic Online Learning for Coding Agents with Aggregate Feedback",
+          "body": "The distribution is not softmax: FTRL combines Tsallis and log-barrier terms. It uses completed-task scores, previous hints in the current task and the current hint weighted by elapsed turns. A task draws one Exp(1) noise vector shared across all turns and selects argmin noise/probability. The probability rho that arm k wins every turn uses maxima of probability ratios, not products of marginals. Only that event receives residual Z/rho; switched tasks have zero residual correction while every arm still receives accumulated hints. Algorithm2 doubles its threshold when a signed cumulative observable potential gap strictly exceeds it, resetting score and gap rather than clipping negative gaps. Controls check KKT residuals, translation invariance, shared-noise event probabilities versus independent products, zero residual attribution after switching, elapsed-turn hint weighting, task bounds, lifecycle errors, preserved pending state after invalid aggregates, signed negative gaps and restart resets. Analytic event partitions check importance weighting; a small Monte Carlo run is not advertised as proof of unbiasedness."
+        },
+        "question": {
+          "question": "Do the two selectors choose the same object at the same time?",
+          "answer": "No. The earlier paper selects historical actions for SFT; OOAS chooses steering policies online and updates after aggregate feedback. Offline gradient scores do not automatically satisfy its hint/regret assumptions.",
+          "example": "Teaching example: choosing256 cleaning records selects training data; choosing Cap1.5 versus2.0 selects a current intervention."
+        },
+        "update": "The independent standard-library CPU kernel solves FTRL's KKT equations: Gk+alpha/sqrt(pk)+beta/pk share a multiplier, found by score translation and bisection rather than a softmax substitute. It implements shared exponential sampling, rho, aggregate residuals, the potential and Algorithm2 restarts. The begin/choose/finish API receives current hints and one terminal aggregate, not turn reward vectors or gold answers/plans. Injected noise is for mathematical controls only. No LLM, activation probe, TACT intervention, code executor, real-task score or Evolve mapping runs. The float64 root solver has numerical tolerance, not infinite precision. The full campaign is terminally not reproduced."
+      }
+    },
+    {
+      "paper": "agent-research:transport-safe-audit",
+      "target_card": "agent-research/harness-and-self-improvement",
+      "source_revisions": {
+        "agent-research:transport-safe-audit": "6f04d7cc63853173d3153a6fd580e48c2334ae70fa00e4ae1b749ae95ffadf20",
+        "agent-research:coevobench": "46cfd36b03e74f4dcb83e7a643df67b536c616cf039013f14378b7d9cee1ac99"
+      },
+      "comparison": {
+        "position": "不同Agent产生不同轨迹；即使裁判在给定(X,Y)时看不到Agent身份，其sensitivity/specificity的平均值也会随成功/失败轨迹分布改变。论文连接scalar transport偏差、支持与识别、随机人工audit、anytime monitoring和rank sets；这些统计工具本身不是新发明。主要证据是semi-synthetic，公共Agent数据的既有分析未在本文独立重跑，不据此声称轨迹长度有因果作用。",
+        "tradeoff": "CoEvoBench保护Selection/Test内容并审计训练血缘，回答候选是否越界及能否泛化；本篇问即使访问隔离正确，LLM judge误差是否能跨轨迹分布transport。二者不能替代：无数据泄漏不等于judge已校准，AIPW也不能消除被评Agent读了gold造成的污染。CoEvo完整系统本地未跑，本篇也没有live judge结果可横比。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "同主题比较与边界",
+          "完整实验与成本决定"
+        ]
+      },
+      "analysis": {
+        "title": "Transport-safe audit：校准过的LLM裁判也未必能跨Agent搬用",
+        "body": "已知随机audit概率φ有正下界时，AIPW用out-of-fold预测m加R/φ(Y−m)修正；未audit样本只用m，估计值不强裁[0,1]。bounded allocation令φ=min(1,max(φmin,λ√m(1−m)))满足可达预算。在线e-process要求预测函数和audit规则由过去选定、新V到达后求值，当前label不能反过来改它们；目标必须固定且逐任务独立稳定。支持缺失时给outer set而不补造点估计，rank只用严格区间分离而非中点硬排。精确枚举小型Bernoulli audit设计，验证错误imputation仍design-unbiased；检查AIPW可超1而不裁剪、同fold训练拒绝、预算/positivity/零方差stratum、log-space与直接乘积相同、长stream不溢出、未audit真值拒绝、未知target拒绝、重叠/恰接区间不硬定序。三seed只是数学控制，不是coverage达到0.95的经验估计。",
+        "papers": [
+          "agent-research:transport-safe-audit",
+          "agent-research:coevobench"
+        ]
+      },
+      "question": {
+        "id": "cross-nov24-transport-safe-audit",
+        "question": "与CoEvo的数据隔离审计，哪一个能替代哪一个？",
+        "answer": "都不能。CoEvo限制任务/答案访问和训练血缘；本篇校正裁判测量误差。没有泄漏仍可judge偏差；校正judge也不能让读过gold的Agent重新成为合格评测对象。",
+        "example": "教学例：一个没见测试答案的Agent被错误裁判低估，需要audit；一个见过测试答案的Agent即使judge完全准确也已污染。",
+        "papers": [
+          "agent-research:transport-safe-audit",
+          "agent-research:coevobench"
+        ]
+      },
+      "update": {
+        "date": "2026-11-24",
+        "papers": [
+          "agent-research:transport-safe-audit",
+          "agent-research:coevobench"
+        ],
+        "source_revisions": {
+          "agent-research:transport-safe-audit": "6f04d7cc63853173d3153a6fd580e48c2334ae70fa00e4ae1b749ae95ffadf20",
+          "agent-research:coevobench": "46cfd36b03e74f4dcb83e7a643df67b536c616cf039013f14378b7d9cee1ac99"
+        },
+        "summary": "本地是evaluator侧标准库算术：scalar transport偏差、带显式fold声明的AIPW、finite-strata bounded allocation、支持缺失outer set、严格区间rank sets和log-space hedged e-process。plan先提交m与φ再随机决定audit；observe只收已audit的0/1，未audit必须None，并逐episode更新。拒绝换target、未冻结/非独立任务声明和λ不严格小于φmin。仅对预先固定有限θ网格反演，accepted_grid不是连续CS端点，真值不在网格时没有网格覆盖说法。没有nuisance拟合、真人采集、LLM裁判、三judge潜变量模型、cluster bootstrap或live leaderboard；时序/fold声明是外部统计契约，不是恶意调用方不可绕过的安全证明。 完整campaign终态不复现，审查DONE。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Agents induce different trajectory distributions. Even a judge blind to agent identity given(X,Y) may have different averaged sensitivity/specificity under those distributions. The paper connects scalar-transport bias, support/identification, randomized human auditing, anytime monitoring and rank sets; these statistical tools are not individually new. Evidence is mainly semi-synthetic. Prior public-agent analyses are not independently rerun, and no causal effect of trajectory length is established.",
+          "tradeoff": "CoEvoBench protects Selection/Test material and audits training lineage, addressing prohibited access and generalization. This paper asks whether judge errors transport across trajectory distributions even when access isolation is correct. Neither substitutes for the other: no leakage does not ensure calibration, and AIPW cannot undo gold contamination of an evaluated agent. There are no local live-judge results to compare with CoEvoBench."
+        },
+        "analysis": {
+          "title": "Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing",
+          "body": "With known randomized audit propensities bounded away from zero, AIPW adds R/phi(Y-m) to out-of-fold imputations; unaudited rows use m only, and estimates are not clipped to[0,1]. Bounded allocation uses min(1,max(floor,lambda*sqrt(m(1-m)))) under an attainable budget. Online e-processes require past-chosen prediction/audit functions evaluated at new V, without using the current label. The target must be frozen and stable across independently drawn tasks. Missing support produces outer sets rather than invented point estimates, and ranks use strict interval separation rather than midpoint ordering. Exact enumeration of a small Bernoulli audit design checks unbiasedness despite wrong imputation. Controls cover unclipped estimates above1, own-fold rejection, allocation/positivity/zero-variance strata, agreement with direct products, log-space long-stream stability, rejection of unaudited labels and changed targets, and unresolved overlapping/touching intervals. Three seeds are mathematical controls, not an empirical estimate of95% coverage."
+        },
+        "question": {
+          "question": "Can measurement audits replace CoEvo-style data isolation?",
+          "answer": "No. Data isolation concerns access/lineage; this method concerns judge measurement error. A clean agent can still be misgraded, while perfect grading cannot validate a gold-contaminated agent.",
+          "example": "Teaching example: an unseen-test agent may need judge auditing; a test-answer-exposed agent remains contaminated even under a perfect judge."
+        },
+        "update": "The evaluator-side standard-library slice implements scalar bias, AIPW with declared fold provenance, finite-stratum bounded allocation, support outer sets, strict interval rank sets and a log-space hedged e-process. Plan commits m/phi before drawing an audit; observe accepts binary labels only for audited rows and requires None otherwise. Every episode updates. Changed targets, nonfrozen/nonindependent task declarations and lambda not strictly below the positivity floor are rejected. Inversion is only on a predeclared finite theta grid: accepted_grid is not continuous CS endpoints or coverage for off-grid truth. No nuisance fitting, human collection, LLM judge, three-judge latent model, cluster bootstrap or live leaderboard runs. Timing/fold declarations are external statistical contracts, not adversarial information-flow security proofs. The full campaign is terminally not reproduced."
+      }
+    },
+    {
+      "paper": "agent-research:morse",
+      "target_card": "agent-research/harness-and-self-improvement",
+      "source_revisions": {
+        "agent-research:morse": "c595ce2784525d97645fa3b1ac219503e405b1015866a17fd786f29d72009029",
+        "agent-research:harness2": "c738a9266c1647b8f5cc0e50a0055d1aecf1fcf783ee78de3405c2e84850f48a"
+      },
+      "comparison": {
+        "position": "流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。核心是研究—实现—验证的自主Editor与可扩展服务，不是固定候选列表或门控公式本身。",
+        "tradeoff": "Harness²固定工具表面，用Propose–Probe–Compose执行对照改当前任务harness，再跨任务保存经验；MORSE在流式记忆设计中把在线文献研究和host批准的感知工具获取纳入搜索，保留当前head迭代。二者不能简化为同一“反思循环”：MORSE的validation概率/成本gate与持续服务扩展有专门契约，Harness²匿名selector也不是其scorer。本地Harness²机制替身与本篇review-only没有可比较Agent分数。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "同主题比较与边界",
+          "完整实验与成本决定"
+        ]
+      },
+      "analysis": {
+        "title": "MORSE：用反复出现的记忆失败驱动在线研究与工具扩展",
+        "body": "20轮accuracy后5轮efficiency。accuracy要求平均correct-option probability至少增加0.004；efficiency要求延迟≤父代0.9，允许每轮概率/正确数损失0.003/2，同时相对stage-entry累计损失≤0.008/4。都须延迟≤1s、write load≤1、完整validation问题数不变。accuracy可从qualified archive选，efficiency不取archive；合并后必须重新验证。64张persistent帧之外另有16秒近期窗口，text/vector无全局存储上限，不能宣传总memory恒定。Editor只看训练逐题trace及validation聚合；benchmark/答案链接经broker禁止。审查保留估计latency与实测latency、frame cap与无限text/vector、已装服务与实际采用服务、rejected diff复用与重新验证的区别。作者用gold计算validation指标只发生在host/evaluator侧，不允许把gold给Solver/Editor。本地没有通过率或性能负控实测。",
+        "papers": [
+          "agent-research:morse",
+          "agent-research:harness2"
+        ]
+      },
+      "question": {
+        "id": "cross-nov24-morse",
+        "question": "与Harness²都改harness，能共用一个选择器解释吗？",
+        "answer": "不能。Harness²匿名选择已执行最终产物，跨任务重启初始harness；MORSE持续head并按私有validation质量/延迟筛选，还扩展host批准感知服务。对象和反馈不同。",
+        "example": "教学例：匿名挑两个报告不是按正确选项概率筛视频记忆程序；装了VideoMAE也不等于已被最终harness采用。",
+        "papers": [
+          "agent-research:morse",
+          "agent-research:harness2"
+        ]
+      },
+      "update": {
+        "date": "2026-11-24",
+        "papers": [
+          "agent-research:morse",
+          "agent-research:harness2"
+        ],
+        "source_revisions": {
+          "agent-research:morse": "c595ce2784525d97645fa3b1ac219503e405b1015866a17fd786f29d72009029",
+          "agent-research:harness2": "c738a9266c1647b8f5cc0e50a0055d1aecf1fcf783ee78de3405c2e84850f48a"
+        },
+        "summary": "仅资料收录与成本审查：固定v1、来源/元数据、访问边界、成本和同主题比较。没有本地算法模块、Editor、研究broker、视频服务、harness代码演化、benchmark、GPU试跑或Evolve operator。不能实现几个gate后称已复现MORSE，也不需要给review-only制造三seed指标或GPU receipt。 完整campaign终态不复现，审查DONE。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Streaming memory must retain evidence in one pass before future queries are known. MORSE's editor diagnoses recurring failures in training traces, researches papers/model cards/code and edits write/read harnesses around a frozen VLM. Missing perception capabilities can be requested but require host review of licensing, training provenance and cost before deployment. The defining mechanism is the research/implementation/validation editor plus expandable services, not a fixed candidate list or gate formula alone.",
+          "tradeoff": "Harness² improves current-task harnesses through Propose/Probe/Compose execution contrasts and saves cross-task lessons within a fixed tool surface. MORSE adds online literature research and host-approved perception acquisition to streaming-memory design while iterating a persistent head. Their feedback, candidate selection and tool-admission contracts differ. Harness²'s anonymous selector is not MORSE's validation probability/cost scorer. The local Harness² diagnostic and this review-only entry have no comparable agent scores."
+        },
+        "analysis": {
+          "title": "MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research",
+          "body": "Twenty accuracy rounds precede five efficiency rounds. Accuracy requires at least.004 mean correct-option-probability gain. Efficiency requires latency at most.9 of the parent, per-update losses at most.003 probability/two correct answers, and stage-entry cumulative losses at most.008/four answers. Both enforce latency at most1 second, write load at most1 and unchanged validation question counts. Accuracy may select qualified archive entries; efficiency excludes the archive. Merges are revalidated. The64-frame persistent cap is separate from a16-second recent window, and text/vectors have no global cap; total memory is not constant. The editor sees training traces and aggregate validation feedback; the broker blocks benchmark/answer sources. The review distinguishes estimated from measured latency, frame caps from uncapped text/vectors, installed from adopted services, and reused rejected diffs from revalidated candidates. Gold-dependent validation metrics belong to host/evaluator boundaries, not the solver/editor. No local success-rate or performance controls are measured."
+        },
+        "question": {
+          "question": "Can MORSE and Harness² share one selector interpretation?",
+          "answer": "No. Harness² anonymously selects executed final artifacts and restarts each task; MORSE iterates a head using private validation quality/latency and approved perception services. Their selection objects and feedback differ.",
+          "example": "Teaching example: choosing anonymous reports differs from scoring a video-memory program's option probabilities; installing VideoMAE does not imply adoption."
+        },
+        "update": "Review-only delivery records fixed-v1 sources/metadata, access boundaries, costs and a same-topic comparison. No local algorithm module, editor, research broker, video service, harness evolution, benchmark, GPU trial or Evolve operator is created. Gate arithmetic alone would not reproduce MORSE; review-only disposition requires no invented three-seed metrics or GPU receipt. The full campaign is terminally not reproduced."
+      }
+    }
+  ]
+}

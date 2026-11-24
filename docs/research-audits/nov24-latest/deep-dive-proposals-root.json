@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "proposals": [
+    {
+      "paper": "recommendation:weight-coding",
+      "target_card": "recommendation/research-serving-loop",
+      "source_revisions": {
+        "recommendation:weight-coding": "5e6b1d32f2244dd70379a18037aecc20dd22d4d091a02c58af0ff5a3e242bb0f",
+        "recommendation:evopilot": "461d4284afa1aa1a754016383d87aca09361b2b6abf0f9dfca423a3b156fdbae"
+      },
+      "comparison": {
+        "position": "本地CPU参考只实现Table1的缩放、显式reference重置、投影置零、插值、方向平移，以及§3.4反向配对Gaussian ES、centered rank、Adam上升和validation选步。没有compression、LLM假设生成、缓存生产引擎、TorchScript编辑、真实检索模型或线上A/B。原文未公布Adam细节和ties规则，本地显式采用(.9,.999)、epsilon=1e-8和平均并列rank；不能声称恢复私有实现。每seed20步×16对，synthetic quadratic仅查机制；不接Evolve晋级。",
+        "tradeoff": "EvoPilot强调比较证据的完整性：共同base、数据、评测器、有效输出深度和唯一treatment都要匹配，再由人工审核接纳。Weight Coding则规定了可搜索对象：固定架构/服务上的权重数值和少量row scales。验证协议与搜索算子互补、不能互相替代；本地ES不等于已经完成自主研究或部署。原论文直接叠加编辑会退化、重新搜索可恢复，这不意味着任意两个本地算子组合必然有收益。",
+        "sections": [
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "它与Evopilot的自进化有什么不同？",
+        "body": "EvoPilot强调比较证据的完整性：共同base、数据、评测器、有效输出深度和唯一treatment都要匹配，再由人工审核接纳。Weight Coding则规定了可搜索对象：固定架构/服务上的权重数值和少量row scales。验证协议与搜索算子互补、不能互相替代；本地ES不等于已经完成自主研究或部署。原论文直接叠加编辑会退化、重新搜索可恢复，这不意味着任意两个本地算子组合必然有收益。",
+        "papers": [
+          "recommendation:weight-coding",
+          "recommendation:evopilot"
+        ]
+      },
+      "question": {
+        "id": "nov24-weight-coding",
+        "question": "它与Evopilot的自进化有什么不同？",
+        "answer": "EvoPilot强调比较证据的完整性：共同base、数据、评测器、有效输出深度和唯一treatment都要匹配，再由人工审核接纳。Weight Coding则规定了可搜索对象：固定架构/服务上的权重数值和少量row scales。验证协议与搜索算子互补、不能互相替代；本地ES不等于已经完成自主研究或部署。原论文直接叠加编辑会退化、重新搜索可恢复，这不意味着任意两个本地算子组合必然有收益。",
+        "example": "教学例：修改模型结构和训练pipeline属于代码级搜索；只调现有层的row log-scales属于固定架构的权重编辑，两者都不能用test挑最佳轮次。",
+        "papers": [
+          "recommendation:weight-coding",
+          "recommendation:evopilot"
+        ]
+      },
+      "update": {
+        "date": "2026-11-24",
+        "papers": [
+          "recommendation:weight-coding",
+          "recommendation:evopilot"
+        ],
+        "summary": "本地CPU参考只实现Table1的缩放、显式reference重置、投影置零、插值、方向平移，以及§3.4反向配对Gaussian ES、centered rank、Adam上升和validation选步。没有compression、LLM假设生成、缓存生产引擎、TorchScript编辑、真实检索模型或线上A/B。原文未公布Adam细节和ties规则，本地显式采用(.9,.999)、epsilon=1e-8和平均并列rank；不能声称恢复私有实现。每seed20步×16对，synthetic quadratic仅查机制；不接Evolve晋级。"
+      },
+      "english": {
+        "comparison": {
+          "position": "The CPU reference implements Table1 rescaling, explicit-reference resets, zeroing a selected projection, interpolation and steering, plus Section3.4 antithetic Gaussian ES, centered ranks, ascent Adam and validation-selected steps. Compression, LLM hypothesis generation, the cached production engine, TorchScript edits, real retrieval models and online A/B are absent. Adam details and tie rules were not published; the local reference explicitly uses (.9,.999), epsilon1e-8 and average tied ranks, without claiming private-code parity. Each seed uses20 steps and16 pairs on a synthetic quadratic, with no Evolve promotion.",
+          "tradeoff": "EvoPilot emphasizes comparison integrity: shared base, data, evaluator, effective output depth and the sole treatment must match before human acceptance. Weight Coding specifies what to search: weights and a small set of row scales under fixed architecture/serving. Verification protocols and search operators are complementary, not substitutes. Local ES is not completed autonomous research or deployment. The paper observes degradation from direct edit stacking and recovery through re-search, without guaranteeing gains from arbitrary local combinations."
+        },
+        "analysis": {
+          "title": "How does it differ from Evopilot's evolution?",
+          "body": "EvoPilot emphasizes comparison integrity: shared base, data, evaluator, effective output depth and the sole treatment must match before human acceptance. Weight Coding specifies what to search: weights and a small set of row scales under fixed architecture/serving. Verification protocols and search operators are complementary, not substitutes. Local ES is not completed autonomous research or deployment. The paper observes degradation from direct edit stacking and recovery through re-search, without guaranteeing gains from arbitrary local combinations."
+        },
+        "question": {
+          "question": "How does it differ from Evopilot's evolution?",
+          "answer": "EvoPilot emphasizes comparison integrity: shared base, data, evaluator, effective output depth and the sole treatment must match before human acceptance. Weight Coding specifies what to search: weights and a small set of row scales under fixed architecture/serving. Verification protocols and search operators are complementary, not substitutes. Local ES is not completed autonomous research or deployment. The paper observes degradation from direct edit stacking and recovery through re-search, without guaranteeing gains from arbitrary local combinations.",
+          "example": "Teaching example: changing an architecture/training pipeline is code search; adjusting existing row log-scales is fixed-architecture weight editing. Neither may choose iterations using test data."
+        },
+        "update": "The CPU reference implements Table1 rescaling, explicit-reference resets, zeroing a selected projection, interpolation and steering, plus Section3.4 antithetic Gaussian ES, centered ranks, ascent Adam and validation-selected steps. Compression, LLM hypothesis generation, the cached production engine, TorchScript edits, real retrieval models and online A/B are absent. Adam details and tie rules were not published; the local reference explicitly uses (.9,.999), epsilon1e-8 and average tied ranks, without claiming private-code parity. Each seed uses20 steps and16 pairs on a synthetic quadratic, with no Evolve promotion."
+      }
+    }
+  ]
+}

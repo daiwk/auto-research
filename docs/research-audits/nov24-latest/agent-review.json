@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-24",
+  "scope": "Three Nov23 first releases found Nov24; finite selection, no watermark movement",
+  "implementation_preflight_completed": true,
+  "reviews": [
+    {
+      "identity": "agent-research:ooas",
+      "id": "2611.30405",
+      "published_at": "2026-11-23T10:05:39Z",
+      "updated_at": "2026-11-23T10:05:39Z",
+      "discovered_on": "2026-11-24",
+      "announced_on": null,
+      "source_url": "https://arxiv.org/pdf/2611.30405v1",
+      "source_sha256": "7b976fa4eb802030e0fd09c0c57b171dd7fa2ee26a6ef387ab92327aa3bdec44",
+      "source_revisions": {
+        "agent-research:ooas": "165271aa805a2ba8cd12f79d8003ac2e27e586d1d372982113c0f1c69b3243de",
+        "agent-research:acting-to-learning": "b4facbf5a94d973a84390bb3cdff04b8d454e177645cfae4dddfc3f754e55414"
+      },
+      "scope": "The independent standard-library CPU kernel solves FTRL's KKT equations: Gk+alpha/sqrt(pk)+beta/pk share a multiplier, found by score translation and bisection rather than a softmax substitute. It implements shared exponential sampling, rho, aggregate residuals, the potential and Algorithm2 restarts. The begin/choose/finish API receives current hints and one terminal aggregate, not turn reward vectors or gold answers/plans. Injected noise is for mathematical controls only. No LLM, activation probe, TACT intervention, code executor, real-task score or Evolve mapping runs. The float64 root solver has numerical tolerance, not infinite precision.",
+      "cost_basis": "The full campaign uses a27B model,589 real coding/terminal tasks, Cap/Gate multi-arm comparisons and baselines, with up to256/128 turns. Simulations span10^7-10^8 turns,50 seeds and up to512 arms. This long-rollout/multi-arm campaign exceeds the short one-A100/A30-or-Mac budget and is terminally not reproduced. No checkpoints, benchmarks, APIs or trial runs are launched. Only bounded small-K/L CPU controls run, estimated in seconds pending shared-runner timing.",
+      "implementation_status": "component_only",
+      "review_done": true
+    },
+    {
+      "identity": "agent-research:transport-safe-audit",
+      "id": "2611.30742",
+      "published_at": "2026-11-23T14:19:52Z",
+      "updated_at": "2026-11-23T14:19:52Z",
+      "discovered_on": "2026-11-24",
+      "announced_on": null,
+      "source_url": "https://arxiv.org/pdf/2611.30742v1",
+      "source_sha256": "6798d8f34473451811adce548d42dac5a3f0509649f8c561d0d6b7cc7ee29ab2",
+      "source_revisions": {
+        "agent-research:transport-safe-audit": "6f04d7cc63853173d3153a6fd580e48c2334ae70fa00e4ae1b749ae95ffadf20",
+        "agent-research:coevobench": "46cfd36b03e74f4dcb83e7a643df67b536c616cf039013f14378b7d9cee1ac99"
+      },
+      "scope": "The evaluator-side standard-library slice implements scalar bias, AIPW with declared fold provenance, finite-stratum bounded allocation, support outer sets, strict interval rank sets and a log-space hedged e-process. Plan commits m/phi before drawing an audit; observe accepts binary labels only for audited rows and requires None otherwise. Every episode updates. Changed targets, nonfrozen/nonindependent task declarations and lambda not strictly below the positivity floor are rejected. Inversion is only on a predeclared finite theta grid: accepted_grid is not continuous CS endpoints or coverage for off-grid truth. No nuisance fitting, human collection, LLM judge, three-judge latent model, cluster bootstrap or live leaderboard runs. Timing/fold declarations are external statistical contracts, not adversarial information-flow security proofs.",
+      "cost_basis": "This is CPU statistical research, not a study that necessarily requires GPUs. The full allocation campaign reaches500 replications by500000 episodes(about250 million episode records), plus250 four-agent replications,48-cell stress tests,200 by3000-step monitoring streams and1000 rank experiments. Some target sizes/executable scripts are not supplied, so full reproduction cost cannot be cheaply established from metadata. The cost gate closes the full campaign without a costly probe; only bounded small-array/exact-design controls execute. No live-judge, human-labeling or GPU cost is measured or invented.",
+      "implementation_status": "component_only",
+      "review_done": true
+    },
+    {
+      "identity": "agent-research:morse",
+      "id": "2611.30011",
+      "published_at": "2026-11-23T04:11:45Z",
+      "updated_at": "2026-11-23T04:11:45Z",
+      "discovered_on": "2026-11-24",
+      "announced_on": null,
+      "source_url": "https://arxiv.org/pdf/2611.30011v1",
+      "source_sha256": "186e24c7573f349e60484fcfc5fa4b5b8e825c8731cf6209852964fa8e7da7be",
+      "source_revisions": {
+        "agent-research:morse": "c595ce2784525d97645fa3b1ac219503e405b1015866a17fd786f29d72009029",
+        "agent-research:harness2": "c738a9266c1647b8f5cc0e50a0055d1aecf1fcf783ee78de3405c2e84850f48a"
+      },
+      "scope": "Review-only delivery records fixed-v1 sources/metadata, access boundaries, costs and a same-topic comparison. No local algorithm module, editor, research broker, video service, harness evolution, benchmark, GPU trial or Evolve operator is created. Gate arithmetic alone would not reproduce MORSE; review-only disposition requires no invented three-seed metrics or GPU receipt.",
+      "cost_basis": "Each backbone uses25 rounds with up to six initial candidates per round plus merges. Three separate backbones are Qwen2.5-VL7B,Qwen3-VL8B andQwen3.8-27B, with Claude Opus5.5 editing, multiple CLIP/OCR/VideoMAE/encoder services,780 training/388 validation questions and three test video benchmarks. Host limits allow20000 service calls per episode and131072 context tokens per call. The singleH100 is test-timing hardware, not a complete evolution budget. This clearly exceeds the short one-A100/A30-or-Mac scope; the full system is terminally not reproduced without model/video downloads, services, paid calls or probes.",
+      "implementation_status": "deferred_high_cost",
+      "review_done": true
+    }
+  ]
+}

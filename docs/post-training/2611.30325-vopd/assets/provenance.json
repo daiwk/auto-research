@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/html/2611.30325v1",
+  "source_url": "https://arxiv.org/html/2611.30325v1/vopd_main_cropped.svg",
+  "figure": "Figure 1",
+  "caption": "Figure 1: RLVR sparse verified feedback, OPD dense unverified feedback, and VOPD projection plus conditional next-token Rao-Blackwellization.",
+  "source_sha256": "5043d61ef92ea86b4549c76daeeab81ed94c2b8a6e9573c381641395890dd456",
+  "asset_sha256": "604ff9ee00a45ca4dc047879c5ac871fe0b91867af577c955f6c80e658479a09",
+  "image_sha256": "604ff9ee00a45ca4dc047879c5ac871fe0b91867af577c955f6c80e658479a09",
+  "render_scale": 3,
+  "visually_reviewed": true,
+  "scientific_content_modified": false,
+  "transformation": "Original SVG preserved; full-figure PNG rasterized by PyMuPDF at scale3",
+  "copyright": "Copyright remains with original authors; original figure with attribution."
+}

@@ -7,7 +7,7 @@ hide:
 
 # 训练预算：数据配比、目标与优化器
 
-[基础模型](index.md) / 148 个问题 · 37 篇论文
+[基础模型](index.md) / 152 个问题 · 38 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">148 个问题 · 37 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">152 个问题 · 38 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stablekl" data-paper-title="The KL Divergence Is Never Negative, Except in PyTorch" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="The KL Divergence Is Never Negative, Except in PyTorch 基础模型 Yale University 2026-11-23 近等分布的真实KL是二阶小量，但教科书公式往往由一阶或常数量相减得到，容易返回零、负数或错误梯度。StableKL把闭式KL重写成非负小量的组合，配合差值、补偿算术和解析梯度；它还区分F.kl_div算子误差与输入log-prob本身已丢失的信息。本地只选择其中Exponential族的Rewrite核。 完整实验成本过高，不复现（审查 DONE）；L1组件，diagnostic only，不是完整论文或模型能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。仅FP32 CPU、形状匹配的正rate输入，17项φ级数、远区间分支及一阶解析autograd。对非有限/非正参数、dtype/形状/设备不符、ratio溢出/下溢和非有限结果直接拒绝，不冒充极端范围mantissa/exponent处理。独立80位Decimal参考以实际FP32存储值为输入，校验近等、区间边界、远区间、梯度和精确恒等；它不是区间认证。  训练与数值可靠性 近等分布KL稳定重写 基础模型 训练预算：数据配比、目标与优化器 KL结果非负就说明计算正确吗？ 不是。消去可以把真实正KL变成0，也会产生正但偏差很大的值。clamp只去掉负号，不能恢复被舍掉的二阶量或梯度。 教学例：rate_p=1、FP32 rate_q=1.0001时，朴素公式可为0，而存储输入的KL约5×10⁻9。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<span id="paper-foundation-models-stablekl-203bc05b" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-677fc84dec6d443f">KL结果非负就说明计算正确吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astablekl">The KL Divergence Is Never Negative, Except in PyTorch</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。消去可以把真实正KL变成0，也会产生正但偏差很大的值。clamp只去掉负号，不能恢复被舍掉的二阶量或梯度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：rate_p=1、FP32 rate_q=1.0001时，朴素公式可为0，而存储输入的KL约5×10⁻9。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30835v1">原论文</a> · <a href="../../../../foundation-models/2611.30835-stablekl/">实现解读</a> · <a href="#qa-677fc84dec6d443f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stablekl" data-paper-title="The KL Divergence Is Never Negative, Except in PyTorch" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="The KL Divergence Is Never Negative, Except in PyTorch 基础模型 Yale University 2026-11-23 近等分布的真实KL是二阶小量，但教科书公式往往由一阶或常数量相减得到，容易返回零、负数或错误梯度。StableKL把闭式KL重写成非负小量的组合，配合差值、补偿算术和解析梯度；它还区分F.kl_div算子误差与输入log-prob本身已丢失的信息。本地只选择其中Exponential族的Rewrite核。 完整实验成本过高，不复现（审查 DONE）；L1组件，diagnostic only，不是完整论文或模型能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。仅FP32 CPU、形状匹配的正rate输入，17项φ级数、远区间分支及一阶解析autograd。对非有限/非正参数、dtype/形状/设备不符、ratio溢出/下溢和非有限结果直接拒绝，不冒充极端范围mantissa/exponent处理。独立80位Decimal参考以实际FP32存储值为输入，校验近等、区间边界、远区间、梯度和精确恒等；它不是区间认证。  训练与数值可靠性 近等分布KL稳定重写 基础模型 训练预算：数据配比、目标与优化器 为什么Exponential修复要先做rate差，而不是ratio−1？ 近等浮点输入的直接减法可精确保留差值；先做ratio会在1附近舍入，再减1暴露该误差。φ级数随后直接表示二阶小量，解析梯度避免再经过消去链。 教学例：把q设成1的下一个FP32数，d=q−1仍非零；稳定级数输出约7.1×10⁻15，而常数量相减可能归零。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1986196f71f30e8e">为什么Exponential修复要先做rate差，而不是ratio−1？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astablekl">The KL Divergence Is Never Negative, Except in PyTorch</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>近等浮点输入的直接减法可精确保留差值；先做ratio会在1附近舍入，再减1暴露该误差。φ级数随后直接表示二阶小量，解析梯度避免再经过消去链。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把q设成1的下一个FP32数，d=q−1仍非零；稳定级数输出约7.1×10⁻15，而常数量相减可能归零。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30835v1">原论文</a> · <a href="../../../../foundation-models/2611.30835-stablekl/">实现解读</a> · <a href="#qa-1986196f71f30e8e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stablekl" data-paper-title="The KL Divergence Is Never Negative, Except in PyTorch" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="The KL Divergence Is Never Negative, Except in PyTorch 基础模型 Yale University 2026-11-23 近等分布的真实KL是二阶小量，但教科书公式往往由一阶或常数量相减得到，容易返回零、负数或错误梯度。StableKL把闭式KL重写成非负小量的组合，配合差值、补偿算术和解析梯度；它还区分F.kl_div算子误差与输入log-prob本身已丢失的信息。本地只选择其中Exponential族的Rewrite核。 完整实验成本过高，不复现（审查 DONE）；L1组件，diagnostic only，不是完整论文或模型能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。仅FP32 CPU、形状匹配的正rate输入，17项φ级数、远区间分支及一阶解析autograd。对非有限/非正参数、dtype/形状/设备不符、ratio溢出/下溢和非有限结果直接拒绝，不冒充极端范围mantissa/exponent处理。独立80位Decimal参考以实际FP32存储值为输入，校验近等、区间边界、远区间、梯度和精确恒等；它不是区间认证。  训练与数值可靠性 近等分布KL稳定重写 基础模型 训练预算：数据配比、目标与优化器 StableKL与随机舍入能互相替代吗？ 不能。随机舍入解决量化格点吞掉更新，并引入受控随机性；StableKL解决已存输入上的确定性消去。丢失在输入表示中的信息也不属于KL算子能恢复的范围。 教学例：BF16把两个rate先都存成1，StableKL只能正确给0；若FP32仍保留两者差值，它才可通过重写恢复小的正KL。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-64498b05a818a4bf">StableKL与随机舍入能互相替代吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astablekl">The KL Divergence Is Never Negative, Except in PyTorch</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。随机舍入解决量化格点吞掉更新，并引入受控随机性；StableKL解决已存输入上的确定性消去。丢失在输入表示中的信息也不属于KL算子能恢复的范围。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：BF16把两个rate先都存成1，StableKL只能正确给0；若FP32仍保留两者差值，它才可通过重写恢复小的正KL。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30835v1">原论文</a> · <a href="../../../../foundation-models/2611.30835-stablekl/">实现解读</a> · <a href="#qa-64498b05a818a4bf">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stablekl" data-paper-title="The KL Divergence Is Never Negative, Except in PyTorch" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="The KL Divergence Is Never Negative, Except in PyTorch 基础模型 Yale University 2026-11-23 近等分布的真实KL是二阶小量，但教科书公式往往由一阶或常数量相减得到，容易返回零、负数或错误梯度。StableKL把闭式KL重写成非负小量的组合，配合差值、补偿算术和解析梯度；它还区分F.kl_div算子误差与输入log-prob本身已丢失的信息。本地只选择其中Exponential族的Rewrite核。 完整实验成本过高，不复现（审查 DONE）；L1组件，diagnostic only，不是完整论文或模型能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。仅FP32 CPU、形状匹配的正rate输入，17项φ级数、远区间分支及一阶解析autograd。对非有限/非正参数、dtype/形状/设备不符、ratio溢出/下溢和非有限结果直接拒绝，不冒充极端范围mantissa/exponent处理。独立80位Decimal参考以实际FP32存储值为输入，校验近等、区间边界、远区间、梯度和精确恒等；它不是区间认证。  训练与数值可靠性 近等分布KL稳定重写 基础模型 训练预算：数据配比、目标与优化器 本地80位Decimal对照为什么不能写成论文strict正确舍入验收？ 它只是有限样本的独立高精度参考，没有误差区间、舍入边界判定或Ziv重试，也只覆盖一个FP32分布族。严格认证与抽样数值一致是不同证据等级。 教学例：32个近等输入相对误差小于2×10⁻6只能支持这个小核诊断，不能外推到18族或567M F.kl_div分量全部正确舍入。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-aefb8e173cdc6995">本地80位Decimal对照为什么不能写成论文strict正确舍入验收？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astablekl">The KL Divergence Is Never Negative, Except in PyTorch</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它只是有限样本的独立高精度参考，没有误差区间、舍入边界判定或Ziv重试，也只覆盖一个FP32分布族。严格认证与抽样数值一致是不同证据等级。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：32个近等输入相对误差小于2×10⁻6只能支持这个小核诊断，不能外推到18族或567M F.kl_div分量全部正确舍入。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30835v1">原论文</a> · <a href="../../../../foundation-models/2611.30835-stablekl/">实现解读</a> · <a href="#qa-aefb8e173cdc6995">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:aimuon" data-paper-title="Accelerating Muon with Spectral Residual Correction" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Accelerating Muon with Spectral Residual Correction 基础模型 Tsinghua University 2026-11-20 AIMuon不改普通EMA动量，而改参数子问题：先更新M，再算E=G−M，分别对M与E做谱变换，以各自核范数估计决定相对权重。把残差混进动量后只做一次变换通常不等价，因为矩阵符号映射非线性。实用Algorithm1用两次五步BF16 Newton–Schulz近似，并用内积绝对值估计核范数，不做额外SVD；最后把合成步的Frobenius范数匹配到同M的Muon，权重衰减解耦。理论收敛结论针对未归一化、精确矩阵符号版本，不自动覆盖这个BF16实用算法。 完整矩阵直接成本过高不复现；仅矩阵参数的函数式Algorithm1、NS5和20步合成二次矩阵损失autograd诊断。L1机制/计分组件，diagnostic only，不是完整论文能力复现。高成本完整实验不复现（审查 DONE），不接Evolve晋级。仅矩阵参数的函数式Algorithm1、NS5和20步合成二次矩阵损失autograd诊断。检查相同动量的步长匹配、c=0退回Muon、独立变换不等于预混合、零矩阵、转置和BF16溢出拒绝；没有语言模型预训练、FineWeb读取、超参数搜索或Evolve算子。CPU与真实A100三seed的指标是数值/机制诊断，不是模型能力比较。  预训练与数据 谱残差优化 基础模型 训练预算：数据配比、目标与优化器 AIMuon改的是动量还是参数步？ 保留普通EMA，改参数子问题得到独立残差谱方向。不是Nesterov动量，也不是把当前梯度直接加到Muon结果。 教学例：β=0.9、旧M=0时，新M=0.1G，E=0.9G；必须先更新M再算E。 2026-11-23">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
 <span id="paper-foundation-models-aimuon-487c5031" class="ar-learning-paper-anchor"></span>

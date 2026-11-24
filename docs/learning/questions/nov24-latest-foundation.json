@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:deep-cross-attention": {
+      "questions": [
+        {
+          "id": "history-is-increments",
+          "level": "basics",
+          "question": "DCA历史栈为什么不能装每层完整residual state？",
+          "answer": "文字定义G保存输入和每层增量f_i(g_i)，完整state已经含旧层之和，再次把它们相加会重复计数。",
+          "example": "教学例：输入x、增量a和b应累成x+a+b；若存x、x+a、x+a+b再相加，会变成3x+2a+b。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-24"
+        },
+        {
+          "id": "not-layer-softmax",
+          "level": "mechanism",
+          "question": "GRN-v3的动态项为什么不是普通softmax层注意力？",
+          "answer": "它把b与ReLU(wᵀG)相加后直接线性加权；系数不要求非负或和为1，基础项还逐feature变化。",
+          "example": "教学例：三份全1历史、b=1且w=0输出3，不是softmax均值1；把b改成−2会输出−6。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-24"
+        },
+        {
+          "id": "three-versus-role-split",
+          "level": "comparison",
+          "question": "DCA与RD-AttnRes的Q/K/V解耦边界有什么区别？",
+          "answer": "RD-AttnRes保留共享QK、解耦V；DCA对Q、K、V各自配置独立GRN-v3，且深度混合公式不同。",
+          "example": "教学例：只修改DCA的Q基础权重，K和V路由输出必须逐位不变；RD中Q和K本来共享路由。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-24"
+        },
+        {
+          "id": "zero-relu-not-hidden",
+          "level": "implementation",
+          "question": "零初始化w配ReLU时，怎样避免把动态路由诊断写成训练成功？",
+          "answer": "先按原公式保留w=0并记录ReLU零点导数下初始梯度为0；再用明确标注的非零参数干预检查动态公式与梯度，不能悄悄随机初始化后声称忠实复刻训练。",
+          "example": "教学例：第一个测试断言w梯度全0；另一个测试手工设w=0.05后检查有限非零梯度。两项都不是LM收敛实验。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-24"
+        }
+      ]
+    },
+    "foundation-models:stablekl": {
+      "questions": [
+        {
+          "id": "positive-not-accurate",
+          "level": "basics",
+          "question": "KL结果非负就说明计算正确吗？",
+          "answer": "不是。消去可以把真实正KL变成0，也会产生正但偏差很大的值。clamp只去掉负号，不能恢复被舍掉的二阶量或梯度。",
+          "example": "教学例：rate_p=1、FP32 rate_q=1.0001时，朴素公式可为0，而存储输入的KL约5×10⁻9。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-24"
+        },
+        {
+          "id": "difference-before-ratio",
+          "level": "mechanism",
+          "question": "为什么Exponential修复要先做rate差，而不是ratio−1？",
+          "answer": "近等浮点输入的直接减法可精确保留差值；先做ratio会在1附近舍入，再减1暴露该误差。φ级数随后直接表示二阶小量，解析梯度避免再经过消去链。",
+          "example": "教学例：把q设成1的下一个FP32数，d=q−1仍非零；稳定级数输出约7.1×10⁻15，而常数量相减可能归零。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-24"
+        },
+        {
+          "id": "not-stochastic-rounding",
+          "level": "comparison",
+          "question": "StableKL与随机舍入能互相替代吗？",
+          "answer": "不能。随机舍入解决量化格点吞掉更新，并引入受控随机性；StableKL解决已存输入上的确定性消去。丢失在输入表示中的信息也不属于KL算子能恢复的范围。",
+          "example": "教学例：BF16把两个rate先都存成1，StableKL只能正确给0；若FP32仍保留两者差值，它才可通过重写恢复小的正KL。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-24"
+        },
+        {
+          "id": "reference-not-certification",
+          "level": "implementation",
+          "question": "本地80位Decimal对照为什么不能写成论文strict正确舍入验收？",
+          "answer": "它只是有限样本的独立高精度参考，没有误差区间、舍入边界判定或Ziv重试，也只覆盖一个FP32分布族。严格认证与抽样数值一致是不同证据等级。",
+          "example": "教学例：32个近等输入相对误差小于2×10⁻6只能支持这个小核诊断，不能外推到18族或567M F.kl_div分量全部正确舍入。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-24"
+        }
+      ]
+    }
+  }
+}

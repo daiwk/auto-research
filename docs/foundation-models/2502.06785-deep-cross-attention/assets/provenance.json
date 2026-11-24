@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/abs/2502.06785v2",
+  "source_url": "https://arxiv.org/pdf/2502.06785v2#page=4",
+  "source_sha256": "594c5b5b017724dd1b0f5969f50a99ec0ca628890591c96fd9d6d1abde23d240",
+  "source_pdf_sha256": "594c5b5b017724dd1b0f5969f50a99ec0ca628890591c96fd9d6d1abde23d240",
+  "pdf_page": 4,
+  "page": 4,
+  "figure": "Figure 4",
+  "caption": "Figure 4: Computation diagram of a DCA decoder block.",
+  "crop_pdf_points": [
+    306,
+    68,
+    544,
+    304
+  ],
+  "crop_box_pdf_points": [
+    306,
+    68,
+    544,
+    304
+  ],
+  "render_scale": 3,
+  "asset_sha256": "0c18f1493c14ef218527094fc84a33c4a1c71e0c7568efcef99104dff2ebb41f",
+  "image_sha256": "0c18f1493c14ef218527094fc84a33c4a1c71e0c7568efcef99104dff2ebb41f",
+  "retrieved_on": "2026-11-24",
+  "reviewed_version": "v2",
+  "visually_reviewed": true,
+  "scientific_content_modified": false,
+  "extraction": "Original PDF crop including complete caption",
+  "copyright": "Copyright belongs to the original authors."
+}

@@ -7,7 +7,7 @@ hide:
 
 # 按需算力：选择专家、跳过计算，还是查回旧知识
 
-[基础模型](../index.md) · 更新 2026-11-18 · 27 篇主题资料 / 7 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-24 · 28 篇主题资料 / 8 篇重点对照
 
 参数容量、每 token 激活量与部署时延是三件事。Switch 选择计算专家，Engram 和 Memory Grafting 查局部模式；AdaDSF、Telescopic LM 与 WIDE 则分别从 token—层、整体深度和组宽度分配计算。先识别路由对象，才能讨论容量和省算。
 
@@ -32,6 +32,7 @@ hide:
 | [Telescopic Language Models](../../../foundation-models/2609.35769-telescopic-lm/README.md) · [原始来源](https://arxiv.org/abs/2609.35769)<br>章节：背景与主要改动 | 训练随机深度前缀并保留全深 anchor，让同一 checkpoint 在多个完整前缀深度可用。 | 控制的是可部署深度，不等于每个 token 都有细粒度层路由；本地只验证随机深度和 anchor 梯度路径。 |
 | [WIDE: Boosting Adaptive LLM Inference via Token-level Dynamic Width Pruning](../../../reproductions/2607.28418-wide/README.md) · [原始来源](https://arxiv.org/abs/2607.28418)<br>章节：背景与主要改动、核心公式、复现边界 | 每 token 分别选择 attention head group 与 FFN channel group，使计算粒度细于整层。 | 需要 mask 重排和设备内 block skip 才兑现速度；本地 dense kernel 下的稀疏率不能直接当加速。 |
 | [Smart Model Routing for Order-of-Magnitude LLM Cost Reduction](../../../foundation-models/2611.15911-smart-model-routing/README.md) · [原始来源](https://arxiv.org/abs/2611.15911v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果、结果、负控与边界 | 应用层按成本/预测质量选完整模型，计入router/checker、残余难题与token偏斜；cascade接受率需过严格全路径breakeven。 | Switch在单网络内做token级top-1专家和负载均衡，Smart Routing选完整endpoint。内部激活FLOPs与外部API账单不是同一单位；便宜调用或校准平均概率本身不保证可区分易题，也不保证省钱。 |
+| [DeepCrossAttention: Supercharging Transformer Residual Connections](../../../foundation-models/2502.06785-deep-cross-attention/README.md) · [原始来源](https://arxiv.org/abs/2502.06785v2)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 传统残差把原始输入和历层增量输出直接相加。DCA把这份历史保留下来，由可学习的feature×history基础权重，加上逐token、逐历史项的动态项，选择层输入；Q、K、V分别使用独立GRN-v3。这里的深度路由不是在层维做softmax，而是直接加权求和；普通attention仍在token维计算。 | RD-AttnRes从Block AttnRes出发保留共享QK路由、单独解耦V，采用其attention-residual深度选择机制。DCA的Q/K/V三路均独立，并以feature-dependent基础权重加ReLU动态项线性求和，不是把RD的V路由复制三份。两者都改变attention输入来源，却不能互换归一化、历史缓存或完整训练证据。 |
 
 </div>
 
@@ -54,6 +55,12 @@ AdaDSF 的层预算控制有多少 token 进入各层；Telescopic LM 使一个�
 Switch减少每token激活计算，而外部cascade无论首答是否采用都支付cheap/checker费用。原文2.19×变2.70×的误账与残余质量高估说明只统计终答不可靠；learned-router follow-up又未优于同成本blind mixing。CPU实现Eq.5/6/7与条件质量，只验证算术，不读取test gold选模型或宣称训练出有效router。
 
 对照来源：[smart-model-routing](../../../foundation-models/2611.15911-smart-model-routing/README.md) · [switch-transformer](../../../reproductions/2101.03961-switch-transformer/README.md)
+
+### DeepCrossAttention: Supercharging Transformer Residual Connections
+
+RD-AttnRes从Block AttnRes出发保留共享QK路由、单独解耦V，采用其attention-residual深度选择机制。DCA的Q/K/V三路均独立，并以feature-dependent基础权重加ReLU动态项线性求和，不是把RD的V路由复制三份。两者都改变attention输入来源，却不能互换归一化、历史缓存或完整训练证据。 固定v2§3.1文字公式为b+ReLU(wᵀG)：b初始化为1，w初始化为0。按PyTorch的ReLU'(0)=0，精确零初始化时动态w的第一步梯度为0；本地把它作为可见负控，而不是偷偷换激活或随机初始化。Figure3还画了文字公式未明确的Norm和不同的activation次序；本地声明按文字公式解释，不声称复刻作者训练器。Figure4的Q/K/V外部Norm以三套LayerNorm实现。
+
+对照来源：[deep-cross-attention](../../../foundation-models/2502.06785-deep-cross-attention/README.md) · [rd-attnres](../../../reproductions/2608.01075-rd-attnres/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -99,9 +106,23 @@ Switch减少每token激活计算，而外部cascade无论首答是否采用都�
 
     对照来源：[smart-model-routing](../../../foundation-models/2611.15911-smart-model-routing/README.md) · [switch-transformer](../../../reproductions/2101.03961-switch-transformer/README.md)
 
+### DCA与RD-AttnRes的Q/K/V解耦边界有什么区别？ {#cross-nov24-deep-cross-attention}
+
+??? note "展开答案与例子"
+
+    **答案：** RD-AttnRes保留共享QK、解耦V；DCA对Q、K、V各自配置独立GRN-v3，且深度混合公式不同。
+
+    **教学例子：** 教学例：只修改DCA的Q基础权重，K和V路由输出必须逐位不变；RD中Q和K本来共享路由。
+
+    对照来源：[deep-cross-attention](../../../foundation-models/2502.06785-deep-cross-attention/README.md) · [rd-attnres](../../../reproductions/2608.01075-rd-attnres/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-24** · RD-AttnRes从Block AttnRes出发保留共享QK路由、单独解耦V，采用其attention-residual深度选择机制。DCA的Q/K/V三路均独立，并以feature-dependent基础权重加ReLU动态项线性求和，不是把RD的V路由复制三份。两者都改变attention输入来源，却不能互换归一化、历史缓存或完整训练证据。 完整实验不复现与本地L1组件分开，不晋级Evolve。
+
+涉及：[deep-cross-attention](../../../foundation-models/2502.06785-deep-cross-attention/README.md) · [rd-attnres](../../../reproductions/2608.01075-rd-attnres/README.md)
 
 **2026-11-18** · 补应用层完整模型路由成本核，与token专家路由分层；保留learned-router负结果，显式计checker/router、token偏斜与条件fallback质量。完整推理/收集不复现。
 
@@ -111,7 +132,7 @@ Switch减少每token激活计算，而外部cascade无论首答是否采用都�
 
 覆盖 26 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 27 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 28 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -142,6 +163,7 @@ Switch减少每token激活计算，而外部cascade无论首答是否采用都�
 - [Telescopic Language Models](../../../foundation-models/2609.35769-telescopic-lm/README.md)
 - [WIDE: Boosting Adaptive LLM Inference via Token-level Dynamic Width Pruning](../../../reproductions/2607.28418-wide/README.md)
 - [Smart Model Routing for Order-of-Magnitude LLM Cost Reduction](../../../foundation-models/2611.15911-smart-model-routing/README.md)
+- [DeepCrossAttention: Supercharging Transformer Residual Connections](../../../foundation-models/2502.06785-deep-cross-attention/README.md)
 
 </details>
 

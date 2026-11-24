@@ -130,6 +130,7 @@ Agent 策略学习 = Agent policy learning
 检索增强与记忆 = Retrieval augmentation and memory
 深度生长与层复制 = Depth growth and layer duplication
 深度生长与残差结构 = Depth growth and residual structure
+研究Agent与自动实验 = Research agents and automated experiments
 潜在知识与泛化 = Latent knowledge and generalization
 生成式视频 Agent = Generative video agents
 知识与推理 = Knowledge and reasoning

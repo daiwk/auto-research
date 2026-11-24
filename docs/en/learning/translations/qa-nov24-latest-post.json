@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:vopd/nov24-basics": {
+      "source_sha256": "c37e8fe39578acb6785767453acb9f8ed2f805697aee6c934516d6542557c1f2",
+      "reviewed": true,
+      "fields": {
+        "question": "How can sparse verifier feedback reach unsampled tokens?",
+        "answer": "Project response-level verifier preference onto cumulative teacher/reference reward, then hold group statistics fixed and use full-vocabulary log ratios at visited prefixes. This reuses distributions rather than guessing correctness of unsampled responses.",
+        "example": "Teaching example: when high-D responses usually succeed, c is positive and an unsampled token receives a dense gradient from its teacher/reference ratio. Its possible continuations have not all been verified."
+      }
+    },
+    "qa/post-training:vopd/nov24-mechanism": {
+      "source_sha256": "a4eb159a31482fc7f94d9523ec2fca085ddd37b5e77522ac0bb0e084abcec96e",
+      "reviewed": true,
+      "fields": {
+        "question": "Which expectation is preserved by Rao–Blackwellization?",
+        "answer": "The local gradient expectation after the immediate-token approximation, conditional on the observed group/prefix and a fresh hypothetical next token. Fixed c and baseline permit score-identity cancellation; this is not an unbiased full-sequence verifier gradient.",
+        "example": "Teaching example: with fixed p=(0.2,0.8), enumerating two next tokens removes that sampling noise, not randomness in the already sampled group or future continuations."
+      }
+    },
+    "qa/post-training:vopd/nov24-comparison": {
+      "source_sha256": "34af0a9d8395436402ff7512dbf4ec654a1d46877aa6b091aba4b59d3d207fad",
+      "reviewed": true,
+      "fields": {
+        "question": "Is VOPD lambda GKD's student-data fraction?",
+        "answer": "No. GKD's mixture changes the source of prefixes. VOPD lambda scales teacher/reference extrapolation with group correlation c. Equal verifier outcomes use fixed0.25 extrapolation, not an invented c=0 fallback.",
+        "example": "Teaching example: lambda0.25 and c−0.8 give strength−0.2, moving the target toward reference. A GKD data fraction cannot express that operation with a negative value."
+      }
+    },
+    "qa/post-training:vopd/nov24-implementation": {
+      "source_sha256": "f8716591db20ab4f63b1b3b3d1590fbec41de9c1124b5924fac704e39650b243",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not claim reproduction of top-16 training?",
+        "answer": "The author repository currently only announces a future release, so trainer reduction details are not source-verified. Local code faithfully executes the theoretical finite full-vocabulary loss/gradient with supplied rewards/distributions, without rollout, models or a verifier.",
+        "example": "Teaching example: checking all gradients and equivalent targets in a three-token vocabulary does not execute the paper's eight-A1004B training."
+      }
+    },
+    "qa/post-training:shpo/nov24-basics": {
+      "source_sha256": "31c3dc52dab14a72f1cd5e7d98f91259876198036c1befa8279177e8da72ecdf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can DPO not express a preference triangle cycle?",
+        "answer": "Its pair logit is a difference of scalar potentials, so three edges telescope to zero. SHPO adds antisymmetric plane residuals with nonzero triangle circulation rather than enlarging the same BT scalar reward.",
+        "example": "Teaching example: three scalars cannot satisfy A>B, B>C and C>A. Unit-circle embeddings at0/120/240 degrees can give all three oriented plane areas the same sign."
+      }
+    },
+    "qa/post-training:shpo/nov24-mechanism": {
+      "source_sha256": "8eec0a3c5043fc50e70285b18eb238687bcbc0985e2da614e00ba7c60424341f",
+      "reviewed": true,
+      "fields": {
+        "question": "Is the curl head an exact orthogonal Hodge projection?",
+        "answer": "No. Remark3 explicitly describes a parametric antisymmetric head, not necessarily the fixed graph's orthogonal curl projection. Harmonic-free assumptions also exclude some global topological cycles. Swapping sign is only one structural property.",
+        "example": "Teaching example: oriented area is antisymmetric, but without solving the graph-level least-squares problem it is not an exact graph decomposition."
+      }
+    },
+    "qa/post-training:shpo/nov24-comparison": {
+      "source_sha256": "630003d0595e8fb5fc1e363735e9731f4a379d6f88169be3840b0fcbe9e6d1c3",
+      "reviewed": true,
+      "fields": {
+        "question": "Can augmented-head preference accuracy replace generation quality?",
+        "answer": "No. Acc_pi uses policy sequence probabilities, acc_dpo corrects by reference and acc_dpo+c adds the head. Generation does not automatically use this pairwise head. Preserve metric definitions and separate generation evaluation.",
+        "example": "Teaching example: fitting only the head can improve pair classification with an unchanged policy, without directly changing next-token probabilities."
+      }
+    },
+    "qa/post-training:shpo/nov24-implementation": {
+      "source_sha256": "3677f43d84fad6d306ff0e28502363970e605dd05963aeff395e64002b970f35",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the local kernel avoid silently using the detach variant?",
+        "answer": "It returns analytic W, gamma and both input-hidden gradients, all checked by finite differences. A generic nonzero head must have hidden gradients. Zero-projection backward and gamma=0 subgradient choices are explicit local conventions, not upstream defaults.",
+        "example": "Teaching example: alpha0 makes curl hidden gradients zero; generic nonzero alpha should not. Tests distinguish them without presenting frozen-input calculations as joint model training."
+      }
+    }
+  }
+}

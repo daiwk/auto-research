@@ -7,7 +7,7 @@ hide:
 
 # 从更便宜的一次前向，到可验证的长期研究闭环
 
-[搜广推](../index.md) · 更新 2026-11-20 · 23 篇主题资料 / 9 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-24 · 24 篇主题资料 / 10 篇重点对照
 
 ROCS减少请求内重复计算，Rec-Distill将昂贵教师知识移到训练，Effective Training Time追踪训练生命周期损耗，FORTE控制特征退役风险，Self-Evolving RecSys把提案、实验和线上反馈接成长期循环。它们优化的时间尺度不同；省GPU、删特征和自动提出方案，都不能直接当作推荐效果提升。
 
@@ -34,6 +34,7 @@ ROCS减少请求内重复计算，Rec-Distill将昂贵教师知识移到训练�
 | [MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems](../../../recommendation-components/2611.23910-mle-agents/README.md) · [原始来源](https://arxiv.org/abs/2611.23910v1)<br>章节：背景与主要改动、核心公式、同主题对照 | Meta把提假设、改代码、训练和读指标组成有人监督的模型研发循环。2.0每轮名义上并行七个候选和一个方差探针，使用与线上影响校准过的加权NE，而不是只追逐点击AUPRC。失败块名单、结构化输出和只回传近期未采纳赢家控制上下文陈旧；最终模型仍由工程师审核并独立做线上实验。 | EvoPilot先锁定控制/实验两臂的比较合同并拒绝不匹配证据；MLE Agents强调搜索目标与同轮噪声探针。二者都不让“训练结束”自动成为可发布结论，目标校准也不能取代EvoPilot的产物一致性检查。 |
 | [MARS Technical Report](../../../recommendation-components/2611.24006-mars-fapo/README.md) · [原始来源](https://arxiv.org/abs/2611.24006v1)<br>章节：背景与主要改动、核心公式、同主题对照 | MARS让近线0.6B策略为用户产生跨召回、粗排、精排和重排的七维配置，经校验后缓存，在线始终不等待LLM。SFT建立合法格式，FAPO把偏好比较集中到实际不同的动作值token，最后GRPO在沙箱回放和冻结奖励模型上继续优化。正文版权行为Taobao，贡献者按名字母排序，不虚构个人一作机构。 | EvoPilot校验模型开发实验的两臂证据，MARS生成和训练线上流水线配置。MARS的缓存/fallback是服务安全，不能替代开发比较合同；ActionMask loss也不能证明策略已经能生成合法或优质配置。 |
 | [Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models](../../../recommendation-components/2611.26531-fleet-feature-optimization/README.md) · [原始来源](https://arxiv.org/abs/2611.26531v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | Meta把特征创建、FI估计、跨任务Pareto分层、多来源混合和有约束搜索连成fleet级流程。LLM提出假设，确定性工具验证；每个模型同时面对自身serving限制和跨模型共享的上游pipeline预算。另一个模型已经使用某特征时，新增使用不一定新增pipeline成本。 | MLE Agents用同轮方差探针对候选研发做目标准入；Fleet侧重特征共享成本与serving可行性。低NE不能覆盖资源超限，低成本也不能绕过NE必须优于基线的准入。两者诊断接口都不能自行证明模型研发或线上收益。 |
+| [Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents](../../../recommendation-components/2611.29613-weight-coding/README.md) · [原始来源](https://arxiv.org/abs/2611.29613v1)<br>章节：与已有方法的关系、结果、负控与边界 | 本地CPU参考只实现Table1的缩放、显式reference重置、投影置零、插值、方向平移，以及§3.4反向配对Gaussian ES、centered rank、Adam上升和validation选步。没有compression、LLM假设生成、缓存生产引擎、TorchScript编辑、真实检索模型或线上A/B。原文未公布Adam细节和ties规则，本地显式采用(.9,.999)、epsilon=1e-8和平均并列rank；不能声称恢复私有实现。每seed20步×16对，synthetic quadratic仅查机制；不接Evolve晋级。 | EvoPilot强调比较证据的完整性：共同base、数据、评测器、有效输出深度和唯一treatment都要匹配，再由人工审核接纳。Weight Coding则规定了可搜索对象：固定架构/服务上的权重数值和少量row scales。验证协议与搜索算子互补、不能互相替代；本地ES不等于已经完成自主研究或部署。原论文直接叠加编辑会退化、重新搜索可恢复，这不意味着任意两个本地算子组合必然有收益。 |
 
 </div>
 
@@ -74,6 +75,12 @@ Eq11–13保留全chosen回答的生成anchor，只有偏好项乘clip(1+2(p+−
 MLE Agents用同轮方差探针对候选研发做目标准入；Fleet侧重特征共享成本与serving可行性。低NE不能覆盖资源超限，低成本也不能绕过NE必须优于基线的准入。两者诊断接口都不能自行证明模型研发或线上收益。 FI向量按所有任务的逐维支配关系分层，不先把任务loss相加。多个来源固定顺序取未选特征，论文写round(pi_m N)，却没有规定舍入与末层同分切分；本地将整数quota及层内顺序显式交给调用方。成本使用完整特征集合oracle，不把共享成本猜成各特征价格求和；跨预算的最贵删除顺序也由外部提供。QPS约束必须先变换成1/QPS这种上界口径。
 
 对照来源：[fleet-feature-optimization](../../../recommendation-components/2611.26531-fleet-feature-optimization/README.md) · [mle-agents](../../../recommendation-components/2611.23910-mle-agents/README.md)
+
+### 它与Evopilot的自进化有什么不同？
+
+EvoPilot强调比较证据的完整性：共同base、数据、评测器、有效输出深度和唯一treatment都要匹配，再由人工审核接纳。Weight Coding则规定了可搜索对象：固定架构/服务上的权重数值和少量row scales。验证协议与搜索算子互补、不能互相替代；本地ES不等于已经完成自主研究或部署。原论文直接叠加编辑会退化、重新搜索可恢复，这不意味着任意两个本地算子组合必然有收益。
+
+对照来源：[weight-coding](../../../recommendation-components/2611.29613-weight-coding/README.md) · [evopilot](../../../reproductions/2609.21257-evopilot/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -159,9 +166,23 @@ MLE Agents用同轮方差探针对候选研发做目标准入；Fleet侧重特�
 
     对照来源：[fleet-feature-optimization](../../../recommendation-components/2611.26531-fleet-feature-optimization/README.md) · [mle-agents](../../../recommendation-components/2611.23910-mle-agents/README.md)
 
+### 它与Evopilot的自进化有什么不同？ {#cross-nov24-weight-coding}
+
+??? note "展开答案与例子"
+
+    **答案：** EvoPilot强调比较证据的完整性：共同base、数据、评测器、有效输出深度和唯一treatment都要匹配，再由人工审核接纳。Weight Coding则规定了可搜索对象：固定架构/服务上的权重数值和少量row scales。验证协议与搜索算子互补、不能互相替代；本地ES不等于已经完成自主研究或部署。原论文直接叠加编辑会退化、重新搜索可恢复，这不意味着任意两个本地算子组合必然有收益。
+
+    **教学例子：** 教学例：修改模型结构和训练pipeline属于代码级搜索；只调现有层的row log-scales属于固定架构的权重编辑，两者都不能用test挑最佳轮次。
+
+    对照来源：[weight-coding](../../../recommendation-components/2611.29613-weight-coding/README.md) · [evopilot](../../../reproductions/2609.21257-evopilot/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-24** · 本地CPU参考只实现Table1的缩放、显式reference重置、投影置零、插值、方向平移，以及§3.4反向配对Gaussian ES、centered rank、Adam上升和validation选步。没有compression、LLM假设生成、缓存生产引擎、TorchScript编辑、真实检索模型或线上A/B。原文未公布Adam细节和ties规则，本地显式采用(.9,.999)、epsilon=1e-8和平均并列rank；不能声称恢复私有实现。每seed20步×16对，synthetic quadratic仅查机制；不接Evolve晋级。
+
+涉及：[weight-coding](../../../recommendation-components/2611.29613-weight-coding/README.md) · [evopilot](../../../reproductions/2609.21257-evopilot/README.md)
 
 **2026-11-20** · MLE Agents用同轮方差探针对候选研发做目标准入；Fleet侧重特征共享成本与serving可行性。低NE不能覆盖资源超限，低成本也不能绕过NE必须优于基线的准入。两者诊断接口都不能自行证明模型研发或线上收益。 原文线上证据与本地合同分开记录。
 
@@ -183,7 +204,7 @@ MLE Agents用同轮方差探针对候选研发做目标准入；Fleet侧重特�
 
 覆盖 19 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 23 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 24 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -210,6 +231,7 @@ MLE Agents用同轮方差探针对候选研发做目标准入；Fleet侧重特�
 - [MLE Agents: Autonomous ML Engineering in Large-scale Recommendation Systems](../../../recommendation-components/2611.23910-mle-agents/README.md)
 - [MARS Technical Report](../../../recommendation-components/2611.24006-mars-fapo/README.md)
 - [Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models](../../../recommendation-components/2611.26531-fleet-feature-optimization/README.md)
+- [Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents](../../../recommendation-components/2611.29613-weight-coding/README.md)
 
 </details>
 

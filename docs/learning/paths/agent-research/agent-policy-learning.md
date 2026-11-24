@@ -7,7 +7,7 @@ hide:
 
 # 交互策略学习：把轨迹反馈变成更新
 
-[Agent](index.md) / 228 个问题 · 57 篇论文
+[Agent](index.md) / 232 个问题 · 58 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">228 个问题 · 57 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">232 个问题 · 58 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ooas" data-paper-title="Optimistic Online Learning for Coding Agents with Aggregate Feedback" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Optimistic Online Learning for Coding Agents with Aggregate Feedback Agent National University of Singapore, School of Computing 2026-11-23 OOAS把activation steering候选选择建模为逐turn多臂bandit。每轮先见所有候选的reward hint，选一个策略；任务结束只见已选序列的加和reward，不见逐轮贡献。它不是猜哪条编辑会通过隐藏测试，而是在聚合反馈粒度下修正累计hint误差。论文理论要求reward向量、hint和任务划分预先固定、独立于学习者随机数；真实编码Agent的状态依赖轨迹不自动满足该假设。分布不是softmax：FTRL同时使用Tsallis项和log barrier。 成本过高，不复现（审查 DONE）；component_only / L1 CPU数学机制诊断，diagnostic_only=true；不是Agent能力复现。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。独立标准库CPU核实际解FTRL的KKT方程：Gk+α/√pk+β/pk为共同乘子，通过平移score与二分求解，而非softmax替身；实现共享Exp采样、ρ、聚合残差、potential和Alg2重启。begin→choose→finish只接受当前hint和最终aggregate，不接受turn reward向量或gold答案/计划。  Agent 策略学习 CPU机制组件 Agent 交互策略学习：把轨迹反馈变成更新 任务完成才有反馈，为什么不能逐轮做普通bandit更新？ 因为只观察一项任务总reward，无法知道每轮被选臂各贡献多少；把总reward复制到每轮会改变估计器。OOAS先用hint，再用整任务事件校正。 教学例：两轮分别选A/B后总reward为1，不能据此断定A和B各得1，也不能任意各分0.5。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<span id="paper-agent-research-ooas-68b26b58" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-06253c860f3fcc07">任务完成才有反馈，为什么不能逐轮做普通bandit更新？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aooas">Optimistic Online Learning for Coding Agents with Aggregate Feedback</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · National University of Singapore, School of Computing</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>因为只观察一项任务总reward，无法知道每轮被选臂各贡献多少；把总reward复制到每轮会改变估计器。OOAS先用hint，再用整任务事件校正。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两轮分别选A/B后总reward为1，不能据此断定A和B各得1，也不能任意各分0.5。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30405v1">原论文</a> · <a href="../../../../agent-research/2611.30405-ooas/">实现解读</a> · <a href="#qa-06253c860f3fcc07">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ooas" data-paper-title="Optimistic Online Learning for Coding Agents with Aggregate Feedback" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Optimistic Online Learning for Coding Agents with Aggregate Feedback Agent National University of Singapore, School of Computing 2026-11-23 OOAS把activation steering候选选择建模为逐turn多臂bandit。每轮先见所有候选的reward hint，选一个策略；任务结束只见已选序列的加和reward，不见逐轮贡献。它不是猜哪条编辑会通过隐藏测试，而是在聚合反馈粒度下修正累计hint误差。论文理论要求reward向量、hint和任务划分预先固定、独立于学习者随机数；真实编码Agent的状态依赖轨迹不自动满足该假设。分布不是softmax：FTRL同时使用Tsallis项和log barrier。 成本过高，不复现（审查 DONE）；component_only / L1 CPU数学机制诊断，diagnostic_only=true；不是Agent能力复现。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。独立标准库CPU核实际解FTRL的KKT方程：Gk+α/√pk+β/pk为共同乘子，通过平移score与二分求解，而非softmax替身；实现共享Exp采样、ρ、聚合残差、potential和Alg2重启。begin→choose→finish只接受当前hint和最终aggregate，不接受turn reward向量或gold答案/计划。  Agent 策略学习 CPU机制组件 Agent 交互策略学习：把轨迹反馈变成更新 整任务都选同一臂的概率能把各轮pk相乘吗？ 不能。每任务共享一组Exp噪声，动作相关；ρ使用跨turn概率比的最大值。独立相乘对应另一种采样，会使importance权重失真。 教学例：两臂概率从(0.3,0.7)变成(0.8,0.2)，共享噪声下A全胜概率0.3，不是0.24。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-fe30f69fde525b6b">整任务都选同一臂的概率能把各轮pk相乘吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aooas">Optimistic Online Learning for Coding Agents with Aggregate Feedback</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · National University of Singapore, School of Computing</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。每任务共享一组Exp噪声，动作相关；ρ使用跨turn概率比的最大值。独立相乘对应另一种采样，会使importance权重失真。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两臂概率从(0.3,0.7)变成(0.8,0.2)，共享噪声下A全胜概率0.3，不是0.24。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30405v1">原论文</a> · <a href="../../../../agent-research/2611.30405-ooas/">实现解读</a> · <a href="#qa-fe30f69fde525b6b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ooas" data-paper-title="Optimistic Online Learning for Coding Agents with Aggregate Feedback" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Optimistic Online Learning for Coding Agents with Aggregate Feedback Agent National University of Singapore, School of Computing 2026-11-23 OOAS把activation steering候选选择建模为逐turn多臂bandit。每轮先见所有候选的reward hint，选一个策略；任务结束只见已选序列的加和reward，不见逐轮贡献。它不是猜哪条编辑会通过隐藏测试，而是在聚合反馈粒度下修正累计hint误差。论文理论要求reward向量、hint和任务划分预先固定、独立于学习者随机数；真实编码Agent的状态依赖轨迹不自动满足该假设。分布不是softmax：FTRL同时使用Tsallis项和log barrier。 成本过高，不复现（审查 DONE）；component_only / L1 CPU数学机制诊断，diagnostic_only=true；不是Agent能力复现。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。独立标准库CPU核实际解FTRL的KKT方程：Gk+α/√pk+β/pk为共同乘子，通过平移score与二分求解，而非softmax替身；实现共享Exp采样、ρ、聚合残差、potential和Alg2重启。begin→choose→finish只接受当前hint和最终aggregate，不接受turn reward向量或gold答案/计划。  Agent 策略学习 CPU机制组件 Agent 交互策略学习：把轨迹反馈变成更新 与From Acting to Learning都做选择，选择的对象和时点相同吗？ 不同。旧文选历史action用于后续SFT；OOAS在当前执行turn选steering策略，结束后用aggregate更新。不能用离线gradient score直接替代hint并宣称有同样regret保证。 教学例：挑256条清洁经验是训练数据选择；本轮选Cap=1.5还是2.0是在线干预选择。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e0b01812f2c9669a">与From Acting to Learning都做选择，选择的对象和时点相同吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aooas">Optimistic Online Learning for Coding Agents with Aggregate Feedback</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · National University of Singapore, School of Computing</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同。旧文选历史action用于后续SFT；OOAS在当前执行turn选steering策略，结束后用aggregate更新。不能用离线gradient score直接替代hint并宣称有同样regret保证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：挑256条清洁经验是训练数据选择；本轮选Cap=1.5还是2.0是在线干预选择。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30405v1">原论文</a> · <a href="../../../../agent-research/2611.30405-ooas/">实现解读</a> · <a href="#qa-e0b01812f2c9669a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ooas" data-paper-title="Optimistic Online Learning for Coding Agents with Aggregate Feedback" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Optimistic Online Learning for Coding Agents with Aggregate Feedback Agent National University of Singapore, School of Computing 2026-11-23 OOAS把activation steering候选选择建模为逐turn多臂bandit。每轮先见所有候选的reward hint，选一个策略；任务结束只见已选序列的加和reward，不见逐轮贡献。它不是猜哪条编辑会通过隐藏测试，而是在聚合反馈粒度下修正累计hint误差。论文理论要求reward向量、hint和任务划分预先固定、独立于学习者随机数；真实编码Agent的状态依赖轨迹不自动满足该假设。分布不是softmax：FTRL同时使用Tsallis项和log barrier。 成本过高，不复现（审查 DONE）；component_only / L1 CPU数学机制诊断，diagnostic_only=true；不是Agent能力复现。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。独立标准库CPU核实际解FTRL的KKT方程：Gk+α/√pk+β/pk为共同乘子，通过平移score与二分求解，而非softmax替身；实现共享Exp采样、ρ、聚合残差、potential和Alg2重启。begin→choose→finish只接受当前hint和最终aggregate，不接受turn reward向量或gold答案/计划。  Agent 策略学习 CPU机制组件 Agent 交互策略学习：把轨迹反馈变成更新 potential gap为负应裁成0再累计吗？ 不应。Alg2累计有符号gap，只有总值严格超过H才doubling并清零score和gap；改成非负累计改变重启时点和算法。 教学例：已有gap为-2，新gap为3时累计是1，不是3；H=1时等于阈值仍不重启。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3942a35330ee7a43">potential gap为负应裁成0再累计吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aooas">Optimistic Online Learning for Coding Agents with Aggregate Feedback</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · National University of Singapore, School of Computing</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不应。Alg2累计有符号gap，只有总值严格超过H才doubling并清零score和gap；改成非负累计改变重启时点和算法。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：已有gap为-2，新gap为3时累计是1，不是3；H=1时等于阈值仍不重启。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30405v1">原论文</a> · <a href="../../../../agent-research/2611.30405-ooas/">实现解读</a> · <a href="#qa-3942a35330ee7a43">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:acting-to-learning" data-paper-title="From Acting to Learning: Experience Selection toward Continually Learning Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="From Acting to Learning: Experience Selection toward Continually Learning Agents Agent Country Garden Services AI Lab / Omni AI 2026-11-20 论文把成功交互后的经验选择单独隔离：历史池先固定，选择规则决定训练哪些action记录，所有学生使用同一训练预算与部署executor。它不是一个新通用梯度影响公式；打分沿用LESS式优化器感知梯度，贡献是Agent学习中的严格对照，尤其把排序规则和可选择的覆盖空间交叉。完整研究只有一次选择—训练阶段，没有验证多轮持续学习、遗忘或自主修改harness。候选LoRA梯度在warmup第8/16/24/32个checkpoint上，与冻结Adam一、二阶矩构成ranking feature； 成本过高，不复现（审查 DONE）。component_only / L1 CPU公式与调度诊断，diagnostic_only=true。不是Agent能力复现或Evolve集成。首发为2026-11-20，发现/审查为2026-11-23，不称11月23日新首发。本地独立实现NumPy float64公式核：显式梯度/冻结moments转feature、逐support向量归一化、checkpoint平均后family最大值、按完整字符串精确去重、全局top/random和三轮调度、按reference逐位置匹配stratum并保持不同内容配额的选择。零范数方向原文未定义，明确拒绝而不补造0分；  Agent 策略学习 acting-to-learning Agent 交互策略学习：把轨迹反馈变成更新 既然记录都成功，为什么还要选择？ 成功只说明当时动作完成了任务；重复、容易预测的记录未必补上学生缺口。论文在固定经验池与训练预算下比较选择规则，而不把采集成功率当学生学习收益。 教学例：重复100次熟悉的拿杯子动作，可能不如补一条学生缺失的清洁动作；这只是示意，不是本文测量。 2026-11-23">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-acting-to-learning-404dedab" class="ar-learning-paper-anchor"></span>

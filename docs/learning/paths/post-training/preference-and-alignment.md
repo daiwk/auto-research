@@ -7,7 +7,7 @@ hide:
 
 # 偏好与对齐：先看反馈长什么样
 
-[LLM 后训练](index.md) / 128 个问题 · 32 篇论文
+[LLM 后训练](index.md) / 132 个问题 · 33 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">128 个问题 · 32 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">132 个问题 · 33 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:shpo" data-paper-title="Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences LLM 后训练 Jinan University 2026-11-23 DPO把偏好写成response标量势之差，围绕三角形相加为零，不能表示A胜B、B胜C、C胜A的局部环。SHPO保留DPO项，再把response最后层hidden仅在response token上均值池化，经无bias W投影到2K维并归一化；每个二维plane的有向面积乘γ后相加，构造交换两回答即反号的残差。γ的L1惩罚使不活跃plane受压制；梯度同时流回W、γ和共享policy hidden，不是固定打分后重新排序。 完整实验成本过高，不复现（审查 DONE）；多seed不升级机制诊断为能力比较，没有下载数据/权重、生成真实response、训练模型或调用judge。L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU执行response-only mean pool、无bias d×2K投影与L2归一化、antisymmetric plane特征、DPO+curl logistic loss及gamma L1 subgradient；  preference-and-alignment CPU机制组件 LLM 后训练 偏好与对齐：先看反馈长什么样 DPO为什么不能表达三角偏好环？ DPO pair logit是两个标量势之差，三边相加严格望远镜消去为0。SHPO增加antisymmetric plane残差，可使三角circulation非零；这不是仅扩大同一个BT标量reward。 教学例：A&gt;B、B&gt;C、C&gt;A三边都要正时，不存在三个标量同时满足；单位圆上0/120/240度的plane有向面积可给三边同号。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<span id="paper-post-training-shpo-bd72026e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-5e89eb3a723b10f0">DPO为什么不能表达三角偏好环？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ashpo">Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Jinan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>DPO pair logit是两个标量势之差，三边相加严格望远镜消去为0。SHPO增加antisymmetric plane残差，可使三角circulation非零；这不是仅扩大同一个BT标量reward。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A&gt;B、B&gt;C、C&gt;A三边都要正时，不存在三个标量同时满足；单位圆上0/120/240度的plane有向面积可给三边同号。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30135v1">原论文</a> · <a href="../../../../post-training/2611.30135-shpo/">实现解读</a> · <a href="#qa-5e89eb3a723b10f0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:shpo" data-paper-title="Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences LLM 后训练 Jinan University 2026-11-23 DPO把偏好写成response标量势之差，围绕三角形相加为零，不能表示A胜B、B胜C、C胜A的局部环。SHPO保留DPO项，再把response最后层hidden仅在response token上均值池化，经无bias W投影到2K维并归一化；每个二维plane的有向面积乘γ后相加，构造交换两回答即反号的残差。γ的L1惩罚使不活跃plane受压制；梯度同时流回W、γ和共享policy hidden，不是固定打分后重新排序。 完整实验成本过高，不复现（审查 DONE）；多seed不升级机制诊断为能力比较，没有下载数据/权重、生成真实response、训练模型或调用judge。L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU执行response-only mean pool、无bias d×2K投影与L2归一化、antisymmetric plane特征、DPO+curl logistic loss及gamma L1 subgradient；  preference-and-alignment CPU机制组件 LLM 后训练 偏好与对齐：先看反馈长什么样 curl head是不是精确Hodge正交投影？ 不是。原文Remark3明确它是参数化反对称head，不必等于固定图的正交curl子空间投影；harmonic-free假设也排除了某些全局拓扑循环。交换回答反号只是一项结构性质。 教学例：两个向量的有向面积天然反号，但不经过整张比较图的最小二乘求解，就不能把该值叫精确图级分解。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-26618f0ebdf5cca2">curl head是不是精确Hodge正交投影？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ashpo">Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Jinan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。原文Remark3明确它是参数化反对称head，不必等于固定图的正交curl子空间投影；harmonic-free假设也排除了某些全局拓扑循环。交换回答反号只是一项结构性质。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个向量的有向面积天然反号，但不经过整张比较图的最小二乘求解，就不能把该值叫精确图级分解。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30135v1">原论文</a> · <a href="../../../../post-training/2611.30135-shpo/">实现解读</a> · <a href="#qa-26618f0ebdf5cca2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:shpo" data-paper-title="Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences LLM 后训练 Jinan University 2026-11-23 DPO把偏好写成response标量势之差，围绕三角形相加为零，不能表示A胜B、B胜C、C胜A的局部环。SHPO保留DPO项，再把response最后层hidden仅在response token上均值池化，经无bias W投影到2K维并归一化；每个二维plane的有向面积乘γ后相加，构造交换两回答即反号的残差。γ的L1惩罚使不活跃plane受压制；梯度同时流回W、γ和共享policy hidden，不是固定打分后重新排序。 完整实验成本过高，不复现（审查 DONE）；多seed不升级机制诊断为能力比较，没有下载数据/权重、生成真实response、训练模型或调用judge。L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU执行response-only mean pool、无bias d×2K投影与L2归一化、antisymmetric plane特征、DPO+curl logistic loss及gamma L1 subgradient；  preference-and-alignment CPU机制组件 LLM 后训练 偏好与对齐：先看反馈长什么样 含curl的偏好准确率能替代策略生成质量吗？ 不能。accπ看policy自身序列概率，acc_dpo做reference校正，acc_dpo+c还用额外head；生成时并不自动使用这个pairwise head。必须保留三个指标口径和独立生成评测。 教学例：固定policy不变而只训练head，也可能让pair分类变准，但policy下一token分布不会因此直接改变。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-8299638cf3ccdf9e">含curl的偏好准确率能替代策略生成质量吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ashpo">Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Jinan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。accπ看policy自身序列概率，acc_dpo做reference校正，acc_dpo+c还用额外head；生成时并不自动使用这个pairwise head。必须保留三个指标口径和独立生成评测。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：固定policy不变而只训练head，也可能让pair分类变准，但policy下一token分布不会因此直接改变。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30135v1">原论文</a> · <a href="../../../../post-training/2611.30135-shpo/">实现解读</a> · <a href="#qa-8299638cf3ccdf9e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:shpo" data-paper-title="Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences LLM 后训练 Jinan University 2026-11-23 DPO把偏好写成response标量势之差，围绕三角形相加为零，不能表示A胜B、B胜C、C胜A的局部环。SHPO保留DPO项，再把response最后层hidden仅在response token上均值池化，经无bias W投影到2K维并归一化；每个二维plane的有向面积乘γ后相加，构造交换两回答即反号的残差。γ的L1惩罚使不活跃plane受压制；梯度同时流回W、γ和共享policy hidden，不是固定打分后重新排序。 完整实验成本过高，不复现（审查 DONE）；多seed不升级机制诊断为能力比较，没有下载数据/权重、生成真实response、训练模型或调用judge。L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU执行response-only mean pool、无bias d×2K投影与L2归一化、antisymmetric plane特征、DPO+curl logistic loss及gamma L1 subgradient；  preference-and-alignment CPU机制组件 LLM 后训练 偏好与对齐：先看反馈长什么样 本地怎样防止把detach版误写成SHPO梯度？ 返回对W、γ和两侧输入hidden的解析梯度并逐项做有限差分；正常非零head应有hidden梯度。零投影反向0与γ=0次梯度0明确是本地边界约定，非上游默认。 教学例：α=0时curl对hidden梯度应为0；α非零且输入一般位置时应非零，单测比较两者而不把冻结hidden的拟合宣传成联合模型训练。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-363976a9627c732c">本地怎样防止把detach版误写成SHPO梯度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ashpo">Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Jinan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>返回对W、γ和两侧输入hidden的解析梯度并逐项做有限差分；正常非零head应有hidden梯度。零投影反向0与γ=0次梯度0明确是本地边界约定，非上游默认。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：α=0时curl对hidden梯度应为0；α非零且输入一般位置时应非零，单测比较两者而不把冻结hidden的拟合宣传成联合模型训练。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30135v1">原论文</a> · <a href="../../../../post-training/2611.30135-shpo/">实现解读</a> · <a href="#qa-363976a9627c732c">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ambient-sft" data-paper-title="Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching LLM 后训练 Massachusetts Institute of Technology 2026-11-17 目标不是复制base全部细节，而是在小数据SFT时保留其粗粒度分布；升温降低对错误细节的信任，clean CE仍提供新任务方向。原式没有T²，T趋无穷时KL项自然消失并还原SFT；乘T²会改变这个极限和温度控制的偏差—方差关系。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。原式CE与同位置温度forward-KL、冻结教师、随机clean/matching分支；不乘T²。  preference-and-alignment 后训练算法组件 LLM 后训练 偏好与对齐：先看反馈长什么样 为什么用可能比学生更弱的冻结base做教师？ 目标不是复制base全部细节，而是在小数据SFT时保留其粗粒度分布；升温降低对错误细节的信任，clean CE仍提供新任务方向。 教学例：两个类别的教师偏差在高温下变小，但目标token的CE并未被删掉。 2026-11-18">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-ambient-sft-f64b9f6a" class="ar-learning-paper-anchor"></span>

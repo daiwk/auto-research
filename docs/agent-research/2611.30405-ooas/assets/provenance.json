@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-24",
+  "figures": [
+    {
+      "file": "paper-figure-01.png",
+      "figure": "Algorithm 1",
+      "paper_id": "2611.30405",
+      "version": "v1",
+      "paper_url": "https://arxiv.org/abs/2611.30405v1",
+      "source_url": "https://arxiv.org/pdf/2611.30405v1#page=5",
+      "source_sha256": "7b976fa4eb802030e0fd09c0c57b171dd7fa2ee26a6ef387ab92327aa3bdec44",
+      "asset_sha256": "6e46c2cec0fbd8bea56a787101a75e268848f11fe7ea121d116bff8c3965d074",
+      "image_sha256": "6e46c2cec0fbd8bea56a787101a75e268848f11fe7ea121d116bff8c3965d074",
+      "source_kind": "fixed_version_pdf_crop_rendered_png",
+      "page": 5,
+      "crop_points": [
+        65,
+        65,
+        550,
+        278
+      ],
+      "render_dpi": 144,
+      "caption_included": true,
+      "scientific_content_modified": false,
+      "visual_review_done": true,
+      "attribution": "Original authors' figure/algorithm and caption. Not local results; no new license granted."
+    }
+  ]
+}

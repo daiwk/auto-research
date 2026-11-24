@@ -2174,6 +2174,30 @@
             "同主题比较与边界",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "agent-research:transport-safe-audit",
+          "position": "不同Agent产生不同轨迹；即使裁判在给定(X,Y)时看不到Agent身份，其sensitivity/specificity的平均值也会随成功/失败轨迹分布改变。论文连接scalar transport偏差、支持与识别、随机人工audit、anytime monitoring和rank sets；这些统计工具本身不是新发明。主要证据是semi-synthetic，公共Agent数据的既有分析未在本文独立重跑，不据此声称轨迹长度有因果作用。",
+          "tradeoff": "CoEvoBench保护Selection/Test内容并审计训练血缘，回答候选是否越界及能否泛化；本篇问即使访问隔离正确，LLM judge误差是否能跨轨迹分布transport。二者不能替代：无数据泄漏不等于judge已校准，AIPW也不能消除被评Agent读了gold造成的污染。CoEvo完整系统本地未跑，本篇也没有live judge结果可横比。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ]
+        },
+        {
+          "paper": "agent-research:morse",
+          "position": "流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。核心是研究—实现—验证的自主Editor与可扩展服务，不是固定候选列表或门控公式本身。",
+          "tradeoff": "Harness²固定工具表面，用Propose–Probe–Compose执行对照改当前任务harness，再跨任务保存经验；MORSE在流式记忆设计中把在线文献研究和host批准的感知工具获取纳入搜索，保留当前head迭代。二者不能简化为同一“反思循环”：MORSE的validation概率/成本gate与持续服务扩展有专门契约，Harness²匿名selector也不是其scorer。本地Harness²机制替身与本篇review-only没有可比较Agent分数。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ]
         }
       ],
       "analysis": [
@@ -2458,6 +2482,22 @@
           "papers": [
             "agent-research:coevobench",
             "agent-research:sage-evolve"
+          ]
+        },
+        {
+          "title": "Transport-safe audit：校准过的LLM裁判也未必能跨Agent搬用",
+          "body": "已知随机audit概率φ有正下界时，AIPW用out-of-fold预测m加R/φ(Y−m)修正；未audit样本只用m，估计值不强裁[0,1]。bounded allocation令φ=min(1,max(φmin,λ√m(1−m)))满足可达预算。在线e-process要求预测函数和audit规则由过去选定、新V到达后求值，当前label不能反过来改它们；目标必须固定且逐任务独立稳定。支持缺失时给outer set而不补造点估计，rank只用严格区间分离而非中点硬排。精确枚举小型Bernoulli audit设计，验证错误imputation仍design-unbiased；检查AIPW可超1而不裁剪、同fold训练拒绝、预算/positivity/零方差stratum、log-space与直接乘积相同、长stream不溢出、未audit真值拒绝、未知target拒绝、重叠/恰接区间不硬定序。三seed只是数学控制，不是coverage达到0.95的经验估计。",
+          "papers": [
+            "agent-research:transport-safe-audit",
+            "agent-research:coevobench"
+          ]
+        },
+        {
+          "title": "MORSE：用反复出现的记忆失败驱动在线研究与工具扩展",
+          "body": "20轮accuracy后5轮efficiency。accuracy要求平均correct-option probability至少增加0.004；efficiency要求延迟≤父代0.9，允许每轮概率/正确数损失0.003/2，同时相对stage-entry累计损失≤0.008/4。都须延迟≤1s、write load≤1、完整validation问题数不变。accuracy可从qualified archive选，efficiency不取archive；合并后必须重新验证。64张persistent帧之外另有16秒近期窗口，text/vector无全局存储上限，不能宣传总memory恒定。Editor只看训练逐题trace及validation聚合；benchmark/答案链接经broker禁止。审查保留估计latency与实测latency、frame cap与无限text/vector、已装服务与实际采用服务、rejected diff复用与重新验证的区别。作者用gold计算validation指标只发生在host/evaluator侧，不允许把gold给Solver/Editor。本地没有通过率或性能负控实测。",
+          "papers": [
+            "agent-research:morse",
+            "agent-research:harness2"
           ]
         }
       ],
@@ -2814,9 +2854,29 @@
             "agent-research:coevobench",
             "agent-research:sage-evolve"
           ]
+        },
+        {
+          "id": "cross-nov24-transport-safe-audit",
+          "question": "与CoEvo的数据隔离审计，哪一个能替代哪一个？",
+          "answer": "都不能。CoEvo限制任务/答案访问和训练血缘；本篇校正裁判测量误差。没有泄漏仍可judge偏差；校正judge也不能让读过gold的Agent重新成为合格评测对象。",
+          "example": "教学例：一个没见测试答案的Agent被错误裁判低估，需要audit；一个见过测试答案的Agent即使judge完全准确也已污染。",
+          "papers": [
+            "agent-research:transport-safe-audit",
+            "agent-research:coevobench"
+          ]
+        },
+        {
+          "id": "cross-nov24-morse",
+          "question": "与Harness²都改harness，能共用一个选择器解释吗？",
+          "answer": "不能。Harness²匿名选择已执行最终产物，跨任务重启初始harness；MORSE持续head并按私有validation质量/延迟筛选，还扩展host批准感知服务。对象和反馈不同。",
+          "example": "教学例：匿名挑两个报告不是按正确选项概率筛视频记忆程序；装了VideoMAE也不等于已被最终harness采用。",
+          "papers": [
+            "agent-research:morse",
+            "agent-research:harness2"
+          ]
         }
       ],
-      "updated": "2026-11-23",
+      "updated": "2026-11-24",
       "reviewed_papers": [
         "agent-research:verified-quantum-wiki",
         "agent-research:rsi-opt",
@@ -2897,7 +2957,9 @@
         "agent-research:searchinject",
         "agent-research:buggymle-cci",
         "agent-research:sage-evolve",
-        "agent-research:coevobench"
+        "agent-research:coevobench",
+        "agent-research:transport-safe-audit",
+        "agent-research:morse"
       ],
       "updates": [
         {
@@ -3395,6 +3457,30 @@
             "agent-research:sage-evolve": "215b157cedab8a5a9798cbeabe4734d6e121d2d7ee52054df314488ec887b176"
           },
           "summary": "本地只收录固定v1、代码提交、split/审计/成本契约与同主题比较；没有新建算法模块、可执行adapter、训练、researcher API调用或benchmark试跑。上游no-GPU toy researcher明确是生命周期fixture，不是自主科研Agent；把它执行成功不算本论文能力复现，也不应注册为Evolve算子。高成本决定本身已审查完成，不需要伪造种子指标或GPU回执。 完整实验高成本不复现，审查DONE。"
+        },
+        {
+          "date": "2026-11-24",
+          "papers": [
+            "agent-research:transport-safe-audit",
+            "agent-research:coevobench"
+          ],
+          "source_revisions": {
+            "agent-research:transport-safe-audit": "6f04d7cc63853173d3153a6fd580e48c2334ae70fa00e4ae1b749ae95ffadf20",
+            "agent-research:coevobench": "46cfd36b03e74f4dcb83e7a643df67b536c616cf039013f14378b7d9cee1ac99"
+          },
+          "summary": "本地是evaluator侧标准库算术：scalar transport偏差、带显式fold声明的AIPW、finite-strata bounded allocation、支持缺失outer set、严格区间rank sets和log-space hedged e-process。plan先提交m与φ再随机决定audit；observe只收已audit的0/1，未audit必须None，并逐episode更新。拒绝换target、未冻结/非独立任务声明和λ不严格小于φmin。仅对预先固定有限θ网格反演，accepted_grid不是连续CS端点，真值不在网格时没有网格覆盖说法。没有nuisance拟合、真人采集、LLM裁判、三judge潜变量模型、cluster bootstrap或live leaderboard；时序/fold声明是外部统计契约，不是恶意调用方不可绕过的安全证明。 完整campaign终态不复现，审查DONE。"
+        },
+        {
+          "date": "2026-11-24",
+          "papers": [
+            "agent-research:morse",
+            "agent-research:harness2"
+          ],
+          "source_revisions": {
+            "agent-research:morse": "c595ce2784525d97645fa3b1ac219503e405b1015866a17fd786f29d72009029",
+            "agent-research:harness2": "c738a9266c1647b8f5cc0e50a0055d1aecf1fcf783ee78de3405c2e84850f48a"
+          },
+          "summary": "仅资料收录与成本审查：固定v1、来源/元数据、访问边界、成本和同主题比较。没有本地算法模块、Editor、研究broker、视频服务、harness代码演化、benchmark、GPU试跑或Evolve operator。不能实现几个gate后称已复现MORSE，也不需要给review-only制造三seed指标或GPU receipt。 完整campaign终态不复现，审查DONE。"
         }
       ]
     },
@@ -3511,6 +3597,18 @@
             "同主题比较与边界",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "agent-research:ooas",
+          "position": "OOAS把activation steering候选选择建模为逐turn多臂bandit。每轮先见所有候选的reward hint，选一个策略；任务结束只见已选序列的加和reward，不见逐轮贡献。它不是猜哪条编辑会通过隐藏测试，而是在聚合反馈粒度下修正累计hint误差。论文理论要求reward向量、hint和任务划分预先固定、独立于学习者随机数；真实编码Agent的状态依赖轨迹不自动满足该假设。",
+          "tradeoff": "From Acting to Learning在固定历史池里选SFT action记录，选择后冷启动学生；OOAS在任务执行中选steering臂，并在任务结束后修正hint。前者的梯度相关性不是后者的reward预测，后者的共享noise也不是经验重放的shuffle。两者都必须分开选择信息与最终评测；本地均没有真实Agent能力比较。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ]
         }
       ],
       "analysis": [
@@ -3562,6 +3660,14 @@
           "papers": [
             "agent-research:r2-tool-redundancy",
             "agent-research:adastep"
+          ]
+        },
+        {
+          "title": "OOAS：只看到任务总回报，也能用逐轮hint学习策略",
+          "body": "分布不是softmax：FTRL同时使用Tsallis项和log barrier。turn t把已完成任务score、当前任务此前hint和本轮hint乘已过turn数相加，再求内点最优分布。每任务只抽一次K个Exp(1)噪声，所有turn共享，以argmin ξ/p选臂。整任务都选同一臂k的概率ρ由各turn概率比的最大值计算，不能用边缘概率相乘；只有该事件发生时才以Z/ρ修正此臂，发生切臂则残差修正全0，但所有臂仍加hint之和。Alg2用可观察potential gap的有符号累积触发严格大于阈值的doubling，重启score与gap，不把负gap裁为0。负控覆盖KKT残差、分布平移不变、共享noise的整任务事件概率不等于独立概率乘积、切臂时无残差归因、每turn的hint倍率、任务长度上限、重复begin/finish拒绝、aggregate越界不丢pending状态、保留负potential gap及重启后score归零。使用分析事件分区核对importance权重，不用少量Monte Carlo冒充无偏证明。",
+          "papers": [
+            "agent-research:ooas",
+            "agent-research:acting-to-learning"
           ]
         }
       ],
@@ -3637,9 +3743,19 @@
             "agent-research:r2-tool-redundancy",
             "agent-research:adastep"
           ]
+        },
+        {
+          "id": "cross-nov24-ooas",
+          "question": "与From Acting to Learning都做选择，选择的对象和时点相同吗？",
+          "answer": "不同。旧文选历史action用于后续SFT；OOAS在当前执行turn选steering策略，结束后用aggregate更新。不能用离线gradient score直接替代hint并宣称有同样regret保证。",
+          "example": "教学例：挑256条清洁经验是训练数据选择；本轮选Cap=1.5还是2.0是在线干预选择。",
+          "papers": [
+            "agent-research:ooas",
+            "agent-research:acting-to-learning"
+          ]
         }
       ],
-      "updated": "2026-11-23",
+      "updated": "2026-11-24",
       "reviewed_papers": [
         "agent-research:frontier-opd",
         "agent-research:asteroid",
@@ -3697,7 +3813,8 @@
         "agent-research:instruct-to-act",
         "agent-research:ace-rl",
         "agent-research:acting-to-learning",
-        "agent-research:r2-tool-redundancy"
+        "agent-research:r2-tool-redundancy",
+        "agent-research:ooas"
       ],
       "updates": [
         {
@@ -3861,6 +3978,18 @@
             "agent-research:adastep": "ecd6aa135b7917da58b2a2462f158635f1f5e6930f9b389d9db69e00252ba093"
           },
           "summary": "CPU NumPy组件只执行同文本token log概率的VFD差、reasoning-only分来源冻结阈值、单eligible-call无偏冗余估计和类别base cost、sample-SD outcome advantage、仅正确轨迹效率项及clipped GRPO标量目标。分位数采用线性插值、目标按每轨迹有效token均值再组平均，是公开的数值约定；不宣称与未公开trainer逐位相等。调用方必须已保证同一推理window、有效crop与完整记录；数组不能证明这些语义。没有VLM、crop构造/评分、CAT rollout标注、图像数据、policy反传/更新或视觉Agent评测；数值差分只检验标量目标导数，不是训练。没有gold答案/计划接口，reward为外部trainer/evaluator给定的0/1标量。 完整实验高成本不复现，审查DONE。"
+        },
+        {
+          "date": "2026-11-24",
+          "papers": [
+            "agent-research:ooas",
+            "agent-research:acting-to-learning"
+          ],
+          "source_revisions": {
+            "agent-research:ooas": "165271aa805a2ba8cd12f79d8003ac2e27e586d1d372982113c0f1c69b3243de",
+            "agent-research:acting-to-learning": "b4facbf5a94d973a84390bb3cdff04b8d454e177645cfae4dddfc3f754e55414"
+          },
+          "summary": "独立标准库CPU核实际解FTRL的KKT方程：Gk+α/√pk+β/pk为共同乘子，通过平移score与二分求解，而非softmax替身；实现共享Exp采样、ρ、聚合残差、potential和Alg2重启。begin→choose→finish只接受当前hint和最终aggregate，不接受turn reward向量或gold答案/计划。噪声注入只供数学控制。没有LLM、activation probe、TACT干预、代码执行器、真实任务分数或Evolve映射。数值求根是有公差的float64近似，不声称无限精度理论实现。 完整campaign终态不复现，审查DONE。"
         }
       ]
     },

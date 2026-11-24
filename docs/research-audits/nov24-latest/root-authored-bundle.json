@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "recommendation:weight-coding": {
+      "questions": [
+        {
+          "id": "nov24-basics",
+          "level": "basics",
+          "question": "为什么改64个LayerNorm gain不等于搜索64个自由度？",
+          "answer": "把64个gain全重置为1可能改64个数值，但没有可调参数；搜索每个gain才可能有64个自由度。支持集合大小和优化维度必须分开。",
+          "example": "教学例：一次reset改变64个值、自由度0；只调一个共享缩放系数可以影响百万权重、自由度仍为1。",
+          "added": "2026-11-24",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov24-mechanism",
+          "level": "mechanism",
+          "question": "ES为何用配对噪声，平分时又怎么办？",
+          "answer": "同一噪声正负两个方向评估后，以centered rank差加权估计更新。相同分数必须采用平均并列rank，否则常数评估器也会凭枚举顺序产生伪更新。",
+          "example": "教学例：32个候选得分全为1时，平均rank后全为0；参数应保持不变，而不是宣称搜索有进步。",
+          "added": "2026-11-24",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov24-comparison",
+          "level": "comparison",
+          "question": "它与Evopilot的自进化有什么不同？",
+          "answer": "EvoPilot强调比较证据的完整性：共同base、数据、评测器、有效输出深度和唯一treatment都要匹配，再由人工审核接纳。Weight Coding则规定了可搜索对象：固定架构/服务上的权重数值和少量row scales。验证协议与搜索算子互补、不能互相替代；本地ES不等于已经完成自主研究或部署。原论文直接叠加编辑会退化、重新搜索可恢复，这不意味着任意两个本地算子组合必然有收益。",
+          "example": "教学例：修改模型结构和训练pipeline属于代码级搜索；只调现有层的row log-scales属于固定架构的权重编辑，两者都不能用test挑最佳轮次。",
+          "added": "2026-11-24",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov24-implementation",
+          "level": "implementation",
+          "question": "本地搜索分数提升能否证明Pinterest线上收益？",
+          "answer": "不能。合成目标检查ES、参数不变性和选步接口。生产收益来自论文真实A/B，不来自本地。search接口只接objective与validation，不接test callback；调用者必须保证数据确实隔离。",
+          "example": "教学例：validation始终偏好初始权重时，返回step0；即使搜索目标改善也不能据此选一个validation更差的模型。",
+          "added": "2026-11-24",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        }
+      ]
+    }
+  },
+  "english_question_units": {
+    "qa/recommendation:weight-coding/nov24-basics": {
+      "source_sha256": "5b23502beec70d298c159d0d9a7cdb422c61f49b0f120bc2375d17d5d08d9b5b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are64 changed LayerNorm gains not necessarily64 search degrees of freedom?",
+        "answer": "Resetting64 gains to one changes64 values but introduces no tunable control. Searching every gain may introduce64 controls; support size and optimization dimension differ.",
+        "example": "Teaching example: a reset changes64 entries with zero controls, while one shared multiplier may affect a million weights with just one control."
+      }
+    },
+    "qa/recommendation:weight-coding/nov24-mechanism": {
+      "source_sha256": "80b9d97b08ca13e3632426dd5f46dfa5f72f43d08e319f7c5118dd8dd5e8f47f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use antithetic noise, and how are ties handled?",
+        "answer": "The same perturbation is evaluated in both directions; differences of centered ranks weight the update estimate. Equal scores use average tied ranks so enumeration cannot create a spurious update under a constant evaluator.",
+        "example": "Teaching example: if all32 scores are one, every centered rank is zero and parameters stay unchanged rather than showing fabricated progress."
+      }
+    },
+    "qa/recommendation:weight-coding/nov24-comparison": {
+      "source_sha256": "59e425725a651256804d9bb081ebb8682067ae049a51d2ad0a1f12e7bd733a95",
+      "reviewed": true,
+      "fields": {
+        "question": "How does it differ from Evopilot's evolution?",
+        "answer": "EvoPilot emphasizes comparison integrity: shared base, data, evaluator, effective output depth and the sole treatment must match before human acceptance. Weight Coding specifies what to search: weights and a small set of row scales under fixed architecture/serving. Verification protocols and search operators are complementary, not substitutes. Local ES is not completed autonomous research or deployment. The paper observes degradation from direct edit stacking and recovery through re-search, without guaranteeing gains from arbitrary local combinations.",
+        "example": "Teaching example: changing an architecture/training pipeline is code search; adjusting existing row log-scales is fixed-architecture weight editing. Neither may choose iterations using test data."
+      }
+    },
+    "qa/recommendation:weight-coding/nov24-implementation": {
+      "source_sha256": "cf149014a067075b348d3fade2b60e9742d7c8e72410d81d709623b49fd83243",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a local search improvement establish Pinterest's online lift?",
+        "answer": "No. Synthetic objectives test ES, invariants and selection interfaces. Production lift belongs to the paper's A/B, not local execution. The search accepts objective and validation, not a test callback; callers remain responsible for data isolation.",
+        "example": "Teaching example: when validation always favors the initial weights, selection returns step0 even if the search objective improves."
+      }
+    }
+  }
+}

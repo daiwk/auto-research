@@ -8,6 +8,7 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [The KL Divergence Is Never Negative, Except in PyTorch](<https://arxiv.org/abs/2611.30835v1>) | 2026-11-23 | [English](../../foundation-models/2611.30835-stablekl/README-en.md) · [Chinese](../../foundation-models/2611.30835-stablekl/README.md) |
 | [Reliable Behavior Discovery via False Discovery Rate Control](<https://arxiv.org/abs/2611.27104v1>) | 2026-11-20 | [English](../../foundation-models/2611.27104-disco/README-en.md) · [Chinese](../../foundation-models/2611.27104-disco/README.md) |
 | [Accelerating Muon with Spectral Residual Correction](<https://arxiv.org/abs/2611.27077v1>) | 2026-11-20 | [English](../../foundation-models/2611.27077-aimuon/README-en.md) · [Chinese](../../foundation-models/2611.27077-aimuon/README.md) |
 | [Sequential Anytime Valid Tests for Efficient Inference-Time Alignment](<https://arxiv.org/abs/2611.26413v1>) | 2026-11-19 | [English](../../foundation-models/2611.26413-e-rwsc/README-en.md) · [Chinese](../../foundation-models/2611.26413-e-rwsc/README.md) |
@@ -258,6 +259,7 @@ Paper titles link to the original publication when available. An English write-u
 | [SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features](<https://arxiv.org/abs/2502.14786>) | 2025-02-20 | [English](../../reproductions/2502.14786-siglip2/README-en.md) · [Chinese](../../reproductions/2502.14786-siglip2/README.md) |
 | [MoBA: Mixture of Block Attention for Long-Context LLMs](<https://arxiv.org/abs/2502.13189>) | 2025-02-18 | [English](../../reproductions/2502.13189-moba/README-en.md) · [Chinese](../../reproductions/2502.13189-moba/README.md) |
 | [Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention](<https://arxiv.org/abs/2502.11089>) | 2025-02-16 | [English](../../reproductions/2502.11089-native-sparse-attention/README-en.md) · [Chinese](../../reproductions/2502.11089-native-sparse-attention/README.md) |
+| [DeepCrossAttention: Supercharging Transformer Residual Connections](<https://arxiv.org/abs/2502.06785v2>) | 2025-02-10 | [English](../../foundation-models/2502.06785-deep-cross-attention/README-en.md) · [Chinese](../../foundation-models/2502.06785-deep-cross-attention/README.md) |
 | [Byte Latent Transformer: Patches Scale Better Than Tokens](<https://arxiv.org/abs/2412.09871>) | 2024-12-13 | [English](../../reproductions/2412.09871-blt/README-en.md) · [Chinese](../../reproductions/2412.09871-blt/README.md) |
 | [Hymba: A Hybrid-head Architecture for Small Language Models](<https://arxiv.org/abs/2411.13676>) | 2024-11-20 | [English](../../reproductions/2411.13676-hymba/README-en.md) · [Chinese](../../reproductions/2411.13676-hymba/README.md) |
 | [Data Mixing Laws: Optimizing Data Mixtures by Predicting Language Modeling Performance](<https://arxiv.org/abs/2403.16952>) | 2024-03-25 | [English](../../reproductions/2403.16952-data-mixing-laws/README-en.md) · [Chinese](../../reproductions/2403.16952-data-mixing-laws/README.md) |

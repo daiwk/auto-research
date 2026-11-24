@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-11-23 · 80 篇主题资料 / 43 篇重点对照
+[Agent](../index.md) · 更新 2026-11-24 · 82 篇主题资料 / 45 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
@@ -68,6 +68,8 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection](../../../agent-research/2611.25088-buggymle-cci/README.md) · [原始来源](https://arxiv.org/abs/2611.25088v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | BuggyMLE先审核可运行、指标稳定且对代码变化敏感的ML仓库，再让Injector注入不同规模的错误。Oracle通过逐个恢复变动找最小恢复集合，再把每个改动单独应用到干净仓库，筛出确有独立指标影响的错误。Solver必须在多文件仓库里真实修复；评价同时检查执行、指标恢复和逐错误语义修复，不能把补偿性调参当修好了全部bug。 | MLE-STAR用检索、真实消融与validation结果定位并改进模型代码；BuggyMLE用有Oracle归因的注入错误构建难度阶梯，CCI是评测/课程设计尺度。前者选改进方案，后者塑造训练与评测任务；不能把后者的结构分数当成前者的真实验证收益。 |
 | [Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement](../../../agent-research/2611.26132-sage-evolve/README.md) · [原始来源](https://arxiv.org/abs/2611.26132v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验 | AdaObs区分固定anchor目标和引导当前研究的active observation。每轮仍在固定anchor上验收；训练进展停滞时，先细分已有输出的错误诊断，再增加同任务的困难层，最后累计加入同能力方向的相关任务。它改变的是发现训练缺口的观察，不是为了提高分数而改评分器、换掉原目标或把测试答案放进训练。 | Harness²固定模型权重，用参考执行、候选执行对照和组合改任务Harness，并保存跨任务经验；AdaObs的完整研究会更新模型权重，固定anchor而改变active observation，平台检测针对数据边际收益。两者都用记忆避免重复，但“哪种执行框架更好”和“当前观察能否揭示新训练缺口”不是同一个选择问题；本地Harness²也是机制替身诊断，不能拿两者本地控制通过率比较Agent能力。 |
 | [CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?](../../../agent-research/2611.27116-coevobench/README.md) · [原始来源](https://arxiv.org/abs/2611.27116v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验 | CoEvoBench不是另一个固定自进化算法，而是测LLM researcher能否自主驱动模型权重和harness联合开发的benchmark。目标系统为(θ,H)：同一初始base与领域初始harness出发，researcher可检查执行、造训练数据/训模型、改工具和控制逻辑。开发后提交冻结的模型—harness对，在独立Test任务上执行。关键不是是否做过“诊断—训练—改代码”，而是先前反馈能否改变下一步干预和最终候选选择。 | Sage-Evolve固定anchor并改变active observation来发现新训练缺口，提出具体自改进策略；CoEvoBench固定benchmark开发/选择/Test契约，把选择改模型还是改harness交给被测researcher，并评价其提交结果。前者的“改观察”不是偷偷改最终评分器，后者的“两个可改旋钮”也不是交替更新就算成功。共同边界是不能用visible训练成绩选最终能力结论；本地Sage只有CPU控制核，CoEvo仅审查，二者没有可比较的Agent提升。 |
+| [Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing](../../../agent-research/2611.30742-transport-safe-audit/README.md) · [原始来源](https://arxiv.org/abs/2611.30742v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定 | 不同Agent产生不同轨迹；即使裁判在给定(X,Y)时看不到Agent身份，其sensitivity/specificity的平均值也会随成功/失败轨迹分布改变。论文连接scalar transport偏差、支持与识别、随机人工audit、anytime monitoring和rank sets；这些统计工具本身不是新发明。主要证据是semi-synthetic，公共Agent数据的既有分析未在本文独立重跑，不据此声称轨迹长度有因果作用。 | CoEvoBench保护Selection/Test内容并审计训练血缘，回答候选是否越界及能否泛化；本篇问即使访问隔离正确，LLM judge误差是否能跨轨迹分布transport。二者不能替代：无数据泄漏不等于judge已校准，AIPW也不能消除被评Agent读了gold造成的污染。CoEvo完整系统本地未跑，本篇也没有live judge结果可横比。 |
+| [MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research](../../../agent-research/2611.30011-morse/README.md) · [原始来源](https://arxiv.org/abs/2611.30011v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定 | 流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。核心是研究—实现—验证的自主Editor与可扩展服务，不是固定候选列表或门控公式本身。 | Harness²固定工具表面，用Propose–Probe–Compose执行对照改当前任务harness，再跨任务保存经验；MORSE在流式记忆设计中把在线文献研究和host批准的感知工具获取纳入搜索，保留当前head迭代。二者不能简化为同一“反思循环”：MORSE的validation概率/成本gate与持续服务扩展有专门契约，Harness²匿名selector也不是其scorer。本地Harness²机制替身与本篇review-only没有可比较Agent分数。 |
 
 </div>
 
@@ -276,6 +278,18 @@ CCI在八个参考benchmark上，先取十项结构特征的任务中位数，�
 五个域覆盖SWE-bench Verified、TB-Lite、AppWorld、Telecom及BFCL多轮/记忆。Visible可看任务和轨迹，Selection只回聚合性能、不给题面/轨迹，Test仅operator最终评价。每run24小时、4张H20、100美元teacher allowance；θ和H相互耦合，不能把两者增益相加当独立贡献。正文对确认违规run退回base权重但保留最终harness，另报退回整个初始系统的更严格规则。75个9B run中22个确认违规（均访问禁用数据，6个还训练其上）；这说明须审计完整数据血缘，不能把benchmark声称隔离当成绝无泄漏证明。审查保留两种audit评分规则，不把reset权重简化成删除所有违规影响的形式证明；论文记录的可见集过拟合和harness—模型错配是方法分析，不是本地负控实测。代码仓库状态与论文报告分开记录。无本地能力结果，不创建自动实现/重试队列。
 
 对照来源：[coevobench](../../../agent-research/2611.27116-coevobench/README.md) · [sage-evolve](../../../agent-research/2611.26132-sage-evolve/README.md)
+
+### Transport-safe audit：校准过的LLM裁判也未必能跨Agent搬用
+
+已知随机audit概率φ有正下界时，AIPW用out-of-fold预测m加R/φ(Y−m)修正；未audit样本只用m，估计值不强裁[0,1]。bounded allocation令φ=min(1,max(φmin,λ√m(1−m)))满足可达预算。在线e-process要求预测函数和audit规则由过去选定、新V到达后求值，当前label不能反过来改它们；目标必须固定且逐任务独立稳定。支持缺失时给outer set而不补造点估计，rank只用严格区间分离而非中点硬排。精确枚举小型Bernoulli audit设计，验证错误imputation仍design-unbiased；检查AIPW可超1而不裁剪、同fold训练拒绝、预算/positivity/零方差stratum、log-space与直接乘积相同、长stream不溢出、未audit真值拒绝、未知target拒绝、重叠/恰接区间不硬定序。三seed只是数学控制，不是coverage达到0.95的经验估计。
+
+对照来源：[transport-safe-audit](../../../agent-research/2611.30742-transport-safe-audit/README.md) · [coevobench](../../../agent-research/2611.27116-coevobench/README.md)
+
+### MORSE：用反复出现的记忆失败驱动在线研究与工具扩展
+
+20轮accuracy后5轮efficiency。accuracy要求平均correct-option probability至少增加0.004；efficiency要求延迟≤父代0.9，允许每轮概率/正确数损失0.003/2，同时相对stage-entry累计损失≤0.008/4。都须延迟≤1s、write load≤1、完整validation问题数不变。accuracy可从qualified archive选，efficiency不取archive；合并后必须重新验证。64张persistent帧之外另有16秒近期窗口，text/vector无全局存储上限，不能宣传总memory恒定。Editor只看训练逐题trace及validation聚合；benchmark/答案链接经broker禁止。审查保留估计latency与实测latency、frame cap与无限text/vector、已装服务与实际采用服务、rejected diff复用与重新验证的区别。作者用gold计算validation指标只发生在host/evaluator侧，不允许把gold给Solver/Editor。本地没有通过率或性能负控实测。
+
+对照来源：[morse](../../../agent-research/2611.30011-morse/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -631,9 +645,37 @@ CCI在八个参考benchmark上，先取十项结构特征的任务中位数，�
 
     对照来源：[coevobench](../../../agent-research/2611.27116-coevobench/README.md) · [sage-evolve](../../../agent-research/2611.26132-sage-evolve/README.md)
 
+### 与CoEvo的数据隔离审计，哪一个能替代哪一个？ {#cross-cross-nov24-transport-safe-audit}
+
+??? note "展开答案与例子"
+
+    **答案：** 都不能。CoEvo限制任务/答案访问和训练血缘；本篇校正裁判测量误差。没有泄漏仍可judge偏差；校正judge也不能让读过gold的Agent重新成为合格评测对象。
+
+    **教学例子：** 教学例：一个没见测试答案的Agent被错误裁判低估，需要audit；一个见过测试答案的Agent即使judge完全准确也已污染。
+
+    对照来源：[transport-safe-audit](../../../agent-research/2611.30742-transport-safe-audit/README.md) · [coevobench](../../../agent-research/2611.27116-coevobench/README.md)
+
+### 与Harness²都改harness，能共用一个选择器解释吗？ {#cross-cross-nov24-morse}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。Harness²匿名选择已执行最终产物，跨任务重启初始harness；MORSE持续head并按私有validation质量/延迟筛选，还扩展host批准感知服务。对象和反馈不同。
+
+    **教学例子：** 教学例：匿名挑两个报告不是按正确选项概率筛视频记忆程序；装了VideoMAE也不等于已被最终harness采用。
+
+    对照来源：[morse](../../../agent-research/2611.30011-morse/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-24** · 仅资料收录与成本审查：固定v1、来源/元数据、访问边界、成本和同主题比较。没有本地算法模块、Editor、研究broker、视频服务、harness代码演化、benchmark、GPU试跑或Evolve operator。不能实现几个gate后称已复现MORSE，也不需要给review-only制造三seed指标或GPU receipt。 完整campaign终态不复现，审查DONE。
+
+涉及：[morse](../../../agent-research/2611.30011-morse/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+**2026-11-24** · 本地是evaluator侧标准库算术：scalar transport偏差、带显式fold声明的AIPW、finite-strata bounded allocation、支持缺失outer set、严格区间rank sets和log-space hedged e-process。plan先提交m与φ再随机决定audit；observe只收已audit的0/1，未audit必须None，并逐episode更新。拒绝换target、未冻结/非独立任务声明和λ不严格小于φmin。仅对预先固定有限θ网格反演，accepted_grid不是连续CS端点，真值不在网格时没有网格覆盖说法。没有nuisance拟合、真人采集、LLM裁判、三judge潜变量模型、cluster bootstrap或live leaderboard；时序/fold声明是外部统计契约，不是恶意调用方不可绕过的安全证明。 完整campaign终态不复现，审查DONE。
+
+涉及：[transport-safe-audit](../../../agent-research/2611.30742-transport-safe-audit/README.md) · [coevobench](../../../agent-research/2611.27116-coevobench/README.md)
 
 **2026-11-23** · 本地只收录固定v1、代码提交、split/审计/成本契约与同主题比较；没有新建算法模块、可执行adapter、训练、researcher API调用或benchmark试跑。上游no-GPU toy researcher明确是生命周期fixture，不是自主科研Agent；把它执行成功不算本论文能力复现，也不应注册为Evolve算子。高成本决定本身已审查完成，不需要伪造种子指标或GPU回执。 完整实验高成本不复现，审查DONE。
 
@@ -771,7 +813,7 @@ CCI在八个参考benchmark上，先取十项结构特征的任务中位数，�
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 80 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 82 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -855,6 +897,8 @@ CCI在八个参考benchmark上，先取十项结构特征的任务中位数，�
 - [BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection](../../../agent-research/2611.25088-buggymle-cci/README.md)
 - [Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement](../../../agent-research/2611.26132-sage-evolve/README.md)
 - [CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?](../../../agent-research/2611.27116-coevobench/README.md)
+- [Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing](../../../agent-research/2611.30742-transport-safe-audit/README.md)
+- [MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research](../../../agent-research/2611.30011-morse/README.md)
 
 </details>
 

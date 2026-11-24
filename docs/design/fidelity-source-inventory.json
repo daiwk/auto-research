@@ -10937,6 +10937,24 @@
         "fingerprint": "94e585b921a6d009f48997fbff9b0677525ef6a6e92a73cae28081fd60aea047"
       }
     ],
+    "src/auto_research/agent_research/transport_safe_audit.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "observe",
+        "line": 214,
+        "qualified_name": "HedgedAuditProcess.observe",
+        "expression": "self.count += 1",
+        "fingerprint": "0e4a345a434a9e4430ddb8b7b663084dc97f330c2e4180b14a17e37507e4e40f"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "diagnostic",
+        "line": 244,
+        "qualified_name": "diagnostic",
+        "expression": "process.plan",
+        "fingerprint": "ef28410ba6e522d2a41ef77651b416299e7bca7e7e05ccd652fff8a3f57f7e62"
+      }
+    ],
     "src/auto_research/datasets.py": [
       {
         "kind": "label_access_requires_role_review",

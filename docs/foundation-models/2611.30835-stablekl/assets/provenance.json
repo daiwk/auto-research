@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/abs/2611.30835v1",
+  "source_url": "https://arxiv.org/pdf/2611.30835v1#page=2",
+  "source_sha256": "a6386c8f079f5aa3522395e7e3213d062cbe17c1baee9a1bf2765c871804e29a",
+  "source_pdf_sha256": "a6386c8f079f5aa3522395e7e3213d062cbe17c1baee9a1bf2765c871804e29a",
+  "pdf_page": 2,
+  "page": 2,
+  "figure": "Figure 1",
+  "caption": "Figure 1: The problem and one consequence.",
+  "crop_pdf_points": [
+    53,
+    66,
+    544,
+    314
+  ],
+  "crop_box_pdf_points": [
+    53,
+    66,
+    544,
+    314
+  ],
+  "render_scale": 2,
+  "asset_sha256": "2c32b6fb4c5d376252afe762eb9378e6e1e84c06e0b5497b61c063acc6a4c026",
+  "image_sha256": "2c32b6fb4c5d376252afe762eb9378e6e1e84c06e0b5497b61c063acc6a4c026",
+  "retrieved_on": "2026-11-24",
+  "reviewed_version": "v1",
+  "visually_reviewed": true,
+  "scientific_content_modified": false,
+  "extraction": "Original PDF crop including complete caption",
+  "copyright": "Copyright belongs to the original authors."
+}

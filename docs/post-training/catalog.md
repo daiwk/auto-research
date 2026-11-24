@@ -10,6 +10,8 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| preference-and-alignment | [Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences](2611.30135-shpo/README.md) | Jinan University，2026-11-23 | 未发现官方代码 | `shpo`：仅低成本组件，完整实验不复现 |
+| student-trajectory-distillation | [Verifiable On-Policy Distillation](2611.30325-vopd/README.md) | Stanford University，2026-11-23 | [原作者入口](https://github.com/juntongshi48/VOPD)；已核作者仓库，但固定提交仅README声明代码即将发布，方法源码尚未发布；不能标成可运行开源实现。 | `vopd`：仅低成本组件，完整实验不复现 |
 | data-and-budget | [CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency](2611.27119-ctrl/README.md) | The Hong Kong University of Science and Technology (Guangzhou)，2026-11-20 | 未发现官方代码 | 计划键 `ctrl`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | student-trajectory-distillation | [Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation](2611.27131-dwe/README.md) | University of Science and Technology of China，2026-11-20 | [原作者入口](https://github.com/dwe-lab/DWE)；已核实原作者仓库；固定提交481223f3704607b2c9cb21741bfd3fde8822299b，README声明Apache-2.0许可。仅阅读，未运行上游代码。 | `dwe`：仅低成本组件，完整实验不复现 |
 | policy-optimization | [How Far Does Lossless Re-tokenization Move an RLVR Update?](2611.27083-retokenization-update/README.md) | University of Maine at Presque Isle，2026-11-20 | 未发现官方代码 | `retokenization-update`：仅低成本组件，完整实验不复现 |

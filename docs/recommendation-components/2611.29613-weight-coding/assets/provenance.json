@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "source_url": "https://arxiv.org/pdf/2611.29613v1#page=1",
+  "paper_url": "https://arxiv.org/html/2611.29613v1",
+  "source_sha256": "7cd33afef64e00aff5762bb475d07ead833e5fbeab6093e643965b5dee0fa1b5",
+  "pdf_page": 1,
+  "figure": "Figure1",
+  "caption": "Weight coding by LLM agents: editing workflow and successive retrieval-model iterations.",
+  "crop_pdf_points": [
+    51,
+    246,
+    563,
+    474
+  ],
+  "render_scale": 2,
+  "asset_sha256": "5c34039a1c7cdc63b677d0d329115881706eb10510c73fd953b86dbf83545e42",
+  "visually_reviewed": true,
+  "scientific_content_modified": false,
+  "copyright": "Original authors"
+}

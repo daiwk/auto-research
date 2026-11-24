@@ -1,0 +1,61 @@
+{
+  "domain": "foundation-models",
+  "key": "deep-cross-attention",
+  "title": "DeepCrossAttention: Supercharging Transformer Residual Connections",
+  "paper_url": "https://arxiv.org/abs/2502.06785v2",
+  "reviewed_version_url": "https://arxiv.org/pdf/2502.06785v2",
+  "reviewed_version": "v2",
+  "published": "2025-02-10",
+  "published_at": "2025-02-10T18:58:52Z",
+  "updated_at": "2025-07-23T19:32:20Z",
+  "announced_on": null,
+  "detail_path": "foundation-models/2502.06785-deep-cross-attention/README.md",
+  "topic": [
+    "条件计算与残差路由",
+    "独立QKV深度路由"
+  ],
+  "first_author": "Mike Heddes",
+  "first_author_affiliation": "University of California, Irvine",
+  "affiliation_evidence": "Fixed-v2 byline; Google Research coauthors include Kyriakos Axiotis, Gang Fu, MohammadHossein Bateni and Vahab Mirrokni.",
+  "verified_priority_organizations": [
+    "Google Research"
+  ],
+  "code": null,
+  "code_status": "固定v2全文与2026-11-23 Google官方博客未提供已核实的本篇作者代码仓库；未找到不等于作者从未发布。",
+  "code_license": null,
+  "upstream_revision": null,
+  "method_source_sha256": "594c5b5b017724dd1b0f5969f50a99ec0ca628890591c96fd9d6d1abde23d240",
+  "adapter": null,
+  "priority": "P0",
+  "intake_class": "historical_priority_backfill",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "local_operator": "auto_research.foundation_models.deep_cross_attention.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.deep_cross_attention import diagnostic; print(diagnostic(42))'",
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "gpu_validation_artifact": "docs/gpu-validations/deep-cross-attention-a100-20261124-latest.json",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/pdf/2502.06785v2",
+    "sections": [
+      "3.1-3.2",
+      "5"
+    ],
+    "available_resource": "one A100 or A30, or local Mac",
+    "paper_configuration": "Section5:64 TPUs, batch2048, sequence128,500000steps,131Btokens; depth/width and C4/LM1B/ImageNet matrices.",
+    "estimated_cost_basis": "Published full configuration, not a local timing estimate. Tiny QKV-routing component budget below30seconds per three seeds, no data/checkpoint/API downloads.",
+    "decision": "成本过高，不复现（审查 DONE）；仅验收低成本GRN-v3/QKV attention组件"
+  },
+  "summary": "三套独立GRN-v3在深度历史上构造Q/K/V输入；只实现固定v2文字公式、first/middle-sum/last-k和小型因果attention，不是完整Transformer训练。2026-11-23 Google官方博客触发历史补录，不是11月新论文。",
+  "discovered_on": "2026-11-24",
+  "reviewed_on": "2026-11-24"
+}

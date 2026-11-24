@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-24",
+  "scope": "Local bounded implementation and documentation gates; GitHub checks reported separately at PR handoff",
+  "pytest": {"passed": 129, "failed": 0, "command": "PYTHONPATH=src:scripts python -m pytest -o addopts='' -q tests/test_nov24_weight_coding.py tests/test_nov24_dca.py tests/test_nov24_stablekl.py tests/test_nov24_post_training.py tests/test_nov24_agent_components.py tests/test_nov24_foundation_documentation.py tests/test_nov24_latest_delivery.py tests/reproductions/test_documentation_catalog.py"},
+  "independent_review": "Weight Coding edit/rank-ES/data-boundary review and OOAS/transport primary-formula review found no remaining blocking issue. Row-log underflow was repaired before execution-source freeze, with a regression test.",
+  "initial_contract_failure": "MORSE review-only spec lacked deferral_reason. Added explicit terminal high-cost reason to authored input and spec, regenerated manifest/ledger/catalogs, then passed the unchanged documentation contract; no weakened assertion.",
+  "checks_passed": ["ruff src/tests/scripts", "compileall src/tests/scripts", "paper spec check and validate", "GPU evidence validation", "source-bound CPU/CUDA evidence check", "fidelity inventory check", "discovery/implementation reconciliation", "platform completion audit", "strict paper coverage audit", "minimal install metadata and CLI contracts", "English complete and baseline checks", "learning questions and deep dives required", "public dashboard generation", "git diff --check"],
+  "metric_migration": {"audited_artifacts": 1258, "updates_required": 0},
+  "strict_docs_build": {"passed": true, "elapsed_seconds": 72.82, "command": "PYTHONPATH=src:scripts python -m mkdocs build --strict --site-dir .cache/nov24-latest/site-final"},
+  "execution_source_commit": "199b80b2e4df173c513a68bc0e30a116766b9d88",
+  "cpu_components": 7,
+  "cuda_components": 1,
+  "seeds": [42, 43, 44],
+  "cpu_seconds": 0.2286847080104053,
+  "cuda_seconds": 0.35206570103764534,
+  "checkpoint_or_dataset_downloads": 0,
+  "paid_api_calls": 0,
+  "full_capability_reproductions": 0
+}

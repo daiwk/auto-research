@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "recommendation:weight-coding": {
+      "questions": [
+        {
+          "id": "nov24-basics",
+          "level": "basics",
+          "question": "为什么改64个LayerNorm gain不等于搜索64个自由度？",
+          "answer": "把64个gain全重置为1可能改64个数值，但没有可调参数；搜索每个gain才可能有64个自由度。支持集合大小和优化维度必须分开。",
+          "example": "教学例：一次reset改变64个值、自由度0；只调一个共享缩放系数可以影响百万权重、自由度仍为1。",
+          "added": "2026-11-24",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov24-mechanism",
+          "level": "mechanism",
+          "question": "ES为何用配对噪声，平分时又怎么办？",
+          "answer": "同一噪声正负两个方向评估后，以centered rank差加权估计更新。相同分数必须采用平均并列rank，否则常数评估器也会凭枚举顺序产生伪更新。",
+          "example": "教学例：32个候选得分全为1时，平均rank后全为0；参数应保持不变，而不是宣称搜索有进步。",
+          "added": "2026-11-24",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov24-comparison",
+          "level": "comparison",
+          "question": "它与Evopilot的自进化有什么不同？",
+          "answer": "EvoPilot强调比较证据的完整性：共同base、数据、评测器、有效输出深度和唯一treatment都要匹配，再由人工审核接纳。Weight Coding则规定了可搜索对象：固定架构/服务上的权重数值和少量row scales。验证协议与搜索算子互补、不能互相替代；本地ES不等于已经完成自主研究或部署。原论文直接叠加编辑会退化、重新搜索可恢复，这不意味着任意两个本地算子组合必然有收益。",
+          "example": "教学例：修改模型结构和训练pipeline属于代码级搜索；只调现有层的row log-scales属于固定架构的权重编辑，两者都不能用test挑最佳轮次。",
+          "added": "2026-11-24",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov24-implementation",
+          "level": "implementation",
+          "question": "本地搜索分数提升能否证明Pinterest线上收益？",
+          "answer": "不能。合成目标检查ES、参数不变性和选步接口。生产收益来自论文真实A/B，不来自本地。search接口只接objective与validation，不接test callback；调用者必须保证数据确实隔离。",
+          "example": "教学例：validation始终偏好初始权重时，返回step0；即使搜索目标改善也不能据此选一个validation更差的模型。",
+          "added": "2026-11-24",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        }
+      ]
+    }
+  }
+}

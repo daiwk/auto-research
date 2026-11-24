@@ -229,6 +229,7 @@
 - 2024-02 · [HSTU](../2402.17152-hstu/README.md)：以分层顺序转导单元建模超长行为历史，用生成式目标统一大规模推荐排序。
 
 ## Pinterest
+- [Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents](../../recommendation-components/2611.29613-weight-coding/README.md)：Weight Coding把已训练权重本身变成可执行编辑对象，固定架构、特征和服务逻辑。LLM Agent先扫描单模块编辑，按独立filter日期排除方向翻转，再直接改值、搜索或重新搜索组合后的参数。编辑原语包括缩放、重置、移除分支、压缩、快照插值、概念方向平移；编辑支持大小不等于独立自由度。原论文的GPU缓存引擎只重算被影响模块及下游，搜索阶段不反传目标模型。 本地CPU参考只实现Table1的缩放、显式reference重置、投影置零、插值、方向平移，以及§3.4反向配对Gaussian ES、centered rank、Adam上升和validation选步。没有compression、LLM假设生成、缓存生产引擎、TorchScript编辑、真实检索模型或线上A/B。原文未公布Adam细节和ties规则，本地显式采用(.9,.999)、epsilon=1e-8和平均并列rank；不能声称恢复私有实现。每seed20步×16对，synthetic quadratic仅查机制；不接Evolve晋级。
 - [PinGER: Token-Efficient Generative Retrieval with Semantic IDs](../../recommendation-components/2610.33435-pinger/README.md)：用训练专用SID与历史dense的非对称mask保留多级监督而压缩服务输入，再按共同前缀深度分配beam并用所有前缀DPO加NTP锚校准排序偏好。本地仅实现可核对的数值机制，不实现生产模型/稀疏kernel或复现线上收益。
 - [Reinforcement Learning for Controller Parameters in the Auto-Bidding System at Pinterest](../../recommendation-components/2610.33248-pinterest-rlbp/README.md)：保留高频PID，在日级从9个P/I倍率动作中选择，分别回归预算利用率与CPC相对生产基线的变化，再按生命周期融合并top-K随机选择。实际部署gamma为0；本地实现双头目标、负CPC奖励与有界策略/IPS核，不实现私有Q网络或线上出价。
 - 2026-10 · [FORTE](../2610.13806-forte/README.md)：用类型约束的配对扰动、跨时间窗多目标门槛和真实重训选择可退役特征，再审计依赖消费者的移除顺序。
