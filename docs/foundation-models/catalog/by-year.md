@@ -4,6 +4,7 @@
 
 ## 2026
 
+- 2026-11 · [The KL Divergence Is Never Negative, Except in PyTorch](../../foundation-models/2611.30835-stablekl/README.md)（`stablekl`）：近等分布的真实KL是二阶小量，但教科书公式往往由一阶或常数量相减得到，容易返回零、负数或错误梯度。StableKL把闭式KL重写成非负小量的组合，配合差值、补偿算术和解析梯度；它还区分F.kl_div算子误差与输入log-prob本身已丢失的信息。本地只选择其中Exponential族的Rewrite核。
 - 2026-11 · [Accelerating Muon with Spectral Residual Correction](../../foundation-models/2611.27077-aimuon/README.md)（`aimuon`）：AIMuon不改普通EMA动量，而改参数子问题：先更新M，再算E=G−M，分别对M与E做谱变换，以各自核范数估计决定相对权重。把残差混进动量后只做一次变换通常不等价，因为矩阵符号映射非线性。实用Algorithm1用两次五步BF16 Newton–Schulz近似，并用内积绝对值估计核范数，不做额外SVD；最后把合成步的Frobenius范数匹配到同M的Muon，权重衰减解耦。理论收敛结论针对未归一化、精确矩阵符号版本，不自动覆盖这个BF16实用算法。
 - 2026-11 · [Reliable Behavior Discovery via False Discovery Rate Control](../../foundation-models/2611.27104-disco/README.md)（`disco`）：行为发现寻找的是可重复的输入—输出规律，而不是几条显眼失败案例。不断挑选假设、查询模型、观察结果再换假设会产生选择偏差；即使每个单项检验都控制错误，也不能直接保证最终发现集合的FDR。DISCO通过冻结e-process和限制选择器只能看粗分箱状态，允许最终以实际测试假设数$K_{obs}$运行eBH，而不总以保守的预设上界加权。
 - 2026-11 · [FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models](../../foundation-models/2611.26020-frontier-replay/README.md)（`frontier-replay`）：混合模型的attention KV可按页复用，但递归状态只在保存过的精确位置恢复。FrontierReplay先根据已观察到的模板稳定尾、已完成turn和分叉点规划检查点；原生prefill不断开，之后只重放短窗递归输入生成精确状态。保留策略优先保护仍在执行的请求锚点和已证明可复用的分叉，而非只看历史频率。
@@ -263,6 +264,7 @@
 - 2025-02 · [SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features](../../reproductions/2502.14786-siglip2/README.md)（`siglip2`）：SigLIP 2 在 SigLIP 的 pairwise sigmoid loss 上组合 captioning pretraining、global-local self-distillation、masked prediction、在线数据筛选和 NaFlex 动态分辨率，改善语义、定位、 dense feature 与多语言公平性。
 - 2025-02 · [MoBA: Mixture of Block Attention for Long-Context LLMs](../../reproductions/2502.13189-moba/README.md)（`moba`）：把序列切成 block，以可微 router 为每个 query 选择少量相关块，同时保留当前因果块。
 - 2025-02 · [Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention](../../reproductions/2502.11089-native-sparse-attention/README.md)（`native-sparse-attention`）：全注意力的计算和 KV 读取随上下文长度平方增长。NSA 不是在训练后裁剪 attention，而是从预训练开始并行学习三条路径：压缩历史块负责全局轮廓，query 相关的 block selection 恢复重要细节，滑窗保留近期精确信息；三路输出再由可学习门控融合。
+- 2025-02 · [DeepCrossAttention: Supercharging Transformer Residual Connections](../../foundation-models/2502.06785-deep-cross-attention/README.md)（`deep-cross-attention`）：传统残差把原始输入和历层增量输出直接相加。DCA把这份历史保留下来，由可学习的feature×history基础权重，加上逐token、逐历史项的动态项，选择层输入；Q、K、V分别使用独立GRN-v3。这里的深度路由不是在层维做softmax，而是直接加权求和；普通attention仍在token维计算。
 
 ## 2024
 

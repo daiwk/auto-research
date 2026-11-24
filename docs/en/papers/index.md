@@ -4,19 +4,26 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1274 entries from the shared research manifest. English write-ups available: 1274.
+The catalog lists 1282 entries from the shared research manifest. English write-ups available: 1282.
 
 ## Browse by domain
 
-- [Search, ads, recommendation, and LLM applications](recommendation.md): 343 catalog entries, 343 English write-ups
-- [Foundation models](foundation-models.md): 265 catalog entries, 265 English write-ups
+- [Search, ads, recommendation, and LLM applications](recommendation.md): 344 catalog entries, 344 English write-ups
+- [Foundation models](foundation-models.md): 267 catalog entries, 267 English write-ups
 - [Structured decisions / System One](system-one.md): 10 catalog entries, 10 English write-ups
 - [Multimodal models](multimodal-models.md): 32 catalog entries, 32 English write-ups
-- [LLM post-training](post-training.md): 295 catalog entries, 295 English write-ups
-- [Agents](agent-research.md): 329 catalog entries, 329 English write-ups
+- [LLM post-training](post-training.md): 297 catalog entries, 297 English write-ups
+- [Agents](agent-research.md): 332 catalog entries, 332 English write-ups
 
 ## Read in English
 
+- [Verifiable On-Policy Distillation](../../post-training/2611.30325-vopd/README-en.md)
+- [Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing](../../agent-research/2611.30742-transport-safe-audit/README-en.md)
+- [The KL Divergence Is Never Negative, Except in PyTorch](../../foundation-models/2611.30835-stablekl/README-en.md)
+- [Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences](../../post-training/2611.30135-shpo/README-en.md)
+- [Optimistic Online Learning for Coding Agents with Aggregate Feedback](../../agent-research/2611.30405-ooas/README-en.md)
+- [MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research](../../agent-research/2611.30011-morse/README-en.md)
+- [Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents](../../recommendation-components/2611.29613-weight-coding/README-en.md)
 - [Reliable Behavior Discovery via False Discovery Rate Control](../../foundation-models/2611.27104-disco/README-en.md)
 - [How Far Does Lossless Re-tokenization Move an RLVR Update?](../../post-training/2611.27083-retokenization-update/README-en.md)
 - [From Acting to Learning: Experience Selection toward Continually Learning Agents](../../agent-research/2611.27159-acting-to-learning/README-en.md)
@@ -1178,6 +1185,7 @@ The catalog lists 1274 entries from the shared research manifest. English write-
 - [SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features](../../reproductions/2502.14786-siglip2/README-en.md)
 - [MoBA: Mixture of Block Attention for Long-Context LLMs](../../reproductions/2502.13189-moba/README-en.md)
 - [Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention](../../reproductions/2502.11089-native-sparse-attention/README-en.md)
+- [DeepCrossAttention: Supercharging Transformer Residual Connections](../../foundation-models/2502.06785-deep-cross-attention/README-en.md)
 - [FuXi-α: Scaling Recommendation Model with Feature Interaction Enhanced Transformer](../../reproductions/2502.03036-fuxi-alpha/README-en.md)
 - [LOOP](../../agent-research/2502.01600-loop/README-en.md)
 - [MIM: Multi-modal Content Interest Modeling Paradigm for User Behavior Modeling](../../reproductions/2502.00321-mim/README-en.md)

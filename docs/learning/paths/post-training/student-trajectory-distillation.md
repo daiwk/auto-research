@@ -7,7 +7,7 @@ hide:
 
 # 轨迹蒸馏：学生、提案与前缀分布
 
-[LLM 后训练](index.md) / 192 个问题 · 48 篇论文
+[LLM 后训练](index.md) / 196 个问题 · 49 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">192 个问题 · 48 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">196 个问题 · 49 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:vopd" data-paper-title="Verifiable On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Verifiable On-Policy Distillation LLM 后训练 Stanford University 2026-11-23 RLVR只给已采样整条response稀疏结果反馈；OPD给每个访问prefix的完整teacher分布，但该信号未被verifier验证。VOPD先对每组response计算teacher/reference累计log-ratio D，再以population标准差标准化V和D，最小二乘投影得到Pearson相关c。把投影信号乘回σ_D恢复原奖励尺度，然后采用immediate-token近似，在已观察组与prefix固定时，对一个新的假想next-token取全词表条件期望。 完整实验成本过高，不复现（审查 DONE）；多seed不升级机制诊断为能力比较，没有下载数据/权重、生成真实response、训练模型或调用judge。L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU执行masked累计log-ratio之和、population Pearson系数、zero-verifier-variance固定0.25外推fallback、full-vocabulary KL目标/解析logit梯度及条件新token期望。  student-trajectory-distillation CPU机制组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 稀疏verifier如何影响从未采样的token？ 先把response级verifier偏好投影到teacher/reference累计隐式奖励方向，再固定组统计，在每个访问prefix用teacher/reference全词表log-ratio构造局部奖励。它复用已有分布，不是猜未采样response的正确答案。 教学例：组内高D的回答通常答对时c&gt;0，未采样token也会按其teacher/reference log-ratio获得dense梯度；这不代表已验证该token后所有续写。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<span id="paper-post-training-vopd-e7ca22e5" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-e2efab469096fcf8">稀疏verifier如何影响从未采样的token？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Avopd">Verifiable On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Stanford University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先把response级verifier偏好投影到teacher/reference累计隐式奖励方向，再固定组统计，在每个访问prefix用teacher/reference全词表log-ratio构造局部奖励。它复用已有分布，不是猜未采样response的正确答案。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：组内高D的回答通常答对时c&gt;0，未采样token也会按其teacher/reference log-ratio获得dense梯度；这不代表已验证该token后所有续写。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30325v1">原论文</a> · <a href="../../../../post-training/2611.30325-vopd/">实现解读</a> · <a href="#qa-e2efab469096fcf8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:vopd" data-paper-title="Verifiable On-Policy Distillation" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Verifiable On-Policy Distillation LLM 后训练 Stanford University 2026-11-23 RLVR只给已采样整条response稀疏结果反馈；OPD给每个访问prefix的完整teacher分布，但该信号未被verifier验证。VOPD先对每组response计算teacher/reference累计log-ratio D，再以population标准差标准化V和D，最小二乘投影得到Pearson相关c。把投影信号乘回σ_D恢复原奖励尺度，然后采用immediate-token近似，在已观察组与prefix固定时，对一个新的假想next-token取全词表条件期望。 完整实验成本过高，不复现（审查 DONE）；多seed不升级机制诊断为能力比较，没有下载数据/权重、生成真实response、训练模型或调用judge。L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU执行masked累计log-ratio之和、population Pearson系数、zero-verifier-variance固定0.25外推fallback、full-vocabulary KL目标/解析logit梯度及条件新token期望。  student-trajectory-distillation CPU机制组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 Rao–Blackwell化究竟保留了哪一个期望？ 保留的是采用immediate-token近似后、给定已观察组和prefix、重新抽一个假想next-token的局部梯度期望。c和baseline固定，score恒等式消去baseline；不是无偏完整序列verifier梯度。 教学例：固定p=(0.2,0.8)后可以枚举两token来消掉这次抽样噪声，但此前哪组回答被抽到以及未来续写仍是随机的。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-16bca51f0d27a066">Rao–Blackwell化究竟保留了哪一个期望？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Avopd">Verifiable On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Stanford University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>保留的是采用immediate-token近似后、给定已观察组和prefix、重新抽一个假想next-token的局部梯度期望。c和baseline固定，score恒等式消去baseline；不是无偏完整序列verifier梯度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：固定p=(0.2,0.8)后可以枚举两token来消掉这次抽样噪声，但此前哪组回答被抽到以及未来续写仍是随机的。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30325v1">原论文</a> · <a href="../../../../post-training/2611.30325-vopd/">实现解读</a> · <a href="#qa-16bca51f0d27a066">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:vopd" data-paper-title="Verifiable On-Policy Distillation" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Verifiable On-Policy Distillation LLM 后训练 Stanford University 2026-11-23 RLVR只给已采样整条response稀疏结果反馈；OPD给每个访问prefix的完整teacher分布，但该信号未被verifier验证。VOPD先对每组response计算teacher/reference累计log-ratio D，再以population标准差标准化V和D，最小二乘投影得到Pearson相关c。把投影信号乘回σ_D恢复原奖励尺度，然后采用immediate-token近似，在已观察组与prefix固定时，对一个新的假想next-token取全词表条件期望。 完整实验成本过高，不复现（审查 DONE）；多seed不升级机制诊断为能力比较，没有下载数据/权重、生成真实response、训练模型或调用judge。L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU执行masked累计log-ratio之和、population Pearson系数、zero-verifier-variance固定0.25外推fallback、full-vocabulary KL目标/解析logit梯度及条件新token期望。  student-trajectory-distillation CPU机制组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 VOPD的λ是不是GKD里的学生数据比例？ 不是。GKD的混合比例改变训练prefix来源；VOPD的λ控制teacher/reference方向外推强度，另由c按组调节。verifier全同还使用固定0.25外推fallback，不能把c默认0并称忠实。 教学例：λ=0.25、c=−0.8给强度−0.2，目标向reference方向退；GKD数据比例不能取这个负值来表达同一操作。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-3292c0c1e7af9057">VOPD的λ是不是GKD里的学生数据比例？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Avopd">Verifiable On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Stanford University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。GKD的混合比例改变训练prefix来源；VOPD的λ控制teacher/reference方向外推强度，另由c按组调节。verifier全同还使用固定0.25外推fallback，不能把c默认0并称忠实。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：λ=0.25、c=−0.8给强度−0.2，目标向reference方向退；GKD数据比例不能取这个负值来表达同一操作。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30325v1">原论文</a> · <a href="../../../../post-training/2611.30325-vopd/">实现解读</a> · <a href="#qa-3292c0c1e7af9057">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:vopd" data-paper-title="Verifiable On-Policy Distillation" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Verifiable On-Policy Distillation LLM 后训练 Stanford University 2026-11-23 RLVR只给已采样整条response稀疏结果反馈；OPD给每个访问prefix的完整teacher分布，但该信号未被verifier验证。VOPD先对每组response计算teacher/reference累计log-ratio D，再以population标准差标准化V和D，最小二乘投影得到Pearson相关c。把投影信号乘回σ_D恢复原奖励尺度，然后采用immediate-token近似，在已观察组与prefix固定时，对一个新的假想next-token取全词表条件期望。 完整实验成本过高，不复现（审查 DONE）；多seed不升级机制诊断为能力比较，没有下载数据/权重、生成真实response、训练模型或调用judge。L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU执行masked累计log-ratio之和、population Pearson系数、zero-verifier-variance固定0.25外推fallback、full-vocabulary KL目标/解析logit梯度及条件新token期望。  student-trajectory-distillation CPU机制组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 为什么本地不宣称复刻了论文top-16训练？ 作者仓库当前仅README预告，top-16归约细节未获方法代码核验；本地忠实执行理论full-vocabulary有限目标与解析梯度，外部提供组奖励和分布，不执行rollout、模型或verifier。 教学例：三token词表可以独立核对所有梯度和等价target，但通过该检查不等于在4B学生上运行了8×A100训练。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3317a6f07f8605f1">为什么本地不宣称复刻了论文top-16训练？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Avopd">Verifiable On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Stanford University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>作者仓库当前仅README预告，top-16归约细节未获方法代码核验；本地忠实执行理论full-vocabulary有限目标与解析梯度，外部提供组奖励和分布，不执行rollout、模型或verifier。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：三token词表可以独立核对所有梯度和等价target，但通过该检查不等于在4B学生上运行了8×A100训练。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30325v1">原论文</a> · <a href="../../../../post-training/2611.30325-vopd/">实现解读</a> · <a href="#qa-3317a6f07f8605f1">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dwe" data-paper-title="Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation LLM 后训练 University of Science and Technology of China 2026-11-20 DWE不改变蒸馏教师、采样者或KL目标，而是在相同输入和参数下估计输出头的完整梯度。softmax的logit梯度和为零，正负部分各有质量m；分别归一化后配成等量异号的坐标对。以学生初始输出头的首主成分构造固定词表顺序，用同一quantile耦合正负坐标，再在K个等宽区间分别取样。每token最多2K行参与输出头反传，期望保留原梯度。 完整实验成本过高，不复现（审查 DONE）；本轮针对性测试已实际执行三种子CPU诊断；L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU、无CUDA路径，不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯stdlib CPU实现完整正负配对、centered PCA固定顺序、共享分层quantile、forward/reverse KL logit梯度、仅选中行的hidden/weight梯度。小矩阵以多坐标起点的power iteration估计首主成分，与上游随机PCA实现不同但保留论文定义的几何顺序机制。  student-trajectory-distillation CPU机制组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 为什么DWE要同时抽一个正坐标和一个负坐标？ softmax logit梯度和为零，正负质量相同。每对赋予+m与−m保留零和约束，在相同坐标预算下去掉IS随机正负数量分配的方差；不是简单保留top-k。 教学例：g=(0.4,−0.3,−0.1)时m=0.4，每次正坐标固定为第1项，负坐标以0.75/0.25选择后两项，平均恢复g。 2026-11-23">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
 <span id="paper-post-training-dwe-f816adba" class="ar-learning-paper-anchor"></span>

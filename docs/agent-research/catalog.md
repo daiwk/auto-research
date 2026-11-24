@@ -10,6 +10,9 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 执行框架与自改进 | [MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research](2611.30011-morse/README.md) | Carnegie Mellon University，2026-11-23 | 未发现官方代码 | 计划键 `morse`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| Agent 策略学习 | [Optimistic Online Learning for Coding Agents with Aggregate Feedback](2611.30405-ooas/README.md) | National University of Singapore, School of Computing，2026-11-23 | 未发现官方代码 | `ooas`：仅低成本组件，完整实验不复现 |
+| 评测与可靠性 | [Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing](2611.30742-transport-safe-audit/README.md) | Efrei Research Lab, Université Paris-Panthéon-Assas / CEDRIC, Conservatoire National des Arts et Métiers，2026-11-23 | 未发现官方代码 | `transport-safe-audit`：仅低成本组件，完整实验不复现 |
 | Agent 策略学习 | [$R^2$: Recognizing and Reducing Redundant Visual Tool Use](2611.27070-r2-tool-redundancy/README.md) | Tsinghua University，2026-11-20 | 未发现官方代码 | `r2-tool-redundancy`：仅低成本组件，完整实验不复现 |
 | 执行框架与自改进 | [CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?](2611.27116-coevobench/README.md) | Zhejiang University / Alibaba Group / Shanghai Jiao Tong University，2026-11-20 | [原作者入口](https://github.com/AlibabaResearch/CoEvoBench/tree/d39a924c8985806933c94777d8e969d6e756262c)；是：[原作者AlibabaResearch固定提交](https://github.com/AlibabaResearch/CoEvoBench/tree/d39a924c8985806933c94777d8e969d6e756262c)，MIT。上游README同时披露当前镜像/最终评分接口的验收和完整性缺口；开源不等于本地已跑通。 | 计划键 `coevobench`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | Agent 策略学习 | [From Acting to Learning: Experience Selection toward Continually Learning Agents](2611.27159-acting-to-learning/README.md) | Country Garden Services AI Lab / Omni AI，2026-11-20 | 未发现官方代码 | `acting-to-learning`：仅低成本组件，完整实验不复现 |

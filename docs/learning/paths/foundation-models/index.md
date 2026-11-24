@@ -15,12 +15,12 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="conditional-compute/">按需计算：专家、弹性深宽与查表记忆</a></h2>
 <p>同一参数预算下，每个 token 应该激活哪些参数、运行多少步？</p>
-<p class="ar-learning-topic-meta">108 个问题 · 27 篇论文</p>
+<p class="ar-learning-topic-meta">112 个问题 · 28 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="training-budget/">训练预算：数据配比、目标与优化器</a></h2>
 <p>有限训练预算应该先改数据、更新方向，还是模型规模？</p>
-<p class="ar-learning-topic-meta">148 个问题 · 37 篇论文</p>
+<p class="ar-learning-topic-meta">152 个问题 · 38 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="compression-and-cache/">推理压缩：权重、KV 缓存与服务带宽</a></h2>

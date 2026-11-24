@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-24",
+  "papers": {
+    "post-training:vopd": {
+      "domain": "post-training",
+      "key": "vopd",
+      "title": "Verifiable On-Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2611.30325v1",
+      "reviewed_version_url": "https://arxiv.org/html/2611.30325v1",
+      "reviewed_version": "v1",
+      "detail_path": "post-training/2611.30325-vopd/README.md",
+      "first_author": "Juntong Shi",
+      "first_author_affiliation": "Stanford University",
+      "author_organizations": [
+        "Stanford University",
+        "Google DeepMind"
+      ],
+      "verified_priority_organizations": [
+        "Google DeepMind"
+      ],
+      "published": "2026-11-23",
+      "published_at": "2026-11-23T09:04:36Z",
+      "updated_at": "2026-11-23T09:04:36Z",
+      "discovered_on": "2026-11-24",
+      "reviewed_on": "2026-11-24",
+      "announced_on": null,
+      "code": "https://github.com/juntongshi48/VOPD",
+      "code_status": "已核作者仓库，但固定提交仅README声明代码即将发布，方法源码尚未发布；不能标成可运行开源实现。",
+      "code_license": null,
+      "upstream_revision": "21c6c15b4c07cd433387b14956679a0f79b21c03",
+      "adapter": null,
+      "topic": [
+        "student-trajectory-distillation",
+        "CPU机制组件"
+      ],
+      "priority": "P0",
+      "intake_class": "nov23_first_publication_discovered_nov24",
+      "implementation_status": "component_only",
+      "component_implemented": true,
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "summary": "VOPD把组内verifier优势投影到累计teacher/reference隐式奖励方向，detach组相关系数后，用固定prefix下新假想token的全词表期望传播dense监督；它采用immediate-token近似，不是无偏完整轨迹梯度。",
+      "fidelity_note": "纯CPU执行masked累计log-ratio之和、population Pearson系数、zero-verifier-variance固定0.25外推fallback、full-vocabulary KL目标/解析logit梯度及条件新token期望。teacher方差为0但verifier变化时原文未规定，显式拒绝。没有teacher/student模型、rollout、verifier读取gold、训练器或benchmark；不猜测未发布top16实现。",
+      "local_operator": "auto_research.post_training.vopd.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.vopd import diagnostic; print(diagnostic(42))'",
+      "method_source_sha256": "9d6a7adc752f14c3f0eabeb602aa2615ea8484e5f174940b764e50869d30a131",
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2611.30325v1",
+        "source_sections": [
+          "Section5.1",
+          "AppendixA Tables5-6"
+        ],
+        "basis": "固定v1 §5.1/AppendixA每run用8×A100；4B教师、1.7B/4B学生和冻结reference，140/160步×64prompt×4response，最大12288response token；单配置名义35840/40960 rollout槽，另八benchmark最高31744token多采样评测。相对单A100/A30或Mac预算完整矩阵成本过高，计数来自配置不是本机测量，不下载、不试跑。",
+        "available_resource": "One A100 or A30, or local Mac; CPU-only component",
+        "decision": "成本过高，不复现（审查 DONE）；无自动重试或实现队列。",
+        "local_budget": {
+          "checkpoint_download_bytes": 0,
+          "dataset_download_bytes": 0,
+          "paid_api_calls": 0,
+          "local_component_seconds_per_seed_cap": 30
+        }
+      }
+    },
+    "post-training:shpo": {
+      "domain": "post-training",
+      "key": "shpo",
+      "title": "Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences",
+      "paper_url": "https://arxiv.org/abs/2611.30135v1",
+      "reviewed_version_url": "https://arxiv.org/html/2611.30135v1",
+      "reviewed_version": "v1",
+      "detail_path": "post-training/2611.30135-shpo/README.md",
+      "first_author": "Yiming Liu",
+      "first_author_affiliation": "Jinan University",
+      "author_organizations": [
+        "Jinan University",
+        "Harbin Institute of Technology",
+        "Peking University"
+      ],
+      "verified_priority_organizations": [],
+      "published": "2026-11-23",
+      "published_at": "2026-11-23T06:44:15Z",
+      "updated_at": "2026-11-23T06:44:15Z",
+      "discovered_on": "2026-11-24",
+      "reviewed_on": "2026-11-24",
+      "announced_on": null,
+      "code": null,
+      "code_status": "固定v1全文、Data Availability与所核作者入口未找到本篇已核实源码仓库；引用PEFT/Accelerate/AlpacaEval不算本方法源码发布。",
+      "code_license": null,
+      "upstream_revision": null,
+      "adapter": null,
+      "topic": [
+        "preference-and-alignment",
+        "CPU机制组件"
+      ],
+      "priority": "P1",
+      "intake_class": "nov23_first_publication_discovered_nov24",
+      "implementation_status": "component_only",
+      "component_implemented": true,
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "summary": "SHPO在DPO标量势差上加归一化response隐状态投影的antisymmetric双线性plane残差，并对plane系数施加L1。该head能表达三角环，但作者明确不是固定比较图上精确正交Hodge curl投影，也不覆盖任意harmonic全局环。",
+      "fidelity_note": "纯CPU执行response-only mean pool、无bias d×2K投影与L2归一化、antisymmetric plane特征、DPO+curl logistic loss及gamma L1 subgradient；解析返回W/gamma/输入hidden/sequence logp梯度，hidden梯度未detach。zero projection的反向取0及gamma0处subgradient0是显式本地约定。无LLM/QLoRA/GPT judge或完整训练。",
+      "local_operator": "auto_research.post_training.shpo.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.shpo import diagnostic; print(diagnostic(42))'",
+      "method_source_sha256": "ded833478afbd12aa42966d4974933a9a535787a4b276fbe0603d10b23161296",
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2611.30135v1",
+        "source_sections": [
+          "SectionV-A",
+          "AppendixC TableS.7"
+        ],
+        "basis": "固定v1 §V-A/AppendixC TableS.7为Qwen2.5-7B QLoRA4-bit、512token、每数据集10000pair×3epoch、3数据集、主比较6方法×3seed，名义54训练run/162万pair presentations，另HPO/detach/MLP/超参扫参与GPT-4o评测。未报告统一GPU型号/墙钟时间；完整矩阵显著超本轮秒级CPU组件预算，不靠试跑估算，不下载模型数据或调用judge。",
+        "available_resource": "One A100 or A30, or local Mac; CPU-only component",
+        "decision": "成本过高，不复现（审查 DONE）；无自动重试或实现队列。",
+        "local_budget": {
+          "checkpoint_download_bytes": 0,
+          "dataset_download_bytes": 0,
+          "paid_api_calls": 0,
+          "local_component_seconds_per_seed_cap": 30
+        }
+      }
+    }
+  }
+}

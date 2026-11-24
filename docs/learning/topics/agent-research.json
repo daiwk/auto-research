@@ -302,7 +302,9 @@
         "agent-research:searchinject",
         "agent-research:buggymle-cci",
         "agent-research:sage-evolve",
-        "agent-research:coevobench"
+        "agent-research:coevobench",
+        "agent-research:transport-safe-audit",
+        "agent-research:morse"
       ]
     },
     {
@@ -379,7 +381,8 @@
         "agent-research:instruct-to-act",
         "agent-research:ace-rl",
         "agent-research:acting-to-learning",
-        "agent-research:r2-tool-redundancy"
+        "agent-research:r2-tool-redundancy",
+        "agent-research:ooas"
       ]
     },
     {

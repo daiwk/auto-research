@@ -7,7 +7,7 @@ hide:
 
 # 自动研究与高效上线
 
-[搜广推](index.md) / 92 个问题 · 23 篇论文
+[搜广推](index.md) / 96 个问题 · 24 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">92 个问题 · 23 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">96 个问题 · 24 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:weight-coding" data-paper-title="Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents 搜广推与 LLM 应用 Pinterest 2026-11-22 Weight Coding把已训练权重本身变成可执行编辑对象，固定架构、特征和服务逻辑。LLM Agent先扫描单模块编辑，按独立filter日期排除方向翻转，再直接改值、搜索或重新搜索组合后的参数。编辑原语包括缩放、重置、移除分支、压缩、快照插值、概念方向平移；编辑支持大小不等于独立自由度。原论文的GPU缓存引擎只重算被影响模块及下游，搜索阶段不反传目标模型。 完整实验成本过高，不复现（审查 DONE）；L1机制组件，diagnostic only，不是完整Agent或推荐能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。本地CPU参考只实现Table1的缩放、显式reference重置、投影置零、插值、方向平移，以及§3.4反向配对Gaussian ES、centered rank、Adam上升和validation选步。没有compression、LLM假设生成、缓存生产引擎、TorchScript编辑、真实检索模型或线上A/B。原文未公布Adam细节和ties规则，本地显式采用(.9,.999)、epsilon=1e-8和平均并列rank；  研究与服务闭环 直接权重编辑 搜广推 自动研究与高效上线 为什么改64个LayerNorm gain不等于搜索64个自由度？ 把64个gain全重置为1可能改64个数值，但没有可调参数；搜索每个gain才可能有64个自由度。支持集合大小和优化维度必须分开。 教学例：一次reset改变64个值、自由度0；只调一个共享缩放系数可以影响百万权重、自由度仍为1。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<span id="paper-recommendation-weight-coding-509af6ce" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-816e7f8886cd6c42">为什么改64个LayerNorm gain不等于搜索64个自由度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aweight-coding">Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Pinterest</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>把64个gain全重置为1可能改64个数值，但没有可调参数；搜索每个gain才可能有64个自由度。支持集合大小和优化维度必须分开。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一次reset改变64个值、自由度0；只调一个共享缩放系数可以影响百万权重、自由度仍为1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.29613v1">原论文</a> · <a href="../../../../recommendation-components/2611.29613-weight-coding/">实现解读</a> · <a href="#qa-816e7f8886cd6c42">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:weight-coding" data-paper-title="Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents 搜广推与 LLM 应用 Pinterest 2026-11-22 Weight Coding把已训练权重本身变成可执行编辑对象，固定架构、特征和服务逻辑。LLM Agent先扫描单模块编辑，按独立filter日期排除方向翻转，再直接改值、搜索或重新搜索组合后的参数。编辑原语包括缩放、重置、移除分支、压缩、快照插值、概念方向平移；编辑支持大小不等于独立自由度。原论文的GPU缓存引擎只重算被影响模块及下游，搜索阶段不反传目标模型。 完整实验成本过高，不复现（审查 DONE）；L1机制组件，diagnostic only，不是完整Agent或推荐能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。本地CPU参考只实现Table1的缩放、显式reference重置、投影置零、插值、方向平移，以及§3.4反向配对Gaussian ES、centered rank、Adam上升和validation选步。没有compression、LLM假设生成、缓存生产引擎、TorchScript编辑、真实检索模型或线上A/B。原文未公布Adam细节和ties规则，本地显式采用(.9,.999)、epsilon=1e-8和平均并列rank；  研究与服务闭环 直接权重编辑 搜广推 自动研究与高效上线 ES为何用配对噪声，平分时又怎么办？ 同一噪声正负两个方向评估后，以centered rank差加权估计更新。相同分数必须采用平均并列rank，否则常数评估器也会凭枚举顺序产生伪更新。 教学例：32个候选得分全为1时，平均rank后全为0；参数应保持不变，而不是宣称搜索有进步。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-666933a192ee9004">ES为何用配对噪声，平分时又怎么办？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aweight-coding">Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Pinterest</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>同一噪声正负两个方向评估后，以centered rank差加权估计更新。相同分数必须采用平均并列rank，否则常数评估器也会凭枚举顺序产生伪更新。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：32个候选得分全为1时，平均rank后全为0；参数应保持不变，而不是宣称搜索有进步。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.29613v1">原论文</a> · <a href="../../../../recommendation-components/2611.29613-weight-coding/">实现解读</a> · <a href="#qa-666933a192ee9004">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:weight-coding" data-paper-title="Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents 搜广推与 LLM 应用 Pinterest 2026-11-22 Weight Coding把已训练权重本身变成可执行编辑对象，固定架构、特征和服务逻辑。LLM Agent先扫描单模块编辑，按独立filter日期排除方向翻转，再直接改值、搜索或重新搜索组合后的参数。编辑原语包括缩放、重置、移除分支、压缩、快照插值、概念方向平移；编辑支持大小不等于独立自由度。原论文的GPU缓存引擎只重算被影响模块及下游，搜索阶段不反传目标模型。 完整实验成本过高，不复现（审查 DONE）；L1机制组件，diagnostic only，不是完整Agent或推荐能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。本地CPU参考只实现Table1的缩放、显式reference重置、投影置零、插值、方向平移，以及§3.4反向配对Gaussian ES、centered rank、Adam上升和validation选步。没有compression、LLM假设生成、缓存生产引擎、TorchScript编辑、真实检索模型或线上A/B。原文未公布Adam细节和ties规则，本地显式采用(.9,.999)、epsilon=1e-8和平均并列rank；  研究与服务闭环 直接权重编辑 搜广推 自动研究与高效上线 它与Evopilot的自进化有什么不同？ EvoPilot强调比较证据的完整性：共同base、数据、评测器、有效输出深度和唯一treatment都要匹配，再由人工审核接纳。Weight Coding则规定了可搜索对象：固定架构/服务上的权重数值和少量row scales。验证协议与搜索算子互补、不能互相替代；本地ES不等于已经完成自主研究或部署。原论文直接叠加编辑会退化、重新搜索可恢复，这不意味着任意两个本地算子组合必然有收益。 教学例：修改模型结构和训练pipeline属于代码级搜索；只调现有层的row log-scales属于固定架构的权重编辑，两者都不能用test挑最佳轮次。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-8464b7fbc8c253d8">它与Evopilot的自进化有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aweight-coding">Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Pinterest</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>EvoPilot强调比较证据的完整性：共同base、数据、评测器、有效输出深度和唯一treatment都要匹配，再由人工审核接纳。Weight Coding则规定了可搜索对象：固定架构/服务上的权重数值和少量row scales。验证协议与搜索算子互补、不能互相替代；本地ES不等于已经完成自主研究或部署。原论文直接叠加编辑会退化、重新搜索可恢复，这不意味着任意两个本地算子组合必然有收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：修改模型结构和训练pipeline属于代码级搜索；只调现有层的row log-scales属于固定架构的权重编辑，两者都不能用test挑最佳轮次。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.29613v1">原论文</a> · <a href="../../../../recommendation-components/2611.29613-weight-coding/">实现解读</a> · <a href="#qa-8464b7fbc8c253d8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:weight-coding" data-paper-title="Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents 搜广推与 LLM 应用 Pinterest 2026-11-22 Weight Coding把已训练权重本身变成可执行编辑对象，固定架构、特征和服务逻辑。LLM Agent先扫描单模块编辑，按独立filter日期排除方向翻转，再直接改值、搜索或重新搜索组合后的参数。编辑原语包括缩放、重置、移除分支、压缩、快照插值、概念方向平移；编辑支持大小不等于独立自由度。原论文的GPU缓存引擎只重算被影响模块及下游，搜索阶段不反传目标模型。 完整实验成本过高，不复现（审查 DONE）；L1机制组件，diagnostic only，不是完整Agent或推荐能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。本地CPU参考只实现Table1的缩放、显式reference重置、投影置零、插值、方向平移，以及§3.4反向配对Gaussian ES、centered rank、Adam上升和validation选步。没有compression、LLM假设生成、缓存生产引擎、TorchScript编辑、真实检索模型或线上A/B。原文未公布Adam细节和ties规则，本地显式采用(.9,.999)、epsilon=1e-8和平均并列rank；  研究与服务闭环 直接权重编辑 搜广推 自动研究与高效上线 本地搜索分数提升能否证明Pinterest线上收益？ 不能。合成目标检查ES、参数不变性和选步接口。生产收益来自论文真实A/B，不来自本地。search接口只接objective与validation，不接test callback；调用者必须保证数据确实隔离。 教学例：validation始终偏好初始权重时，返回step0；即使搜索目标改善也不能据此选一个validation更差的模型。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-05e81c5c67fbee67">本地搜索分数提升能否证明Pinterest线上收益？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aweight-coding">Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Pinterest</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。合成目标检查ES、参数不变性和选步接口。生产收益来自论文真实A/B，不来自本地。search接口只接objective与validation，不接test callback；调用者必须保证数据确实隔离。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：validation始终偏好初始权重时，返回step0；即使搜索目标改善也不能据此选一个validation更差的模型。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.29613v1">原论文</a> · <a href="../../../../recommendation-components/2611.29613-weight-coding/">实现解读</a> · <a href="#qa-05e81c5c67fbee67">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:fleet-feature-optimization" data-paper-title="Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models 搜广推与 LLM 应用 Meta, Inc. 2026-11-19 Meta把特征创建、FI估计、跨任务Pareto分层、多来源混合和有约束搜索连成fleet级流程。LLM提出假设，确定性工具验证；每个模型同时面对自身serving限制和跨模型共享的上游pipeline预算。另一个模型已经使用某特征时，新增使用不一定新增pipeline成本。Fixed-v1 primary source 完整实验：成本过高，不复现（审查 DONE）。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。完整实验：成本过高，不复现（审查 DONE）。仅实现Pareto层、显式quota混合、集合依赖pipeline差值、删除/同类别补回原语和已完成validation trial准入。FI、成本oracle、删除顺序、训练与资源测量都为外部输入。不运行LLM feature proposer、FI估计、异步研究搜索或生产发布；这是CPU机制合同，不是完整Agent优化系统。  研究与服务闭环 特征工程与成本约束 搜广推 自动研究与高效上线 为什么一个特征可以对模型有代价、对某pipeline预算却零增量？ 模型仍付embedding/投影等serving代价；但预算内其他模型已消费该特征时，上游生成/存储工作已经发生，不能再算一份同样的pipeline增量。 教学例：A已用f，B新增f时，共享集合并集不变，但B自身推理FLOPs仍可能增加。 2026-11-20">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
 <span id="paper-recommendation-fleet-feature-optimization-252b2d94" class="ar-learning-paper-anchor"></span>

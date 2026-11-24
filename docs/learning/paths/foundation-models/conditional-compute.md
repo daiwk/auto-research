@@ -7,7 +7,7 @@ hide:
 
 # 按需计算：专家、弹性深宽与查表记忆
 
-[基础模型](index.md) / 108 个问题 · 27 篇论文
+[基础模型](index.md) / 112 个问题 · 28 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">108 个问题 · 27 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">112 个问题 · 28 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:smart-model-routing" data-paper-title="Smart Model Routing for Order-of-Magnitude LLM Cost Reduction" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="Smart Model Routing for Order-of-Magnitude LLM Cost Reduction 基础模型 Independent Researcher 2026-11-11 本文研究应用层在多个完整模型/endpoint 之间选路，不是 MoE 内部 token→expert，也不是同一模型副本的负载均衡。核心问题是：在可接受质量下，让每个请求尽量使用便宜模型，同时计入 router、checker、被拒绝的小模型调用和长难题的额外 token 成本。作者区分 calibration 与 discrimination：所有请求都预测“便宜模型 90% 正确”可以完全校准，却无法辨别哪一条会错。 高成本完整矩阵标注不复现。状态：CPU L1 成本/策略算术组件，diagnostic only；不是训练好的 router，不发送真实模型请求。“10×”是条件化分析，不是本地或生产收益。完整模型/API 与跨任务实验不运行；高成本完整矩阵标注不复现。本地只实现影子价格 argmin、输入/输出 token 计费、frontier 最小份额、token 偏斜修正、K 阶段 cascade 成本、严格两阶段 breakeven 和条件质量求和。terminal stage 必须接受；负成本、无穷值、越界概率会拒绝。影子价格不由 test 选择，接口不接收 gold 答案。  推理与系统效率 模型选择与条件计算 基础模型 按需计算：专家、弹性深宽与查表记忆 Smart Model Routing和Switch Transformer的router是同一种东西吗？ 不是。本文在应用层选择完整模型endpoint，支付router/checker和每次推理费用；Switch在单个网络内部把token送给专家，关心激活参数和专家负载。两个层级的成本和质量约束不能混用。 教学例：选小LLM还是frontier是外部路由；同一个LLM中选expert3不等于省掉整个frontier API调用。 2026-11-18">
@@ -1352,6 +1352,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>两行都把全部权重压到同一列，行和虽为1，列和却不满足要求。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2512.24880">原论文</a> · <a href="../../../../reproductions/2512.24880-mhc/">实现解读</a> · <a href="#qa-38438b55be6098ad">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:deep-cross-attention" data-paper-title="DeepCrossAttention: Supercharging Transformer Residual Connections" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="DeepCrossAttention: Supercharging Transformer Residual Connections 基础模型 University of California, Irvine 2025-02-10 传统残差把原始输入和历层增量输出直接相加。DCA把这份历史保留下来，由可学习的feature×history基础权重，加上逐token、逐历史项的动态项，选择层输入；Q、K、V分别使用独立GRN-v3。这里的深度路由不是在层维做softmax，而是直接加权求和；普通attention仍在token维计算。 完整实验成本过高，不复现（审查 DONE）；L1组件，diagnostic only，不是完整论文或模型能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。实现GRN-v3文字公式、三套独立参数、first+middle-sum+last-k历史栈、小型多头因果attention及真实autograd。历史元素是原始输入和各层增量输出，不是重复累加的完整residual state。有限历史不直接丢弃中间层，而把它们保存在未加权sum桶中。没有完整FFN/外层残差接线、LM训练、预训练checkpoint改装、KV cache或benchmark收益。  条件计算与残差路由 独立QKV深度路由 基础模型 按需计算：专家、弹性深宽与查表记忆 DCA历史栈为什么不能装每层完整residual state？ 文字定义G保存输入和每层增量f_i(g_i)，完整state已经含旧层之和，再次把它们相加会重复计数。 教学例：输入x、增量a和b应累成x+a+b；若存x、x+a、x+a+b再相加，会变成3x+2a+b。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 按需计算：专家、弹性深宽与查表记忆</a></p>
+<span id="paper-foundation-models-deep-cross-attention-ccf6bf93" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f67214aacfa7b251">DCA历史栈为什么不能装每层完整residual state？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adeep-cross-attention">DeepCrossAttention: Supercharging Transformer Residual Connections</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · University of California, Irvine</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>文字定义G保存输入和每层增量f_i(g_i)，完整state已经含旧层之和，再次把它们相加会重复计数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：输入x、增量a和b应累成x+a+b；若存x、x+a、x+a+b再相加，会变成3x+2a+b。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2502.06785v2">原论文</a> · <a href="../../../../foundation-models/2502.06785-deep-cross-attention/">实现解读</a> · <a href="#qa-f67214aacfa7b251">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:deep-cross-attention" data-paper-title="DeepCrossAttention: Supercharging Transformer Residual Connections" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="DeepCrossAttention: Supercharging Transformer Residual Connections 基础模型 University of California, Irvine 2025-02-10 传统残差把原始输入和历层增量输出直接相加。DCA把这份历史保留下来，由可学习的feature×history基础权重，加上逐token、逐历史项的动态项，选择层输入；Q、K、V分别使用独立GRN-v3。这里的深度路由不是在层维做softmax，而是直接加权求和；普通attention仍在token维计算。 完整实验成本过高，不复现（审查 DONE）；L1组件，diagnostic only，不是完整论文或模型能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。实现GRN-v3文字公式、三套独立参数、first+middle-sum+last-k历史栈、小型多头因果attention及真实autograd。历史元素是原始输入和各层增量输出，不是重复累加的完整residual state。有限历史不直接丢弃中间层，而把它们保存在未加权sum桶中。没有完整FFN/外层残差接线、LM训练、预训练checkpoint改装、KV cache或benchmark收益。  条件计算与残差路由 独立QKV深度路由 基础模型 按需计算：专家、弹性深宽与查表记忆 GRN-v3的动态项为什么不是普通softmax层注意力？ 它把b与ReLU(wᵀG)相加后直接线性加权；系数不要求非负或和为1，基础项还逐feature变化。 教学例：三份全1历史、b=1且w=0输出3，不是softmax均值1；把b改成−2会输出−6。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 按需计算：专家、弹性深宽与查表记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-9d9e3c55ac8ec7a8">GRN-v3的动态项为什么不是普通softmax层注意力？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adeep-cross-attention">DeepCrossAttention: Supercharging Transformer Residual Connections</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · University of California, Irvine</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它把b与ReLU(wᵀG)相加后直接线性加权；系数不要求非负或和为1，基础项还逐feature变化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：三份全1历史、b=1且w=0输出3，不是softmax均值1；把b改成−2会输出−6。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2502.06785v2">原论文</a> · <a href="../../../../foundation-models/2502.06785-deep-cross-attention/">实现解读</a> · <a href="#qa-9d9e3c55ac8ec7a8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:deep-cross-attention" data-paper-title="DeepCrossAttention: Supercharging Transformer Residual Connections" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="DeepCrossAttention: Supercharging Transformer Residual Connections 基础模型 University of California, Irvine 2025-02-10 传统残差把原始输入和历层增量输出直接相加。DCA把这份历史保留下来，由可学习的feature×history基础权重，加上逐token、逐历史项的动态项，选择层输入；Q、K、V分别使用独立GRN-v3。这里的深度路由不是在层维做softmax，而是直接加权求和；普通attention仍在token维计算。 完整实验成本过高，不复现（审查 DONE）；L1组件，diagnostic only，不是完整论文或模型能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。实现GRN-v3文字公式、三套独立参数、first+middle-sum+last-k历史栈、小型多头因果attention及真实autograd。历史元素是原始输入和各层增量输出，不是重复累加的完整residual state。有限历史不直接丢弃中间层，而把它们保存在未加权sum桶中。没有完整FFN/外层残差接线、LM训练、预训练checkpoint改装、KV cache或benchmark收益。  条件计算与残差路由 独立QKV深度路由 基础模型 按需计算：专家、弹性深宽与查表记忆 DCA与RD-AttnRes的Q/K/V解耦边界有什么区别？ RD-AttnRes保留共享QK、解耦V；DCA对Q、K、V各自配置独立GRN-v3，且深度混合公式不同。 教学例：只修改DCA的Q基础权重，K和V路由输出必须逐位不变；RD中Q和K本来共享路由。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 按需计算：专家、弹性深宽与查表记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-075621bde853e73f">DCA与RD-AttnRes的Q/K/V解耦边界有什么区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adeep-cross-attention">DeepCrossAttention: Supercharging Transformer Residual Connections</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · University of California, Irvine</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>RD-AttnRes保留共享QK、解耦V；DCA对Q、K、V各自配置独立GRN-v3，且深度混合公式不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：只修改DCA的Q基础权重，K和V路由输出必须逐位不变；RD中Q和K本来共享路由。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2502.06785v2">原论文</a> · <a href="../../../../foundation-models/2502.06785-deep-cross-attention/">实现解读</a> · <a href="#qa-075621bde853e73f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:deep-cross-attention" data-paper-title="DeepCrossAttention: Supercharging Transformer Residual Connections" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="DeepCrossAttention: Supercharging Transformer Residual Connections 基础模型 University of California, Irvine 2025-02-10 传统残差把原始输入和历层增量输出直接相加。DCA把这份历史保留下来，由可学习的feature×history基础权重，加上逐token、逐历史项的动态项，选择层输入；Q、K、V分别使用独立GRN-v3。这里的深度路由不是在层维做softmax，而是直接加权求和；普通attention仍在token维计算。 完整实验成本过高，不复现（审查 DONE）；L1组件，diagnostic only，不是完整论文或模型能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。实现GRN-v3文字公式、三套独立参数、first+middle-sum+last-k历史栈、小型多头因果attention及真实autograd。历史元素是原始输入和各层增量输出，不是重复累加的完整residual state。有限历史不直接丢弃中间层，而把它们保存在未加权sum桶中。没有完整FFN/外层残差接线、LM训练、预训练checkpoint改装、KV cache或benchmark收益。  条件计算与残差路由 独立QKV深度路由 基础模型 按需计算：专家、弹性深宽与查表记忆 零初始化w配ReLU时，怎样避免把动态路由诊断写成训练成功？ 先按原公式保留w=0并记录ReLU零点导数下初始梯度为0；再用明确标注的非零参数干预检查动态公式与梯度，不能悄悄随机初始化后声称忠实复刻训练。 教学例：第一个测试断言w梯度全0；另一个测试手工设w=0.05后检查有限非零梯度。两项都不是LM收敛实验。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 按需计算：专家、弹性深宽与查表记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-a9d9b6d1a71adb22">零初始化w配ReLU时，怎样避免把动态路由诊断写成训练成功？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adeep-cross-attention">DeepCrossAttention: Supercharging Transformer Residual Connections</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · University of California, Irvine</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先按原公式保留w=0并记录ReLU零点导数下初始梯度为0；再用明确标注的非零参数干预检查动态公式与梯度，不能悄悄随机初始化后声称忠实复刻训练。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第一个测试断言w梯度全0；另一个测试手工设w=0.05后检查有限非零梯度。两项都不是LM收敛实验。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2502.06785v2">原论文</a> · <a href="../../../../foundation-models/2502.06785-deep-cross-attention/">实现解读</a> · <a href="#qa-a9d9b6d1a71adb22">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:blt" data-paper-title="Byte Latent Transformer: Patches Scale Better Than Tokens" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="Byte Latent Transformer: Patches Scale Better Than Tokens 基础模型 Meta FAIR 2024-12-13 直接处理 byte，并依据 next-byte entropy 动态形成 patch；全局 Transformer 在 patch 级计算，局部编码器/解码器恢复 byte。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。实际执行可学习 surprisal boundary、相邻低熵位置 latent patch 共享并展开回原目标；当前 evaluator 的 512-symbol tokenizer 只近似 byte alphabet，未复刻 8B BLT 与完整 local encoder/decoder。本地数值不等同于原论文大模型、私有数据、生产流量或专用 kernel；本地相对变化不得与原文提升混写。本地对照口径：基线为同预算 llama_modern，实验组为 blt；相对 PPL -2.13%。  tokenizer-free byte-model dynamic-patching architecture 基础模型 按需计算：专家、弹性深宽与查表记忆 BLT 为什么在 byte 与全局 Transformer 之间引入 patch？ 直接逐byte做昂贵全局计算成本高。BLT按next-byte不确定性形成可变patch，把全局计算集中到patch级，再由局部编码器/解码器连接byte级输入与输出。 示意：容易预测的连续字节可以合成较长patch，复杂位置则需要更细的分段。 2026-10-27">

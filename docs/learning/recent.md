@@ -68,9 +68,433 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">5106 个问题 · 1274 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">5138 个问题 · 1282 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:vopd" data-paper-title="Verifiable On-Policy Distillation" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Verifiable On-Policy Distillation LLM 后训练 Stanford University 2026-11-23 RLVR只给已采样整条response稀疏结果反馈；OPD给每个访问prefix的完整teacher分布，但该信号未被verifier验证。VOPD先对每组response计算teacher/reference累计log-ratio D，再以population标准差标准化V和D，最小二乘投影得到Pearson相关c。把投影信号乘回σ_D恢复原奖励尺度，然后采用immediate-token近似，在已观察组与prefix固定时，对一个新的假想next-token取全词表条件期望。 完整实验成本过高，不复现（审查 DONE）；多seed不升级机制诊断为能力比较，没有下载数据/权重、生成真实response、训练模型或调用judge。L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU执行masked累计log-ratio之和、population Pearson系数、zero-verifier-variance固定0.25外推fallback、full-vocabulary KL目标/解析logit梯度及条件新token期望。  student-trajectory-distillation CPU机制组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 Rao–Blackwell化究竟保留了哪一个期望？ 保留的是采用immediate-token近似后、给定已观察组和prefix、重新抽一个假想next-token的局部梯度期望。c和baseline固定，score恒等式消去baseline；不是无偏完整序列verifier梯度。 教学例：固定p=(0.2,0.8)后可以枚举两token来消掉这次抽样噪声，但此前哪组回答被抽到以及未来续写仍是随机的。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/student-trajectory-distillation/">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-16bca51f0d27a066">Rao–Blackwell化究竟保留了哪一个期望？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Avopd">Verifiable On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Stanford University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>保留的是采用immediate-token近似后、给定已观察组和prefix、重新抽一个假想next-token的局部梯度期望。c和baseline固定，score恒等式消去baseline；不是无偏完整序列verifier梯度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：固定p=(0.2,0.8)后可以枚举两token来消掉这次抽样噪声，但此前哪组回答被抽到以及未来续写仍是随机的。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30325v1">原论文</a> · <a href="../../post-training/2611.30325-vopd/">实现解读</a> · <a href="#qa-16bca51f0d27a066">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:vopd" data-paper-title="Verifiable On-Policy Distillation" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Verifiable On-Policy Distillation LLM 后训练 Stanford University 2026-11-23 RLVR只给已采样整条response稀疏结果反馈；OPD给每个访问prefix的完整teacher分布，但该信号未被verifier验证。VOPD先对每组response计算teacher/reference累计log-ratio D，再以population标准差标准化V和D，最小二乘投影得到Pearson相关c。把投影信号乘回σ_D恢复原奖励尺度，然后采用immediate-token近似，在已观察组与prefix固定时，对一个新的假想next-token取全词表条件期望。 完整实验成本过高，不复现（审查 DONE）；多seed不升级机制诊断为能力比较，没有下载数据/权重、生成真实response、训练模型或调用judge。L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU执行masked累计log-ratio之和、population Pearson系数、zero-verifier-variance固定0.25外推fallback、full-vocabulary KL目标/解析logit梯度及条件新token期望。  student-trajectory-distillation CPU机制组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 为什么本地不宣称复刻了论文top-16训练？ 作者仓库当前仅README预告，top-16归约细节未获方法代码核验；本地忠实执行理论full-vocabulary有限目标与解析梯度，外部提供组奖励和分布，不执行rollout、模型或verifier。 教学例：三token词表可以独立核对所有梯度和等价target，但通过该检查不等于在4B学生上运行了8×A100训练。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/student-trajectory-distillation/">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3317a6f07f8605f1">为什么本地不宣称复刻了论文top-16训练？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Avopd">Verifiable On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Stanford University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>作者仓库当前仅README预告，top-16归约细节未获方法代码核验；本地忠实执行理论full-vocabulary有限目标与解析梯度，外部提供组奖励和分布，不执行rollout、模型或verifier。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：三token词表可以独立核对所有梯度和等价target，但通过该检查不等于在4B学生上运行了8×A100训练。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30325v1">原论文</a> · <a href="../../post-training/2611.30325-vopd/">实现解读</a> · <a href="#qa-3317a6f07f8605f1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:vopd" data-paper-title="Verifiable On-Policy Distillation" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Verifiable On-Policy Distillation LLM 后训练 Stanford University 2026-11-23 RLVR只给已采样整条response稀疏结果反馈；OPD给每个访问prefix的完整teacher分布，但该信号未被verifier验证。VOPD先对每组response计算teacher/reference累计log-ratio D，再以population标准差标准化V和D，最小二乘投影得到Pearson相关c。把投影信号乘回σ_D恢复原奖励尺度，然后采用immediate-token近似，在已观察组与prefix固定时，对一个新的假想next-token取全词表条件期望。 完整实验成本过高，不复现（审查 DONE）；多seed不升级机制诊断为能力比较，没有下载数据/权重、生成真实response、训练模型或调用judge。L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU执行masked累计log-ratio之和、population Pearson系数、zero-verifier-variance固定0.25外推fallback、full-vocabulary KL目标/解析logit梯度及条件新token期望。  student-trajectory-distillation CPU机制组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 VOPD的λ是不是GKD里的学生数据比例？ 不是。GKD的混合比例改变训练prefix来源；VOPD的λ控制teacher/reference方向外推强度，另由c按组调节。verifier全同还使用固定0.25外推fallback，不能把c默认0并称忠实。 教学例：λ=0.25、c=−0.8给强度−0.2，目标向reference方向退；GKD数据比例不能取这个负值来表达同一操作。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/student-trajectory-distillation/">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-3292c0c1e7af9057">VOPD的λ是不是GKD里的学生数据比例？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Avopd">Verifiable On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Stanford University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。GKD的混合比例改变训练prefix来源；VOPD的λ控制teacher/reference方向外推强度，另由c按组调节。verifier全同还使用固定0.25外推fallback，不能把c默认0并称忠实。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：λ=0.25、c=−0.8给强度−0.2，目标向reference方向退；GKD数据比例不能取这个负值来表达同一操作。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30325v1">原论文</a> · <a href="../../post-training/2611.30325-vopd/">实现解读</a> · <a href="#qa-3292c0c1e7af9057">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:vopd" data-paper-title="Verifiable On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Verifiable On-Policy Distillation LLM 后训练 Stanford University 2026-11-23 RLVR只给已采样整条response稀疏结果反馈；OPD给每个访问prefix的完整teacher分布，但该信号未被verifier验证。VOPD先对每组response计算teacher/reference累计log-ratio D，再以population标准差标准化V和D，最小二乘投影得到Pearson相关c。把投影信号乘回σ_D恢复原奖励尺度，然后采用immediate-token近似，在已观察组与prefix固定时，对一个新的假想next-token取全词表条件期望。 完整实验成本过高，不复现（审查 DONE）；多seed不升级机制诊断为能力比较，没有下载数据/权重、生成真实response、训练模型或调用judge。L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU执行masked累计log-ratio之和、population Pearson系数、zero-verifier-variance固定0.25外推fallback、full-vocabulary KL目标/解析logit梯度及条件新token期望。  student-trajectory-distillation CPU机制组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 稀疏verifier如何影响从未采样的token？ 先把response级verifier偏好投影到teacher/reference累计隐式奖励方向，再固定组统计，在每个访问prefix用teacher/reference全词表log-ratio构造局部奖励。它复用已有分布，不是猜未采样response的正确答案。 教学例：组内高D的回答通常答对时c&gt;0，未采样token也会按其teacher/reference log-ratio获得dense梯度；这不代表已验证该token后所有续写。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/student-trajectory-distillation/">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<span id="paper-post-training-vopd-e7ca22e5" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-e2efab469096fcf8">稀疏verifier如何影响从未采样的token？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Avopd">Verifiable On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Stanford University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先把response级verifier偏好投影到teacher/reference累计隐式奖励方向，再固定组统计，在每个访问prefix用teacher/reference全词表log-ratio构造局部奖励。它复用已有分布，不是猜未采样response的正确答案。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：组内高D的回答通常答对时c&gt;0，未采样token也会按其teacher/reference log-ratio获得dense梯度；这不代表已验证该token后所有续写。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30325v1">原论文</a> · <a href="../../post-training/2611.30325-vopd/">实现解读</a> · <a href="#qa-e2efab469096fcf8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:shpo" data-paper-title="Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences LLM 后训练 Jinan University 2026-11-23 DPO把偏好写成response标量势之差，围绕三角形相加为零，不能表示A胜B、B胜C、C胜A的局部环。SHPO保留DPO项，再把response最后层hidden仅在response token上均值池化，经无bias W投影到2K维并归一化；每个二维plane的有向面积乘γ后相加，构造交换两回答即反号的残差。γ的L1惩罚使不活跃plane受压制；梯度同时流回W、γ和共享policy hidden，不是固定打分后重新排序。 完整实验成本过高，不复现（审查 DONE）；多seed不升级机制诊断为能力比较，没有下载数据/权重、生成真实response、训练模型或调用judge。L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU执行response-only mean pool、无bias d×2K投影与L2归一化、antisymmetric plane特征、DPO+curl logistic loss及gamma L1 subgradient；  preference-and-alignment CPU机制组件 LLM 后训练 偏好与对齐：先看反馈长什么样 curl head是不是精确Hodge正交投影？ 不是。原文Remark3明确它是参数化反对称head，不必等于固定图的正交curl子空间投影；harmonic-free假设也排除了某些全局拓扑循环。交换回答反号只是一项结构性质。 教学例：两个向量的有向面积天然反号，但不经过整张比较图的最小二乘求解，就不能把该值叫精确图级分解。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/preference-and-alignment/">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-26618f0ebdf5cca2">curl head是不是精确Hodge正交投影？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Ashpo">Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Jinan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。原文Remark3明确它是参数化反对称head，不必等于固定图的正交curl子空间投影；harmonic-free假设也排除了某些全局拓扑循环。交换回答反号只是一项结构性质。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个向量的有向面积天然反号，但不经过整张比较图的最小二乘求解，就不能把该值叫精确图级分解。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30135v1">原论文</a> · <a href="../../post-training/2611.30135-shpo/">实现解读</a> · <a href="#qa-26618f0ebdf5cca2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:shpo" data-paper-title="Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences LLM 后训练 Jinan University 2026-11-23 DPO把偏好写成response标量势之差，围绕三角形相加为零，不能表示A胜B、B胜C、C胜A的局部环。SHPO保留DPO项，再把response最后层hidden仅在response token上均值池化，经无bias W投影到2K维并归一化；每个二维plane的有向面积乘γ后相加，构造交换两回答即反号的残差。γ的L1惩罚使不活跃plane受压制；梯度同时流回W、γ和共享policy hidden，不是固定打分后重新排序。 完整实验成本过高，不复现（审查 DONE）；多seed不升级机制诊断为能力比较，没有下载数据/权重、生成真实response、训练模型或调用judge。L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU执行response-only mean pool、无bias d×2K投影与L2归一化、antisymmetric plane特征、DPO+curl logistic loss及gamma L1 subgradient；  preference-and-alignment CPU机制组件 LLM 后训练 偏好与对齐：先看反馈长什么样 本地怎样防止把detach版误写成SHPO梯度？ 返回对W、γ和两侧输入hidden的解析梯度并逐项做有限差分；正常非零head应有hidden梯度。零投影反向0与γ=0次梯度0明确是本地边界约定，非上游默认。 教学例：α=0时curl对hidden梯度应为0；α非零且输入一般位置时应非零，单测比较两者而不把冻结hidden的拟合宣传成联合模型训练。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/preference-and-alignment/">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-363976a9627c732c">本地怎样防止把detach版误写成SHPO梯度？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Ashpo">Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Jinan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>返回对W、γ和两侧输入hidden的解析梯度并逐项做有限差分；正常非零head应有hidden梯度。零投影反向0与γ=0次梯度0明确是本地边界约定，非上游默认。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：α=0时curl对hidden梯度应为0；α非零且输入一般位置时应非零，单测比较两者而不把冻结hidden的拟合宣传成联合模型训练。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30135v1">原论文</a> · <a href="../../post-training/2611.30135-shpo/">实现解读</a> · <a href="#qa-363976a9627c732c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:shpo" data-paper-title="Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences LLM 后训练 Jinan University 2026-11-23 DPO把偏好写成response标量势之差，围绕三角形相加为零，不能表示A胜B、B胜C、C胜A的局部环。SHPO保留DPO项，再把response最后层hidden仅在response token上均值池化，经无bias W投影到2K维并归一化；每个二维plane的有向面积乘γ后相加，构造交换两回答即反号的残差。γ的L1惩罚使不活跃plane受压制；梯度同时流回W、γ和共享policy hidden，不是固定打分后重新排序。 完整实验成本过高，不复现（审查 DONE）；多seed不升级机制诊断为能力比较，没有下载数据/权重、生成真实response、训练模型或调用judge。L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU执行response-only mean pool、无bias d×2K投影与L2归一化、antisymmetric plane特征、DPO+curl logistic loss及gamma L1 subgradient；  preference-and-alignment CPU机制组件 LLM 后训练 偏好与对齐：先看反馈长什么样 含curl的偏好准确率能替代策略生成质量吗？ 不能。accπ看policy自身序列概率，acc_dpo做reference校正，acc_dpo+c还用额外head；生成时并不自动使用这个pairwise head。必须保留三个指标口径和独立生成评测。 教学例：固定policy不变而只训练head，也可能让pair分类变准，但policy下一token分布不会因此直接改变。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/preference-and-alignment/">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-8299638cf3ccdf9e">含curl的偏好准确率能替代策略生成质量吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Ashpo">Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Jinan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。accπ看policy自身序列概率，acc_dpo做reference校正，acc_dpo+c还用额外head；生成时并不自动使用这个pairwise head。必须保留三个指标口径和独立生成评测。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：固定policy不变而只训练head，也可能让pair分类变准，但policy下一token分布不会因此直接改变。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30135v1">原论文</a> · <a href="../../post-training/2611.30135-shpo/">实现解读</a> · <a href="#qa-8299638cf3ccdf9e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:shpo" data-paper-title="Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences LLM 后训练 Jinan University 2026-11-23 DPO把偏好写成response标量势之差，围绕三角形相加为零，不能表示A胜B、B胜C、C胜A的局部环。SHPO保留DPO项，再把response最后层hidden仅在response token上均值池化，经无bias W投影到2K维并归一化；每个二维plane的有向面积乘γ后相加，构造交换两回答即反号的残差。γ的L1惩罚使不活跃plane受压制；梯度同时流回W、γ和共享policy hidden，不是固定打分后重新排序。 完整实验成本过高，不复现（审查 DONE）；多seed不升级机制诊断为能力比较，没有下载数据/权重、生成真实response、训练模型或调用judge。L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU执行response-only mean pool、无bias d×2K投影与L2归一化、antisymmetric plane特征、DPO+curl logistic loss及gamma L1 subgradient；  preference-and-alignment CPU机制组件 LLM 后训练 偏好与对齐：先看反馈长什么样 DPO为什么不能表达三角偏好环？ DPO pair logit是两个标量势之差，三边相加严格望远镜消去为0。SHPO增加antisymmetric plane残差，可使三角circulation非零；这不是仅扩大同一个BT标量reward。 教学例：A&gt;B、B&gt;C、C&gt;A三边都要正时，不存在三个标量同时满足；单位圆上0/120/240度的plane有向面积可给三边同号。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/preference-and-alignment/">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<span id="paper-post-training-shpo-bd72026e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-5e89eb3a723b10f0">DPO为什么不能表达三角偏好环？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Ashpo">Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Jinan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>DPO pair logit是两个标量势之差，三边相加严格望远镜消去为0。SHPO增加antisymmetric plane残差，可使三角circulation非零；这不是仅扩大同一个BT标量reward。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A&gt;B、B&gt;C、C&gt;A三边都要正时，不存在三个标量同时满足；单位圆上0/120/240度的plane有向面积可给三边同号。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30135v1">原论文</a> · <a href="../../post-training/2611.30135-shpo/">实现解读</a> · <a href="#qa-5e89eb3a723b10f0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stablekl" data-paper-title="The KL Divergence Is Never Negative, Except in PyTorch" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="The KL Divergence Is Never Negative, Except in PyTorch 基础模型 Yale University 2026-11-23 近等分布的真实KL是二阶小量，但教科书公式往往由一阶或常数量相减得到，容易返回零、负数或错误梯度。StableKL把闭式KL重写成非负小量的组合，配合差值、补偿算术和解析梯度；它还区分F.kl_div算子误差与输入log-prob本身已丢失的信息。本地只选择其中Exponential族的Rewrite核。 完整实验成本过高，不复现（审查 DONE）；L1组件，diagnostic only，不是完整论文或模型能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。仅FP32 CPU、形状匹配的正rate输入，17项φ级数、远区间分支及一阶解析autograd。对非有限/非正参数、dtype/形状/设备不符、ratio溢出/下溢和非有限结果直接拒绝，不冒充极端范围mantissa/exponent处理。独立80位Decimal参考以实际FP32存储值为输入，校验近等、区间边界、远区间、梯度和精确恒等；它不是区间认证。  训练与数值可靠性 近等分布KL稳定重写 基础模型 训练预算：数据配比、目标与优化器 本地80位Decimal对照为什么不能写成论文strict正确舍入验收？ 它只是有限样本的独立高精度参考，没有误差区间、舍入边界判定或Ziv重试，也只覆盖一个FP32分布族。严格认证与抽样数值一致是不同证据等级。 教学例：32个近等输入相对误差小于2×10⁻6只能支持这个小核诊断，不能外推到18族或567M F.kl_div分量全部正确舍入。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/training-budget/">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-aefb8e173cdc6995">本地80位Decimal对照为什么不能写成论文strict正确舍入验收？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Astablekl">The KL Divergence Is Never Negative, Except in PyTorch</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它只是有限样本的独立高精度参考，没有误差区间、舍入边界判定或Ziv重试，也只覆盖一个FP32分布族。严格认证与抽样数值一致是不同证据等级。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：32个近等输入相对误差小于2×10⁻6只能支持这个小核诊断，不能外推到18族或567M F.kl_div分量全部正确舍入。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30835v1">原论文</a> · <a href="../../foundation-models/2611.30835-stablekl/">实现解读</a> · <a href="#qa-aefb8e173cdc6995">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stablekl" data-paper-title="The KL Divergence Is Never Negative, Except in PyTorch" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="The KL Divergence Is Never Negative, Except in PyTorch 基础模型 Yale University 2026-11-23 近等分布的真实KL是二阶小量，但教科书公式往往由一阶或常数量相减得到，容易返回零、负数或错误梯度。StableKL把闭式KL重写成非负小量的组合，配合差值、补偿算术和解析梯度；它还区分F.kl_div算子误差与输入log-prob本身已丢失的信息。本地只选择其中Exponential族的Rewrite核。 完整实验成本过高，不复现（审查 DONE）；L1组件，diagnostic only，不是完整论文或模型能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。仅FP32 CPU、形状匹配的正rate输入，17项φ级数、远区间分支及一阶解析autograd。对非有限/非正参数、dtype/形状/设备不符、ratio溢出/下溢和非有限结果直接拒绝，不冒充极端范围mantissa/exponent处理。独立80位Decimal参考以实际FP32存储值为输入，校验近等、区间边界、远区间、梯度和精确恒等；它不是区间认证。  训练与数值可靠性 近等分布KL稳定重写 基础模型 训练预算：数据配比、目标与优化器 KL结果非负就说明计算正确吗？ 不是。消去可以把真实正KL变成0，也会产生正但偏差很大的值。clamp只去掉负号，不能恢复被舍掉的二阶量或梯度。 教学例：rate_p=1、FP32 rate_q=1.0001时，朴素公式可为0，而存储输入的KL约5×10⁻9。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/training-budget/">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<span id="paper-foundation-models-stablekl-203bc05b" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-677fc84dec6d443f">KL结果非负就说明计算正确吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Astablekl">The KL Divergence Is Never Negative, Except in PyTorch</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。消去可以把真实正KL变成0，也会产生正但偏差很大的值。clamp只去掉负号，不能恢复被舍掉的二阶量或梯度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：rate_p=1、FP32 rate_q=1.0001时，朴素公式可为0，而存储输入的KL约5×10⁻9。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30835v1">原论文</a> · <a href="../../foundation-models/2611.30835-stablekl/">实现解读</a> · <a href="#qa-677fc84dec6d443f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stablekl" data-paper-title="The KL Divergence Is Never Negative, Except in PyTorch" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="The KL Divergence Is Never Negative, Except in PyTorch 基础模型 Yale University 2026-11-23 近等分布的真实KL是二阶小量，但教科书公式往往由一阶或常数量相减得到，容易返回零、负数或错误梯度。StableKL把闭式KL重写成非负小量的组合，配合差值、补偿算术和解析梯度；它还区分F.kl_div算子误差与输入log-prob本身已丢失的信息。本地只选择其中Exponential族的Rewrite核。 完整实验成本过高，不复现（审查 DONE）；L1组件，diagnostic only，不是完整论文或模型能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。仅FP32 CPU、形状匹配的正rate输入，17项φ级数、远区间分支及一阶解析autograd。对非有限/非正参数、dtype/形状/设备不符、ratio溢出/下溢和非有限结果直接拒绝，不冒充极端范围mantissa/exponent处理。独立80位Decimal参考以实际FP32存储值为输入，校验近等、区间边界、远区间、梯度和精确恒等；它不是区间认证。  训练与数值可靠性 近等分布KL稳定重写 基础模型 训练预算：数据配比、目标与优化器 StableKL与随机舍入能互相替代吗？ 不能。随机舍入解决量化格点吞掉更新，并引入受控随机性；StableKL解决已存输入上的确定性消去。丢失在输入表示中的信息也不属于KL算子能恢复的范围。 教学例：BF16把两个rate先都存成1，StableKL只能正确给0；若FP32仍保留两者差值，它才可通过重写恢复小的正KL。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/training-budget/">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-64498b05a818a4bf">StableKL与随机舍入能互相替代吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Astablekl">The KL Divergence Is Never Negative, Except in PyTorch</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。随机舍入解决量化格点吞掉更新，并引入受控随机性；StableKL解决已存输入上的确定性消去。丢失在输入表示中的信息也不属于KL算子能恢复的范围。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：BF16把两个rate先都存成1，StableKL只能正确给0；若FP32仍保留两者差值，它才可通过重写恢复小的正KL。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30835v1">原论文</a> · <a href="../../foundation-models/2611.30835-stablekl/">实现解读</a> · <a href="#qa-64498b05a818a4bf">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stablekl" data-paper-title="The KL Divergence Is Never Negative, Except in PyTorch" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="The KL Divergence Is Never Negative, Except in PyTorch 基础模型 Yale University 2026-11-23 近等分布的真实KL是二阶小量，但教科书公式往往由一阶或常数量相减得到，容易返回零、负数或错误梯度。StableKL把闭式KL重写成非负小量的组合，配合差值、补偿算术和解析梯度；它还区分F.kl_div算子误差与输入log-prob本身已丢失的信息。本地只选择其中Exponential族的Rewrite核。 完整实验成本过高，不复现（审查 DONE）；L1组件，diagnostic only，不是完整论文或模型能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。仅FP32 CPU、形状匹配的正rate输入，17项φ级数、远区间分支及一阶解析autograd。对非有限/非正参数、dtype/形状/设备不符、ratio溢出/下溢和非有限结果直接拒绝，不冒充极端范围mantissa/exponent处理。独立80位Decimal参考以实际FP32存储值为输入，校验近等、区间边界、远区间、梯度和精确恒等；它不是区间认证。  训练与数值可靠性 近等分布KL稳定重写 基础模型 训练预算：数据配比、目标与优化器 为什么Exponential修复要先做rate差，而不是ratio−1？ 近等浮点输入的直接减法可精确保留差值；先做ratio会在1附近舍入，再减1暴露该误差。φ级数随后直接表示二阶小量，解析梯度避免再经过消去链。 教学例：把q设成1的下一个FP32数，d=q−1仍非零；稳定级数输出约7.1×10⁻15，而常数量相减可能归零。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/training-budget/">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1986196f71f30e8e">为什么Exponential修复要先做rate差，而不是ratio−1？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Astablekl">The KL Divergence Is Never Negative, Except in PyTorch</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>近等浮点输入的直接减法可精确保留差值；先做ratio会在1附近舍入，再减1暴露该误差。φ级数随后直接表示二阶小量，解析梯度避免再经过消去链。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把q设成1的下一个FP32数，d=q−1仍非零；稳定级数输出约7.1×10⁻15，而常数量相减可能归零。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30835v1">原论文</a> · <a href="../../foundation-models/2611.30835-stablekl/">实现解读</a> · <a href="#qa-1986196f71f30e8e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:transport-safe-audit" data-paper-title="Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing Agent Efrei Research Lab, Université Paris-Panthéon-Assas / CEDRIC, Conservatoire National des Arts et Métiers 2026-11-23 不同Agent产生不同轨迹；即使裁判在给定(X,Y)时看不到Agent身份，其sensitivity/specificity的平均值也会随成功/失败轨迹分布改变。论文连接scalar transport偏差、支持与识别、随机人工audit、anytime monitoring和rank sets；这些统计工具本身不是新发明。主要证据是semi-synthetic，公共Agent数据的既有分析未在本文独立重跑，不据此声称轨迹长度有因果作用。 成本过高，不复现（审查 DONE）；component_only / L1 CPU数学机制诊断，diagnostic_only=true；不是Agent能力复现。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。本地是evaluator侧标准库算术：scalar transport偏差、带显式fold声明的AIPW、finite-strata bounded allocation、支持缺失outer set、严格区间rank sets和log-space hedged e-process。plan先提交m与φ再随机决定audit；  评测与可靠性 CPU机制组件 Agent 运行流程与自进化：改的是哪一层 看到当前label后再调audit概率，或者更新Agent后继续同一e-process，可以吗？ 不可以。预测/audit规则须依赖过去，当前label不能回流；稳定target要求冻结Agent与独立任务。更新模型、混Agent或固定小样本无放回抽取不自动满足。网格反演也不能冒充连续CS。 教学例：先定φ=0.2再随机audit合法；看到失败才把本条φ改成1会破坏已声明设计概率。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-829707ebb4733bec">看到当前label后再调audit概率，或者更新Agent后继续同一e-process，可以吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Atransport-safe-audit">Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Efrei Research Lab, Université Paris-Panthéon-Assas / CEDRIC, Conservatoire National des Arts et Métiers</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不可以。预测/audit规则须依赖过去，当前label不能回流；稳定target要求冻结Agent与独立任务。更新模型、混Agent或固定小样本无放回抽取不自动满足。网格反演也不能冒充连续CS。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：先定φ=0.2再随机audit合法；看到失败才把本条φ改成1会破坏已声明设计概率。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30742v1">原论文</a> · <a href="../../agent-research/2611.30742-transport-safe-audit/">实现解读</a> · <a href="#qa-829707ebb4733bec">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:transport-safe-audit" data-paper-title="Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing Agent Efrei Research Lab, Université Paris-Panthéon-Assas / CEDRIC, Conservatoire National des Arts et Métiers 2026-11-23 不同Agent产生不同轨迹；即使裁判在给定(X,Y)时看不到Agent身份，其sensitivity/specificity的平均值也会随成功/失败轨迹分布改变。论文连接scalar transport偏差、支持与识别、随机人工audit、anytime monitoring和rank sets；这些统计工具本身不是新发明。主要证据是semi-synthetic，公共Agent数据的既有分析未在本文独立重跑，不据此声称轨迹长度有因果作用。 成本过高，不复现（审查 DONE）；component_only / L1 CPU数学机制诊断，diagnostic_only=true；不是Agent能力复现。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。本地是evaluator侧标准库算术：scalar transport偏差、带显式fold声明的AIPW、finite-strata bounded allocation、支持缺失outer set、严格区间rank sets和log-space hedged e-process。plan先提交m与φ再随机决定audit；  评测与可靠性 CPU机制组件 Agent 运行流程与自进化：改的是哪一层 与CoEvo的数据隔离审计，哪一个能替代哪一个？ 都不能。CoEvo限制任务/答案访问和训练血缘；本篇校正裁判测量误差。没有泄漏仍可judge偏差；校正judge也不能让读过gold的Agent重新成为合格评测对象。 教学例：一个没见测试答案的Agent被错误裁判低估，需要audit；一个见过测试答案的Agent即使judge完全准确也已污染。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-be1463389f2f5b12">与CoEvo的数据隔离审计，哪一个能替代哪一个？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Atransport-safe-audit">Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Efrei Research Lab, Université Paris-Panthéon-Assas / CEDRIC, Conservatoire National des Arts et Métiers</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>都不能。CoEvo限制任务/答案访问和训练血缘；本篇校正裁判测量误差。没有泄漏仍可judge偏差；校正judge也不能让读过gold的Agent重新成为合格评测对象。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个没见测试答案的Agent被错误裁判低估，需要audit；一个见过测试答案的Agent即使judge完全准确也已污染。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30742v1">原论文</a> · <a href="../../agent-research/2611.30742-transport-safe-audit/">实现解读</a> · <a href="#qa-be1463389f2f5b12">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:transport-safe-audit" data-paper-title="Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing Agent Efrei Research Lab, Université Paris-Panthéon-Assas / CEDRIC, Conservatoire National des Arts et Métiers 2026-11-23 不同Agent产生不同轨迹；即使裁判在给定(X,Y)时看不到Agent身份，其sensitivity/specificity的平均值也会随成功/失败轨迹分布改变。论文连接scalar transport偏差、支持与识别、随机人工audit、anytime monitoring和rank sets；这些统计工具本身不是新发明。主要证据是semi-synthetic，公共Agent数据的既有分析未在本文独立重跑，不据此声称轨迹长度有因果作用。 成本过高，不复现（审查 DONE）；component_only / L1 CPU数学机制诊断，diagnostic_only=true；不是Agent能力复现。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。本地是evaluator侧标准库算术：scalar transport偏差、带显式fold声明的AIPW、finite-strata bounded allocation、支持缺失outer set、严格区间rank sets和log-space hedged e-process。plan先提交m与φ再随机决定audit；  评测与可靠性 CPU机制组件 Agent 运行流程与自进化：改的是哪一层 judge不看Agent名字，校准就能通用吗？ 不一定。它可在给定轨迹X与成功Y时blind，但不同Agent的成功/失败轨迹X分布不同，导致平均sensitivity/specificity改变；scalar纠正于是有transport偏差。 教学例：judge对短轨迹很准、对长失败常误判；更常生成长轨迹的Agent即使匿名也不能直接用旧平均错误率。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-transport-safe-audit-9119b375" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-7a5fba1c524c5299">judge不看Agent名字，校准就能通用吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Atransport-safe-audit">Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Efrei Research Lab, Université Paris-Panthéon-Assas / CEDRIC, Conservatoire National des Arts et Métiers</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一定。它可在给定轨迹X与成功Y时blind，但不同Agent的成功/失败轨迹X分布不同，导致平均sensitivity/specificity改变；scalar纠正于是有transport偏差。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：judge对短轨迹很准、对长失败常误判；更常生成长轨迹的Agent即使匿名也不能直接用旧平均错误率。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30742v1">原论文</a> · <a href="../../agent-research/2611.30742-transport-safe-audit/">实现解读</a> · <a href="#qa-7a5fba1c524c5299">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:transport-safe-audit" data-paper-title="Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing Agent Efrei Research Lab, Université Paris-Panthéon-Assas / CEDRIC, Conservatoire National des Arts et Métiers 2026-11-23 不同Agent产生不同轨迹；即使裁判在给定(X,Y)时看不到Agent身份，其sensitivity/specificity的平均值也会随成功/失败轨迹分布改变。论文连接scalar transport偏差、支持与识别、随机人工audit、anytime monitoring和rank sets；这些统计工具本身不是新发明。主要证据是semi-synthetic，公共Agent数据的既有分析未在本文独立重跑，不据此声称轨迹长度有因果作用。 成本过高，不复现（审查 DONE）；component_only / L1 CPU数学机制诊断，diagnostic_only=true；不是Agent能力复现。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。本地是evaluator侧标准库算术：scalar transport偏差、带显式fold声明的AIPW、finite-strata bounded allocation、支持缺失outer set、严格区间rank sets和log-space hedged e-process。plan先提交m与φ再随机决定audit；  评测与可靠性 CPU机制组件 Agent 运行流程与自进化：改的是哪一层 AIPW估计超过1应强行裁到1吗？ 不能把裁剪当该design-unbiased估计器。R/φ校正可使有限样本超出[0,1]，但其随机audit期望正确；裁剪会改变期望。报告不确定性与界，不伪造合理外观。 教学例：m=0、φ=0.1、抽中且Y=1时单条校正为10；未抽中为0，期望仍是1。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-7e1c02d419c49c27">AIPW估计超过1应强行裁到1吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Atransport-safe-audit">Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Efrei Research Lab, Université Paris-Panthéon-Assas / CEDRIC, Conservatoire National des Arts et Métiers</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能把裁剪当该design-unbiased估计器。R/φ校正可使有限样本超出[0,1]，但其随机audit期望正确；裁剪会改变期望。报告不确定性与界，不伪造合理外观。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：m=0、φ=0.1、抽中且Y=1时单条校正为10；未抽中为0，期望仍是1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30742v1">原论文</a> · <a href="../../agent-research/2611.30742-transport-safe-audit/">实现解读</a> · <a href="#qa-7e1c02d419c49c27">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ooas" data-paper-title="Optimistic Online Learning for Coding Agents with Aggregate Feedback" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Optimistic Online Learning for Coding Agents with Aggregate Feedback Agent National University of Singapore, School of Computing 2026-11-23 OOAS把activation steering候选选择建模为逐turn多臂bandit。每轮先见所有候选的reward hint，选一个策略；任务结束只见已选序列的加和reward，不见逐轮贡献。它不是猜哪条编辑会通过隐藏测试，而是在聚合反馈粒度下修正累计hint误差。论文理论要求reward向量、hint和任务划分预先固定、独立于学习者随机数；真实编码Agent的状态依赖轨迹不自动满足该假设。分布不是softmax：FTRL同时使用Tsallis项和log barrier。 成本过高，不复现（审查 DONE）；component_only / L1 CPU数学机制诊断，diagnostic_only=true；不是Agent能力复现。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。独立标准库CPU核实际解FTRL的KKT方程：Gk+α/√pk+β/pk为共同乘子，通过平移score与二分求解，而非softmax替身；实现共享Exp采样、ρ、聚合残差、potential和Alg2重启。begin→choose→finish只接受当前hint和最终aggregate，不接受turn reward向量或gold答案/计划。  Agent 策略学习 CPU机制组件 Agent 交互策略学习：把轨迹反馈变成更新 potential gap为负应裁成0再累计吗？ 不应。Alg2累计有符号gap，只有总值严格超过H才doubling并清零score和gap；改成非负累计改变重启时点和算法。 教学例：已有gap为-2，新gap为3时累计是1，不是3；H=1时等于阈值仍不重启。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/agent-policy-learning/">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3942a35330ee7a43">potential gap为负应裁成0再累计吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aooas">Optimistic Online Learning for Coding Agents with Aggregate Feedback</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · National University of Singapore, School of Computing</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不应。Alg2累计有符号gap，只有总值严格超过H才doubling并清零score和gap；改成非负累计改变重启时点和算法。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：已有gap为-2，新gap为3时累计是1，不是3；H=1时等于阈值仍不重启。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30405v1">原论文</a> · <a href="../../agent-research/2611.30405-ooas/">实现解读</a> · <a href="#qa-3942a35330ee7a43">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ooas" data-paper-title="Optimistic Online Learning for Coding Agents with Aggregate Feedback" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Optimistic Online Learning for Coding Agents with Aggregate Feedback Agent National University of Singapore, School of Computing 2026-11-23 OOAS把activation steering候选选择建模为逐turn多臂bandit。每轮先见所有候选的reward hint，选一个策略；任务结束只见已选序列的加和reward，不见逐轮贡献。它不是猜哪条编辑会通过隐藏测试，而是在聚合反馈粒度下修正累计hint误差。论文理论要求reward向量、hint和任务划分预先固定、独立于学习者随机数；真实编码Agent的状态依赖轨迹不自动满足该假设。分布不是softmax：FTRL同时使用Tsallis项和log barrier。 成本过高，不复现（审查 DONE）；component_only / L1 CPU数学机制诊断，diagnostic_only=true；不是Agent能力复现。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。独立标准库CPU核实际解FTRL的KKT方程：Gk+α/√pk+β/pk为共同乘子，通过平移score与二分求解，而非softmax替身；实现共享Exp采样、ρ、聚合残差、potential和Alg2重启。begin→choose→finish只接受当前hint和最终aggregate，不接受turn reward向量或gold答案/计划。  Agent 策略学习 CPU机制组件 Agent 交互策略学习：把轨迹反馈变成更新 整任务都选同一臂的概率能把各轮pk相乘吗？ 不能。每任务共享一组Exp噪声，动作相关；ρ使用跨turn概率比的最大值。独立相乘对应另一种采样，会使importance权重失真。 教学例：两臂概率从(0.3,0.7)变成(0.8,0.2)，共享噪声下A全胜概率0.3，不是0.24。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/agent-policy-learning/">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-fe30f69fde525b6b">整任务都选同一臂的概率能把各轮pk相乘吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aooas">Optimistic Online Learning for Coding Agents with Aggregate Feedback</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · National University of Singapore, School of Computing</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。每任务共享一组Exp噪声，动作相关；ρ使用跨turn概率比的最大值。独立相乘对应另一种采样，会使importance权重失真。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两臂概率从(0.3,0.7)变成(0.8,0.2)，共享噪声下A全胜概率0.3，不是0.24。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30405v1">原论文</a> · <a href="../../agent-research/2611.30405-ooas/">实现解读</a> · <a href="#qa-fe30f69fde525b6b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ooas" data-paper-title="Optimistic Online Learning for Coding Agents with Aggregate Feedback" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Optimistic Online Learning for Coding Agents with Aggregate Feedback Agent National University of Singapore, School of Computing 2026-11-23 OOAS把activation steering候选选择建模为逐turn多臂bandit。每轮先见所有候选的reward hint，选一个策略；任务结束只见已选序列的加和reward，不见逐轮贡献。它不是猜哪条编辑会通过隐藏测试，而是在聚合反馈粒度下修正累计hint误差。论文理论要求reward向量、hint和任务划分预先固定、独立于学习者随机数；真实编码Agent的状态依赖轨迹不自动满足该假设。分布不是softmax：FTRL同时使用Tsallis项和log barrier。 成本过高，不复现（审查 DONE）；component_only / L1 CPU数学机制诊断，diagnostic_only=true；不是Agent能力复现。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。独立标准库CPU核实际解FTRL的KKT方程：Gk+α/√pk+β/pk为共同乘子，通过平移score与二分求解，而非softmax替身；实现共享Exp采样、ρ、聚合残差、potential和Alg2重启。begin→choose→finish只接受当前hint和最终aggregate，不接受turn reward向量或gold答案/计划。  Agent 策略学习 CPU机制组件 Agent 交互策略学习：把轨迹反馈变成更新 与From Acting to Learning都做选择，选择的对象和时点相同吗？ 不同。旧文选历史action用于后续SFT；OOAS在当前执行turn选steering策略，结束后用aggregate更新。不能用离线gradient score直接替代hint并宣称有同样regret保证。 教学例：挑256条清洁经验是训练数据选择；本轮选Cap=1.5还是2.0是在线干预选择。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/agent-policy-learning/">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e0b01812f2c9669a">与From Acting to Learning都做选择，选择的对象和时点相同吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aooas">Optimistic Online Learning for Coding Agents with Aggregate Feedback</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · National University of Singapore, School of Computing</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同。旧文选历史action用于后续SFT；OOAS在当前执行turn选steering策略，结束后用aggregate更新。不能用离线gradient score直接替代hint并宣称有同样regret保证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：挑256条清洁经验是训练数据选择；本轮选Cap=1.5还是2.0是在线干预选择。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30405v1">原论文</a> · <a href="../../agent-research/2611.30405-ooas/">实现解读</a> · <a href="#qa-e0b01812f2c9669a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ooas" data-paper-title="Optimistic Online Learning for Coding Agents with Aggregate Feedback" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Optimistic Online Learning for Coding Agents with Aggregate Feedback Agent National University of Singapore, School of Computing 2026-11-23 OOAS把activation steering候选选择建模为逐turn多臂bandit。每轮先见所有候选的reward hint，选一个策略；任务结束只见已选序列的加和reward，不见逐轮贡献。它不是猜哪条编辑会通过隐藏测试，而是在聚合反馈粒度下修正累计hint误差。论文理论要求reward向量、hint和任务划分预先固定、独立于学习者随机数；真实编码Agent的状态依赖轨迹不自动满足该假设。分布不是softmax：FTRL同时使用Tsallis项和log barrier。 成本过高，不复现（审查 DONE）；component_only / L1 CPU数学机制诊断，diagnostic_only=true；不是Agent能力复现。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。独立标准库CPU核实际解FTRL的KKT方程：Gk+α/√pk+β/pk为共同乘子，通过平移score与二分求解，而非softmax替身；实现共享Exp采样、ρ、聚合残差、potential和Alg2重启。begin→choose→finish只接受当前hint和最终aggregate，不接受turn reward向量或gold答案/计划。  Agent 策略学习 CPU机制组件 Agent 交互策略学习：把轨迹反馈变成更新 任务完成才有反馈，为什么不能逐轮做普通bandit更新？ 因为只观察一项任务总reward，无法知道每轮被选臂各贡献多少；把总reward复制到每轮会改变估计器。OOAS先用hint，再用整任务事件校正。 教学例：两轮分别选A/B后总reward为1，不能据此断定A和B各得1，也不能任意各分0.5。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/agent-policy-learning/">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<span id="paper-agent-research-ooas-68b26b58" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-06253c860f3fcc07">任务完成才有反馈，为什么不能逐轮做普通bandit更新？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aooas">Optimistic Online Learning for Coding Agents with Aggregate Feedback</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · National University of Singapore, School of Computing</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>因为只观察一项任务总reward，无法知道每轮被选臂各贡献多少；把总reward复制到每轮会改变估计器。OOAS先用hint，再用整任务事件校正。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两轮分别选A/B后总reward为1，不能据此断定A和B各得1，也不能任意各分0.5。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30405v1">原论文</a> · <a href="../../agent-research/2611.30405-ooas/">实现解读</a> · <a href="#qa-06253c860f3fcc07">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:morse" data-paper-title="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research Agent Carnegie Mellon University 2026-11-23 流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。核心是研究—实现—验证的自主Editor与可扩展服务，不是固定候选列表或门控公式本身。20轮accuracy后5轮efficiency。 成本过高，不复现（审查 DONE）；deferred_high_cost / 仅资料收录，未实现、未运行。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。仅资料收录与成本审查：固定v1、来源/元数据、访问边界、成本和同主题比较。没有本地算法模块、Editor、研究broker、视频服务、harness代码演化、benchmark、GPU试跑或Evolve operator。不能实现几个gate后称已复现MORSE，也不需要给review-only制造三seed指标或GPU receipt。  执行框架与自改进 系统成本审查 Agent 运行流程与自进化：改的是哪一层 每轮损失都很小，efficiency阶段还需累计损失约束吗？ 需要。只限制相对父代的损失会逐轮积累退化；原文另相对efficiency入口harness限制总概率和正确数损失。 教学例：每轮掉0.003连续5轮会掉0.015；总容忍只有0.008，后续不能因单轮合格就继续放行。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-30c55064d19e0a7d">每轮损失都很小，efficiency阶段还需累计损失约束吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Amorse">MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>需要。只限制相对父代的损失会逐轮积累退化；原文另相对efficiency入口harness限制总概率和正确数损失。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：每轮掉0.003连续5轮会掉0.015；总容忍只有0.008，后续不能因单轮合格就继续放行。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30011v1">原论文</a> · <a href="../../agent-research/2611.30011-morse/">实现解读</a> · <a href="#qa-30c55064d19e0a7d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:morse" data-paper-title="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research Agent Carnegie Mellon University 2026-11-23 流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。核心是研究—实现—验证的自主Editor与可扩展服务，不是固定候选列表或门控公式本身。20轮accuracy后5轮efficiency。 成本过高，不复现（审查 DONE）；deferred_high_cost / 仅资料收录，未实现、未运行。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。仅资料收录与成本审查：固定v1、来源/元数据、访问边界、成本和同主题比较。没有本地算法模块、Editor、研究broker、视频服务、harness代码演化、benchmark、GPU试跑或Evolve operator。不能实现几个gate后称已复现MORSE，也不需要给review-only制造三seed指标或GPU receipt。  执行框架与自改进 系统成本审查 Agent 运行流程与自进化：改的是哪一层 MORSE比已有闭环harness自改进多了什么？ Editor不仅靠已有知识想修复，还从反复失败出发在线查论文/模型/code，并能请求host批准的新感知能力；核心不是多写一个反思提示。 教学例：短暂手物交互反复漏记，Editor查到动作分类模型后请求服务，再改记忆的写入和读取方式。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-morse-460f33ed" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-fce58fab22209ee6">MORSE比已有闭环harness自改进多了什么？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Amorse">MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Editor不仅靠已有知识想修复，还从反复失败出发在线查论文/模型/code，并能请求host批准的新感知能力；核心不是多写一个反思提示。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：短暂手物交互反复漏记，Editor查到动作分类模型后请求服务，再改记忆的写入和读取方式。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30011v1">原论文</a> · <a href="../../agent-research/2611.30011-morse/">实现解读</a> · <a href="#qa-fce58fab22209ee6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:morse" data-paper-title="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research Agent Carnegie Mellon University 2026-11-23 流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。核心是研究—实现—验证的自主Editor与可扩展服务，不是固定候选列表或门控公式本身。20轮accuracy后5轮efficiency。 成本过高，不复现（审查 DONE）；deferred_high_cost / 仅资料收录，未实现、未运行。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。仅资料收录与成本审查：固定v1、来源/元数据、访问边界、成本和同主题比较。没有本地算法模块、Editor、研究broker、视频服务、harness代码演化、benchmark、GPU试跑或Evolve operator。不能实现几个gate后称已复现MORSE，也不需要给review-only制造三seed指标或GPU receipt。  执行框架与自改进 系统成本审查 Agent 运行流程与自进化：改的是哪一层 与Harness²都改harness，能共用一个选择器解释吗？ 不能。Harness²匿名选择已执行最终产物，跨任务重启初始harness；MORSE持续head并按私有validation质量/延迟筛选，还扩展host批准感知服务。对象和反馈不同。 教学例：匿名挑两个报告不是按正确选项概率筛视频记忆程序；装了VideoMAE也不等于已被最终harness采用。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-4b610d69af2c1f3f">与Harness²都改harness，能共用一个选择器解释吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Amorse">MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。Harness²匿名选择已执行最终产物，跨任务重启初始harness；MORSE持续head并按私有validation质量/延迟筛选，还扩展host批准感知服务。对象和反馈不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：匿名挑两个报告不是按正确选项概率筛视频记忆程序；装了VideoMAE也不等于已被最终harness采用。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30011v1">原论文</a> · <a href="../../agent-research/2611.30011-morse/">实现解读</a> · <a href="#qa-4b610d69af2c1f3f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:morse" data-paper-title="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research Agent Carnegie Mellon University 2026-11-23 流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。核心是研究—实现—验证的自主Editor与可扩展服务，不是固定候选列表或门控公式本身。20轮accuracy后5轮efficiency。 成本过高，不复现（审查 DONE）；deferred_high_cost / 仅资料收录，未实现、未运行。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。仅资料收录与成本审查：固定v1、来源/元数据、访问边界、成本和同主题比较。没有本地算法模块、Editor、研究broker、视频服务、harness代码演化、benchmark、GPU试跑或Evolve operator。不能实现几个gate后称已复现MORSE，也不需要给review-only制造三seed指标或GPU receipt。  执行框架与自改进 系统成本审查 Agent 运行流程与自进化：改的是哪一层 64帧上限是否保证总memory恒定？ 不是。另有16秒近期窗口，text和embeddings没有host全局上限。复述成本时应分别记录pixels、文本、向量和服务调用，不能只报frame cap。 教学例：历史帧保持64张，但每分钟新增一条caption仍会让文本随视频时长增长。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-90fe7172b9ccce88">64帧上限是否保证总memory恒定？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Amorse">MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。另有16秒近期窗口，text和embeddings没有host全局上限。复述成本时应分别记录pixels、文本、向量和服务调用，不能只报frame cap。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：历史帧保持64张，但每分钟新增一条caption仍会让文本随视频时长增长。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.30011v1">原论文</a> · <a href="../../agent-research/2611.30011-morse/">实现解读</a> · <a href="#qa-90fe7172b9ccce88">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:weight-coding" data-paper-title="Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents 搜广推与 LLM 应用 Pinterest 2026-11-22 Weight Coding把已训练权重本身变成可执行编辑对象，固定架构、特征和服务逻辑。LLM Agent先扫描单模块编辑，按独立filter日期排除方向翻转，再直接改值、搜索或重新搜索组合后的参数。编辑原语包括缩放、重置、移除分支、压缩、快照插值、概念方向平移；编辑支持大小不等于独立自由度。原论文的GPU缓存引擎只重算被影响模块及下游，搜索阶段不反传目标模型。 完整实验成本过高，不复现（审查 DONE）；L1机制组件，diagnostic only，不是完整Agent或推荐能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。本地CPU参考只实现Table1的缩放、显式reference重置、投影置零、插值、方向平移，以及§3.4反向配对Gaussian ES、centered rank、Adam上升和validation选步。没有compression、LLM假设生成、缓存生产引擎、TorchScript编辑、真实检索模型或线上A/B。原文未公布Adam细节和ties规则，本地显式采用(.9,.999)、epsilon=1e-8和平均并列rank；  研究与服务闭环 直接权重编辑 搜广推 自动研究与高效上线 ES为何用配对噪声，平分时又怎么办？ 同一噪声正负两个方向评估后，以centered rank差加权估计更新。相同分数必须采用平均并列rank，否则常数评估器也会凭枚举顺序产生伪更新。 教学例：32个候选得分全为1时，平均rank后全为0；参数应保持不变，而不是宣称搜索有进步。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/research-serving-loop/">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-666933a192ee9004">ES为何用配对噪声，平分时又怎么办？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Aweight-coding">Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Pinterest</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>同一噪声正负两个方向评估后，以centered rank差加权估计更新。相同分数必须采用平均并列rank，否则常数评估器也会凭枚举顺序产生伪更新。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：32个候选得分全为1时，平均rank后全为0；参数应保持不变，而不是宣称搜索有进步。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.29613v1">原论文</a> · <a href="../../recommendation-components/2611.29613-weight-coding/">实现解读</a> · <a href="#qa-666933a192ee9004">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:weight-coding" data-paper-title="Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents 搜广推与 LLM 应用 Pinterest 2026-11-22 Weight Coding把已训练权重本身变成可执行编辑对象，固定架构、特征和服务逻辑。LLM Agent先扫描单模块编辑，按独立filter日期排除方向翻转，再直接改值、搜索或重新搜索组合后的参数。编辑原语包括缩放、重置、移除分支、压缩、快照插值、概念方向平移；编辑支持大小不等于独立自由度。原论文的GPU缓存引擎只重算被影响模块及下游，搜索阶段不反传目标模型。 完整实验成本过高，不复现（审查 DONE）；L1机制组件，diagnostic only，不是完整Agent或推荐能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。本地CPU参考只实现Table1的缩放、显式reference重置、投影置零、插值、方向平移，以及§3.4反向配对Gaussian ES、centered rank、Adam上升和validation选步。没有compression、LLM假设生成、缓存生产引擎、TorchScript编辑、真实检索模型或线上A/B。原文未公布Adam细节和ties规则，本地显式采用(.9,.999)、epsilon=1e-8和平均并列rank；  研究与服务闭环 直接权重编辑 搜广推 自动研究与高效上线 本地搜索分数提升能否证明Pinterest线上收益？ 不能。合成目标检查ES、参数不变性和选步接口。生产收益来自论文真实A/B，不来自本地。search接口只接objective与validation，不接test callback；调用者必须保证数据确实隔离。 教学例：validation始终偏好初始权重时，返回step0；即使搜索目标改善也不能据此选一个validation更差的模型。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/research-serving-loop/">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-05e81c5c67fbee67">本地搜索分数提升能否证明Pinterest线上收益？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Aweight-coding">Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Pinterest</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。合成目标检查ES、参数不变性和选步接口。生产收益来自论文真实A/B，不来自本地。search接口只接objective与validation，不接test callback；调用者必须保证数据确实隔离。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：validation始终偏好初始权重时，返回step0；即使搜索目标改善也不能据此选一个validation更差的模型。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.29613v1">原论文</a> · <a href="../../recommendation-components/2611.29613-weight-coding/">实现解读</a> · <a href="#qa-05e81c5c67fbee67">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:weight-coding" data-paper-title="Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents 搜广推与 LLM 应用 Pinterest 2026-11-22 Weight Coding把已训练权重本身变成可执行编辑对象，固定架构、特征和服务逻辑。LLM Agent先扫描单模块编辑，按独立filter日期排除方向翻转，再直接改值、搜索或重新搜索组合后的参数。编辑原语包括缩放、重置、移除分支、压缩、快照插值、概念方向平移；编辑支持大小不等于独立自由度。原论文的GPU缓存引擎只重算被影响模块及下游，搜索阶段不反传目标模型。 完整实验成本过高，不复现（审查 DONE）；L1机制组件，diagnostic only，不是完整Agent或推荐能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。本地CPU参考只实现Table1的缩放、显式reference重置、投影置零、插值、方向平移，以及§3.4反向配对Gaussian ES、centered rank、Adam上升和validation选步。没有compression、LLM假设生成、缓存生产引擎、TorchScript编辑、真实检索模型或线上A/B。原文未公布Adam细节和ties规则，本地显式采用(.9,.999)、epsilon=1e-8和平均并列rank；  研究与服务闭环 直接权重编辑 搜广推 自动研究与高效上线 它与Evopilot的自进化有什么不同？ EvoPilot强调比较证据的完整性：共同base、数据、评测器、有效输出深度和唯一treatment都要匹配，再由人工审核接纳。Weight Coding则规定了可搜索对象：固定架构/服务上的权重数值和少量row scales。验证协议与搜索算子互补、不能互相替代；本地ES不等于已经完成自主研究或部署。原论文直接叠加编辑会退化、重新搜索可恢复，这不意味着任意两个本地算子组合必然有收益。 教学例：修改模型结构和训练pipeline属于代码级搜索；只调现有层的row log-scales属于固定架构的权重编辑，两者都不能用test挑最佳轮次。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/research-serving-loop/">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-8464b7fbc8c253d8">它与Evopilot的自进化有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Aweight-coding">Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Pinterest</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>EvoPilot强调比较证据的完整性：共同base、数据、评测器、有效输出深度和唯一treatment都要匹配，再由人工审核接纳。Weight Coding则规定了可搜索对象：固定架构/服务上的权重数值和少量row scales。验证协议与搜索算子互补、不能互相替代；本地ES不等于已经完成自主研究或部署。原论文直接叠加编辑会退化、重新搜索可恢复，这不意味着任意两个本地算子组合必然有收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：修改模型结构和训练pipeline属于代码级搜索；只调现有层的row log-scales属于固定架构的权重编辑，两者都不能用test挑最佳轮次。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.29613v1">原论文</a> · <a href="../../recommendation-components/2611.29613-weight-coding/">实现解读</a> · <a href="#qa-8464b7fbc8c253d8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:weight-coding" data-paper-title="Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents 搜广推与 LLM 应用 Pinterest 2026-11-22 Weight Coding把已训练权重本身变成可执行编辑对象，固定架构、特征和服务逻辑。LLM Agent先扫描单模块编辑，按独立filter日期排除方向翻转，再直接改值、搜索或重新搜索组合后的参数。编辑原语包括缩放、重置、移除分支、压缩、快照插值、概念方向平移；编辑支持大小不等于独立自由度。原论文的GPU缓存引擎只重算被影响模块及下游，搜索阶段不反传目标模型。 完整实验成本过高，不复现（审查 DONE）；L1机制组件，diagnostic only，不是完整Agent或推荐能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。本地CPU参考只实现Table1的缩放、显式reference重置、投影置零、插值、方向平移，以及§3.4反向配对Gaussian ES、centered rank、Adam上升和validation选步。没有compression、LLM假设生成、缓存生产引擎、TorchScript编辑、真实检索模型或线上A/B。原文未公布Adam细节和ties规则，本地显式采用(.9,.999)、epsilon=1e-8和平均并列rank；  研究与服务闭环 直接权重编辑 搜广推 自动研究与高效上线 为什么改64个LayerNorm gain不等于搜索64个自由度？ 把64个gain全重置为1可能改64个数值，但没有可调参数；搜索每个gain才可能有64个自由度。支持集合大小和优化维度必须分开。 教学例：一次reset改变64个值、自由度0；只调一个共享缩放系数可以影响百万权重、自由度仍为1。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/research-serving-loop/">搜广推 / 自动研究与高效上线</a></p>
+<span id="paper-recommendation-weight-coding-509af6ce" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-816e7f8886cd6c42">为什么改64个LayerNorm gain不等于搜索64个自由度？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Aweight-coding">Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · Pinterest</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>把64个gain全重置为1可能改64个数值，但没有可调参数；搜索每个gain才可能有64个自由度。支持集合大小和优化维度必须分开。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一次reset改变64个值、自由度0；只调一个共享缩放系数可以影响百万权重、自由度仍为1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.29613v1">原论文</a> · <a href="../../recommendation-components/2611.29613-weight-coding/">实现解读</a> · <a href="#qa-816e7f8886cd6c42">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:deep-cross-attention" data-paper-title="DeepCrossAttention: Supercharging Transformer Residual Connections" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="DeepCrossAttention: Supercharging Transformer Residual Connections 基础模型 University of California, Irvine 2025-02-10 传统残差把原始输入和历层增量输出直接相加。DCA把这份历史保留下来，由可学习的feature×history基础权重，加上逐token、逐历史项的动态项，选择层输入；Q、K、V分别使用独立GRN-v3。这里的深度路由不是在层维做softmax，而是直接加权求和；普通attention仍在token维计算。 完整实验成本过高，不复现（审查 DONE）；L1组件，diagnostic only，不是完整论文或模型能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。实现GRN-v3文字公式、三套独立参数、first+middle-sum+last-k历史栈、小型多头因果attention及真实autograd。历史元素是原始输入和各层增量输出，不是重复累加的完整residual state。有限历史不直接丢弃中间层，而把它们保存在未加权sum桶中。没有完整FFN/外层残差接线、LM训练、预训练checkpoint改装、KV cache或benchmark收益。  条件计算与残差路由 独立QKV深度路由 基础模型 按需计算：专家、弹性深宽与查表记忆 零初始化w配ReLU时，怎样避免把动态路由诊断写成训练成功？ 先按原公式保留w=0并记录ReLU零点导数下初始梯度为0；再用明确标注的非零参数干预检查动态公式与梯度，不能悄悄随机初始化后声称忠实复刻训练。 教学例：第一个测试断言w梯度全0；另一个测试手工设w=0.05后检查有限非零梯度。两项都不是LM收敛实验。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/conditional-compute/">基础模型 / 按需计算：专家、弹性深宽与查表记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-a9d9b6d1a71adb22">零初始化w配ReLU时，怎样避免把动态路由诊断写成训练成功？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Adeep-cross-attention">DeepCrossAttention: Supercharging Transformer Residual Connections</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · University of California, Irvine</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先按原公式保留w=0并记录ReLU零点导数下初始梯度为0；再用明确标注的非零参数干预检查动态公式与梯度，不能悄悄随机初始化后声称忠实复刻训练。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第一个测试断言w梯度全0；另一个测试手工设w=0.05后检查有限非零梯度。两项都不是LM收敛实验。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2502.06785v2">原论文</a> · <a href="../../foundation-models/2502.06785-deep-cross-attention/">实现解读</a> · <a href="#qa-a9d9b6d1a71adb22">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:deep-cross-attention" data-paper-title="DeepCrossAttention: Supercharging Transformer Residual Connections" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="DeepCrossAttention: Supercharging Transformer Residual Connections 基础模型 University of California, Irvine 2025-02-10 传统残差把原始输入和历层增量输出直接相加。DCA把这份历史保留下来，由可学习的feature×history基础权重，加上逐token、逐历史项的动态项，选择层输入；Q、K、V分别使用独立GRN-v3。这里的深度路由不是在层维做softmax，而是直接加权求和；普通attention仍在token维计算。 完整实验成本过高，不复现（审查 DONE）；L1组件，diagnostic only，不是完整论文或模型能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。实现GRN-v3文字公式、三套独立参数、first+middle-sum+last-k历史栈、小型多头因果attention及真实autograd。历史元素是原始输入和各层增量输出，不是重复累加的完整residual state。有限历史不直接丢弃中间层，而把它们保存在未加权sum桶中。没有完整FFN/外层残差接线、LM训练、预训练checkpoint改装、KV cache或benchmark收益。  条件计算与残差路由 独立QKV深度路由 基础模型 按需计算：专家、弹性深宽与查表记忆 DCA与RD-AttnRes的Q/K/V解耦边界有什么区别？ RD-AttnRes保留共享QK、解耦V；DCA对Q、K、V各自配置独立GRN-v3，且深度混合公式不同。 教学例：只修改DCA的Q基础权重，K和V路由输出必须逐位不变；RD中Q和K本来共享路由。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/conditional-compute/">基础模型 / 按需计算：专家、弹性深宽与查表记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-075621bde853e73f">DCA与RD-AttnRes的Q/K/V解耦边界有什么区别？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Adeep-cross-attention">DeepCrossAttention: Supercharging Transformer Residual Connections</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · University of California, Irvine</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>RD-AttnRes保留共享QK、解耦V；DCA对Q、K、V各自配置独立GRN-v3，且深度混合公式不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：只修改DCA的Q基础权重，K和V路由输出必须逐位不变；RD中Q和K本来共享路由。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2502.06785v2">原论文</a> · <a href="../../foundation-models/2502.06785-deep-cross-attention/">实现解读</a> · <a href="#qa-075621bde853e73f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:deep-cross-attention" data-paper-title="DeepCrossAttention: Supercharging Transformer Residual Connections" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="DeepCrossAttention: Supercharging Transformer Residual Connections 基础模型 University of California, Irvine 2025-02-10 传统残差把原始输入和历层增量输出直接相加。DCA把这份历史保留下来，由可学习的feature×history基础权重，加上逐token、逐历史项的动态项，选择层输入；Q、K、V分别使用独立GRN-v3。这里的深度路由不是在层维做softmax，而是直接加权求和；普通attention仍在token维计算。 完整实验成本过高，不复现（审查 DONE）；L1组件，diagnostic only，不是完整论文或模型能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。实现GRN-v3文字公式、三套独立参数、first+middle-sum+last-k历史栈、小型多头因果attention及真实autograd。历史元素是原始输入和各层增量输出，不是重复累加的完整residual state。有限历史不直接丢弃中间层，而把它们保存在未加权sum桶中。没有完整FFN/外层残差接线、LM训练、预训练checkpoint改装、KV cache或benchmark收益。  条件计算与残差路由 独立QKV深度路由 基础模型 按需计算：专家、弹性深宽与查表记忆 GRN-v3的动态项为什么不是普通softmax层注意力？ 它把b与ReLU(wᵀG)相加后直接线性加权；系数不要求非负或和为1，基础项还逐feature变化。 教学例：三份全1历史、b=1且w=0输出3，不是softmax均值1；把b改成−2会输出−6。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/conditional-compute/">基础模型 / 按需计算：专家、弹性深宽与查表记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-9d9e3c55ac8ec7a8">GRN-v3的动态项为什么不是普通softmax层注意力？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Adeep-cross-attention">DeepCrossAttention: Supercharging Transformer Residual Connections</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · University of California, Irvine</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它把b与ReLU(wᵀG)相加后直接线性加权；系数不要求非负或和为1，基础项还逐feature变化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：三份全1历史、b=1且w=0输出3，不是softmax均值1；把b改成−2会输出−6。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2502.06785v2">原论文</a> · <a href="../../foundation-models/2502.06785-deep-cross-attention/">实现解读</a> · <a href="#qa-9d9e3c55ac8ec7a8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:deep-cross-attention" data-paper-title="DeepCrossAttention: Supercharging Transformer Residual Connections" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="DeepCrossAttention: Supercharging Transformer Residual Connections 基础模型 University of California, Irvine 2025-02-10 传统残差把原始输入和历层增量输出直接相加。DCA把这份历史保留下来，由可学习的feature×history基础权重，加上逐token、逐历史项的动态项，选择层输入；Q、K、V分别使用独立GRN-v3。这里的深度路由不是在层维做softmax，而是直接加权求和；普通attention仍在token维计算。 完整实验成本过高，不复现（审查 DONE）；L1组件，diagnostic only，不是完整论文或模型能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。实现GRN-v3文字公式、三套独立参数、first+middle-sum+last-k历史栈、小型多头因果attention及真实autograd。历史元素是原始输入和各层增量输出，不是重复累加的完整residual state。有限历史不直接丢弃中间层，而把它们保存在未加权sum桶中。没有完整FFN/外层残差接线、LM训练、预训练checkpoint改装、KV cache或benchmark收益。  条件计算与残差路由 独立QKV深度路由 基础模型 按需计算：专家、弹性深宽与查表记忆 DCA历史栈为什么不能装每层完整residual state？ 文字定义G保存输入和每层增量f_i(g_i)，完整state已经含旧层之和，再次把它们相加会重复计数。 教学例：输入x、增量a和b应累成x+a+b；若存x、x+a、x+a+b再相加，会变成3x+2a+b。 2026-11-24">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/conditional-compute/">基础模型 / 按需计算：专家、弹性深宽与查表记忆</a></p>
+<span id="paper-foundation-models-deep-cross-attention-ccf6bf93" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f67214aacfa7b251">DCA历史栈为什么不能装每层完整residual state？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Adeep-cross-attention">DeepCrossAttention: Supercharging Transformer Residual Connections</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-24 · University of California, Irvine</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>文字定义G保存输入和每层增量f_i(g_i)，完整state已经含旧层之和，再次把它们相加会重复计数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：输入x、增量a和b应累成x+a+b；若存x、x+a、x+a+b再相加，会变成3x+2a+b。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2502.06785v2">原论文</a> · <a href="../../foundation-models/2502.06785-deep-cross-attention/">实现解读</a> · <a href="#qa-f67214aacfa7b251">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:retokenization-update" data-paper-title="How Far Does Lossless Re-tokenization Move an RLVR Update?" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="How Far Does Lossless Re-tokenization Move an RLVR Update? LLM 后训练 University of Maine at Presque Isle 2026-11-20 研究对象不是奖励变化，而是同一rollout的token ID变化。保留文本、reward、advantage和checkpoint，仅将可拆token替换成两个拼回原文本的词表项。论文从共享参数checkpoint比较canonical、re-encoded和不同batch的更新，另在每种分词各自一套prefix-softmax表上证明：未访问prefix的条件概率比保持不变，但整词softmax的未采样logit仍被完整梯度改变。 完整实验成本过高，不复现（审查 DONE）；这是一项机制诊断，不是后训练能力实现。L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU、无CUDA路径，不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU prefix-softmax表从同一正的完整字符串分布按chain rule初始化，执行λ_t(e_token−π_row)完整梯度；检验未访问行、coarse未采样logit和字符串分布差异。独立实现c及ratio-of-means R，但不把两套独立tabular参数假装成共享LLM参数来计算R；  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 tabular论证为什么必须保留未采样logit的完整梯度？ coarse步λ(e_ab−π)会移动所有未采样logit，使ba/bb的log比变化−λ[π(ba)−π(bb)]；fine没有访问b行，所以该条件比不变。只改sampled-logit会换成论文明确区分的较弱模拟器。 教学例：π(ba)=0.3、π(bb)=0.4、λ=0.2时coarse log比增加0.02，fine增加0；这是计算出的机制差，不是LLM性能损失。 2026-11-23">
 <p class="ar-learning-card__domain"><a href="../paths/post-training/policy-optimization/">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
 <p class="ar-learning-level">核心机制</p>

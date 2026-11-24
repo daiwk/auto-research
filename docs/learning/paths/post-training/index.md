@@ -10,7 +10,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="preference-and-alignment/">偏好与对齐：先看反馈长什么样</a></h2>
 <p>只有“更喜欢哪个回答”或单条点赞时，怎样把反馈变成可学习目标？</p>
-<p class="ar-learning-topic-meta">128 个问题 · 32 篇论文</p>
+<p class="ar-learning-topic-meta">132 个问题 · 33 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="policy-optimization/">策略优化：谁在采样，谁在被更新</a></h2>
@@ -25,7 +25,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="student-trajectory-distillation/">轨迹蒸馏：学生、提案与前缀分布</a></h2>
 <p>学生总在自己的错误前缀上继续生成，为什么只模仿教师完整答案可能教不到那里？</p>
-<p class="ar-learning-topic-meta">192 个问题 · 48 篇论文</p>
+<p class="ar-learning-topic-meta">196 个问题 · 49 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="teacher-and-context/">教师与纠错：额外信息何时能帮到学生</a></h2>

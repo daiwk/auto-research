@@ -40,7 +40,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="research-serving-loop/">自动研究与高效上线</a></h2>
 <p>一个离线更好的方案，怎样才算在真实请求和持续迭代中可用？</p>
-<p class="ar-learning-topic-meta">92 个问题 · 23 篇论文</p>
+<p class="ar-learning-topic-meta">96 个问题 · 24 篇论文</p>
 </article>
 </div>
 

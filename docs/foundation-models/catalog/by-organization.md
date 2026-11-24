@@ -616,6 +616,10 @@
 
 - 2026-10-08 · [Rounding in Preconditioner Space: Redesigning 4-bit AdamW Optimizer-State Quantization](../../foundation-models/2610.12444-adamw4bit/README.md)（`adamw4bit`）：AdamW 的量化误差会进入后续矩递推。ZIP-SR 在预条件器空间随机舍入第二矩；ZE-EDEN 排除零码点并校准块尺度。两者使用 NF4 第一矩，训练末尾 10% 对 LM head 第一矩随机舍入。[原文](https://arxiv.org/html/2610.12444v1)
 
+## University of California, Irvine
+
+- 2025-02-10 · [DeepCrossAttention: Supercharging Transformer Residual Connections](../../foundation-models/2502.06785-deep-cross-attention/README.md)（`deep-cross-attention`）：传统残差把原始输入和历层增量输出直接相加。DCA把这份历史保留下来，由可学习的feature×history基础权重，加上逐token、逐历史项的动态项，选择层输入；Q、K、V分别使用独立GRN-v3。这里的深度路由不是在层维做softmax，而是直接加权求和；普通attention仍在token维计算。
+
 ## University of California, San Diego
 
 - 2026-10-08 · [LeWAM: End-to-End World and Action Modeling with JEPAs](../../reproductions/2610.12818-lewam/README.md)（`lewam`）：传统 JEPA 学习“给定动作会到什么状态”，之后另训逆动力学或在线搜索动作。两阶段会使控制监督无法塑造视觉表征，宽高斯动作搜索也较昂贵。
@@ -758,6 +762,10 @@
 ## Xiaomi AI Lab
 
 - 2026-10-08 · [CoTS: Competitive Token Selection for Latent Reasoning in Large Language Models](../../foundation-models/2610.20642-cots/README.md)（`cots`）：连续 reasoning 的 soft token 可能偏离离散轨迹。CoTS 用 top-2 概率竞争分配 soft 混合强度，保留 sampled token 至少半数权重，并在结束推理后锁定纯离散输出。主源为 §3.1-3.3 的公式 1-6；实验配置和消融见 §4。
+
+## Yale University
+
+- 2026-11-23 · [The KL Divergence Is Never Negative, Except in PyTorch](../../foundation-models/2611.30835-stablekl/README.md)（`stablekl`）：近等分布的真实KL是二阶小量，但教科书公式往往由一阶或常数量相减得到，容易返回零、负数或错误梯度。StableKL把闭式KL重写成非负小量的组合，配合差值、补偿算术和解析梯度；它还区分F.kl_div算子误差与输入log-prob本身已丢失的信息。本地只选择其中Exponential族的Rewrite核。
 
 ## Zhejiang University
 

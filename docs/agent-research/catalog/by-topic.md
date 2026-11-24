@@ -10,6 +10,7 @@
 
 ### Agent 策略学习
 
+- [Optimistic Online Learning for Coding Agents with Aggregate Feedback](../2611.30405-ooas/README.md)（`ooas`）：OOAS把activation steering候选选择建模为逐turn多臂bandit。每轮先见所有候选的reward hint，选一个策略；任务结束只见已选序列的加和reward，不见逐轮贡献。
 - [$R^2$: Recognizing and Reducing Redundant Visual Tool Use](../2611.27070-r2-tool-redundancy/README.md)（`r2-tool-redundancy`）：R²把三个问题分开：CAT描述题目是否可能从工具获益；VFD描述一次返回观察对后续同一段推理文本提供多少额外似然支持；RA-GRPO在答对的轨迹之间比较工具效率，而不是奖励所有少调用的轨迹。CAT标签来自训练侧tool/no-tool rollouts的多次正确性和实际调用，不是根据问题长度或关键词猜测；VFD也不是gold-answer概率或“这次工具有用”的因果证明。
 - [From Acting to Learning: Experience Selection toward Continually Learning Agents](../2611.27159-acting-to-learning/README.md)（`acting-to-learning`）：论文把成功交互后的经验选择单独隔离：历史池先固定，选择规则决定训练哪些action记录，所有学生使用同一训练预算与部署executor。它不是一个新通用梯度影响公式；打分沿用LESS式优化器感知梯度，贡献是Agent学习中的严格对照，尤其把排序规则和可选择的覆盖空间交叉。
 
@@ -50,6 +51,7 @@
 
 ### 执行框架与自改进
 
+- [MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research](../2611.30011-morse/README.md)（`morse`）：流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?](../2611.27116-coevobench/README.md)（`coevobench`）：CoEvoBench不是另一个固定自进化算法，而是测LLM researcher能否自主驱动模型权重和harness联合开发的benchmark。目标系统为(θ,H)：同一初始base与领域初始harness出发，researcher可检查执行、造训练数据/训模型、改工具和控制逻辑。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [Sage-Evolve-Preview: Adaptive Observation for Post-Training Self-Improvement](../2611.26132-sage-evolve/README.md)（`sage-evolve`）：AdaObs区分固定anchor目标和引导当前研究的active observation。每轮仍在固定anchor上验收；训练进展停滞时，先细分已有输出的错误诊断，再增加同任务的困难层，最后累计加入同能力方向的相关任务。
 - [Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses](../2611.24924-ahe-beta/README.md)（`ahe-beta`）：AHE-Beta把演进的依据从测试分数移到经过核实的用户需求。模拟用户进行多轮交互并提交问题；Triage把问题核实成可泛化需求，Architect按共同根因合并至少两个需求，PM从跨会话记录找隐含产品需求。
@@ -147,6 +149,7 @@
 
 ### 评测与可靠性
 
+- [Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing](../2611.30742-transport-safe-audit/README.md)（`transport-safe-audit`）：不同Agent产生不同轨迹；即使裁判在给定(X,Y)时看不到Agent身份，其sensitivity/specificity的平均值也会随成功/失败轨迹分布改变。论文连接scalar transport偏差、支持与识别、随机人工audit、anytime monitoring和rank sets；这些统计工具本身不是新发明。
 - [SkillBuffBench: Measuring What Agent Skills Contribute across Harnesses, Models, Skill Access Modes and Memory](../2611.22017-skillbuffbench/README.md)（`skillbuffbench`）：手工给Agent正确skill测的是精选上界，不等于部署时能从库里找到它。SkillBuffBench在同一任务／模型／harness下交叉三种skill访问（无、精选、自动）与两种memory模式，单独测内容收益、发现损失和记忆交互。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [The Resolution Hypothesis: Agent Evolution's Key Is Identifying Improvements](../2611.23068-resolution-hypothesis/README.md)（`resolution-hypothesis`）：自进化停滞不一定是提案不够好，可能是一次嘈杂评分分不清候选改进。本文把“同一artifact反复测”的评测噪声与“不同演化run产出不同artifact”的真实质量波动分开。
 - [Verifying Agents in Rubric-Graded Environments](../2611.22841-gandalf-bvb/README.md)（`gandalf-bvb`）：复杂任务产物可能是Excel、PowerPoint或应用状态，单纯把文件转成文本会丢公式、布局与跨文件关系。本文不是新做任务的Agent，而是研究判断Agent产物的verifier：BVB包含24投资银行任务、2464个人工判定criteria，用来评测验证器的判断。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-24",
+  "exact_disposable_targets": [
+    {
+      "path": ".cache/nov24-latest/site-final",
+      "allocated_bytes": 1080942592,
+      "logical_bytes": 1065047269
+    },
+    {
+      "path": ".cache/nov24-latest/frozen-source-transfer.tgz",
+      "allocated_bytes": 81920,
+      "logical_bytes": 80563
+    },
+    {
+      "path": ".cache/nov24-latest/weight-coding-page1.png",
+      "allocated_bytes": 208896,
+      "logical_bytes": 207309
+    }
+  ],
+  "allocated_bytes_reclaimed": 1081233408,
+  "protected_files": 81,
+  "protected_sha256_before": "351aa6f665a8f82f1d17875e54df29024ce1e1b2b7d962195a5e6df105a6cf24",
+  "protected_sha256_after": "351aa6f665a8f82f1d17875e54df29024ce1e1b2b7d962195a5e6df105a6cf24",
+  "kept": "All code/Git checkouts, original results including failures, receipts/frozen proofs, original source captures and formal figures, reusable model/data caches and Codex records/configuration",
+  "remote_transfer_cleanup": "Separate exact temporary source directory/archive removed only after fetching and validating the actual CUDA result; no remote jobs remained"
+}

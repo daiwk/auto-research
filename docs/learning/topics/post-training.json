@@ -52,7 +52,8 @@
         "post-training:margin-dynamics-tpo",
         "post-training:ca-zodpo",
         "post-training:confidence-adaptive-granularity",
-        "post-training:mpg-dpo"
+        "post-training:mpg-dpo",
+        "post-training:shpo"
       ]
     },
     {
@@ -275,7 +276,8 @@
         "post-training:drd-mopd",
         "post-training:streaming-opd",
         "post-training:mrpd-replay",
-        "post-training:dwe"
+        "post-training:dwe",
+        "post-training:vopd"
       ]
     },
     {

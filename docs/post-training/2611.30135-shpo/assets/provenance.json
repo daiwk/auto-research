@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/html/2611.30135v1",
+  "source_url": "https://arxiv.org/html/2611.30135v1/full_figure.svg",
+  "figure": "Figure 1",
+  "caption": "Figure 1: cyclic-preference diagnosis and DPO augmented with a sparse antisymmetric curl head; this schematic is not an exact graph-level Hodge projection implementation.",
+  "source_sha256": "f5dbd54da5ecc4389b8eb68720ab54287f0b26cdf274da9758d63a87f95aff8d",
+  "asset_sha256": "b6105e74a16e163cafca46902345b01c284fed432cb310a392dd900d699d0961",
+  "image_sha256": "b6105e74a16e163cafca46902345b01c284fed432cb310a392dd900d699d0961",
+  "render_scale": 3,
+  "visually_reviewed": true,
+  "scientific_content_modified": false,
+  "transformation": "Original SVG preserved; full-figure PNG rasterized by PyMuPDF at scale3",
+  "copyright": "Copyright remains with original authors; original figure with attribution."
+}

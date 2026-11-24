@@ -159,6 +159,7 @@
 
 ### preference-and-alignment
 
+- [Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences](../2611.30135-shpo/README.md)（`shpo`）：DPO把偏好写成response标量势之差，围绕三角形相加为零，不能表示A胜B、B胜C、C胜A的局部环。SHPO保留DPO项，再把response最后层hidden仅在response token上均值池化，经无bias W投影到2K维并归一化；每个二维plane的有向面积乘γ后相加，构造交换两回答即反号的残差。
 - [Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching](../2611.23229-ambient-sft/README.md)（`ambient-sft`）：目标不是复制base全部细节，而是在小数据SFT时保留其粗粒度分布；升温降低对错误细节的信任，clean CE仍提供新任务方向。
 - [Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data](../2611.22210-mpg-dpo/README.md)（`mpg-dpo`）：用户反馈保留的方向生成偏好cone，dual generators形成W；以偏序筛除确定被支配回答，再选择尚有规则trade-off的回答对，避免先拍定单一权重。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment](../2611.20635-ca-zodpo/README.md)（`ca-zodpo`）：偏好loss仍是policy/reference的chosen-rejected margin；改变的是无需反传的搜索方向，用chosen与rejected输入activation差提取低秩空间，而非全参数各向同性扰动。
@@ -256,6 +257,7 @@
 
 ### student-trajectory-distillation
 
+- [Verifiable On-Policy Distillation](../2611.30325-vopd/README.md)（`vopd`）：RLVR只给已采样整条response稀疏结果反馈；OPD给每个访问prefix的完整teacher分布，但该信号未被verifier验证。VOPD先对每组response计算teacher/reference累计log-ratio D，再以population标准差标准化V和D，最小二乘投影得到Pearson相关c。
 - [Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation](../2611.27131-dwe/README.md)（`dwe`）：DWE不改变蒸馏教师、采样者或KL目标，而是在相同输入和参数下估计输出头的完整梯度。softmax的logit梯度和为零，正负部分各有质量m；分别归一化后配成等量异号的坐标对。
 - [Replay, Don't Resample: Off-Policy Consolidation of Long-Horizon RL Experts](../2611.24059-mrpd-replay/README.md)（`mrpd-replay`）：MRPD把专家RL训练日志当作随训练步变化的课程，而非混洗后的离线数据池。学生与专家同一SFT初始化；第k步合并各域专家第k步日志，使用日志采样策略的log-prob做importance ratio，重算组相对奖励的非对称clipped PG。
 - [Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption](../2611.22298-streaming-opd/README.md)（`streaming-opd`）：token局部teacher监督只依赖已生成prefix，不依赖未来token。片段可先进入candidate pool，等监督预算凑齐才更新，而不必每片段一次更新或等整答案结束。

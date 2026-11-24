@@ -980,6 +980,16 @@
             "论文离线与线上效果",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:deep-cross-attention",
+          "position": "传统残差把原始输入和历层增量输出直接相加。DCA把这份历史保留下来，由可学习的feature×history基础权重，加上逐token、逐历史项的动态项，选择层输入；Q、K、V分别使用独立GRN-v3。这里的深度路由不是在层维做softmax，而是直接加权求和；普通attention仍在token维计算。",
+          "tradeoff": "RD-AttnRes从Block AttnRes出发保留共享QK路由、单独解耦V，采用其attention-residual深度选择机制。DCA的Q/K/V三路均独立，并以feature-dependent基础权重加ReLU动态项线性求和，不是把RD的V路由复制三份。两者都改变attention输入来源，却不能互换归一化、历史缓存或完整训练证据。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1007,6 +1017,14 @@
           "papers": [
             "foundation-models:smart-model-routing",
             "foundation-models:switch-transformer"
+          ]
+        },
+        {
+          "title": "DeepCrossAttention: Supercharging Transformer Residual Connections",
+          "body": "RD-AttnRes从Block AttnRes出发保留共享QK路由、单独解耦V，采用其attention-residual深度选择机制。DCA的Q/K/V三路均独立，并以feature-dependent基础权重加ReLU动态项线性求和，不是把RD的V路由复制三份。两者都改变attention输入来源，却不能互换归一化、历史缓存或完整训练证据。 固定v2§3.1文字公式为b+ReLU(wᵀG)：b初始化为1，w初始化为0。按PyTorch的ReLU'(0)=0，精确零初始化时动态w的第一步梯度为0；本地把它作为可见负控，而不是偷偷换激活或随机初始化。Figure3还画了文字公式未明确的Norm和不同的activation次序；本地声明按文字公式解释，不声称复刻作者训练器。Figure4的Q/K/V外部Norm以三套LayerNorm实现。",
+          "papers": [
+            "foundation-models:deep-cross-attention",
+            "foundation-models:rd-attnres"
           ]
         }
       ],
@@ -1052,9 +1070,19 @@
             "foundation-models:smart-model-routing",
             "foundation-models:switch-transformer"
           ]
+        },
+        {
+          "id": "nov24-deep-cross-attention",
+          "question": "DCA与RD-AttnRes的Q/K/V解耦边界有什么区别？",
+          "answer": "RD-AttnRes保留共享QK、解耦V；DCA对Q、K、V各自配置独立GRN-v3，且深度混合公式不同。",
+          "example": "教学例：只修改DCA的Q基础权重，K和V路由输出必须逐位不变；RD中Q和K本来共享路由。",
+          "papers": [
+            "foundation-models:deep-cross-attention",
+            "foundation-models:rd-attnres"
+          ]
         }
       ],
-      "updated": "2026-11-18",
+      "updated": "2026-11-24",
       "reviewed_papers": [
         "foundation-models:adadsf",
         "foundation-models:blt",
@@ -1082,7 +1110,8 @@
         "foundation-models:swrouter",
         "foundation-models:telescopic-lm",
         "foundation-models:wide",
-        "foundation-models:smart-model-routing"
+        "foundation-models:smart-model-routing",
+        "foundation-models:deep-cross-attention"
       ],
       "updates": [
         {
@@ -1155,6 +1184,18 @@
           "source_revisions": {
             "foundation-models:smart-model-routing": "9674bf6450a9b74de92d844c4814e42fbebb303ff4de63b4d4346fe713200326",
             "foundation-models:switch-transformer": "71cfc2d850556aa59636dc714b8879095e954f5731b7daca20eb2faf603473b8"
+          }
+        },
+        {
+          "date": "2026-11-24",
+          "papers": [
+            "foundation-models:deep-cross-attention",
+            "foundation-models:rd-attnres"
+          ],
+          "summary": "RD-AttnRes从Block AttnRes出发保留共享QK路由、单独解耦V，采用其attention-residual深度选择机制。DCA的Q/K/V三路均独立，并以feature-dependent基础权重加ReLU动态项线性求和，不是把RD的V路由复制三份。两者都改变attention输入来源，却不能互换归一化、历史缓存或完整训练证据。 完整实验不复现与本地L1组件分开，不晋级Evolve。",
+          "source_revisions": {
+            "foundation-models:deep-cross-attention": "a04f520759d0914ba4c5d624ec21617660ef1c3f52a39aec22b8430f772ac2d3",
+            "foundation-models:rd-attnres": "4d60f1665f9c81ee267e18e423bc17e842efe332a4550f6f5f12c1b34c474684"
           }
         }
       ]
@@ -1320,6 +1361,16 @@
             "与已有方法的关系",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:stablekl",
+          "position": "近等分布的真实KL是二阶小量，但教科书公式往往由一阶或常数量相减得到，容易返回零、负数或错误梯度。StableKL把闭式KL重写成非负小量的组合，配合差值、补偿算术和解析梯度；它还区分F.kl_div算子误差与输入log-prob本身已丢失的信息。本地只选择其中Exponential族的Rewrite核。",
+          "tradeoff": "随机舍入处理的是FP32小更新转BF16时落回同一格点，靠随机相邻格点在条件期望上保留变化。StableKL处理的是已存参数上的确定性代数消去，靠公式重写与解析梯度减少误差。前者不修复错误KL公式，后者也不能恢复输入量化前已经消失的更新；提高precision、clamp和随机舍入都不是可互换的补丁。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1403,6 +1454,14 @@
           "papers": [
             "foundation-models:aimuon",
             "foundation-models:af-muon"
+          ]
+        },
+        {
+          "title": "The KL Divergence Is Never Negative, Except in PyTorch",
+          "body": "随机舍入处理的是FP32小更新转BF16时落回同一格点，靠随机相邻格点在条件期望上保留变化。StableKL处理的是已存参数上的确定性代数消去，靠公式重写与解析梯度减少误差。前者不修复错误KL公式，后者也不能恢复输入量化前已经消失的更新；提高precision、clamp和随机舍入都不是可互换的补丁。 Exponential的x先由原始rate之差计算，避免先取ratio再减1。在−0.75≤x≤3上，FP32用K=17的Horner级数计算φ；两侧使用条件良好的log1p或log(rate_q/rate_p)分支。自定义autograd直接返回两rate解析导数。末端非负截断只是稳定公式的边界约定，不是对原始消去公式clamp就算修复。原文strict模式、区间算术与其他分布的误差自由变换不在本地范围。",
+          "papers": [
+            "foundation-models:stablekl",
+            "foundation-models:stochastic-rounding"
           ]
         }
       ],
@@ -1517,9 +1576,19 @@
             "foundation-models:aimuon",
             "foundation-models:af-muon"
           ]
+        },
+        {
+          "id": "nov24-stablekl",
+          "question": "StableKL与随机舍入能互相替代吗？",
+          "answer": "不能。随机舍入解决量化格点吞掉更新，并引入受控随机性；StableKL解决已存输入上的确定性消去。丢失在输入表示中的信息也不属于KL算子能恢复的范围。",
+          "example": "教学例：BF16把两个rate先都存成1，StableKL只能正确给0；若FP32仍保留两者差值，它才可通过重写恢复小的正KL。",
+          "papers": [
+            "foundation-models:stablekl",
+            "foundation-models:stochastic-rounding"
+          ]
         }
       ],
-      "updated": "2026-11-23",
+      "updated": "2026-11-24",
       "reviewed_papers": [
         "foundation-models:adamw4bit",
         "foundation-models:af-muon",
@@ -1557,7 +1626,8 @@
         "foundation-models:archspace",
         "foundation-models:lara-plus-plus",
         "foundation-models:latent-feedback-scaling",
-        "foundation-models:aimuon"
+        "foundation-models:aimuon",
+        "foundation-models:stablekl"
       ],
       "updates": [
         {
@@ -1718,6 +1788,18 @@
           "source_revisions": {
             "foundation-models:aimuon": "dec9b4992d9408a7f103ac077db88f861e82b84c3df80684f4e96154645ca5bf",
             "foundation-models:af-muon": "eff4e72c1ef53b275691373df114f5a6beb42bdf5cc0c140192bd863ebaf7fd9"
+          }
+        },
+        {
+          "date": "2026-11-24",
+          "papers": [
+            "foundation-models:stablekl",
+            "foundation-models:stochastic-rounding"
+          ],
+          "summary": "随机舍入处理的是FP32小更新转BF16时落回同一格点，靠随机相邻格点在条件期望上保留变化。StableKL处理的是已存参数上的确定性代数消去，靠公式重写与解析梯度减少误差。前者不修复错误KL公式，后者也不能恢复输入量化前已经消失的更新；提高precision、clamp和随机舍入都不是可互换的补丁。 完整实验不复现与本地L1组件分开，不晋级Evolve。",
+          "source_revisions": {
+            "foundation-models:stablekl": "359dca1245dc303d978f5fddf717efd98947fdd5e95bfd716d06e3dadbf522cf",
+            "foundation-models:stochastic-rounding": "2d38215ff494778a4ddd9cf33755f3e69edf0422d2af49ca3b99e521070b44c3"
           }
         }
       ]

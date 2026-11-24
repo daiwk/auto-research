@@ -1,0 +1,646 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-24",
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "raw_directory_receipt_sha256": "d7e00552d0cac5e5cb89e86ac96eff3cc490ce56572dfa854ae73c38529bb1fa",
+  "previous_priority_review_sha256": "cc5f28cc198dcfce8ab8d3182ad0df0491a46843589d1db0ecc5ef6212e526c6",
+  "directory_baseline": "Nov15 finite Google directory, not publication dates",
+  "directory_comparison_complete": true,
+  "google_added_directory_urls": [
+    {
+      "source_url": "https://research.google/pubs/a-multi-environment-formal-verification-methodology-for-catching-latency-induced-rtl-hangs/",
+      "capture_sha256": "abdad4423981e0c3f1d0c58908dde939561d5f1e7aad0764c7cabc48f3109af1",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-24",
+      "decision": "carried_forward_finite_source_triage",
+      "previous_decision": {
+        "source_url": "https://research.google/pubs/a-multi-environment-formal-verification-methodology-for-catching-latency-induced-rtl-hangs/",
+        "capture_sha256": "0a1489ebb1743015c811aee5a71d6b8216aa9440d0e97ebea9911f2f55724d1e",
+        "parse_complete": true,
+        "reviewed_on": "2026-11-23",
+        "decision": "outside_this_finite_paper_intake",
+        "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+        "automatic_retry": false
+      },
+      "previous_review": "nov23-latest/priority-primary-selection.json",
+      "reason": "This URL is the same finiteNov15-baseline directory difference already triaged inNov23, not a newly published paper. Carry forward the recorded disposition; this is not a new full-method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/a-weighted-hierarchical-approach-to-testpoint-configuration-driving-efficient-dft-convergence/",
+      "capture_sha256": "af5e35880e30fcc954007aa28e6ac69e890c1a378f1a70a54e0bd7ec240aafbb",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-24",
+      "decision": "carried_forward_finite_source_triage",
+      "previous_decision": {
+        "source_url": "https://research.google/pubs/a-weighted-hierarchical-approach-to-testpoint-configuration-driving-efficient-dft-convergence/",
+        "capture_sha256": "a9d2fb95a7d294601d17f003afcc0f62223e5232b928f596496ec4b770f9c711",
+        "parse_complete": true,
+        "reviewed_on": "2026-11-23",
+        "decision": "outside_this_finite_paper_intake",
+        "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+        "automatic_retry": false
+      },
+      "previous_review": "nov23-latest/priority-primary-selection.json",
+      "reason": "This URL is the same finiteNov15-baseline directory difference already triaged inNov23, not a newly published paper. Carry forward the recorded disposition; this is not a new full-method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/beyond-the-structural-filter-ai-assisted-inductive-refinement-for-scalable-formal-sign-off-of-multi-stage-arbitration-logic/",
+      "capture_sha256": "5e2c9c33ac8e347a5c6b302642dabb67b8feaa77c98a098c5b6f9227939f8913",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-24",
+      "decision": "carried_forward_finite_source_triage",
+      "previous_decision": {
+        "source_url": "https://research.google/pubs/beyond-the-structural-filter-ai-assisted-inductive-refinement-for-scalable-formal-sign-off-of-multi-stage-arbitration-logic/",
+        "capture_sha256": "a6263ce01347aa9bdf1384e34d89e493c94ae0de5a02e74c446a0a1b25aea0a4",
+        "parse_complete": true,
+        "reviewed_on": "2026-11-23",
+        "decision": "source_limitation_archived",
+        "reason": "Read the official page including its extended method description. LLM-assisted proprietary SoC verification is potentially relevant, but the page supplies no independently accessible full technical paper/code/data link or verified original publication date. Do not invent an LLM/RTL implementation from a workflow paragraph; not a completed full-method review or a claim that no novel algorithm exists.",
+        "automatic_retry": false
+      },
+      "previous_review": "nov23-latest/priority-primary-selection.json",
+      "reason": "This URL is the same finiteNov15-baseline directory difference already triaged inNov23, not a newly published paper. Carry forward the recorded disposition; this is not a new full-method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/covering-a-polyomino-shaped-stain-with-non-overlapping-stickers-of-the-same-shape/",
+      "capture_sha256": "bc5d5a8616b4a65438d79d1a2d982d57dbbdd607da4e330b30c46ac63a6b1887",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-24",
+      "decision": "carried_forward_finite_source_triage",
+      "previous_decision": {
+        "source_url": "https://research.google/pubs/covering-a-polyomino-shaped-stain-with-non-overlapping-stickers-of-the-same-shape/",
+        "capture_sha256": "9b677461c3529e49d622e48a2ed1196ec73ab5907e37f0a7e80485ee8ad630de",
+        "parse_complete": true,
+        "reviewed_on": "2026-11-23",
+        "decision": "outside_this_finite_paper_intake",
+        "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+        "automatic_retry": false
+      },
+      "previous_review": "nov23-latest/priority-primary-selection.json",
+      "reason": "This URL is the same finiteNov15-baseline directory difference already triaged inNov23, not a newly published paper. Carry forward the recorded disposition; this is not a new full-method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/detecting-crosstalk-induced-static-noise-defects-with-a-custom-test-flow/",
+      "capture_sha256": "474f0e543e64a32a1107dc2663b453e8f7b081858d53f898751eb6f20956ec3c",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-24",
+      "decision": "carried_forward_finite_source_triage",
+      "previous_decision": {
+        "source_url": "https://research.google/pubs/detecting-crosstalk-induced-static-noise-defects-with-a-custom-test-flow/",
+        "capture_sha256": "34296e158879652c3610085469da257ea9f8ff2606aaa09bca7369fcb696a052",
+        "parse_complete": true,
+        "reviewed_on": "2026-11-23",
+        "decision": "outside_this_finite_paper_intake",
+        "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+        "automatic_retry": false
+      },
+      "previous_review": "nov23-latest/priority-primary-selection.json",
+      "reason": "This URL is the same finiteNov15-baseline directory difference already triaged inNov23, not a newly published paper. Carry forward the recorded disposition; this is not a new full-method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/dont-pause-every-predictions-matter-in-a-streaming-video/",
+      "capture_sha256": "091ad71b2779bd527ec54f07a2a651e07115071c8157e7cc25b7060c86efdb8d",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-24",
+      "decision": "carried_forward_finite_source_triage",
+      "previous_decision": {
+        "source_url": "https://research.google/pubs/dont-pause-every-predictions-matter-in-a-streaming-video/",
+        "capture_sha256": "6bca63775f06497691fcd2894cb93c7b5fd1a96bd5b4a65777d17ede9f472411",
+        "parse_complete": true,
+        "reviewed_on": "2026-11-23",
+        "decision": "selected_historical_directory_backfill",
+        "reason": "Fixed arXiv2604.24317v2 byline is first-author NUS, Yale Song Google. OriginalApr27, revisionNov5, discoveredNov23; Algorithm1/Eq2 scorer accepted, no full streaming controller/benchmark.",
+        "automatic_retry": false
+      },
+      "previous_review": "nov23-latest/priority-primary-selection.json",
+      "reason": "This URL is the same finiteNov15-baseline directory difference already triaged inNov23, not a newly published paper. Carry forward the recorded disposition; this is not a new full-method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/from-prompt-to-probe-left-shifting-soc-debug-with-generative-ai/",
+      "capture_sha256": "eb8a362a98d1d82db4fff9c4b5e0117fe63a83b6c12e6c35b1f2066802159192",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-24",
+      "decision": "carried_forward_finite_source_triage",
+      "previous_decision": {
+        "source_url": "https://research.google/pubs/from-prompt-to-probe-left-shifting-soc-debug-with-generative-ai/",
+        "capture_sha256": "09bb141ae09c0e108e731b8564b0f47bc0f581d622e070103dd789184e9f3a83",
+        "parse_complete": true,
+        "reviewed_on": "2026-11-23",
+        "decision": "source_limitation_archived",
+        "reason": "Read the official page including its extended method description. LLM-assisted proprietary SoC verification is potentially relevant, but the page supplies no independently accessible full technical paper/code/data link or verified original publication date. Do not invent an LLM/RTL implementation from a workflow paragraph; not a completed full-method review or a claim that no novel algorithm exists.",
+        "automatic_retry": false
+      },
+      "previous_review": "nov23-latest/priority-primary-selection.json",
+      "reason": "This URL is the same finiteNov15-baseline directory difference already triaged inNov23, not a newly published paper. Carry forward the recorded disposition; this is not a new full-method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/multi-tiered-physical-aware-formal-ensuring-latency-robustness-in-power-management-architecture-and-design/",
+      "capture_sha256": "6a0b5be5d736395ae9397cee497547e6a1695ae274ae3397b2529e498aea5625",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-24",
+      "decision": "carried_forward_finite_source_triage",
+      "previous_decision": {
+        "source_url": "https://research.google/pubs/multi-tiered-physical-aware-formal-ensuring-latency-robustness-in-power-management-architecture-and-design/",
+        "capture_sha256": "6a0b5be5d736395ae9397cee497547e6a1695ae274ae3397b2529e498aea5625",
+        "parse_complete": true,
+        "reviewed_on": "2026-11-23",
+        "decision": "outside_this_finite_paper_intake",
+        "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+        "automatic_retry": false
+      },
+      "previous_review": "nov23-latest/priority-primary-selection.json",
+      "reason": "This URL is the same finiteNov15-baseline directory difference already triaged inNov23, not a newly published paper. Carry forward the recorded disposition; this is not a new full-method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/navigating-the-cutting-edge-a-collaborative-approach-to-ufs-50-pre-silicon-maturity/",
+      "capture_sha256": "f56b192a7afbb235d5c9a6db79169f7dab1beaba1c1bf6cc09b0beb81ea6d6f9",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-24",
+      "decision": "carried_forward_finite_source_triage",
+      "previous_decision": {
+        "source_url": "https://research.google/pubs/navigating-the-cutting-edge-a-collaborative-approach-to-ufs-50-pre-silicon-maturity/",
+        "capture_sha256": "f56b192a7afbb235d5c9a6db79169f7dab1beaba1c1bf6cc09b0beb81ea6d6f9",
+        "parse_complete": true,
+        "reviewed_on": "2026-11-23",
+        "decision": "outside_this_finite_paper_intake",
+        "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+        "automatic_retry": false
+      },
+      "previous_review": "nov23-latest/priority-primary-selection.json",
+      "reason": "This URL is the same finiteNov15-baseline directory difference already triaged inNov23, not a newly published paper. Carry forward the recorded disposition; this is not a new full-method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/optimizing-ppa-with-atpg-qor-a-custom-testpoints-reclustering-approach-for-reduced-congestion-and-leakage-with-improved-test-qor/",
+      "capture_sha256": "5e292291c7a52e0eb0269edb80c41c3c1d79301fb199e175960e1d2179befb47",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-24",
+      "decision": "carried_forward_finite_source_triage",
+      "previous_decision": {
+        "source_url": "https://research.google/pubs/optimizing-ppa-with-atpg-qor-a-custom-testpoints-reclustering-approach-for-reduced-congestion-and-leakage-with-improved-test-qor/",
+        "capture_sha256": "5e292291c7a52e0eb0269edb80c41c3c1d79301fb199e175960e1d2179befb47",
+        "parse_complete": true,
+        "reviewed_on": "2026-11-23",
+        "decision": "outside_this_finite_paper_intake",
+        "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+        "automatic_retry": false
+      },
+      "previous_review": "nov23-latest/priority-primary-selection.json",
+      "reason": "This URL is the same finiteNov15-baseline directory difference already triaged inNov23, not a newly published paper. Carry forward the recorded disposition; this is not a new full-method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/safe-coding-rigorous-modular-reasoning-about-software-safety-2/",
+      "capture_sha256": "ae3eab7681cdebf2864d12424755980a6dfb6533d9f05dd6ebbb51adc6f6f355",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-24",
+      "decision": "carried_forward_finite_source_triage",
+      "previous_decision": {
+        "source_url": "https://research.google/pubs/safe-coding-rigorous-modular-reasoning-about-software-safety-2/",
+        "capture_sha256": "811ee265923dc9479345ab1c97809a8764d3e206e8b3e597f0fe37c1a1f0b5e7",
+        "parse_complete": true,
+        "reviewed_on": "2026-11-23",
+        "decision": "outside_this_finite_paper_intake",
+        "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+        "automatic_retry": false
+      },
+      "previous_review": "nov23-latest/priority-primary-selection.json",
+      "reason": "This URL is the same finiteNov15-baseline directory difference already triaged inNov23, not a newly published paper. Carry forward the recorded disposition; this is not a new full-method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/scalable-bayesian-inference-for-time-series-via-divide-and-conquer/",
+      "capture_sha256": "3fbee6777052d9bbb5e2446d819bf63d35c3c8965ed6a8e3559f7df1f5e27bd2",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-24",
+      "decision": "carried_forward_finite_source_triage",
+      "previous_decision": {
+        "source_url": "https://research.google/pubs/scalable-bayesian-inference-for-time-series-via-divide-and-conquer/",
+        "capture_sha256": "6f16babba2f3a39e08e31c76146c10f15b7fcccae48a02be222a979f12ecb271",
+        "parse_complete": true,
+        "reviewed_on": "2026-11-23",
+        "decision": "outside_this_finite_paper_intake",
+        "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+        "automatic_retry": false
+      },
+      "previous_review": "nov23-latest/priority-primary-selection.json",
+      "reason": "This URL is the same finiteNov15-baseline directory difference already triaged inNov23, not a newly published paper. Carry forward the recorded disposition; this is not a new full-method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/searchinject-retrieval-exposure-control-for-indirect-prompt-injection-in-language-model-search/",
+      "capture_sha256": "77256cb64b4fbcb096218e8270c3ac929856fd770542144b3e7da8bdae40fc9c",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-24",
+      "decision": "carried_forward_finite_source_triage",
+      "previous_decision": {
+        "source_url": "https://research.google/pubs/searchinject-retrieval-exposure-control-for-indirect-prompt-injection-in-language-model-search/",
+        "capture_sha256": "a0824a26cd0c902431164b9238bbb9c07179231a686eb774e7e43b7980773d9c",
+        "parse_complete": true,
+        "reviewed_on": "2026-11-23",
+        "decision": "already_cataloged",
+        "reason": "SearchInject was cataloged inNov19; finite directory difference againstNov15 does not reopen a completed selection.",
+        "automatic_retry": false
+      },
+      "previous_review": "nov23-latest/priority-primary-selection.json",
+      "reason": "This URL is the same finiteNov15-baseline directory difference already triaged inNov23, not a newly published paper. Carry forward the recorded disposition; this is not a new full-method review.",
+      "automatic_retry": false
+    },
+    {
+      "source_url": "https://research.google/pubs/vclp-dft-dashboard-for-efficient-extraction-of-dft-related-electrical-violations-in-multi-power-domain-scan-stitching/",
+      "capture_sha256": "983f173be3bb1aa45e0a797adac32a942886ad4e725bf8d20b5129e871b19511",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-24",
+      "decision": "carried_forward_finite_source_triage",
+      "previous_decision": {
+        "source_url": "https://research.google/pubs/vclp-dft-dashboard-for-efficient-extraction-of-dft-related-electrical-violations-in-multi-power-domain-scan-stitching/",
+        "capture_sha256": "55944c81c2a011aa751c22726912f2166e6fac0e315a75933a180a543c97a2d3",
+        "parse_complete": true,
+        "reviewed_on": "2026-11-23",
+        "decision": "outside_this_finite_paper_intake",
+        "reason": "Official page describes hardware/formal-verification/design-for-test, generic software safety, polyomino mathematics or time-series Bayesian inference, not a newly specified LLM/recommendation/post-training/agent/world-model method or public benchmark selected in this intake. This is source-page scope triage, not full-text method review.",
+        "automatic_retry": false
+      },
+      "previous_review": "nov23-latest/priority-primary-selection.json",
+      "reason": "This URL is the same finiteNov15-baseline directory difference already triaged inNov23, not a newly published paper. Carry forward the recorded disposition; this is not a new full-method review.",
+      "automatic_retry": false
+    }
+  ],
+  "new_directory_urls_relative_to_previous_batch": 0,
+  "repository_observations": [
+    {
+      "repository": "google-research/google-research",
+      "event": "pushed",
+      "source_url": "https://github.com/google-research/google-research",
+      "observed_pushed_at": "2026-11-24T04:17:47Z",
+      "observed_created_at": "2018-10-04T18:42:48Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-research/perch-hoplite",
+      "event": "pushed",
+      "source_url": "https://github.com/google-research/perch-hoplite",
+      "observed_pushed_at": "2026-11-23T15:39:09Z",
+      "observed_created_at": "2024-11-19T10:44:20Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-research/ple",
+      "event": "pushed",
+      "source_url": "https://github.com/google-research/ple",
+      "observed_pushed_at": "2026-11-23T23:52:36Z",
+      "observed_created_at": "2026-10-09T20:41:30Z",
+      "decision": "bounded_readme_or_existing_identity_triage",
+      "reason": "Read official README: paper2610.30537 is already cataloged as physical-engineering-exam. Push time is not a new paper date.",
+      "readme_capture_sha256": "ff5ed7392afc48d0ae21e865070ec52d7def4ad59df4fd2d45dc350b85fee177"
+    },
+    {
+      "repository": "google-research/openfst",
+      "event": "pushed",
+      "source_url": "https://github.com/google-research/openfst",
+      "observed_pushed_at": "2026-11-24T01:16:05Z",
+      "observed_created_at": "2025-12-11T12:32:06Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-research/mseb",
+      "event": "pushed",
+      "source_url": "https://github.com/google-research/mseb",
+      "observed_pushed_at": "2026-11-23T23:41:22Z",
+      "observed_created_at": "2025-05-13T18:19:15Z",
+      "decision": "bounded_readme_or_existing_identity_triage",
+      "reason": "Read README: Massive Sound Embedding Benchmark framework. This intake did not verify a new linked standalone paper/method or run its sound benchmark.",
+      "readme_capture_sha256": "3eb5793432a537e73380df29e7056bdf8041118b1565c0db3271c4dac93bbc01"
+    },
+    {
+      "repository": "google-research/opengrm",
+      "event": "pushed",
+      "source_url": "https://github.com/google-research/opengrm",
+      "observed_pushed_at": "2026-11-24T02:22:55Z",
+      "observed_created_at": "2026-06-01T10:15:05Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/mujoco",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/mujoco",
+      "observed_pushed_at": "2026-11-24T00:51:14Z",
+      "observed_created_at": "2021-08-27T12:25:48Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/gemma",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/gemma",
+      "observed_pushed_at": "2026-11-23T14:30:34Z",
+      "observed_created_at": "2024-02-20T18:39:01Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/mujoco_menagerie",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/mujoco_menagerie",
+      "observed_pushed_at": "2026-11-24T00:44:44Z",
+      "observed_created_at": "2022-09-05T10:37:53Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/mujoco_playground",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/mujoco_playground",
+      "observed_pushed_at": "2026-11-23T23:08:17Z",
+      "observed_created_at": "2024-12-03T22:39:09Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/mujoco_mpc",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/mujoco_mpc",
+      "observed_pushed_at": "2026-11-24T00:51:11Z",
+      "observed_created_at": "2022-12-01T11:39:35Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/mujoco_warp",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/mujoco_warp",
+      "observed_pushed_at": "2026-11-23T21:02:30Z",
+      "observed_created_at": "2025-03-17T22:35:01Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/formal-conjectures",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/formal-conjectures",
+      "observed_pushed_at": "2026-11-23T22:52:42Z",
+      "observed_created_at": "2025-05-12T08:22:05Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/torax",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/torax",
+      "observed_pushed_at": "2026-11-23T21:18:24Z",
+      "observed_created_at": "2024-03-05T14:20:02Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/formal-quantum-computation",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/formal-quantum-computation",
+      "observed_pushed_at": "2026-11-23T16:21:58Z",
+      "observed_created_at": "2026-11-14T00:01:30Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/reaf-sim",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/reaf-sim",
+      "observed_pushed_at": "2026-11-23T23:08:20Z",
+      "observed_created_at": "2026-07-28T23:19:02Z",
+      "decision": "bounded_readme_or_existing_identity_triage",
+      "reason": "Read README: simulation library and MuJoCo playground integration. No new standalone in-scope paper verified from the README; not a completed method review.",
+      "readme_capture_sha256": "efb60f77d0475e19732f7da101124d6b6d092a01a97461e88e9665eb1edfd015"
+    },
+    {
+      "repository": "google-deepmind/origami-design",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/origami-design",
+      "observed_pushed_at": "2026-11-23T13:44:36Z",
+      "observed_created_at": "2026-11-12T16:54:17Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/faiss",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/faiss",
+      "observed_pushed_at": "2026-11-24T04:34:21Z",
+      "observed_created_at": "2017-02-07T16:07:05Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/MHR",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/MHR",
+      "observed_pushed_at": "2026-11-24T03:00:23Z",
+      "observed_created_at": "2025-09-07T22:12:57Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/projectaria_tools",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/projectaria_tools",
+      "observed_pushed_at": "2026-11-23T22:18:42Z",
+      "observed_created_at": "2023-06-15T06:06:29Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/project_superdex",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/project_superdex",
+      "observed_pushed_at": "2026-11-24T05:28:36Z",
+      "observed_created_at": "2026-08-20T02:04:05Z",
+      "decision": "bounded_readme_or_existing_identity_triage",
+      "reason": "Read official README: physics/robotics/studio/lab simulation platform. No standalone LLM/Agent/world-model paper identity verified in that README; source-only tooling observation, not rejection of a verified novel algorithm.",
+      "readme_capture_sha256": "bacc0f6ddbb8096cf7d08f50a02752d526b3c07fcd0372b1a5046ae21ceae193"
+    },
+    {
+      "repository": "facebookresearch/vrs",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/vrs",
+      "observed_pushed_at": "2026-11-23T17:30:07Z",
+      "observed_created_at": "2021-09-08T03:09:54Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/momentum",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/momentum",
+      "observed_pushed_at": "2026-11-24T03:47:41Z",
+      "observed_created_at": "2024-06-14T16:03:53Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/spdl",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/spdl",
+      "observed_pushed_at": "2026-11-24T02:24:02Z",
+      "observed_created_at": "2024-06-27T19:57:35Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/neuroai",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/neuroai",
+      "observed_pushed_at": "2026-11-23T18:47:11Z",
+      "observed_created_at": "2026-04-14T12:59:23Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/atlas-lean",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/atlas-lean",
+      "observed_pushed_at": "2026-11-24T06:20:12Z",
+      "observed_created_at": "2026-05-26T22:31:48Z",
+      "decision": "bounded_readme_or_existing_identity_triage",
+      "reason": "Read current README: v2 library is live; companion paper2605.29955 and AutoformBot are existing identities. A library push is not a newly published algorithm.",
+      "readme_capture_sha256": "adf08cbeeec7709582c18f1ea4eb146b757fe0cf441589f5d2060e634087e0fa"
+    },
+    {
+      "repository": "facebookresearch/generic-neuromotor-interface",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/generic-neuromotor-interface",
+      "observed_pushed_at": "2026-11-23T21:36:12Z",
+      "observed_created_at": "2024-09-03T18:58:58Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/DRTK",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/DRTK",
+      "observed_pushed_at": "2026-11-23T21:52:49Z",
+      "observed_created_at": "2024-03-08T17:27:57Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/autoform-bot",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/autoform-bot",
+      "observed_pushed_at": "2026-11-23T14:15:48Z",
+      "observed_created_at": "2026-05-26T22:37:11Z",
+      "decision": "bounded_readme_or_existing_identity_triage",
+      "reason": "Existing AutoformBench/AutoformBot catalog; no changed defining method verified from this push.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/secpriv-skill",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/secpriv-skill",
+      "observed_pushed_at": "2026-11-24T00:07:13Z",
+      "observed_created_at": "2026-05-19T20:43:28Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Repository push is a recall signal. No full-method or paper-release conclusion made for this general library/tooling event in the finite intake.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/logact",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/logact",
+      "observed_pushed_at": "2026-11-24T06:15:04Z",
+      "observed_created_at": "2026-09-25T19:36:42Z",
+      "decision": "bounded_readme_or_existing_identity_triage",
+      "reason": "Existing LogAct catalog; no defining-method change verified from the push.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/lean_kernel_verify",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/lean_kernel_verify",
+      "observed_pushed_at": "2026-11-23T18:44:57Z",
+      "observed_created_at": "2026-10-20T04:49:48Z",
+      "decision": "bounded_readme_or_existing_identity_triage",
+      "reason": "Carry forward source-only compiler/Lean limitation fromNov23; no standalone paper identity newly established.",
+      "readme_capture_sha256": null
+    }
+  ],
+  "selected_priority_papers": [
+    {
+      "identity": "foundation-models:deep-cross-attention",
+      "priority": "P0",
+      "source_url": "https://research.google/blog/supercharging-transformer-residual-connections/",
+      "capture_sha256": "9f1b4b7ea6e27b1585b87169e8141ac14ea30d441e3c083b569c46e3223a46d1",
+      "evidence": "Nov23 blog links ICML2025 DCA; fixed2502.06785v2 first authorMike Heddes/UCI, multiple Google Research coauthors. Feb10,2025 first release, July23v2. Historical backfill, not aNov23 new paper."
+    },
+    {
+      "identity": "post-training:vopd",
+      "priority": "P0",
+      "evidence": "Fixed2611.30325v1 byline: first authorJuntong Shi/Stanford, Minkai Xu/Google DeepMind. Nov23 original. Author repository currently only promises forthcoming code; not a published runnable trainer."
+    }
+  ],
+  "industrial_priority": [
+    {
+      "identity": "recommendation:weight-coding",
+      "source_url": "https://arxiv.org/html/2611.29613v1",
+      "evidence": "Fixedv1 Pinterest byline, Section4.7/Table4 real online A/B ~10M users/group ~one week; source-attributed saves/user+8.4–10.7%, not site-wide. Only CPU edit/search core implemented, private full campaign not reproduced."
+    }
+  ],
+  "source_exceptions": [
+    {
+      "url": "https://ai.meta.com/research/",
+      "http_status": 200,
+      "sha256": "ace2fb4f56dcac8d514517d04b54198c6a1b99aeb22a7dd659b7ef33f73b028d",
+      "capture": "a9d72a37dea2e2a913eb.html",
+      "parse_complete": false,
+      "error_type": null
+    },
+    {
+      "url": "https://ai.meta.com/research/publications/",
+      "http_status": 200,
+      "sha256": "de23e0c264ff944ee66adb95a36d8b8613ad646ba1147b3f87d843d0d73f88a0",
+      "capture": "6215fb19a98209f86f48.html",
+      "parse_complete": false,
+      "error_type": null
+    }
+  ],
+  "notes": [
+    "Two incomplete Meta landing inventories do not prove zero new Meta papers.",
+    "Existing GSLM2, Unbundling Vision and AutoformBot identities were checked in the current catalog; do not count resurfaced search results as new releases.",
+    "MoR4Rec2611.29462 is an unselected academic sequential-recommendation lead; no qualifying production A/B established in this intake. Not implemented by treating offline improvements as industrial evidence.",
+    "All unselected recent metadata remain recall observations, not a hidden mandatory implementation backlog or a completed full-window review."
+  ]
+}

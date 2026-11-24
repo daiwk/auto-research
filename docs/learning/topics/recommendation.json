@@ -483,7 +483,8 @@
         "recommendation:cutagent",
         "recommendation:mle-agents",
         "recommendation:mars-fapo",
-        "recommendation:fleet-feature-optimization"
+        "recommendation:fleet-feature-optimization",
+        "recommendation:weight-coding"
       ]
     }
   ]

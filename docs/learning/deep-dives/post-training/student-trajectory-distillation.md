@@ -7,7 +7,7 @@ hide:
 
 # 轨迹蒸馏：采样者、提案与散度方向分开看
 
-[LLM 后训练](../index.md) · 更新 2026-11-23 · 48 篇主题资料 / 14 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-24 · 49 篇主题资料 / 15 篇重点对照
 
 “on-policy”描述监督发生在哪些状态，FKL/RKL/JSD描述在这些状态怎样比较分布。GKD和MiniLLM建立这两个轴，DrOPD、AP-OPD再调整纠错位置或强度，Semi-OPD与学习信号诊断则提醒：离线复用和残余损失各有不同含义。 MPOPD再把采样者变成可学习proposal：几何混合是提案target，学生仍向教师做RKL，二者不能混成同一个蒸馏分布。
 
@@ -39,6 +39,7 @@ hide:
 | [Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption](../../../post-training/2611.22298-streaming-opd/README.md) · [原始来源](https://arxiv.org/abs/2611.22298v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 保留完整因果prefix的新片段loss mask/version记录、teacher top-k不重归一化截断clip损失、按监督权重归约。 | OPDLM把AR教师与双向扩散学生的状态/目标对齐；Streaming OPD仍沿因果prefix计分，只改变交付和消费时序。旧OPDLM候选诊断不是实际扩散decoder，当前prefix/损失核也不是异步服务性能证据。 |
 | [Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts](../../../post-training/2611.24059-mrpd-replay/README.md) · [原始来源](https://arxiv.org/abs/2611.24059v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 显式chronological log schedule检查、teacher-top-k加tail的reverse KL、日志策略ratio与0.2/0.28非对称clip、response-mean损失和冻结teacher/logging policy梯度。无真实专家日志/训练器/环境集成。 | Streaming OPD在新学生生成prefix上拆开生成、交付、更新时钟，top-k部分KL不补tail且作截断；MRPD不生成新轨迹，按专家日志顺序重放，top-k和tail合成完整粗粒化分布，并使用reverse KL。二者不能仅因都写top-k而共用损失。 |
 | [Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation](../../../post-training/2611.27131-dwe/README.md) · [原始来源](https://arxiv.org/abs/2611.27131v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 纯stdlib CPU实现完整正负配对、centered PCA固定顺序、共享分层quantile、forward/reverse KL logit梯度、仅选中行的hidden/weight梯度。小矩阵以多坐标起点的power iteration估计首主成分，与上游随机PCA实现不同但保留论文定义的几何顺序机制。精确积分所有CDF区间检验无偏性，有限差分独立核对KL梯度；top-coordinate丢弃是有偏负控。没有Transformer、CUDA kernel、真实teacher cache、学生生成、能力benchmark或吞吐测量。 | SimOPD在各自表示空间匹配回答间的相似度分布，改变监督目标；DWE保持既定KL目标，只改变反向梯度估计和输出行计算。二者可在设计上组合，但SimOPD的关系分布不是DWE已经支持的真实LLM路径；本轮也未验证联合训练。 |
+| [Verifiable On-Policy Distillation](../../../post-training/2611.30325-vopd/README.md) · [原始来源](https://arxiv.org/abs/2611.30325v1)<br>章节：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界 | 纯CPU执行masked累计log-ratio之和、population Pearson系数、zero-verifier-variance固定0.25外推fallback、full-vocabulary KL目标/解析logit梯度及条件新token期望。teacher方差为0但verifier变化时原文未规定，显式拒绝。没有teacher/student模型、rollout、verifier读取gold、训练器或benchmark；不猜测未发布top16实现。 | GKD区分监督状态来自学生还是固定轨迹，以及采用哪种散度；VOPD在学生访问状态上再用verifier与teacher/reference奖励相关性改变蒸馏目标。不是把GKD的on-policy比例λ换个名字：这里λ控制外推强度，另有冻结reference和组统计。现有GKD候选协议及本轮有限核都不能证明大模型能力收益。 |
 
 </div>
 
@@ -103,6 +104,12 @@ Streaming OPD在新学生生成prefix上拆开生成、交付、更新时钟，t
 SimOPD在各自表示空间匹配回答间的相似度分布，改变监督目标；DWE保持既定KL目标，只改变反向梯度估计和输出行计算。二者可在设计上组合，但SimOPD的关系分布不是DWE已经支持的真实LLM路径；本轮也未验证联合训练。 来源：§2 Eq.2–3；§3 Eq.4–15。U_k独立均匀分布于((k−1)/K,k/K)，正负CDF共用U_k。反传实际计算Wᵀĝ与ĝhᵀ；不能先做完整稠密反传再屏蔽。reverse KL的logit梯度为p_i[log(p_i/q_i)−KL(p‖q)]，同样和为零。固定顺序可近似几何，但不是每步重排或把教师/学生词表ID混用。
 
 对照来源：[dwe](../../../post-training/2611.27131-dwe/README.md) · [simopd](../../../post-training/2610.23306-simopd/README.md)
+
+### VOPD的λ是不是GKD里的学生数据比例？
+
+GKD区分监督状态来自学生还是固定轨迹，以及采用哪种散度；VOPD在学生访问状态上再用verifier与teacher/reference奖励相关性改变蒸馏目标。不是把GKD的on-policy比例λ换个名字：这里λ控制外推强度，另有冻结reference和组统计。现有GKD候选协议及本轮有限核都不能证明大模型能力收益。 来源：§4 Eq.6–18。A^V和A^D都用population方差，因而(1/n)Σ(A^D)²=1。c_x与prefix在本地反传中固定；Rao–Blackwellization只消去新token抽样方差，不消去组和轨迹方差，也不撤销immediate-token近似。等价target为q∝p_T^(1+λc)p_ref^(−λc)。verifier组内无方差时原文用固定0.25外推，不是把c置0退回普通OPD；teacher D无方差但V变化的情况未规定，本组件显式拒绝，不擅自补fallback。
+
+对照来源：[vopd](../../../post-training/2611.30325-vopd/README.md) · [gkd](../../../post-training/2306.13649-gkd/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -218,9 +225,23 @@ SimOPD在各自表示空间匹配回答间的相似度分布，改变监督目�
 
     对照来源：[dwe](../../../post-training/2611.27131-dwe/README.md) · [simopd](../../../post-training/2610.23306-simopd/README.md)
 
+### VOPD的λ是不是GKD里的学生数据比例？ {#cross-nov24-vopd}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是。GKD的混合比例改变训练prefix来源；VOPD的λ控制teacher/reference方向外推强度，另由c按组调节。verifier全同还使用固定0.25外推fallback，不能把c默认0并称忠实。
+
+    **教学例子：** 教学例：λ=0.25、c=−0.8给强度−0.2，目标向reference方向退；GKD数据比例不能取这个负值来表达同一操作。
+
+    对照来源：[vopd](../../../post-training/2611.30325-vopd/README.md) · [gkd](../../../post-training/2306.13649-gkd/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-24** · GKD区分监督状态来自学生还是固定轨迹，以及采用哪种散度；VOPD在学生访问状态上再用verifier与teacher/reference奖励相关性改变蒸馏目标。不是把GKD的on-policy比例λ换个名字：这里λ控制外推强度，另有冻结reference和组统计。现有GKD候选协议及本轮有限核都不能证明大模型能力收益。 L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。 完整实验成本过高不复现，审查DONE。
+
+涉及：[vopd](../../../post-training/2611.30325-vopd/README.md) · [gkd](../../../post-training/2306.13649-gkd/README.md)
 
 **2026-11-23** · SimOPD在各自表示空间匹配回答间的相似度分布，改变监督目标；DWE保持既定KL目标，只改变反向梯度估计和输出行计算。二者可在设计上组合，但SimOPD的关系分布不是DWE已经支持的真实LLM路径；本轮也未验证联合训练。 L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU、无CUDA路径，不作为Evolve晋级证据。 完整实验成本过高不复现，审查DONE。
 
@@ -258,7 +279,7 @@ SimOPD在各自表示空间匹配回答间的相似度分布，改变监督目�
 
 覆盖 40 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 48 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 49 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -310,6 +331,7 @@ SimOPD在各自表示空间匹配回答间的相似度分布，改变监督目�
 - [Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption](../../../post-training/2611.22298-streaming-opd/README.md)
 - [Replay, Don&#x27;t Resample: Off-Policy Consolidation of Long-Horizon RL Experts](../../../post-training/2611.24059-mrpd-replay/README.md)
 - [Distillation with Errors: Sparse Unbiased Backpropagation for Knowledge Distillation](../../../post-training/2611.27131-dwe/README.md)
+- [Verifiable On-Policy Distillation](../../../post-training/2611.30325-vopd/README.md)
 
 </details>
 

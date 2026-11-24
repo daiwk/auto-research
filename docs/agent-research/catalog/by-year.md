@@ -4,6 +4,9 @@
 
 ## 2026
 
+- 2026-11 · [MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research](../2611.30011-morse/README.md)（`morse`）：流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- 2026-11 · [Optimistic Online Learning for Coding Agents with Aggregate Feedback](../2611.30405-ooas/README.md)（`ooas`）：OOAS把activation steering候选选择建模为逐turn多臂bandit。每轮先见所有候选的reward hint，选一个策略；任务结束只见已选序列的加和reward，不见逐轮贡献。
+- 2026-11 · [Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing](../2611.30742-transport-safe-audit/README.md)（`transport-safe-audit`）：不同Agent产生不同轨迹；即使裁判在给定(X,Y)时看不到Agent身份，其sensitivity/specificity的平均值也会随成功/失败轨迹分布改变。论文连接scalar transport偏差、支持与识别、随机人工audit、anytime monitoring和rank sets；这些统计工具本身不是新发明。
 - 2026-11 · [$R^2$: Recognizing and Reducing Redundant Visual Tool Use](../2611.27070-r2-tool-redundancy/README.md)（`r2-tool-redundancy`）：R²把三个问题分开：CAT描述题目是否可能从工具获益；VFD描述一次返回观察对后续同一段推理文本提供多少额外似然支持；RA-GRPO在答对的轨迹之间比较工具效率，而不是奖励所有少调用的轨迹。CAT标签来自训练侧tool/no-tool rollouts的多次正确性和实际调用，不是根据问题长度或关键词猜测；VFD也不是gold-answer概率或“这次工具有用”的因果证明。
 - 2026-11 · [CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?](../2611.27116-coevobench/README.md)（`coevobench`）：CoEvoBench不是另一个固定自进化算法，而是测LLM researcher能否自主驱动模型权重和harness联合开发的benchmark。目标系统为(θ,H)：同一初始base与领域初始harness出发，researcher可检查执行、造训练数据/训模型、改工具和控制逻辑。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-11 · [From Acting to Learning: Experience Selection toward Continually Learning Agents](../2611.27159-acting-to-learning/README.md)（`acting-to-learning`）：论文把成功交互后的经验选择单独隔离：历史池先固定，选择规则决定训练哪些action记录，所有学生使用同一训练预算与部署executor。它不是一个新通用梯度影响公式；打分沿用LESS式优化器感知梯度，贡献是Agent学习中的严格对照，尤其把排序规则和可选择的覆盖空间交叉。

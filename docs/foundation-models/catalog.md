@@ -10,6 +10,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 预训练与数据 | [The KL Divergence Is Never Negative, Except in PyTorch](2611.30835-stablekl/README.md) | Yale University，2026-11-23 | [原作者入口](https://github.com/xi-xiaoran/stablekl)；已核原作者仓库与固定Exponential修复源；本地只实现一族Rewrite组件，不是作者完整包。 | `stablekl`：仅低成本组件，完整实验不复现 |
 | 预训练与数据 | [Accelerating Muon with Spectral Residual Correction](2611.27077-aimuon/README.md) | Tsinghua University，2026-11-20 | 未发现官方代码 | `aimuon`：仅低成本组件，完整实验不复现 |
 | 推理与系统效率 | [Reliable Behavior Discovery via False Discovery Rate Control](2611.27104-disco/README.md) | Google DeepMind，2026-11-20 | [原作者入口](https://github.com/google-deepmind/disco)；论文声明源码位于google-deepmind/disco，但2026-11-23官方GitHub入口HTTP404；可访问代码及commit未核实，不能据此断言作者未发布。 | `disco`：仅低成本组件，完整实验不复现 |
 | 推理与系统效率 | [FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models](2611.26020-frontier-replay/README.md) | Beijing Institute of Technology，2026-11-19 | 未发现官方代码 | `frontier-replay`：仅低成本组件，完整实验不复现 |
@@ -266,6 +267,7 @@
 | 多模态基础模型 | [SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features](../reproductions/2502.14786-siglip2/README.md) | Google DeepMind，2025-02-20 | [已开源](https://github.com/google-research/big_vision) | `siglip2` |
 | 注意力与长上下文 | [MoBA: Mixture of Block Attention for Long-Context LLMs](../reproductions/2502.13189-moba/README.md) | Moonshot AI，2025-02-18 | [已开源](https://github.com/MoonshotAI/MoBA) | `moba` |
 | 注意力与长上下文 | [Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention](../reproductions/2502.11089-native-sparse-attention/README.md) | DeepSeek，2025-02-16 | 未发现官方代码 | `native-sparse-attention` |
+| 网络架构 | [DeepCrossAttention: Supercharging Transformer Residual Connections](2502.06785-deep-cross-attention/README.md) | University of California, Irvine，2025-02-10 | 未发现官方代码 | `deep-cross-attention`：仅低成本组件，完整实验不复现 |
 | 网络架构 | [Byte Latent Transformer: Patches Scale Better Than Tokens](../reproductions/2412.09871-blt/README.md) | Meta FAIR，2024-12-13 | [已开源](https://github.com/facebookresearch/blt) | `blt` |
 | 网络架构 | [Hymba: A Hybrid-head Architecture for Small Language Models](../reproductions/2411.13676-hymba/README.md) | NVIDIA，2024-11-20 | [已开源](https://github.com/NVlabs/hymba) | `hymba` |
 | 预训练与数据 | [Data Mixing Laws: Optimizing Data Mixtures by Predicting Language Modeling Performance](../reproductions/2403.16952-data-mixing-laws/README.md) | University of Cambridge / Shanghai AI Laboratory，2024-03-25 | [已开源](https://github.com/yegcjs/mixinglaws) | `data-mixing-laws` |

@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:deep-cross-attention/history-is-increments": {
+      "source_sha256": "341218a6cc81c9bbaf42374009bda7038c2fe122955c63bafe0da44feab69e41",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must DCA history store increments rather than full residual states?",
+        "answer": "G contains the input and incremental f_i(g_i) outputs. Full states already sum earlier outputs, so summing them again double-counts history.",
+        "example": "Illustration: x,a,b sum to x+a+b. Summing states x,x+a,x+a+b gives3x+2a+b."
+      }
+    },
+    "qa/foundation-models:deep-cross-attention/not-layer-softmax": {
+      "source_sha256": "59cab881aa504a0802429186fb879b304915669d0ec1d4815db8658722743e3c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is GRN-v3 not ordinary softmax attention across layers?",
+        "answer": "It directly weights history by b+ReLU(wᵀG). Coefficients need not be nonnegative or sum to one, and base weights vary by feature.",
+        "example": "Illustration: three all-one sources with b=1,w=0 yield3, not the softmax mean1. With b=−2 they yield−6."
+      }
+    },
+    "qa/foundation-models:deep-cross-attention/three-versus-role-split": {
+      "source_sha256": "c3159e17742536e03aa55b3c3fd4c97ce8318ae37c1505fac22767456fdde3f3",
+      "reviewed": true,
+      "fields": {
+        "question": "How does DCA's Q/K/V separation differ from RD-AttnRes?",
+        "answer": "RD-AttnRes retains shared QK routing and separates V. DCA has three independent GRN-v3 modules and a different depth-mixing formula.",
+        "example": "Illustration: changing only DCA's Q base weights must leave K/V route outputs bitwise unchanged; RD shares the Q/K route."
+      }
+    },
+    "qa/foundation-models:deep-cross-attention/zero-relu-not-hidden": {
+      "source_sha256": "9f47a841dc0a73d123bd699b2252f9a0e293ffc43644631bf69bc14e6dc7bda4",
+      "reviewed": true,
+      "fields": {
+        "question": "How do we avoid calling zero-w/ReLU diagnostics successful dynamic-route training?",
+        "answer": "Retain the specified zero initialization and expose its initial zero gradient under PyTorch's convention. Test the dynamic formula with a clearly labeled nonzero parameter intervention, not a hidden initialization change.",
+        "example": "Illustration: one test requires zero w gradients; another explicitly sets w=0.05 before checking nonzero finite gradients. Neither is an LM convergence experiment."
+      }
+    },
+    "qa/foundation-models:stablekl/positive-not-accurate": {
+      "source_sha256": "e5b5aa4c787d0b222915be988852ff235c716a631c2dd75a4667723bbb316df8",
+      "reviewed": true,
+      "fields": {
+        "question": "Does nonnegative KL establish numerical correctness?",
+        "answer": "No. Cancellation can turn positive KL into zero or leave a positive but inaccurate result. Clamping removes the sign without recovering the second-order value or gradient.",
+        "example": "Illustration: rates1 and FP32 1.0001 can give zero naively, while KL for those stored inputs is about5×10⁻9."
+      }
+    },
+    "qa/foundation-models:stablekl/difference-before-ratio": {
+      "source_sha256": "c947e31490e84e68aff9ca341d14843d6231ebb1ea093c4a42c4ca8b736119a8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why form the rate difference before computing the ratio-minus-one argument?",
+        "answer": "Direct subtraction preserves nearby stored differences, while a ratio is rounded near one before subtraction exposes that error. The phi series represents the second-order quantity directly, and analytic gradients avoid another cancelling chain.",
+        "example": "Illustration: q equal to the next FP32 value above1 has nonzero d=q−1. The stable series gives about7.1×10⁻15, while constant-term subtraction may give zero."
+      }
+    },
+    "qa/foundation-models:stablekl/not-stochastic-rounding": {
+      "source_sha256": "8fdeae524817114d03edfad852c77238bbd61215af160710efa09d3d65f75f1e",
+      "reviewed": true,
+      "fields": {
+        "question": "Can StableKL and stochastic rounding replace one another?",
+        "answer": "No. Stochastic rounding addresses updates lost to a quantization grid; StableKL addresses deterministic cancellation on stored inputs. Information already lost in the input representation cannot be restored by the KL operator.",
+        "example": "Illustration: if BF16 first stores both rates as1, StableKL correctly returns0. If FP32 retains their difference, rewriting can recover the small positive KL."
+      }
+    },
+    "qa/foundation-models:stablekl/reference-not-certification": {
+      "source_sha256": "1c8aa963652c8b6dec455a33e4d6281023a74dea24e923a69d9b1b38817b1bc9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is the local80-digit Decimal comparison not strict correctly-rounded certification?",
+        "answer": "It is a finite independent high-precision reference without interval bounds, midpoint decisions or Ziv retries, covering only one FP32 family. Agreement on samples and certified rounding are different evidence levels.",
+        "example": "Illustration: relative error below2×10⁻6 on32 inputs supports this small diagnostic, not correct rounding across18 families or567M F.kl_div components."
+      }
+    }
+  }
+}

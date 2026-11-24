@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-24",
+  "papers": {
+    "post-training:vopd": {
+      "questions": [
+        {
+          "id": "nov24-basics",
+          "level": "basics",
+          "question": "稀疏verifier如何影响从未采样的token？",
+          "answer": "先把response级verifier偏好投影到teacher/reference累计隐式奖励方向，再固定组统计，在每个访问prefix用teacher/reference全词表log-ratio构造局部奖励。它复用已有分布，不是猜未采样response的正确答案。",
+          "example": "教学例：组内高D的回答通常答对时c>0，未采样token也会按其teacher/reference log-ratio获得dense梯度；这不代表已验证该token后所有续写。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-24"
+        },
+        {
+          "id": "nov24-mechanism",
+          "level": "mechanism",
+          "question": "Rao–Blackwell化究竟保留了哪一个期望？",
+          "answer": "保留的是采用immediate-token近似后、给定已观察组和prefix、重新抽一个假想next-token的局部梯度期望。c和baseline固定，score恒等式消去baseline；不是无偏完整序列verifier梯度。",
+          "example": "教学例：固定p=(0.2,0.8)后可以枚举两token来消掉这次抽样噪声，但此前哪组回答被抽到以及未来续写仍是随机的。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-24"
+        },
+        {
+          "id": "nov24-comparison",
+          "level": "comparison",
+          "question": "VOPD的λ是不是GKD里的学生数据比例？",
+          "answer": "不是。GKD的混合比例改变训练prefix来源；VOPD的λ控制teacher/reference方向外推强度，另由c按组调节。verifier全同还使用固定0.25外推fallback，不能把c默认0并称忠实。",
+          "example": "教学例：λ=0.25、c=−0.8给强度−0.2，目标向reference方向退；GKD数据比例不能取这个负值来表达同一操作。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-24"
+        },
+        {
+          "id": "nov24-implementation",
+          "level": "implementation",
+          "question": "为什么本地不宣称复刻了论文top-16训练？",
+          "answer": "作者仓库当前仅README预告，top-16归约细节未获方法代码核验；本地忠实执行理论full-vocabulary有限目标与解析梯度，外部提供组奖励和分布，不执行rollout、模型或verifier。",
+          "example": "教学例：三token词表可以独立核对所有梯度和等价target，但通过该检查不等于在4B学生上运行了8×A100训练。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-24"
+        }
+      ]
+    },
+    "post-training:shpo": {
+      "questions": [
+        {
+          "id": "nov24-basics",
+          "level": "basics",
+          "question": "DPO为什么不能表达三角偏好环？",
+          "answer": "DPO pair logit是两个标量势之差，三边相加严格望远镜消去为0。SHPO增加antisymmetric plane残差，可使三角circulation非零；这不是仅扩大同一个BT标量reward。",
+          "example": "教学例：A>B、B>C、C>A三边都要正时，不存在三个标量同时满足；单位圆上0/120/240度的plane有向面积可给三边同号。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-24"
+        },
+        {
+          "id": "nov24-mechanism",
+          "level": "mechanism",
+          "question": "curl head是不是精确Hodge正交投影？",
+          "answer": "不是。原文Remark3明确它是参数化反对称head，不必等于固定图的正交curl子空间投影；harmonic-free假设也排除了某些全局拓扑循环。交换回答反号只是一项结构性质。",
+          "example": "教学例：两个向量的有向面积天然反号，但不经过整张比较图的最小二乘求解，就不能把该值叫精确图级分解。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-24"
+        },
+        {
+          "id": "nov24-comparison",
+          "level": "comparison",
+          "question": "含curl的偏好准确率能替代策略生成质量吗？",
+          "answer": "不能。accπ看policy自身序列概率，acc_dpo做reference校正，acc_dpo+c还用额外head；生成时并不自动使用这个pairwise head。必须保留三个指标口径和独立生成评测。",
+          "example": "教学例：固定policy不变而只训练head，也可能让pair分类变准，但policy下一token分布不会因此直接改变。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-24"
+        },
+        {
+          "id": "nov24-implementation",
+          "level": "implementation",
+          "question": "本地怎样防止把detach版误写成SHPO梯度？",
+          "answer": "返回对W、γ和两侧输入hidden的解析梯度并逐项做有限差分；正常非零head应有hidden梯度。零投影反向0与γ=0次梯度0明确是本地边界约定，非上游默认。",
+          "example": "教学例：α=0时curl对hidden梯度应为0；α非零且输入一般位置时应非零，单测比较两者而不把冻结hidden的拟合宣传成联合模型训练。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-24"
+        }
+      ]
+    }
+  },
+  "english_question_units": {
+    "qa/post-training:vopd/nov24-basics": {
+      "source_sha256": "c37e8fe39578acb6785767453acb9f8ed2f805697aee6c934516d6542557c1f2",
+      "reviewed": true,
+      "fields": {
+        "question": "How can sparse verifier feedback reach unsampled tokens?",
+        "answer": "Project response-level verifier preference onto cumulative teacher/reference reward, then hold group statistics fixed and use full-vocabulary log ratios at visited prefixes. This reuses distributions rather than guessing correctness of unsampled responses.",
+        "example": "Teaching example: when high-D responses usually succeed, c is positive and an unsampled token receives a dense gradient from its teacher/reference ratio. Its possible continuations have not all been verified."
+      }
+    },
+    "qa/post-training:vopd/nov24-mechanism": {
+      "source_sha256": "a4eb159a31482fc7f94d9523ec2fca085ddd37b5e77522ac0bb0e084abcec96e",
+      "reviewed": true,
+      "fields": {
+        "question": "Which expectation is preserved by Rao–Blackwellization?",
+        "answer": "The local gradient expectation after the immediate-token approximation, conditional on the observed group/prefix and a fresh hypothetical next token. Fixed c and baseline permit score-identity cancellation; this is not an unbiased full-sequence verifier gradient.",
+        "example": "Teaching example: with fixed p=(0.2,0.8), enumerating two next tokens removes that sampling noise, not randomness in the already sampled group or future continuations."
+      }
+    },
+    "qa/post-training:vopd/nov24-comparison": {
+      "source_sha256": "34af0a9d8395436402ff7512dbf4ec654a1d46877aa6b091aba4b59d3d207fad",
+      "reviewed": true,
+      "fields": {
+        "question": "Is VOPD lambda GKD's student-data fraction?",
+        "answer": "No. GKD's mixture changes the source of prefixes. VOPD lambda scales teacher/reference extrapolation with group correlation c. Equal verifier outcomes use fixed0.25 extrapolation, not an invented c=0 fallback.",
+        "example": "Teaching example: lambda0.25 and c−0.8 give strength−0.2, moving the target toward reference. A GKD data fraction cannot express that operation with a negative value."
+      }
+    },
+    "qa/post-training:vopd/nov24-implementation": {
+      "source_sha256": "f8716591db20ab4f63b1b3b3d1590fbec41de9c1124b5924fac704e39650b243",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not claim reproduction of top-16 training?",
+        "answer": "The author repository currently only announces a future release, so trainer reduction details are not source-verified. Local code faithfully executes the theoretical finite full-vocabulary loss/gradient with supplied rewards/distributions, without rollout, models or a verifier.",
+        "example": "Teaching example: checking all gradients and equivalent targets in a three-token vocabulary does not execute the paper's eight-A1004B training."
+      }
+    },
+    "qa/post-training:shpo/nov24-basics": {
+      "source_sha256": "31c3dc52dab14a72f1cd5e7d98f91259876198036c1befa8279177e8da72ecdf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can DPO not express a preference triangle cycle?",
+        "answer": "Its pair logit is a difference of scalar potentials, so three edges telescope to zero. SHPO adds antisymmetric plane residuals with nonzero triangle circulation rather than enlarging the same BT scalar reward.",
+        "example": "Teaching example: three scalars cannot satisfy A>B, B>C and C>A. Unit-circle embeddings at0/120/240 degrees can give all three oriented plane areas the same sign."
+      }
+    },
+    "qa/post-training:shpo/nov24-mechanism": {
+      "source_sha256": "8eec0a3c5043fc50e70285b18eb238687bcbc0985e2da614e00ba7c60424341f",
+      "reviewed": true,
+      "fields": {
+        "question": "Is the curl head an exact orthogonal Hodge projection?",
+        "answer": "No. Remark3 explicitly describes a parametric antisymmetric head, not necessarily the fixed graph's orthogonal curl projection. Harmonic-free assumptions also exclude some global topological cycles. Swapping sign is only one structural property.",
+        "example": "Teaching example: oriented area is antisymmetric, but without solving the graph-level least-squares problem it is not an exact graph decomposition."
+      }
+    },
+    "qa/post-training:shpo/nov24-comparison": {
+      "source_sha256": "630003d0595e8fb5fc1e363735e9731f4a379d6f88169be3840b0fcbe9e6d1c3",
+      "reviewed": true,
+      "fields": {
+        "question": "Can augmented-head preference accuracy replace generation quality?",
+        "answer": "No. Acc_pi uses policy sequence probabilities, acc_dpo corrects by reference and acc_dpo+c adds the head. Generation does not automatically use this pairwise head. Preserve metric definitions and separate generation evaluation.",
+        "example": "Teaching example: fitting only the head can improve pair classification with an unchanged policy, without directly changing next-token probabilities."
+      }
+    },
+    "qa/post-training:shpo/nov24-implementation": {
+      "source_sha256": "3677f43d84fad6d306ff0e28502363970e605dd05963aeff395e64002b970f35",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the local kernel avoid silently using the detach variant?",
+        "answer": "It returns analytic W, gamma and both input-hidden gradients, all checked by finite differences. A generic nonzero head must have hidden gradients. Zero-projection backward and gamma=0 subgradient choices are explicit local conventions, not upstream defaults.",
+        "example": "Teaching example: alpha0 makes curl hidden gradients zero; generic nonzero alpha should not. Tests distinguish them without presenting frozen-input calculations as joint model training."
+      }
+    }
+  }
+}

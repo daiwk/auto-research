@@ -1,0 +1,67 @@
+{
+  "domain": "recommendation",
+  "key": "weight-coding",
+  "title": "Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2611.29613v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.29613v1",
+  "reviewed_version": "v1",
+  "detail_path": "recommendation-components/2611.29613-weight-coding/README.md",
+  "published": "2026-11-22",
+  "published_at": "2026-11-22T17:11:38Z",
+  "announced_on": null,
+  "discovered_on": "2026-11-24",
+  "reviewed_on": "2026-11-24",
+  "first_author": "Junpeng Hou",
+  "first_author_affiliation": "Pinterest",
+  "browse_company": "Pinterest",
+  "topic": [
+    "研究与服务闭环",
+    "直接权重编辑"
+  ],
+  "browse_topic": [
+    "大模型能力与推荐融合",
+    "研究Agent与自动实验"
+  ],
+  "code": null,
+  "code_status": "固定v1及本轮官方入口未找到论文专属原作者源码仓库",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "priority": "P0",
+  "verified_priority_organizations": [],
+  "intake_class": "recent_overlap_first_collection",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "gpu_validation_artifact": null,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "summary": "Weight Coding把已训练权重本身变成可执行编辑对象，固定架构、特征和服务逻辑。LLM Agent先扫描单模块编辑，按独立filter日期排除方向翻转，再直接改值、搜索或重新搜索组合后的参数。编辑原语包括缩放、重置、移除分支、压缩、快照插值、概念方向平移；编辑支持大小不等于独立自由度。原论文的GPU缓存引擎只重算被影响模块及下游，搜索阶段不反传目标模型。 本地CPU参考只实现Table1的缩放、显式reference重置、投影置零、插值、方向平移，以及§3.4反向配对Gaussian ES、centered rank、Adam上升和validation选步。没有compression、LLM假设生成、缓存生产引擎、TorchScript编辑、真实检索模型或线上A/B。原文未公布Adam细节和ties规则，本地显式采用(.9,.999)、epsilon=1e-8和平均并列rank；不能声称恢复私有实现。每seed20步×16对，synthetic quadratic仅查机制；不接Evolve晋级。",
+  "local_operator": "auto_research.reproductions.weight_coding.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.reproductions.weight_coding import diagnostic; print(diagnostic(42))'",
+  "method_source_sha256": "7cd33afef64e00aff5762bb475d07ead833e5fbeab6093e643965b5dee0fa1b5",
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.29613v1",
+    "basis": "全文§3.3约2000编辑配置、190000搜索候选；§4.1为私有Pinterest多日期日志、147M双塔，另含106M生成检索、1.37B ranker、50M+Pin索引。§4.7每组约1000万真实用户、约一周A/B，离线GPU成本比作者finetune低不等于本地低成本可复现。完整Agent/模型/生产实验成本过高，不复现（审查 DONE）；不下载模型/日志，不请求线上权限，不自动重试。",
+    "decision": "成本过高，不复现（审查 DONE）",
+    "local_seconds_per_seed_cap": 30
+  },
+  "online_ab": [
+    {
+      "product": "Pinterest Image Search edited retrieval source",
+      "metric": "saves per user",
+      "lift_percent": 10.7,
+      "traffic": "about10M real users per group, about one week; source-attributed, not site-wide",
+      "source_url": "https://arxiv.org/html/2611.29613v1",
+      "source_location": "Section4.7/Table4; save-oriented arms+8.4% to+10.7%; other retrievers can be cannibalized"
+    }
+  ]
+}

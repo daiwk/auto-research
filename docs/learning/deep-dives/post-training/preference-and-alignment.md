@@ -7,7 +7,7 @@ hide:
 
 # 偏好不是一个分数：先确定反馈格式，再选对齐目标
 
-[LLM 后训练](../index.md) · 更新 2026-11-18 · 32 篇主题资料 / 13 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-24 · 33 篇主题资料 / 14 篇重点对照
 
 DPO、KTO、SimPO、ORPO和IPO主要改变“怎样使用反馈”，CleanRM先处理“反馈是否可信”。参考模型、长度归一化、有限间隔和噪声校正是不同设计轴，不能因都在扩大好坏回答差异就当成同一方法。
 
@@ -38,6 +38,7 @@ DPO、KTO、SimPO、ORPO和IPO主要改变“怎样使用反馈”，CleanRM先�
 | [Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment](../../../post-training/2611.20635-ca-zodpo/README.md) · [原始来源](https://arxiv.org/abs/2611.20635v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | chosen/rejected activation差的power-iteration子空间、rank归一化双点有限差分、换basis投影的低秩momentum更新。 | 不一定。每步要提取activation basis并做正负两次损失前向，少了反传但增加前向；真实time-to-quality需同数据预算和模型评判，组件不报告该结论。 |
 | [Teaching Language Models to Adapt Answer Granularity to Their Confidence](../../../post-training/2611.21211-confidence-adaptive-granularity/README.md) · [原始来源](https://arxiv.org/abs/2611.21211v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 给定已核验hierarchy上的20采样/16共识规则、recognition的逐层全coarser通过规则与归一化information utility；不拿gold选训练共识。 | 这里按模型展示的可辨识知识自训练粒度，不需要chosen/rejected偏好loss；Granola-EQ另用答案和同层distractor的mean-token-logp识别规则。DPO的pair margin不能替代层级知识探测。 |
 | [Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data](../../../post-training/2611.22210-mpg-dpo/README.md) · [原始来源](https://arxiv.org/abs/2611.22210v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 只收录cone+ridge confidence+非支配trade-off主动选对的完整算法；不将一个pair selector宣称完整个性化DPO。 | 不是，核心在带ridge置信界的主动pair选择及cone在线更新，随后才用标准在线DPO。只调用DPO loss或从固定pair池挑最高差分不能冒充完整MPG-DPO。 |
+| [Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences](../../../post-training/2611.30135-shpo/README.md) · [原始来源](https://arxiv.org/abs/2611.30135v1)<br>章节：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界 | 纯CPU执行response-only mean pool、无bias d×2K投影与L2归一化、antisymmetric plane特征、DPO+curl logistic loss及gamma L1 subgradient；解析返回W/gamma/输入hidden/sequence logp梯度，hidden梯度未detach。zero projection的反向取0及gamma0处subgradient0是显式本地约定。无LLM/QLoRA/GPT judge或完整训练。 | DPO的reference-relative log-ratio保持一维标量势，SHPO在同一logit上加可表示局部循环的反对称残差，并保留对shared hidden的训练梯度。引入更多pairwise容量不意味着生成时直接使用curl head，论文因此把accπ和acc_dpo+c分开报告；本地也不把有环的三点教学例当作真实偏好数据收益。 |
 
 </div>
 
@@ -96,6 +97,12 @@ Vital Persons规则在20个模型回答中找至少16条共享的最细值，只
 只有所有旧规则都以超过τ的margin支持相反方向才丢弃；还要处理零score差、dual trivial和候选不足等边界。不能把任一规则反对误读成全体反对。 不是，核心在带ridge置信界的主动pair选择及cone在线更新，随后才用标准在线DPO。只调用DPO loss或从固定pair池挑最高差分不能冒充完整MPG-DPO。 本轮边界：只收录cone+ridge confidence+非支配trade-off主动选对的完整算法；不将一个pair selector宣称完整个性化DPO。
 
 对照来源：[mpg-dpo](../../../post-training/2611.22210-mpg-dpo/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
+
+### 含curl的偏好准确率能替代策略生成质量吗？
+
+DPO的reference-relative log-ratio保持一维标量势，SHPO在同一logit上加可表示局部循环的反对称残差，并保留对shared hidden的训练梯度。引入更多pairwise容量不意味着生成时直接使用curl head，论文因此把accπ和acc_dpo+c分开报告；本地也不把有环的三点教学例当作真实偏好数据收益。 来源：§III-B Eq.3–5、§III-C Eq.6–8、§III-D。当投影为0时论文令v=0；本地在该非光滑点选择零反向导数、γ=0选择零L1次梯度，均标为本地边界约定而非上游实现。Remark3明确该参数head不一定等于固定图的正交Hodge curl投影；论文讨论harmonic-free比较结构，不能把head叫任意全局循环的精确分解器。α/γ可互相吸收，存在L1惩罚时尺度会改变有效正则强度。
+
+对照来源：[shpo](../../../post-training/2611.30135-shpo/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -201,9 +208,23 @@ Vital Persons规则在20个模型回答中找至少16条共享的最细值，只
 
     对照来源：[mpg-dpo](../../../post-training/2611.22210-mpg-dpo/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
 
+### 含curl的偏好准确率能替代策略生成质量吗？ {#cross-nov24-shpo}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。accπ看policy自身序列概率，acc_dpo做reference校正，acc_dpo+c还用额外head；生成时并不自动使用这个pairwise head。必须保留三个指标口径和独立生成评测。
+
+    **教学例子：** 教学例：固定policy不变而只训练head，也可能让pair分类变准，但policy下一token分布不会因此直接改变。
+
+    对照来源：[shpo](../../../post-training/2611.30135-shpo/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-24** · DPO的reference-relative log-ratio保持一维标量势，SHPO在同一logit上加可表示局部循环的反对称残差，并保留对shared hidden的训练梯度。引入更多pairwise容量不意味着生成时直接使用curl head，论文因此把accπ和acc_dpo+c分开报告；本地也不把有环的三点教学例当作真实偏好数据收益。 L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。 完整实验成本过高不复现，审查DONE。
+
+涉及：[shpo](../../../post-training/2611.30135-shpo/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
 
 **2026-11-18** · 只收录cone+ridge confidence+非支配trade-off主动选对的完整算法；不将一个pair selector宣称完整个性化DPO。 完整实验高成本不复现；组件诊断不等于能力比较。
 
@@ -237,7 +258,7 @@ Vital Persons规则在20个模型回答中找至少16条共享的最细值，只
 
 覆盖 25 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 32 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 33 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -273,6 +294,7 @@ Vital Persons规则在20个模型回答中找至少16条共享的最细值，只
 - [Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment](../../../post-training/2611.20635-ca-zodpo/README.md)
 - [Teaching Language Models to Adapt Answer Granularity to Their Confidence](../../../post-training/2611.21211-confidence-adaptive-granularity/README.md)
 - [Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data](../../../post-training/2611.22210-mpg-dpo/README.md)
+- [Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences](../../../post-training/2611.30135-shpo/README.md)
 
 </details>
 

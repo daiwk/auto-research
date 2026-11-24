@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-24",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "post-training:vopd",
+      "target_card": "post-training/student-trajectory-distillation",
+      "source_revisions": {
+        "post-training:vopd": "49aac328f1b225567775b6ffd22277b7f7ffe7c79967842079a3baa4430d0456",
+        "post-training:gkd": "2ab62ef8abeb52d245df7464048bea93a0622c2239fa7baae80261321f6ecd3e"
+      },
+      "comparison": {
+        "position": "纯CPU执行masked累计log-ratio之和、population Pearson系数、zero-verifier-variance固定0.25外推fallback、full-vocabulary KL目标/解析logit梯度及条件新token期望。teacher方差为0但verifier变化时原文未规定，显式拒绝。没有teacher/student模型、rollout、verifier读取gold、训练器或benchmark；不猜测未发布top16实现。",
+        "tradeoff": "GKD区分监督状态来自学生还是固定轨迹，以及采用哪种散度；VOPD在学生访问状态上再用verifier与teacher/reference奖励相关性改变蒸馏目标。不是把GKD的on-policy比例λ换个名字：这里λ控制外推强度，另有冻结reference和组统计。现有GKD候选协议及本轮有限核都不能证明大模型能力收益。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "VOPD的λ是不是GKD里的学生数据比例？",
+        "body": "GKD区分监督状态来自学生还是固定轨迹，以及采用哪种散度；VOPD在学生访问状态上再用verifier与teacher/reference奖励相关性改变蒸馏目标。不是把GKD的on-policy比例λ换个名字：这里λ控制外推强度，另有冻结reference和组统计。现有GKD候选协议及本轮有限核都不能证明大模型能力收益。 来源：§4 Eq.6–18。A^V和A^D都用population方差，因而(1/n)Σ(A^D)²=1。c_x与prefix在本地反传中固定；Rao–Blackwellization只消去新token抽样方差，不消去组和轨迹方差，也不撤销immediate-token近似。等价target为q∝p_T^(1+λc)p_ref^(−λc)。verifier组内无方差时原文用固定0.25外推，不是把c置0退回普通OPD；teacher D无方差但V变化的情况未规定，本组件显式拒绝，不擅自补fallback。",
+        "papers": [
+          "post-training:vopd",
+          "post-training:gkd"
+        ]
+      },
+      "question": {
+        "id": "nov24-vopd",
+        "question": "VOPD的λ是不是GKD里的学生数据比例？",
+        "answer": "不是。GKD的混合比例改变训练prefix来源；VOPD的λ控制teacher/reference方向外推强度，另由c按组调节。verifier全同还使用固定0.25外推fallback，不能把c默认0并称忠实。",
+        "example": "教学例：λ=0.25、c=−0.8给强度−0.2，目标向reference方向退；GKD数据比例不能取这个负值来表达同一操作。",
+        "papers": [
+          "post-training:vopd",
+          "post-training:gkd"
+        ]
+      },
+      "update": {
+        "date": "2026-11-24",
+        "papers": [
+          "post-training:vopd",
+          "post-training:gkd"
+        ],
+        "summary": "GKD区分监督状态来自学生还是固定轨迹，以及采用哪种散度；VOPD在学生访问状态上再用verifier与teacher/reference奖励相关性改变蒸馏目标。不是把GKD的on-policy比例λ换个名字：这里λ控制外推强度，另有冻结reference和组统计。现有GKD候选协议及本轮有限核都不能证明大模型能力收益。 L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。 完整实验成本过高不复现，审查DONE。"
+      },
+      "english": {
+        "comparison": {
+          "position": "CPU-only code executes masked sums of sampled-token log ratios, population Pearson projection, the fixed0.25 zero-verifier-variance fallback, full-vocabulary loss and analytic logit gradients, and the conditional expectation over a fresh token. The loss receives a detached scalar coefficient. A zero teacher variance with varying verifier outcomes fails explicitly. No teacher/student model, rollout, answer verifier, training backend or benchmark runs; the unreleased top-16 implementation is not guessed.",
+          "tradeoff": "GKD separates the source of supervision states from the divergence choice. At student-visited states, VOPD additionally changes the target using verifier agreement with teacher/reference reward. Its lambda is extrapolation strength, not GKD's on-policy-data fraction; a frozen reference and group statistics are additional requirements. Neither the existing GKD candidate protocol nor these finite kernels establish large-model capability gains."
+        },
+        "analysis": {
+          "title": "Is VOPD lambda GKD's student-data fraction?",
+          "body": "GKD separates the source of supervision states from the divergence choice. At student-visited states, VOPD additionally changes the target using verifier agreement with teacher/reference reward. Its lambda is extrapolation strength, not GKD's on-policy-data fraction; a frozen reference and group statistics are additional requirements. Neither the existing GKD candidate protocol nor these finite kernels establish large-model capability gains. Source: Section4, Eqs.6–18. Both advantages use population variance, so mean squared standardized D equals one. The group coefficient and prefix remain fixed during local backpropagation. Rao–Blackwellization removes only fresh-token sampling variance, not group/trajectory variance or the immediate-token approximation. The equivalent target is q proportional to p_T^(1+lambda*c) p_ref^(−lambda*c). Zero verifier variance uses a fixed0.25 extrapolation strength, not c=0 ordinary OPD. Varying verifier outcomes with zero teacher-reward variance are unspecified and explicitly rejected locally."
+        },
+        "question": {
+          "question": "Is VOPD lambda GKD's student-data fraction?",
+          "answer": "No. GKD's mixture changes the source of prefixes. VOPD lambda scales teacher/reference extrapolation with group correlation c. Equal verifier outcomes use fixed0.25 extrapolation, not an invented c=0 fallback.",
+          "example": "Teaching example: lambda0.25 and c−0.8 give strength−0.2, moving the target toward reference. A GKD data fraction cannot express that operation with a negative value."
+        },
+        "update": "GKD separates the source of supervision states from the divergence choice. At student-visited states, VOPD additionally changes the target using verifier agreement with teacher/reference reward. Its lambda is extrapolation strength, not GKD's on-policy-data fraction; a frozen reference and group statistics are additional requirements. Neither the existing GKD candidate protocol nor these finite kernels establish large-model capability gains. L1 core-mechanism component, diagnostic only; not complete LLM training or capability evidence. CPU-only, without an advertised CUDA path or Evolve promotion. Full experiments are high-cost and not reproduced, review DONE."
+      }
+    },
+    {
+      "paper": "post-training:shpo",
+      "target_card": "post-training/preference-and-alignment",
+      "source_revisions": {
+        "post-training:shpo": "25327173775f2d63ac1ff06814e1581a819a088be2db14aaa53426226ad85518",
+        "post-training:dpo": "a54594bea7a424401714d5eebff0524039aed35495680075243dab7355be9acd"
+      },
+      "comparison": {
+        "position": "纯CPU执行response-only mean pool、无bias d×2K投影与L2归一化、antisymmetric plane特征、DPO+curl logistic loss及gamma L1 subgradient；解析返回W/gamma/输入hidden/sequence logp梯度，hidden梯度未detach。zero projection的反向取0及gamma0处subgradient0是显式本地约定。无LLM/QLoRA/GPT judge或完整训练。",
+        "tradeoff": "DPO的reference-relative log-ratio保持一维标量势，SHPO在同一logit上加可表示局部循环的反对称残差，并保留对shared hidden的训练梯度。引入更多pairwise容量不意味着生成时直接使用curl head，论文因此把accπ和acc_dpo+c分开报告；本地也不把有环的三点教学例当作真实偏好数据收益。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "含curl的偏好准确率能替代策略生成质量吗？",
+        "body": "DPO的reference-relative log-ratio保持一维标量势，SHPO在同一logit上加可表示局部循环的反对称残差，并保留对shared hidden的训练梯度。引入更多pairwise容量不意味着生成时直接使用curl head，论文因此把accπ和acc_dpo+c分开报告；本地也不把有环的三点教学例当作真实偏好数据收益。 来源：§III-B Eq.3–5、§III-C Eq.6–8、§III-D。当投影为0时论文令v=0；本地在该非光滑点选择零反向导数、γ=0选择零L1次梯度，均标为本地边界约定而非上游实现。Remark3明确该参数head不一定等于固定图的正交Hodge curl投影；论文讨论harmonic-free比较结构，不能把head叫任意全局循环的精确分解器。α/γ可互相吸收，存在L1惩罚时尺度会改变有效正则强度。",
+        "papers": [
+          "post-training:shpo",
+          "post-training:dpo"
+        ]
+      },
+      "question": {
+        "id": "nov24-shpo",
+        "question": "含curl的偏好准确率能替代策略生成质量吗？",
+        "answer": "不能。accπ看policy自身序列概率，acc_dpo做reference校正，acc_dpo+c还用额外head；生成时并不自动使用这个pairwise head。必须保留三个指标口径和独立生成评测。",
+        "example": "教学例：固定policy不变而只训练head，也可能让pair分类变准，但policy下一token分布不会因此直接改变。",
+        "papers": [
+          "post-training:shpo",
+          "post-training:dpo"
+        ]
+      },
+      "update": {
+        "date": "2026-11-24",
+        "papers": [
+          "post-training:shpo",
+          "post-training:dpo"
+        ],
+        "summary": "DPO的reference-relative log-ratio保持一维标量势，SHPO在同一logit上加可表示局部循环的反对称残差，并保留对shared hidden的训练梯度。引入更多pairwise容量不意味着生成时直接使用curl head，论文因此把accπ和acc_dpo+c分开报告；本地也不把有环的三点教学例当作真实偏好数据收益。 L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。 完整实验成本过高不复现，审查DONE。"
+      },
+      "english": {
+        "comparison": {
+          "position": "CPU code executes response-only pooling, bias-free d-by-2K projection, L2 normalization, antisymmetric plane features, DPO-plus-curl logistic loss and gamma L1 subgradients. Analytic derivatives are returned for W, gamma, input hidden states and sequence log probabilities, with no hidden-state detachment. Independent finite differences check every head/hidden derivative; a three-response cycle and zero-curl DPO reduction are controls. There is no language model, QLoRA update, GPT judge, real preference-data training or graph-level Hodge solver.",
+          "tradeoff": "DPO retains a scalar potential through reference-relative log ratios. SHPO adds antisymmetric local-cycle capacity to that logit while retaining shared-hidden gradients. Additional pairwise capacity does not mean generation directly uses the curl head, which is why the paper separates acc_pi from acc_dpo+c. The local three-point teaching cycle is not a real-preference-data improvement."
+        },
+        "analysis": {
+          "title": "Can augmented-head preference accuracy replace generation quality?",
+          "body": "DPO retains a scalar potential through reference-relative log ratios. SHPO adds antisymmetric local-cycle capacity to that logit while retaining shared-hidden gradients. Additional pairwise capacity does not mean generation directly uses the curl head, which is why the paper separates acc_pi from acc_dpo+c. The local three-point teaching cycle is not a real-preference-data improvement. Sources: SectionIII-B, Eqs.3–5; SectionIII-C, Eqs.6–8; SectionIII-D. The paper sets v=0 at zero projection. Locally, the backward derivative there and the L1 subgradient at gamma=0 are chosen as zero, explicit boundary conventions rather than upstream defaults. Remark3 states that this parametric head need not equal the graph's orthogonal Hodge-curl projection. Harmonic-free comparison structures are assumed; this is not an exact arbitrary-global-cycle decomposition. Alpha can be absorbed into gamma, but L1 regularization makes that rescaling affect effective sparsity strength."
+        },
+        "question": {
+          "question": "Can augmented-head preference accuracy replace generation quality?",
+          "answer": "No. Acc_pi uses policy sequence probabilities, acc_dpo corrects by reference and acc_dpo+c adds the head. Generation does not automatically use this pairwise head. Preserve metric definitions and separate generation evaluation.",
+          "example": "Teaching example: fitting only the head can improve pair classification with an unchanged policy, without directly changing next-token probabilities."
+        },
+        "update": "DPO retains a scalar potential through reference-relative log ratios. SHPO adds antisymmetric local-cycle capacity to that logit while retaining shared-hidden gradients. Additional pairwise capacity does not mean generation directly uses the curl head, which is why the paper separates acc_pi from acc_dpo+c. The local three-point teaching cycle is not a real-preference-data improvement. L1 core-mechanism component, diagnostic only; not complete LLM training or capability evidence. CPU-only, without an advertised CUDA path or Evolve promotion. Full experiments are high-cost and not reproduced, review DONE."
+      }
+    }
+  ]
+}

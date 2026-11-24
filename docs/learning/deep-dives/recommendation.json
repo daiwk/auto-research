@@ -2444,7 +2444,7 @@
     "research-serving-loop": {
       "title": "从更便宜的一次前向，到可验证的长期研究闭环",
       "thesis": "ROCS减少请求内重复计算，Rec-Distill将昂贵教师知识移到训练，Effective Training Time追踪训练生命周期损耗，FORTE控制特征退役风险，Self-Evolving RecSys把提案、实验和线上反馈接成长期循环。它们优化的时间尺度不同；省GPU、删特征和自动提出方案，都不能直接当作推荐效果提升。",
-      "updated": "2026-11-20",
+      "updated": "2026-11-24",
       "axes": [
         "成本属于训练、请求内推理还是长期研发生命周期",
         "复用与删除要求哪些依赖/消费者保持一致",
@@ -2542,6 +2542,15 @@
             "核心公式",
             "同主题比较与边界"
           ]
+        },
+        {
+          "paper": "recommendation:weight-coding",
+          "position": "本地CPU参考只实现Table1的缩放、显式reference重置、投影置零、插值、方向平移，以及§3.4反向配对Gaussian ES、centered rank、Adam上升和validation选步。没有compression、LLM假设生成、缓存生产引擎、TorchScript编辑、真实检索模型或线上A/B。原文未公布Adam细节和ties规则，本地显式采用(.9,.999)、epsilon=1e-8和平均并列rank；不能声称恢复私有实现。每seed20步×16对，synthetic quadratic仅查机制；不接Evolve晋级。",
+          "tradeoff": "EvoPilot强调比较证据的完整性：共同base、数据、评测器、有效输出深度和唯一treatment都要匹配，再由人工审核接纳。Weight Coding则规定了可搜索对象：固定架构/服务上的权重数值和少量row scales。验证协议与搜索算子互补、不能互相替代；本地ES不等于已经完成自主研究或部署。原论文直接叠加编辑会退化、重新搜索可恢复，这不意味着任意两个本地算子组合必然有收益。",
+          "sections": [
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -2593,6 +2602,14 @@
           "papers": [
             "recommendation:fleet-feature-optimization",
             "recommendation:mle-agents"
+          ]
+        },
+        {
+          "title": "它与Evopilot的自进化有什么不同？",
+          "body": "EvoPilot强调比较证据的完整性：共同base、数据、评测器、有效输出深度和唯一treatment都要匹配，再由人工审核接纳。Weight Coding则规定了可搜索对象：固定架构/服务上的权重数值和少量row scales。验证协议与搜索算子互补、不能互相替代；本地ES不等于已经完成自主研究或部署。原论文直接叠加编辑会退化、重新搜索可恢复，这不意味着任意两个本地算子组合必然有收益。",
+          "papers": [
+            "recommendation:weight-coding",
+            "recommendation:evopilot"
           ]
         }
       ],
@@ -2676,6 +2693,16 @@
             "recommendation:fleet-feature-optimization",
             "recommendation:mle-agents"
           ]
+        },
+        {
+          "id": "nov24-weight-coding",
+          "question": "它与Evopilot的自进化有什么不同？",
+          "answer": "EvoPilot强调比较证据的完整性：共同base、数据、评测器、有效输出深度和唯一treatment都要匹配，再由人工审核接纳。Weight Coding则规定了可搜索对象：固定架构/服务上的权重数值和少量row scales。验证协议与搜索算子互补、不能互相替代；本地ES不等于已经完成自主研究或部署。原论文直接叠加编辑会退化、重新搜索可恢复，这不意味着任意两个本地算子组合必然有收益。",
+          "example": "教学例：修改模型结构和训练pipeline属于代码级搜索；只调现有层的row log-scales属于固定架构的权重编辑，两者都不能用test挑最佳轮次。",
+          "papers": [
+            "recommendation:weight-coding",
+            "recommendation:evopilot"
+          ]
         }
       ],
       "reviewed_papers": [
@@ -2701,7 +2728,8 @@
         "recommendation:cutagent",
         "recommendation:mle-agents",
         "recommendation:mars-fapo",
-        "recommendation:fleet-feature-optimization"
+        "recommendation:fleet-feature-optimization",
+        "recommendation:weight-coding"
       ],
       "updates": [
         {
@@ -2796,6 +2824,18 @@
           "source_revisions": {
             "recommendation:fleet-feature-optimization": "92e05986add9227815ff2fc10ef63bd09893a705b350b8cffe07dcf19b157314",
             "recommendation:mle-agents": "0bd7f4f9ad3821aa4f88f89458e31d2fa7baa94a6f033a272f067ce1e64d75b9"
+          }
+        },
+        {
+          "date": "2026-11-24",
+          "papers": [
+            "recommendation:weight-coding",
+            "recommendation:evopilot"
+          ],
+          "summary": "本地CPU参考只实现Table1的缩放、显式reference重置、投影置零、插值、方向平移，以及§3.4反向配对Gaussian ES、centered rank、Adam上升和validation选步。没有compression、LLM假设生成、缓存生产引擎、TorchScript编辑、真实检索模型或线上A/B。原文未公布Adam细节和ties规则，本地显式采用(.9,.999)、epsilon=1e-8和平均并列rank；不能声称恢复私有实现。每seed20步×16对，synthetic quadratic仅查机制；不接Evolve晋级。",
+          "source_revisions": {
+            "recommendation:weight-coding": "5e6b1d32f2244dd70379a18037aecc20dd22d4d091a02c58af0ff5a3e242bb0f",
+            "recommendation:evopilot": "461d4284afa1aa1a754016383d87aca09361b2b6abf0f9dfca423a3b156fdbae"
           }
         }
       ]

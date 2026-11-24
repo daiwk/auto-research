@@ -249,6 +249,10 @@
 
 - 2026-09-09 · 一作：Naibin Gu · [CompassOPD: Cross-Family On-Policy Distillation via Within-Family Likelihood Shifts](../2609.10154-compass-opd/README.md)（`compass-opd`）：异构教师与学生的绝对概率刻度不可直接比较。CompassOPD 用教师相对其 reference 的后训练变化作“指南针”，并在模型族内中心化，保留方向而消除不同模型族的整体偏置。
 
+## Jinan University
+
+- 2026-11-23 · 一作：Yiming Liu · [Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences](../2611.30135-shpo/README.md)（`shpo`）：DPO把偏好写成response标量势之差，围绕三角形相加为零，不能表示A胜B、B胜C、C胜A的局部环。SHPO保留DPO项，再把response最后层hidden仅在response token上均值池化，经无bias W投影到2K维并归一化；每个二维plane的有向面积乘γ后相加，构造交换两回答即反号的残差。
+
 ## Johns Hopkins University
 
 - 2026-07-08 · 一作：Xiuyi Lou · [TACO](../2607.07976-taco/README.md)（`taco`）：整条回答正确时，统一的正 advantage 会把内部不合理的低概率 token 一起强化，形成 positive-credit contamination。TACO 依据局部上下文计算 tail risk，并仅平滑降低高 risk token 的正信用，负信用仍完整保留。
@@ -526,6 +530,7 @@
 
 ## Stanford University
 
+- 2026-11-23 · 一作：Juntong Shi · [Verifiable On-Policy Distillation](../2611.30325-vopd/README.md)（`vopd`）：RLVR只给已采样整条response稀疏结果反馈；OPD给每个访问prefix的完整teacher分布，但该信号未被verifier验证。VOPD先对每组response计算teacher/reference累计log-ratio D，再以population标准差标准化V和D，最小二乘投影得到Pearson相关c。
 - 2026-05-18 · 一作：Muhammad Umer · [GPRL](../2605.18721-gprl/README.md)（`gprl`）：单一标量 reward 容易掩盖 helpfulness、格式、推理和简洁度之间的冲突。GPRL 先在每个偏好维度内部计算 group-relative advantage，再根据上下文聚合；漂移控制器检测某个维度是否主导训练并调整权重。
 - 2023-05-29 · 一作：Rafael Rafailov · [DPO](../2305.18290-dpo/README.md)（`dpo`）：传统 RLHF 先拟合 reward model，再用 PPO 优化策略，链路复杂且不稳定。DPO 从 KL-regularized RLHF 的最优策略形式出发，把隐式 reward 写成 policy 与 reference log-ratio，最终只需在偏好对上做二分类。
 

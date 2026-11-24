@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:ooas/aggregate-not-turn": {
+      "source_sha256": "1d3f3609e60543704a5bb2d0b2e81c6fee41e7d875dd3ecdff05d2eb13b5bc10",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not apply ordinary per-turn bandit updates?",
+        "answer": "Only one task aggregate is observed; copying it to every turn invents individual rewards. OOAS uses hints and task-level event corrections instead.",
+        "example": "Teaching example: choosing A then B and observing total1 does not establish reward1 for both or justify assigning.5 to each."
+      }
+    },
+    "qa/agent-research:ooas/shared-event-probability": {
+      "source_sha256": "7aab388ee921499bf8fc3571c703b508ca71933658102a71349718b138bb5f01",
+      "reviewed": true,
+      "fields": {
+        "question": "May all-turn selection probabilities be multiplied?",
+        "answer": "No. Shared exponential noise correlates choices within a task. Rho uses maxima of cross-turn probability ratios; multiplying marginals assumes different randomization and misweights corrections.",
+        "example": "Teaching example: probabilities(.3,.7) then(.8,.2) give all-A probability.3 under shared noise, not.24."
+      }
+    },
+    "qa/agent-research:ooas/offline-vs-online": {
+      "source_sha256": "a16b66dc4e25d1a848407ed831b97c46292d934f2af325bac08428bb6bee0651",
+      "reviewed": true,
+      "fields": {
+        "question": "Do the two selectors choose the same object at the same time?",
+        "answer": "No. The earlier paper selects historical actions for SFT; OOAS chooses steering policies online and updates after aggregate feedback. Offline gradient scores do not automatically satisfy its hint/regret assumptions.",
+        "example": "Teaching example: choosing256 cleaning records selects training data; choosing Cap1.5 versus2.0 selects a current intervention."
+      }
+    },
+    "qa/agent-research:ooas/signed-gap-restart": {
+      "source_sha256": "a40449cdb666305dded8b52cc65869ef29b78672c5e7b4967b65a8a629d57b58",
+      "reviewed": true,
+      "fields": {
+        "question": "Should negative potential gaps be clipped to zero?",
+        "answer": "No. Algorithm2 accumulates signed gaps and restarts only when the sum strictly exceeds H. Clipping changes restart times and the algorithm.",
+        "example": "Teaching example: gap-2 followed by3 sums to1, not3; with H=1, equality still does not restart."
+      }
+    },
+    "qa/agent-research:transport-safe-audit/blind-not-transport": {
+      "source_sha256": "68696b4b5847cd21c7b3589bae96da0a5bcfeac672ba567f256b602f55d5b389",
+      "reviewed": true,
+      "fields": {
+        "question": "Does hiding agent names make calibration universal?",
+        "answer": "No. Conditional blindness given trajectoryX and successY does not fix the distribution of X within successes/failures. Different distributions change averaged error rates and bias scalar transport.",
+        "example": "Teaching example: a judge accurate on short traces but unreliable on long failures still treats an anonymous long-trace agent differently."
+      }
+    },
+    "qa/agent-research:transport-safe-audit/audit-correction-not-clipping": {
+      "source_sha256": "a9a7db6ea36ebd68d0af0a17c8b345c5b543057b4bd5233b74c5eba1e886dcf1",
+      "reviewed": true,
+      "fields": {
+        "question": "Should AIPW estimates above1 be clipped?",
+        "answer": "Not while claiming this design-unbiased estimator. Inverse-propensity correction may leave[0,1] in finite samples; clipping changes its expectation. Report uncertainty rather than cosmetically forcing a probability.",
+        "example": "Teaching example: m=0,phi=.1 and auditedY=1 give contribution10; unaudited contribution0 still gives expectation1."
+      }
+    },
+    "qa/agent-research:transport-safe-audit/calibration-vs-contamination": {
+      "source_sha256": "44b8fad0a75a3fea507d48a9aa0915e21c180277197fc645e5e1a80d7f978975",
+      "reviewed": true,
+      "fields": {
+        "question": "Can measurement audits replace CoEvo-style data isolation?",
+        "answer": "No. Data isolation concerns access/lineage; this method concerns judge measurement error. A clean agent can still be misgraded, while perfect grading cannot validate a gold-contaminated agent.",
+        "example": "Teaching example: an unseen-test agent may need judge auditing; a test-answer-exposed agent remains contaminated even under a perfect judge."
+      }
+    },
+    "qa/agent-research:transport-safe-audit/predictable-fixed-target": {
+      "source_sha256": "6349cabf39fd668baa506afaef8cba5bc8831fe179c06c010229a04f899c9c58",
+      "reviewed": true,
+      "fields": {
+        "question": "May the current label change its propensity, or an updated agent continue the same process?",
+        "answer": "No. Prediction/audit rules must be past-measurable, and a stable target requires a frozen agent with independently drawn tasks. Updated/mixed agents or small fixed-benchmark sampling are not automatically covered. Grid inversion is not continuous CS inversion.",
+        "example": "Teaching example: committing phi=.2 before random auditing is valid; changing that episode's phi to1 after seeing failure invalidates the declared design."
+      }
+    },
+    "qa/agent-research:morse/research-beyond-recall": {
+      "source_sha256": "90c9a43bd6e63281ea8d5631e4361c629f1ef2bf12f04931bd18a698d265b1b0",
+      "reviewed": true,
+      "fields": {
+        "question": "What goes beyond a closed-world harness loop?",
+        "answer": "The editor researches recurring failures externally and can request host-approved perception capabilities, rather than relying only on prior knowledge and a fixed tool set.",
+        "example": "Teaching example: recurring missed hand-object interactions motivate research on an action classifier, a service request and corresponding memory changes."
+      }
+    },
+    "qa/agent-research:morse/stage-entry-loss-budget": {
+      "source_sha256": "92b68dc97636d716cae07fb63fbc91a31c182915596f8146aa2c9a56512ff26e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why bound total loss as well as each update?",
+        "answer": "Small parent-relative losses can accumulate. The efficiency gate also bounds probability/count losses relative to the stage-entry harness.",
+        "example": "Teaching example: five losses of.003 total.015, exceeding the.008 cumulative tolerance even though each update meets its local bound."
+      }
+    },
+    "qa/agent-research:morse/harness2-open-tools": {
+      "source_sha256": "de279649a423df280cb0e85e8ec3dc88daf03ad65068586f44abbf5ea59c0a98",
+      "reviewed": true,
+      "fields": {
+        "question": "Can MORSE and Harness² share one selector interpretation?",
+        "answer": "No. Harness² anonymously selects executed final artifacts and restarts each task; MORSE iterates a head using private validation quality/latency and approved perception services. Their selection objects and feedback differ.",
+        "example": "Teaching example: choosing anonymous reports differs from scoring a video-memory program's option probabilities; installing VideoMAE does not imply adoption."
+      }
+    },
+    "qa/agent-research:morse/frame-cap-not-total-memory": {
+      "source_sha256": "746e2b6dc755f807d6fc2949dee21b42d2bc4e7e1aa703c6c578316351442005",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the64-frame cap make total memory constant?",
+        "answer": "No. A separate16-second window exists, while text/embeddings have no host-wide cap. Pixels, text, vectors and service calls need separate accounting.",
+        "example": "Teaching example: retaining64 historical frames while adding a caption each minute still makes text storage grow with video duration."
+      }
+    }
+  }
+}

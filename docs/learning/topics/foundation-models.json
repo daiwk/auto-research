@@ -114,7 +114,8 @@
         "foundation-models:swrouter",
         "foundation-models:telescopic-lm",
         "foundation-models:wide",
-        "foundation-models:smart-model-routing"
+        "foundation-models:smart-model-routing",
+        "foundation-models:deep-cross-attention"
       ]
     },
     {
@@ -170,7 +171,8 @@
         "foundation-models:archspace",
         "foundation-models:lara-plus-plus",
         "foundation-models:latent-feedback-scaling",
-        "foundation-models:aimuon"
+        "foundation-models:aimuon",
+        "foundation-models:stablekl"
       ]
     },
     {

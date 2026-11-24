@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/conditional-compute/comparison/foundation-models:deep-cross-attention": {
+      "source_sha256": "a0b4b1da1c99d93c45416779c0e1c8a4bbf5992c0bcdf76e1ca94c7ff5d136ad",
+      "reviewed": true,
+      "fields": {
+        "position": "Standard residuals sum the input and previous incremental layer outputs. DCA retains that history and combines feature-by-history base weights with token/history-dependent terms. Q, K and V have independent GRN-v3 modules. Depth routing is an unnormalized weighted sum, not a layer-wise softmax; ordinary attention still operates across tokens.",
+        "tradeoff": "RD-AttnRes starts from Block AttnRes, retains one QK route and separates V through its attention-residual mechanism. DCA instead separates all three Q/K/V routes and uses feature-dependent base weights plus ReLU dynamic terms in a linear sum. It is not three copies of RD's V route. Their normalization, historical storage and full-training evidence are not interchangeable."
+      }
+    },
+    "dive/foundation-models/conditional-compute/analysis/3": {
+      "source_sha256": "6115811ead5dd50d5e966ce9111b9e8e094b3de30f0099bee0411c978fefa329",
+      "reviewed": true,
+      "fields": {
+        "title": "DeepCrossAttention: Supercharging Transformer Residual Connections",
+        "body": "RD-AttnRes starts from Block AttnRes, retains one QK route and separates V through its attention-residual mechanism. DCA instead separates all three Q/K/V routes and uses feature-dependent base weights plus ReLU dynamic terms in a linear sum. It is not three copies of RD's V route. Their normalization, historical storage and full-training evidence are not interchangeable. The fixed-v2 Section3.1 text specifies b+ReLU(wᵀG), initializing b to one and w to zero. Under PyTorch's ReLU'(0)=0 convention, the initial dynamic-w gradient is zero. We expose that negative control instead of changing activation or initialization. Figure3 additionally depicts normalization and a different activation ordering not explicit in the text equation. Local code declares the text-formula interpretation, not the authors' training implementation. Three LayerNorms follow the Q/K/V routes as in Figure4."
+      }
+    },
+    "dive/foundation-models/conditional-compute/question/nov24-deep-cross-attention": {
+      "source_sha256": "9d2f007c74f89db337eddf821e90274ee240dca658b27ab43776a9c232a7c4ed",
+      "reviewed": true,
+      "fields": {
+        "question": "How does DCA's Q/K/V separation differ from RD-AttnRes?",
+        "answer": "RD-AttnRes retains shared QK routing and separates V. DCA has three independent GRN-v3 modules and a different depth-mixing formula.",
+        "example": "Illustration: changing only DCA's Q base weights must leave K/V route outputs bitwise unchanged; RD shares the Q/K route."
+      }
+    },
+    "dive/foundation-models/conditional-compute/update/2026-11-24/2": {
+      "source_sha256": "c8576bd12d336d0cde02bb5cc33b97d23f88aff6a43d9348f6889ca468dbe62c",
+      "reviewed": true,
+      "fields": {
+        "summary": "RD-AttnRes starts from Block AttnRes, retains one QK route and separates V through its attention-residual mechanism. DCA instead separates all three Q/K/V routes and uses feature-dependent base weights plus ReLU dynamic terms in a linear sum. It is not three copies of RD's V route. Their normalization, historical storage and full-training evidence are not interchangeable. Full-experiment non-reproduction remains separate from L1 components; no Evolve promotion."
+      }
+    },
+    "dive/foundation-models/training-budget/comparison/foundation-models:stablekl": {
+      "source_sha256": "057f22ba78c76cba6268026a6f868d1e06a9b7c792ea5aa679bbf1fec94dbace",
+      "reviewed": true,
+      "fields": {
+        "position": "For nearby distributions, true KL is second order, while textbook formulas subtract first-order or constant terms. They can return zero, negative values or inaccurate gradients. StableKL uses nonnegative decompositions, accurate differences, compensated arithmetic and analytic gradients, distinguishing operator error from information already lost in rounded log-probabilities. Local code covers only the Exponential Rewrite core.",
+        "tradeoff": "Stochastic rounding addresses FP32 updates disappearing on conversion to the BF16 grid, preserving changes in conditional expectation through randomized adjacent values. StableKL addresses deterministic algebraic cancellation on already stored parameters through formula rewrites and analytic gradients. The former does not repair KL algebra; the latter cannot recover an update lost before input storage. Precision promotion, clamping and stochastic rounding are not interchangeable patches."
+      }
+    },
+    "dive/foundation-models/training-budget/analysis/10": {
+      "source_sha256": "501f44e1154aaa8274a37f7d33eea912081cefe3787771c4a7dd350a4b70d550",
+      "reviewed": true,
+      "fields": {
+        "title": "The KL Divergence Is Never Negative, Except in PyTorch",
+        "body": "Stochastic rounding addresses FP32 updates disappearing on conversion to the BF16 grid, preserving changes in conditional expectation through randomized adjacent values. StableKL addresses deterministic algebraic cancellation on already stored parameters through formula rewrites and analytic gradients. The former does not repair KL algebra; the latter cannot recover an update lost before input storage. Precision promotion, clamping and stochastic rounding are not interchangeable patches. The Exponential argument is formed from the raw rate difference before division, not ratio-minus-one. On−0.75≤x≤3, FP32 uses a17-term Horner series for phi. Outside it, well-conditioned log1p or log(rate_q/rate_p) branches are used. Custom autograd returns analytic gradients for both rates. A final nonnegative clamp is a boundary convention of the stable formula, not a repair obtained by clamping the cancelling textbook formula. Strict mode, interval arithmetic and error-free transformations for other families are absent."
+      }
+    },
+    "dive/foundation-models/training-budget/question/nov24-stablekl": {
+      "source_sha256": "07789894ba8c85cf8743af02c1a79141853c8444a734dc9d5aa60bf2c762c6b2",
+      "reviewed": true,
+      "fields": {
+        "question": "Can StableKL and stochastic rounding replace one another?",
+        "answer": "No. Stochastic rounding addresses updates lost to a quantization grid; StableKL addresses deterministic cancellation on stored inputs. Information already lost in the input representation cannot be restored by the KL operator.",
+        "example": "Illustration: if BF16 first stores both rates as1, StableKL correctly returns0. If FP32 retains their difference, rewriting can recover the small positive KL."
+      }
+    },
+    "dive/foundation-models/training-budget/update/2026-11-24/9": {
+      "source_sha256": "cffaf6adefced69c79d70f8a88651fea8f24df29343d26570a04d15fd091e1af",
+      "reviewed": true,
+      "fields": {
+        "summary": "Stochastic rounding addresses FP32 updates disappearing on conversion to the BF16 grid, preserving changes in conditional expectation through randomized adjacent values. StableKL addresses deterministic algebraic cancellation on already stored parameters through formula rewrites and analytic gradients. The former does not repair KL algebra; the latter cannot recover an update lost before input storage. Precision promotion, clamping and stochastic rounding are not interchangeable patches. Full-experiment non-reproduction remains separate from L1 components; no Evolve promotion."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/comparison/agent-research:ooas": {
+      "source_sha256": "69523c45c7246b376df96ab2712414a076f87ee3a22d7768d433ac38b26262d9",
+      "reviewed": true,
+      "fields": {
+        "position": "OOAS models activation-steering selection as a turn-level bandit. Each turn reveals reward hints for all candidate policies; only the selected sequence's aggregate reward arrives at task completion. The method corrects cumulative hint errors without observing individual rewards. Its theory assumes reward vectors, hints and the task partition are fixed independently of learner randomization. Stateful coding-agent trajectories do not automatically satisfy that assumption.",
+        "tradeoff": "From Acting to Learning selects SFT action records from fixed history pools and cold-starts students. OOAS selects steering arms during execution and corrects hints after each task. Gradient relevance is not a reward hint, and shared task noise is not replay shuffling. Both require separation of selection information from final evaluation; neither local slice compares agent capability."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/analysis/6": {
+      "source_sha256": "78717d21c6e5d9aa5d0403779b374c656d7b50369674c567212703141dc15782",
+      "reviewed": true,
+      "fields": {
+        "title": "Optimistic Online Learning for Coding Agents with Aggregate Feedback",
+        "body": "The distribution is not softmax: FTRL combines Tsallis and log-barrier terms. It uses completed-task scores, previous hints in the current task and the current hint weighted by elapsed turns. A task draws one Exp(1) noise vector shared across all turns and selects argmin noise/probability. The probability rho that arm k wins every turn uses maxima of probability ratios, not products of marginals. Only that event receives residual Z/rho; switched tasks have zero residual correction while every arm still receives accumulated hints. Algorithm2 doubles its threshold when a signed cumulative observable potential gap strictly exceeds it, resetting score and gap rather than clipping negative gaps. Controls check KKT residuals, translation invariance, shared-noise event probabilities versus independent products, zero residual attribution after switching, elapsed-turn hint weighting, task bounds, lifecycle errors, preserved pending state after invalid aggregates, signed negative gaps and restart resets. Analytic event partitions check importance weighting; a small Monte Carlo run is not advertised as proof of unbiasedness."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/question/cross-nov24-ooas": {
+      "source_sha256": "476de8c81b3b18aa6d2fa22b8906d9d9d60bf88ab3b8bb8f1c85480ff743f002",
+      "reviewed": true,
+      "fields": {
+        "question": "Do the two selectors choose the same object at the same time?",
+        "answer": "No. The earlier paper selects historical actions for SFT; OOAS chooses steering policies online and updates after aggregate feedback. Offline gradient scores do not automatically satisfy its hint/regret assumptions.",
+        "example": "Teaching example: choosing256 cleaning records selects training data; choosing Cap1.5 versus2.0 selects a current intervention."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/update/2026-11-24/5": {
+      "source_sha256": "3349f9fe3ffc8d92416f33c187592dc2924aa5f91b226c086f77da7ecdfdc0d9",
+      "reviewed": true,
+      "fields": {
+        "summary": "The independent standard-library CPU kernel solves FTRL's KKT equations: Gk+alpha/sqrt(pk)+beta/pk share a multiplier, found by score translation and bisection rather than a softmax substitute. It implements shared exponential sampling, rho, aggregate residuals, the potential and Algorithm2 restarts. The begin/choose/finish API receives current hints and one terminal aggregate, not turn reward vectors or gold answers/plans. Injected noise is for mathematical controls only. No LLM, activation probe, TACT intervention, code executor, real-task score or Evolve mapping runs. The float64 root solver has numerical tolerance, not infinite precision. The full campaign is terminally not reproduced."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:transport-safe-audit": {
+      "source_sha256": "332dbd9067788fbdcecaa5b936ed04d7c2098b49ffc524dbfef0217ac3aeb300",
+      "reviewed": true,
+      "fields": {
+        "position": "Agents induce different trajectory distributions. Even a judge blind to agent identity given(X,Y) may have different averaged sensitivity/specificity under those distributions. The paper connects scalar-transport bias, support/identification, randomized human auditing, anytime monitoring and rank sets; these statistical tools are not individually new. Evidence is mainly semi-synthetic. Prior public-agent analyses are not independently rerun, and no causal effect of trajectory length is established.",
+        "tradeoff": "CoEvoBench protects Selection/Test material and audits training lineage, addressing prohibited access and generalization. This paper asks whether judge errors transport across trajectory distributions even when access isolation is correct. Neither substitutes for the other: no leakage does not ensure calibration, and AIPW cannot undo gold contamination of an evaluated agent. There are no local live-judge results to compare with CoEvoBench."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/34": {
+      "source_sha256": "bff435041a3d34dcb0b6f79192a2a3a7b6001749400520d8202e78f8538dc07a",
+      "reviewed": true,
+      "fields": {
+        "title": "Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing",
+        "body": "With known randomized audit propensities bounded away from zero, AIPW adds R/phi(Y-m) to out-of-fold imputations; unaudited rows use m only, and estimates are not clipped to[0,1]. Bounded allocation uses min(1,max(floor,lambda*sqrt(m(1-m)))) under an attainable budget. Online e-processes require past-chosen prediction/audit functions evaluated at new V, without using the current label. The target must be frozen and stable across independently drawn tasks. Missing support produces outer sets rather than invented point estimates, and ranks use strict interval separation rather than midpoint ordering. Exact enumeration of a small Bernoulli audit design checks unbiasedness despite wrong imputation. Controls cover unclipped estimates above1, own-fold rejection, allocation/positivity/zero-variance strata, agreement with direct products, log-space long-stream stability, rejection of unaudited labels and changed targets, and unresolved overlapping/touching intervals. Three seeds are mathematical controls, not an empirical estimate of95% coverage."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov24-transport-safe-audit": {
+      "source_sha256": "15b1d2932b6a5d9d15a93ab542b130c29871b4ce0efb5bd28e6e6182b51e3bb0",
+      "reviewed": true,
+      "fields": {
+        "question": "Can measurement audits replace CoEvo-style data isolation?",
+        "answer": "No. Data isolation concerns access/lineage; this method concerns judge measurement error. A clean agent can still be misgraded, while perfect grading cannot validate a gold-contaminated agent.",
+        "example": "Teaching example: an unseen-test agent may need judge auditing; a test-answer-exposed agent remains contaminated even under a perfect judge."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-24/34": {
+      "source_sha256": "2ef96dc574e41db47c599b7463f4dd0c8b755f25e17c2484e68c534e1bda212e",
+      "reviewed": true,
+      "fields": {
+        "summary": "The evaluator-side standard-library slice implements scalar bias, AIPW with declared fold provenance, finite-stratum bounded allocation, support outer sets, strict interval rank sets and a log-space hedged e-process. Plan commits m/phi before drawing an audit; observe accepts binary labels only for audited rows and requires None otherwise. Every episode updates. Changed targets, nonfrozen/nonindependent task declarations and lambda not strictly below the positivity floor are rejected. Inversion is only on a predeclared finite theta grid: accepted_grid is not continuous CS endpoints or coverage for off-grid truth. No nuisance fitting, human collection, LLM judge, three-judge latent model, cluster bootstrap or live leaderboard runs. Timing/fold declarations are external statistical contracts, not adversarial information-flow security proofs. The full campaign is terminally not reproduced."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:morse": {
+      "source_sha256": "a384db44deb5b017771ca54c803cfe1ce94902caeb7c2a21890324a352af5689",
+      "reviewed": true,
+      "fields": {
+        "position": "Streaming memory must retain evidence in one pass before future queries are known. MORSE's editor diagnoses recurring failures in training traces, researches papers/model cards/code and edits write/read harnesses around a frozen VLM. Missing perception capabilities can be requested but require host review of licensing, training provenance and cost before deployment. The defining mechanism is the research/implementation/validation editor plus expandable services, not a fixed candidate list or gate formula alone.",
+        "tradeoff": "Harness² improves current-task harnesses through Propose/Probe/Compose execution contrasts and saves cross-task lessons within a fixed tool surface. MORSE adds online literature research and host-approved perception acquisition to streaming-memory design while iterating a persistent head. Their feedback, candidate selection and tool-admission contracts differ. Harness²'s anonymous selector is not MORSE's validation probability/cost scorer. The local Harness² diagnostic and this review-only entry have no comparable agent scores."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/35": {
+      "source_sha256": "269679cdc8ea61552093fb61b7c664615702b49bb1a99b8e5e718e73267aae70",
+      "reviewed": true,
+      "fields": {
+        "title": "MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research",
+        "body": "Twenty accuracy rounds precede five efficiency rounds. Accuracy requires at least.004 mean correct-option-probability gain. Efficiency requires latency at most.9 of the parent, per-update losses at most.003 probability/two correct answers, and stage-entry cumulative losses at most.008/four answers. Both enforce latency at most1 second, write load at most1 and unchanged validation question counts. Accuracy may select qualified archive entries; efficiency excludes the archive. Merges are revalidated. The64-frame persistent cap is separate from a16-second recent window, and text/vectors have no global cap; total memory is not constant. The editor sees training traces and aggregate validation feedback; the broker blocks benchmark/answer sources. The review distinguishes estimated from measured latency, frame caps from uncapped text/vectors, installed from adopted services, and reused rejected diffs from revalidated candidates. Gold-dependent validation metrics belong to host/evaluator boundaries, not the solver/editor. No local success-rate or performance controls are measured."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov24-morse": {
+      "source_sha256": "26be4d51d273a8bcc8733a8c26c69e3887d9aba05bf0b8376653c421574c94e0",
+      "reviewed": true,
+      "fields": {
+        "question": "Can MORSE and Harness² share one selector interpretation?",
+        "answer": "No. Harness² anonymously selects executed final artifacts and restarts each task; MORSE iterates a head using private validation quality/latency and approved perception services. Their selection objects and feedback differ.",
+        "example": "Teaching example: choosing anonymous reports differs from scoring a video-memory program's option probabilities; installing VideoMAE does not imply adoption."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-24/35": {
+      "source_sha256": "f37a464480fc0b76161bc2c81e9a822fb4e7eedea9d14e6aa5a1975b5a6a87d3",
+      "reviewed": true,
+      "fields": {
+        "summary": "Review-only delivery records fixed-v1 sources/metadata, access boundaries, costs and a same-topic comparison. No local algorithm module, editor, research broker, video service, harness evolution, benchmark, GPU trial or Evolve operator is created. Gate arithmetic alone would not reproduce MORSE; review-only disposition requires no invented three-seed metrics or GPU receipt. The full campaign is terminally not reproduced."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/comparison/post-training:vopd": {
+      "source_sha256": "5a797279b62b9daf7c21e0790f3f1e29a36d19cba11a480b8895002b6017121c",
+      "reviewed": true,
+      "fields": {
+        "position": "CPU-only code executes masked sums of sampled-token log ratios, population Pearson projection, the fixed0.25 zero-verifier-variance fallback, full-vocabulary loss and analytic logit gradients, and the conditional expectation over a fresh token. The loss receives a detached scalar coefficient. A zero teacher variance with varying verifier outcomes fails explicitly. No teacher/student model, rollout, answer verifier, training backend or benchmark runs; the unreleased top-16 implementation is not guessed.",
+        "tradeoff": "GKD separates the source of supervision states from the divergence choice. At student-visited states, VOPD additionally changes the target using verifier agreement with teacher/reference reward. Its lambda is extrapolation strength, not GKD's on-policy-data fraction; a frozen reference and group statistics are additional requirements. Neither the existing GKD candidate protocol nor these finite kernels establish large-model capability gains."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/analysis/10": {
+      "source_sha256": "20d00166dd73b360fc5ddc0c6826c92bae7b4c12286fb6d205af18b43a1f63d0",
+      "reviewed": true,
+      "fields": {
+        "title": "Is VOPD lambda GKD's student-data fraction?",
+        "body": "GKD separates the source of supervision states from the divergence choice. At student-visited states, VOPD additionally changes the target using verifier agreement with teacher/reference reward. Its lambda is extrapolation strength, not GKD's on-policy-data fraction; a frozen reference and group statistics are additional requirements. Neither the existing GKD candidate protocol nor these finite kernels establish large-model capability gains. Source: Section4, Eqs.6–18. Both advantages use population variance, so mean squared standardized D equals one. The group coefficient and prefix remain fixed during local backpropagation. Rao–Blackwellization removes only fresh-token sampling variance, not group/trajectory variance or the immediate-token approximation. The equivalent target is q proportional to p_T^(1+lambda*c) p_ref^(−lambda*c). Zero verifier variance uses a fixed0.25 extrapolation strength, not c=0 ordinary OPD. Varying verifier outcomes with zero teacher-reward variance are unspecified and explicitly rejected locally."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/question/nov24-vopd": {
+      "source_sha256": "077a5db41a16a14825a27b4b0275ef0109cc9c4c0f2dac2c8ec22de40f81facd",
+      "reviewed": true,
+      "fields": {
+        "question": "Is VOPD lambda GKD's student-data fraction?",
+        "answer": "No. GKD's mixture changes the source of prefixes. VOPD lambda scales teacher/reference extrapolation with group correlation c. Equal verifier outcomes use fixed0.25 extrapolation, not an invented c=0 fallback.",
+        "example": "Teaching example: lambda0.25 and c−0.8 give strength−0.2, moving the target toward reference. A GKD data fraction cannot express that operation with a negative value."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/update/2026-11-24/9": {
+      "source_sha256": "e50482764070c972d0ead653b6364959ef331cb2069825f5ef8e1992fcd6f9c5",
+      "reviewed": true,
+      "fields": {
+        "summary": "GKD separates the source of supervision states from the divergence choice. At student-visited states, VOPD additionally changes the target using verifier agreement with teacher/reference reward. Its lambda is extrapolation strength, not GKD's on-policy-data fraction; a frozen reference and group statistics are additional requirements. Neither the existing GKD candidate protocol nor these finite kernels establish large-model capability gains. L1 core-mechanism component, diagnostic only; not complete LLM training or capability evidence. CPU-only, without an advertised CUDA path or Evolve promotion. Full experiments are high-cost and not reproduced, review DONE."
+      }
+    },
+    "dive/post-training/preference-and-alignment/comparison/post-training:shpo": {
+      "source_sha256": "395d354b1ffe38dac770b72cd2c626ab5408f42a602b7b791fcc744198904ace",
+      "reviewed": true,
+      "fields": {
+        "position": "CPU code executes response-only pooling, bias-free d-by-2K projection, L2 normalization, antisymmetric plane features, DPO-plus-curl logistic loss and gamma L1 subgradients. Analytic derivatives are returned for W, gamma, input hidden states and sequence log probabilities, with no hidden-state detachment. Independent finite differences check every head/hidden derivative; a three-response cycle and zero-curl DPO reduction are controls. There is no language model, QLoRA update, GPT judge, real preference-data training or graph-level Hodge solver.",
+        "tradeoff": "DPO retains a scalar potential through reference-relative log ratios. SHPO adds antisymmetric local-cycle capacity to that logit while retaining shared-hidden gradients. Additional pairwise capacity does not mean generation directly uses the curl head, which is why the paper separates acc_pi from acc_dpo+c. The local three-point teaching cycle is not a real-preference-data improvement."
+      }
+    },
+    "dive/post-training/preference-and-alignment/analysis/9": {
+      "source_sha256": "9bf347e11448475fa443cac89a6461c302f8f87714963b47d22820851826bd07",
+      "reviewed": true,
+      "fields": {
+        "title": "Can augmented-head preference accuracy replace generation quality?",
+        "body": "DPO retains a scalar potential through reference-relative log ratios. SHPO adds antisymmetric local-cycle capacity to that logit while retaining shared-hidden gradients. Additional pairwise capacity does not mean generation directly uses the curl head, which is why the paper separates acc_pi from acc_dpo+c. The local three-point teaching cycle is not a real-preference-data improvement. Sources: SectionIII-B, Eqs.3–5; SectionIII-C, Eqs.6–8; SectionIII-D. The paper sets v=0 at zero projection. Locally, the backward derivative there and the L1 subgradient at gamma=0 are chosen as zero, explicit boundary conventions rather than upstream defaults. Remark3 states that this parametric head need not equal the graph's orthogonal Hodge-curl projection. Harmonic-free comparison structures are assumed; this is not an exact arbitrary-global-cycle decomposition. Alpha can be absorbed into gamma, but L1 regularization makes that rescaling affect effective sparsity strength."
+      }
+    },
+    "dive/post-training/preference-and-alignment/question/nov24-shpo": {
+      "source_sha256": "27d9a29cad11c3d5dac375bb200395a1d0a9e8ed0e478630a03ce65f2af7b631",
+      "reviewed": true,
+      "fields": {
+        "question": "Can augmented-head preference accuracy replace generation quality?",
+        "answer": "No. Acc_pi uses policy sequence probabilities, acc_dpo corrects by reference and acc_dpo+c adds the head. Generation does not automatically use this pairwise head. Preserve metric definitions and separate generation evaluation.",
+        "example": "Teaching example: fitting only the head can improve pair classification with an unchanged policy, without directly changing next-token probabilities."
+      }
+    },
+    "dive/post-training/preference-and-alignment/update/2026-11-24/8": {
+      "source_sha256": "528abc57ec0ca83ac46bea3daa0f64b058433b20b11df3afba72564c4f087d49",
+      "reviewed": true,
+      "fields": {
+        "summary": "DPO retains a scalar potential through reference-relative log ratios. SHPO adds antisymmetric local-cycle capacity to that logit while retaining shared-hidden gradients. Additional pairwise capacity does not mean generation directly uses the curl head, which is why the paper separates acc_pi from acc_dpo+c. The local three-point teaching cycle is not a real-preference-data improvement. L1 core-mechanism component, diagnostic only; not complete LLM training or capability evidence. CPU-only, without an advertised CUDA path or Evolve promotion. Full experiments are high-cost and not reproduced, review DONE."
+      }
+    },
+    "dive/recommendation/research-serving-loop/comparison/recommendation:weight-coding": {
+      "source_sha256": "bdee14823f4313214a0f73cf79964143cc601551c3dfc341f07c321abaed0954",
+      "reviewed": true,
+      "fields": {
+        "position": "The CPU reference implements Table1 rescaling, explicit-reference resets, zeroing a selected projection, interpolation and steering, plus Section3.4 antithetic Gaussian ES, centered ranks, ascent Adam and validation-selected steps. Compression, LLM hypothesis generation, the cached production engine, TorchScript edits, real retrieval models and online A/B are absent. Adam details and tie rules were not published; the local reference explicitly uses (.9,.999), epsilon1e-8 and average tied ranks, without claiming private-code parity. Each seed uses20 steps and16 pairs on a synthetic quadratic, with no Evolve promotion.",
+        "tradeoff": "EvoPilot emphasizes comparison integrity: shared base, data, evaluator, effective output depth and the sole treatment must match before human acceptance. Weight Coding specifies what to search: weights and a small set of row scales under fixed architecture/serving. Verification protocols and search operators are complementary, not substitutes. Local ES is not completed autonomous research or deployment. The paper observes degradation from direct edit stacking and recovery through re-search, without guaranteeing gains from arbitrary local combinations."
+      }
+    },
+    "dive/recommendation/research-serving-loop/analysis/6": {
+      "source_sha256": "c7123607f1463ec5979372824e824c4c6708da80cd0561d98d9b77c805a39d5d",
+      "reviewed": true,
+      "fields": {
+        "title": "How does it differ from Evopilot's evolution?",
+        "body": "EvoPilot emphasizes comparison integrity: shared base, data, evaluator, effective output depth and the sole treatment must match before human acceptance. Weight Coding specifies what to search: weights and a small set of row scales under fixed architecture/serving. Verification protocols and search operators are complementary, not substitutes. Local ES is not completed autonomous research or deployment. The paper observes degradation from direct edit stacking and recovery through re-search, without guaranteeing gains from arbitrary local combinations."
+      }
+    },
+    "dive/recommendation/research-serving-loop/question/nov24-weight-coding": {
+      "source_sha256": "bfba8673dc489c175d078b62c1a1a2e34264f0151e35fb39b5733f617198c20c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does it differ from Evopilot's evolution?",
+        "answer": "EvoPilot emphasizes comparison integrity: shared base, data, evaluator, effective output depth and the sole treatment must match before human acceptance. Weight Coding specifies what to search: weights and a small set of row scales under fixed architecture/serving. Verification protocols and search operators are complementary, not substitutes. Local ES is not completed autonomous research or deployment. The paper observes degradation from direct edit stacking and recovery through re-search, without guaranteeing gains from arbitrary local combinations.",
+        "example": "Teaching example: changing an architecture/training pipeline is code search; adjusting existing row log-scales is fixed-architecture weight editing. Neither may choose iterations using test data."
+      }
+    },
+    "dive/recommendation/research-serving-loop/update/2026-11-24/5": {
+      "source_sha256": "49c65d4df0b3a00209415c6a4f36fe7c6c51b573b62b96d6f55ea6f1d142ff01",
+      "reviewed": true,
+      "fields": {
+        "summary": "The CPU reference implements Table1 rescaling, explicit-reference resets, zeroing a selected projection, interpolation and steering, plus Section3.4 antithetic Gaussian ES, centered ranks, ascent Adam and validation-selected steps. Compression, LLM hypothesis generation, the cached production engine, TorchScript edits, real retrieval models and online A/B are absent. Adam details and tie rules were not published; the local reference explicitly uses (.9,.999), epsilon1e-8 and average tied ranks, without claiming private-code parity. Each seed uses20 steps and16 pairs on a synthetic quadratic, with no Evolve promotion."
+      }
+    }
+  }
+}

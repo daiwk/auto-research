@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-24-latest-components",
+  "reviewed_on": "2026-11-24",
+  "base_commit": "b83631c8786fd55d8e7ef5870055696de091a14a",
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "review_watermark_unchanged": "2026-11-15",
+  "accepted_papers": ["foundation-models:deep-cross-attention", "foundation-models:stablekl", "post-training:vopd", "post-training:shpo", "agent-research:ooas", "agent-research:transport-safe-audit", "agent-research:morse", "recommendation:weight-coding"],
+  "component_papers": ["foundation-models:deep-cross-attention", "foundation-models:stablekl", "post-training:vopd", "post-training:shpo", "agent-research:ooas", "agent-research:transport-safe-audit", "recommendation:weight-coding"],
+  "full_capability_reproductions": 0,
+  "selection_policy": "Finite primary-source method/cost selection. Google/Meta priority; industrial recommendation additionally requires real production evidence. High-cost full campaigns terminal not reproduced, review DONE; no automatic retries or Evolve promotion. Recall pools are not an implementation backlog."
+}
