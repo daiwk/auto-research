@@ -734,7 +734,7 @@
     "history-ranking-backbones": {
       "title": "DIN、HSTU、LONGER、SlimPer、RankMixer：究竟让谁与谁交互？",
       "thesis": "比较排序骨干前先画三条边：历史到历史、候选到历史、字段到字段。DIN按候选激活历史，HSTU在输入窗口内逐层改写历史状态，LONGER先合并再以短查询读长KV，SlimPer反复读取用户池但只传播小知识库，RankMixer则更换异构字段交互。它们可处于同一流水线的不同位置，不能按一个长度变量或一张本地结果表排总名次。",
-      "updated": "2026-11-20",
+      "updated": "2026-11-24",
       "axes": [
         "交互对象：历史内部、目标读取还是字段混合",
         "每层传播的状态及原始历史是否持续可读",
@@ -1161,6 +1161,16 @@
           "source_revisions": {
             "recommendation:dna": "90b1fa83da1fe794609b59f25bf20c44f9e6946f2ccd58fc71e12ab0e4c313eb",
             "recommendation:longer": "e3c1167c41d992644a63b143c4d2b067a56b3e9329f4c49d07790cc45152ac4d"
+          }
+        },
+        {
+          "date": "2026-11-24",
+          "papers": [
+            "recommendation:echo-selector-loss"
+          ],
+          "summary": "按 ECHO v3 §4.6 更新线上证据：快手和快手极速版的 App 总使用时长分别提升 0.240% 和 0.373%。v3 未给出人均提升；此更新不改变长历史机制对比，也不是本地选择器损失的实测结果。",
+          "source_revisions": {
+            "recommendation:echo-selector-loss": "6c40a6cf7575d412d34d06558349c7039fa867ca80bc203b770b7cbc793acf60"
           }
         }
       ]

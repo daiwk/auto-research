@@ -28,7 +28,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="recommendation/history-ranking-backbones/">DIN、HSTU、LONGER、SlimPer、RankMixer：究竟让谁与谁交互？</a></h2>
 <p>比较排序骨干前先画三条边：历史到历史、候选到历史、字段到字段。DIN按候选激活历史，HSTU在输入窗口内逐层改写历史状态，LONGER先合并再以短查询读长KV，SlimPer反复读取用户池但只传播小知识库，RankMixer则更换异构字段交互。它们可处于同一流水线的不同位置，不能按一个长度变量或一张本地结果表排总名次。</p>
-<p class="ar-learning-topic-meta">7 篇重点对照 · 5 个跨论文问答 · 2026-11-20</p>
+<p class="ar-learning-topic-meta">7 篇重点对照 · 5 个跨论文问答 · 2026-11-24</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="recommendation/generative-retrieval-reasoning/">生成一个物品，先后跨过码本、模型分布与合法目录三道关</a></h2>
