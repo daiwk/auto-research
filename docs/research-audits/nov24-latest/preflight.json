@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-24-latest-components",
+  "seeds": [42, 43, 44],
+  "maximum_run_seconds": 180,
+  "maximum_cuda_devices": 1,
+  "model_and_dataset_downloads": 0,
+  "api_calls": 0,
+  "automatic_retry": false,
+  "full_experiments_executed": false,
+  "cost_basis": "Seven bounded L1 numerical/protocol diagnostics, with DCA alone on one real A100/A30. No checkpoints, datasets, private logs, LLM rollouts, production services or provider calls. Full campaigns are terminal high-cost review DONE, not reproduced. The 30-second per-seed component cap is a bounded budget, not a full-experiment timing estimate.",
+  "components": {
+    "deep-cross-attention": {"domain": "foundation-models", "module": "foundation_models/deep_cross_attention.py", "cuda": true, "evaluation_tier": "l1_mechanism"},
+    "stablekl": {"domain": "foundation-models", "module": "foundation_models/stablekl.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "vopd": {"domain": "post-training", "module": "post_training/vopd.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "shpo": {"domain": "post-training", "module": "post_training/shpo.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "ooas": {"domain": "agent-research", "module": "agent_research/ooas.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "transport-safe-audit": {"domain": "agent-research", "module": "agent_research/transport_safe_audit.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "weight-coding": {"domain": "recommendation", "module": "reproductions/weight_coding.py", "cuda": false, "evaluation_tier": "l1_mechanism"}
+  }
+}
