@@ -246,7 +246,7 @@ flowchart LR
 
 [![原论文{paper['figure']}](assets/paper-figure-01.png)](https://arxiv.org/pdf/{aid}v1#page={paper['page']})
 
-原图/算法来自[固定v1论文](https://arxiv.org/pdf/{aid}v1#page={paper['page']})第{paper['page']}页{paper['figure']}，完整保留图注/算法标题与内容，版权归原作者。仅裁无关正文/留白，科学内容未修改，已目视核对。[来源SHA256、裁剪坐标](assets/provenance.json)。它不是本地实验。
+图片来自[原论文](https://arxiv.org/pdf/{aid}v1#page={paper['page']})第{paper['page']}页{paper['figure']}，完整保留图注/算法标题与内容，版权归原作者所有。仅裁无关正文/留白，科学内容未修改，已目视核对。[来源SHA256、裁剪坐标](assets/provenance.json)。它不是本地实验。
 <!-- paper-figure:end -->
 
 ### 核心公式

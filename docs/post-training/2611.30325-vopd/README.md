@@ -26,7 +26,7 @@ RLVR只给已采样整条response稀疏结果反馈；OPD给每个访问prefix�
 
 [![原论文Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2611.30325v1/vopd_main_cropped.svg)
 
-图来自[固定v1原始SVG](https://arxiv.org/html/2611.30325v1/vopd_main_cropped.svg)，已完整保留并视觉核对，无科学内容修改；版权归原作者所有。[出处与SHA256](assets/provenance.json)。图示是论文方法，不是本地训练或结果。
+图片来自[原论文](https://arxiv.org/html/2611.30325v1/vopd_main_cropped.svg)，已完整保留并视觉核对，无科学内容修改；版权归原作者所有。[出处与SHA256](assets/provenance.json)。图示是论文方法，不是本地训练或结果。
 <!-- paper-figure:end -->
 
 ```mermaid

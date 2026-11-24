@@ -1,6 +1,6 @@
 # MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research
 
-<!-- source-sha256: c595ce2784525d97645fa3b1ac219503e405b1015866a17fd786f29d72009029 -->
+<!-- source-sha256: 6afb3b7a6f4799968bead7adc93e7de3ad60b47d0c7938c4e36f69c7e1589e87 -->
 
 [简体中文](README.md)
 

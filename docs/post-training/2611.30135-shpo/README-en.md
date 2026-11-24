@@ -1,6 +1,6 @@
 # Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences
 
-<!-- source-sha256: 16c25987e520b0041afe08f5ecacb871bcb5fe8959915db85f4befd985737e98 -->
+<!-- source-sha256: 25327173775f2d63ac1ff06814e1581a819a088be2db14aaa53426226ad85518 -->
 
 [简体中文](README.md)
 

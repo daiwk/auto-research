@@ -47,6 +47,9 @@ def test_papers_have_reviewed_english_figures_and_metrics():
         assert f"<!-- source-sha256: {digest} -->" in page.with_name("README-en.md").read_text()
         assert (page.parent/"assets/paper-figure-01.png").stat().st_size>=5000
         assert (page.parent/"assets/provenance.json").is_file()
+        for token in ("<!-- paper-figure:start -->", "### 原论文关键图", "assets/paper-figure-01.png",
+                      "图片来自[原论文]", "版权归原作者所有", "<!-- paper-figure:end -->"):
+            assert token in page.read_text(), (row["key"], token)
         if row["key"] in config()["components"]:
             for device in ("cpu","cuda") if row["requires_gpu_validation"] else ("cpu",):
                 metric=load(page.parent/f"metrics/component-{device}-seeds42-44.json")

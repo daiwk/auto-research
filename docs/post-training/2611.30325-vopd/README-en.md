@@ -1,6 +1,6 @@
 # Verifiable On-Policy Distillation
 
-<!-- source-sha256: 98bf5e80f612ef8220c05d7dea14dfca9f80826bcb596f914d21c95033f4c9e2 -->
+<!-- source-sha256: 49aac328f1b225567775b6ffd22277b7f7ffe7c79967842079a3baa4430d0456 -->
 
 [简体中文](README.md)
 

@@ -7,7 +7,7 @@
       "paper": "post-training:vopd",
       "target_card": "post-training/student-trajectory-distillation",
       "source_revisions": {
-        "post-training:vopd": "98bf5e80f612ef8220c05d7dea14dfca9f80826bcb596f914d21c95033f4c9e2",
+        "post-training:vopd": "49aac328f1b225567775b6ffd22277b7f7ffe7c79967842079a3baa4430d0456",
         "post-training:gkd": "2ab62ef8abeb52d245df7464048bea93a0622c2239fa7baae80261321f6ecd3e"
       },
       "comparison": {
@@ -67,7 +67,7 @@
       "paper": "post-training:shpo",
       "target_card": "post-training/preference-and-alignment",
       "source_revisions": {
-        "post-training:shpo": "16c25987e520b0041afe08f5ecacb871bcb5fe8959915db85f4befd985737e98",
+        "post-training:shpo": "25327173775f2d63ac1ff06814e1581a819a088be2db14aaa53426226ad85518",
         "post-training:dpo": "a54594bea7a424401714d5eebff0524039aed35495680075243dab7355be9acd"
       },
       "comparison": {

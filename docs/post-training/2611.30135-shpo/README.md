@@ -26,7 +26,7 @@ DPO把偏好写成response标量势之差，围绕三角形相加为零，不能
 
 [![原论文Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2611.30135v1/full_figure.svg)
 
-图来自[固定v1原始SVG](https://arxiv.org/html/2611.30135v1/full_figure.svg)，已完整保留并视觉核对，无科学内容修改；版权归原作者所有。[出处与SHA256](assets/provenance.json)。图示是论文方法，不是本地训练或结果。
+图片来自[原论文](https://arxiv.org/html/2611.30135v1/full_figure.svg)，已完整保留并视觉核对，无科学内容修改；版权归原作者所有。[出处与SHA256](assets/provenance.json)。图示是论文方法，不是本地训练或结果。
 <!-- paper-figure:end -->
 
 ```mermaid

@@ -1,6 +1,6 @@
 # Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing
 
-<!-- source-sha256: 6f04d7cc63853173d3153a6fd580e48c2334ae70fa00e4ae1b749ae95ffadf20 -->
+<!-- source-sha256: 343a0e9432618dc051092ae67801585261381d76c7485ecc399b8d5a9dff5866 -->
 
 [简体中文](README.md)
 

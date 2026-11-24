@@ -134,7 +134,7 @@ def document(spec, p, english):
 
 [![{p['caption']}](assets/paper-figure-01.png)]({spec['reviewed_version_url']}#page={p['page']})
 
-{'Original fixed-version PDF crop including the complete original caption; visually checked without scientific-content edits. Copyright belongs to the authors. The full method/result in the figure is not local capability evidence.' if english else '固定版本PDF原图与完整原图注，已视觉核对，无科学内容编辑；版权归原作者所有。图中的完整方法/实验结果不是本地能力证据。'} [Provenance/SHA256](assets/provenance.json).
+{'Original fixed-version PDF crop including the complete original caption; visually checked without scientific-content edits. Copyright belongs to the authors. The full method/result in the figure is not local capability evidence.' if english else '图片来自[原论文]('+spec['reviewed_version_url']+')；固定版本PDF原图与完整原图注，已视觉核对，无科学内容编辑；版权归原作者所有。图中的完整方法/实验结果不是本地能力证据。'} [Provenance/SHA256](assets/provenance.json).
 <!-- paper-figure:end -->
 
 ```mermaid

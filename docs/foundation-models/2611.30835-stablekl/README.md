@@ -26,7 +26,7 @@
 
 [![Figure 1: The problem and one consequence.](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.30835v1#page=2)
 
-固定版本PDF原图与完整原图注，已视觉核对，无科学内容编辑；版权归原作者所有。图中的完整方法/实验结果不是本地能力证据。 [Provenance/SHA256](assets/provenance.json).
+图片来自[原论文](https://arxiv.org/pdf/2611.30835v1)；固定版本PDF原图与完整原图注，已视觉核对，无科学内容编辑；版权归原作者所有。图中的完整方法/实验结果不是本地能力证据。 [Provenance/SHA256](assets/provenance.json).
 <!-- paper-figure:end -->
 
 ```mermaid

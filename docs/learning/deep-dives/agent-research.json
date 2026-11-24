@@ -3465,7 +3465,7 @@
             "agent-research:coevobench"
           ],
           "source_revisions": {
-            "agent-research:transport-safe-audit": "6f04d7cc63853173d3153a6fd580e48c2334ae70fa00e4ae1b749ae95ffadf20",
+            "agent-research:transport-safe-audit": "343a0e9432618dc051092ae67801585261381d76c7485ecc399b8d5a9dff5866",
             "agent-research:coevobench": "46cfd36b03e74f4dcb83e7a643df67b536c616cf039013f14378b7d9cee1ac99"
           },
           "summary": "本地是evaluator侧标准库算术：scalar transport偏差、带显式fold声明的AIPW、finite-strata bounded allocation、支持缺失outer set、严格区间rank sets和log-space hedged e-process。plan先提交m与φ再随机决定audit；observe只收已audit的0/1，未audit必须None，并逐episode更新。拒绝换target、未冻结/非独立任务声明和λ不严格小于φmin。仅对预先固定有限θ网格反演，accepted_grid不是连续CS端点，真值不在网格时没有网格覆盖说法。没有nuisance拟合、真人采集、LLM裁判、三judge潜变量模型、cluster bootstrap或live leaderboard；时序/fold声明是外部统计契约，不是恶意调用方不可绕过的安全证明。 完整campaign终态不复现，审查DONE。"
@@ -3477,7 +3477,7 @@
             "agent-research:harness2"
           ],
           "source_revisions": {
-            "agent-research:morse": "c595ce2784525d97645fa3b1ac219503e405b1015866a17fd786f29d72009029",
+            "agent-research:morse": "6afb3b7a6f4799968bead7adc93e7de3ad60b47d0c7938c4e36f69c7e1589e87",
             "agent-research:harness2": "c738a9266c1647b8f5cc0e50a0055d1aecf1fcf783ee78de3405c2e84850f48a"
           },
           "summary": "仅资料收录与成本审查：固定v1、来源/元数据、访问边界、成本和同主题比较。没有本地算法模块、Editor、研究broker、视频服务、harness代码演化、benchmark、GPU试跑或Evolve operator。不能实现几个gate后称已复现MORSE，也不需要给review-only制造三seed指标或GPU receipt。 完整campaign终态不复现，审查DONE。"
@@ -3986,7 +3986,7 @@
             "agent-research:acting-to-learning"
           ],
           "source_revisions": {
-            "agent-research:ooas": "165271aa805a2ba8cd12f79d8003ac2e27e586d1d372982113c0f1c69b3243de",
+            "agent-research:ooas": "e1581613218eb76d573c188ec4f32cbc699cc76915ce56e442e9d71639c4e193",
             "agent-research:acting-to-learning": "b4facbf5a94d973a84390bb3cdff04b8d454e177645cfae4dddfc3f754e55414"
           },
           "summary": "独立标准库CPU核实际解FTRL的KKT方程：Gk+α/√pk+β/pk为共同乘子，通过平移score与二分求解，而非softmax替身；实现共享Exp采样、ρ、聚合残差、potential和Alg2重启。begin→choose→finish只接受当前hint和最终aggregate，不接受turn reward向量或gold答案/计划。噪声注入只供数学控制。没有LLM、activation probe、TACT干预、代码执行器、真实任务分数或Evolve映射。数值求根是有公差的float64近似，不声称无限精度理论实现。 完整campaign终态不复现，审查DONE。"

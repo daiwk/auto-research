@@ -541,7 +541,7 @@
           ],
           "summary": "DPO的reference-relative log-ratio保持一维标量势，SHPO在同一logit上加可表示局部循环的反对称残差，并保留对shared hidden的训练梯度。引入更多pairwise容量不意味着生成时直接使用curl head，论文因此把accπ和acc_dpo+c分开报告；本地也不把有环的三点教学例当作真实偏好数据收益。 L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。 完整实验成本过高不复现，审查DONE。",
           "source_revisions": {
-            "post-training:shpo": "16c25987e520b0041afe08f5ecacb871bcb5fe8959915db85f4befd985737e98",
+            "post-training:shpo": "25327173775f2d63ac1ff06814e1581a819a088be2db14aaa53426226ad85518",
             "post-training:dpo": "a54594bea7a424401714d5eebff0524039aed35495680075243dab7355be9acd"
           }
         }
@@ -2696,7 +2696,7 @@
           ],
           "summary": "GKD区分监督状态来自学生还是固定轨迹，以及采用哪种散度；VOPD在学生访问状态上再用verifier与teacher/reference奖励相关性改变蒸馏目标。不是把GKD的on-policy比例λ换个名字：这里λ控制外推强度，另有冻结reference和组统计。现有GKD候选协议及本轮有限核都不能证明大模型能力收益。 L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。 完整实验成本过高不复现，审查DONE。",
           "source_revisions": {
-            "post-training:vopd": "98bf5e80f612ef8220c05d7dea14dfca9f80826bcb596f914d21c95033f4c9e2",
+            "post-training:vopd": "49aac328f1b225567775b6ffd22277b7f7ffe7c79967842079a3baa4430d0456",
             "post-training:gkd": "2ab62ef8abeb52d245df7464048bea93a0622c2239fa7baae80261321f6ecd3e"
           }
         }

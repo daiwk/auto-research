@@ -1,6 +1,6 @@
 # Optimistic Online Learning for Coding Agents with Aggregate Feedback
 
-<!-- source-sha256: 165271aa805a2ba8cd12f79d8003ac2e27e586d1d372982113c0f1c69b3243de -->
+<!-- source-sha256: e1581613218eb76d573c188ec4f32cbc699cc76915ce56e442e9d71639c4e193 -->
 
 [简体中文](README.md)
 

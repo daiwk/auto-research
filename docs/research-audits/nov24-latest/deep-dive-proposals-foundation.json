@@ -7,7 +7,7 @@
       "paper": "foundation-models:deep-cross-attention",
       "target_card": "foundation-models/conditional-compute",
       "source_revisions": {
-        "foundation-models:deep-cross-attention": "6eff1be4e0b3147268c6ffeb8aab8df3050dbf84b38bbafbac74af7aba548c36",
+        "foundation-models:deep-cross-attention": "a04f520759d0914ba4c5d624ec21617660ef1c3f52a39aec22b8430f772ac2d3",
         "foundation-models:rd-attnres": "4d60f1665f9c81ee267e18e423bc17e842efe332a4550f6f5f12c1b34c474684"
       },
       "comparison": {
@@ -66,7 +66,7 @@
       "paper": "foundation-models:stablekl",
       "target_card": "foundation-models/training-budget",
       "source_revisions": {
-        "foundation-models:stablekl": "df2352b240e7a1824606331d6e9f6147acee01f55256551a78f1053dab4a20e1",
+        "foundation-models:stablekl": "359dca1245dc303d978f5fddf717efd98947fdd5e95bfd716d06e3dadbf522cf",
         "foundation-models:stochastic-rounding": "2d38215ff494778a4ddd9cf33755f3e69edf0422d2af49ca3b99e521070b44c3"
       },
       "comparison": {

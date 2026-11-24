@@ -27,7 +27,7 @@
       }
     },
     "dive/foundation-models/conditional-compute/update/2026-11-24/2": {
-      "source_sha256": "bc0025d8bc64b7631766d07b33806f5a3f596a9922052781b1bf72b4ca3dd0a2",
+      "source_sha256": "c8576bd12d336d0cde02bb5cc33b97d23f88aff6a43d9348f6889ca468dbe62c",
       "reviewed": true,
       "fields": {
         "summary": "RD-AttnRes starts from Block AttnRes, retains one QK route and separates V through its attention-residual mechanism. DCA instead separates all three Q/K/V routes and uses feature-dependent base weights plus ReLU dynamic terms in a linear sum. It is not three copies of RD's V route. Their normalization, historical storage and full-training evidence are not interchangeable. Full-experiment non-reproduction remains separate from L1 components; no Evolve promotion."
@@ -59,7 +59,7 @@
       }
     },
     "dive/foundation-models/training-budget/update/2026-11-24/9": {
-      "source_sha256": "7cd84471ce35a6707b0e7db8543e0d71249750668ab0be7ac7529bccf2ebee27",
+      "source_sha256": "cffaf6adefced69c79d70f8a88651fea8f24df29343d26570a04d15fd091e1af",
       "reviewed": true,
       "fields": {
         "summary": "Stochastic rounding addresses FP32 updates disappearing on conversion to the BF16 grid, preserving changes in conditional expectation through randomized adjacent values. StableKL addresses deterministic algebraic cancellation on already stored parameters through formula rewrites and analytic gradients. The former does not repair KL algebra; the latter cannot recover an update lost before input storage. Precision promotion, clamping and stochastic rounding are not interchangeable patches. Full-experiment non-reproduction remains separate from L1 components; no Evolve promotion."
@@ -91,7 +91,7 @@
       }
     },
     "dive/agent-research/agent-policy-learning/update/2026-11-24/5": {
-      "source_sha256": "748e9e6540d9a2b756e5ecca0a7be6b12bdff5da3746ebb9181bbf9bc00e072e",
+      "source_sha256": "3349f9fe3ffc8d92416f33c187592dc2924aa5f91b226c086f77da7ecdfdc0d9",
       "reviewed": true,
       "fields": {
         "summary": "The independent standard-library CPU kernel solves FTRL's KKT equations: Gk+alpha/sqrt(pk)+beta/pk share a multiplier, found by score translation and bisection rather than a softmax substitute. It implements shared exponential sampling, rho, aggregate residuals, the potential and Algorithm2 restarts. The begin/choose/finish API receives current hints and one terminal aggregate, not turn reward vectors or gold answers/plans. Injected noise is for mathematical controls only. No LLM, activation probe, TACT intervention, code executor, real-task score or Evolve mapping runs. The float64 root solver has numerical tolerance, not infinite precision. The full campaign is terminally not reproduced."
@@ -123,7 +123,7 @@
       }
     },
     "dive/agent-research/harness-and-self-improvement/update/2026-11-24/34": {
-      "source_sha256": "995bd4fc9e4b29bf973131b517416a7681c70ad34bd80fd4954fb1e570b70d71",
+      "source_sha256": "2ef96dc574e41db47c599b7463f4dd0c8b755f25e17c2484e68c534e1bda212e",
       "reviewed": true,
       "fields": {
         "summary": "The evaluator-side standard-library slice implements scalar bias, AIPW with declared fold provenance, finite-stratum bounded allocation, support outer sets, strict interval rank sets and a log-space hedged e-process. Plan commits m/phi before drawing an audit; observe accepts binary labels only for audited rows and requires None otherwise. Every episode updates. Changed targets, nonfrozen/nonindependent task declarations and lambda not strictly below the positivity floor are rejected. Inversion is only on a predeclared finite theta grid: accepted_grid is not continuous CS endpoints or coverage for off-grid truth. No nuisance fitting, human collection, LLM judge, three-judge latent model, cluster bootstrap or live leaderboard runs. Timing/fold declarations are external statistical contracts, not adversarial information-flow security proofs. The full campaign is terminally not reproduced."
@@ -155,7 +155,7 @@
       }
     },
     "dive/agent-research/harness-and-self-improvement/update/2026-11-24/35": {
-      "source_sha256": "a6efd2795db267438e78c7b4669c895b292987be3ea5a8eb133b2b49ac3c4175",
+      "source_sha256": "f37a464480fc0b76161bc2c81e9a822fb4e7eedea9d14e6aa5a1975b5a6a87d3",
       "reviewed": true,
       "fields": {
         "summary": "Review-only delivery records fixed-v1 sources/metadata, access boundaries, costs and a same-topic comparison. No local algorithm module, editor, research broker, video service, harness evolution, benchmark, GPU trial or Evolve operator is created. Gate arithmetic alone would not reproduce MORSE; review-only disposition requires no invented three-seed metrics or GPU receipt. The full campaign is terminally not reproduced."
@@ -187,7 +187,7 @@
       }
     },
     "dive/post-training/student-trajectory-distillation/update/2026-11-24/9": {
-      "source_sha256": "624fca7a42682c4692e55a421fe51053378bed5747ecdd9da3fa5f17228fae63",
+      "source_sha256": "e50482764070c972d0ead653b6364959ef331cb2069825f5ef8e1992fcd6f9c5",
       "reviewed": true,
       "fields": {
         "summary": "GKD separates the source of supervision states from the divergence choice. At student-visited states, VOPD additionally changes the target using verifier agreement with teacher/reference reward. Its lambda is extrapolation strength, not GKD's on-policy-data fraction; a frozen reference and group statistics are additional requirements. Neither the existing GKD candidate protocol nor these finite kernels establish large-model capability gains. L1 core-mechanism component, diagnostic only; not complete LLM training or capability evidence. CPU-only, without an advertised CUDA path or Evolve promotion. Full experiments are high-cost and not reproduced, review DONE."
@@ -219,7 +219,7 @@
       }
     },
     "dive/post-training/preference-and-alignment/update/2026-11-24/8": {
-      "source_sha256": "39a13675343a44ba1fdc3d84531fc56d90bd27c32dcdc627a259d7c52b4c8ed7",
+      "source_sha256": "528abc57ec0ca83ac46bea3daa0f64b058433b20b11df3afba72564c4f087d49",
       "reviewed": true,
       "fields": {
         "summary": "DPO retains a scalar potential through reference-relative log ratios. SHPO adds antisymmetric local-cycle capacity to that logit while retaining shared-hidden gradients. Additional pairwise capacity does not mean generation directly uses the curl head, which is why the paper separates acc_pi from acc_dpo+c. The local three-point teaching cycle is not a real-preference-data improvement. L1 core-mechanism component, diagnostic only; not complete LLM training or capability evidence. CPU-only, without an advertised CUDA path or Evolve promotion. Full experiments are high-cost and not reproduced, review DONE."

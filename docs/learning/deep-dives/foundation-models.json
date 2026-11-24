@@ -1194,7 +1194,7 @@
           ],
           "summary": "RD-AttnRes从Block AttnRes出发保留共享QK路由、单独解耦V，采用其attention-residual深度选择机制。DCA的Q/K/V三路均独立，并以feature-dependent基础权重加ReLU动态项线性求和，不是把RD的V路由复制三份。两者都改变attention输入来源，却不能互换归一化、历史缓存或完整训练证据。 完整实验不复现与本地L1组件分开，不晋级Evolve。",
           "source_revisions": {
-            "foundation-models:deep-cross-attention": "6eff1be4e0b3147268c6ffeb8aab8df3050dbf84b38bbafbac74af7aba548c36",
+            "foundation-models:deep-cross-attention": "a04f520759d0914ba4c5d624ec21617660ef1c3f52a39aec22b8430f772ac2d3",
             "foundation-models:rd-attnres": "4d60f1665f9c81ee267e18e423bc17e842efe332a4550f6f5f12c1b34c474684"
           }
         }
@@ -1798,7 +1798,7 @@
           ],
           "summary": "随机舍入处理的是FP32小更新转BF16时落回同一格点，靠随机相邻格点在条件期望上保留变化。StableKL处理的是已存参数上的确定性代数消去，靠公式重写与解析梯度减少误差。前者不修复错误KL公式，后者也不能恢复输入量化前已经消失的更新；提高precision、clamp和随机舍入都不是可互换的补丁。 完整实验不复现与本地L1组件分开，不晋级Evolve。",
           "source_revisions": {
-            "foundation-models:stablekl": "df2352b240e7a1824606331d6e9f6147acee01f55256551a78f1053dab4a20e1",
+            "foundation-models:stablekl": "359dca1245dc303d978f5fddf717efd98947fdd5e95bfd716d06e3dadbf522cf",
             "foundation-models:stochastic-rounding": "2d38215ff494778a4ddd9cf33755f3e69edf0422d2af49ca3b99e521070b44c3"
           }
         }
