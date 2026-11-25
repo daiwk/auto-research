@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-25-latest-components",
+  "seeds": [42, 43, 44],
+  "maximum_run_seconds": 180,
+  "maximum_cuda_devices": 1,
+  "model_and_dataset_downloads": 0,
+  "api_calls": 0,
+  "automatic_retry": false,
+  "full_experiments_executed": false,
+  "cost_basis": "Seven bounded L1 numerical/protocol components. Only LazUnirec advertises CUDA, requiring one real A100/A30 receipt. No checkpoints, training datasets, private logs, LLM APIs, browser/robot services or full campaigns. Complete expensive experiments are terminal not reproduced, review DONE. Per-seed30seconds is a component cap, not a full-experiment estimate.",
+  "components": {
+    "udvr": {"domain": "foundation-models", "module": "foundation_models/udvr.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "thresholded-longce": {"domain": "foundation-models", "module": "foundation_models/thresholded_longce.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "epro": {"domain": "post-training", "module": "post_training/epro.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "larf": {"domain": "recommendation", "module": "reproductions/larf_components.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "lazunirec": {"domain": "recommendation", "module": "reproductions/lazunirec_components.py", "cuda": true, "evaluation_tier": "l1_mechanism"},
+    "agent-kernel": {"domain": "agent-research", "module": "agent_research/agent_kernel.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "cape": {"domain": "agent-research", "module": "agent_research/cape.py", "cuda": false, "evaluation_tier": "l1_mechanism"}
+  }
+}
