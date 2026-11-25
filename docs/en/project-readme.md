@@ -1,17 +1,27 @@
-# Auto Research
+# Auto Research: 410+ AI Paper Implementations, Public Experiment Audits & Automated Model Evolution
 
-<!-- source-sha256: fda2622d113efb2162685bae62ce18667c96af5ac1ec80104c5b19cbf4839f2f -->
+<!-- source-sha256: b83c6c3efa57cb6db5e82321872a857b42486565afa0a8ed1eed70fb25b3328b -->
 
 [简体中文](../project-readme.md)
 
 [English README on GitHub](https://github.com/daiwk/auto-research/blob/main/README.en.md) · [English documentation](index.md)
 
-Understand papers, inspect their implementations, and iterate on research with public data. The project covers search, ads and recommendation, foundation models, LLM post-training, agents, multimodal models, and structured decisions.
+> **Go beyond reading papers—verify them with executable code and public data.**  
+> Spanning **Search, Ads & Recommendation (RecSys), Foundation Models, LLM Post-Training, Agents, Multimodal Models, and Structured Decisions**. Auto Research brings together **410+ standardized paper adapters, 4-layer interactive learning cards, cross-paper deep dives, multi-seed public experiment dashboards (retaining negative results)**, and **multi-generation automated model evolution**.
 
 [![Python quality](https://github.com/daiwk/auto-research/actions/workflows/quality.yml/badge.svg)](https://github.com/daiwk/auto-research/actions/workflows/quality.yml)
 [![Documentation](https://github.com/daiwk/auto-research/actions/workflows/docs.yml/badge.svg)](https://github.com/daiwk/auto-research/actions/workflows/docs.yml)
 
-**[Open the site](index.md) · [Learn paper by paper](learning/index.md) · [Research library](research-library.md) · [Experiment dashboard](public-experiment-dashboard.md)**
+**[Open the site](index.md) · [Learn paper by paper](learning/index.md) · [Research library](research-library.md) · [Topic deep dives](learning/deep-dives/index.md) · [Experiment dashboard](public-experiment-dashboard.md)**
+
+⭐ *If you often use the site's learning cards, code implementations, or experiment comparisons, give the repository a **Star** to find the latest updates again.*
+
+## Key Highlights
+
+1. **Strict Reproduction Fidelity Tiers (No Fake Reproductions)**: The repository currently registers **410** paper adapters, strictly distinguishing between `full_pipeline`, `core_mechanism`, and heuristic `concept_demo` implementations. Proxy scoring functions or fixed heuristics are never passed off as paper reproductions.
+2. **Production A/B Evidence Audits & Negative Results Retained**: Industrial RecSys papers are audited for real production traffic and online A/B metrics. Local public-data experiments follow L0–L3 evaluation tiers and multi-seed statistics (fewer than 3 seeds are labeled as smoke tests and cannot claim stable gains), **transparently preserving negative results and non-reproduced boundaries**.
+3. **4-Layer Q&A Cards & Cross-Paper Deep Dives**: Every paper is broken down into interactive Q&A cards across four progressive layers (*Fundamentals → Core Mechanism → Method Comparison → Implementation Details*), paired with topic-level deep dives that compare trade-offs across papers and are checked and updated as new papers are added.
+4. **Safe, Data-Isolated Automated Model Evolution (`evolve` & `run`)**: Evolve models across recommendation (`RankMixer`, `HyFormer`, `GenRec`), `micro-llm` (architecture, data mixture, SFT, GRPO), and Agents using tested whitelist operators—selecting candidates strictly on validation splits before running isolated test evaluations.
 
 ## Take a tour of the site
 
@@ -70,15 +80,6 @@ Questions, documentation corrections, and new paper components are welcome. See 
 
 CI checks the Python contracts and documentation build. New papers need synchronized metadata, source and cost boundaries, all four question levels, and an update to the relevant topic deep dive. Experiments retain commands, versions, metrics, and failures. New CUDA implementations also require evidence from a real GPU run.
 
-<details>
-<summary>Star History</summary>
+## 📈 Star History
 
-<a href="https://www.star-history.com/?repos=daiwk%2Fauto-research&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=daiwk/auto-research&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=daiwk/auto-research&type=date&theme=light&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=daiwk/auto-research&type=date&legend=top-left" />
- </picture>
-</a>
-
-</details>
+[![Star History Chart](https://api.star-history.com/svg?repos=daiwk/auto-research&type=Date)](https://star-history.com/#daiwk/auto-research&Date)
