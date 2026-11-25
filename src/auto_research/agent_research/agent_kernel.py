@@ -232,9 +232,9 @@ class AgentKernel:
 
 
 def diagnostic(seed: int = 42, device: str = "cpu") -> dict:
+    """Small deterministic failure-injection control; no task capability score."""
     if type(seed) is not int or seed < 0 or device != "cpu":
         raise ValueError("nonnegative integer seed and CPU-only device required")
-    """Small deterministic failure-injection control; no task capability score."""
     import random
     names = ["a", "b", "c"]
     random.Random(seed).shuffle(names)
@@ -258,4 +258,13 @@ def diagnostic(seed: int = 42, device: str = "cpu") -> dict:
         reopened = AgentKernel(Path(tmp) / "sab.sqlite", recover_running=True)
         result["durable_complete_nodes"] = len(reopened.query("complete"))
         reopened.close()
+        result["evaluation_tier"] = "l1_mechanism"
+        result["checks"] = {
+            "transient_failure_recovery_completes_graph": result["nodes_complete"] == 4,
+            "completed_siblings_are_not_reexecuted": result["preserved_sibling_calls"] == 2,
+            "actual_parent_text_keeps_declared_order": result["parent_text_order_correct"],
+            "reopened_sqlite_preserves_complete_nodes": result["durable_complete_nodes"] == 4,
+        }
+        result["metrics"] = {key: result[key] for key in (
+            "nodes_complete", "executor_calls", "preserved_sibling_calls", "durable_complete_nodes")}
         return result

@@ -407,10 +407,23 @@ def diagnostic(seed: int = 42, device: str = "cpu") -> dict:
     outcomes = [execute(policy, lambda a, h=h: effects[a, h], call_limit=3) for h in configurations]
     value = sum(ok for ok, _ in outcomes), -sum(n for _, n in outcomes)
     oracle = exhaustive_oracle(configurations, actions, effects, compiler.required, 3)
-    return {"diagnostic_only": True, "seed": seed, "configurations": 4,
+    result = {"diagnostic_only": True, "seed": seed, "configurations": 4,
             "calibration_queries": len(compiler.query_log), "eager_table_queries": len(effects),
             "completed_configurations": value[0], "total_deployment_calls": -value[1],
             "oracle_agreement": value == oracle, "runtime_certificate": compiler.certified,
             "protected_configurations": len(compiler.required),
             "bound_snapshots": len(compiler.snapshots),
             "selected_two_call_tightenings": compiler.selected_tightenings}
+    result["evaluation_tier"] = "l1_mechanism"
+    result["checks"] = {
+        "independent_exhaustive_oracle_agrees": result["oracle_agreement"],
+        "closed_lower_bound_has_certificate": result["runtime_certificate"],
+        "all_four_configurations_complete": result["completed_configurations"] == 4,
+        "bounded_deployment_calls": max(calls for _, calls in outcomes) <= 3,
+        "calibration_does_not_exceed_full_table": result["calibration_queries"] <= result["eager_table_queries"],
+        "full_table_negative_result_is_preserved": result["calibration_queries"] == result["eager_table_queries"],
+    }
+    result["metrics"] = {key: result[key] for key in (
+        "configurations", "calibration_queries", "eager_table_queries", "completed_configurations",
+        "total_deployment_calls", "protected_configurations", "bound_snapshots", "selected_two_call_tightenings")}
+    return result
