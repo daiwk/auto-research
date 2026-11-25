@@ -179,6 +179,16 @@
         "fingerprint": "d4657dba7478e945c411152dc1bdc11a567efd1c7202a2a06ed170672b53b9c5"
       }
     ],
+    "src/auto_research/agent_research/cape.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "_two_call",
+        "line": 223,
+        "qualified_name": "CapeCompiler._two_call",
+        "expression": "self.selected_tightenings += 1",
+        "fingerprint": "94dc44053a6f8931d6b24d9b7c0506fdd3ff1ccb17fadc845a5106e164dcfcd9"
+      }
+    ],
     "src/auto_research/agent_research/caplite.py": [
       {
         "kind": "state_update_not_execution_evidence",

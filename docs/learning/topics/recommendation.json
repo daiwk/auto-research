@@ -61,7 +61,8 @@
         "recommendation:ured",
         "recommendation:yuanbao-rubric",
         "recommendation:intentflow",
-        "recommendation:lser-serving"
+        "recommendation:lser-serving",
+        "recommendation:larf"
       ]
     },
     {
@@ -236,7 +237,8 @@
         "recommendation:wide-deep",
         "recommendation:zenith",
         "recommendation:xsplit-argus",
-        "recommendation:dna"
+        "recommendation:dna",
+        "recommendation:lazunirec"
       ]
     },
     {

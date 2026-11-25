@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:epro/nov25-basics": {
+      "source_sha256": "60babd58a17a50419de8550c26e19aa7071fee46445b3aaeb01cdf50ab0d6969",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish training and execution policies with identical weights?",
+        "answer": "BF16 training and low-precision inference can induce different distributions through numerical paths and kernels. Intermediate learner updates directly expose only the training policy. EPRO transports movement from the old execution anchor, rather than claiming to observe the current execution policy.",
+        "example": "Teaching example: with old training p=(0.5,0.5) and execution q=(0.6,0.4), unchanged training must predict q, not forcibly replace it with p."
+      }
+    },
+    "qa/post-training:epro/nov25-mechanism": {
+      "source_sha256": "4462281f8c81b9da3b1c1d61fe47d42d8e3c336403ae93f47c360e14bf90506b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not differentiate importance weights and the SSC gate?",
+        "answer": "Equation11 explicitly stops their gradients. The direction comes from the transported log-policy score; the gate sets this contribution's strength. Differentiating it introduces risk-statistic derivatives absent from the algorithm.",
+        "example": "Teaching example: cache the coefficient before perturbing logits for finite differences. Recomputing the gate after each perturbation differentiates a different objective and is a negative control."
+      }
+    },
+    "qa/post-training:epro/nov25-comparison": {
+      "source_sha256": "90ddc99376bdc7476fec8992664b968535671489629fd5e6b99f40384f298f3f",
+      "reviewed": true,
+      "fields": {
+        "question": "Can EPRO directly replace Regularized Score Centering because both subtract a center?",
+        "answer": "No. RSC estimates a center under fixed behavior with auxiliary actions and adds reverse-KL control. EPRO moves its center with the transported prediction and attenuates outward updates using distribution-wide Policy Shift. Neither is reward-mean subtraction; no matched-budget capability comparison was run.",
+        "example": "Teaching example: after several learner updates, fixed-q and transported-mu centers can differ. Stronger reward centering cannot create that changing distribution."
+      }
+    },
+    "qa/post-training:epro/nov25-implementation": {
+      "source_sha256": "0fe359155bf9a044621890f39479b5277e7275e5ae0e4c42a6fe06a0359e621c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why should top-K plus one tail bucket not be forced to match full-vocabulary gradients?",
+        "answer": "AppendixB approximates the unknown execution tail by a scaled old-training tail and coarse-grains Policy Shift. Internal tail movement is compressed, generally introducing approximation error. Only a full head or special tail structure recovers exactness.",
+        "example": "Teaching example: two tail tokens can move in opposite directions with unchanged total mass; one bucket misses that movement. Local diagnostics retain, rather than erase, head-tail/full gradient differences."
+      }
+    },
+    "qa/recommendation:larf/nov25-basics": {
+      "source_sha256": "5c9572917300f7e178f1aa4c57dff0feac8a11f9ef3843ece4e52c113d0fe66e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does LARF need reasoning supervision in training but not reasoning generation online?",
+        "answer": "Five classification heads and an auxiliary generation head share representations and joint supervision. Rationale generation is a training objective. Serving removes generation and directly uses classification; removing its training loss is not the same procedure.",
+        "example": "Teaching example: train both explanation writing and six-class decisions, then read only class heads at deployment. No full explanation must be generated and discarded for each search request."
+      }
+    },
+    "qa/recommendation:larf/nov25-mechanism": {
+      "source_sha256": "5b0eb6628b42993b04eb603f6c844a394d55083c8dec1853ca4217cc7766bf47",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the list-wise reward distinguish gold ties from predicted ties?",
+        "answer": "Equal-gold pairs are excluded because no directed order is supervised. Unequal-gold pairs with tied predictions receive half credit, yielding zero after2c−1 centering. Concordant and inverted pairs contribute positively and negatively, scaled by group-size confidence.",
+        "example": "Teaching example: gold=(0,0,5) excludes the first pair. If all predictions equal2, every comparable pair is a predicted tie, c=0.5 and list-wise reward is zero."
+      }
+    },
+    "qa/recommendation:larf/nov25-comparison": {
+      "source_sha256": "35d760d777ed5824a667175bb716abf29256aab0d5cd66f08ba973567bb095c0",
+      "reviewed": true,
+      "fields": {
+        "question": "Is LARF's within-query PNR the same as Yuanbao Rubric set utility?",
+        "answer": "No. PNR compares ordinal document order with gold order. Yuanbao Rubric allows several documents to jointly cover positive criteria and penalizes negative criteria triggered by any document. Objectives and online metrics differ, so lifts are neither directly comparable nor additive.",
+        "example": "Teaching example: two documents each covering half the facts can have high combined coverage but identical relevance grades with no comparable PNR pair. The signals address different problems."
+      }
+    },
+    "qa/recommendation:larf/nov25-implementation": {
+      "source_sha256": "f0142c8b00e15016c59511ea35964667078981ac203a7ec59a5bb6e2016119fd",
+      "reviewed": true,
+      "fields": {
+        "question": "Does terminal margin penalize only adjacent grades, and which tokens receive gradients?",
+        "answer": "Equations8–10 select the strongest of all non-gold digit classes, not only adjacent grades. Only the gold and competing digit at one unique valid terminal position receive gradients. Other positions and non-digit vocabulary entries receive zero.",
+        "example": "Teaching example: with gold2 and highest competing score at class5, raise2 and lower5, not merely1/3. A sample marked at two terminal positions is excluded rather than arbitrarily taking the last."
+      }
+    }
+  }
+}

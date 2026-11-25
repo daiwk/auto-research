@@ -1,0 +1,9 @@
+{
+  "schema_version": 1, "paper_url": "https://arxiv.org/abs/2611.32866v1", "source_url": "https://arxiv.org/pdf/2611.32866v1#page=7",
+  "source_sha256": "52f8f6cafa50f14aa7dbce607feb254410a3305a87b5ae3ac5654e32899b6593", "source_pdf_sha256": "52f8f6cafa50f14aa7dbce607feb254410a3305a87b5ae3ac5654e32899b6593",
+  "pdf_page": 7, "page": 7, "figure": "Figure 1", "caption": "Shift of the optimal hyperparameter with model width and depth on CIFAR.",
+  "crop_pdf_points": [100, 195, 520, 530], "crop_box_pdf_points": [100, 195, 520, 530], "render_scale": 2,
+  "asset_sha256": "4dbec0bc9e6c8f076c85aba37bc8779637146533cf85ad70eceea16cc85b1040", "image_sha256": "4dbec0bc9e6c8f076c85aba37bc8779637146533cf85ad70eceea16cc85b1040",
+  "retrieved_on": "2026-11-25", "reviewed_version": "v1", "visually_reviewed": true, "scientific_content_modified": false,
+  "extraction": "Original PDF crop including complete caption, rendered with pdftoppm at144dpi; reviewed against page7 preview.", "copyright": "Copyright belongs to the original authors."
+}

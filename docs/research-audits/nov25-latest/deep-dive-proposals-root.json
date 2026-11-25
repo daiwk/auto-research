@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "proposals": [
+    {
+      "paper": "recommendation:lazunirec",
+      "target_card": "recommendation/history-ranking-backbones",
+      "source_revisions": {
+        "recommendation:lazunirec": "4b8f8e8c927aae755f07d2f5595315353dcfd7afabc5945ee519463012da577b",
+        "recommendation:onetrans-v2": "92e6c9f6f31c4d398bc8b963728618f17f0887dab50b5c6d6752d455b382ac4c"
+      },
+      "comparison": {
+        "position": "执行Eq7低秩任务投影、Eq10/11 sparse shared/private输出组合、Eq12–14 EMA evidence/相对权重/停止梯度及Eq15–17请求内MaxSim/KL，并用真实autograd验证参数路径。输入router scores/expert outputs/已探测gradient与interest probabilities是显式张量，不虚构未给细节的条件router或概率头。未实现完整Transformer/RMSNorm/attention mask、embedding、场景数据管线、expert网络、MoE z-loss、训练调度与部署；因此不是完整模型、正式benchmark或Evolve算子。",
+        "tradeoff": "OneTrans-V2用阶段隔离token共享因果用户上下文，精排向预排传递中心化logits/sigmoid信号；LazUnirec关注召回与排序的梯度冲突，用task-private LoRA/expert及方向可靠性区分更新，并向检索蒸馏请求内softmax分布。共享上下文不等于所有参数完全共用，独立任务参数也不自动保证梯度正交。旧OneTrans-V2公开MovieLens链路是concept demo，本批则只验局部算子，不能比较二者的代理能力分数。",
+        "sections": [
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "LazUnirec蒸馏与OneTrans-V2的精排→预排信号相同吗？",
+        "body": "OneTrans-V2用阶段隔离token共享因果用户上下文，精排向预排传递中心化logits/sigmoid信号；LazUnirec关注召回与排序的梯度冲突，用task-private LoRA/expert及方向可靠性区分更新，并向检索蒸馏请求内softmax分布。共享上下文不等于所有参数完全共用，独立任务参数也不自动保证梯度正交。旧OneTrans-V2公开MovieLens链路是concept demo，本批则只验局部算子，不能比较二者的代理能力分数。",
+        "papers": [
+          "recommendation:lazunirec",
+          "recommendation:onetrans-v2"
+        ]
+      },
+      "question": {
+        "id": "nov25-lazunirec",
+        "question": "LazUnirec蒸馏与OneTrans-V2的精排→预排信号相同吗？",
+        "answer": "OneTrans-V2用阶段隔离token共享因果用户上下文，精排向预排传递中心化logits/sigmoid信号；LazUnirec关注召回与排序的梯度冲突，用task-private LoRA/expert及方向可靠性区分更新，并向检索蒸馏请求内softmax分布。共享上下文不等于所有参数完全共用，独立任务参数也不自动保证梯度正交。旧OneTrans-V2公开MovieLens链路是concept demo，本批则只验局部算子，不能比较二者的代理能力分数。",
+        "example": "教学例：LazUnirec两候选分数同时加同一常量不改变请求内softmax教师；不能因此认为任意独立sigmoid蒸馏目标也有相同不变性。",
+        "papers": [
+          "recommendation:lazunirec",
+          "recommendation:onetrans-v2"
+        ]
+      },
+      "update": {
+        "date": "2026-11-25",
+        "papers": [
+          "recommendation:lazunirec",
+          "recommendation:onetrans-v2"
+        ],
+        "summary": "执行Eq7低秩任务投影、Eq10/11 sparse shared/private输出组合、Eq12–14 EMA evidence/相对权重/停止梯度及Eq15–17请求内MaxSim/KL，并用真实autograd验证参数路径。输入router scores/expert outputs/已探测gradient与interest probabilities是显式张量，不虚构未给细节的条件router或概率头。未实现完整Transformer/RMSNorm/attention mask、embedding、场景数据管线、expert网络、MoE z-loss、训练调度与部署；因此不是完整模型、正式benchmark或Evolve算子。"
+      },
+      "english": {
+        "comparison": {
+          "position": "The component executes Equation7 task-private low-rank projection, Equations10–11 sparse shared/private output composition, Equations12–14 EMA evidence/relative weights/stop-gradient and Equations15–17 request-local MaxSim/KL, with real autograd path checks. Router scores, expert outputs, probed gradients and interest probabilities are explicit tensors; unspecified router/probability heads are not fabricated. The complete Transformer, RMSNorm, attention mask, embeddings, scenario pipeline, expert networks, MoE z-loss, training schedule and deployment are absent. This is not a complete model, formal benchmark or Evolve operator.",
+          "tradeoff": "OneTrans-V2 shares causal user context through stage-isolated tokens and transfers centered-logit/sigmoid signals from fine ranking to pre-ranking. LazUnirec addresses retrieval/ranking gradient conflict with task-private LoRA/experts and directional reliability, distilling a request-local softmax distribution into retrieval. Shared context does not mean fully shared parameters, and private parameters do not guarantee orthogonal gradients. The existing MovieLens OneTrans-V2 path is a concept demo, while this batch checks only operators; their proxy capability scores are not comparable."
+        },
+        "analysis": {
+          "title": "Is its distillation the same as OneTrans-V2 fine-to-pre-ranking transfer?",
+          "body": "OneTrans-V2 shares causal user context through stage-isolated tokens and transfers centered-logit/sigmoid signals from fine ranking to pre-ranking. LazUnirec addresses retrieval/ranking gradient conflict with task-private LoRA/experts and directional reliability, distilling a request-local softmax distribution into retrieval. Shared context does not mean fully shared parameters, and private parameters do not guarantee orthogonal gradients. The existing MovieLens OneTrans-V2 path is a concept demo, while this batch checks only operators; their proxy capability scores are not comparable."
+        },
+        "question": {
+          "question": "Is its distillation the same as OneTrans-V2 fine-to-pre-ranking transfer?",
+          "answer": "OneTrans-V2 shares causal user context through stage-isolated tokens and transfers centered-logit/sigmoid signals from fine ranking to pre-ranking. LazUnirec addresses retrieval/ranking gradient conflict with task-private LoRA/experts and directional reliability, distilling a request-local softmax distribution into retrieval. Shared context does not mean fully shared parameters, and private parameters do not guarantee orthogonal gradients. The existing MovieLens OneTrans-V2 path is a concept demo, while this batch checks only operators; their proxy capability scores are not comparable.",
+          "example": "Teaching example: adding one constant to both teacher candidate scores leaves a request-local softmax unchanged; an arbitrary independent sigmoid-distillation objective need not share that invariance."
+        },
+        "update": "The component executes Equation7 task-private low-rank projection, Equations10–11 sparse shared/private output composition, Equations12–14 EMA evidence/relative weights/stop-gradient and Equations15–17 request-local MaxSim/KL, with real autograd path checks. Router scores, expert outputs, probed gradients and interest probabilities are explicit tensors; unspecified router/probability heads are not fabricated. The complete Transformer, RMSNorm, attention mask, embeddings, scenario pipeline, expert networks, MoE z-loss, training schedule and deployment are absent. This is not a complete model, formal benchmark or Evolve operator."
+      }
+    }
+  ]
+}

@@ -7,7 +7,7 @@ hide:
 
 # 长上下文：注意力、递归状态与记忆
 
-[基础模型](index.md) / 196 个问题 · 49 篇论文
+[基础模型](index.md) / 200 个问题 · 50 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">196 个问题 · 49 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">200 个问题 · 50 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:thresholded-longce" data-paper-title="Eliciting the Recall Capacity of Linear Attention" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Eliciting the Recall Capacity of Linear Attention 基础模型 ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology 2026-11-24 线性注意力的固定状态可以在专门训练的任务中存储大量关联，但标准语言预训练并不一定教会模型从上下文复制。论文分开研究容量、训练诱因和召回提示；目标语料里 qualifying AR-hit 仅约占 1.7%，因此增添句子重复，并用 Thresholded LongCE（TLCE）强化依赖远上下文的 token。两种干预互补，但可能牺牲通用语言建模；不能把“存在容量”写成“任意任务都能召回”。 成本过高，不复现（审查 DONE）。260-token、9词表、4维 GRU 只是短窗接口诊断，不是论文的 KDA、DeltaNet 或 softmax 对照训练。weights / loss 执行 Eq4，接受同形 CPU FP32/FP64 的目标 log-prob、int64 窗内位置和 valid mask。padding 不进入分母，合法目标必须非空、有限且 log-prob 不大于零。context_scores 对外部因果模型实际运行完整前向与分窗无梯度前向；调用者提供已经移位对齐的 tokens/targets，模型每次调用必须重置状态，且不应引入前后不一致的随机性。  长上下文与状态 上下文敏感召回监督 基础模型 长上下文：注意力、递归状态与记忆 TLCE会自动找到所有应该依赖远处信息的token吗？ 不会。权重取决于当前模型的full概率是否已经显著高于short；尚未利用的远处线索不会因为理论上有用就被加权。 教学例：远处有答案但full与short概率同为0.1，差为0，权重仍为1。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-thresholded-longce-52468414" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-7743cb06bc0c09d2">TLCE会自动找到所有应该依赖远处信息的token吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Athresholded-longce">Eliciting the Recall Capacity of Linear Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不会。权重取决于当前模型的full概率是否已经显著高于short；尚未利用的远处线索不会因为理论上有用就被加权。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：远处有答案但full与short概率同为0.1，差为0，权重仍为1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32969v1">原论文</a> · <a href="../../../../foundation-models/2611.32969-thresholded-longce/">实现解读</a> · <a href="#qa-7743cb06bc0c09d2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:thresholded-longce" data-paper-title="Eliciting the Recall Capacity of Linear Attention" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Eliciting the Recall Capacity of Linear Attention 基础模型 ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology 2026-11-24 线性注意力的固定状态可以在专门训练的任务中存储大量关联，但标准语言预训练并不一定教会模型从上下文复制。论文分开研究容量、训练诱因和召回提示；目标语料里 qualifying AR-hit 仅约占 1.7%，因此增添句子重复，并用 Thresholded LongCE（TLCE）强化依赖远上下文的 token。两种干预互补，但可能牺牲通用语言建模；不能把“存在容量”写成“任意任务都能召回”。 成本过高，不复现（审查 DONE）。260-token、9词表、4维 GRU 只是短窗接口诊断，不是论文的 KDA、DeltaNet 或 softmax 对照训练。weights / loss 执行 Eq4，接受同形 CPU FP32/FP64 的目标 log-prob、int64 窗内位置和 valid mask。padding 不进入分母，合法目标必须非空、有限且 log-prob 不大于零。context_scores 对外部因果模型实际运行完整前向与分窗无梯度前向；调用者提供已经移位对齐的 tokens/targets，模型每次调用必须重置状态，且不应引入前后不一致的随机性。  长上下文与状态 上下文敏感召回监督 基础模型 长上下文：注意力、递归状态与记忆 Δ=1和窗内位置127时，TLCE会加权吗？ 都不会。必须Δ严格大于1且offset至少128；符合条件后exp(Δ)最多为5，并对valid目标的总权重归一化。 教学例：Δ分别为1/2/2，offset为128/127/128时权重为1/1/5；不是1/e²/e²。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-da5f649ddc14b88c">Δ=1和窗内位置127时，TLCE会加权吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Athresholded-longce">Eliciting the Recall Capacity of Linear Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>都不会。必须Δ严格大于1且offset至少128；符合条件后exp(Δ)最多为5，并对valid目标的总权重归一化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Δ分别为1/2/2，offset为128/127/128时权重为1/1/5；不是1/e²/e²。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32969v1">原论文</a> · <a href="../../../../foundation-models/2611.32969-thresholded-longce/">实现解读</a> · <a href="#qa-da5f649ddc14b88c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:thresholded-longce" data-paper-title="Eliciting the Recall Capacity of Linear Attention" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Eliciting the Recall Capacity of Linear Attention 基础模型 ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology 2026-11-24 线性注意力的固定状态可以在专门训练的任务中存储大量关联，但标准语言预训练并不一定教会模型从上下文复制。论文分开研究容量、训练诱因和召回提示；目标语料里 qualifying AR-hit 仅约占 1.7%，因此增添句子重复，并用 Thresholded LongCE（TLCE）强化依赖远上下文的 token。两种干预互补，但可能牺牲通用语言建模；不能把“存在容量”写成“任意任务都能召回”。 成本过高，不复现（审查 DONE）。260-token、9词表、4维 GRU 只是短窗接口诊断，不是论文的 KDA、DeltaNet 或 softmax 对照训练。weights / loss 执行 Eq4，接受同形 CPU FP32/FP64 的目标 log-prob、int64 窗内位置和 valid mask。padding 不进入分母，合法目标必须非空、有限且 log-prob 不大于零。context_scores 对外部因果模型实际运行完整前向与分窗无梯度前向；调用者提供已经移位对齐的 tokens/targets，模型每次调用必须重置状态，且不应引入前后不一致的随机性。  长上下文与状态 上下文敏感召回监督 基础模型 长上下文：注意力、递归状态与记忆 TLCE能替代MERLIN的多状态路由吗？ 不能。TLCE重分配训练损失而不改变记忆结构；MERLIN改变分段状态的读取权重。未存的信息和未学会使用的信息是不同瓶颈。 教学例：若两个历史压进同一状态后已无法区分，给后续token更大loss不能保证还原；保留多个状态则改变了可读取信息。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-0bf698937092aa7e">TLCE能替代MERLIN的多状态路由吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Athresholded-longce">Eliciting the Recall Capacity of Linear Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。TLCE重分配训练损失而不改变记忆结构；MERLIN改变分段状态的读取权重。未存的信息和未学会使用的信息是不同瓶颈。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：若两个历史压进同一状态后已无法区分，给后续token更大loss不能保证还原；保留多个状态则改变了可读取信息。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32969v1">原论文</a> · <a href="../../../../foundation-models/2611.32969-thresholded-longce/">实现解读</a> · <a href="#qa-0bf698937092aa7e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:thresholded-longce" data-paper-title="Eliciting the Recall Capacity of Linear Attention" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Eliciting the Recall Capacity of Linear Attention 基础模型 ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology 2026-11-24 线性注意力的固定状态可以在专门训练的任务中存储大量关联，但标准语言预训练并不一定教会模型从上下文复制。论文分开研究容量、训练诱因和召回提示；目标语料里 qualifying AR-hit 仅约占 1.7%，因此增添句子重复，并用 Thresholded LongCE（TLCE）强化依赖远上下文的 token。两种干预互补，但可能牺牲通用语言建模；不能把“存在容量”写成“任意任务都能召回”。 成本过高，不复现（审查 DONE）。260-token、9词表、4维 GRU 只是短窗接口诊断，不是论文的 KDA、DeltaNet 或 softmax 对照训练。weights / loss 执行 Eq4，接受同形 CPU FP32/FP64 的目标 log-prob、int64 窗内位置和 valid mask。padding 不进入分母，合法目标必须非空、有限且 log-prob 不大于零。context_scores 对外部因果模型实际运行完整前向与分窗无梯度前向；调用者提供已经移位对齐的 tokens/targets，模型每次调用必须重置状态，且不应引入前后不一致的随机性。  长上下文与状态 上下文敏感召回监督 基础模型 长上下文：注意力、递归状态与记忆 为什么只传入两组任意log-prob不足以验证短窗协议？ 权重公式不能证明short来自真正重置的因果窗口。需要实际分窗前向、检查边界重置且无梯度，并核对full梯度只为负归一化权重。 教学例：650-token输入在512处重新调用模型，short第512位置应等同独立短序列首位，而不继承前512的GRU状态。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3dfbae18ab4b92c7">为什么只传入两组任意log-prob不足以验证短窗协议？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Athresholded-longce">Eliciting the Recall Capacity of Linear Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>权重公式不能证明short来自真正重置的因果窗口。需要实际分窗前向、检查边界重置且无梯度，并核对full梯度只为负归一化权重。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：650-token输入在512处重新调用模型，short第512位置应等同独立短序列首位，而不继承前512的GRU状态。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32969v1">原论文</a> · <a href="../../../../foundation-models/2611.32969-thresholded-longce/">实现解读</a> · <a href="#qa-3dfbae18ab4b92c7">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:hisa" data-paper-title="HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs 基础模型 EPFL / Swiss Data Science Center (EPFL and ETH Zurich) 2026-11-19 HiSA不先筛token，而是对每个query-key点积只保留尚未超过角度预算的RoPE频率对。近处key保留更多分量，远处仅保留慢频分量；Q/K投影不变，规则只由位置、RoPE base和预算决定。Fixed-v1 primary source L1参考组件，仅机制诊断. 完整实验：成本过高，不复现（审查 DONE）。实现精确Eq3的fp32/fp64小张量参考、因果/越reach屏蔽、带绝对位置的decode对齐与梯度负控。显式物化每pair分数，不是稀疏kernel；不实现FA3 block近似、GQA存储压缩、decoder训练、真实KV allocator或吞吐优化。GPU验收另由主运行器冻结后实跑，不以CPU单测代替。  注意力与长上下文 RoPE与隐藏维稀疏 基础模型 长上下文：注意力、递归状态与记忆 HiSA稀疏的是token还是点积维度？ 主要是每个点积里的RoPE二维频率对；同一key可以只剩慢频部分，而不是整token统一保留或删除。 教学例：一个远处key可舍弃最快的8对而保留后24对；只有最后一对也过期才整key退出。 2026-11-20">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
 <span id="paper-foundation-models-hisa-2c94e546" class="ar-learning-paper-anchor"></span>

@@ -1,0 +1,75 @@
+{
+  "domain": "recommendation",
+  "key": "lazunirec",
+  "title": "LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation",
+  "paper_url": "https://arxiv.org/abs/2611.32590v1",
+  "reviewed_version_url": "https://arxiv.org/pdf/2611.32590v1",
+  "reviewed_version": "v1",
+  "detail_path": "recommendation-components/2611.32590-lazunirec/README.md",
+  "first_author": "Xiaodong Li",
+  "first_author_affiliation": "Alibaba International Digital Commerce Group",
+  "browse_company": "Alibaba",
+  "published": "2026-11-24",
+  "published_at": "2026-11-24T13:26:54Z",
+  "announced_on": null,
+  "discovered_on": "2026-11-25",
+  "reviewed_on": "2026-11-25",
+  "code": null,
+  "code_status": "固定v1未给本篇作者仓库；本轮未找到可核验的公开方法实现",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "多任务与联合建模",
+    "共享骨干与梯度可靠性"
+  ],
+  "browse_topic": [
+    "生成、排序与冷启动",
+    "多任务学习与多目标优化"
+  ],
+  "priority": "P0",
+  "verified_priority_organizations": [],
+  "intake_class": "nov24_first_publication_discovered_nov25",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "gpu_validation_artifact": "docs/gpu-validations/lazunirec-a100-20261125-latest.json",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "summary": "LazUnirec把历史、trigger、多兴趣检索query和同请求候选组织到同一Transformer，但不要求召回与排序完全共用全部参数。召回/排序各有Q/K/V低秩残差与private FFN expert，另由条件router选择top-2 shared experts。按scenario/task观察共享参数的归一化梯度历史，以EMA方向方差估计可靠性，停止梯度后重加权任务损失；排序还向召回做请求内候选分布蒸馏。 执行Eq7低秩任务投影、Eq10/11 sparse shared/private输出组合、Eq12–14 EMA evidence/相对权重/停止梯度及Eq15–17请求内MaxSim/KL，并用真实autograd验证参数路径。输入router scores/expert outputs/已探测gradient与interest probabilities是显式张量，不虚构未给细节的条件router或概率头。未实现完整Transformer/RMSNorm/attention mask、embedding、场景数据管线、expert网络、MoE z-loss、训练调度与部署；因此不是完整模型、正式benchmark或Evolve算子。",
+  "local_operator": "auto_research.reproductions.lazunirec_components.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.reproductions.lazunirec_components import diagnostic; print(diagnostic(42))'",
+  "method_source_sha256": "7e298be089830fe9cdb34ccf7365b6b76de98bec1262e1d47e9156fdbe7723dc",
+  "cost_assessment": {
+    "source": "https://arxiv.org/pdf/2611.32590v1",
+    "basis": "§4.1使用私有25天日志训练、后一日测试，H100上训练5层/256宽/4heads/最长2048历史，每请求最多15 ranking tokens与8 retrieval queries，每层14 shared experts+每任务1 private expert，并做多基线、多场景与线上优化/一周A/B。原文未披露总样本量、GPU数量或总GPU小时，不凭dim256推算可负担。完整数据/模型/服务矩阵超本轮单A100/A30或Mac短时预算且私有输入不可得，成本过高，不复现（审查 DONE），不下载、不探跑、不自动重试。仅局部组件每seed预算30秒、0checkpoint/数据下载、0API。",
+    "decision": "成本过高，不复现（审查 DONE）",
+    "local_seconds_per_seed_cap": 30
+  },
+  "online_ab": [
+    {
+      "product": "Alibaba international e-commerce trigger-free recommendation",
+      "metric": "GMV",
+      "lift_percent": 4.01,
+      "traffic": "10% production traffic, one week in October2026; replaces MIMA retrieval and LazFormer ranking together",
+      "source_url": "https://arxiv.org/pdf/2611.32590v1",
+      "source_location": "Section4.8/Table5; full private pipeline, not isolated local kernels"
+    },
+    {
+      "product": "Alibaba international e-commerce trigger-based recommendation",
+      "metric": "GMV",
+      "lift_percent": 3.06,
+      "traffic": "10% production traffic, one week in October2026",
+      "source_url": "https://arxiv.org/pdf/2611.32590v1",
+      "source_location": "Section4.8/Table5"
+    }
+  ]
+}

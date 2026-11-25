@@ -241,6 +241,16 @@
             "核心公式",
             "同主题比较与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:thresholded-longce",
+          "position": "TLCE不改状态容量，而比较同一目标的full/short log-prob；仅当优势超过1nat且短窗已积累128token时给capped ratio权重，再按总权重归一化。它强调已被模型利用的远上下文信息。",
+          "tradeoff": "MERLIN用routing key的一二阶矩改变多状态读取，TLCE改变训练监督分配。更强读取结构不等于已经学会召回；反之损失加权也不能恢复固定状态中未保存的信息。两者需要相同模型/数据预算的独立组合实验，现有小核不支持组合收益。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -390,6 +400,14 @@
           "papers": [
             "foundation-models:canon-layers-scale",
             "foundation-models:mamba"
+          ]
+        },
+        {
+          "title": "Eliciting the Recall Capacity of Linear Attention",
+          "body": "MERLIN用routing key的一二阶矩改变多状态读取，TLCE改变训练监督分配。更强读取结构不等于已经学会召回；反之损失加权也不能恢复固定状态中未保存的信息。两者需要相同模型/数据预算的独立组合实验，现有小核不支持组合收益。 短窗最大512，边界必须重置状态/attention，额外前向无梯度，权重也stop-gradient。全程联合重复实验包含另一个内容干预，本地未实现句子重复，不能将TLCE接口当成全文recall比较。",
+          "papers": [
+            "foundation-models:thresholded-longce",
+            "foundation-models:merlin"
           ]
         }
       ],
@@ -585,9 +603,19 @@
             "foundation-models:canon-layers-scale",
             "foundation-models:mamba"
           ]
+        },
+        {
+          "id": "nov25-thresholded-longce",
+          "question": "TLCE能替代MERLIN的多状态路由吗？",
+          "answer": "不能。TLCE重分配训练损失而不改变记忆结构；MERLIN改变分段状态的读取权重。未存的信息和未学会使用的信息是不同瓶颈。",
+          "example": "教学例：若两个历史压进同一状态后已无法区分，给后续token更大loss不能保证还原；保留多个状态则改变了可读取信息。",
+          "papers": [
+            "foundation-models:thresholded-longce",
+            "foundation-models:merlin"
+          ]
         }
       ],
-      "updated": "2026-11-20",
+      "updated": "2026-11-25",
       "reviewed_papers": [
         "foundation-models:alibi",
         "foundation-models:autonomy-heads",
@@ -637,7 +665,8 @@
         "foundation-models:dealrank",
         "foundation-models:kernel-ridge-attention",
         "foundation-models:hisa",
-        "foundation-models:canon-layers-scale"
+        "foundation-models:canon-layers-scale",
+        "foundation-models:thresholded-longce"
       ],
       "updates": [
         {
@@ -898,6 +927,18 @@
           "source_revisions": {
             "foundation-models:canon-layers-scale": "e8ac3b1fffface324e4d6e5116ddbc1bde5c0916141952f4378fb46f29558a6c",
             "foundation-models:mamba": "cc8e64d103688cf6f1eb766728f173a4c9af31eca88def398193334b5ab90220"
+          }
+        },
+        {
+          "date": "2026-11-25",
+          "papers": [
+            "foundation-models:thresholded-longce",
+            "foundation-models:merlin"
+          ],
+          "summary": "MERLIN用routing key的一二阶矩改变多状态读取，TLCE改变训练监督分配。更强读取结构不等于已经学会召回；反之损失加权也不能恢复固定状态中未保存的信息。两者需要相同模型/数据预算的独立组合实验，现有小核不支持组合收益。 完整实验按成本终态收录，不以L1诊断或资料收录晋级Evolve。",
+          "source_revisions": {
+            "foundation-models:thresholded-longce": "acab1c57bc187f65dfb30ab2a809f542ec9341ea0bd92a58fd058feb20e149e6",
+            "foundation-models:merlin": "5549f39008d450d4a2446631403f0b94d55ea76f976bcc61197cb3c9f1fa0f01"
           }
         }
       ]
@@ -1371,6 +1412,16 @@
             "核心公式",
             "同主题比较与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:udvr",
+          "position": "UDVR固定U列/V行的长度，把尺度移入不参与优化的D；attention双侧吸收，FFN仅吸收U侧。它通过不同分支正则与形状规则设置更新尺度，不是训练一个独立幅值参数。",
+          "tradeoff": "ProLand协调LoRA乘积空间谱方向，并独立恢复B的Stiefel约束；UDVR不要求正交，只固定长度。长度相等不保证方向独立，QR与单独Muon不是替代实现；两个L1诊断都不支持跨模型训练效果比较。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1462,6 +1513,14 @@
           "papers": [
             "foundation-models:stablekl",
             "foundation-models:stochastic-rounding"
+          ]
+        },
+        {
+          "title": "Weight Scale Rebalancing: Transferable Training Recipes for Transformers",
+          "body": "ProLand协调LoRA乘积空间谱方向，并独立恢复B的Stiefel约束；UDVR不要求正交，只固定长度。长度相等不保证方向独立，QR与单独Muon不是替代实现；两个L1诊断都不支持跨模型训练效果比较。 原文FFN的D更新不含V侧尺度，故GELU路径不函数守恒；attention才有精确UDV守恒。D必须是buffer，真实任务梯度与分支正则先更新U/V，之后再重平衡，不能把投影放在梯度前充数。",
+          "papers": [
+            "foundation-models:udvr",
+            "foundation-models:proland"
           ]
         }
       ],
@@ -1586,9 +1645,19 @@
             "foundation-models:stablekl",
             "foundation-models:stochastic-rounding"
           ]
+        },
+        {
+          "id": "nov25-udvr",
+          "question": "UDVR和ProLand都约束因子，约束相同吗？",
+          "answer": "不相同。UDVR逐列/行固定长度而允许方向相关；ProLand围绕B的正交性与乘积空间谱更新。二者的几何和优化顺序不能互换。",
+          "example": "教学例：两列完全一样但范数都为目标值可满足UDVR，却不满足B转置B=I。",
+          "papers": [
+            "foundation-models:udvr",
+            "foundation-models:proland"
+          ]
         }
       ],
-      "updated": "2026-11-24",
+      "updated": "2026-11-25",
       "reviewed_papers": [
         "foundation-models:adamw4bit",
         "foundation-models:af-muon",
@@ -1627,7 +1696,8 @@
         "foundation-models:lara-plus-plus",
         "foundation-models:latent-feedback-scaling",
         "foundation-models:aimuon",
-        "foundation-models:stablekl"
+        "foundation-models:stablekl",
+        "foundation-models:udvr"
       ],
       "updates": [
         {
@@ -1800,6 +1870,18 @@
           "source_revisions": {
             "foundation-models:stablekl": "359dca1245dc303d978f5fddf717efd98947fdd5e95bfd716d06e3dadbf522cf",
             "foundation-models:stochastic-rounding": "2d38215ff494778a4ddd9cf33755f3e69edf0422d2af49ca3b99e521070b44c3"
+          }
+        },
+        {
+          "date": "2026-11-25",
+          "papers": [
+            "foundation-models:udvr",
+            "foundation-models:proland"
+          ],
+          "summary": "ProLand协调LoRA乘积空间谱方向，并独立恢复B的Stiefel约束；UDVR不要求正交，只固定长度。长度相等不保证方向独立，QR与单独Muon不是替代实现；两个L1诊断都不支持跨模型训练效果比较。 完整实验按成本终态收录，不以L1诊断或资料收录晋级Evolve。",
+          "source_revisions": {
+            "foundation-models:udvr": "73bc8da43095deda0dbc2394d5a1725fa6a502b961ab4e450aed30e379bca991",
+            "foundation-models:proland": "275d98175b4b5d888c6ccc97f04fa6557753a442a671f465e091e376a8fc3e35"
           }
         }
       ]

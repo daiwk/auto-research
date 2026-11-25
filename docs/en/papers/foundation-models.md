@@ -8,6 +8,9 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [Weight Scale Rebalancing: Transferable Training Recipes for Transformers](<https://arxiv.org/abs/2611.32866v1>) | 2026-11-24 | [English](../../foundation-models/2611.32866-udvr/README-en.md) · [Chinese](../../foundation-models/2611.32866-udvr/README.md) |
+| [Eliciting the Recall Capacity of Linear Attention](<https://arxiv.org/abs/2611.32969v1>) | 2026-11-24 | [English](../../foundation-models/2611.32969-thresholded-longce/README-en.md) · [Chinese](../../foundation-models/2611.32969-thresholded-longce/README.md) |
+| [CriticJEPA: World Models Are Better Critics Than Optimizers](<https://arxiv.org/abs/2611.32357v1>) | 2026-11-24 | [English](../../foundation-models/2611.32357-criticjepa/README-en.md) · [Chinese](../../foundation-models/2611.32357-criticjepa/README.md) |
 | [The KL Divergence Is Never Negative, Except in PyTorch](<https://arxiv.org/abs/2611.30835v1>) | 2026-11-23 | [English](../../foundation-models/2611.30835-stablekl/README-en.md) · [Chinese](../../foundation-models/2611.30835-stablekl/README.md) |
 | [Reliable Behavior Discovery via False Discovery Rate Control](<https://arxiv.org/abs/2611.27104v1>) | 2026-11-20 | [English](../../foundation-models/2611.27104-disco/README-en.md) · [Chinese](../../foundation-models/2611.27104-disco/README.md) |
 | [Accelerating Muon with Spectral Residual Correction](<https://arxiv.org/abs/2611.27077v1>) | 2026-11-20 | [English](../../foundation-models/2611.27077-aimuon/README-en.md) · [Chinese](../../foundation-models/2611.27077-aimuon/README.md) |

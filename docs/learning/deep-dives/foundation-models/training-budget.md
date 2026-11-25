@@ -7,7 +7,7 @@ hide:
 
 # 训练预算：改数据、改更新方向，还是改比较口径
 
-[基础模型](../index.md) · 更新 2026-11-24 · 38 篇主题资料 / 16 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-25 · 39 篇主题资料 / 17 篇重点对照
 
 同一预算内训练得更好，可能来自更合适的数据、逐样本处理、更有效更新或更低状态开销。DoReMi、Mixing Laws、DataOrchestra、Muon 和 ECO 改动不同环节；Muon Paired Budget 则提醒先冻结选参规则，再分别回答等数据和等时间问题。ProLand改变LoRA乘积空间的更新几何，GAVAGAI则给captioning增加显式词区域对齐目标，二者不能仅因都改善训练就混为一类。
 
@@ -41,6 +41,7 @@ hide:
 | [Latent Feedback Is a Compute and Data Amplifier](../../../foundation-models/2611.20404-latent-feedback-scaling/README.md) · [原始来源](https://arxiv.org/abs/2611.20404v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | latent feedback把上一token的顶层状态注入下一token输入，花更多每token计算。本文不只在相同token数比较，而让普通Transformer把相同FLOPs用于更多epoch，并同时控制unique数据和模型规模。 | ArchSpace比较架构/超参的匹配预算曲面；本篇专门研究重复数据及feedback的额外计算。两种拟合系数不可交换，单独输出预测loss不等于已训练候选。 |
 | [Accelerating Muon with Spectral Residual Correction](../../../foundation-models/2611.27077-aimuon/README.md) · [原始来源](https://arxiv.org/abs/2611.27077v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 仅矩阵参数的函数式Algorithm1、NS5和20步合成二次矩阵损失autograd诊断。检查相同动量的步长匹配、c=0退回Muon、独立变换不等于预混合、零矩阵、转置和BF16溢出拒绝；没有语言模型预训练、FineWeb读取、超参数搜索或Evolve算子。CPU与真实A100三seed的指标是数值/机制诊断，不是模型能力比较。 | AF-Muon处理tied embedding上稀疏输入与稠密输出的冲突，以support/cap词表方向和一维RMS去掉AdamW；AIMuon改变的是矩阵参数的谱残差方向，不解决共享词表support问题，也不能自动替代AF-Muon全参数分工。相同步长只排除纯尺度效应，不保证新方向一定更优。 |
 | [The KL Divergence Is Never Negative, Except in PyTorch](../../../foundation-models/2611.30835-stablekl/README.md) · [原始来源](https://arxiv.org/abs/2611.30835v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 近等分布的真实KL是二阶小量，但教科书公式往往由一阶或常数量相减得到，容易返回零、负数或错误梯度。StableKL把闭式KL重写成非负小量的组合，配合差值、补偿算术和解析梯度；它还区分F.kl_div算子误差与输入log-prob本身已丢失的信息。本地只选择其中Exponential族的Rewrite核。 | 随机舍入处理的是FP32小更新转BF16时落回同一格点，靠随机相邻格点在条件期望上保留变化。StableKL处理的是已存参数上的确定性代数消去，靠公式重写与解析梯度减少误差。前者不修复错误KL公式，后者也不能恢复输入量化前已经消失的更新；提高precision、clamp和随机舍入都不是可互换的补丁。 |
+| [Weight Scale Rebalancing: Transferable Training Recipes for Transformers](../../../foundation-models/2611.32866-udvr/README.md) · [原始来源](https://arxiv.org/abs/2611.32866v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | UDVR固定U列/V行的长度，把尺度移入不参与优化的D；attention双侧吸收，FFN仅吸收U侧。它通过不同分支正则与形状规则设置更新尺度，不是训练一个独立幅值参数。 | ProLand协调LoRA乘积空间谱方向，并独立恢复B的Stiefel约束；UDVR不要求正交，只固定长度。长度相等不保证方向独立，QR与单独Muon不是替代实现；两个L1诊断都不支持跨模型训练效果比较。 |
 
 </div>
 
@@ -111,6 +112,12 @@ AF-Muon处理tied embedding上稀疏输入与稠密输出的冲突，以support/
 随机舍入处理的是FP32小更新转BF16时落回同一格点，靠随机相邻格点在条件期望上保留变化。StableKL处理的是已存参数上的确定性代数消去，靠公式重写与解析梯度减少误差。前者不修复错误KL公式，后者也不能恢复输入量化前已经消失的更新；提高precision、clamp和随机舍入都不是可互换的补丁。 Exponential的x先由原始rate之差计算，避免先取ratio再减1。在−0.75≤x≤3上，FP32用K=17的Horner级数计算φ；两侧使用条件良好的log1p或log(rate_q/rate_p)分支。自定义autograd直接返回两rate解析导数。末端非负截断只是稳定公式的边界约定，不是对原始消去公式clamp就算修复。原文strict模式、区间算术与其他分布的误差自由变换不在本地范围。
 
 对照来源：[stablekl](../../../foundation-models/2611.30835-stablekl/README.md) · [stochastic-rounding](../../../foundation-models/2611.13545-stochastic-rounding/README.md)
+
+### Weight Scale Rebalancing: Transferable Training Recipes for Transformers
+
+ProLand协调LoRA乘积空间谱方向，并独立恢复B的Stiefel约束；UDVR不要求正交，只固定长度。长度相等不保证方向独立，QR与单独Muon不是替代实现；两个L1诊断都不支持跨模型训练效果比较。 原文FFN的D更新不含V侧尺度，故GELU路径不函数守恒；attention才有精确UDV守恒。D必须是buffer，真实任务梯度与分支正则先更新U/V，之后再重平衡，不能把投影放在梯度前充数。
+
+对照来源：[udvr](../../../foundation-models/2611.32866-udvr/README.md) · [proland](../../../foundation-models/2611.00236-proland/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -236,9 +243,23 @@ AF-Muon处理tied embedding上稀疏输入与稠密输出的冲突，以support/
 
     对照来源：[stablekl](../../../foundation-models/2611.30835-stablekl/README.md) · [stochastic-rounding](../../../foundation-models/2611.13545-stochastic-rounding/README.md)
 
+### UDVR和ProLand都约束因子，约束相同吗？ {#cross-nov25-udvr}
+
+??? note "展开答案与例子"
+
+    **答案：** 不相同。UDVR逐列/行固定长度而允许方向相关；ProLand围绕B的正交性与乘积空间谱更新。二者的几何和优化顺序不能互换。
+
+    **教学例子：** 教学例：两列完全一样但范数都为目标值可满足UDVR，却不满足B转置B=I。
+
+    对照来源：[udvr](../../../foundation-models/2611.32866-udvr/README.md) · [proland](../../../foundation-models/2611.00236-proland/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-25** · ProLand协调LoRA乘积空间谱方向，并独立恢复B的Stiefel约束；UDVR不要求正交，只固定长度。长度相等不保证方向独立，QR与单独Muon不是替代实现；两个L1诊断都不支持跨模型训练效果比较。 完整实验按成本终态收录，不以L1诊断或资料收录晋级Evolve。
+
+涉及：[udvr](../../../foundation-models/2611.32866-udvr/README.md) · [proland](../../../foundation-models/2611.00236-proland/README.md)
 
 **2026-11-24** · 随机舍入处理的是FP32小更新转BF16时落回同一格点，靠随机相邻格点在条件期望上保留变化。StableKL处理的是已存参数上的确定性代数消去，靠公式重写与解析梯度减少误差。前者不修复错误KL公式，后者也不能恢复输入量化前已经消失的更新；提高precision、clamp和随机舍入都不是可互换的补丁。 完整实验不复现与本地L1组件分开，不晋级Evolve。
 
@@ -280,7 +301,7 @@ AF-Muon处理tied embedding上稀疏输入与稠密输出的冲突，以support/
 
 覆盖 28 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 38 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 39 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -322,6 +343,7 @@ AF-Muon处理tied embedding上稀疏输入与稠密输出的冲突，以support/
 - [Latent Feedback Is a Compute and Data Amplifier](../../../foundation-models/2611.20404-latent-feedback-scaling/README.md)
 - [Accelerating Muon with Spectral Residual Correction](../../../foundation-models/2611.27077-aimuon/README.md)
 - [The KL Divergence Is Never Negative, Except in PyTorch](../../../foundation-models/2611.30835-stablekl/README.md)
+- [Weight Scale Rebalancing: Transferable Training Recipes for Transformers](../../../foundation-models/2611.32866-udvr/README.md)
 
 </details>
 

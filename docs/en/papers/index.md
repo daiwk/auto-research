@@ -4,19 +4,28 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1282 entries from the shared research manifest. English write-ups available: 1282.
+The catalog lists 1291 entries from the shared research manifest. English write-ups available: 1291.
 
 ## Browse by domain
 
-- [Search, ads, recommendation, and LLM applications](recommendation.md): 344 catalog entries, 344 English write-ups
-- [Foundation models](foundation-models.md): 267 catalog entries, 267 English write-ups
+- [Search, ads, recommendation, and LLM applications](recommendation.md): 346 catalog entries, 346 English write-ups
+- [Foundation models](foundation-models.md): 270 catalog entries, 270 English write-ups
 - [Structured decisions / System One](system-one.md): 10 catalog entries, 10 English write-ups
 - [Multimodal models](multimodal-models.md): 32 catalog entries, 32 English write-ups
-- [LLM post-training](post-training.md): 297 catalog entries, 297 English write-ups
-- [Agents](agent-research.md): 332 catalog entries, 332 English write-ups
+- [LLM post-training](post-training.md): 298 catalog entries, 298 English write-ups
+- [Agents](agent-research.md): 335 catalog entries, 335 English write-ups
 
 ## Read in English
 
+- [fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration](../../agent-research/2611.31727-agent-kernel/README-en.md)
+- [Weight Scale Rebalancing: Transferable Training Recipes for Transformers](../../foundation-models/2611.32866-udvr/README-en.md)
+- [RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research](../../agent-research/2611.32508-recurscibench/README-en.md)
+- [LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation](../../recommendation-components/2611.32590-lazunirec/README-en.md)
+- [LARF: Learning-aligned Reasoning Framework for Search Relevance](../../recommendation-components/2611.32125-larf/README-en.md)
+- [Eliciting the Recall Capacity of Linear Attention](../../foundation-models/2611.32969-thresholded-longce/README-en.md)
+- [EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor](../../post-training/2611.32810-epro/README-en.md)
+- [CriticJEPA: World Models Are Better Critics Than Optimizers](../../foundation-models/2611.32357-criticjepa/README-en.md)
+- [CAPE: Coordinating Calibration and Search for Tool-Use Policies](../../agent-research/2611.31938-cape/README-en.md)
 - [Verifiable On-Policy Distillation](../../post-training/2611.30325-vopd/README-en.md)
 - [Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing](../../agent-research/2611.30742-transport-safe-audit/README-en.md)
 - [The KL Divergence Is Never Negative, Except in PyTorch](../../foundation-models/2611.30835-stablekl/README-en.md)

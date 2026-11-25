@@ -31,6 +31,12 @@
 
 - [Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback](../2608.15591-agent-gym/README.md)（`agent-gym`）：业务规则变化往往比 Agent 代码发布更快。Agent Gym 不重新训练或直接改写 acting agent，而在其 JSON 产物之后加独立纠错规则层：确定性条件检测、按作用域收集、按动作层级合并，再由领域专家审核新规则。
 
+### 工具与协作
+
+- [CAPE: Coordinating Calibration and Search for Tool-Use Policies](../2611.31938-cape/README.md)（`cape`）：操作本身正确，序列化仍可能被隐藏parser配置误读。CAPE离线在可复制的候选配置族H上校准调用，编译一个部署时只按响应分支的策略。
+- [fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration](../2611.31727-agent-kernel/README.md)（`agent-kernel`）：SGR（Sub-Graph Recovery）不是新发明依赖恢复：它把已知的子图选择性重试放入LLM内容编排层。异常先令下游不可达，独立兄弟仍可完成；重试只复位失败节点及其不可达后代。
+- [Invariant-Aware Harness Enforcement to Protect LLM Agents from Silent API Failures](../2611.20595-silentguard/README.md)（`silentguard`）：API返回HTTP200并不保证按请求过滤，静默忽略字段、把AND变OR或截断total都可能让Agent相信错误数据。SilentGuard把检查从提示中的建议移到执行harness：结果过确定性不变量才放行，失败真实重试一次，仍失败时按检查可信度隐藏值或警告，不自动生成“修复值”。
+
 ### 自进化与经验复用
 
 - [Harmony Harness: Multi-Objective Self-Evolution of Agent Harnesses](../2610.15150-harmony-harness/README.md)（`harmony-harness`）：单目标演化可能通过放松检查提高功能分数，同时损害安全。Harmony Harness 将功能与安全保持为两个独立目标：每个偏好向量维护一个框架，候选只替换邻域中更差的框架。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -272,6 +278,10 @@
 
 - [PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving](../mlsys2026-prompts/README.md)（`prompts`）：Coordinator、Analyzer 和 Proposal Agent 联合读取 profiler 与知识库，诊断瓶颈并输出可解释的 sharding 候选。
 
+### Harness与自改进
+
+- [RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research](../2611.32508-recurscibench/README.md)（`recurscibench`）：任务内涨分不等于获得可迁移的科研能力。RecurSciPipe从原始科学数据生成共享背景的建模F/分析A任务，先查合同、信息隔离、可执行、scorer行为，再查目标、输入和评价的科学有效性；设计错回Designer，实施错回Builder，两任务全过才准入。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ### 红队技能进化
 
 - [RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution](../2608.27439-redevoagent/README.md)（`redevoagent`）：RedEvoAgent 不直接检索冗长攻击轨迹，而把跨案例经验蒸馏成可读技能；只归因真正决定成败的工具，并且新技能必须在留出验证集上优于 incumbent 才能晋级。
@@ -307,10 +317,6 @@
 ### 失败恢复
 
 - [Sentry: Learning to Recover from LLM Agent Failures at Test Time](../2610.02994-sentry/README.md)（`sentry`）：Sentry 不把所有失败经验长期塞进 Agent 上下文，而是先识别当前行为失败，再按类别和标签检索相关恢复建议。外部验证器只看后续可观察进展、不看任务奖励，确认恢复后才把经验写入 playbook；动作格式错误走单独的硬修复路径。
-
-### 工具与协作
-
-- [Invariant-Aware Harness Enforcement to Protect LLM Agents from Silent API Failures](../2611.20595-silentguard/README.md)（`silentguard`）：API返回HTTP200并不保证按请求过滤，静默忽略字段、把AND变OR或截断total都可能让Agent相信错误数据。SilentGuard把检查从提示中的建议移到执行harness：结果过确定性不变量才放行，失败真实重试一次，仍失败时按检查可信度隐藏值或警告，不自动生成“修复值”。
 
 ### Agent 数据合成
 

@@ -1,0 +1,703 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-25",
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "directory_baseline": "Nov15 finite inventory, not first-publication dates",
+  "raw_directory_receipt_sha256": "17b92b7587f453ca51ba73d93df538c94e975c05ebecb9f1253b406f397dfcb4",
+  "previous_priority_review_sha256": "1f09d753a9d09588e331545cf33d55a0d82b143dbf26b0eb650c685f725c85f1",
+  "directory_comparison_complete": true,
+  "google_added_directory_urls": [
+    {
+      "source_url": "https://research.google/pubs/a-multi-environment-formal-verification-methodology-for-catching-latency-induced-rtl-hangs/",
+      "capture_sha256": "0a1489ebb1743015c811aee5a71d6b8216aa9440d0e97ebea9911f2f55724d1e",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-25",
+      "automatic_retry": false,
+      "is_new_directory_url_relative_to_nov24": false,
+      "decision": "carried_forward_finite_directory_triage",
+      "previous_review": "nov24-latest/priority-primary-selection.json",
+      "previous_decision": "carried_forward_finite_source_triage",
+      "reason": "Same finiteNov15-baseline directory difference previously triaged. Carry forward its disposition without nesting complete historical records or claiming a new paper/full-method review."
+    },
+    {
+      "source_url": "https://research.google/pubs/a-weighted-hierarchical-approach-to-testpoint-configuration-driving-efficient-dft-convergence/",
+      "capture_sha256": "a9d2fb95a7d294601d17f003afcc0f62223e5232b928f596496ec4b770f9c711",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-25",
+      "automatic_retry": false,
+      "is_new_directory_url_relative_to_nov24": false,
+      "decision": "carried_forward_finite_directory_triage",
+      "previous_review": "nov24-latest/priority-primary-selection.json",
+      "previous_decision": "carried_forward_finite_source_triage",
+      "reason": "Same finiteNov15-baseline directory difference previously triaged. Carry forward its disposition without nesting complete historical records or claiming a new paper/full-method review."
+    },
+    {
+      "source_url": "https://research.google/pubs/beyond-the-structural-filter-ai-assisted-inductive-refinement-for-scalable-formal-sign-off-of-multi-stage-arbitration-logic/",
+      "capture_sha256": "a6263ce01347aa9bdf1384e34d89e493c94ae0de5a02e74c446a0a1b25aea0a4",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-25",
+      "automatic_retry": false,
+      "is_new_directory_url_relative_to_nov24": false,
+      "decision": "carried_forward_finite_directory_triage",
+      "previous_review": "nov24-latest/priority-primary-selection.json",
+      "previous_decision": "carried_forward_finite_source_triage",
+      "reason": "Same finiteNov15-baseline directory difference previously triaged. Carry forward its disposition without nesting complete historical records or claiming a new paper/full-method review."
+    },
+    {
+      "source_url": "https://research.google/pubs/covering-a-polyomino-shaped-stain-with-non-overlapping-stickers-of-the-same-shape/",
+      "capture_sha256": "9b677461c3529e49d622e48a2ed1196ec73ab5907e37f0a7e80485ee8ad630de",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-25",
+      "automatic_retry": false,
+      "is_new_directory_url_relative_to_nov24": false,
+      "decision": "carried_forward_finite_directory_triage",
+      "previous_review": "nov24-latest/priority-primary-selection.json",
+      "previous_decision": "carried_forward_finite_source_triage",
+      "reason": "Same finiteNov15-baseline directory difference previously triaged. Carry forward its disposition without nesting complete historical records or claiming a new paper/full-method review."
+    },
+    {
+      "source_url": "https://research.google/pubs/detecting-crosstalk-induced-static-noise-defects-with-a-custom-test-flow/",
+      "capture_sha256": "474f0e543e64a32a1107dc2663b453e8f7b081858d53f898751eb6f20956ec3c",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-25",
+      "automatic_retry": false,
+      "is_new_directory_url_relative_to_nov24": false,
+      "decision": "carried_forward_finite_directory_triage",
+      "previous_review": "nov24-latest/priority-primary-selection.json",
+      "previous_decision": "carried_forward_finite_source_triage",
+      "reason": "Same finiteNov15-baseline directory difference previously triaged. Carry forward its disposition without nesting complete historical records or claiming a new paper/full-method review."
+    },
+    {
+      "source_url": "https://research.google/pubs/dont-pause-every-predictions-matter-in-a-streaming-video/",
+      "capture_sha256": "091ad71b2779bd527ec54f07a2a651e07115071c8157e7cc25b7060c86efdb8d",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-25",
+      "automatic_retry": false,
+      "is_new_directory_url_relative_to_nov24": false,
+      "decision": "carried_forward_finite_directory_triage",
+      "previous_review": "nov24-latest/priority-primary-selection.json",
+      "previous_decision": "carried_forward_finite_source_triage",
+      "reason": "Same finiteNov15-baseline directory difference previously triaged. Carry forward its disposition without nesting complete historical records or claiming a new paper/full-method review."
+    },
+    {
+      "source_url": "https://research.google/pubs/from-prompt-to-probe-left-shifting-soc-debug-with-generative-ai/",
+      "capture_sha256": "09bb141ae09c0e108e731b8564b0f47bc0f581d622e070103dd789184e9f3a83",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-25",
+      "automatic_retry": false,
+      "is_new_directory_url_relative_to_nov24": false,
+      "decision": "carried_forward_finite_directory_triage",
+      "previous_review": "nov24-latest/priority-primary-selection.json",
+      "previous_decision": "carried_forward_finite_source_triage",
+      "reason": "Same finiteNov15-baseline directory difference previously triaged. Carry forward its disposition without nesting complete historical records or claiming a new paper/full-method review."
+    },
+    {
+      "source_url": "https://research.google/pubs/i-want-to-be-pushed-i-want-to-grow-enabling-social-workers-to-design-evaluations-of-llm-augmentation-in-their-work/",
+      "capture_sha256": "81fec0b0110e3a2d64dac3e4f2b0effccac52bd3a89f3304b6c0bb36f54ae77d",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-25",
+      "automatic_retry": false,
+      "is_new_directory_url_relative_to_nov24": true,
+      "decision": "extended_abstract_reviewed_full_materials_unverified_archived",
+      "original_first_publication_date_verified": false,
+      "paper_title": "I Want to Be Pushed, I Want to Grow: Enabling Social Workers to Design Evaluations of LLM Augmentation in Their Work",
+      "published_primary_url": "https://ojs.aaai.org/index.php/AIES/article/download/43241/50801",
+      "published_pdf_sha256": "d37ca67d978d270404ee2b15749c471b14968eaa7b2148daa9ca3bda14e41ced",
+      "published_primary_pages_read": 2,
+      "first_author_affiliation": "Carnegie Mellon University",
+      "verified_priority_organizations": [
+        "Google Research"
+      ],
+      "affiliation_evidence": "Published PDF: Anna Kawakami/CMU; coauthor Renee Shelby/Google Research. Google directory discovery does not replace the byline.",
+      "reason": "Read the complete two-page AIES2026 extended abstract: eight workshops with19 workers,16 worker-authored evaluation cases and an LLM-judge rubric. The work does describe a benchmark; do not dismiss it as non-algorithmic from the abstract. The short publication does not release the executable rubric/cases or enough validation detail. Its linked extended Google Drive version was inaccessible via the web tool, so full-method/public-material availability remains unverified. Archive this precise source limitation, do not invent a scorer or claim full-method rejection.",
+      "linked_extended_version": "https://drive.google.com/file/d/14afU70spaglF9Wbi-v3phVjqBs-4Hfi-/view?usp=sharing",
+      "full_method_review_complete": false,
+      "resolution": "source_limitation_archived_not_implementation_backlog"
+    },
+    {
+      "source_url": "https://research.google/pubs/multi-tiered-physical-aware-formal-ensuring-latency-robustness-in-power-management-architecture-and-design/",
+      "capture_sha256": "6a0b5be5d736395ae9397cee497547e6a1695ae274ae3397b2529e498aea5625",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-25",
+      "automatic_retry": false,
+      "is_new_directory_url_relative_to_nov24": false,
+      "decision": "carried_forward_finite_directory_triage",
+      "previous_review": "nov24-latest/priority-primary-selection.json",
+      "previous_decision": "carried_forward_finite_source_triage",
+      "reason": "Same finiteNov15-baseline directory difference previously triaged. Carry forward its disposition without nesting complete historical records or claiming a new paper/full-method review."
+    },
+    {
+      "source_url": "https://research.google/pubs/navigating-the-cutting-edge-a-collaborative-approach-to-ufs-50-pre-silicon-maturity/",
+      "capture_sha256": "559c78a7869a2273a34e55ff97f8ab140ae9abbe5f19b8cc5b2081d558aae808",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-25",
+      "automatic_retry": false,
+      "is_new_directory_url_relative_to_nov24": false,
+      "decision": "carried_forward_finite_directory_triage",
+      "previous_review": "nov24-latest/priority-primary-selection.json",
+      "previous_decision": "carried_forward_finite_source_triage",
+      "reason": "Same finiteNov15-baseline directory difference previously triaged. Carry forward its disposition without nesting complete historical records or claiming a new paper/full-method review."
+    },
+    {
+      "source_url": "https://research.google/pubs/optimizing-ppa-with-atpg-qor-a-custom-testpoints-reclustering-approach-for-reduced-congestion-and-leakage-with-improved-test-qor/",
+      "capture_sha256": "ae5f62c969fc5175daead314949665101ea2a58093a517c521e8b1a37766ad78",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-25",
+      "automatic_retry": false,
+      "is_new_directory_url_relative_to_nov24": false,
+      "decision": "carried_forward_finite_directory_triage",
+      "previous_review": "nov24-latest/priority-primary-selection.json",
+      "previous_decision": "carried_forward_finite_source_triage",
+      "reason": "Same finiteNov15-baseline directory difference previously triaged. Carry forward its disposition without nesting complete historical records or claiming a new paper/full-method review."
+    },
+    {
+      "source_url": "https://research.google/pubs/safe-coding-rigorous-modular-reasoning-about-software-safety-2/",
+      "capture_sha256": "811ee265923dc9479345ab1c97809a8764d3e206e8b3e597f0fe37c1a1f0b5e7",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-25",
+      "automatic_retry": false,
+      "is_new_directory_url_relative_to_nov24": false,
+      "decision": "carried_forward_finite_directory_triage",
+      "previous_review": "nov24-latest/priority-primary-selection.json",
+      "previous_decision": "carried_forward_finite_source_triage",
+      "reason": "Same finiteNov15-baseline directory difference previously triaged. Carry forward its disposition without nesting complete historical records or claiming a new paper/full-method review."
+    },
+    {
+      "source_url": "https://research.google/pubs/scalable-bayesian-inference-for-time-series-via-divide-and-conquer/",
+      "capture_sha256": "93a86abceb44c4faab73c6b9b20d2232c9b761528d3932544365c2d9c9345ddb",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-25",
+      "automatic_retry": false,
+      "is_new_directory_url_relative_to_nov24": false,
+      "decision": "carried_forward_finite_directory_triage",
+      "previous_review": "nov24-latest/priority-primary-selection.json",
+      "previous_decision": "carried_forward_finite_source_triage",
+      "reason": "Same finiteNov15-baseline directory difference previously triaged. Carry forward its disposition without nesting complete historical records or claiming a new paper/full-method review."
+    },
+    {
+      "source_url": "https://research.google/pubs/searchinject-retrieval-exposure-control-for-indirect-prompt-injection-in-language-model-search/",
+      "capture_sha256": "68bba088be1db80bc78cdd0b96c48743aa3f1391bddcdda89462135d4b870fa3",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-25",
+      "automatic_retry": false,
+      "is_new_directory_url_relative_to_nov24": false,
+      "decision": "carried_forward_finite_directory_triage",
+      "previous_review": "nov24-latest/priority-primary-selection.json",
+      "previous_decision": "carried_forward_finite_source_triage",
+      "reason": "Same finiteNov15-baseline directory difference previously triaged. Carry forward its disposition without nesting complete historical records or claiming a new paper/full-method review."
+    },
+    {
+      "source_url": "https://research.google/pubs/vclp-dft-dashboard-for-efficient-extraction-of-dft-related-electrical-violations-in-multi-power-domain-scan-stitching/",
+      "capture_sha256": "b8b55b65a35227fd48d5a8285b0c2b58eff694aa32172d3abfc3a9f05bbbc46b",
+      "parse_complete": true,
+      "reviewed_on": "2026-11-25",
+      "automatic_retry": false,
+      "is_new_directory_url_relative_to_nov24": false,
+      "decision": "carried_forward_finite_directory_triage",
+      "previous_review": "nov24-latest/priority-primary-selection.json",
+      "previous_decision": "carried_forward_finite_source_triage",
+      "reason": "Same finiteNov15-baseline directory difference previously triaged. Carry forward its disposition without nesting complete historical records or claiming a new paper/full-method review."
+    }
+  ],
+  "new_directory_urls_relative_to_previous_batch": 1,
+  "repository_observations": [
+    {
+      "repository": "google-research/google-research",
+      "event": "pushed",
+      "source_url": "https://github.com/google-research/google-research",
+      "observed_created_at": "2018-10-04T18:42:48Z",
+      "observed_pushed_at": "2026-11-24T22:16:08Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-research/flood-forecasting",
+      "event": "pushed",
+      "source_url": "https://github.com/google-research/flood-forecasting",
+      "observed_created_at": "2025-09-29T10:52:23Z",
+      "observed_pushed_at": "2026-11-24T19:31:10Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-research/openfst",
+      "event": "pushed",
+      "source_url": "https://github.com/google-research/openfst",
+      "observed_created_at": "2025-12-11T12:32:06Z",
+      "observed_pushed_at": "2026-11-24T15:23:22Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-research/mseb",
+      "event": "pushed",
+      "source_url": "https://github.com/google-research/mseb",
+      "observed_created_at": "2025-05-13T18:19:15Z",
+      "observed_pushed_at": "2026-11-24T21:47:53Z",
+      "decision": "carried_forward_source_only_library",
+      "reason": "PreviousNov24 README triage retained; no newly verified standalone paper from this library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-research/opengrm",
+      "event": "pushed",
+      "source_url": "https://github.com/google-research/opengrm",
+      "observed_created_at": "2026-06-01T10:15:05Z",
+      "observed_pushed_at": "2026-11-24T19:20:28Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-research/nmr-otoc",
+      "event": "pushed",
+      "source_url": "https://github.com/google-research/nmr-otoc",
+      "observed_created_at": "2026-11-11T21:58:14Z",
+      "observed_pushed_at": "2026-11-25T00:46:51Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/mujoco",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/mujoco",
+      "observed_created_at": "2021-08-27T12:25:48Z",
+      "observed_pushed_at": "2026-11-25T01:34:09Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/gemma",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/gemma",
+      "observed_created_at": "2024-02-20T18:39:01Z",
+      "observed_pushed_at": "2026-11-24T16:30:13Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/mujoco_menagerie",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/mujoco_menagerie",
+      "observed_created_at": "2022-09-05T10:37:53Z",
+      "observed_pushed_at": "2026-11-24T00:44:44Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/optax",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/optax",
+      "observed_created_at": "2020-06-12T15:45:35Z",
+      "observed_pushed_at": "2026-11-24T16:10:27Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/mujoco_playground",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/mujoco_playground",
+      "observed_created_at": "2024-12-03T22:39:09Z",
+      "observed_pushed_at": "2026-11-25T00:35:40Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/alphagenome",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/alphagenome",
+      "observed_created_at": "2024-10-16T09:33:11Z",
+      "observed_pushed_at": "2026-11-24T11:50:39Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/mujoco_mpc",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/mujoco_mpc",
+      "observed_created_at": "2022-12-01T11:39:35Z",
+      "observed_pushed_at": "2026-11-24T00:51:11Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/mujoco_warp",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/mujoco_warp",
+      "observed_created_at": "2025-03-17T22:35:01Z",
+      "observed_pushed_at": "2026-11-24T19:51:28Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/formal-conjectures",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/formal-conjectures",
+      "observed_created_at": "2025-05-12T08:22:05Z",
+      "observed_pushed_at": "2026-11-24T15:36:54Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/torax",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/torax",
+      "observed_created_at": "2024-03-05T14:20:02Z",
+      "observed_pushed_at": "2026-11-25T00:09:23Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/dm_env",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/dm_env",
+      "observed_created_at": "2019-07-08T13:58:50Z",
+      "observed_pushed_at": "2026-11-24T23:19:49Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/robotics-antigravity-plugin",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/robotics-antigravity-plugin",
+      "observed_created_at": "2026-11-16T18:50:28Z",
+      "observed_pushed_at": "2026-11-25T02:50:22Z",
+      "decision": "source_only_plugin_observation",
+      "reason": "Read official README: robotics agent/controller plugin, simulation and real-arm examples. No new standalone paper identity verified in the README; not a new algorithm inferred from repository activity. No robot operation, package installation or provider call.",
+      "readme_capture_sha256": "c93ab5d076a14daff49e1918f22c6d2e9c3d98466acb32c6e2b3fd950ad52e86"
+    },
+    {
+      "repository": "google-deepmind/gbench",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/gbench",
+      "observed_created_at": "2026-10-30T00:44:55Z",
+      "observed_pushed_at": "2026-11-24T18:34:30Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "google-deepmind/reaf-sim",
+      "event": "pushed",
+      "source_url": "https://github.com/google-deepmind/reaf-sim",
+      "observed_created_at": "2026-07-28T23:19:02Z",
+      "observed_pushed_at": "2026-11-24T13:27:14Z",
+      "decision": "carried_forward_source_only_library",
+      "reason": "PreviousNov24 simulation-library source observation retained; not a new paper date.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/agentbox",
+      "event": "created",
+      "source_url": "https://github.com/facebookresearch/agentbox",
+      "observed_created_at": "2026-11-24T22:39:03Z",
+      "observed_pushed_at": "2026-11-25T01:04:17Z",
+      "decision": "partial_infrastructure_release_existing_paper",
+      "reason": "Read official README: Meta FAIR container orchestrator originally built for AIRA2 and subsequently refactored, not release of the complete research/evolution pipeline. Linked arXiv2603.26499 is existing AIRA2, originalMarch27,2026, not aNovember25 first release. Do not relabel its null complete-paper-code field or reopen the high-cost campaign for a new repository creation.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/faiss",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/faiss",
+      "observed_created_at": "2017-02-07T16:07:05Z",
+      "observed_pushed_at": "2026-11-24T15:13:45Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/pytorch3d",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/pytorch3d",
+      "observed_created_at": "2019-10-25T02:23:45Z",
+      "observed_pushed_at": "2026-11-24T16:54:12Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/fairchem",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/fairchem",
+      "observed_created_at": "2019-09-26T04:47:27Z",
+      "observed_pushed_at": "2026-11-25T02:48:09Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/MHR",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/MHR",
+      "observed_created_at": "2025-09-07T22:12:57Z",
+      "observed_pushed_at": "2026-11-24T03:00:23Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/projectaria_tools",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/projectaria_tools",
+      "observed_created_at": "2023-06-15T06:06:29Z",
+      "observed_pushed_at": "2026-11-24T07:13:35Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/project_superdex",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/project_superdex",
+      "observed_created_at": "2026-08-20T02:04:05Z",
+      "observed_pushed_at": "2026-11-25T03:15:44Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/balance",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/balance",
+      "observed_created_at": "2022-11-15T15:04:10Z",
+      "observed_pushed_at": "2026-11-24T20:01:29Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/vrs",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/vrs",
+      "observed_created_at": "2021-09-08T03:09:54Z",
+      "observed_pushed_at": "2026-11-24T18:48:55Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/momentum",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/momentum",
+      "observed_created_at": "2024-06-14T16:03:53Z",
+      "observed_pushed_at": "2026-11-25T02:59:15Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/spdl",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/spdl",
+      "observed_created_at": "2024-06-27T19:57:35Z",
+      "observed_pushed_at": "2026-11-24T09:53:10Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/neuroai",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/neuroai",
+      "observed_created_at": "2026-04-14T12:59:23Z",
+      "observed_pushed_at": "2026-11-24T15:35:02Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/atlas-lean",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/atlas-lean",
+      "observed_created_at": "2026-05-26T22:31:48Z",
+      "observed_pushed_at": "2026-11-25T04:11:42Z",
+      "decision": "existing_catalog_identity",
+      "reason": "Existing ATLAS/AutoformBot linked identity; a library push alone is not a new method.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/DCPerf",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/DCPerf",
+      "observed_created_at": "2021-08-09T17:00:50Z",
+      "observed_pushed_at": "2026-11-24T22:43:00Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/autoform-bot",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/autoform-bot",
+      "observed_created_at": "2026-05-26T22:37:11Z",
+      "observed_pushed_at": "2026-11-24T21:25:12Z",
+      "decision": "existing_catalog_identity",
+      "reason": "Existing AutoformBot/AutoformBench; no changed defining method verified by the push.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/GenIA",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/GenIA",
+      "observed_created_at": "2026-10-08T15:34:21Z",
+      "observed_pushed_at": "2026-11-24T21:35:31Z",
+      "decision": "existing_terminal_high_cost_not_reopened",
+      "reason": "Official README links historical2610.12388; existing ledger already records verified Meta collaboration, author code/license and terminal not-reproduced-high-cost. November memory/appearance optimization notes alone do not establish an affordable complete bounded campaign. No weights/render-stack probe or automatic reopening.",
+      "readme_capture_sha256": "c97974b195e85a8daa794ec95c064cab29b6d025097711215874bec4c2fbda99"
+    },
+    {
+      "repository": "facebookresearch/OpenApps",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/OpenApps",
+      "observed_created_at": "2025-09-22T14:34:26Z",
+      "observed_pushed_at": "2026-11-24T22:53:20Z",
+      "decision": "historical_identity_only_not_new_publication",
+      "reason": "Official README links2511.20766, a2025 historical benchmark identity, with CPU Python app infrastructure. November2026 push is not its first publication. This recent-paper intake does not claim a full-method review, new implementation or rejection of the historical benchmark.",
+      "readme_capture_sha256": "c204e3db9c676ccfb82ff9c38b311a8b9027978e43f6fd2eab20b995fd1fc780"
+    },
+    {
+      "repository": "facebookresearch/PrivacyGuard",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/PrivacyGuard",
+      "observed_created_at": "2025-05-15T14:05:24Z",
+      "observed_pushed_at": "2026-11-25T00:03:59Z",
+      "decision": "source_only_library_observation",
+      "reason": "Read official README: privacy-analysis library/attacks and LLM analysis utilities; no new standalone paper identity verified from this README in the finite intake. Do not invent a new paper date or run privacy attacks.",
+      "readme_capture_sha256": "9c7d00fe1dbfd06e11b702d1cb4d500f7ad81e6bc19ea51bcc57ca1fa4e9376d"
+    },
+    {
+      "repository": "facebookresearch/projectaria_gen2_pilot_dataset",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/projectaria_gen2_pilot_dataset",
+      "observed_created_at": "2025-09-15T23:50:59Z",
+      "observed_pushed_at": "2026-11-24T11:22:32Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/stereo-splat",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/stereo-splat",
+      "observed_created_at": "2026-09-29T09:22:22Z",
+      "observed_pushed_at": "2026-11-24T11:16:13Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/secpriv-skill",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/secpriv-skill",
+      "observed_created_at": "2026-05-19T20:43:28Z",
+      "observed_pushed_at": "2026-11-24T00:07:13Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/logact",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/logact",
+      "observed_created_at": "2026-09-25T19:36:42Z",
+      "observed_pushed_at": "2026-11-24T23:34:24Z",
+      "decision": "existing_catalog_identity",
+      "reason": "Existing LogAct; preserve terminal decisions rather than reopen from a push.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/lean_kernel_verify",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/lean_kernel_verify",
+      "observed_created_at": "2026-10-20T04:49:48Z",
+      "observed_pushed_at": "2026-11-24T19:41:52Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/agentbox",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/agentbox",
+      "observed_created_at": "2026-11-24T22:39:03Z",
+      "observed_pushed_at": "2026-11-25T01:04:17Z",
+      "decision": "partial_infrastructure_release_existing_paper",
+      "reason": "Read official README: Meta FAIR container orchestrator originally built for AIRA2 and subsequently refactored, not release of the complete research/evolution pipeline. Linked arXiv2603.26499 is existing AIRA2, originalMarch27,2026, not aNovember25 first release. Do not relabel its null complete-paper-code field or reopen the high-cost campaign for a new repository creation.",
+      "readme_capture_sha256": null
+    },
+    {
+      "repository": "facebookresearch/projectaria_hloc_example",
+      "event": "pushed",
+      "source_url": "https://github.com/facebookresearch/projectaria_hloc_example",
+      "observed_created_at": "2026-11-05T18:00:55Z",
+      "observed_pushed_at": "2026-11-24T17:32:58Z",
+      "decision": "event_observed_not_full_method_reviewed",
+      "reason": "Bounded repository recall only. No standalone release/date/novel-method conclusion made for this general tooling/library event.",
+      "readme_capture_sha256": null
+    }
+  ],
+  "unique_repository_identities": 44,
+  "selected_priority_papers": [],
+  "priority_selection_note": "No new Google/Meta paper selected in this finite source pass; not a claim that no such paper exists globally.",
+  "industrial_priority": [
+    {
+      "identity": "recommendation:lazunirec",
+      "source_url": "https://arxiv.org/pdf/2611.32590v1",
+      "evidence": "Fixedv1 Alibaba International byline, Section4.8/Table5:10% production traffic for one week inOctober2026; GMV+4.01% trigger-free,+3.06% trigger-based. Complete retriever+ranker replacement, not isolated local-loss effect."
+    },
+    {
+      "identity": "recommendation:larf",
+      "source_url": "https://arxiv.org/pdf/2611.32125v1",
+      "evidence": "Fixedv1 Tencent Yuanbao byline, Section5.6/Table5: deployed1.7B student vs production baseline; high-satisfaction+1.77%, low-satisfaction−3.22%. Allocation/duration/sample size undisclosed, not invented."
+    }
+  ],
+  "unselected_industrial_leads": [
+    {
+      "id": "2611.32855",
+      "source_url": "https://arxiv.org/pdf/2611.32855v1",
+      "reason": "Fixedv1 first-author Etsy; SIDECAR theoretical/certified semantic-ID decoding study, with production-scale transfer discussed separately. No qualifying quantified real production A/B verified. Do not substitute offline certificates for the industrial intake gate or relabel as Google from an author's name."
+    }
+  ],
+  "source_exceptions": [
+    {
+      "url": "https://ai.meta.com/research/",
+      "http_status": 200,
+      "sha256": "c935b06874c827a4df71e4906f1eb12b752722f83d802e3d30df1b351821698a",
+      "capture": "a9d72a37dea2e2a913eb.html",
+      "parse_complete": false,
+      "error_type": null
+    },
+    {
+      "url": "https://ai.meta.com/research/publications/",
+      "http_status": 200,
+      "sha256": "de23e0c264ff944ee66adb95a36d8b8613ad646ba1147b3f87d843d0d73f88a0",
+      "capture": "6215fb19a98209f86f48.html",
+      "parse_complete": false,
+      "error_type": null
+    }
+  ],
+  "notes": [
+    "Two incomplete Meta landing inventories do not prove absence of new Meta work.",
+    "The newly created AgentBox appears in both created and pushed observations; it is one repository, not two papers.",
+    "Existing high-cost GenIA stays terminal; no archive is silently reintroduced as a reproduction TODO.",
+    "New directory items, first submissions, revisions, bulletin dates and source-code releases remain separate.",
+    "This finite selection does not close all metadata/source review since theNov15 watermark."
+  ]
+}

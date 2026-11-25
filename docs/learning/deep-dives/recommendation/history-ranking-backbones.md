@@ -7,7 +7,7 @@ hide:
 
 # DIN、HSTU、LONGER、SlimPer、RankMixer：究竟让谁与谁交互？
 
-[搜广推](../index.md) · 更新 2026-11-24 · 75 篇主题资料 / 7 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-25 · 76 篇主题资料 / 8 篇重点对照
 
 比较排序骨干前先画三条边：历史到历史、候选到历史、字段到字段。DIN按候选激活历史，HSTU在输入窗口内逐层改写历史状态，LONGER先合并再以短查询读长KV，SlimPer反复读取用户池但只传播小知识库，RankMixer则更换异构字段交互。它们可处于同一流水线的不同位置，不能按一个长度变量或一张本地结果表排总名次。
 
@@ -32,6 +32,7 @@ hide:
 | [RankMixer: Scaling Up Ranking Models in Industrial Recommenders](../../../reproductions/2507.15551-rankmixer/README.md) · [原始来源](https://arxiv.org/abs/2507.15551)<br>章节：背景与主要改动、核心公式、本地复现 | 异构feature tokens按head/token做固定重排，输出位置各有独立FFN；用不同分量相遇后学习组合，替代字段交互中的attention。 | token数与head/宽度约束必须匹配；这不禁止上游历史模块使用attention，也不自动处理超长行为压缩。Sparse路由和本地实现状态需另看，不能泛化全模型无attention。 |
 | [X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction](../../../recommendation-components/2611.24283-xsplit-argus/README.md) · [原始来源](https://arxiv.org/abs/2611.24283v1)<br>章节：背景与主要改动、核心公式、同主题对照 | 将候选无关的旧历史压成因果编码器末K个状态，在线只编码最近M个事件；候选token再对两段记忆做cross-attention。离线缓存是服务时的执行安排，不是训练时detach压缩器。点击监督头与原始logit的L1蒸馏头共享历史表示，但上线只使用监督头。 | ARGUS前作按反馈→物品分解下一事件分布；X-split重点是候选无关历史缓存和候选特定点击logit蒸馏，目标排列与预测头不能照搬。二者的本地负结果/诊断也不能互相当作能力对照。 |
 | [DNA: Unlocking Depth Scaling in CTR Models](../../../recommendation-components/2611.25659-dna/README.md) · [原始来源](https://arxiv.org/abs/2611.25659v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | DNA把请求U与历史S组成候选无关的双流：每层请求和候选F分别读取同一组历史K/V，随后历史token再反向读取刚更新的U。这样下一层看到的是受当前请求塑形的历史，而不是每层重投影同一S0。请求与历史状态可在同一请求的所有候选间共享。 | LONGER先用少量query读取长历史，后续主要在压缩token上计算；DNA不靠删掉历史token，而让每个历史token从少量请求token吸收上下文，下一层继续读更新后的完整S。两者都关注候选共享，但共享的对象和更新时机不同；本地诊断不提供二者推荐指标胜负。 |
+| [LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation](../../../recommendation-components/2611.32590-lazunirec/README.md) · [原始来源](https://arxiv.org/abs/2611.32590v1)<br>章节：与已有方法的关系、结果、负控与边界 | 执行Eq7低秩任务投影、Eq10/11 sparse shared/private输出组合、Eq12–14 EMA evidence/相对权重/停止梯度及Eq15–17请求内MaxSim/KL，并用真实autograd验证参数路径。输入router scores/expert outputs/已探测gradient与interest probabilities是显式张量，不虚构未给细节的条件router或概率头。未实现完整Transformer/RMSNorm/attention mask、embedding、场景数据管线、expert网络、MoE z-loss、训练调度与部署；因此不是完整模型、正式benchmark或Evolve算子。 | OneTrans-V2用阶段隔离token共享因果用户上下文，精排向预排传递中心化logits/sigmoid信号；LazUnirec关注召回与排序的梯度冲突，用task-private LoRA/expert及方向可靠性区分更新，并向检索蒸馏请求内softmax分布。共享上下文不等于所有参数完全共用，独立任务参数也不自动保证梯度正交。旧OneTrans-V2公开MovieLens链路是concept demo，本批则只验局部算子，不能比较二者的代理能力分数。 |
 
 </div>
 
@@ -60,6 +61,12 @@ Eq1–11：历史编码因果且候选无关；训练memory只选目标之前状
 LONGER先用少量query读取长历史，后续主要在压缩token上计算；DNA不靠删掉历史token，而让每个历史token从少量请求token吸收上下文，下一层继续读更新后的完整S。两者都关注候选共享，但共享的对象和更新时机不同；本地诊断不提供二者推荐指标胜负。 共有D次请求read、D次候选read，却只有D-1次历史update，最后一层不再更新无人读取的S。read中各行为组使用不同K/V投影，各非序列token使用独立SwiGLU；update对全部请求token的拼接做composite K/V投影，行为组共享各自FFN，padding置零。QKNorm及head缩放保留。
 
 对照来源：[dna](../../../recommendation-components/2611.25659-dna/README.md) · [longer](../../../reproductions/2505.04421-longer/README.md)
+
+### LazUnirec蒸馏与OneTrans-V2的精排→预排信号相同吗？
+
+OneTrans-V2用阶段隔离token共享因果用户上下文，精排向预排传递中心化logits/sigmoid信号；LazUnirec关注召回与排序的梯度冲突，用task-private LoRA/expert及方向可靠性区分更新，并向检索蒸馏请求内softmax分布。共享上下文不等于所有参数完全共用，独立任务参数也不自动保证梯度正交。旧OneTrans-V2公开MovieLens链路是concept demo，本批则只验局部算子，不能比较二者的代理能力分数。
+
+对照来源：[lazunirec](../../../recommendation-components/2611.32590-lazunirec/README.md) · [onetrans-v2](../../../reproductions/2609.28589-onetrans-v2/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -115,9 +122,23 @@ LONGER先用少量query读取长历史，后续主要在压缩token上计算；D
 
     对照来源：[dna](../../../recommendation-components/2611.25659-dna/README.md) · [longer](../../../reproductions/2505.04421-longer/README.md)
 
+### LazUnirec蒸馏与OneTrans-V2的精排→预排信号相同吗？ {#cross-nov25-lazunirec}
+
+??? note "展开答案与例子"
+
+    **答案：** OneTrans-V2用阶段隔离token共享因果用户上下文，精排向预排传递中心化logits/sigmoid信号；LazUnirec关注召回与排序的梯度冲突，用task-private LoRA/expert及方向可靠性区分更新，并向检索蒸馏请求内softmax分布。共享上下文不等于所有参数完全共用，独立任务参数也不自动保证梯度正交。旧OneTrans-V2公开MovieLens链路是concept demo，本批则只验局部算子，不能比较二者的代理能力分数。
+
+    **教学例子：** 教学例：LazUnirec两候选分数同时加同一常量不改变请求内softmax教师；不能因此认为任意独立sigmoid蒸馏目标也有相同不变性。
+
+    对照来源：[lazunirec](../../../recommendation-components/2611.32590-lazunirec/README.md) · [onetrans-v2](../../../reproductions/2609.28589-onetrans-v2/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-25** · 执行Eq7低秩任务投影、Eq10/11 sparse shared/private输出组合、Eq12–14 EMA evidence/相对权重/停止梯度及Eq15–17请求内MaxSim/KL，并用真实autograd验证参数路径。输入router scores/expert outputs/已探测gradient与interest probabilities是显式张量，不虚构未给细节的条件router或概率头。未实现完整Transformer/RMSNorm/attention mask、embedding、场景数据管线、expert网络、MoE z-loss、训练调度与部署；因此不是完整模型、正式benchmark或Evolve算子。
+
+涉及：[lazunirec](../../../recommendation-components/2611.32590-lazunirec/README.md) · [onetrans-v2](../../../reproductions/2609.28589-onetrans-v2/README.md)
 
 **2026-11-24** · 按 ECHO v3 §4.6 更新线上证据：快手和快手极速版的 App 总使用时长分别提升 0.240% 和 0.373%。v3 未给出人均提升；此更新不改变长历史机制对比，也不是本地选择器损失的实测结果。
 
@@ -135,7 +156,7 @@ LONGER先用少量query读取长历史，后续主要在压缩token上计算；D
 
 覆盖 73 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 75 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 76 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -214,6 +235,7 @@ LONGER先用少量query读取长历史，后续主要在压缩token上计算；D
 - [Zenith: Scaling up Ranking Models for Billion-scale Livestreaming Recommendation](../../../reproductions/2601.21285-zenith/README.md)
 - [X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction](../../../recommendation-components/2611.24283-xsplit-argus/README.md)
 - [DNA: Unlocking Depth Scaling in CTR Models](../../../recommendation-components/2611.25659-dna/README.md)
+- [LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation](../../../recommendation-components/2611.32590-lazunirec/README.md)
 
 </details>
 

@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-11-24 · 82 篇主题资料 / 45 篇重点对照
+[Agent](../index.md) · 更新 2026-11-25 · 83 篇主题资料 / 46 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
@@ -70,6 +70,7 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?](../../../agent-research/2611.27116-coevobench/README.md) · [原始来源](https://arxiv.org/abs/2611.27116v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验 | CoEvoBench不是另一个固定自进化算法，而是测LLM researcher能否自主驱动模型权重和harness联合开发的benchmark。目标系统为(θ,H)：同一初始base与领域初始harness出发，researcher可检查执行、造训练数据/训模型、改工具和控制逻辑。开发后提交冻结的模型—harness对，在独立Test任务上执行。关键不是是否做过“诊断—训练—改代码”，而是先前反馈能否改变下一步干预和最终候选选择。 | Sage-Evolve固定anchor并改变active observation来发现新训练缺口，提出具体自改进策略；CoEvoBench固定benchmark开发/选择/Test契约，把选择改模型还是改harness交给被测researcher，并评价其提交结果。前者的“改观察”不是偷偷改最终评分器，后者的“两个可改旋钮”也不是交替更新就算成功。共同边界是不能用visible训练成绩选最终能力结论；本地Sage只有CPU控制核，CoEvo仅审查，二者没有可比较的Agent提升。 |
 | [Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing](../../../agent-research/2611.30742-transport-safe-audit/README.md) · [原始来源](https://arxiv.org/abs/2611.30742v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定 | 不同Agent产生不同轨迹；即使裁判在给定(X,Y)时看不到Agent身份，其sensitivity/specificity的平均值也会随成功/失败轨迹分布改变。论文连接scalar transport偏差、支持与识别、随机人工audit、anytime monitoring和rank sets；这些统计工具本身不是新发明。主要证据是semi-synthetic，公共Agent数据的既有分析未在本文独立重跑，不据此声称轨迹长度有因果作用。 | CoEvoBench保护Selection/Test内容并审计训练血缘，回答候选是否越界及能否泛化；本篇问即使访问隔离正确，LLM judge误差是否能跨轨迹分布transport。二者不能替代：无数据泄漏不等于judge已校准，AIPW也不能消除被评Agent读了gold造成的污染。CoEvo完整系统本地未跑，本篇也没有live judge结果可横比。 |
 | [MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research](../../../agent-research/2611.30011-morse/README.md) · [原始来源](https://arxiv.org/abs/2611.30011v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定 | 流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。核心是研究—实现—验证的自主Editor与可扩展服务，不是固定候选列表或门控公式本身。 | Harness²固定工具表面，用Propose–Probe–Compose执行对照改当前任务harness，再跨任务保存经验；MORSE在流式记忆设计中把在线文献研究和host批准的感知工具获取纳入搜索，保留当前head迭代。二者不能简化为同一“反思循环”：MORSE的validation概率/成本gate与持续服务扩展有专门契约，Harness²匿名selector也不是其scorer。本地Harness²机制替身与本篇review-only没有可比较Agent分数。 |
+| [RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research](../../../agent-research/2611.32508-recurscibench/README.md) · [原始来源](https://arxiv.org/abs/2611.32508v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验 | RecurSciBench用成对科学建模F/分析A任务作为经验来源，冻结evolved state后在独立G-test评价within-type、cross-type和cross-domain迁移；backbone权重固定，source gain不能代替迁移结论。 | CoEvoBench允许researcher选择权重训练/harness干预，在Visible/Selection/Test中审计开发与选择；RecurSciBench固定权重，测不同系统与经验来源能否迁往新科学任务。前者回答干预选得怎样，后者回答经验在何种条件有效；都要隔离被评policy和gold。 |
 
 </div>
 
@@ -290,6 +291,12 @@ CCI在八个参考benchmark上，先取十项结构特征的任务中位数，�
 20轮accuracy后5轮efficiency。accuracy要求平均correct-option probability至少增加0.004；efficiency要求延迟≤父代0.9，允许每轮概率/正确数损失0.003/2，同时相对stage-entry累计损失≤0.008/4。都须延迟≤1s、write load≤1、完整validation问题数不变。accuracy可从qualified archive选，efficiency不取archive；合并后必须重新验证。64张persistent帧之外另有16秒近期窗口，text/vector无全局存储上限，不能宣传总memory恒定。Editor只看训练逐题trace及validation聚合；benchmark/答案链接经broker禁止。审查保留估计latency与实测latency、frame cap与无限text/vector、已装服务与实际采用服务、rejected diff复用与重新验证的区别。作者用gold计算validation指标只发生在host/evaluator侧，不允许把gold给Solver/Editor。本地没有通过率或性能负控实测。
 
 对照来源：[morse](../../../agent-research/2611.30011-morse/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### 从源任务适配到经验迁移：同一记忆也可能帮一域伤一域
+
+RecurSciPipe的F/A联合设计保留科学schema、采样结构与provenance，A的证据仅来自F的公开训练部分。准入需要四执行检查加三科学检查，失败按设计/实施层分流修复。38对source与20个独立test F构成96任务，四系统六source设置得到24冻结state；测试任务间不携带经验。各run按reference gap归一化后任务内均值，再对任务相对gain取均值，不能改成总分相对变化。附录A的source反馈因系统不同，但G-test targets/scores统一不可见。作者半数state负gain说明条件性经验可能被错误固化，不证明RSI普遍无效。每任务A800/96GiB/6h上限及长rollout矩阵成本过高，本地仅审查；公式教学和源码平台链接不构成复现。
+
+对照来源：[recurscibench](../../../agent-research/2611.32508-recurscibench/README.md) · [coevobench](../../../agent-research/2611.27116-coevobench/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -665,9 +672,23 @@ CCI在八个参考benchmark上，先取十项结构特征的任务中位数，�
 
     对照来源：[morse](../../../agent-research/2611.30011-morse/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
 
+### 与CoEvoBench相比，这里递归自改进的可变对象相同吗？ {#cross-cross-nov25-recurscibench}
+
+??? note "展开答案与例子"
+
+    **答案：** 不同。RecurSciBench四系统冻结backbone权重，分别改变解、记忆、harness或改进策略，测跨任务迁移；CoEvoBench允许researcher选择训练权重或修改harness，并审计开发/选择/Test访问。
+
+    **教学例子：** 教学例：把在源任务学到的验证切分规则迁往新科学域，是经验迁移；根据反馈决定训9B权重还是改工具，是另一种干预选择。
+
+    对照来源：[recurscibench](../../../agent-research/2611.32508-recurscibench/README.md) · [coevobench](../../../agent-research/2611.27116-coevobench/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-25** · 仅review-only固定v1、F/A来源隔离、冻结G-test协议、公式、成本和同主题比较；不创建算法/adapter、科学任务生成、scorer、reference solver、LLM演化或benchmark。测试targets/scores必须对被测Agent不可见；只实现归一化不能冒称本篇复现。无虚构seed指标或GPU回执。 完整高成本campaign终态不复现，审查DONE。
+
+涉及：[recurscibench](../../../agent-research/2611.32508-recurscibench/README.md) · [coevobench](../../../agent-research/2611.27116-coevobench/README.md)
 
 **2026-11-24** · 仅资料收录与成本审查：固定v1、来源/元数据、访问边界、成本和同主题比较。没有本地算法模块、Editor、研究broker、视频服务、harness代码演化、benchmark、GPU试跑或Evolve operator。不能实现几个gate后称已复现MORSE，也不需要给review-only制造三seed指标或GPU receipt。 完整campaign终态不复现，审查DONE。
 
@@ -813,7 +834,7 @@ CCI在八个参考benchmark上，先取十项结构特征的任务中位数，�
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 82 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 83 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -899,6 +920,7 @@ CCI在八个参考benchmark上，先取十项结构特征的任务中位数，�
 - [CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?](../../../agent-research/2611.27116-coevobench/README.md)
 - [Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing](../../../agent-research/2611.30742-transport-safe-audit/README.md)
 - [MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research](../../../agent-research/2611.30011-morse/README.md)
+- [RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research](../../../agent-research/2611.32508-recurscibench/README.md)
 
 </details>
 

@@ -7,7 +7,7 @@ hide:
 
 # 候选生成与搜索匹配
 
-[搜广推](index.md) / 164 个问题 · 41 篇论文
+[搜广推](index.md) / 168 个问题 · 42 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">164 个问题 · 41 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">168 个问题 · 42 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:larf" data-paper-title="LARF: Learning-aligned Reasoning Framework for Search Relevance" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="LARF: Learning-aligned Reasoning Framework for Search Relevance 搜广推与 LLM 应用 Yuanbao Team, Tencent 2026-11-24 LARF把搜索相关性定义为语义、权威、质量、时效与总体五个0–5级ordinal标签。第一阶段用多Agent合成label-conditioned CoT供SFT学习；gold仅用于训练target构造和离线checker，不给评测Agent。第二阶段用属性、query内排序、规则一致性奖励，再直接优化terminal六digit决策margin。第三阶段用五个分类head与辅助生成head联合训练，服务时丢弃生成head，不再逐token输出CoT。 完整私有训练与生产实验成本过高，不复现（审查 DONE）；L1 CPU奖励/目标组件，diagnostic only。完整私有训练与生产实验成本过高，不复现（审查 DONE）；不是完整LARF或可晋级能力实现。模块接受外部训练标签、预测标签、权重、rule布尔结果、logits与mask。实现Eq.2–10/12；没有训练Agent可读取gold的接口。listwise_reward只处理一个query的文档组，拒绝无可比gold文档对或，因为原式没有定义分母为0的fallback。margin最强竞争者并列取首个digit、hinge恰好为0取零次梯度是本地约定。  retrieval-matching CPU机制组件 搜广推 候选生成与搜索匹配 LARF的推理为什么只在训练需要，而不是在线必须生成？ 五个分类head与辅助生成head共享表示并联合受监督；生成rationale只作为训练目标。服务时删除生成head，分类路径直接给五维标签，不能把删除生成loss的纯分类器等同此训练过程。 教学例：训练时同时考作文解释与六类判别，部署只读取分类head；这不代表模型在每个搜索请求先生成整段解释再丢弃。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<span id="paper-recommendation-larf-dc044298" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-bc67fd70a0646b7a">LARF的推理为什么只在训练需要，而不是在线必须生成？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Alarf">LARF: Learning-aligned Reasoning Framework for Search Relevance</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Yuanbao Team, Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>五个分类head与辅助生成head共享表示并联合受监督；生成rationale只作为训练目标。服务时删除生成head，分类路径直接给五维标签，不能把删除生成loss的纯分类器等同此训练过程。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：训练时同时考作文解释与六类判别，部署只读取分类head；这不代表模型在每个搜索请求先生成整段解释再丢弃。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32125v1">原论文</a> · <a href="../../../../recommendation-components/2611.32125-larf/">实现解读</a> · <a href="#qa-bc67fd70a0646b7a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:larf" data-paper-title="LARF: Learning-aligned Reasoning Framework for Search Relevance" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="LARF: Learning-aligned Reasoning Framework for Search Relevance 搜广推与 LLM 应用 Yuanbao Team, Tencent 2026-11-24 LARF把搜索相关性定义为语义、权威、质量、时效与总体五个0–5级ordinal标签。第一阶段用多Agent合成label-conditioned CoT供SFT学习；gold仅用于训练target构造和离线checker，不给评测Agent。第二阶段用属性、query内排序、规则一致性奖励，再直接优化terminal六digit决策margin。第三阶段用五个分类head与辅助生成head联合训练，服务时丢弃生成head，不再逐token输出CoT。 完整私有训练与生产实验成本过高，不复现（审查 DONE）；L1 CPU奖励/目标组件，diagnostic only。完整私有训练与生产实验成本过高，不复现（审查 DONE）；不是完整LARF或可晋级能力实现。模块接受外部训练标签、预测标签、权重、rule布尔结果、logits与mask。实现Eq.2–10/12；没有训练Agent可读取gold的接口。listwise_reward只处理一个query的文档组，拒绝无可比gold文档对或，因为原式没有定义分母为0的fallback。margin最强竞争者并列取首个digit、hinge恰好为0取零次梯度是本地约定。  retrieval-matching CPU机制组件 搜广推 候选生成与搜索匹配 list-wise奖励怎样区分gold tie与predicted tie？ gold相等的文档对被排除，因为没有有向顺序可监督；gold不同但预测相等的pair计半分，经过2c−1后对应零中心。其余pair按顺序一致或倒序给正负贡献，再乘组大小置信权重。 教学例：gold=(0,0,5)时前两文档不互比；若三个预测都为2，每个有效pair都是预测tie，c=0.5，list-wise奖励为0。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-906d278d64454c04">list-wise奖励怎样区分gold tie与predicted tie？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Alarf">LARF: Learning-aligned Reasoning Framework for Search Relevance</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Yuanbao Team, Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>gold相等的文档对被排除，因为没有有向顺序可监督；gold不同但预测相等的pair计半分，经过2c−1后对应零中心。其余pair按顺序一致或倒序给正负贡献，再乘组大小置信权重。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：gold=(0,0,5)时前两文档不互比；若三个预测都为2，每个有效pair都是预测tie，c=0.5，list-wise奖励为0。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32125v1">原论文</a> · <a href="../../../../recommendation-components/2611.32125-larf/">实现解读</a> · <a href="#qa-906d278d64454c04">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:larf" data-paper-title="LARF: Learning-aligned Reasoning Framework for Search Relevance" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="LARF: Learning-aligned Reasoning Framework for Search Relevance 搜广推与 LLM 应用 Yuanbao Team, Tencent 2026-11-24 LARF把搜索相关性定义为语义、权威、质量、时效与总体五个0–5级ordinal标签。第一阶段用多Agent合成label-conditioned CoT供SFT学习；gold仅用于训练target构造和离线checker，不给评测Agent。第二阶段用属性、query内排序、规则一致性奖励，再直接优化terminal六digit决策margin。第三阶段用五个分类head与辅助生成head联合训练，服务时丢弃生成head，不再逐token输出CoT。 完整私有训练与生产实验成本过高，不复现（审查 DONE）；L1 CPU奖励/目标组件，diagnostic only。完整私有训练与生产实验成本过高，不复现（审查 DONE）；不是完整LARF或可晋级能力实现。模块接受外部训练标签、预测标签、权重、rule布尔结果、logits与mask。实现Eq.2–10/12；没有训练Agent可读取gold的接口。listwise_reward只处理一个query的文档组，拒绝无可比gold文档对或，因为原式没有定义分母为0的fallback。margin最强竞争者并列取首个digit、hinge恰好为0取零次梯度是本地约定。  retrieval-matching CPU机制组件 搜广推 候选生成与搜索匹配 LARF的query内PNR是否就是Yuanbao Rubric的集合效用？ 不是。PNR比较同一query下单文档ordinal顺序与gold顺序；Yuanbao Rubric允许多个文档共同覆盖正向标准，并对任一文档触发负标准扣分。二者优化对象和线上指标不同，不可直接相加或比较增幅。 教学例：两个各覆盖一半事实的文档可能有高集合覆盖，但各自相关性等级相同而无可比PNR pair；两种信号解决不同问题。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ae7ef0c9940f6c00">LARF的query内PNR是否就是Yuanbao Rubric的集合效用？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Alarf">LARF: Learning-aligned Reasoning Framework for Search Relevance</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Yuanbao Team, Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。PNR比较同一query下单文档ordinal顺序与gold顺序；Yuanbao Rubric允许多个文档共同覆盖正向标准，并对任一文档触发负标准扣分。二者优化对象和线上指标不同，不可直接相加或比较增幅。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个各覆盖一半事实的文档可能有高集合覆盖，但各自相关性等级相同而无可比PNR pair；两种信号解决不同问题。</p>
+<p class="ar-learning-sources">依据：与已有方法的关系、核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32125v1">原论文</a> · <a href="../../../../recommendation-components/2611.32125-larf/">实现解读</a> · <a href="#qa-ae7ef0c9940f6c00">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:larf" data-paper-title="LARF: Learning-aligned Reasoning Framework for Search Relevance" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="LARF: Learning-aligned Reasoning Framework for Search Relevance 搜广推与 LLM 应用 Yuanbao Team, Tencent 2026-11-24 LARF把搜索相关性定义为语义、权威、质量、时效与总体五个0–5级ordinal标签。第一阶段用多Agent合成label-conditioned CoT供SFT学习；gold仅用于训练target构造和离线checker，不给评测Agent。第二阶段用属性、query内排序、规则一致性奖励，再直接优化terminal六digit决策margin。第三阶段用五个分类head与辅助生成head联合训练，服务时丢弃生成head，不再逐token输出CoT。 完整私有训练与生产实验成本过高，不复现（审查 DONE）；L1 CPU奖励/目标组件，diagnostic only。完整私有训练与生产实验成本过高，不复现（审查 DONE）；不是完整LARF或可晋级能力实现。模块接受外部训练标签、预测标签、权重、rule布尔结果、logits与mask。实现Eq.2–10/12；没有训练Agent可读取gold的接口。listwise_reward只处理一个query的文档组，拒绝无可比gold文档对或，因为原式没有定义分母为0的fallback。margin最强竞争者并列取首个digit、hinge恰好为0取零次梯度是本地约定。  retrieval-matching CPU机制组件 搜广推 候选生成与搜索匹配 terminal margin只惩罚相邻等级吗，哪些token能收到梯度？ Eq.8–10在所有非gold的六digit候选中取最强竞争者，而不是仅相邻等级。只在唯一有效terminal位置对gold和该竞争digit产生梯度；其他位置与非digit词表项为零。 教学例：gold=2而class5分数最高时，margin压class5并抬class2；不能只压class1/3。两个terminal标记的样本被排除，不任意选最后一个。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-7125e2d71693a7f8">terminal margin只惩罚相邻等级吗，哪些token能收到梯度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Alarf">LARF: Learning-aligned Reasoning Framework for Search Relevance</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Yuanbao Team, Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Eq.8–10在所有非gold的六digit候选中取最强竞争者，而不是仅相邻等级。只在唯一有效terminal位置对gold和该竞争digit产生梯度；其他位置与非digit词表项为零。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：gold=2而class5分数最高时，margin压class5并抬class2；不能只压class1/3。两个terminal标记的样本被排除，不任意选最后一个。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32125v1">原论文</a> · <a href="../../../../recommendation-components/2611.32125-larf/">实现解读</a> · <a href="#qa-7125e2d71693a7f8">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:lser-serving" data-paper-title="From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation 搜广推与 LLM 应用 Autodesk 2026-11-19 LSER在双塔召回的用户侧融合会话、较长期历史、请求特征与可选LLM语义向量。较重encoder异步nearline计算，在线请求只读取已完成向量并融合/ANN检索。LLM路径并不替代BERT4Rec式encoder，而提供同一时间窗口的补充语义视角。Fixed-v1 primary source 完整实验：成本过高，不复现（审查 DONE）。l0_interface: 仅低成本机制/接口诊断，不是完整能力复现。l0_interface: 仅低成本机制/接口诊断，不是完整能力复现。完整实验：成本过高，不复现（审查 DONE）。只实现显式事件的point-in-time切分与已完成缓存向量选择。调用方必须先将events/records隔离为同一user并完成资格过滤与catalog映射；本接口没有user_id权限隔离，不是完整生产防泄漏系统。缺必需向量时显式要求外部cold-start；LLM缺失或关闭时需外部兼容baseline fusion，不能自动改变治疗模型的输入维度。  大模型能力与推荐融合 近线用户表示与召回 搜广推 候选生成与搜索匹配 论文线上CTR+10.3%证明LLM向量有效吗？ 不证明。线上实验的LLM辅助特征关闭；它验证从规则引擎迁移到学习召回与nearline路径。LLM增量只在离线对照中隔离。 教学例：BERT4Rec+nearline赢规则不能自动推导出再打开LLM会在生产继续增益。 2026-11-20">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
 <span id="paper-recommendation-lser-serving-5c99505b" class="ar-learning-paper-anchor"></span>

@@ -1,0 +1,308 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "papers": {
+    "foundation-models:udvr": {
+      "questions": [
+        {
+          "id": "buffer-not-learned-gain",
+          "level": "basics",
+          "question": "D不参与优化，为什么仍能改变？",
+          "answer": "每步U/V更新后，重平衡把被移除的方向尺度乘进D。它随更新轨迹变化，但没有独立梯度或学习率。",
+          "example": "教学例：U某列的范数翻倍，归一回原长度时attention对应D元素吸收这个2；D不需要出现在Adam参数表。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-25"
+        },
+        {
+          "id": "two-branch-scale-transfer",
+          "level": "mechanism",
+          "question": "为什么不能把attention的D=SDR直接用于原文FFN？",
+          "answer": "FFN有激活，原文只将U尺度移入D，V仍投影但其尺度被丢弃；同时用系数2的FFN正则补足传入D的收缩。双侧守恒只属于attention分支。",
+          "example": "教学例：保持UD不变却将V除以2，GELU(xUD)V输出减半；把它断言为原函数不变会误判。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-25"
+        },
+        {
+          "id": "length-not-stiefel",
+          "level": "comparison",
+          "question": "UDVR和ProLand都约束因子，约束相同吗？",
+          "answer": "不相同。UDVR逐列/行固定长度而允许方向相关；ProLand围绕B的正交性与乘积空间谱更新。二者的几何和优化顺序不能互换。",
+          "example": "教学例：两列完全一样但范数都为目标值可满足UDVR，却不满足B转置B=I。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-25"
+        },
+        {
+          "id": "post-step-real-buffer",
+          "level": "implementation",
+          "question": "怎样验收重平衡不是只在初始化执行？",
+          "answer": "用真实损失反传并更新U/V，逐步调用重平衡后核对方向范数；另查D不在参数表、attention乘积守恒及零方向拒绝。只测初始化shape不够。",
+          "example": "教学例：跑4次Adam，每次更新后检查所有方向长度；对零列应报错，而不是加未声明epsilon伪造方向。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-25"
+        }
+      ]
+    },
+    "foundation-models:thresholded-longce": {
+      "questions": [
+        {
+          "id": "benefit-not-importance-oracle",
+          "level": "basics",
+          "question": "TLCE会自动找到所有应该依赖远处信息的token吗？",
+          "answer": "不会。权重取决于当前模型的full概率是否已经显著高于short；尚未利用的远处线索不会因为理论上有用就被加权。",
+          "example": "教学例：远处有答案但full与short概率同为0.1，差为0，权重仍为1。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-25"
+        },
+        {
+          "id": "strict-and-offset-boundaries",
+          "level": "mechanism",
+          "question": "Δ=1和窗内位置127时，TLCE会加权吗？",
+          "answer": "都不会。必须Δ严格大于1且offset至少128；符合条件后exp(Δ)最多为5，并对valid目标的总权重归一化。",
+          "example": "教学例：Δ分别为1/2/2，offset为128/127/128时权重为1/1/5；不是1/e²/e²。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-25"
+        },
+        {
+          "id": "supervision-versus-readout",
+          "level": "comparison",
+          "question": "TLCE能替代MERLIN的多状态路由吗？",
+          "answer": "不能。TLCE重分配训练损失而不改变记忆结构；MERLIN改变分段状态的读取权重。未存的信息和未学会使用的信息是不同瓶颈。",
+          "example": "教学例：若两个历史压进同一状态后已无法区分，给后续token更大loss不能保证还原；保留多个状态则改变了可读取信息。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-25"
+        },
+        {
+          "id": "reset-and-detach",
+          "level": "implementation",
+          "question": "为什么只传入两组任意log-prob不足以验证短窗协议？",
+          "answer": "权重公式不能证明short来自真正重置的因果窗口。需要实际分窗前向、检查边界重置且无梯度，并核对full梯度只为负归一化权重。",
+          "example": "教学例：650-token输入在512处重新调用模型，short第512位置应等同独立短序列首位，而不继承前512的GRU状态。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-25"
+        }
+      ]
+    },
+    "foundation-models:criticjepa": {
+      "questions": [
+        {
+          "id": "ranking-is-not-gradient-quality",
+          "level": "basics",
+          "question": "能正确比较两个计划，就表示世界模型梯度能持续改进动作吗？",
+          "answer": "不表示。排序仅需候选间相对评分有信息；优化需要沿局部梯度移动也改善真实执行。持续搜索还可能利用预测误差。",
+          "example": "教学例：模型把安全绕行排在撞墙前，仍可能在绕行附近沿错误梯度把动作推向墙；该例说明逻辑差异，不是论文实测轨迹。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-25"
+        },
+        {
+          "id": "anchor-not-final-score",
+          "level": "mechanism",
+          "question": "anchor惩罚为什么不留在最终选择cost里？",
+          "answer": "anchor限制每个候选偏离自身提案的距离，用于局部精修；最终需要比较实际rollout目标cost，而不是奖励离初始候选更近。",
+          "example": "教学例：A的rollout cost为1但移动0.5，B为2但未移动；最终应选A，不能因为A离提案远就让anchor翻转排名。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-25"
+        },
+        {
+          "id": "prediction-planning-and-candidate-source",
+          "level": "comparison",
+          "question": "CriticJEPA比预测—规划评测多区分了什么？",
+          "answer": "前者在同一冻结模型里改变候选来源与搜索方式，区分能否排序、梯度是否有效和环境成功；后者用冻结解码协议拆表示与预测误差，并单独要求真实规划结果。",
+          "example": "教学例：一步误差相同的模型可对flow提案有用、对长搜索生成的离分布候选无用；因此不能仅按一步loss选规划器。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-25"
+        },
+        {
+          "id": "no-fixture-for-proposer",
+          "level": "implementation",
+          "question": "用预先写好的好动作候选能算低成本CriticJEPA复现吗？",
+          "answer": "不能。conditional flow的训练、生成及跨层目标/时间窗决定候选分布，是核心机制。固定候选可诊断critic接口，但不能声称复现提案能力；完整矩阵已按成本终态不复现。",
+          "example": "教学例：手填一条到目标的动作再让critic选中，只证明列表里有答案；本地因此不写这种可执行operator，也不报告控制成功率。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-25"
+        }
+      ]
+    }
+  },
+  "english_question_units": {
+    "qa/foundation-models:udvr/buffer-not-learned-gain": {
+      "source_sha256": "7e4be6d2b122c082a72ea25b4ef80f9b74b314a3b59541cec9d7ef31714d1d59",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can D change without being optimized?",
+        "answer": "Rebalancing transfers removed U/V scales into D after each factor update. D follows the trajectory without an independent gradient or learning rate.",
+        "example": "Illustration: doubling a U-column norm transfers a factor2 into its attention D entry when repinned, without adding D to Adam."
+      }
+    },
+    "qa/foundation-models:udvr/two-branch-scale-transfer": {
+      "source_sha256": "a73714fbadee9277d1d94ee97cd035a707d0e5a8f2e266c215cf5c40dc034a52",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not use attention's D=SDR update in the paper's FFN?",
+        "answer": "The activation leads the paper to transfer only U scale into D while projecting V and discarding its scale. The FFN regularizer has factor2 to restore shrinkage reaching D. Two-sided product invariance is an attention property.",
+        "example": "Illustration: holding UD fixed and dividing V by2 halves GELU(xUD)V, so a function-invariance assertion would be wrong."
+      }
+    },
+    "qa/foundation-models:udvr/length-not-stiefel": {
+      "source_sha256": "5c8974ca7b84e924c16f42041cc5da9470a9bd76a281bdd3a96b6a312fa9ed7b",
+      "reviewed": true,
+      "fields": {
+        "question": "Do UDVR and ProLand impose the same factor constraint?",
+        "answer": "No. UDVR fixes individual lengths while allowing correlated directions. ProLand combines B orthogonality with product-space spectral updates. Their geometry and update ordering are not interchangeable.",
+        "example": "Illustration: identical columns with the target norm can satisfy UDVR but not B-transpose-B=I."
+      }
+    },
+    "qa/foundation-models:udvr/post-step-real-buffer": {
+      "source_sha256": "e82c0a617ad7b5b20138c3079eed18d4149dd6c8ca72f40da62dd1b94ec926d6",
+      "reviewed": true,
+      "fields": {
+        "question": "How do we check rebalancing beyond initialization?",
+        "answer": "Backpropagate a real loss, update U/V, rebalance each step and check direction norms. Also verify D is not a parameter, attention-product invariance and rejection of zero directions. Initial shapes alone are insufficient.",
+        "example": "Illustration: check every direction after four Adam updates; a zero column must fail instead of receiving an undeclared epsilon direction."
+      }
+    },
+    "qa/foundation-models:thresholded-longce/benefit-not-importance-oracle": {
+      "source_sha256": "ebd61262849108e73368dda595478d8d1d92e6ef547e8168fad9f656c0dc7812",
+      "reviewed": true,
+      "fields": {
+        "question": "Does TLCE find every token that should use distant context?",
+        "answer": "No. Weighting depends on the current model already assigning substantially higher probability with full context. A theoretically useful but unused cue receives no extra weight.",
+        "example": "Illustration: if both probabilities are0.1 despite a distant answer, the difference is0 and the weight remains1."
+      }
+    },
+    "qa/foundation-models:thresholded-longce/strict-and-offset-boundaries": {
+      "source_sha256": "4674818b88967b0aad991d20403061a6f0f004dbf9c9cd2206899d9a44eb3821",
+      "reviewed": true,
+      "fields": {
+        "question": "Do delta=1 or window offset127 receive extra weight?",
+        "answer": "No. Delta must be strictly above1 and offset at least128. Eligible exponentiated differences are capped at5 and normalized over valid targets' total weight.",
+        "example": "Illustration: deltas1/2/2 at offsets128/127/128 receive1/1/5, not1/e-squared/e-squared."
+      }
+    },
+    "qa/foundation-models:thresholded-longce/supervision-versus-readout": {
+      "source_sha256": "fef1847ec5aa993cefafd287515d3308f58213a4546e6661fe25f6a592463255",
+      "reviewed": true,
+      "fields": {
+        "question": "Can TLCE replace MERLIN's multi-state routing?",
+        "answer": "No. TLCE reallocates loss without changing memory structure; MERLIN changes segment-state readout. Missing information and unlearned use of available information are different bottlenecks.",
+        "example": "Illustration: weighting a later token cannot guarantee recovery after two histories become indistinguishable in one state; preserving multiple states changes what can be read."
+      }
+    },
+    "qa/foundation-models:thresholded-longce/reset-and-detach": {
+      "source_sha256": "2422965e517e35e575350d1fadbecbc6547cd07d62abae457c1cd202019fd895",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are two arbitrary log-probability arrays insufficient to verify the short-window protocol?",
+        "answer": "The weighting formula cannot prove that short scores came from reset causal windows. Run actual chunked no-grad forwards, check reset boundaries and confirm the full gradient is only the negative normalized weight.",
+        "example": "Illustration: for650tokens, call the model again at512; its short score there must match an independent first position without the preceding GRU state."
+      }
+    },
+    "qa/foundation-models:criticjepa/ranking-is-not-gradient-quality": {
+      "source_sha256": "73d3988dc3f921fd0758c0a914732fa807aed1a701196637196b23d2054f7016",
+      "reviewed": true,
+      "fields": {
+        "question": "Does ranking two plans imply gradients can keep improving actions?",
+        "answer": "No. Ranking needs informative relative scores; optimization needs local gradient moves to improve real execution. Prolonged search may exploit prediction error.",
+        "example": "Illustration: a model may rank a safe detour above a collision yet have gradients near that detour pointing toward a wall. This is a teaching example, not a measured trajectory."
+      }
+    },
+    "qa/foundation-models:criticjepa/anchor-not-final-score": {
+      "source_sha256": "5129bb0fa07e91b7a9514731bb5fb24d71ba5ebbb42a419b0ff9830875b07550",
+      "reviewed": true,
+      "fields": {
+        "question": "Why remove the anchor from the final selection score?",
+        "answer": "The anchor limits local departure from each proposal during polish. Final selection compares rollout objective costs rather than rewarding proximity to a starting proposal.",
+        "example": "Illustration: if A has rollout cost1 after moving0.5 and unchanged B has cost2, final selection chooses A without letting an anchor reverse the ranking."
+      }
+    },
+    "qa/foundation-models:criticjepa/prediction-planning-and-candidate-source": {
+      "source_sha256": "d81475bb597cc9472528d001248cc30d1546b34ecdb7e1eb4e4482033ac3b58d",
+      "reviewed": true,
+      "fields": {
+        "question": "What distinction does CriticJEPA add to prediction-planning evaluation?",
+        "answer": "It changes candidate sources and search under a frozen model to separate ranking, useful gradients and execution. The evaluation protocol instead decomposes representation/prediction errors with a frozen decoder and separately requires real planning outcomes.",
+        "example": "Illustration: an unchanged one-step-error model may rank flow proposals usefully but not out-of-distribution prolonged-search outputs; one-step loss alone cannot select the planner."
+      }
+    },
+    "qa/foundation-models:criticjepa/no-fixture-for-proposer": {
+      "source_sha256": "01451b2fda040e0f27043039758f185e0a4c6984f981b7be92e6250cc853f8cd",
+      "reviewed": true,
+      "fields": {
+        "question": "Do hand-written good actions count as a low-cost CriticJEPA reproduction?",
+        "answer": "No. Trained conditional flows, generation and cross-level target/time contracts define the candidate distribution. Fixed candidates can diagnose an interface, not proposal capability; full experiments are terminally cost-deferred.",
+        "example": "Illustration: inserting a goal-reaching action by hand only proves the list contains an answer. No such executable operator or control-success metric is provided locally."
+      }
+    }
+  }
+}

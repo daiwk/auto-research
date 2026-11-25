@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "recommendation:lazunirec": {
+      "questions": [
+        {
+          "id": "nov25-basics",
+          "level": "basics",
+          "question": "共享同一骨干为何还需要task-private参数？",
+          "answer": "召回与排序目标不同，共享参数可能收到冲突更新。低秩残差与private expert提供任务容量，shared专家仍传递共同知识；这不是梯度已正交的证明。",
+          "example": "教学例：同一历史对点击召回有用、对转化排序却需不同交互；两个任务可读同一用户表示但使用不同低秩投影。",
+          "added": "2026-11-25",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov25-mechanism",
+          "level": "mechanism",
+          "question": "梯度可靠性等于梯度幅值或方向正确性吗？",
+          "answer": "都不是。对归一化方向计算历史EMA方差，小方差表示相对稳定。稳定错误方向也可有高evidence；权重还依赖同batch其他任务，不是概率置信度。",
+          "example": "教学例：[1,0]与[100,0]有相同L2方向；[1,0]/[-1,0]反复翻转则有较大方向方差，即使每步梯度范数都为1。",
+          "added": "2026-11-25",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov25-comparison",
+          "level": "comparison",
+          "question": "LazUnirec蒸馏与OneTrans-V2的精排→预排信号相同吗？",
+          "answer": "OneTrans-V2用阶段隔离token共享因果用户上下文，精排向预排传递中心化logits/sigmoid信号；LazUnirec关注召回与排序的梯度冲突，用task-private LoRA/expert及方向可靠性区分更新，并向检索蒸馏请求内softmax分布。共享上下文不等于所有参数完全共用，独立任务参数也不自动保证梯度正交。旧OneTrans-V2公开MovieLens链路是concept demo，本批则只验局部算子，不能比较二者的代理能力分数。",
+          "example": "教学例：LazUnirec两候选分数同时加同一常量不改变请求内softmax教师；不能因此认为任意独立sigmoid蒸馏目标也有相同不变性。",
+          "added": "2026-11-25",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov25-implementation",
+          "level": "implementation",
+          "question": "为什么权重和排序teacher必须detach，clip后要再归一吗？",
+          "answer": "Eq14权重和Eq16排序teacher均停止梯度，避免模型绕过任务监督去优化evidence或反向改teacher。§4.1.4先相对batch均值归一再clip到[0.8,1.2]，不额外二次归一。",
+          "example": "教学例：裁剪后权重[0.8,1.2,1.2]均值为1.0667；再除均值会改变既定损失，且不再严格保留裁剪下界。",
+          "added": "2026-11-25",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        }
+      ]
+    }
+  },
+  "english_question_units": {
+    "qa/recommendation:lazunirec/nov25-basics": {
+      "source_sha256": "9e76b5e43a40412ae9903184137d4dcd9aaf3c109a1f5ee271e94ec46a75fc09",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain task-private parameters under a shared backbone?",
+        "answer": "Retrieval and ranking objectives can yield conflicting shared updates. Low-rank residuals and private experts add task capacity while shared experts transfer common knowledge; orthogonal gradients are not guaranteed.",
+        "example": "Teaching example: the same history may support click retrieval while conversion ranking needs different interactions; both tasks can read one user context with distinct low-rank projections."
+      }
+    },
+    "qa/recommendation:lazunirec/nov25-mechanism": {
+      "source_sha256": "4d8e235ab2a5e5fd45ad617e0a2dee1a447b565c703e98a461a1f41ff71fdc22",
+      "reviewed": true,
+      "fields": {
+        "question": "Is gradient reliability its magnitude or correctness?",
+        "answer": "Neither. EMA variance of normalized directions measures relative stability. A consistently wrong direction can have high evidence, and batch-relative weights are not calibrated confidence probabilities.",
+        "example": "Teaching example: [1,0] and[100,0] have the same L2 direction; alternating[1,0]/[-1,0] has directional variance even though every gradient norm is one."
+      }
+    },
+    "qa/recommendation:lazunirec/nov25-comparison": {
+      "source_sha256": "60d65eee4172dfb251f1d12dfbc369669c661676e8f94cca9638869def9d1e37",
+      "reviewed": true,
+      "fields": {
+        "question": "Is its distillation the same as OneTrans-V2 fine-to-pre-ranking transfer?",
+        "answer": "OneTrans-V2 shares causal user context through stage-isolated tokens and transfers centered-logit/sigmoid signals from fine ranking to pre-ranking. LazUnirec addresses retrieval/ranking gradient conflict with task-private LoRA/experts and directional reliability, distilling a request-local softmax distribution into retrieval. Shared context does not mean fully shared parameters, and private parameters do not guarantee orthogonal gradients. The existing MovieLens OneTrans-V2 path is a concept demo, while this batch checks only operators; their proxy capability scores are not comparable.",
+        "example": "Teaching example: adding one constant to both teacher candidate scores leaves a request-local softmax unchanged; an arbitrary independent sigmoid-distillation objective need not share that invariance."
+      }
+    },
+    "qa/recommendation:lazunirec/nov25-implementation": {
+      "source_sha256": "3a14b1631382c5b3de7e44e5a9ed8741770bab6f5aed4bfde4e09514d81183c3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why detach weights and the ranking teacher, and renormalize after clipping?",
+        "answer": "Equations14/16 detach weights and teacher to avoid optimizing evidence or backpropagating into the teacher through this objective. Section4.1.4 normalizes by batch reliability before clipping to[0.8,1.2], without a second normalization.",
+        "example": "Teaching example: clipped weights[0.8,1.2,1.2] average1.0667; renormalizing changes the loss and no longer strictly retains the stated lower bound."
+      }
+    }
+  }
+}

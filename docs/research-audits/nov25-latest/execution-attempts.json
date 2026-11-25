@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-25",
+  "attempts": [
+    {
+      "source_commit": "690a9e2348a8e0bd04480cc4027cd2a49de7db50",
+      "cpu_result": "failed_before_final_artifact_write",
+      "failure": "AttributeError: agent_kernel module has no REQUIRES_GPU_VALIDATION; both standard-library Agent diagnostics also lacked the unified device keyword contract",
+      "cpu_artifact": null,
+      "cuda_result": "passed_component_diagnostic",
+      "cuda_artifact": "raw-cuda-attempt1.json",
+      "frozen_proof": "frozen-sources-attempt1.json",
+      "cuda_elapsed_seconds": 1.3741332478821278,
+      "resolution": "Added explicit CPU-only module declaration and device keyword/rejection guards to the two Agent diagnostics. Added a regression test. Algorithm bodies unchanged. A new source snapshot and fresh bounded CPU/CUDA run are required; do not admit the old snapshot as current evidence.",
+      "full_experiment_executed": false
+    },
+    {
+      "source_commit": "216bddb6c17650d3b04ffbb7667908f5e63e1c1f",
+      "cpu_result": "failed_before_final_artifact_write",
+      "failure": "ValueError: wrong diagnostic identity/tier: agent-kernel; the two Agent diagnostics returned legacy flat fields instead of the unified evaluation_tier/checks/metrics envelope",
+      "cpu_artifact": null,
+      "cuda_result": "passed_component_diagnostic",
+      "cuda_artifact": "raw-cuda-attempt2.json",
+      "frozen_proof": "frozen-sources-attempt2.json",
+      "cuda_elapsed_seconds": 0.5999139584600925,
+      "resolution": "Kept all legacy diagnostic fields, added the required L1 envelope using actual invariant checks and finite counters, without changing either Agent algorithm. A new seven-component CPU contract test validates every diagnostic before the final source freeze. 54 contract/Agent tests passed. A final fresh source-bound run is required; previous snapshots remain historical evidence.",
+      "full_experiment_executed": false
+    }
+  ],
+  "automatic_high_cost_retry": false,
+  "preserved_prior_results": true
+}

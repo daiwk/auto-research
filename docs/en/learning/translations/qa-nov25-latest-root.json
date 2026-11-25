@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:lazunirec/nov25-basics": {
+      "source_sha256": "9e76b5e43a40412ae9903184137d4dcd9aaf3c109a1f5ee271e94ec46a75fc09",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain task-private parameters under a shared backbone?",
+        "answer": "Retrieval and ranking objectives can yield conflicting shared updates. Low-rank residuals and private experts add task capacity while shared experts transfer common knowledge; orthogonal gradients are not guaranteed.",
+        "example": "Teaching example: the same history may support click retrieval while conversion ranking needs different interactions; both tasks can read one user context with distinct low-rank projections."
+      }
+    },
+    "qa/recommendation:lazunirec/nov25-mechanism": {
+      "source_sha256": "4d8e235ab2a5e5fd45ad617e0a2dee1a447b565c703e98a461a1f41ff71fdc22",
+      "reviewed": true,
+      "fields": {
+        "question": "Is gradient reliability its magnitude or correctness?",
+        "answer": "Neither. EMA variance of normalized directions measures relative stability. A consistently wrong direction can have high evidence, and batch-relative weights are not calibrated confidence probabilities.",
+        "example": "Teaching example: [1,0] and[100,0] have the same L2 direction; alternating[1,0]/[-1,0] has directional variance even though every gradient norm is one."
+      }
+    },
+    "qa/recommendation:lazunirec/nov25-comparison": {
+      "source_sha256": "60d65eee4172dfb251f1d12dfbc369669c661676e8f94cca9638869def9d1e37",
+      "reviewed": true,
+      "fields": {
+        "question": "Is its distillation the same as OneTrans-V2 fine-to-pre-ranking transfer?",
+        "answer": "OneTrans-V2 shares causal user context through stage-isolated tokens and transfers centered-logit/sigmoid signals from fine ranking to pre-ranking. LazUnirec addresses retrieval/ranking gradient conflict with task-private LoRA/experts and directional reliability, distilling a request-local softmax distribution into retrieval. Shared context does not mean fully shared parameters, and private parameters do not guarantee orthogonal gradients. The existing MovieLens OneTrans-V2 path is a concept demo, while this batch checks only operators; their proxy capability scores are not comparable.",
+        "example": "Teaching example: adding one constant to both teacher candidate scores leaves a request-local softmax unchanged; an arbitrary independent sigmoid-distillation objective need not share that invariance."
+      }
+    },
+    "qa/recommendation:lazunirec/nov25-implementation": {
+      "source_sha256": "3a14b1631382c5b3de7e44e5a9ed8741770bab6f5aed4bfde4e09514d81183c3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why detach weights and the ranking teacher, and renormalize after clipping?",
+        "answer": "Equations14/16 detach weights and teacher to avoid optimizing evidence or backpropagating into the teacher through this objective. Section4.1.4 normalizes by batch reliability before clipping to[0.8,1.2], without a second normalization.",
+        "example": "Teaching example: clipped weights[0.8,1.2,1.2] average1.0667; renormalizing changes the loss and no longer strictly retains the stated lower bound."
+      }
+    }
+  }
+}

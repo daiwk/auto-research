@@ -1,0 +1,593 @@
+{
+  "schema_version": 2,
+  "batch": "2026-11-25-latest-components",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "device": "cpu",
+  "accelerator": "CPU",
+  "source_sha256": {
+    "scripts/run_nov25_latest_components.py": "8920737bb4b2a58f962d88f0a1c8376be78fef046c3c23410ca576fe6a3cfcc2",
+    "scripts/run_nov18_latest_components.py": "0fe50e8e554f6663b3c8c179654400d10bfbb557ceb9cefb9880da78f164b7c1",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "docs/research-audits/nov25-latest/preflight.json": "c6a5d2b4ce2940f86e23e9660b207cd51c2d5cfc4ece31e7c6fe9085b7ac5003",
+    "src/auto_research/foundation_models/udvr.py": "c744b408031a6ac07de2a79d27f94fc85c2b44b76e8ec65244c5c9e7d9312918",
+    "src/auto_research/foundation_models/thresholded_longce.py": "c3630846ff02b79ef7fb4345f52d6c7dca2da1eea14ff8e256795788224ada14",
+    "src/auto_research/post_training/epro.py": "99ac17f3f2d5bfbcc066e3385c93583eee363e0a574eb9982db62c9768217288",
+    "src/auto_research/reproductions/larf_components.py": "ebe7e3dbafc26eee9cd4e8325d75e4efc4d045859c967ae3558878c477db480d",
+    "src/auto_research/reproductions/lazunirec_components.py": "0031741469f05f94a08ac592f567e466308fce934297ae5f180d32949d851260",
+    "src/auto_research/agent_research/agent_kernel.py": "d541eb28b28e1b04459d5caf15224068a2deb19ac6eff81a1b03ef47958c53d9",
+    "src/auto_research/agent_research/cape.py": "513ec26cefc7a0497bcd83a3a5fd861885978904dff1d136cab18235af656f66"
+  },
+  "code_commit": "61ff050d4ef437fb7516944f2a9167a763db46b9",
+  "components": {
+    "udvr": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "attention_initial_product_preserved": true,
+            "factor_gradients_and_adam_run": true,
+            "directions_pinned_after_updates": true,
+            "diagonal_is_not_a_parameter": true,
+            "ffn_projection_is_not_function_preserving": true
+          },
+          "metrics": {
+            "initial_product_max_error": 6.661338147750939e-16,
+            "post_step_norm_max_error": 6.938893903907228e-18,
+            "ffn_noninvariance_max_difference": 14.897926257040238
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "attention_initial_product_preserved": true,
+            "factor_gradients_and_adam_run": true,
+            "directions_pinned_after_updates": true,
+            "diagonal_is_not_a_parameter": true,
+            "ffn_projection_is_not_function_preserving": true
+          },
+          "metrics": {
+            "initial_product_max_error": 4.440892098500626e-16,
+            "post_step_norm_max_error": 6.938893903907228e-18,
+            "ffn_noninvariance_max_difference": 11.570613774022794
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "attention_initial_product_preserved": true,
+            "factor_gradients_and_adam_run": true,
+            "directions_pinned_after_updates": true,
+            "diagonal_is_not_a_parameter": true,
+            "ffn_projection_is_not_function_preserving": true
+          },
+          "metrics": {
+            "initial_product_max_error": 8.881784197001252e-16,
+            "post_step_norm_max_error": 3.469446951953614e-18,
+            "ffn_noninvariance_max_difference": 11.566135919291371
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "thresholded-longce": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "strict_threshold_min_context_and_cap": true,
+            "short_forward_is_detached": true,
+            "weight_branch_is_detached": true,
+            "normalized_full_gradient": true,
+            "short_state_resets_at_boundary": true,
+            "tiny_causal_model_has_gradient": true
+          },
+          "metrics": {
+            "synthetic_loss": 2.0,
+            "synthetic_total_weight": 12.0,
+            "tiny_model_loss": 2.2563421726226807
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "strict_threshold_min_context_and_cap": true,
+            "short_forward_is_detached": true,
+            "weight_branch_is_detached": true,
+            "normalized_full_gradient": true,
+            "short_state_resets_at_boundary": true,
+            "tiny_causal_model_has_gradient": true
+          },
+          "metrics": {
+            "synthetic_loss": 2.0,
+            "synthetic_total_weight": 12.0,
+            "tiny_model_loss": 2.3188748359680176
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "strict_threshold_min_context_and_cap": true,
+            "short_forward_is_detached": true,
+            "weight_branch_is_detached": true,
+            "normalized_full_gradient": true,
+            "short_state_resets_at_boundary": true,
+            "tiny_causal_model_has_gradient": true
+          },
+          "metrics": {
+            "synthetic_loss": 2.0,
+            "synthetic_total_weight": 12.0,
+            "tiny_model_loss": 2.235461711883545
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "epro": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "frozen_multiplier_gradient_matches_finite_difference": true,
+            "transport_recovers_execution_anchor_at_rollout": true,
+            "matched_engines_transport_to_current_training_policy": true,
+            "full_head_reduces_to_full_vocabulary": true,
+            "head_tail_uses_a_normalized_reconstructed_anchor": true,
+            "score_centering_logit_gradient_sums_to_zero": true,
+            "importance_is_capped": true,
+            "zero_policy_shift_at_rollout": true
+          },
+          "metrics": {
+            "finite_difference_max_abs_error": 1.5310164247495095e-10,
+            "head_tail_gradient_difference": 0.021452168752961225,
+            "prefixes": 4,
+            "vocabulary": 7
+          },
+          "training_executed": false,
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "frozen_multiplier_gradient_matches_finite_difference": true,
+            "transport_recovers_execution_anchor_at_rollout": true,
+            "matched_engines_transport_to_current_training_policy": true,
+            "full_head_reduces_to_full_vocabulary": true,
+            "head_tail_uses_a_normalized_reconstructed_anchor": true,
+            "score_centering_logit_gradient_sums_to_zero": true,
+            "importance_is_capped": true,
+            "zero_policy_shift_at_rollout": true
+          },
+          "metrics": {
+            "finite_difference_max_abs_error": 1.1439692942927238e-10,
+            "head_tail_gradient_difference": 0.02945032742894224,
+            "prefixes": 4,
+            "vocabulary": 7
+          },
+          "training_executed": false,
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "frozen_multiplier_gradient_matches_finite_difference": true,
+            "transport_recovers_execution_anchor_at_rollout": true,
+            "matched_engines_transport_to_current_training_policy": true,
+            "full_head_reduces_to_full_vocabulary": true,
+            "head_tail_uses_a_normalized_reconstructed_anchor": true,
+            "score_centering_logit_gradient_sums_to_zero": true,
+            "importance_is_capped": true,
+            "zero_policy_shift_at_rollout": true
+          },
+          "metrics": {
+            "finite_difference_max_abs_error": 6.420956821795443e-11,
+            "head_tail_gradient_difference": 0.010439505857195473,
+            "prefixes": 4,
+            "vocabulary": 7
+          },
+          "training_executed": false,
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "larf": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "perfect_order_has_positive_one_reward": true,
+            "inverted_order_has_negative_one_reward": true,
+            "predicted_ties_are_zero_centered": true,
+            "margin_gradient_matches_finite_difference": true,
+            "ambiguous_terminal_positions_are_excluded": true,
+            "non_digit_logits_receive_no_margin_gradient": true,
+            "both_joint_training_heads_receive_gradient": true,
+            "masked_reasoning_tokens_have_zero_gradient": true
+          },
+          "metrics": {
+            "margin_finite_difference_max_abs_error": 6.988898348936345e-11,
+            "documents": 3,
+            "classification_heads": 5,
+            "ordinal_classes": 6
+          },
+          "training_executed": false,
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "perfect_order_has_positive_one_reward": true,
+            "inverted_order_has_negative_one_reward": true,
+            "predicted_ties_are_zero_centered": true,
+            "margin_gradient_matches_finite_difference": true,
+            "ambiguous_terminal_positions_are_excluded": true,
+            "non_digit_logits_receive_no_margin_gradient": true,
+            "both_joint_training_heads_receive_gradient": true,
+            "masked_reasoning_tokens_have_zero_gradient": true
+          },
+          "metrics": {
+            "margin_finite_difference_max_abs_error": 4.11333189731522e-11,
+            "documents": 3,
+            "classification_heads": 5,
+            "ordinal_classes": 6
+          },
+          "training_executed": false,
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "perfect_order_has_positive_one_reward": true,
+            "inverted_order_has_negative_one_reward": true,
+            "predicted_ties_are_zero_centered": true,
+            "margin_gradient_matches_finite_difference": true,
+            "ambiguous_terminal_positions_are_excluded": true,
+            "non_digit_logits_receive_no_margin_gradient": true,
+            "both_joint_training_heads_receive_gradient": true,
+            "masked_reasoning_tokens_have_zero_gradient": true
+          },
+          "metrics": {
+            "margin_finite_difference_max_abs_error": 6.988898348936345e-11,
+            "documents": 3,
+            "classification_heads": 5,
+            "ordinal_classes": 6
+          },
+          "training_executed": false,
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "lazunirec": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "history_uses_shared_projection_only": true,
+            "task_private_gradients_do_not_cross": true,
+            "unselected_shared_experts_receive_zero_gradient": true,
+            "selected_shared_weights_sum_to_one": true,
+            "stable_direction_gets_higher_reliability": true,
+            "reliability_weights_detached_and_loss_gradient_correct": true,
+            "ranking_teacher_is_detached": true,
+            "retrieval_interests_and_probabilities_train": true
+          },
+          "metrics": {
+            "synthetic_kd_loss": 58.657792695517486,
+            "stable_evidence_mean": 100.0,
+            "fluctuating_evidence_mean": 50.503118837899834,
+            "clipped_task_weight_mean": 1.0,
+            "retrieval_gradient_norm": 66.90746229904879
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "history_uses_shared_projection_only": true,
+            "task_private_gradients_do_not_cross": true,
+            "unselected_shared_experts_receive_zero_gradient": true,
+            "selected_shared_weights_sum_to_one": true,
+            "stable_direction_gets_higher_reliability": true,
+            "reliability_weights_detached_and_loss_gradient_correct": true,
+            "ranking_teacher_is_detached": true,
+            "retrieval_interests_and_probabilities_train": true
+          },
+          "metrics": {
+            "synthetic_kd_loss": 37.32306755674232,
+            "stable_evidence_mean": 100.0,
+            "fluctuating_evidence_mean": 50.503118837899834,
+            "clipped_task_weight_mean": 1.0,
+            "retrieval_gradient_norm": 93.72916779600124
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "history_uses_shared_projection_only": true,
+            "task_private_gradients_do_not_cross": true,
+            "unselected_shared_experts_receive_zero_gradient": true,
+            "selected_shared_weights_sum_to_one": true,
+            "stable_direction_gets_higher_reliability": true,
+            "reliability_weights_detached_and_loss_gradient_correct": true,
+            "ranking_teacher_is_detached": true,
+            "retrieval_interests_and_probabilities_train": true
+          },
+          "metrics": {
+            "synthetic_kd_loss": 113.0982894514151,
+            "stable_evidence_mean": 100.0,
+            "fluctuating_evidence_mean": 50.503118837899834,
+            "clipped_task_weight_mean": 1.0,
+            "retrieval_gradient_norm": 101.16894383603494
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "agent-kernel": {
+      "per_seed": [
+        {
+          "diagnostic_only": true,
+          "seed": 42,
+          "nodes_complete": 4,
+          "executor_calls": 5,
+          "preserved_sibling_calls": 2,
+          "parent_text_order_correct": true,
+          "durable_complete_nodes": 4,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "transient_failure_recovery_completes_graph": true,
+            "completed_siblings_are_not_reexecuted": true,
+            "actual_parent_text_keeps_declared_order": true,
+            "reopened_sqlite_preserves_complete_nodes": true
+          },
+          "metrics": {
+            "nodes_complete": 4,
+            "executor_calls": 5,
+            "preserved_sibling_calls": 2,
+            "durable_complete_nodes": 4
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "diagnostic_only": true,
+          "seed": 43,
+          "nodes_complete": 4,
+          "executor_calls": 5,
+          "preserved_sibling_calls": 2,
+          "parent_text_order_correct": true,
+          "durable_complete_nodes": 4,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "transient_failure_recovery_completes_graph": true,
+            "completed_siblings_are_not_reexecuted": true,
+            "actual_parent_text_keeps_declared_order": true,
+            "reopened_sqlite_preserves_complete_nodes": true
+          },
+          "metrics": {
+            "nodes_complete": 4,
+            "executor_calls": 5,
+            "preserved_sibling_calls": 2,
+            "durable_complete_nodes": 4
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "diagnostic_only": true,
+          "seed": 44,
+          "nodes_complete": 4,
+          "executor_calls": 5,
+          "preserved_sibling_calls": 2,
+          "parent_text_order_correct": true,
+          "durable_complete_nodes": 4,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "transient_failure_recovery_completes_graph": true,
+            "completed_siblings_are_not_reexecuted": true,
+            "actual_parent_text_keeps_declared_order": true,
+            "reopened_sqlite_preserves_complete_nodes": true
+          },
+          "metrics": {
+            "nodes_complete": 4,
+            "executor_calls": 5,
+            "preserved_sibling_calls": 2,
+            "durable_complete_nodes": 4
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "cape": {
+      "per_seed": [
+        {
+          "diagnostic_only": true,
+          "seed": 42,
+          "configurations": 4,
+          "calibration_queries": 20,
+          "eager_table_queries": 20,
+          "completed_configurations": 4,
+          "total_deployment_calls": 8,
+          "oracle_agreement": true,
+          "runtime_certificate": true,
+          "protected_configurations": 3,
+          "bound_snapshots": 20,
+          "selected_two_call_tightenings": 8,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "independent_exhaustive_oracle_agrees": true,
+            "closed_lower_bound_has_certificate": true,
+            "all_four_configurations_complete": true,
+            "bounded_deployment_calls": true,
+            "calibration_does_not_exceed_full_table": true,
+            "full_table_negative_result_is_preserved": true
+          },
+          "metrics": {
+            "configurations": 4,
+            "calibration_queries": 20,
+            "eager_table_queries": 20,
+            "completed_configurations": 4,
+            "total_deployment_calls": 8,
+            "protected_configurations": 3,
+            "bound_snapshots": 20,
+            "selected_two_call_tightenings": 8
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "diagnostic_only": true,
+          "seed": 43,
+          "configurations": 4,
+          "calibration_queries": 20,
+          "eager_table_queries": 20,
+          "completed_configurations": 4,
+          "total_deployment_calls": 8,
+          "oracle_agreement": true,
+          "runtime_certificate": true,
+          "protected_configurations": 3,
+          "bound_snapshots": 20,
+          "selected_two_call_tightenings": 8,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "independent_exhaustive_oracle_agrees": true,
+            "closed_lower_bound_has_certificate": true,
+            "all_four_configurations_complete": true,
+            "bounded_deployment_calls": true,
+            "calibration_does_not_exceed_full_table": true,
+            "full_table_negative_result_is_preserved": true
+          },
+          "metrics": {
+            "configurations": 4,
+            "calibration_queries": 20,
+            "eager_table_queries": 20,
+            "completed_configurations": 4,
+            "total_deployment_calls": 8,
+            "protected_configurations": 3,
+            "bound_snapshots": 20,
+            "selected_two_call_tightenings": 8
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "diagnostic_only": true,
+          "seed": 44,
+          "configurations": 4,
+          "calibration_queries": 20,
+          "eager_table_queries": 20,
+          "completed_configurations": 4,
+          "total_deployment_calls": 8,
+          "oracle_agreement": true,
+          "runtime_certificate": true,
+          "protected_configurations": 3,
+          "bound_snapshots": 20,
+          "selected_two_call_tightenings": 8,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "independent_exhaustive_oracle_agrees": true,
+            "closed_lower_bound_has_certificate": true,
+            "all_four_configurations_complete": true,
+            "bounded_deployment_calls": true,
+            "calibration_does_not_exceed_full_table": true,
+            "full_table_negative_result_is_preserved": true
+          },
+          "metrics": {
+            "configurations": 4,
+            "calibration_queries": 20,
+            "eager_table_queries": 20,
+            "completed_configurations": 4,
+            "total_deployment_calls": 8,
+            "protected_configurations": 3,
+            "bound_snapshots": 20,
+            "selected_two_call_tightenings": 8
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    }
+  },
+  "elapsed_seconds": 2.482570916879922,
+  "diagnostic_only": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiments_executed": false,
+  "pretrained_model_calls": 0,
+  "api_calls": 0,
+  "automatic_retry": false
+}

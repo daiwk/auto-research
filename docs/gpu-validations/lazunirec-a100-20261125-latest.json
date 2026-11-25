@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "adapter_key": "lazunirec",
+  "validated_at": "2026-11-25",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB",
+    "count": 1
+  },
+  "command": [
+    "timeout",
+    "180",
+    "python3",
+    "scripts/run_nov25_latest_components.py",
+    "--device",
+    "cuda",
+    "--source-commit",
+    "61ff050d4ef437fb7516944f2a9167a763db46b9",
+    "--output",
+    "raw-cuda.json"
+  ],
+  "dataset": {
+    "id": "synthetic:nov25-overlap-lazunirec-component-v1",
+    "revision": "sha256:0031741469f05f94a08ac592f567e466308fce934297ae5f180d32949d851260",
+    "recipe": "Seeded small tensors or explicit deterministic evaluator/control cases; no pretrained output or public capability measurement",
+    "capability_benchmark": false
+  },
+  "checkpoint": {
+    "public_id": "none-seeded-component-initialization",
+    "revision": "61ff050d4ef437fb7516944f2a9167a763db46b9",
+    "pretrained": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "metrics": {
+    "clipped_task_weight_mean": 1.0,
+    "fluctuating_evidence_mean": 50.50311883789984,
+    "retrieval_gradient_norm": 87.268524643695,
+    "stable_evidence_mean": 100.0,
+    "synthetic_kd_loss": 69.69304990122497
+  },
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "provenance": {
+    "commit": "61ff050d4ef437fb7516944f2a9167a763db46b9",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "artifact_path": "docs/gpu-validations/lazunirec-a100-20261125-latest.json",
+    "executed_source_sha256": {
+      "scripts/run_nov25_latest_components.py": "8920737bb4b2a58f962d88f0a1c8376be78fef046c3c23410ca576fe6a3cfcc2",
+      "scripts/run_nov18_latest_components.py": "0fe50e8e554f6663b3c8c179654400d10bfbb557ceb9cefb9880da78f164b7c1",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov25-latest/preflight.json": "c6a5d2b4ce2940f86e23e9660b207cd51c2d5cfc4ece31e7c6fe9085b7ac5003",
+      "src/auto_research/foundation_models/udvr.py": "c744b408031a6ac07de2a79d27f94fc85c2b44b76e8ec65244c5c9e7d9312918",
+      "src/auto_research/foundation_models/thresholded_longce.py": "c3630846ff02b79ef7fb4345f52d6c7dca2da1eea14ff8e256795788224ada14",
+      "src/auto_research/post_training/epro.py": "99ac17f3f2d5bfbcc066e3385c93583eee363e0a574eb9982db62c9768217288",
+      "src/auto_research/reproductions/larf_components.py": "ebe7e3dbafc26eee9cd4e8325d75e4efc4d045859c967ae3558878c477db480d",
+      "src/auto_research/reproductions/lazunirec_components.py": "0031741469f05f94a08ac592f567e466308fce934297ae5f180d32949d851260",
+      "src/auto_research/agent_research/agent_kernel.py": "d541eb28b28e1b04459d5caf15224068a2deb19ac6eff81a1b03ef47958c53d9",
+      "src/auto_research/agent_research/cape.py": "513ec26cefc7a0497bcd83a3a5fd861885978904dff1d136cab18235af656f66"
+    },
+    "dataset_fingerprint": "sha256:c448e7c3fb204b179ae1dc8f7d8c1b119ff2375edf0887572cc0d60174e34735",
+    "raw_runner_artifact_sha256": "bb7cdc6098c8270e494211e7cb0fcfb77daa7dea48b410a5ed74eed7978a8958",
+    "metric_artifact_path": "docs/recommendation-components/2611.32590-lazunirec/metrics/component-cuda-seeds42-44.json"
+  }
+}

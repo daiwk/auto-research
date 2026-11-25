@@ -1,0 +1,8 @@
+{
+  "schema_version": 1, "artifact_scope": "Review-only cost decision, not experiment metrics", "paper_url": "https://arxiv.org/abs/2611.32357v1", "reviewed_on": "2026-11-25", "implementation_status": "deferred_high_cost",
+  "full_experiment_status": "not_reproduced_high_cost", "review_done": true, "diagnostic_only": true, "local_metrics": {},
+  "deferral_reason": "成本过高，不复现（审查 DONE）；18套冻结世界模型、多层flow训练及四域150-450episodes/方法的候选与精修矩阵超单A100/A30或Mac有界预算。",
+  "automatic_retry": false, "automatic_implementation_queue": false, "evolve_integrated": false, "local_operator": null,
+  "code_status": "Author repository link present but inaccessible; no readable source or commit verified.", "upstream_revision": null,
+  "measurements": "None: no model/data download, trial training or environment planning. Paper FLOPs are not local wall-time measurements."
+}

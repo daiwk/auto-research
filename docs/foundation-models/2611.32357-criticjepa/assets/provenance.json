@@ -1,0 +1,9 @@
+{
+  "schema_version": 1, "paper_url": "https://arxiv.org/abs/2611.32357v1", "source_url": "https://arxiv.org/pdf/2611.32357v1#page=5",
+  "source_sha256": "8b71557c5f3857ad69f2be686b6cc638de8a7995511d0376194de7ba9b2ad8bb", "source_pdf_sha256": "8b71557c5f3857ad69f2be686b6cc638de8a7995511d0376194de7ba9b2ad8bb",
+  "pdf_page": 5, "page": 5, "figure": "Figure 3", "caption": "CriticJEPA: proposals supply plans; the world model judges them.",
+  "crop_pdf_points": [52.5, 72.5, 562.5, 357.5], "crop_box_pdf_points": [52.5, 72.5, 562.5, 357.5], "render_scale": 2,
+  "asset_sha256": "01ac5cfdbcd7bd613acde9c87ae79f121c7b0a7a4ae8174684ce85148392ef08", "image_sha256": "01ac5cfdbcd7bd613acde9c87ae79f121c7b0a7a4ae8174684ce85148392ef08",
+  "retrieved_on": "2026-11-25", "reviewed_version": "v1", "visually_reviewed": true, "scientific_content_modified": false,
+  "extraction": "Original PDF crop including complete caption, rendered with pdftoppm at144dpi; reviewed against page5 preview.", "copyright": "Copyright belongs to the original authors."
+}

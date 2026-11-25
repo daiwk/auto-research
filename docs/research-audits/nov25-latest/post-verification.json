@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-25",
+  "owner": "nov25_post",
+  "accepted_scope": ["post-training:epro", "recommendation:larf"],
+  "modules_frozen": true,
+  "verification": [
+    {"command": "PYTHONPATH=src:scripts ../../.venv/bin/python -m pytest tests/test_nov25_post_components.py tests/test_research_module_docs.py -q", "result": "passed", "tests": 39, "note": "Passed before relocating provisional metrics to preflight. Formal metrics paths are reserved for the root source-bound runner, and require final integrated recheck."},
+    {"check": "8 authored bilingual questions, all4 levels per paper, actual README source headings, English source-unit fingerprints", "result": "passed"},
+    {"check": "New EPRO/LARF and actually re-read RSC/Yuanbao-Rubric peer README SHA256 values in deep-dive proposals", "result": "passed"},
+    {"check": "Original EPRO Figure1 page2 and LARF Figure1 page4, including captions, author bylines and LARF Table5", "result": "visually reviewed"}
+  ],
+  "provisional_results_preserved": ["preflight-epro.json", "preflight-larf.json"],
+  "pending_integration": "Root integrates proposals/questions/deep-dives into canonical sources, generates source-bound metrics and runs final shared gates. This agent did not modify registry/manifest/ledger/learning main files or commit.",
+  "cost": "No checkpoint, training dataset, paid API, GPU experiment or model probe; both full experiments terminally not_reproduced_high_cost.",
+  "lazunirec_peer_review": {
+    "source": "https://arxiv.org/pdf/2611.32590v1", "pages": [3,4,5,6],
+    "target": "src/auto_research/reproductions/lazunirec_components.py",
+    "result": "No blocking discrepancy found in bounded Eq7/10–17 and Section4.1.4 slice: shared/private BA, shared top2 softmax plus private expert, detached directional EMA evidence and clipped reliability weights, request-local max(pi*inner), detached ranking teacher, temperatures0.5/0.01 and teacher-to-student KL match. Attention mask/router/probe cadence/full trainer remain explicitly out of scope; caller must guarantee same-request candidate semantics."
+  },
+  "cleanup": {
+    "scope": "Only4 self-created disposable full-page PNG previews under .cache/nov25-latest/post-primary were removed; fixed primary HTML/PDF, final figure crops/provenance and all results preserved.",
+    "allocated_kib_reclaimed": 1012,
+    "post_primary_before_kib": 5228,
+    "post_primary_after_kib": 4216
+  }
+}

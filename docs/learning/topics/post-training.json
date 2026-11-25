@@ -139,7 +139,8 @@
         "post-training:ash-hint-steering",
         "post-training:led-edits",
         "post-training:dfrl",
-        "post-training:retokenization-update"
+        "post-training:retokenization-update",
+        "post-training:epro"
       ]
     },
     {

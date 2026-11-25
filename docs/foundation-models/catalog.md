@@ -10,6 +10,9 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 网络架构 | [CriticJEPA: World Models Are Better Critics Than Optimizers](2611.32357-criticjepa/README.md) | Tsinghua University，2026-11-24 | [原作者入口](https://github.com/daybraeklaxry/CriticJEPA-code)；原文作者代码链接存在，但2026-11-25 git ls-remote返回Repository not found、raw/main/README.md返回404；未核实可读源码或commit，不等于确认已公开。 | 计划键 `criticjepa`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| 注意力与长上下文 | [Eliciting the Recall Capacity of Linear Attention](2611.32969-thresholded-longce/README.md) | ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology，2026-11-24 | 未发现官方代码 | `thresholded-longce`：仅低成本组件，完整实验不复现 |
+| 预训练与数据 | [Weight Scale Rebalancing: Transferable Training Recipes for Transformers](2611.32866-udvr/README.md) | Umeå University，2026-11-24 | 未发现官方代码 | `udvr`：仅低成本组件，完整实验不复现 |
 | 预训练与数据 | [The KL Divergence Is Never Negative, Except in PyTorch](2611.30835-stablekl/README.md) | Yale University，2026-11-23 | [原作者入口](https://github.com/xi-xiaoran/stablekl)；已核原作者仓库与固定Exponential修复源；本地只实现一族Rewrite组件，不是作者完整包。 | `stablekl`：仅低成本组件，完整实验不复现 |
 | 预训练与数据 | [Accelerating Muon with Spectral Residual Correction](2611.27077-aimuon/README.md) | Tsinghua University，2026-11-20 | 未发现官方代码 | `aimuon`：仅低成本组件，完整实验不复现 |
 | 推理与系统效率 | [Reliable Behavior Discovery via False Discovery Rate Control](2611.27104-disco/README.md) | Google DeepMind，2026-11-20 | [原作者入口](https://github.com/google-deepmind/disco)；论文声明源码位于google-deepmind/disco，但2026-11-23官方GitHub入口HTTP404；可访问代码及commit未核实，不能据此断言作者未发布。 | `disco`：仅低成本组件，完整实验不复现 |

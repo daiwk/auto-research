@@ -1,0 +1,142 @@
+{
+  "schema_version": 2,
+  "method": "agent-kernel",
+  "manifest_ref": "agent-research:agent-kernel",
+  "dataset": {
+    "id": "synthetic:nov25-overlap-agent-kernel-component-v1",
+    "kind": "explicit_protocol_or_mechanism_fixtures",
+    "revision": "sha256:d541eb28b28e1b04459d5caf15224068a2deb19ac6eff81a1b03ef47958c53d9",
+    "public_capability_benchmark": false,
+    "source": "Seeded small tensors or explicit deterministic evaluator/control cases; no pretrained output or public capability measurement"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "diagnostic_only": true,
+      "seed": 42,
+      "nodes_complete": 4,
+      "executor_calls": 5,
+      "preserved_sibling_calls": 2,
+      "parent_text_order_correct": true,
+      "durable_complete_nodes": 4,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "transient_failure_recovery_completes_graph": true,
+        "completed_siblings_are_not_reexecuted": true,
+        "actual_parent_text_keeps_declared_order": true,
+        "reopened_sqlite_preserves_complete_nodes": true
+      },
+      "metrics": {
+        "nodes_complete": 4,
+        "executor_calls": 5,
+        "preserved_sibling_calls": 2,
+        "durable_complete_nodes": 4
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "diagnostic_only": true,
+      "seed": 43,
+      "nodes_complete": 4,
+      "executor_calls": 5,
+      "preserved_sibling_calls": 2,
+      "parent_text_order_correct": true,
+      "durable_complete_nodes": 4,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "transient_failure_recovery_completes_graph": true,
+        "completed_siblings_are_not_reexecuted": true,
+        "actual_parent_text_keeps_declared_order": true,
+        "reopened_sqlite_preserves_complete_nodes": true
+      },
+      "metrics": {
+        "nodes_complete": 4,
+        "executor_calls": 5,
+        "preserved_sibling_calls": 2,
+        "durable_complete_nodes": 4
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "diagnostic_only": true,
+      "seed": 44,
+      "nodes_complete": 4,
+      "executor_calls": 5,
+      "preserved_sibling_calls": 2,
+      "parent_text_order_correct": true,
+      "durable_complete_nodes": 4,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "transient_failure_recovery_completes_graph": true,
+        "completed_siblings_are_not_reexecuted": true,
+        "actual_parent_text_keeps_declared_order": true,
+        "reopened_sqlite_preserves_complete_nodes": true
+      },
+      "metrics": {
+        "nodes_complete": 4,
+        "executor_calls": 5,
+        "preserved_sibling_calls": 2,
+        "durable_complete_nodes": 4
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "durable_complete_nodes": 4.0,
+    "executor_calls": 5.0,
+    "nodes_complete": 4.0,
+    "preserved_sibling_calls": 2.0
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Operator/interface controls only; not a complete model, agent, public benchmark or production comparison"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "61ff050d4ef437fb7516944f2a9167a763db46b9",
+    "accelerator": "CPU",
+    "artifact_path": "docs/agent-research/2611.31727-agent-kernel/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_nov25_latest_components.py": "8920737bb4b2a58f962d88f0a1c8376be78fef046c3c23410ca576fe6a3cfcc2",
+      "scripts/run_nov18_latest_components.py": "0fe50e8e554f6663b3c8c179654400d10bfbb557ceb9cefb9880da78f164b7c1",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov25-latest/preflight.json": "c6a5d2b4ce2940f86e23e9660b207cd51c2d5cfc4ece31e7c6fe9085b7ac5003",
+      "src/auto_research/foundation_models/udvr.py": "c744b408031a6ac07de2a79d27f94fc85c2b44b76e8ec65244c5c9e7d9312918",
+      "src/auto_research/foundation_models/thresholded_longce.py": "c3630846ff02b79ef7fb4345f52d6c7dca2da1eea14ff8e256795788224ada14",
+      "src/auto_research/post_training/epro.py": "99ac17f3f2d5bfbcc066e3385c93583eee363e0a574eb9982db62c9768217288",
+      "src/auto_research/reproductions/larf_components.py": "ebe7e3dbafc26eee9cd4e8325d75e4efc4d045859c967ae3558878c477db480d",
+      "src/auto_research/reproductions/lazunirec_components.py": "0031741469f05f94a08ac592f567e466308fce934297ae5f180d32949d851260",
+      "src/auto_research/agent_research/agent_kernel.py": "d541eb28b28e1b04459d5caf15224068a2deb19ac6eff81a1b03ef47958c53d9",
+      "src/auto_research/agent_research/cape.py": "513ec26cefc7a0497bcd83a3a5fd861885978904dff1d136cab18235af656f66"
+    },
+    "dataset_fingerprint": "sha256:5a10ab43a3dc8e2b04276d9b4e57f0df34716bd311d71f33bf7df0332213085d",
+    "raw_runner_artifact_sha256": "ef2e2adb63ebfb4cd1845a129c9bcf02de586c6d9756df237631255cf48dd961"
+  }
+}

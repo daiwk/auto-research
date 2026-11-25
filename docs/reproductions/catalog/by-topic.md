@@ -287,6 +287,9 @@
 ### 训练目标与决策优化
 - [SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search](../../recommendation-components/2611.04662-spade-local-search/README.md)：OA-BPE用业务价值加权token-pair计数，STAR以软门控编码时空位置，MARS-DPO对齐生产偏好，SDBS按父beam排序给予有界sigmoid奖励。本地只实现分词/解码算子；首beam自身零奖励不意味着任意参数下top1永不被其他beam超过。
 
+### 多任务学习与多目标优化
+- [LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation](../../recommendation-components/2611.32590-lazunirec/README.md)：LazUnirec把历史、trigger、多兴趣检索query和同请求候选组织到同一Transformer，但不要求召回与排序完全共用全部参数。召回/排序各有Q/K/V低秩残差与private FFN expert，另由条件router选择top-2 shared experts。按scenario/task观察共享参数的归一化梯度历史，以EMA方向方差估计可靠性，停止梯度后重加权任务损失；排序还向召回做请求内候选分布蒸馏。 执行Eq7低秩任务投影、Eq10/11 sparse shared/private输出组合、Eq12–14 EMA evidence/相对权重/停止梯度及Eq15–17请求内MaxSim/KL，并用真实autograd验证参数路径。输入router scores/expert outputs/已探测gradient与interest probabilities是显式张量，不虚构未给细节的条件router或概率头。未实现完整Transformer/RMSNorm/attention mask、embedding、场景数据管线、expert网络、MoE z-loss、训练调度与部署；因此不是完整模型、正式benchmark或Evolve算子。
+
 ## 训练目标与决策优化
 
 ### 采样、蒸馏与强化学习
@@ -520,6 +523,9 @@
 
 ### 内容理解、审核与风险控制
 - [Antom 3-in-1 Transformer: A Payment Foundation Model](../../recommendation-components/2611.25403-antom-3-in-1/README.md)：Antom把用户/卡/设备历史、当前交易字段和滚动用户图分开编码，再用任务query、共享注意力与稀疏专家做多任务融合。序列先做prefix-future对比，图先做视图对比及关系计数重建；下游图encoder冻结，图表示离线生成并按交易时间查询，其余主要模块在线打分。 只收录经核对的生产证据、方法边界、原图和成本；没有本地模型、训练/推理代码、metrics、GPU回执或Evolve operator。公开IBM/图benchmark的存在不补全缺失配置和私有训练链路；不以小型拼接/MLP冒充7B支付基础模型。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
+### retrieval-matching
+- [LARF: Learning-aligned Reasoning Framework for Search Relevance](../../recommendation-components/2611.32125-larf/README.md)：三阶段相关性学习：label-conditioned多agent CoT只构造SFT训练target；DGRPO结合五维ordinal奖励、query内排序一致性、外部规则一致性和terminal六digit margin；双head联合分类/生成目标后仅分类路径服务。
 
 ## 召回与匹配
 

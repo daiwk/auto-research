@@ -8,6 +8,9 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration](<https://arxiv.org/abs/2611.31727v1>) | 2026-11-24 | [English](../../agent-research/2611.31727-agent-kernel/README-en.md) · [Chinese](../../agent-research/2611.31727-agent-kernel/README.md) |
+| [RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research](<https://arxiv.org/abs/2611.32508v1>) | 2026-11-24 | [English](../../agent-research/2611.32508-recurscibench/README-en.md) · [Chinese](../../agent-research/2611.32508-recurscibench/README.md) |
+| [CAPE: Coordinating Calibration and Search for Tool-Use Policies](<https://arxiv.org/abs/2611.31938v1>) | 2026-11-24 | [English](../../agent-research/2611.31938-cape/README-en.md) · [Chinese](../../agent-research/2611.31938-cape/README.md) |
 | [Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing](<https://arxiv.org/abs/2611.30742v1>) | 2026-11-23 | [English](../../agent-research/2611.30742-transport-safe-audit/README-en.md) · [Chinese](../../agent-research/2611.30742-transport-safe-audit/README.md) |
 | [Optimistic Online Learning for Coding Agents with Aggregate Feedback](<https://arxiv.org/abs/2611.30405v1>) | 2026-11-23 | [English](../../agent-research/2611.30405-ooas/README-en.md) · [Chinese](../../agent-research/2611.30405-ooas/README.md) |
 | [MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research](<https://arxiv.org/abs/2611.30011v1>) | 2026-11-23 | [English](../../agent-research/2611.30011-morse/README-en.md) · [Chinese](../../agent-research/2611.30011-morse/README.md) |

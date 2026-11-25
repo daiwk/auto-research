@@ -1,0 +1,12 @@
+{
+  "schema_version": 1, "artifact_scope": "Preflight snapshot, not frozen-source release evidence or dashboard metrics", "device": "cpu", "evaluation_tier": "l1_mechanism", "diagnostic_only": true, "seeds": [42, 43, 44],
+  "command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.thresholded_longce import diagnostic; print([diagnostic(s) for s in (42,43,44)])'",
+  "data": "Synthetic target log-probabilities plus260token,9word,4dimensional randomly initialized GRU; not a paper linear mixer or recall dataset.",
+  "all_checks_passed": true,
+  "per_seed": [
+    {"seed": 42, "synthetic_loss": 2.0, "synthetic_total_weight": 12.0, "tiny_model_loss": 2.2563421726226807},
+    {"seed": 43, "synthetic_loss": 2.0, "synthetic_total_weight": 12.0, "tiny_model_loss": 2.3188748359680176},
+    {"seed": 44, "synthetic_loss": 2.0, "synthetic_total_weight": 12.0, "tiny_model_loss": 2.235461711883545}
+  ],
+  "limitations": "Exact TLCE/window interface only; no sentence repetition, pretrained model, paper mixer, natural-language recall capability or CUDA path."
+}

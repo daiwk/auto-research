@@ -1,0 +1,12 @@
+{
+  "schema_version": 1, "artifact_scope": "Preflight snapshot, not frozen-source release evidence or dashboard metrics", "device": "cpu", "evaluation_tier": "l1_mechanism", "diagnostic_only": true, "seeds": [42, 43, 44],
+  "command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.udvr import diagnostic; print([diagnostic(s) for s in (42,43,44)])'",
+  "data": "Synthetic6x4/4x6 FP64 factors,8x6 inputs and independent synthetic targets; no dataset or checkpoint.",
+  "steps_per_seed": 4, "all_checks_passed": true,
+  "per_seed": [
+    {"seed": 42, "initial_product_max_error": 6.661338147750939e-16, "post_step_norm_max_error": 6.938893903907228e-18, "ffn_noninvariance_max_difference": 14.897926257040238},
+    {"seed": 43, "initial_product_max_error": 4.440892098500626e-16, "post_step_norm_max_error": 6.938893903907228e-18, "ffn_noninvariance_max_difference": 11.570613774022794},
+    {"seed": 44, "initial_product_max_error": 8.881784197001252e-16, "post_step_norm_max_error": 3.469446951953614e-18, "ffn_noninvariance_max_difference": 11.566135919291371}
+  ],
+  "limitations": "Pair formula/autograd checks only; no Transformer training, model-scale transfer, generalization result or CUDA path."
+}

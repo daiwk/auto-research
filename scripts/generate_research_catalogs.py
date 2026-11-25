@@ -345,6 +345,9 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "udvr": ("预训练与数据", "优化器与训练稳定性"),
+    "thresholded-longce": ("注意力与长上下文", "线性注意力与状态空间"),
+    "criticjepa": ("网络架构", "JEPA 与几何表征"),
     "deep-cross-attention": ("网络架构", "MoE、状态空间与残差路径"),
     "stablekl": ("预训练与数据", "优化器与训练稳定性"),
     "aimuon": ("预训练与数据", "优化器与训练稳定性"),
@@ -924,6 +927,7 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in ("udvr", "thresholded-longce", "criticjepa")},
         **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in ("deep-cross-attention", "stablekl")},
         **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in ("aimuon", "spot-bench", "disco", "frontier-replay", "mv-jepa", "e-rwsc")},
         **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in ("hisa", "canon-layers-scale")},

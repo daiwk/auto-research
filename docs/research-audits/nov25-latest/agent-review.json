@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-25",
+  "scope": "Three Nov24 first releases, bounded Agent/RSI selection; no exhaustive coverage claim",
+  "implementation_preflight_completed": true,
+  "reviews": [
+    {
+      "identity": "agent-research:agent-kernel",
+      "id": "2611.31727",
+      "published_at": "2026-11-24T00:33:20Z",
+      "updated_at": "2026-11-24T00:33:20Z",
+      "discovered_on": "2026-11-25",
+      "announced_on": null,
+      "source_url": "https://arxiv.org/pdf/2611.31727v1",
+      "source_sha256": "9a3b12274394c82f3d7d805396184e3fe060dee279d29f9cb48f5312c2e53ded",
+      "source_revisions": {
+        "agent-research:agent-kernel": "591608992b3551fbedb187b6125bf2008c08e1ec03b005f54e79c42fb5974ceb",
+        "agent-research:runtime-tickets": "5b00948adf9bb0542e98df053cfe7028c1ab6925099a181503296520a390d8d4"
+      },
+      "scope": "标准库SQLite/WAL、7态SAB、五动词、事务claim、失败/取消级联、SGR和声明序实际父文本继承。fork不等待执行，run为有界线程池driver；executor仅收task/context、不读gold。显式单owner重开撤销running旧claim，generation/owner拒绝陈旧完成；不是分布式租约证明。字符上限是本地准入而非模型token预算；没有LLM、prompt-mutation、语义恢复或真实tool服务；外部副作用不保证exactly-once。",
+      "cost_basis": "完整矩阵为14,434 Claude API runs，含Sonnet4.5、Haiku/Opus、多宽深DAG、tau-bench/Gaia2/AutomationBench/InterruptBench与真实框架对照，长rollout/API多臂矩阵超单A100/A30或Mac短时预算。附录Qwen LoRA属于未来工作，不是已测开源路径。直接终态不复现，不调用API、不下载模型或benchmark；只有秒级小DAG CPU控制，未测论文加速。",
+      "implementation_status": "component_only",
+      "review_done": true
+    },
+    {
+      "identity": "agent-research:cape",
+      "id": "2611.31938",
+      "published_at": "2026-11-24T04:43:02Z",
+      "updated_at": "2026-11-24T04:43:02Z",
+      "discovered_on": "2026-11-25",
+      "announced_on": null,
+      "source_url": "https://arxiv.org/pdf/2611.31938v1",
+      "source_sha256": "529ace5a686d8a6ed892132888969207803de27110effb799acde902d86f0e35",
+      "source_revisions": {
+        "agent-research:cape": "adc6b4c3082ee2d00caa4a8538ed32b2cccb2ae2bab14c235221f4fca5eef8e7",
+        "agent-research:caplite": "2c380139ce94eb86eb96b0c23440b0b3896e4450f8c9bb9f69bb7e902a9646d5"
+      },
+      "scope": "1–8配置、1–4调用的标准库有限编译器保留local closure、持久witness、Eq1–7乐观program/probe松弛、双frontier、三级query获取与selected两调用收紧；完全取得效果时有限递推精确。query-count上限替代wall-clock预算。校准可查询候选h；部署Policy只保存action/响应分支，execute不接活跃h、完整表或gold；独立full-information oracle仅评估侧。教学4配置全20格校准、无校准节省；非DuckDB/pandas真实数据、非LLM工具胜率、非完整性能复现。",
+      "cost_basis": "原文完整CPU/API研究含64请求×两接口、多个compiler/消融、14模型proposal panel、240扩展测量、960条5–240秒预算扫描及80,756次native调用，另有DeepSeek在线retry。完整多条件新进程计时/API矩阵超本轮短时单A100/A30或Mac预算，不能假称必须CUDA。成本基于配置非本地完整实测；不下载、不探跑、不调API，仅小H有界CPU组件。",
+      "implementation_status": "component_only",
+      "review_done": true
+    },
+    {
+      "identity": "agent-research:recurscibench",
+      "id": "2611.32508",
+      "published_at": "2026-11-24T12:38:22Z",
+      "updated_at": "2026-11-24T12:38:22Z",
+      "discovered_on": "2026-11-25",
+      "announced_on": null,
+      "source_url": "https://arxiv.org/pdf/2611.32508v1",
+      "source_sha256": "b7b1598d830c84fe637907c73f89448bf301e6b2ac38332c5744e139c90142c4",
+      "source_revisions": {
+        "agent-research:recurscibench": "d02a9774157bab68e7e673927e3bd17c1c979babe9445e9290643e66ca26ab06",
+        "agent-research:coevobench": "46cfd36b03e74f4dcb83e7a643df67b536c616cf039013f14378b7d9cee1ac99"
+      },
+      "scope": "仅review-only固定v1、F/A来源隔离、冻结G-test协议、公式、成本和同主题比较；不创建算法/adapter、科学任务生成、scorer、reference solver、LLM演化或benchmark。测试targets/scores必须对被测Agent不可见；只实现归一化不能冒称本篇复现。无虚构seed指标或GPU回执。",
+      "cost_basis": "每任务1×A800、15逻辑CPU核、96GiB、6小时上限；4RSI×6source=24 evolved states与初始state在20个G-test最多三次有效run；另有GLM5.3构建、高推理GLM5.3-Flash、400step技能、120turn改写和多候选科研实验。6h是cap非实测，未虚构总GPU小时/API账单。完整多域长rollout矩阵超单A100/A30或Mac，直接终态不复现，不下载大数据/模型、不做成本探针或自动重试。",
+      "implementation_status": "deferred_high_cost",
+      "review_done": true
+    }
+  ],
+  "source_only_releases": [
+    {
+      "repository": "https://github.com/facebookresearch/agentbox",
+      "paper": "https://arxiv.org/abs/2603.26499",
+      "identity": "agent-research:aira2",
+      "original_published_at": "2026-03-27T15:02:43Z",
+      "repository_release_observed_on": "2026-11-25",
+      "resolution": "Existing AIRA2-linked partial infrastructure release, not a new paper or verified complete AIRA2 code release.",
+      "evidence": "Official README: originally built at Meta FAIR to study research agents and since refactored/improved; distributed container orchestration using Apptainer and Monarch. Mac containers use Lima. Under construction.",
+      "existing_local_code_state": "spec code=null; README states no public original implementation found as of 2026-10-04. No old README/spec was edited.",
+      "full_paper_cost": "AIRA2 uses 8 H200 workers, 24/72-hour searches, per-worker 12 CPU cores/120GB RAM. High-cost campaign remains not reproduced."
+    }
+  ]
+}

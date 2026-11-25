@@ -202,7 +202,9 @@
         "agent-research:saycan",
         "agent-research:webgpt",
         "agent-research:retrace",
-        "agent-research:caplite"
+        "agent-research:caplite",
+        "agent-research:agent-kernel",
+        "agent-research:cape"
       ]
     },
     {
@@ -304,7 +306,8 @@
         "agent-research:sage-evolve",
         "agent-research:coevobench",
         "agent-research:transport-safe-audit",
-        "agent-research:morse"
+        "agent-research:morse",
+        "agent-research:recurscibench"
       ]
     },
     {

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "source_url": "https://arxiv.org/pdf/2611.32508v1",
+  "source_sha256": "b7b1598d830c84fe637907c73f89448bf301e6b2ac38332c5744e139c90142c4",
+  "asset_sha256": "10674dc67064f6566e76eb8b8566a148ffb80d29d4ac5c60df2490be0704f742",
+  "page": 5,
+  "figure": "Figure 2",
+  "crop_pdf_points": [68, 62, 531, 326],
+  "render_scale": 2,
+  "reviewed_on": "2026-11-25",
+  "visually_reviewed": true,
+  "caption_preserved": true,
+  "modification": "Crop unrelated text/whitespace only; scientific content unchanged.",
+  "copyright": "Original authors"
+}

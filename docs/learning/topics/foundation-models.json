@@ -68,7 +68,8 @@
         "foundation-models:dealrank",
         "foundation-models:kernel-ridge-attention",
         "foundation-models:hisa",
-        "foundation-models:canon-layers-scale"
+        "foundation-models:canon-layers-scale",
+        "foundation-models:thresholded-longce"
       ]
     },
     {
@@ -172,7 +173,8 @@
         "foundation-models:lara-plus-plus",
         "foundation-models:latent-feedback-scaling",
         "foundation-models:aimuon",
-        "foundation-models:stablekl"
+        "foundation-models:stablekl",
+        "foundation-models:udvr"
       ]
     },
     {

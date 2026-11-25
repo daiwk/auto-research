@@ -1,0 +1,9 @@
+{
+  "schema_version": 1, "paper_url": "https://arxiv.org/abs/2611.32969v1", "source_url": "https://arxiv.org/pdf/2611.32969v1#page=5",
+  "source_sha256": "0c1b607a0ea667f743693501c3360830cab3e162bae5d6ae1f85b361b2f97c83", "source_pdf_sha256": "0c1b607a0ea667f743693501c3360830cab3e162bae5d6ae1f85b361b2f97c83",
+  "pdf_page": 5, "page": 5, "figure": "Figure 1", "caption": "Recall accuracy and language modeling perplexity under standard training.",
+  "crop_pdf_points": [85, 45, 530, 322.5], "crop_box_pdf_points": [85, 45, 530, 322.5], "render_scale": 2,
+  "asset_sha256": "6d7c4723195f0c7ecf57d92ee882136314e4515ad5ae4b8987e3990416d3d2be", "image_sha256": "6d7c4723195f0c7ecf57d92ee882136314e4515ad5ae4b8987e3990416d3d2be",
+  "retrieved_on": "2026-11-25", "reviewed_version": "v1", "visually_reviewed": true, "scientific_content_modified": false,
+  "extraction": "Original PDF crop including complete caption, rendered with pdftoppm at144dpi; reviewed against page5 preview.", "copyright": "Copyright belongs to the original authors."
+}
