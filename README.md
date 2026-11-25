@@ -59,3 +59,12 @@ source .venv/bin/activate
 python -m pip install -e .
 auto-research --help
 auto-research list
+```
+
+
+## 📈 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=daiwk/auto-research&type=Date)](https://star-history.com/#daiwk/auto-research&Date)
+
+
+
