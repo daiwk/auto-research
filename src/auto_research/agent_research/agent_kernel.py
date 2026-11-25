@@ -20,6 +20,8 @@ from typing import Callable
 import uuid
 
 
+REQUIRES_GPU_VALIDATION = False
+
 TERMINAL = frozenset({"complete", "failed", "cancelled", "unreachable"})
 STATES = frozenset({"pending", "waiting", "running"}) | TERMINAL
 
@@ -229,7 +231,9 @@ class AgentKernel:
                         self.finish(claim, error=f"{type(exc).__name__}: {exc}")
 
 
-def diagnostic(seed: int = 42) -> dict:
+def diagnostic(seed: int = 42, device: str = "cpu") -> dict:
+    if type(seed) is not int or seed < 0 or device != "cpu":
+        raise ValueError("nonnegative integer seed and CPU-only device required")
     """Small deterministic failure-injection control; no task capability score."""
     import random
     names = ["a", "b", "c"]

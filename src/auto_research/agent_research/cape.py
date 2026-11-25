@@ -386,8 +386,13 @@ def exhaustive_oracle(configurations: tuple[str, ...], actions: tuple[Action, ..
     return result
 
 
-def diagnostic(seed: int = 42) -> dict:
+REQUIRES_GPU_VALIDATION = False
+
+
+def diagnostic(seed: int = 42, device: str = "cpu") -> dict:
     """The paper's four-configuration teaching structure, not its native data."""
+    if type(seed) is not int or seed < 0 or device != "cpu":
+        raise ValueError("nonnegative integer seed and CPU-only device required")
     import random
     configurations = ("semicolon-day", "comma-day", "semicolon-month", "comma-month")
     actions = tuple(Action(f"p{i}", True) for i in range(4)) + (Action("probe", False),)
