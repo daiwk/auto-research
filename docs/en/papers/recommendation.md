@@ -8,6 +8,8 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation](<https://arxiv.org/abs/2611.32590v1>) | 2026-11-24 | [English](../../recommendation-components/2611.32590-lazunirec/README-en.md) · [Chinese](../../recommendation-components/2611.32590-lazunirec/README.md) |
+| [LARF: Learning-aligned Reasoning Framework for Search Relevance](<https://arxiv.org/abs/2611.32125v1>) | 2026-11-24 | [English](../../recommendation-components/2611.32125-larf/README-en.md) · [Chinese](../../recommendation-components/2611.32125-larf/README.md) |
 | [Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents](<https://arxiv.org/abs/2611.29613v1>) | 2026-11-22 | [English](../../recommendation-components/2611.29613-weight-coding/README-en.md) · [Chinese](../../recommendation-components/2611.29613-weight-coding/README.md) |
 | [From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation](<https://arxiv.org/abs/2611.26096v1>) | 2026-11-19 | [English](../../recommendation-components/2611.26096-lser-serving/README-en.md) · [Chinese](../../recommendation-components/2611.26096-lser-serving/README.md) |
 | [DNA: Unlocking Depth Scaling in CTR Models](<https://arxiv.org/abs/2611.25659v1>) | 2026-11-19 | [English](../../recommendation-components/2611.25659-dna/README-en.md) · [Chinese](../../recommendation-components/2611.25659-dna/README.md) |

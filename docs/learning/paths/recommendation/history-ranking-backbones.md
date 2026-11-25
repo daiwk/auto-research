@@ -7,7 +7,7 @@ hide:
 
 # 用户历史与排序骨干
 
-[搜广推](index.md) / 307 个问题 · 75 篇论文
+[搜广推](index.md) / 311 个问题 · 76 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">307 个问题 · 75 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">311 个问题 · 76 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:lazunirec" data-paper-title="LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-11-24 LazUnirec把历史、trigger、多兴趣检索query和同请求候选组织到同一Transformer，但不要求召回与排序完全共用全部参数。召回/排序各有Q/K/V低秩残差与private FFN expert，另由条件router选择top-2 shared experts。按scenario/task观察共享参数的归一化梯度历史，以EMA方向方差估计可靠性，停止梯度后重加权任务损失；排序还向召回做请求内候选分布蒸馏。 完整数据/模型/服务矩阵超本轮单A100/A30或Mac短时预算且私有输入不可得，成本过高，不复现（审查 DONE），不下载、不探跑、不自动重试。L1机制组件，diagnostic only，不是完整模型或能力复现。高成本完整实验不复现（审查 DONE），不接Evolve晋级。执行Eq7低秩任务投影、Eq10/11 sparse shared/private输出组合、Eq12–14 EMA evidence/相对权重/停止梯度及Eq15–17请求内MaxSim/KL，并用真实autograd验证参数路径。  多任务与联合建模 共享骨干与梯度可靠性 搜广推 用户历史与排序骨干 共享同一骨干为何还需要task-private参数？ 召回与排序目标不同，共享参数可能收到冲突更新。低秩残差与private expert提供任务容量，shared专家仍传递共同知识；这不是梯度已正交的证明。 教学例：同一历史对点击召回有用、对转化排序却需不同交互；两个任务可读同一用户表示但使用不同低秩投影。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
+<span id="paper-recommendation-lazunirec-bc8e76c8" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-92f29992dddddb5f">共享同一骨干为何还需要task-private参数？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Alazunirec">LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Alibaba International Digital Commerce Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>召回与排序目标不同，共享参数可能收到冲突更新。低秩残差与private expert提供任务容量，shared专家仍传递共同知识；这不是梯度已正交的证明。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一历史对点击召回有用、对转化排序却需不同交互；两个任务可读同一用户表示但使用不同低秩投影。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32590v1">原论文</a> · <a href="../../../../recommendation-components/2611.32590-lazunirec/">实现解读</a> · <a href="#qa-92f29992dddddb5f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:lazunirec" data-paper-title="LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-11-24 LazUnirec把历史、trigger、多兴趣检索query和同请求候选组织到同一Transformer，但不要求召回与排序完全共用全部参数。召回/排序各有Q/K/V低秩残差与private FFN expert，另由条件router选择top-2 shared experts。按scenario/task观察共享参数的归一化梯度历史，以EMA方向方差估计可靠性，停止梯度后重加权任务损失；排序还向召回做请求内候选分布蒸馏。 完整数据/模型/服务矩阵超本轮单A100/A30或Mac短时预算且私有输入不可得，成本过高，不复现（审查 DONE），不下载、不探跑、不自动重试。L1机制组件，diagnostic only，不是完整模型或能力复现。高成本完整实验不复现（审查 DONE），不接Evolve晋级。执行Eq7低秩任务投影、Eq10/11 sparse shared/private输出组合、Eq12–14 EMA evidence/相对权重/停止梯度及Eq15–17请求内MaxSim/KL，并用真实autograd验证参数路径。  多任务与联合建模 共享骨干与梯度可靠性 搜广推 用户历史与排序骨干 梯度可靠性等于梯度幅值或方向正确性吗？ 都不是。对归一化方向计算历史EMA方差，小方差表示相对稳定。稳定错误方向也可有高evidence；权重还依赖同batch其他任务，不是概率置信度。 教学例：[1,0]与[100,0]有相同L2方向；[1,0]/[-1,0]反复翻转则有较大方向方差，即使每步梯度范数都为1。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-cff65ec12c814da7">梯度可靠性等于梯度幅值或方向正确性吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Alazunirec">LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Alibaba International Digital Commerce Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>都不是。对归一化方向计算历史EMA方差，小方差表示相对稳定。稳定错误方向也可有高evidence；权重还依赖同batch其他任务，不是概率置信度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：[1,0]与[100,0]有相同L2方向；[1,0]/[-1,0]反复翻转则有较大方向方差，即使每步梯度范数都为1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32590v1">原论文</a> · <a href="../../../../recommendation-components/2611.32590-lazunirec/">实现解读</a> · <a href="#qa-cff65ec12c814da7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:lazunirec" data-paper-title="LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-11-24 LazUnirec把历史、trigger、多兴趣检索query和同请求候选组织到同一Transformer，但不要求召回与排序完全共用全部参数。召回/排序各有Q/K/V低秩残差与private FFN expert，另由条件router选择top-2 shared experts。按scenario/task观察共享参数的归一化梯度历史，以EMA方向方差估计可靠性，停止梯度后重加权任务损失；排序还向召回做请求内候选分布蒸馏。 完整数据/模型/服务矩阵超本轮单A100/A30或Mac短时预算且私有输入不可得，成本过高，不复现（审查 DONE），不下载、不探跑、不自动重试。L1机制组件，diagnostic only，不是完整模型或能力复现。高成本完整实验不复现（审查 DONE），不接Evolve晋级。执行Eq7低秩任务投影、Eq10/11 sparse shared/private输出组合、Eq12–14 EMA evidence/相对权重/停止梯度及Eq15–17请求内MaxSim/KL，并用真实autograd验证参数路径。  多任务与联合建模 共享骨干与梯度可靠性 搜广推 用户历史与排序骨干 LazUnirec蒸馏与OneTrans-V2的精排→预排信号相同吗？ OneTrans-V2用阶段隔离token共享因果用户上下文，精排向预排传递中心化logits/sigmoid信号；LazUnirec关注召回与排序的梯度冲突，用task-private LoRA/expert及方向可靠性区分更新，并向检索蒸馏请求内softmax分布。共享上下文不等于所有参数完全共用，独立任务参数也不自动保证梯度正交。旧OneTrans-V2公开MovieLens链路是concept demo，本批则只验局部算子，不能比较二者的代理能力分数。 教学例：LazUnirec两候选分数同时加同一常量不改变请求内softmax教师；不能因此认为任意独立sigmoid蒸馏目标也有相同不变性。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-6e2ed3d69f085249">LazUnirec蒸馏与OneTrans-V2的精排→预排信号相同吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Alazunirec">LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Alibaba International Digital Commerce Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>OneTrans-V2用阶段隔离token共享因果用户上下文，精排向预排传递中心化logits/sigmoid信号；LazUnirec关注召回与排序的梯度冲突，用task-private LoRA/expert及方向可靠性区分更新，并向检索蒸馏请求内softmax分布。共享上下文不等于所有参数完全共用，独立任务参数也不自动保证梯度正交。旧OneTrans-V2公开MovieLens链路是concept demo，本批则只验局部算子，不能比较二者的代理能力分数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：LazUnirec两候选分数同时加同一常量不改变请求内softmax教师；不能因此认为任意独立sigmoid蒸馏目标也有相同不变性。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32590v1">原论文</a> · <a href="../../../../recommendation-components/2611.32590-lazunirec/">实现解读</a> · <a href="#qa-6e2ed3d69f085249">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:lazunirec" data-paper-title="LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-11-24 LazUnirec把历史、trigger、多兴趣检索query和同请求候选组织到同一Transformer，但不要求召回与排序完全共用全部参数。召回/排序各有Q/K/V低秩残差与private FFN expert，另由条件router选择top-2 shared experts。按scenario/task观察共享参数的归一化梯度历史，以EMA方向方差估计可靠性，停止梯度后重加权任务损失；排序还向召回做请求内候选分布蒸馏。 完整数据/模型/服务矩阵超本轮单A100/A30或Mac短时预算且私有输入不可得，成本过高，不复现（审查 DONE），不下载、不探跑、不自动重试。L1机制组件，diagnostic only，不是完整模型或能力复现。高成本完整实验不复现（审查 DONE），不接Evolve晋级。执行Eq7低秩任务投影、Eq10/11 sparse shared/private输出组合、Eq12–14 EMA evidence/相对权重/停止梯度及Eq15–17请求内MaxSim/KL，并用真实autograd验证参数路径。  多任务与联合建模 共享骨干与梯度可靠性 搜广推 用户历史与排序骨干 为什么权重和排序teacher必须detach，clip后要再归一吗？ Eq14权重和Eq16排序teacher均停止梯度，避免模型绕过任务监督去优化evidence或反向改teacher。§4.1.4先相对batch均值归一再clip到[0.8,1.2]，不额外二次归一。 教学例：裁剪后权重[0.8,1.2,1.2]均值为1.0667；再除均值会改变既定损失，且不再严格保留裁剪下界。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-c113c8f6cda0b2b6">为什么权重和排序teacher必须detach，clip后要再归一吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Alazunirec">LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Alibaba International Digital Commerce Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Eq14权重和Eq16排序teacher均停止梯度，避免模型绕过任务监督去优化evidence或反向改teacher。§4.1.4先相对batch均值归一再clip到[0.8,1.2]，不额外二次归一。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：裁剪后权重[0.8,1.2,1.2]均值为1.0667；再除均值会改变既定损失，且不再严格保留裁剪下界。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32590v1">原论文</a> · <a href="../../../../recommendation-components/2611.32590-lazunirec/">实现解读</a> · <a href="#qa-c113c8f6cda0b2b6">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:dna" data-paper-title="DNA: Unlocking Depth Scaling in CTR Models" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="DNA: Unlocking Depth Scaling in CTR Models 搜广推与 LLM 应用 Alibaba Group 2026-11-19 DNA把请求U与历史S组成候选无关的双流：每层请求和候选F分别读取同一组历史K/V，随后历史token再反向读取刚更新的U。这样下一层看到的是受当前请求塑形的历史，而不是每层重投影同一S0。请求与历史状态可在同一请求的所有候选间共享。Fixed-v1 primary source 完整实验：成本过高，不复现（审查 DONE）。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。l1_mechanism: 仅低成本机制/接口诊断，不是完整能力复现。完整实验：成本过高，不复现（审查 DONE）。实际执行小型可微attention、组特异投影、token特异SwiGLU、composite请求投影及D-1次update；比较同缓存逐候选/批量结果，检查padding不影响分数、请求确实改变S、history/request梯度与backward有限性。score返回logits而不是点击概率，Eq13的sigmoid用BCEWithLogits稳定合并；  排序网络与长序列 请求条件历史更新 搜广推 用户历史与排序骨干 为什么多叠几层cross-attention不等于DNA？ 固定历史基线每层只重投影S0；DNA让历史接收刚更新请求的信息，下一层读的是新的S。 教学例：同一历史面对两个不同搜索query，可以产生不同S1；固定S0投影没有这种依赖。 2026-11-20">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
 <span id="paper-recommendation-dna-a5f55260" class="ar-learning-paper-anchor"></span>

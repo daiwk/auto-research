@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-25",
+  "window": {
+    "start": "2026-11-25",
+    "end": "2026-11-25"
+  },
+  "metadata_identities": 1982,
+  "announcement_identities": 2128,
+  "new_metadata_identities_relative_to_nov24_capture": 1188,
+  "newly_captured_recent_first_releases_by_date": {
+    "2026-11-23": 277,
+    "2026-11-24": 557
+  },
+  "first_releases_in_requested_window": 0,
+  "latest_original_publication_observed": "2026-11-24T17:07:26Z",
+  "announcement_dates_observed": [
+    "2026-11-24"
+  ],
+  "announcement_identity_delta_from_previous_batch": 2096,
+  "official_directory_pages": 56,
+  "parse_complete_pages": 54,
+  "repository_event_queries": 6,
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "review_watermark_unchanged": "2026-11-15",
+  "primary_priority_review": "priority-primary-selection.json",
+  "limits": [
+    "First submission, revision, announcement, discovery and review dates are distinct.",
+    "Current bulletin is datedNov24 and does not establish announcement dates for selected metadata-only papers.",
+    "Recent overlap startsNov23; this finite selection does not close the outstanding full window sinceNov15.",
+    "Recall pools and repository events are not newly qualified papers or an implementation backlog.",
+    "Google directory differences use the finiteNov15 baseline, not a daily publication count.",
+    "Two incomplete Meta landing pages do not demonstrate absence of new Meta work."
+  ]
+}

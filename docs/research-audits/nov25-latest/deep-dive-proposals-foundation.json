@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-25",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "foundation-models:udvr",
+      "target_card": "foundation-models/training-budget",
+      "source_revisions": {
+        "foundation-models:udvr": "73bc8da43095deda0dbc2394d5a1725fa6a502b961ab4e450aed30e379bca991",
+        "foundation-models:proland": "275d98175b4b5d888c6ccc97f04fa6557753a442a671f465e091e376a8fc3e35"
+      },
+      "comparison": {
+        "position": "UDVR固定U列/V行的长度，把尺度移入不参与优化的D；attention双侧吸收，FFN仅吸收U侧。它通过不同分支正则与形状规则设置更新尺度，不是训练一个独立幅值参数。",
+        "tradeoff": "ProLand协调LoRA乘积空间谱方向，并独立恢复B的Stiefel约束；UDVR不要求正交，只固定长度。长度相等不保证方向独立，QR与单独Muon不是替代实现；两个L1诊断都不支持跨模型训练效果比较。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "Weight Scale Rebalancing: Transferable Training Recipes for Transformers",
+        "body": "ProLand协调LoRA乘积空间谱方向，并独立恢复B的Stiefel约束；UDVR不要求正交，只固定长度。长度相等不保证方向独立，QR与单独Muon不是替代实现；两个L1诊断都不支持跨模型训练效果比较。 原文FFN的D更新不含V侧尺度，故GELU路径不函数守恒；attention才有精确UDV守恒。D必须是buffer，真实任务梯度与分支正则先更新U/V，之后再重平衡，不能把投影放在梯度前充数。",
+        "papers": [
+          "foundation-models:udvr",
+          "foundation-models:proland"
+        ]
+      },
+      "question": {
+        "id": "nov25-udvr",
+        "question": "UDVR和ProLand都约束因子，约束相同吗？",
+        "answer": "不相同。UDVR逐列/行固定长度而允许方向相关；ProLand围绕B的正交性与乘积空间谱更新。二者的几何和优化顺序不能互换。",
+        "example": "教学例：两列完全一样但范数都为目标值可满足UDVR，却不满足B转置B=I。",
+        "papers": [
+          "foundation-models:udvr",
+          "foundation-models:proland"
+        ]
+      },
+      "update": {
+        "date": "2026-11-25",
+        "papers": [
+          "foundation-models:udvr",
+          "foundation-models:proland"
+        ],
+        "summary": "ProLand协调LoRA乘积空间谱方向，并独立恢复B的Stiefel约束；UDVR不要求正交，只固定长度。长度相等不保证方向独立，QR与单独Muon不是替代实现；两个L1诊断都不支持跨模型训练效果比较。 完整实验按成本终态收录，不以L1诊断或资料收录晋级Evolve。"
+      },
+      "english": {
+        "comparison": {
+          "position": "UDVR pins U-column/V-row lengths and moves scale into a non-optimized D buffer, absorbing both sides for attention but only U for FFNs. Branch-specific regularizers and a shape rule set update scale; D is not an independently trained magnitude.",
+          "tradeoff": "ProLand coordinates product-space LoRA spectral directions and separately restores B toward the Stiefel manifold. UDVR imposes lengths, not orthogonality. Equal lengths do not imply independent directions; QR and separate Muon updates are not substitutes. Neither local L1 diagnostic supports cross-model training comparisons."
+        },
+        "analysis": {
+          "title": "Weight Scale Rebalancing: Transferable Training Recipes for Transformers",
+          "body": "ProLand coordinates product-space LoRA spectral directions and separately restores B toward the Stiefel manifold. UDVR imposes lengths, not orthogonality. Equal lengths do not imply independent directions; QR and separate Muon updates are not substitutes. Neither local L1 diagnostic supports cross-model training comparisons. The FFN D update excludes removed V scale, so its GELU path is not function-preserving. Exact UDV invariance applies to attention. D remains a buffer; task and branch-regularizer gradients update U/V before rebalancing."
+        },
+        "question": {
+          "question": "Do UDVR and ProLand impose the same factor constraint?",
+          "answer": "No. UDVR fixes individual lengths while allowing correlated directions. ProLand combines B orthogonality with product-space spectral updates. Their geometry and update ordering are not interchangeable.",
+          "example": "Illustration: identical columns with the target norm can satisfy UDVR but not B-transpose-B=I."
+        },
+        "update": "ProLand coordinates product-space LoRA spectral directions and separately restores B toward the Stiefel manifold. UDVR imposes lengths, not orthogonality. Equal lengths do not imply independent directions; QR and separate Muon updates are not substitutes. Neither local L1 diagnostic supports cross-model training comparisons. Full experiments are terminally cost-deferred; no L1 diagnostic or review-only entry is Evolve evidence."
+      }
+    },
+    {
+      "paper": "foundation-models:thresholded-longce",
+      "target_card": "foundation-models/context-and-state",
+      "source_revisions": {
+        "foundation-models:thresholded-longce": "acab1c57bc187f65dfb30ab2a809f542ec9341ea0bd92a58fd058feb20e149e6",
+        "foundation-models:merlin": "5549f39008d450d4a2446631403f0b94d55ea76f976bcc61197cb3c9f1fa0f01"
+      },
+      "comparison": {
+        "position": "TLCE不改状态容量，而比较同一目标的full/short log-prob；仅当优势超过1nat且短窗已积累128token时给capped ratio权重，再按总权重归一化。它强调已被模型利用的远上下文信息。",
+        "tradeoff": "MERLIN用routing key的一二阶矩改变多状态读取，TLCE改变训练监督分配。更强读取结构不等于已经学会召回；反之损失加权也不能恢复固定状态中未保存的信息。两者需要相同模型/数据预算的独立组合实验，现有小核不支持组合收益。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "Eliciting the Recall Capacity of Linear Attention",
+        "body": "MERLIN用routing key的一二阶矩改变多状态读取，TLCE改变训练监督分配。更强读取结构不等于已经学会召回；反之损失加权也不能恢复固定状态中未保存的信息。两者需要相同模型/数据预算的独立组合实验，现有小核不支持组合收益。 短窗最大512，边界必须重置状态/attention，额外前向无梯度，权重也stop-gradient。全程联合重复实验包含另一个内容干预，本地未实现句子重复，不能将TLCE接口当成全文recall比较。",
+        "papers": [
+          "foundation-models:thresholded-longce",
+          "foundation-models:merlin"
+        ]
+      },
+      "question": {
+        "id": "nov25-thresholded-longce",
+        "question": "TLCE能替代MERLIN的多状态路由吗？",
+        "answer": "不能。TLCE重分配训练损失而不改变记忆结构；MERLIN改变分段状态的读取权重。未存的信息和未学会使用的信息是不同瓶颈。",
+        "example": "教学例：若两个历史压进同一状态后已无法区分，给后续token更大loss不能保证还原；保留多个状态则改变了可读取信息。",
+        "papers": [
+          "foundation-models:thresholded-longce",
+          "foundation-models:merlin"
+        ]
+      },
+      "update": {
+        "date": "2026-11-25",
+        "papers": [
+          "foundation-models:thresholded-longce",
+          "foundation-models:merlin"
+        ],
+        "summary": "MERLIN用routing key的一二阶矩改变多状态读取，TLCE改变训练监督分配。更强读取结构不等于已经学会召回；反之损失加权也不能恢复固定状态中未保存的信息。两者需要相同模型/数据预算的独立组合实验，现有小核不支持组合收益。 完整实验按成本终态收录，不以L1诊断或资料收录晋级Evolve。"
+      },
+      "english": {
+        "comparison": {
+          "position": "TLCE keeps state capacity unchanged and compares full/short log-probabilities for the same target. A capped ratio applies only above1nat of benefit and after128short-context tokens, with total-weight normalization. It emphasizes distant information the model already uses.",
+          "tradeoff": "MERLIN changes multi-state readout using routing-key first/second moments; TLCE changes supervision allocation. Flexible readout does not establish learned recall, while weighting cannot recover information absent from state. Joint benefits require matched model/data budgets and are not established by existing small components."
+        },
+        "analysis": {
+          "title": "Eliciting the Recall Capacity of Linear Attention",
+          "body": "MERLIN changes multi-state readout using routing-key first/second moments; TLCE changes supervision allocation. Flexible readout does not establish learned recall, while weighting cannot recover information absent from state. Joint benefits require matched model/data budgets and are not established by existing small components. Short windows contain at most512tokens, reset state/attention, and run without gradients; weights are also detached. Full-training combined experiments include sentence repetition, absent locally. The loss interface is not a reproduction of the paper's recall comparison."
+        },
+        "question": {
+          "question": "Can TLCE replace MERLIN's multi-state routing?",
+          "answer": "No. TLCE reallocates loss without changing memory structure; MERLIN changes segment-state readout. Missing information and unlearned use of available information are different bottlenecks.",
+          "example": "Illustration: weighting a later token cannot guarantee recovery after two histories become indistinguishable in one state; preserving multiple states changes what can be read."
+        },
+        "update": "MERLIN changes multi-state readout using routing-key first/second moments; TLCE changes supervision allocation. Flexible readout does not establish learned recall, while weighting cannot recover information absent from state. Joint benefits require matched model/data budgets and are not established by existing small components. Full experiments are terminally cost-deferred; no L1 diagnostic or review-only entry is Evolve evidence."
+      }
+    },
+    {
+      "paper": "foundation-models:criticjepa",
+      "target_card": "multimodal-models/world-state-actions",
+      "source_revisions": {
+        "foundation-models:criticjepa": "32b97d41ccc34bc62adce7ebed90d23014c21411b81c4c56a8e6c4aa58cad34d",
+        "foundation-models:jepa-prediction-planning": "754eb348792674a6a8916439d927bc1f9895d8166a55b1cc9da92c1b44248778"
+      },
+      "comparison": {
+        "position": "CriticJEPA每层用真实训练轨迹的hindsight目标学习conditional flow提案，冻结层级rollout作选择；可短有锚精修，但最终按不含anchor的cost重选。排序能力与可利用的梯度方向分开验证。",
+        "tradeoff": "预测—规划评测区分表示可读性、预测误差与实际成功；CriticJEPA在同一冻结模型上进一步区分候选来源、排序与优化。两者都不能用latent loss取代环境执行。CriticJEPA额外要求真实flow和多层时间合同，固定候选fixture只能是诊断，不能替代能力实现。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "CriticJEPA: World Models Are Better Critics Than Optimizers",
+        "body": "预测—规划评测区分表示可读性、预测误差与实际成功；CriticJEPA在同一冻结模型上进一步区分候选来源、排序与优化。两者都不能用latent loss取代环境执行。CriticJEPA额外要求真实flow和多层时间合同，固定候选fixture只能是诊断，不能替代能力实现。 最终critic cost保留H-JEPA的目标空间、评分时间窗与action-consistency项；上层选择计划的首个预测状态作为子目标。论文FLOPs计入反传而非墙时。本地按18模型/多域训练规划矩阵高成本终态收录，无operator、无环境执行或自动重试。",
+        "papers": [
+          "foundation-models:criticjepa",
+          "foundation-models:jepa-prediction-planning"
+        ]
+      },
+      "question": {
+        "id": "nov25-criticjepa",
+        "question": "CriticJEPA比预测—规划评测多区分了什么？",
+        "answer": "前者在同一冻结模型里改变候选来源与搜索方式，区分能否排序、梯度是否有效和环境成功；后者用冻结解码协议拆表示与预测误差，并单独要求真实规划结果。",
+        "example": "教学例：一步误差相同的模型可对flow提案有用、对长搜索生成的离分布候选无用；因此不能仅按一步loss选规划器。",
+        "papers": [
+          "foundation-models:criticjepa",
+          "foundation-models:jepa-prediction-planning"
+        ]
+      },
+      "update": {
+        "date": "2026-11-25",
+        "papers": [
+          "foundation-models:criticjepa",
+          "foundation-models:jepa-prediction-planning"
+        ],
+        "summary": "预测—规划评测区分表示可读性、预测误差与实际成功；CriticJEPA在同一冻结模型上进一步区分候选来源、排序与优化。两者都不能用latent loss取代环境执行。CriticJEPA额外要求真实flow和多层时间合同，固定候选fixture只能是诊断，不能替代能力实现。 完整实验按成本终态收录，不以L1诊断或资料收录晋级Evolve。"
+      },
+      "english": {
+        "comparison": {
+          "position": "CriticJEPA learns per-level conditional flow proposals from hindsight goals in real training trajectories and selects using a frozen hierarchical rollout. Optional short anchored polish precedes final selection without the anchor. Ranking quality and useful gradient directions are tested separately.",
+          "tradeoff": "Prediction-planning evaluation separates representation readability, prediction error and execution success. CriticJEPA further distinguishes candidate sources, rankings and optimization under one frozen model. Neither substitutes latent loss for execution. CriticJEPA additionally needs trained flows and temporal hierarchy contracts; fixed candidates are diagnostic, not capability implementations."
+        },
+        "analysis": {
+          "title": "CriticJEPA: World Models Are Better Critics Than Optimizers",
+          "body": "Prediction-planning evaluation separates representation readability, prediction error and execution success. CriticJEPA further distinguishes candidate sources, rankings and optimization under one frozen model. Neither substitutes latent loss for execution. CriticJEPA additionally needs trained flows and temporal hierarchy contracts; fixed candidates are diagnostic, not capability implementations. The final critic retains H-JEPA's target space, scoring windows and action-consistency term. The first predicted upper state becomes the subgoal. Paper FLOPs include backpropagation, not wall time. The18-model multi-domain matrix is terminally cost-deferred locally, with no operator, environment execution or automatic retry."
+        },
+        "question": {
+          "question": "What distinction does CriticJEPA add to prediction-planning evaluation?",
+          "answer": "It changes candidate sources and search under a frozen model to separate ranking, useful gradients and execution. The evaluation protocol instead decomposes representation/prediction errors with a frozen decoder and separately requires real planning outcomes.",
+          "example": "Illustration: an unchanged one-step-error model may rank flow proposals usefully but not out-of-distribution prolonged-search outputs; one-step loss alone cannot select the planner."
+        },
+        "update": "Prediction-planning evaluation separates representation readability, prediction error and execution success. CriticJEPA further distinguishes candidate sources, rankings and optimization under one frozen model. Neither substitutes latent loss for execution. CriticJEPA additionally needs trained flows and temporal hierarchy contracts; fixed candidates are diagnostic, not capability implementations. Full experiments are terminally cost-deferred; no L1 diagnostic or review-only entry is Evolve evidence."
+      }
+    }
+  ]
+}

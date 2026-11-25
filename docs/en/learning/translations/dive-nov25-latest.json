@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/training-budget/comparison/foundation-models:udvr": {
+      "source_sha256": "c98aab057d0f1f5f44e15bbb6ad8a7a727375fe68cb5d2dc92053bfdbbcd5a4b",
+      "reviewed": true,
+      "fields": {
+        "position": "UDVR pins U-column/V-row lengths and moves scale into a non-optimized D buffer, absorbing both sides for attention but only U for FFNs. Branch-specific regularizers and a shape rule set update scale; D is not an independently trained magnitude.",
+        "tradeoff": "ProLand coordinates product-space LoRA spectral directions and separately restores B toward the Stiefel manifold. UDVR imposes lengths, not orthogonality. Equal lengths do not imply independent directions; QR and separate Muon updates are not substitutes. Neither local L1 diagnostic supports cross-model training comparisons."
+      }
+    },
+    "dive/foundation-models/training-budget/analysis/11": {
+      "source_sha256": "ee553e3e5de8fe09717ff395d55f17420d9eb9ba328f19c9b7f8f6b0ab5b72e7",
+      "reviewed": true,
+      "fields": {
+        "title": "Weight Scale Rebalancing: Transferable Training Recipes for Transformers",
+        "body": "ProLand coordinates product-space LoRA spectral directions and separately restores B toward the Stiefel manifold. UDVR imposes lengths, not orthogonality. Equal lengths do not imply independent directions; QR and separate Muon updates are not substitutes. Neither local L1 diagnostic supports cross-model training comparisons. The FFN D update excludes removed V scale, so its GELU path is not function-preserving. Exact UDV invariance applies to attention. D remains a buffer; task and branch-regularizer gradients update U/V before rebalancing."
+      }
+    },
+    "dive/foundation-models/training-budget/question/nov25-udvr": {
+      "source_sha256": "2ef65d9ec279623be0f9b880d976d5931a201480fe9c1283d9eed73f0292f37e",
+      "reviewed": true,
+      "fields": {
+        "question": "Do UDVR and ProLand impose the same factor constraint?",
+        "answer": "No. UDVR fixes individual lengths while allowing correlated directions. ProLand combines B orthogonality with product-space spectral updates. Their geometry and update ordering are not interchangeable.",
+        "example": "Illustration: identical columns with the target norm can satisfy UDVR but not B-transpose-B=I."
+      }
+    },
+    "dive/foundation-models/training-budget/update/2026-11-25/10": {
+      "source_sha256": "9f1fd0431e349b46159eeec1979a8f1f2eb52aec88cf05dfa893e2d7f8b61cbe",
+      "reviewed": true,
+      "fields": {
+        "summary": "ProLand coordinates product-space LoRA spectral directions and separately restores B toward the Stiefel manifold. UDVR imposes lengths, not orthogonality. Equal lengths do not imply independent directions; QR and separate Muon updates are not substitutes. Neither local L1 diagnostic supports cross-model training comparisons. Full experiments are terminally cost-deferred; no L1 diagnostic or review-only entry is Evolve evidence."
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:thresholded-longce": {
+      "source_sha256": "6f923c543295c98800c89060684dda11a6cae14d1b1f9ce4754f27935d729fb4",
+      "reviewed": true,
+      "fields": {
+        "position": "TLCE keeps state capacity unchanged and compares full/short log-probabilities for the same target. A capped ratio applies only above1nat of benefit and after128short-context tokens, with total-weight normalization. It emphasizes distant information the model already uses.",
+        "tradeoff": "MERLIN changes multi-state readout using routing-key first/second moments; TLCE changes supervision allocation. Flexible readout does not establish learned recall, while weighting cannot recover information absent from state. Joint benefits require matched model/data budgets and are not established by existing small components."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/18": {
+      "source_sha256": "a3340c7c4fbb1c945adaed2c26cbf8d82255810c41963b691a6ca074efbfa40f",
+      "reviewed": true,
+      "fields": {
+        "title": "Eliciting the Recall Capacity of Linear Attention",
+        "body": "MERLIN changes multi-state readout using routing-key first/second moments; TLCE changes supervision allocation. Flexible readout does not establish learned recall, while weighting cannot recover information absent from state. Joint benefits require matched model/data budgets and are not established by existing small components. Short windows contain at most512tokens, reset state/attention, and run without gradients; weights are also detached. Full-training combined experiments include sentence repetition, absent locally. The loss interface is not a reproduction of the paper's recall comparison."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/nov25-thresholded-longce": {
+      "source_sha256": "c8c6347bbd3f8f52cf7b613eb89abc844fc2ef9d9254f2edb28cab405458def3",
+      "reviewed": true,
+      "fields": {
+        "question": "Can TLCE replace MERLIN's multi-state routing?",
+        "answer": "No. TLCE reallocates loss without changing memory structure; MERLIN changes segment-state readout. Missing information and unlearned use of available information are different bottlenecks.",
+        "example": "Illustration: weighting a later token cannot guarantee recovery after two histories become indistinguishable in one state; preserving multiple states changes what can be read."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-11-25/17": {
+      "source_sha256": "00ba93bc5e29cc024c7d39b362625279c9d3e40655e8d883ea0e48aadee75083",
+      "reviewed": true,
+      "fields": {
+        "summary": "MERLIN changes multi-state readout using routing-key first/second moments; TLCE changes supervision allocation. Flexible readout does not establish learned recall, while weighting cannot recover information absent from state. Joint benefits require matched model/data budgets and are not established by existing small components. Full experiments are terminally cost-deferred; no L1 diagnostic or review-only entry is Evolve evidence."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/comparison/foundation-models:criticjepa": {
+      "source_sha256": "63cb7fe1edb875f68264d168d2b21c36730a4fdb028d62e499ff9a4e154d5e6f",
+      "reviewed": true,
+      "fields": {
+        "position": "CriticJEPA learns per-level conditional flow proposals from hindsight goals in real training trajectories and selects using a frozen hierarchical rollout. Optional short anchored polish precedes final selection without the anchor. Ranking quality and useful gradient directions are tested separately.",
+        "tradeoff": "Prediction-planning evaluation separates representation readability, prediction error and execution success. CriticJEPA further distinguishes candidate sources, rankings and optimization under one frozen model. Neither substitutes latent loss for execution. CriticJEPA additionally needs trained flows and temporal hierarchy contracts; fixed candidates are diagnostic, not capability implementations."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/analysis/16": {
+      "source_sha256": "affb07a92e777c48fe9210c56ec21aa8edfc800b139a4b36207b8020c4155322",
+      "reviewed": true,
+      "fields": {
+        "title": "CriticJEPA: World Models Are Better Critics Than Optimizers",
+        "body": "Prediction-planning evaluation separates representation readability, prediction error and execution success. CriticJEPA further distinguishes candidate sources, rankings and optimization under one frozen model. Neither substitutes latent loss for execution. CriticJEPA additionally needs trained flows and temporal hierarchy contracts; fixed candidates are diagnostic, not capability implementations. The final critic retains H-JEPA's target space, scoring windows and action-consistency term. The first predicted upper state becomes the subgoal. Paper FLOPs include backpropagation, not wall time. The18-model multi-domain matrix is terminally cost-deferred locally, with no operator, environment execution or automatic retry."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/question/nov25-criticjepa": {
+      "source_sha256": "dbc357ad326646bd5aebc78d36a05eb2278258b3a571a356f767ffad60450b6d",
+      "reviewed": true,
+      "fields": {
+        "question": "What distinction does CriticJEPA add to prediction-planning evaluation?",
+        "answer": "It changes candidate sources and search under a frozen model to separate ranking, useful gradients and execution. The evaluation protocol instead decomposes representation/prediction errors with a frozen decoder and separately requires real planning outcomes.",
+        "example": "Illustration: an unchanged one-step-error model may rank flow proposals usefully but not out-of-distribution prolonged-search outputs; one-step loss alone cannot select the planner."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/update/2026-11-25/15": {
+      "source_sha256": "60eec3d610d6bfe5f8365db5169ed2c94189e06083884743111686379015bbc3",
+      "reviewed": true,
+      "fields": {
+        "summary": "Prediction-planning evaluation separates representation readability, prediction error and execution success. CriticJEPA further distinguishes candidate sources, rankings and optimization under one frozen model. Neither substitutes latent loss for execution. CriticJEPA additionally needs trained flows and temporal hierarchy contracts; fixed candidates are diagnostic, not capability implementations. Full experiments are terminally cost-deferred; no L1 diagnostic or review-only entry is Evolve evidence."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/comparison/agent-research:agent-kernel": {
+      "source_sha256": "1722a764f663fe0397857ccabac92733e5d087cf1d92a4fb7ed986f3b30f9091",
+      "reviewed": true,
+      "fields": {
+        "position": "Agent-Kernel places dependency-graph recovery in the content plane: exceptions make descendants unreachable; SGR retries that subgraph, preserves completed siblings and injects actual parent text. Selective recovery inherits established distributed-systems ideas rather than inventing a planner or detector.",
+        "tradeoff": "RuntimeTickets freezes and checks permissions/obligations before external effects and avoids automatic resend after callback uncertainty. Agent-Kernel protects internal SAB dependencies/state, but reexecution can repeat effects. The layers can compose; recovery is neither authorization nor network exactly-once."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/analysis/6": {
+      "source_sha256": "b433f4e962360fe04a49b4bd7b296bd8e2adbff22526779529f7b99ea941d4d5",
+      "reviewed": true,
+      "fields": {
+        "title": "Subgraph recovery versus effect protection: preserved state is not unique effects",
+        "body": "SGR preserves states and outputs outside the failed node and its descendants. Detection and budget decisions are external; DSP first cascades unreachable, and the caller decides whether to retry. Children require every parent complete and inherit actual outputs in declared order. Prompt mutation is a preliminary appendix probe, not the shipped core loop. Local transactional claims and generation/owner checks reject late pre-reopen output under explicit single-scheduler handover, not a distributed lease proof. Character admission is not model-token budgeting. An exception-after-mutation control deliberately produces two mutations, preserving the absence of exactly-once guarantees. Three seeds with four nodes/five calls test scope, sibling preservation and text dependencies, not agent capability, semantic correction or paper latency gains."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/question/cross-nov25-agent-kernel": {
+      "source_sha256": "feac5fe2d458c65d5522454b76880bdf059ed75de2443791b6a8aeb03cc66d3d",
+      "reviewed": true,
+      "fields": {
+        "question": "Can SGR state preservation replace RuntimeTickets?",
+        "answer": "No. SGR preserves sibling SAB records and permits reexecution. RuntimeTickets checks authority and obligations before effects and avoids automatic resend under callback uncertainty. Recovery and effect authorization are separate layers.",
+        "example": "Teaching example: a payment succeeds before its node throws, so SGR may run it again. An effect-layer transaction/idempotency contract is needed; unchanged siblings do not prevent duplicate payment."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/update/2026-11-25/5": {
+      "source_sha256": "4fe43adef780fbfb6c5ad87196bd3eec484aa51f58abb0d1d277edfdac7c5fa3",
+      "reviewed": true,
+      "fields": {
+        "summary": "SGR preserves states and outputs outside the failed node and its descendants. Detection and budget decisions are external; DSP first cascades unreachable, and the caller decides whether to retry. Children require every parent complete and inherit actual outputs in declared order. Prompt mutation is a preliminary appendix probe, not the shipped core loop. Local transactional claims and generation/owner checks reject late pre-reopen output under explicit single-scheduler handover, not a distributed lease proof. Character admission is not model-token budgeting. An exception-after-mutation control deliberately produces two mutations, preserving the absence of exactly-once guarantees. Three seeds with four nodes/five calls test scope, sibling preservation and text dependencies, not agent capability, semantic correction or paper latency gains. The high-cost full campaign is terminally not reproduced; review DONE."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/comparison/agent-research:cape": {
+      "source_sha256": "491bcd3131cfc1494160582ac122d43fc110d5f480b68d68c9b6a25324b20906",
+      "reviewed": true,
+      "fields": {
+        "position": "CAPE calibrates a reproducible parser family offline while maintaining executable witnesses and local closure on reached response scopes. Optimistic unknown effects guide acquisition/bounds, never deployment answers. Its lexicographic objective maximizes configuration completion before minimizing call mass while preserving initial R0.",
+        "tradeoff": "CapLite freezes authority grounding and write order from trusted requests/schemas. CAPE solves representation under hidden parsers after the operation is fixed. A reference-matching commit does not prove authorization, and compiler optimality does not imply a write-prefix safety contract."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/analysis/7": {
+      "source_sha256": "615b0b3d43bbea1e986057bd0682df42eaf2bc322727f5343011329c14783cc4",
+      "reviewed": true,
+      "fields": {
+        "title": "Local-closure certificates do not permit reading hidden deployment configurations",
+        "body": "Calibration can query candidate h in a reproducible test environment for f(a,h)=(observation,commit). Returned policies contain actions/response branches only; deployment receives tool observations. Closed actions compose successes by union and call mass by |V| plus child mass. Unknown programs optimistically commit; unknown probes optimistically separate each configuration. Selected T2 tightens only the current action's two-call continuations. Witnesses preserve R0 and remain executable under consistent added effects; valid equal root bounds certify optimality. The local slice supports one to eight configurations and one to four calls with query-count rather than wall-clock allowance. Its four-configuration diagnostic acquires all twenty cells and saves no calibration. The independent oracle stays evaluator-side. Random finite tables, interrupted coverage, bounds and outside-scope-unknown controls establish neither native CSV/JSON behavior nor LLM success gains."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/question/cross-nov25-cape": {
+      "source_sha256": "a3035252fe45405351326c232a72c853412b202ae5b9c0b7962c12de7473c972",
+      "reviewed": true,
+      "fields": {
+        "question": "Does protected CAPE coverage imply CapLite-style safety?",
+        "answer": "No. CAPE maximizes completion over parser candidates, then minimizes calls. CapLite freezes trusted write order and authority grounding. Matching a reference does not establish user authorization or write-prefix safety.",
+        "example": "Teaching example: an upload may commit under all four date parsers while sending the correct data to an unauthorized recipient."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/update/2026-11-25/6": {
+      "source_sha256": "e678fdb3516bcf64f65fe82edca88eca535375d26fad75bade887ac402a7b232",
+      "reviewed": true,
+      "fields": {
+        "summary": "Calibration can query candidate h in a reproducible test environment for f(a,h)=(observation,commit). Returned policies contain actions/response branches only; deployment receives tool observations. Closed actions compose successes by union and call mass by |V| plus child mass. Unknown programs optimistically commit; unknown probes optimistically separate each configuration. Selected T2 tightens only the current action's two-call continuations. Witnesses preserve R0 and remain executable under consistent added effects; valid equal root bounds certify optimality. The local slice supports one to eight configurations and one to four calls with query-count rather than wall-clock allowance. Its four-configuration diagnostic acquires all twenty cells and saves no calibration. The independent oracle stays evaluator-side. Random finite tables, interrupted coverage, bounds and outside-scope-unknown controls establish neither native CSV/JSON behavior nor LLM success gains. The high-cost full campaign is terminally not reproduced; review DONE."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:recurscibench": {
+      "source_sha256": "fb7af57a385ea2e1e93e2e4b7f388d493b8e64e673528a583740ca71550ecc82",
+      "reviewed": true,
+      "fields": {
+        "position": "RecurSciBench uses paired modeling F/analysis A sources, then freezes evolved states and tests independent within-type, cross-type and cross-domain transfer. Backbone weights remain fixed; source gains cannot substitute for transfer evidence.",
+        "tradeoff": "CoEvoBench lets researchers choose weight/harness interventions and audits Visible/Selection/Test development. RecurSciBench freezes weights and tests transfer across systems and experience sources. They ask about intervention choice versus conditions for useful experience, while both require gold/policy isolation."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/36": {
+      "source_sha256": "de163c23849edc902ad3fdb122c497d29d36bc1ed0d111490949c4915c740c59",
+      "reviewed": true,
+      "fields": {
+        "title": "From source adaptation to transfer: one memory can help one domain and hurt another",
+        "body": "Joint F/A design retains scientific schema, sampling structure and provenance, with A evidence derived only from F public training data. Admission requires four execution and three scientific checks; failures route to design or implementation repair. Thirty-eight source pairs and twenty independent test F tasks yield ninety-six tasks; four systems across six sources produce twenty-four frozen states without between-test experience. Runs are normalized by reference gaps, averaged within tasks, and task-relative gains are averaged, not replaced by relative aggregate change. Appendix A gives system-specific source-score feedback, while all hide G-test targets/scores. Half the evolved states have negative overall gain, indicating that conditional experience can be frozen incorrectly, not that RSI is universally ineffective. The A800/96GiB/six-hour-cap long-rollout campaign is high-cost; this local entry is review-only, and formula teaching/platform links are not reproduction."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov25-recurscibench": {
+      "source_sha256": "795723cbfc0e1c0cf2f60e6d229bc4958f6bb232902103ac9aac40430046720c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does it expose the same mutable objects as CoEvoBench?",
+        "answer": "No. The four RecurSciBench systems freeze backbone weights and change subsets of solutions, memory, harness and improvement strategy to test transfer. CoEvoBench permits weight/harness intervention choices and audits development/selection/test access.",
+        "example": "Teaching example: moving a learned validation-split rule to a new scientific domain tests experience transfer; choosing whether to train a 9B model or change a tool tests intervention choice."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-25/36": {
+      "source_sha256": "543cdc71c8aa4a15f8684bc257979fff50f4ac05fb61c9a4d320f984b390cb57",
+      "reviewed": true,
+      "fields": {
+        "summary": "Joint F/A design retains scientific schema, sampling structure and provenance, with A evidence derived only from F public training data. Admission requires four execution and three scientific checks; failures route to design or implementation repair. Thirty-eight source pairs and twenty independent test F tasks yield ninety-six tasks; four systems across six sources produce twenty-four frozen states without between-test experience. Runs are normalized by reference gaps, averaged within tasks, and task-relative gains are averaged, not replaced by relative aggregate change. Appendix A gives system-specific source-score feedback, while all hide G-test targets/scores. Half the evolved states have negative overall gain, indicating that conditional experience can be frozen incorrectly, not that RSI is universally ineffective. The A800/96GiB/six-hour-cap long-rollout campaign is high-cost; this local entry is review-only, and formula teaching/platform links are not reproduction. The high-cost full campaign is terminally not reproduced; review DONE."
+      }
+    },
+    "dive/post-training/policy-optimization/comparison/post-training:epro": {
+      "source_sha256": "7c6d642abf533c08b4d0fae4b60ca1339d6065821c31c34390b76ddfee979bda",
+      "reviewed": true,
+      "fields": {
+        "position": "Transport the old execution anchor with training-policy movement, then combine old-training log-ratio variance with outward-only soft attenuation. Importance and gate are frozen for differentiation. CPU code implements full-vocabulary and AppendixB head-tail equations, not an execution engine or RL trainer.",
+        "tradeoff": "RSC estimates its center under fixed behavior using independent auxiliary actions and adds reverse KL. EPRO moves the center through transport and attenuates outward updates using distribution movement. Fixed-behavior correction, predicted execution and measured execution error are different objects, not reward-mean subtraction. No common LLM training measurement ranks their capabilities."
+      }
+    },
+    "dive/post-training/policy-optimization/analysis/13": {
+      "source_sha256": "ac4307168853abef677df8095c655e80c5f1e08b2c173db86c4b6f1236772e62",
+      "reviewed": true,
+      "fields": {
+        "title": "A predicted distribution is not an observed distribution; score centering is not reward centering",
+        "body": "EPRO Eq.2 normalizes mu0*pi_current/pi0 to predict current execution and recovers mu0 when the learner is unchanged. RSC keeps behavior fixed and limits drift with reverse KL; EPRO moves its center with transport and attenuates outward contributions using Policy Shift. Low shift alone does not establish the prediction-error bound assumed by theory. AppendixB's one tail bucket can hide internal tail movement. Finite differences must freeze importance and SSC coefficients, or they test a different gradient. Full/head-tail differences are a disclosed approximation boundary, not a failure to erase."
+      }
+    },
+    "dive/post-training/policy-optimization/question/nov25-epro-centering": {
+      "source_sha256": "ab89158268189d2bf1f7ed432c93be0850d06833025464c86f76423806bdb1ff",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish fixed behavior from transported distributions if both EPRO and RSC center scores?",
+        "answer": "After learner updates, old execution behavior remains fixed while transport moves with training-policy changes. Their expectations of the same score can differ. RSC reverse KL and EPRO SSC are also inequivalent controls.",
+        "example": "Teaching example: with distinct engine anchors, zero learner movement must recover the old execution anchor. Later training-policy changes move the center rather than merely subtracting group-mean reward."
+      }
+    },
+    "dive/post-training/policy-optimization/update/2026-11-25/13": {
+      "source_sha256": "e0c376a4be0917bdac678a69608eb13bedbca9899feded0ec97dc4d1c6d341b4",
+      "reviewed": true,
+      "fields": {
+        "summary": "Re-read the current RSC README against fixed-v1 EPRO Eqs.2/8/10–12 and AppendixB. Added fixed-behavior versus transported-prediction centering while preserving STE/prediction-error assumptions, frozen multipliers and coarse tail limits. Local components do not constitute a matched-budget capability comparison; full four-model EPRO RL is high-cost and not reproduced, review DONE."
+      }
+    },
+    "dive/recommendation/retrieval-matching/comparison/recommendation:larf": {
+      "source_sha256": "e7da383eb42f9d029988867d89860f957f7873fdd4eb1c4df5e3a23c2aa39bdc",
+      "reviewed": true,
+      "fields": {
+        "position": "Five-dimensional ordinal rewards, within-query document PNR and terminal six-digit margin, followed by generation-supervised training of five classification heads. Local code only implements CPU rewards/objectives and logit gradients, without CoT construction or a network.",
+        "tradeoff": "Yuanbao Rubric unifies retrieval, ranking and set selection with query-specific criteria. LARF targets document grades and terminal decisions. Ordered PNR pairs are not cross-document rubric coverage, and dual-head training is not best-trajectory distillation; online pipelines and metrics are not additive."
+      }
+    },
+    "dive/recommendation/retrieval-matching/analysis/7": {
+      "source_sha256": "aad5042650bd81d0fc7644e6b2d090b836a1f9f72211cbc84e787c867f2a7e82",
+      "reviewed": true,
+      "fields": {
+        "title": "Shared Yuanbao Search context does not make document grades and set utility identical",
+        "body": "LARF Eqs.3–5 exclude gold ties, give half credit to predicted ties and scale ordered concordance by group size. Yuanbao Rubric allows joint positive coverage and negative triggers from any document. LARF Eqs.8–10 choose the strongest among all non-gold digit classes, not only adjacent grades; Eq.12 retains generation in training and deletes it only in serving. Gold-conditioned CoT is training-target construction, not gold visibility for an evaluated agent. Both real production baselines matter, but HSR/LSR differ from GSB, and LARF8B offline50.98 is not the deployed1.7B student's result."
+      }
+    },
+    "dive/recommendation/retrieval-matching/question/nov25-larf-pnr": {
+      "source_sha256": "8ee9688a13b7405c6d7bc34048dcc534cf8cd137c428cdbc2cfbd5d8d87b60c6",
+      "reviewed": true,
+      "fields": {
+        "question": "Does high PNR imply that an evidence set satisfies the query rubric?",
+        "answer": "No. PNR checks whether predicted document grades reproduce gold order within a query. Rubric set utility concerns joint coverage and negative triggers. Correct order can still miss key facts or include a penalized document.",
+        "example": "Teaching example: two correctly ordered documents both omit date evidence; PNR can be high with an uncovered timeliness criterion. Adding a dated source can improve coverage without changing their pair order."
+      }
+    },
+    "dive/recommendation/retrieval-matching/update/2026-11-25/7": {
+      "source_sha256": "2181a766bf92938e4dffc6553b6f41e767c72eadbd05c369175a9964ec8e8732",
+      "reviewed": true,
+      "fields": {
+        "summary": "Re-read the current Yuanbao Rubric README and full fixed-v1 LARF. Added the boundary between document ordinal/PNR/terminal supervision and multi-document rubric utility, separating training-side gold construction, generation-head training, classification-only serving and8B/1.7B evidence. LARF is CPU formula components only; the private64-H20 pipeline is too expensive and not reproduced, review DONE."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/comparison/recommendation:lazunirec": {
+      "source_sha256": "08abeb358023452ab6dc45f181ad440e4b60f9121bb11ee72dbc0327e26ad04b",
+      "reviewed": true,
+      "fields": {
+        "position": "The component executes Equation7 task-private low-rank projection, Equations10–11 sparse shared/private output composition, Equations12–14 EMA evidence/relative weights/stop-gradient and Equations15–17 request-local MaxSim/KL, with real autograd path checks. Router scores, expert outputs, probed gradients and interest probabilities are explicit tensors; unspecified router/probability heads are not fabricated. The complete Transformer, RMSNorm, attention mask, embeddings, scenario pipeline, expert networks, MoE z-loss, training schedule and deployment are absent. This is not a complete model, formal benchmark or Evolve operator.",
+        "tradeoff": "OneTrans-V2 shares causal user context through stage-isolated tokens and transfers centered-logit/sigmoid signals from fine ranking to pre-ranking. LazUnirec addresses retrieval/ranking gradient conflict with task-private LoRA/experts and directional reliability, distilling a request-local softmax distribution into retrieval. Shared context does not mean fully shared parameters, and private parameters do not guarantee orthogonal gradients. The existing MovieLens OneTrans-V2 path is a concept demo, while this batch checks only operators; their proxy capability scores are not comparable."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/analysis/4": {
+      "source_sha256": "6849631c1af77ce28cd4bfeaf0f38cfa5d4e87c1f897d6607947514b5987c1b9",
+      "reviewed": true,
+      "fields": {
+        "title": "Is its distillation the same as OneTrans-V2 fine-to-pre-ranking transfer?",
+        "body": "OneTrans-V2 shares causal user context through stage-isolated tokens and transfers centered-logit/sigmoid signals from fine ranking to pre-ranking. LazUnirec addresses retrieval/ranking gradient conflict with task-private LoRA/experts and directional reliability, distilling a request-local softmax distribution into retrieval. Shared context does not mean fully shared parameters, and private parameters do not guarantee orthogonal gradients. The existing MovieLens OneTrans-V2 path is a concept demo, while this batch checks only operators; their proxy capability scores are not comparable."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/question/nov25-lazunirec": {
+      "source_sha256": "b43f34f821b07a0c812bcf22abf874426ddbc7621f82b3c3b7d009089452e2e9",
+      "reviewed": true,
+      "fields": {
+        "question": "Is its distillation the same as OneTrans-V2 fine-to-pre-ranking transfer?",
+        "answer": "OneTrans-V2 shares causal user context through stage-isolated tokens and transfers centered-logit/sigmoid signals from fine ranking to pre-ranking. LazUnirec addresses retrieval/ranking gradient conflict with task-private LoRA/experts and directional reliability, distilling a request-local softmax distribution into retrieval. Shared context does not mean fully shared parameters, and private parameters do not guarantee orthogonal gradients. The existing MovieLens OneTrans-V2 path is a concept demo, while this batch checks only operators; their proxy capability scores are not comparable.",
+        "example": "Teaching example: adding one constant to both teacher candidate scores leaves a request-local softmax unchanged; an arbitrary independent sigmoid-distillation objective need not share that invariance."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/update/2026-11-25/4": {
+      "source_sha256": "f671b16a98d56e1df4e431c790badac4d41ff72b72dc4c848e184d0ef22c86bd",
+      "reviewed": true,
+      "fields": {
+        "summary": "The component executes Equation7 task-private low-rank projection, Equations10–11 sparse shared/private output composition, Equations12–14 EMA evidence/relative weights/stop-gradient and Equations15–17 request-local MaxSim/KL, with real autograd path checks. Router scores, expert outputs, probed gradients and interest probabilities are explicit tensors; unspecified router/probability heads are not fabricated. The complete Transformer, RMSNorm, attention mask, embeddings, scenario pipeline, expert networks, MoE z-loss, training schedule and deployment are absent. This is not a complete model, formal benchmark or Evolve operator."
+      }
+    }
+  }
+}

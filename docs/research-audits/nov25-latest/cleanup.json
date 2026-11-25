@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-25",
+  "exact_disposable_targets": [
+    {"path": ".cache/nov25-latest/site-final", "allocated_bytes": 1088548864, "logical_bytes": 1072454643},
+    {"path": ".cache/nov25-latest/frozen-source-transfer-attempt1.tgz", "allocated_bytes": 86016, "logical_bytes": 82999},
+    {"path": ".cache/nov25-latest/frozen-source-transfer-attempt2.tgz", "allocated_bytes": 86016, "logical_bytes": 83027},
+    {"path": ".cache/nov25-latest/frozen-source-transfer.tgz", "allocated_bytes": 86016, "logical_bytes": 83429},
+    {"path": ".cache/nov25-latest/root-primary/lazunirec-page3.png", "allocated_bytes": 225280, "logical_bytes": 221651}
+  ],
+  "allocated_bytes_reclaimed": 1089032192,
+  "protected_files": 198,
+  "protected_sha256_before": "732b5308b48386e8e9adbee47b7747f7451d02a92f16185edcf90180ce5e05c1",
+  "protected_sha256_after": "732b5308b48386e8e9adbee47b7747f7451d02a92f16185edcf90180ce5e05c1",
+  "kept": "Code/Git checkouts, original results including failed attempts, receipts/frozen proofs, primary source captures and formal figures, reusable weights/data, and Codex records/configuration",
+  "remote_transfer_cleanup": {"exact_temporary_targets_removed": 6, "already_absent": 0, "source_copies_only": true, "after_results_fetched_and_validated": true}
+}

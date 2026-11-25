@@ -15,7 +15,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="policy-optimization/">策略优化：谁在采样，谁在被更新</a></h2>
 <p>在线采样、旧策略概率与当前策略更新之间，哪些量必须分开？</p>
-<p class="ar-learning-topic-meta">264 个问题 · 66 篇论文</p>
+<p class="ar-learning-topic-meta">268 个问题 · 67 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="reward-and-credit/">奖励与信用：正确结果该奖励哪些步骤</a></h2>

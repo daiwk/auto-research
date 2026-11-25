@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-25",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "agent-research:agent-kernel",
+      "target_card": "agent-research/tools-and-collaboration",
+      "source_revisions": {
+        "agent-research:agent-kernel": "591608992b3551fbedb187b6125bf2008c08e1ec03b005f54e79c42fb5974ceb",
+        "agent-research:runtime-tickets": "5b00948adf9bb0542e98df053cfe7028c1ab6925099a181503296520a390d8d4"
+      },
+      "peer_membership_verified_in": "docs/learning/topics/agent-research.json",
+      "comparison": {
+        "position": "Agent-Kernel将依赖图恢复放到内容编排层：异常使后代不可达，SGR只重试失败子图，保存已完成兄弟，并让子节点继承真实父文本；选择性恢复本身继承分布式系统已有思想，不是新的planner或failure detector。",
+        "tradeoff": "RuntimeTickets在外部副作用前冻结并检查权限/obligation，对callback异常不自动重发；Agent-Kernel维护SAB内部依赖/状态，重试可以再次执行有副作用的节点。两层可组合但不互相替代。恢复完成不等于授权合法，更不意味着网络exactly-once。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "结果、负控与边界",
+          "同主题比较与边界",
+          "完整实验与成本决定"
+        ]
+      },
+      "analysis": {
+        "title": "恢复子图与保护副作用：状态不丢，不等于效果不重",
+        "body": "SGR的保证域是C = V ∖ ({f} ∪ Desc(f))的state与outputs不变。异常检测与retry budget在外部，DSP先级联unreachable再由caller决定是否retry；子节点必须等所有父节点complete，真实输出按声明序继承。prompt-mutation是附录初步探针，不是已交付主循环。本地SQLite事务claim和generation/owner负控拒绝重开前晚到结果，显式单scheduler交接不是分布式租约证明；字符上限准入不冒充模型token预算。副作用后异常负控实际执行两次mutation，保留无exactly-once保证。三seed4节点/5调用只验证重试范围、兄弟保留与文本依赖，不验证Agent能力、语义纠错或论文延迟提升。",
+        "papers": [
+          "agent-research:agent-kernel",
+          "agent-research:runtime-tickets"
+        ]
+      },
+      "question": {
+        "id": "cross-nov25-agent-kernel",
+        "question": "SGR的状态保持能替代RuntimeTickets的副作用合同吗？",
+        "answer": "不能。SGR保护SAB里的兄弟状态并允许重执行；RuntimeTickets在副作用前核权限与obligation，callback不确定时不自动重发。编排恢复与授权/副作用边界是不同层。",
+        "example": "教学例：付款已成功后节点抛错，SGR可再次执行；需要下层事务/幂等合同，不能拿兄弟节点没变证明不会重复付款。",
+        "papers": [
+          "agent-research:agent-kernel",
+          "agent-research:runtime-tickets"
+        ]
+      },
+      "update": {
+        "date": "2026-11-25",
+        "papers": [
+          "agent-research:agent-kernel",
+          "agent-research:runtime-tickets"
+        ],
+        "source_revisions": {
+          "agent-research:agent-kernel": "591608992b3551fbedb187b6125bf2008c08e1ec03b005f54e79c42fb5974ceb",
+          "agent-research:runtime-tickets": "5b00948adf9bb0542e98df053cfe7028c1ab6925099a181503296520a390d8d4"
+        },
+        "summary": "标准库SQLite/WAL、7态SAB、五动词、事务claim、失败/取消级联、SGR和声明序实际父文本继承。fork不等待执行，run为有界线程池driver；executor仅收task/context、不读gold。显式单owner重开撤销running旧claim，generation/owner拒绝陈旧完成；不是分布式租约证明。字符上限是本地准入而非模型token预算；没有LLM、prompt-mutation、语义恢复或真实tool服务；外部副作用不保证exactly-once。 完整高成本campaign终态不复现，审查DONE。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Agent-Kernel places dependency-graph recovery in the content plane: exceptions make descendants unreachable; SGR retries that subgraph, preserves completed siblings and injects actual parent text. Selective recovery inherits established distributed-systems ideas rather than inventing a planner or detector.",
+          "tradeoff": "RuntimeTickets freezes and checks permissions/obligations before external effects and avoids automatic resend after callback uncertainty. Agent-Kernel protects internal SAB dependencies/state, but reexecution can repeat effects. The layers can compose; recovery is neither authorization nor network exactly-once."
+        },
+        "analysis": {
+          "title": "Subgraph recovery versus effect protection: preserved state is not unique effects",
+          "body": "SGR preserves states and outputs outside the failed node and its descendants. Detection and budget decisions are external; DSP first cascades unreachable, and the caller decides whether to retry. Children require every parent complete and inherit actual outputs in declared order. Prompt mutation is a preliminary appendix probe, not the shipped core loop. Local transactional claims and generation/owner checks reject late pre-reopen output under explicit single-scheduler handover, not a distributed lease proof. Character admission is not model-token budgeting. An exception-after-mutation control deliberately produces two mutations, preserving the absence of exactly-once guarantees. Three seeds with four nodes/five calls test scope, sibling preservation and text dependencies, not agent capability, semantic correction or paper latency gains."
+        },
+        "question": {
+          "question": "Can SGR state preservation replace RuntimeTickets?",
+          "answer": "No. SGR preserves sibling SAB records and permits reexecution. RuntimeTickets checks authority and obligations before effects and avoids automatic resend under callback uncertainty. Recovery and effect authorization are separate layers.",
+          "example": "Teaching example: a payment succeeds before its node throws, so SGR may run it again. An effect-layer transaction/idempotency contract is needed; unchanged siblings do not prevent duplicate payment."
+        },
+        "update": "SGR preserves states and outputs outside the failed node and its descendants. Detection and budget decisions are external; DSP first cascades unreachable, and the caller decides whether to retry. Children require every parent complete and inherit actual outputs in declared order. Prompt mutation is a preliminary appendix probe, not the shipped core loop. Local transactional claims and generation/owner checks reject late pre-reopen output under explicit single-scheduler handover, not a distributed lease proof. Character admission is not model-token budgeting. An exception-after-mutation control deliberately produces two mutations, preserving the absence of exactly-once guarantees. Three seeds with four nodes/five calls test scope, sibling preservation and text dependencies, not agent capability, semantic correction or paper latency gains. The high-cost full campaign is terminally not reproduced; review DONE."
+      }
+    },
+    {
+      "paper": "agent-research:cape",
+      "target_card": "agent-research/tools-and-collaboration",
+      "source_revisions": {
+        "agent-research:cape": "adc6b4c3082ee2d00caa4a8538ed32b2cccb2ae2bab14c235221f4fca5eef8e7",
+        "agent-research:caplite": "2c380139ce94eb86eb96b0c23440b0b3896e4450f8c9bb9f69bb7e902a9646d5"
+      },
+      "peer_membership_verified_in": "docs/learning/topics/agent-research.json",
+      "comparison": {
+        "position": "CAPE离线校准可复制parser配置族，持续存可执行策略并按响应scope做local closure；unknown效果的乐观松弛只指引获取和上界，不能作为部署答案。目标先最大化逐配置完成，再最小化调用总量，并保留初始R0。",
+        "tradeoff": "CapLite从可信请求/schema冻结authority grounding与写序列；CAPE在已选操作固定后解决其表示在隐藏parser下怎样执行。reference相等的commit不证明用户授权；CAPE的最优证书也不保证CapLite的write-prefix合同。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "结果、负控与边界",
+          "同主题比较与边界",
+          "完整实验与成本决定"
+        ]
+      },
+      "analysis": {
+        "title": "局部闭合的编译证书，不是部署时偷看配置",
+        "body": "CAPE的校准阶段知道候选h，可在隔离测试环境取得f(a,h)=(o,g)；返回policy仅有action和响应分支，部署只读工具观测。closed动作以G∪children组合成功集，以|V|+ΣMchild计算调用mass。未知program乐观立即成功，未知probe乐观每配置独立响应，selected T2只收紧当前动作的两调用续段。witness覆盖R0并在一致新效果后仍可执行，root有效lower=upper才证最优。本地1–8配置/1–4calls、query-count而非wall-clock预算；4配置诊断取得全20格，没有校准节省。独立oracle留在评估侧；随机有限表、中断R0、上下界和V外未知效果负控不等于真实CSV/JSON或LLM胜率。",
+        "papers": [
+          "agent-research:cape",
+          "agent-research:caplite"
+        ]
+      },
+      "question": {
+        "id": "cross-nov25-cape",
+        "question": "CAPE保留初始覆盖是否等于CapLite的安全保证？",
+        "answer": "不等于。CAPE在parser候选族上最大化完成数并再省调用；CapLite冻结可信写序列及authority grounding。结果符合reference不能证明写入被用户授权，覆盖最优也不保证顺序权限。",
+        "example": "教学例：一个上传策略能在四种日期parser都commit，仍可能把正确数据发给未经授权的接收者。",
+        "papers": [
+          "agent-research:cape",
+          "agent-research:caplite"
+        ]
+      },
+      "update": {
+        "date": "2026-11-25",
+        "papers": [
+          "agent-research:cape",
+          "agent-research:caplite"
+        ],
+        "source_revisions": {
+          "agent-research:cape": "adc6b4c3082ee2d00caa4a8538ed32b2cccb2ae2bab14c235221f4fca5eef8e7",
+          "agent-research:caplite": "2c380139ce94eb86eb96b0c23440b0b3896e4450f8c9bb9f69bb7e902a9646d5"
+        },
+        "summary": "1–8配置、1–4调用的标准库有限编译器保留local closure、持久witness、Eq1–7乐观program/probe松弛、双frontier、三级query获取与selected两调用收紧；完全取得效果时有限递推精确。query-count上限替代wall-clock预算。校准可查询候选h；部署Policy只保存action/响应分支，execute不接活跃h、完整表或gold；独立full-information oracle仅评估侧。教学4配置全20格校准、无校准节省；非DuckDB/pandas真实数据、非LLM工具胜率、非完整性能复现。 完整高成本campaign终态不复现，审查DONE。"
+      },
+      "english": {
+        "comparison": {
+          "position": "CAPE calibrates a reproducible parser family offline while maintaining executable witnesses and local closure on reached response scopes. Optimistic unknown effects guide acquisition/bounds, never deployment answers. Its lexicographic objective maximizes configuration completion before minimizing call mass while preserving initial R0.",
+          "tradeoff": "CapLite freezes authority grounding and write order from trusted requests/schemas. CAPE solves representation under hidden parsers after the operation is fixed. A reference-matching commit does not prove authorization, and compiler optimality does not imply a write-prefix safety contract."
+        },
+        "analysis": {
+          "title": "Local-closure certificates do not permit reading hidden deployment configurations",
+          "body": "Calibration can query candidate h in a reproducible test environment for f(a,h)=(observation,commit). Returned policies contain actions/response branches only; deployment receives tool observations. Closed actions compose successes by union and call mass by |V| plus child mass. Unknown programs optimistically commit; unknown probes optimistically separate each configuration. Selected T2 tightens only the current action's two-call continuations. Witnesses preserve R0 and remain executable under consistent added effects; valid equal root bounds certify optimality. The local slice supports one to eight configurations and one to four calls with query-count rather than wall-clock allowance. Its four-configuration diagnostic acquires all twenty cells and saves no calibration. The independent oracle stays evaluator-side. Random finite tables, interrupted coverage, bounds and outside-scope-unknown controls establish neither native CSV/JSON behavior nor LLM success gains."
+        },
+        "question": {
+          "question": "Does protected CAPE coverage imply CapLite-style safety?",
+          "answer": "No. CAPE maximizes completion over parser candidates, then minimizes calls. CapLite freezes trusted write order and authority grounding. Matching a reference does not establish user authorization or write-prefix safety.",
+          "example": "Teaching example: an upload may commit under all four date parsers while sending the correct data to an unauthorized recipient."
+        },
+        "update": "Calibration can query candidate h in a reproducible test environment for f(a,h)=(observation,commit). Returned policies contain actions/response branches only; deployment receives tool observations. Closed actions compose successes by union and call mass by |V| plus child mass. Unknown programs optimistically commit; unknown probes optimistically separate each configuration. Selected T2 tightens only the current action's two-call continuations. Witnesses preserve R0 and remain executable under consistent added effects; valid equal root bounds certify optimality. The local slice supports one to eight configurations and one to four calls with query-count rather than wall-clock allowance. Its four-configuration diagnostic acquires all twenty cells and saves no calibration. The independent oracle stays evaluator-side. Random finite tables, interrupted coverage, bounds and outside-scope-unknown controls establish neither native CSV/JSON behavior nor LLM success gains. The high-cost full campaign is terminally not reproduced; review DONE."
+      }
+    },
+    {
+      "paper": "agent-research:recurscibench",
+      "target_card": "agent-research/harness-and-self-improvement",
+      "source_revisions": {
+        "agent-research:recurscibench": "d02a9774157bab68e7e673927e3bd17c1c979babe9445e9290643e66ca26ab06",
+        "agent-research:coevobench": "46cfd36b03e74f4dcb83e7a643df67b536c616cf039013f14378b7d9cee1ac99"
+      },
+      "peer_membership_verified_in": "docs/learning/topics/agent-research.json",
+      "comparison": {
+        "position": "RecurSciBench用成对科学建模F/分析A任务作为经验来源，冻结evolved state后在独立G-test评价within-type、cross-type和cross-domain迁移；backbone权重固定，source gain不能代替迁移结论。",
+        "tradeoff": "CoEvoBench允许researcher选择权重训练/harness干预，在Visible/Selection/Test中审计开发与选择；RecurSciBench固定权重，测不同系统与经验来源能否迁往新科学任务。前者回答干预选得怎样，后者回答经验在何种条件有效；都要隔离被评policy和gold。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "同主题比较与边界",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "从源任务适配到经验迁移：同一记忆也可能帮一域伤一域",
+        "body": "RecurSciPipe的F/A联合设计保留科学schema、采样结构与provenance，A的证据仅来自F的公开训练部分。准入需要四执行检查加三科学检查，失败按设计/实施层分流修复。38对source与20个独立test F构成96任务，四系统六source设置得到24冻结state；测试任务间不携带经验。各run按reference gap归一化后任务内均值，再对任务相对gain取均值，不能改成总分相对变化。附录A的source反馈因系统不同，但G-test targets/scores统一不可见。作者半数state负gain说明条件性经验可能被错误固化，不证明RSI普遍无效。每任务A800/96GiB/6h上限及长rollout矩阵成本过高，本地仅审查；公式教学和源码平台链接不构成复现。",
+        "papers": [
+          "agent-research:recurscibench",
+          "agent-research:coevobench"
+        ]
+      },
+      "question": {
+        "id": "cross-nov25-recurscibench",
+        "question": "与CoEvoBench相比，这里递归自改进的可变对象相同吗？",
+        "answer": "不同。RecurSciBench四系统冻结backbone权重，分别改变解、记忆、harness或改进策略，测跨任务迁移；CoEvoBench允许researcher选择训练权重或修改harness，并审计开发/选择/Test访问。",
+        "example": "教学例：把在源任务学到的验证切分规则迁往新科学域，是经验迁移；根据反馈决定训9B权重还是改工具，是另一种干预选择。",
+        "papers": [
+          "agent-research:recurscibench",
+          "agent-research:coevobench"
+        ]
+      },
+      "update": {
+        "date": "2026-11-25",
+        "papers": [
+          "agent-research:recurscibench",
+          "agent-research:coevobench"
+        ],
+        "source_revisions": {
+          "agent-research:recurscibench": "d02a9774157bab68e7e673927e3bd17c1c979babe9445e9290643e66ca26ab06",
+          "agent-research:coevobench": "46cfd36b03e74f4dcb83e7a643df67b536c616cf039013f14378b7d9cee1ac99"
+        },
+        "summary": "仅review-only固定v1、F/A来源隔离、冻结G-test协议、公式、成本和同主题比较；不创建算法/adapter、科学任务生成、scorer、reference solver、LLM演化或benchmark。测试targets/scores必须对被测Agent不可见；只实现归一化不能冒称本篇复现。无虚构seed指标或GPU回执。 完整高成本campaign终态不复现，审查DONE。"
+      },
+      "english": {
+        "comparison": {
+          "position": "RecurSciBench uses paired modeling F/analysis A sources, then freezes evolved states and tests independent within-type, cross-type and cross-domain transfer. Backbone weights remain fixed; source gains cannot substitute for transfer evidence.",
+          "tradeoff": "CoEvoBench lets researchers choose weight/harness interventions and audits Visible/Selection/Test development. RecurSciBench freezes weights and tests transfer across systems and experience sources. They ask about intervention choice versus conditions for useful experience, while both require gold/policy isolation."
+        },
+        "analysis": {
+          "title": "From source adaptation to transfer: one memory can help one domain and hurt another",
+          "body": "Joint F/A design retains scientific schema, sampling structure and provenance, with A evidence derived only from F public training data. Admission requires four execution and three scientific checks; failures route to design or implementation repair. Thirty-eight source pairs and twenty independent test F tasks yield ninety-six tasks; four systems across six sources produce twenty-four frozen states without between-test experience. Runs are normalized by reference gaps, averaged within tasks, and task-relative gains are averaged, not replaced by relative aggregate change. Appendix A gives system-specific source-score feedback, while all hide G-test targets/scores. Half the evolved states have negative overall gain, indicating that conditional experience can be frozen incorrectly, not that RSI is universally ineffective. The A800/96GiB/six-hour-cap long-rollout campaign is high-cost; this local entry is review-only, and formula teaching/platform links are not reproduction."
+        },
+        "question": {
+          "question": "Does it expose the same mutable objects as CoEvoBench?",
+          "answer": "No. The four RecurSciBench systems freeze backbone weights and change subsets of solutions, memory, harness and improvement strategy to test transfer. CoEvoBench permits weight/harness intervention choices and audits development/selection/test access.",
+          "example": "Teaching example: moving a learned validation-split rule to a new scientific domain tests experience transfer; choosing whether to train a 9B model or change a tool tests intervention choice."
+        },
+        "update": "Joint F/A design retains scientific schema, sampling structure and provenance, with A evidence derived only from F public training data. Admission requires four execution and three scientific checks; failures route to design or implementation repair. Thirty-eight source pairs and twenty independent test F tasks yield ninety-six tasks; four systems across six sources produce twenty-four frozen states without between-test experience. Runs are normalized by reference gaps, averaged within tasks, and task-relative gains are averaged, not replaced by relative aggregate change. Appendix A gives system-specific source-score feedback, while all hide G-test targets/scores. Half the evolved states have negative overall gain, indicating that conditional experience can be frozen incorrectly, not that RSI is universally ineffective. The A800/96GiB/six-hour-cap long-rollout campaign is high-cost; this local entry is review-only, and formula teaching/platform links are not reproduction. The high-cost full campaign is terminally not reproduced; review DONE."
+      }
+    }
+  ]
+}

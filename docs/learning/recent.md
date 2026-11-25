@@ -68,9 +68,486 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">5138 个问题 · 1282 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">5174 个问题 · 1291 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:lazunirec" data-paper-title="LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-11-24 LazUnirec把历史、trigger、多兴趣检索query和同请求候选组织到同一Transformer，但不要求召回与排序完全共用全部参数。召回/排序各有Q/K/V低秩残差与private FFN expert，另由条件router选择top-2 shared experts。按scenario/task观察共享参数的归一化梯度历史，以EMA方向方差估计可靠性，停止梯度后重加权任务损失；排序还向召回做请求内候选分布蒸馏。 完整数据/模型/服务矩阵超本轮单A100/A30或Mac短时预算且私有输入不可得，成本过高，不复现（审查 DONE），不下载、不探跑、不自动重试。L1机制组件，diagnostic only，不是完整模型或能力复现。高成本完整实验不复现（审查 DONE），不接Evolve晋级。执行Eq7低秩任务投影、Eq10/11 sparse shared/private输出组合、Eq12–14 EMA evidence/相对权重/停止梯度及Eq15–17请求内MaxSim/KL，并用真实autograd验证参数路径。  多任务与联合建模 共享骨干与梯度可靠性 搜广推 用户历史与排序骨干 梯度可靠性等于梯度幅值或方向正确性吗？ 都不是。对归一化方向计算历史EMA方差，小方差表示相对稳定。稳定错误方向也可有高evidence；权重还依赖同batch其他任务，不是概率置信度。 教学例：[1,0]与[100,0]有相同L2方向；[1,0]/[-1,0]反复翻转则有较大方向方差，即使每步梯度范数都为1。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/history-ranking-backbones/">搜广推 / 用户历史与排序骨干</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-cff65ec12c814da7">梯度可靠性等于梯度幅值或方向正确性吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Alazunirec">LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Alibaba International Digital Commerce Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>都不是。对归一化方向计算历史EMA方差，小方差表示相对稳定。稳定错误方向也可有高evidence；权重还依赖同batch其他任务，不是概率置信度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：[1,0]与[100,0]有相同L2方向；[1,0]/[-1,0]反复翻转则有较大方向方差，即使每步梯度范数都为1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32590v1">原论文</a> · <a href="../../recommendation-components/2611.32590-lazunirec/">实现解读</a> · <a href="#qa-cff65ec12c814da7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:lazunirec" data-paper-title="LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-11-24 LazUnirec把历史、trigger、多兴趣检索query和同请求候选组织到同一Transformer，但不要求召回与排序完全共用全部参数。召回/排序各有Q/K/V低秩残差与private FFN expert，另由条件router选择top-2 shared experts。按scenario/task观察共享参数的归一化梯度历史，以EMA方向方差估计可靠性，停止梯度后重加权任务损失；排序还向召回做请求内候选分布蒸馏。 完整数据/模型/服务矩阵超本轮单A100/A30或Mac短时预算且私有输入不可得，成本过高，不复现（审查 DONE），不下载、不探跑、不自动重试。L1机制组件，diagnostic only，不是完整模型或能力复现。高成本完整实验不复现（审查 DONE），不接Evolve晋级。执行Eq7低秩任务投影、Eq10/11 sparse shared/private输出组合、Eq12–14 EMA evidence/相对权重/停止梯度及Eq15–17请求内MaxSim/KL，并用真实autograd验证参数路径。  多任务与联合建模 共享骨干与梯度可靠性 搜广推 用户历史与排序骨干 为什么权重和排序teacher必须detach，clip后要再归一吗？ Eq14权重和Eq16排序teacher均停止梯度，避免模型绕过任务监督去优化evidence或反向改teacher。§4.1.4先相对batch均值归一再clip到[0.8,1.2]，不额外二次归一。 教学例：裁剪后权重[0.8,1.2,1.2]均值为1.0667；再除均值会改变既定损失，且不再严格保留裁剪下界。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/history-ranking-backbones/">搜广推 / 用户历史与排序骨干</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-c113c8f6cda0b2b6">为什么权重和排序teacher必须detach，clip后要再归一吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Alazunirec">LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Alibaba International Digital Commerce Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Eq14权重和Eq16排序teacher均停止梯度，避免模型绕过任务监督去优化evidence或反向改teacher。§4.1.4先相对batch均值归一再clip到[0.8,1.2]，不额外二次归一。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：裁剪后权重[0.8,1.2,1.2]均值为1.0667；再除均值会改变既定损失，且不再严格保留裁剪下界。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32590v1">原论文</a> · <a href="../../recommendation-components/2611.32590-lazunirec/">实现解读</a> · <a href="#qa-c113c8f6cda0b2b6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:lazunirec" data-paper-title="LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-11-24 LazUnirec把历史、trigger、多兴趣检索query和同请求候选组织到同一Transformer，但不要求召回与排序完全共用全部参数。召回/排序各有Q/K/V低秩残差与private FFN expert，另由条件router选择top-2 shared experts。按scenario/task观察共享参数的归一化梯度历史，以EMA方向方差估计可靠性，停止梯度后重加权任务损失；排序还向召回做请求内候选分布蒸馏。 完整数据/模型/服务矩阵超本轮单A100/A30或Mac短时预算且私有输入不可得，成本过高，不复现（审查 DONE），不下载、不探跑、不自动重试。L1机制组件，diagnostic only，不是完整模型或能力复现。高成本完整实验不复现（审查 DONE），不接Evolve晋级。执行Eq7低秩任务投影、Eq10/11 sparse shared/private输出组合、Eq12–14 EMA evidence/相对权重/停止梯度及Eq15–17请求内MaxSim/KL，并用真实autograd验证参数路径。  多任务与联合建模 共享骨干与梯度可靠性 搜广推 用户历史与排序骨干 LazUnirec蒸馏与OneTrans-V2的精排→预排信号相同吗？ OneTrans-V2用阶段隔离token共享因果用户上下文，精排向预排传递中心化logits/sigmoid信号；LazUnirec关注召回与排序的梯度冲突，用task-private LoRA/expert及方向可靠性区分更新，并向检索蒸馏请求内softmax分布。共享上下文不等于所有参数完全共用，独立任务参数也不自动保证梯度正交。旧OneTrans-V2公开MovieLens链路是concept demo，本批则只验局部算子，不能比较二者的代理能力分数。 教学例：LazUnirec两候选分数同时加同一常量不改变请求内softmax教师；不能因此认为任意独立sigmoid蒸馏目标也有相同不变性。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/history-ranking-backbones/">搜广推 / 用户历史与排序骨干</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-6e2ed3d69f085249">LazUnirec蒸馏与OneTrans-V2的精排→预排信号相同吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Alazunirec">LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Alibaba International Digital Commerce Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>OneTrans-V2用阶段隔离token共享因果用户上下文，精排向预排传递中心化logits/sigmoid信号；LazUnirec关注召回与排序的梯度冲突，用task-private LoRA/expert及方向可靠性区分更新，并向检索蒸馏请求内softmax分布。共享上下文不等于所有参数完全共用，独立任务参数也不自动保证梯度正交。旧OneTrans-V2公开MovieLens链路是concept demo，本批则只验局部算子，不能比较二者的代理能力分数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：LazUnirec两候选分数同时加同一常量不改变请求内softmax教师；不能因此认为任意独立sigmoid蒸馏目标也有相同不变性。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32590v1">原论文</a> · <a href="../../recommendation-components/2611.32590-lazunirec/">实现解读</a> · <a href="#qa-6e2ed3d69f085249">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:lazunirec" data-paper-title="LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-11-24 LazUnirec把历史、trigger、多兴趣检索query和同请求候选组织到同一Transformer，但不要求召回与排序完全共用全部参数。召回/排序各有Q/K/V低秩残差与private FFN expert，另由条件router选择top-2 shared experts。按scenario/task观察共享参数的归一化梯度历史，以EMA方向方差估计可靠性，停止梯度后重加权任务损失；排序还向召回做请求内候选分布蒸馏。 完整数据/模型/服务矩阵超本轮单A100/A30或Mac短时预算且私有输入不可得，成本过高，不复现（审查 DONE），不下载、不探跑、不自动重试。L1机制组件，diagnostic only，不是完整模型或能力复现。高成本完整实验不复现（审查 DONE），不接Evolve晋级。执行Eq7低秩任务投影、Eq10/11 sparse shared/private输出组合、Eq12–14 EMA evidence/相对权重/停止梯度及Eq15–17请求内MaxSim/KL，并用真实autograd验证参数路径。  多任务与联合建模 共享骨干与梯度可靠性 搜广推 用户历史与排序骨干 共享同一骨干为何还需要task-private参数？ 召回与排序目标不同，共享参数可能收到冲突更新。低秩残差与private expert提供任务容量，shared专家仍传递共同知识；这不是梯度已正交的证明。 教学例：同一历史对点击召回有用、对转化排序却需不同交互；两个任务可读同一用户表示但使用不同低秩投影。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/history-ranking-backbones/">搜广推 / 用户历史与排序骨干</a></p>
+<span id="paper-recommendation-lazunirec-bc8e76c8" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-92f29992dddddb5f">共享同一骨干为何还需要task-private参数？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Alazunirec">LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Alibaba International Digital Commerce Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>召回与排序目标不同，共享参数可能收到冲突更新。低秩残差与private expert提供任务容量，shared专家仍传递共同知识；这不是梯度已正交的证明。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一历史对点击召回有用、对转化排序却需不同交互；两个任务可读同一用户表示但使用不同低秩投影。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32590v1">原论文</a> · <a href="../../recommendation-components/2611.32590-lazunirec/">实现解读</a> · <a href="#qa-92f29992dddddb5f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:larf" data-paper-title="LARF: Learning-aligned Reasoning Framework for Search Relevance" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="LARF: Learning-aligned Reasoning Framework for Search Relevance 搜广推与 LLM 应用 Yuanbao Team, Tencent 2026-11-24 LARF把搜索相关性定义为语义、权威、质量、时效与总体五个0–5级ordinal标签。第一阶段用多Agent合成label-conditioned CoT供SFT学习；gold仅用于训练target构造和离线checker，不给评测Agent。第二阶段用属性、query内排序、规则一致性奖励，再直接优化terminal六digit决策margin。第三阶段用五个分类head与辅助生成head联合训练，服务时丢弃生成head，不再逐token输出CoT。 完整私有训练与生产实验成本过高，不复现（审查 DONE）；L1 CPU奖励/目标组件，diagnostic only。完整私有训练与生产实验成本过高，不复现（审查 DONE）；不是完整LARF或可晋级能力实现。模块接受外部训练标签、预测标签、权重、rule布尔结果、logits与mask。实现Eq.2–10/12；没有训练Agent可读取gold的接口。listwise_reward只处理一个query的文档组，拒绝无可比gold文档对或，因为原式没有定义分母为0的fallback。margin最强竞争者并列取首个digit、hinge恰好为0取零次梯度是本地约定。  retrieval-matching CPU机制组件 搜广推 候选生成与搜索匹配 list-wise奖励怎样区分gold tie与predicted tie？ gold相等的文档对被排除，因为没有有向顺序可监督；gold不同但预测相等的pair计半分，经过2c−1后对应零中心。其余pair按顺序一致或倒序给正负贡献，再乘组大小置信权重。 教学例：gold=(0,0,5)时前两文档不互比；若三个预测都为2，每个有效pair都是预测tie，c=0.5，list-wise奖励为0。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/retrieval-matching/">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-906d278d64454c04">list-wise奖励怎样区分gold tie与predicted tie？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Alarf">LARF: Learning-aligned Reasoning Framework for Search Relevance</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Yuanbao Team, Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>gold相等的文档对被排除，因为没有有向顺序可监督；gold不同但预测相等的pair计半分，经过2c−1后对应零中心。其余pair按顺序一致或倒序给正负贡献，再乘组大小置信权重。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：gold=(0,0,5)时前两文档不互比；若三个预测都为2，每个有效pair都是预测tie，c=0.5，list-wise奖励为0。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32125v1">原论文</a> · <a href="../../recommendation-components/2611.32125-larf/">实现解读</a> · <a href="#qa-906d278d64454c04">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:larf" data-paper-title="LARF: Learning-aligned Reasoning Framework for Search Relevance" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="LARF: Learning-aligned Reasoning Framework for Search Relevance 搜广推与 LLM 应用 Yuanbao Team, Tencent 2026-11-24 LARF把搜索相关性定义为语义、权威、质量、时效与总体五个0–5级ordinal标签。第一阶段用多Agent合成label-conditioned CoT供SFT学习；gold仅用于训练target构造和离线checker，不给评测Agent。第二阶段用属性、query内排序、规则一致性奖励，再直接优化terminal六digit决策margin。第三阶段用五个分类head与辅助生成head联合训练，服务时丢弃生成head，不再逐token输出CoT。 完整私有训练与生产实验成本过高，不复现（审查 DONE）；L1 CPU奖励/目标组件，diagnostic only。完整私有训练与生产实验成本过高，不复现（审查 DONE）；不是完整LARF或可晋级能力实现。模块接受外部训练标签、预测标签、权重、rule布尔结果、logits与mask。实现Eq.2–10/12；没有训练Agent可读取gold的接口。listwise_reward只处理一个query的文档组，拒绝无可比gold文档对或，因为原式没有定义分母为0的fallback。margin最强竞争者并列取首个digit、hinge恰好为0取零次梯度是本地约定。  retrieval-matching CPU机制组件 搜广推 候选生成与搜索匹配 terminal margin只惩罚相邻等级吗，哪些token能收到梯度？ Eq.8–10在所有非gold的六digit候选中取最强竞争者，而不是仅相邻等级。只在唯一有效terminal位置对gold和该竞争digit产生梯度；其他位置与非digit词表项为零。 教学例：gold=2而class5分数最高时，margin压class5并抬class2；不能只压class1/3。两个terminal标记的样本被排除，不任意选最后一个。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/retrieval-matching/">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-7125e2d71693a7f8">terminal margin只惩罚相邻等级吗，哪些token能收到梯度？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Alarf">LARF: Learning-aligned Reasoning Framework for Search Relevance</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Yuanbao Team, Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Eq.8–10在所有非gold的六digit候选中取最强竞争者，而不是仅相邻等级。只在唯一有效terminal位置对gold和该竞争digit产生梯度；其他位置与非digit词表项为零。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：gold=2而class5分数最高时，margin压class5并抬class2；不能只压class1/3。两个terminal标记的样本被排除，不任意选最后一个。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32125v1">原论文</a> · <a href="../../recommendation-components/2611.32125-larf/">实现解读</a> · <a href="#qa-7125e2d71693a7f8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:larf" data-paper-title="LARF: Learning-aligned Reasoning Framework for Search Relevance" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="LARF: Learning-aligned Reasoning Framework for Search Relevance 搜广推与 LLM 应用 Yuanbao Team, Tencent 2026-11-24 LARF把搜索相关性定义为语义、权威、质量、时效与总体五个0–5级ordinal标签。第一阶段用多Agent合成label-conditioned CoT供SFT学习；gold仅用于训练target构造和离线checker，不给评测Agent。第二阶段用属性、query内排序、规则一致性奖励，再直接优化terminal六digit决策margin。第三阶段用五个分类head与辅助生成head联合训练，服务时丢弃生成head，不再逐token输出CoT。 完整私有训练与生产实验成本过高，不复现（审查 DONE）；L1 CPU奖励/目标组件，diagnostic only。完整私有训练与生产实验成本过高，不复现（审查 DONE）；不是完整LARF或可晋级能力实现。模块接受外部训练标签、预测标签、权重、rule布尔结果、logits与mask。实现Eq.2–10/12；没有训练Agent可读取gold的接口。listwise_reward只处理一个query的文档组，拒绝无可比gold文档对或，因为原式没有定义分母为0的fallback。margin最强竞争者并列取首个digit、hinge恰好为0取零次梯度是本地约定。  retrieval-matching CPU机制组件 搜广推 候选生成与搜索匹配 LARF的query内PNR是否就是Yuanbao Rubric的集合效用？ 不是。PNR比较同一query下单文档ordinal顺序与gold顺序；Yuanbao Rubric允许多个文档共同覆盖正向标准，并对任一文档触发负标准扣分。二者优化对象和线上指标不同，不可直接相加或比较增幅。 教学例：两个各覆盖一半事实的文档可能有高集合覆盖，但各自相关性等级相同而无可比PNR pair；两种信号解决不同问题。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/retrieval-matching/">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ae7ef0c9940f6c00">LARF的query内PNR是否就是Yuanbao Rubric的集合效用？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Alarf">LARF: Learning-aligned Reasoning Framework for Search Relevance</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Yuanbao Team, Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。PNR比较同一query下单文档ordinal顺序与gold顺序；Yuanbao Rubric允许多个文档共同覆盖正向标准，并对任一文档触发负标准扣分。二者优化对象和线上指标不同，不可直接相加或比较增幅。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个各覆盖一半事实的文档可能有高集合覆盖，但各自相关性等级相同而无可比PNR pair；两种信号解决不同问题。</p>
+<p class="ar-learning-sources">依据：与已有方法的关系、核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32125v1">原论文</a> · <a href="../../recommendation-components/2611.32125-larf/">实现解读</a> · <a href="#qa-ae7ef0c9940f6c00">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:larf" data-paper-title="LARF: Learning-aligned Reasoning Framework for Search Relevance" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="LARF: Learning-aligned Reasoning Framework for Search Relevance 搜广推与 LLM 应用 Yuanbao Team, Tencent 2026-11-24 LARF把搜索相关性定义为语义、权威、质量、时效与总体五个0–5级ordinal标签。第一阶段用多Agent合成label-conditioned CoT供SFT学习；gold仅用于训练target构造和离线checker，不给评测Agent。第二阶段用属性、query内排序、规则一致性奖励，再直接优化terminal六digit决策margin。第三阶段用五个分类head与辅助生成head联合训练，服务时丢弃生成head，不再逐token输出CoT。 完整私有训练与生产实验成本过高，不复现（审查 DONE）；L1 CPU奖励/目标组件，diagnostic only。完整私有训练与生产实验成本过高，不复现（审查 DONE）；不是完整LARF或可晋级能力实现。模块接受外部训练标签、预测标签、权重、rule布尔结果、logits与mask。实现Eq.2–10/12；没有训练Agent可读取gold的接口。listwise_reward只处理一个query的文档组，拒绝无可比gold文档对或，因为原式没有定义分母为0的fallback。margin最强竞争者并列取首个digit、hinge恰好为0取零次梯度是本地约定。  retrieval-matching CPU机制组件 搜广推 候选生成与搜索匹配 LARF的推理为什么只在训练需要，而不是在线必须生成？ 五个分类head与辅助生成head共享表示并联合受监督；生成rationale只作为训练目标。服务时删除生成head，分类路径直接给五维标签，不能把删除生成loss的纯分类器等同此训练过程。 教学例：训练时同时考作文解释与六类判别，部署只读取分类head；这不代表模型在每个搜索请求先生成整段解释再丢弃。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/retrieval-matching/">搜广推 / 候选生成与搜索匹配</a></p>
+<span id="paper-recommendation-larf-dc044298" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-bc67fd70a0646b7a">LARF的推理为什么只在训练需要，而不是在线必须生成？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Alarf">LARF: Learning-aligned Reasoning Framework for Search Relevance</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Yuanbao Team, Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>五个分类head与辅助生成head共享表示并联合受监督；生成rationale只作为训练目标。服务时删除生成head，分类路径直接给五维标签，不能把删除生成loss的纯分类器等同此训练过程。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：训练时同时考作文解释与六类判别，部署只读取分类head；这不代表模型在每个搜索请求先生成整段解释再丢弃。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32125v1">原论文</a> · <a href="../../recommendation-components/2611.32125-larf/">实现解读</a> · <a href="#qa-bc67fd70a0646b7a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:epro" data-paper-title="EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor LLM 后训练 Northwestern University 2026-11-24 同一权重在BF16训练引擎与低精度rollout引擎中不一定给出相同分布。旧checkpoint时两者可观测，但中间learner更新对应的当前执行分布不可直接读取。EPRO不把当前训练策略直接当执行策略，而从旧执行锚点出发，用训练策略变化构造transported predictor，再用分布移动量衰减不可靠的outward更新。 完整实验成本过高，不复现（审查 DONE）；L1 CPU公式组件，diagnostic only；不是LLM强化学习能力复现。完整实验成本过高，不复现（审查 DONE）；不自动重试，不接Evolve晋级。prepare_update接受外部旧训练/旧执行/当前logits、action、advantage和mask，冻结Eq.11系数。loss_gradient返回全词表transport下的loss与解析logit梯度；head-tail模式使用附B重建锚点。只接受有限、可解析尾部的数组；尾部质量≤显式拒绝，不猜补未观测概率。旧执行概率并列时稳定选top-K是本地约定。  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 为什么不能对importance系数和SSC gate一起反传？ Eq.11明确stop-gradient该乘数。更新方向来自transported log-policy的score，gate只决定本次贡献的强度；连同gate求导会引入原算法没有的风险统计导数。 教学例：固定A和当前shift后先缓存系数，再扰动logits作有限差分；每次扰动都重算gate的差分是不同目标，已作为负控。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/policy-optimization/">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-7c3848999abef3f9">为什么不能对importance系数和SSC gate一起反传？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aepro">EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Northwestern University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Eq.11明确stop-gradient该乘数。更新方向来自transported log-policy的score，gate只决定本次贡献的强度；连同gate求导会引入原算法没有的风险统计导数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：固定A和当前shift后先缓存系数，再扰动logits作有限差分；每次扰动都重算gate的差分是不同目标，已作为负控。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32810v1">原论文</a> · <a href="../../post-training/2611.32810-epro/">实现解读</a> · <a href="#qa-7c3848999abef3f9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:epro" data-paper-title="EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor LLM 后训练 Northwestern University 2026-11-24 同一权重在BF16训练引擎与低精度rollout引擎中不一定给出相同分布。旧checkpoint时两者可观测，但中间learner更新对应的当前执行分布不可直接读取。EPRO不把当前训练策略直接当执行策略，而从旧执行锚点出发，用训练策略变化构造transported predictor，再用分布移动量衰减不可靠的outward更新。 完整实验成本过高，不复现（审查 DONE）；L1 CPU公式组件，diagnostic only；不是LLM强化学习能力复现。完整实验成本过高，不复现（审查 DONE）；不自动重试，不接Evolve晋级。prepare_update接受外部旧训练/旧执行/当前logits、action、advantage和mask，冻结Eq.11系数。loss_gradient返回全词表transport下的loss与解析logit梯度；head-tail模式使用附B重建锚点。只接受有限、可解析尾部的数组；尾部质量≤显式拒绝，不猜补未观测概率。旧执行概率并列时稳定选top-K是本地约定。  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 top-K加一个tail bucket为何不应强制等于全词表梯度？ 附B把未知执行尾部近似成旧训练尾部的整体缩放，并对Policy Shift作粗粒化。尾部内部概率变化被压缩，通常产生近似误差；只有全head或特殊尾部结构才会退化为精确情形。 教学例：两个tail token一升一降但总质量不变时，单tail bucket看不到内部移动；本地保留head-tail与full梯度差而不是把它改成零。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/policy-optimization/">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-0403ab2160537685">top-K加一个tail bucket为何不应强制等于全词表梯度？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aepro">EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Northwestern University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>附B把未知执行尾部近似成旧训练尾部的整体缩放，并对Policy Shift作粗粒化。尾部内部概率变化被压缩，通常产生近似误差；只有全head或特殊尾部结构才会退化为精确情形。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个tail token一升一降但总质量不变时，单tail bucket看不到内部移动；本地保留head-tail与full梯度差而不是把它改成零。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32810v1">原论文</a> · <a href="../../post-training/2611.32810-epro/">实现解读</a> · <a href="#qa-0403ab2160537685">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:epro" data-paper-title="EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor LLM 后训练 Northwestern University 2026-11-24 同一权重在BF16训练引擎与低精度rollout引擎中不一定给出相同分布。旧checkpoint时两者可观测，但中间learner更新对应的当前执行分布不可直接读取。EPRO不把当前训练策略直接当执行策略，而从旧执行锚点出发，用训练策略变化构造transported predictor，再用分布移动量衰减不可靠的outward更新。 完整实验成本过高，不复现（审查 DONE）；L1 CPU公式组件，diagnostic only；不是LLM强化学习能力复现。完整实验成本过高，不复现（审查 DONE）；不自动重试，不接Evolve晋级。prepare_update接受外部旧训练/旧执行/当前logits、action、advantage和mask，冻结Eq.11系数。loss_gradient返回全词表transport下的loss与解析logit梯度；head-tail模式使用附B重建锚点。只接受有限、可解析尾部的数组；尾部质量≤显式拒绝，不猜补未观测概率。旧执行概率并列时稳定选top-K是本地约定。  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 EPRO与Regularized Score Centering都减中心项，能直接替换吗？ 不能。RSC在固定behavior下用辅助动作估计中心，并加reverse-KL约束；EPRO的中心随transport预测分布变化，再用分布级Policy Shift衰减outward更新。它们不是reward减均值，也无本轮同预算能力比较。 教学例：旧执行q不变而learner多次更新时，固定q中心与mu_hat中心可不同；加大reward居中幅度并不能得到这种分布变化。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/policy-optimization/">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-d02b9f9ff2e20620">EPRO与Regularized Score Centering都减中心项，能直接替换吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aepro">EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Northwestern University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。RSC在固定behavior下用辅助动作估计中心，并加reverse-KL约束；EPRO的中心随transport预测分布变化，再用分布级Policy Shift衰减outward更新。它们不是reward减均值，也无本轮同预算能力比较。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：旧执行q不变而learner多次更新时，固定q中心与mu_hat中心可不同；加大reward居中幅度并不能得到这种分布变化。</p>
+<p class="ar-learning-sources">依据：与已有方法的关系、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32810v1">原论文</a> · <a href="../../post-training/2611.32810-epro/">实现解读</a> · <a href="#qa-d02b9f9ff2e20620">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:epro" data-paper-title="EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor LLM 后训练 Northwestern University 2026-11-24 同一权重在BF16训练引擎与低精度rollout引擎中不一定给出相同分布。旧checkpoint时两者可观测，但中间learner更新对应的当前执行分布不可直接读取。EPRO不把当前训练策略直接当执行策略，而从旧执行锚点出发，用训练策略变化构造transported predictor，再用分布移动量衰减不可靠的outward更新。 完整实验成本过高，不复现（审查 DONE）；L1 CPU公式组件，diagnostic only；不是LLM强化学习能力复现。完整实验成本过高，不复现（审查 DONE）；不自动重试，不接Evolve晋级。prepare_update接受外部旧训练/旧执行/当前logits、action、advantage和mask，冻结Eq.11系数。loss_gradient返回全词表transport下的loss与解析logit梯度；head-tail模式使用附B重建锚点。只接受有限、可解析尾部的数组；尾部质量≤显式拒绝，不猜补未观测概率。旧执行概率并列时稳定选top-K是本地约定。  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 同一权重为什么还要区分训练策略与执行策略？ BF16训练和低精度推理的kernel/数值路径可使分布不同；中间learner更新只直接暴露训练策略。EPRO从旧执行分布出发transport训练变化，不声称已经观测当前执行策略。 教学例：旧训练p=(0.5,0.5)、旧执行q=(0.6,0.4)，当前训练仍为p时预测执行必须还是q，不能强行改成p。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/policy-optimization/">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<span id="paper-post-training-epro-26098291" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-540549bf80f8d891">同一权重为什么还要区分训练策略与执行策略？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aepro">EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Northwestern University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>BF16训练和低精度推理的kernel/数值路径可使分布不同；中间learner更新只直接暴露训练策略。EPRO从旧执行分布出发transport训练变化，不声称已经观测当前执行策略。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：旧训练p=(0.5,0.5)、旧执行q=(0.6,0.4)，当前训练仍为p时预测执行必须还是q，不能强行改成p。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32810v1">原论文</a> · <a href="../../post-training/2611.32810-epro/">实现解读</a> · <a href="#qa-540549bf80f8d891">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:udvr" data-paper-title="Weight Scale Rebalancing: Transferable Training Recipes for Transformers" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Weight Scale Rebalancing: Transferable Training Recipes for Transformers 基础模型 Umeå University 2026-11-24 同一个双线性映射可由许多不同尺度的矩阵因子表示，但优化器对这些表示并不等价。UDVR 在 attention 的 QK、VO 和 FFN 自然配对矩阵之间加对角 buffer，每步更新后固定的列范数和的行范数，并把尺度移入。不接受优化器更新；它不是 Weight Normalization 的独立可学习幅值。 成本过高，不复现（审查 DONE）。rebalance 精确执行两种分支，UDVPair 用真实 autograd、Adam 和非优化 buffer，learning_rates 执行 Eq4。仅 CPU FP32/FP64 有限小张量；零范数、非法 shape／常数及非 CPU 输入失败。没有矩阵安装到 Transformer、完整 QK/VO 多头结构、SwiGLU 改造或原文数据训练。调用者必须在每个优化器 step 后显式调用 rebalance_()。  预训练与数据 权重重参数化与尺度转移 基础模型 训练预算：数据配比、目标与优化器 为什么不能把attention的D=SDR直接用于原文FFN？ FFN有激活，原文只将U尺度移入D，V仍投影但其尺度被丢弃；同时用系数2的FFN正则补足传入D的收缩。双侧守恒只属于attention分支。 教学例：保持UD不变却将V除以2，GELU(xUD)V输出减半；把它断言为原函数不变会误判。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/training-budget/">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-d96c7a49723981af">为什么不能把attention的D=SDR直接用于原文FFN？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Audvr">Weight Scale Rebalancing: Transferable Training Recipes for Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Umeå University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>FFN有激活，原文只将U尺度移入D，V仍投影但其尺度被丢弃；同时用系数2的FFN正则补足传入D的收缩。双侧守恒只属于attention分支。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：保持UD不变却将V除以2，GELU(xUD)V输出减半；把它断言为原函数不变会误判。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32866v1">原论文</a> · <a href="../../foundation-models/2611.32866-udvr/">实现解读</a> · <a href="#qa-d96c7a49723981af">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:udvr" data-paper-title="Weight Scale Rebalancing: Transferable Training Recipes for Transformers" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Weight Scale Rebalancing: Transferable Training Recipes for Transformers 基础模型 Umeå University 2026-11-24 同一个双线性映射可由许多不同尺度的矩阵因子表示，但优化器对这些表示并不等价。UDVR 在 attention 的 QK、VO 和 FFN 自然配对矩阵之间加对角 buffer，每步更新后固定的列范数和的行范数，并把尺度移入。不接受优化器更新；它不是 Weight Normalization 的独立可学习幅值。 成本过高，不复现（审查 DONE）。rebalance 精确执行两种分支，UDVPair 用真实 autograd、Adam 和非优化 buffer，learning_rates 执行 Eq4。仅 CPU FP32/FP64 有限小张量；零范数、非法 shape／常数及非 CPU 输入失败。没有矩阵安装到 Transformer、完整 QK/VO 多头结构、SwiGLU 改造或原文数据训练。调用者必须在每个优化器 step 后显式调用 rebalance_()。  预训练与数据 权重重参数化与尺度转移 基础模型 训练预算：数据配比、目标与优化器 怎样验收重平衡不是只在初始化执行？ 用真实损失反传并更新U/V，逐步调用重平衡后核对方向范数；另查D不在参数表、attention乘积守恒及零方向拒绝。只测初始化shape不够。 教学例：跑4次Adam，每次更新后检查所有方向长度；对零列应报错，而不是加未声明epsilon伪造方向。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/training-budget/">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-67d35e0e53fc675d">怎样验收重平衡不是只在初始化执行？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Audvr">Weight Scale Rebalancing: Transferable Training Recipes for Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Umeå University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>用真实损失反传并更新U/V，逐步调用重平衡后核对方向范数；另查D不在参数表、attention乘积守恒及零方向拒绝。只测初始化shape不够。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：跑4次Adam，每次更新后检查所有方向长度；对零列应报错，而不是加未声明epsilon伪造方向。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32866v1">原论文</a> · <a href="../../foundation-models/2611.32866-udvr/">实现解读</a> · <a href="#qa-67d35e0e53fc675d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:udvr" data-paper-title="Weight Scale Rebalancing: Transferable Training Recipes for Transformers" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Weight Scale Rebalancing: Transferable Training Recipes for Transformers 基础模型 Umeå University 2026-11-24 同一个双线性映射可由许多不同尺度的矩阵因子表示，但优化器对这些表示并不等价。UDVR 在 attention 的 QK、VO 和 FFN 自然配对矩阵之间加对角 buffer，每步更新后固定的列范数和的行范数，并把尺度移入。不接受优化器更新；它不是 Weight Normalization 的独立可学习幅值。 成本过高，不复现（审查 DONE）。rebalance 精确执行两种分支，UDVPair 用真实 autograd、Adam 和非优化 buffer，learning_rates 执行 Eq4。仅 CPU FP32/FP64 有限小张量；零范数、非法 shape／常数及非 CPU 输入失败。没有矩阵安装到 Transformer、完整 QK/VO 多头结构、SwiGLU 改造或原文数据训练。调用者必须在每个优化器 step 后显式调用 rebalance_()。  预训练与数据 权重重参数化与尺度转移 基础模型 训练预算：数据配比、目标与优化器 UDVR和ProLand都约束因子，约束相同吗？ 不相同。UDVR逐列/行固定长度而允许方向相关；ProLand围绕B的正交性与乘积空间谱更新。二者的几何和优化顺序不能互换。 教学例：两列完全一样但范数都为目标值可满足UDVR，却不满足B转置B=I。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/training-budget/">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-f5db78c91f298208">UDVR和ProLand都约束因子，约束相同吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Audvr">Weight Scale Rebalancing: Transferable Training Recipes for Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Umeå University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不相同。UDVR逐列/行固定长度而允许方向相关；ProLand围绕B的正交性与乘积空间谱更新。二者的几何和优化顺序不能互换。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两列完全一样但范数都为目标值可满足UDVR，却不满足B转置B=I。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32866v1">原论文</a> · <a href="../../foundation-models/2611.32866-udvr/">实现解读</a> · <a href="#qa-f5db78c91f298208">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:udvr" data-paper-title="Weight Scale Rebalancing: Transferable Training Recipes for Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Weight Scale Rebalancing: Transferable Training Recipes for Transformers 基础模型 Umeå University 2026-11-24 同一个双线性映射可由许多不同尺度的矩阵因子表示，但优化器对这些表示并不等价。UDVR 在 attention 的 QK、VO 和 FFN 自然配对矩阵之间加对角 buffer，每步更新后固定的列范数和的行范数，并把尺度移入。不接受优化器更新；它不是 Weight Normalization 的独立可学习幅值。 成本过高，不复现（审查 DONE）。rebalance 精确执行两种分支，UDVPair 用真实 autograd、Adam 和非优化 buffer，learning_rates 执行 Eq4。仅 CPU FP32/FP64 有限小张量；零范数、非法 shape／常数及非 CPU 输入失败。没有矩阵安装到 Transformer、完整 QK/VO 多头结构、SwiGLU 改造或原文数据训练。调用者必须在每个优化器 step 后显式调用 rebalance_()。  预训练与数据 权重重参数化与尺度转移 基础模型 训练预算：数据配比、目标与优化器 D不参与优化，为什么仍能改变？ 每步U/V更新后，重平衡把被移除的方向尺度乘进D。它随更新轨迹变化，但没有独立梯度或学习率。 教学例：U某列的范数翻倍，归一回原长度时attention对应D元素吸收这个2；D不需要出现在Adam参数表。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/training-budget/">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<span id="paper-foundation-models-udvr-c253b283" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-45fb4b96219a213a">D不参与优化，为什么仍能改变？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Audvr">Weight Scale Rebalancing: Transferable Training Recipes for Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Umeå University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>每步U/V更新后，重平衡把被移除的方向尺度乘进D。它随更新轨迹变化，但没有独立梯度或学习率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：U某列的范数翻倍，归一回原长度时attention对应D元素吸收这个2；D不需要出现在Adam参数表。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32866v1">原论文</a> · <a href="../../foundation-models/2611.32866-udvr/">实现解读</a> · <a href="#qa-45fb4b96219a213a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:thresholded-longce" data-paper-title="Eliciting the Recall Capacity of Linear Attention" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Eliciting the Recall Capacity of Linear Attention 基础模型 ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology 2026-11-24 线性注意力的固定状态可以在专门训练的任务中存储大量关联，但标准语言预训练并不一定教会模型从上下文复制。论文分开研究容量、训练诱因和召回提示；目标语料里 qualifying AR-hit 仅约占 1.7%，因此增添句子重复，并用 Thresholded LongCE（TLCE）强化依赖远上下文的 token。两种干预互补，但可能牺牲通用语言建模；不能把“存在容量”写成“任意任务都能召回”。 成本过高，不复现（审查 DONE）。260-token、9词表、4维 GRU 只是短窗接口诊断，不是论文的 KDA、DeltaNet 或 softmax 对照训练。weights / loss 执行 Eq4，接受同形 CPU FP32/FP64 的目标 log-prob、int64 窗内位置和 valid mask。padding 不进入分母，合法目标必须非空、有限且 log-prob 不大于零。context_scores 对外部因果模型实际运行完整前向与分窗无梯度前向；调用者提供已经移位对齐的 tokens/targets，模型每次调用必须重置状态，且不应引入前后不一致的随机性。  长上下文与状态 上下文敏感召回监督 基础模型 长上下文：注意力、递归状态与记忆 TLCE能替代MERLIN的多状态路由吗？ 不能。TLCE重分配训练损失而不改变记忆结构；MERLIN改变分段状态的读取权重。未存的信息和未学会使用的信息是不同瓶颈。 教学例：若两个历史压进同一状态后已无法区分，给后续token更大loss不能保证还原；保留多个状态则改变了可读取信息。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/context-and-state/">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-0bf698937092aa7e">TLCE能替代MERLIN的多状态路由吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Athresholded-longce">Eliciting the Recall Capacity of Linear Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。TLCE重分配训练损失而不改变记忆结构；MERLIN改变分段状态的读取权重。未存的信息和未学会使用的信息是不同瓶颈。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：若两个历史压进同一状态后已无法区分，给后续token更大loss不能保证还原；保留多个状态则改变了可读取信息。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32969v1">原论文</a> · <a href="../../foundation-models/2611.32969-thresholded-longce/">实现解读</a> · <a href="#qa-0bf698937092aa7e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:thresholded-longce" data-paper-title="Eliciting the Recall Capacity of Linear Attention" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Eliciting the Recall Capacity of Linear Attention 基础模型 ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology 2026-11-24 线性注意力的固定状态可以在专门训练的任务中存储大量关联，但标准语言预训练并不一定教会模型从上下文复制。论文分开研究容量、训练诱因和召回提示；目标语料里 qualifying AR-hit 仅约占 1.7%，因此增添句子重复，并用 Thresholded LongCE（TLCE）强化依赖远上下文的 token。两种干预互补，但可能牺牲通用语言建模；不能把“存在容量”写成“任意任务都能召回”。 成本过高，不复现（审查 DONE）。260-token、9词表、4维 GRU 只是短窗接口诊断，不是论文的 KDA、DeltaNet 或 softmax 对照训练。weights / loss 执行 Eq4，接受同形 CPU FP32/FP64 的目标 log-prob、int64 窗内位置和 valid mask。padding 不进入分母，合法目标必须非空、有限且 log-prob 不大于零。context_scores 对外部因果模型实际运行完整前向与分窗无梯度前向；调用者提供已经移位对齐的 tokens/targets，模型每次调用必须重置状态，且不应引入前后不一致的随机性。  长上下文与状态 上下文敏感召回监督 基础模型 长上下文：注意力、递归状态与记忆 Δ=1和窗内位置127时，TLCE会加权吗？ 都不会。必须Δ严格大于1且offset至少128；符合条件后exp(Δ)最多为5，并对valid目标的总权重归一化。 教学例：Δ分别为1/2/2，offset为128/127/128时权重为1/1/5；不是1/e²/e²。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/context-and-state/">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-da5f649ddc14b88c">Δ=1和窗内位置127时，TLCE会加权吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Athresholded-longce">Eliciting the Recall Capacity of Linear Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>都不会。必须Δ严格大于1且offset至少128；符合条件后exp(Δ)最多为5，并对valid目标的总权重归一化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Δ分别为1/2/2，offset为128/127/128时权重为1/1/5；不是1/e²/e²。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32969v1">原论文</a> · <a href="../../foundation-models/2611.32969-thresholded-longce/">实现解读</a> · <a href="#qa-da5f649ddc14b88c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:thresholded-longce" data-paper-title="Eliciting the Recall Capacity of Linear Attention" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Eliciting the Recall Capacity of Linear Attention 基础模型 ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology 2026-11-24 线性注意力的固定状态可以在专门训练的任务中存储大量关联，但标准语言预训练并不一定教会模型从上下文复制。论文分开研究容量、训练诱因和召回提示；目标语料里 qualifying AR-hit 仅约占 1.7%，因此增添句子重复，并用 Thresholded LongCE（TLCE）强化依赖远上下文的 token。两种干预互补，但可能牺牲通用语言建模；不能把“存在容量”写成“任意任务都能召回”。 成本过高，不复现（审查 DONE）。260-token、9词表、4维 GRU 只是短窗接口诊断，不是论文的 KDA、DeltaNet 或 softmax 对照训练。weights / loss 执行 Eq4，接受同形 CPU FP32/FP64 的目标 log-prob、int64 窗内位置和 valid mask。padding 不进入分母，合法目标必须非空、有限且 log-prob 不大于零。context_scores 对外部因果模型实际运行完整前向与分窗无梯度前向；调用者提供已经移位对齐的 tokens/targets，模型每次调用必须重置状态，且不应引入前后不一致的随机性。  长上下文与状态 上下文敏感召回监督 基础模型 长上下文：注意力、递归状态与记忆 为什么只传入两组任意log-prob不足以验证短窗协议？ 权重公式不能证明short来自真正重置的因果窗口。需要实际分窗前向、检查边界重置且无梯度，并核对full梯度只为负归一化权重。 教学例：650-token输入在512处重新调用模型，short第512位置应等同独立短序列首位，而不继承前512的GRU状态。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/context-and-state/">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3dfbae18ab4b92c7">为什么只传入两组任意log-prob不足以验证短窗协议？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Athresholded-longce">Eliciting the Recall Capacity of Linear Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>权重公式不能证明short来自真正重置的因果窗口。需要实际分窗前向、检查边界重置且无梯度，并核对full梯度只为负归一化权重。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：650-token输入在512处重新调用模型，short第512位置应等同独立短序列首位，而不继承前512的GRU状态。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32969v1">原论文</a> · <a href="../../foundation-models/2611.32969-thresholded-longce/">实现解读</a> · <a href="#qa-3dfbae18ab4b92c7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:thresholded-longce" data-paper-title="Eliciting the Recall Capacity of Linear Attention" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Eliciting the Recall Capacity of Linear Attention 基础模型 ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology 2026-11-24 线性注意力的固定状态可以在专门训练的任务中存储大量关联，但标准语言预训练并不一定教会模型从上下文复制。论文分开研究容量、训练诱因和召回提示；目标语料里 qualifying AR-hit 仅约占 1.7%，因此增添句子重复，并用 Thresholded LongCE（TLCE）强化依赖远上下文的 token。两种干预互补，但可能牺牲通用语言建模；不能把“存在容量”写成“任意任务都能召回”。 成本过高，不复现（审查 DONE）。260-token、9词表、4维 GRU 只是短窗接口诊断，不是论文的 KDA、DeltaNet 或 softmax 对照训练。weights / loss 执行 Eq4，接受同形 CPU FP32/FP64 的目标 log-prob、int64 窗内位置和 valid mask。padding 不进入分母，合法目标必须非空、有限且 log-prob 不大于零。context_scores 对外部因果模型实际运行完整前向与分窗无梯度前向；调用者提供已经移位对齐的 tokens/targets，模型每次调用必须重置状态，且不应引入前后不一致的随机性。  长上下文与状态 上下文敏感召回监督 基础模型 长上下文：注意力、递归状态与记忆 TLCE会自动找到所有应该依赖远处信息的token吗？ 不会。权重取决于当前模型的full概率是否已经显著高于short；尚未利用的远处线索不会因为理论上有用就被加权。 教学例：远处有答案但full与short概率同为0.1，差为0，权重仍为1。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/context-and-state/">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-thresholded-longce-52468414" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-7743cb06bc0c09d2">TLCE会自动找到所有应该依赖远处信息的token吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Athresholded-longce">Eliciting the Recall Capacity of Linear Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不会。权重取决于当前模型的full概率是否已经显著高于short；尚未利用的远处线索不会因为理论上有用就被加权。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：远处有答案但full与short概率同为0.1，差为0，权重仍为1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32969v1">原论文</a> · <a href="../../foundation-models/2611.32969-thresholded-longce/">实现解读</a> · <a href="#qa-7743cb06bc0c09d2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:criticjepa" data-paper-title="CriticJEPA: World Models Are Better Critics Than Optimizers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="CriticJEPA: World Models Are Better Critics Than Optimizers 基础模型 Tsinghua University 2026-11-24 对一个预测器找到更低的预测 cost，需要其梯度方向可靠；从一组好候选中挑更好的，只要求局部排序有信息。论文在冻结 H-JEPA 上观察到：长梯度搜索可继续降低预测 cost，但实际行动不再改善；同一预测器却能比较 goal-conditioned 提案。CriticJEPA 在每个时间层级训练 flow proposer，再用冻结 rollout 选择；只给提案做短的有锚精修，而不让无约束搜索承担整个规划。 成本过高，不复现（审查 DONE）。仅审查收录，无本地代码、无环境实跑、无 CPU/CUDA 机制代理、无本地成功率。此页与成本审查记录只保存来源、方法和高成本边界，不设 metrics 目录；论文表格不是本地测量，也不需要为此收录伪造 GPU receipt。  JEPA与世界模型 提案选择与有锚规划 多模态 世界建模：状态、生成与动作条件 能正确比较两个计划，就表示世界模型梯度能持续改进动作吗？ 不表示。排序仅需候选间相对评分有信息；优化需要沿局部梯度移动也改善真实执行。持续搜索还可能利用预测误差。 教学例：模型把安全绕行排在撞墙前，仍可能在绕行附近沿错误梯度把动作推向墙；该例说明逻辑差异，不是论文实测轨迹。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<span id="paper-foundation-models-criticjepa-1e87f1a4" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-05295c40f0825d92">能正确比较两个计划，就表示世界模型梯度能持续改进动作吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Acriticjepa">CriticJEPA: World Models Are Better Critics Than Optimizers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不表示。排序仅需候选间相对评分有信息；优化需要沿局部梯度移动也改善真实执行。持续搜索还可能利用预测误差。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：模型把安全绕行排在撞墙前，仍可能在绕行附近沿错误梯度把动作推向墙；该例说明逻辑差异，不是论文实测轨迹。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32357v1">原论文</a> · <a href="../../foundation-models/2611.32357-criticjepa/">实现解读</a> · <a href="#qa-05295c40f0825d92">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:criticjepa" data-paper-title="CriticJEPA: World Models Are Better Critics Than Optimizers" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="CriticJEPA: World Models Are Better Critics Than Optimizers 基础模型 Tsinghua University 2026-11-24 对一个预测器找到更低的预测 cost，需要其梯度方向可靠；从一组好候选中挑更好的，只要求局部排序有信息。论文在冻结 H-JEPA 上观察到：长梯度搜索可继续降低预测 cost，但实际行动不再改善；同一预测器却能比较 goal-conditioned 提案。CriticJEPA 在每个时间层级训练 flow proposer，再用冻结 rollout 选择；只给提案做短的有锚精修，而不让无约束搜索承担整个规划。 成本过高，不复现（审查 DONE）。仅审查收录，无本地代码、无环境实跑、无 CPU/CUDA 机制代理、无本地成功率。此页与成本审查记录只保存来源、方法和高成本边界，不设 metrics 目录；论文表格不是本地测量，也不需要为此收录伪造 GPU receipt。  JEPA与世界模型 提案选择与有锚规划 多模态 世界建模：状态、生成与动作条件 CriticJEPA比预测—规划评测多区分了什么？ 前者在同一冻结模型里改变候选来源与搜索方式，区分能否排序、梯度是否有效和环境成功；后者用冻结解码协议拆表示与预测误差，并单独要求真实规划结果。 教学例：一步误差相同的模型可对flow提案有用、对长搜索生成的离分布候选无用；因此不能仅按一步loss选规划器。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-1055275115f6ef1d">CriticJEPA比预测—规划评测多区分了什么？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Acriticjepa">CriticJEPA: World Models Are Better Critics Than Optimizers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>前者在同一冻结模型里改变候选来源与搜索方式，区分能否排序、梯度是否有效和环境成功；后者用冻结解码协议拆表示与预测误差，并单独要求真实规划结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一步误差相同的模型可对flow提案有用、对长搜索生成的离分布候选无用；因此不能仅按一步loss选规划器。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32357v1">原论文</a> · <a href="../../foundation-models/2611.32357-criticjepa/">实现解读</a> · <a href="#qa-1055275115f6ef1d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:criticjepa" data-paper-title="CriticJEPA: World Models Are Better Critics Than Optimizers" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="CriticJEPA: World Models Are Better Critics Than Optimizers 基础模型 Tsinghua University 2026-11-24 对一个预测器找到更低的预测 cost，需要其梯度方向可靠；从一组好候选中挑更好的，只要求局部排序有信息。论文在冻结 H-JEPA 上观察到：长梯度搜索可继续降低预测 cost，但实际行动不再改善；同一预测器却能比较 goal-conditioned 提案。CriticJEPA 在每个时间层级训练 flow proposer，再用冻结 rollout 选择；只给提案做短的有锚精修，而不让无约束搜索承担整个规划。 成本过高，不复现（审查 DONE）。仅审查收录，无本地代码、无环境实跑、无 CPU/CUDA 机制代理、无本地成功率。此页与成本审查记录只保存来源、方法和高成本边界，不设 metrics 目录；论文表格不是本地测量，也不需要为此收录伪造 GPU receipt。  JEPA与世界模型 提案选择与有锚规划 多模态 世界建模：状态、生成与动作条件 用预先写好的好动作候选能算低成本CriticJEPA复现吗？ 不能。conditional flow的训练、生成及跨层目标/时间窗决定候选分布，是核心机制。固定候选可诊断critic接口，但不能声称复现提案能力；完整矩阵已按成本终态不复现。 教学例：手填一条到目标的动作再让critic选中，只证明列表里有答案；本地因此不写这种可执行operator，也不报告控制成功率。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-4e9e6417175d8206">用预先写好的好动作候选能算低成本CriticJEPA复现吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Acriticjepa">CriticJEPA: World Models Are Better Critics Than Optimizers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。conditional flow的训练、生成及跨层目标/时间窗决定候选分布，是核心机制。固定候选可诊断critic接口，但不能声称复现提案能力；完整矩阵已按成本终态不复现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：手填一条到目标的动作再让critic选中，只证明列表里有答案；本地因此不写这种可执行operator，也不报告控制成功率。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32357v1">原论文</a> · <a href="../../foundation-models/2611.32357-criticjepa/">实现解读</a> · <a href="#qa-4e9e6417175d8206">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:criticjepa" data-paper-title="CriticJEPA: World Models Are Better Critics Than Optimizers" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="CriticJEPA: World Models Are Better Critics Than Optimizers 基础模型 Tsinghua University 2026-11-24 对一个预测器找到更低的预测 cost，需要其梯度方向可靠；从一组好候选中挑更好的，只要求局部排序有信息。论文在冻结 H-JEPA 上观察到：长梯度搜索可继续降低预测 cost，但实际行动不再改善；同一预测器却能比较 goal-conditioned 提案。CriticJEPA 在每个时间层级训练 flow proposer，再用冻结 rollout 选择；只给提案做短的有锚精修，而不让无约束搜索承担整个规划。 成本过高，不复现（审查 DONE）。仅审查收录，无本地代码、无环境实跑、无 CPU/CUDA 机制代理、无本地成功率。此页与成本审查记录只保存来源、方法和高成本边界，不设 metrics 目录；论文表格不是本地测量，也不需要为此收录伪造 GPU receipt。  JEPA与世界模型 提案选择与有锚规划 多模态 世界建模：状态、生成与动作条件 anchor惩罚为什么不留在最终选择cost里？ anchor限制每个候选偏离自身提案的距离，用于局部精修；最终需要比较实际rollout目标cost，而不是奖励离初始候选更近。 教学例：A的rollout cost为1但移动0.5，B为2但未移动；最终应选A，不能因为A离提案远就让anchor翻转排名。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/world-state-actions/">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-7b63e892e0032e2f">anchor惩罚为什么不留在最终选择cost里？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Acriticjepa">CriticJEPA: World Models Are Better Critics Than Optimizers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>anchor限制每个候选偏离自身提案的距离，用于局部精修；最终需要比较实际rollout目标cost，而不是奖励离初始候选更近。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A的rollout cost为1但移动0.5，B为2但未移动；最终应选A，不能因为A离提案远就让anchor翻转排名。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32357v1">原论文</a> · <a href="../../foundation-models/2611.32357-criticjepa/">实现解读</a> · <a href="#qa-7b63e892e0032e2f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:recurscibench" data-paper-title="RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research Agent Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences 2026-11-24 任务内涨分不等于获得可迁移的科研能力。RecurSciPipe从原始科学数据生成共享背景的建模F/分析A任务，先查合同、信息隔离、可执行、scorer行为，再查目标、输入和评价的科学有效性；设计错回Designer，实施错回Builder，两任务全过才准入。58 families分成38个G-evolve F/A配对和20个独立G-test F，共96任务、四科学域。四种RSI各在六种source设置演化，共24个冻结evolved states； 成本过高，不复现（审查 DONE）。deferred_high_cost / review-only资料收录，未实现、未运行；deferred_high_cost / review-only资料收录，未实现、未运行；成本过高，不复现（审查 DONE）。首发2026-11-24，发现/审查2026-11-25；封面November25不是arXiv首发日。本地仅审查固定v1、F/A来源与隔离契约、冻结评估协议、成本及同主题差异。没有运行GLM、RSI系统、科学任务构建、scorer、参考解、模型训练或benchmark；仅重写归一化公式不构成本论文复现。  Harness与自改进 review-only Agent 运行流程与自进化：改的是哪一层 源科学任务上进步，为什么还不能证明经验有用？ 记忆或harness可能只适合源条件。RecurSciBench冻结从G-evolve选择的状态，再以独立副本在G-test比较初始与演化状态，不携带测试任务间经验，以区分迁移和源任务适配。 教学例：化学曲线中的简单模型经验可能帮外推物理曲线，却伤害需要多协变量的叶绿素任务。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-recurscibench-8ea36755" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-32b34123b90d3ac2">源科学任务上进步，为什么还不能证明经验有用？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Arecurscibench">RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>记忆或harness可能只适合源条件。RecurSciBench冻结从G-evolve选择的状态，再以独立副本在G-test比较初始与演化状态，不携带测试任务间经验，以区分迁移和源任务适配。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：化学曲线中的简单模型经验可能帮外推物理曲线，却伤害需要多协变量的叶绿素任务。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32508v1">原论文</a> · <a href="../../agent-research/2611.32508-recurscibench/">实现解读</a> · <a href="#qa-32b34123b90d3ac2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:recurscibench" data-paper-title="RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research Agent Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences 2026-11-24 任务内涨分不等于获得可迁移的科研能力。RecurSciPipe从原始科学数据生成共享背景的建模F/分析A任务，先查合同、信息隔离、可执行、scorer行为，再查目标、输入和评价的科学有效性；设计错回Designer，实施错回Builder，两任务全过才准入。58 families分成38个G-evolve F/A配对和20个独立G-test F，共96任务、四科学域。四种RSI各在六种source设置演化，共24个冻结evolved states； 成本过高，不复现（审查 DONE）。deferred_high_cost / review-only资料收录，未实现、未运行；deferred_high_cost / review-only资料收录，未实现、未运行；成本过高，不复现（审查 DONE）。首发2026-11-24，发现/审查2026-11-25；封面November25不是arXiv首发日。本地仅审查固定v1、F/A来源与隔离契约、冻结评估协议、成本及同主题差异。没有运行GLM、RSI系统、科学任务构建、scorer、参考解、模型训练或benchmark；仅重写归一化公式不构成本论文复现。  Harness与自改进 review-only Agent 运行流程与自进化：改的是哪一层 Evolution Gain能直接用总分相对变化替代吗？ 不能。先用reference到optimum的gap归一化每run，再任务内平均，最后对各任务相对变化等权平均。小基线任务与大基线任务的相对变化不能由总分差保留。 教学例：两任务从0.2/0.8到0.3/0.8，平均任务相对gain为25%，但总平均分从0.5到0.55只涨10%。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-16d2d0437edfb763">Evolution Gain能直接用总分相对变化替代吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Arecurscibench">RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。先用reference到optimum的gap归一化每run，再任务内平均，最后对各任务相对变化等权平均。小基线任务与大基线任务的相对变化不能由总分差保留。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两任务从0.2/0.8到0.3/0.8，平均任务相对gain为25%，但总平均分从0.5到0.55只涨10%。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32508v1">原论文</a> · <a href="../../agent-research/2611.32508-recurscibench/">实现解读</a> · <a href="#qa-16d2d0437edfb763">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:recurscibench" data-paper-title="RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research Agent Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences 2026-11-24 任务内涨分不等于获得可迁移的科研能力。RecurSciPipe从原始科学数据生成共享背景的建模F/分析A任务，先查合同、信息隔离、可执行、scorer行为，再查目标、输入和评价的科学有效性；设计错回Designer，实施错回Builder，两任务全过才准入。58 families分成38个G-evolve F/A配对和20个独立G-test F，共96任务、四科学域。四种RSI各在六种source设置演化，共24个冻结evolved states； 成本过高，不复现（审查 DONE）。deferred_high_cost / review-only资料收录，未实现、未运行；deferred_high_cost / review-only资料收录，未实现、未运行；成本过高，不复现（审查 DONE）。首发2026-11-24，发现/审查2026-11-25；封面November25不是arXiv首发日。本地仅审查固定v1、F/A来源与隔离契约、冻结评估协议、成本及同主题差异。没有运行GLM、RSI系统、科学任务构建、scorer、参考解、模型训练或benchmark；仅重写归一化公式不构成本论文复现。  Harness与自改进 review-only Agent 运行流程与自进化：改的是哪一层 只实现归一化公式，或把参考解交给Agent，能算低成本复现吗？ 都不能。核心还包含科学任务构建/七项检查、source演化、冻结状态及独立G-test执行。scorer/reference必须在评估侧；被测Agent不能读gold。完整A800/6小时上限多域矩阵已按成本门槛终态不复现。 教学例：让脚本读reference后输出0.5只验证算术；既没自主科研，也破坏若把reference用于policy的评测边界。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-ec0f4164e137d056">只实现归一化公式，或把参考解交给Agent，能算低成本复现吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Arecurscibench">RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>都不能。核心还包含科学任务构建/七项检查、source演化、冻结状态及独立G-test执行。scorer/reference必须在评估侧；被测Agent不能读gold。完整A800/6小时上限多域矩阵已按成本门槛终态不复现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：让脚本读reference后输出0.5只验证算术；既没自主科研，也破坏若把reference用于policy的评测边界。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32508v1">原论文</a> · <a href="../../agent-research/2611.32508-recurscibench/">实现解读</a> · <a href="#qa-ec0f4164e137d056">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:recurscibench" data-paper-title="RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research Agent Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences 2026-11-24 任务内涨分不等于获得可迁移的科研能力。RecurSciPipe从原始科学数据生成共享背景的建模F/分析A任务，先查合同、信息隔离、可执行、scorer行为，再查目标、输入和评价的科学有效性；设计错回Designer，实施错回Builder，两任务全过才准入。58 families分成38个G-evolve F/A配对和20个独立G-test F，共96任务、四科学域。四种RSI各在六种source设置演化，共24个冻结evolved states； 成本过高，不复现（审查 DONE）。deferred_high_cost / review-only资料收录，未实现、未运行；deferred_high_cost / review-only资料收录，未实现、未运行；成本过高，不复现（审查 DONE）。首发2026-11-24，发现/审查2026-11-25；封面November25不是arXiv首发日。本地仅审查固定v1、F/A来源与隔离契约、冻结评估协议、成本及同主题差异。没有运行GLM、RSI系统、科学任务构建、scorer、参考解、模型训练或benchmark；仅重写归一化公式不构成本论文复现。  Harness与自改进 review-only Agent 运行流程与自进化：改的是哪一层 与CoEvoBench相比，这里递归自改进的可变对象相同吗？ 不同。RecurSciBench四系统冻结backbone权重，分别改变解、记忆、harness或改进策略，测跨任务迁移；CoEvoBench允许researcher选择训练权重或修改harness，并审计开发/选择/Test访问。 教学例：把在源任务学到的验证切分规则迁往新科学域，是经验迁移；根据反馈决定训9B权重还是改工具，是另一种干预选择。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-8f23367a88df0ff2">与CoEvoBench相比，这里递归自改进的可变对象相同吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Arecurscibench">RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同。RecurSciBench四系统冻结backbone权重，分别改变解、记忆、harness或改进策略，测跨任务迁移；CoEvoBench允许researcher选择训练权重或修改harness，并审计开发/选择/Test访问。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把在源任务学到的验证切分规则迁往新科学域，是经验迁移；根据反馈决定训9B权重还是改工具，是另一种干预选择。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32508v1">原论文</a> · <a href="../../agent-research/2611.32508-recurscibench/">实现解读</a> · <a href="#qa-8f23367a88df0ff2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cape" data-paper-title="CAPE: Coordinating Calibration and Search for Tool-Use Policies" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CAPE: Coordinating Calibration and Search for Tool-Use Policies Agent State Key Laboratory of Electrical Insulation and Power Equipment, Xi’an Jiaotong University 2026-11-24 操作本身正确，序列化仍可能被隐藏parser配置误读。CAPE离线在可复制的候选配置族H上校准调用，编译一个部署时只按响应分支的策略。关键不是先全校准再搜索，而是在已到达配置子集V上动作效果全已知（local closure）就可用；持续维护可执行witness和未知效果的乐观上界，把有限编译预算用于可能改善策略的格子。 大量跨条件新进程测量及API矩阵超出本轮短时单A100/A30或Mac预算，成本过高，不复现（审查 DONE）。component_only / L1 CPU有限编译器诊断，diagnostic_only=true；不是LLM工具胜率复现。2026-11-24首发、2026-11-25发现/审查；不接入Evolve。CapeCompiler接受已声明的有限H、action catalog、初始策略和calibration callback，可向离线可复制h查询；1–8配置、1–4调用。  工具与协作 CPU机制组件 Agent 工具与协作执行：把计划变成可检查的动作 乐观策略看起来能全成功，为什么不能直接部署？ unknown program被假设立即commit，unknown probe被假设逐配置区分，只用于有效上界。这些响应未必真实存在。部署必须来自已取得效果组成的witness，并逐配置覆盖R0；只有lower=upper才证最优。 教学例：未知probe的三个假想响应可能实测全是同一error，三条可选续段会合并，原来的乐观树不可执行。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/tools-and-collaboration/">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-b2ad66b760205e9c">乐观策略看起来能全成功，为什么不能直接部署？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Acape">CAPE: Coordinating Calibration and Search for Tool-Use Policies</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · State Key Laboratory of Electrical Insulation and Power Equipment, Xi’an Jiaotong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>unknown program被假设立即commit，unknown probe被假设逐配置区分，只用于有效上界。这些响应未必真实存在。部署必须来自已取得效果组成的witness，并逐配置覆盖R0；只有lower=upper才证最优。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：未知probe的三个假想响应可能实测全是同一error，三条可选续段会合并，原来的乐观树不可执行。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31938v1">原论文</a> · <a href="../../agent-research/2611.31938-cape/">实现解读</a> · <a href="#qa-b2ad66b760205e9c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cape" data-paper-title="CAPE: Coordinating Calibration and Search for Tool-Use Policies" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CAPE: Coordinating Calibration and Search for Tool-Use Policies Agent State Key Laboratory of Electrical Insulation and Power Equipment, Xi’an Jiaotong University 2026-11-24 操作本身正确，序列化仍可能被隐藏parser配置误读。CAPE离线在可复制的候选配置族H上校准调用，编译一个部署时只按响应分支的策略。关键不是先全校准再搜索，而是在已到达配置子集V上动作效果全已知（local closure）就可用；持续维护可执行witness和未知效果的乐观上界，把有限编译预算用于可能改善策略的格子。 大量跨条件新进程测量及API矩阵超出本轮短时单A100/A30或Mac预算，成本过高，不复现（审查 DONE）。component_only / L1 CPU有限编译器诊断，diagnostic_only=true；不是LLM工具胜率复现。2026-11-24首发、2026-11-25发现/审查；不接入Evolve。CapeCompiler接受已声明的有限H、action catalog、初始策略和calibration callback，可向离线可复制h查询；1–8配置、1–4调用。  工具与协作 CPU机制组件 Agent 工具与协作执行：把计划变成可检查的动作 为什么一个动作不必在所有H上测完才能使用？ 策略到达某节点时只剩响应一致的配置子集V。该动作在V上效果全已知就locally closed；V外未知效果不会改变此策略实际执行路径。 教学例：首次上传已排除h4，probe只需在剩余h1/h2/h3上校准；不能因此宣称全H上的probe行已知。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/tools-and-collaboration/">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<span id="paper-agent-research-cape-8b45dad7" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-fd129ea03523b2c7">为什么一个动作不必在所有H上测完才能使用？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Acape">CAPE: Coordinating Calibration and Search for Tool-Use Policies</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · State Key Laboratory of Electrical Insulation and Power Equipment, Xi’an Jiaotong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>策略到达某节点时只剩响应一致的配置子集V。该动作在V上效果全已知就locally closed；V外未知效果不会改变此策略实际执行路径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：首次上传已排除h4，probe只需在剩余h1/h2/h3上校准；不能因此宣称全H上的probe行已知。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31938v1">原论文</a> · <a href="../../agent-research/2611.31938-cape/">实现解读</a> · <a href="#qa-fd129ea03523b2c7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cape" data-paper-title="CAPE: Coordinating Calibration and Search for Tool-Use Policies" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CAPE: Coordinating Calibration and Search for Tool-Use Policies Agent State Key Laboratory of Electrical Insulation and Power Equipment, Xi’an Jiaotong University 2026-11-24 操作本身正确，序列化仍可能被隐藏parser配置误读。CAPE离线在可复制的候选配置族H上校准调用，编译一个部署时只按响应分支的策略。关键不是先全校准再搜索，而是在已到达配置子集V上动作效果全已知（local closure）就可用；持续维护可执行witness和未知效果的乐观上界，把有限编译预算用于可能改善策略的格子。 大量跨条件新进程测量及API矩阵超出本轮短时单A100/A30或Mac预算，成本过高，不复现（审查 DONE）。component_only / L1 CPU有限编译器诊断，diagnostic_only=true；不是LLM工具胜率复现。2026-11-24首发、2026-11-25发现/审查；不接入Evolve。CapeCompiler接受已声明的有限H、action catalog、初始策略和calibration callback，可向离线可复制h查询；1–8配置、1–4调用。  工具与协作 CPU机制组件 Agent 工具与协作执行：把计划变成可检查的动作 CAPE保留初始覆盖是否等于CapLite的安全保证？ 不等于。CAPE在parser候选族上最大化完成数并再省调用；CapLite冻结可信写序列及authority grounding。结果符合reference不能证明写入被用户授权，覆盖最优也不保证顺序权限。 教学例：一个上传策略能在四种日期parser都commit，仍可能把正确数据发给未经授权的接收者。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/tools-and-collaboration/">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-edf5daacec026ed7">CAPE保留初始覆盖是否等于CapLite的安全保证？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Acape">CAPE: Coordinating Calibration and Search for Tool-Use Policies</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · State Key Laboratory of Electrical Insulation and Power Equipment, Xi’an Jiaotong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不等于。CAPE在parser候选族上最大化完成数并再省调用；CapLite冻结可信写序列及authority grounding。结果符合reference不能证明写入被用户授权，覆盖最优也不保证顺序权限。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个上传策略能在四种日期parser都commit，仍可能把正确数据发给未经授权的接收者。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31938v1">原论文</a> · <a href="../../agent-research/2611.31938-cape/">实现解读</a> · <a href="#qa-edf5daacec026ed7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cape" data-paper-title="CAPE: Coordinating Calibration and Search for Tool-Use Policies" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CAPE: Coordinating Calibration and Search for Tool-Use Policies Agent State Key Laboratory of Electrical Insulation and Power Equipment, Xi’an Jiaotong University 2026-11-24 操作本身正确，序列化仍可能被隐藏parser配置误读。CAPE离线在可复制的候选配置族H上校准调用，编译一个部署时只按响应分支的策略。关键不是先全校准再搜索，而是在已到达配置子集V上动作效果全已知（local closure）就可用；持续维护可执行witness和未知效果的乐观上界，把有限编译预算用于可能改善策略的格子。 大量跨条件新进程测量及API矩阵超出本轮短时单A100/A30或Mac预算，成本过高，不复现（审查 DONE）。component_only / L1 CPU有限编译器诊断，diagnostic_only=true；不是LLM工具胜率复现。2026-11-24首发、2026-11-25发现/审查；不接入Evolve。CapeCompiler接受已声明的有限H、action catalog、初始策略和calibration callback，可向离线可复制h查询；1–8配置、1–4调用。  工具与协作 CPU机制组件 Agent 工具与协作执行：把计划变成可检查的动作 编译器校准时知道h，部署policy也能拿活跃h来选程序吗？ 不能。离线校准可以向已声明、可复制的候选h查询；返回Policy只保存action及响应分支。部署execute只能接工具响应/commit；完整effect表和独立穷举oracle留在评估侧。 教学例：同一probe返回day-first后再走对应分支可以；直接读取hidden_h=day-first后选序列化属于越界。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/tools-and-collaboration/">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-38052c62185b0c45">编译器校准时知道h，部署policy也能拿活跃h来选程序吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Acape">CAPE: Coordinating Calibration and Search for Tool-Use Policies</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · State Key Laboratory of Electrical Insulation and Power Equipment, Xi’an Jiaotong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。离线校准可以向已声明、可复制的候选h查询；返回Policy只保存action及响应分支。部署execute只能接工具响应/commit；完整effect表和独立穷举oracle留在评估侧。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一probe返回day-first后再走对应分支可以；直接读取hidden_h=day-first后选序列化属于越界。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31938v1">原论文</a> · <a href="../../agent-research/2611.31938-cape/">实现解读</a> · <a href="#qa-38052c62185b0c45">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-kernel" data-paper-title="fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration Agent Amazon, AGI / Sunnyvale, USA 2026-11-24 SGR（Sub-Graph Recovery）不是新发明依赖恢复：它把已知的子图选择性重试放入LLM内容编排层。异常先令下游不可达，独立兄弟仍可完成；重试只复位失败节点及其不可达后代。SQLite SAB保存状态/文本，DSP在所有父节点完成后才调度子节点，并按声明顺序把真实父输出拼入提示。五个动词是fork、retry、cancel、query、fetch。fork是创建DAG任务，不是操作系统进程克隆。 单A100/A30或Mac预算不承担该长rollout/API多臂矩阵：成本过高，不复现（审查 DONE）。42/43/44三seed CPU诊断：4节点完成、5次executor调用，兄弟b/c各执行一次，join读取A/B/C实际文本顺序，重开保留4个complete节点。component_only / L1 CPU编排机制诊断，diagnostic_only=true，不是LLM Agent能力复现。2026-11-24首发、2026-11-25发现/审查；不接入Evolve晋级。标准库SQLite/WAL实现7态SAB、五动词、事务claim、失败/取消级联、SGR与实际父文本继承。fork不等待执行；  工具与协作 CPU机制组件 Agent 工具与协作执行：把计划变成可检查的动作 重开后为什么要拒绝旧claim的晚到完成？ 重开将旧running重新排队，旧执行可能仍晚到。generation和owner必须与当前running claim一致才能写完成，防止旧结果覆盖新尝试；这是本地单owner交接，不是分布式租约证明。 教学例：旧claim generation=1，重开后新claim=3；旧线程回传stale不能覆盖新线程的fresh。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/tools-and-collaboration/">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-a871be7ccfccbdfd">重开后为什么要拒绝旧claim的晚到完成？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aagent-kernel">fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Amazon, AGI / Sunnyvale, USA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>重开将旧running重新排队，旧执行可能仍晚到。generation和owner必须与当前running claim一致才能写完成，防止旧结果覆盖新尝试；这是本地单owner交接，不是分布式租约证明。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：旧claim generation=1，重开后新claim=3；旧线程回传stale不能覆盖新线程的fresh。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31727v1">原论文</a> · <a href="../../agent-research/2611.31727-agent-kernel/">实现解读</a> · <a href="#qa-a871be7ccfccbdfd">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-kernel" data-paper-title="fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration Agent Amazon, AGI / Sunnyvale, USA 2026-11-24 SGR（Sub-Graph Recovery）不是新发明依赖恢复：它把已知的子图选择性重试放入LLM内容编排层。异常先令下游不可达，独立兄弟仍可完成；重试只复位失败节点及其不可达后代。SQLite SAB保存状态/文本，DSP在所有父节点完成后才调度子节点，并按声明顺序把真实父输出拼入提示。五个动词是fork、retry、cancel、query、fetch。fork是创建DAG任务，不是操作系统进程克隆。 单A100/A30或Mac预算不承担该长rollout/API多臂矩阵：成本过高，不复现（审查 DONE）。42/43/44三seed CPU诊断：4节点完成、5次executor调用，兄弟b/c各执行一次，join读取A/B/C实际文本顺序，重开保留4个complete节点。component_only / L1 CPU编排机制诊断，diagnostic_only=true，不是LLM Agent能力复现。2026-11-24首发、2026-11-25发现/审查；不接入Evolve晋级。标准库SQLite/WAL实现7态SAB、五动词、事务claim、失败/取消级联、SGR与实际父文本继承。fork不等待执行；  工具与协作 CPU机制组件 Agent 工具与协作执行：把计划变成可检查的动作 为什么一次节点异常不应让整个任务从头重来？ 在声明正确的DAG中，只有失败节点及其依赖后代需要重试；已完成独立兄弟的状态和输出应保持。全重放会重复已完成工作，并再次暴露于暂时故障。 教学例：A/B/C独立取价，汇总依赖三者；A超时，只重试A和未运行汇总，不重新取B/C。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/tools-and-collaboration/">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<span id="paper-agent-research-agent-kernel-7ec9b09a" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-7a1cd0c72d1fe010">为什么一次节点异常不应让整个任务从头重来？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aagent-kernel">fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Amazon, AGI / Sunnyvale, USA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>在声明正确的DAG中，只有失败节点及其依赖后代需要重试；已完成独立兄弟的状态和输出应保持。全重放会重复已完成工作，并再次暴露于暂时故障。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A/B/C独立取价，汇总依赖三者；A超时，只重试A和未运行汇总，不重新取B/C。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31727v1">原论文</a> · <a href="../../agent-research/2611.31727-agent-kernel/">实现解读</a> · <a href="#qa-7a1cd0c72d1fe010">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-kernel" data-paper-title="fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration Agent Amazon, AGI / Sunnyvale, USA 2026-11-24 SGR（Sub-Graph Recovery）不是新发明依赖恢复：它把已知的子图选择性重试放入LLM内容编排层。异常先令下游不可达，独立兄弟仍可完成；重试只复位失败节点及其不可达后代。SQLite SAB保存状态/文本，DSP在所有父节点完成后才调度子节点，并按声明顺序把真实父输出拼入提示。五个动词是fork、retry、cancel、query、fetch。fork是创建DAG任务，不是操作系统进程克隆。 单A100/A30或Mac预算不承担该长rollout/API多臂矩阵：成本过高，不复现（审查 DONE）。42/43/44三seed CPU诊断：4节点完成、5次executor调用，兄弟b/c各执行一次，join读取A/B/C实际文本顺序，重开保留4个complete节点。component_only / L1 CPU编排机制诊断，diagnostic_only=true，不是LLM Agent能力复现。2026-11-24首发、2026-11-25发现/审查；不接入Evolve晋级。标准库SQLite/WAL实现7态SAB、五动词、事务claim、失败/取消级联、SGR与实际父文本继承。fork不等待执行；  工具与协作 CPU机制组件 Agent 工具与协作执行：把计划变成可检查的动作 SGR的状态保持能替代RuntimeTickets的副作用合同吗？ 不能。SGR保护SAB里的兄弟状态并允许重执行；RuntimeTickets在副作用前核权限与obligation，callback不确定时不自动重发。编排恢复与授权/副作用边界是不同层。 教学例：付款已成功后节点抛错，SGR可再次执行；需要下层事务/幂等合同，不能拿兄弟节点没变证明不会重复付款。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/tools-and-collaboration/">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-4c1b37fa0fdeb9be">SGR的状态保持能替代RuntimeTickets的副作用合同吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aagent-kernel">fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Amazon, AGI / Sunnyvale, USA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。SGR保护SAB里的兄弟状态并允许重执行；RuntimeTickets在副作用前核权限与obligation，callback不确定时不自动重发。编排恢复与授权/副作用边界是不同层。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：付款已成功后节点抛错，SGR可再次执行；需要下层事务/幂等合同，不能拿兄弟节点没变证明不会重复付款。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31727v1">原论文</a> · <a href="../../agent-research/2611.31727-agent-kernel/">实现解读</a> · <a href="#qa-4c1b37fa0fdeb9be">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-kernel" data-paper-title="fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration Agent Amazon, AGI / Sunnyvale, USA 2026-11-24 SGR（Sub-Graph Recovery）不是新发明依赖恢复：它把已知的子图选择性重试放入LLM内容编排层。异常先令下游不可达，独立兄弟仍可完成；重试只复位失败节点及其不可达后代。SQLite SAB保存状态/文本，DSP在所有父节点完成后才调度子节点，并按声明顺序把真实父输出拼入提示。五个动词是fork、retry、cancel、query、fetch。fork是创建DAG任务，不是操作系统进程克隆。 单A100/A30或Mac预算不承担该长rollout/API多臂矩阵：成本过高，不复现（审查 DONE）。42/43/44三seed CPU诊断：4节点完成、5次executor调用，兄弟b/c各执行一次，join读取A/B/C实际文本顺序，重开保留4个complete节点。component_only / L1 CPU编排机制诊断，diagnostic_only=true，不是LLM Agent能力复现。2026-11-24首发、2026-11-25发现/审查；不接入Evolve晋级。标准库SQLite/WAL实现7态SAB、五动词、事务claim、失败/取消级联、SGR与实际父文本继承。fork不等待执行；  工具与协作 CPU机制组件 Agent 工具与协作执行：把计划变成可检查的动作 并行子节点只等父任务结束就足够吗？ 不够，父节点必须complete而非failed/cancelled，且子prompt要继承每个声明父节点的真实最新输出。只并发启动或填空文本会违反内容依赖；SGR不是语义错误检测器。 教学例：汇总有A和C价格但B失败时不能把B=NULL照常推荐；B恢复后按声明顺序读入三份文本。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/tools-and-collaboration/">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-446963ae74c731c1">并行子节点只等父任务结束就足够吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aagent-kernel">fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Amazon, AGI / Sunnyvale, USA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不够，父节点必须complete而非failed/cancelled，且子prompt要继承每个声明父节点的真实最新输出。只并发启动或填空文本会违反内容依赖；SGR不是语义错误检测器。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：汇总有A和C价格但B失败时不能把B=NULL照常推荐；B恢复后按声明顺序读入三份文本。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31727v1">原论文</a> · <a href="../../agent-research/2611.31727-agent-kernel/">实现解读</a> · <a href="#qa-446963ae74c731c1">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:vopd" data-paper-title="Verifiable On-Policy Distillation" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Verifiable On-Policy Distillation LLM 后训练 Stanford University 2026-11-23 RLVR只给已采样整条response稀疏结果反馈；OPD给每个访问prefix的完整teacher分布，但该信号未被verifier验证。VOPD先对每组response计算teacher/reference累计log-ratio D，再以population标准差标准化V和D，最小二乘投影得到Pearson相关c。把投影信号乘回σ_D恢复原奖励尺度，然后采用immediate-token近似，在已观察组与prefix固定时，对一个新的假想next-token取全词表条件期望。 完整实验成本过高，不复现（审查 DONE）；多seed不升级机制诊断为能力比较，没有下载数据/权重、生成真实response、训练模型或调用judge。L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU执行masked累计log-ratio之和、population Pearson系数、zero-verifier-variance固定0.25外推fallback、full-vocabulary KL目标/解析logit梯度及条件新token期望。  student-trajectory-distillation CPU机制组件 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 Rao–Blackwell化究竟保留了哪一个期望？ 保留的是采用immediate-token近似后、给定已观察组和prefix、重新抽一个假想next-token的局部梯度期望。c和baseline固定，score恒等式消去baseline；不是无偏完整序列verifier梯度。 教学例：固定p=(0.2,0.8)后可以枚举两token来消掉这次抽样噪声，但此前哪组回答被抽到以及未来续写仍是随机的。 2026-11-24">
 <p class="ar-learning-card__domain"><a href="../paths/post-training/student-trajectory-distillation/">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
 <p class="ar-learning-level">核心机制</p>

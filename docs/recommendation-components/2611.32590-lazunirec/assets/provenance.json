@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/pdf/2611.32590v1",
+  "source_url": "https://arxiv.org/pdf/2611.32590v1#page=3",
+  "pdf_page": 3,
+  "figure": "Figure2",
+  "caption": "The overall framework of LazUnirec.",
+  "source_sha256": "7e298be089830fe9cdb34ccf7365b6b76de98bec1262e1d47e9156fdbe7723dc",
+  "crop_pdf_points": [
+    64,
+    70,
+    551,
+    316
+  ],
+  "render_scale": 2,
+  "asset_sha256": "fa40d7b67b846cfcbd551cea34c172e3c637a81ba2ce7b39b1c94995b165bd02",
+  "visually_reviewed": true,
+  "scientific_content_modified": false,
+  "copyright": "Original authors"
+}

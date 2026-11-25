@@ -11,14 +11,14 @@ hide:
 
 每个子主题维护一张卡片。新论文进入后，更新对应卡片的比较或结论，并记录这次变化；不必再从头读整批论文。
 
-31 张精读卡片 · 1282 篇主题资料 · 按主题折叠
+31 张精读卡片 · 1291 篇主题资料 · 按主题折叠
 
 <details class="ar-deep-shelf"><summary>搜广推 · 7 张</summary>
 <div class="ar-deep-grid">
 <article class="ar-deep-tile">
 <h2><a href="recommendation/retrieval-matching/">召回覆盖从哪里来：用户表示、正例组织与负例难度</a></h2>
 <p>候选生成先决定后续排序能看见什么。YouTube DNN说明单用户向量如何进入近邻检索，Airbnb EBR把监督放回搜索—浏览—预订旅程，MIMA让同请求多正例分配给互补兴趣，MDCNS改变负例的难度与多视角监督。这四种改动分别作用于表示、标签、兴趣分工和梯度，不能用召回数变大统一解释。</p>
-<p class="ar-learning-topic-meta">9 篇重点对照 · 7 个跨论文问答 · 2026-11-21</p>
+<p class="ar-learning-topic-meta">10 篇重点对照 · 8 个跨论文问答 · 2026-11-25</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="recommendation/content-semantic-ids/">知识、协同向量与语义码：相同内容怎样进入不同推荐接口？</a></h2>
@@ -28,7 +28,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="recommendation/history-ranking-backbones/">DIN、HSTU、LONGER、SlimPer、RankMixer：究竟让谁与谁交互？</a></h2>
 <p>比较排序骨干前先画三条边：历史到历史、候选到历史、字段到字段。DIN按候选激活历史，HSTU在输入窗口内逐层改写历史状态，LONGER先合并再以短查询读长KV，SlimPer反复读取用户池但只传播小知识库，RankMixer则更换异构字段交互。它们可处于同一流水线的不同位置，不能按一个长度变量或一张本地结果表排总名次。</p>
-<p class="ar-learning-topic-meta">7 篇重点对照 · 5 个跨论文问答 · 2026-11-24</p>
+<p class="ar-learning-topic-meta">8 篇重点对照 · 6 个跨论文问答 · 2026-11-25</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="recommendation/generative-retrieval-reasoning/">生成一个物品，先后跨过码本、模型分布与合法目录三道关</a></h2>
@@ -57,7 +57,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/context-and-state/">长上下文不是一条轴：位置、读取与状态压缩</a></h2>
 <p>先问历史以什么形式存在，再问当前 token 怎样读它。RoPE 改变相对位置关系，Mamba 把历史写入递归状态，NSA 在多条读取路径间分工，OpenAttention 为未精读部分保留代理，TTR 则为当前输入求一个压缩表示。这些方法不能只按“支持多长”排成一列。 MERLIN在多个压缩状态之外保留routing key矩统计，改变段间读取权重，而不替换每段内部的递归写入。</p>
-<p class="ar-learning-topic-meta">23 篇重点对照 · 19 个跨论文问答 · 2026-11-20</p>
+<p class="ar-learning-topic-meta">24 篇重点对照 · 20 个跨论文问答 · 2026-11-25</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/conditional-compute/">按需算力：选择专家、跳过计算，还是查回旧知识</a></h2>
@@ -67,7 +67,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/training-budget/">训练预算：改数据、改更新方向，还是改比较口径</a></h2>
 <p>同一预算内训练得更好，可能来自更合适的数据、逐样本处理、更有效更新或更低状态开销。DoReMi、Mixing Laws、DataOrchestra、Muon 和 ECO 改动不同环节；Muon Paired Budget 则提醒先冻结选参规则，再分别回答等数据和等时间问题。ProLand改变LoRA乘积空间的更新几何，GAVAGAI则给captioning增加显式词区域对齐目标，二者不能仅因都改善训练就混为一类。</p>
-<p class="ar-learning-topic-meta">16 篇重点对照 · 12 个跨论文问答 · 2026-11-24</p>
+<p class="ar-learning-topic-meta">17 篇重点对照 · 13 个跨论文问答 · 2026-11-25</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/compression-and-cache/">推理压缩先找瓶颈：权重、KV 内容与缓存层级</a></h2>
@@ -120,7 +120,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="multimodal-models/world-state-actions/">会预测下一幕，还不等于会行动或保持同一个世界</a></h2>
 <p>世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。</p>
-<p class="ar-learning-topic-meta">20 篇重点对照 · 17 个跨论文问答 · 2026-11-21</p>
+<p class="ar-learning-topic-meta">21 篇重点对照 · 18 个跨论文问答 · 2026-11-25</p>
 </article>
 </div></details>
 
@@ -134,7 +134,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="post-training/policy-optimization/">同一个GRPO名字之外：优势尺度、裁剪单位与训推失配</a></h2>
 <p>GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。</p>
-<p class="ar-learning-topic-meta">18 篇重点对照 · 14 个跨论文问答 · 2026-11-23</p>
+<p class="ar-learning-topic-meta">19 篇重点对照 · 15 个跨论文问答 · 2026-11-25</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="post-training/reward-and-credit/">奖励从哪里来，信用才该分到哪里</a></h2>
@@ -173,12 +173,12 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="agent-research/tools-and-collaboration/">从会调用到能交付：工具接口、可靠性与协作合同</a></h2>
 <p>Toolformer 学何时调用，SWE-agent 设计动作接口，RATED 处理相关工具的运行可靠性；AutoGen 定义消息程序，MetaGPT 约束角色交付物，World of SWEcraft 再用隐藏下游检验群体产出。每层都可能失败，调用格式正确不是端到端完成的替身。</p>
-<p class="ar-learning-topic-meta">9 篇重点对照 · 6 个跨论文问答 · 2026-11-15</p>
+<p class="ar-learning-topic-meta">11 篇重点对照 · 8 个跨论文问答 · 2026-11-25</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/harness-and-self-improvement/">自改进先标对象：答案、经验、接口与系统版本</a></h2>
 <p>Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。</p>
-<p class="ar-learning-topic-meta">45 篇重点对照 · 37 个跨论文问答 · 2026-11-24</p>
+<p class="ar-learning-topic-meta">46 篇重点对照 · 38 个跨论文问答 · 2026-11-25</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/agent-policy-learning/">交互学习：统一轨迹之后，信用和教师信息怎样分配</a></h2>

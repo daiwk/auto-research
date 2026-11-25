@@ -7,7 +7,7 @@ hide:
 
 # 长上下文不是一条轴：位置、读取与状态压缩
 
-[基础模型](../index.md) · 更新 2026-11-20 · 49 篇主题资料 / 23 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-25 · 50 篇主题资料 / 24 篇重点对照
 
 先问历史以什么形式存在，再问当前 token 怎样读它。RoPE 改变相对位置关系，Mamba 把历史写入递归状态，NSA 在多条读取路径间分工，OpenAttention 为未精读部分保留代理，TTR 则为当前输入求一个压缩表示。这些方法不能只按“支持多长”排成一列。 MERLIN在多个压缩状态之外保留routing key矩统计，改变段间读取权重，而不替换每段内部的递归写入。
 
@@ -48,6 +48,7 @@ hide:
 | [Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting](../../../foundation-models/2611.23896-kernel-ridge-attention/README.md) · [原始来源](https://arxiv.org/abs/2611.23896v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | KRA把历史关联写入固定大小的回归矩阵，同时保留后验协方差。共享可学习Fourier特征形成非线性核；内容相关OU时钟既衰减旧系数，也把协方差恢复到先验，使已经遗忘的方向重新可写。读取发生在当前值写入之后。 | Mamba用输入相关步长和读写向量控制SSM状态；KRA额外维护后验协方差来处理相关key方向的干扰。两者都是有界状态，但KRA每头还承担D平方协方差存储，不能仅按线性序列复杂度认为成本相同。 |
 | [HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs](../../../foundation-models/2611.26363-hisa/README.md) · [原始来源](https://arxiv.org/abs/2611.26363v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | HiSA不先筛token，而是对每个query-key点积只保留尚未超过角度预算的RoPE频率对。近处key保留更多分量，远处仅保留慢频分量；Q/K投影不变，规则只由位置、RoPE base和预算决定。 | RoFormer保留所有RoPE二维对，使用相对旋转来编码距离；HiSA额外根据距离和频率删掉部分点积项。这是打分规则变化，不等于在既有checkpoint上无训练切换后仍保留能力。与只删整token的策略也不同，后者不能表达同一key只保留慢频分量。 |
 | [Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality](../../../foundation-models/2611.24963-canon-layers-scale/README.md) · [原始来源](https://arxiv.org/abs/2611.24963v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | Canon在层内多个位置加入沿token轴的残差短卷积，显式提供邻近信息。本文把此前小规模合成训练得到的结构判断放到64组1.3B–8B真实语料预训练中检验，并对线性模型使用低秩输出门的GLA5/GDN2。重要贡献还包括对预算、基线调参和可测技能的重新审视。 | Canon的宽4因果残差只提供局部token混合，本身不是长历史状态，也不能独立读取任意远位置；它可插入attention、线性attention或SSM。Mamba除局部卷积外还维护输入选择的递归状态，两者功能不能等同。比较需对齐参数/状态与调参，并另测上下文检索；知识分数更高不推出固定状态已具备attention式远程读取。 |
+| [Eliciting the Recall Capacity of Linear Attention](../../../foundation-models/2611.32969-thresholded-longce/README.md) · [原始来源](https://arxiv.org/abs/2611.32969v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | TLCE不改状态容量，而比较同一目标的full/short log-prob；仅当优势超过1nat且短窗已积累128token时给capped ratio权重，再按总权重归一化。它强调已被模型利用的远上下文信息。 | MERLIN用routing key的一二阶矩改变多状态读取，TLCE改变训练监督分配。更强读取结构不等于已经学会召回；反之损失加权也不能恢复固定状态中未保存的信息。两者需要相同模型/数据预算的独立组合实验，现有小核不支持组合收益。 |
 
 </div>
 
@@ -160,6 +161,12 @@ RoFormer保留所有RoPE二维对，使用相对旋转来编码距离；HiSA额�
 Canon的宽4因果残差只提供局部token混合，本身不是长历史状态，也不能独立读取任意远位置；它可插入attention、线性attention或SSM。Mamba除局部卷积外还维护输入选择的递归状态，两者功能不能等同。比较需对齐参数/状态与调参，并另测上下文检索；知识分数更高不推出固定状态已具备attention式远程读取。 Canon是每通道独立、kernel=4、左侧补零的因果卷积，带原hidden残差；A/C在norm后、B在QKV投影后、D覆盖门控MLP两支。线性模型低秩约束作用于SiLU之前的G1G2，激活后门不保证低秩。公开LlamaCanon还用quarter RoPE，不能把其全部差异只归因于卷积。
 
 对照来源：[canon-layers-scale](../../../foundation-models/2611.24963-canon-layers-scale/README.md) · [mamba](../../../reproductions/2312.00752-mamba/README.md)
+
+### Eliciting the Recall Capacity of Linear Attention
+
+MERLIN用routing key的一二阶矩改变多状态读取，TLCE改变训练监督分配。更强读取结构不等于已经学会召回；反之损失加权也不能恢复固定状态中未保存的信息。两者需要相同模型/数据预算的独立组合实验，现有小核不支持组合收益。 短窗最大512，边界必须重置状态/attention，额外前向无梯度，权重也stop-gradient。全程联合重复实验包含另一个内容干预，本地未实现句子重复，不能将TLCE接口当成全文recall比较。
+
+对照来源：[thresholded-longce](../../../foundation-models/2611.32969-thresholded-longce/README.md) · [merlin](../../../foundation-models/2610.37645-merlin/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -355,9 +362,23 @@ Canon的宽4因果残差只提供局部token混合，本身不是长历史状态
 
     对照来源：[canon-layers-scale](../../../foundation-models/2611.24963-canon-layers-scale/README.md) · [mamba](../../../reproductions/2312.00752-mamba/README.md)
 
+### TLCE能替代MERLIN的多状态路由吗？ {#cross-nov25-thresholded-longce}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。TLCE重分配训练损失而不改变记忆结构；MERLIN改变分段状态的读取权重。未存的信息和未学会使用的信息是不同瓶颈。
+
+    **教学例子：** 教学例：若两个历史压进同一状态后已无法区分，给后续token更大loss不能保证还原；保留多个状态则改变了可读取信息。
+
+    对照来源：[thresholded-longce](../../../foundation-models/2611.32969-thresholded-longce/README.md) · [merlin](../../../foundation-models/2610.37645-merlin/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-25** · MERLIN用routing key的一二阶矩改变多状态读取，TLCE改变训练监督分配。更强读取结构不等于已经学会召回；反之损失加权也不能恢复固定状态中未保存的信息。两者需要相同模型/数据预算的独立组合实验，现有小核不支持组合收益。 完整实验按成本终态收录，不以L1诊断或资料收录晋级Evolve。
+
+涉及：[thresholded-longce](../../../foundation-models/2611.32969-thresholded-longce/README.md) · [merlin](../../../foundation-models/2610.37645-merlin/README.md)
 
 **2026-11-20** · Canon的宽4因果残差只提供局部token混合，本身不是长历史状态，也不能独立读取任意远位置；它可插入attention、线性attention或SSM。Mamba除局部卷积外还维护输入选择的递归状态，两者功能不能等同。比较需对齐参数/状态与调参，并另测上下文检索；知识分数更高不推出固定状态已具备attention式远程读取。 本地证据层级与完整实验不复现分别记录。
 
@@ -427,7 +448,7 @@ Canon的宽4因果残差只提供局部token混合，本身不是长历史状态
 
 覆盖 31 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 49 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 50 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -480,6 +501,7 @@ Canon的宽4因果残差只提供局部token混合，本身不是长历史状态
 - [Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting](../../../foundation-models/2611.23896-kernel-ridge-attention/README.md)
 - [HiSA: Sparsifying the Hidden Dimension of RoPE Attention in LLMs](../../../foundation-models/2611.26363-hisa/README.md)
 - [Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality](../../../foundation-models/2611.24963-canon-layers-scale/README.md)
+- [Eliciting the Recall Capacity of Linear Attention](../../../foundation-models/2611.32969-thresholded-longce/README.md)
 
 </details>
 

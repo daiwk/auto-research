@@ -10,6 +10,8 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| retrieval-matching | [LARF: Learning-aligned Reasoning Framework for Search Relevance](../../recommendation-components/2611.32125-larf/README.md) | Yuanbao Team, Tencent，2026-11-24 | 未发现官方代码 | `larf`：仅低成本组件，完整实验不复现 |
+| 多任务与联合建模 | [LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation](../../recommendation-components/2611.32590-lazunirec/README.md) | Alibaba International Digital Commerce Group，2026-11-24 | 未发现官方代码 | `lazunirec`：仅低成本组件，完整实验不复现 |
 | 研究与服务闭环 | [Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents](../../recommendation-components/2611.29613-weight-coding/README.md) | Pinterest，2026-11-22 | 未发现官方代码 | `weight-coding`：仅低成本组件，完整实验不复现 |
 | 内容理解、审核与风险控制 | [Antom 3-in-1 Transformer: A Payment Foundation Model](../../recommendation-components/2611.25403-antom-3-in-1/README.md) | Ant International，2026-11-19 | 未发现官方代码 | 计划键 `antom-3-in-1`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 研究与服务闭环 | [Cost-Aware Agentic Feature Optimization System for Fleet-Scale Ranking Models](../../recommendation-components/2611.26531-fleet-feature-optimization/README.md) | Meta, Inc.，2026-11-19 | 未发现官方代码 | `fleet-feature-optimization`：仅低成本组件，完整实验不复现 |

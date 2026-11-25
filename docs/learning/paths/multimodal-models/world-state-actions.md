@@ -7,7 +7,7 @@ hide:
 
 # 世界建模：状态、生成与动作条件
 
-[多模态](index.md) / 145 个问题 · 36 篇论文
+[多模态](index.md) / 149 个问题 · 37 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">145 个问题 · 36 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">149 个问题 · 37 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:criticjepa" data-paper-title="CriticJEPA: World Models Are Better Critics Than Optimizers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="CriticJEPA: World Models Are Better Critics Than Optimizers 基础模型 Tsinghua University 2026-11-24 对一个预测器找到更低的预测 cost，需要其梯度方向可靠；从一组好候选中挑更好的，只要求局部排序有信息。论文在冻结 H-JEPA 上观察到：长梯度搜索可继续降低预测 cost，但实际行动不再改善；同一预测器却能比较 goal-conditioned 提案。CriticJEPA 在每个时间层级训练 flow proposer，再用冻结 rollout 选择；只给提案做短的有锚精修，而不让无约束搜索承担整个规划。 成本过高，不复现（审查 DONE）。仅审查收录，无本地代码、无环境实跑、无 CPU/CUDA 机制代理、无本地成功率。此页与成本审查记录只保存来源、方法和高成本边界，不设 metrics 目录；论文表格不是本地测量，也不需要为此收录伪造 GPU receipt。  JEPA与世界模型 提案选择与有锚规划 多模态 世界建模：状态、生成与动作条件 能正确比较两个计划，就表示世界模型梯度能持续改进动作吗？ 不表示。排序仅需候选间相对评分有信息；优化需要沿局部梯度移动也改善真实执行。持续搜索还可能利用预测误差。 教学例：模型把安全绕行排在撞墙前，仍可能在绕行附近沿错误梯度把动作推向墙；该例说明逻辑差异，不是论文实测轨迹。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<span id="paper-foundation-models-criticjepa-1e87f1a4" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-05295c40f0825d92">能正确比较两个计划，就表示世界模型梯度能持续改进动作吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acriticjepa">CriticJEPA: World Models Are Better Critics Than Optimizers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不表示。排序仅需候选间相对评分有信息；优化需要沿局部梯度移动也改善真实执行。持续搜索还可能利用预测误差。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：模型把安全绕行排在撞墙前，仍可能在绕行附近沿错误梯度把动作推向墙；该例说明逻辑差异，不是论文实测轨迹。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32357v1">原论文</a> · <a href="../../../../foundation-models/2611.32357-criticjepa/">实现解读</a> · <a href="#qa-05295c40f0825d92">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:criticjepa" data-paper-title="CriticJEPA: World Models Are Better Critics Than Optimizers" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="CriticJEPA: World Models Are Better Critics Than Optimizers 基础模型 Tsinghua University 2026-11-24 对一个预测器找到更低的预测 cost，需要其梯度方向可靠；从一组好候选中挑更好的，只要求局部排序有信息。论文在冻结 H-JEPA 上观察到：长梯度搜索可继续降低预测 cost，但实际行动不再改善；同一预测器却能比较 goal-conditioned 提案。CriticJEPA 在每个时间层级训练 flow proposer，再用冻结 rollout 选择；只给提案做短的有锚精修，而不让无约束搜索承担整个规划。 成本过高，不复现（审查 DONE）。仅审查收录，无本地代码、无环境实跑、无 CPU/CUDA 机制代理、无本地成功率。此页与成本审查记录只保存来源、方法和高成本边界，不设 metrics 目录；论文表格不是本地测量，也不需要为此收录伪造 GPU receipt。  JEPA与世界模型 提案选择与有锚规划 多模态 世界建模：状态、生成与动作条件 anchor惩罚为什么不留在最终选择cost里？ anchor限制每个候选偏离自身提案的距离，用于局部精修；最终需要比较实际rollout目标cost，而不是奖励离初始候选更近。 教学例：A的rollout cost为1但移动0.5，B为2但未移动；最终应选A，不能因为A离提案远就让anchor翻转排名。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-7b63e892e0032e2f">anchor惩罚为什么不留在最终选择cost里？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acriticjepa">CriticJEPA: World Models Are Better Critics Than Optimizers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>anchor限制每个候选偏离自身提案的距离，用于局部精修；最终需要比较实际rollout目标cost，而不是奖励离初始候选更近。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A的rollout cost为1但移动0.5，B为2但未移动；最终应选A，不能因为A离提案远就让anchor翻转排名。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32357v1">原论文</a> · <a href="../../../../foundation-models/2611.32357-criticjepa/">实现解读</a> · <a href="#qa-7b63e892e0032e2f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:criticjepa" data-paper-title="CriticJEPA: World Models Are Better Critics Than Optimizers" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="CriticJEPA: World Models Are Better Critics Than Optimizers 基础模型 Tsinghua University 2026-11-24 对一个预测器找到更低的预测 cost，需要其梯度方向可靠；从一组好候选中挑更好的，只要求局部排序有信息。论文在冻结 H-JEPA 上观察到：长梯度搜索可继续降低预测 cost，但实际行动不再改善；同一预测器却能比较 goal-conditioned 提案。CriticJEPA 在每个时间层级训练 flow proposer，再用冻结 rollout 选择；只给提案做短的有锚精修，而不让无约束搜索承担整个规划。 成本过高，不复现（审查 DONE）。仅审查收录，无本地代码、无环境实跑、无 CPU/CUDA 机制代理、无本地成功率。此页与成本审查记录只保存来源、方法和高成本边界，不设 metrics 目录；论文表格不是本地测量，也不需要为此收录伪造 GPU receipt。  JEPA与世界模型 提案选择与有锚规划 多模态 世界建模：状态、生成与动作条件 CriticJEPA比预测—规划评测多区分了什么？ 前者在同一冻结模型里改变候选来源与搜索方式，区分能否排序、梯度是否有效和环境成功；后者用冻结解码协议拆表示与预测误差，并单独要求真实规划结果。 教学例：一步误差相同的模型可对flow提案有用、对长搜索生成的离分布候选无用；因此不能仅按一步loss选规划器。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-1055275115f6ef1d">CriticJEPA比预测—规划评测多区分了什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acriticjepa">CriticJEPA: World Models Are Better Critics Than Optimizers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>前者在同一冻结模型里改变候选来源与搜索方式，区分能否排序、梯度是否有效和环境成功；后者用冻结解码协议拆表示与预测误差，并单独要求真实规划结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一步误差相同的模型可对flow提案有用、对长搜索生成的离分布候选无用；因此不能仅按一步loss选规划器。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32357v1">原论文</a> · <a href="../../../../foundation-models/2611.32357-criticjepa/">实现解读</a> · <a href="#qa-1055275115f6ef1d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:criticjepa" data-paper-title="CriticJEPA: World Models Are Better Critics Than Optimizers" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="CriticJEPA: World Models Are Better Critics Than Optimizers 基础模型 Tsinghua University 2026-11-24 对一个预测器找到更低的预测 cost，需要其梯度方向可靠；从一组好候选中挑更好的，只要求局部排序有信息。论文在冻结 H-JEPA 上观察到：长梯度搜索可继续降低预测 cost，但实际行动不再改善；同一预测器却能比较 goal-conditioned 提案。CriticJEPA 在每个时间层级训练 flow proposer，再用冻结 rollout 选择；只给提案做短的有锚精修，而不让无约束搜索承担整个规划。 成本过高，不复现（审查 DONE）。仅审查收录，无本地代码、无环境实跑、无 CPU/CUDA 机制代理、无本地成功率。此页与成本审查记录只保存来源、方法和高成本边界，不设 metrics 目录；论文表格不是本地测量，也不需要为此收录伪造 GPU receipt。  JEPA与世界模型 提案选择与有锚规划 多模态 世界建模：状态、生成与动作条件 用预先写好的好动作候选能算低成本CriticJEPA复现吗？ 不能。conditional flow的训练、生成及跨层目标/时间窗决定候选分布，是核心机制。固定候选可诊断critic接口，但不能声称复现提案能力；完整矩阵已按成本终态不复现。 教学例：手填一条到目标的动作再让critic选中，只证明列表里有答案；本地因此不写这种可执行operator，也不报告控制成功率。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-4e9e6417175d8206">用预先写好的好动作候选能算低成本CriticJEPA复现吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acriticjepa">CriticJEPA: World Models Are Better Critics Than Optimizers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。conditional flow的训练、生成及跨层目标/时间窗决定候选分布，是核心机制。固定候选可诊断critic接口，但不能声称复现提案能力；完整矩阵已按成本终态不复现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：手填一条到目标的动作再让critic选中，只证明列表里有答案；本地因此不写这种可执行operator，也不报告控制成功率。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32357v1">原论文</a> · <a href="../../../../foundation-models/2611.32357-criticjepa/">实现解读</a> · <a href="#qa-4e9e6417175d8206">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:counterfactual-wm" data-paper-title="Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Counterfactual World Models: JEPAs That Reason About &quot;What If&quot; 基础模型 Brown University / AMI Labs 2026-11-18 普通world model给动作的平均结果，不能仅凭更准的事实分布识别同一扰动下的个体反事实。本文将实际观测结果作为事件信息，加上同一事实预测器对两个动作的预测差；加性扰动时精确，平滑短时动力学下有交互误差界，但碰撞、乘法故障和弯曲坐标可破坏近似。Fixed-v1 source. 不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。未训练JEPA、加载encoder、采集模拟轨迹或执行规划；l1_mechanism组件；不是完整模型. 完整实验：成本过高，不复现（审查 DONE）。执行Eq6残差复用和Eq7 readout坐标运输，严格拒绝隐式broadcast；加性系统验证等式，乘法gain fault与非线性readout保留预期失效。未训练JEPA、加载encoder、采集模拟轨迹或执行规划；诊断中的分析函数不冒充训练好的world model。  世界模型与JEPA 反事实预测与可识别性 多模态 世界建模：状态、生成与动作条件 为什么平均未来预测准确还不等于反事实准确？ 事实分布只给不同动作的边缘结果，没说明两种结果属于同一扰动事件的哪一对。个体反事实需要这份配对结构。 教学例：U与1-U都均匀分布，但观测U=0.2时两种耦合的替代结果分别是0.2和0.8。 2026-11-19">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-counterfactual-wm-f2e1144d" class="ar-learning-paper-anchor"></span>

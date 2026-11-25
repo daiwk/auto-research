@@ -16,6 +16,7 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    "lazunirec": "docs/gpu-validations/lazunirec-a100-20261125-latest.json",
     "deep-cross-attention": "docs/gpu-validations/deep-cross-attention-a100-20261124-latest.json",
     "vfold-cache-keyword-compat": "docs/gpu-validations/vfold-cache-keyword-compat-a100-20261123.json",
     "aimuon": "docs/gpu-validations/aimuon-a100-20261123-latest.json",

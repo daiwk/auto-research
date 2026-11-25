@@ -7,7 +7,7 @@ hide:
 
 # 同一个GRPO名字之外：优势尺度、裁剪单位与训推失配
 
-[LLM 后训练](../index.md) · 更新 2026-11-23 · 66 篇主题资料 / 18 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-25 · 67 篇主题资料 / 19 篇重点对照
 
 GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。
 
@@ -43,6 +43,7 @@ GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比�
 | [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](../../../post-training/2611.23750-led-edits/README.md) · [原始来源](https://arxiv.org/abs/2611.23750v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 最长公共子序列的固定block edit标签、每gap单次Ins、末尾gap不造锚点、mask阈值fallback、visible-token edit阈值以及同时编辑后截断/补mask。没有扩散模型forward、多阶段SFT或循环重采样decoder。 | ORL让扩散模型在自身诱导的残差状态上学习并需专用推理链；LED改变离散序列的长度对齐与edit监督，插删由LCS提供标签。二者都处理训练/推理状态差异，但残差分布不等于编辑动作，两个review边界也不能互相补成完整模型。 |
 | [Decision-Focused Reinforcement Learning for LLM Post-Training](../../../post-training/2611.25597-dfrl/README.md) · [原始来源](https://arxiv.org/abs/2611.25597v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 纯stdlib、CPU-only的实际成本RLOO优势、单批共享Bernoulli逆概率校正与lazy整批精确成本回调、显式warm-start边界、小规模枚举knapsack。诊断对三个可采样参数预测的真实可行决策计算观测成本，穷举两个独立categorical样本的score-gradient期望并与解析梯度比较；偏置cheap成本仅为明确的负控输入，不冒充训练好的估计器。没有LLM、token生成、参数JSON解析器、H&amp;M处理、Adam训练或能力评测；非Evolve算子。 | 已有RLOO实现把整条response作为action，用其他response的奖励均值作baseline，并可加KL shaping。DFRL在这里指定奖励来自下游真实决策成本；其文中RLOO分析抵消共同hindsight常数，reward correction用整批开关减少昂贵反馈调用。RLOO没有自动定义什么是业务regret；DFRL也没有使任意归一化、clipping或候选相关baseline都保持无偏。两者是目标/反馈与估计器两个维度，而非互斥算法。 |
 | [How Far Does Lossless Re-tokenization Move an RLVR Update?](../../../post-training/2611.27083-retokenization-update/README.md) · [原始来源](https://arxiv.org/abs/2611.27083v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 纯CPU prefix-softmax表从同一正的完整字符串分布按chain rule初始化，执行λ_t(e_token−π_row)完整梯度；检验未访问行、coarse未采样logit和字符串分布差异。独立实现c及ratio-of-means R，但不把两套独立tabular参数假装成共享LLM参数来计算R；R函数仅接受调用方已在同一参数空间测得的更新。包含均匀分布非零一致步的对称正控，避免过度概括定理。没有真实BPE、LoRA、AdamW、rollout或修复算法；这是一项机制诊断，不是后训练能力实现。 | DFRL改变奖励来自何种下游决策成本，RLOO消去同一实例共有常数；本篇固定奖励和优势，检查编码怎样改变score-gradient。baseline消去共同regret常数并不使不同token路径的Jacobian相同；不能把reward不变误写成更新不变。 |
+| [EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor](../../../post-training/2611.32810-epro/README.md) · [原始来源](https://arxiv.org/abs/2611.32810v1)<br>章节：核心公式、与已有方法的关系、结果、负控与边界 | 从旧执行锚点按训练分布变化transport中心，结合old-training下log-ratio方差与outward-only软衰减；importance和gate在反传时冻结。CPU执行full-vocab和附B head-tail公式，不运行执行引擎或RL。 | RSC在固定behavior下用独立auxiliary动作估计center并加reverse-KL；EPRO使center随transport变化，再按分布移动衰减outward更新。固定behavior校正、预测执行策略和实际执行误差是不同对象，不能把两者都简化成reward减均值。没有共同LLM训练测量，不比较能力。 |
 
 </div>
 
@@ -125,6 +126,12 @@ ORL让扩散模型在自身诱导的残差状态上学习并需专用推理链�
 DFRL改变奖励来自何种下游决策成本，RLOO消去同一实例共有常数；本篇固定奖励和优势，检查编码怎样改变score-gradient。baseline消去共同regret常数并不使不同token路径的Jacobian相同；不能把reward不变误写成更新不变。 来源：§2 Eq.1–2、§4 Proposition1及AppendixE。采样ab时，coarse完整score步为λ(e_ab−π)；fine只更新root和a后继行，b行不动，所以fine的ba/bb比不变。若π(ba)≠π(bb)，共同更新仅能为零；均匀分布的对称例外不满足这个前提，不能宣称所有分布绝无非零一致步。论文AppendixE还明确区分仅更新sampled-logit的较弱模拟器，本地使用完整softmax梯度而非该替代。
 
 对照来源：[retokenization-update](../../../post-training/2611.27083-retokenization-update/README.md) · [dfrl](../../../post-training/2611.25597-dfrl/README.md)
+
+### 分布预测不是分布观测，score中心也不是reward中心
+
+EPRO Eq.2通过mu0*pi_current/pi0归一化构造当前执行策略预测；当learner不动时恢复mu0。RSC固定behavior中心并用reverse-KL限制漂移，EPRO中心随transport演进，再由Policy Shift衰减outward贡献。预测误差上界的理论假设不由一个低Policy Shift自动保证；附B单tail bucket还会隐藏尾部内部变化。CPU有限差分必须固定importance与SSC系数，否则检验的是另一条梯度。full/head-tail梯度差是公开的近似边界，不是要求消掉的失败。
+
+对照来源：[epro](../../../post-training/2611.32810-epro/README.md) · [regularized-score-centering](../../../post-training/2611.21791-regularized-score-centering/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -270,9 +277,23 @@ DFRL改变奖励来自何种下游决策成本，RLOO消去同一实例共有常
 
     对照来源：[retokenization-update](../../../post-training/2611.27083-retokenization-update/README.md) · [dfrl](../../../post-training/2611.25597-dfrl/README.md)
 
+### EPRO和RSC都做score centering，为何仍要区分固定behavior与transport分布？ {#cross-nov25-epro-centering}
+
+??? note "展开答案与例子"
+
+    **答案：** learner多次更新后，旧执行behavior不变，而transport分布借训练变化移动。两种中心对同一score的期望可不同；再加RSC的reverse-KL与EPRO的SSC并非等价约束。
+
+    **教学例子：** 教学例：训练与执行旧锚点有偏差时，零learner变化必须恢复旧执行锚点；后续改变训练概率时移动中心，而不是只把reward减去组均值。
+
+    对照来源：[epro](../../../post-training/2611.32810-epro/README.md) · [regularized-score-centering](../../../post-training/2611.21791-regularized-score-centering/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-25** · 实际重读RSC当前README并对照EPRO固定v1 Eq.2/8/10–12与附B，新增固定behavior中心和transport预测中心的区别，保留STE/预测误差假设、冻结乘数和tail粗粒化边界。两者本地组件不能构成同预算能力比较；EPRO完整四模型RL高成本不复现，审查DONE。
+
+涉及：[epro](../../../post-training/2611.32810-epro/README.md) · [regularized-score-centering](../../../post-training/2611.21791-regularized-score-centering/README.md)
 
 **2026-11-23** · DFRL改变奖励来自何种下游决策成本，RLOO消去同一实例共有常数；本篇固定奖励和优势，检查编码怎样改变score-gradient。baseline消去共同regret常数并不使不同token路径的Jacobian相同；不能把reward不变误写成更新不变。 L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU、无CUDA路径，不作为Evolve晋级证据。 完整实验成本过高不复现，审查DONE。
 
@@ -326,7 +347,7 @@ DFRL改变奖励来自何种下游决策成本，RLOO消去同一实例共有常
 
 覆盖 54 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 66 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 67 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -396,6 +417,7 @@ DFRL改变奖励来自何种下游决策成本，RLOO消去同一实例共有常
 - [Beyond Replacement: Levenshtein Editing for Diffusion Language Models](../../../post-training/2611.23750-led-edits/README.md)
 - [Decision-Focused Reinforcement Learning for LLM Post-Training](../../../post-training/2611.25597-dfrl/README.md)
 - [How Far Does Lossless Re-tokenization Move an RLVR Update?](../../../post-training/2611.27083-retokenization-update/README.md)
+- [EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor](../../../post-training/2611.32810-epro/README.md)
 
 </details>
 

@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 328 个问题 · 82 篇论文
+[Agent](index.md) / 332 个问题 · 83 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">328 个问题 · 82 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">332 个问题 · 83 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:recurscibench" data-paper-title="RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research Agent Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences 2026-11-24 任务内涨分不等于获得可迁移的科研能力。RecurSciPipe从原始科学数据生成共享背景的建模F/分析A任务，先查合同、信息隔离、可执行、scorer行为，再查目标、输入和评价的科学有效性；设计错回Designer，实施错回Builder，两任务全过才准入。58 families分成38个G-evolve F/A配对和20个独立G-test F，共96任务、四科学域。四种RSI各在六种source设置演化，共24个冻结evolved states； 成本过高，不复现（审查 DONE）。deferred_high_cost / review-only资料收录，未实现、未运行；deferred_high_cost / review-only资料收录，未实现、未运行；成本过高，不复现（审查 DONE）。首发2026-11-24，发现/审查2026-11-25；封面November25不是arXiv首发日。本地仅审查固定v1、F/A来源与隔离契约、冻结评估协议、成本及同主题差异。没有运行GLM、RSI系统、科学任务构建、scorer、参考解、模型训练或benchmark；仅重写归一化公式不构成本论文复现。  Harness与自改进 review-only Agent 运行流程与自进化：改的是哪一层 源科学任务上进步，为什么还不能证明经验有用？ 记忆或harness可能只适合源条件。RecurSciBench冻结从G-evolve选择的状态，再以独立副本在G-test比较初始与演化状态，不携带测试任务间经验，以区分迁移和源任务适配。 教学例：化学曲线中的简单模型经验可能帮外推物理曲线，却伤害需要多协变量的叶绿素任务。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-recurscibench-8ea36755" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-32b34123b90d3ac2">源科学任务上进步，为什么还不能证明经验有用？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arecurscibench">RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>记忆或harness可能只适合源条件。RecurSciBench冻结从G-evolve选择的状态，再以独立副本在G-test比较初始与演化状态，不携带测试任务间经验，以区分迁移和源任务适配。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：化学曲线中的简单模型经验可能帮外推物理曲线，却伤害需要多协变量的叶绿素任务。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32508v1">原论文</a> · <a href="../../../../agent-research/2611.32508-recurscibench/">实现解读</a> · <a href="#qa-32b34123b90d3ac2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:recurscibench" data-paper-title="RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research Agent Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences 2026-11-24 任务内涨分不等于获得可迁移的科研能力。RecurSciPipe从原始科学数据生成共享背景的建模F/分析A任务，先查合同、信息隔离、可执行、scorer行为，再查目标、输入和评价的科学有效性；设计错回Designer，实施错回Builder，两任务全过才准入。58 families分成38个G-evolve F/A配对和20个独立G-test F，共96任务、四科学域。四种RSI各在六种source设置演化，共24个冻结evolved states； 成本过高，不复现（审查 DONE）。deferred_high_cost / review-only资料收录，未实现、未运行；deferred_high_cost / review-only资料收录，未实现、未运行；成本过高，不复现（审查 DONE）。首发2026-11-24，发现/审查2026-11-25；封面November25不是arXiv首发日。本地仅审查固定v1、F/A来源与隔离契约、冻结评估协议、成本及同主题差异。没有运行GLM、RSI系统、科学任务构建、scorer、参考解、模型训练或benchmark；仅重写归一化公式不构成本论文复现。  Harness与自改进 review-only Agent 运行流程与自进化：改的是哪一层 Evolution Gain能直接用总分相对变化替代吗？ 不能。先用reference到optimum的gap归一化每run，再任务内平均，最后对各任务相对变化等权平均。小基线任务与大基线任务的相对变化不能由总分差保留。 教学例：两任务从0.2/0.8到0.3/0.8，平均任务相对gain为25%，但总平均分从0.5到0.55只涨10%。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-16d2d0437edfb763">Evolution Gain能直接用总分相对变化替代吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arecurscibench">RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。先用reference到optimum的gap归一化每run，再任务内平均，最后对各任务相对变化等权平均。小基线任务与大基线任务的相对变化不能由总分差保留。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两任务从0.2/0.8到0.3/0.8，平均任务相对gain为25%，但总平均分从0.5到0.55只涨10%。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32508v1">原论文</a> · <a href="../../../../agent-research/2611.32508-recurscibench/">实现解读</a> · <a href="#qa-16d2d0437edfb763">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:recurscibench" data-paper-title="RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research Agent Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences 2026-11-24 任务内涨分不等于获得可迁移的科研能力。RecurSciPipe从原始科学数据生成共享背景的建模F/分析A任务，先查合同、信息隔离、可执行、scorer行为，再查目标、输入和评价的科学有效性；设计错回Designer，实施错回Builder，两任务全过才准入。58 families分成38个G-evolve F/A配对和20个独立G-test F，共96任务、四科学域。四种RSI各在六种source设置演化，共24个冻结evolved states； 成本过高，不复现（审查 DONE）。deferred_high_cost / review-only资料收录，未实现、未运行；deferred_high_cost / review-only资料收录，未实现、未运行；成本过高，不复现（审查 DONE）。首发2026-11-24，发现/审查2026-11-25；封面November25不是arXiv首发日。本地仅审查固定v1、F/A来源与隔离契约、冻结评估协议、成本及同主题差异。没有运行GLM、RSI系统、科学任务构建、scorer、参考解、模型训练或benchmark；仅重写归一化公式不构成本论文复现。  Harness与自改进 review-only Agent 运行流程与自进化：改的是哪一层 与CoEvoBench相比，这里递归自改进的可变对象相同吗？ 不同。RecurSciBench四系统冻结backbone权重，分别改变解、记忆、harness或改进策略，测跨任务迁移；CoEvoBench允许researcher选择训练权重或修改harness，并审计开发/选择/Test访问。 教学例：把在源任务学到的验证切分规则迁往新科学域，是经验迁移；根据反馈决定训9B权重还是改工具，是另一种干预选择。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-8f23367a88df0ff2">与CoEvoBench相比，这里递归自改进的可变对象相同吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arecurscibench">RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同。RecurSciBench四系统冻结backbone权重，分别改变解、记忆、harness或改进策略，测跨任务迁移；CoEvoBench允许researcher选择训练权重或修改harness，并审计开发/选择/Test访问。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把在源任务学到的验证切分规则迁往新科学域，是经验迁移；根据反馈决定训9B权重还是改工具，是另一种干预选择。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32508v1">原论文</a> · <a href="../../../../agent-research/2611.32508-recurscibench/">实现解读</a> · <a href="#qa-8f23367a88df0ff2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:recurscibench" data-paper-title="RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research Agent Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences 2026-11-24 任务内涨分不等于获得可迁移的科研能力。RecurSciPipe从原始科学数据生成共享背景的建模F/分析A任务，先查合同、信息隔离、可执行、scorer行为，再查目标、输入和评价的科学有效性；设计错回Designer，实施错回Builder，两任务全过才准入。58 families分成38个G-evolve F/A配对和20个独立G-test F，共96任务、四科学域。四种RSI各在六种source设置演化，共24个冻结evolved states； 成本过高，不复现（审查 DONE）。deferred_high_cost / review-only资料收录，未实现、未运行；deferred_high_cost / review-only资料收录，未实现、未运行；成本过高，不复现（审查 DONE）。首发2026-11-24，发现/审查2026-11-25；封面November25不是arXiv首发日。本地仅审查固定v1、F/A来源与隔离契约、冻结评估协议、成本及同主题差异。没有运行GLM、RSI系统、科学任务构建、scorer、参考解、模型训练或benchmark；仅重写归一化公式不构成本论文复现。  Harness与自改进 review-only Agent 运行流程与自进化：改的是哪一层 只实现归一化公式，或把参考解交给Agent，能算低成本复现吗？ 都不能。核心还包含科学任务构建/七项检查、source演化、冻结状态及独立G-test执行。scorer/reference必须在评估侧；被测Agent不能读gold。完整A800/6小时上限多域矩阵已按成本门槛终态不复现。 教学例：让脚本读reference后输出0.5只验证算术；既没自主科研，也破坏若把reference用于policy的评测边界。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-ec0f4164e137d056">只实现归一化公式，或把参考解交给Agent，能算低成本复现吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arecurscibench">RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>都不能。核心还包含科学任务构建/七项检查、source演化、冻结状态及独立G-test执行。scorer/reference必须在评估侧；被测Agent不能读gold。完整A800/6小时上限多域矩阵已按成本门槛终态不复现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：让脚本读reference后输出0.5只验证算术；既没自主科研，也破坏若把reference用于policy的评测边界。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32508v1">原论文</a> · <a href="../../../../agent-research/2611.32508-recurscibench/">实现解读</a> · <a href="#qa-ec0f4164e137d056">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:morse" data-paper-title="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research Agent Carnegie Mellon University 2026-11-23 流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。核心是研究—实现—验证的自主Editor与可扩展服务，不是固定候选列表或门控公式本身。20轮accuracy后5轮efficiency。 成本过高，不复现（审查 DONE）；deferred_high_cost / 仅资料收录，未实现、未运行。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。仅资料收录与成本审查：固定v1、来源/元数据、访问边界、成本和同主题比较。没有本地算法模块、Editor、研究broker、视频服务、harness代码演化、benchmark、GPU试跑或Evolve operator。不能实现几个gate后称已复现MORSE，也不需要给review-only制造三seed指标或GPU receipt。  执行框架与自改进 系统成本审查 Agent 运行流程与自进化：改的是哪一层 MORSE比已有闭环harness自改进多了什么？ Editor不仅靠已有知识想修复，还从反复失败出发在线查论文/模型/code，并能请求host批准的新感知能力；核心不是多写一个反思提示。 教学例：短暂手物交互反复漏记，Editor查到动作分类模型后请求服务，再改记忆的写入和读取方式。 2026-11-24">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-morse-460f33ed" class="ar-learning-paper-anchor"></span>

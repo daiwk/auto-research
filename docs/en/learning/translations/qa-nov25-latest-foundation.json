@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:udvr/buffer-not-learned-gain": {
+      "source_sha256": "7e4be6d2b122c082a72ea25b4ef80f9b74b314a3b59541cec9d7ef31714d1d59",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can D change without being optimized?",
+        "answer": "Rebalancing transfers removed U/V scales into D after each factor update. D follows the trajectory without an independent gradient or learning rate.",
+        "example": "Illustration: doubling a U-column norm transfers a factor2 into its attention D entry when repinned, without adding D to Adam."
+      }
+    },
+    "qa/foundation-models:udvr/two-branch-scale-transfer": {
+      "source_sha256": "a73714fbadee9277d1d94ee97cd035a707d0e5a8f2e266c215cf5c40dc034a52",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not use attention's D=SDR update in the paper's FFN?",
+        "answer": "The activation leads the paper to transfer only U scale into D while projecting V and discarding its scale. The FFN regularizer has factor2 to restore shrinkage reaching D. Two-sided product invariance is an attention property.",
+        "example": "Illustration: holding UD fixed and dividing V by2 halves GELU(xUD)V, so a function-invariance assertion would be wrong."
+      }
+    },
+    "qa/foundation-models:udvr/length-not-stiefel": {
+      "source_sha256": "5c8974ca7b84e924c16f42041cc5da9470a9bd76a281bdd3a96b6a312fa9ed7b",
+      "reviewed": true,
+      "fields": {
+        "question": "Do UDVR and ProLand impose the same factor constraint?",
+        "answer": "No. UDVR fixes individual lengths while allowing correlated directions. ProLand combines B orthogonality with product-space spectral updates. Their geometry and update ordering are not interchangeable.",
+        "example": "Illustration: identical columns with the target norm can satisfy UDVR but not B-transpose-B=I."
+      }
+    },
+    "qa/foundation-models:udvr/post-step-real-buffer": {
+      "source_sha256": "e82c0a617ad7b5b20138c3079eed18d4149dd6c8ca72f40da62dd1b94ec926d6",
+      "reviewed": true,
+      "fields": {
+        "question": "How do we check rebalancing beyond initialization?",
+        "answer": "Backpropagate a real loss, update U/V, rebalance each step and check direction norms. Also verify D is not a parameter, attention-product invariance and rejection of zero directions. Initial shapes alone are insufficient.",
+        "example": "Illustration: check every direction after four Adam updates; a zero column must fail instead of receiving an undeclared epsilon direction."
+      }
+    },
+    "qa/foundation-models:thresholded-longce/benefit-not-importance-oracle": {
+      "source_sha256": "ebd61262849108e73368dda595478d8d1d92e6ef547e8168fad9f656c0dc7812",
+      "reviewed": true,
+      "fields": {
+        "question": "Does TLCE find every token that should use distant context?",
+        "answer": "No. Weighting depends on the current model already assigning substantially higher probability with full context. A theoretically useful but unused cue receives no extra weight.",
+        "example": "Illustration: if both probabilities are0.1 despite a distant answer, the difference is0 and the weight remains1."
+      }
+    },
+    "qa/foundation-models:thresholded-longce/strict-and-offset-boundaries": {
+      "source_sha256": "4674818b88967b0aad991d20403061a6f0f004dbf9c9cd2206899d9a44eb3821",
+      "reviewed": true,
+      "fields": {
+        "question": "Do delta=1 or window offset127 receive extra weight?",
+        "answer": "No. Delta must be strictly above1 and offset at least128. Eligible exponentiated differences are capped at5 and normalized over valid targets' total weight.",
+        "example": "Illustration: deltas1/2/2 at offsets128/127/128 receive1/1/5, not1/e-squared/e-squared."
+      }
+    },
+    "qa/foundation-models:thresholded-longce/supervision-versus-readout": {
+      "source_sha256": "fef1847ec5aa993cefafd287515d3308f58213a4546e6661fe25f6a592463255",
+      "reviewed": true,
+      "fields": {
+        "question": "Can TLCE replace MERLIN's multi-state routing?",
+        "answer": "No. TLCE reallocates loss without changing memory structure; MERLIN changes segment-state readout. Missing information and unlearned use of available information are different bottlenecks.",
+        "example": "Illustration: weighting a later token cannot guarantee recovery after two histories become indistinguishable in one state; preserving multiple states changes what can be read."
+      }
+    },
+    "qa/foundation-models:thresholded-longce/reset-and-detach": {
+      "source_sha256": "2422965e517e35e575350d1fadbecbc6547cd07d62abae457c1cd202019fd895",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are two arbitrary log-probability arrays insufficient to verify the short-window protocol?",
+        "answer": "The weighting formula cannot prove that short scores came from reset causal windows. Run actual chunked no-grad forwards, check reset boundaries and confirm the full gradient is only the negative normalized weight.",
+        "example": "Illustration: for650tokens, call the model again at512; its short score there must match an independent first position without the preceding GRU state."
+      }
+    },
+    "qa/foundation-models:criticjepa/ranking-is-not-gradient-quality": {
+      "source_sha256": "73d3988dc3f921fd0758c0a914732fa807aed1a701196637196b23d2054f7016",
+      "reviewed": true,
+      "fields": {
+        "question": "Does ranking two plans imply gradients can keep improving actions?",
+        "answer": "No. Ranking needs informative relative scores; optimization needs local gradient moves to improve real execution. Prolonged search may exploit prediction error.",
+        "example": "Illustration: a model may rank a safe detour above a collision yet have gradients near that detour pointing toward a wall. This is a teaching example, not a measured trajectory."
+      }
+    },
+    "qa/foundation-models:criticjepa/anchor-not-final-score": {
+      "source_sha256": "5129bb0fa07e91b7a9514731bb5fb24d71ba5ebbb42a419b0ff9830875b07550",
+      "reviewed": true,
+      "fields": {
+        "question": "Why remove the anchor from the final selection score?",
+        "answer": "The anchor limits local departure from each proposal during polish. Final selection compares rollout objective costs rather than rewarding proximity to a starting proposal.",
+        "example": "Illustration: if A has rollout cost1 after moving0.5 and unchanged B has cost2, final selection chooses A without letting an anchor reverse the ranking."
+      }
+    },
+    "qa/foundation-models:criticjepa/prediction-planning-and-candidate-source": {
+      "source_sha256": "d81475bb597cc9472528d001248cc30d1546b34ecdb7e1eb4e4482033ac3b58d",
+      "reviewed": true,
+      "fields": {
+        "question": "What distinction does CriticJEPA add to prediction-planning evaluation?",
+        "answer": "It changes candidate sources and search under a frozen model to separate ranking, useful gradients and execution. The evaluation protocol instead decomposes representation/prediction errors with a frozen decoder and separately requires real planning outcomes.",
+        "example": "Illustration: an unchanged one-step-error model may rank flow proposals usefully but not out-of-distribution prolonged-search outputs; one-step loss alone cannot select the planner."
+      }
+    },
+    "qa/foundation-models:criticjepa/no-fixture-for-proposer": {
+      "source_sha256": "01451b2fda040e0f27043039758f185e0a4c6984f981b7be92e6250cc853f8cd",
+      "reviewed": true,
+      "fields": {
+        "question": "Do hand-written good actions count as a low-cost CriticJEPA reproduction?",
+        "answer": "No. Trained conditional flows, generation and cross-level target/time contracts define the candidate distribution. Fixed candidates can diagnose an interface, not proposal capability; full experiments are terminally cost-deferred.",
+        "example": "Illustration: inserting a goal-reaching action by hand only proves the list contains an answer. No such executable operator or control-success metric is provided locally."
+      }
+    }
+  }
+}

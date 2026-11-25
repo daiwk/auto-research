@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-25",
+  "scope": "Agent-Kernel and CAPE finite CPU components; RecurSciBench review-only",
+  "commands": [
+    {
+      "command": "PYTHONPATH=src:scripts ../../.venv/bin/python -m pytest tests/test_nov25_agent_components.py tests/test_nov25_agent_documentation.py -q",
+      "exit_code": 0,
+      "tests": 51
+    },
+    {
+      "command": "../../.venv/bin/ruff check src/auto_research/agent_research/agent_kernel.py src/auto_research/agent_research/cape.py tests/test_nov25_agent_components.py tests/test_nov25_agent_documentation.py",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "source_sha256": {
+    "src/auto_research/agent_research/agent_kernel.py": "2dd61383e4a745aa07d088b623ed25209db098af216a8d3e170a27f8b5f7d4aa",
+    "src/auto_research/agent_research/cape.py": "ca75ec0a91f5b2cd58e1b6a6f111ed0377fca790296491dc0171948f0df71422"
+  },
+  "retained_negative_results": [
+    "The four-configuration CAPE diagnostic acquires all 20 effect cells; it shows no calibration saving and does not reproduce the paper's 22% speedup.",
+    "An external mutation followed by an exception is repeated on retry, explicitly demonstrating no exactly-once external-effect guarantee.",
+    "Initial self-authored tests incorrectly required fewer-than-full-table acquisition for every action order and assumed a final root-optimal policy must leave the probe's h3 effect unknown. Three tests failed. Global optimality can require the complete probe row. The tests now check unique bounded acquisition, independent optimum/bounds and explicit local closure on V without outside effects; no pre-existing assertion was changed."
+  ],
+  "not_run": [
+    "LLM or paid API calls",
+    "Native CSV/JSON benchmark or paper timing campaign",
+    "Real tool services or agent capability benchmark",
+    "GPU experiments",
+    "RecurSciBench scientific task generation/evolution/evaluation"
+  ],
+  "integration_gates_owned_by_root": [
+    "Shared catalog/manifest/learning integration",
+    "Unified source-frozen three-seed metric files",
+    "Full applicable quality/docs CI gates"
+  ],
+  "cleanup": {
+    "scope": ".cache/nov25-latest/agent-previews only; four self-generated PDF-page previews",
+    "reclaimed_allocated_kib": 976,
+    "preserved": "Fixed-v1 PDFs/metadata captures, final original-figure crops, source code, authored bundles and test results",
+    "available_disk_before_cleanup_gib_rounded": 16
+  }
+}

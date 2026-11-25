@@ -7,7 +7,7 @@ hide:
 
 # 训练预算：数据配比、目标与优化器
 
-[基础模型](index.md) / 152 个问题 · 38 篇论文
+[基础模型](index.md) / 156 个问题 · 39 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">152 个问题 · 38 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">156 个问题 · 39 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:udvr" data-paper-title="Weight Scale Rebalancing: Transferable Training Recipes for Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Weight Scale Rebalancing: Transferable Training Recipes for Transformers 基础模型 Umeå University 2026-11-24 同一个双线性映射可由许多不同尺度的矩阵因子表示，但优化器对这些表示并不等价。UDVR 在 attention 的 QK、VO 和 FFN 自然配对矩阵之间加对角 buffer，每步更新后固定的列范数和的行范数，并把尺度移入。不接受优化器更新；它不是 Weight Normalization 的独立可学习幅值。 成本过高，不复现（审查 DONE）。rebalance 精确执行两种分支，UDVPair 用真实 autograd、Adam 和非优化 buffer，learning_rates 执行 Eq4。仅 CPU FP32/FP64 有限小张量；零范数、非法 shape／常数及非 CPU 输入失败。没有矩阵安装到 Transformer、完整 QK/VO 多头结构、SwiGLU 改造或原文数据训练。调用者必须在每个优化器 step 后显式调用 rebalance_()。  预训练与数据 权重重参数化与尺度转移 基础模型 训练预算：数据配比、目标与优化器 D不参与优化，为什么仍能改变？ 每步U/V更新后，重平衡把被移除的方向尺度乘进D。它随更新轨迹变化，但没有独立梯度或学习率。 教学例：U某列的范数翻倍，归一回原长度时attention对应D元素吸收这个2；D不需要出现在Adam参数表。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<span id="paper-foundation-models-udvr-c253b283" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-45fb4b96219a213a">D不参与优化，为什么仍能改变？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Audvr">Weight Scale Rebalancing: Transferable Training Recipes for Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Umeå University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>每步U/V更新后，重平衡把被移除的方向尺度乘进D。它随更新轨迹变化，但没有独立梯度或学习率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：U某列的范数翻倍，归一回原长度时attention对应D元素吸收这个2；D不需要出现在Adam参数表。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32866v1">原论文</a> · <a href="../../../../foundation-models/2611.32866-udvr/">实现解读</a> · <a href="#qa-45fb4b96219a213a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:udvr" data-paper-title="Weight Scale Rebalancing: Transferable Training Recipes for Transformers" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Weight Scale Rebalancing: Transferable Training Recipes for Transformers 基础模型 Umeå University 2026-11-24 同一个双线性映射可由许多不同尺度的矩阵因子表示，但优化器对这些表示并不等价。UDVR 在 attention 的 QK、VO 和 FFN 自然配对矩阵之间加对角 buffer，每步更新后固定的列范数和的行范数，并把尺度移入。不接受优化器更新；它不是 Weight Normalization 的独立可学习幅值。 成本过高，不复现（审查 DONE）。rebalance 精确执行两种分支，UDVPair 用真实 autograd、Adam 和非优化 buffer，learning_rates 执行 Eq4。仅 CPU FP32/FP64 有限小张量；零范数、非法 shape／常数及非 CPU 输入失败。没有矩阵安装到 Transformer、完整 QK/VO 多头结构、SwiGLU 改造或原文数据训练。调用者必须在每个优化器 step 后显式调用 rebalance_()。  预训练与数据 权重重参数化与尺度转移 基础模型 训练预算：数据配比、目标与优化器 为什么不能把attention的D=SDR直接用于原文FFN？ FFN有激活，原文只将U尺度移入D，V仍投影但其尺度被丢弃；同时用系数2的FFN正则补足传入D的收缩。双侧守恒只属于attention分支。 教学例：保持UD不变却将V除以2，GELU(xUD)V输出减半；把它断言为原函数不变会误判。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-d96c7a49723981af">为什么不能把attention的D=SDR直接用于原文FFN？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Audvr">Weight Scale Rebalancing: Transferable Training Recipes for Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Umeå University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>FFN有激活，原文只将U尺度移入D，V仍投影但其尺度被丢弃；同时用系数2的FFN正则补足传入D的收缩。双侧守恒只属于attention分支。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：保持UD不变却将V除以2，GELU(xUD)V输出减半；把它断言为原函数不变会误判。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32866v1">原论文</a> · <a href="../../../../foundation-models/2611.32866-udvr/">实现解读</a> · <a href="#qa-d96c7a49723981af">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:udvr" data-paper-title="Weight Scale Rebalancing: Transferable Training Recipes for Transformers" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Weight Scale Rebalancing: Transferable Training Recipes for Transformers 基础模型 Umeå University 2026-11-24 同一个双线性映射可由许多不同尺度的矩阵因子表示，但优化器对这些表示并不等价。UDVR 在 attention 的 QK、VO 和 FFN 自然配对矩阵之间加对角 buffer，每步更新后固定的列范数和的行范数，并把尺度移入。不接受优化器更新；它不是 Weight Normalization 的独立可学习幅值。 成本过高，不复现（审查 DONE）。rebalance 精确执行两种分支，UDVPair 用真实 autograd、Adam 和非优化 buffer，learning_rates 执行 Eq4。仅 CPU FP32/FP64 有限小张量；零范数、非法 shape／常数及非 CPU 输入失败。没有矩阵安装到 Transformer、完整 QK/VO 多头结构、SwiGLU 改造或原文数据训练。调用者必须在每个优化器 step 后显式调用 rebalance_()。  预训练与数据 权重重参数化与尺度转移 基础模型 训练预算：数据配比、目标与优化器 UDVR和ProLand都约束因子，约束相同吗？ 不相同。UDVR逐列/行固定长度而允许方向相关；ProLand围绕B的正交性与乘积空间谱更新。二者的几何和优化顺序不能互换。 教学例：两列完全一样但范数都为目标值可满足UDVR，却不满足B转置B=I。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-f5db78c91f298208">UDVR和ProLand都约束因子，约束相同吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Audvr">Weight Scale Rebalancing: Transferable Training Recipes for Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Umeå University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不相同。UDVR逐列/行固定长度而允许方向相关；ProLand围绕B的正交性与乘积空间谱更新。二者的几何和优化顺序不能互换。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两列完全一样但范数都为目标值可满足UDVR，却不满足B转置B=I。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32866v1">原论文</a> · <a href="../../../../foundation-models/2611.32866-udvr/">实现解读</a> · <a href="#qa-f5db78c91f298208">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:udvr" data-paper-title="Weight Scale Rebalancing: Transferable Training Recipes for Transformers" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Weight Scale Rebalancing: Transferable Training Recipes for Transformers 基础模型 Umeå University 2026-11-24 同一个双线性映射可由许多不同尺度的矩阵因子表示，但优化器对这些表示并不等价。UDVR 在 attention 的 QK、VO 和 FFN 自然配对矩阵之间加对角 buffer，每步更新后固定的列范数和的行范数，并把尺度移入。不接受优化器更新；它不是 Weight Normalization 的独立可学习幅值。 成本过高，不复现（审查 DONE）。rebalance 精确执行两种分支，UDVPair 用真实 autograd、Adam 和非优化 buffer，learning_rates 执行 Eq4。仅 CPU FP32/FP64 有限小张量；零范数、非法 shape／常数及非 CPU 输入失败。没有矩阵安装到 Transformer、完整 QK/VO 多头结构、SwiGLU 改造或原文数据训练。调用者必须在每个优化器 step 后显式调用 rebalance_()。  预训练与数据 权重重参数化与尺度转移 基础模型 训练预算：数据配比、目标与优化器 怎样验收重平衡不是只在初始化执行？ 用真实损失反传并更新U/V，逐步调用重平衡后核对方向范数；另查D不在参数表、attention乘积守恒及零方向拒绝。只测初始化shape不够。 教学例：跑4次Adam，每次更新后检查所有方向长度；对零列应报错，而不是加未声明epsilon伪造方向。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-67d35e0e53fc675d">怎样验收重平衡不是只在初始化执行？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Audvr">Weight Scale Rebalancing: Transferable Training Recipes for Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Umeå University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>用真实损失反传并更新U/V，逐步调用重平衡后核对方向范数；另查D不在参数表、attention乘积守恒及零方向拒绝。只测初始化shape不够。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：跑4次Adam，每次更新后检查所有方向长度；对零列应报错，而不是加未声明epsilon伪造方向。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32866v1">原论文</a> · <a href="../../../../foundation-models/2611.32866-udvr/">实现解读</a> · <a href="#qa-67d35e0e53fc675d">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stablekl" data-paper-title="The KL Divergence Is Never Negative, Except in PyTorch" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="The KL Divergence Is Never Negative, Except in PyTorch 基础模型 Yale University 2026-11-23 近等分布的真实KL是二阶小量，但教科书公式往往由一阶或常数量相减得到，容易返回零、负数或错误梯度。StableKL把闭式KL重写成非负小量的组合，配合差值、补偿算术和解析梯度；它还区分F.kl_div算子误差与输入log-prob本身已丢失的信息。本地只选择其中Exponential族的Rewrite核。 完整实验成本过高，不复现（审查 DONE）；L1组件，diagnostic only，不是完整论文或模型能力复现。完整实验成本过高，不复现（审查 DONE）；不接Evolve晋级。仅FP32 CPU、形状匹配的正rate输入，17项φ级数、远区间分支及一阶解析autograd。对非有限/非正参数、dtype/形状/设备不符、ratio溢出/下溢和非有限结果直接拒绝，不冒充极端范围mantissa/exponent处理。独立80位Decimal参考以实际FP32存储值为输入，校验近等、区间边界、远区间、梯度和精确恒等；它不是区间认证。  训练与数值可靠性 近等分布KL稳定重写 基础模型 训练预算：数据配比、目标与优化器 KL结果非负就说明计算正确吗？ 不是。消去可以把真实正KL变成0，也会产生正但偏差很大的值。clamp只去掉负号，不能恢复被舍掉的二阶量或梯度。 教学例：rate_p=1、FP32 rate_q=1.0001时，朴素公式可为0，而存储输入的KL约5×10⁻9。 2026-11-24">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
 <span id="paper-foundation-models-stablekl-203bc05b" class="ar-learning-paper-anchor"></span>

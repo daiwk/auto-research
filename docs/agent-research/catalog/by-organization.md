@@ -42,6 +42,10 @@
 
 - 2026-10-15 · 一作：Wenxuan Ding · [Harness-Delta Attribution: Dissecting Gains From Harness Evolution](../2610.22466-harness-decomposition/README.md)（`harness-decomposition`）：同一个冻结模型的 Harness 可以靠更多推理算力，也可以靠基准捷径涨分。甚至 held-out 数据也可能共享相同捷径。
 
+## Amazon, AGI / Sunnyvale, USA
+
+- 2026-11-24 · 一作：Ankit Chadha · [fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration](../2611.31727-agent-kernel/README.md)（`agent-kernel`）：SGR（Sub-Graph Recovery）不是新发明依赖恢复：它把已知的子图选择性重试放入LLM内容编排层。异常先令下游不可达，独立兄弟仍可完成；重试只复位失败节点及其不可达后代。
+
 ## Apodex / University of Illinois Urbana-Champaign
 
 - 2026-09-29 · 一作：Cheng Qian · [Learning Meta-Skills for Agent Harness Design in Test-Time AI4AI](../2609.38143-meta-skills/README.md)（`meta-skills`）：从开发任务的 harness 执行反馈中提炼包含 when、provide、use 的 meta-skill，再冻结技能库；测试任务只检索相关 meta-skill 来构建新 harness，不用测试结果反向修改技能库。
@@ -147,6 +151,10 @@
 ## Cribl AI
 
 - 2026-10-08 · 一作：Babak Barazandeh · [OnTrack: Real-Time Monitoring and Intervention in LLM Agent Trajectories via Streaming Structure-Aware Optimal Transport](../2610.12375-ontrack/README.md)（`ontrack`）：Agent 最终失败时，单个答案分数解释不了中间发生了什么。OnTrack 把事件组织成带依赖边的图，将当前执行前缀和成功参考轨迹作非平衡结构化对齐；无参考时则明确退化为循环、重试和信息停滞检测。
+
+## Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences
+
+- 2026-11-24 · 一作：Wenxi Xu · [RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research](../2611.32508-recurscibench/README.md)（`recurscibench`）：任务内涨分不等于获得可迁移的科研能力。RecurSciPipe从原始科学数据生成共享背景的建模F/分析A任务，先查合同、信息隔离、可执行、scorer行为，再查目标、输入和评价的科学有效性；设计错回Designer，实施错回Builder，两任务全过才准入。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ## Datagrids.ai
 
@@ -663,6 +671,10 @@
 - 2026-10-15 · 一作：Anikait Singh / Teresa Zhang / Yoonho Lee（共同一作） · [Librarian Agents: Training LLMs to Curate Long-Context Workspaces that Anticipate Future Queries](../2610.22273-librarian-agents/README.md)（`librarian-agents`）：常规 RAG 每次查询后才检索，重复探索跨文档关系。Librarian 在还未看到评测问题时，由可学习 builder 把原始语料组织成可复用层级文件系统；固定 answerer 后续导航，必要时沿 provenance 回退到 raw docs。
 - 2026-10-02 · 一作：Changxiu Ji · [Sentry: Learning to Recover from LLM Agent Failures at Test Time](../2610.02994-sentry/README.md)（`sentry`）：Sentry 不把所有失败经验长期塞进 Agent 上下文，而是先识别当前行为失败，再按类别和标签检索相关恢复建议。外部验证器只看后续可观察进展、不看任务奖励，确认恢复后才把经验写入 playbook；动作格式错误走单独的硬修复路径。
 - 2023-04-07 · 一作：Joon Sung Park · [Generative Agents](../2304.03442-generative-agents/README.md)（`generative-agents`）：只把完整历史塞给 LLM 无法支撑长期一致行为。论文把每次观察写入 memory stream，按 recency、importance、relevance 检索；累计重要事件达到阈值后生成更高层 reflection，再结合记忆与当前状态制定日程和行动计划。
+
+## State Key Laboratory of Electrical Insulation and Power Equipment, Xi’an Jiaotong University
+
+- 2026-11-24 · 一作：Jiahao Wang · [CAPE: Coordinating Calibration and Search for Tool-Use Policies](../2611.31938-cape/README.md)（`cape`）：操作本身正确，序列化仍可能被隐藏parser配置误读。CAPE离线在可复制的候选配置族H上校准调用，编译一个部署时只按响应分支的策略。
 
 ## State University of Campinas
 

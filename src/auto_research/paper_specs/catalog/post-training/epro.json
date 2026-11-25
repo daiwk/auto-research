@@ -1,0 +1,68 @@
+{
+  "domain": "post-training",
+  "key": "epro",
+  "title": "EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor",
+  "paper_url": "https://arxiv.org/abs/2611.32810v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.32810v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.32810-epro/README.md",
+  "first_author": "Yibo Wang",
+  "first_author_affiliation": "Northwestern University",
+  "author_organizations": [
+    "Northwestern University",
+    "Carnegie Mellon University"
+  ],
+  "verified_priority_organizations": [],
+  "published": "2026-11-24",
+  "published_at": "2026-11-24T15:29:28Z",
+  "updated_at": "2026-11-24T15:29:28Z",
+  "discovered_on": "2026-11-25",
+  "reviewed_on": "2026-11-25",
+  "announced_on": null,
+  "code": "https://github.com/yibowangnwu/EPRO",
+  "code_status": "固定v1声称此作者仓库，但本轮git ls-remote返回Repository not found；公开方法源码未核实/未找到，不标记已开源。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "policy-optimization",
+    "CPU机制组件"
+  ],
+  "priority": "P1",
+  "intake_class": "nov24_first_publication_discovered_nov25",
+  "implementation_status": "component_only",
+  "component_implemented": true,
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "summary": "从rollout时执行分布与训练分布差异出发，按训练分布变化transport执行策略，使用随transport分布变化的score centering；Policy Shift用old-training下log-ratio方差度量分布移动，SSC仅衰减outward更新。",
+  "fidelity_note": "纯CPU执行固定v1 Eq.2/8/10-12与附B head-tail近似：full-vocabulary transport、stop-gradient重要性系数/SSC、解析logit梯度、top-K+tail近似及独立有限差分。无LLM、推理引擎、quantization replay或RL训练；不是能力复现。",
+  "local_operator": "auto_research.post_training.epro.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.epro import diagnostic; print(diagnostic(42))'",
+  "method_source_sha256": "f0504a615d1aa415412f4aa58fd971d0fef589a4dd3795f3738451e68915d699",
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.32810v1",
+    "source_sections": [
+      "Section5",
+      "AppendixF/Table2"
+    ],
+    "basis": "完整实验含Qwen3-1.7B/4B/8B/30B-A3B、300–450轮，每轮128或256prompt×8response、4096最大response token，BF16训练与NVFP4/FP8执行路径；另七数学benchmark多采样及四种baseline。配置上限不是实测用量；完整矩阵超单A100/A30或Mac预算，不下载/试跑证明成本。",
+    "available_resource": "one A100 or A30, or local Mac; CPU-only component",
+    "decision": "成本过高，不复现（审查 DONE）；仅实现低成本公式组件。",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30
+    }
+  }
+}

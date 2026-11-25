@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-25-latest-components",
+  "reviewed_on": "2026-11-25",
+  "base_commit": "722f8458b24dac6cbd612df3f7dcc7bbf1287729",
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "review_watermark_unchanged": "2026-11-15",
+  "accepted_papers": ["foundation-models:udvr", "foundation-models:thresholded-longce", "foundation-models:criticjepa", "post-training:epro", "recommendation:larf", "recommendation:lazunirec", "agent-research:agent-kernel", "agent-research:cape", "agent-research:recurscibench"],
+  "component_papers": ["foundation-models:udvr", "foundation-models:thresholded-longce", "post-training:epro", "recommendation:larf", "recommendation:lazunirec", "agent-research:agent-kernel", "agent-research:cape"],
+  "full_capability_reproductions": 0,
+  "selection_policy": "Finite original-method/cost selection, not full-window closure. Google/Meta sources prioritized and existing identities/cost-terminal decisions preserved; two industrial papers require primary production evidence. High-cost full campaigns not reproduced, review DONE; no automatic retries or Evolve promotion."
+}

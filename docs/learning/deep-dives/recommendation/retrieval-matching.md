@@ -7,7 +7,7 @@ hide:
 
 # 召回覆盖从哪里来：用户表示、正例组织与负例难度
 
-[搜广推](../index.md) · 更新 2026-11-21 · 41 篇主题资料 / 9 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-25 · 42 篇主题资料 / 10 篇重点对照
 
 候选生成先决定后续排序能看见什么。YouTube DNN说明单用户向量如何进入近邻检索，Airbnb EBR把监督放回搜索—浏览—预订旅程，MIMA让同请求多正例分配给互补兴趣，MDCNS改变负例的难度与多视角监督。这四种改动分别作用于表示、标签、兴趣分工和梯度，不能用召回数变大统一解释。
 
@@ -34,6 +34,7 @@ hide:
 | [From Relevance to Utility: Rubric Alignment in Yuanbao Search](../../../recommendation-components/2611.22503-yuanbao-rubric/README.md) · [原始来源](https://arxiv.org/abs/2611.22503v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | 传统逐文档相关性不等于给下游推理提供有用证据。元宝先生成查询特定的加权正向标准和扣分标准，用蒸馏标签统一训练召回与四头排序，再用集合奖励训练选择器。低于组均值的轨迹并不接受负优势惩罚，而是按奖励差蒸馏组内最佳轨迹。 | WeSearch用簇和原子文档匹配收缩候选空间；元宝用rubric统一上游标签和最终集合奖励。两者不是同一种SID/召回架构，局部ADC或双分支loss都不能替代端到端搜索验证。 |
 | [IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu](../../../recommendation-components/2611.20448-intentflow/README.md) · [原始来源](https://arxiv.org/abs/2611.20448v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | 相同图片上的找同款、找搭配和问使用信息需要不同证据，纯视觉相似性不足。IntentFlow将意图层级、可验证三档相关性、agentic数据构造、多模态检索和意图条件重排统一起来。索引固定后只在查询侧进行高层LoRA与六专家残差投影，避免全库重算。 | WeSearch用簇限制候选并原子匹配；IntentFlow先定义请求满足所需证据，再让查询编码适配固定文档空间。一个侧重候选组织，一个侧重意图监督与查询表示，均不能仅凭组件前后向推断线上收益。 |
 | [From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation](../../../recommendation-components/2611.26096-lser-serving/README.md) · [原始来源](https://arxiv.org/abs/2611.26096v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | LSER在双塔召回的用户侧融合会话、较长期历史、请求特征与可选LLM语义向量。较重encoder异步nearline计算，在线请求只读取已完成向量并融合/ANN检索。LLM路径并不替代BERT4Rec式encoder，而提供同一时间窗口的补充语义视角。 | YouTube DNN把聚合观看历史与上下文经非线性用户塔变成召回向量，训练为下一次观看分类；LSER显式区分session/history序列encoder，并可加入LLM辅助语义向量与nearline刷新。两者都能以用户向量查询离线item索引，差异是表征和更新合同，不是把ANN改为LLM逐token生成。原文线上对照是规则引擎，不是YouTube DNN；本地接口不提供两者质量胜负。 |
+| [LARF: Learning-aligned Reasoning Framework for Search Relevance](../../../recommendation-components/2611.32125-larf/README.md) · [原始来源](https://arxiv.org/abs/2611.32125v1)<br>章节：核心公式、与已有方法的关系、论文离线与线上效果、结果、负控与边界 | 五维ordinal相关性奖励、同query文档PNR与terminal六digit margin，再以训练期生成监督辅助五分类head；本地仅CPU reward/目标及logit梯度，不构造CoT或运行网络。 | Yuanbao Rubric以query特定标准统一检索、排序与集合选择；LARF把训练信号落到单文档五维等级和terminal决策。PNR有序pair不等于跨文档rubric覆盖，dual-head联合目标也不是蒸馏组内最佳轨迹；线上链路和指标不能相加。 |
 
 </div>
 
@@ -80,6 +81,12 @@ WeSearch 先用簇收缩检索空间，再以 OPQ 和特征打分；URED 反过�
 YouTube DNN把聚合观看历史与上下文经非线性用户塔变成召回向量，训练为下一次观看分类；LSER显式区分session/history序列encoder，并可加入LLM辅助语义向量与nearline刷新。两者都能以用户向量查询离线item索引，差异是表征和更新合同，不是把ANN改为LLM逐token生成。原文线上对照是规则引擎，不是YouTube DNN；本地接口不提供两者质量胜负。 session使用已记录的session ID，历史窗口止于session起点；所有事件严格早于label/request cutoff。通道资格、ID映射、回看长度和session规则是外部合同，未公开的receipt schema不能猜造。原文没有给出通用TTL；本地按(as_of,written_at)防异步乱序回退是接口防护，不冒称论文算法。
 
 对照来源：[lser-serving](../../../recommendation-components/2611.26096-lser-serving/README.md) · [youtube-dnn](../../../reproductions/recsys2016-youtube-dnn-youtube-dnn/README.md)
+
+### 同在元宝搜索，监督对象仍要区分文档等级与集合效用
+
+LARF Eq.3–5排除gold tie，把predicted tie计半分，再按组规模缩放有序一致性；Yuanbao Rubric允许多个文档共同覆盖正标准、任一文档触发负标准。LARF Eq.8–10对所有非gold六digit取最强竞争者，不只相邻等级；其Eq.12在训练保留生成head，服务时才删除。Gold-conditioned CoT仅是训练target构造，不能转化为评测Agent可见gold。两篇生产A/B的真实对照均有价值，但HSR/LSR与GSB不是同一指标，LARF8B离线50.98也不属于1.7B部署学生。
+
+对照来源：[larf](../../../recommendation-components/2611.32125-larf/README.md) · [yuanbao-rubric](../../../recommendation-components/2611.22503-yuanbao-rubric/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -155,9 +162,23 @@ YouTube DNN把聚合观看历史与上下文经非线性用户塔变成召回向
 
     对照来源：[lser-serving](../../../recommendation-components/2611.26096-lser-serving/README.md) · [youtube-dnn](../../../reproductions/recsys2016-youtube-dnn-youtube-dnn/README.md)
 
+### PNR奖励很高是否说明证据集合已满足query rubric？ {#cross-nov25-larf-pnr}
+
+??? note "展开答案与例子"
+
+    **答案：** 不说明。PNR只看同query文档的预测等级是否复现gold顺序；rubric集合效用关心多文档覆盖与负标准触发。正确顺序仍可能缺关键事实或包含触发扣分的文档。
+
+    **教学例子：** 教学例：两个文档顺序都排对但都遗漏日期证据，PNR可高而时效rubric未覆盖；补一篇日期文档可能提高集合覆盖而不改变原pair顺序。
+
+    对照来源：[larf](../../../recommendation-components/2611.32125-larf/README.md) · [yuanbao-rubric](../../../recommendation-components/2611.22503-yuanbao-rubric/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-25** · 实际重读Yuanbao Rubric当前README与LARF固定v1全文，补充单文档ordinal/PNR/terminal监督和多文档rubric集合效用的界线，并分开训练期gold构造、生成head训练、仅分类服务及8B/1.7B指标。LARF仅CPU公式组件；64H20私有完整流程成本过高不复现，审查DONE。
+
+涉及：[larf](../../../recommendation-components/2611.32125-larf/README.md) · [yuanbao-rubric](../../../recommendation-components/2611.22503-yuanbao-rubric/README.md)
 
 **2026-11-21** · 复核 HILL 原文表 8：单层 MoNN Small 是基线，Medium → Small 的线上广告指标提升 1.22%，Large → Small 提升 2.57%。这项更正不改变召回机制对比，也不是本地复现结果。
 
@@ -187,7 +208,7 @@ YouTube DNN把聚合观看历史与上下文经非线性用户塔变成召回向
 
 覆盖 36 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 41 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 42 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -232,6 +253,7 @@ YouTube DNN把聚合观看历史与上下文经非线性用户塔变成召回向
 - [From Relevance to Utility: Rubric Alignment in Yuanbao Search](../../../recommendation-components/2611.22503-yuanbao-rubric/README.md)
 - [IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu](../../../recommendation-components/2611.20448-intentflow/README.md)
 - [From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation](../../../recommendation-components/2611.26096-lser-serving/README.md)
+- [LARF: Learning-aligned Reasoning Framework for Search Relevance](../../../recommendation-components/2611.32125-larf/README.md)
 
 </details>
 

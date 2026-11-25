@@ -4,6 +4,9 @@
 
 ## 2026
 
+- 2026-11 · [CAPE: Coordinating Calibration and Search for Tool-Use Policies](../2611.31938-cape/README.md)（`cape`）：操作本身正确，序列化仍可能被隐藏parser配置误读。CAPE离线在可复制的候选配置族H上校准调用，编译一个部署时只按响应分支的策略。
+- 2026-11 · [fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration](../2611.31727-agent-kernel/README.md)（`agent-kernel`）：SGR（Sub-Graph Recovery）不是新发明依赖恢复：它把已知的子图选择性重试放入LLM内容编排层。异常先令下游不可达，独立兄弟仍可完成；重试只复位失败节点及其不可达后代。
+- 2026-11 · [RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research](../2611.32508-recurscibench/README.md)（`recurscibench`）：任务内涨分不等于获得可迁移的科研能力。RecurSciPipe从原始科学数据生成共享背景的建模F/分析A任务，先查合同、信息隔离、可执行、scorer行为，再查目标、输入和评价的科学有效性；设计错回Designer，实施错回Builder，两任务全过才准入。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-11 · [MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research](../2611.30011-morse/README.md)（`morse`）：流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-11 · [Optimistic Online Learning for Coding Agents with Aggregate Feedback](../2611.30405-ooas/README.md)（`ooas`）：OOAS把activation steering候选选择建模为逐turn多臂bandit。每轮先见所有候选的reward hint，选一个策略；任务结束只见已选序列的加和reward，不见逐轮贡献。
 - 2026-11 · [Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing](../2611.30742-transport-safe-audit/README.md)（`transport-safe-audit`）：不同Agent产生不同轨迹；即使裁判在给定(X,Y)时看不到Agent身份，其sensitivity/specificity的平均值也会随成功/失败轨迹分布改变。论文连接scalar transport偏差、支持与识别、随机人工audit、anytime monitoring和rank sets；这些统计工具本身不是新发明。

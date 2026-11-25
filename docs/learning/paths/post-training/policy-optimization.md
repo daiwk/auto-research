@@ -7,7 +7,7 @@ hide:
 
 # 策略优化：谁在采样，谁在被更新
 
-[LLM 后训练](index.md) / 264 个问题 · 66 篇论文
+[LLM 后训练](index.md) / 268 个问题 · 67 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">264 个问题 · 66 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">268 个问题 · 67 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:epro" data-paper-title="EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor LLM 后训练 Northwestern University 2026-11-24 同一权重在BF16训练引擎与低精度rollout引擎中不一定给出相同分布。旧checkpoint时两者可观测，但中间learner更新对应的当前执行分布不可直接读取。EPRO不把当前训练策略直接当执行策略，而从旧执行锚点出发，用训练策略变化构造transported predictor，再用分布移动量衰减不可靠的outward更新。 完整实验成本过高，不复现（审查 DONE）；L1 CPU公式组件，diagnostic only；不是LLM强化学习能力复现。完整实验成本过高，不复现（审查 DONE）；不自动重试，不接Evolve晋级。prepare_update接受外部旧训练/旧执行/当前logits、action、advantage和mask，冻结Eq.11系数。loss_gradient返回全词表transport下的loss与解析logit梯度；head-tail模式使用附B重建锚点。只接受有限、可解析尾部的数组；尾部质量≤显式拒绝，不猜补未观测概率。旧执行概率并列时稳定选top-K是本地约定。  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 同一权重为什么还要区分训练策略与执行策略？ BF16训练和低精度推理的kernel/数值路径可使分布不同；中间learner更新只直接暴露训练策略。EPRO从旧执行分布出发transport训练变化，不声称已经观测当前执行策略。 教学例：旧训练p=(0.5,0.5)、旧执行q=(0.6,0.4)，当前训练仍为p时预测执行必须还是q，不能强行改成p。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<span id="paper-post-training-epro-26098291" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-540549bf80f8d891">同一权重为什么还要区分训练策略与执行策略？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aepro">EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Northwestern University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>BF16训练和低精度推理的kernel/数值路径可使分布不同；中间learner更新只直接暴露训练策略。EPRO从旧执行分布出发transport训练变化，不声称已经观测当前执行策略。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：旧训练p=(0.5,0.5)、旧执行q=(0.6,0.4)，当前训练仍为p时预测执行必须还是q，不能强行改成p。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32810v1">原论文</a> · <a href="../../../../post-training/2611.32810-epro/">实现解读</a> · <a href="#qa-540549bf80f8d891">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:epro" data-paper-title="EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor LLM 后训练 Northwestern University 2026-11-24 同一权重在BF16训练引擎与低精度rollout引擎中不一定给出相同分布。旧checkpoint时两者可观测，但中间learner更新对应的当前执行分布不可直接读取。EPRO不把当前训练策略直接当执行策略，而从旧执行锚点出发，用训练策略变化构造transported predictor，再用分布移动量衰减不可靠的outward更新。 完整实验成本过高，不复现（审查 DONE）；L1 CPU公式组件，diagnostic only；不是LLM强化学习能力复现。完整实验成本过高，不复现（审查 DONE）；不自动重试，不接Evolve晋级。prepare_update接受外部旧训练/旧执行/当前logits、action、advantage和mask，冻结Eq.11系数。loss_gradient返回全词表transport下的loss与解析logit梯度；head-tail模式使用附B重建锚点。只接受有限、可解析尾部的数组；尾部质量≤显式拒绝，不猜补未观测概率。旧执行概率并列时稳定选top-K是本地约定。  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 为什么不能对importance系数和SSC gate一起反传？ Eq.11明确stop-gradient该乘数。更新方向来自transported log-policy的score，gate只决定本次贡献的强度；连同gate求导会引入原算法没有的风险统计导数。 教学例：固定A和当前shift后先缓存系数，再扰动logits作有限差分；每次扰动都重算gate的差分是不同目标，已作为负控。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-7c3848999abef3f9">为什么不能对importance系数和SSC gate一起反传？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aepro">EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Northwestern University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Eq.11明确stop-gradient该乘数。更新方向来自transported log-policy的score，gate只决定本次贡献的强度；连同gate求导会引入原算法没有的风险统计导数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：固定A和当前shift后先缓存系数，再扰动logits作有限差分；每次扰动都重算gate的差分是不同目标，已作为负控。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32810v1">原论文</a> · <a href="../../../../post-training/2611.32810-epro/">实现解读</a> · <a href="#qa-7c3848999abef3f9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:epro" data-paper-title="EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor LLM 后训练 Northwestern University 2026-11-24 同一权重在BF16训练引擎与低精度rollout引擎中不一定给出相同分布。旧checkpoint时两者可观测，但中间learner更新对应的当前执行分布不可直接读取。EPRO不把当前训练策略直接当执行策略，而从旧执行锚点出发，用训练策略变化构造transported predictor，再用分布移动量衰减不可靠的outward更新。 完整实验成本过高，不复现（审查 DONE）；L1 CPU公式组件，diagnostic only；不是LLM强化学习能力复现。完整实验成本过高，不复现（审查 DONE）；不自动重试，不接Evolve晋级。prepare_update接受外部旧训练/旧执行/当前logits、action、advantage和mask，冻结Eq.11系数。loss_gradient返回全词表transport下的loss与解析logit梯度；head-tail模式使用附B重建锚点。只接受有限、可解析尾部的数组；尾部质量≤显式拒绝，不猜补未观测概率。旧执行概率并列时稳定选top-K是本地约定。  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 EPRO与Regularized Score Centering都减中心项，能直接替换吗？ 不能。RSC在固定behavior下用辅助动作估计中心，并加reverse-KL约束；EPRO的中心随transport预测分布变化，再用分布级Policy Shift衰减outward更新。它们不是reward减均值，也无本轮同预算能力比较。 教学例：旧执行q不变而learner多次更新时，固定q中心与mu_hat中心可不同；加大reward居中幅度并不能得到这种分布变化。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-d02b9f9ff2e20620">EPRO与Regularized Score Centering都减中心项，能直接替换吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aepro">EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Northwestern University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。RSC在固定behavior下用辅助动作估计中心，并加reverse-KL约束；EPRO的中心随transport预测分布变化，再用分布级Policy Shift衰减outward更新。它们不是reward减均值，也无本轮同预算能力比较。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：旧执行q不变而learner多次更新时，固定q中心与mu_hat中心可不同；加大reward居中幅度并不能得到这种分布变化。</p>
+<p class="ar-learning-sources">依据：与已有方法的关系、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32810v1">原论文</a> · <a href="../../../../post-training/2611.32810-epro/">实现解读</a> · <a href="#qa-d02b9f9ff2e20620">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:epro" data-paper-title="EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor LLM 后训练 Northwestern University 2026-11-24 同一权重在BF16训练引擎与低精度rollout引擎中不一定给出相同分布。旧checkpoint时两者可观测，但中间learner更新对应的当前执行分布不可直接读取。EPRO不把当前训练策略直接当执行策略，而从旧执行锚点出发，用训练策略变化构造transported predictor，再用分布移动量衰减不可靠的outward更新。 完整实验成本过高，不复现（审查 DONE）；L1 CPU公式组件，diagnostic only；不是LLM强化学习能力复现。完整实验成本过高，不复现（审查 DONE）；不自动重试，不接Evolve晋级。prepare_update接受外部旧训练/旧执行/当前logits、action、advantage和mask，冻结Eq.11系数。loss_gradient返回全词表transport下的loss与解析logit梯度；head-tail模式使用附B重建锚点。只接受有限、可解析尾部的数组；尾部质量≤显式拒绝，不猜补未观测概率。旧执行概率并列时稳定选top-K是本地约定。  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 top-K加一个tail bucket为何不应强制等于全词表梯度？ 附B把未知执行尾部近似成旧训练尾部的整体缩放，并对Policy Shift作粗粒化。尾部内部概率变化被压缩，通常产生近似误差；只有全head或特殊尾部结构才会退化为精确情形。 教学例：两个tail token一升一降但总质量不变时，单tail bucket看不到内部移动；本地保留head-tail与full梯度差而不是把它改成零。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-0403ab2160537685">top-K加一个tail bucket为何不应强制等于全词表梯度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aepro">EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Northwestern University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>附B把未知执行尾部近似成旧训练尾部的整体缩放，并对Policy Shift作粗粒化。尾部内部概率变化被压缩，通常产生近似误差；只有全head或特殊尾部结构才会退化为精确情形。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个tail token一升一降但总质量不变时，单tail bucket看不到内部移动；本地保留head-tail与full梯度差而不是把它改成零。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32810v1">原论文</a> · <a href="../../../../post-training/2611.32810-epro/">实现解读</a> · <a href="#qa-0403ab2160537685">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:retokenization-update" data-paper-title="How Far Does Lossless Re-tokenization Move an RLVR Update?" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="How Far Does Lossless Re-tokenization Move an RLVR Update? LLM 后训练 University of Maine at Presque Isle 2026-11-20 研究对象不是奖励变化，而是同一rollout的token ID变化。保留文本、reward、advantage和checkpoint，仅将可拆token替换成两个拼回原文本的词表项。论文从共享参数checkpoint比较canonical、re-encoded和不同batch的更新，另在每种分词各自一套prefix-softmax表上证明：未访问prefix的条件概率比保持不变，但整词softmax的未采样logit仍被完整梯度改变。 完整实验成本过高，不复现（审查 DONE）；这是一项机制诊断，不是后训练能力实现。L1核心机制组件，diagnostic only；不是LLM能力或完整论文复现。纯CPU、无CUDA路径，不作为Evolve晋级证据。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU prefix-softmax表从同一正的完整字符串分布按chain rule初始化，执行λ_t(e_token−π_row)完整梯度；检验未访问行、coarse未采样logit和字符串分布差异。独立实现c及ratio-of-means R，但不把两套独立tabular参数假装成共享LLM参数来计算R；  policy-optimization CPU机制组件 LLM 后训练 策略优化：谁在采样，谁在被更新 文本与reward相同为什么更新仍会不同？ 模型对token路径而不只对解码字符串分配概率。拆token改变访问prefix与score-gradient；固定reward和advantage不能固定该Jacobian。 教学例：The与T、he解码相同，但logπ(The|prefix)和logπ(T|prefix)+logπ(he|prefix,T)的参数导数不必相同。 2026-11-23">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
 <span id="paper-post-training-retokenization-update-7ee85b71" class="ar-learning-paper-anchor"></span>

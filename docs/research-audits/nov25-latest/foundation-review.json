@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-25",
+  "accepted": [
+    {
+      "arxiv_id": "2611.32866",
+      "identity": "foundation-models:udvr",
+      "key": "udvr",
+      "domain": "foundation-models",
+      "title": "Weight Scale Rebalancing: Transferable Training Recipes for Transformers",
+      "first_author": "Yikun Hou",
+      "first_author_affiliation": "Umeå University",
+      "first_published_at": "2026-11-24T16:03:02Z",
+      "announced_on": null,
+      "intake_class": "new_first_release_in_window",
+      "reviewed_version": "v1",
+      "reviewed_source_url": "https://arxiv.org/pdf/2611.32866v1",
+      "source_sha256": "52f8f6cafa50f14aa7dbce607feb254410a3305a87b5ae3ac5654e32899b6593",
+      "sections_read": [
+        "3",
+        "C",
+        "D",
+        "Tables9-15"
+      ],
+      "scope": "把自然配对矩阵拆成方向U/V与非优化buffer D，attention双侧尺度守恒，FFN仅吸收U侧尺度；保留不同正则和形状学习率。仅CPU L1机制，不是跨模型免调参效果复现。",
+      "source_revisions": {
+        "foundation-models:udvr": "73bc8da43095deda0dbc2394d5a1725fa6a502b961ab4e450aed30e379bca991",
+        "foundation-models:proland": "275d98175b4b5d888c6ccc97f04fa6557753a442a671f465e091e376a8fc3e35"
+      },
+      "cost_basis": {
+        "source": "https://arxiv.org/pdf/2611.32866v1",
+        "sections": [
+          "3",
+          "C",
+          "D",
+          "Tables9-15"
+        ],
+        "available_resource": "one A100 or A30, or local Mac",
+        "paper_configuration": "CIFAR200/300epochs with grids and three seeds; ImageNet300epochs on8 A100s;120M-1.3B language models over7Btokens with three seeds.",
+        "estimated_cost_basis": "Read-only published configuration, not measured local time. CPU tiny-pair autograd/Adam diagnostic estimated below10seconds across three seeds; no models/data downloads.",
+        "decision": "成本过高，不复现（审查 DONE）；仅验收CPU小矩阵重平衡、两种正则与形状学习率组件"
+      },
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "local_detail_path": "foundation-models/2611.32866-udvr/README.md",
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "code_url": null,
+      "upstream_revision": null,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "arxiv_id": "2611.32969",
+      "identity": "foundation-models:thresholded-longce",
+      "key": "thresholded-longce",
+      "domain": "foundation-models",
+      "title": "Eliciting the Recall Capacity of Linear Attention",
+      "first_author": "Johan Lindqvist",
+      "first_author_affiliation": "ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology",
+      "first_published_at": "2026-11-24T17:07:06Z",
+      "announced_on": null,
+      "intake_class": "new_first_release_in_window",
+      "reviewed_version": "v1",
+      "reviewed_source_url": "https://arxiv.org/pdf/2611.32969v1",
+      "source_sha256": "0c1b607a0ea667f743693501c3360830cab3e162bae5d6ae1f85b361b2f97c83",
+      "sections_read": [
+        "6",
+        "B",
+        "H"
+      ],
+      "scope": "TLCE用停止梯度的full/short log-prob差，针对超过1nat且已有128token短上下文的位置加权，权重cap5并按总权重归一化。只实现CPU损失与短窗接口，不声称线性注意力召回能力。",
+      "source_revisions": {
+        "foundation-models:thresholded-longce": "acab1c57bc187f65dfb30ab2a809f542ec9341ea0bd92a58fd058feb20e149e6",
+        "foundation-models:merlin": "5549f39008d450d4a2446631403f0b94d55ea76f976bcc61197cb3c9f1fa0f01"
+      },
+      "cost_basis": {
+        "source": "https://arxiv.org/pdf/2611.32969v1",
+        "sections": [
+          "6",
+          "B",
+          "H"
+        ],
+        "available_resource": "one A100 or A30, or local Mac",
+        "paper_configuration": "Four linear mixers and softmax at about340M parameters,20layers,width1024,15Btokens,4096context,batch128,28672steps; additional61.7M/2.52Btoken intervention sweeps.",
+        "estimated_cost_basis": "Published model/token/arm counts; no full pretraining or checkpoint download. CPU weighted-loss and tiny causal-model diagnostic estimated below10seconds across three seeds.",
+        "decision": "成本过高，不复现（审查 DONE）；仅验收CPU TLCE权重、短窗重置与梯度隔离组件"
+      },
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "local_detail_path": "foundation-models/2611.32969-thresholded-longce/README.md",
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "code_url": null,
+      "upstream_revision": null,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "arxiv_id": "2611.32357",
+      "identity": "foundation-models:criticjepa",
+      "key": "criticjepa",
+      "domain": "foundation-models",
+      "title": "CriticJEPA: World Models Are Better Critics Than Optimizers",
+      "first_author": "Xvyuan Liu",
+      "first_author_affiliation": "Tsinghua University",
+      "first_published_at": "2026-11-24T10:30:16Z",
+      "announced_on": null,
+      "intake_class": "new_first_release_in_window",
+      "reviewed_version": "v1",
+      "reviewed_source_url": "https://arxiv.org/pdf/2611.32357v1",
+      "source_sha256": "8b71557c5f3857ad69f2be686b6cc638de8a7995511d0376194de7ba9b2ad8bb",
+      "sections_read": [
+        "4",
+        "5.1",
+        "Tables3-5"
+      ],
+      "scope": "在冻结H-JEPA每层用hindsight轨迹训练flow提案，四步Euler生成候选，rollout critic选择；可先做短有锚优化，再去掉anchor按真实rollout cost重选。仅论文审查，高成本完整实验不复现。",
+      "source_revisions": {
+        "foundation-models:criticjepa": "32b97d41ccc34bc62adce7ebed90d23014c21411b81c4c56a8e6c4aa58cad34d",
+        "foundation-models:jepa-prediction-planning": "754eb348792674a6a8916439d927bc1f9895d8166a55b1cc9da92c1b44248778"
+      },
+      "cost_basis": {
+        "source": "https://arxiv.org/pdf/2611.32357v1",
+        "sections": [
+          "4",
+          "5.1",
+          "Tables3-5"
+        ],
+        "available_resource": "one A100 or A30, or local Mac",
+        "paper_configuration": "18 frozen H-JEPA hierarchies; per-level six-block width512 flow heads trained25epochs,batch1024; four control domains,150-450episodes per method,100/100/200candidates and polish sweeps.",
+        "estimated_cost_basis": "Cost inferred from published model/training/evaluation matrix. GPU model and wall time are not provided; none is invented. No model/data download or trial reproduction.",
+        "decision": "成本过高，不复现（审查 DONE）；review-only，无可执行operator、无自动重试或Evolve"
+      },
+      "implementation_status": "deferred_high_cost",
+      "evaluation_tier": "paper_reported_only",
+      "local_detail_path": "foundation-models/2611.32357-criticjepa/README.md",
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "code_url": "https://github.com/daybraeklaxry/CriticJEPA-code",
+      "upstream_revision": null,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    }
+  ],
+  "preflight_before_implementation": true,
+  "available_resource": "one A100 or A30, or local Mac",
+  "watermark_change_claimed": false,
+  "large_downloads_authorized_or_needed": false,
+  "scope": "Finite Nov24 first-release selection; two CPU-only L1 components and one terminal high-cost review-only paper. Not exhaustive coverage."
+}

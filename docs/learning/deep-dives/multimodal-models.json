@@ -956,7 +956,7 @@
     "world-state-actions": {
       "title": "会预测下一幕，还不等于会行动或保持同一个世界",
       "thesis": "世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。",
-      "updated": "2026-11-21",
+      "updated": "2026-11-25",
       "reviewed_papers": [
         "foundation-models:alps",
         "multimodal-models:aw0",
@@ -993,7 +993,8 @@
         "foundation-models:counterfactual-wm",
         "multimodal-models:autoregressive-view-model",
         "multimodal-models:jepa-dots",
-        "foundation-models:mv-jepa"
+        "foundation-models:mv-jepa",
+        "foundation-models:criticjepa"
       ],
       "axes": [
         "学习对象：未来latent、动作分布、视觉转移、持久几何",
@@ -1202,6 +1203,16 @@
             "核心公式",
             "同主题比较与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:criticjepa",
+          "position": "CriticJEPA每层用真实训练轨迹的hindsight目标学习conditional flow提案，冻结层级rollout作选择；可短有锚精修，但最终按不含anchor的cost重选。排序能力与可利用的梯度方向分开验证。",
+          "tradeoff": "预测—规划评测区分表示可读性、预测误差与实际成功；CriticJEPA在同一冻结模型上进一步区分候选来源、排序与优化。两者都不能用latent loss取代环境执行。CriticJEPA额外要求真实flow和多层时间合同，固定候选fixture只能是诊断，不能替代能力实现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1333,6 +1344,14 @@
           "papers": [
             "foundation-models:mv-jepa",
             "foundation-models:time-jepa"
+          ]
+        },
+        {
+          "title": "CriticJEPA: World Models Are Better Critics Than Optimizers",
+          "body": "预测—规划评测区分表示可读性、预测误差与实际成功；CriticJEPA在同一冻结模型上进一步区分候选来源、排序与优化。两者都不能用latent loss取代环境执行。CriticJEPA额外要求真实flow和多层时间合同，固定候选fixture只能是诊断，不能替代能力实现。 最终critic cost保留H-JEPA的目标空间、评分时间窗与action-consistency项；上层选择计划的首个预测状态作为子目标。论文FLOPs计入反传而非墙时。本地按18模型/多域训练规划矩阵高成本终态收录，无operator、无环境执行或自动重试。",
+          "papers": [
+            "foundation-models:criticjepa",
+            "foundation-models:jepa-prediction-planning"
           ]
         }
       ],
@@ -1506,6 +1525,16 @@
           "papers": [
             "foundation-models:mv-jepa",
             "foundation-models:time-jepa"
+          ]
+        },
+        {
+          "id": "nov25-criticjepa",
+          "question": "CriticJEPA比预测—规划评测多区分了什么？",
+          "answer": "前者在同一冻结模型里改变候选来源与搜索方式，区分能否排序、梯度是否有效和环境成功；后者用冻结解码协议拆表示与预测误差，并单独要求真实规划结果。",
+          "example": "教学例：一步误差相同的模型可对flow提案有用、对长搜索生成的离分布候选无用；因此不能仅按一步loss选规划器。",
+          "papers": [
+            "foundation-models:criticjepa",
+            "foundation-models:jepa-prediction-planning"
           ]
         }
       ],
@@ -1724,6 +1753,18 @@
           "source_revisions": {
             "foundation-models:mv-jepa": "6b68e252224045e8d7e1a5ecaa0c06ae2c256dafc9fb954bfe3c1f9085ab981a",
             "foundation-models:time-jepa": "5296b20ff5697af84daff8219ef1698640500e3b84af2b471f75c6078f336b3d"
+          }
+        },
+        {
+          "date": "2026-11-25",
+          "papers": [
+            "foundation-models:criticjepa",
+            "foundation-models:jepa-prediction-planning"
+          ],
+          "summary": "预测—规划评测区分表示可读性、预测误差与实际成功；CriticJEPA在同一冻结模型上进一步区分候选来源、排序与优化。两者都不能用latent loss取代环境执行。CriticJEPA额外要求真实flow和多层时间合同，固定候选fixture只能是诊断，不能替代能力实现。 完整实验按成本终态收录，不以L1诊断或资料收录晋级Evolve。",
+          "source_revisions": {
+            "foundation-models:criticjepa": "32b97d41ccc34bc62adce7ebed90d23014c21411b81c4c56a8e6c4aa58cad34d",
+            "foundation-models:jepa-prediction-planning": "754eb348792674a6a8916439d927bc1f9895d8166a55b1cc9da92c1b44248778"
           }
         }
       ]

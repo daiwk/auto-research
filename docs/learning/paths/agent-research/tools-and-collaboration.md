@@ -7,7 +7,7 @@ hide:
 
 # 工具与协作执行：把计划变成可检查的动作
 
-[Agent](index.md) / 209 个问题 · 52 篇论文
+[Agent](index.md) / 217 个问题 · 54 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">209 个问题 · 52 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">217 个问题 · 54 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-kernel" data-paper-title="fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration Agent Amazon, AGI / Sunnyvale, USA 2026-11-24 SGR（Sub-Graph Recovery）不是新发明依赖恢复：它把已知的子图选择性重试放入LLM内容编排层。异常先令下游不可达，独立兄弟仍可完成；重试只复位失败节点及其不可达后代。SQLite SAB保存状态/文本，DSP在所有父节点完成后才调度子节点，并按声明顺序把真实父输出拼入提示。五个动词是fork、retry、cancel、query、fetch。fork是创建DAG任务，不是操作系统进程克隆。 单A100/A30或Mac预算不承担该长rollout/API多臂矩阵：成本过高，不复现（审查 DONE）。42/43/44三seed CPU诊断：4节点完成、5次executor调用，兄弟b/c各执行一次，join读取A/B/C实际文本顺序，重开保留4个complete节点。component_only / L1 CPU编排机制诊断，diagnostic_only=true，不是LLM Agent能力复现。2026-11-24首发、2026-11-25发现/审查；不接入Evolve晋级。标准库SQLite/WAL实现7态SAB、五动词、事务claim、失败/取消级联、SGR与实际父文本继承。fork不等待执行；  工具与协作 CPU机制组件 Agent 工具与协作执行：把计划变成可检查的动作 为什么一次节点异常不应让整个任务从头重来？ 在声明正确的DAG中，只有失败节点及其依赖后代需要重试；已完成独立兄弟的状态和输出应保持。全重放会重复已完成工作，并再次暴露于暂时故障。 教学例：A/B/C独立取价，汇总依赖三者；A超时，只重试A和未运行汇总，不重新取B/C。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<span id="paper-agent-research-agent-kernel-7ec9b09a" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-7a1cd0c72d1fe010">为什么一次节点异常不应让整个任务从头重来？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagent-kernel">fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Amazon, AGI / Sunnyvale, USA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>在声明正确的DAG中，只有失败节点及其依赖后代需要重试；已完成独立兄弟的状态和输出应保持。全重放会重复已完成工作，并再次暴露于暂时故障。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A/B/C独立取价，汇总依赖三者；A超时，只重试A和未运行汇总，不重新取B/C。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31727v1">原论文</a> · <a href="../../../../agent-research/2611.31727-agent-kernel/">实现解读</a> · <a href="#qa-7a1cd0c72d1fe010">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-kernel" data-paper-title="fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration Agent Amazon, AGI / Sunnyvale, USA 2026-11-24 SGR（Sub-Graph Recovery）不是新发明依赖恢复：它把已知的子图选择性重试放入LLM内容编排层。异常先令下游不可达，独立兄弟仍可完成；重试只复位失败节点及其不可达后代。SQLite SAB保存状态/文本，DSP在所有父节点完成后才调度子节点，并按声明顺序把真实父输出拼入提示。五个动词是fork、retry、cancel、query、fetch。fork是创建DAG任务，不是操作系统进程克隆。 单A100/A30或Mac预算不承担该长rollout/API多臂矩阵：成本过高，不复现（审查 DONE）。42/43/44三seed CPU诊断：4节点完成、5次executor调用，兄弟b/c各执行一次，join读取A/B/C实际文本顺序，重开保留4个complete节点。component_only / L1 CPU编排机制诊断，diagnostic_only=true，不是LLM Agent能力复现。2026-11-24首发、2026-11-25发现/审查；不接入Evolve晋级。标准库SQLite/WAL实现7态SAB、五动词、事务claim、失败/取消级联、SGR与实际父文本继承。fork不等待执行；  工具与协作 CPU机制组件 Agent 工具与协作执行：把计划变成可检查的动作 并行子节点只等父任务结束就足够吗？ 不够，父节点必须complete而非failed/cancelled，且子prompt要继承每个声明父节点的真实最新输出。只并发启动或填空文本会违反内容依赖；SGR不是语义错误检测器。 教学例：汇总有A和C价格但B失败时不能把B=NULL照常推荐；B恢复后按声明顺序读入三份文本。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-446963ae74c731c1">并行子节点只等父任务结束就足够吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagent-kernel">fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Amazon, AGI / Sunnyvale, USA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不够，父节点必须complete而非failed/cancelled，且子prompt要继承每个声明父节点的真实最新输出。只并发启动或填空文本会违反内容依赖；SGR不是语义错误检测器。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：汇总有A和C价格但B失败时不能把B=NULL照常推荐；B恢复后按声明顺序读入三份文本。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31727v1">原论文</a> · <a href="../../../../agent-research/2611.31727-agent-kernel/">实现解读</a> · <a href="#qa-446963ae74c731c1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-kernel" data-paper-title="fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration Agent Amazon, AGI / Sunnyvale, USA 2026-11-24 SGR（Sub-Graph Recovery）不是新发明依赖恢复：它把已知的子图选择性重试放入LLM内容编排层。异常先令下游不可达，独立兄弟仍可完成；重试只复位失败节点及其不可达后代。SQLite SAB保存状态/文本，DSP在所有父节点完成后才调度子节点，并按声明顺序把真实父输出拼入提示。五个动词是fork、retry、cancel、query、fetch。fork是创建DAG任务，不是操作系统进程克隆。 单A100/A30或Mac预算不承担该长rollout/API多臂矩阵：成本过高，不复现（审查 DONE）。42/43/44三seed CPU诊断：4节点完成、5次executor调用，兄弟b/c各执行一次，join读取A/B/C实际文本顺序，重开保留4个complete节点。component_only / L1 CPU编排机制诊断，diagnostic_only=true，不是LLM Agent能力复现。2026-11-24首发、2026-11-25发现/审查；不接入Evolve晋级。标准库SQLite/WAL实现7态SAB、五动词、事务claim、失败/取消级联、SGR与实际父文本继承。fork不等待执行；  工具与协作 CPU机制组件 Agent 工具与协作执行：把计划变成可检查的动作 SGR的状态保持能替代RuntimeTickets的副作用合同吗？ 不能。SGR保护SAB里的兄弟状态并允许重执行；RuntimeTickets在副作用前核权限与obligation，callback不确定时不自动重发。编排恢复与授权/副作用边界是不同层。 教学例：付款已成功后节点抛错，SGR可再次执行；需要下层事务/幂等合同，不能拿兄弟节点没变证明不会重复付款。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-4c1b37fa0fdeb9be">SGR的状态保持能替代RuntimeTickets的副作用合同吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagent-kernel">fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Amazon, AGI / Sunnyvale, USA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。SGR保护SAB里的兄弟状态并允许重执行；RuntimeTickets在副作用前核权限与obligation，callback不确定时不自动重发。编排恢复与授权/副作用边界是不同层。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：付款已成功后节点抛错，SGR可再次执行；需要下层事务/幂等合同，不能拿兄弟节点没变证明不会重复付款。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31727v1">原论文</a> · <a href="../../../../agent-research/2611.31727-agent-kernel/">实现解读</a> · <a href="#qa-4c1b37fa0fdeb9be">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-kernel" data-paper-title="fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration Agent Amazon, AGI / Sunnyvale, USA 2026-11-24 SGR（Sub-Graph Recovery）不是新发明依赖恢复：它把已知的子图选择性重试放入LLM内容编排层。异常先令下游不可达，独立兄弟仍可完成；重试只复位失败节点及其不可达后代。SQLite SAB保存状态/文本，DSP在所有父节点完成后才调度子节点，并按声明顺序把真实父输出拼入提示。五个动词是fork、retry、cancel、query、fetch。fork是创建DAG任务，不是操作系统进程克隆。 单A100/A30或Mac预算不承担该长rollout/API多臂矩阵：成本过高，不复现（审查 DONE）。42/43/44三seed CPU诊断：4节点完成、5次executor调用，兄弟b/c各执行一次，join读取A/B/C实际文本顺序，重开保留4个complete节点。component_only / L1 CPU编排机制诊断，diagnostic_only=true，不是LLM Agent能力复现。2026-11-24首发、2026-11-25发现/审查；不接入Evolve晋级。标准库SQLite/WAL实现7态SAB、五动词、事务claim、失败/取消级联、SGR与实际父文本继承。fork不等待执行；  工具与协作 CPU机制组件 Agent 工具与协作执行：把计划变成可检查的动作 重开后为什么要拒绝旧claim的晚到完成？ 重开将旧running重新排队，旧执行可能仍晚到。generation和owner必须与当前running claim一致才能写完成，防止旧结果覆盖新尝试；这是本地单owner交接，不是分布式租约证明。 教学例：旧claim generation=1，重开后新claim=3；旧线程回传stale不能覆盖新线程的fresh。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-a871be7ccfccbdfd">重开后为什么要拒绝旧claim的晚到完成？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagent-kernel">fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · Amazon, AGI / Sunnyvale, USA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>重开将旧running重新排队，旧执行可能仍晚到。generation和owner必须与当前running claim一致才能写完成，防止旧结果覆盖新尝试；这是本地单owner交接，不是分布式租约证明。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：旧claim generation=1，重开后新claim=3；旧线程回传stale不能覆盖新线程的fresh。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31727v1">原论文</a> · <a href="../../../../agent-research/2611.31727-agent-kernel/">实现解读</a> · <a href="#qa-a871be7ccfccbdfd">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cape" data-paper-title="CAPE: Coordinating Calibration and Search for Tool-Use Policies" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CAPE: Coordinating Calibration and Search for Tool-Use Policies Agent State Key Laboratory of Electrical Insulation and Power Equipment, Xi’an Jiaotong University 2026-11-24 操作本身正确，序列化仍可能被隐藏parser配置误读。CAPE离线在可复制的候选配置族H上校准调用，编译一个部署时只按响应分支的策略。关键不是先全校准再搜索，而是在已到达配置子集V上动作效果全已知（local closure）就可用；持续维护可执行witness和未知效果的乐观上界，把有限编译预算用于可能改善策略的格子。 大量跨条件新进程测量及API矩阵超出本轮短时单A100/A30或Mac预算，成本过高，不复现（审查 DONE）。component_only / L1 CPU有限编译器诊断，diagnostic_only=true；不是LLM工具胜率复现。2026-11-24首发、2026-11-25发现/审查；不接入Evolve。CapeCompiler接受已声明的有限H、action catalog、初始策略和calibration callback，可向离线可复制h查询；1–8配置、1–4调用。  工具与协作 CPU机制组件 Agent 工具与协作执行：把计划变成可检查的动作 为什么一个动作不必在所有H上测完才能使用？ 策略到达某节点时只剩响应一致的配置子集V。该动作在V上效果全已知就locally closed；V外未知效果不会改变此策略实际执行路径。 教学例：首次上传已排除h4，probe只需在剩余h1/h2/h3上校准；不能因此宣称全H上的probe行已知。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<span id="paper-agent-research-cape-8b45dad7" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-fd129ea03523b2c7">为什么一个动作不必在所有H上测完才能使用？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acape">CAPE: Coordinating Calibration and Search for Tool-Use Policies</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · State Key Laboratory of Electrical Insulation and Power Equipment, Xi’an Jiaotong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>策略到达某节点时只剩响应一致的配置子集V。该动作在V上效果全已知就locally closed；V外未知效果不会改变此策略实际执行路径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：首次上传已排除h4，probe只需在剩余h1/h2/h3上校准；不能因此宣称全H上的probe行已知。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31938v1">原论文</a> · <a href="../../../../agent-research/2611.31938-cape/">实现解读</a> · <a href="#qa-fd129ea03523b2c7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cape" data-paper-title="CAPE: Coordinating Calibration and Search for Tool-Use Policies" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CAPE: Coordinating Calibration and Search for Tool-Use Policies Agent State Key Laboratory of Electrical Insulation and Power Equipment, Xi’an Jiaotong University 2026-11-24 操作本身正确，序列化仍可能被隐藏parser配置误读。CAPE离线在可复制的候选配置族H上校准调用，编译一个部署时只按响应分支的策略。关键不是先全校准再搜索，而是在已到达配置子集V上动作效果全已知（local closure）就可用；持续维护可执行witness和未知效果的乐观上界，把有限编译预算用于可能改善策略的格子。 大量跨条件新进程测量及API矩阵超出本轮短时单A100/A30或Mac预算，成本过高，不复现（审查 DONE）。component_only / L1 CPU有限编译器诊断，diagnostic_only=true；不是LLM工具胜率复现。2026-11-24首发、2026-11-25发现/审查；不接入Evolve。CapeCompiler接受已声明的有限H、action catalog、初始策略和calibration callback，可向离线可复制h查询；1–8配置、1–4调用。  工具与协作 CPU机制组件 Agent 工具与协作执行：把计划变成可检查的动作 乐观策略看起来能全成功，为什么不能直接部署？ unknown program被假设立即commit，unknown probe被假设逐配置区分，只用于有效上界。这些响应未必真实存在。部署必须来自已取得效果组成的witness，并逐配置覆盖R0；只有lower=upper才证最优。 教学例：未知probe的三个假想响应可能实测全是同一error，三条可选续段会合并，原来的乐观树不可执行。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-b2ad66b760205e9c">乐观策略看起来能全成功，为什么不能直接部署？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acape">CAPE: Coordinating Calibration and Search for Tool-Use Policies</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · State Key Laboratory of Electrical Insulation and Power Equipment, Xi’an Jiaotong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>unknown program被假设立即commit，unknown probe被假设逐配置区分，只用于有效上界。这些响应未必真实存在。部署必须来自已取得效果组成的witness，并逐配置覆盖R0；只有lower=upper才证最优。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：未知probe的三个假想响应可能实测全是同一error，三条可选续段会合并，原来的乐观树不可执行。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31938v1">原论文</a> · <a href="../../../../agent-research/2611.31938-cape/">实现解读</a> · <a href="#qa-b2ad66b760205e9c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cape" data-paper-title="CAPE: Coordinating Calibration and Search for Tool-Use Policies" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CAPE: Coordinating Calibration and Search for Tool-Use Policies Agent State Key Laboratory of Electrical Insulation and Power Equipment, Xi’an Jiaotong University 2026-11-24 操作本身正确，序列化仍可能被隐藏parser配置误读。CAPE离线在可复制的候选配置族H上校准调用，编译一个部署时只按响应分支的策略。关键不是先全校准再搜索，而是在已到达配置子集V上动作效果全已知（local closure）就可用；持续维护可执行witness和未知效果的乐观上界，把有限编译预算用于可能改善策略的格子。 大量跨条件新进程测量及API矩阵超出本轮短时单A100/A30或Mac预算，成本过高，不复现（审查 DONE）。component_only / L1 CPU有限编译器诊断，diagnostic_only=true；不是LLM工具胜率复现。2026-11-24首发、2026-11-25发现/审查；不接入Evolve。CapeCompiler接受已声明的有限H、action catalog、初始策略和calibration callback，可向离线可复制h查询；1–8配置、1–4调用。  工具与协作 CPU机制组件 Agent 工具与协作执行：把计划变成可检查的动作 CAPE保留初始覆盖是否等于CapLite的安全保证？ 不等于。CAPE在parser候选族上最大化完成数并再省调用；CapLite冻结可信写序列及authority grounding。结果符合reference不能证明写入被用户授权，覆盖最优也不保证顺序权限。 教学例：一个上传策略能在四种日期parser都commit，仍可能把正确数据发给未经授权的接收者。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-edf5daacec026ed7">CAPE保留初始覆盖是否等于CapLite的安全保证？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acape">CAPE: Coordinating Calibration and Search for Tool-Use Policies</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · State Key Laboratory of Electrical Insulation and Power Equipment, Xi’an Jiaotong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不等于。CAPE在parser候选族上最大化完成数并再省调用；CapLite冻结可信写序列及authority grounding。结果符合reference不能证明写入被用户授权，覆盖最优也不保证顺序权限。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个上传策略能在四种日期parser都commit，仍可能把正确数据发给未经授权的接收者。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31938v1">原论文</a> · <a href="../../../../agent-research/2611.31938-cape/">实现解读</a> · <a href="#qa-edf5daacec026ed7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cape" data-paper-title="CAPE: Coordinating Calibration and Search for Tool-Use Policies" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CAPE: Coordinating Calibration and Search for Tool-Use Policies Agent State Key Laboratory of Electrical Insulation and Power Equipment, Xi’an Jiaotong University 2026-11-24 操作本身正确，序列化仍可能被隐藏parser配置误读。CAPE离线在可复制的候选配置族H上校准调用，编译一个部署时只按响应分支的策略。关键不是先全校准再搜索，而是在已到达配置子集V上动作效果全已知（local closure）就可用；持续维护可执行witness和未知效果的乐观上界，把有限编译预算用于可能改善策略的格子。 大量跨条件新进程测量及API矩阵超出本轮短时单A100/A30或Mac预算，成本过高，不复现（审查 DONE）。component_only / L1 CPU有限编译器诊断，diagnostic_only=true；不是LLM工具胜率复现。2026-11-24首发、2026-11-25发现/审查；不接入Evolve。CapeCompiler接受已声明的有限H、action catalog、初始策略和calibration callback，可向离线可复制h查询；1–8配置、1–4调用。  工具与协作 CPU机制组件 Agent 工具与协作执行：把计划变成可检查的动作 编译器校准时知道h，部署policy也能拿活跃h来选程序吗？ 不能。离线校准可以向已声明、可复制的候选h查询；返回Policy只保存action及响应分支。部署execute只能接工具响应/commit；完整effect表和独立穷举oracle留在评估侧。 教学例：同一probe返回day-first后再走对应分支可以；直接读取hidden_h=day-first后选序列化属于越界。 2026-11-25">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-38052c62185b0c45">编译器校准时知道h，部署policy也能拿活跃h来选程序吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acape">CAPE: Coordinating Calibration and Search for Tool-Use Policies</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-25 · State Key Laboratory of Electrical Insulation and Power Equipment, Xi’an Jiaotong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。离线校准可以向已声明、可复制的候选h查询；返回Policy只保存action及响应分支。部署execute只能接工具响应/commit；完整effect表和独立穷举oracle留在评估侧。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一probe返回day-first后再走对应分支可以；直接读取hidden_h=day-first后选序列化属于越界。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31938v1">原论文</a> · <a href="../../../../agent-research/2611.31938-cape/">实现解读</a> · <a href="#qa-38052c62185b0c45">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:caplite" data-paper-title="CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts Agent The University of Tokyo 2026-11-12 小模型既可能被提示注入欺骗，也可能生成本就错误的权限策略。CapLite把安全决策从模型生成物中移出：可信用户请求与工具schema决定权限，Planner在看到任何工具结果前提交写调用，之后模型只能从提取出的候选ID里绑定authority值，代码在真实副作用前再次校验。读写分类使用工具名及docstring的首个动词：两者都是read verb才是只读，任一为effect verb则写，未知拒绝。写参数默认authority，但正文载荷、时间和enum／bool控制项分开； 成本过高，不复现（审查 DONE）；component_only／L1确定性机制诊断，不是完整Agent防御评测。component_only／L1确定性机制诊断，不是完整Agent防御评测。完整实验高成本不复现（审查 DONE）。本地只支持显式平面schema的受限执行核，不声称通用安全保证。ToolPolicy冻结可信schema，拒绝未知操作及不支持的嵌套object。grounding_set执行显式Unicode词ngram和标识符抽取；不是语义指代解析。Candidate保留ID／来源，bind_candidates只筛既有候选；不会生成绑定。  工具与协作 提示注入与写入权限 Agent 工具与协作执行：把计划变成可检查的动作 CapLite的写入完整性意味着邮件正文也不会被注入影响吗？ 不意味着。它约束收件人、金额、对象、目的地等authority值及预提交写序列。自由payload、时间、最终答案和读内容不在同一保证内。 教学例：收件人必须是用户指定邮箱，但正文可能仍夹带错误文本；不应因此宣称整封邮件安全。 2026-11-15">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-caplite-13214169" class="ar-learning-paper-anchor"></span>

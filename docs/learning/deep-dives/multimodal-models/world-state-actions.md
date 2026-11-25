@@ -7,7 +7,7 @@ hide:
 
 # 会预测下一幕，还不等于会行动或保持同一个世界
 
-[多模态](../index.md) · 更新 2026-11-21 · 36 篇主题资料 / 20 篇重点对照
+[多模态](../index.md) · 更新 2026-11-25 · 37 篇主题资料 / 21 篇重点对照
 
 世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。
 
@@ -45,6 +45,7 @@ hide:
 | [Autoregressive View Model](../../../multimodal-models/2611.23417-autoregressive-view-model/README.md) · [原始来源](https://arxiv.org/abs/2611.23417v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | AVM不拟合显式3D表示，而在给定相机路径下生成短视图片段。预填图像/视频与历史生成片段统一成为context；检索保持活动上下文有界。先把双向视频DiT微调为N-in-1-out的flow matching，再以自身rollout做因果tuning和蒸馏，让生成内容可回到历史中支持后续重访。 | CWM在一个事实事件之后改变动作并复用同一扰动残差；AVM沿相机轨迹继续生成并检索历史视图。二者都使用world model语汇，但AVM的场景重访一致性不证明同一扰动反事实可识别。 |
 | [JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control](../../../multimodal-models/2611.24062-jepa-dots/README.md) · [原始来源](https://arxiv.org/abs/2611.24062v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 共享视觉骨干之后拆动力学和任务两条latent路径，语言FiLM只进入任务路径。world query只读动力学历史和给定clean动作，policy读历史、goal和noisy动作；多层mask同时阻断间接泄漏。固定参数、观测和给定动作时，换指令不能改变world预测，但policy可以生成不同动作。 | LeWAM联合world/action并用预测模型规划；JEPA Dots强调语言目标与动力学给定动作输入的隔离，部署world分支不参与动作搜索。相同masked-MoT背景不代表推理链相同。 |
 | [MV-JEPA: Post-Training Video Encoders for Cross-View Understanding](../../../foundation-models/2611.25172-mv-jepa/README.md) · [原始来源](https://arxiv.org/abs/2611.25172v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | MV-JEPA直接后训练已有JEPA视频编码器，强化不同摄像头视角之间的对象/时刻对应。共享student分别编码各context view的可见token；联合predictor利用所有context特征，既重建被mask的context位置，又预测一个完全held-out视图。held-out图像/特征从不进入student或predictor，只提供teacher目标；推理仍可独立编码单视角。 | Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行masked潜变量预测和unmasked物理态回归；MV-JEPA用另一个摄像头的latent作held-out目标，并让联合predictor从多个独立context视图推断。两者都不能把训练目标喂回推理输入，但MV-JEPA的跨view query不是Time-JEPA的传感器head；重放保持表征和物理时序对齐也是不同验收。 |
+| [CriticJEPA: World Models Are Better Critics Than Optimizers](../../../foundation-models/2611.32357-criticjepa/README.md) · [原始来源](https://arxiv.org/abs/2611.32357v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | CriticJEPA每层用真实训练轨迹的hindsight目标学习conditional flow提案，冻结层级rollout作选择；可短有锚精修，但最终按不含anchor的cost重选。排序能力与可利用的梯度方向分开验证。 | 预测—规划评测区分表示可读性、预测误差与实际成功；CriticJEPA在同一冻结模型上进一步区分候选来源、排序与优化。两者都不能用latent loss取代环境执行。CriticJEPA额外要求真实flow和多层时间合同，固定候选fixture只能是诊断，不能替代能力实现。 |
 
 </div>
 
@@ -145,6 +146,12 @@ LeWAM联合world/action并用预测模型规划；JEPA Dots强调语言目标与
 Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行masked潜变量预测和unmasked物理态回归；MV-JEPA用另一个摄像头的latent作held-out目标，并让联合predictor从多个独立context视图推断。两者都不能把训练目标喂回推理输入，但MV-JEPA的跨view query不是Time-JEPA的传感器head；重放保持表征和物理时序对齐也是不同验收。 完整context和held-out由EMA teacher编码，经逐token LayerNorm并stop-gradient。context视图分配互异随机view ID，held-out使用专属ID；masked-context和held-out使用两种不同mask embedding。Eq4对masked-context和全部held-out目标token等权，先逐example归一化，再对batch取均值，不能按view等权或全batch微平均。每epoch随机打散152次多视图与148次原始单视图replay，共享online encoder和predictor；optimizer后按0.99925更新teacher。
 
 对照来源：[mv-jepa](../../../foundation-models/2611.25172-mv-jepa/README.md) · [time-jepa](../../../foundation-models/2610.23982-time-jepa/README.md)
+
+### CriticJEPA: World Models Are Better Critics Than Optimizers
+
+预测—规划评测区分表示可读性、预测误差与实际成功；CriticJEPA在同一冻结模型上进一步区分候选来源、排序与优化。两者都不能用latent loss取代环境执行。CriticJEPA额外要求真实flow和多层时间合同，固定候选fixture只能是诊断，不能替代能力实现。 最终critic cost保留H-JEPA的目标空间、评分时间窗与action-consistency项；上层选择计划的首个预测状态作为子目标。论文FLOPs计入反传而非墙时。本地按18模型/多域训练规划矩阵高成本终态收录，无operator、无环境执行或自动重试。
+
+对照来源：[criticjepa](../../../foundation-models/2611.32357-criticjepa/README.md) · [jepa-prediction-planning](../../../foundation-models/2610.19375-jepa-prediction-planning/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -320,9 +327,23 @@ Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行
 
     对照来源：[mv-jepa](../../../foundation-models/2611.25172-mv-jepa/README.md) · [time-jepa](../../../foundation-models/2610.23982-time-jepa/README.md)
 
+### CriticJEPA比预测—规划评测多区分了什么？ {#cross-nov25-criticjepa}
+
+??? note "展开答案与例子"
+
+    **答案：** 前者在同一冻结模型里改变候选来源与搜索方式，区分能否排序、梯度是否有效和环境成功；后者用冻结解码协议拆表示与预测误差，并单独要求真实规划结果。
+
+    **教学例子：** 教学例：一步误差相同的模型可对flow提案有用、对长搜索生成的离分布候选无用；因此不能仅按一步loss选规划器。
+
+    对照来源：[criticjepa](../../../foundation-models/2611.32357-criticjepa/README.md) · [jepa-prediction-planning](../../../foundation-models/2610.19375-jepa-prediction-planning/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-25** · 预测—规划评测区分表示可读性、预测误差与实际成功；CriticJEPA在同一冻结模型上进一步区分候选来源、排序与优化。两者都不能用latent loss取代环境执行。CriticJEPA额外要求真实flow和多层时间合同，固定候选fixture只能是诊断，不能替代能力实现。 完整实验按成本终态收录，不以L1诊断或资料收录晋级Evolve。
+
+涉及：[criticjepa](../../../foundation-models/2611.32357-criticjepa/README.md) · [jepa-prediction-planning](../../../foundation-models/2610.19375-jepa-prediction-planning/README.md)
 
 **2026-11-21** · Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行masked潜变量预测和unmasked物理态回归；MV-JEPA用另一个摄像头的latent作held-out目标，并让联合predictor从多个独立context视图推断。两者都不能把训练目标喂回推理输入，但MV-JEPA的跨view query不是Time-JEPA的传感器head；重放保持表征和物理时序对齐也是不同验收。 本地组件证据与完整实验不复现分开记录。
 
@@ -384,7 +405,7 @@ Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行
 
 覆盖 22 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 36 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 37 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -424,6 +445,7 @@ Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行
 - [Autoregressive View Model](../../../multimodal-models/2611.23417-autoregressive-view-model/README.md)
 - [JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control](../../../multimodal-models/2611.24062-jepa-dots/README.md)
 - [MV-JEPA: Post-Training Video Encoders for Cross-View Understanding](../../../foundation-models/2611.25172-mv-jepa/README.md)
+- [CriticJEPA: World Models Are Better Critics Than Optimizers](../../../foundation-models/2611.32357-criticjepa/README.md)
 
 </details>
 

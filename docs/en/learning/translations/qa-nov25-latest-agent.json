@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:agent-kernel/retry-scope": {
+      "source_sha256": "d2f3cfb3131d92af970229313c4f728c66de01028dfa677e6426354113551c5e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not restart the whole task after one node raises?",
+        "answer": "With correct declared dependencies, only the failed node and its descendants need recovery. Completed independent siblings retain state and outputs; whole replay repeats work and exposes it to fresh transient failures.",
+        "example": "Teaching example: A/B/C fetch prices independently and a join needs all three. If A times out, retry A and the unexecuted join, not completed B/C."
+      }
+    },
+    "qa/agent-research:agent-kernel/actual-parent-context": {
+      "source_sha256": "c66f377551d08cdeb9d70d7b20920e6d40d1cccef60424d579994fffbef1fc71",
+      "reviewed": true,
+      "fields": {
+        "question": "Is waiting for a parent's termination sufficient?",
+        "answer": "No. Every parent must be complete, not failed/cancelled, and the child prompt must inherit actual latest outputs in declared order. Starting everything concurrently or substituting empty text violates content dependencies; SGR is not a semantic failure detector.",
+        "example": "Teaching example: a price join cannot recommend with B=NULL after B fails; after recovery it consumes all three actual texts in declared order."
+      }
+    },
+    "qa/agent-research:agent-kernel/recovery-vs-authorization": {
+      "source_sha256": "c8a46665cb8d9839c3a08e437a0ff29e166cb4cd82106afc5256e30e85c5837d",
+      "reviewed": true,
+      "fields": {
+        "question": "Can SGR state preservation replace RuntimeTickets?",
+        "answer": "No. SGR preserves sibling SAB records and permits reexecution. RuntimeTickets checks authority and obligations before effects and avoids automatic resend under callback uncertainty. Recovery and effect authorization are separate layers.",
+        "example": "Teaching example: a payment succeeds before its node throws, so SGR may run it again. An effect-layer transaction/idempotency contract is needed; unchanged siblings do not prevent duplicate payment."
+      }
+    },
+    "qa/agent-research:agent-kernel/stale-claim-reopen": {
+      "source_sha256": "7e0184729dbfa06ee4d4c161cc85e4019d3242152aebe387a41c61b3cfc9a82d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reject late completion from a pre-reopen claim?",
+        "answer": "Reopening requeues running work, while an old execution can still return. Completion must match the current running generation and owner, preventing old output from overwriting a new attempt. This is local single-owner handover, not a distributed lease proof.",
+        "example": "Teaching example: the old claim has generation 1 and the reopened claim 3. A late stale result cannot overwrite the new fresh result."
+      }
+    },
+    "qa/agent-research:cape/local-not-full-row": {
+      "source_sha256": "f13ae35dcd20dcced3e4411c094148aff6615847bbc9054a009b14daaf5be7c9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can an action be used before its full H row is known?",
+        "answer": "At a policy node only the response-consistent scope V remains possible. Knowing all effects on V provides local closure; outside-scope unknowns cannot alter that policy's paths.",
+        "example": "Teaching example: an upload rules out h4, so a probe needs calibration on h1/h2/h3 only. This does not make its complete H row known."
+      }
+    },
+    "qa/agent-research:cape/witness-vs-optimism": {
+      "source_sha256": "28b127cfbda7da176eb10542b54062ff88289feb6caa8af659febe56621a2ee8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not deploy an optimistic policy that appears to solve everything?",
+        "answer": "Unknown programs are assumed to commit and unknown probes to separate configurations only for an upper bound. Those responses may not exist. Deployment requires an acquired-effect witness preserving every R0 configuration; optimality needs equal valid bounds.",
+        "example": "Teaching example: three hypothetical probe responses may all become one error, merging continuations and making the optimistic tree unrealizable."
+      }
+    },
+    "qa/agent-research:cape/completion-vs-authority": {
+      "source_sha256": "2f86eea3dfb3700cebf3a67f2df6a12c68964ca1bfd22c48e5419fb76a538db7",
+      "reviewed": true,
+      "fields": {
+        "question": "Does protected CAPE coverage imply CapLite-style safety?",
+        "answer": "No. CAPE maximizes completion over parser candidates, then minimizes calls. CapLite freezes trusted write order and authority grounding. Matching a reference does not establish user authorization or write-prefix safety.",
+        "example": "Teaching example: an upload may commit under all four date parsers while sending the correct data to an unauthorized recipient."
+      }
+    },
+    "qa/agent-research:cape/calibration-deployment-boundary": {
+      "source_sha256": "07e3ac58612505a910df7418f67cad682a854c2c8de1f923ce338b7423b4790b",
+      "reviewed": true,
+      "fields": {
+        "question": "May deployment use the active h because calibration knows candidate h?",
+        "answer": "No. Offline calibration may query reproducible declared candidates. The returned policy stores actions/response branches only; execute receives tool observations and commits. Full effect tables and the independent oracle remain evaluator-side.",
+        "example": "Teaching example: branching after a day-first probe response is valid; reading hidden_h=day-first to choose serialization is not."
+      }
+    },
+    "qa/agent-research:recurscibench/transfer-not-source-gain": {
+      "source_sha256": "23b3dda77db3e8b3184cf9f4457071a1d52de41fb85f336f13d4877bd3be23ec",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do source-task gains not establish useful experience?",
+        "answer": "Memory/harness changes may fit source conditions only. RecurSciBench freezes a state selected on G-evolve and compares independent initial/evolved copies on G-test without transferring experience between test tasks.",
+        "example": "Teaching example: a simple-model lesson from chemistry can help physical extrapolation but hurt a chlorophyll task that needs multiple covariates."
+      }
+    },
+    "qa/agent-research:recurscibench/taskwise-normalization": {
+      "source_sha256": "eec850fb06104b14d0b5bcce63ba9605f4858eda915450ffdd14c61d2015f686",
+      "reviewed": true,
+      "fields": {
+        "question": "Can relative aggregate-score change replace Evolution Gain?",
+        "answer": "No. Runs are normalized against reference-to-optimum gaps, averaged within each task, then task-relative changes are averaged equally. Aggregate differences lose the relative weighting of small versus large baselines.",
+        "example": "Teaching example: scores .2/.8 becoming .3/.8 give mean task-relative gain 25%, while aggregate mean .5 to .55 rises only 10%."
+      }
+    },
+    "qa/agent-research:recurscibench/fixed-weights-vs-coevolution": {
+      "source_sha256": "0981c4eee1033b58b0aa5bde27d9e81165c79ef23644179ef519c999710d6867",
+      "reviewed": true,
+      "fields": {
+        "question": "Does it expose the same mutable objects as CoEvoBench?",
+        "answer": "No. The four RecurSciBench systems freeze backbone weights and change subsets of solutions, memory, harness and improvement strategy to test transfer. CoEvoBench permits weight/harness intervention choices and audits development/selection/test access.",
+        "example": "Teaching example: moving a learned validation-split rule to a new scientific domain tests experience transfer; choosing whether to train a 9B model or change a tool tests intervention choice."
+      }
+    },
+    "qa/agent-research:recurscibench/scorer-isolation-cost": {
+      "source_sha256": "209c12d456e8715a590a878305bf7127104c9ec1173495e017dc54e6ffa1cd0d",
+      "reviewed": true,
+      "fields": {
+        "question": "Does implementing normalization alone, or giving agents references, make an affordable reproduction?",
+        "answer": "Neither. The defining workflow includes scientific task construction/seven checks, source evolution, state freezing and independent G-test execution. Scorers/references stay evaluator-side; agents cannot read gold. The A800, six-hour-cap multi-domain campaign is terminally not reproduced under the cost gate.",
+        "example": "Teaching example: reading the reference and printing .5 checks arithmetic only; it performs no autonomous science, and using that reference in a policy contaminates evaluation."
+      }
+    }
+  }
+}

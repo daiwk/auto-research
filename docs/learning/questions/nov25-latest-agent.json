@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "agent-research:agent-kernel": {
+      "questions": [
+        {
+          "id": "retry-scope",
+          "level": "basics",
+          "question": "为什么一次节点异常不应让整个任务从头重来？",
+          "answer": "在声明正确的DAG中，只有失败节点及其依赖后代需要重试；已完成独立兄弟的状态和输出应保持。全重放会重复已完成工作，并再次暴露于暂时故障。",
+          "example": "教学例：A/B/C独立取价，汇总依赖三者；A超时，只重试A和未运行汇总，不重新取B/C。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-25"
+        },
+        {
+          "id": "actual-parent-context",
+          "level": "mechanism",
+          "question": "并行子节点只等父任务结束就足够吗？",
+          "answer": "不够，父节点必须complete而非failed/cancelled，且子prompt要继承每个声明父节点的真实最新输出。只并发启动或填空文本会违反内容依赖；SGR不是语义错误检测器。",
+          "example": "教学例：汇总有A和C价格但B失败时不能把B=NULL照常推荐；B恢复后按声明顺序读入三份文本。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-25"
+        },
+        {
+          "id": "recovery-vs-authorization",
+          "level": "comparison",
+          "question": "SGR的状态保持能替代RuntimeTickets的副作用合同吗？",
+          "answer": "不能。SGR保护SAB里的兄弟状态并允许重执行；RuntimeTickets在副作用前核权限与obligation，callback不确定时不自动重发。编排恢复与授权/副作用边界是不同层。",
+          "example": "教学例：付款已成功后节点抛错，SGR可再次执行；需要下层事务/幂等合同，不能拿兄弟节点没变证明不会重复付款。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-25"
+        },
+        {
+          "id": "stale-claim-reopen",
+          "level": "implementation",
+          "question": "重开后为什么要拒绝旧claim的晚到完成？",
+          "answer": "重开将旧running重新排队，旧执行可能仍晚到。generation和owner必须与当前running claim一致才能写完成，防止旧结果覆盖新尝试；这是本地单owner交接，不是分布式租约证明。",
+          "example": "教学例：旧claim generation=1，重开后新claim=3；旧线程回传stale不能覆盖新线程的fresh。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-25"
+        }
+      ]
+    },
+    "agent-research:cape": {
+      "questions": [
+        {
+          "id": "local-not-full-row",
+          "level": "basics",
+          "question": "为什么一个动作不必在所有H上测完才能使用？",
+          "answer": "策略到达某节点时只剩响应一致的配置子集V。该动作在V上效果全已知就locally closed；V外未知效果不会改变此策略实际执行路径。",
+          "example": "教学例：首次上传已排除h4，probe只需在剩余h1/h2/h3上校准；不能因此宣称全H上的probe行已知。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-25"
+        },
+        {
+          "id": "witness-vs-optimism",
+          "level": "mechanism",
+          "question": "乐观策略看起来能全成功，为什么不能直接部署？",
+          "answer": "unknown program被假设立即commit，unknown probe被假设逐配置区分，只用于有效上界。这些响应未必真实存在。部署必须来自已取得效果组成的witness，并逐配置覆盖R0；只有lower=upper才证最优。",
+          "example": "教学例：未知probe的三个假想响应可能实测全是同一error，三条可选续段会合并，原来的乐观树不可执行。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-25"
+        },
+        {
+          "id": "completion-vs-authority",
+          "level": "comparison",
+          "question": "CAPE保留初始覆盖是否等于CapLite的安全保证？",
+          "answer": "不等于。CAPE在parser候选族上最大化完成数并再省调用；CapLite冻结可信写序列及authority grounding。结果符合reference不能证明写入被用户授权，覆盖最优也不保证顺序权限。",
+          "example": "教学例：一个上传策略能在四种日期parser都commit，仍可能把正确数据发给未经授权的接收者。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-25"
+        },
+        {
+          "id": "calibration-deployment-boundary",
+          "level": "implementation",
+          "question": "编译器校准时知道h，部署policy也能拿活跃h来选程序吗？",
+          "answer": "不能。离线校准可以向已声明、可复制的候选h查询；返回Policy只保存action及响应分支。部署execute只能接工具响应/commit；完整effect表和独立穷举oracle留在评估侧。",
+          "example": "教学例：同一probe返回day-first后再走对应分支可以；直接读取hidden_h=day-first后选序列化属于越界。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-25"
+        }
+      ]
+    },
+    "agent-research:recurscibench": {
+      "questions": [
+        {
+          "id": "transfer-not-source-gain",
+          "level": "basics",
+          "question": "源科学任务上进步，为什么还不能证明经验有用？",
+          "answer": "记忆或harness可能只适合源条件。RecurSciBench冻结从G-evolve选择的状态，再以独立副本在G-test比较初始与演化状态，不携带测试任务间经验，以区分迁移和源任务适配。",
+          "example": "教学例：化学曲线中的简单模型经验可能帮外推物理曲线，却伤害需要多协变量的叶绿素任务。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-25"
+        },
+        {
+          "id": "taskwise-normalization",
+          "level": "mechanism",
+          "question": "Evolution Gain能直接用总分相对变化替代吗？",
+          "answer": "不能。先用reference到optimum的gap归一化每run，再任务内平均，最后对各任务相对变化等权平均。小基线任务与大基线任务的相对变化不能由总分差保留。",
+          "example": "教学例：两任务从0.2/0.8到0.3/0.8，平均任务相对gain为25%，但总平均分从0.5到0.55只涨10%。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-25"
+        },
+        {
+          "id": "fixed-weights-vs-coevolution",
+          "level": "comparison",
+          "question": "与CoEvoBench相比，这里递归自改进的可变对象相同吗？",
+          "answer": "不同。RecurSciBench四系统冻结backbone权重，分别改变解、记忆、harness或改进策略，测跨任务迁移；CoEvoBench允许researcher选择训练权重或修改harness，并审计开发/选择/Test访问。",
+          "example": "教学例：把在源任务学到的验证切分规则迁往新科学域，是经验迁移；根据反馈决定训9B权重还是改工具，是另一种干预选择。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-25"
+        },
+        {
+          "id": "scorer-isolation-cost",
+          "level": "implementation",
+          "question": "只实现归一化公式，或把参考解交给Agent，能算低成本复现吗？",
+          "answer": "都不能。核心还包含科学任务构建/七项检查、source演化、冻结状态及独立G-test执行。scorer/reference必须在评估侧；被测Agent不能读gold。完整A800/6小时上限多域矩阵已按成本门槛终态不复现。",
+          "example": "教学例：让脚本读reference后输出0.5只验证算术；既没自主科研，也破坏若把reference用于policy的评测边界。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-25"
+        }
+      ]
+    }
+  }
+}

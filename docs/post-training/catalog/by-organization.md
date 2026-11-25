@@ -428,6 +428,10 @@
 
 - 2026-11-18 · 一作：Zhengyuan Fan · [How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation](../2611.24005-dcc-aggregation/README.md)（`dcc-aggregation`）：等权rubric相加并不代表各维贡献相等：每维满足/不满足样本的平均分差形成reward gain。论文把候选奖励差精确拆成基础满足数量信号、gain imbalance项和残差；把gain全部归一成1反而可能放大小gain维度的噪声。
 
+## Northwestern University
+
+- 2026-11-24 · 一作：Yibo Wang · [EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor](../2611.32810-epro/README.md)（`epro`）：同一权重在BF16训练引擎与低精度rollout引擎中不一定给出相同分布。旧checkpoint时两者可观测，但中间learner更新对应的当前执行分布不可直接读取。
+
 ## OpenAI
 
 - 2023-05-31 · 一作：Hunter Lightman · [Let's Verify Step by Step](../2305.20050-process-supervision/README.md)（`process-supervision`）：逐步奖励模型判断每个推理步骤，并优先标注不确定步骤；本地与 outcome-only 奖励使用同一候选和预算。

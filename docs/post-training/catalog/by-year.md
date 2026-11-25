@@ -4,6 +4,7 @@
 
 ## 2026
 
+- 2026-11 · [EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor](../2611.32810-epro/README.md)（`epro`）：同一权重在BF16训练引擎与低精度rollout引擎中不一定给出相同分布。旧checkpoint时两者可观测，但中间learner更新对应的当前执行分布不可直接读取。
 - 2026-11 · [Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences](../2611.30135-shpo/README.md)（`shpo`）：DPO把偏好写成response标量势之差，围绕三角形相加为零，不能表示A胜B、B胜C、C胜A的局部环。SHPO保留DPO项，再把response最后层hidden仅在response token上均值池化，经无bias W投影到2K维并归一化；每个二维plane的有向面积乘γ后相加，构造交换两回答即反号的残差。
 - 2026-11 · [Verifiable On-Policy Distillation](../2611.30325-vopd/README.md)（`vopd`）：RLVR只给已采样整条response稀疏结果反馈；OPD给每个访问prefix的完整teacher分布，但该信号未被verifier验证。VOPD先对每组response计算teacher/reference累计log-ratio D，再以population标准差标准化V和D，最小二乘投影得到Pearson相关c。
 - 2026-11 · [CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency](../2611.27119-ctrl/README.md)（`ctrl`）：CTRL让每张GPU同时驻留learner rank和持续rollout shard，在CUDA MPS下共享SM。为腾出显存，优化器和immutable policy版本保存在host，learner仅流式装入有限层窗口。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**

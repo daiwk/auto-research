@@ -550,7 +550,7 @@
     "policy-optimization": {
       "title": "同一个GRPO名字之外：优势尺度、裁剪单位与训推失配",
       "thesis": "GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。",
-      "updated": "2026-11-23",
+      "updated": "2026-11-25",
       "reviewed_papers": [
         "post-training:rcea",
         "post-training:rlid",
@@ -617,7 +617,8 @@
         "post-training:ash-hint-steering",
         "post-training:led-edits",
         "post-training:dfrl",
-        "post-training:retokenization-update"
+        "post-training:retokenization-update",
+        "post-training:epro"
       ],
       "axes": [
         "优势尺度：组均值、组标准差、长度归一化",
@@ -807,6 +808,16 @@
             "与已有方法的关系",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "post-training:epro",
+          "position": "从旧执行锚点按训练分布变化transport中心，结合old-training下log-ratio方差与outward-only软衰减；importance和gate在反传时冻结。CPU执行full-vocab和附B head-tail公式，不运行执行引擎或RL。",
+          "tradeoff": "RSC在固定behavior下用独立auxiliary动作估计center并加reverse-KL；EPRO使center随transport变化，再按分布移动衰减outward更新。固定behavior校正、预测执行策略和实际执行误差是不同对象，不能把两者都简化成reward减均值。没有共同LLM训练测量，不比较能力。",
+          "sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -915,6 +926,14 @@
           "papers": [
             "post-training:retokenization-update",
             "post-training:dfrl"
+          ]
+        },
+        {
+          "title": "分布预测不是分布观测，score中心也不是reward中心",
+          "body": "EPRO Eq.2通过mu0*pi_current/pi0归一化构造当前执行策略预测；当learner不动时恢复mu0。RSC固定behavior中心并用reverse-KL限制漂移，EPRO中心随transport演进，再由Policy Shift衰减outward贡献。预测误差上界的理论假设不由一个低Policy Shift自动保证；附B单tail bucket还会隐藏尾部内部变化。CPU有限差分必须固定importance与SSC系数，否则检验的是另一条梯度。full/head-tail梯度差是公开的近似边界，不是要求消掉的失败。",
+          "papers": [
+            "post-training:epro",
+            "post-training:regularized-score-centering"
           ]
         }
       ],
@@ -1060,6 +1079,16 @@
           "papers": [
             "post-training:retokenization-update",
             "post-training:dfrl"
+          ]
+        },
+        {
+          "id": "nov25-epro-centering",
+          "question": "EPRO和RSC都做score centering，为何仍要区分固定behavior与transport分布？",
+          "answer": "learner多次更新后，旧执行behavior不变，而transport分布借训练变化移动。两种中心对同一score的期望可不同；再加RSC的reverse-KL与EPRO的SSC并非等价约束。",
+          "example": "教学例：训练与执行旧锚点有偏差时，零learner变化必须恢复旧执行锚点；后续改变训练概率时移动中心，而不是只把reward减去组均值。",
+          "papers": [
+            "post-training:epro",
+            "post-training:regularized-score-centering"
           ]
         }
       ],
@@ -1314,6 +1343,18 @@
           "source_revisions": {
             "post-training:retokenization-update": "414fe7e23ed0cb58275987eb2d1b5e73c1946d9eb1eecc8297d0c79292bdcdb9",
             "post-training:dfrl": "897844a59cfe062c84c423073f75dd192b69ce998bdab4331fa01a47bce6ff39"
+          }
+        },
+        {
+          "date": "2026-11-25",
+          "papers": [
+            "post-training:epro",
+            "post-training:regularized-score-centering"
+          ],
+          "summary": "实际重读RSC当前README并对照EPRO固定v1 Eq.2/8/10–12与附B，新增固定behavior中心和transport预测中心的区别，保留STE/预测误差假设、冻结乘数和tail粗粒化边界。两者本地组件不能构成同预算能力比较；EPRO完整四模型RL高成本不复现，审查DONE。",
+          "source_revisions": {
+            "post-training:epro": "66703ac045c4039cf8dc8eb5df856eb2ad7655bf23e2e5cbcf122bab606a4632",
+            "post-training:regularized-score-centering": "19435f7b79d7e4ed8130b2b8f144410da32517d77ac78aff028ba1d87c77f3a2"
           }
         }
       ]
