@@ -1,5 +1,7 @@
 # Auto Research: 410+ AI Paper Implementations, Public Experiment Audits & Automated Model Evolution
 
+<!-- source-sha256: b0e39389672678022b80a90c60e003dc3170d86ff4de4b9354b1e1f58ecc072d -->
+
 [简体中文](README.md) · English
 
 > **Go beyond reading papers—verify them with executable code and public data.**  
