@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/recommendation/history-ranking-backbones/update/2026-11-24/3": {
+      "source_sha256": "12d0a90dafdca0e3c803ce2add7eb53a9215ac69b5fabf13621772c75513e0b4",
+      "reviewed": true,
+      "fields": {
+        "summary": "Refreshed the online evidence from ECHO v3 §4.6: total app usage time rose 0.240% on Kuaishou and 0.373% on Kuaishou Lite. v3 does not report a per-user gain. This does not change the long-history mechanism comparison and is not a result measured in the local selector-loss experiment."
+      }
+    }
+  }
+}

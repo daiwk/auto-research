@@ -1,6 +1,6 @@
 # ECHO: Selector distillation and boundary supervision for long user histories
 
-<!-- source-sha256: 84371f3b8148cdea47cd190b42b0bfa2ce261d5bdb8c7e2687c92c5cda4ad8dd -->
+<!-- source-sha256: 6c40a6cf7575d412d34d06558349c7039fa867ca80bc203b770b7cbc793acf60 -->
 
 [简体中文](README.md)
 
@@ -42,7 +42,7 @@ Use detached full teacher probabilities and temperature-squared CE. Sharper mini
 
 ### Results reported by the authors
 
-The paper compares GAUC on KuaiRand-1K and private tasks. Section 4.6 seven-day production A/B with 5% treatment reports +0.613% total App use and +0.640% per user versus production TWIN/compression baseline. Roughly 160× FLOP reduction is a full serving-budget comparison, not a local loss speedup.
+The paper compares GAUC on KuaiRand-1K and private tasks. [v3 §4.6](https://arxiv.org/html/2610.28569v3#S4.SS6) reports total app usage time gains of **0.240%** on Kuaishou and **0.373%** on Kuaishou Lite against their respective production systems. It describes a seven-day A/B test with 5% treatment traffic for the Kuaishou short-video scenario; it does not separately specify the Lite traffic split or report a per-user lift. At a 100K history length, [v3 §4.4](https://arxiv.org/html/2610.28569v3#S4.SS4) estimates that ECHO uses about 1/159.2 of STCA’s inference sequence-branch FLOPs. This is not an end-to-end latency measurement or a speedup measured in the local loss experiment.
 
 ## Local reproduction and limits
 
