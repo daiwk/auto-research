@@ -93,14 +93,27 @@ def project_spatial(points, matrix, *, curvature: float = 1.0):
 
 
 def pairwise_distance(points, *, curvature: float = 1.0):
-    """Hyperbolic law of cosines with a stable radial-difference expression."""
+    """Stable half-angle form of the hyperbolic law of cosines.
+
+    Computing ``1 - u @ u.T`` leaves a first-order rounding residual even
+    for identical unit vectors. Large radii amplify it by sinh(r_i)sinh(r_j).
+    Direction differences instead give a second-order error near a common ray.
+    The half-angle form also avoids subtracting one from cosh of a small gap.
+    """
     root = _curvature(curvature)
     r, u = lorentz_to_polar(points, curvature=curvature)
-    angle_loss = np.clip(1 - u @ u.T, 0, 2)
+    angle_loss = np.empty((len(u), len(u)), dtype=np.float64)
+    # Row-wise differences avoid an O(n*n*d) temporary. For normalized u,v,
+    # ||u-v||^2/2 = 1-cos(theta), without Gram-matrix cancellation.
+    for i, direction in enumerate(u):
+        angle_loss[i] = .5 * np.square(direction-u).sum(axis=1)
+    np.clip(angle_loss, 0, 2, out=angle_loss)
     a = root * r
-    argument = np.cosh(a[:, None] - a[None, :]) + np.outer(np.sinh(a), np.sinh(a)) * angle_loss
-    result = np.arccosh(np.maximum(argument, 1)) / root
-    np.fill_diagonal(result, 0)
+    half_argument = np.square(np.sinh((a[:, None]-a[None, :])/2))
+    half_argument += .5 * np.outer(np.sinh(a), np.sinh(a)) * angle_loss
+    result = 2 * np.arcsinh(np.sqrt(half_argument)) / root
+    if not np.isfinite(result).all():
+        raise ValueError("pair distances exceed the numerical range")
     return result
 
 
@@ -121,14 +134,20 @@ def diagnostic(seed: int, device: str = "cpu") -> dict:
     distortion = lambda z: float(np.abs(pairwise_distance(z)[mask] / original[mask] - 1).mean())
     ray = polar_to_lorentz(np.array([0.2, 1.1, 1.9]), np.tile(u[1], (3, 1)))
     ray_error = float(np.max(np.abs(pairwise_distance(project_rap(ray, p)) - pairwise_distance(ray))))
+    large_ray = polar_to_lorentz(np.array([20.,20.,20.001]), np.tile(u[1],(3,1)))
+    large_distances = pairwise_distance(large_ray)
+    large_ray_error = float(np.max(np.abs(large_distances-np.abs(np.array([20.,20.,20.001])[:,None]-np.array([20.,20.,20.001])[None,:]))))
     manifold_error = float(np.max(np.abs(-y[:, 0] ** 2 + (y[:, 1:] ** 2).sum(axis=1) + 1)))
     return {"seed": seed, "device": device, "evaluation_tier": "l1_mechanism", "diagnostic_only": True,
             "checks": {"exact_radius": bool(np.max(np.abs(yr-r)) < 1e-12),
                        "target_hyperboloid": bool(manifold_error < 1e-12),
                        "same_ray_distance": bool(ray_error < 1e-7),
+                       "large_radius_duplicate_points": bool(large_distances[0,1] == 0),
+                       "large_radius_same_ray_distance": bool(large_ray_error < 1e-9),
                        "anchor_is_preserved": bool(np.array_equal(y[0], np.array([1.] + [0.]*8)))},
             "metrics": {"radial_max_abs_error": float(np.max(np.abs(yr-r))),
                         "hyperboloid_max_abs_error": manifold_error, "same_ray_max_abs_error": ray_error,
+                        "large_radius_same_ray_max_abs_error": large_ray_error,
                         "rap_mean_relative_distortion": distortion(y),
                         "tangent_mean_relative_distortion": distortion(project_tangent(x,p)),
                         "spatial_mean_relative_distortion": distortion(project_spatial(x,p)),

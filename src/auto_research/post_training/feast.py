@@ -5,6 +5,7 @@ Persistent atomic histories survive policy-adaptive PCA/GMM regrouping.
 The diagnostic uses named synthetic arrays, not model-capability evidence.
 """
 
+import copy
 import math
 
 import numpy as np
@@ -23,6 +24,26 @@ def _integer(value, name, minimum=1):
     if type(value) is not int or value < minimum:
         raise ValueError(f"{name} must be an integer >= {minimum}")
     return value
+
+
+def _temperature(value):
+    if isinstance(value, (bool, np.bool_)) or not np.isscalar(value):
+        raise ValueError("positive finite temperature required")
+    try:
+        value = float(value)
+    except (TypeError, ValueError) as exc:
+        raise ValueError("positive finite temperature required") from exc
+    if not math.isfinite(value) or value <= 0:
+        raise ValueError("positive finite temperature required")
+    return value
+
+
+def _proportional_weights(log_scores, temperature):
+    # Subtract BEFORE dividing: even a finite subnormal temperature must not
+    # turn all log scores into -inf and then produce inf-inf/NaN. Underflow
+    # of non-maximal relative masses is harmless; at least one weight is one.
+    with np.errstate(over="ignore", under="ignore"):
+        return np.exp((log_scores-log_scores.max())/temperature)
 
 
 def kmeans(vectors, clusters, *, seed=42, restarts=10, max_iterations=300, tolerance=1e-4):
@@ -179,10 +200,8 @@ class FeastScheduler:
         psi = 1+.20/(1+np.exp((self.m-.5)/.05))
         return .05+self.u*phi*psi*(1+.50*np.abs(self.trend))+.05*shortfall
 
-    def group_weights(self, *, prompts_per_group=32, temperature=1.):
+    def _group_log_scores(self, prompts_per_group):
         _integer(prompts_per_group, "prompts_per_group")
-        if not math.isfinite(temperature) or temperature <= 0:
-            raise ValueError("positive finite temperature required")
         priority = self.priorities()
         unseen = np.bincount(self.assignment, weights=self.unseen, minlength=self.atoms)
         groups, weights = np.unique(self.groups), []
@@ -190,39 +209,69 @@ class FeastScheduler:
             members = self.groups == c
             capacity = unseen[members].sum()
             mean = (np.dot(unseen[members], priority[members])/capacity if capacity else priority[members].mean())
-            weights.append((.05+min(1., capacity/prompts_per_group)*(mean-.05))**(1/temperature))
-        return groups, np.array(weights)
+            weights.append(.05+min(1., capacity/prompts_per_group)*(mean-.05))
+        return groups, np.log(np.array(weights))
+
+    def group_weights(self, *, prompts_per_group=32, temperature=1.):
+        """Finite proportional weights (maximum one), not absolute powered scores.
+
+        Only relative mass affects Eq.5. Extremely small non-maximal masses may
+        underflow to zero here; ``plan`` recomputes weights after EVERY draw so
+        remaining clusters never become ineligible through that underflow.
+        """
+        temperature = _temperature(temperature)
+        groups, log_scores = self._group_log_scores(prompts_per_group)
+        return groups, _proportional_weights(log_scores, temperature)
 
     def plan(self, *, selected_groups=4, prompts_per_group=32, temperature=1.):
-        """Use ONLY historical observations, then reserve each selected group's slots."""
+        """Plan atomically from historical observations; failures consume no state.
+
+        Eq.5 is sampled sequentially without replacement, re-normalizing in log
+        space over the remaining clusters after each draw. Capacity checks do
+        not filter/reselect clusters: any insufficient selected cluster fails
+        the entire plan before unseen/cursor/RNG state is committed.
+        """
         _integer(selected_groups, "selected_groups")
-        groups, weights = self.group_weights(prompts_per_group=prompts_per_group, temperature=temperature)
+        temperature = _temperature(temperature)
+        groups, log_scores = self._group_log_scores(prompts_per_group)
         if selected_groups > len(groups):
             raise ValueError("not enough groups")
-        selected = self.rng.choice(groups, size=selected_groups, replace=False, p=weights/weights.sum())
+        rng = copy.deepcopy(self.rng)
+        remaining, selected = list(range(len(groups))), []
+        for _ in range(selected_groups):
+            weights = _proportional_weights(log_scores[remaining], temperature)
+            index = int(rng.choice(len(remaining), p=weights/weights.sum()))
+            selected.append(groups[remaining.pop(index)])
+        # Validate ALL selected reservations before producing any prompt slots.
+        members_by_group = {int(c): np.flatnonzero(self.groups == c) for c in selected}
+        if any(np.isin(self.assignment, members).sum() < prompts_per_group
+               for members in members_by_group.values()):
+            raise ValueError("selected cluster has insufficient unique prompt capacity")
+        pending_unseen, pending_cursor = self.unseen.copy(), self.cursor.copy()
         priority, result = self.priorities(), {}
         for c in selected:
-            members = np.flatnonzero(self.groups == c)
-            if np.isin(self.assignment, members).sum() < prompts_per_group:
-                raise ValueError("selected cluster has insufficient unique prompt capacity")
+            members = members_by_group[int(c)]
             chosen = []
             for _ in range(prompts_per_group):
-                unseen = np.bincount(self.assignment, weights=self.unseen, minlength=self.atoms)[members]
+                unseen = np.bincount(self.assignment, weights=pending_unseen, minlength=self.atoms)[members]
                 if unseen.sum():
                     capacity = unseen
                 else:
                     capacity = np.array([np.count_nonzero(self.assignment == i)-sum(self.assignment[j] == i for j in chosen)
                                          for i in members])
                 mass = priority[members]*capacity
-                atom = int(self.rng.choice(members, p=mass/mass.sum()))
+                atom = int(rng.choice(members, p=mass/mass.sum()))
                 cycle = self.cycles[atom]
-                while cycle[self.cursor[atom] % len(cycle)] in chosen:
-                    self.cursor[atom] += 1
-                prompt = cycle[self.cursor[atom] % len(cycle)]
-                self.cursor[atom] += 1
-                self.unseen[prompt] = False
+                while cycle[pending_cursor[atom] % len(cycle)] in chosen:
+                    pending_cursor[atom] += 1
+                prompt = cycle[pending_cursor[atom] % len(cycle)]
+                pending_cursor[atom] += 1
+                pending_unseen[prompt] = False
                 chosen.append(prompt)
             result[int(c)] = chosen
+        self.unseen[:] = pending_unseen
+        self.cursor[:] = pending_cursor
+        self.rng.bit_generator.state = rng.bit_generator.state
         return result
 
     def observe(self, rewards_by_prompt, *, total_budget):
