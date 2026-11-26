@@ -7,7 +7,7 @@ hide:
 
 # 奖励从哪里来，信用才该分到哪里
 
-[LLM 后训练](../index.md) · 更新 2026-11-19 · 49 篇主题资料 / 19 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-26 · 50 篇主题资料 / 20 篇重点对照
 
 过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。 CONCUR另处理奖励维度之间的优先级，把门控辅助优势投影到主奖励保序锥；这不是沿时间轴分配token信用。
 
@@ -44,6 +44,7 @@ hide:
 | [GPRM: Global Perspective Process Reward Model](../../../post-training/2611.20755-gprm/README.md) · [原始来源](https://arxiv.org/abs/2611.20755v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 只收录方法和成本；不以字符串parser或固定规则替代4维global PRM。 | Bait对外部reward的probe/policy差做防御变换，不判断推理step；GPRM学习带预测历史和未来trajectory的四维过程模型。二者都要隔离scorer信息，但不能用Bait数值核或标签parser替代PRM。 |
 | [Evidence-Based Credit Assignment for Search-Augmented Language Models](../../../post-training/2611.23824-eca-credit/README.md) · [原始来源](https://arxiv.org/abs/2611.23824v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 固定G=8、H=3的势函数suffix return、对侧fold样本标准差/0.25 floor、novelty gate、search-local token advantage及无ratio clip的序列求和策略损失。冻结scorer打分、检索器和完整LLM训练未实现。 | OpCredit在KG操作上组合复用分支结果的BOC与答案邻域的FTC；ECA在文本检索中用冻结模型对证据的答案似然做势函数。二者都把训练信用对齐到操作span，但不能互换状态定义、势函数或把训练gold放进Actor。 |
 | [How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation](../../../post-training/2611.24005-dcc-aggregation/README.md) · [原始来源](https://arxiv.org/abs/2611.24005v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | CPU精确1D two-medians、共享clip区间、相同分数退化、最小split tie-break与可选权重归约。只处理已存在的合法judge分数，不调用或伪造judge，也不训练GRPO。 | DynamicRubric改变评估维度和权重，并与policy共进化；DCC把rubric、judge和权重视为给定，仅根据当前候选组数值拟合共享clip端点。二者解决评估器适应与分数量纲影响两个不同层次，不可把聚合核当动态judge。 |
+| [BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees](../../../post-training/2611.34746-briar/README.md) · [原始来源](https://arxiv.org/abs/2611.34746v1)<br>章节：核心公式、与已有方法的关系、结果、负控与边界 | 显式prefix树上结果分歧前沿、边界调制异方差RTS/LMMSE与最小吸收前沿后的零和log长度优势；本地CPU核验Eq3/5–10，不运行LLM/RL。 | OpCredit按操作上下文匹配支持集得到BOC、按训练答案邻域得到FTC；BRIAR的固定经验方差和树全局后验并非这些图语义信号。两者均须隔离训练信用与被评测Agent输入，无同预算能力比较。 |
 
 </div>
 
@@ -132,6 +133,12 @@ OpCredit在KG操作上组合复用分支结果的BOC与答案邻域的FTC；ECA�
 DynamicRubric改变评估维度和权重，并与policy共进化；DCC把rubric、judge和权重视为给定，仅根据当前候选组数值拟合共享clip端点。二者解决评估器适应与分数量纲影响两个不同层次，不可把聚合核当动态judge。 two-medians可让孤立极端值自成一簇，因此共享区间上界就等于该极值。DCC提供条件性的贡献上界，不是保证移除所有outlier或提高任务能力。
 
 对照来源：[dcc-aggregation](../../../post-training/2611.24005-dcc-aggregation/README.md) · [dynamic-rubric](../../../reproductions/2607.20083-dynamic-rubric/README.md)
+
+### 局部信用既可能来自匹配轨迹，也可能来自全局树后验
+
+实际重读OpCredit当前README：BOC去重的是匹配上下文下的轨迹支持集，FTC比较操作局部前沿，不把训练gold输入actor。BRIAR将已采样prefix树视为Gaussian状态空间，向上信息和向下后验融合使兄弟分支共同影响信用；dense covariance是独立数值参考。Eq5的2.2倍和长度项并不逐边硬性满足martingale方差上界，suffix token排除也不保证共享参数更新后prefix行为不变。CPU等价检查只能支持该数值组件，完整16/32A100矩阵成本过高不复现。
+
+对照来源：[briar](../../../post-training/2611.34746-briar/README.md) · [opcredit](../../../post-training/2610.21345-opcredit/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -287,9 +294,23 @@ DynamicRubric改变评估维度和权重，并与policy共进化；DCC把rubric�
 
     对照来源：[dcc-aggregation](../../../post-training/2611.24005-dcc-aggregation/README.md) · [dynamic-rubric](../../../reproductions/2607.20083-dynamic-rubric/README.md)
 
+### 相同实体的两条轨迹可以直接合并成BRIAR共享prefix吗？ {#cross-nov26-briar-boundary}
+
+??? note "展开答案与例子"
+
+    **答案：** 不可以。共享prefix要求完整可见历史相同；OpCredit也需上下文匹配，实体相同不代表访问集合、预算和阶段相同。忽略历史会把不同条件概率和训练信用混为一谈。
+
+    **教学例子：** 教学例：一条轨迹已访问实体A且只余1步，另一条尚未访问且余3步；即使当前实体相同，其续写分布也不同，不能仅用实体ID共用posterior。
+
+    对照来源：[briar](../../../post-training/2611.34746-briar/README.md) · [opcredit](../../../post-training/2610.21345-opcredit/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-26** · 实际重读OpCredit README并对照BRIAR固定v1 Eq3/5–10、附B/C，新增匹配操作支持集与Gaussian树后验的区别；纠正硬方差包络/共享参数prefix不变的过强解读。BRIAR仅CPU组件，完整多卡RL成本DONE，不据此比较Agent能力。
+
+涉及：[briar](../../../post-training/2611.34746-briar/README.md) · [opcredit](../../../post-training/2610.21345-opcredit/README.md)
 
 **2026-11-19** · CPU精确1D two-medians、共享clip区间、相同分数退化、最小split tie-break与可选权重归约。只处理已存在的合法judge分数，不调用或伪造judge，也不训练GRPO。 完整实验高成本不复现；组件或资料不构成能力晋级。
 
@@ -343,7 +364,7 @@ DynamicRubric改变评估维度和权重，并与policy共进化；DCC把rubric�
 
 覆盖 36 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 49 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 50 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -396,6 +417,7 @@ DynamicRubric改变评估维度和权重，并与policy共进化；DCC把rubric�
 - [GPRM: Global Perspective Process Reward Model](../../../post-training/2611.20755-gprm/README.md)
 - [Evidence-Based Credit Assignment for Search-Augmented Language Models](../../../post-training/2611.23824-eca-credit/README.md)
 - [How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation](../../../post-training/2611.24005-dcc-aggregation/README.md)
+- [BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees](../../../post-training/2611.34746-briar/README.md)
 
 </details>
 

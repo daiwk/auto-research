@@ -1,0 +1,67 @@
+{
+  "domain": "recommendation",
+  "key": "onequery",
+  "title": "OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding",
+  "paper_url": "https://arxiv.org/abs/2611.33653v1",
+  "reviewed_version_url": "https://arxiv.org/pdf/2611.33653v1",
+  "reviewed_version": "v1",
+  "detail_path": "recommendation-components/2611.33653-onequery/README.md",
+  "first_author": "Mingyu Zhang",
+  "first_author_affiliation": "Xiamen University; co-first author Jiejie Qin, Alibaba Group; Harbin Institute of Technology collaborator",
+  "browse_company": "Alibaba",
+  "published": "2026-11-25",
+  "published_at": "2026-11-25T02:19:27Z",
+  "announced_on": "2026-11-26",
+  "discovered_on": "2026-11-26",
+  "reviewed_on": "2026-11-26",
+  "code": null,
+  "code_status": "固定v1未给专属作者仓库；本轮未找到已核实公开方法实现",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "大模型能力与推荐融合",
+    "查询理解与结构化生成"
+  ],
+  "browse_topic": [
+    "大模型能力与推荐融合",
+    "查询理解与结构化生成"
+  ],
+  "priority": "P0",
+  "verified_priority_organizations": [],
+  "intake_class": "nov25_first_publication_discovered_nov26",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "gpu_validation_artifact": null,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "summary": "OneQuery把语言识别、纠错、英语翻译和查询标注作为同一次schema引导JSON生成，而不是四个独立模型逐级传错。Stage1混合四类单任务SFT；Stage2从部分标注中保留真值、用Stage1补齐缺字段，清洗后混合3.6M伪标注与310K人工样本；Stage3用任务特定reward做GRPO。生产端14B离线缓存头部查询，蒸馏0.3B学生实时处理尾部。 本地只执行Eq5–13的reward、优势和clipping算术。QT输入为显式tuple列表，不发明私有标注串的parser；无效schema直接拒绝，不猜造格式reward。空串对空串编辑相似度取1、sigma采用总体标准差、delta=1e-8是显式边界约定。没有语言模型、schema约束解码、部分标注补齐、SFT、GRPO参数训练、蒸馏或服务；gold只作为reward计算输入，不存在读取gold的Agent。",
+  "local_operator": "auto_research.reproductions.onequery_components.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.reproductions.onequery_components import diagnostic; print(diagnostic(42))'",
+  "method_source_sha256": "ddbae097cd68de7c8a6d29cb5c7d8cc280e0b639c13c2bbc25e7b5ea04523e68",
+  "cost_assessment": {
+    "source": "https://arxiv.org/pdf/2611.33653v1",
+    "basis": "§5.1以ME-LLM5.2-14B（另有4B/8B）做完整三阶段，16×A100-80GB，3.6M伪标注+310K人工样本、31K RL query、每query8次采样；另含私有评测19,087条和线上蒸馏/缓存/A/B。总GPU小时未披露，不能从0.3B服务学生反推训练便宜。成本过高，不复现（审查 DONE）；不下载模型或训练数据、不探跑、不重试。",
+    "decision": "成本过高，不复现（审查 DONE）",
+    "local_seconds_per_seed_cap": 30
+  },
+  "online_ab": [
+    {
+      "product": "AliExpress multi-country search",
+      "metric": "L2P",
+      "lift_percent": 0.5,
+      "traffic": "Real A/B against existing production QU; duration/traffic fraction undisclosed; SBS relevance separately+0.8points",
+      "source_url": "https://arxiv.org/pdf/2611.33653v1",
+      "source_location": "Section5.6"
+    }
+  ]
+}

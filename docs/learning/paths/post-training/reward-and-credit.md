@@ -7,7 +7,7 @@ hide:
 
 # 奖励与信用：正确结果该奖励哪些步骤
 
-[LLM 后训练](index.md) / 196 个问题 · 49 篇论文
+[LLM 后训练](index.md) / 200 个问题 · 50 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">196 个问题 · 49 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">200 个问题 · 50 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:briar" data-paper-title="BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees LLM 后训练 Jilin University 2026-11-25 终局正确率不能告诉训练器哪一步值得继续分支，也不能区分必要推导和答案确定后的反复检查。BRIAR以prefix成功概率的martingale结构连接三个组件：用结果分歧和置信奖励选探索前沿；以边界调制方差做树上全局LMMSE信用；仅在吸收前沿之后对正确续写的长度做零和比较。 完整实验成本过高，不复现（审查 DONE）；L1 CPU树信用组件，diagnostic only；不是数学推理/RL能力复现。完整实验成本过高，不复现（审查 DONE）；不自动重试，不接Evolve。frontier_scores执行Eq.3；smooth_tree执行Eq.5–9；dense_reference独立建立共享路径协方差核对均值与方差；absorbed_suffixes执行最小吸收前沿和Eq.10。输入是调用方已采样树、二值verifier叶奖励、edge token长度；内部节点奖励必须NaN。节点按父先于子排序，root parent为-1。  reward-and-credit CPU机制组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 为什么token entropy高不代表这个前缀值得继续分支？ 词汇表述仍可多样，但后续答案可能已经确定。BRIAR按二值结果的分歧与估计不确定性选前沿，而非把措辞变化直接当作可学习信用。全对或全错的采样节点不可探索。 教学例：六条续写都答对，但分别用不同自检措辞；token entropy可高，结果却无分歧，该节点不因措辞丰富而进入frontier。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-briar-f08fc90a" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-0245ea302f20dfe7">为什么token entropy高不代表这个前缀值得继续分支？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Abriar">BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Jilin University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>词汇表述仍可多样，但后续答案可能已经确定。BRIAR按二值结果的分歧与估计不确定性选前沿，而非把措辞变化直接当作可学习信用。全对或全错的采样节点不可探索。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：六条续写都答对，但分别用不同自检措辞；token entropy可高，结果却无分歧，该节点不因措辞丰富而进入frontier。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34746v1">原论文</a> · <a href="../../../../post-training/2611.34746-briar/">实现解读</a> · <a href="#qa-0245ea302f20dfe7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:briar" data-paper-title="BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees LLM 后训练 Jilin University 2026-11-25 终局正确率不能告诉训练器哪一步值得继续分支，也不能区分必要推导和答案确定后的反复检查。BRIAR以prefix成功概率的martingale结构连接三个组件：用结果分歧和置信奖励选探索前沿；以边界调制方差做树上全局LMMSE信用；仅在吸收前沿之后对正确续写的长度做零和比较。 完整实验成本过高，不复现（审查 DONE）；L1 CPU树信用组件，diagnostic only；不是数学推理/RL能力复现。完整实验成本过高，不复现（审查 DONE）；不自动重试，不接Evolve。frontier_scores执行Eq.3；smooth_tree执行Eq.5–9；dense_reference独立建立共享路径协方差核对均值与方差；absorbed_suffixes执行最小吸收前沿和Eq.10。输入是调用方已采样树、二值verifier叶奖励、edge token长度；内部节点奖励必须NaN。节点按父先于子排序，root parent为-1。  reward-and-credit CPU机制组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 两遍RTS为何不只是对子节点reward求平均？ 向上pass把各子树的precision和information按边方差衰减后汇总，向下pass再把父节点全局后验和本子树证据融合。兄弟分支通过父后验影响本节点，而普通局部平均丢失这条路径。 教学例：同一子树只有一个正确叶，另一个兄弟有大量错误叶；RTS的父后验会改变该子树估值，不等于只把唯一叶的1直接向上复制。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-cf1109a49f8e0c5e">两遍RTS为何不只是对子节点reward求平均？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Abriar">BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Jilin University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>向上pass把各子树的precision和information按边方差衰减后汇总，向下pass再把父节点全局后验和本子树证据融合。兄弟分支通过父后验影响本节点，而普通局部平均丢失这条路径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一子树只有一个正确叶，另一个兄弟有大量错误叶；RTS的父后验会改变该子树估值，不等于只把唯一叶的1直接向上复制。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34746v1">原论文</a> · <a href="../../../../post-training/2611.34746-briar/">实现解读</a> · <a href="#qa-cf1109a49f8e0c5e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:briar" data-paper-title="BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees LLM 后训练 Jilin University 2026-11-25 终局正确率不能告诉训练器哪一步值得继续分支，也不能区分必要推导和答案确定后的反复检查。BRIAR以prefix成功概率的martingale结构连接三个组件：用结果分歧和置信奖励选探索前沿；以边界调制方差做树上全局LMMSE信用；仅在吸收前沿之后对正确续写的长度做零和比较。 完整实验成本过高，不复现（审查 DONE）；L1 CPU树信用组件，diagnostic only；不是数学推理/RL能力复现。完整实验成本过高，不复现（审查 DONE）；不自动重试，不接Evolve。frontier_scores执行Eq.3；smooth_tree执行Eq.5–9；dense_reference独立建立共享路径协方差核对均值与方差；absorbed_suffixes执行最小吸收前沿和Eq.10。输入是调用方已采样树、二值verifier叶奖励、edge token长度；内部节点奖励必须NaN。节点按父先于子排序，root parent为-1。  reward-and-credit CPU机制组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 BRIAR与OpCredit都做局部信用，为什么不能互换？ OpCredit的BOC依赖匹配操作上下文的轨迹支持集，FTC依赖训练专用答案邻域；BRIAR依赖显式前缀树、叶奖励与经验Gaussian边方差。支持集匹配或邻域势差不能代替全局协方差平滑。 教学例：两个KG操作到达相同实体但访问历史不同，BOC先检查上下文匹配；BRIAR只有在完整prefix共享时才共享树路径，不能仅按实体ID合并。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-8fe635378ec78f8f">BRIAR与OpCredit都做局部信用，为什么不能互换？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Abriar">BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Jilin University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>OpCredit的BOC依赖匹配操作上下文的轨迹支持集，FTC依赖训练专用答案邻域；BRIAR依赖显式前缀树、叶奖励与经验Gaussian边方差。支持集匹配或邻域势差不能代替全局协方差平滑。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个KG操作到达相同实体但访问历史不同，BOC先检查上下文匹配；BRIAR只有在完整prefix共享时才共享树路径，不能仅按实体ID合并。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34746v1">原论文</a> · <a href="../../../../post-training/2611.34746-briar/">实现解读</a> · <a href="#qa-8fe635378ec78f8f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:briar" data-paper-title="BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees LLM 后训练 Jilin University 2026-11-25 终局正确率不能告诉训练器哪一步值得继续分支，也不能区分必要推导和答案确定后的反复检查。BRIAR以prefix成功概率的martingale结构连接三个组件：用结果分歧和置信奖励选探索前沿；以边界调制方差做树上全局LMMSE信用；仅在吸收前沿之后对正确续写的长度做零和比较。 完整实验成本过高，不复现（审查 DONE）；L1 CPU树信用组件，diagnostic only；不是数学推理/RL能力复现。完整实验成本过高，不复现（审查 DONE）；不自动重试，不接Evolve。frontier_scores执行Eq.3；smooth_tree执行Eq.5–9；dense_reference独立建立共享路径协方差核对均值与方差；absorbed_suffixes执行最小吸收前沿和Eq.10。输入是调用方已采样树、二值verifier叶奖励、edge token长度；内部节点奖励必须NaN。节点按父先于子排序，root parent为-1。  reward-and-credit CPU机制组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 为什么suffix clip之后还要recenter，也不能宣传prefix行为不变？ recenter落实每个吸收节点优势总和为零，二次clip可能再次破坏它。suffix mask只排除prefix token loss；共享网络参数仍参与suffix预测，因此更新后prefix行为未被保证不变。 教学例：偏斜长度使clip后均值不为零，需要减去该均值；即使prefix位置不计loss，suffix对共享attention权重的梯度仍可改变下次prefix预测。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-8384b3cb84dccddd">为什么suffix clip之后还要recenter，也不能宣传prefix行为不变？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Abriar">BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Jilin University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>recenter落实每个吸收节点优势总和为零，二次clip可能再次破坏它。suffix mask只排除prefix token loss；共享网络参数仍参与suffix预测，因此更新后prefix行为未被保证不变。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：偏斜长度使clip后均值不为零，需要减去该均值；即使prefix位置不计loss，suffix对共享attention权重的梯度仍可改变下次prefix预测。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34746v1">原论文</a> · <a href="../../../../post-training/2611.34746-briar/">实现解读</a> · <a href="#qa-8384b3cb84dccddd">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dcc-aggregation" data-paper-title="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation LLM 后训练 Northwestern Polytechnical University 2026-11-18 等权rubric相加并不代表各维贡献相等：每维满足/不满足样本的平均分差形成reward gain。论文把候选奖励差精确拆成基础满足数量信号、gain imbalance项和残差；把gain全部归一成1反而可能放大小gain维度的噪声。DCC不重新训练judge，也不学习rubric权重。它把当前prompt全部候选×标准的分数放在一起，精确扫描一维双median分簇，用最小绝对偏差确定两个公共clip端点；同成本取最小split。最后在公共区间clip，再按可选标准权重求平均；权重不参与端点拟合。 完整实验成本过高，不复现（审查 DONE）；L1独立机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。CPU精确1D two-medians、共享clip区间、相同分数退化、最小split tie-break与可选权重归约。只处理已存在的合法judge分数，不调用或伪造judge，也不训练GRPO。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 等权聚合为什么不等于标准贡献相等？ 第k维满足与不满足样本的平均分差Δk会隐式乘到满足状态上；即使权重都是1/K，gain更大的标准仍更有影响。简单除以Δk也会放大其残差。 教学例：两维满足/不满足分差分别10和1，等权求和时前者可盖过后者；但把后者放大10倍也同步放大噪声。 2026-11-19">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
 <span id="paper-post-training-dcc-aggregation-55e188d6" class="ar-learning-paper-anchor"></span>

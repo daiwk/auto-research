@@ -62,7 +62,8 @@
         "recommendation:yuanbao-rubric",
         "recommendation:intentflow",
         "recommendation:lser-serving",
-        "recommendation:larf"
+        "recommendation:larf",
+        "recommendation:onequery"
       ]
     },
     {
@@ -238,7 +239,8 @@
         "recommendation:zenith",
         "recommendation:xsplit-argus",
         "recommendation:dna",
-        "recommendation:lazunirec"
+        "recommendation:lazunirec",
+        "recommendation:camar"
       ]
     },
     {

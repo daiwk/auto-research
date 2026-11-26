@@ -1,0 +1,10 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.34746v1",
+  "paper_version": "v1", "page": 4, "figure": "Figure2",
+  "source_pdf_sha256": "bae7a1b0d4b02812f9efe09d43d2962b3235542899fd763a1f55a1c6074a4e98",
+  "crop_pdf_points": [65, 68, 532, 284], "render_scale": 2,
+  "asset_sha256": "8bc8533032a12ea6ce242aa41dc227fd54fdff021ae14e2cac83547e289bdbfb",
+  "visually_reviewed_on": "2026-11-26",
+  "review": "Original complete Figure2 and caption visually checked. Figure wording is not a stronger locally established theorem.",
+  "copyright": "original authors", "scientific_content_modified": false
+}

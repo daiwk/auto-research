@@ -1,0 +1,10 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.33827v1",
+  "paper_version": "v1", "page": 5, "figure": "Figure3",
+  "source_pdf_sha256": "f567742c5ba3fc47d0ca755dd7c46881eb90ebc9a75883080996429b3797ee02",
+  "crop_pdf_points": [104, 78, 506, 258], "render_scale": 2,
+  "asset_sha256": "3552841250d9f8017296049596164d2bd6c79975c57104edcedafc28200ae31f",
+  "visually_reviewed_on": "2026-11-26",
+  "review": "Original complete Figure3 and caption visually checked; allocation diagram is not local capability evidence.",
+  "copyright": "original authors", "scientific_content_modified": false
+}

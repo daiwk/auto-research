@@ -956,7 +956,7 @@
     "world-state-actions": {
       "title": "会预测下一幕，还不等于会行动或保持同一个世界",
       "thesis": "世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。",
-      "updated": "2026-11-25",
+      "updated": "2026-11-26",
       "reviewed_papers": [
         "foundation-models:alps",
         "multimodal-models:aw0",
@@ -994,7 +994,9 @@
         "multimodal-models:autoregressive-view-model",
         "multimodal-models:jepa-dots",
         "foundation-models:mv-jepa",
-        "foundation-models:criticjepa"
+        "foundation-models:criticjepa",
+        "foundation-models:jepa-eu",
+        "multimodal-models:agentic-longlive"
       ],
       "axes": [
         "学习对象：未来latent、动作分布、视觉转移、持久几何",
@@ -1213,6 +1215,29 @@
             "核心公式",
             "同主题比较与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:jepa-eu",
+          "position": "JEPA EU沿模拟器状态到像素、encoder、预测特征及post-hoc uncertainty逐层追踪扰动，区分RSSM的GRU时间平均与重建目标实体像素权重。",
+          "tradeoff": "预测—规划评测拆表示误差、预测误差和环境成功；JEPA EU分析不确定性在何层丢失。低一步误差、敏感uncertainty及更好规划是不同证据。观测posterior head可恢复当前帧异常信号，但不能用于没有未来观察的imagined rollout。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
+        },
+        {
+          "paper": "multimodal-models:agentic-longlive",
+          "position": "Agentic LongLive冻结视频生成器，以开放环实体记忆、后台图像绘制/预填充和边界交换保持在线一致性；planner不能看未来脚本或生成视频。",
+          "tradeoff": "PixVid经线性对齐、噪声校准与detailer改变latent到pixel表示；它不提供LongLive的在线记忆，而LongLive的sink注入也未取消VAE。两者未跑完整矩阵，无可比本地视频指标。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ]
         }
       ],
       "analysis": [
@@ -1352,6 +1377,22 @@
           "papers": [
             "foundation-models:criticjepa",
             "foundation-models:jepa-prediction-planning"
+          ]
+        },
+        {
+          "title": "Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models",
+          "body": "预测—规划评测拆表示误差、预测误差和环境成功；JEPA EU分析不确定性在何层丢失。低一步误差、敏感uncertainty及更好规划是不同证据。观测posterior head可恢复当前帧异常信号，但不能用于没有未来观察的imagined rollout。 Laplace只依赖输入特征：若扰动在前面被消掉，换最后读出也看不见。RSSM GRU把单帧扰动按gate缩放，持续扰动才累积；重建目标按像素贡献优化。posterior需观察帧，不可当作规划时可用的prior特征。",
+          "papers": [
+            "foundation-models:jepa-eu",
+            "foundation-models:jepa-prediction-planning"
+          ]
+        },
+        {
+          "title": "隐藏关键路径延迟，不是消除总GPU成本",
+          "body": "每镜头记忆在下一prompt到达前准备，边界只选完整prefill版本；未完成继续用旧记忆。未来标注只能用于奖励/评价，不进入planner。8B LoRA由SFT/GRPO学选择，不能拿固定recency规则替代。PixVid的像素迁移则改变生成器自身。LongLive约1%额外时间利用额外agent/辅助GPU；六H100图示、8×B200节点和35B/4B/8B模型超单卡预算。两篇本地均review-only，原图/公开mock不是复现或能力证据。",
+          "papers": [
+            "multimodal-models:agentic-longlive",
+            "multimodal-models:pixvid"
           ]
         }
       ],
@@ -1535,6 +1576,26 @@
           "papers": [
             "foundation-models:criticjepa",
             "foundation-models:jepa-prediction-planning"
+          ]
+        },
+        {
+          "id": "nov26-jepa-eu",
+          "question": "比预测—规划评测多得到一个uncertainty指标，能跳过实际规划吗？",
+          "answer": "不能。误差、不确定性与成功率不同。JEPA EU还需真实CEM评估，并且posterior读出虽可检测当前异常，却依赖不可用于想象未来的观察。",
+          "example": "教学例：用真实下一帧的posterior把异常检出率提高，并不表示planner在执行前就拥有该信号。",
+          "papers": [
+            "foundation-models:jepa-eu",
+            "foundation-models:jepa-prediction-planning"
+          ]
+        },
+        {
+          "id": "cross-nov26-agentic-longlive",
+          "question": "Agentic LongLive与PixVid都改善视频，修改的是同一层吗？",
+          "answer": "不是。前者冻结已有生成器并增加记忆KV和边界交换；PixVid将latent DiT迁往像素表示并训练detailer。外部一致性记忆不等于去掉VAE。",
+          "example": "教学例：同一个冻结latent生成器可接实体记忆；迁到像素DiT后仍需单独解决跨镜头实体记忆。",
+          "papers": [
+            "multimodal-models:agentic-longlive",
+            "multimodal-models:pixvid"
           ]
         }
       ],
@@ -1766,6 +1827,30 @@
             "foundation-models:criticjepa": "32b97d41ccc34bc62adce7ebed90d23014c21411b81c4c56a8e6c4aa58cad34d",
             "foundation-models:jepa-prediction-planning": "754eb348792674a6a8916439d927bc1f9895d8166a55b1cc9da92c1b44248778"
           }
+        },
+        {
+          "date": "2026-11-26",
+          "papers": [
+            "foundation-models:jepa-eu",
+            "foundation-models:jepa-prediction-planning"
+          ],
+          "source_revisions": {
+            "foundation-models:jepa-eu": "3a4cd54f9a6999d1a8faa0dbacc14e25f33e3d566ac69eb11423c40634110943",
+            "foundation-models:jepa-prediction-planning": "754eb348792674a6a8916439d927bc1f9895d8166a55b1cc9da92c1b44248778"
+          },
+          "summary": "预测—规划评测拆表示误差、预测误差和环境成功；JEPA EU分析不确定性在何层丢失。低一步误差、敏感uncertainty及更好规划是不同证据。观测posterior head可恢复当前帧异常信号，但不能用于没有未来观察的imagined rollout。 完整矩阵高成本终态，不以L1或审查充当能力证据。"
+        },
+        {
+          "date": "2026-11-26",
+          "papers": [
+            "multimodal-models:agentic-longlive",
+            "multimodal-models:pixvid"
+          ],
+          "source_revisions": {
+            "multimodal-models:agentic-longlive": "1b3727eb004e119257b2290d687d6e2f8c88878238064c59c2322d5315b325ba",
+            "multimodal-models:pixvid": "af14fd84ecf954028202fd5cf61ef0145afa848db73a106afc7f41fd4ff8a8ae"
+          },
+          "summary": "仅review-only：固定全文、在线prompt可见性、开放环实体记忆、KV预填充与边界交换、RL训练奖励隔离、作者结果和资源成本。无本地算法、adapter/operator/command、scorer、模型/视频、metrics或GPU回执；不运行CPU mock冒充视频能力。 完整高成本campaign终态不复现，审查DONE。"
         }
       ]
     }

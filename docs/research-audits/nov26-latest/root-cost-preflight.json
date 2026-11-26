@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-26",
+  "available_resource": "One A100 or A30, or local Mac; not simultaneous or multi-GPU",
+  "assessments": {
+    "onequery": {"source": "https://arxiv.org/pdf/2611.33653v1", "basis": "Section5.1: ME-LLM5.2-14B plus4B/8B, 3.6M synthetic+310K private annotations,31K RL queries,group8,16 A100-80GB; Section5.6 offline14B cached head queries plus distilled0.3B tail-serving and real A/B. Total GPU hours undisclosed.", "decision": "成本过高，不复现（审查 DONE）", "affordable_scope": "CPU Eq7-13 normalization/exact/edit/set rewards and Eq5-6 group advantage/clipping arithmetic, not model/SFT/GRPO training or query-understanding capability", "local_seconds_per_seed_cap": 30},
+    "camar": {"source": "https://arxiv.org/pdf/2611.33628v1", "basis": "SectionsV-A/TableI: about539M private events and16M public Amazon events, multi-modal encoders plus shared RQ-VAE preprocessing,9 baselines/ablations and full-vocabulary/cold-start tests; A100 GPUs,4095 sampled negatives,validation loss-weight grid; two-week production A/B. GPU count and total hours undisclosed.", "decision": "成本过高，不复现（审查 DONE）", "affordable_scope": "Small supplied per-domain state tensors; actual stopped-gradient pairwise TransNet, invariant/specific split, active-only attention/gates/GRL/orthogonality and supplied-candidate sampled loss; no item backbone, semantic preprocessing, full data or serving", "local_seconds_per_seed_cap": 30, "requires_real_gpu_validation": true}
+  },
+  "checkpoint_downloads": 0,
+  "training_dataset_downloads": 0,
+  "api_model_calls": 0
+}

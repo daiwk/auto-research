@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩：权重、KV 缓存与服务带宽
 
-[基础模型](index.md) / 168 个问题 · 42 篇论文
+[基础模型](index.md) / 172 个问题 · 43 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">168 个问题 · 42 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">172 个问题 · 43 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:duomi" data-paper-title="DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers 基础模型 Huawei Foundation Model Lab 2026-11-25 两次调用共享expert FFN，但attention、router与normalization独立。仅看总体expert使用分布会漏掉每个token全部换expert的情况；仅看逐token变化又可能允许两轮偏好不同子池。DuoMI分别限制聚合round–expert依赖和token条件下的round–expert依赖，训练使用全部expert的softmax而非无梯度的硬Top-k集合。 成本过高，不复现（审查 DONE），指完整论文实验矩阵；本地默认诊断为激活下界梯度而显式使用D区间[.5,.8]，不是调参求能力收益；PairedSharedExperts确实用两个独立router/LayerNorm读取连续状态，两轮调用同一GELU FFN expert池，稀疏Top-k派发和原加权不受正则改变。duomi_penalty读取派发前logits，valid token对齐，按8序列分组并真实反传。仅FFN耦合组件，无attention/因果语言模型、全局负载均衡、expert parallel或MindSpeed集成，不能称完整looped Transformer。  条件计算与专家路由 基础模型 推理压缩：权重、KV 缓存与服务带宽 两轮总体expert使用相同，是否每个token都复用expert？ 不一定。不同token的变化可互相抵消，使聚合G=0但逐token D&gt;0。 教学例：第一轮x选A、y选B，第二轮交换；两轮总体各一半A/B，但每个token都换了expert。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-duomi-d6b64757" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-61c1309fbb9f9845">两轮总体expert使用相同，是否每个token都复用expert？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aduomi">DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Huawei Foundation Model Lab</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一定。不同token的变化可互相抵消，使聚合G=0但逐token D&gt;0。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第一轮x选A、y选B，第二轮交换；两轮总体各一半A/B，但每个token都换了expert。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33952v1">原论文</a> · <a href="../../../../foundation-models/2611.33952-duomi/">实现解读</a> · <a href="#qa-61c1309fbb9f9845">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:duomi" data-paper-title="DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers 基础模型 Huawei Foundation Model Lab 2026-11-25 两次调用共享expert FFN，但attention、router与normalization独立。仅看总体expert使用分布会漏掉每个token全部换expert的情况；仅看逐token变化又可能允许两轮偏好不同子池。DuoMI分别限制聚合round–expert依赖和token条件下的round–expert依赖，训练使用全部expert的softmax而非无梯度的硬Top-k集合。 成本过高，不复现（审查 DONE），指完整论文实验矩阵；本地默认诊断为激活下界梯度而显式使用D区间[.5,.8]，不是调参求能力收益；PairedSharedExperts确实用两个独立router/LayerNorm读取连续状态，两轮调用同一GELU FFN expert池，稀疏Top-k派发和原加权不受正则改变。duomi_penalty读取派发前logits，valid token对齐，按8序列分组并真实反传。仅FFN耦合组件，无attention/因果语言模型、全局负载均衡、expert parallel或MindSpeed集成，不能称完整looped Transformer。  条件计算与专家路由 基础模型 推理压缩：权重、KV 缓存与服务带宽 为何不能先跨所有group平均G/D再计算阈值罚项？ 平方hinge非线性；一组越界不能被另一组抵消。必须每组每pool先计算Phi再平均。 教学例：两组分别偏好相反子池，池化后G为0，但两组自身G都大，正确实现仍有罚项。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-257b0569a5ba37c1">为何不能先跨所有group平均G/D再计算阈值罚项？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aduomi">DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Huawei Foundation Model Lab</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>平方hinge非线性；一组越界不能被另一组抵消。必须每组每pool先计算Phi再平均。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两组分别偏好相反子池，池化后G为0，但两组自身G都大，正确实现仍有罚项。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33952v1">原论文</a> · <a href="../../../../foundation-models/2611.33952-duomi/">实现解读</a> · <a href="#qa-257b0569a5ba37c1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:duomi" data-paper-title="DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers 基础模型 Huawei Foundation Model Lab 2026-11-25 两次调用共享expert FFN，但attention、router与normalization独立。仅看总体expert使用分布会漏掉每个token全部换expert的情况；仅看逐token变化又可能允许两轮偏好不同子池。DuoMI分别限制聚合round–expert依赖和token条件下的round–expert依赖，训练使用全部expert的softmax而非无梯度的硬Top-k集合。 成本过高，不复现（审查 DONE），指完整论文实验矩阵；本地默认诊断为激活下界梯度而显式使用D区间[.5,.8]，不是调参求能力收益；PairedSharedExperts确实用两个独立router/LayerNorm读取连续状态，两轮调用同一GELU FFN expert池，稀疏Top-k派发和原加权不受正则改变。duomi_penalty读取派发前logits，valid token对齐，按8序列分组并真实反传。仅FFN耦合组件，无attention/因果语言模型、全局负载均衡、expert parallel或MindSpeed集成，不能称完整looped Transformer。  条件计算与专家路由 基础模型 推理压缩：权重、KV 缓存与服务带宽 DuoMI和EchoMoE里的跨层复用是同一种东西吗？ 不是。DuoMI约束共享FFN池的router选择；EchoMoE复用激活reference并压缩差值通信。 教学例：同一个expert可被两轮选择，但两轮激活差值仍很大；专家复用率不能替代通信字节测量。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e71561fd4bda2147">DuoMI和EchoMoE里的跨层复用是同一种东西吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aduomi">DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Huawei Foundation Model Lab</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。DuoMI约束共享FFN池的router选择；EchoMoE复用激活reference并压缩差值通信。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一个expert可被两轮选择，但两轮激活差值仍很大；专家复用率不能替代通信字节测量。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33952v1">原论文</a> · <a href="../../../../foundation-models/2611.33952-duomi/">实现解读</a> · <a href="#qa-e71561fd4bda2147">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:duomi" data-paper-title="DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers 基础模型 Huawei Foundation Model Lab 2026-11-25 两次调用共享expert FFN，但attention、router与normalization独立。仅看总体expert使用分布会漏掉每个token全部换expert的情况；仅看逐token变化又可能允许两轮偏好不同子池。DuoMI分别限制聚合round–expert依赖和token条件下的round–expert依赖，训练使用全部expert的softmax而非无梯度的硬Top-k集合。 成本过高，不复现（审查 DONE），指完整论文实验矩阵；本地默认诊断为激活下界梯度而显式使用D区间[.5,.8]，不是调参求能力收益；PairedSharedExperts确实用两个独立router/LayerNorm读取连续状态，两轮调用同一GELU FFN expert池，稀疏Top-k派发和原加权不受正则改变。duomi_penalty读取派发前logits，valid token对齐，按8序列分组并真实反传。仅FFN耦合组件，无attention/因果语言模型、全局负载均衡、expert parallel或MindSpeed集成，不能称完整looped Transformer。  条件计算与专家路由 基础模型 推理压缩：权重、KV 缓存与服务带宽 只给任意两组logits算JSD算完成DuoMI L1吗？ 不够。本地需实际两router依次读取状态并调用同一expert池，证明组化正则能反传到两router且不改变硬派发。 教学例：独立优化两个logits数组无法证明共享FFN的耦合；本地检查第二轮loss通过第一轮状态回到共享参数。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3045d33257e10b35">只给任意两组logits算JSD算完成DuoMI L1吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aduomi">DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Huawei Foundation Model Lab</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不够。本地需实际两router依次读取状态并调用同一expert池，证明组化正则能反传到两router且不改变硬派发。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：独立优化两个logits数组无法证明共享FFN的耦合；本地检查第二轮loss通过第一轮状态回到共享参数。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33952v1">原论文</a> · <a href="../../../../foundation-models/2611.33952-duomi/">实现解读</a> · <a href="#qa-3045d33257e10b35">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:frontier-replay" data-paper-title="FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models 基础模型 Beijing Institute of Technology 2026-11-19 混合模型的attention KV可按页复用，但递归状态只在保存过的精确位置恢复。FrontierReplay先根据已观察到的模板稳定尾、已完成turn和分叉点规划检查点；原生prefill不断开，之后只重放短窗递归输入生成精确状态。保留策略优先保护仍在执行的请求锚点和已证明可复用的分叉，而非只看历史频率。 完整实验：成本过高，不复现（审查 DONE）。源绑定的实际诊断由本批runner单独记录；L1策略/训练连线组件，不是完整论文复现。完整实验：成本过高，不复现（审查 DONE）。实现纯CPU host-policy组件：观察边界规划、显式pending/completion发布、lease、分层准入/驱逐、长前缀保护和每16请求的回收决策。KV驻留、已观察progress、稳定尾与非自身驱逐信号均由调用方显式提供；没有自主观察真实服务或用户日志。状态槽只是合成token前缀元数据，不是模型状态。  推理与系统效率 混合模型前缀缓存与检查点 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么有KV页仍可能无法复用整段混合模型前缀？ 递归状态是覆盖更新的。即使KV页还在，恢复位置也必须有完全对应的递归检查点；不能把较晚状态截短成较早状态。 教学例：KV覆盖到640token，但最近状态只在528；原生服务仍需从528重算到640。 2026-11-21">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-frontier-replay-ca5d4620" class="ar-learning-paper-anchor"></span>

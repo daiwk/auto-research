@@ -4,6 +4,15 @@
 
 ## 网络架构
 
+### MoE 与动态路由
+
+- [DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers](../../foundation-models/2611.33952-duomi/README.md)（`duomi`）：两次调用共享expert FFN，但attention、router与normalization独立。仅看总体expert使用分布会漏掉每个token全部换expert的情况；仅看逐token变化又可能允许两轮偏好不同子池。DuoMI分别限制聚合round–expert依赖和token条件下的round–expert依赖，训练使用全部expert的softmax而非无梯度的硬Top-k集合。
+- [Communicate the Change: Efficient Expert Parallelism via Activation Compression](../../foundation-models/2611.22215-echomoe/README.md)（`echomoe`）：每组MoE层先广播参考z，其余层只发送x-a⊙z的压缩code；router仍读取完整x。专家将reference gain和dispatch decoder折入gate/up权重，再将combine compressor折入down权重，避免完整重建或输出物化。 [已核方法位置](https://arxiv.org/html/2611.22215v1#S3)：4.1–4.4, 5.1, G.1。
+- [Rethinking Routing Exploration in Modern Mixture-of-Experts](../../foundation-models/2610.22353-mirror-moe/README.md)（`mirror-moe`）：共享专家占据较多输出后，改变路由专家带来的表征差异减弱，而细粒度分割又扩大组合空间。MirrorMoE 不简单增噪，而是以镜像选择暂时抑制部分专家，随训练退火恢复普通路由。主源是 §3 的公式 3–6。
+- [Smoothing the Top-k Exposure Boundary for Sparse Mixture-of-Experts](../../foundation-models/2610.11575-elastic-expert-routing/README.md)（`elastic-expert-routing`）：固定 Top-k 会让排序边界外的专家长期缺少训练曝光。该方法训练时为每个 token、每层独立抽取邻近的专家预算，在不改变期望预算的情况下，让边界附近专家参与真实稀疏计算。部署时恢复固定 k。
+- [Cross-Entropy Guided Routing in Mixture-of-Experts Large Language Models](../../foundation-models/2609.37751-ce-guided-moe/README.md)（`ce-guided-moe`）：在原生 MoE affinity 旁增加逐 expert token-error head，并用预测误差的 started-log 对路由 logit 做衰减；高预测错误的 expert 在 Top-K 前被降权，同时误差头由真实 next-token CE 监督。
+- [Data Scarcity and Model Sparsity: Mixtures-of-Experts Overfit More to Repeated Data](../../foundation-models/2609.11917-repeat-aware-moe/README.md)（`repeat-aware-moe`）：研究重复数据下 MoE 比 Dense 更早过拟合的问题，并用更强 masking/dropout 抑制 expert 记忆化。
+
 ### JEPA 与几何表征
 
 - [CriticJEPA: World Models Are Better Critics Than Optimizers](../../foundation-models/2611.32357-criticjepa/README.md)（`criticjepa`）：对一个预测器找到更低的预测 cost，需要其梯度方向可靠；从一组好候选中挑更好的，只要求局部排序有信息。论文在冻结 H-JEPA 上观察到：长梯度搜索可继续降低预测 cost，但实际行动不再改善；同一预测器却能比较 goal-conditioned 提案。CriticJEPA 在每个时间层级训练 flow proposer，再用冻结 rollout 选择；只给提案做短的有锚精修，而不让无约束搜索承担整个规划。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -13,14 +22,6 @@
 - [DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces](../../foundation-models/2611.15968-duojepa/README.md)（`duojepa`）：每个encoder用LeJEPA保留自己的空间，额外单层translator将其输出映射到另一模态的own space。目标在对方空间计算，不直接比较两个own embedding；但两encoder仍被联合优化，不能把“没有直接对齐损失”说成“完全独立训练”。残差translator会提供接近identity的捷径，论文因此只在translator移除两条残差。[§5](https://arxiv.org/html/2611.15968v1#S5)
 - [ALPS: Visual State Encoders for World Models](../../foundation-models/2610.30120-alps/README.md)（`alps`）：世界模型以视觉 token 为状态进行预测和规划，但一个编码器通常只擅长物理状态、语言对齐或像素重建中的一部分。ALPS 尝试让同一组 patch token 同时承担三种接口：机器人状态探针能读出位置，文字指令能对应图像，而未来 token 能被解码成图像以便检查。
 - [LocaLeJEPA: Maximum Entropy Representations under Geometric Priors](../../foundation-models/2610.28458-locale-jepa/README.md)（`locale-jepa`）：LeJEPA 将整体表示推向各向同性高斯；当表示本身具有局部流形、双曲或等变几何时，单一全局分布不一定合适。LocaLeJEPA 不改写为另一种高斯损失，而是将每个 batch 的多视图平均表示分簇，在各簇内分别匹配**均匀球分布**。各簇位置不被拉向共同原点，局部形状通过重中心后的残差约束。
-
-### MoE 与动态路由
-
-- [Communicate the Change: Efficient Expert Parallelism via Activation Compression](../../foundation-models/2611.22215-echomoe/README.md)（`echomoe`）：每组MoE层先广播参考z，其余层只发送x-a⊙z的压缩code；router仍读取完整x。专家将reference gain和dispatch decoder折入gate/up权重，再将combine compressor折入down权重，避免完整重建或输出物化。 [已核方法位置](https://arxiv.org/html/2611.22215v1#S3)：4.1–4.4, 5.1, G.1。
-- [Rethinking Routing Exploration in Modern Mixture-of-Experts](../../foundation-models/2610.22353-mirror-moe/README.md)（`mirror-moe`）：共享专家占据较多输出后，改变路由专家带来的表征差异减弱，而细粒度分割又扩大组合空间。MirrorMoE 不简单增噪，而是以镜像选择暂时抑制部分专家，随训练退火恢复普通路由。主源是 §3 的公式 3–6。
-- [Smoothing the Top-k Exposure Boundary for Sparse Mixture-of-Experts](../../foundation-models/2610.11575-elastic-expert-routing/README.md)（`elastic-expert-routing`）：固定 Top-k 会让排序边界外的专家长期缺少训练曝光。该方法训练时为每个 token、每层独立抽取邻近的专家预算，在不改变期望预算的情况下，让边界附近专家参与真实稀疏计算。部署时恢复固定 k。
-- [Cross-Entropy Guided Routing in Mixture-of-Experts Large Language Models](../../foundation-models/2609.37751-ce-guided-moe/README.md)（`ce-guided-moe`）：在原生 MoE affinity 旁增加逐 expert token-error head，并用预测误差的 started-log 对路由 logit 做衰减；高预测错误的 expert 在 Top-K 前被降权，同时误差头由真实 next-token CE 监督。
-- [Data Scarcity and Model Sparsity: Mixtures-of-Experts Overfit More to Repeated Data](../../foundation-models/2609.11917-repeat-aware-moe/README.md)（`repeat-aware-moe`）：研究重复数据下 MoE 比 Dense 更早过拟合的问题，并用更强 masking/dropout 抑制 expert 记忆化。
 
 ### 循环与弹性深度
 
@@ -304,6 +305,17 @@
 
 ## 多模态基础模型
 
+### 世界模型与具身控制
+
+- [Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models](../../foundation-models/2611.34830-jepa-eu/README.md)（`jepa-eu`）：冻结LeWM与DreamerV3后，在预测头最后线性层前的特征上拟合last-layer Laplace，并用五头ensemble对照。对物理状态做标准差尺度扰动再由模拟器重渲染，追踪各层相对位移；延长扰动持续K帧可分离GRU平均效应，按实体重建梯度与像素面积分析小物体效应。此处是实证诊断，不是已完成移除重建项/改变gate的因果消融，也不证明所有RSSM或JEPA都如此。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [Persistent Planar Memory for Video World Models](../../foundation-models/2610.23795-ppmem/README.md)（`ppmem`）：长视频生成若只保存少量历史帧，跨视角回访容易遗忘场景；持续保存全部像素点云又非常大。PPMem把场景记忆压成可光栅化的平面primitive，在视频生成过程中由同一骨干联合预测，再通过持久pool向后续chunk反馈深度。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [Gen4P: Video Generators are 4D Perceivers](../../foundation-models/2610.22371-gen4p/README.md)（`gen4p`）：视频生成预训练包含运动与几何先验。Gen4P不通过多次去噪恢复几何，而是在干净视频潜变量上运行一次DiT编码，用按需cross-attention查询输出3D轨迹、点云、深度和相机参数。连续时间查询适配不同视频长度，冻结depth-LoRA提供额外几何先验，独立4D-LoRA学习新任务。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [EgoJEPA: Beyond Retargeting for Dexterous Manipulation from Egocentric Videos](../../foundation-models/2610.20904-egojepa/README.md)（`egojepa`）：人类第一视角视频中的手运动不需要经规则映射为每种机器人的动作。EgoJEPA先用手部运动差分条件JEPA预测未来视觉表示，再联合建模视觉与潜动作，最后仅适配目标机器人的输入输出动作接口。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [One-Step Prediction Fidelity Is a Poor Proxy for Planning Performance in JEPA World Models](../../foundation-models/2610.19375-jepa-prediction-planning/README.md)（`jepa-prediction-planning`）：JEPA 在自己的潜空间预测下一观察，较小的一步 loss 不一定表示更好的长程行动。论文固定一个只在真实观察编码上拟合的物理状态解码器，分别解码真实下一表征与预测下一表征，把编码器本身的可读性和预测器新增的误差拆开。规划仍用相同 checkpoint、相同任务和配对种子单独执行，不能由预测指标推导成功率。
+- [SmolWAM: A Latent World-Action Model for Robotic Manipulation on Edge Devices](../../reproductions/2610.13740-smolwam/README.md)（`smolwam`）：Cosmos Policy 将机器人状态、两路相机、动作和未来状态编码为九个 latent frame，沿用视频生成接口：33 帧 VAE、T5-XXL、28-block 2B DiT、1764 tokens 和五步去噪。SmolWAM 并非只换一个轻量 action head，而是在保留预训练 trunk、token 原位置与 rectified-flow readout 的同时，逐项恢复接口改变造成的分布偏移。
+- [LeWAM: End-to-End World and Action Modeling with JEPAs](../../reproductions/2610.12818-lewam/README.md)（`lewam`）：传统 JEPA 学习“给定动作会到什么状态”，之后另训逆动力学或在线搜索动作。两阶段会使控制监督无法塑造视觉表征，宽高斯动作搜索也较昂贵。
+- [V-JEPA Policy: Building Effective World-Action Models on Predictive Visual Latents](../../foundation-models/2609.37250-vjepa-policy/README.md)（`vjepa-policy`）：冻结 V-JEPA 2.1 视觉编码器，在预测视觉潜空间中联合训练 instruction-conditioned future-latent predictor 和 flow-matching action expert；动作生成读取 predictor 的未来信息上下文。
+
 ### JEPA与物理态监督
 
 - [CascadeJEPA: Enhancing 3D Geometric Representations via Spatially Coupled Cascaded Prediction](../../foundation-models/2611.22686-cascadejepa/README.md)（`cascadejepa`）：I-JEPA的高层语义改善不保证几何对应更好。CascadeJEPA对同图两个crop共享context和EMA target；第一crop把masked patch embedding置零后加位置、保留完整网格，第二crop只编码visible patches，再通过第一阶段full-grid KV引导预测。 [已核方法位置](https://arxiv.org/html/2611.22686v1#S3)：3.2.1–3.2.4, 4.1–4.2。
@@ -327,16 +339,6 @@
 ### 医学图像与结构化视觉决策
 
 - [PathJev: Decision-Native Vision–Language Modelling for Histopathology](../../foundation-models/2610.32478-pathjev/README.md)（`pathjev`）：模型一遍前向在question/candidate markers读取hidden，decision head混合candidate线性项、question-candidate交互和set attention，对runtime候选做softmax。head和两阶段训练继承已有OmniMed-Jev；PathJev的重要新增是病理40K states、专家标签到三种typed decisions、split/overlap审计、未见器官与generative readout对照。不能只实现一个普通softmax就声称复现病理泛化。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
-
-### 世界模型与具身控制
-
-- [Persistent Planar Memory for Video World Models](../../foundation-models/2610.23795-ppmem/README.md)（`ppmem`）：长视频生成若只保存少量历史帧，跨视角回访容易遗忘场景；持续保存全部像素点云又非常大。PPMem把场景记忆压成可光栅化的平面primitive，在视频生成过程中由同一骨干联合预测，再通过持久pool向后续chunk反馈深度。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
-- [Gen4P: Video Generators are 4D Perceivers](../../foundation-models/2610.22371-gen4p/README.md)（`gen4p`）：视频生成预训练包含运动与几何先验。Gen4P不通过多次去噪恢复几何，而是在干净视频潜变量上运行一次DiT编码，用按需cross-attention查询输出3D轨迹、点云、深度和相机参数。连续时间查询适配不同视频长度，冻结depth-LoRA提供额外几何先验，独立4D-LoRA学习新任务。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
-- [EgoJEPA: Beyond Retargeting for Dexterous Manipulation from Egocentric Videos](../../foundation-models/2610.20904-egojepa/README.md)（`egojepa`）：人类第一视角视频中的手运动不需要经规则映射为每种机器人的动作。EgoJEPA先用手部运动差分条件JEPA预测未来视觉表示，再联合建模视觉与潜动作，最后仅适配目标机器人的输入输出动作接口。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
-- [One-Step Prediction Fidelity Is a Poor Proxy for Planning Performance in JEPA World Models](../../foundation-models/2610.19375-jepa-prediction-planning/README.md)（`jepa-prediction-planning`）：JEPA 在自己的潜空间预测下一观察，较小的一步 loss 不一定表示更好的长程行动。论文固定一个只在真实观察编码上拟合的物理状态解码器，分别解码真实下一表征与预测下一表征，把编码器本身的可读性和预测器新增的误差拆开。规划仍用相同 checkpoint、相同任务和配对种子单独执行，不能由预测指标推导成功率。
-- [SmolWAM: A Latent World-Action Model for Robotic Manipulation on Edge Devices](../../reproductions/2610.13740-smolwam/README.md)（`smolwam`）：Cosmos Policy 将机器人状态、两路相机、动作和未来状态编码为九个 latent frame，沿用视频生成接口：33 帧 VAE、T5-XXL、28-block 2B DiT、1764 tokens 和五步去噪。SmolWAM 并非只换一个轻量 action head，而是在保留预训练 trunk、token 原位置与 rectified-flow readout 的同时，逐项恢复接口改变造成的分布偏移。
-- [LeWAM: End-to-End World and Action Modeling with JEPAs](../../reproductions/2610.12818-lewam/README.md)（`lewam`）：传统 JEPA 学习“给定动作会到什么状态”，之后另训逆动力学或在线搜索动作。两阶段会使控制监督无法塑造视觉表征，宽高斯动作搜索也较昂贵。
-- [V-JEPA Policy: Building Effective World-Action Models on Predictive Visual Latents](../../foundation-models/2609.37250-vjepa-policy/README.md)（`vjepa-policy`）：冻结 V-JEPA 2.1 视觉编码器，在预测视觉潜空间中联合训练 instruction-conditioned future-latent predictor 和 flow-matching action expert；动作生成读取 predictor 的未来信息上下文。
 
 ### 循环视觉编码与自适应计算
 
@@ -413,6 +415,10 @@
 - [BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models](../../reproductions/2301.12597-blip2/README.md)（`blip2`）：BLIP-2 冻结已有视觉 encoder 和 LLM，只训练轻量 Q-Former。固定数量的可学习 query 通过 cross-attention 从视觉 token 提取与语言最相关的信息；第一阶段做图文表征学习，第二阶段将 query 输出投影成冻结 LLM 的 soft visual prompt。
 
 ## 推理与系统效率
+
+### 表征压缩与几何
+
+- [RAP: Radial-Angular Random Projection for Hyperbolic Representations](../../foundation-models/2611.34298-rap/README.md)（`rap`）：普通空间坐标投影会同时改变径向深度与角相似度。RAP拆开这两者：到所选原点的半径不变，角向量乘一次高斯矩阵后归一化，再提升回目标 Lorentz 双曲面。它不是对原始坐标做普通欧氏 JL；保证仍受半径上界、点间分离和 arcosh 条件数限制。
 
 ### 能力评测与推理协议
 

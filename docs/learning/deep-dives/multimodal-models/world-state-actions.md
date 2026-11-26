@@ -7,7 +7,7 @@ hide:
 
 # 会预测下一幕，还不等于会行动或保持同一个世界
 
-[多模态](../index.md) · 更新 2026-11-25 · 37 篇主题资料 / 21 篇重点对照
+[多模态](../index.md) · 更新 2026-11-26 · 39 篇主题资料 / 23 篇重点对照
 
 世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。
 
@@ -46,6 +46,8 @@ hide:
 | [JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control](../../../multimodal-models/2611.24062-jepa-dots/README.md) · [原始来源](https://arxiv.org/abs/2611.24062v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 共享视觉骨干之后拆动力学和任务两条latent路径，语言FiLM只进入任务路径。world query只读动力学历史和给定clean动作，policy读历史、goal和noisy动作；多层mask同时阻断间接泄漏。固定参数、观测和给定动作时，换指令不能改变world预测，但policy可以生成不同动作。 | LeWAM联合world/action并用预测模型规划；JEPA Dots强调语言目标与动力学给定动作输入的隔离，部署world分支不参与动作搜索。相同masked-MoT背景不代表推理链相同。 |
 | [MV-JEPA: Post-Training Video Encoders for Cross-View Understanding](../../../foundation-models/2611.25172-mv-jepa/README.md) · [原始来源](https://arxiv.org/abs/2611.25172v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | MV-JEPA直接后训练已有JEPA视频编码器，强化不同摄像头视角之间的对象/时刻对应。共享student分别编码各context view的可见token；联合predictor利用所有context特征，既重建被mask的context位置，又预测一个完全held-out视图。held-out图像/特征从不进入student或predictor，只提供teacher目标；推理仍可独立编码单视角。 | Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行masked潜变量预测和unmasked物理态回归；MV-JEPA用另一个摄像头的latent作held-out目标，并让联合predictor从多个独立context视图推断。两者都不能把训练目标喂回推理输入，但MV-JEPA的跨view query不是Time-JEPA的传感器head；重放保持表征和物理时序对齐也是不同验收。 |
 | [CriticJEPA: World Models Are Better Critics Than Optimizers](../../../foundation-models/2611.32357-criticjepa/README.md) · [原始来源](https://arxiv.org/abs/2611.32357v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | CriticJEPA每层用真实训练轨迹的hindsight目标学习conditional flow提案，冻结层级rollout作选择；可短有锚精修，但最终按不含anchor的cost重选。排序能力与可利用的梯度方向分开验证。 | 预测—规划评测区分表示可读性、预测误差与实际成功；CriticJEPA在同一冻结模型上进一步区分候选来源、排序与优化。两者都不能用latent loss取代环境执行。CriticJEPA额外要求真实flow和多层时间合同，固定候选fixture只能是诊断，不能替代能力实现。 |
+| [Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models](../../../foundation-models/2611.34830-jepa-eu/README.md) · [原始来源](https://arxiv.org/abs/2611.34830v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | JEPA EU沿模拟器状态到像素、encoder、预测特征及post-hoc uncertainty逐层追踪扰动，区分RSSM的GRU时间平均与重建目标实体像素权重。 | 预测—规划评测拆表示误差、预测误差和环境成功；JEPA EU分析不确定性在何层丢失。低一步误差、敏感uncertainty及更好规划是不同证据。观测posterior head可恢复当前帧异常信号，但不能用于没有未来观察的imagined rollout。 |
+| [Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation](../../../multimodal-models/2611.34907-agentic-longlive/README.md) · [原始来源](https://arxiv.org/abs/2611.34907v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、同主题比较与边界、完整实验与成本决定 | Agentic LongLive冻结视频生成器，以开放环实体记忆、后台图像绘制/预填充和边界交换保持在线一致性；planner不能看未来脚本或生成视频。 | PixVid经线性对齐、噪声校准与detailer改变latent到pixel表示；它不提供LongLive的在线记忆，而LongLive的sink注入也未取消VAE。两者未跑完整矩阵，无可比本地视频指标。 |
 
 </div>
 
@@ -152,6 +154,18 @@ Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行
 预测—规划评测区分表示可读性、预测误差与实际成功；CriticJEPA在同一冻结模型上进一步区分候选来源、排序与优化。两者都不能用latent loss取代环境执行。CriticJEPA额外要求真实flow和多层时间合同，固定候选fixture只能是诊断，不能替代能力实现。 最终critic cost保留H-JEPA的目标空间、评分时间窗与action-consistency项；上层选择计划的首个预测状态作为子目标。论文FLOPs计入反传而非墙时。本地按18模型/多域训练规划矩阵高成本终态收录，无operator、无环境执行或自动重试。
 
 对照来源：[criticjepa](../../../foundation-models/2611.32357-criticjepa/README.md) · [jepa-prediction-planning](../../../foundation-models/2610.19375-jepa-prediction-planning/README.md)
+
+### Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models
+
+预测—规划评测拆表示误差、预测误差和环境成功；JEPA EU分析不确定性在何层丢失。低一步误差、敏感uncertainty及更好规划是不同证据。观测posterior head可恢复当前帧异常信号，但不能用于没有未来观察的imagined rollout。 Laplace只依赖输入特征：若扰动在前面被消掉，换最后读出也看不见。RSSM GRU把单帧扰动按gate缩放，持续扰动才累积；重建目标按像素贡献优化。posterior需观察帧，不可当作规划时可用的prior特征。
+
+对照来源：[jepa-eu](../../../foundation-models/2611.34830-jepa-eu/README.md) · [jepa-prediction-planning](../../../foundation-models/2610.19375-jepa-prediction-planning/README.md)
+
+### 隐藏关键路径延迟，不是消除总GPU成本
+
+每镜头记忆在下一prompt到达前准备，边界只选完整prefill版本；未完成继续用旧记忆。未来标注只能用于奖励/评价，不进入planner。8B LoRA由SFT/GRPO学选择，不能拿固定recency规则替代。PixVid的像素迁移则改变生成器自身。LongLive约1%额外时间利用额外agent/辅助GPU；六H100图示、8×B200节点和35B/4B/8B模型超单卡预算。两篇本地均review-only，原图/公开mock不是复现或能力证据。
+
+对照来源：[agentic-longlive](../../../multimodal-models/2611.34907-agentic-longlive/README.md) · [pixvid](../../../multimodal-models/2611.17336-pixvid/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -337,9 +351,37 @@ Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行
 
     对照来源：[criticjepa](../../../foundation-models/2611.32357-criticjepa/README.md) · [jepa-prediction-planning](../../../foundation-models/2610.19375-jepa-prediction-planning/README.md)
 
+### 比预测—规划评测多得到一个uncertainty指标，能跳过实际规划吗？ {#cross-nov26-jepa-eu}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。误差、不确定性与成功率不同。JEPA EU还需真实CEM评估，并且posterior读出虽可检测当前异常，却依赖不可用于想象未来的观察。
+
+    **教学例子：** 教学例：用真实下一帧的posterior把异常检出率提高，并不表示planner在执行前就拥有该信号。
+
+    对照来源：[jepa-eu](../../../foundation-models/2611.34830-jepa-eu/README.md) · [jepa-prediction-planning](../../../foundation-models/2610.19375-jepa-prediction-planning/README.md)
+
+### Agentic LongLive与PixVid都改善视频，修改的是同一层吗？ {#cross-cross-nov26-agentic-longlive}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是。前者冻结已有生成器并增加记忆KV和边界交换；PixVid将latent DiT迁往像素表示并训练detailer。外部一致性记忆不等于去掉VAE。
+
+    **教学例子：** 教学例：同一个冻结latent生成器可接实体记忆；迁到像素DiT后仍需单独解决跨镜头实体记忆。
+
+    对照来源：[agentic-longlive](../../../multimodal-models/2611.34907-agentic-longlive/README.md) · [pixvid](../../../multimodal-models/2611.17336-pixvid/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-26** · 仅review-only：固定全文、在线prompt可见性、开放环实体记忆、KV预填充与边界交换、RL训练奖励隔离、作者结果和资源成本。无本地算法、adapter/operator/command、scorer、模型/视频、metrics或GPU回执；不运行CPU mock冒充视频能力。 完整高成本campaign终态不复现，审查DONE。
+
+涉及：[agentic-longlive](../../../multimodal-models/2611.34907-agentic-longlive/README.md) · [pixvid](../../../multimodal-models/2611.17336-pixvid/README.md)
+
+**2026-11-26** · 预测—规划评测拆表示误差、预测误差和环境成功；JEPA EU分析不确定性在何层丢失。低一步误差、敏感uncertainty及更好规划是不同证据。观测posterior head可恢复当前帧异常信号，但不能用于没有未来观察的imagined rollout。 完整矩阵高成本终态，不以L1或审查充当能力证据。
+
+涉及：[jepa-eu](../../../foundation-models/2611.34830-jepa-eu/README.md) · [jepa-prediction-planning](../../../foundation-models/2610.19375-jepa-prediction-planning/README.md)
 
 **2026-11-25** · 预测—规划评测区分表示可读性、预测误差与实际成功；CriticJEPA在同一冻结模型上进一步区分候选来源、排序与优化。两者都不能用latent loss取代环境执行。CriticJEPA额外要求真实flow和多层时间合同，固定候选fixture只能是诊断，不能替代能力实现。 完整实验按成本终态收录，不以L1诊断或资料收录晋级Evolve。
 
@@ -405,7 +447,7 @@ Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行
 
 覆盖 22 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 37 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 39 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -446,6 +488,8 @@ Time-JEPA用物理时序作额外训练目标，在同一online encoder上执行
 - [JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control](../../../multimodal-models/2611.24062-jepa-dots/README.md)
 - [MV-JEPA: Post-Training Video Encoders for Cross-View Understanding](../../../foundation-models/2611.25172-mv-jepa/README.md)
 - [CriticJEPA: World Models Are Better Critics Than Optimizers](../../../foundation-models/2611.32357-criticjepa/README.md)
+- [Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models](../../../foundation-models/2611.34830-jepa-eu/README.md)
+- [Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation](../../../multimodal-models/2611.34907-agentic-longlive/README.md)
 
 </details>
 

@@ -1,0 +1,83 @@
+{
+  "domain": "recommendation",
+  "key": "camar",
+  "title": "Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation",
+  "paper_url": "https://arxiv.org/abs/2611.33628v1",
+  "reviewed_version_url": "https://arxiv.org/pdf/2611.33628v1",
+  "reviewed_version": "v1",
+  "detail_path": "recommendation-components/2611.33628-camar/README.md",
+  "first_author": "Yu Ren",
+  "first_author_affiliation": "Hangzhou Dianzi University / NetEase Cloud Music; co-first author Pengcheng Li, NetEase Cloud Music",
+  "browse_company": "NetEase",
+  "published": "2026-11-25",
+  "published_at": "2026-11-25T01:57:30Z",
+  "announced_on": "2026-11-26",
+  "discovered_on": "2026-11-26",
+  "reviewed_on": "2026-11-26",
+  "code": null,
+  "code_status": "固定v1未给专属作者仓库；本轮未找到已核实公开方法实现",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "生成、排序与冷启动",
+    "多任务学习与多目标优化"
+  ],
+  "browse_topic": [
+    "生成、排序与冷启动",
+    "多任务学习与多目标优化"
+  ],
+  "priority": "P0",
+  "verified_priority_organizations": [],
+  "intake_class": "nov25_first_publication_discovered_nov26",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "gpu_validation_artifact": "docs/gpu-validations/camar-a100-20261126-latest.json",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "summary": "CAMAR先用共享跨域RQ-VAE语义ID、独立域序列encoder形成偏好，再用有向域对的两层ReLU PCN对缺失域补全。每域线性拆出invariant/specific两部分；平方内积约束二者，GRL分类器去除invariant的域信息，仅invariant参与active-domain self-attention，最后按域gate融合共享向量与本域specific。该结构约束不是仅靠一个正则项声称发现真实因果因素。 只实现给定per-domain state/candidate张量上的Eq5–7、9–15：真实两层PCN、双线性factor、单层active-only MHA、域gate/classifier、GRL、正交和sampled-softmax。没有多模态encoder、RQ-VAE/语义码本、item/history backbone、Eq8 task-level冷启动Lcf、完整LTN或三阶段训练器；因此不宣称完整CAMAR。bias-free factor、MHA细节/MLP隐藏宽度等原文未唯一给出，显式采用本地参考配置。",
+  "local_operator": "auto_research.reproductions.camar_components.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.reproductions.camar_components import diagnostic; print(diagnostic(42))'",
+  "method_source_sha256": "7f35800d16f6ec680adbb5e511ce91d7a0e5101858a1aff86bdfe79e25e329dd",
+  "cost_assessment": {
+    "source": "https://arxiv.org/pdf/2611.33628v1",
+    "basis": "§V-A/TableI约539M私有交互和16M Amazon交互；需多模态特征/RQ-VAE预处理、独立序列骨干、9基线/消融、多域全库评测与两周线上A/B。原文列A100 GPUs、4095负例和验证权重搜索，未给GPU数量/总小时。完整矩阵明显超单A100/A30或Mac短时预算：成本过高，不复现（审查 DONE）。只验小算子，不下载数据/权重或启动完整试跑。",
+    "decision": "成本过高，不复现（审查 DONE）",
+    "local_seconds_per_seed_cap": 30
+  },
+  "online_ab": [
+    {
+      "product": "NetEase Cloud Music Song",
+      "metric": "Play Duration",
+      "lift_percent": 1.0,
+      "traffic": "Two-week May2026 A/B; extra CAMAR recall channel with same ranking/reranking; fraction undisclosed",
+      "source_url": "https://arxiv.org/pdf/2611.33628v1",
+      "source_location": "SectionV-E/TableV"
+    },
+    {
+      "product": "NetEase Cloud Music Playlist",
+      "metric": "Like Rate",
+      "lift_percent": 3.0,
+      "traffic": "Two-week May2026 A/B; extra CAMAR recall channel with same ranking/reranking; fraction undisclosed",
+      "source_url": "https://arxiv.org/pdf/2611.33628v1",
+      "source_location": "SectionV-E/TableV"
+    },
+    {
+      "product": "NetEase Cloud Music Podcast",
+      "metric": "Play Duration",
+      "lift_percent": 1.6,
+      "traffic": "Two-week May2026 A/B; extra CAMAR recall channel with same ranking/reranking; fraction undisclosed",
+      "source_url": "https://arxiv.org/pdf/2611.33628v1",
+      "source_location": "SectionV-E/TableV"
+    }
+  ]
+}

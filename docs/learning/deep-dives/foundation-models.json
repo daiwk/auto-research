@@ -251,6 +251,16 @@
             "核心公式",
             "同主题比较与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:rap",
+          "position": "RAP在同一双曲空间中压缩维度，保持每点到指定原点的半径，只随机投影并归一化角方向；不拟合数据。",
+          "tradeoff": "HVMap学习异构编码器空间的配对映射并联合原生/映射分数；RAP不对齐不同编码器，也不能把不同曲率或原点的向量直接混用。二者解决的不是同一检索瓶颈，现有L1不支持语义检索收益比较。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -408,6 +418,14 @@
           "papers": [
             "foundation-models:thresholded-longce",
             "foundation-models:merlin"
+          ]
+        },
+        {
+          "title": "RAP: Radial-Angular Random Projection for Hyperbolic Representations",
+          "body": "HVMap学习异构编码器空间的配对映射并联合原生/映射分数；RAP不对齐不同编码器，也不能把不同曲率或原点的向量直接混用。二者解决的不是同一检索瓶颈，现有L1不支持语义检索收益比较。 对应 Eq11–12。非原点方向若落入投影核则不可归一化，必须拒绝；原点映射为目标原点。同射线距离精确保留；任意角度的距离并非无损。",
+          "papers": [
+            "foundation-models:rap",
+            "foundation-models:hvmap"
           ]
         }
       ],
@@ -613,9 +631,19 @@
             "foundation-models:thresholded-longce",
             "foundation-models:merlin"
           ]
+        },
+        {
+          "id": "nov26-rap",
+          "question": "RAP能替代HVMap把不同编码器的向量库对齐吗？",
+          "answer": "不能。RAP压缩同一已定义双曲空间；HVMap从配对表示学习异构空间映射。保持原点半径不提供跨编码器语义对应。",
+          "example": "教学例：编码器A与B把同一物体置于不同方向，即使两边半径都保持，角向量也不会自动对齐。",
+          "papers": [
+            "foundation-models:rap",
+            "foundation-models:hvmap"
+          ]
         }
       ],
-      "updated": "2026-11-25",
+      "updated": "2026-11-26",
       "reviewed_papers": [
         "foundation-models:alibi",
         "foundation-models:autonomy-heads",
@@ -666,7 +694,8 @@
         "foundation-models:kernel-ridge-attention",
         "foundation-models:hisa",
         "foundation-models:canon-layers-scale",
-        "foundation-models:thresholded-longce"
+        "foundation-models:thresholded-longce",
+        "foundation-models:rap"
       ],
       "updates": [
         {
@@ -940,6 +969,18 @@
             "foundation-models:thresholded-longce": "acab1c57bc187f65dfb30ab2a809f542ec9341ea0bd92a58fd058feb20e149e6",
             "foundation-models:merlin": "5549f39008d450d4a2446631403f0b94d55ea76f976bcc61197cb3c9f1fa0f01"
           }
+        },
+        {
+          "date": "2026-11-26",
+          "papers": [
+            "foundation-models:rap",
+            "foundation-models:hvmap"
+          ],
+          "source_revisions": {
+            "foundation-models:rap": "64ee21e21b476fe037a084b3c647e27e8d9526a00e2dc8373e8f8c6c248b1541",
+            "foundation-models:hvmap": "34c0f79eee9d1fe6fbc2b41e76c1c4671ba6a2346e8a290b93efb9b9ae044d9b"
+          },
+          "summary": "HVMap学习异构编码器空间的配对映射并联合原生/映射分数；RAP不对齐不同编码器，也不能把不同曲率或原点的向量直接混用。二者解决的不是同一检索瓶颈，现有L1不支持语义检索收益比较。 本轮组件范围闭环；完整矩阵未执行且未认定高成本。"
         }
       ]
     },
@@ -2081,6 +2122,16 @@
             "核心公式",
             "同主题比较与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:duomi",
+          "position": "DuoMI按相同token在两轮的全部expert软路由计算两种互信息：聚合使用对齐与逐token变化区间，训练时约束共享expert池的实际复用。",
+          "tradeoff": "EchoMoE复用跨层激活参考并压缩通信变化量；DuoMI共享expert参数并约束路由。前者的reference不是后者的expert池，减少通信和改变专家复用不是可交换收益；小张量反传不代表语言模型提升。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -2193,6 +2244,14 @@
           "papers": [
             "foundation-models:frontier-replay",
             "foundation-models:replayssm"
+          ]
+        },
+        {
+          "title": "DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers",
+          "body": "EchoMoE复用跨层激活参考并压缩通信变化量；DuoMI共享expert参数并约束路由。前者的reference不是后者的expert池，减少通信和改变专家复用不是可交换收益；小张量反传不代表语言模型提升。 每组8条序列；先逐group、逐pool计算阈值罚项，再平均。默认tau=1、g_max=.02 bits、D区间[.05,.30] bits、三个权重均.1。D是平均JSD，soft D不是Top-k替换比例；只有均匀硬Top-k分布才有D=1−retention。基础语言、负载均衡与z-loss保持原配置。",
+          "papers": [
+            "foundation-models:duomi",
+            "foundation-models:echomoe"
           ]
         }
       ],
@@ -2338,9 +2397,19 @@
             "foundation-models:frontier-replay",
             "foundation-models:replayssm"
           ]
+        },
+        {
+          "id": "nov26-duomi",
+          "question": "DuoMI和EchoMoE里的跨层复用是同一种东西吗？",
+          "answer": "不是。DuoMI约束共享FFN池的router选择；EchoMoE复用激活reference并压缩差值通信。",
+          "example": "教学例：同一个expert可被两轮选择，但两轮激活差值仍很大；专家复用率不能替代通信字节测量。",
+          "papers": [
+            "foundation-models:duomi",
+            "foundation-models:echomoe"
+          ]
         }
       ],
-      "updated": "2026-11-21",
+      "updated": "2026-11-26",
       "reviewed_papers": [
         "foundation-models:agentkv",
         "foundation-models:e-means",
@@ -2383,7 +2452,8 @@
         "foundation-models:risa",
         "foundation-models:beyond-bitwidth",
         "foundation-models:loopcache-interface",
-        "foundation-models:frontier-replay"
+        "foundation-models:frontier-replay",
+        "foundation-models:duomi"
       ],
       "updates": [
         {
@@ -2591,6 +2661,18 @@
             "foundation-models:frontier-replay": "045606d01bae6c42450d164dd7e2d22553327ebfb1c5ad0fa1552d0c55fb77a8",
             "foundation-models:replayssm": "484da6cd97e204eb4fe6bab2d3a05149d52677a41c78bb1cb4e1e0dc9b5244ff"
           }
+        },
+        {
+          "date": "2026-11-26",
+          "papers": [
+            "foundation-models:duomi",
+            "foundation-models:echomoe"
+          ],
+          "source_revisions": {
+            "foundation-models:duomi": "4275d915a8f5ae6311fbfc05ebf3c4639a85d8a1761deda8f9cabdde036f7033",
+            "foundation-models:echomoe": "a939116286b19789b759c661c55b55fd02d367f882fe538d9d11251e867f42b9"
+          },
+          "summary": "EchoMoE复用跨层激活参考并压缩通信变化量；DuoMI共享expert参数并约束路由。前者的reference不是后者的expert池，减少通信和改变专家复用不是可交换收益；小张量反传不代表语言模型提升。 完整矩阵高成本终态，不以L1或审查充当能力证据。"
         }
       ]
     },

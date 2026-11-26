@@ -209,7 +209,8 @@
         "post-training:design-taste-admission",
         "post-training:gprm",
         "post-training:eca-credit",
-        "post-training:dcc-aggregation"
+        "post-training:dcc-aggregation",
+        "post-training:briar"
       ]
     },
     {
@@ -355,7 +356,8 @@
         "post-training:behavioral-canaries",
         "post-training:leaf-opd",
         "post-training:hint-wam",
-        "post-training:visalloc"
+        "post-training:visalloc",
+        "post-training:care-opd"
       ]
     },
     {
@@ -418,7 +420,8 @@
         "post-training:sh-opd",
         "post-training:tailroll",
         "post-training:colir-replay",
-        "post-training:ctrl"
+        "post-training:ctrl",
+        "post-training:feast"
       ]
     }
   ]

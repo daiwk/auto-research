@@ -8,6 +8,7 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation](<https://arxiv.org/abs/2611.34907v1>) | 2026-11-25 | [English](../../multimodal-models/2611.34907-agentic-longlive/README-en.md) · [Chinese](../../multimodal-models/2611.34907-agentic-longlive/README.md) |
 | [JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control](<https://arxiv.org/abs/2611.24062v1>) | 2026-11-18 | [English](../../multimodal-models/2611.24062-jepa-dots/README-en.md) · [Chinese](../../multimodal-models/2611.24062-jepa-dots/README.md) |
 | [Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers](<https://arxiv.org/abs/2611.22287v1>) | 2026-11-17 | [English](../../multimodal-models/2611.22287-dwd/README-en.md) · [Chinese](../../multimodal-models/2611.22287-dwd/README.md) |
 | [Autoregressive View Model](<https://arxiv.org/abs/2611.23417v1>) | 2026-11-17 | [English](../../multimodal-models/2611.23417-autoregressive-view-model/README-en.md) · [Chinese](../../multimodal-models/2611.23417-autoregressive-view-model/README.md) |

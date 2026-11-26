@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/pdf/2611.33653v1",
+  "source_url": "https://arxiv.org/pdf/2611.33653v1#page=4",
+  "pdf_page": 4,
+  "figure": "Figure2",
+  "caption": "Three-Stage Training Framework of OneQuery.",
+  "source_sha256": "ddbae097cd68de7c8a6d29cb5c7d8cc280e0b639c13c2bbc25e7b5ea04523e68",
+  "crop_pdf_points": [
+    50,
+    85,
+    563,
+    397
+  ],
+  "asset_sha256": "0c69b9ef8ac87ee99bb7b5b3b4d25129bfc87c55f3e8911f81552a287c474feb",
+  "visually_reviewed": true,
+  "render_scale": 2,
+  "scientific_content_modified": false,
+  "copyright": "Original authors"
+}

@@ -1362,7 +1362,7 @@
     "reward-and-credit": {
       "title": "奖励从哪里来，信用才该分到哪里",
       "thesis": "过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。 CONCUR另处理奖励维度之间的优先级，把门控辅助优势投影到主奖励保序锥；这不是沿时间轴分配token信用。",
-      "updated": "2026-11-19",
+      "updated": "2026-11-26",
       "reviewed_papers": [
         "post-training:emoreward",
         "post-training:dars-density",
@@ -1412,7 +1412,8 @@
         "post-training:design-taste-admission",
         "post-training:gprm",
         "post-training:eca-credit",
-        "post-training:dcc-aggregation"
+        "post-training:dcc-aggregation",
+        "post-training:briar"
       ],
       "axes": [
         "证据来源：人工步骤、正确续写比例、verifier、内在分布",
@@ -1611,6 +1612,16 @@
             "与已有方法的关系",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "post-training:briar",
+          "position": "显式prefix树上结果分歧前沿、边界调制异方差RTS/LMMSE与最小吸收前沿后的零和log长度优势；本地CPU核验Eq3/5–10，不运行LLM/RL。",
+          "tradeoff": "OpCredit按操作上下文匹配支持集得到BOC、按训练答案邻域得到FTC；BRIAR的固定经验方差和树全局后验并非这些图语义信号。两者均须隔离训练信用与被评测Agent输入，无同预算能力比较。",
+          "sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1727,6 +1738,14 @@
           "papers": [
             "post-training:dcc-aggregation",
             "post-training:dynamic-rubric"
+          ]
+        },
+        {
+          "title": "局部信用既可能来自匹配轨迹，也可能来自全局树后验",
+          "body": "实际重读OpCredit当前README：BOC去重的是匹配上下文下的轨迹支持集，FTC比较操作局部前沿，不把训练gold输入actor。BRIAR将已采样prefix树视为Gaussian状态空间，向上信息和向下后验融合使兄弟分支共同影响信用；dense covariance是独立数值参考。Eq5的2.2倍和长度项并不逐边硬性满足martingale方差上界，suffix token排除也不保证共享参数更新后prefix行为不变。CPU等价检查只能支持该数值组件，完整16/32A100矩阵成本过高不复现。",
+          "papers": [
+            "post-training:briar",
+            "post-training:opcredit"
           ]
         }
       ],
@@ -1881,6 +1900,16 @@
           "papers": [
             "post-training:dcc-aggregation",
             "post-training:dynamic-rubric"
+          ]
+        },
+        {
+          "id": "nov26-briar-boundary",
+          "question": "相同实体的两条轨迹可以直接合并成BRIAR共享prefix吗？",
+          "answer": "不可以。共享prefix要求完整可见历史相同；OpCredit也需上下文匹配，实体相同不代表访问集合、预算和阶段相同。忽略历史会把不同条件概率和训练信用混为一谈。",
+          "example": "教学例：一条轨迹已访问实体A且只余1步，另一条尚未访问且余3步；即使当前实体相同，其续写分布也不同，不能仅用实体ID共用posterior。",
+          "papers": [
+            "post-training:briar",
+            "post-training:opcredit"
           ]
         }
       ],
@@ -2109,6 +2138,18 @@
           "source_revisions": {
             "post-training:dcc-aggregation": "c282369a45c9a59d57f58f3aa6bfc70ff414371a1dafca2015738f6608192778",
             "post-training:dynamic-rubric": "c07b566ed4926d31d375558d5d4dcab3989d6dddb98123114dc9584c60480c7d"
+          }
+        },
+        {
+          "date": "2026-11-26",
+          "papers": [
+            "post-training:briar",
+            "post-training:opcredit"
+          ],
+          "summary": "实际重读OpCredit README并对照BRIAR固定v1 Eq3/5–10、附B/C，新增匹配操作支持集与Gaussian树后验的区别；纠正硬方差包络/共享参数prefix不变的过强解读。BRIAR仅CPU组件，完整多卡RL成本DONE，不据此比较Agent能力。",
+          "source_revisions": {
+            "post-training:briar": "32ea31e03dbd2dd78cc9260628c2a89cd8b64559b506b2ff0cf8e17c2cd16d2a",
+            "post-training:opcredit": "68850a49841d1702552ad4020e63204a73b9860466f8f33e47c304390cc5f4f0"
           }
         }
       ]
@@ -2746,7 +2787,7 @@
     "teacher-and-context": {
       "title": "教师更强仍可能教错：信息、兼容性与成功行为保护",
       "thesis": "教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。",
-      "updated": "2026-11-20",
+      "updated": "2026-11-26",
       "reviewed_papers": [
         "post-training:p2-mopd",
         "post-training:targeted-guidance",
@@ -2804,7 +2845,8 @@
         "post-training:behavioral-canaries",
         "post-training:leaf-opd",
         "post-training:hint-wam",
-        "post-training:visalloc"
+        "post-training:visalloc",
+        "post-training:care-opd"
       ],
       "axes": [
         "教师来源：同参数特权视图或独立领域专家",
@@ -2972,6 +3014,16 @@
             "与已有方法的关系",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "post-training:care-opd",
+          "position": "学生roll-in扩历史，teacher continuation验证、后见证据选turn与新响应confidence gate联合决定prefix replay；仍采用教师token reverse KL。仅review-only。",
+          "tradeoff": "TreeOPSD将共享树信用映射为冻结有界Bernoulli target以限制重复更新；CARE-OPD改变历史支持、回放turn和更新资格，不规定相同有限target。完成轨迹可用于训练selector，但未来结果不得暴露给学生。",
+          "sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -3073,6 +3125,14 @@
           "papers": [
             "post-training:visalloc",
             "post-training:visually-attributable-opd"
+          ]
+        },
+        {
+          "title": "后见选择样本不是构造有界蒸馏目标",
+          "body": "实际重读TreeOPSD README，树共享要求完整历史、叶奖励使用sample std，冻结Bernoulli目标在达到和越过目标时分别零梯度与反向。CARE-OPD的定义性变化发生在collection/replay allocation/response acceptance；后见teacher看完整执行记录，学生只看原prefix，临时标识与未来证据必须剥离。用固定前40%或仅confidence gate会删掉关键selector，不能称忠实核心。原文32H200、128K/150turn和大规模SWE执行超预算，review-only终态，不建本地指标或evolve。",
+          "papers": [
+            "post-training:care-opd",
+            "post-training:treeopsd"
           ]
         }
       ],
@@ -3217,6 +3277,16 @@
           "papers": [
             "post-training:visalloc",
             "post-training:visually-attributable-opd"
+          ]
+        },
+        {
+          "id": "nov26-care-opd-boundary",
+          "question": "后见选择了一个teacher turn，是否就给学生设定了有限更新终点？",
+          "answer": "没有。CARE-OPD只是决定从哪个prefix生成新响应并是否蒸馏，其教师token reverse KL与TreeOPSD的冻结Bernoulli目标不同；选择本身既不等于目标半径，也不保证overshoot控制。",
+          "example": "教学例：把第60轮修复选进replay只规定采样位置；TreeOPSD则还给相对旧策略的turn分数一个明确target，达到后梯度归零。",
+          "papers": [
+            "post-training:care-opd",
+            "post-training:treeopsd"
           ]
         }
       ],
@@ -3432,13 +3502,25 @@
             "post-training:visalloc": "62749cf4095a80d9f090f356d16f3493859fda9648a2e6999e2ce2848d7ae72f",
             "post-training:visually-attributable-opd": "0b6e38a966163901c2b78a8fa2523a4f6c83e68b5fa58b2bdeee298f9fec3848"
           }
+        },
+        {
+          "date": "2026-11-26",
+          "papers": [
+            "post-training:care-opd",
+            "post-training:treeopsd"
+          ],
+          "summary": "实际重读TreeOPSD README与CARE-OPD固定v1 Section3/AppendixB，增加有界目标与后见样本分配的区分、未来证据隔离要求及不可用固定selector代替的界线。CARE-OPD完整32H200流程成本过高不复现，review DONE；无本地代码/指标/GPU/evolve。",
+          "source_revisions": {
+            "post-training:care-opd": "206dc50df086fbcd2fe05faf0aee6e046f5f1f64dc81ed226b158e6a78edcc27",
+            "post-training:treeopsd": "4f3ccade6cebd5da769aa83706997118c5459a69a4e3ef50409c3f695ed83100"
+          }
         }
       ]
     },
     "data-and-budget": {
       "title": "省掉哪一份算力：选问题、少生成、分枝与有条件重放",
       "thesis": "数据与预算方法改变的是训练链路的不同位置。课程重估当前难度，LESSER降低筛选特征成本，STOPD随机少生成并校正，BranchOPD增加关键分枝，Lightning缓存教师，TAR召回被压制的正确模式；少调用一次教师不等于整个训练更便宜。",
-      "updated": "2026-11-23",
+      "updated": "2026-11-26",
       "reviewed_papers": [
         "post-training:ask-to-distill",
         "post-training:tar-adaptive-replay",
@@ -3482,7 +3564,8 @@
         "post-training:sh-opd",
         "post-training:tailroll",
         "post-training:colir-replay",
-        "post-training:ctrl"
+        "post-training:ctrl",
+        "post-training:feast"
       ],
       "axes": [
         "选择对象：问题、token位置、后缀、历史轨迹",
@@ -3601,6 +3684,16 @@
             "与已有方法的关系",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "post-training:feast",
+          "position": "固定atomic历史、当前policy/PCA/GMM重聚类、正priority与曝光欠额、选中簇预算保护，再以累计reward方差2/4/16晋级；外部表示不以task标签替代。",
+          "tradeoff": "RAIL以shadow-to-live干预后的recoverability收益学习contextual bandit，控制帮助位置和方式；FEAST分配学习机会与计算，未学习干预策略。簇内variance selector单独存在不等于FEAST，旧RAIL mini-suite亦不构成共同能力对照。",
+          "sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -3660,6 +3753,14 @@
           "papers": [
             "post-training:ctrl",
             "post-training:colir-replay"
+          ]
+        },
+        {
+          "title": "保护机会不同于学习如何救回失败轨迹",
+          "body": "实际重读RAIL README，其定义对象为干预状态/动作与恢复收益。FEAST处理的是内生学习信号导致的长期机会分配；每个原子的m/u/trend/shortfall不因当前policy重聚类而重置。共同pilot给prompt等权反馈，全部rollout计入曝光，selected cluster预算不可在后续晋级时跨簇流走。本地运行真实KMeans++/PCA/GMM-EM/BIC、history和quota组件，但随机向量及Bernoulli callback只作诊断，不是LLM或公平性能力实验。最小单臂约6.07A100小时不代表完整多臂矩阵可负担。",
+          "papers": [
+            "post-training:feast",
+            "post-training:rail"
           ]
         }
       ],
@@ -3742,6 +3843,16 @@
           "papers": [
             "post-training:ctrl",
             "post-training:colir-replay"
+          ]
+        },
+        {
+          "id": "nov26-feast-boundary",
+          "question": "若一簇本轮pilot全部失败，能否把其余预算挪给别簇的高方差题？",
+          "answer": "在FEAST预留预算机制中不能。该簇既已选中，就保有固定Bc；内部晋级仍按原始累计reward方差执行。否则删掉的是跨簇机会保护，不是等价加速。",
+          "example": "教学例：逻辑簇和数学簇各预留256条；逻辑pilot全0时仍用稳定并列晋级完成其256条，不能借此给数学簇额外128条。",
+          "papers": [
+            "post-training:feast",
+            "post-training:rail"
           ]
         }
       ],
@@ -3888,6 +3999,18 @@
           "source_revisions": {
             "post-training:ctrl": "2e8ebbc76609c6fbfd4f3c0f9fcfc80ddab1c06412478058206b8d2c43297ef4",
             "post-training:colir-replay": "b49323cf277810e110f192851ab26765bc97c094f390dfc64aed205ffcfddecd"
+          }
+        },
+        {
+          "date": "2026-11-26",
+          "papers": [
+            "post-training:feast",
+            "post-training:rail"
+          ],
+          "summary": "实际重读RAIL README并对照FEAST固定v1 Section4/AppendixA.2–A.3，新增recoverability干预与持久机会/配额保护的区别，保留pilot等权、全部曝光和聚类不重置历史的边界。CPU组件不作学习能力比较，完整LLM矩阵成本DONE。",
+          "source_revisions": {
+            "post-training:feast": "676d734ea3ecc3a226000a6fb7e6cc653eaf182363f55077b2723190780448b3",
+            "post-training:rail": "1e60cba323dbe55dc7d133e062a7458d611618abd1e81c797b73fd5410e4aaf2"
           }
         }
       ]

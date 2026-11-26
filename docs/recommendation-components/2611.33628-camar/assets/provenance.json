@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/pdf/2611.33628v1",
+  "source_url": "https://arxiv.org/pdf/2611.33628v1#page=4",
+  "pdf_page": 4,
+  "figure": "Figure1",
+  "caption": "The overall workflow of CAMAR, with multi-modal preference encoding and causal preference disentanglement.",
+  "source_sha256": "7f35800d16f6ec680adbb5e511ce91d7a0e5101858a1aff86bdfe79e25e329dd",
+  "crop_pdf_points": [
+    44,
+    38,
+    568,
+    306
+  ],
+  "asset_sha256": "3160b83bfbd2d5ee21ffa05494bba89f7c5c2121a6b8c6d2c70db6a2ad684a4d",
+  "visually_reviewed": true,
+  "render_scale": 2,
+  "scientific_content_modified": false,
+  "copyright": "Original authors"
+}

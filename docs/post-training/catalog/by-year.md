@@ -4,6 +4,9 @@
 
 ## 2026
 
+- 2026-11 · [BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees](../2611.34746-briar/README.md)（`briar`）：终局正确率不能告诉训练器哪一步值得继续分支，也不能区分必要推导和答案确定后的反复检查。BRIAR以prefix成功概率的martingale结构连接三个组件：用结果分歧和置信奖励选探索前沿；以边界调制方差做树上全局LMMSE信用；仅在吸收前沿之后对正确续写的长度做零和比较。
+- 2026-11 · [Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents](../2611.34756-care-opd/README.md)（`care-opd`）：prefix replay让当前学生从已保存历史生成一轮响应，再由教师监督，从训练关键路径中移走长环境交互；但教师独有历史可能漏掉学生造成的状态，且固定早轮偏好会漏掉晚期诊断。CARE-OPD以少量学生roll-in再由教师完成来扩历史，用教师在新学生响应上的置信门过滤更新，并让已完成轨迹中的执行反馈支持回放turn选择。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- 2026-11 · [FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning](../2611.33827-feast/README.md)（`feast`）：只追逐当前高学习信号会形成反馈环：弱能力因过去分配不足而表现差，又因此拿不到新经验。FEAST将学习机会与计算分配分开：固定atomic unit保存历史，当前策略表示和学习趋势只改变簇归属；选中簇先保留独立预算，随后才在各簇内按reward方差逐轮晋级prompt。
 - 2026-11 · [EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor](../2611.32810-epro/README.md)（`epro`）：同一权重在BF16训练引擎与低精度rollout引擎中不一定给出相同分布。旧checkpoint时两者可观测，但中间learner更新对应的当前执行分布不可直接读取。
 - 2026-11 · [Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences](../2611.30135-shpo/README.md)（`shpo`）：DPO把偏好写成response标量势之差，围绕三角形相加为零，不能表示A胜B、B胜C、C胜A的局部环。SHPO保留DPO项，再把response最后层hidden仅在response token上均值池化，经无bias W投影到2K维并归一化；每个二维plane的有向面积乘γ后相加，构造交换两回答即反号的残差。
 - 2026-11 · [Verifiable On-Policy Distillation](../2611.30325-vopd/README.md)（`vopd`）：RLVR只给已采样整条response稀疏结果反馈；OPD给每个访问prefix的完整teacher分布，但该信号未被verifier验证。VOPD先对每组response计算teacher/reference累计log-ratio D，再以population标准差标准化V和D，最小二乘投影得到Pearson相关c。

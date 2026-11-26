@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-11-25 · 83 篇主题资料 / 46 篇重点对照
+[Agent](../index.md) · 更新 2026-11-26 · 84 篇主题资料 / 47 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
@@ -71,6 +71,7 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing](../../../agent-research/2611.30742-transport-safe-audit/README.md) · [原始来源](https://arxiv.org/abs/2611.30742v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定 | 不同Agent产生不同轨迹；即使裁判在给定(X,Y)时看不到Agent身份，其sensitivity/specificity的平均值也会随成功/失败轨迹分布改变。论文连接scalar transport偏差、支持与识别、随机人工audit、anytime monitoring和rank sets；这些统计工具本身不是新发明。主要证据是semi-synthetic，公共Agent数据的既有分析未在本文独立重跑，不据此声称轨迹长度有因果作用。 | CoEvoBench保护Selection/Test内容并审计训练血缘，回答候选是否越界及能否泛化；本篇问即使访问隔离正确，LLM judge误差是否能跨轨迹分布transport。二者不能替代：无数据泄漏不等于judge已校准，AIPW也不能消除被评Agent读了gold造成的污染。CoEvo完整系统本地未跑，本篇也没有live judge结果可横比。 |
 | [MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research](../../../agent-research/2611.30011-morse/README.md) · [原始来源](https://arxiv.org/abs/2611.30011v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定 | 流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。核心是研究—实现—验证的自主Editor与可扩展服务，不是固定候选列表或门控公式本身。 | Harness²固定工具表面，用Propose–Probe–Compose执行对照改当前任务harness，再跨任务保存经验；MORSE在流式记忆设计中把在线文献研究和host批准的感知工具获取纳入搜索，保留当前head迭代。二者不能简化为同一“反思循环”：MORSE的validation概率/成本gate与持续服务扩展有专门契约，Harness²匿名selector也不是其scorer。本地Harness²机制替身与本篇review-only没有可比较Agent分数。 |
 | [RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research](../../../agent-research/2611.32508-recurscibench/README.md) · [原始来源](https://arxiv.org/abs/2611.32508v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验 | RecurSciBench用成对科学建模F/分析A任务作为经验来源，冻结evolved state后在独立G-test评价within-type、cross-type和cross-domain迁移；backbone权重固定，source gain不能代替迁移结论。 | CoEvoBench允许researcher选择权重训练/harness干预，在Visible/Selection/Test中审计开发与选择；RecurSciBench固定权重，测不同系统与经验来源能否迁往新科学任务。前者回答干预选得怎样，后者回答经验在何种条件有效；都要隔离被评policy和gold。 |
+| [HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants](../../../agent-research/2611.34624-home/README.md) · [原始来源](https://arxiv.org/abs/2611.34624v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、同主题比较与边界、完整实验与成本决定 | HoMe把文件记忆构建/检索/回答的失败用session差分追溯到harness，再用结构探索、两级采样和构建复用提高评价效率；本地只执行采样/复用，不执行诊断或优化agent。 | MORSE的Editor可在线研究并经host准入扩展视频感知工具，受accuracy/efficiency阶段合同约束；HoMe固定ReMe运行时，编辑应用harness。二者评价分数与改进对象不可混为一谈。 |
 
 </div>
 
@@ -297,6 +298,12 @@ CCI在八个参考benchmark上，先取十项结构特征的任务中位数，�
 RecurSciPipe的F/A联合设计保留科学schema、采样结构与provenance，A的证据仅来自F的公开训练部分。准入需要四执行检查加三科学检查，失败按设计/实施层分流修复。38对source与20个独立test F构成96任务，四系统六source设置得到24冻结state；测试任务间不携带经验。各run按reference gap归一化后任务内均值，再对任务相对gain取均值，不能改成总分相对变化。附录A的source反馈因系统不同，但G-test targets/scores统一不可见。作者半数state负gain说明条件性经验可能被错误固化，不证明RSI普遍无效。每任务A800/96GiB/6h上限及长rollout矩阵成本过高，本地仅审查；公式教学和源码平台链接不构成复现。
 
 对照来源：[recurscibench](../../../agent-research/2611.32508-recurscibench/README.md) · [coevobench](../../../agent-research/2611.27116-coevobench/README.md)
+
+### 评价预算控制不等于记忆研究能力
+
+HoMe的EMA/staleness/count/unresolved-error与uniform项寻找可行动失败，均分不是无偏总体估计。复用须核构建等价、来源指纹和完整快照，只抽一次概率；未知必须重建。MORSE还把文献研究、外部感知服务准入和阶段性质量/延迟gate纳入完整Editor。实现采样或gate都不能替代两篇的语义agent。本地HoMe为L1数值/协议诊断，MORSE仍review-only；完整HoMe10.4h/185.2M token矩阵终态不复现。
+
+对照来源：[home](../../../agent-research/2611.34624-home/README.md) · [morse](../../../agent-research/2611.30011-morse/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -682,9 +689,23 @@ RecurSciPipe的F/A联合设计保留科学schema、采样结构与provenance，A
 
     对照来源：[recurscibench](../../../agent-research/2611.32508-recurscibench/README.md) · [coevobench](../../../agent-research/2611.27116-coevobench/README.md)
 
+### HoMe与MORSE都改记忆harness，搜索边界相同吗？ {#cross-cross-nov26-home}
+
+??? note "展开答案与例子"
+
+    **答案：** 不同。HoMe围绕文件记忆的session差分归因和评价复用；MORSE让Editor在线研究并经host准入扩展视频感知服务，另有阶段性质量/延迟合同。
+
+    **教学例子：** 教学例：修复文件检索的source多样性是HoMe方向；研究并申请OCR服务是MORSE的开放工具边界。
+
+    对照来源：[home](../../../agent-research/2611.34624-home/README.md) · [morse](../../../agent-research/2611.30011-morse/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-26** · 纯CPU两级case/query采样、EMA与uniform探索、未复查错误衰减、无放回/fair-share分配、选择时间戳；host批准的构建等价、完整来源指纹、最近完成祖先与一次0.6复用抽签。无LLM诊断、harness编辑、真实问答或能力评价；host验证标量不交给被测policy。 完整高成本campaign终态不复现，审查DONE。
+
+涉及：[home](../../../agent-research/2611.34624-home/README.md) · [morse](../../../agent-research/2611.30011-morse/README.md)
 
 **2026-11-25** · 仅review-only固定v1、F/A来源隔离、冻结G-test协议、公式、成本和同主题比较；不创建算法/adapter、科学任务生成、scorer、reference solver、LLM演化或benchmark。测试targets/scores必须对被测Agent不可见；只实现归一化不能冒称本篇复现。无虚构seed指标或GPU回执。 完整高成本campaign终态不复现，审查DONE。
 
@@ -834,7 +855,7 @@ RecurSciPipe的F/A联合设计保留科学schema、采样结构与provenance，A
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 83 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 84 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -921,6 +942,7 @@ RecurSciPipe的F/A联合设计保留科学schema、采样结构与provenance，A
 - [Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing](../../../agent-research/2611.30742-transport-safe-audit/README.md)
 - [MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research](../../../agent-research/2611.30011-morse/README.md)
 - [RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research](../../../agent-research/2611.32508-recurscibench/README.md)
+- [HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants](../../../agent-research/2611.34624-home/README.md)
 
 </details>
 

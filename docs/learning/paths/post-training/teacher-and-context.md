@@ -7,7 +7,7 @@ hide:
 
 # 教师与纠错：额外信息何时能帮到学生
 
-[LLM 后训练](index.md) / 228 个问题 · 57 篇论文
+[LLM 后训练](index.md) / 232 个问题 · 58 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">228 个问题 · 57 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">232 个问题 · 58 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:care-opd" data-paper-title="Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents LLM 后训练 Shanghai Jiao Tong University 2026-11-25 prefix replay让当前学生从已保存历史生成一轮响应，再由教师监督，从训练关键路径中移走长环境交互；但教师独有历史可能漏掉学生造成的状态，且固定早轮偏好会漏掉晚期诊断。CARE-OPD以少量学生roll-in再由教师完成来扩历史，用教师在新学生响应上的置信门过滤更新，并让已完成轨迹中的执行反馈支持回放turn选择。 完整实验成本过高，不复现（审查 DONE）；Review-only。完整实验成本过高，不复现（审查 DONE）；无本地实现、metrics或GPU回执，不自动重试，不接Evolve。无本地实现、运行命令或数据下载；不建立paper metrics或GPU回执。后见反馈仅可供训练时selector，绝不成为被评测Agent输入；若未来实现，应对学生prefix白名单及未来信息移除建立隔离测试。  teacher-and-context 轨迹回放 LLM 后训练 教师与纠错：额外信息何时能帮到学生 prefix replay中的on-policy到底在哪一层成立？ 当前学生从保存prefix生成新响应，所以响应层是on-policy；prefix来自过去固定policy轨迹，因此历史层off-policy。CARE-OPD用学生roll-in扩历史，但不把保存历史变成每次更新的新环境轨迹。 教学例：今天的学生从昨天记录的第20轮观察继续回答；新回答来自今天policy，但前19轮并未按今天policy重新执行。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<span id="paper-post-training-care-opd-a90c534c" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-612ba82437fa3408">prefix replay中的on-policy到底在哪一层成立？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acare-opd">Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>当前学生从保存prefix生成新响应，所以响应层是on-policy；prefix来自过去固定policy轨迹，因此历史层off-policy。CARE-OPD用学生roll-in扩历史，但不把保存历史变成每次更新的新环境轨迹。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：今天的学生从昨天记录的第20轮观察继续回答；新回答来自今天policy，但前19轮并未按今天policy重新执行。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34756v1">原论文</a> · <a href="../../../../post-training/2611.34756-care-opd/">实现解读</a> · <a href="#qa-612ba82437fa3408">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:care-opd" data-paper-title="Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents LLM 后训练 Shanghai Jiao Tong University 2026-11-25 prefix replay让当前学生从已保存历史生成一轮响应，再由教师监督，从训练关键路径中移走长环境交互；但教师独有历史可能漏掉学生造成的状态，且固定早轮偏好会漏掉晚期诊断。CARE-OPD以少量学生roll-in再由教师完成来扩历史，用教师在新学生响应上的置信门过滤更新，并让已完成轨迹中的执行反馈支持回放turn选择。 完整实验成本过高，不复现（审查 DONE）；Review-only。完整实验成本过高，不复现（审查 DONE）；无本地实现、metrics或GPU回执，不自动重试，不接Evolve。无本地实现、运行命令或数据下载；不建立paper metrics或GPU回执。后见反馈仅可供训练时selector，绝不成为被评测Agent输入；若未来实现，应对学生prefix白名单及未来信息移除建立隔离测试。  teacher-and-context 轨迹回放 LLM 后训练 教师与纠错：额外信息何时能帮到学生 后见selector可以读完整轨迹，为什么学生却不能？ selector用后续执行反馈决定哪些教师turn值得训练，这是训练侧分配信息。被评测或生成响应的学生只能读该turn之前的prefix；临时ID、selector输出和未来证据都必须移除，否则构成信息泄漏。 教学例：后续测试暴露修复失败，可帮助selector选择早期诊断turn；学生学习该turn时不能看到尚未运行的测试结果。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-e831465f034a02ba">后见selector可以读完整轨迹，为什么学生却不能？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acare-opd">Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>selector用后续执行反馈决定哪些教师turn值得训练，这是训练侧分配信息。被评测或生成响应的学生只能读该turn之前的prefix；临时ID、selector输出和未来证据都必须移除，否则构成信息泄漏。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：后续测试暴露修复失败，可帮助selector选择早期诊断turn；学生学习该turn时不能看到尚未运行的测试结果。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34756v1">原论文</a> · <a href="../../../../post-training/2611.34756-care-opd/">实现解读</a> · <a href="#qa-e831465f034a02ba">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:care-opd" data-paper-title="Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents LLM 后训练 Shanghai Jiao Tong University 2026-11-25 prefix replay让当前学生从已保存历史生成一轮响应，再由教师监督，从训练关键路径中移走长环境交互；但教师独有历史可能漏掉学生造成的状态，且固定早轮偏好会漏掉晚期诊断。CARE-OPD以少量学生roll-in再由教师完成来扩历史，用教师在新学生响应上的置信门过滤更新，并让已完成轨迹中的执行反馈支持回放turn选择。 完整实验成本过高，不复现（审查 DONE）；Review-only。完整实验成本过高，不复现（审查 DONE）；无本地实现、metrics或GPU回执，不自动重试，不接Evolve。无本地实现、运行命令或数据下载；不建立paper metrics或GPU回执。后见反馈仅可供训练时selector，绝不成为被评测Agent输入；若未来实现，应对学生prefix白名单及未来信息移除建立隔离测试。  teacher-and-context 轨迹回放 LLM 后训练 教师与纠错：额外信息何时能帮到学生 为什么CARE-OPD不等于TreeOPSD的树后验目标？ TreeOPSD从树信用构造冻结有界Bernoulli target，主要控制更新方向与停止点；CARE-OPD选择历史/turn及响应资格，目标仍是教师token分布reverse KL。样本分配不等于有限更新target。 教学例：同一prefix被选为回放并不规定学生应该移动多远；TreeOPSD的target会在达到目标时令对应梯度为零。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-49a876485f3a010a">为什么CARE-OPD不等于TreeOPSD的树后验目标？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acare-opd">Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>TreeOPSD从树信用构造冻结有界Bernoulli target，主要控制更新方向与停止点；CARE-OPD选择历史/turn及响应资格，目标仍是教师token分布reverse KL。样本分配不等于有限更新target。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一prefix被选为回放并不规定学生应该移动多远；TreeOPSD的target会在达到目标时令对应梯度为零。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34756v1">原论文</a> · <a href="../../../../post-training/2611.34756-care-opd/">实现解读</a> · <a href="#qa-49a876485f3a010a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:care-opd" data-paper-title="Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents LLM 后训练 Shanghai Jiao Tong University 2026-11-25 prefix replay让当前学生从已保存历史生成一轮响应，再由教师监督，从训练关键路径中移走长环境交互；但教师独有历史可能漏掉学生造成的状态，且固定早轮偏好会漏掉晚期诊断。CARE-OPD以少量学生roll-in再由教师完成来扩历史，用教师在新学生响应上的置信门过滤更新，并让已完成轨迹中的执行反馈支持回放turn选择。 完整实验成本过高，不复现（审查 DONE）；Review-only。完整实验成本过高，不复现（审查 DONE）；无本地实现、metrics或GPU回执，不自动重试，不接Evolve。无本地实现、运行命令或数据下载；不建立paper metrics或GPU回执。后见反馈仅可供训练时selector，绝不成为被评测Agent输入；若未来实现，应对学生prefix白名单及未来信息移除建立隔离测试。  teacher-and-context 轨迹回放 LLM 后训练 教师与纠错：额外信息何时能帮到学生 为什么只实现confidence gate不能标记CARE-OPD已复现？ 定义性流程还包括学生roll-in、教师完成与验证、基于后见执行证据的teacher selector、去未来信息的prefix replay和新学生响应蒸馏。只写通用门或固定turn fixture删掉了核心选择模型，且完整流程成本超预算。 教学例：手工总选前40%turn没有读到后来失败测试，不能替代可能选中后半段关键修复的后见教师；因此本篇保持review-only成本DONE。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-5e919a153d654646">为什么只实现confidence gate不能标记CARE-OPD已复现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acare-opd">Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>定义性流程还包括学生roll-in、教师完成与验证、基于后见执行证据的teacher selector、去未来信息的prefix replay和新学生响应蒸馏。只写通用门或固定turn fixture删掉了核心选择模型，且完整流程成本超预算。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：手工总选前40%turn没有读到后来失败测试，不能替代可能选中后半段关键修复的后见教师；因此本篇保持review-only成本DONE。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34756v1">原论文</a> · <a href="../../../../post-training/2611.34756-care-opd/">实现解读</a> · <a href="#qa-5e919a153d654646">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:hint-wam" data-paper-title="HINT-WAM: Hindsight-Informed Training for World Action Models" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="HINT-WAM: Hindsight-Informed Training for World Action Models LLM 后训练 National University of Singapore 2026-11-18 HINT-WAM先SFT动作专家，再冻结同一backbone，只训练hindsight encoder与gated adapters读取示范未来视频。teacher去掉当前帧并保留时间轴，学生与部署策略从来不看未来。最后学生在自身ODE采样轨迹上重新评估少量去噪点，匹配冻结teacher的动作分布。直接velocity MSE可能把学生看不到的多模态未来压成均值。论文用energy score：到teacher单样本的吸引项减去学生样本间排斥项，同时保留behavior-cloning anchor； 完整实验成本过高，不复现（审查 DONE）；仅研究资料，无本地实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录同源hindsight teacher、学生ODE状态上的energy-score与BC anchor、成本和限制。无本地模型/算子/指标，不用静态动作样本替代真实WAM蒸馏。  teacher-and-context 后训练方法资料 LLM 后训练 教师与纠错：额外信息何时能帮到学生 学生部署时为什么不需要未来视频？ 未来视频只通过训练期hindsight encoder/adapters进入冻结teacher；student只看当前帧、指令和本体状态，蒸馏结束丢弃teacher模块。把未来交给student会改变任务。 教学例：示范未来可消解抓取左物体/右物体的歧义，但真实机器人执行时不能读取尚未发生的示范帧。 2026-11-19">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
 <span id="paper-post-training-hint-wam-e62968c6" class="ar-learning-paper-anchor"></span>

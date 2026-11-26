@@ -10,6 +10,9 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 网络架构 | [DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers](2611.33952-duomi/README.md) | Huawei Foundation Model Lab，2026-11-25 | 未发现官方代码 | `duomi`：仅低成本组件，完整实验不复现 |
+| 多模态基础模型 | [Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models](2611.34830-jepa-eu/README.md) | Fraunhofer Heinrich-Hertz-Institut，2026-11-25 | 未发现官方代码 | 计划键 `jepa-eu`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| 推理与系统效率 | [RAP: Radial-Angular Random Projection for Hyperbolic Representations](2611.34298-rap/README.md) | The Chinese University of Hong Kong，2026-11-25 | [原作者入口](https://github.com/HUBERILT/RAP)；作者固定 v1 直接链接公开 Python 仓库，GitHub API 已确认 public；git ls-remote 核验 HEAD。未声明许可证，按论文公式独立实现，未复制源码。 | `rap`：仅低成本组件，完整实验不复现 |
 | 网络架构 | [CriticJEPA: World Models Are Better Critics Than Optimizers](2611.32357-criticjepa/README.md) | Tsinghua University，2026-11-24 | [原作者入口](https://github.com/daybraeklaxry/CriticJEPA-code)；原文作者代码链接存在，但2026-11-25 git ls-remote返回Repository not found、raw/main/README.md返回404；未核实可读源码或commit，不等于确认已公开。 | 计划键 `criticjepa`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 注意力与长上下文 | [Eliciting the Recall Capacity of Linear Attention](2611.32969-thresholded-longce/README.md) | ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology，2026-11-24 | 未发现官方代码 | `thresholded-longce`：仅低成本组件，完整实验不复现 |
 | 预训练与数据 | [Weight Scale Rebalancing: Transferable Training Recipes for Transformers](2611.32866-udvr/README.md) | Umeå University，2026-11-24 | 未发现官方代码 | `udvr`：仅低成本组件，完整实验不复现 |

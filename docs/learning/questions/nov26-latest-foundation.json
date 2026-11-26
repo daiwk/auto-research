@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:rap": {
+      "questions": [
+        {
+          "id": "radius-not-all-distances",
+          "level": "basics",
+          "question": "保持半径是否表示所有距离都不变？",
+          "answer": "不是。半径只固定每点到选定原点的距离，角向随机投影仍改变不同射线间距离。",
+          "example": "教学例：两个半径同为1的点可夹角90度；投影后夹角变为60度时，两半径不变而点间距离改变。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "完整实验与成本边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "normalize-before-lift",
+          "level": "mechanism",
+          "question": "为何不能直接把Pu作为目标空间坐标？",
+          "answer": "Pu一般不是单位方向；必须先除以其范数，再按原半径用cosh/sinh提升，否则径向深度漂移。",
+          "example": "教学例：Pu长度为2时直接代入空间分量会偏离原半径；除以2恢复角方向，非原点且Pu=0必须报错。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "完整实验与成本边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "not-cross-encoder-alignment",
+          "level": "comparison",
+          "question": "RAP能替代HVMap把不同编码器的向量库对齐吗？",
+          "answer": "不能。RAP压缩同一已定义双曲空间；HVMap从配对表示学习异构空间映射。保持原点半径不提供跨编码器语义对应。",
+          "example": "教学例：编码器A与B把同一物体置于不同方向，即使两边半径都保持，角向量也不会自动对齐。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "完整实验与成本边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "diagnostic-not-retrieval",
+          "level": "implementation",
+          "question": "怎样检验实现没有偷换成欧氏距离压缩？",
+          "answer": "同时检查输出在目标双曲面、每点半径不变及同射线距离；用双曲距离而非输出坐标欧氏距离计失真。",
+          "example": "教学例：把r和Pu直接拼接可能通过shape测试，却无法通过Lorentz约束；本地负控会拒绝非法输入。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "完整实验与成本边界"
+          ],
+          "added": "2026-11-26"
+        }
+      ]
+    },
+    "foundation-models:duomi": {
+      "questions": [
+        {
+          "id": "aggregate-not-token-agreement",
+          "level": "basics",
+          "question": "两轮总体expert使用相同，是否每个token都复用expert？",
+          "answer": "不一定。不同token的变化可互相抵消，使聚合G=0但逐token D>0。",
+          "example": "教学例：第一轮x选A、y选B，第二轮交换；两轮总体各一半A/B，但每个token都换了expert。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "group-before-hinge",
+          "level": "mechanism",
+          "question": "为何不能先跨所有group平均G/D再计算阈值罚项？",
+          "answer": "平方hinge非线性；一组越界不能被另一组抵消。必须每组每pool先计算Phi再平均。",
+          "example": "教学例：两组分别偏好相反子池，池化后G为0，但两组自身G都大，正确实现仍有罚项。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "reuse-not-communication",
+          "level": "comparison",
+          "question": "DuoMI和EchoMoE里的跨层复用是同一种东西吗？",
+          "answer": "不是。DuoMI约束共享FFN池的router选择；EchoMoE复用激活reference并压缩差值通信。",
+          "example": "教学例：同一个expert可被两轮选择，但两轮激活差值仍很大；专家复用率不能替代通信字节测量。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "real-coupled-gradients",
+          "level": "implementation",
+          "question": "只给任意两组logits算JSD算完成DuoMI L1吗？",
+          "answer": "不够。本地需实际两router依次读取状态并调用同一expert池，证明组化正则能反传到两router且不改变硬派发。",
+          "example": "教学例：独立优化两个logits数组无法证明共享FFN的耦合；本地检查第二轮loss通过第一轮状态回到共享参数。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-26"
+        }
+      ]
+    },
+    "foundation-models:jepa-eu": {
+      "questions": [
+        {
+          "id": "feature-limits-uncertainty",
+          "level": "basics",
+          "question": "最后一层贝叶斯不确定性能看见任何输入异常吗？",
+          "answer": "不能。它只读冻结特征；若前面的表示已把异常抹平，最后一层估计器也无法恢复该差异。",
+          "example": "教学例：正常与异常帧被映射到同一psi时，二者s²严格相同，即使原始像素差异很大。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "persistence-not-stronger-head",
+          "level": "mechanism",
+          "question": "为什么把同一扰动持续多帧能检验RSSM的时间平均？",
+          "answer": "GRU单步只接纳gate比例的新状态，持续K帧逐步累积；这改变进入feature的信号，不是换更强uncertainty head。",
+          "example": "教学例：固定gate=.25的线性近似在1帧保留.25，持续4帧保留1−.75⁴≈.684；只是说明机制，不是本地世界模型实测。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "uncertainty-not-planning-proof",
+          "level": "comparison",
+          "question": "比预测—规划评测多得到一个uncertainty指标，能跳过实际规划吗？",
+          "answer": "不能。误差、不确定性与成功率不同。JEPA EU还需真实CEM评估，并且posterior读出虽可检测当前异常，却依赖不可用于想象未来的观察。",
+          "example": "教学例：用真实下一帧的posterior把异常检出率提高，并不表示planner在执行前就拥有该信号。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "no-generic-laplace-substitute",
+          "level": "implementation",
+          "question": "本地只算Laplace二次型能声称复现本文结论吗？",
+          "answer": "不能。核心证据来自真实训练世界模型、可重渲染模拟器、逐层扰动追踪及五任务配对评测；完整矩阵已按成本终态不复现。",
+          "example": "教学例：手工设正常psi=0、异常psi=1会保证分数不同，但那是把答案写进表示，无法证明JEPA优于RSSM。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-26"
+        }
+      ]
+    }
+  }
+}

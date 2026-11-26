@@ -8,6 +8,9 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [RAP: Radial-Angular Random Projection for Hyperbolic Representations](<https://arxiv.org/abs/2611.34298v1>) | 2026-11-25 | [English](../../foundation-models/2611.34298-rap/README-en.md) · [Chinese](../../foundation-models/2611.34298-rap/README.md) |
+| [Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models](<https://arxiv.org/abs/2611.34830v1>) | 2026-11-25 | [English](../../foundation-models/2611.34830-jepa-eu/README-en.md) · [Chinese](../../foundation-models/2611.34830-jepa-eu/README.md) |
+| [DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers](<https://arxiv.org/abs/2611.33952v1>) | 2026-11-25 | [English](../../foundation-models/2611.33952-duomi/README-en.md) · [Chinese](../../foundation-models/2611.33952-duomi/README.md) |
 | [Weight Scale Rebalancing: Transferable Training Recipes for Transformers](<https://arxiv.org/abs/2611.32866v1>) | 2026-11-24 | [English](../../foundation-models/2611.32866-udvr/README-en.md) · [Chinese](../../foundation-models/2611.32866-udvr/README.md) |
 | [Eliciting the Recall Capacity of Linear Attention](<https://arxiv.org/abs/2611.32969v1>) | 2026-11-24 | [English](../../foundation-models/2611.32969-thresholded-longce/README-en.md) · [Chinese](../../foundation-models/2611.32969-thresholded-longce/README.md) |
 | [CriticJEPA: World Models Are Better Critics Than Optimizers](<https://arxiv.org/abs/2611.32357v1>) | 2026-11-24 | [English](../../foundation-models/2611.32357-criticjepa/README-en.md) · [Chinese](../../foundation-models/2611.32357-criticjepa/README.md) |

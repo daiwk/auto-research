@@ -1,0 +1,357 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/context-and-state/comparison/foundation-models:rap": {
+      "source_sha256": "92c28c89f9c7f4ff7b51af52a39a2d9f17a96e93046ea86d51387b6b3940c79c",
+      "reviewed": true,
+      "fields": {
+        "position": "RAP reduces dimension within a hyperbolic geometry, preserving distance to a designated origin and projecting only the normalized angular direction without fitting data.",
+        "tradeoff": "HVMap learns paired mappings between heterogeneous encoder spaces and combines native/mapped scores. RAP does not align encoders or permit mixing arbitrary curvatures or origins. Their L1 components do not establish comparative semantic retrieval gains."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/19": {
+      "source_sha256": "d6de3f47ed0e55c424c3c83014d52af91437072f835a9c538548eece99014406",
+      "reviewed": true,
+      "fields": {
+        "title": "RAP: Radial-Angular Random Projection for Hyperbolic Representations",
+        "body": "HVMap learns paired mappings between heterogeneous encoder spaces and combines native/mapped scores. RAP does not align encoders or permit mixing arbitrary curvatures or origins. Their L1 components do not establish comparative semantic retrieval gains. These are Eq.11–12. Reject a non-origin direction in the projection kernel; map the origin to the target origin. Same-ray distances are exact, but arbitrary pairwise distances are not lossless."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/nov26-rap": {
+      "source_sha256": "d22cb4ad25152364c88a4cb8ee3c1a278fe17b7d2eb7a55cd3e8dec29b79b96d",
+      "reviewed": true,
+      "fields": {
+        "question": "Can RAP replace HVMap for cross-encoder alignment?",
+        "answer": "No. RAP compresses one defined hyperbolic space; HVMap learns paired mappings between heterogeneous spaces. Radial preservation provides no semantic correspondence.",
+        "example": "Illustration:if two encoders place an object in different directions, preserving their radii does not align those directions."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-11-26/18": {
+      "source_sha256": "a192e67f08a900be2e6691884cec372dc3a13e70e7a0e65823067a7b127aa54f",
+      "reviewed": true,
+      "fields": {
+        "summary": "HVMap learns paired mappings between heterogeneous encoder spaces and combines native/mapped scores. RAP does not align encoders or permit mixing arbitrary curvatures or origins. Their L1 components do not establish comparative semantic retrieval gains. The component scope is complete; the full matrix was not run and is not labeled high-cost."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:duomi": {
+      "source_sha256": "f0a5b535a5d8e1da51744d9465cc87be0b3caa64dbdcce0b62235ae18451b7df",
+      "reviewed": true,
+      "fields": {
+        "position": "DuoMI regulates realized expert reuse using aggregate alignment and a token-level change band computed from all-expert soft routing at aligned positions in two rounds.",
+        "tradeoff": "EchoMoE reuses activation references and compresses communication deltas; DuoMI shares expert parameters and regularizes routing. A reference is not an expert pool. Communication reduction and routing reuse are different benefits, and tensor gradients establish no language-model gain."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/analysis/13": {
+      "source_sha256": "878d9ec55f4cbed6ea089f8a7b591822406861d5a87c7a21e7396313ee1263ad",
+      "reviewed": true,
+      "fields": {
+        "title": "DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers",
+        "body": "EchoMoE reuses activation references and compresses communication deltas; DuoMI shares expert parameters and regularizes routing. A reference is not an expert pool. Communication reduction and routing reuse are different benefits, and tensor gradients establish no language-model gain. Each group has eight sequences. Apply thresholds per group and pool before averaging. Defaults:tau=1,g_max=.02bits,D-band[.05,.30]bits,and weights.1. Soft D is not the Top-k replacement fraction; D=1-retention holds only for uniform hard Top-k distributions. The language, load-balancing and z-loss objectives retain their baseline coefficients."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/question/nov26-duomi": {
+      "source_sha256": "75dcc6781c194c243283dd174b4d1b09b294c199e1b125b9a3a6310271fa9055",
+      "reviewed": true,
+      "fields": {
+        "question": "Is cross-layer reuse the same in DuoMI and EchoMoE?",
+        "answer": "No. DuoMI regulates shared-FFN routing; EchoMoE reuses activation references and compresses communication deltas.",
+        "example": "Illustration:the same expert may process very different activations in two rounds, so expert retention cannot substitute for communication bytes."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/update/2026-11-26/13": {
+      "source_sha256": "bebacd946fee7a1ea07d7954f927b72f44c6a61a1f540c104526bf473f5756ac",
+      "reviewed": true,
+      "fields": {
+        "summary": "EchoMoE reuses activation references and compresses communication deltas; DuoMI shares expert parameters and regularizes routing. A reference is not an expert pool. Communication reduction and routing reuse are different benefits, and tensor gradients establish no language-model gain. Complete matrices are terminally cost-deferred; L1 or review is not capability evidence."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/comparison/foundation-models:jepa-eu": {
+      "source_sha256": "63e50bc1a195773e2a479cd84342c3dfa3f78a3c47aca4dd9c835dad9e223ea7",
+      "reviewed": true,
+      "fields": {
+        "position": "JEPA EU traces simulator-state perturbations through pixels, encoder, predictor features and post-hoc uncertainty, separating recurrent averaging from reconstruction-based entity weighting.",
+        "tradeoff": "Prediction-planning evaluation separates representation error, prediction error and execution. JEPA EU asks where uncertainty loses a perturbation. Low error, responsive uncertainty and planning success are different evidence. A posterior head observes the current frame and cannot replace a prior head in imagined rollout."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/analysis/17": {
+      "source_sha256": "23e9e27b2716d44ad70c71b7cdd613ec6e36f266fe5947a5d251bf25ac90e1db",
+      "reviewed": true,
+      "fields": {
+        "title": "Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models",
+        "body": "Prediction-planning evaluation separates representation error, prediction error and execution. JEPA EU asks where uncertainty loses a perturbation. Low error, responsive uncertainty and planning success are different evidence. A posterior head observes the current frame and cannot replace a prior head in imagined rollout. A Laplace readout only sees its feature: a perturbation erased upstream cannot be recovered by changing that readout. The RSSM GRU admits a one-frame change through its gate and accumulates persistent changes; reconstruction allocates signal by pixels. The observation-dependent posterior feature is unavailable during imagination."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/question/nov26-jepa-eu": {
+      "source_sha256": "9dd837b12f1b9e5d4a24b618a74d6f4588f7778a9e0653dbf4c158c77c261f6f",
+      "reviewed": true,
+      "fields": {
+        "question": "Does adding uncertainty remove the need for real planning evaluation?",
+        "answer": "No. Error,uncertainty and success differ. JEPA EU also evaluates CEM; a posterior readout can detect observed anomalies but requires observations absent in imagined futures.",
+        "example": "Illustration:detecting an anomaly with the actual next-frame posterior does not make that signal available before the action."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/update/2026-11-26/16": {
+      "source_sha256": "d84909a2ed4f5ddd28f99bb07e164eacc7d11256fdd94c9ab152128a7a904c95",
+      "reviewed": true,
+      "fields": {
+        "summary": "Prediction-planning evaluation separates representation error, prediction error and execution. JEPA EU asks where uncertainty loses a perturbation. Low error, responsive uncertainty and planning success are different evidence. A posterior head observes the current frame and cannot replace a prior head in imagined rollout. Complete matrices are terminally cost-deferred; L1 or review is not capability evidence."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:home": {
+      "source_sha256": "3a0933d1c2de4914610f9209329f7d6913200361c477e020122f616451a2a250",
+      "reviewed": true,
+      "fields": {
+        "position": "HoMe localizes file-memory construction/retrieval/answer failures with session differences and improves evaluation through structural exploration, two-level sampling and reuse. The local slice executes sampling/reuse, not diagnostic or optimization agents.",
+        "tradeoff": "MORSE researches and acquires host-approved video-perception tools under accuracy/efficiency contracts. HoMe fixes ReMe runtime while editing application harnesses; scores and intervention spaces are not interchangeable."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/37": {
+      "source_sha256": "175a567f53563aa8f27778d7ae9a311dc126ad4a6f16f04d686e82732c2bfe4b",
+      "reviewed": true,
+      "fields": {
+        "title": "Evaluation budget control is not memory research capability",
+        "body": "HoMe combines EMA, staleness, count, unresolved errors and uniform exploration to find actionable failures, not unbiased performance means. Reuse requires host equivalence, fingerprints and complete snapshots before one draw; unknown changes rebuild. MORSE additionally requires research, service admission and staged quality/latency gates. Sampling or gates cannot replace either semantic agent. Local HoMe is an L1 numerical/protocol diagnostic; MORSE stays review-only. The full 10.4-hour/185.2M-token HoMe campaign is terminally not reproduced."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov26-home": {
+      "source_sha256": "43c2b0dbe29bd8c2a718766affed6a90d4e6278dcc549729ec1510034dd6e4ff",
+      "reviewed": true,
+      "fields": {
+        "question": "Do HoMe and MORSE search the same memory-harness space?",
+        "answer": "No. HoMe centers on file-memory session differences and evaluation reuse. MORSE adds online research and host-approved video-perception services under staged quality/latency contracts.",
+        "example": "Teaching example: diversifying retrieved source files fits HoMe; researching and requesting OCR expands MORSE's tool boundary."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-26/37": {
+      "source_sha256": "4300840163e3b1f3e9d9f7bd923bbee07af87537c98250f8b105ffd058926249",
+      "reviewed": true,
+      "fields": {
+        "summary": "HoMe combines EMA, staleness, count, unresolved errors and uniform exploration to find actionable failures, not unbiased performance means. Reuse requires host equivalence, fingerprints and complete snapshots before one draw; unknown changes rebuild. MORSE additionally requires research, service admission and staged quality/latency gates. Sampling or gates cannot replace either semantic agent. Local HoMe is an L1 numerical/protocol diagnostic; MORSE stays review-only. The full 10.4-hour/185.2M-token HoMe campaign is terminally not reproduced. Review DONE; no full campaign, automatic retry or Evolve promotion."
+      }
+    },
+    "dive/agent-research/memory-and-skills/comparison/agent-research:dualpm": {
+      "source_sha256": "e09a24717766474728b04f8d38c55f8bda43408b51679c2f6d2f790c900b7b0c",
+      "reviewed": true,
+      "fields": {
+        "position": "DualPM lossily abstracts success/failure procedures, freezes within-block memory, maintains the pools separately and injects the complete next-block pool. Local evidence is L0 callback/provenance compliance, not LLM memory quality.",
+        "tradeoff": "GrepMem retains raw trajectories for lexical retrieval after compaction. DualPM does not retrieve and retains abstract rules. Lossless logs, bounded procedural memory and improved future behavior are different claims."
+      }
+    },
+    "dive/agent-research/memory-and-skills/analysis/13": {
+      "source_sha256": "5c82b465a015bef3fdaaf22b0efca4a2b8b7fada99ba8fb3b72d3b1a83f1ba18",
+      "reviewed": true,
+      "fields": {
+        "title": "Retained evidence and abstract lessons do not validate each other",
+        "body": "DualPM local polarity is not an episode label. Two episode-model calls precede separate polarity maintenance. Frozen blocks prevent early within-block exposure, while lineage remains model-claimed rather than semantically verified. GrepMem logs/paginated grep can recover omitted text without establishing correct model retrieval or use. DualPM rules may transfer or overgeneralize. Controlled callbacks establish only L0 immutability/atomic contracts, not L1 memory policy or success rates. The full API campaign is terminally not reproduced for cost."
+      }
+    },
+    "dive/agent-research/memory-and-skills/question/cross-nov26-dualpm": {
+      "source_sha256": "119827f3307d5a012ef4c4b4546bdbf930310d534356b1666e126366b20472e8",
+      "reviewed": true,
+      "fields": {
+        "question": "Is bounded DualPM more lossless than GrepMem?",
+        "answer": "They target different things. GrepMem retains raw trajectories for grep; DualPM abstracts transferable procedural lessons and may discard detail. Bounded memory guarantees neither detail recovery nor lesson utility.",
+        "example": "Teaching example: an order number may remain in GrepMem's log while DualPM retains only the procedure to resolve an order ID before acting."
+      }
+    },
+    "dive/agent-research/memory-and-skills/update/2026-11-26/12": {
+      "source_sha256": "b4ad1772a10c31e4b8f755997344141a49df95b70bb15053c141e7dd863f3e3a",
+      "reviewed": true,
+      "fields": {
+        "summary": "DualPM local polarity is not an episode label. Two episode-model calls precede separate polarity maintenance. Frozen blocks prevent early within-block exposure, while lineage remains model-claimed rather than semantically verified. GrepMem logs/paginated grep can recover omitted text without establishing correct model retrieval or use. DualPM rules may transfer or overgeneralize. Controlled callbacks establish only L0 immutability/atomic contracts, not L1 memory policy or success rates. The full API campaign is terminally not reproduced for cost. Review DONE; no full campaign, automatic retry or Evolve promotion."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/comparison/multimodal-models:agentic-longlive": {
+      "source_sha256": "e14c46994ed35355bd1e6318e68c77e0681e138c557397d9155e0a44ce1f2b24",
+      "reviewed": true,
+      "fields": {
+        "position": "Agentic LongLive freezes the generator and adds open-loop entity memory, background drawing/prefill and boundary swaps. Its planner cannot read future scripts or generated video.",
+        "tradeoff": "PixVid changes latent-to-pixel representation through alignment, noise calibration and a detailer. It does not supply LongLive's online memory, and sink injection does not remove the VAE. Neither full matrix ran locally; no local video metrics are comparable."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/analysis/18": {
+      "source_sha256": "fa705ca4a0adf3788831da46c95b1ed53ca0597fc0ce2cff29acf64d4bf1810a",
+      "reviewed": true,
+      "fields": {
+        "title": "Hidden critical-path latency does not eliminate total GPU cost",
+        "body": "Memory precedes the next prompt, boundaries select only completed prefills, and missing updates retain old memory. Future annotations are reward/evaluator-only. SFT/GRPO train the 8B selector; fixed recency is not a substitute. PixVid instead changes the generator representation. LongLive's roughly 1% added time uses extra agent/auxiliary GPUs; the six-H100 illustration, eight-B200 node and 35B/4B/8B services exceed one-card resources. Both entries are review-only: original figures/public mocks are not capability or reproduction evidence."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/question/cross-nov26-agentic-longlive": {
+      "source_sha256": "cd02903a6345ed3a7a69e3051a75fe9805a73cc3dcd7ec05db62875cbce8cd30",
+      "reviewed": true,
+      "fields": {
+        "question": "Do Agentic LongLive and PixVid modify the same layer?",
+        "answer": "No. The former freezes a generator and injects memory KV at boundaries; PixVid transfers latent DiT knowledge to pixels with a detailer. External consistency memory is not VAE removal.",
+        "example": "Teaching example: a frozen latent generator can accept entity memory, while a pixel DiT still needs a separate long-horizon memory design."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/update/2026-11-26/17": {
+      "source_sha256": "e5ca7a82cc598251428c0f46e2cad796ce7f09b68464fe491987800ceddacc5b",
+      "reviewed": true,
+      "fields": {
+        "summary": "Memory precedes the next prompt, boundaries select only completed prefills, and missing updates retain old memory. Future annotations are reward/evaluator-only. SFT/GRPO train the 8B selector; fixed recency is not a substitute. PixVid instead changes the generator representation. LongLive's roughly 1% added time uses extra agent/auxiliary GPUs; the six-H100 illustration, eight-B200 node and 35B/4B/8B services exceed one-card resources. Both entries are review-only: original figures/public mocks are not capability or reproduction evidence. Review DONE; no full campaign, automatic retry or Evolve promotion."
+      }
+    },
+    "dive/post-training/reward-and-credit/comparison/post-training:briar": {
+      "source_sha256": "c029c1b900c6f170f188be5389a466db77f8f54b6df41e41df56a036bb66de88",
+      "reviewed": true,
+      "fields": {
+        "position": "Outcome-bifurcation frontier, boundary-modulated heteroscedastic RTS/LMMSE and zero-sum log-length advantages after minimal absorption. CPU code checks Eqs.3/5–10, not LLM/RL.",
+        "tradeoff": "OpCredit uses context-matched supports for BOC and training-side answer neighborhoods for FTC. BRIAR's empirical edge variances and global tree posterior are not those graph-semantic signals. Both must separate training credit from agent inputs; no matched-budget capability comparison exists."
+      }
+    },
+    "dive/post-training/reward-and-credit/analysis/14": {
+      "source_sha256": "5bbd53ca21941d277705591ac702e63d61aac8e01390f871f917d31d1825edf9",
+      "reviewed": true,
+      "fields": {
+        "title": "Local credit can come from matched trajectories or a global tree posterior",
+        "body": "Re-reading OpCredit confirms deduplicated context-matched BOC supports and operation-local FTC frontiers, without gold in actor inputs. BRIAR treats a sampled prefix tree as a Gaussian state-space model; upward information and downward smoothing transmit sibling evidence. Dense covariance is an independent numerical reference. Equation5's2.2 factor and length term do not impose a hard martingale variance bound, and excluding prefix-token loss does not freeze shared-parameter prefix behavior. CPU equivalence only supports the numerical component; the full16/32-A100 matrix is too expensive."
+      }
+    },
+    "dive/post-training/reward-and-credit/question/nov26-briar-boundary": {
+      "source_sha256": "8ca15f21ec6db10a073e97bb5d1085c0d1808584c6bf7932df2b31edca89e693",
+      "reviewed": true,
+      "fields": {
+        "question": "Can trajectories at the same entity be merged into a shared BRIAR prefix?",
+        "answer": "No. Full visible histories must match. OpCredit likewise needs context matching: identical entities do not imply identical visited sets, budgets or phases. Ignoring history conflates conditional probabilities and credit.",
+        "example": "Teaching example: one trajectory has visitedA with one step left; another has not and has three steps left. Their continuation distributions differ despite the same current entity."
+      }
+    },
+    "dive/post-training/reward-and-credit/update/2026-11-26/13": {
+      "source_sha256": "63c715f47be6a66e39a7d1deeb54c709eeab33ce06e1a2cb2a6b75c6a2a32ab8",
+      "reviewed": true,
+      "fields": {
+        "summary": "Re-read OpCredit against fixed-v1 BRIAR Eqs.3/5–10 and AppendicesB/C. Added matched supports versus Gaussian posteriors and corrected hard-envelope/shared-parameter-invariance overclaims. BRIAR is CPU components only; full multi-GPU RL is high-cost review DONE, not agent-capability comparison."
+      }
+    },
+    "dive/post-training/data-and-budget/comparison/post-training:feast": {
+      "source_sha256": "d4a22f2699f9354ec758e58a5f02c97ab9dea8682ed506a9300537971f24855c",
+      "reviewed": true,
+      "fields": {
+        "position": "Persistent atomic histories, current-policy PCA/GMM regrouping, positive priorities/shortfalls, cluster reservations and cumulative-variance2/4/16 promotion. External representations are not replaced with task labels.",
+        "tradeoff": "RAIL learns a shadow-to-live contextual bandit from intervention recoverability, controlling where/how to help. FEAST allocates opportunity and compute without learning interventions. A variance selector alone is not FEAST; the old RAIL mini-suite is not a common capability comparison."
+      }
+    },
+    "dive/post-training/data-and-budget/analysis/7": {
+      "source_sha256": "f3cafaf2ced215b802ed725ff94d104076d0a7d0d99042affadcf3bfaa3f809e",
+      "reviewed": true,
+      "fields": {
+        "title": "Protecting opportunity differs from learning how to recover a failing trajectory",
+        "body": "The current RAIL README defines intervention states/actions and recovery gains. FEAST addresses endogenous signals and long-run opportunity: atomic attainment, disagreement, trend and shortfall survive policy-adaptive regrouping. Common pilots give prompt-equal feedback, every rollout counts as exposure, and reserved compute cannot migrate between clusters. Local code runs actual KMeans++, PCA, GMM-EM/BIC, histories and quotas, but random vectors and Bernoulli callbacks remain diagnostics, not LLM or fairness-capability experiments. A6.07-A100-hour minimum arm does not make the complete matrix affordable."
+      }
+    },
+    "dive/post-training/data-and-budget/question/nov26-feast-boundary": {
+      "source_sha256": "bff8e875f2d3db704cb7d8d338939504d843876daaa6a62ddde1700d9e651c6e",
+      "reviewed": true,
+      "fields": {
+        "question": "Can an all-failing pilot cluster give its remaining budget to another cluster's high-variance prompts?",
+        "answer": "Not under FEAST reservations. Once selected, the cluster retains its fixed budget and promotes internally using cumulative raw-reward variance. Reallocation removes cross-cluster protection rather than providing an equivalent acceleration.",
+        "example": "Teaching example: logic and mathematics each reserve256 trajectories. All-zero logic pilots still complete its256 through stable promotion ties; mathematics cannot take an extra128."
+      }
+    },
+    "dive/post-training/data-and-budget/update/2026-11-26/6": {
+      "source_sha256": "9bbc387eff524c2360b181b000f9bb080b94ff404ad13cbe70f346713c139f82",
+      "reviewed": true,
+      "fields": {
+        "summary": "Re-read RAIL against fixed-v1 FEAST Section4 and AppendicesA.2–A.3. Added recoverability interventions versus persistent opportunities/quotas, preserving pilot-equal feedback, full exposure and non-resetting histories. CPU components do not rank learning ability; full LLM experiments are high-cost review DONE."
+      }
+    },
+    "dive/post-training/teacher-and-context/comparison/post-training:care-opd": {
+      "source_sha256": "06ef1d059f6b22d2abe728c511ff318e7f926c9aa157897e5df545e97ebe530a",
+      "reviewed": true,
+      "fields": {
+        "position": "Student roll-ins broaden history, verified teacher continuations and hindsight evidence select turns, and confidence gates fresh student responses. Teacher-token reverse KL remains; review-only locally.",
+        "tradeoff": "TreeOPSD maps shared-tree credit into frozen bounded Bernoulli targets to limit repeated updates. CARE-OPD changes history support, replay turns and response eligibility without imposing the same finite target. Completed trajectories may inform the training selector, never expose future evidence to students."
+      }
+    },
+    "dive/post-training/teacher-and-context/analysis/12": {
+      "source_sha256": "7d522efd380ef33ae9b49395b1991d03aa42df816c36c7b2c76ce43d1db2b5b1",
+      "reviewed": true,
+      "fields": {
+        "title": "Hindsight sample selection is not a bounded distillation target",
+        "body": "The current TreeOPSD README requires full shared histories, sample-standardized leaf rewards and frozen Bernoulli targets with zero/overshoot-reversing gradients. CARE-OPD changes collection, allocation and acceptance. Its hindsight teacher sees complete execution evidence; students see only original prefixes after removing identifiers and future evidence. A fixed first40% selector or confidence gate alone removes a defining model and is not faithful reproduction. The32-H200,128K-context,150-turn SWE workflow exceeds budget, remaining terminal review-only with no local metrics or Evolve."
+      }
+    },
+    "dive/post-training/teacher-and-context/question/nov26-care-opd-boundary": {
+      "source_sha256": "4eb649c201ff7af6f777d3305ca7beb0124ba43032dda657b1201700c4733568",
+      "reviewed": true,
+      "fields": {
+        "question": "Does selecting a teacher turn establish a finite student update endpoint?",
+        "answer": "No. CARE-OPD chooses a prefix for fresh responses and decides whether to distill them. Teacher-token reverse KL differs from TreeOPSD's frozen Bernoulli target; selection alone provides neither a target radius nor overshoot control.",
+        "example": "Teaching example: replaying a repair at turn60 specifies a sampling location. TreeOPSD additionally assigns a target to the turn score relative to old policy, with zero gradient at that target."
+      }
+    },
+    "dive/post-training/teacher-and-context/update/2026-11-26/10": {
+      "source_sha256": "1d484a341a02ddefed782e4ad3c47ff3199aff0c8c81af65b79d0d4486c005ce",
+      "reviewed": true,
+      "fields": {
+        "summary": "Re-read TreeOPSD and fixed-v1 CARE-OPD Section3/AppendixB. Added bounded targets versus hindsight allocation, future-evidence isolation and the non-equivalence of fixed selectors. Full32-H200 CARE-OPD is too expensive and not reproduced, review DONE; no local code, metrics, GPU or Evolve."
+      }
+    },
+    "dive/recommendation/retrieval-matching/comparison/recommendation:onequery": {
+      "source_sha256": "4c653212e49b6c1433b7490c3d112d52495dedda525cf5a29c1e7acb2e67bfc2",
+      "reviewed": true,
+      "fields": {
+        "position": "The local component executes only Equations5–13 reward, advantage and clipping arithmetic. QT is an explicit tuple list, not a fabricated parser for a private tag syntax. Invalid schemas are rejected rather than receiving an invented format reward. Empty-versus-empty edit similarity1, population standard deviation and delta1e-8 are declared boundary conventions. There is no language model, constrained decoder, label completion, SFT, GRPO parameter training, distillation or serving. References enter only the reward evaluator; no agent can read gold.",
+        "tradeoff": "LARF models five ordinal relevance attributes of one document with PNR, rule feedback and terminal-digit margins. OneQuery instead supervises four heterogeneous structured fields of one query. Its QT reward requires whole-set exact matching, not LARF's graded distance or inter-document ordering. LARF's training generation/serving classification split also differs from OneQuery's head cache/tail distillation. Their production metrics are not directly comparable."
+      }
+    },
+    "dive/recommendation/retrieval-matching/analysis/8": {
+      "source_sha256": "174e9a58066a4894b49efdf6077804d009dfc6c3bb5751688a5e7b5b953bf8a8",
+      "reviewed": true,
+      "fields": {
+        "title": "Can QT reward be replaced by LARF's ordinal distance?",
+        "body": "LARF models five ordinal relevance attributes of one document with PNR, rule feedback and terminal-digit margins. OneQuery instead supervises four heterogeneous structured fields of one query. Its QT reward requires whole-set exact matching, not LARF's graded distance or inter-document ordering. LARF's training generation/serving classification split also differs from OneQuery's head cache/tail distillation. Their production metrics are not directly comparable."
+      }
+    },
+    "dive/recommendation/retrieval-matching/question/nov26-onequery": {
+      "source_sha256": "2505257e8d356be58ba91d95b34589490dde172263b3f6950259ad36ed6a0c05",
+      "reviewed": true,
+      "fields": {
+        "question": "Can QT reward be replaced by LARF's ordinal distance?",
+        "answer": "LARF models five ordinal relevance attributes of one document with PNR, rule feedback and terminal-digit margins. OneQuery instead supervises four heterogeneous structured fields of one query. Its QT reward requires whole-set exact matching, not LARF's graded distance or inter-document ordering. LARF's training generation/serving classification split also differs from OneQuery's head cache/tail distillation. Their production metrics are not directly comparable.",
+        "example": "Teaching example: if the reference contains brand and product, missing either gives zero QT reward, not0.5 for matching half or an ordinal-distance score."
+      }
+    },
+    "dive/recommendation/retrieval-matching/update/2026-11-26/8": {
+      "source_sha256": "9753224ec861b76d7915c66ee8d09aa30b5c719ff2ee30e8320d0aefd1a0f798",
+      "reviewed": true,
+      "fields": {
+        "summary": "The local component executes only Equations5–13 reward, advantage and clipping arithmetic. QT is an explicit tuple list, not a fabricated parser for a private tag syntax. Invalid schemas are rejected rather than receiving an invented format reward. Empty-versus-empty edit similarity1, population standard deviation and delta1e-8 are declared boundary conventions. There is no language model, constrained decoder, label completion, SFT, GRPO parameter training, distillation or serving. References enter only the reward evaluator; no agent can read gold."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/comparison/recommendation:camar": {
+      "source_sha256": "1ce9f1e3157032adf0cc8c976c9db01bd41ec670120400faad4fd24dfca314e1",
+      "reviewed": true,
+      "fields": {
+        "position": "The component executes Equations5–7 and9–15 on supplied domain states/candidates: real two-layer PCNs, linear factor maps, one active-only MHA layer, domain gates/classifier, GRL, orthogonality and sampled softmax. Multi-modal encoders, RQ-VAE/semantic codebooks, item/history backbones, Equation8 task-level cold-start loss, complete LTN and the three-stage trainer are absent; this is not full CAMAR. Bias-free factor maps, MHA details and MLP hidden widths are declared local choices where the paper does not uniquely specify them.",
+        "tradeoff": "LazUnirec uses private LoRA/experts and directional-reliability weights across retrieval/ranking tasks. CAMAR splits invariant/specific factors across song/playlist/podcast and permits only invariant cross-domain interaction. The former controls shared-update conflict; the latter constrains representation flow and domain distinguishability. Stable gradients do not establish domain invariance, and orthogonal inner products do not establish statistical independence. Neither private data nor local synthetic diagnostics support a direct quality ranking."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/analysis/5": {
+      "source_sha256": "151434d10d0a48272a2a198b8f2e9d82e0ec13d7f8f0e043942567ac6edd2516",
+      "reviewed": true,
+      "fields": {
+        "title": "Do CAMAR and LazUnirec solve the same sharing problem?",
+        "body": "LazUnirec uses private LoRA/experts and directional-reliability weights across retrieval/ranking tasks. CAMAR splits invariant/specific factors across song/playlist/podcast and permits only invariant cross-domain interaction. The former controls shared-update conflict; the latter constrains representation flow and domain distinguishability. Stable gradients do not establish domain invariance, and orthogonal inner products do not establish statistical independence. Neither private data nor local synthetic diagnostics support a direct quality ranking."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/question/nov26-camar": {
+      "source_sha256": "8605576a6457fc4b5de101238938051284fc1168c567a79034267050a6b5d225",
+      "reviewed": true,
+      "fields": {
+        "question": "Do CAMAR and LazUnirec solve the same sharing problem?",
+        "answer": "LazUnirec uses private LoRA/experts and directional-reliability weights across retrieval/ranking tasks. CAMAR splits invariant/specific factors across song/playlist/podcast and permits only invariant cross-domain interaction. The former controls shared-update conflict; the latter constrains representation flow and domain distinguishability. Stable gradients do not establish domain invariance, and orthogonal inner products do not establish statistical independence. Neither private data nor local synthetic diagnostics support a direct quality ranking.",
+        "example": "Teaching example: a domain factor can have stable gradients while encoding domain identity. Reliability weights cannot replace adversarial domain classification."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/update/2026-11-26/5": {
+      "source_sha256": "e540c846597770d977bc955b412cd56983c4ef4d2e7ad653103684695edc08c6",
+      "reviewed": true,
+      "fields": {
+        "summary": "The component executes Equations5–7 and9–15 on supplied domain states/candidates: real two-layer PCNs, linear factor maps, one active-only MHA layer, domain gates/classifier, GRL, orthogonality and sampled softmax. Multi-modal encoders, RQ-VAE/semantic codebooks, item/history backbones, Equation8 task-level cold-start loss, complete LTN and the three-stage trainer are absent; this is not full CAMAR. Bias-free factor maps, MHA details and MLP hidden widths are declared local choices where the paper does not uniquely specify them."
+      }
+    }
+  }
+}

@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 332 个问题 · 83 篇论文
+[Agent](index.md) / 336 个问题 · 84 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">332 个问题 · 83 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">336 个问题 · 84 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:home" data-paper-title="HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants Agent Shanghai Jiao Tong University 2026-11-25 HoMe让代码agent从此前任意已评估harness派生新候选，以逐session记忆版本和执行trace追溯信息丢失，再跨case归纳共同失败机制。早期门控拒绝只有prompt/参数变化的候选，后期放开细调；评价前先smoke。自适应采样减少case/query数；若构建未变，则以0.6概率重用最近兼容祖先的已构建记忆，仅重跑检索、回答和评分。模型固定，变化的是代码、prompt和配置，不是模型权重。 完整实验成本过高，不复现（审查 DONE）；component_only / l1_mechanism，仅CPU采样与复用协议诊断；component_only / l1_mechanism，仅CPU采样与复用协议诊断；不是LLM诊断、harness优化或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不接入Evolve晋级。纯标准库实现observe/probabilities/sample/mark_selected，保留公式、无放回、真实uniform混合和选择时间戳。输入只有case/query ID与host验证侧标量；没有gold答案或完整任务表进入被测policy。  Harness 与自改进 记忆harness评价 CPU机制组件 Agent 运行流程与自进化：改的是哪一层 为什么自适应子集均分不能直接给候选排名？ 不同轮次覆盖和难度不同，采样又偏向旧失败。它用于找到可修复错误，不是无偏全量性能估计；选择须看共同case/query、覆盖与回归。 教学例：A被抽到三道难题得0.6，B抽到三道易题得0.9，不能由此断言B更强。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-home-6afb1ec0" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-39efc55ad68ff66d">为什么自适应子集均分不能直接给候选排名？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ahome">HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同轮次覆盖和难度不同，采样又偏向旧失败。它用于找到可修复错误，不是无偏全量性能估计；选择须看共同case/query、覆盖与回归。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A被抽到三道难题得0.6，B抽到三道易题得0.9，不能由此断言B更强。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34624v1">原论文</a> · <a href="../../../../agent-research/2611.34624-home/">实现解读</a> · <a href="#qa-39efc55ad68ff66d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:home" data-paper-title="HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants Agent Shanghai Jiao Tong University 2026-11-25 HoMe让代码agent从此前任意已评估harness派生新候选，以逐session记忆版本和执行trace追溯信息丢失，再跨case归纳共同失败机制。早期门控拒绝只有prompt/参数变化的候选，后期放开细调；评价前先smoke。自适应采样减少case/query数；若构建未变，则以0.6概率重用最近兼容祖先的已构建记忆，仅重跑检索、回答和评分。模型固定，变化的是代码、prompt和配置，不是模型权重。 完整实验成本过高，不复现（审查 DONE）；component_only / l1_mechanism，仅CPU采样与复用协议诊断；component_only / l1_mechanism，仅CPU采样与复用协议诊断；不是LLM诊断、harness优化或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不接入Evolve晋级。纯标准库实现observe/probabilities/sample/mark_selected，保留公式、无放回、真实uniform混合和选择时间戳。输入只有case/query ID与host验证侧标量；没有gold答案或完整任务表进入被测policy。  Harness 与自改进 记忆harness评价 CPU机制组件 Agent 运行流程与自进化：改的是哪一层 一次旧失败怎样在后来满分观察后降低采样影响？ 未复查错误项是log(1+错误距今轮数)/(1+错误后满分次数)。满分增加分母，但损失EMA、staleness、观察数和uniform探索仍共同决定概率。 教学例：同一错误年龄下，零次复查项为log(4)，两次满分后为log(4)/3；不是直接删掉该case。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-15b9a58d37946734">一次旧失败怎样在后来满分观察后降低采样影响？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ahome">HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>未复查错误项是log(1+错误距今轮数)/(1+错误后满分次数)。满分增加分母，但损失EMA、staleness、观察数和uniform探索仍共同决定概率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一错误年龄下，零次复查项为log(4)，两次满分后为log(4)/3；不是直接删掉该case。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34624v1">原论文</a> · <a href="../../../../agent-research/2611.34624-home/">实现解读</a> · <a href="#qa-15b9a58d37946734">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:home" data-paper-title="HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants Agent Shanghai Jiao Tong University 2026-11-25 HoMe让代码agent从此前任意已评估harness派生新候选，以逐session记忆版本和执行trace追溯信息丢失，再跨case归纳共同失败机制。早期门控拒绝只有prompt/参数变化的候选，后期放开细调；评价前先smoke。自适应采样减少case/query数；若构建未变，则以0.6概率重用最近兼容祖先的已构建记忆，仅重跑检索、回答和评分。模型固定，变化的是代码、prompt和配置，不是模型权重。 完整实验成本过高，不复现（审查 DONE）；component_only / l1_mechanism，仅CPU采样与复用协议诊断；component_only / l1_mechanism，仅CPU采样与复用协议诊断；不是LLM诊断、harness优化或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不接入Evolve晋级。纯标准库实现observe/probabilities/sample/mark_selected，保留公式、无放回、真实uniform混合和选择时间戳。输入只有case/query ID与host验证侧标量；没有gold答案或完整任务表进入被测policy。  Harness 与自改进 记忆harness评价 CPU机制组件 Agent 运行流程与自进化：改的是哪一层 HoMe与MORSE都改记忆harness，搜索边界相同吗？ 不同。HoMe围绕文件记忆的session差分归因和评价复用；MORSE让Editor在线研究并经host准入扩展视频感知服务，另有阶段性质量/延迟合同。 教学例：修复文件检索的source多样性是HoMe方向；研究并申请OCR服务是MORSE的开放工具边界。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-c88a4bed6c9b09ad">HoMe与MORSE都改记忆harness，搜索边界相同吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ahome">HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同。HoMe围绕文件记忆的session差分归因和评价复用；MORSE让Editor在线研究并经host准入扩展视频感知服务，另有阶段性质量/延迟合同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：修复文件检索的source多样性是HoMe方向；研究并申请OCR服务是MORSE的开放工具边界。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34624v1">原论文</a> · <a href="../../../../agent-research/2611.34624-home/">实现解读</a> · <a href="#qa-c88a4bed6c9b09ad">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:home" data-paper-title="HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants Agent Shanghai Jiao Tong University 2026-11-25 HoMe让代码agent从此前任意已评估harness派生新候选，以逐session记忆版本和执行trace追溯信息丢失，再跨case归纳共同失败机制。早期门控拒绝只有prompt/参数变化的候选，后期放开细调；评价前先smoke。自适应采样减少case/query数；若构建未变，则以0.6概率重用最近兼容祖先的已构建记忆，仅重跑检索、回答和评分。模型固定，变化的是代码、prompt和配置，不是模型权重。 完整实验成本过高，不复现（审查 DONE）；component_only / l1_mechanism，仅CPU采样与复用协议诊断；component_only / l1_mechanism，仅CPU采样与复用协议诊断；不是LLM诊断、harness优化或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不接入Evolve晋级。纯标准库实现observe/probabilities/sample/mark_selected，保留公式、无放回、真实uniform混合和选择时间戳。输入只有case/query ID与host验证侧标量；没有gold答案或完整任务表进入被测policy。  Harness 与自改进 记忆harness评价 CPU机制组件 Agent 运行流程与自进化：改的是哪一层 构建等价未知时为什么不能先复用再看分数？ 复用会固定旧构建，掩盖候选写入行为的变化。必须由host审查构建路径并核指纹与完成快照；未知或不兼容就重建，不能让候选自称等价。 教学例：只改检索可获host批准复用；修改记忆schema却沿用旧快照，会漏测新构建缺陷。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-6154c6bc0136a6d2">构建等价未知时为什么不能先复用再看分数？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ahome">HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>复用会固定旧构建，掩盖候选写入行为的变化。必须由host审查构建路径并核指纹与完成快照；未知或不兼容就重建，不能让候选自称等价。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：只改检索可获host批准复用；修改记忆schema却沿用旧快照，会漏测新构建缺陷。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34624v1">原论文</a> · <a href="../../../../agent-research/2611.34624-home/">实现解读</a> · <a href="#qa-6154c6bc0136a6d2">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:recurscibench" data-paper-title="RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research Agent Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences 2026-11-24 任务内涨分不等于获得可迁移的科研能力。RecurSciPipe从原始科学数据生成共享背景的建模F/分析A任务，先查合同、信息隔离、可执行、scorer行为，再查目标、输入和评价的科学有效性；设计错回Designer，实施错回Builder，两任务全过才准入。58 families分成38个G-evolve F/A配对和20个独立G-test F，共96任务、四科学域。四种RSI各在六种source设置演化，共24个冻结evolved states； 成本过高，不复现（审查 DONE）。deferred_high_cost / review-only资料收录，未实现、未运行；deferred_high_cost / review-only资料收录，未实现、未运行；成本过高，不复现（审查 DONE）。首发2026-11-24，发现/审查2026-11-25；封面November25不是arXiv首发日。本地仅审查固定v1、F/A来源与隔离契约、冻结评估协议、成本及同主题差异。没有运行GLM、RSI系统、科学任务构建、scorer、参考解、模型训练或benchmark；仅重写归一化公式不构成本论文复现。  Harness与自改进 review-only Agent 运行流程与自进化：改的是哪一层 源科学任务上进步，为什么还不能证明经验有用？ 记忆或harness可能只适合源条件。RecurSciBench冻结从G-evolve选择的状态，再以独立副本在G-test比较初始与演化状态，不携带测试任务间经验，以区分迁移和源任务适配。 教学例：化学曲线中的简单模型经验可能帮外推物理曲线，却伤害需要多协变量的叶绿素任务。 2026-11-25">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-recurscibench-8ea36755" class="ar-learning-paper-anchor"></span>

@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩先找瓶颈：权重、KV 内容与缓存层级
 
-[基础模型](../index.md) · 更新 2026-11-21 · 42 篇主题资料 / 19 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-26 · 43 篇主题资料 / 20 篇重点对照
 
 AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM 管可执行历史视图，Remote KV Tiers 解决跨层级加载。它们可以组合，但不能用一个“压缩率”解释质量、可恢复性和端到端速度。 FoldBias另解决压缩缓存的接口障碍：把静态bias折进同维key，但未来query漂移仍会引入误差。
 
@@ -44,6 +44,7 @@ AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM
 | [Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell](../../../foundation-models/2611.21974-beyond-bitwidth/README.md) · [原始来源](https://arxiv.org/abs/2611.21974v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 低比特名称不保证GPU真的按该格式执行，也不保证多语种质量。本文用固定诊断/selection/final切分，逐fused-module核对weight类型、activation policy、kernel、fallback和显存，再按服务质量约束配置保护。 | AWQ用calibration activation搜索等价通道缩放后统一做低比特weight-only量化；Beyond Bitwidth研究B200原生format、mixed precision分配及质量/显存/延迟门槛。保护重要通道与给模块分配不同格式不是同一算法，AWQ的小型输出MSE不能充当Blackwell执行证据。 |
 | [LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers](../../../foundation-models/2611.24301-loopcache-interface/README.md) · [原始来源](https://arxiv.org/abs/2611.24301v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 固定深度的draft可能沿过时轨迹继续推进。LoopCache用新候选相对旧候选的logit差控制替换，并清除依赖旧token的所有后代。推测路径轮转读取同一loop cache，独立KV分支再以正确loop缓存重算；浅层差异较大时才单独读取对应loop的cache。 | Spool重建固定记录层输入下的递归状态；LoopCache安排loop-specific KV读取并以exact分支纠正近似推测。前者的摘要精确性与后者的目标解码精确性证明对象不同。 |
 | [FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models](../../../foundation-models/2611.26020-frontier-replay/README.md) · [原始来源](https://arxiv.org/abs/2611.26020v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 混合模型的attention KV可按页复用，但递归状态只在保存过的精确位置恢复。FrontierReplay先根据已观察到的模板稳定尾、已完成turn和分叉点规划检查点；原生prefill不断开，之后只重放短窗递归输入生成精确状态。保留策略优先保护仍在执行的请求锚点和已证明可复用的分叉，而非只看历史频率。 | ReplaySSM主要减少decode/投机时的逐token矩阵状态写回，把输入缓存、output-only读取和接受回滚联动；FrontierReplay主要为下一次prefill的结构边界补造精确检查点，并管理哪些状态值得保留。前者的周期刷新和高低精度anchor不是后者的会话frontier保留策略。本地ReplaySSM已有独立Triton证据，但不能把那份执行回执借给本页的host策略，更不能把两种输入日志视为可互换。 |
+| [DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers](../../../foundation-models/2611.33952-duomi/README.md) · [原始来源](https://arxiv.org/abs/2611.33952v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | DuoMI按相同token在两轮的全部expert软路由计算两种互信息：聚合使用对齐与逐token变化区间，训练时约束共享expert池的实际复用。 | EchoMoE复用跨层激活参考并压缩通信变化量；DuoMI共享expert参数并约束路由。前者的reference不是后者的expert池，减少通信和改变专家复用不是可交换收益；小张量反传不代表语言模型提升。 |
 
 </div>
 
@@ -126,6 +127,12 @@ Spool重建固定记录层输入下的递归状态；LoopCache安排loop-specifi
 ReplaySSM主要减少decode/投机时的逐token矩阵状态写回，把输入缓存、output-only读取和接受回滚联动；FrontierReplay主要为下一次prefill的结构边界补造精确检查点，并管理哪些状态值得保留。前者的周期刷新和高低精度anchor不是后者的会话frontier保留策略。本地ReplaySSM已有独立Triton证据，但不能把那份执行回执借给本页的host策略，更不能把两种输入日志视为可互换。 正文§4.3使用16-token页；native chunk end必须已经16对齐，不能静默向下取整来虚构该位置已有状态。完成turn可按原文取decode已经经过的最后页边界，结构目标仍可向下对齐后请求回放。分叉至少256token，回放窗最多1024token；缺少活锚点/日志页则退化为exact cut。Falcon-H1不在1568token以下保存或恢复状态。§4.4分层为dead=-1、superseded=0、natural=1、未用template/turn=2、proven=3、running=4；两次来自同一request的restore不能晋升proven。只有完成事件后才公开新检查点，失败/未完成状态不能命中；lease保护正在用的锚点。长前缀额外保护稳定尾之前一个prefill预算内、深度至少4096的最深natural检查点。
 
 对照来源：[frontier-replay](../../../foundation-models/2611.26020-frontier-replay/README.md) · [replayssm](../../../reproductions/2610.13778-replayssm/README.md)
+
+### DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers
+
+EchoMoE复用跨层激活参考并压缩通信变化量；DuoMI共享expert参数并约束路由。前者的reference不是后者的expert池，减少通信和改变专家复用不是可交换收益；小张量反传不代表语言模型提升。 每组8条序列；先逐group、逐pool计算阈值罚项，再平均。默认tau=1、g_max=.02 bits、D区间[.05,.30] bits、三个权重均.1。D是平均JSD，soft D不是Top-k替换比例；只有均匀硬Top-k分布才有D=1−retention。基础语言、负载均衡与z-loss保持原配置。
+
+对照来源：[duomi](../../../foundation-models/2611.33952-duomi/README.md) · [echomoe](../../../foundation-models/2611.22215-echomoe/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -271,9 +278,23 @@ ReplaySSM主要减少decode/投机时的逐token矩阵状态写回，把输入�
 
     对照来源：[frontier-replay](../../../foundation-models/2611.26020-frontier-replay/README.md) · [replayssm](../../../reproductions/2610.13778-replayssm/README.md)
 
+### DuoMI和EchoMoE里的跨层复用是同一种东西吗？ {#cross-nov26-duomi}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是。DuoMI约束共享FFN池的router选择；EchoMoE复用激活reference并压缩差值通信。
+
+    **教学例子：** 教学例：同一个expert可被两轮选择，但两轮激活差值仍很大；专家复用率不能替代通信字节测量。
+
+    对照来源：[duomi](../../../foundation-models/2611.33952-duomi/README.md) · [echomoe](../../../foundation-models/2611.22215-echomoe/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-26** · EchoMoE复用跨层激活参考并压缩通信变化量；DuoMI共享expert参数并约束路由。前者的reference不是后者的expert池，减少通信和改变专家复用不是可交换收益；小张量反传不代表语言模型提升。 完整矩阵高成本终态，不以L1或审查充当能力证据。
+
+涉及：[duomi](../../../foundation-models/2611.33952-duomi/README.md) · [echomoe](../../../foundation-models/2611.22215-echomoe/README.md)
 
 **2026-11-21** · ReplaySSM主要减少decode/投机时的逐token矩阵状态写回，把输入缓存、output-only读取和接受回滚联动；FrontierReplay主要为下一次prefill的结构边界补造精确检查点，并管理哪些状态值得保留。前者的周期刷新和高低精度anchor不是后者的会话frontier保留策略。本地ReplaySSM已有独立Triton证据，但不能把那份执行回执借给本页的host策略，更不能把两种输入日志视为可互换。 本地组件证据与完整实验不复现分开记录。
 
@@ -327,7 +348,7 @@ ReplaySSM主要减少decode/投机时的逐token矩阵状态写回，把输入�
 
 覆盖 29 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 42 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 43 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -373,6 +394,7 @@ ReplaySSM主要减少decode/投机时的逐token矩阵状态写回，把输入�
 - [Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell](../../../foundation-models/2611.21974-beyond-bitwidth/README.md)
 - [LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers](../../../foundation-models/2611.24301-loopcache-interface/README.md)
 - [FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models](../../../foundation-models/2611.26020-frontier-replay/README.md)
+- [DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers](../../../foundation-models/2611.33952-duomi/README.md)
 
 </details>
 

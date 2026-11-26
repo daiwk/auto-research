@@ -706,6 +706,19 @@
             "同主题比较与边界",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "agent-research:dualpm",
+          "position": "DualPM有损归纳成功与失败程序经验，块内冻结、块后独立维护两池，整池进入下一块；本地只验证L0回调/来源合同，不声称LLM记忆质量。",
+          "tradeoff": "GrepMem保留完整原始轨迹并在压缩后按需词法检索；DualPM不检索、保留的是概括规则。原日志无损、程序经验容量受限与未来行为改善是三个不同命题。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ]
         }
       ],
       "analysis": [
@@ -813,6 +826,14 @@
           "papers": [
             "agent-research:memlife",
             "agent-research:memfolder"
+          ]
+        },
+        {
+          "title": "保留原始证据与抽象经验不能互相证明",
+          "body": "DualPM局部极性不等于整轨迹标签，两次episode模型调用后每极性独立维护。冻结block保证同块无提前暴露，来源引用只是可追踪的模型声称而不是语义真实性。GrepMem的原日志与分页grep能找回摘要遗漏，但不能证明模型会检索或使用；DualPM的可迁移规则可能有效也可能错误推广。本地受控callbacks只证明L0不可变与原子合同，不是L1记忆策略或胜率；完整API矩阵成本过高终态不复现。",
+          "papers": [
+            "agent-research:dualpm",
+            "agent-research:grepmem"
           ]
         }
       ],
@@ -956,9 +977,19 @@
             "agent-research:memlife",
             "agent-research:memfolder"
           ]
+        },
+        {
+          "id": "cross-nov26-dualpm",
+          "question": "DualPM容量受限是否比GrepMem更无损？",
+          "answer": "不是同一目标。GrepMem保留原始轨迹以便grep；DualPM压缩为可迁移程序经验并可能丢掉细节。bounded memory既不保证原始细节恢复，也不证明经验有效。",
+          "example": "教学例：原始订单号可留在GrepMem日志；DualPM可能只保留先解析订单ID再操作的程序规则。",
+          "papers": [
+            "agent-research:dualpm",
+            "agent-research:grepmem"
+          ]
         }
       ],
-      "updated": "2026-11-21",
+      "updated": "2026-11-26",
       "reviewed_papers": [
         "agent-research:cache-engineering",
         "agent-research:tokenworth",
@@ -1025,7 +1056,8 @@
         "agent-research:clam-memory",
         "agent-research:grepmem",
         "agent-research:memfolder",
-        "agent-research:memlife"
+        "agent-research:memlife",
+        "agent-research:dualpm"
       ],
       "updates": [
         {
@@ -1271,6 +1303,18 @@
             "agent-research:memlife": "052bca04c8531bc8aee8775449296e3b4905bead5cf9e61a95d5f93d3faad6ea",
             "agent-research:memfolder": "d734549ed4d09f71761fbb06873671b0677c35cd80f31b200c16d77ec4e4b392"
           }
+        },
+        {
+          "date": "2026-11-26",
+          "papers": [
+            "agent-research:dualpm",
+            "agent-research:grepmem"
+          ],
+          "source_revisions": {
+            "agent-research:dualpm": "a4bdd361fdc640bc318a165e754b984ddd823967b2f3d02078bfdf2726c0f1d0",
+            "agent-research:grepmem": "577f2b1b106591e9094f1a1901e01ce3592ab70c1e184636e2a0c24c7e27d511"
+          },
+          "summary": "仅L0：冻结block记忆、可见episode的reflect→draft实际typed callbacks、两极性独立维护回调、d/m/e与call-local引用校验、原子两池提交和重放拒绝。没有LLM、agent/runtime、语义grounding或记忆收益；fixture经验文本只验证接口，不是L1策略能力。 完整高成本campaign终态不复现，审查DONE。"
         }
       ]
     },
@@ -2298,6 +2342,19 @@
             "同主题比较与边界",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "agent-research:home",
+          "position": "HoMe把文件记忆构建/检索/回答的失败用session差分追溯到harness，再用结构探索、两级采样和构建复用提高评价效率；本地只执行采样/复用，不执行诊断或优化agent。",
+          "tradeoff": "MORSE的Editor可在线研究并经host准入扩展视频感知工具，受accuracy/efficiency阶段合同约束；HoMe固定ReMe运行时，编辑应用harness。二者评价分数与改进对象不可混为一谈。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ]
         }
       ],
       "analysis": [
@@ -2606,6 +2663,14 @@
           "papers": [
             "agent-research:recurscibench",
             "agent-research:coevobench"
+          ]
+        },
+        {
+          "title": "评价预算控制不等于记忆研究能力",
+          "body": "HoMe的EMA/staleness/count/unresolved-error与uniform项寻找可行动失败，均分不是无偏总体估计。复用须核构建等价、来源指纹和完整快照，只抽一次概率；未知必须重建。MORSE还把文献研究、外部感知服务准入和阶段性质量/延迟gate纳入完整Editor。实现采样或gate都不能替代两篇的语义agent。本地HoMe为L1数值/协议诊断，MORSE仍review-only；完整HoMe10.4h/185.2M token矩阵终态不复现。",
+          "papers": [
+            "agent-research:home",
+            "agent-research:morse"
           ]
         }
       ],
@@ -2992,9 +3057,19 @@
             "agent-research:recurscibench",
             "agent-research:coevobench"
           ]
+        },
+        {
+          "id": "cross-nov26-home",
+          "question": "HoMe与MORSE都改记忆harness，搜索边界相同吗？",
+          "answer": "不同。HoMe围绕文件记忆的session差分归因和评价复用；MORSE让Editor在线研究并经host准入扩展视频感知服务，另有阶段性质量/延迟合同。",
+          "example": "教学例：修复文件检索的source多样性是HoMe方向；研究并申请OCR服务是MORSE的开放工具边界。",
+          "papers": [
+            "agent-research:home",
+            "agent-research:morse"
+          ]
         }
       ],
-      "updated": "2026-11-25",
+      "updated": "2026-11-26",
       "reviewed_papers": [
         "agent-research:verified-quantum-wiki",
         "agent-research:rsi-opt",
@@ -3078,7 +3153,8 @@
         "agent-research:coevobench",
         "agent-research:transport-safe-audit",
         "agent-research:morse",
-        "agent-research:recurscibench"
+        "agent-research:recurscibench",
+        "agent-research:home"
       ],
       "updates": [
         {
@@ -3612,6 +3688,18 @@
             "agent-research:coevobench": "46cfd36b03e74f4dcb83e7a643df67b536c616cf039013f14378b7d9cee1ac99"
           },
           "summary": "仅review-only固定v1、F/A来源隔离、冻结G-test协议、公式、成本和同主题比较；不创建算法/adapter、科学任务生成、scorer、reference solver、LLM演化或benchmark。测试targets/scores必须对被测Agent不可见；只实现归一化不能冒称本篇复现。无虚构seed指标或GPU回执。 完整高成本campaign终态不复现，审查DONE。"
+        },
+        {
+          "date": "2026-11-26",
+          "papers": [
+            "agent-research:home",
+            "agent-research:morse"
+          ],
+          "source_revisions": {
+            "agent-research:home": "38fa2c1a2ece7aee87ef3a24ff628a555b8678144858a97166ab9ba61a4abbea",
+            "agent-research:morse": "6afb3b7a6f4799968bead7adc93e7de3ad60b47d0c7938c4e36f69c7e1589e87"
+          },
+          "summary": "纯CPU两级case/query采样、EMA与uniform探索、未复查错误衰减、无放回/fair-share分配、选择时间戳；host批准的构建等价、完整来源指纹、最近完成祖先与一次0.6复用抽签。无LLM诊断、harness编辑、真实问答或能力评价；host验证标量不交给被测policy。 完整高成本campaign终态不复现，审查DONE。"
         }
       ]
     },

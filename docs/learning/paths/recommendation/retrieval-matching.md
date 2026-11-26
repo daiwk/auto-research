@@ -7,7 +7,7 @@ hide:
 
 # 候选生成与搜索匹配
 
-[搜广推](index.md) / 168 个问题 · 42 篇论文
+[搜广推](index.md) / 172 个问题 · 43 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">168 个问题 · 42 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">172 个问题 · 43 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:onequery" data-paper-title="OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding 搜广推与 LLM 应用 Xiamen University; co-first author Jiejie Qin, Alibaba Group; Harbin Institute of Technology collaborator 2026-11-25 OneQuery把语言识别、纠错、英语翻译和查询标注作为同一次schema引导JSON生成，而不是四个独立模型逐级传错。Stage1混合四类单任务SFT；Stage2从部分标注中保留真值、用Stage1补齐缺字段，清洗后混合3.6M伪标注与310K人工样本；Stage3用任务特定reward做GRPO。生产端14B离线缓存头部查询，蒸馏0.3B学生实时处理尾部。 成本过高，不复现（审查 DONE）；L1机制诊断，不是完整能力复现；L1机制诊断，不是完整能力复现；高成本完整实验不复现（审查 DONE），不接Evolve晋级。本地只执行Eq5–13的reward、优势和clipping算术。QT输入为显式tuple列表，不发明私有标注串的parser；无效schema直接拒绝，不猜造格式reward。空串对空串编辑相似度取1、sigma采用总体标准差、delta=1e-8是显式边界约定。没有语言模型、schema约束解码、部分标注补齐、SFT、GRPO参数训练、蒸馏或服务；gold只作为reward计算输入，不存在读取gold的Agent。  大模型能力与推荐融合 查询理解与结构化生成 搜广推 候选生成与搜索匹配 把四项任务放进一个JSON，改变了什么？ 模型可从原查询联合生成四字段，避免独立流水线只看到上游错误结果；但联合格式本身不保证语义一致，仍需训练与清洗。 教学例：错译商品词会误导流水线QT；联合模型同时看原始拼写和其他字段，有机会纠正，但本地reward并不具备这种生成能力。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<span id="paper-recommendation-onequery-ecd2a82c" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-95cceffc9e0f01b8">把四项任务放进一个JSON，改变了什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aonequery">OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Xiamen University; co-first author Jiejie Qin, Alibaba Group; Harbin Institute of Technology collaborator</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>模型可从原查询联合生成四字段，避免独立流水线只看到上游错误结果；但联合格式本身不保证语义一致，仍需训练与清洗。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：错译商品词会误导流水线QT；联合模型同时看原始拼写和其他字段，有机会纠正，但本地reward并不具备这种生成能力。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33653v1">原论文</a> · <a href="../../../../recommendation-components/2611.33653-onequery/">实现解读</a> · <a href="#qa-95cceffc9e0f01b8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:onequery" data-paper-title="OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding 搜广推与 LLM 应用 Xiamen University; co-first author Jiejie Qin, Alibaba Group; Harbin Institute of Technology collaborator 2026-11-25 OneQuery把语言识别、纠错、英语翻译和查询标注作为同一次schema引导JSON生成，而不是四个独立模型逐级传错。Stage1混合四类单任务SFT；Stage2从部分标注中保留真值、用Stage1补齐缺字段，清洗后混合3.6M伪标注与310K人工样本；Stage3用任务特定reward做GRPO。生产端14B离线缓存头部查询，蒸馏0.3B学生实时处理尾部。 成本过高，不复现（审查 DONE）；L1机制诊断，不是完整能力复现；L1机制诊断，不是完整能力复现；高成本完整实验不复现（审查 DONE），不接Evolve晋级。本地只执行Eq5–13的reward、优势和clipping算术。QT输入为显式tuple列表，不发明私有标注串的parser；无效schema直接拒绝，不猜造格式reward。空串对空串编辑相似度取1、sigma采用总体标准差、delta=1e-8是显式边界约定。没有语言模型、schema约束解码、部分标注补齐、SFT、GRPO参数训练、蒸馏或服务；gold只作为reward计算输入，不存在读取gold的Agent。  大模型能力与推荐融合 查询理解与结构化生成 搜广推 候选生成与搜索匹配 为什么纠错reward不是统一exact match或统一编辑相似度？ 需要改时保留最高1分给正确串，其余最多0.3分；不需要改时任何改写都0分。这能区分部分修正与过度修正。 教学例：red shose的近似修正可得低额分；本来正确的red shoes改成red shoe仍是0，不能因为编辑距离很小而奖励。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-aae3cf67f1ed3edd">为什么纠错reward不是统一exact match或统一编辑相似度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aonequery">OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Xiamen University; co-first author Jiejie Qin, Alibaba Group; Harbin Institute of Technology collaborator</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>需要改时保留最高1分给正确串，其余最多0.3分；不需要改时任何改写都0分。这能区分部分修正与过度修正。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：red shose的近似修正可得低额分；本来正确的red shoes改成red shoe仍是0，不能因为编辑距离很小而奖励。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33653v1">原论文</a> · <a href="../../../../recommendation-components/2611.33653-onequery/">实现解读</a> · <a href="#qa-aae3cf67f1ed3edd">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:onequery" data-paper-title="OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding 搜广推与 LLM 应用 Xiamen University; co-first author Jiejie Qin, Alibaba Group; Harbin Institute of Technology collaborator 2026-11-25 OneQuery把语言识别、纠错、英语翻译和查询标注作为同一次schema引导JSON生成，而不是四个独立模型逐级传错。Stage1混合四类单任务SFT；Stage2从部分标注中保留真值、用Stage1补齐缺字段，清洗后混合3.6M伪标注与310K人工样本；Stage3用任务特定reward做GRPO。生产端14B离线缓存头部查询，蒸馏0.3B学生实时处理尾部。 成本过高，不复现（审查 DONE）；L1机制诊断，不是完整能力复现；L1机制诊断，不是完整能力复现；高成本完整实验不复现（审查 DONE），不接Evolve晋级。本地只执行Eq5–13的reward、优势和clipping算术。QT输入为显式tuple列表，不发明私有标注串的parser；无效schema直接拒绝，不猜造格式reward。空串对空串编辑相似度取1、sigma采用总体标准差、delta=1e-8是显式边界约定。没有语言模型、schema约束解码、部分标注补齐、SFT、GRPO参数训练、蒸馏或服务；gold只作为reward计算输入，不存在读取gold的Agent。  大模型能力与推荐融合 查询理解与结构化生成 搜广推 候选生成与搜索匹配 OneQuery的QT reward能换成LARF的ordinal距离吗？ LARF把单文档相关性建成五维ordinal标签，并使用PNR、规则反馈和terminal digit margin；OneQuery监督的是同一query的四个异构结构字段。OneQuery的QT reward是完整集合exact match，不能换成LARF的分级距离或文档间有序pair。LARF训练期生成head/服务分类head也不等于OneQuery的头部缓存/尾部蒸馏。两篇作者线上指标不可直接比较。 教学例：参考含brand和product，少一个字段时QT reward=0；不能按匹配了一半给0.5，或按等级距离衰减。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-900a16ef9e150328">OneQuery的QT reward能换成LARF的ordinal距离吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aonequery">OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Xiamen University; co-first author Jiejie Qin, Alibaba Group; Harbin Institute of Technology collaborator</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>LARF把单文档相关性建成五维ordinal标签，并使用PNR、规则反馈和terminal digit margin；OneQuery监督的是同一query的四个异构结构字段。OneQuery的QT reward是完整集合exact match，不能换成LARF的分级距离或文档间有序pair。LARF训练期生成head/服务分类head也不等于OneQuery的头部缓存/尾部蒸馏。两篇作者线上指标不可直接比较。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：参考含brand和product，少一个字段时QT reward=0；不能按匹配了一半给0.5，或按等级距离衰减。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33653v1">原论文</a> · <a href="../../../../recommendation-components/2611.33653-onequery/">实现解读</a> · <a href="#qa-900a16ef9e150328">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:onequery" data-paper-title="OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding 搜广推与 LLM 应用 Xiamen University; co-first author Jiejie Qin, Alibaba Group; Harbin Institute of Technology collaborator 2026-11-25 OneQuery把语言识别、纠错、英语翻译和查询标注作为同一次schema引导JSON生成，而不是四个独立模型逐级传错。Stage1混合四类单任务SFT；Stage2从部分标注中保留真值、用Stage1补齐缺字段，清洗后混合3.6M伪标注与310K人工样本；Stage3用任务特定reward做GRPO。生产端14B离线缓存头部查询，蒸馏0.3B学生实时处理尾部。 成本过高，不复现（审查 DONE）；L1机制诊断，不是完整能力复现；L1机制诊断，不是完整能力复现；高成本完整实验不复现（审查 DONE），不接Evolve晋级。本地只执行Eq5–13的reward、优势和clipping算术。QT输入为显式tuple列表，不发明私有标注串的parser；无效schema直接拒绝，不猜造格式reward。空串对空串编辑相似度取1、sigma采用总体标准差、delta=1e-8是显式边界约定。没有语言模型、schema约束解码、部分标注补齐、SFT、GRPO参数训练、蒸馏或服务；gold只作为reward计算输入，不存在读取gold的Agent。  大模型能力与推荐融合 查询理解与结构化生成 搜广推 候选生成与搜索匹配 常数组reward的优势和无效schema如何处理？ 常数组的分子为0，加正delta后优势仍全0。本地无效schema拒绝而不是猜造原文没给的格式奖励；gold仅在scorer侧。 教学例：8个候选reward均0.7时，不能因seed变化强行给某个候选正优势；缺QT字段的输出也不能当成QT空集合自动通过。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e8b7923b1daabecf">常数组reward的优势和无效schema如何处理？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aonequery">OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Xiamen University; co-first author Jiejie Qin, Alibaba Group; Harbin Institute of Technology collaborator</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>常数组的分子为0，加正delta后优势仍全0。本地无效schema拒绝而不是猜造原文没给的格式奖励；gold仅在scorer侧。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：8个候选reward均0.7时，不能因seed变化强行给某个候选正优势；缺QT字段的输出也不能当成QT空集合自动通过。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33653v1">原论文</a> · <a href="../../../../recommendation-components/2611.33653-onequery/">实现解读</a> · <a href="#qa-e8b7923b1daabecf">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:larf" data-paper-title="LARF: Learning-aligned Reasoning Framework for Search Relevance" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="LARF: Learning-aligned Reasoning Framework for Search Relevance 搜广推与 LLM 应用 Yuanbao Team, Tencent 2026-11-24 LARF把搜索相关性定义为语义、权威、质量、时效与总体五个0–5级ordinal标签。第一阶段用多Agent合成label-conditioned CoT供SFT学习；gold仅用于训练target构造和离线checker，不给评测Agent。第二阶段用属性、query内排序、规则一致性奖励，再直接优化terminal六digit决策margin。第三阶段用五个分类head与辅助生成head联合训练，服务时丢弃生成head，不再逐token输出CoT。 完整私有训练与生产实验成本过高，不复现（审查 DONE）；L1 CPU奖励/目标组件，diagnostic only。完整私有训练与生产实验成本过高，不复现（审查 DONE）；不是完整LARF或可晋级能力实现。模块接受外部训练标签、预测标签、权重、rule布尔结果、logits与mask。实现Eq.2–10/12；没有训练Agent可读取gold的接口。listwise_reward只处理一个query的文档组，拒绝无可比gold文档对或，因为原式没有定义分母为0的fallback。margin最强竞争者并列取首个digit、hinge恰好为0取零次梯度是本地约定。  retrieval-matching CPU机制组件 搜广推 候选生成与搜索匹配 LARF的推理为什么只在训练需要，而不是在线必须生成？ 五个分类head与辅助生成head共享表示并联合受监督；生成rationale只作为训练目标。服务时删除生成head，分类路径直接给五维标签，不能把删除生成loss的纯分类器等同此训练过程。 教学例：训练时同时考作文解释与六类判别，部署只读取分类head；这不代表模型在每个搜索请求先生成整段解释再丢弃。 2026-11-25">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
 <span id="paper-recommendation-larf-dc044298" class="ar-learning-paper-anchor"></span>

@@ -1,0 +1,320 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-26",
+  "papers": {
+    "agent-research:home": {
+      "questions": [
+        {
+          "id": "sampling-not-ranking",
+          "level": "basics",
+          "question": "为什么自适应子集均分不能直接给候选排名？",
+          "answer": "不同轮次覆盖和难度不同，采样又偏向旧失败。它用于找到可修复错误，不是无偏全量性能估计；选择须看共同case/query、覆盖与回归。",
+          "example": "教学例：A被抽到三道难题得0.6，B抽到三道易题得0.9，不能由此断言B更强。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "unresolved-error-decay",
+          "level": "mechanism",
+          "question": "一次旧失败怎样在后来满分观察后降低采样影响？",
+          "answer": "未复查错误项是log(1+错误距今轮数)/(1+错误后满分次数)。满分增加分母，但损失EMA、staleness、观察数和uniform探索仍共同决定概率。",
+          "example": "教学例：同一错误年龄下，零次复查项为log(4)，两次满分后为log(4)/3；不是直接删掉该case。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "home-versus-morse",
+          "level": "comparison",
+          "question": "HoMe与MORSE都改记忆harness，搜索边界相同吗？",
+          "answer": "不同。HoMe围绕文件记忆的session差分归因和评价复用；MORSE让Editor在线研究并经host准入扩展视频感知服务，另有阶段性质量/延迟合同。",
+          "example": "教学例：修复文件检索的source多样性是HoMe方向；研究并申请OCR服务是MORSE的开放工具边界。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "reuse-unknown-rebuild",
+          "level": "implementation",
+          "question": "构建等价未知时为什么不能先复用再看分数？",
+          "answer": "复用会固定旧构建，掩盖候选写入行为的变化。必须由host审查构建路径并核指纹与完成快照；未知或不兼容就重建，不能让候选自称等价。",
+          "example": "教学例：只改检索可获host批准复用；修改记忆schema却沿用旧快照，会漏测新构建缺陷。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-26"
+        }
+      ]
+    },
+    "agent-research:dualpm": {
+      "questions": [
+        {
+          "id": "local-polarity",
+          "level": "basics",
+          "question": "失败的整条轨迹只能生成失败记忆吗？",
+          "answer": "不能这样限制。局部有效行为可以出现在最终失败轨迹，局部错误也能出现在成功轨迹；两种极性依据可见行为分别归纳，不由隐藏最终得分决定。",
+          "example": "教学例：正确查到联系人ID但后续漏发附件，既可记成功的ID解析，也可记失败的完整性检查。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "frozen-prequential-block",
+          "level": "mechanism",
+          "question": "为什么不能把本块第一个任务的反思立即交给第二个任务？",
+          "answer": "论文块内所有任务共享冻结的上一块记忆，整块先测试再进入反思维护。立即更新改成了逐任务在线协议，影响冷启动、比较口径与经验暴露。",
+          "example": "教学例：b=5时任务1到5都用M0；完成后才得到M1供任务6开始使用。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "dualpm-versus-grepmem",
+          "level": "comparison",
+          "question": "DualPM容量受限是否比GrepMem更无损？",
+          "answer": "不是同一目标。GrepMem保留原始轨迹以便grep；DualPM压缩为可迁移程序经验并可能丢掉细节。bounded memory既不保证原始细节恢复，也不证明经验有效。",
+          "example": "教学例：原始订单号可留在GrepMem日志；DualPM可能只保留先解析订单ID再操作的程序规则。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "lineage-not-grounding",
+          "level": "implementation",
+          "question": "通过call-local来源检查就验证了记忆真实吗？",
+          "answer": "没有。检查只证明引用存在、同极性且容量合规；模型可能给出无效概括，来源是模型声称的lineage。本地受控回调只验证L0，不是LLM反思能力。",
+          "example": "教学例：一条D0确实存在，但把一次成功推广成所有任务都应跳过验证，仍可能是错误经验。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-26"
+        }
+      ]
+    },
+    "multimodal-models:agentic-longlive": {
+      "questions": [
+        {
+          "id": "no-video-feedback",
+          "level": "basics",
+          "question": "memory agent为什么不读生成视频纠错？",
+          "answer": "主协议是开放环：只读已揭示prompt，避免把生成错误写回记忆；实时已播放镜头也不能回滚。读视频是另一种消融，不是主方法输入。",
+          "example": "教学例：生成器画错外套颜色，主agent仍依据已揭示文本保留正确实体状态，而不是把错色学成真。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "future-only-in-reward",
+          "level": "mechanism",
+          "question": "用未来标注训练奖励会让planner提前知道下一镜头吗？",
+          "answer": "按论文隔离不会。planner只见实体bank、最近四prompt和slot预算；未来脚本供训练scorer评价选择，不能进入policy输入。oracle-next-prompt只能是破坏在线约束的上界。",
+          "example": "教学例：奖励可事后发现雨伞对第9镜头有用，但第8镜头policy不能读取第9条prompt来选雨伞。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "memory-versus-pixels",
+          "level": "comparison",
+          "question": "Agentic LongLive与PixVid都改善视频，修改的是同一层吗？",
+          "answer": "不是。前者冻结已有生成器并增加记忆KV和边界交换；PixVid将latent DiT迁往像素表示并训练detailer。外部一致性记忆不等于去掉VAE。",
+          "example": "教学例：同一个冻结latent生成器可接实体记忆；迁到像素DiT后仍需单独解决跨镜头实体记忆。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "time-not-total-compute",
+          "level": "implementation",
+          "question": "约1%额外生成时间为什么不代表单卡可低成本复现？",
+          "answer": "agent和预填充在额外GPU并行，隐藏的是关键路径延迟而非总算力。六H100示意和8×B200节点已经超出单A100/A30预算，且还需35B/4B/8B服务及完整训练评测。",
+          "example": "教学例：原生成器跑16秒时另外三GPU忙15秒，墙钟几乎不变，但GPU秒和下载量显著增加。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-26"
+        }
+      ]
+    }
+  },
+  "english_question_units": {
+    "qa/agent-research:home/sampling-not-ranking": {
+      "source_sha256": "17f6f70ddf6302c0d6d79edc0dd1c2395846096183b529f28383ca341d6735fb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not rank candidates by adaptive-subset means?",
+        "answer": "Rounds differ in coverage and difficulty and favor historical failures. They expose actionable errors, not unbiased full-set performance; selection needs common cases/queries, coverage and regressions.",
+        "example": "Teaching example: A scores 0.6 on three difficult cases and B 0.9 on three easy ones; this does not establish B is stronger."
+      }
+    },
+    "qa/agent-research:home/unresolved-error-decay": {
+      "source_sha256": "32f15a634645b3237e8b34c708e48d67815a62e5536dc1ca721bdf74664748f5",
+      "reviewed": true,
+      "fields": {
+        "question": "How do later perfect observations reduce an old failure's influence?",
+        "answer": "The unresolved-error term divides log(1+error age) by one plus subsequent perfect observations. EMA loss, staleness, count and uniform exploration still jointly determine probability.",
+        "example": "Teaching example: at the same error age, two perfect observations reduce log(4) to log(4)/3 without deleting the case."
+      }
+    },
+    "qa/agent-research:home/home-versus-morse": {
+      "source_sha256": "362e03d51c2096a06a8745d1f880e95802aec057bd8116a394575fdf752173f0",
+      "reviewed": true,
+      "fields": {
+        "question": "Do HoMe and MORSE search the same memory-harness space?",
+        "answer": "No. HoMe centers on file-memory session differences and evaluation reuse. MORSE adds online research and host-approved video-perception services under staged quality/latency contracts.",
+        "example": "Teaching example: diversifying retrieved source files fits HoMe; researching and requesting OCR expands MORSE's tool boundary."
+      }
+    },
+    "qa/agent-research:home/reuse-unknown-rebuild": {
+      "source_sha256": "240d62bf88f75abc4d58e5d73d1c73c744fba0193314c9e389cde1fd1627006d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why rebuild when construction equivalence is unknown?",
+        "answer": "Reuse freezes old construction and can hide changed write behavior. The host must review construction paths and validate fingerprints/completed snapshots; unknown or incompatible changes rebuild.",
+        "example": "Teaching example: retrieval-only edits may reuse after host approval, while schema changes evaluated on old snapshots would hide construction defects."
+      }
+    },
+    "qa/agent-research:dualpm/local-polarity": {
+      "source_sha256": "b919e1c54f350add62cc45a4a8cd033296c5277afc4849be87ddb503f0083cdf",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a failed episode produce only failure memories?",
+        "answer": "No. Failed episodes can contain useful actions and successful episodes ineffective ones. Both polarities are derived independently from visible behavior, not hidden final scores.",
+        "example": "Teaching example: resolving a contact ID correctly but omitting an attachment supports a resolution success lesson and a completeness failure lesson."
+      }
+    },
+    "qa/agent-research:dualpm/frozen-prequential-block": {
+      "source_sha256": "11465791c8bd2e8876f93f28ddc11c4413842224f8c9194eeb43ff5a262ed4a8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not give task one's reflection immediately to task two?",
+        "answer": "Every task in a paper block shares the previous frozen memory. The whole block is tested before reflection/maintenance; immediate updates change exposure, cold start and the evaluation protocol.",
+        "example": "Teaching example: with b=5, tasks one through five use M0; M1 becomes available starting at task six."
+      }
+    },
+    "qa/agent-research:dualpm/dualpm-versus-grepmem": {
+      "source_sha256": "b11ccd8dd967c173790d743ddbdd82b9c5e8556409469f5591d3a00edf3377c4",
+      "reviewed": true,
+      "fields": {
+        "question": "Is bounded DualPM more lossless than GrepMem?",
+        "answer": "They target different things. GrepMem retains raw trajectories for grep; DualPM abstracts transferable procedural lessons and may discard detail. Bounded memory guarantees neither detail recovery nor lesson utility.",
+        "example": "Teaching example: an order number may remain in GrepMem's log while DualPM retains only the procedure to resolve an order ID before acting."
+      }
+    },
+    "qa/agent-research:dualpm/lineage-not-grounding": {
+      "source_sha256": "2ba524e0086eeb51a574c0d1800d400f650ac8143e1cb70619d27d69a00e3955",
+      "reviewed": true,
+      "fields": {
+        "question": "Does valid call-local lineage establish a truthful memory?",
+        "answer": "No. It establishes existing same-polarity references and capacity compliance, not valid generalization. Lineage is model-claimed; controlled callbacks prove L0 plumbing, not LLM reflection.",
+        "example": "Teaching example: D0 can exist while the lesson wrongly generalizes one success into a rule to skip all future verification."
+      }
+    },
+    "qa/multimodal-models:agentic-longlive/no-video-feedback": {
+      "source_sha256": "e8be935c8d922254627b0b7b32f7b35288c598105e4536973f72342df14bb907",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does the memory agent not correct from generated video?",
+        "answer": "The main protocol is open-loop, reading revealed prompts to avoid feeding generation errors back into memory; played shots cannot be rolled back. Reading video is a different ablation.",
+        "example": "Teaching example: a wrongly rendered coat color should not replace the entity state specified by the revealed prompt."
+      }
+    },
+    "qa/multimodal-models:agentic-longlive/future-only-in-reward": {
+      "source_sha256": "d6f587a3e6ea81940fe4a0832dd0034bbe3950dba5bbd694aaab2df2e1c1cafc",
+      "reviewed": true,
+      "fields": {
+        "question": "Does hindsight reward reveal the next shot to the planner?",
+        "answer": "Not under the paper's separation. The policy sees its entity bank, four recent prompts and slot budget; future scripts belong only to reward scoring. Oracle-next-prompt is an upper bound that breaks online constraints.",
+        "example": "Teaching example: a scorer may later reward an umbrella useful in shot nine, but the shot-eight policy cannot read prompt nine."
+      }
+    },
+    "qa/multimodal-models:agentic-longlive/memory-versus-pixels": {
+      "source_sha256": "23cd25188e98734fee411f0e0bbb3a8b4d64a06b84ae3baa4068ccb253f585f7",
+      "reviewed": true,
+      "fields": {
+        "question": "Do Agentic LongLive and PixVid modify the same layer?",
+        "answer": "No. The former freezes a generator and injects memory KV at boundaries; PixVid transfers latent DiT knowledge to pixels with a detailer. External consistency memory is not VAE removal.",
+        "example": "Teaching example: a frozen latent generator can accept entity memory, while a pixel DiT still needs a separate long-horizon memory design."
+      }
+    },
+    "qa/multimodal-models:agentic-longlive/time-not-total-compute": {
+      "source_sha256": "af26c5cd62ff6dfc551ec39546bffcbba9b29a5944966ed5dfba11dd63b59bc1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does roughly 1% extra generation time not imply cheap single-GPU reproduction?",
+        "answer": "Agent and prefill work run on extra GPUs, hiding critical-path latency rather than total compute. Six-H100/eight-B200 layouts plus 35B/4B/8B services and full training/evaluation exceed one A100/A30.",
+        "example": "Teaching example: three extra GPUs working for fifteen seconds during a sixteen-second shot barely change wall time but add substantial GPU-seconds and downloads."
+      }
+    }
+  }
+}

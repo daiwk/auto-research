@@ -4,6 +4,8 @@
 
 ## 2026
 
+- 2026-11 · [Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory](../2611.33612-dualpm/README.md)（`dualpm`）：整条轨迹成功不表示每步都好，失败轨迹也可包含值得保留的局部行为。DualPM把任务流分块：块内所有任务只读同一个冻结记忆；完成后每轨迹先由LLM反思，再用第二次调用起草两种极性经验。
+- 2026-11 · [HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants](../2611.34624-home/README.md)（`home`）：HoMe让代码agent从此前任意已评估harness派生新候选，以逐session记忆版本和执行trace追溯信息丢失，再跨case归纳共同失败机制。早期门控拒绝只有prompt/参数变化的候选，后期放开细调；评价前先smoke。
 - 2026-11 · [CAPE: Coordinating Calibration and Search for Tool-Use Policies](../2611.31938-cape/README.md)（`cape`）：操作本身正确，序列化仍可能被隐藏parser配置误读。CAPE离线在可复制的候选配置族H上校准调用，编译一个部署时只按响应分支的策略。
 - 2026-11 · [fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration](../2611.31727-agent-kernel/README.md)（`agent-kernel`）：SGR（Sub-Graph Recovery）不是新发明依赖恢复：它把已知的子图选择性重试放入LLM内容编排层。异常先令下游不可达，独立兄弟仍可完成；重试只复位失败节点及其不可达后代。
 - 2026-11 · [RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research](../2611.32508-recurscibench/README.md)（`recurscibench`）：任务内涨分不等于获得可迁移的科研能力。RecurSciPipe从原始科学数据生成共享背景的建模F/分析A任务，先查合同、信息隔离、可执行、scorer行为，再查目标、输入和评价的科学有效性；设计错回Designer，实施错回Builder，两任务全过才准入。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**

@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-26",
+  "attempts": [{"phase": "cpu_invocation_pre_execution", "result": "rejected", "reason": "The entered source-commit argument was not the actual SHA returned by the freeze operation. The immutable source gate rejected it before importing/running components or writing an execution artifact.", "frozen_source_commit": "1351d9d97ed2fbae2c71daef0c4da637f2f11319", "component_execution_started": false, "artifact_created": false, "resolution": "Use the verified full SHA from frozen-sources.json; preserve the existing valid proof and do not relabel a failed call as a run."}],
+  "first_frozen_run": {"source_commit": "1351d9d97ed2fbae2c71daef0c4da637f2f11319", "cpu_result": "passed_default_component_controls_before_independent_boundary_review", "cpu_elapsed_seconds": 2.3894940419122577, "cpu_artifact": "raw-cpu-attempt1.json", "frozen_proof": "frozen-sources-attempt1.json", "cuda_run": false, "new_findings": ["FEAST could partially mutate exposure/cursor state before a later selected cluster failed capacity validation, and tiny positive temperature could underflow all probabilities", "RAP Gram-matrix angular subtraction amplified rounding error at large radius, giving nonzero distances for duplicate/same-ray points"], "resolution": "Repair numerical/transaction boundaries, add direct regression and diagnostic controls, then commit/freeze and execute fresh CPU/CUDA evidence. Preserve this actual prior run without admitting it as current."},
+  "automatic_high_cost_retry": false
+}

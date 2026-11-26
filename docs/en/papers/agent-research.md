@@ -8,6 +8,8 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants](<https://arxiv.org/abs/2611.34624v1>) | 2026-11-25 | [English](../../agent-research/2611.34624-home/README-en.md) · [Chinese](../../agent-research/2611.34624-home/README.md) |
+| [Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory](<https://arxiv.org/abs/2611.33612v1>) | 2026-11-25 | [English](../../agent-research/2611.33612-dualpm/README-en.md) · [Chinese](../../agent-research/2611.33612-dualpm/README.md) |
 | [fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration](<https://arxiv.org/abs/2611.31727v1>) | 2026-11-24 | [English](../../agent-research/2611.31727-agent-kernel/README-en.md) · [Chinese](../../agent-research/2611.31727-agent-kernel/README.md) |
 | [RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research](<https://arxiv.org/abs/2611.32508v1>) | 2026-11-24 | [English](../../agent-research/2611.32508-recurscibench/README-en.md) · [Chinese](../../agent-research/2611.32508-recurscibench/README.md) |
 | [CAPE: Coordinating Calibration and Search for Tool-Use Policies](<https://arxiv.org/abs/2611.31938v1>) | 2026-11-24 | [English](../../agent-research/2611.31938-cape/README-en.md) · [Chinese](../../agent-research/2611.31938-cape/README.md) |

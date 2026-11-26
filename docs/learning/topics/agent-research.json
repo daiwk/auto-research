@@ -130,7 +130,8 @@
         "agent-research:clam-memory",
         "agent-research:grepmem",
         "agent-research:memfolder",
-        "agent-research:memlife"
+        "agent-research:memlife",
+        "agent-research:dualpm"
       ]
     },
     {
@@ -307,7 +308,8 @@
         "agent-research:coevobench",
         "agent-research:transport-safe-audit",
         "agent-research:morse",
-        "agent-research:recurscibench"
+        "agent-research:recurscibench",
+        "agent-research:home"
       ]
     },
     {

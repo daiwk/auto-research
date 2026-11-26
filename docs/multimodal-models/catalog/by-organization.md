@@ -98,6 +98,10 @@
 
 - 2026-09-01 · [From Visual Cues to Spoken Narration: Rethinking Audio Description](../../multimodal-models/2609.01725-cue2narrate-drl/README.md)（`cue2narrate-drl`）：固定v1 Section4.3 Eqs5–8：SFT按每个AD目标token求和；positive/negative评分均为同一当前模型和prompt上的token-mean logp，prompt/padding排除；DRL=-logsigmoid((s+−s−)/0.5)，全loss加0.2DRL。离线负caption生成冻结，但其当前模型likelihood仍反传。
 
+## The Chinese University of Hong Kong (CUHK)
+
+- 2026-11-25 · [Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation](../../multimodal-models/2611.34907-agentic-longlive/README.md)（`agentic-longlive`）：实时视频不能提前读脚本、停流等agent或回滚已播放镜头。memory agent只读已揭示prompt而不读生成视频，避免把生成错误写回；维护实体文本/图像，组合长期全局图$G$与每镜头图$M$，由辅助GPU提前编码为attention-sink KV。边界只交换已完整prefill的最新版本；没准备好就用旧版本，不等正在绘制的图。图像首版可先commit，即使未通过检查；后续重画须通过且不降分才能替换。scene routing和实体文本卡只使用已揭示prompt。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## UC Berkeley
 
 - 2026-10-21 · [Agentic World Action Models](../../multimodal-models/2610.30136-aw0/README.md)（`aw0`）：世界动作模型能预测未来视觉和控制轨迹，但通常缺少可组合的技能结构；代码型机器人 Agent 能重用程序，却未必把计划与物理动态预测统一起来。AW-0 在 Mixture-of-Transformers 中组合三个专家：代码专家产生参数化程序片段，视频专家预测未来场景，动作专家产生连续控制。程序既能约束预测，也可在可选执行模式中调用技能库。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**

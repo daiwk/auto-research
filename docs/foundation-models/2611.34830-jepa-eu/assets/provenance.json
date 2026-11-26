@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/abs/2611.34830v1",
+  "source_url": "https://arxiv.org/pdf/2611.34830v1#page=5",
+  "source_pdf_sha256": "ca7bb1ed9817a792bf37f3ea4ea90c8599d36bd864991cedfea67b0201797284",
+  "source_sha256": "ca7bb1ed9817a792bf37f3ea4ea90c8599d36bd864991cedfea67b0201797284",
+  "page": 5,
+  "pdf_page": 5,
+  "figure": "Figure 4",
+  "caption": "Persistence and entity pixel/gradient share influence uncertainty sensitivity.",
+  "image_sha256": "0668f19976cc9c5015550090069f05d7d3c6dbf8cb64031accaa0ff25fd90959",
+  "asset_sha256": "0668f19976cc9c5015550090069f05d7d3c6dbf8cb64031accaa0ff25fd90959",
+  "retrieved_on": "2026-11-26",
+  "reviewed_version": "v1",
+  "visually_reviewed": true,
+  "visually_reviewed_on": "2026-11-26",
+  "scientific_content_modified": false,
+  "render_dpi": 120,
+  "extraction": "Unmodified full PDF page raster including complete figure caption; pdftoppm at120dpi; visually reviewed.",
+  "copyright": "Copyright belongs to the original authors."
+}

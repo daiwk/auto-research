@@ -46,6 +46,7 @@
 - 2026-09 · [MIMA](../2609.12842-mima/README.md)：将同请求物品组成多正例集合，以排他匹配监督互补兴趣，并用 activation routing 校准多通道分数。
 
 ## Alibaba
+- [OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding](../../recommendation-components/2611.33653-onequery/README.md)：OneQuery把语言识别、纠错、英语翻译和查询标注作为同一次schema引导JSON生成，而不是四个独立模型逐级传错。Stage1混合四类单任务SFT；Stage2从部分标注中保留真值、用Stage1补齐缺字段，清洗后混合3.6M伪标注与310K人工样本；Stage3用任务特定reward做GRPO。生产端14B离线缓存头部查询，蒸馏0.3B学生实时处理尾部。 本地只执行Eq5–13的reward、优势和clipping算术。QT输入为显式tuple列表，不发明私有标注串的parser；无效schema直接拒绝，不猜造格式reward。空串对空串编辑相似度取1、sigma采用总体标准差、delta=1e-8是显式边界约定。没有语言模型、schema约束解码、部分标注补齐、SFT、GRPO参数训练、蒸馏或服务；gold只作为reward计算输入，不存在读取gold的Agent。
 - [LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation](../../recommendation-components/2611.32590-lazunirec/README.md)：LazUnirec把历史、trigger、多兴趣检索query和同请求候选组织到同一Transformer，但不要求召回与排序完全共用全部参数。召回/排序各有Q/K/V低秩残差与private FFN expert，另由条件router选择top-2 shared experts。按scenario/task观察共享参数的归一化梯度历史，以EMA方向方差估计可靠性，停止梯度后重加权任务损失；排序还向召回做请求内候选分布蒸馏。 执行Eq7低秩任务投影、Eq10/11 sparse shared/private输出组合、Eq12–14 EMA evidence/相对权重/停止梯度及Eq15–17请求内MaxSim/KL，并用真实autograd验证参数路径。输入router scores/expert outputs/已探测gradient与interest probabilities是显式张量，不虚构未给细节的条件router或概率头。未实现完整Transformer/RMSNorm/attention mask、embedding、场景数据管线、expert网络、MoE z-loss、训练调度与部署；因此不是完整模型、正式benchmark或Evolve算子。
 - [ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability](../../recommendation-components/2611.16404-resid/README.md)：用独立子空间长parallel SID避免残差链误差，完整词表log-prior校准配合prefix log-mean-exp势能引导beam，再按Hamming partial matching排序。本地只实现冻结输入上的有限CPU核，不训练推荐器。
 - [TriGen: A Generative Paradigm for Trigger-Induced Recommendation](../../recommendation-components/2611.16395-trigen/README.md)：固定窗口尾部重复trigger，双条件路径直接读取pristine history，分别pool后逐level路由并用独立PFFN持续调制BOS/已观察prefix。本地无完整encoder-decoder推荐训练，MLP内部两层GELU为明示选择。
@@ -294,6 +295,7 @@
 - 2026-01 · [Podcast MTL](../2601.02306-podcast-mtl/README.md)：共享广告、推广与 organic stream 表征，将高资源任务知识迁移给冷启动 podcast。
 
 ## NetEase
+- [Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation](../../recommendation-components/2611.33628-camar/README.md)：CAMAR先用共享跨域RQ-VAE语义ID、独立域序列encoder形成偏好，再用有向域对的两层ReLU PCN对缺失域补全。每域线性拆出invariant/specific两部分；平方内积约束二者，GRL分类器去除invariant的域信息，仅invariant参与active-domain self-attention，最后按域gate融合共享向量与本域specific。该结构约束不是仅靠一个正则项声称发现真实因果因素。 只实现给定per-domain state/candidate张量上的Eq5–7、9–15：真实两层PCN、双线性factor、单层active-only MHA、域gate/classifier、GRL、正交和sampled-softmax。没有多模态encoder、RQ-VAE/语义码本、item/history backbone、Eq8 task-level冷启动Lcf、完整LTN或三阶段训练器；因此不宣称完整CAMAR。bias-free factor、MHA细节/MLP隐藏宽度等原文未唯一给出，显式采用本地参考配置。
 - 2026-09 · [AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems](../2609.04871-autolr/README.md)：以多专家评审、证据加权预算和确定性晋级门串联研究、实验与上线评审。
 - 2026-07 · [Melo](../2607.23718-melo/README.md)：用多节点音乐 Agent、实体目录 grounding 和反思重试生成可靠 playlist。
 - 2026-06 · [PIANO](../2606.16641-piano/README.md)：用查询驱动兴趣精炼和信息聚合节点执行个性化 listwise 音乐重排。

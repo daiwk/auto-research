@@ -8,6 +8,8 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding](<https://arxiv.org/abs/2611.33653v1>) | 2026-11-25 | [English](../../recommendation-components/2611.33653-onequery/README-en.md) · [Chinese](../../recommendation-components/2611.33653-onequery/README.md) |
+| [Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation](<https://arxiv.org/abs/2611.33628v1>) | 2026-11-25 | [English](../../recommendation-components/2611.33628-camar/README-en.md) · [Chinese](../../recommendation-components/2611.33628-camar/README.md) |
 | [LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation](<https://arxiv.org/abs/2611.32590v1>) | 2026-11-24 | [English](../../recommendation-components/2611.32590-lazunirec/README-en.md) · [Chinese](../../recommendation-components/2611.32590-lazunirec/README.md) |
 | [LARF: Learning-aligned Reasoning Framework for Search Relevance](<https://arxiv.org/abs/2611.32125v1>) | 2026-11-24 | [English](../../recommendation-components/2611.32125-larf/README-en.md) · [Chinese](../../recommendation-components/2611.32125-larf/README.md) |
 | [Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents](<https://arxiv.org/abs/2611.29613v1>) | 2026-11-22 | [English](../../recommendation-components/2611.29613-weight-coding/README-en.md) · [Chinese](../../recommendation-components/2611.29613-weight-coding/README.md) |

@@ -7,7 +7,7 @@ hide:
 
 # 省掉哪一份算力：选问题、少生成、分枝与有条件重放
 
-[LLM 后训练](../index.md) · 更新 2026-11-23 · 43 篇主题资料 / 11 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-26 · 44 篇主题资料 / 12 篇重点对照
 
 数据与预算方法改变的是训练链路的不同位置。课程重估当前难度，LESSER降低筛选特征成本，STOPD随机少生成并校正，BranchOPD增加关键分枝，Lightning缓存教师，TAR召回被压制的正确模式；少调用一次教师不等于整个训练更便宜。
 
@@ -36,6 +36,7 @@ hide:
 | [TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training](../../../post-training/2611.22206-tailroll/README.md) · [原始来源](https://arxiv.org/abs/2611.22206v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 只收录多engine真实在途迁移/单次re-prefill与部分输出loss mask机制；不以离线调度模拟声称系统提速。 | GRPODropout在完成生成后按响应熵贡献筛选，基本不省生成预算；TailRoll可提前终止尾response，并mask其partial loss，改变实际完成样本和系统时序。 |
 | [Policy Improvement-Guided Replay for Continual Reinforcement Learning](../../../post-training/2611.25989-colir-replay/README.md) · [原始来源](https://arxiv.org/abs/2611.25989v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 显式缓存的四组cross-policy序列log-likelihood、候选资格、每任务top-B、任务均匀/任务内均匀抽样和回放KL token门控。保留精确并列时的输入顺序；跨任务抽样本组件显式用有放回策略，论文未指定替换规则。没有VLM评分器、MRCL训练器、GSPO更新或能力评测，不能称为Evolve已接入。 | TAR先从base正确响应构建分散原型bank，按当前策略相对base的压制程度，对旧轨迹和token做门控加权NLL；CoLiR用初始错误与最终正确响应的cross-policy似然变化筛选历史prompt，后续由当前策略生成新响应，并只对replay施加KL。两者都分配历史回放预算，但单位是旧响应行为与历史问题，筛选依据是当前压制与原任务策略改进。比较成本必须分别计入TAR建bank、CoLiR补评分以及后续新rollout；CoLiR构建记忆免额外生成，不等于训练全程不再生成。 |
 | [CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency](../../../post-training/2611.27119-ctrl/README.md) · [原始来源](https://arxiv.org/abs/2611.27119v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 本篇仅收录和成本审查：没有本地CTRL实现、CUDA路径、benchmark、指标回执或Evolve算子。未将paper公式或CPU时序fixture宣传为CUDA共驻留系统。保存固定版本事实、机制、原图及失败/不占优条件，不生成伪实验metrics。 | CoLiR选择应回放哪些历史prompt、后续由当前策略生成新响应；CTRL决定同一批训练与生成怎样共享硬件和发布时间。一个是数据预算/记忆选择，一个是系统布局/版本合同，互不替代。免额外生成来构建CoLiR记忆也不消除训练rollout成本，不能据此把CTRL系统加速直接叠乘。 |
+| [FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning](../../../post-training/2611.33827-feast/README.md) · [原始来源](https://arxiv.org/abs/2611.33827v1)<br>章节：核心公式、与已有方法的关系、结果、负控与边界 | 固定atomic历史、当前policy/PCA/GMM重聚类、正priority与曝光欠额、选中簇预算保护，再以累计reward方差2/4/16晋级；外部表示不以task标签替代。 | RAIL以shadow-to-live干预后的recoverability收益学习contextual bandit，控制帮助位置和方式；FEAST分配学习机会与计算，未学习干预策略。簇内variance selector单独存在不等于FEAST，旧RAIL mini-suite亦不构成共同能力对照。 |
 
 </div>
 
@@ -82,6 +83,12 @@ TAR先从base正确响应构建分散原型bank，按当前策略相对base的�
 CoLiR选择应回放哪些历史prompt、后续由当前策略生成新响应；CTRL决定同一批训练与生成怎样共享硬件和发布时间。一个是数据预算/记忆选择，一个是系统布局/版本合同，互不替代。免额外生成来构建CoLiR记忆也不消除训练rollout成本，不能据此把CTRL系统加速直接叠乘。 来源：§3.3 Eq.1及publication gate、§3.4 Eq.3。b(y)是包括跨刷新续写时的最早behavior版本，而非最终完成时版本。publication g在仍有dispatch p且g−p+1≥T的请求时等待；FIFO消费与W≤T warmup一起支撑陈旧度界。P的下界指导测量和SM share选择，不保证下界可达，也不是CPU调度模拟可以证实的吞吐收益。
 
 对照来源：[ctrl](../../../post-training/2611.27119-ctrl/README.md) · [colir-replay](../../../post-training/2611.25989-colir-replay/README.md)
+
+### 保护机会不同于学习如何救回失败轨迹
+
+实际重读RAIL README，其定义对象为干预状态/动作与恢复收益。FEAST处理的是内生学习信号导致的长期机会分配；每个原子的m/u/trend/shortfall不因当前policy重聚类而重置。共同pilot给prompt等权反馈，全部rollout计入曝光，selected cluster预算不可在后续晋级时跨簇流走。本地运行真实KMeans++/PCA/GMM-EM/BIC、history和quota组件，但随机向量及Bernoulli callback只作诊断，不是LLM或公平性能力实验。最小单臂约6.07A100小时不代表完整多臂矩阵可负担。
+
+对照来源：[feast](../../../post-training/2611.33827-feast/README.md) · [rail](../../../post-training/2608.05080-rail/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -167,9 +174,23 @@ CoLiR选择应回放哪些历史prompt、后续由当前策略生成新响应；
 
     对照来源：[ctrl](../../../post-training/2611.27119-ctrl/README.md) · [colir-replay](../../../post-training/2611.25989-colir-replay/README.md)
 
+### 若一簇本轮pilot全部失败，能否把其余预算挪给别簇的高方差题？ {#cross-nov26-feast-boundary}
+
+??? note "展开答案与例子"
+
+    **答案：** 在FEAST预留预算机制中不能。该簇既已选中，就保有固定Bc；内部晋级仍按原始累计reward方差执行。否则删掉的是跨簇机会保护，不是等价加速。
+
+    **教学例子：** 教学例：逻辑簇和数学簇各预留256条；逻辑pilot全0时仍用稳定并列晋级完成其256条，不能借此给数学簇额外128条。
+
+    对照来源：[feast](../../../post-training/2611.33827-feast/README.md) · [rail](../../../post-training/2608.05080-rail/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-26** · 实际重读RAIL README并对照FEAST固定v1 Section4/AppendixA.2–A.3，新增recoverability干预与持久机会/配额保护的区别，保留pilot等权、全部曝光和聚类不重置历史的边界。CPU组件不作学习能力比较，完整LLM矩阵成本DONE。
+
+涉及：[feast](../../../post-training/2611.33827-feast/README.md) · [rail](../../../post-training/2608.05080-rail/README.md)
 
 **2026-11-23** · CoLiR选择应回放哪些历史prompt、后续由当前策略生成新响应；CTRL决定同一批训练与生成怎样共享硬件和发布时间。一个是数据预算/记忆选择，一个是系统布局/版本合同，互不替代。免额外生成来构建CoLiR记忆也不消除训练rollout成本，不能据此把CTRL系统加速直接叠乘。 仅收录、无本地系统实现、无CUDA验收；成本过高，不复现（审查 DONE）。 完整实验成本过高不复现，审查DONE。
 
@@ -195,7 +216,7 @@ CoLiR选择应回放哪些历史prompt、后续由当前策略生成新响应；
 
 覆盖 38 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 43 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 44 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -242,6 +263,7 @@ CoLiR选择应回放哪些历史prompt、后续由当前策略生成新响应；
 - [TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training](../../../post-training/2611.22206-tailroll/README.md)
 - [Policy Improvement-Guided Replay for Continual Reinforcement Learning](../../../post-training/2611.25989-colir-replay/README.md)
 - [CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency](../../../post-training/2611.27119-ctrl/README.md)
+- [FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning](../../../post-training/2611.33827-feast/README.md)
 
 </details>
 

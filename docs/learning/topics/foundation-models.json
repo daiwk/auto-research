@@ -69,7 +69,8 @@
         "foundation-models:kernel-ridge-attention",
         "foundation-models:hisa",
         "foundation-models:canon-layers-scale",
-        "foundation-models:thresholded-longce"
+        "foundation-models:thresholded-longce",
+        "foundation-models:rap"
       ]
     },
     {
@@ -235,7 +236,8 @@
         "foundation-models:risa",
         "foundation-models:beyond-bitwidth",
         "foundation-models:loopcache-interface",
-        "foundation-models:frontier-replay"
+        "foundation-models:frontier-replay",
+        "foundation-models:duomi"
       ]
     },
     {

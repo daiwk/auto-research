@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-26-latest-components",
+  "seeds": [42, 43, 44],
+  "maximum_run_seconds": 180,
+  "maximum_cuda_devices": 1,
+  "model_and_dataset_downloads": 0,
+  "api_calls": 0,
+  "automatic_retry": false,
+  "full_experiments_executed": false,
+  "cost_basis": "Seven L1 mechanisms and one L0 callback interface. Only CAMAR advertises CUDA and needs real single A100/A30 evidence. No checkpoint/data download or LLM/API/browser/robot run. All complete high-cost campaigns are terminal not-reproduced/review DONE. See group primary reviews and root-cost-preflight for published scales; the per-device180seconds cap is not a full reproduction estimate.",
+  "components": {
+    "rap": {"domain": "foundation-models", "module": "foundation_models/rap.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "duomi": {"domain": "foundation-models", "module": "foundation_models/duomi.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "briar": {"domain": "post-training", "module": "post_training/briar.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "feast": {"domain": "post-training", "module": "post_training/feast.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "home": {"domain": "agent-research", "module": "agent_research/home.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "dualpm": {"domain": "agent-research", "module": "agent_research/dualpm.py", "cuda": false, "evaluation_tier": "l0_interface"},
+    "onequery": {"domain": "recommendation", "module": "reproductions/onequery_components.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "camar": {"domain": "recommendation", "module": "reproductions/camar_components.py", "cuda": true, "evaluation_tier": "l1_mechanism"}
+  }
+}
