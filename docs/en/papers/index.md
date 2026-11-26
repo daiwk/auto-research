@@ -4,19 +4,30 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1291 entries from the shared research manifest. English write-ups available: 1291.
+The catalog lists 1302 entries from the shared research manifest. English write-ups available: 1302.
 
 ## Browse by domain
 
-- [Search, ads, recommendation, and LLM applications](recommendation.md): 346 catalog entries, 346 English write-ups
-- [Foundation models](foundation-models.md): 270 catalog entries, 270 English write-ups
+- [Search, ads, recommendation, and LLM applications](recommendation.md): 348 catalog entries, 348 English write-ups
+- [Foundation models](foundation-models.md): 273 catalog entries, 273 English write-ups
 - [Structured decisions / System One](system-one.md): 10 catalog entries, 10 English write-ups
-- [Multimodal models](multimodal-models.md): 32 catalog entries, 32 English write-ups
-- [LLM post-training](post-training.md): 298 catalog entries, 298 English write-ups
-- [Agents](agent-research.md): 335 catalog entries, 335 English write-ups
+- [Multimodal models](multimodal-models.md): 33 catalog entries, 33 English write-ups
+- [LLM post-training](post-training.md): 301 catalog entries, 301 English write-ups
+- [Agents](agent-research.md): 337 catalog entries, 337 English write-ups
 
 ## Read in English
 
+- [RAP: Radial-Angular Random Projection for Hyperbolic Representations](../../foundation-models/2611.34298-rap/README-en.md)
+- [OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding](../../recommendation-components/2611.33653-onequery/README-en.md)
+- [Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models](../../foundation-models/2611.34830-jepa-eu/README-en.md)
+- [Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation](../../recommendation-components/2611.33628-camar/README-en.md)
+- [HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants](../../agent-research/2611.34624-home/README-en.md)
+- [Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory](../../agent-research/2611.33612-dualpm/README-en.md)
+- [FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning](../../post-training/2611.33827-feast/README-en.md)
+- [DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers](../../foundation-models/2611.33952-duomi/README-en.md)
+- [Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents](../../post-training/2611.34756-care-opd/README-en.md)
+- [BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees](../../post-training/2611.34746-briar/README-en.md)
+- [Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation](../../multimodal-models/2611.34907-agentic-longlive/README-en.md)
 - [fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration](../../agent-research/2611.31727-agent-kernel/README-en.md)
 - [Weight Scale Rebalancing: Transferable Training Recipes for Transformers](../../foundation-models/2611.32866-udvr/README-en.md)
 - [RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research](../../agent-research/2611.32508-recurscibench/README-en.md)

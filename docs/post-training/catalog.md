@@ -10,6 +10,9 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| reward-and-credit | [BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees](2611.34746-briar/README.md) | Jilin University，2026-11-25 | 未发现官方代码 | `briar`：仅低成本组件，完整实验不复现 |
+| teacher-and-context | [Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents](2611.34756-care-opd/README.md) | Shanghai Jiao Tong University，2026-11-25 | 未发现官方代码 | 计划键 `care-opd`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| data-and-budget | [FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning](2611.33827-feast/README.md) | Zhejiang University，2026-11-25 | 未发现官方代码 | `feast`：仅低成本组件，完整实验不复现 |
 | policy-optimization | [EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor](2611.32810-epro/README.md) | Northwestern University，2026-11-24 | [原作者入口](https://github.com/yibowangnwu/EPRO)；固定v1声称此作者仓库，但本轮git ls-remote返回Repository not found；公开方法源码未核实/未找到，不标记已开源。 | `epro`：仅低成本组件，完整实验不复现 |
 | preference-and-alignment | [Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences](2611.30135-shpo/README.md) | Jinan University，2026-11-23 | 未发现官方代码 | `shpo`：仅低成本组件，完整实验不复现 |
 | student-trajectory-distillation | [Verifiable On-Policy Distillation](2611.30325-vopd/README.md) | Stanford University，2026-11-23 | [原作者入口](https://github.com/juntongshi48/VOPD)；已核作者仓库，但固定提交仅README声明代码即将发布，方法源码尚未发布；不能标成可运行开源实现。 | `vopd`：仅低成本组件，完整实验不复现 |

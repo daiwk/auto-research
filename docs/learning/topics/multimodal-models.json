@@ -143,7 +143,9 @@
         "multimodal-models:autoregressive-view-model",
         "multimodal-models:jepa-dots",
         "foundation-models:mv-jepa",
-        "foundation-models:criticjepa"
+        "foundation-models:criticjepa",
+        "foundation-models:jepa-eu",
+        "multimodal-models:agentic-longlive"
       ]
     }
   ]

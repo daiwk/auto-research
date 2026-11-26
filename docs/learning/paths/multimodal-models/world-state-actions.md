@@ -7,7 +7,7 @@ hide:
 
 # 世界建模：状态、生成与动作条件
 
-[多模态](index.md) / 149 个问题 · 37 篇论文
+[多模态](index.md) / 157 个问题 · 39 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">149 个问题 · 37 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">157 个问题 · 39 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:jepa-eu" data-paper-title="Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models 基础模型 Fraunhofer Heinrich-Hertz-Institut 2026-11-25 冻结LeWM与DreamerV3后，在预测头最后线性层前的特征上拟合last-layer Laplace，并用五头ensemble对照。对物理状态做标准差尺度扰动再由模拟器重渲染，追踪各层相对位移；延长扰动持续K帧可分离GRU平均效应，按实体重建梯度与像素面积分析小物体效应。此处是实证诊断，不是已完成移除重建项/改变gate的因果消融，也不证明所有RSSM或JEPA都如此。 成本过高，不复现（审查 DONE），指完整论文实验矩阵；本地未执行训练、五项任务或控制成功率测量。没有本地模型实现、adapter、operator、运行命令、metrics或GPU回执。没有以通用Laplace公式或手工异常数组冒充本文多环境比较。这里只交付固定v1原文审查、图源与教学问答。  JEPA与世界模型 多模态 世界建模：状态、生成与动作条件 最后一层贝叶斯不确定性能看见任何输入异常吗？ 不能。它只读冻结特征；若前面的表示已把异常抹平，最后一层估计器也无法恢复该差异。 教学例：正常与异常帧被映射到同一psi时，二者s²严格相同，即使原始像素差异很大。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<span id="paper-foundation-models-jepa-eu-07f97930" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f13aafcd89a3ff18">最后一层贝叶斯不确定性能看见任何输入异常吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ajepa-eu">Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Fraunhofer Heinrich-Hertz-Institut</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它只读冻结特征；若前面的表示已把异常抹平，最后一层估计器也无法恢复该差异。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：正常与异常帧被映射到同一psi时，二者s²严格相同，即使原始像素差异很大。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34830v1">原论文</a> · <a href="../../../../foundation-models/2611.34830-jepa-eu/">实现解读</a> · <a href="#qa-f13aafcd89a3ff18">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:jepa-eu" data-paper-title="Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models 基础模型 Fraunhofer Heinrich-Hertz-Institut 2026-11-25 冻结LeWM与DreamerV3后，在预测头最后线性层前的特征上拟合last-layer Laplace，并用五头ensemble对照。对物理状态做标准差尺度扰动再由模拟器重渲染，追踪各层相对位移；延长扰动持续K帧可分离GRU平均效应，按实体重建梯度与像素面积分析小物体效应。此处是实证诊断，不是已完成移除重建项/改变gate的因果消融，也不证明所有RSSM或JEPA都如此。 成本过高，不复现（审查 DONE），指完整论文实验矩阵；本地未执行训练、五项任务或控制成功率测量。没有本地模型实现、adapter、operator、运行命令、metrics或GPU回执。没有以通用Laplace公式或手工异常数组冒充本文多环境比较。这里只交付固定v1原文审查、图源与教学问答。  JEPA与世界模型 多模态 世界建模：状态、生成与动作条件 为什么把同一扰动持续多帧能检验RSSM的时间平均？ GRU单步只接纳gate比例的新状态，持续K帧逐步累积；这改变进入feature的信号，不是换更强uncertainty head。 教学例：固定gate=.25的线性近似在1帧保留.25，持续4帧保留1−.75⁴≈.684；只是说明机制，不是本地世界模型实测。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-2ee2eeb87d7410e9">为什么把同一扰动持续多帧能检验RSSM的时间平均？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ajepa-eu">Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Fraunhofer Heinrich-Hertz-Institut</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>GRU单步只接纳gate比例的新状态，持续K帧逐步累积；这改变进入feature的信号，不是换更强uncertainty head。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：固定gate=.25的线性近似在1帧保留.25，持续4帧保留1−.75⁴≈.684；只是说明机制，不是本地世界模型实测。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34830v1">原论文</a> · <a href="../../../../foundation-models/2611.34830-jepa-eu/">实现解读</a> · <a href="#qa-2ee2eeb87d7410e9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:jepa-eu" data-paper-title="Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models 基础模型 Fraunhofer Heinrich-Hertz-Institut 2026-11-25 冻结LeWM与DreamerV3后，在预测头最后线性层前的特征上拟合last-layer Laplace，并用五头ensemble对照。对物理状态做标准差尺度扰动再由模拟器重渲染，追踪各层相对位移；延长扰动持续K帧可分离GRU平均效应，按实体重建梯度与像素面积分析小物体效应。此处是实证诊断，不是已完成移除重建项/改变gate的因果消融，也不证明所有RSSM或JEPA都如此。 成本过高，不复现（审查 DONE），指完整论文实验矩阵；本地未执行训练、五项任务或控制成功率测量。没有本地模型实现、adapter、operator、运行命令、metrics或GPU回执。没有以通用Laplace公式或手工异常数组冒充本文多环境比较。这里只交付固定v1原文审查、图源与教学问答。  JEPA与世界模型 多模态 世界建模：状态、生成与动作条件 比预测—规划评测多得到一个uncertainty指标，能跳过实际规划吗？ 不能。误差、不确定性与成功率不同。JEPA EU还需真实CEM评估，并且posterior读出虽可检测当前异常，却依赖不可用于想象未来的观察。 教学例：用真实下一帧的posterior把异常检出率提高，并不表示planner在执行前就拥有该信号。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-920c25de51c1f659">比预测—规划评测多得到一个uncertainty指标，能跳过实际规划吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ajepa-eu">Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Fraunhofer Heinrich-Hertz-Institut</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。误差、不确定性与成功率不同。JEPA EU还需真实CEM评估，并且posterior读出虽可检测当前异常，却依赖不可用于想象未来的观察。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：用真实下一帧的posterior把异常检出率提高，并不表示planner在执行前就拥有该信号。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34830v1">原论文</a> · <a href="../../../../foundation-models/2611.34830-jepa-eu/">实现解读</a> · <a href="#qa-920c25de51c1f659">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:jepa-eu" data-paper-title="Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models 基础模型 Fraunhofer Heinrich-Hertz-Institut 2026-11-25 冻结LeWM与DreamerV3后，在预测头最后线性层前的特征上拟合last-layer Laplace，并用五头ensemble对照。对物理状态做标准差尺度扰动再由模拟器重渲染，追踪各层相对位移；延长扰动持续K帧可分离GRU平均效应，按实体重建梯度与像素面积分析小物体效应。此处是实证诊断，不是已完成移除重建项/改变gate的因果消融，也不证明所有RSSM或JEPA都如此。 成本过高，不复现（审查 DONE），指完整论文实验矩阵；本地未执行训练、五项任务或控制成功率测量。没有本地模型实现、adapter、operator、运行命令、metrics或GPU回执。没有以通用Laplace公式或手工异常数组冒充本文多环境比较。这里只交付固定v1原文审查、图源与教学问答。  JEPA与世界模型 多模态 世界建模：状态、生成与动作条件 本地只算Laplace二次型能声称复现本文结论吗？ 不能。核心证据来自真实训练世界模型、可重渲染模拟器、逐层扰动追踪及五任务配对评测；完整矩阵已按成本终态不复现。 教学例：手工设正常psi=0、异常psi=1会保证分数不同，但那是把答案写进表示，无法证明JEPA优于RSSM。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-465599ed7886bda8">本地只算Laplace二次型能声称复现本文结论吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ajepa-eu">Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Fraunhofer Heinrich-Hertz-Institut</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。核心证据来自真实训练世界模型、可重渲染模拟器、逐层扰动追踪及五任务配对评测；完整矩阵已按成本终态不复现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：手工设正常psi=0、异常psi=1会保证分数不同，但那是把答案写进表示，无法证明JEPA优于RSSM。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34830v1">原论文</a> · <a href="../../../../foundation-models/2611.34830-jepa-eu/">实现解读</a> · <a href="#qa-465599ed7886bda8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:agentic-longlive" data-paper-title="Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation 多模态大模型 The Chinese University of Hong Kong (CUHK) 2026-11-25 实时视频不能提前读脚本、停流等agent或回滚已播放镜头。memory agent只读已揭示prompt而不读生成视频，避免把生成错误写回；维护实体文本/图像，组合长期全局图与每镜头图，由辅助GPU提前编码为attention-sink KV。边界只交换已完整prefill的最新版本；没准备好就用旧版本，不等正在绘制的图。图像首版可先commit，即使未通过检查；后续重画须通过且不降分才能替换。scene routing和实体文本卡只使用已揭示prompt。 完整系统成本过高，不复现（审查 DONE）；deferred_high_cost / 仅资料收录，未实现、未运行。deferred_high_cost / 仅资料收录，未实现、未运行。完整系统成本过高，不复现（审查 DONE）；无本地adapter、代码operator、运行命令、metrics或GPU回执，不进入重试/实现队列或Evolve。仅全文机制、时间、署名、开源状态、成本与同主题对照审查。无本地算法、LLM policy、视频generator、reward实现、训练、GPU执行或Evolve映射；不制造三seed数据/指标或回执。作者上游有CPU mock测试不等于完整视频能力，不运行它来绕过成本门槛。  视频生成 异步实体记忆 高成本审查 多模态 世界建模：状态、生成与动作条件 memory agent为什么不读生成视频纠错？ 主协议是开放环：只读已揭示prompt，避免把生成错误写回记忆；实时已播放镜头也不能回滚。读视频是另一种消融，不是主方法输入。 教学例：生成器画错外套颜色，主agent仍依据已揭示文本保留正确实体状态，而不是把错色学成真。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<span id="paper-multimodal-models-agentic-longlive-b111ba5e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f4c7dbe16a0b549e">memory agent为什么不读生成视频纠错？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aagentic-longlive">Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · The Chinese University of Hong Kong (CUHK)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>主协议是开放环：只读已揭示prompt，避免把生成错误写回记忆；实时已播放镜头也不能回滚。读视频是另一种消融，不是主方法输入。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：生成器画错外套颜色，主agent仍依据已揭示文本保留正确实体状态，而不是把错色学成真。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34907v1">原论文</a> · <a href="../../../../multimodal-models/2611.34907-agentic-longlive/">实现解读</a> · <a href="#qa-f4c7dbe16a0b549e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:agentic-longlive" data-paper-title="Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation 多模态大模型 The Chinese University of Hong Kong (CUHK) 2026-11-25 实时视频不能提前读脚本、停流等agent或回滚已播放镜头。memory agent只读已揭示prompt而不读生成视频，避免把生成错误写回；维护实体文本/图像，组合长期全局图与每镜头图，由辅助GPU提前编码为attention-sink KV。边界只交换已完整prefill的最新版本；没准备好就用旧版本，不等正在绘制的图。图像首版可先commit，即使未通过检查；后续重画须通过且不降分才能替换。scene routing和实体文本卡只使用已揭示prompt。 完整系统成本过高，不复现（审查 DONE）；deferred_high_cost / 仅资料收录，未实现、未运行。deferred_high_cost / 仅资料收录，未实现、未运行。完整系统成本过高，不复现（审查 DONE）；无本地adapter、代码operator、运行命令、metrics或GPU回执，不进入重试/实现队列或Evolve。仅全文机制、时间、署名、开源状态、成本与同主题对照审查。无本地算法、LLM policy、视频generator、reward实现、训练、GPU执行或Evolve映射；不制造三seed数据/指标或回执。作者上游有CPU mock测试不等于完整视频能力，不运行它来绕过成本门槛。  视频生成 异步实体记忆 高成本审查 多模态 世界建模：状态、生成与动作条件 用未来标注训练奖励会让planner提前知道下一镜头吗？ 按论文隔离不会。planner只见实体bank、最近四prompt和slot预算；未来脚本供训练scorer评价选择，不能进入policy输入。oracle-next-prompt只能是破坏在线约束的上界。 教学例：奖励可事后发现雨伞对第9镜头有用，但第8镜头policy不能读取第9条prompt来选雨伞。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-f2358ba5f213c20e">用未来标注训练奖励会让planner提前知道下一镜头吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aagentic-longlive">Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · The Chinese University of Hong Kong (CUHK)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>按论文隔离不会。planner只见实体bank、最近四prompt和slot预算；未来脚本供训练scorer评价选择，不能进入policy输入。oracle-next-prompt只能是破坏在线约束的上界。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：奖励可事后发现雨伞对第9镜头有用，但第8镜头policy不能读取第9条prompt来选雨伞。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34907v1">原论文</a> · <a href="../../../../multimodal-models/2611.34907-agentic-longlive/">实现解读</a> · <a href="#qa-f2358ba5f213c20e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:agentic-longlive" data-paper-title="Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation 多模态大模型 The Chinese University of Hong Kong (CUHK) 2026-11-25 实时视频不能提前读脚本、停流等agent或回滚已播放镜头。memory agent只读已揭示prompt而不读生成视频，避免把生成错误写回；维护实体文本/图像，组合长期全局图与每镜头图，由辅助GPU提前编码为attention-sink KV。边界只交换已完整prefill的最新版本；没准备好就用旧版本，不等正在绘制的图。图像首版可先commit，即使未通过检查；后续重画须通过且不降分才能替换。scene routing和实体文本卡只使用已揭示prompt。 完整系统成本过高，不复现（审查 DONE）；deferred_high_cost / 仅资料收录，未实现、未运行。deferred_high_cost / 仅资料收录，未实现、未运行。完整系统成本过高，不复现（审查 DONE）；无本地adapter、代码operator、运行命令、metrics或GPU回执，不进入重试/实现队列或Evolve。仅全文机制、时间、署名、开源状态、成本与同主题对照审查。无本地算法、LLM policy、视频generator、reward实现、训练、GPU执行或Evolve映射；不制造三seed数据/指标或回执。作者上游有CPU mock测试不等于完整视频能力，不运行它来绕过成本门槛。  视频生成 异步实体记忆 高成本审查 多模态 世界建模：状态、生成与动作条件 Agentic LongLive与PixVid都改善视频，修改的是同一层吗？ 不是。前者冻结已有生成器并增加记忆KV和边界交换；PixVid将latent DiT迁往像素表示并训练detailer。外部一致性记忆不等于去掉VAE。 教学例：同一个冻结latent生成器可接实体记忆；迁到像素DiT后仍需单独解决跨镜头实体记忆。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-704e250c6610c871">Agentic LongLive与PixVid都改善视频，修改的是同一层吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aagentic-longlive">Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · The Chinese University of Hong Kong (CUHK)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。前者冻结已有生成器并增加记忆KV和边界交换；PixVid将latent DiT迁往像素表示并训练detailer。外部一致性记忆不等于去掉VAE。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一个冻结latent生成器可接实体记忆；迁到像素DiT后仍需单独解决跨镜头实体记忆。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34907v1">原论文</a> · <a href="../../../../multimodal-models/2611.34907-agentic-longlive/">实现解读</a> · <a href="#qa-704e250c6610c871">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:agentic-longlive" data-paper-title="Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation 多模态大模型 The Chinese University of Hong Kong (CUHK) 2026-11-25 实时视频不能提前读脚本、停流等agent或回滚已播放镜头。memory agent只读已揭示prompt而不读生成视频，避免把生成错误写回；维护实体文本/图像，组合长期全局图与每镜头图，由辅助GPU提前编码为attention-sink KV。边界只交换已完整prefill的最新版本；没准备好就用旧版本，不等正在绘制的图。图像首版可先commit，即使未通过检查；后续重画须通过且不降分才能替换。scene routing和实体文本卡只使用已揭示prompt。 完整系统成本过高，不复现（审查 DONE）；deferred_high_cost / 仅资料收录，未实现、未运行。deferred_high_cost / 仅资料收录，未实现、未运行。完整系统成本过高，不复现（审查 DONE）；无本地adapter、代码operator、运行命令、metrics或GPU回执，不进入重试/实现队列或Evolve。仅全文机制、时间、署名、开源状态、成本与同主题对照审查。无本地算法、LLM policy、视频generator、reward实现、训练、GPU执行或Evolve映射；不制造三seed数据/指标或回执。作者上游有CPU mock测试不等于完整视频能力，不运行它来绕过成本门槛。  视频生成 异步实体记忆 高成本审查 多模态 世界建模：状态、生成与动作条件 约1%额外生成时间为什么不代表单卡可低成本复现？ agent和预填充在额外GPU并行，隐藏的是关键路径延迟而非总算力。六H100示意和8×B200节点已经超出单A100/A30预算，且还需35B/4B/8B服务及完整训练评测。 教学例：原生成器跑16秒时另外三GPU忙15秒，墙钟几乎不变，但GPU秒和下载量显著增加。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-bc69637ef7700761">约1%额外生成时间为什么不代表单卡可低成本复现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aagentic-longlive">Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · The Chinese University of Hong Kong (CUHK)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>agent和预填充在额外GPU并行，隐藏的是关键路径延迟而非总算力。六H100示意和8×B200节点已经超出单A100/A30预算，且还需35B/4B/8B服务及完整训练评测。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：原生成器跑16秒时另外三GPU忙15秒，墙钟几乎不变，但GPU秒和下载量显著增加。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34907v1">原论文</a> · <a href="../../../../multimodal-models/2611.34907-agentic-longlive/">实现解读</a> · <a href="#qa-bc69637ef7700761">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:criticjepa" data-paper-title="CriticJEPA: World Models Are Better Critics Than Optimizers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="CriticJEPA: World Models Are Better Critics Than Optimizers 基础模型 Tsinghua University 2026-11-24 对一个预测器找到更低的预测 cost，需要其梯度方向可靠；从一组好候选中挑更好的，只要求局部排序有信息。论文在冻结 H-JEPA 上观察到：长梯度搜索可继续降低预测 cost，但实际行动不再改善；同一预测器却能比较 goal-conditioned 提案。CriticJEPA 在每个时间层级训练 flow proposer，再用冻结 rollout 选择；只给提案做短的有锚精修，而不让无约束搜索承担整个规划。 成本过高，不复现（审查 DONE）。仅审查收录，无本地代码、无环境实跑、无 CPU/CUDA 机制代理、无本地成功率。此页与成本审查记录只保存来源、方法和高成本边界，不设 metrics 目录；论文表格不是本地测量，也不需要为此收录伪造 GPU receipt。  JEPA与世界模型 提案选择与有锚规划 多模态 世界建模：状态、生成与动作条件 能正确比较两个计划，就表示世界模型梯度能持续改进动作吗？ 不表示。排序仅需候选间相对评分有信息；优化需要沿局部梯度移动也改善真实执行。持续搜索还可能利用预测误差。 教学例：模型把安全绕行排在撞墙前，仍可能在绕行附近沿错误梯度把动作推向墙；该例说明逻辑差异，不是论文实测轨迹。 2026-11-25">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-criticjepa-1e87f1a4" class="ar-learning-paper-anchor"></span>

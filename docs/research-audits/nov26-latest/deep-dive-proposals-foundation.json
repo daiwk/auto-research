@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-26",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "foundation-models:rap",
+      "target_card": "foundation-models/context-and-state",
+      "source_revisions": {
+        "foundation-models:rap": "64ee21e21b476fe037a084b3c647e27e8d9526a00e2dc8373e8f8c6c248b1541",
+        "foundation-models:hvmap": "34c0f79eee9d1fe6fbc2b41e76c1c4671ba6a2346e8a290b93efb9b9ae044d9b"
+      },
+      "comparison": {
+        "position": "RAP在同一双曲空间中压缩维度，保持每点到指定原点的半径，只随机投影并归一化角方向；不拟合数据。",
+        "tradeoff": "HVMap学习异构编码器空间的配对映射并联合原生/映射分数；RAP不对齐不同编码器，也不能把不同曲率或原点的向量直接混用。二者解决的不是同一检索瓶颈，现有L1不支持语义检索收益比较。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "RAP: Radial-Angular Random Projection for Hyperbolic Representations",
+        "body": "HVMap学习异构编码器空间的配对映射并联合原生/映射分数；RAP不对齐不同编码器，也不能把不同曲率或原点的向量直接混用。二者解决的不是同一检索瓶颈，现有L1不支持语义检索收益比较。 对应 Eq11–12。非原点方向若落入投影核则不可归一化，必须拒绝；原点映射为目标原点。同射线距离精确保留；任意角度的距离并非无损。",
+        "papers": [
+          "foundation-models:rap",
+          "foundation-models:hvmap"
+        ]
+      },
+      "question": {
+        "id": "nov26-rap",
+        "question": "RAP能替代HVMap把不同编码器的向量库对齐吗？",
+        "answer": "不能。RAP压缩同一已定义双曲空间；HVMap从配对表示学习异构空间映射。保持原点半径不提供跨编码器语义对应。",
+        "example": "教学例：编码器A与B把同一物体置于不同方向，即使两边半径都保持，角向量也不会自动对齐。",
+        "papers": [
+          "foundation-models:rap",
+          "foundation-models:hvmap"
+        ]
+      },
+      "update": {
+        "date": "2026-11-26",
+        "papers": [
+          "foundation-models:rap",
+          "foundation-models:hvmap"
+        ],
+        "source_revisions": {
+          "foundation-models:rap": "64ee21e21b476fe037a084b3c647e27e8d9526a00e2dc8373e8f8c6c248b1541",
+          "foundation-models:hvmap": "34c0f79eee9d1fe6fbc2b41e76c1c4671ba6a2346e8a290b93efb9b9ae044d9b"
+        },
+        "summary": "HVMap学习异构编码器空间的配对映射并联合原生/映射分数；RAP不对齐不同编码器，也不能把不同曲率或原点的向量直接混用。二者解决的不是同一检索瓶颈，现有L1不支持语义检索收益比较。 本轮组件范围闭环；完整矩阵未执行且未认定高成本。"
+      },
+      "english": {
+        "comparison": {
+          "position": "RAP reduces dimension within a hyperbolic geometry, preserving distance to a designated origin and projecting only the normalized angular direction without fitting data.",
+          "tradeoff": "HVMap learns paired mappings between heterogeneous encoder spaces and combines native/mapped scores. RAP does not align encoders or permit mixing arbitrary curvatures or origins. Their L1 components do not establish comparative semantic retrieval gains."
+        },
+        "analysis": {
+          "title": "RAP: Radial-Angular Random Projection for Hyperbolic Representations",
+          "body": "HVMap learns paired mappings between heterogeneous encoder spaces and combines native/mapped scores. RAP does not align encoders or permit mixing arbitrary curvatures or origins. Their L1 components do not establish comparative semantic retrieval gains. These are Eq.11–12. Reject a non-origin direction in the projection kernel; map the origin to the target origin. Same-ray distances are exact, but arbitrary pairwise distances are not lossless."
+        },
+        "question": {
+          "question": "Can RAP replace HVMap for cross-encoder alignment?",
+          "answer": "No. RAP compresses one defined hyperbolic space; HVMap learns paired mappings between heterogeneous spaces. Radial preservation provides no semantic correspondence.",
+          "example": "Illustration:if two encoders place an object in different directions, preserving their radii does not align those directions."
+        },
+        "update": "HVMap learns paired mappings between heterogeneous encoder spaces and combines native/mapped scores. RAP does not align encoders or permit mixing arbitrary curvatures or origins. Their L1 components do not establish comparative semantic retrieval gains. The component scope is complete; the full matrix was not run and is not labeled high-cost."
+      }
+    },
+    {
+      "paper": "foundation-models:duomi",
+      "target_card": "foundation-models/compression-and-cache",
+      "source_revisions": {
+        "foundation-models:duomi": "4275d915a8f5ae6311fbfc05ebf3c4639a85d8a1761deda8f9cabdde036f7033",
+        "foundation-models:echomoe": "a939116286b19789b759c661c55b55fd02d367f882fe538d9d11251e867f42b9"
+      },
+      "comparison": {
+        "position": "DuoMI按相同token在两轮的全部expert软路由计算两种互信息：聚合使用对齐与逐token变化区间，训练时约束共享expert池的实际复用。",
+        "tradeoff": "EchoMoE复用跨层激活参考并压缩通信变化量；DuoMI共享expert参数并约束路由。前者的reference不是后者的expert池，减少通信和改变专家复用不是可交换收益；小张量反传不代表语言模型提升。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers",
+        "body": "EchoMoE复用跨层激活参考并压缩通信变化量；DuoMI共享expert参数并约束路由。前者的reference不是后者的expert池，减少通信和改变专家复用不是可交换收益；小张量反传不代表语言模型提升。 每组8条序列；先逐group、逐pool计算阈值罚项，再平均。默认tau=1、g_max=.02 bits、D区间[.05,.30] bits、三个权重均.1。D是平均JSD，soft D不是Top-k替换比例；只有均匀硬Top-k分布才有D=1−retention。基础语言、负载均衡与z-loss保持原配置。",
+        "papers": [
+          "foundation-models:duomi",
+          "foundation-models:echomoe"
+        ]
+      },
+      "question": {
+        "id": "nov26-duomi",
+        "question": "DuoMI和EchoMoE里的跨层复用是同一种东西吗？",
+        "answer": "不是。DuoMI约束共享FFN池的router选择；EchoMoE复用激活reference并压缩差值通信。",
+        "example": "教学例：同一个expert可被两轮选择，但两轮激活差值仍很大；专家复用率不能替代通信字节测量。",
+        "papers": [
+          "foundation-models:duomi",
+          "foundation-models:echomoe"
+        ]
+      },
+      "update": {
+        "date": "2026-11-26",
+        "papers": [
+          "foundation-models:duomi",
+          "foundation-models:echomoe"
+        ],
+        "source_revisions": {
+          "foundation-models:duomi": "4275d915a8f5ae6311fbfc05ebf3c4639a85d8a1761deda8f9cabdde036f7033",
+          "foundation-models:echomoe": "a939116286b19789b759c661c55b55fd02d367f882fe538d9d11251e867f42b9"
+        },
+        "summary": "EchoMoE复用跨层激活参考并压缩通信变化量；DuoMI共享expert参数并约束路由。前者的reference不是后者的expert池，减少通信和改变专家复用不是可交换收益；小张量反传不代表语言模型提升。 完整矩阵高成本终态，不以L1或审查充当能力证据。"
+      },
+      "english": {
+        "comparison": {
+          "position": "DuoMI regulates realized expert reuse using aggregate alignment and a token-level change band computed from all-expert soft routing at aligned positions in two rounds.",
+          "tradeoff": "EchoMoE reuses activation references and compresses communication deltas; DuoMI shares expert parameters and regularizes routing. A reference is not an expert pool. Communication reduction and routing reuse are different benefits, and tensor gradients establish no language-model gain."
+        },
+        "analysis": {
+          "title": "DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers",
+          "body": "EchoMoE reuses activation references and compresses communication deltas; DuoMI shares expert parameters and regularizes routing. A reference is not an expert pool. Communication reduction and routing reuse are different benefits, and tensor gradients establish no language-model gain. Each group has eight sequences. Apply thresholds per group and pool before averaging. Defaults:tau=1,g_max=.02bits,D-band[.05,.30]bits,and weights.1. Soft D is not the Top-k replacement fraction; D=1-retention holds only for uniform hard Top-k distributions. The language, load-balancing and z-loss objectives retain their baseline coefficients."
+        },
+        "question": {
+          "question": "Is cross-layer reuse the same in DuoMI and EchoMoE?",
+          "answer": "No. DuoMI regulates shared-FFN routing; EchoMoE reuses activation references and compresses communication deltas.",
+          "example": "Illustration:the same expert may process very different activations in two rounds, so expert retention cannot substitute for communication bytes."
+        },
+        "update": "EchoMoE reuses activation references and compresses communication deltas; DuoMI shares expert parameters and regularizes routing. A reference is not an expert pool. Communication reduction and routing reuse are different benefits, and tensor gradients establish no language-model gain. Complete matrices are terminally cost-deferred; L1 or review is not capability evidence."
+      }
+    },
+    {
+      "paper": "foundation-models:jepa-eu",
+      "target_card": "multimodal-models/world-state-actions",
+      "source_revisions": {
+        "foundation-models:jepa-eu": "3a4cd54f9a6999d1a8faa0dbacc14e25f33e3d566ac69eb11423c40634110943",
+        "foundation-models:jepa-prediction-planning": "754eb348792674a6a8916439d927bc1f9895d8166a55b1cc9da92c1b44248778"
+      },
+      "comparison": {
+        "position": "JEPA EU沿模拟器状态到像素、encoder、预测特征及post-hoc uncertainty逐层追踪扰动，区分RSSM的GRU时间平均与重建目标实体像素权重。",
+        "tradeoff": "预测—规划评测拆表示误差、预测误差和环境成功；JEPA EU分析不确定性在何层丢失。低一步误差、敏感uncertainty及更好规划是不同证据。观测posterior head可恢复当前帧异常信号，但不能用于没有未来观察的imagined rollout。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models",
+        "body": "预测—规划评测拆表示误差、预测误差和环境成功；JEPA EU分析不确定性在何层丢失。低一步误差、敏感uncertainty及更好规划是不同证据。观测posterior head可恢复当前帧异常信号，但不能用于没有未来观察的imagined rollout。 Laplace只依赖输入特征：若扰动在前面被消掉，换最后读出也看不见。RSSM GRU把单帧扰动按gate缩放，持续扰动才累积；重建目标按像素贡献优化。posterior需观察帧，不可当作规划时可用的prior特征。",
+        "papers": [
+          "foundation-models:jepa-eu",
+          "foundation-models:jepa-prediction-planning"
+        ]
+      },
+      "question": {
+        "id": "nov26-jepa-eu",
+        "question": "比预测—规划评测多得到一个uncertainty指标，能跳过实际规划吗？",
+        "answer": "不能。误差、不确定性与成功率不同。JEPA EU还需真实CEM评估，并且posterior读出虽可检测当前异常，却依赖不可用于想象未来的观察。",
+        "example": "教学例：用真实下一帧的posterior把异常检出率提高，并不表示planner在执行前就拥有该信号。",
+        "papers": [
+          "foundation-models:jepa-eu",
+          "foundation-models:jepa-prediction-planning"
+        ]
+      },
+      "update": {
+        "date": "2026-11-26",
+        "papers": [
+          "foundation-models:jepa-eu",
+          "foundation-models:jepa-prediction-planning"
+        ],
+        "source_revisions": {
+          "foundation-models:jepa-eu": "3a4cd54f9a6999d1a8faa0dbacc14e25f33e3d566ac69eb11423c40634110943",
+          "foundation-models:jepa-prediction-planning": "754eb348792674a6a8916439d927bc1f9895d8166a55b1cc9da92c1b44248778"
+        },
+        "summary": "预测—规划评测拆表示误差、预测误差和环境成功；JEPA EU分析不确定性在何层丢失。低一步误差、敏感uncertainty及更好规划是不同证据。观测posterior head可恢复当前帧异常信号，但不能用于没有未来观察的imagined rollout。 完整矩阵高成本终态，不以L1或审查充当能力证据。"
+      },
+      "english": {
+        "comparison": {
+          "position": "JEPA EU traces simulator-state perturbations through pixels, encoder, predictor features and post-hoc uncertainty, separating recurrent averaging from reconstruction-based entity weighting.",
+          "tradeoff": "Prediction-planning evaluation separates representation error, prediction error and execution. JEPA EU asks where uncertainty loses a perturbation. Low error, responsive uncertainty and planning success are different evidence. A posterior head observes the current frame and cannot replace a prior head in imagined rollout."
+        },
+        "analysis": {
+          "title": "Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models",
+          "body": "Prediction-planning evaluation separates representation error, prediction error and execution. JEPA EU asks where uncertainty loses a perturbation. Low error, responsive uncertainty and planning success are different evidence. A posterior head observes the current frame and cannot replace a prior head in imagined rollout. A Laplace readout only sees its feature: a perturbation erased upstream cannot be recovered by changing that readout. The RSSM GRU admits a one-frame change through its gate and accumulates persistent changes; reconstruction allocates signal by pixels. The observation-dependent posterior feature is unavailable during imagination."
+        },
+        "question": {
+          "question": "Does adding uncertainty remove the need for real planning evaluation?",
+          "answer": "No. Error,uncertainty and success differ. JEPA EU also evaluates CEM; a posterior readout can detect observed anomalies but requires observations absent in imagined futures.",
+          "example": "Illustration:detecting an anomaly with the actual next-frame posterior does not make that signal available before the action."
+        },
+        "update": "Prediction-planning evaluation separates representation error, prediction error and execution. JEPA EU asks where uncertainty loses a perturbation. Low error, responsive uncertainty and planning success are different evidence. A posterior head observes the current frame and cannot replace a prior head in imagined rollout. Complete matrices are terminally cost-deferred; L1 or review is not capability evidence."
+      }
+    }
+  ]
+}

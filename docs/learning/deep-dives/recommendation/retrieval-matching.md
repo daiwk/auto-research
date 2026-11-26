@@ -7,7 +7,7 @@ hide:
 
 # 召回覆盖从哪里来：用户表示、正例组织与负例难度
 
-[搜广推](../index.md) · 更新 2026-11-25 · 42 篇主题资料 / 10 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-26 · 43 篇主题资料 / 11 篇重点对照
 
 候选生成先决定后续排序能看见什么。YouTube DNN说明单用户向量如何进入近邻检索，Airbnb EBR把监督放回搜索—浏览—预订旅程，MIMA让同请求多正例分配给互补兴趣，MDCNS改变负例的难度与多视角监督。这四种改动分别作用于表示、标签、兴趣分工和梯度，不能用召回数变大统一解释。
 
@@ -35,6 +35,7 @@ hide:
 | [IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu](../../../recommendation-components/2611.20448-intentflow/README.md) · [原始来源](https://arxiv.org/abs/2611.20448v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | 相同图片上的找同款、找搭配和问使用信息需要不同证据，纯视觉相似性不足。IntentFlow将意图层级、可验证三档相关性、agentic数据构造、多模态检索和意图条件重排统一起来。索引固定后只在查询侧进行高层LoRA与六专家残差投影，避免全库重算。 | WeSearch用簇限制候选并原子匹配；IntentFlow先定义请求满足所需证据，再让查询编码适配固定文档空间。一个侧重候选组织，一个侧重意图监督与查询表示，均不能仅凭组件前后向推断线上收益。 |
 | [From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation](../../../recommendation-components/2611.26096-lser-serving/README.md) · [原始来源](https://arxiv.org/abs/2611.26096v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | LSER在双塔召回的用户侧融合会话、较长期历史、请求特征与可选LLM语义向量。较重encoder异步nearline计算，在线请求只读取已完成向量并融合/ANN检索。LLM路径并不替代BERT4Rec式encoder，而提供同一时间窗口的补充语义视角。 | YouTube DNN把聚合观看历史与上下文经非线性用户塔变成召回向量，训练为下一次观看分类；LSER显式区分session/history序列encoder，并可加入LLM辅助语义向量与nearline刷新。两者都能以用户向量查询离线item索引，差异是表征和更新合同，不是把ANN改为LLM逐token生成。原文线上对照是规则引擎，不是YouTube DNN；本地接口不提供两者质量胜负。 |
 | [LARF: Learning-aligned Reasoning Framework for Search Relevance](../../../recommendation-components/2611.32125-larf/README.md) · [原始来源](https://arxiv.org/abs/2611.32125v1)<br>章节：核心公式、与已有方法的关系、论文离线与线上效果、结果、负控与边界 | 五维ordinal相关性奖励、同query文档PNR与terminal六digit margin，再以训练期生成监督辅助五分类head；本地仅CPU reward/目标及logit梯度，不构造CoT或运行网络。 | Yuanbao Rubric以query特定标准统一检索、排序与集合选择；LARF把训练信号落到单文档五维等级和terminal决策。PNR有序pair不等于跨文档rubric覆盖，dual-head联合目标也不是蒸馏组内最佳轨迹；线上链路和指标不能相加。 |
+| [OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding](../../../recommendation-components/2611.33653-onequery/README.md) · [原始来源](https://arxiv.org/abs/2611.33653v1)<br>章节：与已有方法的关系、结果、负控与边界 | 本地只执行Eq5–13的reward、优势和clipping算术。QT输入为显式tuple列表，不发明私有标注串的parser；无效schema直接拒绝，不猜造格式reward。空串对空串编辑相似度取1、sigma采用总体标准差、delta=1e-8是显式边界约定。没有语言模型、schema约束解码、部分标注补齐、SFT、GRPO参数训练、蒸馏或服务；gold只作为reward计算输入，不存在读取gold的Agent。 | LARF把单文档相关性建成五维ordinal标签，并使用PNR、规则反馈和terminal digit margin；OneQuery监督的是同一query的四个异构结构字段。OneQuery的QT reward是完整集合exact match，不能换成LARF的分级距离或文档间有序pair。LARF训练期生成head/服务分类head也不等于OneQuery的头部缓存/尾部蒸馏。两篇作者线上指标不可直接比较。 |
 
 </div>
 
@@ -87,6 +88,12 @@ YouTube DNN把聚合观看历史与上下文经非线性用户塔变成召回向
 LARF Eq.3–5排除gold tie，把predicted tie计半分，再按组规模缩放有序一致性；Yuanbao Rubric允许多个文档共同覆盖正标准、任一文档触发负标准。LARF Eq.8–10对所有非gold六digit取最强竞争者，不只相邻等级；其Eq.12在训练保留生成head，服务时才删除。Gold-conditioned CoT仅是训练target构造，不能转化为评测Agent可见gold。两篇生产A/B的真实对照均有价值，但HSR/LSR与GSB不是同一指标，LARF8B离线50.98也不属于1.7B部署学生。
 
 对照来源：[larf](../../../recommendation-components/2611.32125-larf/README.md) · [yuanbao-rubric](../../../recommendation-components/2611.22503-yuanbao-rubric/README.md)
+
+### OneQuery的QT reward能换成LARF的ordinal距离吗？
+
+LARF把单文档相关性建成五维ordinal标签，并使用PNR、规则反馈和terminal digit margin；OneQuery监督的是同一query的四个异构结构字段。OneQuery的QT reward是完整集合exact match，不能换成LARF的分级距离或文档间有序pair。LARF训练期生成head/服务分类head也不等于OneQuery的头部缓存/尾部蒸馏。两篇作者线上指标不可直接比较。
+
+对照来源：[onequery](../../../recommendation-components/2611.33653-onequery/README.md) · [larf](../../../recommendation-components/2611.32125-larf/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -172,9 +179,23 @@ LARF Eq.3–5排除gold tie，把predicted tie计半分，再按组规模缩放�
 
     对照来源：[larf](../../../recommendation-components/2611.32125-larf/README.md) · [yuanbao-rubric](../../../recommendation-components/2611.22503-yuanbao-rubric/README.md)
 
+### OneQuery的QT reward能换成LARF的ordinal距离吗？ {#cross-nov26-onequery}
+
+??? note "展开答案与例子"
+
+    **答案：** LARF把单文档相关性建成五维ordinal标签，并使用PNR、规则反馈和terminal digit margin；OneQuery监督的是同一query的四个异构结构字段。OneQuery的QT reward是完整集合exact match，不能换成LARF的分级距离或文档间有序pair。LARF训练期生成head/服务分类head也不等于OneQuery的头部缓存/尾部蒸馏。两篇作者线上指标不可直接比较。
+
+    **教学例子：** 教学例：参考含brand和product，少一个字段时QT reward=0；不能按匹配了一半给0.5，或按等级距离衰减。
+
+    对照来源：[onequery](../../../recommendation-components/2611.33653-onequery/README.md) · [larf](../../../recommendation-components/2611.32125-larf/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-26** · 本地只执行Eq5–13的reward、优势和clipping算术。QT输入为显式tuple列表，不发明私有标注串的parser；无效schema直接拒绝，不猜造格式reward。空串对空串编辑相似度取1、sigma采用总体标准差、delta=1e-8是显式边界约定。没有语言模型、schema约束解码、部分标注补齐、SFT、GRPO参数训练、蒸馏或服务；gold只作为reward计算输入，不存在读取gold的Agent。
+
+涉及：[onequery](../../../recommendation-components/2611.33653-onequery/README.md) · [larf](../../../recommendation-components/2611.32125-larf/README.md)
 
 **2026-11-25** · 实际重读Yuanbao Rubric当前README与LARF固定v1全文，补充单文档ordinal/PNR/terminal监督和多文档rubric集合效用的界线，并分开训练期gold构造、生成head训练、仅分类服务及8B/1.7B指标。LARF仅CPU公式组件；64H20私有完整流程成本过高不复现，审查DONE。
 
@@ -208,7 +229,7 @@ LARF Eq.3–5排除gold tie，把predicted tie计半分，再按组规模缩放�
 
 覆盖 36 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 42 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 43 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -254,6 +275,7 @@ LARF Eq.3–5排除gold tie，把predicted tie计半分，再按组规模缩放�
 - [IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu](../../../recommendation-components/2611.20448-intentflow/README.md)
 - [From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation](../../../recommendation-components/2611.26096-lser-serving/README.md)
 - [LARF: Learning-aligned Reasoning Framework for Search Relevance](../../../recommendation-components/2611.32125-larf/README.md)
+- [OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding](../../../recommendation-components/2611.33653-onequery/README.md)
 
 </details>
 

@@ -249,6 +249,10 @@
 
 - 2026-09-09 · 一作：Naibin Gu · [CompassOPD: Cross-Family On-Policy Distillation via Within-Family Likelihood Shifts](../2609.10154-compass-opd/README.md)（`compass-opd`）：异构教师与学生的绝对概率刻度不可直接比较。CompassOPD 用教师相对其 reference 的后训练变化作“指南针”，并在模型族内中心化，保留方向而消除不同模型族的整体偏置。
 
+## Jilin University
+
+- 2026-11-25 · 一作：Tianyi Yang · [BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees](../2611.34746-briar/README.md)（`briar`）：终局正确率不能告诉训练器哪一步值得继续分支，也不能区分必要推导和答案确定后的反复检查。BRIAR以prefix成功概率的martingale结构连接三个组件：用结果分歧和置信奖励选探索前沿；以边界调制方差做树上全局LMMSE信用；仅在吸收前沿之后对正确续写的长度做零和比较。
+
 ## Jinan University
 
 - 2026-11-23 · 一作：Yiming Liu · [Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences](../2611.30135-shpo/README.md)（`shpo`）：DPO把偏好写成response标量势之差，围绕三角形相加为零，不能表示A胜B、B胜C、C胜A的局部环。SHPO保留DPO项，再把response最后层hidden仅在response token上均值池化，经无bias W投影到2K维并归一化；每个二维plane的有向面积乘γ后相加，构造交换两回答即反号的残差。
@@ -515,6 +519,7 @@
 
 ## Shanghai Jiao Tong University
 
+- 2026-11-25 · 一作：Haowen Hou · [Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents](../2611.34756-care-opd/README.md)（`care-opd`）：prefix replay让当前学生从已保存历史生成一轮响应，再由教师监督，从训练关键路径中移走长环境交互；但教师独有历史可能漏掉学生造成的状态，且固定早轮偏好会漏掉晚期诊断。CARE-OPD以少量学生roll-in再由教师完成来扩历史，用教师在新学生响应上的置信门过滤更新，并让已完成轨迹中的执行反馈支持回放turn选择。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-10-22 · 一作：Shijie Li · [GIFT: Gradient Informed Filtering for Distillation Augmented Reasoning RL](../2610.30796-gift/README.md)（`gift`）：终局正确性驱动的 RL 梯度与教师模仿梯度可能相冲突。GIFT 在原始词表 logits 空间分解两者：先最少纳入冲突 token，再优先保留提供正交新方向的教师监督；训练逐步缩减被蒸馏的 token 数量，保留项的强度不稀释。
 - 2026-10-16 · 一作：Yushu Wang · [GR-OPD: Group-Relative Sequence Credit for On-Policy Distillation](../2610.23042-gr-opd/README.md)（`gr-opd`）：教师在每个 token 上更自信，不一定意味着整段推理更值得复制；教师与学生的推理模式不同还可能造成训练崩溃。GR-OPD 在学生轨迹上重放教师，把 log-prob 差聚合为序列分数，在同题回答之间分配相对信用；保留一部分组均值压力，以免纯中心化抹掉教师总体偏好，然后使用 clipped PPO 更新。
 - 2026-10-15 · 一作：Feiyang Chen · [Learning from Unverified Peers via Shared Residual Distillation](../2610.22080-shared-residual-distillation/README.md)（`shared-residual-distillation`）：没有标准答案或可验证 reward 时，整段错误解答也可能包含有用步骤。SRD 不投票选“正确答案”，而比较同题 peers 相对跨题 control 对 token 分布的改变，只接收多位 peer 共同支持的保守残差。
@@ -819,6 +824,7 @@
 
 ## Zhejiang University
 
+- 2026-11-25 · 一作：Yongxi Zhu · [FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning](../2611.33827-feast/README.md)（`feast`）：只追逐当前高学习信号会形成反馈环：弱能力因过去分配不足而表现差，又因此拿不到新经验。FEAST将学习机会与计算分配分开：固定atomic unit保存历史，当前策略表示和学习趋势只改变簇归属；选中簇先保留独立预算，随后才在各簇内按reward方差逐轮晋级prompt。
 - 2026-11-18 · 一作：Haoran Xu · [VisAlloc: Allocating Visual Supervision for On-Policy Self-Distillation](../2611.25069-visalloc/README.md)（`visalloc`）：VisAlloc把视觉监督分成固定样本筛选和在线token分配。先用几何匹配的正/负裁剪，保留正教师答对、负教师答错且注释质量合格的样本；该筛选发生在优化前。
 - 2026-10-16 · 一作：Kai Tang · [SimOPD: Relational Knowledge Transfer for On-Policy Distillation](../2610.23306-simopd/README.md)（`simopd`）：概率蒸馏只利用输出分布，直接匹配隐状态又要求学生迁就教师的坐标和维数。SimOPD 改为比较回答之间的关系：两模型分别编码同一批学生回答，在自己的空间里计算“当前回答与历史回答有多像”，再匹配这两个相似度分布。
 - 2026-10-15 · 一作：Licheng Pan · [CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF](../2610.21138-clean-rm/README.md)（`clean-rm`）：不同偏好样本的标注噪声不一定相同。CleanRM 用少量干净反馈校准两个方向的样本级噪声率；以语义与恢复偏好的**联合分布**作最优传输，而不是只匹配偏好直方图。

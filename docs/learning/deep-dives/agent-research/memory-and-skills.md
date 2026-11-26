@@ -7,7 +7,7 @@ hide:
 
 # 经验进入长期系统前，要解决存取、价值与准入
 
-[Agent](../index.md) · 更新 2026-11-21 · 66 篇主题资料 / 17 篇重点对照
+[Agent](../index.md) · 更新 2026-11-26 · 67 篇主题资料 / 18 篇重点对照
 
 MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，CMP 管效用如何识别；Voyager 把成功程序变技能，VaG 管技能进入库的风险，SkillRise 用后续任务检验整理价值。存得下、相关、合法和能帮助未来，是四个不同问题。 EMMA再把结构化记忆分配给controller、agent与skill，按失败scope限制单次编辑及下一次实际使用义务。
 
@@ -42,6 +42,7 @@ MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，C
 | [Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents](../../../agent-research/2611.25123-grepmem/README.md) · [原始来源](https://arxiv.org/abs/2611.25123v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | GrepMem把有限工作上下文和完整历史分开：压缩时只把活跃上下文换成系统提示、任务与摘要，原始消息、工具调用/输出和摘要仍追加到纯文本日志。第一次压缩之后才开放grep_history，让模型按需用大小写不敏感正则取回遗漏细节。不需要embedding、索引或知识抽取，但“lossless”只指原日志保留，不代表模型每次都能找对或答对。 | MemGPT以分层内存、page-out/page-in与模型工具调用管理归档；GrepMem不预先抽取归档结构，保留原始轨迹并做词法搜索。两者都可压缩工作上下文，但GrepMem没有减少原始日志占盘；模型是否会选对检索词仍需训练与真实任务评价，本地固定key的旧MemGPT诊断也不能作能力对照。 |
 | [MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management](../../../agent-research/2611.26427-memfolder/README.md) · [原始来源](https://arxiv.org/abs/2611.26427v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验 | MemFolder把记录数和取回上下文长度分开处理。RecordFolder先用LLM统一实体，再以密度峰选首锚点、以相对已有锚点的novelty渐进选互补锚点；语义/实体亲和与时间链修正分组，最后由LLM按时间合并。ContextFolder沿用这些分组，按事实重要性和token比例编码，通过看不到源记录和预期答案的blind reader检查可恢复性。分组不是摘要生成，校验也不是无损保证。 | MemForest按事件构建最大生成树并渐进合并，检索时从anchor传播到时间邻域；MemFolder先以全局互补锚点确定目标组数，再用实体/语义gain和Hungarian非分支时间链修正组，并另加独立的ContextFolder编码层。二者都保留结构，但树形层次与一入一出的链不等价。现有本地MemForest用词项重叠近似语义，本地MemFolder只收显式embedding，因此不能凭两者单测数值宣称谁的模型记忆更好。 |
 | [MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories](../../../agent-research/2609.40195-memlife/README.md) · [原始来源](https://arxiv.org/abs/2609.40195v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验 | MemLife先把每段第一视角视频和语音写成有时间锚点、实体落地的第一人称文本，再由reader按问题进行语义搜索和时间区间读取。MemOpt只训练writer，reader保持冻结；FIRM将逐token的faithfulness、逐候选的informativeness和retrievability相乘。前者看源视频是否支持内容，后两者分别看回答所需事实是否被保留、已缓存reader动作能否找回该候选，不把完整reader成败混成一个写入奖励。 | MemFolder主要改变已有记忆如何分组、合并与编码，MemOpt则改变writer生成什么文本以及如何分配训练credit；前者的结构压缩和后者的写入奖励不互相替代。MemFolder的ContextFolder blind reader看不到源记录/预期答案；MemOpt训练评审可用源视频和训练问答，但这些信息不得流向被评测reader。二者本地都是L1数学组件，不能把分组数或优势方差当QA准确率比较。 |
+| [Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory](../../../agent-research/2611.33612-dualpm/README.md) · [原始来源](https://arxiv.org/abs/2611.33612v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、同主题比较与边界、完整实验与成本决定 | DualPM有损归纳成功与失败程序经验，块内冻结、块后独立维护两池，整池进入下一块；本地只验证L0回调/来源合同，不声称LLM记忆质量。 | GrepMem保留完整原始轨迹并在压缩后按需词法检索；DualPM不检索、保留的是概括规则。原日志无损、程序经验容量受限与未来行为改善是三个不同命题。 |
 
 </div>
 
@@ -124,6 +125,12 @@ grep按原始记录头与行号返回最早匹配，默认10条、最多30条，
 Eq.11先对每个候选的response token求均值，再对候选做宏平均，避免长记忆独占基线。方差是每个候选围绕同一group均值的token偏差平方再宏平均，不能改成候选内部方差，否则丢掉informativeness/retrievability的候选间信号。Eq.12归一化后先clip到±3，再按组中有效response token加权重心化，最后全局masked whitening；prompt和padding始终排除。KL属于Eq.16 loss项，不进入FIRM奖励或优势统计。训练reward可用训练问答，问题独立的writer与被评测reader不可读测试答案。长度不等候选构造宏均值0.5而token池均值0.25，检验group方差0.25而非候选内方差0；稀疏离群值检验clip后重心化。有效response奖励限定[0,1]；极大有限padding先归零，有限输入的ratio乘advantage或KL项溢出也明确拒绝，不能输出inf或把溢出方差伪装成零优势。负控还包括全平group、空候选/padding、无效概率、KL只影响独立loss、不改变奖励、严格未来片段和其他subject在检索前排除、恰好query_time的片段可用。所有输入是合成显式控制值，没有任何gold QA或视频内容输入reader；通过率不是长视频QA能力。
 
 对照来源：[memlife](../../../agent-research/2609.40195-memlife/README.md) · [memfolder](../../../agent-research/2611.26427-memfolder/README.md)
+
+### 保留原始证据与抽象经验不能互相证明
+
+DualPM局部极性不等于整轨迹标签，两次episode模型调用后每极性独立维护。冻结block保证同块无提前暴露，来源引用只是可追踪的模型声称而不是语义真实性。GrepMem的原日志与分页grep能找回摘要遗漏，但不能证明模型会检索或使用；DualPM的可迁移规则可能有效也可能错误推广。本地受控callbacks只证明L0不可变与原子合同，不是L1记忆策略或胜率；完整API矩阵成本过高终态不复现。
+
+对照来源：[dualpm](../../../agent-research/2611.33612-dualpm/README.md) · [grepmem](../../../agent-research/2611.25123-grepmem/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -269,9 +276,23 @@ Eq.11先对每个候选的response token求均值，再对候选做宏平均，�
 
     对照来源：[memlife](../../../agent-research/2609.40195-memlife/README.md) · [memfolder](../../../agent-research/2611.26427-memfolder/README.md)
 
+### DualPM容量受限是否比GrepMem更无损？ {#cross-cross-nov26-dualpm}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是同一目标。GrepMem保留原始轨迹以便grep；DualPM压缩为可迁移程序经验并可能丢掉细节。bounded memory既不保证原始细节恢复，也不证明经验有效。
+
+    **教学例子：** 教学例：原始订单号可留在GrepMem日志；DualPM可能只保留先解析订单ID再操作的程序规则。
+
+    对照来源：[dualpm](../../../agent-research/2611.33612-dualpm/README.md) · [grepmem](../../../agent-research/2611.25123-grepmem/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-26** · 仅L0：冻结block记忆、可见episode的reflect→draft实际typed callbacks、两极性独立维护回调、d/m/e与call-local引用校验、原子两池提交和重放拒绝。没有LLM、agent/runtime、语义grounding或记忆收益；fixture经验文本只验证接口，不是L1策略能力。 完整高成本campaign终态不复现，审查DONE。
+
+涉及：[dualpm](../../../agent-research/2611.33612-dualpm/README.md) · [grepmem](../../../agent-research/2611.25123-grepmem/README.md)
 
 **2026-11-21** · 本地只接收显式概率/奖励数组与response mask，执行Eq.7的概率差、FIRM乘积、Eq.11-12宏统计、clip/组内token重心化/全局whitening和Eq.16已给ratio/advantage/KL的标量loss算术。独立NumPy float64实现，normalization epsilon=1e-6，whitening epsilon=1e-8、样本方差correction=1作为显式数值协议；不声称与外部trainer逐bit相同。空候选从G排除，空group输出0；全batch少于2个有效token则拒绝，不补造whitening。另有最多512条的显式unit-vector SearchMemory/FetchMemory：先按end≤query_time及区间完整包含过滤，再排序；返回按时间排列。单subject过滤是本地隔离合同，不是论文LVQA混合受试者基准，也不认证调用者身份。没有视频/embedding模型、VLM评审、writer/reader、训练数据构建、cached reader trace生成、RL训练或Evolve接入。 完整实验高成本不复现。
 
@@ -321,7 +342,7 @@ Eq.11先对每个候选的response token求均值，再对候选做宏平均，�
 
 覆盖 55 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 66 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 67 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -391,6 +412,7 @@ Eq.11先对每个候选的response token求均值，再对候选做宏平均，�
 - [Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents](../../../agent-research/2611.25123-grepmem/README.md)
 - [MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management](../../../agent-research/2611.26427-memfolder/README.md)
 - [MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories](../../../agent-research/2609.40195-memlife/README.md)
+- [Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory](../../../agent-research/2611.33612-dualpm/README.md)
 
 </details>
 

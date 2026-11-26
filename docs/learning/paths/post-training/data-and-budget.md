@@ -7,7 +7,7 @@ hide:
 
 # 数据与预算：下一份算力花在哪里
 
-[LLM 后训练](index.md) / 172 个问题 · 43 篇论文
+[LLM 后训练](index.md) / 176 个问题 · 44 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">172 个问题 · 43 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">176 个问题 · 44 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:feast" data-paper-title="FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning LLM 后训练 Zhejiang University 2026-11-25 只追逐当前高学习信号会形成反馈环：弱能力因过去分配不足而表现差，又因此拿不到新经验。FEAST将学习机会与计算分配分开：固定atomic unit保存历史，当前策略表示和学习趋势只改变簇归属；选中簇先保留独立预算，随后才在各簇内按reward方差逐轮晋级prompt。 完整实验成本过高，不复现（审查 DONE）；本地诊断明确使用随机向量和Bernoulli callback，不将它们称为LLM。L1 CPU预算调度组件，diagnostic only；不是LLM训练或能力提升证据。完整实验成本过高，不复现（审查 DONE）；不自动重试，不接Evolve。kmeans、regroup实际执行KMeans++/PCA/对角GMM-EM/BIC与最少2原子修复；FeastScheduler实现历史、欠额、终生未见容量、无放回选簇和稳定prompt循环；progressive_rollouts向调用方采样callback请求各轮reward，保留簇预算。  data-and-budget CPU机制组件 LLM 后训练 数据与预算：下一份算力花在哪里 为什么FEAST先预留簇预算，再在簇内追逐reward方差？ 弱能力当前方差低可能是长期分配不足的结果。正priority保持其被选机会；一旦选中，独立预算不能被其他簇的高方差prompt抢走。只做全局variance top-k会丢掉这层保护。 教学例：数学簇有大量高方差题，逻辑簇暂时全错。若两簇都被选，逻辑簇仍获得256条，而不是把其后续预算全部转给数学。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<span id="paper-post-training-feast-db785d98" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-dc9356b9e3098839">为什么FEAST先预留簇预算，再在簇内追逐reward方差？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Afeast">FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Zhejiang University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>弱能力当前方差低可能是长期分配不足的结果。正priority保持其被选机会；一旦选中，独立预算不能被其他簇的高方差prompt抢走。只做全局variance top-k会丢掉这层保护。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：数学簇有大量高方差题，逻辑簇暂时全错。若两簇都被选，逻辑簇仍获得256条，而不是把其后续预算全部转给数学。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33827v1">原论文</a> · <a href="../../../../post-training/2611.33827-feast/">实现解读</a> · <a href="#qa-dc9356b9e3098839">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:feast" data-paper-title="FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning LLM 后训练 Zhejiang University 2026-11-25 只追逐当前高学习信号会形成反馈环：弱能力因过去分配不足而表现差，又因此拿不到新经验。FEAST将学习机会与计算分配分开：固定atomic unit保存历史，当前策略表示和学习趋势只改变簇归属；选中簇先保留独立预算，随后才在各簇内按reward方差逐轮晋级prompt。 完整实验成本过高，不复现（审查 DONE）；本地诊断明确使用随机向量和Bernoulli callback，不将它们称为LLM。L1 CPU预算调度组件，diagnostic only；不是LLM训练或能力提升证据。完整实验成本过高，不复现（审查 DONE）；不自动重试，不接Evolve。kmeans、regroup实际执行KMeans++/PCA/对角GMM-EM/BIC与最少2原子修复；FeastScheduler实现历史、欠额、终生未见容量、无放回选簇和稳定prompt循环；progressive_rollouts向调用方采样callback请求各轮reward，保留簇预算。  data-and-budget CPU机制组件 LLM 后训练 数据与预算：下一份算力花在哪里 动态重聚类为什么不能重置atomic历史？ 当前policy表示和慢signed trend会改变簇归属，但attainment、pilot disagreement与曝光欠额属于持久原子。重置会把曾受忽视的能力当成全新能力，破坏分配历史和欠额补偿的意义。 教学例：一个原子从簇A移动到B时，其欠额80仍保留；只更新i到cluster映射，不给它重新置零，也不复制A整个簇的历史。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-87437e6d035d2bec">动态重聚类为什么不能重置atomic历史？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Afeast">FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Zhejiang University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>当前policy表示和慢signed trend会改变簇归属，但attainment、pilot disagreement与曝光欠额属于持久原子。重置会把曾受忽视的能力当成全新能力，破坏分配历史和欠额补偿的意义。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个原子从簇A移动到B时，其欠额80仍保留；只更新i到cluster映射，不给它重新置零，也不复制A整个簇的历史。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33827v1">原论文</a> · <a href="../../../../post-training/2611.33827-feast/">实现解读</a> · <a href="#qa-87437e6d035d2bec">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:feast" data-paper-title="FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning LLM 后训练 Zhejiang University 2026-11-25 只追逐当前高学习信号会形成反馈环：弱能力因过去分配不足而表现差，又因此拿不到新经验。FEAST将学习机会与计算分配分开：固定atomic unit保存历史，当前策略表示和学习趋势只改变簇归属；选中簇先保留独立预算，随后才在各簇内按reward方差逐轮晋级prompt。 完整实验成本过高，不复现（审查 DONE）；本地诊断明确使用随机向量和Bernoulli callback，不将它们称为LLM。L1 CPU预算调度组件，diagnostic only；不是LLM训练或能力提升证据。完整实验成本过高，不复现（审查 DONE）；不自动重试，不接Evolve。kmeans、regroup实际执行KMeans++/PCA/对角GMM-EM/BIC与最少2原子修复；FeastScheduler实现历史、欠额、终生未见容量、无放回选簇和稳定prompt循环；progressive_rollouts向调用方采样callback请求各轮reward，保留簇预算。  data-and-budget CPU机制组件 LLM 后训练 数据与预算：下一份算力花在哪里 FEAST与RAIL都分配rollout，差别是否只是selector名字？ 不是。RAIL从shadow干预的recoverability收益学习contextual bandit；FEAST保护跨簇机会与预算，然后在簇内晋级prompt。FEAST不学习如何修复轨迹，RAIL的干预收益也不是FEAST的pilot等权统计。 教学例：选择在哪个失败步骤插入帮助是干预决策；决定逻辑簇本轮仍有256条机会是配额保护，两者不等价。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-434e7c2dc6d18e4b">FEAST与RAIL都分配rollout，差别是否只是selector名字？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Afeast">FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Zhejiang University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。RAIL从shadow干预的recoverability收益学习contextual bandit；FEAST保护跨簇机会与预算，然后在簇内晋级prompt。FEAST不学习如何修复轨迹，RAIL的干预收益也不是FEAST的pilot等权统计。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：选择在哪个失败步骤插入帮助是干预决策；决定逻辑簇本轮仍有256条机会是配额保护，两者不等价。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33827v1">原论文</a> · <a href="../../../../post-training/2611.33827-feast/">实现解读</a> · <a href="#qa-434e7c2dc6d18e4b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:feast" data-paper-title="FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning LLM 后训练 Zhejiang University 2026-11-25 只追逐当前高学习信号会形成反馈环：弱能力因过去分配不足而表现差，又因此拿不到新经验。FEAST将学习机会与计算分配分开：固定atomic unit保存历史，当前策略表示和学习趋势只改变簇归属；选中簇先保留独立预算，随后才在各簇内按reward方差逐轮晋级prompt。 完整实验成本过高，不复现（审查 DONE）；本地诊断明确使用随机向量和Bernoulli callback，不将它们称为LLM。L1 CPU预算调度组件，diagnostic only；不是LLM训练或能力提升证据。完整实验成本过高，不复现（审查 DONE）；不自动重试，不接Evolve。kmeans、regroup实际执行KMeans++/PCA/对角GMM-EM/BIC与最少2原子修复；FeastScheduler实现历史、欠额、终生未见容量、无放回选簇和稳定prompt循环；progressive_rollouts向调用方采样callback请求各轮reward，保留簇预算。  data-and-budget CPU机制组件 LLM 后训练 数据与预算：下一份算力花在哪里 为何attainment只看共同两个pilot，而欠额要计全部rollout？ 晋级由reward方差决定，若用晋级后的全部样本估计attainment会引入自适应选择偏置。共同pilot让prompt等权可比；但所有生成都消耗真实预算，因此欠额和总成本必须计入pilot、晋级及零方差样本。 教学例：题A的pilot为0和1，后来多采20次成功；题B的pilot都0。attainment仍为(0.5+0)/2=0.25，不是21/24；曝光却要计24条。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e5710bc674fa411a">为何attainment只看共同两个pilot，而欠额要计全部rollout？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Afeast">FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Zhejiang University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>晋级由reward方差决定，若用晋级后的全部样本估计attainment会引入自适应选择偏置。共同pilot让prompt等权可比；但所有生成都消耗真实预算，因此欠额和总成本必须计入pilot、晋级及零方差样本。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：题A的pilot为0和1，后来多采20次成功；题B的pilot都0。attainment仍为(0.5+0)/2=0.25，不是21/24；曝光却要计24条。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33827v1">原论文</a> · <a href="../../../../post-training/2611.33827-feast/">实现解读</a> · <a href="#qa-e5710bc674fa411a">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ctrl" data-paper-title="CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency LLM 后训练 The Hong Kong University of Science and Technology (Guangzhou) 2026-11-20 CTRL让每张GPU同时驻留learner rank和持续rollout shard，在CUDA MPS下共享SM。为腾出显存，优化器和immutable policy版本保存在host，learner仅流式装入有限层窗口。训练ready batch后才在发布前等待到期cohort，避免先暴露全部rollout tail；更新完成和对rollout发布是两个事件。刷新时保留partial响应、旧采样logp及最早behavior版本。 成本过高，不复现（审查 DONE）。未运行本论文实验，无本地metrics；仅收录、无本地系统实现、无CUDA验收；成本过高，不复现（审查 DONE）。完整实验成本过高，不复现（审查 DONE）；不自动重试。本篇仅收录和成本审查：没有本地CTRL实现、CUDA路径、benchmark、指标回执或Evolve算子。未将paper公式或CPU时序fixture宣传为CUDA共驻留系统。保存固定版本事实、机制、原图及失败/不占优条件，不生成伪实验metrics。  data-and-budget 系统成本审查 LLM 后训练 数据与预算：下一份算力花在哪里 CTRL的共驻留为什么不等于只把两个进程放到同卡？ 同卡resident只是内存布局，MPS才允许不同进程kernel真正并发；还需host optimizer、有限层窗口与不可变版本发布合同来容纳训练和rollout。 教学例：关闭MPS后两个模型仍留在显存，但kernel轮流执行，不能把这叫训练与生成重叠加速。 2026-11-23">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
 <span id="paper-post-training-ctrl-c3948efb" class="ar-learning-paper-anchor"></span>

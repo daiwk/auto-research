@@ -637,6 +637,7 @@
 
 ## Shanghai Jiao Tong University
 
+- 2026-11-25 · 一作：Yifei Xu · [HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants](../2611.34624-home/README.md)（`home`）：HoMe让代码agent从此前任意已评估harness派生新候选，以逐session记忆版本和执行trace追溯信息丢失，再跨case归纳共同失败机制。早期门控拒绝只有prompt/参数变化的候选，后期放开细调；评价前先smoke。
 - 2026-09-08 · 一作：Junxi Wang · [MemForest: Efficient Agent Memory Management via EventTree Partitioning and Progressive Merging](../2609.08273-memforest/README.md)（`memforest`）：MemForest 不把全部历史压进一条摘要，而是先按事件切分成多棵树，再在容量压力下渐进合并节点。查询从语义 anchor 出发向邻域传播，保留时间结构和跨事件关联。
 
 ## ShanghaiTech University
@@ -898,6 +899,7 @@
 
 ## University of Washington
 
+- 2026-11-25 · 一作：Tianmai M. Zhang · [Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory](../2611.33612-dualpm/README.md)（`dualpm`）：整条轨迹成功不表示每步都好，失败轨迹也可包含值得保留的局部行为。DualPM把任务流分块：块内所有任务只读同一个冻结记忆；完成后每轨迹先由LLM反思，再用第二次调用起草两种极性经验。
 - 2026-10-21 · 一作：Sriyash Poddar · [Asymmetric On-Policy Distillation Learns In-Context Exploration](../2610.30105-asteroid/README.md)（`asteroid`）：部分可观测任务中，专家知道隐藏目标，因而总能直接成功；只模仿专家，学生看不到“失败后如何继续搜索”的上下文。ASTEROID 让**当前学生先探索**，再在同一个隐藏任务下收集专家的**完整成功轨迹**。
 - 2026-08-19 · 一作：Bo Liu · [SPADE: Self-Play in Adaptive Synthetic Executable Environments](../2608.19197-spade/README.md)（`spade`）：同一 LLM 分饰环境设计者和推理 Agent，以有/无 privileged hint 的 regret 学习能力边界上的可执行环境。
 - 2023-03-16 · 一作：Bhargavi Paranjape · [ART](../2303.09014-art/README.md)（`art`）：既有 tool-use prompting 常需为每个任务手写示例和调用顺序。ART 根据新任务自动检索相近的推理/工具示例，让冻结 LLM 生成程序；运行器遇到工具标记就暂停生成，执行工具并注入结果后继续。

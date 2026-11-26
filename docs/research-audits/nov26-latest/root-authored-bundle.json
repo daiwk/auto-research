@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "recommendation:onequery": {
+      "questions": [
+        {
+          "id": "nov26-basics",
+          "level": "basics",
+          "question": "把四项任务放进一个JSON，改变了什么？",
+          "answer": "模型可从原查询联合生成四字段，避免独立流水线只看到上游错误结果；但联合格式本身不保证语义一致，仍需训练与清洗。",
+          "example": "教学例：错译商品词会误导流水线QT；联合模型同时看原始拼写和其他字段，有机会纠正，但本地reward并不具备这种生成能力。",
+          "added": "2026-11-26",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov26-mechanism",
+          "level": "mechanism",
+          "question": "为什么纠错reward不是统一exact match或统一编辑相似度？",
+          "answer": "需要改时保留最高1分给正确串，其余最多0.3分；不需要改时任何改写都0分。这能区分部分修正与过度修正。",
+          "example": "教学例：red shose的近似修正可得低额分；本来正确的red shoes改成red shoe仍是0，不能因为编辑距离很小而奖励。",
+          "added": "2026-11-26",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov26-comparison",
+          "level": "comparison",
+          "question": "OneQuery的QT reward能换成LARF的ordinal距离吗？",
+          "answer": "LARF把单文档相关性建成五维ordinal标签，并使用PNR、规则反馈和terminal digit margin；OneQuery监督的是同一query的四个异构结构字段。OneQuery的QT reward是完整集合exact match，不能换成LARF的分级距离或文档间有序pair。LARF训练期生成head/服务分类head也不等于OneQuery的头部缓存/尾部蒸馏。两篇作者线上指标不可直接比较。",
+          "example": "教学例：参考含brand和product，少一个字段时QT reward=0；不能按匹配了一半给0.5，或按等级距离衰减。",
+          "added": "2026-11-26",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov26-implementation",
+          "level": "implementation",
+          "question": "常数组reward的优势和无效schema如何处理？",
+          "answer": "常数组的分子为0，加正delta后优势仍全0。本地无效schema拒绝而不是猜造原文没给的格式奖励；gold仅在scorer侧。",
+          "example": "教学例：8个候选reward均0.7时，不能因seed变化强行给某个候选正优势；缺QT字段的输出也不能当成QT空集合自动通过。",
+          "added": "2026-11-26",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        }
+      ]
+    },
+    "recommendation:camar": {
+      "questions": [
+        {
+          "id": "nov26-basics",
+          "level": "basics",
+          "question": "CAMAR为何同时保留invariant和specific？",
+          "answer": "共享偏好可跨song/playlist/podcast迁移，但音色、节奏或叙事习惯等域残差不应被强迫共享。CAMAR只允许invariant跨域，specific留在本域。",
+          "example": "教学例：通勤偏好可关联歌曲与播客，歌曲音色偏好却不应直接支配播客召回。",
+          "added": "2026-11-26",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov26-mechanism",
+          "level": "mechanism",
+          "question": "缺失域补全为何不能进入shared平均？",
+          "answer": "原文将inactive的imputed invariant绕过attention，shared只聚合active域，避免把由已知域推测的结果又当独立证据反馈回来。",
+          "example": "教学例：只有song行为时，补出的podcast不是新观测；把两者平均会重复计算同一来源的信息。",
+          "added": "2026-11-26",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov26-comparison",
+          "level": "comparison",
+          "question": "CAMAR与LazUnirec都在解决同一种共享问题吗？",
+          "answer": "LazUnirec对召回/排序任务用private LoRA/expert及梯度方向可靠性调权；CAMAR对song/playlist/podcast域显式拆invariant/specific，并只让invariant跨域。前者主要控制共享参数更新冲突，后者同时限制表示流动和域可辨识性。梯度稳定不等于域不变，内积正交也不等于统计独立；两者的私有数据与本地合成诊断都不能支持直接胜负比较。",
+          "example": "教学例：某域invariant每步梯度很稳定，仍可能编码domain ID；高可靠权重不能代替GRL域分类对抗。",
+          "added": "2026-11-26",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov26-implementation",
+          "level": "implementation",
+          "question": "GRL应反转哪些梯度，表示匹配更新谁？",
+          "answer": "GRL仅反转classifier输入梯度，classifier参数仍正常下降；Eq5/7使PCN源和target都detach，表示匹配只更新PCN。不能反转整个recall分支。",
+          "example": "教学例：前向GRL(x)=x，系数0.6时输入梯度乘−0.6；线性classifier权重梯度不乘−0.6。",
+          "added": "2026-11-26",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        }
+      ]
+    }
+  },
+  "english_question_units": {
+    "qa/recommendation:onequery/nov26-basics": {
+      "source_sha256": "d733ee154f6caf899a0b7c999f85812c46d5fe74a9355bfd8d56292e7f49d07b",
+      "reviewed": true,
+      "fields": {
+        "question": "What changes when four tasks share one JSON output?",
+        "answer": "The model generates four fields jointly from the original query instead of inheriting only erroneous upstream outputs. A shared format does not guarantee consistency; training and cleaning remain necessary.",
+        "example": "Teaching example: a mistranslated product term can mislead pipeline QT. A joint model can consider original spelling and the other fields, but the local reward component cannot generate such a correction."
+      }
+    },
+    "qa/recommendation:onequery/nov26-mechanism": {
+      "source_sha256": "f3ab18440dda2f813c8dfb8769ce45a81ef1e6ba285c6e65dcc6c8c475c327f5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not use exact match or edit similarity for every spelling case?",
+        "answer": "When correction is needed, exact output earns1 and all partial outputs at most0.3. When none is needed, every rewrite earns zero. This separates partial repair from overcorrection.",
+        "example": "Teaching example: a partial repair of red shose can receive small credit. Rewriting the already-correct red shoes to red shoe earns zero despite a small edit distance."
+      }
+    },
+    "qa/recommendation:onequery/nov26-comparison": {
+      "source_sha256": "c36fdadec744a7e251a37d5b229931b2fac16ec0d8bd33402494fa095e23c0e3",
+      "reviewed": true,
+      "fields": {
+        "question": "Can QT reward be replaced by LARF's ordinal distance?",
+        "answer": "LARF models five ordinal relevance attributes of one document with PNR, rule feedback and terminal-digit margins. OneQuery instead supervises four heterogeneous structured fields of one query. Its QT reward requires whole-set exact matching, not LARF's graded distance or inter-document ordering. LARF's training generation/serving classification split also differs from OneQuery's head cache/tail distillation. Their production metrics are not directly comparable.",
+        "example": "Teaching example: if the reference contains brand and product, missing either gives zero QT reward, not0.5 for matching half or an ordinal-distance score."
+      }
+    },
+    "qa/recommendation:onequery/nov26-implementation": {
+      "source_sha256": "02ccc4d09f11b2234aec3809d1dbad2edea6ef88b382750880090a4034051f9b",
+      "reviewed": true,
+      "fields": {
+        "question": "How are constant groups and malformed schemas handled?",
+        "answer": "Constant-group centered rewards are zero and remain zero with positive delta. The local interface rejects malformed schemas rather than inventing a format reward; gold stays inside the scorer.",
+        "example": "Teaching example: eight rewards all equal0.7 must not yield seed-dependent positive advantages. Missing QT must not silently become an empty set that passes."
+      }
+    },
+    "qa/recommendation:camar/nov26-basics": {
+      "source_sha256": "93a9f582f5faf06326fe52ba3b82f61f0f47ad434620bd5d3f25203e6a2e48f5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain invariant and specific factors together?",
+        "answer": "Shared preferences can transfer across song, playlist and podcast, while domain residuals such as timbre, rhythm or narration should not be forced into one shared factor. Only invariant factors cross domains.",
+        "example": "Teaching example: a commuting preference may connect songs and podcasts, but song-timbre preference should not directly control podcast recall."
+      }
+    },
+    "qa/recommendation:camar/nov26-mechanism": {
+      "source_sha256": "53c6e15ed55920d6d602d8ff8080b70f080be8a3c0339bf22d5cf885c67dc474",
+      "reviewed": true,
+      "fields": {
+        "question": "Why exclude imputed inactive domains from the shared average?",
+        "answer": "Inactive imputed invariant factors bypass attention, and shared pooling uses only active domains, preventing predictions from being fed back as independent evidence.",
+        "example": "Teaching example: with only song history, an imputed podcast factor is not a new observation. Averaging both would count information from one source twice."
+      }
+    },
+    "qa/recommendation:camar/nov26-comparison": {
+      "source_sha256": "6f48240ce7d355d4d49a16973f6dd6b0b7df9aa7c0a3df42fffc63211174dfb3",
+      "reviewed": true,
+      "fields": {
+        "question": "Do CAMAR and LazUnirec solve the same sharing problem?",
+        "answer": "LazUnirec uses private LoRA/experts and directional-reliability weights across retrieval/ranking tasks. CAMAR splits invariant/specific factors across song/playlist/podcast and permits only invariant cross-domain interaction. The former controls shared-update conflict; the latter constrains representation flow and domain distinguishability. Stable gradients do not establish domain invariance, and orthogonal inner products do not establish statistical independence. Neither private data nor local synthetic diagnostics support a direct quality ranking.",
+        "example": "Teaching example: a domain factor can have stable gradients while encoding domain identity. Reliability weights cannot replace adversarial domain classification."
+      }
+    },
+    "qa/recommendation:camar/nov26-implementation": {
+      "source_sha256": "fd217cfe5c82c0ee1c97d35bf38065c1b73fc180337629dcd7b746e28d2352d0",
+      "reviewed": true,
+      "fields": {
+        "question": "Which gradients does GRL reverse, and what does representation matching update?",
+        "answer": "GRL reverses only gradients entering the classifier input; classifier parameters still descend normally. Detached PCN source and target in Equations5/7 restrict representation matching to PCN updates. Recall gradients must not be reversed.",
+        "example": "Teaching example: GRL(x)=x in the forward pass. With coefficient0.6, input gradients multiply by−0.6 while linear classifier weight gradients do not."
+      }
+    }
+  }
+}

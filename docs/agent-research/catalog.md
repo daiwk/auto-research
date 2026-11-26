@@ -10,6 +10,8 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 记忆与技能 | [Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory](2611.33612-dualpm/README.md) | University of Washington，2026-11-25 | 未发现官方代码 | `dualpm`：仅低成本组件，完整实验不复现 |
+| Harness 与自改进 | [HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants](2611.34624-home/README.md) | Shanghai Jiao Tong University，2026-11-25 | [原作者入口](https://github.com/agentscope-ai/ReMe/tree/7b2317584f23ba63a21cb154b961eb3dcc788e0e/plugins/home)；作者公开ReMe的HoMe插件；已核查固定树7b2317584f23ba63a21cb154b961eb3dcc788e0e中的sampling.py与evaluation/reuse.py。 | `home`：仅低成本组件，完整实验不复现 |
 | 工具与协作 | [CAPE: Coordinating Calibration and Search for Tool-Use Policies](2611.31938-cape/README.md) | State Key Laboratory of Electrical Insulation and Power Equipment, Xi’an Jiaotong University，2026-11-24 | 未发现官方代码 | `cape`：仅低成本组件，完整实验不复现 |
 | 工具与协作 | [fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration](2611.31727-agent-kernel/README.md) | Amazon, AGI / Sunnyvale, USA，2026-11-24 | 未发现官方代码 | `agent-kernel`：仅低成本组件，完整实验不复现 |
 | Harness与自改进 | [RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research](2611.32508-recurscibench/README.md) | Data Intelligence for Scientific Innovation Lab, Computer Network Information Center, Chinese Academy of Sciences，2026-11-24 | 未发现官方代码 | 计划键 `recurscibench`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |

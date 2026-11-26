@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/abs/2611.33952v1",
+  "source_url": "https://arxiv.org/pdf/2611.33952v1#page=5",
+  "source_pdf_sha256": "35553615ba1f20508eb6fa57948b84cdb24248a07975dffeed835cba6e384067",
+  "source_sha256": "35553615ba1f20508eb6fa57948b84cdb24248a07975dffeed835cba6e384067",
+  "page": 5,
+  "pdf_page": 5,
+  "figure": "Figure 2",
+  "caption": "Two rounds share expert FFNs while attention, routers and normalization remain independent.",
+  "image_sha256": "3dea361580232bd5d6f6a3e7cadd7de9da9c78500b29c011f5bc19d0b83aebf8",
+  "asset_sha256": "3dea361580232bd5d6f6a3e7cadd7de9da9c78500b29c011f5bc19d0b83aebf8",
+  "retrieved_on": "2026-11-26",
+  "reviewed_version": "v1",
+  "visually_reviewed": true,
+  "visually_reviewed_on": "2026-11-26",
+  "scientific_content_modified": false,
+  "render_dpi": 120,
+  "extraction": "Unmodified full PDF page raster including complete figure caption; pdftoppm at120dpi; visually reviewed.",
+  "copyright": "Copyright belongs to the original authors."
+}

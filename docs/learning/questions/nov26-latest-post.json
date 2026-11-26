@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "post-training:briar": {
+      "questions": [
+        {
+          "id": "nov26-basics",
+          "level": "basics",
+          "question": "为什么token entropy高不代表这个前缀值得继续分支？",
+          "answer": "词汇表述仍可多样，但后续答案可能已经确定。BRIAR按二值结果的分歧与估计不确定性选前沿，而非把措辞变化直接当作可学习信用。全对或全错的采样节点不可探索。",
+          "example": "教学例：六条续写都答对，但分别用不同自检措辞；token entropy可高，结果却无分歧，该节点不因措辞丰富而进入frontier。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "nov26-mechanism",
+          "level": "mechanism",
+          "question": "两遍RTS为何不只是对子节点reward求平均？",
+          "answer": "向上pass把各子树的precision和information按边方差衰减后汇总，向下pass再把父节点全局后验和本子树证据融合。兄弟分支通过父后验影响本节点，而普通局部平均丢失这条路径。",
+          "example": "教学例：同一子树只有一个正确叶，另一个兄弟有大量错误叶；RTS的父后验会改变该子树估值，不等于只把唯一叶的1直接向上复制。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "nov26-comparison",
+          "level": "comparison",
+          "question": "BRIAR与OpCredit都做局部信用，为什么不能互换？",
+          "answer": "OpCredit的BOC依赖匹配操作上下文的轨迹支持集，FTC依赖训练专用答案邻域；BRIAR依赖显式前缀树、叶奖励与经验Gaussian边方差。支持集匹配或邻域势差不能代替全局协方差平滑。",
+          "example": "教学例：两个KG操作到达相同实体但访问历史不同，BOC先检查上下文匹配；BRIAR只有在完整prefix共享时才共享树路径，不能仅按实体ID合并。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "nov26-implementation",
+          "level": "implementation",
+          "question": "为什么suffix clip之后还要recenter，也不能宣传prefix行为不变？",
+          "answer": "recenter落实每个吸收节点优势总和为零，二次clip可能再次破坏它。suffix mask只排除prefix token loss；共享网络参数仍参与suffix预测，因此更新后prefix行为未被保证不变。",
+          "example": "教学例：偏斜长度使clip后均值不为零，需要减去该均值；即使prefix位置不计loss，suffix对共享attention权重的梯度仍可改变下次prefix预测。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        }
+      ]
+    },
+    "post-training:feast": {
+      "questions": [
+        {
+          "id": "nov26-basics",
+          "level": "basics",
+          "question": "为什么FEAST先预留簇预算，再在簇内追逐reward方差？",
+          "answer": "弱能力当前方差低可能是长期分配不足的结果。正priority保持其被选机会；一旦选中，独立预算不能被其他簇的高方差prompt抢走。只做全局variance top-k会丢掉这层保护。",
+          "example": "教学例：数学簇有大量高方差题，逻辑簇暂时全错。若两簇都被选，逻辑簇仍获得256条，而不是把其后续预算全部转给数学。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "nov26-mechanism",
+          "level": "mechanism",
+          "question": "动态重聚类为什么不能重置atomic历史？",
+          "answer": "当前policy表示和慢signed trend会改变簇归属，但attainment、pilot disagreement与曝光欠额属于持久原子。重置会把曾受忽视的能力当成全新能力，破坏分配历史和欠额补偿的意义。",
+          "example": "教学例：一个原子从簇A移动到B时，其欠额80仍保留；只更新i到cluster映射，不给它重新置零，也不复制A整个簇的历史。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "nov26-comparison",
+          "level": "comparison",
+          "question": "FEAST与RAIL都分配rollout，差别是否只是selector名字？",
+          "answer": "不是。RAIL从shadow干预的recoverability收益学习contextual bandit；FEAST保护跨簇机会与预算，然后在簇内晋级prompt。FEAST不学习如何修复轨迹，RAIL的干预收益也不是FEAST的pilot等权统计。",
+          "example": "教学例：选择在哪个失败步骤插入帮助是干预决策；决定逻辑簇本轮仍有256条机会是配额保护，两者不等价。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "nov26-implementation",
+          "level": "implementation",
+          "question": "为何attainment只看共同两个pilot，而欠额要计全部rollout？",
+          "answer": "晋级由reward方差决定，若用晋级后的全部样本估计attainment会引入自适应选择偏置。共同pilot让prompt等权可比；但所有生成都消耗真实预算，因此欠额和总成本必须计入pilot、晋级及零方差样本。",
+          "example": "教学例：题A的pilot为0和1，后来多采20次成功；题B的pilot都0。attainment仍为(0.5+0)/2=0.25，不是21/24；曝光却要计24条。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        }
+      ]
+    },
+    "post-training:care-opd": {
+      "questions": [
+        {
+          "id": "nov26-basics",
+          "level": "basics",
+          "question": "prefix replay中的on-policy到底在哪一层成立？",
+          "answer": "当前学生从保存prefix生成新响应，所以响应层是on-policy；prefix来自过去固定policy轨迹，因此历史层off-policy。CARE-OPD用学生roll-in扩历史，但不把保存历史变成每次更新的新环境轨迹。",
+          "example": "教学例：今天的学生从昨天记录的第20轮观察继续回答；新回答来自今天policy，但前19轮并未按今天policy重新执行。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "nov26-mechanism",
+          "level": "mechanism",
+          "question": "后见selector可以读完整轨迹，为什么学生却不能？",
+          "answer": "selector用后续执行反馈决定哪些教师turn值得训练，这是训练侧分配信息。被评测或生成响应的学生只能读该turn之前的prefix；临时ID、selector输出和未来证据都必须移除，否则构成信息泄漏。",
+          "example": "教学例：后续测试暴露修复失败，可帮助selector选择早期诊断turn；学生学习该turn时不能看到尚未运行的测试结果。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "nov26-comparison",
+          "level": "comparison",
+          "question": "为什么CARE-OPD不等于TreeOPSD的树后验目标？",
+          "answer": "TreeOPSD从树信用构造冻结有界Bernoulli target，主要控制更新方向与停止点；CARE-OPD选择历史/turn及响应资格，目标仍是教师token分布reverse KL。样本分配不等于有限更新target。",
+          "example": "教学例：同一prefix被选为回放并不规定学生应该移动多远；TreeOPSD的target会在达到目标时令对应梯度为零。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "nov26-implementation",
+          "level": "implementation",
+          "question": "为什么只实现confidence gate不能标记CARE-OPD已复现？",
+          "answer": "定义性流程还包括学生roll-in、教师完成与验证、基于后见执行证据的teacher selector、去未来信息的prefix replay和新学生响应蒸馏。只写通用门或固定turn fixture删掉了核心选择模型，且完整流程成本超预算。",
+          "example": "教学例：手工总选前40%turn没有读到后来失败测试，不能替代可能选中后半段关键修复的后见教师；因此本篇保持review-only成本DONE。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-26-latest-components",
+  "reviewed_on": "2026-11-26",
+  "base_commit": "bbbba035fe562f688d48ffebdf911edcd5b0ef45",
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "review_watermark_unchanged": "2026-11-15",
+  "accepted_papers": ["foundation-models:rap", "foundation-models:duomi", "foundation-models:jepa-eu", "post-training:briar", "post-training:feast", "post-training:care-opd", "agent-research:home", "agent-research:dualpm", "multimodal-models:agentic-longlive", "recommendation:onequery", "recommendation:camar"],
+  "component_papers": ["foundation-models:rap", "foundation-models:duomi", "post-training:briar", "post-training:feast", "agent-research:home", "agent-research:dualpm", "recommendation:onequery", "recommendation:camar"],
+  "full_capability_reproductions": 0,
+  "selection_policy": "Finite primary-method/cost selection, not full-window closure; Google/Meta official sources and full-text industrial production evidence prioritized. Seven L1 mechanism components, one L0 callback protocol, three review-only high-cost papers. All full high-cost campaigns are terminal not-reproduced/review DONE, no automatic retry or Evolve promotion."
+}

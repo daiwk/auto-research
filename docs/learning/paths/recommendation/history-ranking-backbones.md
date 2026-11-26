@@ -7,7 +7,7 @@ hide:
 
 # 用户历史与排序骨干
 
-[搜广推](index.md) / 311 个问题 · 76 篇论文
+[搜广推](index.md) / 315 个问题 · 77 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">311 个问题 · 76 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">315 个问题 · 77 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:camar" data-paper-title="Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation 搜广推与 LLM 应用 Hangzhou Dianzi University / NetEase Cloud Music; co-first author Pengcheng Li, NetEase Cloud Music 2026-11-25 CAMAR先用共享跨域RQ-VAE语义ID、独立域序列encoder形成偏好，再用有向域对的两层ReLU PCN对缺失域补全。每域线性拆出invariant/specific两部分；平方内积约束二者，GRL分类器去除invariant的域信息，仅invariant参与active-domain self-attention，最后按域gate融合共享向量与本域specific。该结构约束不是仅靠一个正则项声称发现真实因果因素。 完整矩阵明显超单A100/A30或Mac短时预算：成本过高，不复现（审查 DONE）。L1机制诊断，不是完整能力复现；L1机制诊断，不是完整能力复现；高成本完整实验不复现（审查 DONE），不接Evolve晋级。只实现给定per-domain state/candidate张量上的Eq5–7、9–15：真实两层PCN、双线性factor、单层active-only MHA、域gate/classifier、GRL、正交和sampled-softmax。没有多模态encoder、RQ-VAE/语义码本、item/history backbone、Eq8 task-level冷启动Lcf、完整LTN或三阶段训练器；  生成、排序与冷启动 多任务学习与多目标优化 搜广推 用户历史与排序骨干 CAMAR为何同时保留invariant和specific？ 共享偏好可跨song/playlist/podcast迁移，但音色、节奏或叙事习惯等域残差不应被强迫共享。CAMAR只允许invariant跨域，specific留在本域。 教学例：通勤偏好可关联歌曲与播客，歌曲音色偏好却不应直接支配播客召回。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
+<span id="paper-recommendation-camar-fe065136" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-59ccb5dbdac8ac64">CAMAR为何同时保留invariant和specific？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Acamar">Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Hangzhou Dianzi University / NetEase Cloud Music; co-first author Pengcheng Li, NetEase Cloud Music</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>共享偏好可跨song/playlist/podcast迁移，但音色、节奏或叙事习惯等域残差不应被强迫共享。CAMAR只允许invariant跨域，specific留在本域。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：通勤偏好可关联歌曲与播客，歌曲音色偏好却不应直接支配播客召回。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33628v1">原论文</a> · <a href="../../../../recommendation-components/2611.33628-camar/">实现解读</a> · <a href="#qa-59ccb5dbdac8ac64">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:camar" data-paper-title="Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation 搜广推与 LLM 应用 Hangzhou Dianzi University / NetEase Cloud Music; co-first author Pengcheng Li, NetEase Cloud Music 2026-11-25 CAMAR先用共享跨域RQ-VAE语义ID、独立域序列encoder形成偏好，再用有向域对的两层ReLU PCN对缺失域补全。每域线性拆出invariant/specific两部分；平方内积约束二者，GRL分类器去除invariant的域信息，仅invariant参与active-domain self-attention，最后按域gate融合共享向量与本域specific。该结构约束不是仅靠一个正则项声称发现真实因果因素。 完整矩阵明显超单A100/A30或Mac短时预算：成本过高，不复现（审查 DONE）。L1机制诊断，不是完整能力复现；L1机制诊断，不是完整能力复现；高成本完整实验不复现（审查 DONE），不接Evolve晋级。只实现给定per-domain state/candidate张量上的Eq5–7、9–15：真实两层PCN、双线性factor、单层active-only MHA、域gate/classifier、GRL、正交和sampled-softmax。没有多模态encoder、RQ-VAE/语义码本、item/history backbone、Eq8 task-level冷启动Lcf、完整LTN或三阶段训练器；  生成、排序与冷启动 多任务学习与多目标优化 搜广推 用户历史与排序骨干 缺失域补全为何不能进入shared平均？ 原文将inactive的imputed invariant绕过attention，shared只聚合active域，避免把由已知域推测的结果又当独立证据反馈回来。 教学例：只有song行为时，补出的podcast不是新观测；把两者平均会重复计算同一来源的信息。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-23ab19967a737ca9">缺失域补全为何不能进入shared平均？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Acamar">Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Hangzhou Dianzi University / NetEase Cloud Music; co-first author Pengcheng Li, NetEase Cloud Music</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原文将inactive的imputed invariant绕过attention，shared只聚合active域，避免把由已知域推测的结果又当独立证据反馈回来。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：只有song行为时，补出的podcast不是新观测；把两者平均会重复计算同一来源的信息。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33628v1">原论文</a> · <a href="../../../../recommendation-components/2611.33628-camar/">实现解读</a> · <a href="#qa-23ab19967a737ca9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:camar" data-paper-title="Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation 搜广推与 LLM 应用 Hangzhou Dianzi University / NetEase Cloud Music; co-first author Pengcheng Li, NetEase Cloud Music 2026-11-25 CAMAR先用共享跨域RQ-VAE语义ID、独立域序列encoder形成偏好，再用有向域对的两层ReLU PCN对缺失域补全。每域线性拆出invariant/specific两部分；平方内积约束二者，GRL分类器去除invariant的域信息，仅invariant参与active-domain self-attention，最后按域gate融合共享向量与本域specific。该结构约束不是仅靠一个正则项声称发现真实因果因素。 完整矩阵明显超单A100/A30或Mac短时预算：成本过高，不复现（审查 DONE）。L1机制诊断，不是完整能力复现；L1机制诊断，不是完整能力复现；高成本完整实验不复现（审查 DONE），不接Evolve晋级。只实现给定per-domain state/candidate张量上的Eq5–7、9–15：真实两层PCN、双线性factor、单层active-only MHA、域gate/classifier、GRL、正交和sampled-softmax。没有多模态encoder、RQ-VAE/语义码本、item/history backbone、Eq8 task-level冷启动Lcf、完整LTN或三阶段训练器；  生成、排序与冷启动 多任务学习与多目标优化 搜广推 用户历史与排序骨干 CAMAR与LazUnirec都在解决同一种共享问题吗？ LazUnirec对召回/排序任务用private LoRA/expert及梯度方向可靠性调权；CAMAR对song/playlist/podcast域显式拆invariant/specific，并只让invariant跨域。前者主要控制共享参数更新冲突，后者同时限制表示流动和域可辨识性。梯度稳定不等于域不变，内积正交也不等于统计独立；两者的私有数据与本地合成诊断都不能支持直接胜负比较。 教学例：某域invariant每步梯度很稳定，仍可能编码domain ID；高可靠权重不能代替GRL域分类对抗。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-d76714db1efb3581">CAMAR与LazUnirec都在解决同一种共享问题吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Acamar">Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Hangzhou Dianzi University / NetEase Cloud Music; co-first author Pengcheng Li, NetEase Cloud Music</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>LazUnirec对召回/排序任务用private LoRA/expert及梯度方向可靠性调权；CAMAR对song/playlist/podcast域显式拆invariant/specific，并只让invariant跨域。前者主要控制共享参数更新冲突，后者同时限制表示流动和域可辨识性。梯度稳定不等于域不变，内积正交也不等于统计独立；两者的私有数据与本地合成诊断都不能支持直接胜负比较。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某域invariant每步梯度很稳定，仍可能编码domain ID；高可靠权重不能代替GRL域分类对抗。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33628v1">原论文</a> · <a href="../../../../recommendation-components/2611.33628-camar/">实现解读</a> · <a href="#qa-d76714db1efb3581">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:camar" data-paper-title="Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation 搜广推与 LLM 应用 Hangzhou Dianzi University / NetEase Cloud Music; co-first author Pengcheng Li, NetEase Cloud Music 2026-11-25 CAMAR先用共享跨域RQ-VAE语义ID、独立域序列encoder形成偏好，再用有向域对的两层ReLU PCN对缺失域补全。每域线性拆出invariant/specific两部分；平方内积约束二者，GRL分类器去除invariant的域信息，仅invariant参与active-domain self-attention，最后按域gate融合共享向量与本域specific。该结构约束不是仅靠一个正则项声称发现真实因果因素。 完整矩阵明显超单A100/A30或Mac短时预算：成本过高，不复现（审查 DONE）。L1机制诊断，不是完整能力复现；L1机制诊断，不是完整能力复现；高成本完整实验不复现（审查 DONE），不接Evolve晋级。只实现给定per-domain state/candidate张量上的Eq5–7、9–15：真实两层PCN、双线性factor、单层active-only MHA、域gate/classifier、GRL、正交和sampled-softmax。没有多模态encoder、RQ-VAE/语义码本、item/history backbone、Eq8 task-level冷启动Lcf、完整LTN或三阶段训练器；  生成、排序与冷启动 多任务学习与多目标优化 搜广推 用户历史与排序骨干 GRL应反转哪些梯度，表示匹配更新谁？ GRL仅反转classifier输入梯度，classifier参数仍正常下降；Eq5/7使PCN源和target都detach，表示匹配只更新PCN。不能反转整个recall分支。 教学例：前向GRL(x)=x，系数0.6时输入梯度乘−0.6；线性classifier权重梯度不乘−0.6。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f9f5e86c11682608">GRL应反转哪些梯度，表示匹配更新谁？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Acamar">Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · Hangzhou Dianzi University / NetEase Cloud Music; co-first author Pengcheng Li, NetEase Cloud Music</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>GRL仅反转classifier输入梯度，classifier参数仍正常下降；Eq5/7使PCN源和target都detach，表示匹配只更新PCN。不能反转整个recall分支。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：前向GRL(x)=x，系数0.6时输入梯度乘−0.6；线性classifier权重梯度不乘−0.6。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33628v1">原论文</a> · <a href="../../../../recommendation-components/2611.33628-camar/">实现解读</a> · <a href="#qa-f9f5e86c11682608">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:lazunirec" data-paper-title="LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-11-24 LazUnirec把历史、trigger、多兴趣检索query和同请求候选组织到同一Transformer，但不要求召回与排序完全共用全部参数。召回/排序各有Q/K/V低秩残差与private FFN expert，另由条件router选择top-2 shared experts。按scenario/task观察共享参数的归一化梯度历史，以EMA方向方差估计可靠性，停止梯度后重加权任务损失；排序还向召回做请求内候选分布蒸馏。 完整数据/模型/服务矩阵超本轮单A100/A30或Mac短时预算且私有输入不可得，成本过高，不复现（审查 DONE），不下载、不探跑、不自动重试。L1机制组件，diagnostic only，不是完整模型或能力复现。高成本完整实验不复现（审查 DONE），不接Evolve晋级。执行Eq7低秩任务投影、Eq10/11 sparse shared/private输出组合、Eq12–14 EMA evidence/相对权重/停止梯度及Eq15–17请求内MaxSim/KL，并用真实autograd验证参数路径。  多任务与联合建模 共享骨干与梯度可靠性 搜广推 用户历史与排序骨干 共享同一骨干为何还需要task-private参数？ 召回与排序目标不同，共享参数可能收到冲突更新。低秩残差与private expert提供任务容量，shared专家仍传递共同知识；这不是梯度已正交的证明。 教学例：同一历史对点击召回有用、对转化排序却需不同交互；两个任务可读同一用户表示但使用不同低秩投影。 2026-11-25">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
 <span id="paper-recommendation-lazunirec-bc8e76c8" class="ar-learning-paper-anchor"></span>

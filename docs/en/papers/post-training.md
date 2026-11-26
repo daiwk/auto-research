@@ -8,6 +8,9 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning](<https://arxiv.org/abs/2611.33827v1>) | 2026-11-25 | [English](../../post-training/2611.33827-feast/README-en.md) · [Chinese](../../post-training/2611.33827-feast/README.md) |
+| [Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents](<https://arxiv.org/abs/2611.34756v1>) | 2026-11-25 | [English](../../post-training/2611.34756-care-opd/README-en.md) · [Chinese](../../post-training/2611.34756-care-opd/README.md) |
+| [BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees](<https://arxiv.org/abs/2611.34746v1>) | 2026-11-25 | [English](../../post-training/2611.34746-briar/README-en.md) · [Chinese](../../post-training/2611.34746-briar/README.md) |
 | [EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor](<https://arxiv.org/abs/2611.32810v1>) | 2026-11-24 | [English](../../post-training/2611.32810-epro/README-en.md) · [Chinese](../../post-training/2611.32810-epro/README.md) |
 | [Verifiable On-Policy Distillation](<https://arxiv.org/abs/2611.30325v1>) | 2026-11-23 | [English](../../post-training/2611.30325-vopd/README-en.md) · [Chinese](../../post-training/2611.30325-vopd/README.md) |
 | [Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences](<https://arxiv.org/abs/2611.30135v1>) | 2026-11-23 | [English](../../post-training/2611.30135-shpo/README-en.md) · [Chinese](../../post-training/2611.30135-shpo/README.md) |

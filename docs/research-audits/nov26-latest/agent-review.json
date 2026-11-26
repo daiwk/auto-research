@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-26",
+  "scope": "Two Nov25 first-release CPU protocol slices and one high-cost video review-only entry; finite selection, not exhaustive closure",
+  "implementation_preflight_completed": true,
+  "reviews": [
+    {
+      "identity": "agent-research:home",
+      "id": "2611.34624",
+      "published_at": "2026-11-25T16:11:53Z",
+      "updated_at": "2026-11-25T16:11:53Z",
+      "discovered_on": "2026-11-26",
+      "announced_on": "2026-11-26",
+      "source_url": "https://arxiv.org/pdf/2611.34624v1",
+      "source_sha256": "5e63f56e550184fff754bc78a709e8e5dcaa8c0c7dde3dafe017f8472e224601",
+      "source_revisions": {
+        "agent-research:home": "38fa2c1a2ece7aee87ef3a24ff628a555b8678144858a97166ab9ba61a4abbea",
+        "agent-research:morse": "6afb3b7a6f4799968bead7adc93e7de3ad60b47d0c7938c4e36f69c7e1589e87"
+      },
+      "scope": "纯CPU两级case/query采样、EMA与uniform探索、未复查错误衰减、无放回/fair-share分配、选择时间戳；host批准的构建等价、完整来源指纹、最近完成祖先与一次0.6复用抽签。无LLM诊断、harness编辑、真实问答或能力评价；host验证标量不交给被测policy。",
+      "cost_basis": "§4.1、4.2.2与A.8：LongMemEval-S500例均值115K历史token；BEAM-1M35例×20query、均值1.04M历史token；qwen3.6-flash/qwen3.7-max API、28并发、每benchmark六候选。BEAM完整search报告10.4小时/185.2M token，非单次复用评价8分钟。完整API长rollout矩阵超单A100/A30或Mac短时预算，不下载/探跑/调用API。",
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "review_done": true
+    },
+    {
+      "identity": "agent-research:dualpm",
+      "id": "2611.33612",
+      "published_at": "2026-11-25T01:38:15Z",
+      "updated_at": "2026-11-25T01:38:15Z",
+      "discovered_on": "2026-11-26",
+      "announced_on": "2026-11-26",
+      "source_url": "https://arxiv.org/pdf/2611.33612v1",
+      "source_sha256": "581e03a7d449ebe1f32e76d54ec02c6f27be6496e23e3ea0881721f0ada96a68",
+      "source_revisions": {
+        "agent-research:dualpm": "a4bdd361fdc640bc318a165e754b984ddd823967b2f3d02078bfdf2726c0f1d0",
+        "agent-research:grepmem": "577f2b1b106591e9094f1a1901e01ce3592ab70c1e184636e2a0c24c7e27d511"
+      },
+      "scope": "仅L0：冻结block记忆、可见episode的reflect→draft实际typed callbacks、两极性独立维护回调、d/m/e与call-local引用校验、原子两池提交和重放拒绝。没有LLM、agent/runtime、语义grounding或记忆收益；fixture经验文本只验证接口，不是L1策略能力。",
+      "cost_basis": "§3与附录D Table5：GPT-5.5任务/反思/维护、DeepSeek-V3.2裁判；四用户×200任务×4条件，每条件评价720非冷启动episode。both-on每episode162.3K加权token（其中DualPM57.2K，非raw token）；另有跨用户与四域三run外评。完整API多臂长rollout超单A100/A30或Mac短时预算，不启动完整矩阵。",
+      "implementation_status": "component_only",
+      "evaluation_tier": "l0_interface",
+      "review_done": true
+    },
+    {
+      "identity": "multimodal-models:agentic-longlive",
+      "id": "2611.34907",
+      "published_at": "2026-11-25T18:54:03Z",
+      "updated_at": "2026-11-25T18:54:03Z",
+      "discovered_on": "2026-11-26",
+      "announced_on": "2026-11-26",
+      "source_url": "https://arxiv.org/pdf/2611.34907v1",
+      "source_sha256": "8156da13cfd71188b0b89b56d46c8c033615aaa67f6596123bd3d8244039c106",
+      "source_revisions": {
+        "multimodal-models:agentic-longlive": "1b3727eb004e119257b2290d687d6e2f8c88878238064c59c2322d5315b325ba",
+        "multimodal-models:pixvid": "af14fd84ecf954028202fd5cf61ef0145afa848db73a106afc7f41fd4ff8a8ae"
+      },
+      "scope": "仅review-only：固定全文、在线prompt可见性、开放环实体记忆、KV预填充与边界交换、RL训练奖励隔离、作者结果和资源成本。无本地算法、adapter/operator/command、scorer、模型/视频、metrics或GPU回执；不运行CPU mock冒充视频能力。",
+      "cost_basis": "Figure2为六H100系统；附录B TableB1完整B200布局1DiT+2辅助+3agent，节点8×B200（180GB/卡），H3并行更大。agent为35B checker/router、4B FLUX、8B RL planner；公开README列基础视频9.4GB、encoder/VAE32GB、checker37GB、图像16GB、planner约16GB（作者大小，未下载）。56训练故事与teacher/SFT/GRPO/shared servers及多seed视频评测明显超单A100/A30或Mac，直接终态不复现。",
+      "implementation_status": "deferred_high_cost",
+      "evaluation_tier": "review_only",
+      "review_done": true
+    }
+  ]
+}

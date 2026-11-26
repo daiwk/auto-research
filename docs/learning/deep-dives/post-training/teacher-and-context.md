@@ -7,7 +7,7 @@ hide:
 
 # 教师更强仍可能教错：信息、兼容性与成功行为保护
 
-[LLM 后训练](../index.md) · 更新 2026-11-20 · 57 篇主题资料 / 16 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-26 · 58 篇主题资料 / 17 篇重点对照
 
 教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。
 
@@ -41,6 +41,7 @@ hide:
 | [LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation](../../../post-training/2611.20674-leaf-opd/README.md) · [原始来源](https://arxiv.org/abs/2611.20674v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | SS1/SS0.5教师持续监督诊断、teacher-only privileged-context边界、forget/retain分离forward-KL。 | 二者都隔离额外教师上下文，但LCS提供任务兼容成功轨迹纠正失败；LEAF用非披露上下文让teacher压低目标事实概率，并用retain支路保留效用。 |
 | [HINT-WAM: Hindsight-Informed Training for World Action Models](../../../post-training/2611.24789-hint-wam/README.md) · [原始来源](https://arxiv.org/abs/2611.24789v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 只收录同源hindsight teacher、学生ODE状态上的energy-score与BC anchor、成本和限制。无本地模型/算子/指标，不用静态动作样本替代真实WAM蒸馏。 | Video-OPSD用人工证据帧为文本token提供特权自教师监督；HINT-WAM的特权是示范未来，目标是动作chunk分布而非文本token，且teacher必须与学生同一backbone。旧Video-OPSD的证据视图checkpoint审计不等于HINT-WAM训练。 |
 | [VisAlloc: Allocating Visual Supervision for On-Policy Self-Distillation](../../../post-training/2611.25069-visalloc/README.md) · [原始来源](https://arxiv.org/abs/2611.25069v1)<br>章节：背景与主要改动、与已有方法的关系、结果、负控与边界 | 训练用sample verdict过滤、显式logits上的同support top100+tail JSD、冻结prior与模板构建、有效位置分位数、完整OR/shared gates、定预算逆频率bonus、positive-only JSD和detached importance/correction。fp16/bf16在log-softmax、差值与分位数统计前升为fp32，float64保持精度；随机及有限±60000极值负控检查有限输出、冻结教师与有效学生梯度。没有全图VLM、几何裁剪器、教师答案判分、EMA模型更新、rollout或trainer；提供张量不等于执行这些核心网络。 | 已有VAG以视觉对比和教师修正的同号门控，给verifier的GRPO advantage加有界项；VisAlloc不以这个同号规则调制verifier，而是给正教师JSD分配连续base和守恒bonus。不能只因都使用双视图EMA教师就复用其loss或把VAG资料条目改成已实现。 |
+| [Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents](../../../post-training/2611.34756-care-opd/README.md) · [原始来源](https://arxiv.org/abs/2611.34756v1)<br>章节：核心公式、与已有方法的关系、结果、负控与边界 | 学生roll-in扩历史，teacher continuation验证、后见证据选turn与新响应confidence gate联合决定prefix replay；仍采用教师token reverse KL。仅review-only。 | TreeOPSD将共享树信用映射为冻结有界Bernoulli target以限制重复更新；CARE-OPD改变历史支持、回放turn和更新资格，不规定相同有限target。完成轨迹可用于训练selector，但未来结果不得暴露给学生。 |
 
 </div>
 
@@ -117,6 +118,12 @@ Video-OPSD用人工证据帧为文本token提供特权自教师监督；HINT-WAM
 已有VAG以视觉对比和教师修正的同号门控，给verifier的GRPO advantage加有界项；VisAlloc不以这个同号规则调制verifier，而是给正教师JSD分配连续base和守恒bonus。不能只因都使用双视图EMA教师就复用其loss或把VAG资料条目改成已实现。 分位数和频率重分配只看有效且有负视图的位置；缺负视图的有效响应仍以weight1做基线蒸馏，padding损失与梯度为0。教师与权重构造必须冻结。半精度需在log-softmax和差值前升fp32，不能等溢出后再cast；float64保持精度。
 
 对照来源：[visalloc](../../../post-training/2611.25069-visalloc/README.md) · [visually-attributable-opd](../../../post-training/2610.26856-vag/README.md)
+
+### 后见选择样本不是构造有界蒸馏目标
+
+实际重读TreeOPSD README，树共享要求完整历史、叶奖励使用sample std，冻结Bernoulli目标在达到和越过目标时分别零梯度与反向。CARE-OPD的定义性变化发生在collection/replay allocation/response acceptance；后见teacher看完整执行记录，学生只看原prefix，临时标识与未来证据必须剥离。用固定前40%或仅confidence gate会删掉关键selector，不能称忠实核心。原文32H200、128K/150turn和大规模SWE执行超预算，review-only终态，不建本地指标或evolve。
+
+对照来源：[care-opd](../../../post-training/2611.34756-care-opd/README.md) · [treeopsd](../../../post-training/2610.23181-treeopsd/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -262,9 +269,23 @@ Video-OPSD用人工证据帧为文本token提供特权自教师监督；HINT-WAM
 
     对照来源：[visalloc](../../../post-training/2611.25069-visalloc/README.md) · [visually-attributable-opd](../../../post-training/2610.26856-vag/README.md)
 
+### 后见选择了一个teacher turn，是否就给学生设定了有限更新终点？ {#cross-nov26-care-opd-boundary}
+
+??? note "展开答案与例子"
+
+    **答案：** 没有。CARE-OPD只是决定从哪个prefix生成新响应并是否蒸馏，其教师token reverse KL与TreeOPSD的冻结Bernoulli目标不同；选择本身既不等于目标半径，也不保证overshoot控制。
+
+    **教学例子：** 教学例：把第60轮修复选进replay只规定采样位置；TreeOPSD则还给相对旧策略的turn分数一个明确target，达到后梯度归零。
+
+    对照来源：[care-opd](../../../post-training/2611.34756-care-opd/README.md) · [treeopsd](../../../post-training/2610.23181-treeopsd/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-26** · 实际重读TreeOPSD README与CARE-OPD固定v1 Section3/AppendixB，增加有界目标与后见样本分配的区分、未来证据隔离要求及不可用固定selector代替的界线。CARE-OPD完整32H200流程成本过高不复现，review DONE；无本地代码/指标/GPU/evolve。
+
+涉及：[care-opd](../../../post-training/2611.34756-care-opd/README.md) · [treeopsd](../../../post-training/2610.23181-treeopsd/README.md)
 
 **2026-11-20** · 训练用sample verdict过滤、显式logits上的同support top100+tail JSD、冻结prior与模板构建、有效位置分位数、完整OR/shared gates、定预算逆频率bonus、positive-only JSD和detached importance/correction。fp16/bf16在log-softmax、差值与分位数统计前升为fp32，float64保持精度；随机及有限±60000极值负控检查有限输出、冻结教师与有效学生梯度。没有全图VLM、几何裁剪器、教师答案判分、EMA模型更新、rollout或trainer；提供张量不等于执行这些核心网络。 完整实验成本过高不复现；组件不构成能力晋级。
 
@@ -306,7 +327,7 @@ Video-OPSD用人工证据帧为文本token提供特权自教师监督；HINT-WAM
 
 覆盖 47 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 57 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 58 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -367,6 +388,7 @@ Video-OPSD用人工证据帧为文本token提供特权自教师监督；HINT-WAM
 - [LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation](../../../post-training/2611.20674-leaf-opd/README.md)
 - [HINT-WAM: Hindsight-Informed Training for World Action Models](../../../post-training/2611.24789-hint-wam/README.md)
 - [VisAlloc: Allocating Visual Supervision for On-Policy Self-Distillation](../../../post-training/2611.25069-visalloc/README.md)
+- [Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents](../../../post-training/2611.34756-care-opd/README.md)
 
 </details>
 

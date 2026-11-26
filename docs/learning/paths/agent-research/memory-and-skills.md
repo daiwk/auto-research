@@ -7,7 +7,7 @@ hide:
 
 # 记忆与技能：让经验可取回、可失效
 
-[Agent](index.md) / 264 个问题 · 66 篇论文
+[Agent](index.md) / 268 个问题 · 67 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">264 个问题 · 66 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">268 个问题 · 67 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:dualpm" data-paper-title="Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory Agent University of Washington 2026-11-25 整条轨迹成功不表示每步都好，失败轨迹也可包含值得保留的局部行为。DualPM把任务流分块：块内所有任务只读同一个冻结记忆；完成后每轨迹先由LLM反思，再用第二次调用起草两种极性经验。之后两次独立维护调用分别合并成功/失败池，为下一块生成完整记忆列表；不做任务特定检索，整个记忆作为上下文。 完整实验成本过高，不复现（审查 DONE）；语义支持、隐私脱敏、因果有效性和记忆收益均未验证。component_only / l0_interface，只有CPU回调、状态与来源接口测试；固定fixture不代表LLM反思、记忆质量或Agent能力。完整实验成本过高，不复现（审查 DONE）；无Evolve晋级。VisibleEpisode只允许任务、可见instructions/steps/final文本与ID，未知gold字段拒绝；嵌套输入用不可变tuple与冻结dataclass。  记忆与技能 双极性程序经验 L0接口协议 Agent 记忆与技能：让经验可取回、可失效 失败的整条轨迹只能生成失败记忆吗？ 不能这样限制。局部有效行为可以出现在最终失败轨迹，局部错误也能出现在成功轨迹；两种极性依据可见行为分别归纳，不由隐藏最终得分决定。 教学例：正确查到联系人ID但后续漏发附件，既可记成功的ID解析，也可记失败的完整性检查。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<span id="paper-agent-research-dualpm-2610e28a" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-2022a8ac98af8b21">失败的整条轨迹只能生成失败记忆吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Adualpm">Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · University of Washington</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能这样限制。局部有效行为可以出现在最终失败轨迹，局部错误也能出现在成功轨迹；两种极性依据可见行为分别归纳，不由隐藏最终得分决定。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：正确查到联系人ID但后续漏发附件，既可记成功的ID解析，也可记失败的完整性检查。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33612v1">原论文</a> · <a href="../../../../agent-research/2611.33612-dualpm/">实现解读</a> · <a href="#qa-2022a8ac98af8b21">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:dualpm" data-paper-title="Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory Agent University of Washington 2026-11-25 整条轨迹成功不表示每步都好，失败轨迹也可包含值得保留的局部行为。DualPM把任务流分块：块内所有任务只读同一个冻结记忆；完成后每轨迹先由LLM反思，再用第二次调用起草两种极性经验。之后两次独立维护调用分别合并成功/失败池，为下一块生成完整记忆列表；不做任务特定检索，整个记忆作为上下文。 完整实验成本过高，不复现（审查 DONE）；语义支持、隐私脱敏、因果有效性和记忆收益均未验证。component_only / l0_interface，只有CPU回调、状态与来源接口测试；固定fixture不代表LLM反思、记忆质量或Agent能力。完整实验成本过高，不复现（审查 DONE）；无Evolve晋级。VisibleEpisode只允许任务、可见instructions/steps/final文本与ID，未知gold字段拒绝；嵌套输入用不可变tuple与冻结dataclass。  记忆与技能 双极性程序经验 L0接口协议 Agent 记忆与技能：让经验可取回、可失效 为什么不能把本块第一个任务的反思立即交给第二个任务？ 论文块内所有任务共享冻结的上一块记忆，整块先测试再进入反思维护。立即更新改成了逐任务在线协议，影响冷启动、比较口径与经验暴露。 教学例：b=5时任务1到5都用M0；完成后才得到M1供任务6开始使用。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-f66b3c35f12eec41">为什么不能把本块第一个任务的反思立即交给第二个任务？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Adualpm">Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · University of Washington</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文块内所有任务共享冻结的上一块记忆，整块先测试再进入反思维护。立即更新改成了逐任务在线协议，影响冷启动、比较口径与经验暴露。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：b=5时任务1到5都用M0；完成后才得到M1供任务6开始使用。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33612v1">原论文</a> · <a href="../../../../agent-research/2611.33612-dualpm/">实现解读</a> · <a href="#qa-f66b3c35f12eec41">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:dualpm" data-paper-title="Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory Agent University of Washington 2026-11-25 整条轨迹成功不表示每步都好，失败轨迹也可包含值得保留的局部行为。DualPM把任务流分块：块内所有任务只读同一个冻结记忆；完成后每轨迹先由LLM反思，再用第二次调用起草两种极性经验。之后两次独立维护调用分别合并成功/失败池，为下一块生成完整记忆列表；不做任务特定检索，整个记忆作为上下文。 完整实验成本过高，不复现（审查 DONE）；语义支持、隐私脱敏、因果有效性和记忆收益均未验证。component_only / l0_interface，只有CPU回调、状态与来源接口测试；固定fixture不代表LLM反思、记忆质量或Agent能力。完整实验成本过高，不复现（审查 DONE）；无Evolve晋级。VisibleEpisode只允许任务、可见instructions/steps/final文本与ID，未知gold字段拒绝；嵌套输入用不可变tuple与冻结dataclass。  记忆与技能 双极性程序经验 L0接口协议 Agent 记忆与技能：让经验可取回、可失效 DualPM容量受限是否比GrepMem更无损？ 不是同一目标。GrepMem保留原始轨迹以便grep；DualPM压缩为可迁移程序经验并可能丢掉细节。bounded memory既不保证原始细节恢复，也不证明经验有效。 教学例：原始订单号可留在GrepMem日志；DualPM可能只保留先解析订单ID再操作的程序规则。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-29c7de6598d7d85a">DualPM容量受限是否比GrepMem更无损？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Adualpm">Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · University of Washington</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是同一目标。GrepMem保留原始轨迹以便grep；DualPM压缩为可迁移程序经验并可能丢掉细节。bounded memory既不保证原始细节恢复，也不证明经验有效。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：原始订单号可留在GrepMem日志；DualPM可能只保留先解析订单ID再操作的程序规则。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33612v1">原论文</a> · <a href="../../../../agent-research/2611.33612-dualpm/">实现解读</a> · <a href="#qa-29c7de6598d7d85a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:dualpm" data-paper-title="Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory Agent University of Washington 2026-11-25 整条轨迹成功不表示每步都好，失败轨迹也可包含值得保留的局部行为。DualPM把任务流分块：块内所有任务只读同一个冻结记忆；完成后每轨迹先由LLM反思，再用第二次调用起草两种极性经验。之后两次独立维护调用分别合并成功/失败池，为下一块生成完整记忆列表；不做任务特定检索，整个记忆作为上下文。 完整实验成本过高，不复现（审查 DONE）；语义支持、隐私脱敏、因果有效性和记忆收益均未验证。component_only / l0_interface，只有CPU回调、状态与来源接口测试；固定fixture不代表LLM反思、记忆质量或Agent能力。完整实验成本过高，不复现（审查 DONE）；无Evolve晋级。VisibleEpisode只允许任务、可见instructions/steps/final文本与ID，未知gold字段拒绝；嵌套输入用不可变tuple与冻结dataclass。  记忆与技能 双极性程序经验 L0接口协议 Agent 记忆与技能：让经验可取回、可失效 通过call-local来源检查就验证了记忆真实吗？ 没有。检查只证明引用存在、同极性且容量合规；模型可能给出无效概括，来源是模型声称的lineage。本地受控回调只验证L0，不是LLM反思能力。 教学例：一条D0确实存在，但把一次成功推广成所有任务都应跳过验证，仍可能是错误经验。 2026-11-26">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-6fbf379345aa2cfd">通过call-local来源检查就验证了记忆真实吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Adualpm">Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-26 · University of Washington</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。检查只证明引用存在、同极性且容量合规；模型可能给出无效概括，来源是模型声称的lineage。本地受控回调只验证L0，不是LLM反思能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一条D0确实存在，但把一次成功推广成所有任务都应跳过验证，仍可能是错误经验。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33612v1">原论文</a> · <a href="../../../../agent-research/2611.33612-dualpm/">实现解读</a> · <a href="#qa-6fbf379345aa2cfd">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memfolder" data-paper-title="MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management Agent Sichuan University 2026-11-19 MemFolder把记录数和取回上下文长度分开处理。RecordFolder先用LLM统一实体，再以密度峰选首锚点、以相对已有锚点的novelty渐进选互补锚点；语义/实体亲和与时间链修正分组，最后由LLM按时间合并。ContextFolder沿用这些分组，按事实重要性和token比例编码，通过看不到源记录和预期答案的blind reader检查可恢复性。分组不是摘要生成，校验也不是无损保证。实体权重为log(N/df)，共有的实体权重可为0； 成本过高，不复现（审查 DONE）。批次冻结源码后的统一runner生成42/43/44三种子CPU诊断，三种子不改变L1层级，也不是三个独立模型训练。component_only / L1 CPU机制组件，diagnostic_only=true。这是11月19日首发、11月20日公告的重叠池补漏，不算11月21日新论文。高成本完整实验不复现（审查 DONE），不是能力复现或已接入Evolve。本地实现显式embedding和已ground实体集合上的RecordFolder分组核，包括归一化、DPC/novelty锚点、全窗口方差、IDF亲和、正gain候选、SciPy真正Hungarian和链级重新归组；  记忆与技能 memfolder Agent 记忆与技能：让经验可取回、可失效 记录减少一半，上下文token就一定减少一半吗？ 不一定。合并后每条可能变长；RecordFolder减少检索单元数，ContextFolder才另外压缩每组文本，二者成本轴不同。 教学例：两条各20token合成一条40token，记录少50%，文本并未缩短。 2026-11-21">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-memfolder-b329805a" class="ar-learning-paper-anchor"></span>

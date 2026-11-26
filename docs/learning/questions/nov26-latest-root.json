@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "recommendation:onequery": {
+      "questions": [
+        {
+          "id": "nov26-basics",
+          "level": "basics",
+          "question": "把四项任务放进一个JSON，改变了什么？",
+          "answer": "模型可从原查询联合生成四字段，避免独立流水线只看到上游错误结果；但联合格式本身不保证语义一致，仍需训练与清洗。",
+          "example": "教学例：错译商品词会误导流水线QT；联合模型同时看原始拼写和其他字段，有机会纠正，但本地reward并不具备这种生成能力。",
+          "added": "2026-11-26",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov26-mechanism",
+          "level": "mechanism",
+          "question": "为什么纠错reward不是统一exact match或统一编辑相似度？",
+          "answer": "需要改时保留最高1分给正确串，其余最多0.3分；不需要改时任何改写都0分。这能区分部分修正与过度修正。",
+          "example": "教学例：red shose的近似修正可得低额分；本来正确的red shoes改成red shoe仍是0，不能因为编辑距离很小而奖励。",
+          "added": "2026-11-26",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov26-comparison",
+          "level": "comparison",
+          "question": "OneQuery的QT reward能换成LARF的ordinal距离吗？",
+          "answer": "LARF把单文档相关性建成五维ordinal标签，并使用PNR、规则反馈和terminal digit margin；OneQuery监督的是同一query的四个异构结构字段。OneQuery的QT reward是完整集合exact match，不能换成LARF的分级距离或文档间有序pair。LARF训练期生成head/服务分类head也不等于OneQuery的头部缓存/尾部蒸馏。两篇作者线上指标不可直接比较。",
+          "example": "教学例：参考含brand和product，少一个字段时QT reward=0；不能按匹配了一半给0.5，或按等级距离衰减。",
+          "added": "2026-11-26",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov26-implementation",
+          "level": "implementation",
+          "question": "常数组reward的优势和无效schema如何处理？",
+          "answer": "常数组的分子为0，加正delta后优势仍全0。本地无效schema拒绝而不是猜造原文没给的格式奖励；gold仅在scorer侧。",
+          "example": "教学例：8个候选reward均0.7时，不能因seed变化强行给某个候选正优势；缺QT字段的输出也不能当成QT空集合自动通过。",
+          "added": "2026-11-26",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        }
+      ]
+    },
+    "recommendation:camar": {
+      "questions": [
+        {
+          "id": "nov26-basics",
+          "level": "basics",
+          "question": "CAMAR为何同时保留invariant和specific？",
+          "answer": "共享偏好可跨song/playlist/podcast迁移，但音色、节奏或叙事习惯等域残差不应被强迫共享。CAMAR只允许invariant跨域，specific留在本域。",
+          "example": "教学例：通勤偏好可关联歌曲与播客，歌曲音色偏好却不应直接支配播客召回。",
+          "added": "2026-11-26",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov26-mechanism",
+          "level": "mechanism",
+          "question": "缺失域补全为何不能进入shared平均？",
+          "answer": "原文将inactive的imputed invariant绕过attention，shared只聚合active域，避免把由已知域推测的结果又当独立证据反馈回来。",
+          "example": "教学例：只有song行为时，补出的podcast不是新观测；把两者平均会重复计算同一来源的信息。",
+          "added": "2026-11-26",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov26-comparison",
+          "level": "comparison",
+          "question": "CAMAR与LazUnirec都在解决同一种共享问题吗？",
+          "answer": "LazUnirec对召回/排序任务用private LoRA/expert及梯度方向可靠性调权；CAMAR对song/playlist/podcast域显式拆invariant/specific，并只让invariant跨域。前者主要控制共享参数更新冲突，后者同时限制表示流动和域可辨识性。梯度稳定不等于域不变，内积正交也不等于统计独立；两者的私有数据与本地合成诊断都不能支持直接胜负比较。",
+          "example": "教学例：某域invariant每步梯度很稳定，仍可能编码domain ID；高可靠权重不能代替GRL域分类对抗。",
+          "added": "2026-11-26",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov26-implementation",
+          "level": "implementation",
+          "question": "GRL应反转哪些梯度，表示匹配更新谁？",
+          "answer": "GRL仅反转classifier输入梯度，classifier参数仍正常下降；Eq5/7使PCN源和target都detach，表示匹配只更新PCN。不能反转整个recall分支。",
+          "example": "教学例：前向GRL(x)=x，系数0.6时输入梯度乘−0.6；线性classifier权重梯度不乘−0.6。",
+          "added": "2026-11-26",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:rap/radius-not-all-distances": {
+      "source_sha256": "4925c3fccb35ea37331ee0efcf6ca1bfb17f307b52f0aa9554b8dbd1d72a76ab",
+      "reviewed": true,
+      "fields": {
+        "question": "Does preserving radius preserve every distance?",
+        "answer": "No. It fixes distance to the selected origin, while angular projection can change distances between rays.",
+        "example": "Illustration:two radius-one points can change angle from90 to60degrees with unchanged radii but changed mutual distance."
+      }
+    },
+    "qa/foundation-models:rap/normalize-before-lift": {
+      "source_sha256": "e54be2016ea7161ee7dd6ffb8b070e070dedd4cc9df1f26a0fea1d530ad4debb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not use Pu directly as target spatial coordinates?",
+        "answer": "Pu need not be unit length. Normalize it, then lift with the original radius using cosh/sinh; otherwise radial depth drifts.",
+        "example": "Illustration:a sketch of norm2 must be divided by2 before lifting; a zero sketch of a non-origin point must fail."
+      }
+    },
+    "qa/foundation-models:rap/not-cross-encoder-alignment": {
+      "source_sha256": "d86bb8107bef8ca94a5705912c7a072f354035057364248b45bfb02272064e83",
+      "reviewed": true,
+      "fields": {
+        "question": "Can RAP replace HVMap for cross-encoder alignment?",
+        "answer": "No. RAP compresses one defined hyperbolic space; HVMap learns paired mappings between heterogeneous spaces. Radial preservation provides no semantic correspondence.",
+        "example": "Illustration:if two encoders place an object in different directions, preserving their radii does not align those directions."
+      }
+    },
+    "qa/foundation-models:rap/diagnostic-not-retrieval": {
+      "source_sha256": "5288bbedab4e9b0a3cd30303ea5e48f449c420a722dbb771d18e364054e9a356",
+      "reviewed": true,
+      "fields": {
+        "question": "How do we exclude a Euclidean-compression substitution?",
+        "answer": "Check the target hyperboloid, per-point radii and same-ray distances, and measure distortion with hyperbolic rather than ambient Euclidean distances.",
+        "example": "Illustration:concatenating r and Pu can pass shape checks but fails the Lorentz constraint."
+      }
+    },
+    "qa/foundation-models:duomi/aggregate-not-token-agreement": {
+      "source_sha256": "83ae4ec413afde8bf321ff8494a058d3bc4deb6d1bfe6b693eead12617cc679c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does identical aggregate usage mean per-token reuse?",
+        "answer": "No. Token changes can cancel, yielding G=0 with D>0.",
+        "example": "Illustration:x choosesA and y choosesB, then they swap; aggregate usage stays halfA/halfB while both tokens change."
+      }
+    },
+    "qa/foundation-models:duomi/group-before-hinge": {
+      "source_sha256": "01d8f3fa397d4afbc79bf367ddec54ac69be8b07adc15d94b03b8712f3af40a7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not average G/D globally before thresholding?",
+        "answer": "Squared hinges are nonlinear. One group's violation must not be canceled by another; compute Phi per group/pool first.",
+        "example": "Illustration:opposite subgroup preferences cancel after pooling while each group still violates the marginal bound."
+      }
+    },
+    "qa/foundation-models:duomi/reuse-not-communication": {
+      "source_sha256": "1c00a857d9e891d722e588293d0269d10f661d00d8ca732c3758bc8110e79e22",
+      "reviewed": true,
+      "fields": {
+        "question": "Is cross-layer reuse the same in DuoMI and EchoMoE?",
+        "answer": "No. DuoMI regulates shared-FFN routing; EchoMoE reuses activation references and compresses communication deltas.",
+        "example": "Illustration:the same expert may process very different activations in two rounds, so expert retention cannot substitute for communication bytes."
+      }
+    },
+    "qa/foundation-models:duomi/real-coupled-gradients": {
+      "source_sha256": "22d79594e56421c8fcc8bf0e8529515a77422164e073bcb3e706819af879e56b",
+      "reviewed": true,
+      "fields": {
+        "question": "Are arbitrary paired-logit JSD arrays sufficient for this L1?",
+        "answer": "No. Run successive routers with a real shared expert pool, backpropagate the grouped penalty to both routers, and verify unchanged hard dispatch.",
+        "example": "Illustration:optimizing two isolated arrays cannot establish shared-FFN coupling; the second round must depend on the first round's state."
+      }
+    },
+    "qa/foundation-models:jepa-eu/feature-limits-uncertainty": {
+      "source_sha256": "74cdefb3b02ecbfad8947d8586a80af2ecf9aaf53f8e589432cd84331e818a22",
+      "reviewed": true,
+      "fields": {
+        "question": "Can last-layer Bayesian uncertainty detect every anomaly?",
+        "answer": "No. It only reads frozen features; an upstream-erased difference cannot be recovered at the last layer.",
+        "example": "Illustration:normal and anomalous frames mapped to the same psi have exactly the same s-squared despite different pixels."
+      }
+    },
+    "qa/foundation-models:jepa-eu/persistence-not-stronger-head": {
+      "source_sha256": "2463a5deff6a822ee7cb5b926e39baf4d77c3bb4ef5a81178da474f78c4fc8ea",
+      "reviewed": true,
+      "fields": {
+        "question": "Why test the same perturbation over multiple frames?",
+        "answer": "A gated recurrent state admits only part of a new input per step,accumulating it over K frames. This changes the feature signal rather than the uncertainty estimator.",
+        "example": "Illustration:a fixed .25gate retains .25 after one step and1-.75^4,about.684,after four; this is illustrative,not a measured local world model."
+      }
+    },
+    "qa/foundation-models:jepa-eu/uncertainty-not-planning-proof": {
+      "source_sha256": "82db0ba99cda62974f9ea166cf90b214fd112695fd94f46ba961bb4e653c0800",
+      "reviewed": true,
+      "fields": {
+        "question": "Does adding uncertainty remove the need for real planning evaluation?",
+        "answer": "No. Error,uncertainty and success differ. JEPA EU also evaluates CEM; a posterior readout can detect observed anomalies but requires observations absent in imagined futures.",
+        "example": "Illustration:detecting an anomaly with the actual next-frame posterior does not make that signal available before the action."
+      }
+    },
+    "qa/foundation-models:jepa-eu/no-generic-laplace-substitute": {
+      "source_sha256": "58f6bc6d0174ad8ecf68b52900caa59a550015896315985c0d8402c3f33445f9",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a local Laplace quadratic form reproduce this conclusion?",
+        "answer": "No. The evidence requires trained world models,simulator re-rendering,stage traces and paired five-task evaluation. The complete matrix is terminally cost-deferred.",
+        "example": "Illustration:assigning psi=0 to normal inputs and1 to anomalies builds the answer into features and proves no JEPA-over-RSSM claim."
+      }
+    }
+  }
+}

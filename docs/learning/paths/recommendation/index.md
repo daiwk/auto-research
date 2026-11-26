@@ -10,7 +10,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="retrieval-matching/">候选生成与搜索匹配</a></h2>
 <p>精排模型再强，能否找回召回阶段漏掉的好内容？</p>
-<p class="ar-learning-topic-meta">168 个问题 · 42 篇论文</p>
+<p class="ar-learning-topic-meta">172 个问题 · 43 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="content-semantic-ids/">语义表征、用户知识与冷启动</a></h2>
@@ -20,7 +20,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="history-ranking-backbones/">用户历史与排序骨干</a></h2>
 <p>计算预算应该花在历史内部、候选与历史，还是异构字段之间？</p>
-<p class="ar-learning-topic-meta">311 个问题 · 76 篇论文</p>
+<p class="ar-learning-topic-meta">315 个问题 · 77 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="generative-retrieval-reasoning/">生成式召回与推理推荐</a></h2>

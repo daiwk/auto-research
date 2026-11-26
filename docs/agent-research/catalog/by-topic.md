@@ -116,6 +116,7 @@
 
 ### 记忆与技能
 
+- [Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory](../2611.33612-dualpm/README.md)（`dualpm`）：整条轨迹成功不表示每步都好，失败轨迹也可包含值得保留的局部行为。DualPM把任务流分块：块内所有任务只读同一个冻结记忆；完成后每轨迹先由LLM反思，再用第二次调用起草两种极性经验。
 - [MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management](../2611.26427-memfolder/README.md)（`memfolder`）：MemFolder把记录数和取回上下文长度分开处理。RecordFolder先用LLM统一实体，再以密度峰选首锚点、以相对已有锚点的novelty渐进选互补锚点；语义/实体亲和与时间链修正分组，最后由LLM按时间合并。
 - [Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents](../2611.25123-grepmem/README.md)（`grepmem`）：GrepMem把有限工作上下文和完整历史分开：压缩时只把活跃上下文换成系统提示、任务与摘要，原始消息、工具调用/输出和摘要仍追加到纯文本日志。第一次压缩之后才开放grep_history，让模型按需用大小写不敏感正则取回遗漏细节。
 - [Instant Weight-Space Consolidation for Long-Term Memory in LLMs](../2611.20759-clam-memory/README.md)（`clam-memory`）：CLAM把可积累的参数记忆与逐字检索缓冲分开：冻结LLM提供每层会话activation，hypernetwork在不做测试时梯度下降的情况下写出down_proj LoRA，查询时再配top5会话片段。没有提取调用不等于没有前置训练；能力来自离线context distillation。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -234,6 +235,10 @@
 ### 规划、搜索与反思
 
 - [Harness²: Recursive Agent Harnessing for an Open World](../2610.14224-harness2/README.md)（`harness2`）：Harness 是模型外的提示、工具、记忆、技能、脚本、子代理和中间件。论文在不改模型权重的前提下，把“改进当前任务执行方式”和“积累以后如何改进的经验”连接起来。
+
+### Harness 与自改进
+
+- [HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants](../2611.34624-home/README.md)（`home`）：HoMe让代码agent从此前任意已评估harness派生新候选，以逐session记忆版本和执行trace追溯信息丢失，再跨case归纳共同失败机制。早期门控拒绝只有prompt/参数变化的候选，后期放开细调；评价前先smoke。
 
 ### 记忆
 

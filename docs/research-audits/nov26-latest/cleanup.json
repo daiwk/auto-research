@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-26",
+  "exact_disposable_targets": [
+    {"path": ".cache/nov26-latest/site-final", "allocated_bytes": 1097474048, "logical_bytes": 1081143159},
+    {"path": ".cache/nov26-latest/frozen-source-transfer-attempt1.tgz", "allocated_bytes": 90112, "logical_bytes": 88800},
+    {"path": ".cache/nov26-latest/frozen-source-transfer.tgz", "allocated_bytes": 90112, "logical_bytes": 89893},
+    {"path": ".cache/nov26-latest/root-primary/onequery-page4.png", "allocated_bytes": 241664, "logical_bytes": 241429},
+    {"path": ".cache/nov26-latest/root-primary/camar-page4.png", "allocated_bytes": 278528, "logical_bytes": 277029},
+    {"path": ".cache/nov26-latest/runner-template.py", "allocated_bytes": 4096, "logical_bytes": 3034}
+  ],
+  "allocated_bytes_reclaimed": 1098178560,
+  "protected_files": 203,
+  "protected_sha256_before": "d0774b8686ea61238e647a91b88723060e0ce1c1d5b8feec60142344aeb03f2a",
+  "protected_sha256_after": "d0774b8686ea61238e647a91b88723060e0ce1c1d5b8feec60142344aeb03f2a",
+  "kept": "Code/Git checkouts, original results including failures, frozen proofs/receipts, primary captures and formal figures, reusable weights/data, and Codex records/configuration",
+  "remote_transfer_cleanup": {"exact_temporary_targets_removed": 2, "already_absent": 0, "source_copies_only": true, "after_results_fetched_and_validated": true}
+}

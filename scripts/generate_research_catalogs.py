@@ -345,6 +345,9 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "rap": ("推理与系统效率", "表征压缩与几何"),
+    "duomi": ("网络架构", "MoE 与动态路由"),
+    "jepa-eu": ("多模态基础模型", "世界模型与具身控制"),
     "udvr": ("预训练与数据", "优化器与训练稳定性"),
     "thresholded-longce": ("注意力与长上下文", "线性注意力与状态空间"),
     "criticjepa": ("网络架构", "JEPA 与几何表征"),
@@ -927,6 +930,7 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in ("rap", "duomi", "jepa-eu")},
         **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in ("udvr", "thresholded-longce", "criticjepa")},
         **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in ("deep-cross-attention", "stablekl")},
         **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in ("aimuon", "spot-bench", "disco", "frontier-replay", "mv-jepa", "e-rwsc")},
@@ -1174,6 +1178,7 @@ def multimodal_rows() -> list[dict[str, str]]:
     for row in rows:
         row["index_href"] = f"../reproductions/{row['link']}"
     rows.extend(manifest_domain_rows("multimodal-models", {
+        "agentic-longlive": ("视觉生成与编辑", "长视频生成与Agent记忆"),
         "fend-protocol": ("多模态基础模型", "语音事件与人类误报评测"),
         "rslivebench-uav-protocol": ("视觉世界模型与时序推理", "持续航空空间评测"),
         "multimodal-library-protocol": ("多模态检索", "页面检索与系统测量"),

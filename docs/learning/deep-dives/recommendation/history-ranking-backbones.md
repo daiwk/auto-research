@@ -7,7 +7,7 @@ hide:
 
 # DIN、HSTU、LONGER、SlimPer、RankMixer：究竟让谁与谁交互？
 
-[搜广推](../index.md) · 更新 2026-11-25 · 76 篇主题资料 / 8 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-26 · 77 篇主题资料 / 9 篇重点对照
 
 比较排序骨干前先画三条边：历史到历史、候选到历史、字段到字段。DIN按候选激活历史，HSTU在输入窗口内逐层改写历史状态，LONGER先合并再以短查询读长KV，SlimPer反复读取用户池但只传播小知识库，RankMixer则更换异构字段交互。它们可处于同一流水线的不同位置，不能按一个长度变量或一张本地结果表排总名次。
 
@@ -33,6 +33,7 @@ hide:
 | [X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction](../../../recommendation-components/2611.24283-xsplit-argus/README.md) · [原始来源](https://arxiv.org/abs/2611.24283v1)<br>章节：背景与主要改动、核心公式、同主题对照 | 将候选无关的旧历史压成因果编码器末K个状态，在线只编码最近M个事件；候选token再对两段记忆做cross-attention。离线缓存是服务时的执行安排，不是训练时detach压缩器。点击监督头与原始logit的L1蒸馏头共享历史表示，但上线只使用监督头。 | ARGUS前作按反馈→物品分解下一事件分布；X-split重点是候选无关历史缓存和候选特定点击logit蒸馏，目标排列与预测头不能照搬。二者的本地负结果/诊断也不能互相当作能力对照。 |
 | [DNA: Unlocking Depth Scaling in CTR Models](../../../recommendation-components/2611.25659-dna/README.md) · [原始来源](https://arxiv.org/abs/2611.25659v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | DNA把请求U与历史S组成候选无关的双流：每层请求和候选F分别读取同一组历史K/V，随后历史token再反向读取刚更新的U。这样下一层看到的是受当前请求塑形的历史，而不是每层重投影同一S0。请求与历史状态可在同一请求的所有候选间共享。 | LONGER先用少量query读取长历史，后续主要在压缩token上计算；DNA不靠删掉历史token，而让每个历史token从少量请求token吸收上下文，下一层继续读更新后的完整S。两者都关注候选共享，但共享的对象和更新时机不同；本地诊断不提供二者推荐指标胜负。 |
 | [LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation](../../../recommendation-components/2611.32590-lazunirec/README.md) · [原始来源](https://arxiv.org/abs/2611.32590v1)<br>章节：与已有方法的关系、结果、负控与边界 | 执行Eq7低秩任务投影、Eq10/11 sparse shared/private输出组合、Eq12–14 EMA evidence/相对权重/停止梯度及Eq15–17请求内MaxSim/KL，并用真实autograd验证参数路径。输入router scores/expert outputs/已探测gradient与interest probabilities是显式张量，不虚构未给细节的条件router或概率头。未实现完整Transformer/RMSNorm/attention mask、embedding、场景数据管线、expert网络、MoE z-loss、训练调度与部署；因此不是完整模型、正式benchmark或Evolve算子。 | OneTrans-V2用阶段隔离token共享因果用户上下文，精排向预排传递中心化logits/sigmoid信号；LazUnirec关注召回与排序的梯度冲突，用task-private LoRA/expert及方向可靠性区分更新，并向检索蒸馏请求内softmax分布。共享上下文不等于所有参数完全共用，独立任务参数也不自动保证梯度正交。旧OneTrans-V2公开MovieLens链路是concept demo，本批则只验局部算子，不能比较二者的代理能力分数。 |
+| [Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation](../../../recommendation-components/2611.33628-camar/README.md) · [原始来源](https://arxiv.org/abs/2611.33628v1)<br>章节：与已有方法的关系、结果、负控与边界 | 只实现给定per-domain state/candidate张量上的Eq5–7、9–15：真实两层PCN、双线性factor、单层active-only MHA、域gate/classifier、GRL、正交和sampled-softmax。没有多模态encoder、RQ-VAE/语义码本、item/history backbone、Eq8 task-level冷启动Lcf、完整LTN或三阶段训练器；因此不宣称完整CAMAR。bias-free factor、MHA细节/MLP隐藏宽度等原文未唯一给出，显式采用本地参考配置。 | LazUnirec对召回/排序任务用private LoRA/expert及梯度方向可靠性调权；CAMAR对song/playlist/podcast域显式拆invariant/specific，并只让invariant跨域。前者主要控制共享参数更新冲突，后者同时限制表示流动和域可辨识性。梯度稳定不等于域不变，内积正交也不等于统计独立；两者的私有数据与本地合成诊断都不能支持直接胜负比较。 |
 
 </div>
 
@@ -67,6 +68,12 @@ LONGER先用少量query读取长历史，后续主要在压缩token上计算；D
 OneTrans-V2用阶段隔离token共享因果用户上下文，精排向预排传递中心化logits/sigmoid信号；LazUnirec关注召回与排序的梯度冲突，用task-private LoRA/expert及方向可靠性区分更新，并向检索蒸馏请求内softmax分布。共享上下文不等于所有参数完全共用，独立任务参数也不自动保证梯度正交。旧OneTrans-V2公开MovieLens链路是concept demo，本批则只验局部算子，不能比较二者的代理能力分数。
 
 对照来源：[lazunirec](../../../recommendation-components/2611.32590-lazunirec/README.md) · [onetrans-v2](../../../reproductions/2609.28589-onetrans-v2/README.md)
+
+### CAMAR与LazUnirec都在解决同一种共享问题吗？
+
+LazUnirec对召回/排序任务用private LoRA/expert及梯度方向可靠性调权；CAMAR对song/playlist/podcast域显式拆invariant/specific，并只让invariant跨域。前者主要控制共享参数更新冲突，后者同时限制表示流动和域可辨识性。梯度稳定不等于域不变，内积正交也不等于统计独立；两者的私有数据与本地合成诊断都不能支持直接胜负比较。
+
+对照来源：[camar](../../../recommendation-components/2611.33628-camar/README.md) · [lazunirec](../../../recommendation-components/2611.32590-lazunirec/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -132,9 +139,23 @@ OneTrans-V2用阶段隔离token共享因果用户上下文，精排向预排传�
 
     对照来源：[lazunirec](../../../recommendation-components/2611.32590-lazunirec/README.md) · [onetrans-v2](../../../reproductions/2609.28589-onetrans-v2/README.md)
 
+### CAMAR与LazUnirec都在解决同一种共享问题吗？ {#cross-nov26-camar}
+
+??? note "展开答案与例子"
+
+    **答案：** LazUnirec对召回/排序任务用private LoRA/expert及梯度方向可靠性调权；CAMAR对song/playlist/podcast域显式拆invariant/specific，并只让invariant跨域。前者主要控制共享参数更新冲突，后者同时限制表示流动和域可辨识性。梯度稳定不等于域不变，内积正交也不等于统计独立；两者的私有数据与本地合成诊断都不能支持直接胜负比较。
+
+    **教学例子：** 教学例：某域invariant每步梯度很稳定，仍可能编码domain ID；高可靠权重不能代替GRL域分类对抗。
+
+    对照来源：[camar](../../../recommendation-components/2611.33628-camar/README.md) · [lazunirec](../../../recommendation-components/2611.32590-lazunirec/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-26** · 只实现给定per-domain state/candidate张量上的Eq5–7、9–15：真实两层PCN、双线性factor、单层active-only MHA、域gate/classifier、GRL、正交和sampled-softmax。没有多模态encoder、RQ-VAE/语义码本、item/history backbone、Eq8 task-level冷启动Lcf、完整LTN或三阶段训练器；因此不宣称完整CAMAR。bias-free factor、MHA细节/MLP隐藏宽度等原文未唯一给出，显式采用本地参考配置。
+
+涉及：[camar](../../../recommendation-components/2611.33628-camar/README.md) · [lazunirec](../../../recommendation-components/2611.32590-lazunirec/README.md)
 
 **2026-11-25** · 执行Eq7低秩任务投影、Eq10/11 sparse shared/private输出组合、Eq12–14 EMA evidence/相对权重/停止梯度及Eq15–17请求内MaxSim/KL，并用真实autograd验证参数路径。输入router scores/expert outputs/已探测gradient与interest probabilities是显式张量，不虚构未给细节的条件router或概率头。未实现完整Transformer/RMSNorm/attention mask、embedding、场景数据管线、expert网络、MoE z-loss、训练调度与部署；因此不是完整模型、正式benchmark或Evolve算子。
 
@@ -156,7 +177,7 @@ OneTrans-V2用阶段隔离token共享因果用户上下文，精排向预排传�
 
 覆盖 73 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 76 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 77 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -236,6 +257,7 @@ OneTrans-V2用阶段隔离token共享因果用户上下文，精排向预排传�
 - [X-split Argus: Learning Reusable History Tokens for Efficient CTR Prediction](../../../recommendation-components/2611.24283-xsplit-argus/README.md)
 - [DNA: Unlocking Depth Scaling in CTR Models](../../../recommendation-components/2611.25659-dna/README.md)
 - [LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation](../../../recommendation-components/2611.32590-lazunirec/README.md)
+- [Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation](../../../recommendation-components/2611.33628-camar/README.md)
 
 </details>
 

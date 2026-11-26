@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-26",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "agent-research:home",
+      "target_card": "agent-research/harness-and-self-improvement",
+      "source_revisions": {
+        "agent-research:home": "38fa2c1a2ece7aee87ef3a24ff628a555b8678144858a97166ab9ba61a4abbea",
+        "agent-research:morse": "6afb3b7a6f4799968bead7adc93e7de3ad60b47d0c7938c4e36f69c7e1589e87"
+      },
+      "peer_membership_verified_in": "docs/learning/topics/agent-research.json",
+      "comparison": {
+        "position": "HoMe把文件记忆构建/检索/回答的失败用session差分追溯到harness，再用结构探索、两级采样和构建复用提高评价效率；本地只执行采样/复用，不执行诊断或优化agent。",
+        "tradeoff": "MORSE的Editor可在线研究并经host准入扩展视频感知工具，受accuracy/efficiency阶段合同约束；HoMe固定ReMe运行时，编辑应用harness。二者评价分数与改进对象不可混为一谈。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "论文离线与线上效果",
+          "数据协议与代码映射",
+          "同主题比较与边界",
+          "完整实验与成本决定"
+        ]
+      },
+      "analysis": {
+        "title": "评价预算控制不等于记忆研究能力",
+        "body": "HoMe的EMA/staleness/count/unresolved-error与uniform项寻找可行动失败，均分不是无偏总体估计。复用须核构建等价、来源指纹和完整快照，只抽一次概率；未知必须重建。MORSE还把文献研究、外部感知服务准入和阶段性质量/延迟gate纳入完整Editor。实现采样或gate都不能替代两篇的语义agent。本地HoMe为L1数值/协议诊断，MORSE仍review-only；完整HoMe10.4h/185.2M token矩阵终态不复现。",
+        "papers": [
+          "agent-research:home",
+          "agent-research:morse"
+        ]
+      },
+      "question": {
+        "id": "cross-nov26-home",
+        "question": "HoMe与MORSE都改记忆harness，搜索边界相同吗？",
+        "answer": "不同。HoMe围绕文件记忆的session差分归因和评价复用；MORSE让Editor在线研究并经host准入扩展视频感知服务，另有阶段性质量/延迟合同。",
+        "example": "教学例：修复文件检索的source多样性是HoMe方向；研究并申请OCR服务是MORSE的开放工具边界。",
+        "papers": [
+          "agent-research:home",
+          "agent-research:morse"
+        ]
+      },
+      "update": {
+        "date": "2026-11-26",
+        "papers": [
+          "agent-research:home",
+          "agent-research:morse"
+        ],
+        "source_revisions": {
+          "agent-research:home": "38fa2c1a2ece7aee87ef3a24ff628a555b8678144858a97166ab9ba61a4abbea",
+          "agent-research:morse": "6afb3b7a6f4799968bead7adc93e7de3ad60b47d0c7938c4e36f69c7e1589e87"
+        },
+        "summary": "纯CPU两级case/query采样、EMA与uniform探索、未复查错误衰减、无放回/fair-share分配、选择时间戳；host批准的构建等价、完整来源指纹、最近完成祖先与一次0.6复用抽签。无LLM诊断、harness编辑、真实问答或能力评价；host验证标量不交给被测policy。 完整高成本campaign终态不复现，审查DONE。"
+      },
+      "english": {
+        "comparison": {
+          "position": "HoMe localizes file-memory construction/retrieval/answer failures with session differences and improves evaluation through structural exploration, two-level sampling and reuse. The local slice executes sampling/reuse, not diagnostic or optimization agents.",
+          "tradeoff": "MORSE researches and acquires host-approved video-perception tools under accuracy/efficiency contracts. HoMe fixes ReMe runtime while editing application harnesses; scores and intervention spaces are not interchangeable."
+        },
+        "analysis": {
+          "title": "Evaluation budget control is not memory research capability",
+          "body": "HoMe combines EMA, staleness, count, unresolved errors and uniform exploration to find actionable failures, not unbiased performance means. Reuse requires host equivalence, fingerprints and complete snapshots before one draw; unknown changes rebuild. MORSE additionally requires research, service admission and staged quality/latency gates. Sampling or gates cannot replace either semantic agent. Local HoMe is an L1 numerical/protocol diagnostic; MORSE stays review-only. The full 10.4-hour/185.2M-token HoMe campaign is terminally not reproduced."
+        },
+        "question": {
+          "question": "Do HoMe and MORSE search the same memory-harness space?",
+          "answer": "No. HoMe centers on file-memory session differences and evaluation reuse. MORSE adds online research and host-approved video-perception services under staged quality/latency contracts.",
+          "example": "Teaching example: diversifying retrieved source files fits HoMe; researching and requesting OCR expands MORSE's tool boundary."
+        },
+        "update": "HoMe combines EMA, staleness, count, unresolved errors and uniform exploration to find actionable failures, not unbiased performance means. Reuse requires host equivalence, fingerprints and complete snapshots before one draw; unknown changes rebuild. MORSE additionally requires research, service admission and staged quality/latency gates. Sampling or gates cannot replace either semantic agent. Local HoMe is an L1 numerical/protocol diagnostic; MORSE stays review-only. The full 10.4-hour/185.2M-token HoMe campaign is terminally not reproduced. Review DONE; no full campaign, automatic retry or Evolve promotion."
+      }
+    },
+    {
+      "paper": "agent-research:dualpm",
+      "target_card": "agent-research/memory-and-skills",
+      "source_revisions": {
+        "agent-research:dualpm": "a4bdd361fdc640bc318a165e754b984ddd823967b2f3d02078bfdf2726c0f1d0",
+        "agent-research:grepmem": "577f2b1b106591e9094f1a1901e01ce3592ab70c1e184636e2a0c24c7e27d511"
+      },
+      "peer_membership_verified_in": "docs/learning/topics/agent-research.json",
+      "comparison": {
+        "position": "DualPM有损归纳成功与失败程序经验，块内冻结、块后独立维护两池，整池进入下一块；本地只验证L0回调/来源合同，不声称LLM记忆质量。",
+        "tradeoff": "GrepMem保留完整原始轨迹并在压缩后按需词法检索；DualPM不检索、保留的是概括规则。原日志无损、程序经验容量受限与未来行为改善是三个不同命题。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "论文离线与线上效果",
+          "数据协议与代码映射",
+          "同主题比较与边界",
+          "完整实验与成本决定"
+        ]
+      },
+      "analysis": {
+        "title": "保留原始证据与抽象经验不能互相证明",
+        "body": "DualPM局部极性不等于整轨迹标签，两次episode模型调用后每极性独立维护。冻结block保证同块无提前暴露，来源引用只是可追踪的模型声称而不是语义真实性。GrepMem的原日志与分页grep能找回摘要遗漏，但不能证明模型会检索或使用；DualPM的可迁移规则可能有效也可能错误推广。本地受控callbacks只证明L0不可变与原子合同，不是L1记忆策略或胜率；完整API矩阵成本过高终态不复现。",
+        "papers": [
+          "agent-research:dualpm",
+          "agent-research:grepmem"
+        ]
+      },
+      "question": {
+        "id": "cross-nov26-dualpm",
+        "question": "DualPM容量受限是否比GrepMem更无损？",
+        "answer": "不是同一目标。GrepMem保留原始轨迹以便grep；DualPM压缩为可迁移程序经验并可能丢掉细节。bounded memory既不保证原始细节恢复，也不证明经验有效。",
+        "example": "教学例：原始订单号可留在GrepMem日志；DualPM可能只保留先解析订单ID再操作的程序规则。",
+        "papers": [
+          "agent-research:dualpm",
+          "agent-research:grepmem"
+        ]
+      },
+      "update": {
+        "date": "2026-11-26",
+        "papers": [
+          "agent-research:dualpm",
+          "agent-research:grepmem"
+        ],
+        "source_revisions": {
+          "agent-research:dualpm": "a4bdd361fdc640bc318a165e754b984ddd823967b2f3d02078bfdf2726c0f1d0",
+          "agent-research:grepmem": "577f2b1b106591e9094f1a1901e01ce3592ab70c1e184636e2a0c24c7e27d511"
+        },
+        "summary": "仅L0：冻结block记忆、可见episode的reflect→draft实际typed callbacks、两极性独立维护回调、d/m/e与call-local引用校验、原子两池提交和重放拒绝。没有LLM、agent/runtime、语义grounding或记忆收益；fixture经验文本只验证接口，不是L1策略能力。 完整高成本campaign终态不复现，审查DONE。"
+      },
+      "english": {
+        "comparison": {
+          "position": "DualPM lossily abstracts success/failure procedures, freezes within-block memory, maintains the pools separately and injects the complete next-block pool. Local evidence is L0 callback/provenance compliance, not LLM memory quality.",
+          "tradeoff": "GrepMem retains raw trajectories for lexical retrieval after compaction. DualPM does not retrieve and retains abstract rules. Lossless logs, bounded procedural memory and improved future behavior are different claims."
+        },
+        "analysis": {
+          "title": "Retained evidence and abstract lessons do not validate each other",
+          "body": "DualPM local polarity is not an episode label. Two episode-model calls precede separate polarity maintenance. Frozen blocks prevent early within-block exposure, while lineage remains model-claimed rather than semantically verified. GrepMem logs/paginated grep can recover omitted text without establishing correct model retrieval or use. DualPM rules may transfer or overgeneralize. Controlled callbacks establish only L0 immutability/atomic contracts, not L1 memory policy or success rates. The full API campaign is terminally not reproduced for cost."
+        },
+        "question": {
+          "question": "Is bounded DualPM more lossless than GrepMem?",
+          "answer": "They target different things. GrepMem retains raw trajectories for grep; DualPM abstracts transferable procedural lessons and may discard detail. Bounded memory guarantees neither detail recovery nor lesson utility.",
+          "example": "Teaching example: an order number may remain in GrepMem's log while DualPM retains only the procedure to resolve an order ID before acting."
+        },
+        "update": "DualPM local polarity is not an episode label. Two episode-model calls precede separate polarity maintenance. Frozen blocks prevent early within-block exposure, while lineage remains model-claimed rather than semantically verified. GrepMem logs/paginated grep can recover omitted text without establishing correct model retrieval or use. DualPM rules may transfer or overgeneralize. Controlled callbacks establish only L0 immutability/atomic contracts, not L1 memory policy or success rates. The full API campaign is terminally not reproduced for cost. Review DONE; no full campaign, automatic retry or Evolve promotion."
+      }
+    },
+    {
+      "paper": "multimodal-models:agentic-longlive",
+      "target_card": "multimodal-models/world-state-actions",
+      "source_revisions": {
+        "multimodal-models:agentic-longlive": "1b3727eb004e119257b2290d687d6e2f8c88878238064c59c2322d5315b325ba",
+        "multimodal-models:pixvid": "af14fd84ecf954028202fd5cf61ef0145afa848db73a106afc7f41fd4ff8a8ae"
+      },
+      "peer_membership_verified_in": "docs/learning/topics/multimodal-models.json",
+      "comparison": {
+        "position": "Agentic LongLive冻结视频生成器，以开放环实体记忆、后台图像绘制/预填充和边界交换保持在线一致性；planner不能看未来脚本或生成视频。",
+        "tradeoff": "PixVid经线性对齐、噪声校准与detailer改变latent到pixel表示；它不提供LongLive的在线记忆，而LongLive的sink注入也未取消VAE。两者未跑完整矩阵，无可比本地视频指标。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "论文离线与线上效果",
+          "数据协议与代码映射",
+          "同主题比较与边界",
+          "完整实验与成本决定"
+        ]
+      },
+      "analysis": {
+        "title": "隐藏关键路径延迟，不是消除总GPU成本",
+        "body": "每镜头记忆在下一prompt到达前准备，边界只选完整prefill版本；未完成继续用旧记忆。未来标注只能用于奖励/评价，不进入planner。8B LoRA由SFT/GRPO学选择，不能拿固定recency规则替代。PixVid的像素迁移则改变生成器自身。LongLive约1%额外时间利用额外agent/辅助GPU；六H100图示、8×B200节点和35B/4B/8B模型超单卡预算。两篇本地均review-only，原图/公开mock不是复现或能力证据。",
+        "papers": [
+          "multimodal-models:agentic-longlive",
+          "multimodal-models:pixvid"
+        ]
+      },
+      "question": {
+        "id": "cross-nov26-agentic-longlive",
+        "question": "Agentic LongLive与PixVid都改善视频，修改的是同一层吗？",
+        "answer": "不是。前者冻结已有生成器并增加记忆KV和边界交换；PixVid将latent DiT迁往像素表示并训练detailer。外部一致性记忆不等于去掉VAE。",
+        "example": "教学例：同一个冻结latent生成器可接实体记忆；迁到像素DiT后仍需单独解决跨镜头实体记忆。",
+        "papers": [
+          "multimodal-models:agentic-longlive",
+          "multimodal-models:pixvid"
+        ]
+      },
+      "update": {
+        "date": "2026-11-26",
+        "papers": [
+          "multimodal-models:agentic-longlive",
+          "multimodal-models:pixvid"
+        ],
+        "source_revisions": {
+          "multimodal-models:agentic-longlive": "1b3727eb004e119257b2290d687d6e2f8c88878238064c59c2322d5315b325ba",
+          "multimodal-models:pixvid": "af14fd84ecf954028202fd5cf61ef0145afa848db73a106afc7f41fd4ff8a8ae"
+        },
+        "summary": "仅review-only：固定全文、在线prompt可见性、开放环实体记忆、KV预填充与边界交换、RL训练奖励隔离、作者结果和资源成本。无本地算法、adapter/operator/command、scorer、模型/视频、metrics或GPU回执；不运行CPU mock冒充视频能力。 完整高成本campaign终态不复现，审查DONE。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Agentic LongLive freezes the generator and adds open-loop entity memory, background drawing/prefill and boundary swaps. Its planner cannot read future scripts or generated video.",
+          "tradeoff": "PixVid changes latent-to-pixel representation through alignment, noise calibration and a detailer. It does not supply LongLive's online memory, and sink injection does not remove the VAE. Neither full matrix ran locally; no local video metrics are comparable."
+        },
+        "analysis": {
+          "title": "Hidden critical-path latency does not eliminate total GPU cost",
+          "body": "Memory precedes the next prompt, boundaries select only completed prefills, and missing updates retain old memory. Future annotations are reward/evaluator-only. SFT/GRPO train the 8B selector; fixed recency is not a substitute. PixVid instead changes the generator representation. LongLive's roughly 1% added time uses extra agent/auxiliary GPUs; the six-H100 illustration, eight-B200 node and 35B/4B/8B services exceed one-card resources. Both entries are review-only: original figures/public mocks are not capability or reproduction evidence."
+        },
+        "question": {
+          "question": "Do Agentic LongLive and PixVid modify the same layer?",
+          "answer": "No. The former freezes a generator and injects memory KV at boundaries; PixVid transfers latent DiT knowledge to pixels with a detailer. External consistency memory is not VAE removal.",
+          "example": "Teaching example: a frozen latent generator can accept entity memory, while a pixel DiT still needs a separate long-horizon memory design."
+        },
+        "update": "Memory precedes the next prompt, boundaries select only completed prefills, and missing updates retain old memory. Future annotations are reward/evaluator-only. SFT/GRPO train the 8B selector; fixed recency is not a substitute. PixVid instead changes the generator representation. LongLive's roughly 1% added time uses extra agent/auxiliary GPUs; the six-H100 illustration, eight-B200 node and 35B/4B/8B services exceed one-card resources. Both entries are review-only: original figures/public mocks are not capability or reproduction evidence. Review DONE; no full campaign, automatic retry or Evolve promotion."
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.34756v1",
+  "paper_version": "v1", "page": 3, "figure": "Figure1",
+  "source_pdf_sha256": "c6bb329fd6fcf1843baf63a71f7dcc45c13e3e6c3d842569a9abbb44a321db86",
+  "crop_pdf_points": [65, 430, 550, 735], "render_scale": 2,
+  "asset_sha256": "e60d57520b812aec443c3031b50ea5c5b41466ca4984a43827006c12f755afb1",
+  "visually_reviewed_on": "2026-11-26",
+  "review": "Original complete Figure1 and caption visually checked; author training curves are not local results.",
+  "copyright": "original authors", "scientific_content_modified": false
+}

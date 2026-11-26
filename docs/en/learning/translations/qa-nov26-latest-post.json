@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:briar/nov26-basics": {
+      "source_sha256": "f52c364bbc6e1a386ac1d6bfa426c02e38eefb0efeca3cb61bd54e84f09c7a88",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is high token entropy insufficient to justify branching?",
+        "answer": "Wording can vary after the answer has settled. BRIAR uses outcome bifurcation and estimation uncertainty, not lexical diversity as learnable credit. Unanimous sampled nodes are ineligible.",
+        "example": "Teaching example: six continuations use different checking phrases but all succeed. Lexical entropy can be high without outcome disagreement; the node remains outside the frontier."
+      }
+    },
+    "qa/post-training:briar/nov26-mechanism": {
+      "source_sha256": "a26b29457dbc18964802ee167938a26969552928b7d7f1e7e1d1eabd31cb49d5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is two-pass RTS more than averaging child rewards?",
+        "answer": "The upward pass attenuates subtree precision and information by edge variance; the downward pass combines the global parent posterior with local evidence. Siblings influence a node through that parent, unlike purely local averaging.",
+        "example": "Teaching example: one subtree has a single successful leaf while its sibling has many failures. The parent posterior changes its estimate instead of copying the lone reward1."
+      }
+    },
+    "qa/post-training:briar/nov26-comparison": {
+      "source_sha256": "154643ff6555010246d97d04475015f257eb8d1c0dfa85d075c6a3e9657e44ea",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are BRIAR and OpCredit not interchangeable local-credit methods?",
+        "answer": "OpCredit BOC uses context-matched trajectory supports and FTC uses training-side answer neighborhoods. BRIAR uses explicit prefix trees, terminal rewards and empirical Gaussian edge variances. Support matching or potential differences do not replace global covariance smoothing.",
+        "example": "Teaching example: KG operations reach the same entity through different histories. BOC checks context; BRIAR shares a path only for a shared full prefix, not an entity ID."
+      }
+    },
+    "qa/post-training:briar/nov26-implementation": {
+      "source_sha256": "f574103baf045fcd1f3a45fe1030fb9f9928c881b2047e71c9a8636e1e52bfdf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why recenter after suffix clipping, and why not claim unchanged prefix behavior?",
+        "answer": "Recentering enforces zero advantage sum per absorbed node; clipping again can break it. A suffix mask excludes prefix-token loss, but shared parameters still predict suffixes, so unchanged prefix behavior is not guaranteed.",
+        "example": "Teaching example: skewed lengths leave a nonzero mean after clipping; subtract it. Suffix gradients can still update shared attention weights even when prefix positions contribute no loss."
+      }
+    },
+    "qa/post-training:feast/nov26-basics": {
+      "source_sha256": "f1c4f5a33c9943749af9d50f1d612ff2f29756d42b6ad9b1d0fff0994f7e2a12",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reserve cluster budgets before following reward variance?",
+        "answer": "Weak current variance may result from past under-allocation. Positive priority preserves selection opportunities; after selection, other clusters cannot take its reserved compute. Global variance top-k removes this protection.",
+        "example": "Teaching example: mathematics has high-variance prompts while logic currently always fails. If both are selected, logic still receives256 trajectories instead of losing later rounds to mathematics."
+      }
+    },
+    "qa/post-training:feast/nov26-mechanism": {
+      "source_sha256": "baf784c9d4096e735f2cb167a128fa4d41aa1a0fa97665aaafa995e234bb1b7b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must dynamic regrouping preserve atomic histories?",
+        "answer": "Current-policy vectors and slow signed trends change cluster membership, but attainment, pilot disagreement and exposure shortfall belong to persistent atoms. Resetting them erases the allocation history that motivates protection.",
+        "example": "Teaching example: when an atom moves from clusterA toB, its shortfall80 remains. Only its group mapping changes; history is neither zeroed nor copied from the entire old cluster."
+      }
+    },
+    "qa/post-training:feast/nov26-comparison": {
+      "source_sha256": "de53492ed76a44bfef5c239396cb7e02a4f2862d14c2dd5b8115cf369e68ac1a",
+      "reviewed": true,
+      "fields": {
+        "question": "Is FEAST merely a renamed rollout selector relative to RAIL?",
+        "answer": "No. RAIL learns a contextual bandit from shadow-intervention recoverability. FEAST protects cross-cluster opportunities and budgets before promoting within-cluster prompts. It does not learn trajectory repair; intervention gains are not pilot-equal statistics.",
+        "example": "Teaching example: deciding where to insert help in a failing trajectory is an intervention decision; preserving256 logic-cluster trajectories is quota protection."
+      }
+    },
+    "qa/post-training:feast/nov26-implementation": {
+      "source_sha256": "cb04500782f59a13bdb14b4464d700679524612b5f20e24bd7de849280174943",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use only common pilots for attainment but every rollout for shortfall?",
+        "answer": "Variance-driven promotion biases feedback if all promoted samples estimate attainment. Common pilots retain prompt-equal comparability. Every generated sample still consumes compute, including pilots, promotions and zero-variance groups.",
+        "example": "Teaching example: promptA has pilots0/1 and20 more successes; promptB has pilots0/0. Attainment remains(0.5+0)/2=0.25, not21/24, while exposure counts24."
+      }
+    },
+    "qa/post-training:care-opd/nov26-basics": {
+      "source_sha256": "552e2366e989fb6a30362faaf7af4be097b1d72a9a932870118cf39f8fb6a80f",
+      "reviewed": true,
+      "fields": {
+        "question": "At what level is prefix replay on-policy?",
+        "answer": "The current student generates a fresh response from a stored prefix, so responses are on-policy. Histories come from fixed past policies and are off-policy. Student roll-ins broaden support without making every saved history a fresh environment trajectory.",
+        "example": "Teaching example: today's student answers from yesterday's twentieth-turn observation; its response is new, but the previous nineteen turns were not re-executed by today's policy."
+      }
+    },
+    "qa/post-training:care-opd/nov26-mechanism": {
+      "source_sha256": "57ed6163d136b83455a1d752a5c366158a73ed76e5f8e07592be3c818149cb3c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can the hindsight selector read the full trajectory but the student cannot?",
+        "answer": "The selector uses later execution evidence for training-side allocation. A student generating or being evaluated at a turn may see only its prior prefix. Temporary IDs, selector output and future evidence must be removed to avoid leakage.",
+        "example": "Teaching example: a later failed test can identify a useful early diagnosis for replay; the student at that diagnosis cannot see the not-yet-run test result."
+      }
+    },
+    "qa/post-training:care-opd/nov26-comparison": {
+      "source_sha256": "4cd216db5255bb3b3868bbdf2b0f67e0b0ffa95c25507a8a71c0331db7fe7825",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is CARE-OPD different from TreeOPSD posterior targets?",
+        "answer": "TreeOPSD converts tree credit into frozen bounded Bernoulli targets that control update direction and stopping. CARE-OPD selects histories, turns and response eligibility while retaining teacher-token reverse KL. Allocation does not define a finite update target.",
+        "example": "Teaching example: selecting a prefix for replay does not specify how far the student should move; TreeOPSD's target makes its corresponding gradient vanish at the target."
+      }
+    },
+    "qa/post-training:care-opd/nov26-implementation": {
+      "source_sha256": "1031425f93a19631195aec0ccd2ef1422aabbcbf272394445e97392f5545a004",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a confidence gate alone not reproduce CARE-OPD?",
+        "answer": "The defining pipeline also needs student roll-in, verified teacher completion, a hindsight evidence-based teacher selector, future-free prefixes and distillation on fresh responses. A generic gate or fixed-turn fixture removes that selector, while the full workflow exceeds budget.",
+        "example": "Teaching example: always choosing the first40% of turns ignores later failed tests and cannot replace a teacher selecting a critical late repair. This paper stays review-only, high-cost review DONE."
+      }
+    }
+  }
+}

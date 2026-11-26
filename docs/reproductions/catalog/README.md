@@ -10,6 +10,8 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 生成、排序与冷启动 | [Multi-Modal Causal Disentanglement for Multi-Domain Sequential Audio Recommendation](../../recommendation-components/2611.33628-camar/README.md) | Hangzhou Dianzi University / NetEase Cloud Music; co-first author Pengcheng Li, NetEase Cloud Music，2026-11-25 | 未发现官方代码 | `camar`：仅低成本组件，完整实验不复现 |
+| 大模型能力与推荐融合 | [OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding](../../recommendation-components/2611.33653-onequery/README.md) | Xiamen University; co-first author Jiejie Qin, Alibaba Group; Harbin Institute of Technology collaborator，2026-11-25 | 未发现官方代码 | `onequery`：仅低成本组件，完整实验不复现 |
 | retrieval-matching | [LARF: Learning-aligned Reasoning Framework for Search Relevance](../../recommendation-components/2611.32125-larf/README.md) | Yuanbao Team, Tencent，2026-11-24 | 未发现官方代码 | `larf`：仅低成本组件，完整实验不复现 |
 | 多任务与联合建模 | [LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation](../../recommendation-components/2611.32590-lazunirec/README.md) | Alibaba International Digital Commerce Group，2026-11-24 | 未发现官方代码 | `lazunirec`：仅低成本组件，完整实验不复现 |
 | 研究与服务闭环 | [Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents](../../recommendation-components/2611.29613-weight-coding/README.md) | Pinterest，2026-11-22 | 未发现官方代码 | `weight-coding`：仅低成本组件，完整实验不复现 |

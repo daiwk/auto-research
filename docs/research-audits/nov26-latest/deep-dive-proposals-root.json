@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "proposals": [
+    {
+      "paper": "recommendation:onequery",
+      "target_card": "recommendation/retrieval-matching",
+      "source_revisions": {
+        "recommendation:onequery": "b5f8701ce65c21788e1f430185e4b4591f720c600552f0ea82ff14c452a556cb",
+        "recommendation:larf": "8e6ff5949d91269651760f74be419371c5d839daaf6d007c3339d3035a431b4d"
+      },
+      "comparison": {
+        "position": "本地只执行Eq5–13的reward、优势和clipping算术。QT输入为显式tuple列表，不发明私有标注串的parser；无效schema直接拒绝，不猜造格式reward。空串对空串编辑相似度取1、sigma采用总体标准差、delta=1e-8是显式边界约定。没有语言模型、schema约束解码、部分标注补齐、SFT、GRPO参数训练、蒸馏或服务；gold只作为reward计算输入，不存在读取gold的Agent。",
+        "tradeoff": "LARF把单文档相关性建成五维ordinal标签，并使用PNR、规则反馈和terminal digit margin；OneQuery监督的是同一query的四个异构结构字段。OneQuery的QT reward是完整集合exact match，不能换成LARF的分级距离或文档间有序pair。LARF训练期生成head/服务分类head也不等于OneQuery的头部缓存/尾部蒸馏。两篇作者线上指标不可直接比较。",
+        "sections": [
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "OneQuery的QT reward能换成LARF的ordinal距离吗？",
+        "body": "LARF把单文档相关性建成五维ordinal标签，并使用PNR、规则反馈和terminal digit margin；OneQuery监督的是同一query的四个异构结构字段。OneQuery的QT reward是完整集合exact match，不能换成LARF的分级距离或文档间有序pair。LARF训练期生成head/服务分类head也不等于OneQuery的头部缓存/尾部蒸馏。两篇作者线上指标不可直接比较。",
+        "papers": [
+          "recommendation:onequery",
+          "recommendation:larf"
+        ]
+      },
+      "question": {
+        "id": "nov26-onequery",
+        "question": "OneQuery的QT reward能换成LARF的ordinal距离吗？",
+        "answer": "LARF把单文档相关性建成五维ordinal标签，并使用PNR、规则反馈和terminal digit margin；OneQuery监督的是同一query的四个异构结构字段。OneQuery的QT reward是完整集合exact match，不能换成LARF的分级距离或文档间有序pair。LARF训练期生成head/服务分类head也不等于OneQuery的头部缓存/尾部蒸馏。两篇作者线上指标不可直接比较。",
+        "example": "教学例：参考含brand和product，少一个字段时QT reward=0；不能按匹配了一半给0.5，或按等级距离衰减。",
+        "papers": [
+          "recommendation:onequery",
+          "recommendation:larf"
+        ]
+      },
+      "update": {
+        "date": "2026-11-26",
+        "papers": [
+          "recommendation:onequery",
+          "recommendation:larf"
+        ],
+        "summary": "本地只执行Eq5–13的reward、优势和clipping算术。QT输入为显式tuple列表，不发明私有标注串的parser；无效schema直接拒绝，不猜造格式reward。空串对空串编辑相似度取1、sigma采用总体标准差、delta=1e-8是显式边界约定。没有语言模型、schema约束解码、部分标注补齐、SFT、GRPO参数训练、蒸馏或服务；gold只作为reward计算输入，不存在读取gold的Agent。"
+      },
+      "english": {
+        "comparison": {
+          "position": "The local component executes only Equations5–13 reward, advantage and clipping arithmetic. QT is an explicit tuple list, not a fabricated parser for a private tag syntax. Invalid schemas are rejected rather than receiving an invented format reward. Empty-versus-empty edit similarity1, population standard deviation and delta1e-8 are declared boundary conventions. There is no language model, constrained decoder, label completion, SFT, GRPO parameter training, distillation or serving. References enter only the reward evaluator; no agent can read gold.",
+          "tradeoff": "LARF models five ordinal relevance attributes of one document with PNR, rule feedback and terminal-digit margins. OneQuery instead supervises four heterogeneous structured fields of one query. Its QT reward requires whole-set exact matching, not LARF's graded distance or inter-document ordering. LARF's training generation/serving classification split also differs from OneQuery's head cache/tail distillation. Their production metrics are not directly comparable."
+        },
+        "analysis": {
+          "title": "Can QT reward be replaced by LARF's ordinal distance?",
+          "body": "LARF models five ordinal relevance attributes of one document with PNR, rule feedback and terminal-digit margins. OneQuery instead supervises four heterogeneous structured fields of one query. Its QT reward requires whole-set exact matching, not LARF's graded distance or inter-document ordering. LARF's training generation/serving classification split also differs from OneQuery's head cache/tail distillation. Their production metrics are not directly comparable."
+        },
+        "question": {
+          "question": "Can QT reward be replaced by LARF's ordinal distance?",
+          "answer": "LARF models five ordinal relevance attributes of one document with PNR, rule feedback and terminal-digit margins. OneQuery instead supervises four heterogeneous structured fields of one query. Its QT reward requires whole-set exact matching, not LARF's graded distance or inter-document ordering. LARF's training generation/serving classification split also differs from OneQuery's head cache/tail distillation. Their production metrics are not directly comparable.",
+          "example": "Teaching example: if the reference contains brand and product, missing either gives zero QT reward, not0.5 for matching half or an ordinal-distance score."
+        },
+        "update": "The local component executes only Equations5–13 reward, advantage and clipping arithmetic. QT is an explicit tuple list, not a fabricated parser for a private tag syntax. Invalid schemas are rejected rather than receiving an invented format reward. Empty-versus-empty edit similarity1, population standard deviation and delta1e-8 are declared boundary conventions. There is no language model, constrained decoder, label completion, SFT, GRPO parameter training, distillation or serving. References enter only the reward evaluator; no agent can read gold."
+      }
+    },
+    {
+      "paper": "recommendation:camar",
+      "target_card": "recommendation/history-ranking-backbones",
+      "source_revisions": {
+        "recommendation:camar": "5033a738391b4840fc81159daf71e68df54b806ac81804d18abdc23aa8881b91",
+        "recommendation:lazunirec": "4b8f8e8c927aae755f07d2f5595315353dcfd7afabc5945ee519463012da577b"
+      },
+      "comparison": {
+        "position": "只实现给定per-domain state/candidate张量上的Eq5–7、9–15：真实两层PCN、双线性factor、单层active-only MHA、域gate/classifier、GRL、正交和sampled-softmax。没有多模态encoder、RQ-VAE/语义码本、item/history backbone、Eq8 task-level冷启动Lcf、完整LTN或三阶段训练器；因此不宣称完整CAMAR。bias-free factor、MHA细节/MLP隐藏宽度等原文未唯一给出，显式采用本地参考配置。",
+        "tradeoff": "LazUnirec对召回/排序任务用private LoRA/expert及梯度方向可靠性调权；CAMAR对song/playlist/podcast域显式拆invariant/specific，并只让invariant跨域。前者主要控制共享参数更新冲突，后者同时限制表示流动和域可辨识性。梯度稳定不等于域不变，内积正交也不等于统计独立；两者的私有数据与本地合成诊断都不能支持直接胜负比较。",
+        "sections": [
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "CAMAR与LazUnirec都在解决同一种共享问题吗？",
+        "body": "LazUnirec对召回/排序任务用private LoRA/expert及梯度方向可靠性调权；CAMAR对song/playlist/podcast域显式拆invariant/specific，并只让invariant跨域。前者主要控制共享参数更新冲突，后者同时限制表示流动和域可辨识性。梯度稳定不等于域不变，内积正交也不等于统计独立；两者的私有数据与本地合成诊断都不能支持直接胜负比较。",
+        "papers": [
+          "recommendation:camar",
+          "recommendation:lazunirec"
+        ]
+      },
+      "question": {
+        "id": "nov26-camar",
+        "question": "CAMAR与LazUnirec都在解决同一种共享问题吗？",
+        "answer": "LazUnirec对召回/排序任务用private LoRA/expert及梯度方向可靠性调权；CAMAR对song/playlist/podcast域显式拆invariant/specific，并只让invariant跨域。前者主要控制共享参数更新冲突，后者同时限制表示流动和域可辨识性。梯度稳定不等于域不变，内积正交也不等于统计独立；两者的私有数据与本地合成诊断都不能支持直接胜负比较。",
+        "example": "教学例：某域invariant每步梯度很稳定，仍可能编码domain ID；高可靠权重不能代替GRL域分类对抗。",
+        "papers": [
+          "recommendation:camar",
+          "recommendation:lazunirec"
+        ]
+      },
+      "update": {
+        "date": "2026-11-26",
+        "papers": [
+          "recommendation:camar",
+          "recommendation:lazunirec"
+        ],
+        "summary": "只实现给定per-domain state/candidate张量上的Eq5–7、9–15：真实两层PCN、双线性factor、单层active-only MHA、域gate/classifier、GRL、正交和sampled-softmax。没有多模态encoder、RQ-VAE/语义码本、item/history backbone、Eq8 task-level冷启动Lcf、完整LTN或三阶段训练器；因此不宣称完整CAMAR。bias-free factor、MHA细节/MLP隐藏宽度等原文未唯一给出，显式采用本地参考配置。"
+      },
+      "english": {
+        "comparison": {
+          "position": "The component executes Equations5–7 and9–15 on supplied domain states/candidates: real two-layer PCNs, linear factor maps, one active-only MHA layer, domain gates/classifier, GRL, orthogonality and sampled softmax. Multi-modal encoders, RQ-VAE/semantic codebooks, item/history backbones, Equation8 task-level cold-start loss, complete LTN and the three-stage trainer are absent; this is not full CAMAR. Bias-free factor maps, MHA details and MLP hidden widths are declared local choices where the paper does not uniquely specify them.",
+          "tradeoff": "LazUnirec uses private LoRA/experts and directional-reliability weights across retrieval/ranking tasks. CAMAR splits invariant/specific factors across song/playlist/podcast and permits only invariant cross-domain interaction. The former controls shared-update conflict; the latter constrains representation flow and domain distinguishability. Stable gradients do not establish domain invariance, and orthogonal inner products do not establish statistical independence. Neither private data nor local synthetic diagnostics support a direct quality ranking."
+        },
+        "analysis": {
+          "title": "Do CAMAR and LazUnirec solve the same sharing problem?",
+          "body": "LazUnirec uses private LoRA/experts and directional-reliability weights across retrieval/ranking tasks. CAMAR splits invariant/specific factors across song/playlist/podcast and permits only invariant cross-domain interaction. The former controls shared-update conflict; the latter constrains representation flow and domain distinguishability. Stable gradients do not establish domain invariance, and orthogonal inner products do not establish statistical independence. Neither private data nor local synthetic diagnostics support a direct quality ranking."
+        },
+        "question": {
+          "question": "Do CAMAR and LazUnirec solve the same sharing problem?",
+          "answer": "LazUnirec uses private LoRA/experts and directional-reliability weights across retrieval/ranking tasks. CAMAR splits invariant/specific factors across song/playlist/podcast and permits only invariant cross-domain interaction. The former controls shared-update conflict; the latter constrains representation flow and domain distinguishability. Stable gradients do not establish domain invariance, and orthogonal inner products do not establish statistical independence. Neither private data nor local synthetic diagnostics support a direct quality ranking.",
+          "example": "Teaching example: a domain factor can have stable gradients while encoding domain identity. Reliability weights cannot replace adversarial domain classification."
+        },
+        "update": "The component executes Equations5–7 and9–15 on supplied domain states/candidates: real two-layer PCNs, linear factor maps, one active-only MHA layer, domain gates/classifier, GRL, orthogonality and sampled softmax. Multi-modal encoders, RQ-VAE/semantic codebooks, item/history backbones, Equation8 task-level cold-start loss, complete LTN and the three-stage trainer are absent; this is not full CAMAR. Bias-free factor maps, MHA details and MLP hidden widths are declared local choices where the paper does not uniquely specify them."
+      }
+    }
+  ]
+}

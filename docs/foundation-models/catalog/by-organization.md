@@ -130,6 +130,10 @@
 
 - 2026-09-15 · [Persistent Recurrent Memory Between Transformer Layers Improves Language Model Generalization](../../foundation-models/2609.17251-persistent-recurrent-memory/README.md)（`persistent-recurrent-memory`）：在 Transformer 上下半层之间插入 observe–GRU update–gated influence 的持久状态通路。
 
+## Fraunhofer Heinrich-Hertz-Institut
+
+- 2026-11-25 · [Not all world models can doubt: how training objective and architecture shape epistemic uncertainty in JEPA and RSSM world models](../../foundation-models/2611.34830-jepa-eu/README.md)（`jepa-eu`）：冻结LeWM与DreamerV3后，在预测头最后线性层前的特征上拟合last-layer Laplace，并用五头ensemble对照。对物理状态做标准差尺度扰动再由模拟器重渲染，追踪各层相对位移；延长扰动持续K帧可分离GRU平均效应，按实体重建梯度与像素面积分析小物体效应。此处是实证诊断，不是已完成移除重建项/改变gate的因果消融，也不证明所有RSSM或JEPA都如此。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## Fudan University
 
 - 2026-09-29 · [Chinese-Jev: Bringing System One Model to Chinese-Language Tasks](../../foundation-models/2609.36965-chinese-jev/README.md)（`chinese-jev`）：Chinese-Jev 面向分类、路由、候选选择等封闭输出任务，用轻量 encoder 读取中文上下文和候选项，以各候选 marker 的隐藏状态直接评分。异构标注统一成候选概率分布，先做 1000 万条通用预训练，再按医疗、法律、金融分别微调。
@@ -204,6 +208,10 @@
 ## Huawei ACS Lab
 
 - 2026-07-23 · [Adaptive Depth Sparse Framework: Similarity-Driven Resource Allocation for Pre-Trained LLMs](../../reproductions/2607.21291-adadsf/README.md)（`adadsf`）：固定比例的 Mixture-of-Depths 会给每一层相同 token budget，但不同层对表示的改写强度并不相同。AdaDSF 先在 dense teacher 上测量各层输入/输出 cosine similarity，再把更多计算分给变化更大的层；每层 MLP router 只把 Top-K token 送入原 Transformer block，其他 token 走 residual bypass。
+
+## Huawei Foundation Model Lab
+
+- 2026-11-25 · [DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers](../../foundation-models/2611.33952-duomi/README.md)（`duomi`）：两次调用共享expert FFN，但attention、router与normalization独立。仅看总体expert使用分布会漏掉每个token全部换expert的情况；仅看逐token变化又可能允许两轮偏好不同子池。DuoMI分别限制聚合round–expert依赖和token条件下的round–expert依赖，训练使用全部expert的softmax而非无梯度的硬Top-k集合。
 
 ## Huawei Noah's Ark Lab, Montreal Research Center
 
@@ -551,6 +559,7 @@
 
 ## The Chinese University of Hong Kong
 
+- 2026-11-25 · [RAP: Radial-Angular Random Projection for Hyperbolic Representations](../../foundation-models/2611.34298-rap/README.md)（`rap`）：普通空间坐标投影会同时改变径向深度与角相似度。RAP拆开这两者：到所选原点的半径不变，角向量乘一次高斯矩阵后归一化，再提升回目标 Lorentz 双曲面。它不是对原始坐标做普通欧氏 JL；保证仍受半径上界、点间分离和 arcosh 条件数限制。
 - 2026-10-22 · [Rethinking Sequence Compression with Test-time Regression](../../foundation-models/2610.31574-ttr-compressor/README.md)（`ttr-compressor`）：固定池化或投影分别聚合 token，难以按当前输入的相关结构调整压缩。TTR 把一组 token 视作回归观测：由 token 方向构造 key，由保留模长的原始 token 生成可学习标量 target；每次前向精确求解 ridge 系数，直接把系数作为压缩表示。外层任务 loss 通过闭式求解训练 target 投影与正则。
 
 ## The Chinese University of Hong Kong, Shenzhen

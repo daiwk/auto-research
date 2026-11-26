@@ -185,6 +185,16 @@
 
 - [When LLMs Benchmark Themselves: Deconstructing Self-Bias in Automated Evaluation](../2509.26600-benchmark-self-bias/README.md)（`benchmark-self-bias`）：Sec.2 Eq.1使用[segment,target,benchmark-role]的逐segment排名，先按segment平均，再diag−leave-self-out peers。原始分数方向必须明确，MetricX-QE越低越好。
 
+### reward-and-credit
+
+- [BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees](../2611.34746-briar/README.md)（`briar`）：终局正确率不能告诉训练器哪一步值得继续分支，也不能区分必要推导和答案确定后的反复检查。BRIAR以prefix成功概率的martingale结构连接三个组件：用结果分歧和置信奖励选探索前沿；以边界调制方差做树上全局LMMSE信用；仅在吸收前沿之后对正确续写的长度做零和比较。
+- [Evidence-Based Credit Assignment for Search-Augmented Language Models](../2611.23824-eca-credit/README.md)（`eca-credit`）：终止答案全错时，组相对奖励为零，但检索可能已经取得有价值证据。ECA用训练专用冻结策略在仅含问题与去重文档的上下文中，计算参考答案的长度归一化对数似然势函数；生成的思考、查询和其他轨迹不参与打分。
+- [How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation](../2611.24005-dcc-aggregation/README.md)（`dcc-aggregation`）：等权rubric相加并不代表各维贡献相等：每维满足/不满足样本的平均分差形成reward gain。论文把候选奖励差精确拆成基础满足数量信号、gain imbalance项和残差；把gain全部归一成1反而可能放大小gain维度的噪声。
+- [GPRM: Global Perspective Process Reward Model](../2611.20755-gprm/README.md)（`gprm`）：除问题和当前step，还读历史step与已预测judgment、当前候选的后续trajectory；四维分析是forward consistency、posterior verification、goal alignment、self validity。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning](../2611.20955-jev-safety-reward/README.md)（`jev-safety-reward`）：c=max(p,1-p)低于阈值才交强judge；高置信把有害判为安全的miss永远不会被委托，训练可能集中到这个区域。
+- [Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning](../2611.20612-design-taste-admission/README.md)（`design-taste-admission`）：spacing等指标也可被刷分；必须同时通过expert agreement、单原则扰动/修复因果敏感性、hack trap和重复稳定性。未通过的项只作evaluation，不进reward。
+- [Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle](../2611.21538-optimistic-verifier-audit/README.md)（`optimistic-verifier-audit`）：固定被引用特征后，所有其它特征补全都必须维持同一决策；再去掉任一特征就不充分才是minimal。可能存在多个替代充分理由，需保存antichain。
+
 ### 多模态上下文偏好校准
 
 - [Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization](../2608.12158-c2-dpo/README.md)（`c2-dpo`）：普通 DPO 即使输入相关图像上下文，也可能主要依赖语言先验。论文先定义 CPG，度量加入上下文后 chosen/rejected preference margin 增加多少；C²-DPO 直接扩大该增益，同时保留原偏好顺序。
@@ -192,6 +202,13 @@
 ### 校准强化学习
 
 - [Balancing Classification and Calibration Performance in Decision-Making LLMs via Calibration Aware Reinforcement Learning](../2601.13284-calibration-aware-rl/README.md)（`calibration-aware-rl`）：论文指出 RLVR 虽能提高决策正确率，却可能让 decision token 极度过度自信；其方法直接调整决策 token 的概率，在保留准确率的同时降低 ECE。本仓库对应地把 accuracy 与 Brier/ECE 同时纳入报告，并只用 validation 拟合温度，禁止用 test 调参。
+
+### teacher-and-context
+
+- [Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents](../2611.34756-care-opd/README.md)（`care-opd`）：prefix replay让当前学生从已保存历史生成一轮响应，再由教师监督，从训练关键路径中移走长环境交互；但教师独有历史可能漏掉学生造成的状态，且固定早轮偏好会漏掉晚期诊断。CARE-OPD以少量学生roll-in再由教师完成来扩历史，用教师在新学生响应上的置信门过滤更新，并让已完成轨迹中的执行反馈支持回放turn选择。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [HINT-WAM: Hindsight-Informed Training for World Action Models](../2611.24789-hint-wam/README.md)（`hint-wam`）：HINT-WAM先SFT动作专家，再冻结同一backbone，只训练hindsight encoder与gated adapters读取示范未来视频。teacher去掉当前帧并保留时间轴，学生与部署策略从来不看未来。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [VisAlloc: Allocating Visual Supervision for On-Policy Self-Distillation](../2611.25069-visalloc/README.md)（`visalloc`）：VisAlloc把视觉监督分成固定样本筛选和在线token分配。先用几何匹配的正/负裁剪，保留正教师答对、负教师答错且注释质量合格的样本；该筛选发生在优化前。
+- [LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation](../2611.20674-leaf-opd/README.md)（`leaf-opd`）：教师独立解码的首token可能强烈拒答，但在学生已生成事实前缀上，后续token抑制可能迅速消失；需要按同一学生轨迹测监督强度和持续性。
 
 ### RLVR
 
@@ -224,6 +241,7 @@
 
 ### data-and-budget
 
+- [FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning](../2611.33827-feast/README.md)（`feast`）：只追逐当前高学习信号会形成反馈环：弱能力因过去分配不足而表现差，又因此拿不到新经验。FEAST将学习机会与计算分配分开：固定atomic unit保存历史，当前策略表示和学习趋势只改变簇归属；选中簇先保留独立预算，随后才在各簇内按reward方差逐轮晋级prompt。
 - [CTRL: Concurrent Training and Rollout for LLM Reinforcement Learning via GPU Co-Residency](../2611.27119-ctrl/README.md)（`ctrl`）：CTRL让每张GPU同时驻留learner rank和持续rollout shard，在CUDA MPS下共享SM。为腾出显存，优化器和immutable policy版本保存在host，learner仅流式装入有限层窗口。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [Policy Improvement-Guided Replay for Continual Reinforcement Learning](../2611.25989-colir-replay/README.md)（`colir-replay`）：持续RL不应只保存旧模型的输出：新策略仍需在历史任务分布上重新行动。CoLiR在任务结束时复用已有rollout，分别取最终策略生成的正确响应和初始策略生成的错误响应；各自补算另一策略的序列log-likelihood，以正确响应被强化和错误响应被压低两个半权重均值排序prompt。
 - [TAILROLL: Tail-Aware Rollout Acceleration for RL-Based LLM Post-Training](../2611.22206-tailroll/README.md)（`tailroll`）：rollout step常被最长尾response决定，平均load无法反映尾长。TailRoll在chunk边界迁移在途请求，并用完成siblings足够后的终止处理straggler。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -239,15 +257,6 @@
 ### 多语言后训练
 
 - [Large Reasoning Models Struggle to Transfer Parametric Knowledge Across Scripts](../2603.17070-cross-script-knowledge-transfer/README.md)（`cross-script-knowledge-transfer`）：Sec.4–6与Appendix A/H：观察性回归、训练专用entity提示干预和真实LoRA是定义性路径。不能把正则音译、手工插提示或小分类器当成其LLM知识检索机制。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
-
-### reward-and-credit
-
-- [Evidence-Based Credit Assignment for Search-Augmented Language Models](../2611.23824-eca-credit/README.md)（`eca-credit`）：终止答案全错时，组相对奖励为零，但检索可能已经取得有价值证据。ECA用训练专用冻结策略在仅含问题与去重文档的上下文中，计算参考答案的长度归一化对数似然势函数；生成的思考、查询和其他轨迹不参与打分。
-- [How Reward Gain Imbalance Shapes Ranking: Rethinking Rubric-Based Reward Aggregation](../2611.24005-dcc-aggregation/README.md)（`dcc-aggregation`）：等权rubric相加并不代表各维贡献相等：每维满足/不满足样本的平均分差形成reward gain。论文把候选奖励差精确拆成基础满足数量信号、gain imbalance项和残差；把gain全部归一成1反而可能放大小gain维度的噪声。
-- [GPRM: Global Perspective Process Reward Model](../2611.20755-gprm/README.md)（`gprm`）：除问题和当前step，还读历史step与已预测judgment、当前候选的后续trajectory；四维分析是forward consistency、posterior verification、goal alignment、self validity。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
-- [Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning](../2611.20955-jev-safety-reward/README.md)（`jev-safety-reward`）：c=max(p,1-p)低于阈值才交强judge；高置信把有害判为安全的miss永远不会被委托，训练可能集中到这个区域。
-- [Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning](../2611.20612-design-taste-admission/README.md)（`design-taste-admission`）：spacing等指标也可被刷分；必须同时通过expert agreement、单原则扰动/修复因果敏感性、hack trap和重复稳定性。未通过的项只作evaluation，不进reward。
-- [Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle](../2611.21538-optimistic-verifier-audit/README.md)（`optimistic-verifier-audit`）：固定被引用特征后，所有其它特征补全都必须维持同一决策；再去掉任一特征就不充分才是minimal。可能存在多个替代充分理由，需保存antichain。
 
 ### RLHF / RLVR
 
@@ -283,12 +292,6 @@
 ### RL 训练加速
 
 - [GrowMTP: Can RL Grow Its Own Draft Head?](../2609.16648-growmtp/README.md)（`growmtp`）：在 RL rollout 内按被接受的草稿深度训练 MTP head，并与主干梯度解耦。
-
-### teacher-and-context
-
-- [HINT-WAM: Hindsight-Informed Training for World Action Models](../2611.24789-hint-wam/README.md)（`hint-wam`）：HINT-WAM先SFT动作专家，再冻结同一backbone，只训练hindsight encoder与gated adapters读取示范未来视频。teacher去掉当前帧并保留时间轴，学生与部署策略从来不看未来。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
-- [VisAlloc: Allocating Visual Supervision for On-Policy Self-Distillation](../2611.25069-visalloc/README.md)（`visalloc`）：VisAlloc把视觉监督分成固定样本筛选和在线token分配。先用几何匹配的正/负裁剪，保留正教师答对、负教师答错且注释质量合格的样本；该筛选发生在优化前。
-- [LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation](../2611.20674-leaf-opd/README.md)（`leaf-opd`）：教师独立解码的首token可能强烈拒答，但在学生已生成事实前缀上，后续token抑制可能迅速消失；需要按同一学生轨迹测监督强度和持续性。
 
 ### 后训练数据选择
 

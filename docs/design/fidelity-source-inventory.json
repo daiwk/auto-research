@@ -12167,6 +12167,16 @@
         "fingerprint": "78031646e13aecf2df46ef7723520a92d19e30434d7f69e07db2ac913ba491f8"
       }
     ],
+    "src/auto_research/post_training/feast.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "diagnostic",
+        "line": 355,
+        "qualified_name": "diagnostic",
+        "expression": "scheduler.plan",
+        "fingerprint": "faa544a01a3b00db1de8d4b7e39a32a1b3d9445e907d3f8d96db2cad97007af7"
+      }
+    ],
     "src/auto_research/post_training/generation.py": [
       {
         "kind": "label_access_requires_role_review",

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/abs/2611.34298v1",
+  "source_url": "https://arxiv.org/pdf/2611.34298v1#page=4",
+  "source_pdf_sha256": "71dcabaf83e81586dd37f3f11bec548edf50482307ac15897478e8511df8dce4",
+  "source_sha256": "71dcabaf83e81586dd37f3f11bec548edf50482307ac15897478e8511df8dce4",
+  "page": 4,
+  "pdf_page": 4,
+  "figure": "Figure 1",
+  "caption": "Three hyperbolic random projection paradigms, including RAP radial-angular separation.",
+  "image_sha256": "fe7a602ce988e2c329a398be7bcab0c5c0c853f4e09a74540c777b19032492aa",
+  "asset_sha256": "fe7a602ce988e2c329a398be7bcab0c5c0c853f4e09a74540c777b19032492aa",
+  "retrieved_on": "2026-11-26",
+  "reviewed_version": "v1",
+  "visually_reviewed": true,
+  "visually_reviewed_on": "2026-11-26",
+  "scientific_content_modified": false,
+  "render_dpi": 120,
+  "extraction": "Unmodified full PDF page raster including complete figure caption; pdftoppm at120dpi; visually reviewed.",
+  "copyright": "Copyright belongs to the original authors."
+}

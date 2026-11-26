@@ -9,6 +9,7 @@
 
 | 方法族 | 论文 / 官方模型 | 机构与日期 | Adapter / 独立组件 |
 |---|---|---|---|
+| 长视频生成与Agent记忆 | [Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation](../multimodal-models/2611.34907-agentic-longlive/README.md) | The Chinese University of Hong Kong (CUHK)，2026-11-25 | 未复现（高成本资料） |
 | 语音事件与人类误报评测 | [FEND: Far-End Detection in Outbound Voice AI Calls](../multimodal-models/2611.18050-fend-protocol/README.md) | Observe.AI, India，2026-11-13 | `fend-protocol` |
 | 页面检索与系统测量 | [Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries](../multimodal-models/2611.17726-multimodal-library-protocol/README.md) | Indiana University，2026-11-13 | `multimodal-library-protocol` |
 | 视觉状态转移监督 | [Back to Pixels: Lifting Latent Video Diffusion into Pixel Space](../multimodal-models/2611.17336-pixvid/README.md) | Roblox，2026-11-12 | 未复现（高成本资料） |

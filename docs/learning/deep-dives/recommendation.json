@@ -5,7 +5,7 @@
     "retrieval-matching": {
       "title": "召回覆盖从哪里来：用户表示、正例组织与负例难度",
       "thesis": "候选生成先决定后续排序能看见什么。YouTube DNN说明单用户向量如何进入近邻检索，Airbnb EBR把监督放回搜索—浏览—预订旅程，MIMA让同请求多正例分配给互补兴趣，MDCNS改变负例的难度与多视角监督。这四种改动分别作用于表示、标签、兴趣分工和梯度，不能用召回数变大统一解释。",
-      "updated": "2026-11-25",
+      "updated": "2026-11-26",
       "axes": [
         "召回接口：单向量还是多兴趣通道",
         "正例来自下一行为、旅程还是同请求集合",
@@ -114,6 +114,15 @@
             "论文离线与线上效果",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "recommendation:onequery",
+          "position": "本地只执行Eq5–13的reward、优势和clipping算术。QT输入为显式tuple列表，不发明私有标注串的parser；无效schema直接拒绝，不猜造格式reward。空串对空串编辑相似度取1、sigma采用总体标准差、delta=1e-8是显式边界约定。没有语言模型、schema约束解码、部分标注补齐、SFT、GRPO参数训练、蒸馏或服务；gold只作为reward计算输入，不存在读取gold的Agent。",
+          "tradeoff": "LARF把单文档相关性建成五维ordinal标签，并使用PNR、规则反馈和terminal digit margin；OneQuery监督的是同一query的四个异构结构字段。OneQuery的QT reward是完整集合exact match，不能换成LARF的分级距离或文档间有序pair。LARF训练期生成head/服务分类head也不等于OneQuery的头部缓存/尾部蒸馏。两篇作者线上指标不可直接比较。",
+          "sections": [
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -181,6 +190,14 @@
           "papers": [
             "recommendation:larf",
             "recommendation:yuanbao-rubric"
+          ]
+        },
+        {
+          "title": "OneQuery的QT reward能换成LARF的ordinal距离吗？",
+          "body": "LARF把单文档相关性建成五维ordinal标签，并使用PNR、规则反馈和terminal digit margin；OneQuery监督的是同一query的四个异构结构字段。OneQuery的QT reward是完整集合exact match，不能换成LARF的分级距离或文档间有序pair。LARF训练期生成head/服务分类head也不等于OneQuery的头部缓存/尾部蒸馏。两篇作者线上指标不可直接比较。",
+          "papers": [
+            "recommendation:onequery",
+            "recommendation:larf"
           ]
         }
       ],
@@ -265,6 +282,16 @@
             "recommendation:larf",
             "recommendation:yuanbao-rubric"
           ]
+        },
+        {
+          "id": "nov26-onequery",
+          "question": "OneQuery的QT reward能换成LARF的ordinal距离吗？",
+          "answer": "LARF把单文档相关性建成五维ordinal标签，并使用PNR、规则反馈和terminal digit margin；OneQuery监督的是同一query的四个异构结构字段。OneQuery的QT reward是完整集合exact match，不能换成LARF的分级距离或文档间有序pair。LARF训练期生成head/服务分类head也不等于OneQuery的头部缓存/尾部蒸馏。两篇作者线上指标不可直接比较。",
+          "example": "教学例：参考含brand和product，少一个字段时QT reward=0；不能按匹配了一半给0.5，或按等级距离衰减。",
+          "papers": [
+            "recommendation:onequery",
+            "recommendation:larf"
+          ]
         }
       ],
       "reviewed_papers": [
@@ -309,7 +336,8 @@
         "recommendation:yuanbao-rubric",
         "recommendation:intentflow",
         "recommendation:lser-serving",
-        "recommendation:larf"
+        "recommendation:larf",
+        "recommendation:onequery"
       ],
       "updates": [
         {
@@ -470,6 +498,18 @@
           "source_revisions": {
             "recommendation:larf": "8e6ff5949d91269651760f74be419371c5d839daaf6d007c3339d3035a431b4d",
             "recommendation:yuanbao-rubric": "f79f80548329a40d2bb20638f0df7929f1f9258ffd7ecdb5e03b3ea410abe7d1"
+          }
+        },
+        {
+          "date": "2026-11-26",
+          "papers": [
+            "recommendation:onequery",
+            "recommendation:larf"
+          ],
+          "summary": "本地只执行Eq5–13的reward、优势和clipping算术。QT输入为显式tuple列表，不发明私有标注串的parser；无效schema直接拒绝，不猜造格式reward。空串对空串编辑相似度取1、sigma采用总体标准差、delta=1e-8是显式边界约定。没有语言模型、schema约束解码、部分标注补齐、SFT、GRPO参数训练、蒸馏或服务；gold只作为reward计算输入，不存在读取gold的Agent。",
+          "source_revisions": {
+            "recommendation:onequery": "b5f8701ce65c21788e1f430185e4b4591f720c600552f0ea82ff14c452a556cb",
+            "recommendation:larf": "8e6ff5949d91269651760f74be419371c5d839daaf6d007c3339d3035a431b4d"
           }
         }
       ]
@@ -776,7 +816,7 @@
     "history-ranking-backbones": {
       "title": "DIN、HSTU、LONGER、SlimPer、RankMixer：究竟让谁与谁交互？",
       "thesis": "比较排序骨干前先画三条边：历史到历史、候选到历史、字段到字段。DIN按候选激活历史，HSTU在输入窗口内逐层改写历史状态，LONGER先合并再以短查询读长KV，SlimPer反复读取用户池但只传播小知识库，RankMixer则更换异构字段交互。它们可处于同一流水线的不同位置，不能按一个长度变量或一张本地结果表排总名次。",
-      "updated": "2026-11-25",
+      "updated": "2026-11-26",
       "axes": [
         "交互对象：历史内部、目标读取还是字段混合",
         "每层传播的状态及原始历史是否持续可读",
@@ -861,6 +901,15 @@
             "与已有方法的关系",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "recommendation:camar",
+          "position": "只实现给定per-domain state/candidate张量上的Eq5–7、9–15：真实两层PCN、双线性factor、单层active-only MHA、域gate/classifier、GRL、正交和sampled-softmax。没有多模态encoder、RQ-VAE/语义码本、item/history backbone、Eq8 task-level冷启动Lcf、完整LTN或三阶段训练器；因此不宣称完整CAMAR。bias-free factor、MHA细节/MLP隐藏宽度等原文未唯一给出，显式采用本地参考配置。",
+          "tradeoff": "LazUnirec对召回/排序任务用private LoRA/expert及梯度方向可靠性调权；CAMAR对song/playlist/podcast域显式拆invariant/specific，并只让invariant跨域。前者主要控制共享参数更新冲突，后者同时限制表示流动和域可辨识性。梯度稳定不等于域不变，内积正交也不等于统计独立；两者的私有数据与本地合成诊断都不能支持直接胜负比较。",
+          "sections": [
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -908,6 +957,14 @@
           "papers": [
             "recommendation:lazunirec",
             "recommendation:onetrans-v2"
+          ]
+        },
+        {
+          "title": "CAMAR与LazUnirec都在解决同一种共享问题吗？",
+          "body": "LazUnirec对召回/排序任务用private LoRA/expert及梯度方向可靠性调权；CAMAR对song/playlist/podcast域显式拆invariant/specific，并只让invariant跨域。前者主要控制共享参数更新冲突，后者同时限制表示流动和域可辨识性。梯度稳定不等于域不变，内积正交也不等于统计独立；两者的私有数据与本地合成诊断都不能支持直接胜负比较。",
+          "papers": [
+            "recommendation:camar",
+            "recommendation:lazunirec"
           ]
         }
       ],
@@ -973,6 +1030,16 @@
           "papers": [
             "recommendation:lazunirec",
             "recommendation:onetrans-v2"
+          ]
+        },
+        {
+          "id": "nov26-camar",
+          "question": "CAMAR与LazUnirec都在解决同一种共享问题吗？",
+          "answer": "LazUnirec对召回/排序任务用private LoRA/expert及梯度方向可靠性调权；CAMAR对song/playlist/podcast域显式拆invariant/specific，并只让invariant跨域。前者主要控制共享参数更新冲突，后者同时限制表示流动和域可辨识性。梯度稳定不等于域不变，内积正交也不等于统计独立；两者的私有数据与本地合成诊断都不能支持直接胜负比较。",
+          "example": "教学例：某域invariant每步梯度很稳定，仍可能编码domain ID；高可靠权重不能代替GRL域分类对抗。",
+          "papers": [
+            "recommendation:camar",
+            "recommendation:lazunirec"
           ]
         }
       ],
@@ -1052,7 +1119,8 @@
         "recommendation:zenith",
         "recommendation:xsplit-argus",
         "recommendation:dna",
-        "recommendation:lazunirec"
+        "recommendation:lazunirec",
+        "recommendation:camar"
       ],
       "updates": [
         {
@@ -1253,6 +1321,18 @@
           "source_revisions": {
             "recommendation:lazunirec": "4b8f8e8c927aae755f07d2f5595315353dcfd7afabc5945ee519463012da577b",
             "recommendation:onetrans-v2": "92e6c9f6f31c4d398bc8b963728618f17f0887dab50b5c6d6752d455b382ac4c"
+          }
+        },
+        {
+          "date": "2026-11-26",
+          "papers": [
+            "recommendation:camar",
+            "recommendation:lazunirec"
+          ],
+          "summary": "只实现给定per-domain state/candidate张量上的Eq5–7、9–15：真实两层PCN、双线性factor、单层active-only MHA、域gate/classifier、GRL、正交和sampled-softmax。没有多模态encoder、RQ-VAE/语义码本、item/history backbone、Eq8 task-level冷启动Lcf、完整LTN或三阶段训练器；因此不宣称完整CAMAR。bias-free factor、MHA细节/MLP隐藏宽度等原文未唯一给出，显式采用本地参考配置。",
+          "source_revisions": {
+            "recommendation:camar": "5033a738391b4840fc81159daf71e68df54b806ac81804d18abdc23aa8881b91",
+            "recommendation:lazunirec": "4b8f8e8c927aae755f07d2f5595315353dcfd7afabc5945ee519463012da577b"
           }
         }
       ]

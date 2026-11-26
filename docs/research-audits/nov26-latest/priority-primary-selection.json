@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-26",
+  "window": {
+    "start": "2026-11-25",
+    "end": "2026-11-26"
+  },
+  "all_sources_exhaustive": false,
+  "selected_priority_papers": [],
+  "new_directory_urls_relative_to_previous_batch": 0,
+  "new_directory_urls": [],
+  "official_pages": 56,
+  "parse_complete_pages": 54,
+  "repository_query_count": 6,
+  "repository_event_observations": 40,
+  "directory_limit": "The bounded directory inventory differs from the Nov15 baseline. Fifteen added URLs are inherited from earlier captures, not fifteen new papers today. Pagination/link differences do not establish paper deletion. Two incomplete Meta landing pages do not establish no new Meta work.",
+  "google_new_blog": {
+    "source_url": "https://research.google/blog/verifiable-social-reasoning-for-llm-assistants/",
+    "blog_dated_on": "2026-11-25",
+    "paper_url": "https://arxiv.org/abs/2609.17496",
+    "paper_first_published_at": "2026-09-15T17:37:29Z",
+    "existing_identity": "agent-research:fuse-evaluator",
+    "decision": "already_cataloged_not_a_new_first_release",
+    "reason": "Read the actual paper link and submission history; a new blog for Fuse and its21K-example release does not create a new paper identity."
+  },
+  "repository_primary_observations": [
+    {
+      "repository": "google-research/codegen-classroom",
+      "source_url": "https://github.com/google-research/codegen-classroom",
+      "capture": ".cache/nov26-latest/priority-readmes/google-research--codegen-classroom.md",
+      "capture_sha256": "ecbcee80711ef84f805fa744b603d78061d63f81021b7269e85d446de891668f",
+      "paper_arxiv_identity": null,
+      "decision": "source_only_framework_no_new_verified_paper_identity",
+      "reason": "README dates the iterative Gemini/Gemma code-generation framework to August2025 and supplies tasks/RSI workflow, not a verified new paper. Do not execute repository instructions or count a push as a publication.",
+      "read_scope": "README identity/release review, not full method review except the separately documented SCALE4D report"
+    },
+    {
+      "repository": "google-deepmind/cryptids",
+      "source_url": "https://github.com/google-deepmind/cryptids",
+      "capture": ".cache/nov26-latest/priority-readmes/google-deepmind--cryptids.md",
+      "capture_sha256": "b7f426139ec66cf33268061ad10e5531bee8c8a1a17d06bb1c7a9e65cfe6c7ce",
+      "paper_arxiv_identity": "2610.22603",
+      "decision": "existing_historical_identity_source_release",
+      "reason": "README links the existing Busy Beaver autonomous-discovery paper. Formal Lean artifacts and new proofs are source-release evidence, not a new first publication or permission to rerun its campaign.",
+      "read_scope": "README identity/release review, not full method review except the separately documented SCALE4D report"
+    },
+    {
+      "repository": "google-deepmind/disco",
+      "source_url": "https://github.com/google-deepmind/disco",
+      "capture": ".cache/nov26-latest/priority-readmes/google-deepmind--disco.md",
+      "capture_sha256": "7c01f1ded531143db361f2d17b12007d2e2606992cd0e26f65e18aa3efef4684",
+      "paper_arxiv_identity": "2611.27104",
+      "decision": "existing_paper_public_code_observed",
+      "reason": "The official repository is now readable and names the already-cataloged DISCO paper. This source observation does not upgrade the local binary/unboosted component into complete LLM discovery, run API experiments, or rewrite earlier dated not-found observations.",
+      "read_scope": "README identity/release review, not full method review except the separately documented SCALE4D report"
+    },
+    {
+      "repository": "facebookresearch/sphere-encoder",
+      "source_url": "https://github.com/facebookresearch/sphere-encoder",
+      "capture": ".cache/nov26-latest/priority-readmes/facebookresearch--sphere-encoder.md",
+      "capture_sha256": "2accf100128001b11b56c4daa616c71e680a89ea644d828d0b24748038025740",
+      "paper_arxiv_identity": "2602.15030",
+      "decision": "historical_paper_source_release_observation",
+      "reason": "README identifies the February2026 Sphere Encoder paper, plus historical community/sequel links. A current push is not a new November publication; no model download or retrospective full run authorized here.",
+      "read_scope": "README identity/release review, not full method review except the separately documented SCALE4D report"
+    },
+    {
+      "repository": "facebookresearch/rlr_scale4d",
+      "source_url": "https://github.com/facebookresearch/rlr_scale4d",
+      "capture": ".cache/nov26-latest/priority-readmes/facebookresearch--rlr_scale4d.md",
+      "capture_sha256": "82d677c47ede02634ffb4c2eb13ce9bc48453afb717d807e7d57f83baf8ec567",
+      "paper_arxiv_identity": null,
+      "decision": "new_official_technical_report_identity_date_limited_cost_done",
+      "reason": "Official SCALE4D report datedNovember25 has an arXiv submission placeholder, not a public ID; first-public UTC unverified. Method/cost reviewed separately in scale4d-primary-report.json. Code and weights remain under legal review. Full campaign terminally not reproduced, no component or retry.",
+      "read_scope": "README identity/release review, not full method review except the separately documented SCALE4D report"
+    }
+  ],
+  "scale4d_primary_report_review": "scale4d-primary-report.json",
+  "industrial_priority": [
+    {
+      "identity": "recommendation:onequery",
+      "source": "https://arxiv.org/pdf/2611.33653v1",
+      "location": "Section5.6",
+      "evidence": "Real AliExpress multi-country A/B against existing QU, L2P+0.5%, human SBS+0.8points; fraction/duration/CI undisclosed"
+    },
+    {
+      "identity": "recommendation:camar",
+      "source": "https://arxiv.org/pdf/2611.33628v1",
+      "location": "SectionV-E/TableV",
+      "evidence": "Two-week May2026 NetEase production A/B with CAMAR extra recall and same rankers; Song duration+1%, Playlist likes+3%, Podcast duration+1.6%; fraction/p/CI undisclosed"
+    }
+  ],
+  "limits": [
+    "No global absence or exhaustive Google/Meta claim.",
+    "Repository maintenance events outside the five primary identity checks are source-only observations, not fabricated full-paper decisions.",
+    "No existing high-cost terminal campaign automatically reopened.",
+    "Official arXiv metadata recall hitHTTP429 before the overlap boundary; this limitation is retained and the watermark does not advance."
+  ]
+}

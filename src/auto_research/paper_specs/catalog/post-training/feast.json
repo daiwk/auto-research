@@ -1,0 +1,72 @@
+{
+  "domain": "post-training",
+  "reviewed_version": "v1",
+  "published": "2026-11-25",
+  "discovered_on": "2026-11-26",
+  "reviewed_on": "2026-11-26",
+  "announced_on": "2026-11-26",
+  "verified_priority_organizations": [],
+  "code": null,
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "priority": "P1",
+  "intake_class": "new_first_release_in_window",
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "gpu_validation_artifact": null,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "key": "feast",
+  "title": "FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning",
+  "paper_url": "https://arxiv.org/abs/2611.33827v1",
+  "reviewed_version_url": "https://arxiv.org/pdf/2611.33827v1",
+  "detail_path": "post-training/2611.33827-feast/README.md",
+  "first_author": "Yongxi Zhu",
+  "first_author_affiliation": "Zhejiang University",
+  "published_at": "2026-11-25T05:56:03Z",
+  "updated_at": "2026-11-25T05:56:03Z",
+  "method_source_sha256": "f567742c5ba3fc47d0ca755dd7c46881eb90ebc9a75883080996429b3797ee02",
+  "author_organizations": [
+    "Zhejiang University",
+    "Harvard University",
+    "Nanyang Technological University",
+    "The Hong Kong University of Science and Technology"
+  ],
+  "code_status": "固定v1明确录用后发布，正文/摘要未链接本篇源码；本轮未找到已发布方法仓库，许可与commit未知。",
+  "topic": [
+    "data-and-budget",
+    "CPU机制组件"
+  ],
+  "implementation_status": "component_only",
+  "component_implemented": true,
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "local_operator": "auto_research.post_training.feast.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.feast import diagnostic; print(diagnostic(42))'",
+  "summary": "固定atomic历史与当前policy重聚类分离，正priority/曝光欠额保护机会，选中簇预算预留后再按累计reward方差2/4/16晋级。",
+  "fidelity_note": "实际KMeans++/PCA/对角GMM-EM/BIC及至少2原子修复、原子pilot等权历史和欠额、剩余容量选簇、固定簇预算、累计方差渐进callback采样。外部hidden vectors必须显式提供；诊断随机向量与Bernoulli reward不冒充LLM。没有hidden提取、GRPO优化/能力比较。",
+  "cost_assessment": {
+    "source": "https://arxiv.org/pdf/2611.33827v1",
+    "source_sections": [
+      "AppendixA.2",
+      "AppendixA.3/Table11",
+      "AppendixA.6/Table14–15"
+    ],
+    "basis": "最小1.7B单臂100更新估计6.07 A100-80GB GPU小时（排除评测），每步1024trajectory、输入/输出各2048上限；完整还含8B、多scheduler/seed、QEL长程quota矩阵和SMC。单臂可放单A100不等于完整矩阵可负担；完整流程按本轮预算终态不承接。",
+    "available_resource": "one A100 or A30, or local Mac; CPU-only component",
+    "decision": "成本过高，不复现（审查 DONE）；仅低成本预算调度组件，完整矩阵终态。",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30
+    }
+  }
+}

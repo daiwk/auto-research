@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-26",
+  "owner": "post",
+  "scope": [
+    "post-training:briar",
+    "post-training:feast",
+    "post-training:care-opd"
+  ],
+  "fixed_primary_sources": [
+    {
+      "paper": "post-training:briar",
+      "url": "https://arxiv.org/pdf/2611.34746v1",
+      "sha256": "bae7a1b0d4b02812f9efe09d43d2962b3235542899fd763a1f55a1c6074a4e98",
+      "local_capture": ".cache/nov26-latest/post-primary/2611.34746v1.pdf",
+      "bytes": 770527
+    },
+    {
+      "paper": "post-training:feast",
+      "url": "https://arxiv.org/pdf/2611.33827v1",
+      "sha256": "f567742c5ba3fc47d0ca755dd7c46881eb90ebc9a75883080996429b3797ee02",
+      "local_capture": ".cache/nov26-latest/post-primary/2611.33827v1.pdf",
+      "bytes": 3365427
+    },
+    {
+      "paper": "post-training:care-opd",
+      "url": "https://arxiv.org/pdf/2611.34756v1",
+      "sha256": "c6bb329fd6fcf1843baf63a71f7dcc45c13e3e6c3d842569a9abbb44a321db86",
+      "local_capture": ".cache/nov26-latest/post-primary/2611.34756v1.pdf",
+      "bytes": 1044182
+    }
+  ],
+  "implementation": {
+    "briar": "CPU Eqs3/5–10: frontier scores, heteroscedastic two-pass RTS, independent dense covariance, minimal absorption and clipped-then-recentered suffix credit; no language rollout or DAPO training.",
+    "feast": "CPU actual KMeans++/PCA/diagonal-GMM EM+BIC/repaired groups, persistent atom histories/shortfalls/capacities, reserved budgets, cumulative-variance callback sampling; no hidden-state extraction or GRPO optimization.",
+    "care_opd": "Review-only; no code, operator, command, metrics or GPU receipt."
+  },
+  "verification": {
+    "command": "PYTHONPATH=src:scripts ../../.venv/bin/python -m pytest tests/test_nov26_post_components.py -q",
+    "result": "23 passed",
+    "ruff": "passed for two modules and owned tests",
+    "diff_check": "git diff --check passed",
+    "cpu_self_checks": {
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "modules": [
+        "briar",
+        "feast"
+      ],
+      "all_checks_true": true,
+      "formal_metric_status": "Independent root runner/curator owns formal metrics; these self-checks are not paper metrics."
+    },
+    "authored_review": {
+      "questions": 12,
+      "levels_per_paper": [
+        "basics",
+        "mechanism",
+        "comparison",
+        "implementation"
+      ],
+      "english_question_fingerprints_match": true,
+      "deep_proposals": 3,
+      "actual_peer_reads": [
+        "post-training:opcredit",
+        "post-training:rail",
+        "post-training:treeopsd"
+      ],
+      "readme_and_peer_sha256_match": true,
+      "original_figures_visually_reviewed": true
+    }
+  },
+  "integrity": {
+    "diagnostic_only_components": true,
+    "capability_comparison": false,
+    "training_executed": false,
+    "models_downloaded": 0,
+    "datasets_downloaded": 0,
+    "paid_api_calls": 0,
+    "full_experiments": "成本过高，不复现（审查 DONE）",
+    "automatic_retry": false,
+    "evolve_integrated": false
+  },
+  "caveats": [
+    "BRIAR Eq5 is a variance modulation, not a hard bounded-martingale envelope; suffix-only token loss does not freeze shared-parameter prefix behavior.",
+    "FEAST paper does not fully specify GMM repair ordering/ties. Local least-log-posterior-cost repair, population empirical PCA std, 100-step EM/1e-3 tolerance/1e-6 variance floor are disclosed numerical conventions.",
+    "FEAST first-arm 6.07 A100 GPU-hour figure is an author estimate excluding evaluation, not a local measurement or permission to launch the full matrix."
+  ],
+  "cleanup": {
+    "retained": "Fixed-v1 primary PDFs and original figure assets retained as review evidence, total primary PDF bytes 5180136.",
+    "disposable": "Removed exactly three owned full-page review PNGs under /tmp after visual checks, reclaiming 644 KiB allocated space; no model/data or unfamiliar files deleted."
+  },
+  "announcement_verification": {
+    "announced_on": "2026-11-26",
+    "source": ".cache/nov26-latest/announcement-pool.json",
+    "all_three_in_identities": true,
+    "published_remains": "2026-11-25",
+    "algorithm_rerun_needed": false
+  },
+  "readme_sha256": {
+    "post-training:briar": "32ea31e03dbd2dd78cc9260628c2a89cd8b64559b506b2ff0cf8e17c2cd16d2a",
+    "post-training:feast": "676d734ea3ecc3a226000a6fb7e6cc653eaf182363f55077b2723190780448b3",
+    "post-training:care-opd": "206dc50df086fbcd2fe05faf0aee6e046f5f1f64dc81ed226b158e6a78edcc27"
+  }
+}

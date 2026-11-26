@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-26-latest-components",
+  "owner": "agent",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "api_calls": 0,
+  "model_and_dataset_downloads": 0,
+  "automatic_retry": false,
+  "full_experiments_executed": false,
+  "maximum_component_seconds_per_seed": 30,
+  "components": {
+    "home": {
+      "domain": "agent-research",
+      "module": "agent_research/home.py",
+      "cuda": false,
+      "evaluation_tier": "l1_mechanism"
+    },
+    "dualpm": {
+      "domain": "agent-research",
+      "module": "agent_research/dualpm.py",
+      "cuda": false,
+      "evaluation_tier": "l0_interface"
+    }
+  },
+  "review_only": [
+    "multimodal-models:agentic-longlive"
+  ],
+  "tier_enum_verified_in": "scripts/run_nov18_latest_components.py:config accepts l0_interface and l1_mechanism"
+}

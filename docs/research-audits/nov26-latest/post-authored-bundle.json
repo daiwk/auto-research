@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-26",
+  "papers": {
+    "post-training:briar": {
+      "questions": [
+        {
+          "id": "nov26-basics",
+          "level": "basics",
+          "question": "为什么token entropy高不代表这个前缀值得继续分支？",
+          "answer": "词汇表述仍可多样，但后续答案可能已经确定。BRIAR按二值结果的分歧与估计不确定性选前沿，而非把措辞变化直接当作可学习信用。全对或全错的采样节点不可探索。",
+          "example": "教学例：六条续写都答对，但分别用不同自检措辞；token entropy可高，结果却无分歧，该节点不因措辞丰富而进入frontier。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "nov26-mechanism",
+          "level": "mechanism",
+          "question": "两遍RTS为何不只是对子节点reward求平均？",
+          "answer": "向上pass把各子树的precision和information按边方差衰减后汇总，向下pass再把父节点全局后验和本子树证据融合。兄弟分支通过父后验影响本节点，而普通局部平均丢失这条路径。",
+          "example": "教学例：同一子树只有一个正确叶，另一个兄弟有大量错误叶；RTS的父后验会改变该子树估值，不等于只把唯一叶的1直接向上复制。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "nov26-comparison",
+          "level": "comparison",
+          "question": "BRIAR与OpCredit都做局部信用，为什么不能互换？",
+          "answer": "OpCredit的BOC依赖匹配操作上下文的轨迹支持集，FTC依赖训练专用答案邻域；BRIAR依赖显式前缀树、叶奖励与经验Gaussian边方差。支持集匹配或邻域势差不能代替全局协方差平滑。",
+          "example": "教学例：两个KG操作到达相同实体但访问历史不同，BOC先检查上下文匹配；BRIAR只有在完整prefix共享时才共享树路径，不能仅按实体ID合并。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "nov26-implementation",
+          "level": "implementation",
+          "question": "为什么suffix clip之后还要recenter，也不能宣传prefix行为不变？",
+          "answer": "recenter落实每个吸收节点优势总和为零，二次clip可能再次破坏它。suffix mask只排除prefix token loss；共享网络参数仍参与suffix预测，因此更新后prefix行为未被保证不变。",
+          "example": "教学例：偏斜长度使clip后均值不为零，需要减去该均值；即使prefix位置不计loss，suffix对共享attention权重的梯度仍可改变下次prefix预测。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        }
+      ]
+    },
+    "post-training:feast": {
+      "questions": [
+        {
+          "id": "nov26-basics",
+          "level": "basics",
+          "question": "为什么FEAST先预留簇预算，再在簇内追逐reward方差？",
+          "answer": "弱能力当前方差低可能是长期分配不足的结果。正priority保持其被选机会；一旦选中，独立预算不能被其他簇的高方差prompt抢走。只做全局variance top-k会丢掉这层保护。",
+          "example": "教学例：数学簇有大量高方差题，逻辑簇暂时全错。若两簇都被选，逻辑簇仍获得256条，而不是把其后续预算全部转给数学。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "nov26-mechanism",
+          "level": "mechanism",
+          "question": "动态重聚类为什么不能重置atomic历史？",
+          "answer": "当前policy表示和慢signed trend会改变簇归属，但attainment、pilot disagreement与曝光欠额属于持久原子。重置会把曾受忽视的能力当成全新能力，破坏分配历史和欠额补偿的意义。",
+          "example": "教学例：一个原子从簇A移动到B时，其欠额80仍保留；只更新i到cluster映射，不给它重新置零，也不复制A整个簇的历史。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "nov26-comparison",
+          "level": "comparison",
+          "question": "FEAST与RAIL都分配rollout，差别是否只是selector名字？",
+          "answer": "不是。RAIL从shadow干预的recoverability收益学习contextual bandit；FEAST保护跨簇机会与预算，然后在簇内晋级prompt。FEAST不学习如何修复轨迹，RAIL的干预收益也不是FEAST的pilot等权统计。",
+          "example": "教学例：选择在哪个失败步骤插入帮助是干预决策；决定逻辑簇本轮仍有256条机会是配额保护，两者不等价。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "nov26-implementation",
+          "level": "implementation",
+          "question": "为何attainment只看共同两个pilot，而欠额要计全部rollout？",
+          "answer": "晋级由reward方差决定，若用晋级后的全部样本估计attainment会引入自适应选择偏置。共同pilot让prompt等权可比；但所有生成都消耗真实预算，因此欠额和总成本必须计入pilot、晋级及零方差样本。",
+          "example": "教学例：题A的pilot为0和1，后来多采20次成功；题B的pilot都0。attainment仍为(0.5+0)/2=0.25，不是21/24；曝光却要计24条。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        }
+      ]
+    },
+    "post-training:care-opd": {
+      "questions": [
+        {
+          "id": "nov26-basics",
+          "level": "basics",
+          "question": "prefix replay中的on-policy到底在哪一层成立？",
+          "answer": "当前学生从保存prefix生成新响应，所以响应层是on-policy；prefix来自过去固定policy轨迹，因此历史层off-policy。CARE-OPD用学生roll-in扩历史，但不把保存历史变成每次更新的新环境轨迹。",
+          "example": "教学例：今天的学生从昨天记录的第20轮观察继续回答；新回答来自今天policy，但前19轮并未按今天policy重新执行。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "nov26-mechanism",
+          "level": "mechanism",
+          "question": "后见selector可以读完整轨迹，为什么学生却不能？",
+          "answer": "selector用后续执行反馈决定哪些教师turn值得训练，这是训练侧分配信息。被评测或生成响应的学生只能读该turn之前的prefix；临时ID、selector输出和未来证据都必须移除，否则构成信息泄漏。",
+          "example": "教学例：后续测试暴露修复失败，可帮助selector选择早期诊断turn；学生学习该turn时不能看到尚未运行的测试结果。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "nov26-comparison",
+          "level": "comparison",
+          "question": "为什么CARE-OPD不等于TreeOPSD的树后验目标？",
+          "answer": "TreeOPSD从树信用构造冻结有界Bernoulli target，主要控制更新方向与停止点；CARE-OPD选择历史/turn及响应资格，目标仍是教师token分布reverse KL。样本分配不等于有限更新target。",
+          "example": "教学例：同一prefix被选为回放并不规定学生应该移动多远；TreeOPSD的target会在达到目标时令对应梯度为零。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        },
+        {
+          "id": "nov26-implementation",
+          "level": "implementation",
+          "question": "为什么只实现confidence gate不能标记CARE-OPD已复现？",
+          "answer": "定义性流程还包括学生roll-in、教师完成与验证、基于后见执行证据的teacher selector、去未来信息的prefix replay和新学生响应蒸馏。只写通用门或固定turn fixture删掉了核心选择模型，且完整流程成本超预算。",
+          "example": "教学例：手工总选前40%turn没有读到后来失败测试，不能替代可能选中后半段关键修复的后见教师；因此本篇保持review-only成本DONE。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-26"
+        }
+      ]
+    }
+  },
+  "english_question_units": {
+    "qa/post-training:briar/nov26-basics": {
+      "source_sha256": "f52c364bbc6e1a386ac1d6bfa426c02e38eefb0efeca3cb61bd54e84f09c7a88",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is high token entropy insufficient to justify branching?",
+        "answer": "Wording can vary after the answer has settled. BRIAR uses outcome bifurcation and estimation uncertainty, not lexical diversity as learnable credit. Unanimous sampled nodes are ineligible.",
+        "example": "Teaching example: six continuations use different checking phrases but all succeed. Lexical entropy can be high without outcome disagreement; the node remains outside the frontier."
+      }
+    },
+    "qa/post-training:briar/nov26-mechanism": {
+      "source_sha256": "a26b29457dbc18964802ee167938a26969552928b7d7f1e7e1d1eabd31cb49d5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is two-pass RTS more than averaging child rewards?",
+        "answer": "The upward pass attenuates subtree precision and information by edge variance; the downward pass combines the global parent posterior with local evidence. Siblings influence a node through that parent, unlike purely local averaging.",
+        "example": "Teaching example: one subtree has a single successful leaf while its sibling has many failures. The parent posterior changes its estimate instead of copying the lone reward1."
+      }
+    },
+    "qa/post-training:briar/nov26-comparison": {
+      "source_sha256": "154643ff6555010246d97d04475015f257eb8d1c0dfa85d075c6a3e9657e44ea",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are BRIAR and OpCredit not interchangeable local-credit methods?",
+        "answer": "OpCredit BOC uses context-matched trajectory supports and FTC uses training-side answer neighborhoods. BRIAR uses explicit prefix trees, terminal rewards and empirical Gaussian edge variances. Support matching or potential differences do not replace global covariance smoothing.",
+        "example": "Teaching example: KG operations reach the same entity through different histories. BOC checks context; BRIAR shares a path only for a shared full prefix, not an entity ID."
+      }
+    },
+    "qa/post-training:briar/nov26-implementation": {
+      "source_sha256": "f574103baf045fcd1f3a45fe1030fb9f9928c881b2047e71c9a8636e1e52bfdf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why recenter after suffix clipping, and why not claim unchanged prefix behavior?",
+        "answer": "Recentering enforces zero advantage sum per absorbed node; clipping again can break it. A suffix mask excludes prefix-token loss, but shared parameters still predict suffixes, so unchanged prefix behavior is not guaranteed.",
+        "example": "Teaching example: skewed lengths leave a nonzero mean after clipping; subtract it. Suffix gradients can still update shared attention weights even when prefix positions contribute no loss."
+      }
+    },
+    "qa/post-training:feast/nov26-basics": {
+      "source_sha256": "f1c4f5a33c9943749af9d50f1d612ff2f29756d42b6ad9b1d0fff0994f7e2a12",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reserve cluster budgets before following reward variance?",
+        "answer": "Weak current variance may result from past under-allocation. Positive priority preserves selection opportunities; after selection, other clusters cannot take its reserved compute. Global variance top-k removes this protection.",
+        "example": "Teaching example: mathematics has high-variance prompts while logic currently always fails. If both are selected, logic still receives256 trajectories instead of losing later rounds to mathematics."
+      }
+    },
+    "qa/post-training:feast/nov26-mechanism": {
+      "source_sha256": "baf784c9d4096e735f2cb167a128fa4d41aa1a0fa97665aaafa995e234bb1b7b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must dynamic regrouping preserve atomic histories?",
+        "answer": "Current-policy vectors and slow signed trends change cluster membership, but attainment, pilot disagreement and exposure shortfall belong to persistent atoms. Resetting them erases the allocation history that motivates protection.",
+        "example": "Teaching example: when an atom moves from clusterA toB, its shortfall80 remains. Only its group mapping changes; history is neither zeroed nor copied from the entire old cluster."
+      }
+    },
+    "qa/post-training:feast/nov26-comparison": {
+      "source_sha256": "de53492ed76a44bfef5c239396cb7e02a4f2862d14c2dd5b8115cf369e68ac1a",
+      "reviewed": true,
+      "fields": {
+        "question": "Is FEAST merely a renamed rollout selector relative to RAIL?",
+        "answer": "No. RAIL learns a contextual bandit from shadow-intervention recoverability. FEAST protects cross-cluster opportunities and budgets before promoting within-cluster prompts. It does not learn trajectory repair; intervention gains are not pilot-equal statistics.",
+        "example": "Teaching example: deciding where to insert help in a failing trajectory is an intervention decision; preserving256 logic-cluster trajectories is quota protection."
+      }
+    },
+    "qa/post-training:feast/nov26-implementation": {
+      "source_sha256": "cb04500782f59a13bdb14b4464d700679524612b5f20e24bd7de849280174943",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use only common pilots for attainment but every rollout for shortfall?",
+        "answer": "Variance-driven promotion biases feedback if all promoted samples estimate attainment. Common pilots retain prompt-equal comparability. Every generated sample still consumes compute, including pilots, promotions and zero-variance groups.",
+        "example": "Teaching example: promptA has pilots0/1 and20 more successes; promptB has pilots0/0. Attainment remains(0.5+0)/2=0.25, not21/24, while exposure counts24."
+      }
+    },
+    "qa/post-training:care-opd/nov26-basics": {
+      "source_sha256": "552e2366e989fb6a30362faaf7af4be097b1d72a9a932870118cf39f8fb6a80f",
+      "reviewed": true,
+      "fields": {
+        "question": "At what level is prefix replay on-policy?",
+        "answer": "The current student generates a fresh response from a stored prefix, so responses are on-policy. Histories come from fixed past policies and are off-policy. Student roll-ins broaden support without making every saved history a fresh environment trajectory.",
+        "example": "Teaching example: today's student answers from yesterday's twentieth-turn observation; its response is new, but the previous nineteen turns were not re-executed by today's policy."
+      }
+    },
+    "qa/post-training:care-opd/nov26-mechanism": {
+      "source_sha256": "57ed6163d136b83455a1d752a5c366158a73ed76e5f8e07592be3c818149cb3c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can the hindsight selector read the full trajectory but the student cannot?",
+        "answer": "The selector uses later execution evidence for training-side allocation. A student generating or being evaluated at a turn may see only its prior prefix. Temporary IDs, selector output and future evidence must be removed to avoid leakage.",
+        "example": "Teaching example: a later failed test can identify a useful early diagnosis for replay; the student at that diagnosis cannot see the not-yet-run test result."
+      }
+    },
+    "qa/post-training:care-opd/nov26-comparison": {
+      "source_sha256": "4cd216db5255bb3b3868bbdf2b0f67e0b0ffa95c25507a8a71c0331db7fe7825",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is CARE-OPD different from TreeOPSD posterior targets?",
+        "answer": "TreeOPSD converts tree credit into frozen bounded Bernoulli targets that control update direction and stopping. CARE-OPD selects histories, turns and response eligibility while retaining teacher-token reverse KL. Allocation does not define a finite update target.",
+        "example": "Teaching example: selecting a prefix for replay does not specify how far the student should move; TreeOPSD's target makes its corresponding gradient vanish at the target."
+      }
+    },
+    "qa/post-training:care-opd/nov26-implementation": {
+      "source_sha256": "1031425f93a19631195aec0ccd2ef1422aabbcbf272394445e97392f5545a004",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a confidence gate alone not reproduce CARE-OPD?",
+        "answer": "The defining pipeline also needs student roll-in, verified teacher completion, a hindsight evidence-based teacher selector, future-free prefixes and distillation on fresh responses. A generic gate or fixed-turn fixture removes that selector, while the full workflow exceeds budget.",
+        "example": "Teaching example: always choosing the first40% of turns ignores later failed tests and cannot replace a teacher selecting a critical late repair. This paper stays review-only, high-cost review DONE."
+      }
+    }
+  }
+}
