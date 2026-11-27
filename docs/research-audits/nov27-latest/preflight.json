@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-27-overlap-components",
+  "seeds": [42, 43, 44],
+  "maximum_run_seconds": 180,
+  "maximum_cuda_devices": 1,
+  "model_and_dataset_downloads": 0,
+  "api_calls": 0,
+  "automatic_retry": false,
+  "full_experiments_executed": false,
+  "cost_basis": "Seven bounded L1 mechanisms on supplied tensors, coefficients or authorization transcripts. Only ELBO-TDS advertises a CUDA path; one real A100/A30 required. No model/data download, model API, long rollouts or full training. The compute-aware paper's complete public simulation is scope-limited rather than falsely cost-deferred; each complete expensive campaign is independently assessed from primary text.",
+  "components": {
+    "integral-deltanet": {"domain": "foundation-models", "module": "foundation_models/integral_deltanet.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "deco-attention": {"domain": "foundation-models", "module": "foundation_models/deco_attention.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "cafa": {"domain": "post-training", "module": "post_training/cafa.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "elpsd": {"domain": "post-training", "module": "post_training/elpsd.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "compaction-authorization": {"domain": "agent-research", "module": "agent_research/compaction_authorization.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "budgeted-submapl": {"domain": "agent-research", "module": "agent_research/budgeted_submapl.py", "cuda": false, "evaluation_tier": "l1_mechanism"},
+    "elbo-tds": {"domain": "recommendation", "module": "reproductions/elbo_tds_components.py", "cuda": true, "evaluation_tier": "l1_mechanism"}
+  }
+}
