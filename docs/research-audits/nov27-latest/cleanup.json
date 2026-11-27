@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "cleaned_on": "2026-11-27",
+  "scope": "Exact disposable targets created by this run only",
+  "removed": [
+    {
+      "path": ".cache/nov27-latest/site-final",
+      "allocated_bytes": 1103544320,
+      "logical_bytes": 1087036781
+    },
+    {
+      "path": ".cache/nov27-latest/frozen-source-transfer.tgz",
+      "allocated_bytes": 86016,
+      "logical_bytes": 84797
+    },
+    {
+      "path": ".cache/nov27-latest/root-primary/elbo-page3.png",
+      "allocated_bytes": 315392,
+      "logical_bytes": 311728
+    }
+  ],
+  "allocated_bytes_reclaimed": 1103945728,
+  "protected_before": {
+    "files": 208,
+    "combined_sha256": "6fc2f25d32dd6835146d4aa053cf07841fe402262c32c30de4b96e0d1e5d8197"
+  },
+  "protected_after": {
+    "files": 208,
+    "combined_sha256": "6fc2f25d32dd6835146d4aa053cf07841fe402262c32c30de4b96e0d1e5d8197"
+  },
+  "remote_cleanup": {
+    "removed_targets": 2,
+    "kind": "owned temporary source directory and archive",
+    "after_result_validation": true
+  },
+  "preserved": [
+    "Git/checkouts/code",
+    "all raw results including failures",
+    "source proofs/receipts",
+    "primary PDFs/captures",
+    "reusable data/weights",
+    "Codex session records/configuration"
+  ]
+}

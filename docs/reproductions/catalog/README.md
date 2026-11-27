@@ -301,6 +301,7 @@
 | 生成、排序与冷启动 | [Cold-Starting Podcast Ads and Promotions with Multi-Task Learning on Spotify](../2601.02306-podcast-mtl/README.md) | Spotify，2026-01-05 | 未发现官方代码 | `podcast-mtl` |
 | 生成、排序与冷启动 | [HiGR: Industrial-Scale Hierarchical Generative Slate Recommendation Framework in Tencent](../2512.24787-higr/README.md) | Tencent，2025-12-31 | 未发现官方代码 | `higr` |
 | 大模型能力与推荐融合 | [RecGPT-V2 Technical Report](../2512.14503-recgpt-v2/README.md) | Alibaba / Taobao，2025-12-16 | 未发现官方代码 | `recgpt-v2` |
+| 训练目标与决策优化 | [ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems](../../recommendation-components/2511.21032-elbo-tds/README.md) | Shopee，2025-11-26 | [原作者入口](https://github.com/FuCongResearchSquad/ELBO4TDS)；公开作者仓库已核验，许可证未找到；按公式独立实现 | `elbo-tds`：仅低成本组件，完整实验不复现 |
 | 生成、排序与冷启动 | [DualGR: Generative Retrieval with Long and Short-Term Interests Modeling](../2511.12518-dualgr/README.md) | USTC / Kuaishou Technology，2025-11-16 | 未发现官方代码 | `dualgr` |
 | 生成、排序与冷启动 | [OneTrans: Unified Feature Interaction and Sequence Modeling with One Transformer in Industrial Recommender](../2510.26104-onetrans/README.md) | ByteDance，2025-10-30 | 未发现官方代码 | `onetrans` |
 | 大模型能力与推荐融合 | [From Reasoning LLMs to BERT: A Two-Stage Distillation Framework for Search Relevance](../2510.11056-crsd/README.md) | Meituan，2025-10-13 | 未发现官方代码 | `crsd` |

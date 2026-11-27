@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:elbo-tds/nov27-basics": {
+      "source_sha256": "05ef9e09aa6ceef10ba0c4ef43c520caea98553347297b805814fe3ea8551590",
+      "reviewed": true,
+      "fields": {
+        "question": "What should ELBO-TDS preserve and suppress?",
+        "answer": "Preserve relatively stable predictive individual factors while suppressing transient noise. Reconstruction prevents alignment alone from discarding individual detail.",
+        "example": "Teaching example: both users like phones but one values novelty and the other low prices; their representations should not collapse together."
+      }
+    },
+    "qa/recommendation:elbo-tds/nov27-mechanism": {
+      "source_sha256": "f10f68f8ec0d8350638248e3d0939b1499b2a4fc4909f76695a52005e8ac4bd8",
+      "reviewed": true,
+      "fields": {
+        "question": "Which axis defines the prior mean, and why is entropy not trained?",
+        "answer": "Average J sampled views of the same example, not the batch. Fixed unit posterior variance makes entropy constant with zero gradient.",
+        "example": "Teaching example: two users with three views need two centers, not one center over all six views."
+      }
+    },
+    "qa/recommendation:elbo-tds/nov27-comparison": {
+      "source_sha256": "6d96a37cf2025b2f0bee05fef4af8d60fd0354a23dd53ad7afe639e7b6a8dc16",
+      "reviewed": true,
+      "fields": {
+        "question": "How do ELBO-TDS and COTTI address promotional drift differently?",
+        "answer": "COTTI uses a differentiable CPC gate for regular/promotional-view consistency, history-distance RW weights and serving-time ABA calibration. ELBO-TDS instead constrains stable factors through a multi-view Gaussian prior and input reconstruction, leaving supervised prediction on original observations; it has no ABA-style serving probability correction. Both rely on stable-semantics assumptions. Alignment or reconstruction does not establish causal identifiability, and different production A/B experiments do not establish a head-to-head winner.",
+        "example": "Teaching example: reconstruction cannot recover regular preferences if every view contains only promotional prices; COTTI's upward calibration also cannot correct overprediction."
+      }
+    },
+    "qa/recommendation:elbo-tds/nov27-implementation": {
+      "source_sha256": "29efdfb27cf664cdc167e7b2f4c2e80a9155c79e7c3ac812fc0737618f7d48e1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not predict labels from augmented sampled states?",
+        "answer": "Equation6 and Algorithm1 predict using deterministic encoder means from original observations, matching inference. SSL sampling and augmentation are separate and must not alter supervised loss.",
+        "example": "Teaching example: keep original user/item inputs fixed and multiply SSL views by five; supervised loss must remain unchanged while reconstruction/prior may change."
+      }
+    }
+  }
+}

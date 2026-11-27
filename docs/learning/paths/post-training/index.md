@@ -10,7 +10,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="preference-and-alignment/">偏好与对齐：先看反馈长什么样</a></h2>
 <p>只有“更喜欢哪个回答”或单条点赞时，怎样把反馈变成可学习目标？</p>
-<p class="ar-learning-topic-meta">132 个问题 · 33 篇论文</p>
+<p class="ar-learning-topic-meta">136 个问题 · 34 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="policy-optimization/">策略优化：谁在采样，谁在被更新</a></h2>
@@ -30,7 +30,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="teacher-and-context/">教师与纠错：额外信息何时能帮到学生</a></h2>
 <p>教师看到了答案、图像证据或专长提示，怎样把帮助传给没有这些信息的学生？</p>
-<p class="ar-learning-topic-meta">232 个问题 · 58 篇论文</p>
+<p class="ar-learning-topic-meta">236 个问题 · 59 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="data-and-budget/">数据与预算：下一份算力花在哪里</a></h2>

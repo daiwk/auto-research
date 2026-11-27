@@ -205,7 +205,8 @@
         "agent-research:retrace",
         "agent-research:caplite",
         "agent-research:agent-kernel",
-        "agent-research:cape"
+        "agent-research:cape",
+        "agent-research:compaction-authorization"
       ]
     },
     {
@@ -387,7 +388,8 @@
         "agent-research:ace-rl",
         "agent-research:acting-to-learning",
         "agent-research:r2-tool-redundancy",
-        "agent-research:ooas"
+        "agent-research:ooas",
+        "agent-research:budgeted-submapl"
       ]
     },
     {

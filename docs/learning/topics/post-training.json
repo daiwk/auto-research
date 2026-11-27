@@ -53,7 +53,8 @@
         "post-training:ca-zodpo",
         "post-training:confidence-adaptive-granularity",
         "post-training:mpg-dpo",
-        "post-training:shpo"
+        "post-training:shpo",
+        "post-training:cafa"
       ]
     },
     {
@@ -357,7 +358,8 @@
         "post-training:leaf-opd",
         "post-training:hint-wam",
         "post-training:visalloc",
-        "post-training:care-opd"
+        "post-training:care-opd",
+        "post-training:elpsd"
       ]
     },
     {

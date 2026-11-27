@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-27",
+  "accepted": [
+    {
+      "arxiv_id": "2611.32063",
+      "identity": "foundation-models:integral-deltanet",
+      "key": "integral-deltanet",
+      "domain": "foundation-models",
+      "title": "Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration",
+      "first_author": "Junsoo Oh",
+      "first_author_affiliation": "Kim Jaechul Graduate School of AI, KAIST",
+      "first_published_at": "2026-11-24T06:50:52Z",
+      "announced_on": null,
+      "intake_class": "overlap_backfill_newly_reviewed",
+      "reviewed_version": "v1",
+      "reviewed_source_url": "https://arxiv.org/pdf/2611.32063v1",
+      "source_sha256": "66ec96ad3e3e68a00a3ac2075e156bbfebe27d84065341b03c7c9fd48f0afa31",
+      "sections_read": [
+        "2",
+        "3.1–3.2",
+        "4",
+        "Appendix A.1–A.2",
+        "Appendix B.1–B.3"
+      ],
+      "scope": "Integral DeltaNet保留fast delta state并新增其历史积分state；按key channel分别控制积分速度和当前/历史读出，积分state不反向改变delta更新。",
+      "source_revisions": {
+        "foundation-models:integral-deltanet": "128902947e331d13d4a0aea969dfced70110840cc06559d127f196b03d4a355f",
+        "foundation-models:kernel-ridge-attention": "44d055261f665849341526b12537423ee07559cebe19cec23e3ef32cbed78006"
+      },
+      "cost_basis": {
+        "source": "https://arxiv.org/pdf/2611.32063v1",
+        "sections": [
+          "2",
+          "3.1–3.2",
+          "4",
+          "Appendix A.1–A.2",
+          "Appendix B.1–B.3"
+        ],
+        "available_resource": "one A100 or A30,or local Mac",
+        "paper_configuration": "§4主矩阵为340M/1.3B非embedding参数，从头训练15B/100B FineWeb-Edu tokens，4K序列、0.5M-token global batch；多个backbone及额外15B-token门/state消融。B300训练/解码效率测量亦非A100原样配置。完整训练矩阵明显超本轮单A100/A30或Mac预算；这是已发表模型/token配置的成本判断，未测本地完整时长，不编造GPU小时。",
+        "estimated_cost_basis": "Published model/token/platform/evaluation matrix; no local full run or invented GPU hours. CPU component only,no model/data downloads.",
+        "decision": "成本过高，不复现（审查 DONE）；完整实验终态，局部CPU L1另行验收"
+      },
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "local_detail_path": "foundation-models/2611.32063-integral-deltanet/README.md",
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "code_url": "https://github.com/junsoo424/Integral-DeltaNet",
+      "upstream_revision": "f6ec94e15d7b4a3eaea5d8b888168a2e1a7b7ac9",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "arxiv_id": "2611.32035",
+      "identity": "foundation-models:deco-attention",
+      "key": "deco-attention",
+      "domain": "foundation-models",
+      "title": "DeCo-Attention: Decompose to Compensate for Low-Precision Attention",
+      "first_author": "Yuhang He",
+      "first_author_affiliation": "NVIDIA",
+      "first_published_at": "2026-11-24T06:18:09Z",
+      "announced_on": null,
+      "intake_class": "overlap_backfill_newly_reviewed",
+      "reviewed_version": "v1",
+      "reviewed_source_url": "https://arxiv.org/pdf/2611.32035v1",
+      "source_sha256": "abfcd2967d55443344d773a5f41b7140b58c3878ec77259b2ce6c80b15ceba81",
+      "sections_read": [
+        "3.1–3.3",
+        "4.1–4.4",
+        "Appendix B.3–B.4/Algorithm 1/Eq25",
+        "Appendix E.1"
+      ],
+      "scope": "DeCo在runtime逐head估计主子空间，用Q侧和K侧一阶残差投影构造额外通道，让一个扩展QK点积带入两侧补偿；额外通道同样量化。",
+      "source_revisions": {
+        "foundation-models:deco-attention": "f2076f3863195fa17210bcb4f0af885d4d42e816d6a853f333c9a7642bd4c9a1",
+        "foundation-models:dualquant": "88f1833985537599b8a8db50bf43570b1d4dbea3004a4a9fc35dbb4d820e4f29"
+      },
+      "cost_basis": {
+        "source": "https://arxiv.org/pdf/2611.32035v1",
+        "sections": [
+          "3.1–3.3",
+          "4.1–4.4",
+          "Appendix B.3–B.4/Algorithm 1/Eq25",
+          "Appendix E.1"
+        ],
+        "available_resource": "one A100 or A30,or local Mac",
+        "paper_configuration": "原文四个视频大模型含Wan2.2-T2V-A14B 720p，每方法100 MovieGen prompts、多个低精度对照，GB300/VR200/RTX PRO6000原生FP4平台；单Wan基线81帧720p在GB300约302.7秒。完整矩阵与专用硬件路径明显超本轮单A100/A30或Mac可执行范围；A100/A30没有该原生FP4 MMA。未下载checkpoint、captured QKV或视频数据，不用CPU仿真耗时替代论文性能。",
+        "estimated_cost_basis": "Published model/token/platform/evaluation matrix; no local full run or invented GPU hours. CPU component only,no model/data downloads.",
+        "decision": "成本过高，不复现（审查 DONE）；完整实验终态，局部CPU L1另行验收"
+      },
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "local_detail_path": "foundation-models/2611.32035-deco-attention/README.md",
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "code_url": null,
+      "upstream_revision": null,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    }
+  ],
+  "preflight_before_implementation": true,
+  "available_resource": "one A100 or A30,or local Mac",
+  "watermark_change_claimed": false,
+  "large_downloads_authorized_or_needed": false,
+  "scope": "Two Nov24 overlap-backfill CPU L1 components,not Nov27 first releases; no full capability reproduction."
+}

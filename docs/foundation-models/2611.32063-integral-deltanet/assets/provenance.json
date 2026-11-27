@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/abs/2611.32063v1",
+  "source_url": "https://arxiv.org/pdf/2611.32063v1#page=2",
+  "reviewed_version": "v1",
+  "source_sha256": "66ec96ad3e3e68a00a3ac2075e156bbfebe27d84065341b03c7c9fd48f0afa31",
+  "source_pdf_sha256": "66ec96ad3e3e68a00a3ac2075e156bbfebe27d84065341b03c7c9fd48f0afa31",
+  "image_sha256": "45ed70bc1513fb7f21eaea4adaf2932651844ce8652f9c2f4f4d079c4c51e30f",
+  "asset_sha256": "45ed70bc1513fb7f21eaea4adaf2932651844ce8652f9c2f4f4d079c4c51e30f",
+  "pdf_page": 2,
+  "page": 2,
+  "figure": "Figure 1",
+  "caption": "Complete original figure caption preserved in full-page raster.",
+  "render_dpi": 120,
+  "retrieved_on": "2026-11-27",
+  "visually_reviewed_on": "2026-11-27",
+  "visually_reviewed": true,
+  "scientific_content_modified": false,
+  "extraction": "pdftoppm full original PDF page at120dpi,visually reviewed",
+  "copyright": "Copyright belongs to the original authors."
+}

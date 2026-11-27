@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-27-overlap-components",
+  "reviewed_on": "2026-11-27",
+  "base_commit": "b9e713dd8fe5f005aee503a5a9e505b6f3e6b2c3",
+  "accepted_papers": ["foundation-models:integral-deltanet", "foundation-models:deco-attention", "post-training:cafa", "post-training:elpsd", "agent-research:compaction-authorization", "agent-research:budgeted-submapl", "recommendation:elbo-tds"],
+  "component_papers": ["foundation-models:integral-deltanet", "foundation-models:deco-attention", "post-training:cafa", "post-training:elpsd", "agent-research:compaction-authorization", "agent-research:budgeted-submapl", "recommendation:elbo-tds"],
+  "selected_scope_complete": false,
+  "delivery_status": "implementation_and_verification_in_progress",
+  "selection_policy": "Finite overlap/revision selection after priority Google/Meta primary-source checks. New capture, first publication, revision and announcement are distinct; no November26 first release observed in this capture. No full capability/Evolve promotion. No earlier high-cost campaign reopened.",
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "review_watermark_unchanged": "2026-11-15",
+  "full_capability_reproductions": 0
+}

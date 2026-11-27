@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-27",
+  "scope": [
+    "post-training:cafa",
+    "post-training:elpsd"
+  ],
+  "scope_kind": "nov24_overlap_backfill_not_today_new_release",
+  "deduplication": {
+    "checked": [
+      "docs/research-manifest.json",
+      "docs/paper-discovery-ledger.json",
+      "docs/research-audits/nov26-latest/metadata-index.json"
+    ],
+    "new_original_submissions_observed_on_nov26": false,
+    "source": ".cache/nov27-latest/metadata-pool.json",
+    "exhaustive_claim": false
+  },
+  "primary_sources": [
+    {
+      "paper": "post-training:cafa",
+      "url": "https://arxiv.org/pdf/2611.31931v1",
+      "capture": ".cache/nov27-latest/post-primary/2611.31931v1.pdf",
+      "sha256": "d65144a4db07674f19ae40fe29cd84dcdc5dda710884e59d2124a2227715e937",
+      "pages": 79,
+      "reviewed_sections": [
+        "Main Sections2–5/Eqs2–4",
+        "Algorithm1",
+        "AppendixB.4–B.5/Algorithm2",
+        "AppendixG cost/archive passages"
+      ],
+      "first_author": "Hui Zhang",
+      "affiliation": "Beijing Institute of Technology",
+      "code_evidence": "https://github.com/huizhang-ai/CAFA at210ca37e26e3b21bf98f73ac27af159b14ec0da6: README-only Coming soon placeholder, not verified method-source release."
+    },
+    {
+      "paper": "post-training:elpsd",
+      "url": "https://arxiv.org/pdf/2611.32452v1",
+      "capture": ".cache/nov27-latest/post-primary/2611.32452v1.pdf",
+      "sha256": "6a8d3a3cfd04db299a30079baadd062f016e10efff2126cd1badbff18ba73948",
+      "pages": 11,
+      "reviewed_sections": [
+        "Full main text",
+        "AppendixA proofs/exact gradient",
+        "AppendixB/Table3"
+      ],
+      "first_author": "Linghua Zhang",
+      "affiliation": "Not disclosed in fixed-v1 PDF/HTML; not inferred from dependencies",
+      "code_evidence": "No method repository in fixed primary text/abstract or found through bounded title/author search."
+    }
+  ],
+  "verification": {
+    "command": "PYTHONPATH=src:scripts ../../.venv/bin/python -m pytest tests/test_nov27_post_components.py -q",
+    "result": "19 passed",
+    "ruff": "passed for two modules and owned tests",
+    "diff_check": "passed",
+    "cpu_self_check_seeds": [
+      42,
+      43,
+      44
+    ],
+    "all_self_checks_true": true,
+    "formal_metrics": "Independent root runner/curator owns formal metrics; no preflight file written into paper metrics.",
+    "authored_questions": 8,
+    "levels_per_paper": [
+      "basics",
+      "mechanism",
+      "comparison",
+      "implementation"
+    ],
+    "english_source_fingerprints_match": true,
+    "source_headings_match": true,
+    "deep_proposals": 2,
+    "peer_readmes_actually_read": [
+      "post-training:probabilistic-autorater",
+      "post-training:loopsd"
+    ],
+    "peer_hashes_verified": true,
+    "original_assets_visually_reviewed": true
+  },
+  "source_sha256": {
+    "src/auto_research/post_training/cafa.py": "bbbfd13e1b52b6c2816b4cbf6b52899d8ccd5c56d6f8918f921e0e1074a5cccc",
+    "src/auto_research/post_training/elpsd.py": "2d999af3ccfc04bd30a9888ac2d624c0ba3bb0bcb1e21d5324fb06f4394a08f7",
+    "docs/post-training/2611.31931-cafa/README.md": "02b0e8e4e25c58ce6ac51b2d8c883b962840cce23355ce15b84f2170a9a004eb",
+    "docs/post-training/2611.32452-elpsd/README.md": "f2c16826e48b6659928af1b39ee1fd3f5ff2282ab1e9f5f87bd5f32df64633cc"
+  },
+  "integrity": {
+    "diagnostic_only": true,
+    "training_executed": false,
+    "requires_gpu_validation": false,
+    "models_downloaded": 0,
+    "datasets_downloaded": 0,
+    "paid_api_calls": 0,
+    "automatic_retry": false,
+    "evolve_integrated": false,
+    "full_experiments": "成本过高，不复现（审查 DONE）"
+  },
+  "boundaries": [
+    "CAFA is exact fixed-bank acquisition/recovery, not a sampler, a judge or a monetary-cost experiment. Ordinary covariance support differs from mean support; missing scores are not zero-imputed.",
+    "ELPSD is supplied-logit frozen-teacher math and analytical derivatives. Random logits do not represent real loop states, and refreshed_rounds is an idealized negative control, not model optimization.",
+    "Neither candidate has verified Google/Meta affiliation; ELPSD affiliation remains explicitly undisclosed."
+  ],
+  "cleanup": {
+    "retained_primary_pdf_bytes": 2338470,
+    "retained": "Both small fixed-v1 PDFs and original image assets retained as primary evidence.",
+    "disposable": "Removed exactly two owned full-page review PNGs under /tmp after visual inspection, reclaiming 320 KiB allocated space; no unfamiliar files touched."
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:cafa/nov27-basics": {
+      "source_sha256": "4091e30e4ce40ea212da00f71cff3116e1877f50fedf84d975314b654a699825",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can CAFA acquire less feedback than ordinary caching?",
+        "answer": "Caching scores each distinct input once. CAFA also checks whether that input's coefficients cancel in the requested report. A common absolute score may be unnecessary for a difference-only report.",
+        "example": "Teaching example: both models answerA, so their difference is zero without scoringA. Adding the absolute base score makesA necessary again."
+      }
+    },
+    "qa/post-training:cafa/nov27-mechanism": {
+      "source_sha256": "957187ff5b7755334e219df297d1f91ec9461d354429a4cdbdd29d994c5c31ab",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can covariance require scores when mean support is empty?",
+        "answer": "Across-draw cancellation does not make each draw zero. Ordinary covariance needs per-draw deviations, so it retains identities with any nonzero draw coefficient and all original denominators.",
+        "example": "Teaching example: mirror draws(A,B)/(B,A) have mean zero. Scores2 and5 yield differences3/-3 and sample variance18, not zero."
+      }
+    },
+    "qa/post-training:cafa/nov27-comparison": {
+      "source_sha256": "da7b48e0959fd89d1c4a6a6048a33b8c8a5fa56caed69c6c9c4053d39096013e",
+      "reviewed": true,
+      "fields": {
+        "question": "Does acquiring fewer scores solve Probabilistic Autorater calibration?",
+        "answer": "No. CAFA conditions on a fixed/versioned scorer and reduces required inputs. Autorater calibration concerns correspondence to human preference distributions. Exact recovery of a biased judge's report remains biased.",
+        "example": "Teaching example: a length-biased judge can have its checkpoint differences recovered exactly; cancelling unnecessary calls does not remove its length preference."
+      }
+    },
+    "qa/post-training:cafa/nov27-implementation": {
+      "source_sha256": "7161a734437a181c05c1b3d6993209e320b620a73861c8067643e5bbab272dd7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not use approximate identities or zero-impute missing scores?",
+        "answer": "Identity uses exact prompt/decoded text, with scorer version in cache keys. Normalization or semantic merging equates potentially different scores, while zero imputation changes the report. Missing required feedback yields incomplete output or declared-range mean bounds without covariance.",
+        "example": "Teaching example: a case-sensitive rubric may scoreA anda differently. An unavailable score bounded in[0,1] contributes an interval, not an assumed zero."
+      }
+    },
+    "qa/post-training:elpsd/nov27-basics": {
+      "source_sha256": "1157b5d06d15d261ecec7cb00c78ad9b1d67f7cbdd9921466dbc5ff68cfab425",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does the last loop initially learn nothing from its frozen copy?",
+        "answer": "At initialization the distributions coincide, making KL and gradient zero. ELPSD extrapolates the early-to-final log-distribution difference; a nonzero initial target needs positive weight and distinct loops.",
+        "example": "Teaching example: different loop readouts still give the last loop itself as teacher atw=0. Withw=0.5 the target changes; identical readouts remain identical at any weight."
+      }
+    },
+    "qa/post-training:elpsd/nov27-mechanism": {
+      "source_sha256": "49e9decddd1c6ef137fa7852d32f1674462f1624bf7551aeaa54d64dcf626471",
+      "reviewed": true,
+      "fields": {
+        "question": "Why freeze rather than refresh the extrapolated teacher?",
+        "answer": "In the idealized exact-fit recursion with a fixed early loop, refreshing from the current final loop multiplies relative log-odds by1+w each round and concentrates on maximal directions. A frozen teacher gives a fixed KL stationary point, not a global convergence guarantee for shared-parameter training.",
+        "example": "Teaching example:w=0.5 compounds log-odds by1.5 cubed over three idealized rounds. Exact matching to one frozen teacher instead reaches zero gradient without further extrapolation."
+      }
+    },
+    "qa/post-training:elpsd/nov27-comparison": {
+      "source_sha256": "2b43c17fdeecb01fcf1f30a90587d7f3a75819b0e97dda41dc4a9734ea9dfc26",
+      "reviewed": true,
+      "fields": {
+        "question": "Is ELPSD the same cross-loop KL as existing LoOPSD?",
+        "answer": "No. LoOPSD searches repeated-layer intervals in an ordinary model, validates teachers and alternates refresh. ELPSD extrapolates fixed early/final readouts of a native looped model without route search. The separately named LoopOPD must not be confused with LoOPSD.",
+        "example": "Teaching example: searching a route that repeats layers5–8 is LoOPSD; fixed extrapolation of loop1/4 readouts from a native four-loop model is ELPSD."
+      }
+    },
+    "qa/post-training:elpsd/nov27-implementation": {
+      "source_sha256": "ee2c16006f15ddb0ffb1529f8801c65468fab48ace806ad9ec4f4cb61dcae7d1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not replace response-balanced reduction with one batch-wide token mean?",
+        "answer": "Equation4 averages valid prefixes within each response before averaging responses, giving equal response weight. A global token mean overweights long responses. Masks exclude padding but do not generate on-policy prefixes.",
+        "example": "Teaching example: responses with three and one valid prefixes each deserve half the loss. A four-token mean gives the longer response three quarters. Random-logit reduction checks do not execute a looped model."
+      }
+    }
+  }
+}

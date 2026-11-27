@@ -53,6 +53,7 @@
 
 ### on-policy / context 蒸馏
 
+- [The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop](../2611.32452-elpsd/README.md)（`elpsd`）：最后一轮向自己的冻结拷贝蒸馏，在初始化时loss和梯度都为0。ELPSD不换成外部教师或给参考答案，而把冻结初始模型的第一轮和最后一轮读数沿差异方向外推，形成高于最后一轮的target。
 - [Bootstrapped On-Policy Distillation](../2611.13680-bopd/README.md)（`bopd`）：BOPD 先用带参考解答的冻结初始模型监督学生，构造中间模型 M1；再冻结 M1，将它当作**不带参考**的教师，蒸馏一个从原始 M0 精确重置的新学生。两阶段都在各自学生的轨迹前缀上评分，不能把 Stage I 的旧轨迹直接当作 Stage II 的新 on-policy 数据。
 - [DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation](../2611.13249-drd-mopd/README.md)（`drd-mopd`）：多个教师可能提供冲突的领域更新，直接优化一个学生无法区分冲突来自哪一份参数方向。DRD-MOPD 保留冻结基座与多个全参数增量，以域标签选择**哪些增量接受梯度**，而不是在推理时选择哪个教师或专家。
 - [Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation](../2611.13135-lcs-reference-opd/README.md)（`lcs-reference-opd`）：同一任务可有多条成功路线，但并非任意成功 reference 都适合纠正当前失败学生。论文仅用执行动作序列作对齐：相比最长公共前缀 LCP，LCS 在可恢复绕行之后仍保留有序一致，选择更兼容的同任务成功轨迹。
@@ -428,6 +429,7 @@
 
 ### 偏好评测与校准
 
+- [Scoring What Matters: Exact Feedback Reduction for Language Model Comparison](../2611.31931-cafa/README.md)（`cafa`）：比较checkpoint常只需要分数差，而不需要每个绝对分数。相同回答的共同分数会在contrast中抵消，普通缓存仍可能多买一次不需要的反馈。
 - [Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix](../2611.19840-calibrated-judges-protocol/README.md)（`calibrated-judges-protocol`）：论文先报告三个负结果：音素交织继续预训练没有改善可感知口语风格且增加重复；prosody plan 遵从低于门槛；规则韵律 reward 的人类与裁判盲评近似随机。作者因此把重点转向评测：自动特征、功效受限的人类盲评、经过 catch trials 校准的 LLM judge，三层互补，不能用单一客观特征代替感知质量。
 - [Similar Models, Broken Odds: Where Luce's Axiom Fails in Chatbot Arena](../2610.19095-luce-similarity-audit/README.md)（`luce-similarity-audit`）：Bradley–Terry 用每个模型一个分数推导任意两模型胜率，隐含“加入相似选项不应改变现有两者赔率”的 Luce/IIA 思路。作者发现，同系列版本、同代不同尺寸和同实验室模型之间的投票比全局分差预测得更果断。
 

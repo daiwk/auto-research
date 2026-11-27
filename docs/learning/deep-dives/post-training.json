@@ -5,7 +5,7 @@
     "preference-and-alignment": {
       "title": "偏好不是一个分数：先确定反馈格式，再选对齐目标",
       "thesis": "DPO、KTO、SimPO、ORPO和IPO主要改变“怎样使用反馈”，CleanRM先处理“反馈是否可信”。参考模型、长度归一化、有限间隔和噪声校正是不同设计轴，不能因都在扩大好坏回答差异就当成同一方法。",
-      "updated": "2026-11-24",
+      "updated": "2026-11-27",
       "reviewed_papers": [
         "post-training:clean-rm",
         "post-training:gaw-po",
@@ -39,7 +39,8 @@
         "post-training:ca-zodpo",
         "post-training:confidence-adaptive-granularity",
         "post-training:mpg-dpo",
-        "post-training:shpo"
+        "post-training:shpo",
+        "post-training:cafa"
       ],
       "axes": [
         "监督单位：同题偏好对、单条满意标签、带噪标签",
@@ -190,6 +191,16 @@
             "与已有方法的关系",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "post-training:cafa",
+          "position": "给定fixed/versioned scalar scorer，按精确identity对报告系数做评分前抵消，分开mean与ordinary covariance支持；本地是CPU精确算法，不生成模型或判断文本。",
+          "tradeoff": "Probabilistic Autorater优化评分概率的校准与proper reward；CAFA不改变评分者，只减少请求报告所需的分数。exact恢复不等于judge正确，节省评分输入不等于已测总workflow成本下降。",
+          "sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -273,6 +284,14 @@
           "papers": [
             "post-training:shpo",
             "post-training:dpo"
+          ]
+        },
+        {
+          "title": "评测预算优化必须同时固定报告统计量与评分者版本",
+          "body": "实际重读Probabilistic Autorater README：proper reward和parser数值核并不构成生成式autorater能力。CAFA同样不能把外部scorer当成本地已实现judge，但它的定义性算法可在固定bank上精确执行。mean支持按跨draw系数和判零，普通covariance支持保留任一draw非零的identity；镜像差值的mean为零不代表variance为零。cache必须区分rubric/deployment版本，identity不做语义合并，缺失反馈不得补0。少买反馈不校准裁判；不同sampler和draw预算的workflow成本也不能全部归给固定bank抵消。",
+          "papers": [
+            "post-training:cafa",
+            "post-training:probabilistic-autorater"
           ]
         }
       ],
@@ -387,6 +406,16 @@
           "papers": [
             "post-training:shpo",
             "post-training:dpo"
+          ]
+        },
+        {
+          "id": "nov27-cafa-statistic-boundary",
+          "question": "同一bank的均值报告不需要评分，是否表示其置信区间也可以零评分恢复？",
+          "answer": "不表示。普通协方差需要逐draw向量，镜像draw可在均值抵消却仍有非零方差；即使恢复了样本协方差，区间解释还需要抽样独立性与覆盖方法，且不含judge重复噪声。",
+          "example": "教学例：差值3和-3的均值为0，样本方差18。未取得两个score时可以知道均值抵消，却不知道这个方差或任意声称零不确定性。",
+          "papers": [
+            "post-training:cafa",
+            "post-training:probabilistic-autorater"
           ]
         }
       ],
@@ -543,6 +572,18 @@
           "source_revisions": {
             "post-training:shpo": "25327173775f2d63ac1ff06814e1581a819a088be2db14aaa53426226ad85518",
             "post-training:dpo": "a54594bea7a424401714d5eebff0524039aed35495680075243dab7355be9acd"
+          }
+        },
+        {
+          "date": "2026-11-27",
+          "papers": [
+            "post-training:cafa",
+            "post-training:probabilistic-autorater"
+          ],
+          "summary": "实际重读Probabilistic Autorater并对照CAFA固定v1 Eq2–4/Algorithm2，增加评分者校准与评分需求规划的区分，明确mean/covariance支持、版本缓存、缺失不补0和fixed-bank/总体不确定性的界限。CAFA仅CPU算法；完整LLM/judge矩阵高成本不复现，审查DONE。",
+          "source_revisions": {
+            "post-training:cafa": "02b0e8e4e25c58ce6ac51b2d8c883b962840cce23355ce15b84f2170a9a004eb",
+            "post-training:probabilistic-autorater": "fe6f7067f554183ee185f524f706a4377ac0b1bd4191c607c03acc6c3acd8057"
           }
         }
       ]
@@ -2787,7 +2828,7 @@
     "teacher-and-context": {
       "title": "教师更强仍可能教错：信息、兼容性与成功行为保护",
       "thesis": "教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。",
-      "updated": "2026-11-26",
+      "updated": "2026-11-27",
       "reviewed_papers": [
         "post-training:p2-mopd",
         "post-training:targeted-guidance",
@@ -2846,7 +2887,8 @@
         "post-training:leaf-opd",
         "post-training:hint-wam",
         "post-training:visalloc",
-        "post-training:care-opd"
+        "post-training:care-opd",
+        "post-training:elpsd"
       ],
       "axes": [
         "教师来源：同参数特权视图或独立领域专家",
@@ -3024,6 +3066,16 @@
             "与已有方法的关系",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "post-training:elpsd",
+          "position": "冻结原生looped模型初始第一/最后轮分布并外推，直接以标准最后轮为学生，精确全词表reverse KL，不用参考答案/外部teacher；本地只给定logits数学核。",
+          "tradeoff": "LoOPSD在普通模型中搜索重复层route，经validation挑teacher并交替刷新；ELPSD无route搜索，外推teacher不刷新。论文另名LoopOPD不能与已有LoOPSD混同；共同KL形式不代表teacher机制和采样路径相同。",
+          "sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -3133,6 +3185,14 @@
           "papers": [
             "post-training:care-opd",
             "post-training:treeopsd"
+          ]
+        },
+        {
+          "title": "额外计算视角要区分路由搜索、loop读数与外推目标",
+          "body": "实际重读LoOPSD当前README，其教师来自重复连续层区间的搜索与验证，蒸馏学生仍用标准路径；不能把它等同ELPSD文中另一个LoopOPD。ELPSD在原生4loop模型的同一次冻结forward读第一/最后轮，外推分布后训练最后轮。w0与初始化同分布会使KL/梯度退化；理想化刷新且固定第一轮会按1+w复合log-odds，因而不能照搬LoOPSD的teacher刷新。局部response-balanced梯度与移动target负控不执行任何循环模型、路由选择或on-policy采样，也不将旧高成本条目重新放回队列。",
+          "papers": [
+            "post-training:elpsd",
+            "post-training:loopsd"
           ]
         }
       ],
@@ -3287,6 +3347,16 @@
           "papers": [
             "post-training:care-opd",
             "post-training:treeopsd"
+          ]
+        },
+        {
+          "id": "nov27-elpsd-refresh",
+          "question": "LoOPSD可交替刷新teacher，为什么不能直接给ELPSD也加相同刷新？",
+          "answer": "两者teacher构造不同。LoOPSD重新搜索/验证重复层路径；ELPSD若由当前最后轮继续向外推，在论文固定第一轮的理想化精确拟合中会反复放大同一方向，失去固定target。",
+          "example": "教学例：w0.5的理想刷新三次将相对第一轮log-odds放大3.375倍；这不是另一次独立validation找到的重复层route。",
+          "papers": [
+            "post-training:elpsd",
+            "post-training:loopsd"
           ]
         }
       ],
@@ -3513,6 +3583,18 @@
           "source_revisions": {
             "post-training:care-opd": "206dc50df086fbcd2fe05faf0aee6e046f5f1f64dc81ed226b158e6a78edcc27",
             "post-training:treeopsd": "4f3ccade6cebd5da769aa83706997118c5459a69a4e3ef50409c3f695ed83100"
+          }
+        },
+        {
+          "date": "2026-11-27",
+          "papers": [
+            "post-training:elpsd",
+            "post-training:loopsd"
+          ],
+          "summary": "实际重读LoOPSD README并对照ELPSD固定v1 Section3/AppendixA，新增路由搜索与固定loop外推teacher的界线，明确LoOPSD/LoopOPD名称差异、w0退化、理想化刷新负控及response-balanced归约。只实现CPU logits核，完整8GPU训练成本DONE；不重开旧高成本计划。",
+          "source_revisions": {
+            "post-training:elpsd": "f2c16826e48b6659928af1b39ee1fd3f5ff2282ab1e9f5f87bd5f32df64633cc",
+            "post-training:loopsd": "a486a09457247840bf39f700246432d5ff5d873fe8ffa5177de9d483cfec03a5"
           }
         }
       ]

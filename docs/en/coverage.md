@@ -4,23 +4,23 @@
 
 [English home](index.md) · [Paper catalog](papers/index.md)
 
-**1606 of 1606** Chinese site pages have a corresponding English page.
+**1614 of 1614** Chinese site pages have a corresponding English page.
 The table counts document pairs, not English catalog entries that link to Chinese text.
 
 | Source section | Pages | English counterparts | Still untranslated |
 | --- | ---: | ---: | ---: |
 | Top-level pages | 56 | 56 | 0 |
-| agent-research | 342 | 342 | 0 |
+| agent-research | 344 | 344 | 0 |
 | assets | 1 | 1 | 0 |
 | design | 14 | 14 | 0 |
 | evolution | 4 | 4 | 0 |
 | experiments | 4 | 4 | 0 |
-| foundation-models | 202 | 202 | 0 |
+| foundation-models | 204 | 204 | 0 |
 | learning | 73 | 73 | 0 |
 | multimodal-models | 39 | 39 | 0 |
 | paper-audits | 3 | 3 | 0 |
-| post-training | 296 | 296 | 0 |
-| recommendation-components | 42 | 42 | 0 |
+| post-training | 298 | 298 | 0 |
+| recommendation-components | 43 | 43 | 0 |
 | reproductions | 430 | 430 | 0 |
-| research-audits | 79 | 79 | 0 |
+| research-audits | 80 | 80 | 0 |
 | system-one | 21 | 21 | 0 |

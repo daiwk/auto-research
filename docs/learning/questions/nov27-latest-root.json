@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "recommendation:elbo-tds": {
+      "questions": [
+        {
+          "id": "nov27-basics",
+          "level": "basics",
+          "question": "ELBO-TDS要保留什么，又要消除什么？",
+          "answer": "保留相对稳定且能预测个体行为的因素，减少短期促销等噪声；重建项避免仅对齐导致个体细节丢失。",
+          "example": "教学例：两人都喜欢手机，但一个看重新款、另一个看重低价；不能把二者表示压成相同。",
+          "added": "2026-11-27",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov27-mechanism",
+          "level": "mechanism",
+          "question": "prior均值跨哪个维度计算，为什么熵项不训练？",
+          "answer": "prior对同一样本的J个采样视图求均值而不是混整个batch；后验固定单位方差，熵为常数，梯度为0。",
+          "example": "教学例：两个用户各3个视图得到两个中心，不能把6个视图缩向同一个中心。",
+          "added": "2026-11-27",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov27-comparison",
+          "level": "comparison",
+          "question": "ELBO-TDS和COTTI如何分别应对促销漂移？",
+          "answer": "COTTI的CPC用常态/促销两视图的可微门控控制对比一致性，RW对历史距离重加权，ABA在服务logit上作促销校准。ELBO-TDS用多视图高斯prior与输入重建约束稳定因素，并把有标签任务留在原始观测上；没有ABA式上线概率修正。两者都依赖稳定语义假设，不能从对齐或重建直接推断因果可识别，也不能用不同生产A/B宣称彼此胜负。",
+          "example": "教学例：当所有视图只保留促销价时，重建不能凭空恢复常态偏好；COTTI的上调校准也不能纠正过预测。",
+          "added": "2026-11-27",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "id": "nov27-implementation",
+          "level": "implementation",
+          "question": "为什么不能把有标签预测也喂给增广采样表示？",
+          "answer": "Eq6和Algorithm1在原始观测上用确定性encoder均值预测，保持训练/推理一致。SSL的采样与增广是独立分支，改变它们不应改变监督loss。",
+          "example": "教学例：固定用户/商品原始输入，只把SSL视图放大5倍；监督loss必须不变，重建和prior可以变。",
+          "added": "2026-11-27",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ]
+        }
+      ]
+    }
+  }
+}

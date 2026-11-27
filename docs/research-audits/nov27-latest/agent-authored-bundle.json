@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "papers": {
+    "agent-research:compaction-authorization": {
+      "questions": [
+        {
+          "id": "request-not-summary",
+          "level": "basics",
+          "question": "为什么把摘要移出user角色还不够？",
+          "answer": "这能移除摘要的伪授权，但也可能丢掉用户较早给出的限制。门让授权器拿完整原始用户序列，agent仍可读摘要；来源完整性与摘要内容真假是不同问题。",
+          "example": "教学例：用户先指定账户A、后来只说继续付款；只保留后一句会失去A，而完整见证序列仍保留它。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "id": "completeness-after-cancellation",
+          "level": "mechanism",
+          "question": "每条都有有效MAC，为什么仍要当前计数？",
+          "answer": "单条MAC只证明这些出现曾被可信入口签发，不证明后来没有取消。gate要求完整有序1..m且m等于入口当前计数，省略后来的用户turn就失败关闭。",
+          "example": "教学例：许可是counter1，取消是counter2；只带合法counter1不能通过m=2的完整性检查。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "id": "input-versus-effect",
+          "level": "comparison",
+          "question": "该门与RuntimeTickets保护的是同一边界吗？",
+          "answer": "不是。本文保护策略生成前的原始授权输入；RuntimeTickets在真实副作用前核冻结recipient/object/budget合同。原文完整不证明策略语义正确，合法发送也不证明摘要来源真实。",
+          "example": "教学例：认证用户原句后生成器仍可能错误放宽recipient，需要下层ticket核具体交付，而不是把MAC当语义理解。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "id": "trusted-state-assumptions",
+          "level": "implementation",
+          "question": "用了HMAC库就能阻止同进程Agent改授权吗？",
+          "answer": "不能。可信入口必须真实归因，keys/counters/issuer要在Agent权限外。该本地库验证协议和重放持久状态，不提供恶意Python隔离，也不保证门失败后的可用性。",
+          "example": "教学例：Agent若可直接调用ingest并传USER，等于拿到签发权，破坏论文前提；私有字段命名不构成沙箱。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-27"
+        }
+      ]
+    },
+    "agent-research:budgeted-submapl": {
+      "questions": [
+        {
+          "id": "query-not-action-budget",
+          "level": "basics",
+          "question": "查询预算Q限制的是执行动作还是梯度反馈？",
+          "answer": "限制当前轮可评估的agent-action反事实边际数量；所有active agent仍各采样一个执行action。未查询坐标估计为0不是实际收益为0，也不是停止该agent。",
+          "example": "教学例：两agent各两action共4坐标，Q=2只问2个边际，但两agent仍各执行一个动作。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "id": "dependent-rounding-marginals",
+          "level": "mechanism",
+          "question": "为什么不能直接按rho做普通加权无放回抽样？",
+          "answer": "rho是每坐标被包含的边缘概率，不是任意抽样权重。IPW无偏要求E[Z]=rho且总数恰好Q；成对依赖舍入同时保两者，普通加权抽样一般改变边缘概率。",
+          "example": "教学例：rho=(0.2,0.8)、Q=1，第一坐标必须恰以0.2概率入选；分母不能随便换成未校准的权重。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "id": "coordinate-versus-task-event",
+          "level": "comparison",
+          "question": "SubMAPL与OOAS的重要性权重可互换吗？",
+          "answer": "不可。前者观察被查询的反事实边际，按坐标包含概率校正；OOAS只观察任务总反馈，按共享noise产生的整任务同臂事件概率校正hint残差。两者反馈可见性和更新器都不同。",
+          "example": "教学例：一任务中切过臂时OOAS残差归因全0；SubMAPL同轮选中的两坐标仍各按自己的rho更新。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "id": "scope-not-high-cost",
+          "level": "implementation",
+          "question": "数值内核通过就能说完整open-system模拟完成吗？",
+          "answer": "不能。动态迁移M在本篇未给正式定义，完整观察表和环境没实现；原文也不足以把便宜模拟判高成本。应保留scope-limited/false full-review，不补猜或伪造终态。",
+          "example": "教学例：固定两agent测试Q精确，不等于重现agent离开再加入时历史logit如何迁移，也不等于20seed覆盖曲线。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-27"
+        }
+      ]
+    }
+  },
+  "english_question_units": {
+    "qa/agent-research:compaction-authorization/request-not-summary": {
+      "source_sha256": "885ed12a7c86d306fc075c2d610adc0f73cd4da5d452fca4e0a3919966e13bb5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is moving a summary out of the user role insufficient?",
+        "answer": "It removes summary-derived authority but may also lose earlier user constraints. The gate supplies complete original turns to authorization while the agent keeps the summary; attribution integrity is distinct from factual truth.",
+        "example": "Teaching example: a user first specifies account A and later says continue payment; retaining only the latter loses A, while the witnessed sequence preserves it."
+      }
+    },
+    "qa/agent-research:compaction-authorization/completeness-after-cancellation": {
+      "source_sha256": "5f2bfe483e35c8902ddd2849c7b82e7a965282115f0487d0b6e69bb32786477b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why require the current count if every record has a valid MAC?",
+        "answer": "Individual MACs establish issuance, not absence of later cancellations. The gate requires counters one through m in order and m equal to current ingress count, rejecting omitted later turns.",
+        "example": "Teaching example: permission at counter one cannot pass alone when cancellation at counter two makes the trusted count two."
+      }
+    },
+    "qa/agent-research:compaction-authorization/input-versus-effect": {
+      "source_sha256": "97ca5b61747e735c07cabfd01b0cc429acf662fdb0e16bf8daef72c6938afda8",
+      "reviewed": true,
+      "fields": {
+        "question": "Does this gate protect the same boundary as RuntimeTickets?",
+        "answer": "No. It protects authorization input before policy synthesis; RuntimeTickets checks frozen recipient/object/budget contracts before effects. Intact originals do not prove correct policy semantics or authenticate summaries through valid sends.",
+        "example": "Teaching example: a generator can still broaden recipients after reading authentic text, requiring effect-level ticket checks rather than treating MACs as semantic understanding."
+      }
+    },
+    "qa/agent-research:compaction-authorization/trusted-state-assumptions": {
+      "source_sha256": "bdfbd0d94bd52ff411d88e9f18de40872890a2e8cb270915d05677655bbfb79f",
+      "reviewed": true,
+      "fields": {
+        "question": "Does an HMAC library stop an in-process agent from changing authority?",
+        "answer": "No. Ingress attribution must be truthful and keys, counters and issuance outside agent access. The local library tests protocol/persistent replay state, not malicious-Python isolation or availability after failure.",
+        "example": "Teaching example: letting an agent call ingest with USER grants issuing power and violates the assumptions; private attribute names are not a sandbox."
+      }
+    },
+    "qa/agent-research:budgeted-submapl/query-not-action-budget": {
+      "source_sha256": "7a390c8d2266188d5f781bbdba3e9f6e2a96adb42698894309d0fd4336e022a9",
+      "reviewed": true,
+      "fields": {
+        "question": "Does query budget Q limit executed actions or feedback?",
+        "answer": "It limits evaluated counterfactual agent-action marginals in a round. Every active agent still samples an action; zero estimates for unqueried coordinates neither imply zero utility nor stop that agent.",
+        "example": "Teaching example: two agents with two actions have four coordinates; Q=2 queries two marginals while both agents still act."
+      }
+    },
+    "qa/agent-research:budgeted-submapl/dependent-rounding-marginals": {
+      "source_sha256": "46f1d892376181a1ab30ad1518ac7e9e717e811de5a762e2d91d1cbb45a90e2e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not use ordinary weighted sampling without replacement?",
+        "answer": "Rho specifies inclusion marginals, not arbitrary weights. Unbiased IPW requires E[Z]=rho and exactly Q selections; pairwise dependent rounding preserves both, while generic weighted sampling usually changes marginals.",
+        "example": "Teaching example: rho=(0.2,0.8), Q=1 requires the first coordinate's inclusion probability to be exactly 0.2, not an uncalibrated weight."
+      }
+    },
+    "qa/agent-research:budgeted-submapl/coordinate-versus-task-event": {
+      "source_sha256": "9674a2ccda3859b0ca746c55ca8bce570124a10b7786a596e1a6bf759eddb770",
+      "reviewed": true,
+      "fields": {
+        "question": "Can SubMAPL and OOAS interchange importance weights?",
+        "answer": "No. SubMAPL observes queried counterfactual marginals and corrects coordinate inclusion; OOAS sees task aggregates and corrects hint residuals by a shared-noise whole-task same-arm event. Feedback and updates differ.",
+        "example": "Teaching example: switching arms zeroes OOAS residual attribution, while two queried SubMAPL coordinates still receive their own inclusion-corrected updates."
+      }
+    },
+    "qa/agent-research:budgeted-submapl/scope-not-high-cost": {
+      "source_sha256": "86d57e2dfd73fb248d00330d63737be977665e5430ba2ce75dbebb4fea61f1a9",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a passing numerical kernel complete the open-system simulation?",
+        "answer": "No. The paper defers formal migration M and the local slice lacks its environment/observation table. Nor is the small simulation demonstrably expensive. Keep scope-limited/false full review rather than inventing migration or a cost terminal.",
+        "example": "Teaching example: exact Q with two fixed agents does not reproduce retained logits across departures/returns or twenty-seed coverage curves."
+      }
+    }
+  }
+}

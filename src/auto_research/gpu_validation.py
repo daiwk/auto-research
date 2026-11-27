@@ -16,6 +16,7 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    "elbo-tds": "docs/gpu-validations/elbo-tds-a100-20261127-latest.json",
     "camar": "docs/gpu-validations/camar-a100-20261126-latest.json",
     "lazunirec": "docs/gpu-validations/lazunirec-a100-20261125-latest.json",
     "deep-cross-attention": "docs/gpu-validations/deep-cross-attention-a100-20261124-latest.json",

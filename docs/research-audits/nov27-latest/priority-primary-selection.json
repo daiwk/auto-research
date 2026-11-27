@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-27",
+  "captured_at": "2026-11-27T03:48:39.562450+00:00",
+  "window": {
+    "start": "2026-11-26",
+    "end": "2026-11-27"
+  },
+  "all_sources_exhaustive": false,
+  "new_directory_urls_relative_to_nov26": [],
+  "new_directory_url_count": 0,
+  "official_pages": 56,
+  "parse_complete_pages": 50,
+  "repository_query_count": 6,
+  "repository_event_observations": 34,
+  "repository_primary_observations": [
+    {
+      "repository": "facebookresearch/JEP-AV",
+      "source_url": "https://github.com/facebookresearch/JEP-AV",
+      "capture": ".cache/nov27-latest/priority-readmes/facebookresearch--JEP-AV.md",
+      "capture_sha256": "9d8cb822e042a2552bf141793c2314a4ba4b66b3047f2db84614e1a19340a73c",
+      "paper_arxiv_identity": null,
+      "decision": "source_only_placeholder",
+      "reason": "CreatedNov26, README only Coming Soon plus license; no verified paper title/identity/date, method or runnable model. Archive source limitation, do not invent a JEPA reproduction.",
+      "read_scope": "README identity/source-release observation, not full-paper method review"
+    },
+    {
+      "repository": "google-deepmind/psyre",
+      "source_url": "https://github.com/google-deepmind/psyre",
+      "capture": ".cache/nov27-latest/priority-readmes/google-deepmind--psyre.md",
+      "capture_sha256": "7c45e11d4a548fb29974ada014c119571e949ae877b9f480b6155808ace8f727",
+      "paper_arxiv_identity": "2607.21797",
+      "decision": "historical_source_framework",
+      "reason": "Reactive-dataflow framework references2023 PL work and July2026 clock-calculus work. No new LLM/Agent algorithm identified from this README; do not execute installation instructions.",
+      "read_scope": "README identity/source-release observation, not full-paper method review"
+    },
+    {
+      "repository": "google-deepmind/habitats",
+      "source_url": "https://github.com/google-deepmind/habitats",
+      "capture": ".cache/nov27-latest/priority-readmes/google-deepmind--habitats.md",
+      "capture_sha256": "a28f799c543eaf98bae92c778ab37005e6c7019012b2f10adc8c188159e75746",
+      "paper_arxiv_identity": null,
+      "decision": "source_only_framework_no_verified_paper",
+      "reason": "Reward-policy objective-evolution framework describes planner/mutator and cross-fitness but gives no verified paper identity or first-publication date. No fabricated catalog entry or API run.",
+      "read_scope": "README identity/source-release observation, not full-paper method review"
+    },
+    {
+      "repository": "google-deepmind/origami-design",
+      "source_url": "https://github.com/google-deepmind/origami-design",
+      "capture": ".cache/nov27-latest/priority-readmes/google-deepmind--origami-design.md",
+      "capture_sha256": "9b9dbf3831f16525137486651a36a66e53e8bc30325a24fa115167bc1bdb7ca6",
+      "paper_arxiv_identity": "2606.26299",
+      "decision": "historical_source_release",
+      "reason": "README identifies June2026 COrigami, not a new November publication. Historical showcase tool-call histories were unrecorded; never claim replayability from stick figures alone. No campaign reopened.",
+      "read_scope": "README identity/source-release observation, not full-paper method review"
+    },
+    {
+      "repository": "google-deepmind/disco",
+      "source_url": "https://github.com/google-deepmind/disco",
+      "capture": ".cache/nov27-latest/priority-readmes/google-deepmind--disco.md",
+      "capture_sha256": "7c01f1ded531143db361f2d17b12007d2e2606992cd0e26f65e18aa3efef4684",
+      "paper_arxiv_identity": "2611.27104",
+      "decision": "already_cataloged_code_observation",
+      "reason": "Names already-cataloged DISCO. A code push is not a new paper or evidence that our binary/unboosted L1 is a complete LLM-discovery agent.",
+      "read_scope": "README identity/source-release observation, not full-paper method review"
+    }
+  ],
+  "monorepo_commits": [
+    {
+      "sha": "90d8da31512e2945f3b4d3a04c02e4419333ad44",
+      "date": "2026-11-26T08:30:23Z",
+      "message": "Add orbit-guided ALOS PRISM destriping module for GEM-15. GEM-15 elevation tiles exhibit ~50 km periodic across-track waves (±0.6 to 3.0 m) inherited from the coarse ALOS PRISM AW3D30 elevation prior.\n\nPiperOrigin-RevId: 1030484364"
+    }
+  ],
+  "monorepo_selection": "Observed commit adds orbit-guided ALOS PRISM/GEM-15 destriping. Earth-elevation processing, not an identified new in-scope LLM/Agent/JEPA or industrial recommendation algorithm; message-level topic screening only.",
+  "known_blog": {
+    "source": "https://research.google/blog/2026/11/",
+    "latest_observed": "2026-11-25",
+    "paper": "2609.17496",
+    "decision": "New Fuse blog refers to already-cataloged paper, no duplicate intake"
+  },
+  "limits": [
+    "No global absence/exhaustive Google/Meta claim.",
+    "Fifteen directory URL additions are inherited versus Nov15, not today's new publications.",
+    "Incomplete Meta landing pages remain source exceptions, not evidence of no new work.",
+    "No previous high-cost campaign automatically reopened."
+  ]
+}

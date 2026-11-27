@@ -11,7 +11,7 @@ hide:
 
 每个子主题维护一张卡片。新论文进入后，更新对应卡片的比较或结论，并记录这次变化；不必再从头读整批论文。
 
-31 张精读卡片 · 1302 篇主题资料 · 按主题折叠
+31 张精读卡片 · 1309 篇主题资料 · 按主题折叠
 
 <details class="ar-deep-shelf"><summary>搜广推 · 7 张</summary>
 <div class="ar-deep-grid">
@@ -38,7 +38,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="recommendation/feedback-multitask-causality/">从CTR到满意度与uplift：先定义监督对象，再决定怎样共享</a></h2>
 <p>ESMM约束点击—转化漏斗概率，MMoE和PLE安排不同任务怎样共享专家，FLVM尝试把消费、主动参与和正负方向分开，Incrementality则比较采取与不采取动作的潜在结果。预测更多头、共享更多参数或拆出潜因子，都不自动解决因果识别。</p>
-<p class="ar-learning-topic-meta">8 篇重点对照 · 6 个跨论文问答 · 2026-11-20</p>
+<p class="ar-learning-topic-meta">9 篇重点对照 · 7 个跨论文问答 · 2026-11-27</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="recommendation/slates-business-value/">从列表边际价值到出价控制：策略权重与约束</a></h2>
@@ -57,7 +57,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/context-and-state/">长上下文不是一条轴：位置、读取与状态压缩</a></h2>
 <p>先问历史以什么形式存在，再问当前 token 怎样读它。RoPE 改变相对位置关系，Mamba 把历史写入递归状态，NSA 在多条读取路径间分工，OpenAttention 为未精读部分保留代理，TTR 则为当前输入求一个压缩表示。这些方法不能只按“支持多长”排成一列。 MERLIN在多个压缩状态之外保留routing key矩统计，改变段间读取权重，而不替换每段内部的递归写入。</p>
-<p class="ar-learning-topic-meta">25 篇重点对照 · 21 个跨论文问答 · 2026-11-26</p>
+<p class="ar-learning-topic-meta">26 篇重点对照 · 22 个跨论文问答 · 2026-11-27</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/conditional-compute/">按需算力：选择专家、跳过计算，还是查回旧知识</a></h2>
@@ -72,7 +72,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/compression-and-cache/">推理压缩先找瓶颈：权重、KV 内容与缓存层级</a></h2>
 <p>AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM 管可执行历史视图，Remote KV Tiers 解决跨层级加载。它们可以组合，但不能用一个“压缩率”解释质量、可恢复性和端到端速度。 FoldBias另解决压缩缓存的接口障碍：把静态bias折进同维key，但未来query漂移仍会引入误差。</p>
-<p class="ar-learning-topic-meta">20 篇重点对照 · 15 个跨论文问答 · 2026-11-26</p>
+<p class="ar-learning-topic-meta">21 篇重点对照 · 16 个跨论文问答 · 2026-11-27</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/generation-paths/">少做串行步骤：验证草稿与学习迭代不是同一条路</a></h2>
@@ -129,7 +129,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="post-training/preference-and-alignment/">偏好不是一个分数：先确定反馈格式，再选对齐目标</a></h2>
 <p>DPO、KTO、SimPO、ORPO和IPO主要改变“怎样使用反馈”，CleanRM先处理“反馈是否可信”。参考模型、长度归一化、有限间隔和噪声校正是不同设计轴，不能因都在扩大好坏回答差异就当成同一方法。</p>
-<p class="ar-learning-topic-meta">14 篇重点对照 · 11 个跨论文问答 · 2026-11-24</p>
+<p class="ar-learning-topic-meta">15 篇重点对照 · 12 个跨论文问答 · 2026-11-27</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="post-training/policy-optimization/">同一个GRPO名字之外：优势尺度、裁剪单位与训推失配</a></h2>
@@ -149,7 +149,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="post-training/teacher-and-context/">教师更强仍可能教错：信息、兼容性与成功行为保护</a></h2>
 <p>教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。</p>
-<p class="ar-learning-topic-meta">17 篇重点对照 · 15 个跨论文问答 · 2026-11-26</p>
+<p class="ar-learning-topic-meta">18 篇重点对照 · 16 个跨论文问答 · 2026-11-27</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="post-training/data-and-budget/">省掉哪一份算力：选问题、少生成、分枝与有条件重放</a></h2>
@@ -173,7 +173,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="agent-research/tools-and-collaboration/">从会调用到能交付：工具接口、可靠性与协作合同</a></h2>
 <p>Toolformer 学何时调用，SWE-agent 设计动作接口，RATED 处理相关工具的运行可靠性；AutoGen 定义消息程序，MetaGPT 约束角色交付物，World of SWEcraft 再用隐藏下游检验群体产出。每层都可能失败，调用格式正确不是端到端完成的替身。</p>
-<p class="ar-learning-topic-meta">11 篇重点对照 · 8 个跨论文问答 · 2026-11-25</p>
+<p class="ar-learning-topic-meta">12 篇重点对照 · 9 个跨论文问答 · 2026-11-27</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/harness-and-self-improvement/">自改进先标对象：答案、经验、接口与系统版本</a></h2>
@@ -183,7 +183,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="agent-research/agent-policy-learning/">交互学习：统一轨迹之后，信用和教师信息怎样分配</a></h2>
 <p>Agent Lightning先把执行整理成可训练transition；GiGPO、AdaStep和DepGPO分别利用重复状态、回报方差与命令依赖分配信用；Frontier-OPD和ASTEROID则改变教师数据怎样进入学生学习。记录成轨迹只是入口，训练目标和可见信息才定义算法。</p>
-<p class="ar-learning-topic-meta">11 篇重点对照 · 8 个跨论文问答 · 2026-11-24</p>
+<p class="ar-learning-topic-meta">12 篇重点对照 · 9 个跨论文问答 · 2026-11-27</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/evaluation-and-reliability/">评测追问四件事：完成了、稳健吗、靠什么、花多少</a></h2>

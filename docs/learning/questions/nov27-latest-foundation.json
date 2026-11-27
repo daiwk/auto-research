@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:integral-deltanet": {
+      "questions": [
+        {
+          "id": "history-not-second-writer",
+          "level": "basics",
+          "question": "积分state只是另一个独立DeltaNet吗？",
+          "answer": "不是。它积累同一个fast state更新后的历史，不独立根据kv擦写。",
+          "example": "教学例：第三次覆盖擦掉S中的旧关联，X仍可保留第一时刻S的一部分；第二个独立擦写器没有这一固定历史合同。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "id": "current-state-key-channel",
+          "level": "mechanism",
+          "question": "lambda该乘在哪里、在何时积分？",
+          "answer": "沿key列乘在当前更新后的S与旧X上，然后按gamma逐key channel读出；不能先积分旧S。",
+          "example": "教学例：lambda全1时X必须等于刚写入的S；若晚一token，当前kv的积分读出会缺失。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "id": "covariance-not-history",
+          "level": "comparison",
+          "question": "为什么不能把KRA的协方差P称为本文积分state？",
+          "answer": "P描述相关key的后验不确定性并影响写入方向，X保存S的加权历史并只参与读取；语义和更新不同。",
+          "example": "教学例：在无新value时KRA遗忘可使P恢复，但X仍只是旧S历史的保留，不会变成写入增益矩阵。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "id": "chunk-independent-reference",
+          "level": "implementation",
+          "question": "怎样证明chunk路径没把integral state当作每块清零？",
+          "answer": "用非零入state跨块续接，与逐token递推比较输出和两state，另外对q/k/v及所有门核对梯度。",
+          "example": "教学例：长度11、chunk4必须处理4/4/3并传递S和X；只比首块不能发现X重置。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-27"
+        }
+      ]
+    },
+    "foundation-models:deco-attention": {
+      "questions": [
+        {
+          "id": "first-order-not-exact-restoration",
+          "level": "basics",
+          "question": "加回两个一阶残差项是否等于恢复原始QK？",
+          "answer": "不等于。低秩截断、补偿通道再量化及二阶deltaQ deltaK项仍有误差。",
+          "example": "教学例：即使用full-rank basis且不再量化extra，精确乘积与补偿乘积仍差deltaQ deltaK转置。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "id": "two-grams-two-traces",
+          "level": "mechanism",
+          "question": "共享basis为何不是直接相加两个未归一化Gram？",
+          "answer": "Q/K尺度可能不同；逐Gram除以各自trace让两者同权，sample还要在Hadamard后且量化前取得。",
+          "example": "教学例：把Q放大100倍，正确trace归一化basis子空间不变；直接相加会被Q的10000倍能量支配。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "id": "runtime-not-static-scales",
+          "level": "comparison",
+          "question": "DeCo能直接替换DualQuant的权重尺度求解器吗？",
+          "answer": "不能。DualQuant优化静态weight重建的row/column尺度，DeCo纠正动态attention Q/K残差；对象和运行时机不同。",
+          "example": "教学例：两个prompt产生不同Q/K，DeCo需重估basis；静态weight尺度通常可复用。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "id": "emulation-not-fp4-kernel",
+          "level": "implementation",
+          "question": "CPU解码低位值后做FP64乘法，能报告FP4硬件加速吗？",
+          "answer": "不能。它验证舍入与补偿代数，不执行packed FP4 MMA、kernel softmax或访存流水线。",
+          "example": "教学例：把native_fp4_kernel_calls记录为0，并用原始d缩放softmax；不能把NumPy矩阵耗时标为GB300 latency。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-27"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-27",
+  "window": {
+    "start": "2026-11-26",
+    "end": "2026-11-27"
+  },
+  "metadata_identities": 2091,
+  "announcement_identities": 1157,
+  "new_metadata_identities_relative_to_nov26_capture": 891,
+  "newly_captured_recent_first_releases_by_date": {
+    "2026-11-24": 555
+  },
+  "first_releases_in_requested_window": 0,
+  "latest_original_publication_observed": "2026-11-25T18:59:59Z",
+  "announcement_dates_observed": [
+    "2026-11-26"
+  ],
+  "announcement_identity_delta_from_previous_batch": 0,
+  "official_directory_pages": 56,
+  "parse_complete_pages": 50,
+  "repository_event_queries": 6,
+  "metadata_coverage_complete_to_overlap_boundary": true,
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "review_watermark_unchanged": "2026-11-15",
+  "limits": [
+    "Finite selection from overlapping first releases/revisions, not today's newly published paper count.",
+    "API capture reachesNov24 overlap boundary; this is transport/metadata coverage, not per-paper method/selection closure.",
+    "NoNovember26 original first release observed; bulletin remainsNovember26. Missing selected announcement dates stay null.",
+    "Unselected metadata identities are a recall pool, not an unfinished implementation queue.",
+    "Google directory delta is zero versusNov26; inherited15 URL additions versusNov15 are not15 new papers.",
+    "Two incomplete Meta pages and bounded source scans prevent exhaustive-source claims."
+  ]
+}

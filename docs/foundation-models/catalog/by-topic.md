@@ -117,6 +117,7 @@
 ### 线性注意力与状态空间
 
 - [Eliciting the Recall Capacity of Linear Attention](../../foundation-models/2611.32969-thresholded-longce/README.md)（`thresholded-longce`）：线性注意力的固定状态可以在专门训练的任务中存储大量关联，但标准语言预训练并不一定教会模型从上下文复制。论文分开研究容量、训练诱因和召回提示；目标语料里 qualifying AR-hit 仅约占 1.7%，因此增添句子重复，并用 Thresholded LongCE（TLCE）强化依赖远上下文的 token。两种干预互补，但可能牺牲通用语言建模；不能把“存在容量”写成“任意任务都能召回”。
+- [Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration](../../foundation-models/2611.32063-integral-deltanet/README.md)（`integral-deltanet`）：单状态的衰减和定向覆盖会同时压低干扰与有用旧信息。本文保持KDA或GDN-2的fast更新不变，额外积累更新后状态的历史；查询时由输入相关的逐channel门读取两个时间尺度，而不是把所有历史都压进同一读出。常量混合门、额外独立delta state和仅增宽state是论文分别比较的不同设计。
 - [Kernel Ridge Attention: Nonlinear Memory with Selective Forgetting](../../foundation-models/2611.23896-kernel-ridge-attention/README.md)（`kernel-ridge-attention`）：KRA把历史关联写入固定大小的回归矩阵，同时保留后验协方差。共享可学习Fourier特征形成非线性核；内容相关OU时钟既衰减旧系数，也把协方差恢复到先验，使已经遗忘的方向重新可写。读取发生在当前值写入之后。 [Fixed-v1 source](https://arxiv.org/pdf/2611.23896v1).
 - [FM-Mamba: An Efficient Native 2D Selective State Space Model with Stability-Aware Discretization](../../foundation-models/2611.22061-fm-mamba/README.md)（`fm-mamba`）：原生2D FM状态同时接收上、左与左上三个前驱，不通过展平扫描把二维关系退化为一条链。两个输入相关步长分别控制两个轴；a0/(a1a2)决定是否需要给步长施加上界。 [已核方法位置](https://arxiv.org/html/2611.22061v1#S3)：3.1–3.3, 4.1。
 - [Spool: Low-Latency Streaming Inference for Hybrid Vision-Language Models](../../foundation-models/2611.23228-spool/README.md)（`spool`）：GDN的key/value/gates只依赖已记录的层输入，因此状态更新对旧状态是仿射的。每帧缓存一个变换，以非交换的时间顺序组成segment tree；窗口到期时从prefix anchor重放保留摘要，而非重跑所有视频token。 [已核方法位置](https://arxiv.org/html/2611.23228v1#S3)：3.2–3.4, 4, 5.1, Appendix A。
@@ -419,6 +420,10 @@
 ### 表征压缩与几何
 
 - [RAP: Radial-Angular Random Projection for Hyperbolic Representations](../../foundation-models/2611.34298-rap/README.md)（`rap`）：普通空间坐标投影会同时改变径向深度与角相似度。RAP拆开这两者：到所选原点的半径不变，角向量乘一次高斯矩阵后归一化，再提升回目标 Lorentz 双曲面。它不是对原始坐标做普通欧氏 JL；保证仍受半径上界、点间分离和 arcosh 条件数限制。
+
+### 量化与数值补偿
+
+- [DeCo-Attention: Decompose to Compensate for Low-Precision Attention](../../foundation-models/2611.32035-deco-attention/README.md)（`deco-attention`）：FP4 Q/K舍入产生的score误差可能被softmax指数放大。DeCo先以带随机行符号的Hadamard旋转Q/K，从旋转后原始sample的Gram矩阵估计共享principal basis；把量化残差在主方向的两侧一阶项加回。它舍弃二阶残差和未保留方向，不保证逐样本必然比未补偿更好。
 
 ### 能力评测与推理协议
 

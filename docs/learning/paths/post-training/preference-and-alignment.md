@@ -7,7 +7,7 @@ hide:
 
 # 偏好与对齐：先看反馈长什么样
 
-[LLM 后训练](index.md) / 132 个问题 · 33 篇论文
+[LLM 后训练](index.md) / 136 个问题 · 34 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">132 个问题 · 33 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">136 个问题 · 34 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:cafa" data-paper-title="Scoring What Matters: Exact Feedback Reduction for Language Model Comparison" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Scoring What Matters: Exact Feedback Reduction for Language Model Comparison LLM 后训练 Beijing Institute of Technology 2026-11-24 比较checkpoint常只需要分数差，而不需要每个绝对分数。相同回答的共同分数会在contrast中抵消，普通缓存仍可能多买一次不需要的反馈。CAFA先按请求的线性报告聚合精确scoring identity的系数，再决定评分支持；均值和普通样本协方差需要的支持不一定相同。 完整实验成本过高，不复现（审查 DONE）；CPU L1精确支持规划组件，diagnostic only；不是语言模型能力或真实judge节费实测。完整实验成本过高，不复现（审查 DONE）；无retry/evolve。本篇是11月24日首发的近期补漏，不是11月27日新发。plan_report执行Eq.2–4，输入完整decoded-response bank、任意线性系数矩阵与正prompt权重；用Fraction在除draw数前精确聚合，float按十进制拼写解释为有理数，无近零容差。identity为精确(prompt,text)，不归一化、不按token ID或语义合并。  报告驱动反馈采集 评测反馈预算 LLM 后训练 偏好与对齐：先看反馈长什么样 CAFA为什么能比普通缓存少买反馈？ 缓存只把同一评分输入的重复调用合成一次；CAFA还检查请求报告中该输入的系数是否完全抵消。若报告只要两个模型之差，共同回答的绝对分数就可能根本不需要。 教学例：base和update都答A，差值r(A)-r(A)=0；普通缓存仍买一次A，CAFA均值报告可零次。若追加base绝对分数，则A必须恢复。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<span id="paper-post-training-cafa-7f12c61a" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-4527cb72a33e309a">CAFA为什么能比普通缓存少买反馈？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acafa">Scoring What Matters: Exact Feedback Reduction for Language Model Comparison</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Beijing Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>缓存只把同一评分输入的重复调用合成一次；CAFA还检查请求报告中该输入的系数是否完全抵消。若报告只要两个模型之差，共同回答的绝对分数就可能根本不需要。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：base和update都答A，差值r(A)-r(A)=0；普通缓存仍买一次A，CAFA均值报告可零次。若追加base绝对分数，则A必须恢复。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31931v1">原论文</a> · <a href="../../../../post-training/2611.31931-cafa/">实现解读</a> · <a href="#qa-4527cb72a33e309a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:cafa" data-paper-title="Scoring What Matters: Exact Feedback Reduction for Language Model Comparison" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Scoring What Matters: Exact Feedback Reduction for Language Model Comparison LLM 后训练 Beijing Institute of Technology 2026-11-24 比较checkpoint常只需要分数差，而不需要每个绝对分数。相同回答的共同分数会在contrast中抵消，普通缓存仍可能多买一次不需要的反馈。CAFA先按请求的线性报告聚合精确scoring identity的系数，再决定评分支持；均值和普通样本协方差需要的支持不一定相同。 完整实验成本过高，不复现（审查 DONE）；CPU L1精确支持规划组件，diagnostic only；不是语言模型能力或真实judge节费实测。完整实验成本过高，不复现（审查 DONE）；无retry/evolve。本篇是11月24日首发的近期补漏，不是11月27日新发。plan_report执行Eq.2–4，输入完整decoded-response bank、任意线性系数矩阵与正prompt权重；用Fraction在除draw数前精确聚合，float按十进制拼写解释为有理数，无近零容差。identity为精确(prompt,text)，不归一化、不按token ID或语义合并。  报告驱动反馈采集 评测反馈预算 LLM 后训练 偏好与对齐：先看反馈长什么样 均值支持为空，为什么协方差仍可能需要评分？ 跨draw抵消只保证平均贡献为零，不保证逐draw差值为零。普通协方差依赖每个draw偏离均值的量，必须保留任一draw系数非零的identity及全部原始draw分母。 教学例：两draw为(A,B)和(B,A)，均值差0；若r(A)=2、r(B)=5，差值是3和-3，样本方差18，不能把它写成0。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-103f59023275fd3a">均值支持为空，为什么协方差仍可能需要评分？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acafa">Scoring What Matters: Exact Feedback Reduction for Language Model Comparison</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Beijing Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>跨draw抵消只保证平均贡献为零，不保证逐draw差值为零。普通协方差依赖每个draw偏离均值的量，必须保留任一draw系数非零的identity及全部原始draw分母。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两draw为(A,B)和(B,A)，均值差0；若r(A)=2、r(B)=5，差值是3和-3，样本方差18，不能把它写成0。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31931v1">原论文</a> · <a href="../../../../post-training/2611.31931-cafa/">实现解读</a> · <a href="#qa-103f59023275fd3a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:cafa" data-paper-title="Scoring What Matters: Exact Feedback Reduction for Language Model Comparison" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Scoring What Matters: Exact Feedback Reduction for Language Model Comparison LLM 后训练 Beijing Institute of Technology 2026-11-24 比较checkpoint常只需要分数差，而不需要每个绝对分数。相同回答的共同分数会在contrast中抵消，普通缓存仍可能多买一次不需要的反馈。CAFA先按请求的线性报告聚合精确scoring identity的系数，再决定评分支持；均值和普通样本协方差需要的支持不一定相同。 完整实验成本过高，不复现（审查 DONE）；CPU L1精确支持规划组件，diagnostic only；不是语言模型能力或真实judge节费实测。完整实验成本过高，不复现（审查 DONE）；无retry/evolve。本篇是11月24日首发的近期补漏，不是11月27日新发。plan_report执行Eq.2–4，输入完整decoded-response bank、任意线性系数矩阵与正prompt权重；用Fraction在除draw数前精确聚合，float按十进制拼写解释为有理数，无近零容差。identity为精确(prompt,text)，不归一化、不按token ID或语义合并。  报告驱动反馈采集 评测反馈预算 LLM 后训练 偏好与对齐：先看反馈长什么样 减少评分调用是否解决了Probabilistic Autorater的校准问题？ 没有。CAFA假设评分函数或其版本固定，在此条件下减少必要输入；Autorater研究评分概率与人类偏好分布是否校准。完全复原一个有偏裁判的报告，仍然是有偏裁判的报告。 教学例：某judge总偏好长回答，CAFA可以精确复原它的checkpoint分差；省去抵消评分不会消除长度偏置。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-fec172f83083ba53">减少评分调用是否解决了Probabilistic Autorater的校准问题？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acafa">Scoring What Matters: Exact Feedback Reduction for Language Model Comparison</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Beijing Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。CAFA假设评分函数或其版本固定，在此条件下减少必要输入；Autorater研究评分概率与人类偏好分布是否校准。完全复原一个有偏裁判的报告，仍然是有偏裁判的报告。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某judge总偏好长回答，CAFA可以精确复原它的checkpoint分差；省去抵消评分不会消除长度偏置。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31931v1">原论文</a> · <a href="../../../../post-training/2611.31931-cafa/">实现解读</a> · <a href="#qa-fec172f83083ba53">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:cafa" data-paper-title="Scoring What Matters: Exact Feedback Reduction for Language Model Comparison" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Scoring What Matters: Exact Feedback Reduction for Language Model Comparison LLM 后训练 Beijing Institute of Technology 2026-11-24 比较checkpoint常只需要分数差，而不需要每个绝对分数。相同回答的共同分数会在contrast中抵消，普通缓存仍可能多买一次不需要的反馈。CAFA先按请求的线性报告聚合精确scoring identity的系数，再决定评分支持；均值和普通样本协方差需要的支持不一定相同。 完整实验成本过高，不复现（审查 DONE）；CPU L1精确支持规划组件，diagnostic only；不是语言模型能力或真实judge节费实测。完整实验成本过高，不复现（审查 DONE）；无retry/evolve。本篇是11月24日首发的近期补漏，不是11月27日新发。plan_report执行Eq.2–4，输入完整decoded-response bank、任意线性系数矩阵与正prompt权重；用Fraction在除draw数前精确聚合，float按十进制拼写解释为有理数，无近零容差。identity为精确(prompt,text)，不归一化、不按token ID或语义合并。  报告驱动反馈采集 评测反馈预算 LLM 后训练 偏好与对齐：先看反馈长什么样 identity或缺失评分为什么不能用近似匹配与0填补？ identity必须包含精确prompt和decoded text及cache中的scorer版本。归一化或语义合并会把可能不同的score强行设为相同；缺失填0则改变目标。未取得required反馈只能incomplete，或在已声明范围下给均值bounds且不报告协方差。 教学例：A和a可能被大小写敏感rubric判不同，不能合并；未取得r(A)且范围[0,1]时应保留其系数对应区间，不假定r(A)=0。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-12faa76da178dbd6">identity或缺失评分为什么不能用近似匹配与0填补？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acafa">Scoring What Matters: Exact Feedback Reduction for Language Model Comparison</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Beijing Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>identity必须包含精确prompt和decoded text及cache中的scorer版本。归一化或语义合并会把可能不同的score强行设为相同；缺失填0则改变目标。未取得required反馈只能incomplete，或在已声明范围下给均值bounds且不报告协方差。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A和a可能被大小写敏感rubric判不同，不能合并；未取得r(A)且范围[0,1]时应保留其系数对应区间，不假定r(A)=0。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31931v1">原论文</a> · <a href="../../../../post-training/2611.31931-cafa/">实现解读</a> · <a href="#qa-12faa76da178dbd6">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:shpo" data-paper-title="Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences LLM 后训练 Jinan University 2026-11-23 DPO把偏好写成response标量势之差，围绕三角形相加为零，不能表示A胜B、B胜C、C胜A的局部环。SHPO保留DPO项，再把response最后层hidden仅在response token上均值池化，经无bias W投影到2K维并归一化；每个二维plane的有向面积乘γ后相加，构造交换两回答即反号的残差。γ的L1惩罚使不活跃plane受压制；梯度同时流回W、γ和共享policy hidden，不是固定打分后重新排序。 完整实验成本过高，不复现（审查 DONE）；多seed不升级机制诊断为能力比较，没有下载数据/权重、生成真实response、训练模型或调用judge。L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。完整实验成本过高，不复现（审查 DONE）；不自动重试。纯CPU执行response-only mean pool、无bias d×2K投影与L2归一化、antisymmetric plane特征、DPO+curl logistic loss及gamma L1 subgradient；  preference-and-alignment CPU机制组件 LLM 后训练 偏好与对齐：先看反馈长什么样 DPO为什么不能表达三角偏好环？ DPO pair logit是两个标量势之差，三边相加严格望远镜消去为0。SHPO增加antisymmetric plane残差，可使三角circulation非零；这不是仅扩大同一个BT标量reward。 教学例：A&gt;B、B&gt;C、C&gt;A三边都要正时，不存在三个标量同时满足；单位圆上0/120/240度的plane有向面积可给三边同号。 2026-11-24">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-shpo-bd72026e" class="ar-learning-paper-anchor"></span>

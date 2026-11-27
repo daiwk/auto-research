@@ -7,7 +7,7 @@ hide:
 
 # 工具与协作执行：把计划变成可检查的动作
 
-[Agent](index.md) / 217 个问题 · 54 篇论文
+[Agent](index.md) / 221 个问题 · 55 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">217 个问题 · 54 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">221 个问题 · 55 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-kernel" data-paper-title="fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration Agent Amazon, AGI / Sunnyvale, USA 2026-11-24 SGR（Sub-Graph Recovery）不是新发明依赖恢复：它把已知的子图选择性重试放入LLM内容编排层。异常先令下游不可达，独立兄弟仍可完成；重试只复位失败节点及其不可达后代。SQLite SAB保存状态/文本，DSP在所有父节点完成后才调度子节点，并按声明顺序把真实父输出拼入提示。五个动词是fork、retry、cancel、query、fetch。fork是创建DAG任务，不是操作系统进程克隆。 单A100/A30或Mac预算不承担该长rollout/API多臂矩阵：成本过高，不复现（审查 DONE）。42/43/44三seed CPU诊断：4节点完成、5次executor调用，兄弟b/c各执行一次，join读取A/B/C实际文本顺序，重开保留4个complete节点。component_only / L1 CPU编排机制诊断，diagnostic_only=true，不是LLM Agent能力复现。2026-11-24首发、2026-11-25发现/审查；不接入Evolve晋级。标准库SQLite/WAL实现7态SAB、五动词、事务claim、失败/取消级联、SGR与实际父文本继承。fork不等待执行；  工具与协作 CPU机制组件 Agent 工具与协作执行：把计划变成可检查的动作 为什么一次节点异常不应让整个任务从头重来？ 在声明正确的DAG中，只有失败节点及其依赖后代需要重试；已完成独立兄弟的状态和输出应保持。全重放会重复已完成工作，并再次暴露于暂时故障。 教学例：A/B/C独立取价，汇总依赖三者；A超时，只重试A和未运行汇总，不重新取B/C。 2026-11-25">
@@ -133,6 +133,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一probe返回day-first后再走对应分支可以；直接读取hidden_h=day-first后选序列化属于越界。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31938v1">原论文</a> · <a href="../../../../agent-research/2611.31938-cape/">实现解读</a> · <a href="#qa-38052c62185b0c45">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:compaction-authorization" data-paper-title="LLM Agent Authorization Across Context Compaction" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="LLM Agent Authorization Across Context Compaction Agent University of Technology Sydney 2026-11-24 request-derived authorizer假定request slot是用户所说，压缩却可能把模型对用户、工具和注入文本的转述放回user角色。更强的摘要器不能凭字面区分格式一致的真/伪记录。本文分开两条输入：agent继续读摘要；授权策略生成器只读可信入口认证、跨边界逐字保留的完整请求序列。该门解决来源与顺序完整性，不判断请求是否安全，也不保证下游授权策略语义正确。 完整API/长会话矩阵成本过高，不复现（审查 DONE）；component_only / L1 CPU认证协议诊断，不是LLM授权语义、防注入胜率或生产安全产品。component_only / L1 CPU认证协议诊断，不是LLM授权语义、防注入胜率或生产安全产品。完整API/长会话矩阵成本过高，不复现（审查 DONE）；不接Evolve。标准库独立实现HMAC-SHA256、精确UTF-8与长度前缀framing、occurrence/sequence分域、完整有序commit及一次性boundary消费。SQLite事务持久化issued/next-sign/next-verify；  工具与协作 认证请求完整性 Agent 工具与协作执行：把计划变成可检查的动作 为什么把摘要移出user角色还不够？ 这能移除摘要的伪授权，但也可能丢掉用户较早给出的限制。门让授权器拿完整原始用户序列，agent仍可读摘要；来源完整性与摘要内容真假是不同问题。 教学例：用户先指定账户A、后来只说继续付款；只保留后一句会失去A，而完整见证序列仍保留它。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<span id="paper-agent-research-compaction-authorization-e5991905" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-38714cd918ccc8df">为什么把摘要移出user角色还不够？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acompaction-authorization">LLM Agent Authorization Across Context Compaction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · University of Technology Sydney</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这能移除摘要的伪授权，但也可能丢掉用户较早给出的限制。门让授权器拿完整原始用户序列，agent仍可读摘要；来源完整性与摘要内容真假是不同问题。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：用户先指定账户A、后来只说继续付款；只保留后一句会失去A，而完整见证序列仍保留它。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32194v1">原论文</a> · <a href="../../../../agent-research/2611.32194-compaction-authorization/">实现解读</a> · <a href="#qa-38714cd918ccc8df">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:compaction-authorization" data-paper-title="LLM Agent Authorization Across Context Compaction" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="LLM Agent Authorization Across Context Compaction Agent University of Technology Sydney 2026-11-24 request-derived authorizer假定request slot是用户所说，压缩却可能把模型对用户、工具和注入文本的转述放回user角色。更强的摘要器不能凭字面区分格式一致的真/伪记录。本文分开两条输入：agent继续读摘要；授权策略生成器只读可信入口认证、跨边界逐字保留的完整请求序列。该门解决来源与顺序完整性，不判断请求是否安全，也不保证下游授权策略语义正确。 完整API/长会话矩阵成本过高，不复现（审查 DONE）；component_only / L1 CPU认证协议诊断，不是LLM授权语义、防注入胜率或生产安全产品。component_only / L1 CPU认证协议诊断，不是LLM授权语义、防注入胜率或生产安全产品。完整API/长会话矩阵成本过高，不复现（审查 DONE）；不接Evolve。标准库独立实现HMAC-SHA256、精确UTF-8与长度前缀framing、occurrence/sequence分域、完整有序commit及一次性boundary消费。SQLite事务持久化issued/next-sign/next-verify；  工具与协作 认证请求完整性 Agent 工具与协作执行：把计划变成可检查的动作 每条都有有效MAC，为什么仍要当前计数？ 单条MAC只证明这些出现曾被可信入口签发，不证明后来没有取消。gate要求完整有序1..m且m等于入口当前计数，省略后来的用户turn就失败关闭。 教学例：许可是counter1，取消是counter2；只带合法counter1不能通过m=2的完整性检查。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-3d077e401497ca1c">每条都有有效MAC，为什么仍要当前计数？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acompaction-authorization">LLM Agent Authorization Across Context Compaction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · University of Technology Sydney</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>单条MAC只证明这些出现曾被可信入口签发，不证明后来没有取消。gate要求完整有序1..m且m等于入口当前计数，省略后来的用户turn就失败关闭。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：许可是counter1，取消是counter2；只带合法counter1不能通过m=2的完整性检查。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32194v1">原论文</a> · <a href="../../../../agent-research/2611.32194-compaction-authorization/">实现解读</a> · <a href="#qa-3d077e401497ca1c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:compaction-authorization" data-paper-title="LLM Agent Authorization Across Context Compaction" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="LLM Agent Authorization Across Context Compaction Agent University of Technology Sydney 2026-11-24 request-derived authorizer假定request slot是用户所说，压缩却可能把模型对用户、工具和注入文本的转述放回user角色。更强的摘要器不能凭字面区分格式一致的真/伪记录。本文分开两条输入：agent继续读摘要；授权策略生成器只读可信入口认证、跨边界逐字保留的完整请求序列。该门解决来源与顺序完整性，不判断请求是否安全，也不保证下游授权策略语义正确。 完整API/长会话矩阵成本过高，不复现（审查 DONE）；component_only / L1 CPU认证协议诊断，不是LLM授权语义、防注入胜率或生产安全产品。component_only / L1 CPU认证协议诊断，不是LLM授权语义、防注入胜率或生产安全产品。完整API/长会话矩阵成本过高，不复现（审查 DONE）；不接Evolve。标准库独立实现HMAC-SHA256、精确UTF-8与长度前缀framing、occurrence/sequence分域、完整有序commit及一次性boundary消费。SQLite事务持久化issued/next-sign/next-verify；  工具与协作 认证请求完整性 Agent 工具与协作执行：把计划变成可检查的动作 该门与RuntimeTickets保护的是同一边界吗？ 不是。本文保护策略生成前的原始授权输入；RuntimeTickets在真实副作用前核冻结recipient/object/budget合同。原文完整不证明策略语义正确，合法发送也不证明摘要来源真实。 教学例：认证用户原句后生成器仍可能错误放宽recipient，需要下层ticket核具体交付，而不是把MAC当语义理解。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-55dc6b7a2561d316">该门与RuntimeTickets保护的是同一边界吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acompaction-authorization">LLM Agent Authorization Across Context Compaction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · University of Technology Sydney</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。本文保护策略生成前的原始授权输入；RuntimeTickets在真实副作用前核冻结recipient/object/budget合同。原文完整不证明策略语义正确，合法发送也不证明摘要来源真实。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：认证用户原句后生成器仍可能错误放宽recipient，需要下层ticket核具体交付，而不是把MAC当语义理解。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32194v1">原论文</a> · <a href="../../../../agent-research/2611.32194-compaction-authorization/">实现解读</a> · <a href="#qa-55dc6b7a2561d316">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:compaction-authorization" data-paper-title="LLM Agent Authorization Across Context Compaction" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="LLM Agent Authorization Across Context Compaction Agent University of Technology Sydney 2026-11-24 request-derived authorizer假定request slot是用户所说，压缩却可能把模型对用户、工具和注入文本的转述放回user角色。更强的摘要器不能凭字面区分格式一致的真/伪记录。本文分开两条输入：agent继续读摘要；授权策略生成器只读可信入口认证、跨边界逐字保留的完整请求序列。该门解决来源与顺序完整性，不判断请求是否安全，也不保证下游授权策略语义正确。 完整API/长会话矩阵成本过高，不复现（审查 DONE）；component_only / L1 CPU认证协议诊断，不是LLM授权语义、防注入胜率或生产安全产品。component_only / L1 CPU认证协议诊断，不是LLM授权语义、防注入胜率或生产安全产品。完整API/长会话矩阵成本过高，不复现（审查 DONE）；不接Evolve。标准库独立实现HMAC-SHA256、精确UTF-8与长度前缀framing、occurrence/sequence分域、完整有序commit及一次性boundary消费。SQLite事务持久化issued/next-sign/next-verify；  工具与协作 认证请求完整性 Agent 工具与协作执行：把计划变成可检查的动作 用了HMAC库就能阻止同进程Agent改授权吗？ 不能。可信入口必须真实归因，keys/counters/issuer要在Agent权限外。该本地库验证协议和重放持久状态，不提供恶意Python隔离，也不保证门失败后的可用性。 教学例：Agent若可直接调用ingest并传USER，等于拿到签发权，破坏论文前提；私有字段命名不构成沙箱。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3e337e7065fb1ae1">用了HMAC库就能阻止同进程Agent改授权吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acompaction-authorization">LLM Agent Authorization Across Context Compaction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · University of Technology Sydney</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。可信入口必须真实归因，keys/counters/issuer要在Agent权限外。该本地库验证协议和重放持久状态，不提供恶意Python隔离，也不保证门失败后的可用性。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Agent若可直接调用ingest并传USER，等于拿到签发权，破坏论文前提；私有字段命名不构成沙箱。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32194v1">原论文</a> · <a href="../../../../agent-research/2611.32194-compaction-authorization/">实现解读</a> · <a href="#qa-3e337e7065fb1ae1">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:caplite" data-paper-title="CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts Agent The University of Tokyo 2026-11-12 小模型既可能被提示注入欺骗，也可能生成本就错误的权限策略。CapLite把安全决策从模型生成物中移出：可信用户请求与工具schema决定权限，Planner在看到任何工具结果前提交写调用，之后模型只能从提取出的候选ID里绑定authority值，代码在真实副作用前再次校验。读写分类使用工具名及docstring的首个动词：两者都是read verb才是只读，任一为effect verb则写，未知拒绝。写参数默认authority，但正文载荷、时间和enum／bool控制项分开； 成本过高，不复现（审查 DONE）；component_only／L1确定性机制诊断，不是完整Agent防御评测。component_only／L1确定性机制诊断，不是完整Agent防御评测。完整实验高成本不复现（审查 DONE）。本地只支持显式平面schema的受限执行核，不声称通用安全保证。ToolPolicy冻结可信schema，拒绝未知操作及不支持的嵌套object。grounding_set执行显式Unicode词ngram和标识符抽取；不是语义指代解析。Candidate保留ID／来源，bind_candidates只筛既有候选；不会生成绑定。  工具与协作 提示注入与写入权限 Agent 工具与协作执行：把计划变成可检查的动作 CapLite的写入完整性意味着邮件正文也不会被注入影响吗？ 不意味着。它约束收件人、金额、对象、目的地等authority值及预提交写序列。自由payload、时间、最终答案和读内容不在同一保证内。 教学例：收件人必须是用户指定邮箱，但正文可能仍夹带错误文本；不应因此宣称整封邮件安全。 2026-11-15">

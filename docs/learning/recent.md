@@ -68,9 +68,380 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">5218 个问题 · 1302 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">5246 个问题 · 1309 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:budgeted-submapl" data-paper-title="Compute-Aware Submodular Online Learning in Open Multi-Agent Systems" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Compute-Aware Submodular Online Learning in Open Multi-Agent Systems Agent East China University of Science and Technology 2026-11-25 协作覆盖的重叠贡献具有边际递减性，但更新每个agent每个action的收益可能超在线预算。论文在看当前收益之前，只用当前分类策略与查询预算分配包含概率，再用固定基数依赖舍入精确选个agent-action。查询选择与联合action采样独立，对所查反事实边际收益做逆概率校正，再KL mirror-ascent。未被查询的估计为0，不等于真实边际为0。 没有依据标为成本过高。本轮只承接小型CPU数学核，完整模拟/迁移未执行，标not_run_scope_limited、full_experiment_review_done=false；component_only / L1 CPU多智能体协调数学内核；不是LLM Agent或RSI能力复现。完整便宜模拟未承接，不虚构高成本终态：not_run_scope_limited / full_experiment_review_done=false；无Evolve晋级。标准库执行clipped平方根分配、成对依赖舍入、仅Q次oracle查询、IPW与log-space KL更新。两个随机流分别驱动舍入/联合action；  Agent策略学习 预算化多智能体协调数学核 Agent 交互策略学习：把轨迹反馈变成更新 数值内核通过就能说完整open-system模拟完成吗？ 不能。动态迁移M在本篇未给正式定义，完整观察表和环境没实现；原文也不足以把便宜模拟判高成本。应保留scope-limited/false full-review，不补猜或伪造终态。 教学例：固定两agent测试Q精确，不等于重现agent离开再加入时历史logit如何迁移，也不等于20seed覆盖曲线。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/agent-policy-learning/">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-38c8334ffb8129f3">数值内核通过就能说完整open-system模拟完成吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Abudgeted-submapl">Compute-Aware Submodular Online Learning in Open Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · East China University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。动态迁移M在本篇未给正式定义，完整观察表和环境没实现；原文也不足以把便宜模拟判高成本。应保留scope-limited/false full-review，不补猜或伪造终态。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：固定两agent测试Q精确，不等于重现agent离开再加入时历史logit如何迁移，也不等于20seed覆盖曲线。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34211v1">原论文</a> · <a href="../../agent-research/2611.34211-budgeted-submapl/">实现解读</a> · <a href="#qa-38c8334ffb8129f3">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:budgeted-submapl" data-paper-title="Compute-Aware Submodular Online Learning in Open Multi-Agent Systems" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Compute-Aware Submodular Online Learning in Open Multi-Agent Systems Agent East China University of Science and Technology 2026-11-25 协作覆盖的重叠贡献具有边际递减性，但更新每个agent每个action的收益可能超在线预算。论文在看当前收益之前，只用当前分类策略与查询预算分配包含概率，再用固定基数依赖舍入精确选个agent-action。查询选择与联合action采样独立，对所查反事实边际收益做逆概率校正，再KL mirror-ascent。未被查询的估计为0，不等于真实边际为0。 没有依据标为成本过高。本轮只承接小型CPU数学核，完整模拟/迁移未执行，标not_run_scope_limited、full_experiment_review_done=false；component_only / L1 CPU多智能体协调数学内核；不是LLM Agent或RSI能力复现。完整便宜模拟未承接，不虚构高成本终态：not_run_scope_limited / full_experiment_review_done=false；无Evolve晋级。标准库执行clipped平方根分配、成对依赖舍入、仅Q次oracle查询、IPW与log-space KL更新。两个随机流分别驱动舍入/联合action；  Agent策略学习 预算化多智能体协调数学核 Agent 交互策略学习：把轨迹反馈变成更新 查询预算Q限制的是执行动作还是梯度反馈？ 限制当前轮可评估的agent-action反事实边际数量；所有active agent仍各采样一个执行action。未查询坐标估计为0不是实际收益为0，也不是停止该agent。 教学例：两agent各两action共4坐标，Q=2只问2个边际，但两agent仍各执行一个动作。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/agent-policy-learning/">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<span id="paper-agent-research-budgeted-submapl-d51fdd99" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-77131b4c4bfedc80">查询预算Q限制的是执行动作还是梯度反馈？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Abudgeted-submapl">Compute-Aware Submodular Online Learning in Open Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · East China University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>限制当前轮可评估的agent-action反事实边际数量；所有active agent仍各采样一个执行action。未查询坐标估计为0不是实际收益为0，也不是停止该agent。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两agent各两action共4坐标，Q=2只问2个边际，但两agent仍各执行一个动作。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34211v1">原论文</a> · <a href="../../agent-research/2611.34211-budgeted-submapl/">实现解读</a> · <a href="#qa-77131b4c4bfedc80">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:budgeted-submapl" data-paper-title="Compute-Aware Submodular Online Learning in Open Multi-Agent Systems" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Compute-Aware Submodular Online Learning in Open Multi-Agent Systems Agent East China University of Science and Technology 2026-11-25 协作覆盖的重叠贡献具有边际递减性，但更新每个agent每个action的收益可能超在线预算。论文在看当前收益之前，只用当前分类策略与查询预算分配包含概率，再用固定基数依赖舍入精确选个agent-action。查询选择与联合action采样独立，对所查反事实边际收益做逆概率校正，再KL mirror-ascent。未被查询的估计为0，不等于真实边际为0。 没有依据标为成本过高。本轮只承接小型CPU数学核，完整模拟/迁移未执行，标not_run_scope_limited、full_experiment_review_done=false；component_only / L1 CPU多智能体协调数学内核；不是LLM Agent或RSI能力复现。完整便宜模拟未承接，不虚构高成本终态：not_run_scope_limited / full_experiment_review_done=false；无Evolve晋级。标准库执行clipped平方根分配、成对依赖舍入、仅Q次oracle查询、IPW与log-space KL更新。两个随机流分别驱动舍入/联合action；  Agent策略学习 预算化多智能体协调数学核 Agent 交互策略学习：把轨迹反馈变成更新 为什么不能直接按rho做普通加权无放回抽样？ rho是每坐标被包含的边缘概率，不是任意抽样权重。IPW无偏要求E[Z]=rho且总数恰好Q；成对依赖舍入同时保两者，普通加权抽样一般改变边缘概率。 教学例：rho=(0.2,0.8)、Q=1，第一坐标必须恰以0.2概率入选；分母不能随便换成未校准的权重。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/agent-policy-learning/">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-9220227cf2c400e6">为什么不能直接按rho做普通加权无放回抽样？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Abudgeted-submapl">Compute-Aware Submodular Online Learning in Open Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · East China University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>rho是每坐标被包含的边缘概率，不是任意抽样权重。IPW无偏要求E[Z]=rho且总数恰好Q；成对依赖舍入同时保两者，普通加权抽样一般改变边缘概率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：rho=(0.2,0.8)、Q=1，第一坐标必须恰以0.2概率入选；分母不能随便换成未校准的权重。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34211v1">原论文</a> · <a href="../../agent-research/2611.34211-budgeted-submapl/">实现解读</a> · <a href="#qa-9220227cf2c400e6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:budgeted-submapl" data-paper-title="Compute-Aware Submodular Online Learning in Open Multi-Agent Systems" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Compute-Aware Submodular Online Learning in Open Multi-Agent Systems Agent East China University of Science and Technology 2026-11-25 协作覆盖的重叠贡献具有边际递减性，但更新每个agent每个action的收益可能超在线预算。论文在看当前收益之前，只用当前分类策略与查询预算分配包含概率，再用固定基数依赖舍入精确选个agent-action。查询选择与联合action采样独立，对所查反事实边际收益做逆概率校正，再KL mirror-ascent。未被查询的估计为0，不等于真实边际为0。 没有依据标为成本过高。本轮只承接小型CPU数学核，完整模拟/迁移未执行，标not_run_scope_limited、full_experiment_review_done=false；component_only / L1 CPU多智能体协调数学内核；不是LLM Agent或RSI能力复现。完整便宜模拟未承接，不虚构高成本终态：not_run_scope_limited / full_experiment_review_done=false；无Evolve晋级。标准库执行clipped平方根分配、成对依赖舍入、仅Q次oracle查询、IPW与log-space KL更新。两个随机流分别驱动舍入/联合action；  Agent策略学习 预算化多智能体协调数学核 Agent 交互策略学习：把轨迹反馈变成更新 SubMAPL与OOAS的重要性权重可互换吗？ 不可。前者观察被查询的反事实边际，按坐标包含概率校正；OOAS只观察任务总反馈，按共享noise产生的整任务同臂事件概率校正hint残差。两者反馈可见性和更新器都不同。 教学例：一任务中切过臂时OOAS残差归因全0；SubMAPL同轮选中的两坐标仍各按自己的rho更新。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/agent-policy-learning/">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-59e6ce5c7aa45778">SubMAPL与OOAS的重要性权重可互换吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Abudgeted-submapl">Compute-Aware Submodular Online Learning in Open Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · East China University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不可。前者观察被查询的反事实边际，按坐标包含概率校正；OOAS只观察任务总反馈，按共享noise产生的整任务同臂事件概率校正hint残差。两者反馈可见性和更新器都不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一任务中切过臂时OOAS残差归因全0；SubMAPL同轮选中的两坐标仍各按自己的rho更新。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34211v1">原论文</a> · <a href="../../agent-research/2611.34211-budgeted-submapl/">实现解读</a> · <a href="#qa-59e6ce5c7aa45778">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:elpsd" data-paper-title="The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop LLM 后训练 Not disclosed in fixed v1 2026-11-24 最后一轮向自己的冻结拷贝蒸馏，在初始化时loss和梯度都为0。ELPSD不换成外部教师或给参考答案，而把冻结初始模型的第一轮和最后一轮读数沿差异方向外推，形成高于最后一轮的target。学生仍从最后一轮生成，训练后保持标准最后轮解码；teacher在整个训练中不刷新。 完整实验成本过高，不复现（审查 DONE）；CPU L1给定logits数学组件，diagnostic only；没有循环Transformer、on-policy采样或训练。本篇为11月24日首发补漏，不是今日新发。完整实验成本过高，不复现（审查 DONE）；无retry/evolve。extrapolated_teacher固定Eq.3的完整词表target并冻结数组；loss_gradient计算Eq.4/5及解析logit梯度，显式mask排除padding且每响应至少一个有效prefix。refreshed_rounds仅执行Proposition2的有限理想化映射作负控。  跨loop自蒸馏 固定教师与reverse KL LLM 后训练 教师与纠错：额外信息何时能帮到学生 ELPSD为什么必须冻结teacher，而不是每轮刷新外推目标？ 在论文理想化的精确拟合递推中，若第一轮固定而teacher由当前最后轮外推，跨轮log-odds差每轮放大1+w，最终集中到最大方向token。冻结teacher给KL一个固定驻点；该论证不是实际共享参数训练的全局收敛保证。 教学例：w=0.5，三轮理想刷新将相对第一轮的log-odds差放大1.5³倍；对固定teacher的精确匹配则已到零梯度，不再自我外推。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/teacher-and-context/">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-a2d627d1877d28cb">ELPSD为什么必须冻结teacher，而不是每轮刷新外推目标？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aelpsd">The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Not disclosed in fixed v1</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>在论文理想化的精确拟合递推中，若第一轮固定而teacher由当前最后轮外推，跨轮log-odds差每轮放大1+w，最终集中到最大方向token。冻结teacher给KL一个固定驻点；该论证不是实际共享参数训练的全局收敛保证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：w=0.5，三轮理想刷新将相对第一轮的log-odds差放大1.5³倍；对固定teacher的精确匹配则已到零梯度，不再自我外推。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32452v1">原论文</a> · <a href="../../post-training/2611.32452-elpsd/">实现解读</a> · <a href="#qa-a2d627d1877d28cb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:elpsd" data-paper-title="The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop LLM 后训练 Not disclosed in fixed v1 2026-11-24 最后一轮向自己的冻结拷贝蒸馏，在初始化时loss和梯度都为0。ELPSD不换成外部教师或给参考答案，而把冻结初始模型的第一轮和最后一轮读数沿差异方向外推，形成高于最后一轮的target。学生仍从最后一轮生成，训练后保持标准最后轮解码；teacher在整个训练中不刷新。 完整实验成本过高，不复现（审查 DONE）；CPU L1给定logits数学组件，diagnostic only；没有循环Transformer、on-policy采样或训练。本篇为11月24日首发补漏，不是今日新发。完整实验成本过高，不复现（审查 DONE）；无retry/evolve。extrapolated_teacher固定Eq.3的完整词表target并冻结数组；loss_gradient计算Eq.4/5及解析logit梯度，显式mask排除padding且每响应至少一个有效prefix。refreshed_rounds仅执行Proposition2的有限理想化映射作负控。  跨loop自蒸馏 固定教师与reverse KL LLM 后训练 教师与纠错：额外信息何时能帮到学生 为什么不能把每响应均值改成全batch token均值？ Eq4先在每条响应内按有效prefix均值，再跨响应均值，使每条响应总权重相同。全token均值会让长响应获得更多权重；mask只隔离padding，不负责生成真实on-policy prefix。 教学例：两响应分别有3和1个有效prefix，各响应应占总loss一半；统一四token均值会让长响应占3/4。给定随机logits检验这个归约不等于执行循环模型。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/teacher-and-context/">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-c92c53cbac4b1310">为什么不能把每响应均值改成全batch token均值？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aelpsd">The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Not disclosed in fixed v1</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Eq4先在每条响应内按有效prefix均值，再跨响应均值，使每条响应总权重相同。全token均值会让长响应获得更多权重；mask只隔离padding，不负责生成真实on-policy prefix。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两响应分别有3和1个有效prefix，各响应应占总loss一半；统一四token均值会让长响应占3/4。给定随机logits检验这个归约不等于执行循环模型。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32452v1">原论文</a> · <a href="../../post-training/2611.32452-elpsd/">实现解读</a> · <a href="#qa-c92c53cbac4b1310">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:elpsd" data-paper-title="The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop LLM 后训练 Not disclosed in fixed v1 2026-11-24 最后一轮向自己的冻结拷贝蒸馏，在初始化时loss和梯度都为0。ELPSD不换成外部教师或给参考答案，而把冻结初始模型的第一轮和最后一轮读数沿差异方向外推，形成高于最后一轮的target。学生仍从最后一轮生成，训练后保持标准最后轮解码；teacher在整个训练中不刷新。 完整实验成本过高，不复现（审查 DONE）；CPU L1给定logits数学组件，diagnostic only；没有循环Transformer、on-policy采样或训练。本篇为11月24日首发补漏，不是今日新发。完整实验成本过高，不复现（审查 DONE）；无retry/evolve。extrapolated_teacher固定Eq.3的完整词表target并冻结数组；loss_gradient计算Eq.4/5及解析logit梯度，显式mask排除padding且每响应至少一个有效prefix。refreshed_rounds仅执行Proposition2的有限理想化映射作负控。  跨loop自蒸馏 固定教师与reverse KL LLM 后训练 教师与纠错：额外信息何时能帮到学生 ELPSD与已有LoOPSD是否只是同一个跨loop KL？ 不是。LoOPSD在普通模型中搜索重复层区间，独立验证选teacher后交替刷新；ELPSD在原生looped模型中固定第一/最后轮读数并外推，不搜索route。论文另提LoopOPD，不能因名字相近把它与LoOPSD混为一谈。 教学例：为标准Transformer选重复第5至8层的route属于LoOPSD；对原生4loop模型的loop1/4分布做固定外推属于ELPSD。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/teacher-and-context/">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e4514d3978e21401">ELPSD与已有LoOPSD是否只是同一个跨loop KL？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aelpsd">The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Not disclosed in fixed v1</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。LoOPSD在普通模型中搜索重复层区间，独立验证选teacher后交替刷新；ELPSD在原生looped模型中固定第一/最后轮读数并外推，不搜索route。论文另提LoopOPD，不能因名字相近把它与LoOPSD混为一谈。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：为标准Transformer选重复第5至8层的route属于LoOPSD；对原生4loop模型的loop1/4分布做固定外推属于ELPSD。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32452v1">原论文</a> · <a href="../../post-training/2611.32452-elpsd/">实现解读</a> · <a href="#qa-e4514d3978e21401">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:elpsd" data-paper-title="The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop LLM 后训练 Not disclosed in fixed v1 2026-11-24 最后一轮向自己的冻结拷贝蒸馏，在初始化时loss和梯度都为0。ELPSD不换成外部教师或给参考答案，而把冻结初始模型的第一轮和最后一轮读数沿差异方向外推，形成高于最后一轮的target。学生仍从最后一轮生成，训练后保持标准最后轮解码；teacher在整个训练中不刷新。 完整实验成本过高，不复现（审查 DONE）；CPU L1给定logits数学组件，diagnostic only；没有循环Transformer、on-policy采样或训练。本篇为11月24日首发补漏，不是今日新发。完整实验成本过高，不复现（审查 DONE）；无retry/evolve。extrapolated_teacher固定Eq.3的完整词表target并冻结数组；loss_gradient计算Eq.4/5及解析logit梯度，显式mask排除padding且每响应至少一个有效prefix。refreshed_rounds仅执行Proposition2的有限理想化映射作负控。  跨loop自蒸馏 固定教师与reverse KL LLM 后训练 教师与纠错：额外信息何时能帮到学生 为什么最后轮向自己的冻结拷贝学习会没有初始信号？ 初始化时学生与该teacher同分布，KL和梯度都为0。ELPSD用第一轮到最后轮的log分布差向外推，因此w&gt;0且两轮不同才提供非零初始目标。 教学例：两轮分布不同，用w=0仍以最后轮自身为teacher；改w=0.5后target改变。若两轮本来相同，即使w&gt;0也没有该外推差。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/teacher-and-context/">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<span id="paper-post-training-elpsd-ef82563d" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a5a6654b729521e3">为什么最后轮向自己的冻结拷贝学习会没有初始信号？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aelpsd">The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Not disclosed in fixed v1</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>初始化时学生与该teacher同分布，KL和梯度都为0。ELPSD用第一轮到最后轮的log分布差向外推，因此w&gt;0且两轮不同才提供非零初始目标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两轮分布不同，用w=0仍以最后轮自身为teacher；改w=0.5后target改变。若两轮本来相同，即使w&gt;0也没有该外推差。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32452v1">原论文</a> · <a href="../../post-training/2611.32452-elpsd/">实现解读</a> · <a href="#qa-a5a6654b729521e3">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:cafa" data-paper-title="Scoring What Matters: Exact Feedback Reduction for Language Model Comparison" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Scoring What Matters: Exact Feedback Reduction for Language Model Comparison LLM 后训练 Beijing Institute of Technology 2026-11-24 比较checkpoint常只需要分数差，而不需要每个绝对分数。相同回答的共同分数会在contrast中抵消，普通缓存仍可能多买一次不需要的反馈。CAFA先按请求的线性报告聚合精确scoring identity的系数，再决定评分支持；均值和普通样本协方差需要的支持不一定相同。 完整实验成本过高，不复现（审查 DONE）；CPU L1精确支持规划组件，diagnostic only；不是语言模型能力或真实judge节费实测。完整实验成本过高，不复现（审查 DONE）；无retry/evolve。本篇是11月24日首发的近期补漏，不是11月27日新发。plan_report执行Eq.2–4，输入完整decoded-response bank、任意线性系数矩阵与正prompt权重；用Fraction在除draw数前精确聚合，float按十进制拼写解释为有理数，无近零容差。identity为精确(prompt,text)，不归一化、不按token ID或语义合并。  报告驱动反馈采集 评测反馈预算 LLM 后训练 偏好与对齐：先看反馈长什么样 均值支持为空，为什么协方差仍可能需要评分？ 跨draw抵消只保证平均贡献为零，不保证逐draw差值为零。普通协方差依赖每个draw偏离均值的量，必须保留任一draw系数非零的identity及全部原始draw分母。 教学例：两draw为(A,B)和(B,A)，均值差0；若r(A)=2、r(B)=5，差值是3和-3，样本方差18，不能把它写成0。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/preference-and-alignment/">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-103f59023275fd3a">均值支持为空，为什么协方差仍可能需要评分？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Acafa">Scoring What Matters: Exact Feedback Reduction for Language Model Comparison</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Beijing Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>跨draw抵消只保证平均贡献为零，不保证逐draw差值为零。普通协方差依赖每个draw偏离均值的量，必须保留任一draw系数非零的identity及全部原始draw分母。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两draw为(A,B)和(B,A)，均值差0；若r(A)=2、r(B)=5，差值是3和-3，样本方差18，不能把它写成0。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31931v1">原论文</a> · <a href="../../post-training/2611.31931-cafa/">实现解读</a> · <a href="#qa-103f59023275fd3a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:cafa" data-paper-title="Scoring What Matters: Exact Feedback Reduction for Language Model Comparison" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Scoring What Matters: Exact Feedback Reduction for Language Model Comparison LLM 后训练 Beijing Institute of Technology 2026-11-24 比较checkpoint常只需要分数差，而不需要每个绝对分数。相同回答的共同分数会在contrast中抵消，普通缓存仍可能多买一次不需要的反馈。CAFA先按请求的线性报告聚合精确scoring identity的系数，再决定评分支持；均值和普通样本协方差需要的支持不一定相同。 完整实验成本过高，不复现（审查 DONE）；CPU L1精确支持规划组件，diagnostic only；不是语言模型能力或真实judge节费实测。完整实验成本过高，不复现（审查 DONE）；无retry/evolve。本篇是11月24日首发的近期补漏，不是11月27日新发。plan_report执行Eq.2–4，输入完整decoded-response bank、任意线性系数矩阵与正prompt权重；用Fraction在除draw数前精确聚合，float按十进制拼写解释为有理数，无近零容差。identity为精确(prompt,text)，不归一化、不按token ID或语义合并。  报告驱动反馈采集 评测反馈预算 LLM 后训练 偏好与对齐：先看反馈长什么样 identity或缺失评分为什么不能用近似匹配与0填补？ identity必须包含精确prompt和decoded text及cache中的scorer版本。归一化或语义合并会把可能不同的score强行设为相同；缺失填0则改变目标。未取得required反馈只能incomplete，或在已声明范围下给均值bounds且不报告协方差。 教学例：A和a可能被大小写敏感rubric判不同，不能合并；未取得r(A)且范围[0,1]时应保留其系数对应区间，不假定r(A)=0。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/preference-and-alignment/">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-12faa76da178dbd6">identity或缺失评分为什么不能用近似匹配与0填补？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Acafa">Scoring What Matters: Exact Feedback Reduction for Language Model Comparison</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Beijing Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>identity必须包含精确prompt和decoded text及cache中的scorer版本。归一化或语义合并会把可能不同的score强行设为相同；缺失填0则改变目标。未取得required反馈只能incomplete，或在已声明范围下给均值bounds且不报告协方差。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A和a可能被大小写敏感rubric判不同，不能合并；未取得r(A)且范围[0,1]时应保留其系数对应区间，不假定r(A)=0。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31931v1">原论文</a> · <a href="../../post-training/2611.31931-cafa/">实现解读</a> · <a href="#qa-12faa76da178dbd6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:cafa" data-paper-title="Scoring What Matters: Exact Feedback Reduction for Language Model Comparison" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Scoring What Matters: Exact Feedback Reduction for Language Model Comparison LLM 后训练 Beijing Institute of Technology 2026-11-24 比较checkpoint常只需要分数差，而不需要每个绝对分数。相同回答的共同分数会在contrast中抵消，普通缓存仍可能多买一次不需要的反馈。CAFA先按请求的线性报告聚合精确scoring identity的系数，再决定评分支持；均值和普通样本协方差需要的支持不一定相同。 完整实验成本过高，不复现（审查 DONE）；CPU L1精确支持规划组件，diagnostic only；不是语言模型能力或真实judge节费实测。完整实验成本过高，不复现（审查 DONE）；无retry/evolve。本篇是11月24日首发的近期补漏，不是11月27日新发。plan_report执行Eq.2–4，输入完整decoded-response bank、任意线性系数矩阵与正prompt权重；用Fraction在除draw数前精确聚合，float按十进制拼写解释为有理数，无近零容差。identity为精确(prompt,text)，不归一化、不按token ID或语义合并。  报告驱动反馈采集 评测反馈预算 LLM 后训练 偏好与对齐：先看反馈长什么样 减少评分调用是否解决了Probabilistic Autorater的校准问题？ 没有。CAFA假设评分函数或其版本固定，在此条件下减少必要输入；Autorater研究评分概率与人类偏好分布是否校准。完全复原一个有偏裁判的报告，仍然是有偏裁判的报告。 教学例：某judge总偏好长回答，CAFA可以精确复原它的checkpoint分差；省去抵消评分不会消除长度偏置。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/preference-and-alignment/">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-fec172f83083ba53">减少评分调用是否解决了Probabilistic Autorater的校准问题？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Acafa">Scoring What Matters: Exact Feedback Reduction for Language Model Comparison</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Beijing Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。CAFA假设评分函数或其版本固定，在此条件下减少必要输入；Autorater研究评分概率与人类偏好分布是否校准。完全复原一个有偏裁判的报告，仍然是有偏裁判的报告。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某judge总偏好长回答，CAFA可以精确复原它的checkpoint分差；省去抵消评分不会消除长度偏置。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31931v1">原论文</a> · <a href="../../post-training/2611.31931-cafa/">实现解读</a> · <a href="#qa-fec172f83083ba53">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:cafa" data-paper-title="Scoring What Matters: Exact Feedback Reduction for Language Model Comparison" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Scoring What Matters: Exact Feedback Reduction for Language Model Comparison LLM 后训练 Beijing Institute of Technology 2026-11-24 比较checkpoint常只需要分数差，而不需要每个绝对分数。相同回答的共同分数会在contrast中抵消，普通缓存仍可能多买一次不需要的反馈。CAFA先按请求的线性报告聚合精确scoring identity的系数，再决定评分支持；均值和普通样本协方差需要的支持不一定相同。 完整实验成本过高，不复现（审查 DONE）；CPU L1精确支持规划组件，diagnostic only；不是语言模型能力或真实judge节费实测。完整实验成本过高，不复现（审查 DONE）；无retry/evolve。本篇是11月24日首发的近期补漏，不是11月27日新发。plan_report执行Eq.2–4，输入完整decoded-response bank、任意线性系数矩阵与正prompt权重；用Fraction在除draw数前精确聚合，float按十进制拼写解释为有理数，无近零容差。identity为精确(prompt,text)，不归一化、不按token ID或语义合并。  报告驱动反馈采集 评测反馈预算 LLM 后训练 偏好与对齐：先看反馈长什么样 CAFA为什么能比普通缓存少买反馈？ 缓存只把同一评分输入的重复调用合成一次；CAFA还检查请求报告中该输入的系数是否完全抵消。若报告只要两个模型之差，共同回答的绝对分数就可能根本不需要。 教学例：base和update都答A，差值r(A)-r(A)=0；普通缓存仍买一次A，CAFA均值报告可零次。若追加base绝对分数，则A必须恢复。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/preference-and-alignment/">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
+<span id="paper-post-training-cafa-7f12c61a" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-4527cb72a33e309a">CAFA为什么能比普通缓存少买反馈？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Acafa">Scoring What Matters: Exact Feedback Reduction for Language Model Comparison</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Beijing Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>缓存只把同一评分输入的重复调用合成一次；CAFA还检查请求报告中该输入的系数是否完全抵消。若报告只要两个模型之差，共同回答的绝对分数就可能根本不需要。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：base和update都答A，差值r(A)-r(A)=0；普通缓存仍买一次A，CAFA均值报告可零次。若追加base绝对分数，则A必须恢复。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31931v1">原论文</a> · <a href="../../post-training/2611.31931-cafa/">实现解读</a> · <a href="#qa-4527cb72a33e309a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:integral-deltanet" data-paper-title="Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration 基础模型 Kim Jaechul Graduate School of AI, KAIST 2026-11-24 单状态的衰减和定向覆盖会同时压低干扰与有用旧信息。本文保持KDA或GDN-2的fast更新不变，额外积累更新后状态的历史；查询时由输入相关的逐channel门读取两个时间尺度，而不是把所有历史都压进同一读出。常量混合门、额外独立delta state和仅增宽state是论文分别比较的不同设计。 成本过高，不复现（审查 DONE）适用于完整矩阵；42/43/44合成诊断只支持L1；recurrent执行channel-wise GDN-2/KDA兼容更新、Eq6积分和Eq7读取；chunkwise独立构造P/H及积分加权prefix算子，核对输出、两state和真实autograd梯度；支持尾部短chunk和携state续接。IntegralGates从调用方归一化hidden计算低秩门。仅CPU双精度小张量，无decoder、tokenizer、FLA/WY/UT融合实现、LM预训练或query-gold选择。显式prefix矩阵是验证参考，不是并行高性能kernel。  长上下文与状态 基础模型 长上下文：注意力、递归状态与记忆 积分state只是另一个独立DeltaNet吗？ 不是。它积累同一个fast state更新后的历史，不独立根据kv擦写。 教学例：第三次覆盖擦掉S中的旧关联，X仍可保留第一时刻S的一部分；第二个独立擦写器没有这一固定历史合同。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/context-and-state/">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-integral-deltanet-e5bad28c" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-ded0f0ae7a61774b">积分state只是另一个独立DeltaNet吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Aintegral-deltanet">Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Kim Jaechul Graduate School of AI, KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。它积累同一个fast state更新后的历史，不独立根据kv擦写。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第三次覆盖擦掉S中的旧关联，X仍可保留第一时刻S的一部分；第二个独立擦写器没有这一固定历史合同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32063v1">原论文</a> · <a href="../../foundation-models/2611.32063-integral-deltanet/">实现解读</a> · <a href="#qa-ded0f0ae7a61774b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:integral-deltanet" data-paper-title="Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration 基础模型 Kim Jaechul Graduate School of AI, KAIST 2026-11-24 单状态的衰减和定向覆盖会同时压低干扰与有用旧信息。本文保持KDA或GDN-2的fast更新不变，额外积累更新后状态的历史；查询时由输入相关的逐channel门读取两个时间尺度，而不是把所有历史都压进同一读出。常量混合门、额外独立delta state和仅增宽state是论文分别比较的不同设计。 成本过高，不复现（审查 DONE）适用于完整矩阵；42/43/44合成诊断只支持L1；recurrent执行channel-wise GDN-2/KDA兼容更新、Eq6积分和Eq7读取；chunkwise独立构造P/H及积分加权prefix算子，核对输出、两state和真实autograd梯度；支持尾部短chunk和携state续接。IntegralGates从调用方归一化hidden计算低秩门。仅CPU双精度小张量，无decoder、tokenizer、FLA/WY/UT融合实现、LM预训练或query-gold选择。显式prefix矩阵是验证参考，不是并行高性能kernel。  长上下文与状态 基础模型 长上下文：注意力、递归状态与记忆 lambda该乘在哪里、在何时积分？ 沿key列乘在当前更新后的S与旧X上，然后按gamma逐key channel读出；不能先积分旧S。 教学例：lambda全1时X必须等于刚写入的S；若晚一token，当前kv的积分读出会缺失。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/context-and-state/">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-f9b591d06e437b21">lambda该乘在哪里、在何时积分？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Aintegral-deltanet">Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Kim Jaechul Graduate School of AI, KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>沿key列乘在当前更新后的S与旧X上，然后按gamma逐key channel读出；不能先积分旧S。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：lambda全1时X必须等于刚写入的S；若晚一token，当前kv的积分读出会缺失。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32063v1">原论文</a> · <a href="../../foundation-models/2611.32063-integral-deltanet/">实现解读</a> · <a href="#qa-f9b591d06e437b21">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:integral-deltanet" data-paper-title="Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration 基础模型 Kim Jaechul Graduate School of AI, KAIST 2026-11-24 单状态的衰减和定向覆盖会同时压低干扰与有用旧信息。本文保持KDA或GDN-2的fast更新不变，额外积累更新后状态的历史；查询时由输入相关的逐channel门读取两个时间尺度，而不是把所有历史都压进同一读出。常量混合门、额外独立delta state和仅增宽state是论文分别比较的不同设计。 成本过高，不复现（审查 DONE）适用于完整矩阵；42/43/44合成诊断只支持L1；recurrent执行channel-wise GDN-2/KDA兼容更新、Eq6积分和Eq7读取；chunkwise独立构造P/H及积分加权prefix算子，核对输出、两state和真实autograd梯度；支持尾部短chunk和携state续接。IntegralGates从调用方归一化hidden计算低秩门。仅CPU双精度小张量，无decoder、tokenizer、FLA/WY/UT融合实现、LM预训练或query-gold选择。显式prefix矩阵是验证参考，不是并行高性能kernel。  长上下文与状态 基础模型 长上下文：注意力、递归状态与记忆 为什么不能把KRA的协方差P称为本文积分state？ P描述相关key的后验不确定性并影响写入方向，X保存S的加权历史并只参与读取；语义和更新不同。 教学例：在无新value时KRA遗忘可使P恢复，但X仍只是旧S历史的保留，不会变成写入增益矩阵。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/context-and-state/">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-fa2a087bdcbc76a8">为什么不能把KRA的协方差P称为本文积分state？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Aintegral-deltanet">Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Kim Jaechul Graduate School of AI, KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>P描述相关key的后验不确定性并影响写入方向，X保存S的加权历史并只参与读取；语义和更新不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：在无新value时KRA遗忘可使P恢复，但X仍只是旧S历史的保留，不会变成写入增益矩阵。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32063v1">原论文</a> · <a href="../../foundation-models/2611.32063-integral-deltanet/">实现解读</a> · <a href="#qa-fa2a087bdcbc76a8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:integral-deltanet" data-paper-title="Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration 基础模型 Kim Jaechul Graduate School of AI, KAIST 2026-11-24 单状态的衰减和定向覆盖会同时压低干扰与有用旧信息。本文保持KDA或GDN-2的fast更新不变，额外积累更新后状态的历史；查询时由输入相关的逐channel门读取两个时间尺度，而不是把所有历史都压进同一读出。常量混合门、额外独立delta state和仅增宽state是论文分别比较的不同设计。 成本过高，不复现（审查 DONE）适用于完整矩阵；42/43/44合成诊断只支持L1；recurrent执行channel-wise GDN-2/KDA兼容更新、Eq6积分和Eq7读取；chunkwise独立构造P/H及积分加权prefix算子，核对输出、两state和真实autograd梯度；支持尾部短chunk和携state续接。IntegralGates从调用方归一化hidden计算低秩门。仅CPU双精度小张量，无decoder、tokenizer、FLA/WY/UT融合实现、LM预训练或query-gold选择。显式prefix矩阵是验证参考，不是并行高性能kernel。  长上下文与状态 基础模型 长上下文：注意力、递归状态与记忆 怎样证明chunk路径没把integral state当作每块清零？ 用非零入state跨块续接，与逐token递推比较输出和两state，另外对q/k/v及所有门核对梯度。 教学例：长度11、chunk4必须处理4/4/3并传递S和X；只比首块不能发现X重置。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/context-and-state/">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-a1ed357637481bef">怎样证明chunk路径没把integral state当作每块清零？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Aintegral-deltanet">Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Kim Jaechul Graduate School of AI, KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>用非零入state跨块续接，与逐token递推比较输出和两state，另外对q/k/v及所有门核对梯度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：长度11、chunk4必须处理4/4/3并传递S和X；只比首块不能发现X重置。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32063v1">原论文</a> · <a href="../../foundation-models/2611.32063-integral-deltanet/">实现解读</a> · <a href="#qa-a1ed357637481bef">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:deco-attention" data-paper-title="DeCo-Attention: Decompose to Compensate for Low-Precision Attention" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DeCo-Attention: Decompose to Compensate for Low-Precision Attention 基础模型 NVIDIA 2026-11-24 FP4 Q/K舍入产生的score误差可能被softmax指数放大。DeCo先以带随机行符号的Hadamard旋转Q/K，从旋转后原始sample的Gram矩阵估计共享principal basis；把量化残差在主方向的两侧一阶项加回。它舍弃二阶残差和未保留方向，不保证逐样本必然比未补偿更好。 成本过高，不复现（审查 DONE）适用于完整矩阵；诊断仅单一token种类。nvfp4_round按Eq25执行E2M1数值与E4M3 block16尺度的nearest-even仿真；prepare执行Hadamard、sample/raw Gram、EVD、两侧残差和再次量化extra groups；compensated_attention用FP64点积/标准softmax读取V。  注意力量化与残差补偿 基础模型 推理压缩：权重、KV 缓存与服务带宽 共享basis为何不是直接相加两个未归一化Gram？ Q/K尺度可能不同；逐Gram除以各自trace让两者同权，sample还要在Hadamard后且量化前取得。 教学例：把Q放大100倍，正确trace归一化basis子空间不变；直接相加会被Q的10000倍能量支配。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-432c3dd8e3a394b7">共享basis为何不是直接相加两个未归一化Gram？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Adeco-attention">DeCo-Attention: Decompose to Compensate for Low-Precision Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Q/K尺度可能不同；逐Gram除以各自trace让两者同权，sample还要在Hadamard后且量化前取得。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把Q放大100倍，正确trace归一化basis子空间不变；直接相加会被Q的10000倍能量支配。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32035v1">原论文</a> · <a href="../../foundation-models/2611.32035-deco-attention/">实现解读</a> · <a href="#qa-432c3dd8e3a394b7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:deco-attention" data-paper-title="DeCo-Attention: Decompose to Compensate for Low-Precision Attention" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DeCo-Attention: Decompose to Compensate for Low-Precision Attention 基础模型 NVIDIA 2026-11-24 FP4 Q/K舍入产生的score误差可能被softmax指数放大。DeCo先以带随机行符号的Hadamard旋转Q/K，从旋转后原始sample的Gram矩阵估计共享principal basis；把量化残差在主方向的两侧一阶项加回。它舍弃二阶残差和未保留方向，不保证逐样本必然比未补偿更好。 成本过高，不复现（审查 DONE）适用于完整矩阵；诊断仅单一token种类。nvfp4_round按Eq25执行E2M1数值与E4M3 block16尺度的nearest-even仿真；prepare执行Hadamard、sample/raw Gram、EVD、两侧残差和再次量化extra groups；compensated_attention用FP64点积/标准softmax读取V。  注意力量化与残差补偿 基础模型 推理压缩：权重、KV 缓存与服务带宽 DeCo能直接替换DualQuant的权重尺度求解器吗？ 不能。DualQuant优化静态weight重建的row/column尺度，DeCo纠正动态attention Q/K残差；对象和运行时机不同。 教学例：两个prompt产生不同Q/K，DeCo需重估basis；静态weight尺度通常可复用。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-1024235b8681c38d">DeCo能直接替换DualQuant的权重尺度求解器吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Adeco-attention">DeCo-Attention: Decompose to Compensate for Low-Precision Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。DualQuant优化静态weight重建的row/column尺度，DeCo纠正动态attention Q/K残差；对象和运行时机不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个prompt产生不同Q/K，DeCo需重估basis；静态weight尺度通常可复用。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32035v1">原论文</a> · <a href="../../foundation-models/2611.32035-deco-attention/">实现解读</a> · <a href="#qa-1024235b8681c38d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:deco-attention" data-paper-title="DeCo-Attention: Decompose to Compensate for Low-Precision Attention" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DeCo-Attention: Decompose to Compensate for Low-Precision Attention 基础模型 NVIDIA 2026-11-24 FP4 Q/K舍入产生的score误差可能被softmax指数放大。DeCo先以带随机行符号的Hadamard旋转Q/K，从旋转后原始sample的Gram矩阵估计共享principal basis；把量化残差在主方向的两侧一阶项加回。它舍弃二阶残差和未保留方向，不保证逐样本必然比未补偿更好。 成本过高，不复现（审查 DONE）适用于完整矩阵；诊断仅单一token种类。nvfp4_round按Eq25执行E2M1数值与E4M3 block16尺度的nearest-even仿真；prepare执行Hadamard、sample/raw Gram、EVD、两侧残差和再次量化extra groups；compensated_attention用FP64点积/标准softmax读取V。  注意力量化与残差补偿 基础模型 推理压缩：权重、KV 缓存与服务带宽 加回两个一阶残差项是否等于恢复原始QK？ 不等于。低秩截断、补偿通道再量化及二阶deltaQ deltaK项仍有误差。 教学例：即使用full-rank basis且不再量化extra，精确乘积与补偿乘积仍差deltaQ deltaK转置。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-deco-attention-fd4a0d19" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-689e8914c9056e13">加回两个一阶残差项是否等于恢复原始QK？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Adeco-attention">DeCo-Attention: Decompose to Compensate for Low-Precision Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不等于。低秩截断、补偿通道再量化及二阶deltaQ deltaK项仍有误差。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：即使用full-rank basis且不再量化extra，精确乘积与补偿乘积仍差deltaQ deltaK转置。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32035v1">原论文</a> · <a href="../../foundation-models/2611.32035-deco-attention/">实现解读</a> · <a href="#qa-689e8914c9056e13">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:deco-attention" data-paper-title="DeCo-Attention: Decompose to Compensate for Low-Precision Attention" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DeCo-Attention: Decompose to Compensate for Low-Precision Attention 基础模型 NVIDIA 2026-11-24 FP4 Q/K舍入产生的score误差可能被softmax指数放大。DeCo先以带随机行符号的Hadamard旋转Q/K，从旋转后原始sample的Gram矩阵估计共享principal basis；把量化残差在主方向的两侧一阶项加回。它舍弃二阶残差和未保留方向，不保证逐样本必然比未补偿更好。 成本过高，不复现（审查 DONE）适用于完整矩阵；诊断仅单一token种类。nvfp4_round按Eq25执行E2M1数值与E4M3 block16尺度的nearest-even仿真；prepare执行Hadamard、sample/raw Gram、EVD、两侧残差和再次量化extra groups；compensated_attention用FP64点积/标准softmax读取V。  注意力量化与残差补偿 基础模型 推理压缩：权重、KV 缓存与服务带宽 CPU解码低位值后做FP64乘法，能报告FP4硬件加速吗？ 不能。它验证舍入与补偿代数，不执行packed FP4 MMA、kernel softmax或访存流水线。 教学例：把native_fp4_kernel_calls记录为0，并用原始d缩放softmax；不能把NumPy矩阵耗时标为GB300 latency。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-6446bd46c5aced1e">CPU解码低位值后做FP64乘法，能报告FP4硬件加速吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Adeco-attention">DeCo-Attention: Decompose to Compensate for Low-Precision Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它验证舍入与补偿代数，不执行packed FP4 MMA、kernel softmax或访存流水线。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把native_fp4_kernel_calls记录为0，并用原始d缩放softmax；不能把NumPy矩阵耗时标为GB300 latency。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32035v1">原论文</a> · <a href="../../foundation-models/2611.32035-deco-attention/">实现解读</a> · <a href="#qa-6446bd46c5aced1e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:compaction-authorization" data-paper-title="LLM Agent Authorization Across Context Compaction" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="LLM Agent Authorization Across Context Compaction Agent University of Technology Sydney 2026-11-24 request-derived authorizer假定request slot是用户所说，压缩却可能把模型对用户、工具和注入文本的转述放回user角色。更强的摘要器不能凭字面区分格式一致的真/伪记录。本文分开两条输入：agent继续读摘要；授权策略生成器只读可信入口认证、跨边界逐字保留的完整请求序列。该门解决来源与顺序完整性，不判断请求是否安全，也不保证下游授权策略语义正确。 完整API/长会话矩阵成本过高，不复现（审查 DONE）；component_only / L1 CPU认证协议诊断，不是LLM授权语义、防注入胜率或生产安全产品。component_only / L1 CPU认证协议诊断，不是LLM授权语义、防注入胜率或生产安全产品。完整API/长会话矩阵成本过高，不复现（审查 DONE）；不接Evolve。标准库独立实现HMAC-SHA256、精确UTF-8与长度前缀framing、occurrence/sequence分域、完整有序commit及一次性boundary消费。SQLite事务持久化issued/next-sign/next-verify；  工具与协作 认证请求完整性 Agent 工具与协作执行：把计划变成可检查的动作 用了HMAC库就能阻止同进程Agent改授权吗？ 不能。可信入口必须真实归因，keys/counters/issuer要在Agent权限外。该本地库验证协议和重放持久状态，不提供恶意Python隔离，也不保证门失败后的可用性。 教学例：Agent若可直接调用ingest并传USER，等于拿到签发权，破坏论文前提；私有字段命名不构成沙箱。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/tools-and-collaboration/">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3e337e7065fb1ae1">用了HMAC库就能阻止同进程Agent改授权吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Acompaction-authorization">LLM Agent Authorization Across Context Compaction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · University of Technology Sydney</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。可信入口必须真实归因，keys/counters/issuer要在Agent权限外。该本地库验证协议和重放持久状态，不提供恶意Python隔离，也不保证门失败后的可用性。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Agent若可直接调用ingest并传USER，等于拿到签发权，破坏论文前提；私有字段命名不构成沙箱。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32194v1">原论文</a> · <a href="../../agent-research/2611.32194-compaction-authorization/">实现解读</a> · <a href="#qa-3e337e7065fb1ae1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:compaction-authorization" data-paper-title="LLM Agent Authorization Across Context Compaction" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="LLM Agent Authorization Across Context Compaction Agent University of Technology Sydney 2026-11-24 request-derived authorizer假定request slot是用户所说，压缩却可能把模型对用户、工具和注入文本的转述放回user角色。更强的摘要器不能凭字面区分格式一致的真/伪记录。本文分开两条输入：agent继续读摘要；授权策略生成器只读可信入口认证、跨边界逐字保留的完整请求序列。该门解决来源与顺序完整性，不判断请求是否安全，也不保证下游授权策略语义正确。 完整API/长会话矩阵成本过高，不复现（审查 DONE）；component_only / L1 CPU认证协议诊断，不是LLM授权语义、防注入胜率或生产安全产品。component_only / L1 CPU认证协议诊断，不是LLM授权语义、防注入胜率或生产安全产品。完整API/长会话矩阵成本过高，不复现（审查 DONE）；不接Evolve。标准库独立实现HMAC-SHA256、精确UTF-8与长度前缀framing、occurrence/sequence分域、完整有序commit及一次性boundary消费。SQLite事务持久化issued/next-sign/next-verify；  工具与协作 认证请求完整性 Agent 工具与协作执行：把计划变成可检查的动作 为什么把摘要移出user角色还不够？ 这能移除摘要的伪授权，但也可能丢掉用户较早给出的限制。门让授权器拿完整原始用户序列，agent仍可读摘要；来源完整性与摘要内容真假是不同问题。 教学例：用户先指定账户A、后来只说继续付款；只保留后一句会失去A，而完整见证序列仍保留它。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/tools-and-collaboration/">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<span id="paper-agent-research-compaction-authorization-e5991905" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-38714cd918ccc8df">为什么把摘要移出user角色还不够？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Acompaction-authorization">LLM Agent Authorization Across Context Compaction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · University of Technology Sydney</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这能移除摘要的伪授权，但也可能丢掉用户较早给出的限制。门让授权器拿完整原始用户序列，agent仍可读摘要；来源完整性与摘要内容真假是不同问题。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：用户先指定账户A、后来只说继续付款；只保留后一句会失去A，而完整见证序列仍保留它。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32194v1">原论文</a> · <a href="../../agent-research/2611.32194-compaction-authorization/">实现解读</a> · <a href="#qa-38714cd918ccc8df">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:compaction-authorization" data-paper-title="LLM Agent Authorization Across Context Compaction" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="LLM Agent Authorization Across Context Compaction Agent University of Technology Sydney 2026-11-24 request-derived authorizer假定request slot是用户所说，压缩却可能把模型对用户、工具和注入文本的转述放回user角色。更强的摘要器不能凭字面区分格式一致的真/伪记录。本文分开两条输入：agent继续读摘要；授权策略生成器只读可信入口认证、跨边界逐字保留的完整请求序列。该门解决来源与顺序完整性，不判断请求是否安全，也不保证下游授权策略语义正确。 完整API/长会话矩阵成本过高，不复现（审查 DONE）；component_only / L1 CPU认证协议诊断，不是LLM授权语义、防注入胜率或生产安全产品。component_only / L1 CPU认证协议诊断，不是LLM授权语义、防注入胜率或生产安全产品。完整API/长会话矩阵成本过高，不复现（审查 DONE）；不接Evolve。标准库独立实现HMAC-SHA256、精确UTF-8与长度前缀framing、occurrence/sequence分域、完整有序commit及一次性boundary消费。SQLite事务持久化issued/next-sign/next-verify；  工具与协作 认证请求完整性 Agent 工具与协作执行：把计划变成可检查的动作 该门与RuntimeTickets保护的是同一边界吗？ 不是。本文保护策略生成前的原始授权输入；RuntimeTickets在真实副作用前核冻结recipient/object/budget合同。原文完整不证明策略语义正确，合法发送也不证明摘要来源真实。 教学例：认证用户原句后生成器仍可能错误放宽recipient，需要下层ticket核具体交付，而不是把MAC当语义理解。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/tools-and-collaboration/">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-55dc6b7a2561d316">该门与RuntimeTickets保护的是同一边界吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Acompaction-authorization">LLM Agent Authorization Across Context Compaction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · University of Technology Sydney</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。本文保护策略生成前的原始授权输入；RuntimeTickets在真实副作用前核冻结recipient/object/budget合同。原文完整不证明策略语义正确，合法发送也不证明摘要来源真实。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：认证用户原句后生成器仍可能错误放宽recipient，需要下层ticket核具体交付，而不是把MAC当语义理解。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32194v1">原论文</a> · <a href="../../agent-research/2611.32194-compaction-authorization/">实现解读</a> · <a href="#qa-55dc6b7a2561d316">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:compaction-authorization" data-paper-title="LLM Agent Authorization Across Context Compaction" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="LLM Agent Authorization Across Context Compaction Agent University of Technology Sydney 2026-11-24 request-derived authorizer假定request slot是用户所说，压缩却可能把模型对用户、工具和注入文本的转述放回user角色。更强的摘要器不能凭字面区分格式一致的真/伪记录。本文分开两条输入：agent继续读摘要；授权策略生成器只读可信入口认证、跨边界逐字保留的完整请求序列。该门解决来源与顺序完整性，不判断请求是否安全，也不保证下游授权策略语义正确。 完整API/长会话矩阵成本过高，不复现（审查 DONE）；component_only / L1 CPU认证协议诊断，不是LLM授权语义、防注入胜率或生产安全产品。component_only / L1 CPU认证协议诊断，不是LLM授权语义、防注入胜率或生产安全产品。完整API/长会话矩阵成本过高，不复现（审查 DONE）；不接Evolve。标准库独立实现HMAC-SHA256、精确UTF-8与长度前缀framing、occurrence/sequence分域、完整有序commit及一次性boundary消费。SQLite事务持久化issued/next-sign/next-verify；  工具与协作 认证请求完整性 Agent 工具与协作执行：把计划变成可检查的动作 每条都有有效MAC，为什么仍要当前计数？ 单条MAC只证明这些出现曾被可信入口签发，不证明后来没有取消。gate要求完整有序1..m且m等于入口当前计数，省略后来的用户turn就失败关闭。 教学例：许可是counter1，取消是counter2；只带合法counter1不能通过m=2的完整性检查。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/tools-and-collaboration/">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-3d077e401497ca1c">每条都有有效MAC，为什么仍要当前计数？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Acompaction-authorization">LLM Agent Authorization Across Context Compaction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · University of Technology Sydney</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>单条MAC只证明这些出现曾被可信入口签发，不证明后来没有取消。gate要求完整有序1..m且m等于入口当前计数，省略后来的用户turn就失败关闭。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：许可是counter1，取消是counter2；只带合法counter1不能通过m=2的完整性检查。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32194v1">原论文</a> · <a href="../../agent-research/2611.32194-compaction-authorization/">实现解读</a> · <a href="#qa-3d077e401497ca1c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:elbo-tds" data-paper-title="ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems 搜广推与 LLM 应用 Shopee 2025-11-26 ELBO-TDS假设短期变化围绕相对稳定的用户/商品因素发生。它不只对齐增广表示：固定单位方差的encoder后验经重参数采样，decoder保留个体特征，跨视图prior约束抑制暂态噪声；任务预测只用原始观测的确定性均值。统计特征做分桶邻域扰动，序列随机mask，类别embedding dropout，再用全局特征选择限制增广强度。 完整矩阵成本过高，不复现（审查 DONE）；CUDA同入口，已在真实单A100完成42/43/44三seed诊断（统一runner计时约1.41秒），不代表性能加速或能力提升。L1机制组件，不是完整工业复现；原始首发2025年，2026年11月25日v2带出本次补录，不是今天新发。本地L1只实现Eq3–7/Algorithm1的小型双encoder/decoder与dot-product预测器、单位高斯重参数采样和slot级增广。输入为调用者给定的分桶ID或已嵌入浮点slot：不读取生产特征或学习真实稳定因素。slot选择、各slot独立mask、MSE的元素均值是显式本地配置；  训练目标与决策优化 时间漂移与稳健增量训练 搜广推 学习信号、多任务与反馈偏差 prior均值跨哪个维度计算，为什么熵项不训练？ prior对同一样本的J个采样视图求均值而不是混整个batch；后验固定单位方差，熵为常数，梯度为0。 教学例：两个用户各3个视图得到两个中心，不能把6个视图缩向同一个中心。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/feedback-multitask-causality/">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-05db9116ce7db4ef">prior均值跨哪个维度计算，为什么熵项不训练？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Aelbo-tds">ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Shopee</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>prior对同一样本的J个采样视图求均值而不是混整个batch；后验固定单位方差，熵为常数，梯度为0。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个用户各3个视图得到两个中心，不能把6个视图缩向同一个中心。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2511.21032v2">原论文</a> · <a href="../../recommendation-components/2511.21032-elbo-tds/">实现解读</a> · <a href="#qa-05db9116ce7db4ef">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:elbo-tds" data-paper-title="ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems 搜广推与 LLM 应用 Shopee 2025-11-26 ELBO-TDS假设短期变化围绕相对稳定的用户/商品因素发生。它不只对齐增广表示：固定单位方差的encoder后验经重参数采样，decoder保留个体特征，跨视图prior约束抑制暂态噪声；任务预测只用原始观测的确定性均值。统计特征做分桶邻域扰动，序列随机mask，类别embedding dropout，再用全局特征选择限制增广强度。 完整矩阵成本过高，不复现（审查 DONE）；CUDA同入口，已在真实单A100完成42/43/44三seed诊断（统一runner计时约1.41秒），不代表性能加速或能力提升。L1机制组件，不是完整工业复现；原始首发2025年，2026年11月25日v2带出本次补录，不是今天新发。本地L1只实现Eq3–7/Algorithm1的小型双encoder/decoder与dot-product预测器、单位高斯重参数采样和slot级增广。输入为调用者给定的分桶ID或已嵌入浮点slot：不读取生产特征或学习真实稳定因素。slot选择、各slot独立mask、MSE的元素均值是显式本地配置；  训练目标与决策优化 时间漂移与稳健增量训练 搜广推 学习信号、多任务与反馈偏差 为什么不能把有标签预测也喂给增广采样表示？ Eq6和Algorithm1在原始观测上用确定性encoder均值预测，保持训练/推理一致。SSL的采样与增广是独立分支，改变它们不应改变监督loss。 教学例：固定用户/商品原始输入，只把SSL视图放大5倍；监督loss必须不变，重建和prior可以变。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/feedback-multitask-causality/">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f8ff2b8a2670cf5f">为什么不能把有标签预测也喂给增广采样表示？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Aelbo-tds">ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Shopee</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Eq6和Algorithm1在原始观测上用确定性encoder均值预测，保持训练/推理一致。SSL的采样与增广是独立分支，改变它们不应改变监督loss。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：固定用户/商品原始输入，只把SSL视图放大5倍；监督loss必须不变，重建和prior可以变。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2511.21032v2">原论文</a> · <a href="../../recommendation-components/2511.21032-elbo-tds/">实现解读</a> · <a href="#qa-f8ff2b8a2670cf5f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:elbo-tds" data-paper-title="ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems 搜广推与 LLM 应用 Shopee 2025-11-26 ELBO-TDS假设短期变化围绕相对稳定的用户/商品因素发生。它不只对齐增广表示：固定单位方差的encoder后验经重参数采样，decoder保留个体特征，跨视图prior约束抑制暂态噪声；任务预测只用原始观测的确定性均值。统计特征做分桶邻域扰动，序列随机mask，类别embedding dropout，再用全局特征选择限制增广强度。 完整矩阵成本过高，不复现（审查 DONE）；CUDA同入口，已在真实单A100完成42/43/44三seed诊断（统一runner计时约1.41秒），不代表性能加速或能力提升。L1机制组件，不是完整工业复现；原始首发2025年，2026年11月25日v2带出本次补录，不是今天新发。本地L1只实现Eq3–7/Algorithm1的小型双encoder/decoder与dot-product预测器、单位高斯重参数采样和slot级增广。输入为调用者给定的分桶ID或已嵌入浮点slot：不读取生产特征或学习真实稳定因素。slot选择、各slot独立mask、MSE的元素均值是显式本地配置；  训练目标与决策优化 时间漂移与稳健增量训练 搜广推 学习信号、多任务与反馈偏差 ELBO-TDS和COTTI如何分别应对促销漂移？ COTTI的CPC用常态/促销两视图的可微门控控制对比一致性，RW对历史距离重加权，ABA在服务logit上作促销校准。ELBO-TDS用多视图高斯prior与输入重建约束稳定因素，并把有标签任务留在原始观测上；没有ABA式上线概率修正。两者都依赖稳定语义假设，不能从对齐或重建直接推断因果可识别，也不能用不同生产A/B宣称彼此胜负。 教学例：当所有视图只保留促销价时，重建不能凭空恢复常态偏好；COTTI的上调校准也不能纠正过预测。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/feedback-multitask-causality/">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-26c16696188dc84e">ELBO-TDS和COTTI如何分别应对促销漂移？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Aelbo-tds">ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Shopee</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>COTTI的CPC用常态/促销两视图的可微门控控制对比一致性，RW对历史距离重加权，ABA在服务logit上作促销校准。ELBO-TDS用多视图高斯prior与输入重建约束稳定因素，并把有标签任务留在原始观测上；没有ABA式上线概率修正。两者都依赖稳定语义假设，不能从对齐或重建直接推断因果可识别，也不能用不同生产A/B宣称彼此胜负。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：当所有视图只保留促销价时，重建不能凭空恢复常态偏好；COTTI的上调校准也不能纠正过预测。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2511.21032v2">原论文</a> · <a href="../../recommendation-components/2511.21032-elbo-tds/">实现解读</a> · <a href="#qa-26c16696188dc84e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:elbo-tds" data-paper-title="ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems 搜广推与 LLM 应用 Shopee 2025-11-26 ELBO-TDS假设短期变化围绕相对稳定的用户/商品因素发生。它不只对齐增广表示：固定单位方差的encoder后验经重参数采样，decoder保留个体特征，跨视图prior约束抑制暂态噪声；任务预测只用原始观测的确定性均值。统计特征做分桶邻域扰动，序列随机mask，类别embedding dropout，再用全局特征选择限制增广强度。 完整矩阵成本过高，不复现（审查 DONE）；CUDA同入口，已在真实单A100完成42/43/44三seed诊断（统一runner计时约1.41秒），不代表性能加速或能力提升。L1机制组件，不是完整工业复现；原始首发2025年，2026年11月25日v2带出本次补录，不是今天新发。本地L1只实现Eq3–7/Algorithm1的小型双encoder/decoder与dot-product预测器、单位高斯重参数采样和slot级增广。输入为调用者给定的分桶ID或已嵌入浮点slot：不读取生产特征或学习真实稳定因素。slot选择、各slot独立mask、MSE的元素均值是显式本地配置；  训练目标与决策优化 时间漂移与稳健增量训练 搜广推 学习信号、多任务与反馈偏差 ELBO-TDS要保留什么，又要消除什么？ 保留相对稳定且能预测个体行为的因素，减少短期促销等噪声；重建项避免仅对齐导致个体细节丢失。 教学例：两人都喜欢手机，但一个看重新款、另一个看重低价；不能把二者表示压成相同。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/feedback-multitask-causality/">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<span id="paper-recommendation-elbo-tds-287ffde7" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-32061d0ffde44a5f">ELBO-TDS要保留什么，又要消除什么？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Aelbo-tds">ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Shopee</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>保留相对稳定且能预测个体行为的因素，减少短期促销等噪声；重建项避免仅对齐导致个体细节丢失。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两人都喜欢手机，但一个看重新款、另一个看重低价；不能把二者表示压成相同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2511.21032v2">原论文</a> · <a href="../../recommendation-components/2511.21032-elbo-tds/">实现解读</a> · <a href="#qa-32061d0ffde44a5f">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:onequery" data-paper-title="OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="OneQuery: Unified Sequence-to-Structure Generation for Multilingual E-commerce Query Understanding 搜广推与 LLM 应用 Xiamen University; co-first author Jiejie Qin, Alibaba Group; Harbin Institute of Technology collaborator 2026-11-25 OneQuery把语言识别、纠错、英语翻译和查询标注作为同一次schema引导JSON生成，而不是四个独立模型逐级传错。Stage1混合四类单任务SFT；Stage2从部分标注中保留真值、用Stage1补齐缺字段，清洗后混合3.6M伪标注与310K人工样本；Stage3用任务特定reward做GRPO。生产端14B离线缓存头部查询，蒸馏0.3B学生实时处理尾部。 成本过高，不复现（审查 DONE）；L1机制诊断，不是完整能力复现；L1机制诊断，不是完整能力复现；高成本完整实验不复现（审查 DONE），不接Evolve晋级。本地只执行Eq5–13的reward、优势和clipping算术。QT输入为显式tuple列表，不发明私有标注串的parser；无效schema直接拒绝，不猜造格式reward。空串对空串编辑相似度取1、sigma采用总体标准差、delta=1e-8是显式边界约定。没有语言模型、schema约束解码、部分标注补齐、SFT、GRPO参数训练、蒸馏或服务；gold只作为reward计算输入，不存在读取gold的Agent。  大模型能力与推荐融合 查询理解与结构化生成 搜广推 候选生成与搜索匹配 为什么纠错reward不是统一exact match或统一编辑相似度？ 需要改时保留最高1分给正确串，其余最多0.3分；不需要改时任何改写都0分。这能区分部分修正与过度修正。 教学例：red shose的近似修正可得低额分；本来正确的red shoes改成red shoe仍是0，不能因为编辑距离很小而奖励。 2026-11-26">
 <p class="ar-learning-card__domain"><a href="../paths/recommendation/retrieval-matching/">搜广推 / 候选生成与搜索匹配</a></p>
 <p class="ar-learning-level">核心机制</p>

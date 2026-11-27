@@ -511,6 +511,7 @@
 
 ### 训练目标与决策优化
 - [COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift](../../recommendation-components/2611.22597-cotti/README.md)：COTTI把训练时历史偏好连续性和上线时促销概率修正分开。CPC比较同一用户常态/促销双视图并用可微门控调节一致性；RW按相对历史距离重加权但截断其梯度；ABA在冻结预测器的logit上添加事件强度与预测头方差决定的有界修正。 本地边界：本地只运行CPC/RW/ABA张量；没有历史构造、缺失常态视图回退或服务融合策略。保留paid-item新类目召回下降的作者负结果，不能拿整体AUC覆盖探索代价。
+- [ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems](../../recommendation-components/2511.21032-elbo-tds/README.md)：ELBO-TDS假设短期变化围绕相对稳定的用户/商品因素发生。它不只对齐增广表示：固定单位方差的encoder后验经重参数采样，decoder保留个体特征，跨视图prior约束抑制暂态噪声；任务预测只用原始观测的确定性均值。统计特征做分桶邻域扰动，序列随机mask，类别embedding dropout，再用全局特征选择限制增广强度。 本地L1只实现Eq3–7/Algorithm1的小型双encoder/decoder与dot-product预测器、单位高斯重参数采样和slot级增广。输入为调用者给定的分桶ID或已嵌入浮点slot：不读取生产特征或学习真实稳定因素。slot选择、各slot独立mask、MSE的元素均值是显式本地配置；没有完整字段embedding/dropout分组、时序增量trainer、MMoE、私有排序链路或公开benchmark效果比较。
 
 ### 检索与匹配
 - [From Relevance to Utility: Rubric Alignment in Yuanbao Search](../../recommendation-components/2611.22503-yuanbao-rubric/README.md)：传统逐文档相关性不等于给下游推理提供有用证据。元宝先生成查询特定的加权正向标准和扣分标准，用蒸馏标签统一训练召回与四头排序，再用集合奖励训练选择器。低于组均值的轨迹并不接受负优势惩罚，而是按奖励差蒸馏组内最佳轨迹。 本地边界：没有运行 rubric 生成、DeepSeek judge、Qwen 编码器或真实搜索。诊断检查最佳轨迹有蒸馏梯度、失败轨迹没有模仿梯度、奖励不反传、padding 梯度为零；它们不是答案准确率。

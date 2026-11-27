@@ -176,6 +176,10 @@
 
 - 2026-10-27 · 一作：Yipeng Hao · [Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems](../2610.36652-discernmem/README.md)（`discernmem`）：团队失败不代表注入的每条记忆都有错。DiscernMem把“规则内容有缺陷”和“好规则用错场景”分开：以相同任务、seed和配置运行完整团队，仅向原拥有者注入一条记忆，再与所有角色都无记忆的执行比较。
 
+## East China University of Science and Technology
+
+- 2026-11-25 · 一作：Jing Liu · [Compute-Aware Submodular Online Learning in Open Multi-Agent Systems](../2611.34211-budgeted-submapl/README.md)（`budgeted-submapl`）：协作覆盖的重叠贡献具有边际递减性，但更新每个agent每个action的收益可能超在线预算。论文在看当前收益之前，只用当前分类策略与查询预算分配包含概率，再用固定基数依赖舍入精确选$Q$个agent-action。
+
 ## Efrei Research Lab, Université Paris-Panthéon-Assas / CEDRIC, Conservatoire National des Arts et Métiers
 
 - 2026-11-23 · 一作：Yulliwas Ameur · [Transport-Safe Evaluation of LLM Agents: Trajectory-Dependent Judge Error and Anytime-Valid Auditing](../2611.30742-transport-safe-audit/README.md)（`transport-safe-audit`）：不同Agent产生不同轨迹；即使裁判在给定(X,Y)时看不到Agent身份，其sensitivity/specificity的平均值也会随成功/失败轨迹分布改变。论文连接scalar transport偏差、支持与识别、随机人工audit、anytime monitoring和rank sets；这些统计工具本身不是新发明。
@@ -892,6 +896,10 @@
 
 - 2026-11-18 · 一作：Ziyan Yang · [Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents](../2611.25123-grepmem/README.md)（`grepmem`）：GrepMem把有限工作上下文和完整历史分开：压缩时只把活跃上下文换成系统提示、任务与摘要，原始消息、工具调用/输出和摘要仍追加到纯文本日志。第一次压缩之后才开放grep_history，让模型按需用大小写不敏感正则取回遗漏细节。
 - 2026-10-08 · 一作：Seyedarmin Azizi · [One Word Opens the Gate: The Option-Channel Attack on Typed Decision Models as Agent Guardrails](../2610.12292-option-channel-attack/README.md)（`option-channel-attack`）：类型化模型对调用方给定的选项输出概率，但选项名字本身也进入模型输入。保持动作、可信策略定义不变，仅把允许选项换成误导性标签，就可能让本来正确的拒绝变成放行。
+
+## University of Technology Sydney
+
+- 2026-11-24 · 一作：Zeming Fei · [LLM Agent Authorization Across Context Compaction](../2611.32194-compaction-authorization/README.md)（`compaction-authorization`）：request-derived authorizer假定request slot是用户所说，压缩却可能把模型对用户、工具和注入文本的转述放回user角色。更强的摘要器不能凭字面区分格式一致的真/伪记录。
 
 ## University of Virginia
 

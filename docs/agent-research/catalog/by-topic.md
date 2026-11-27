@@ -665,3 +665,15 @@
 ### 上下文压缩与精确恢复
 
 - [Maximising Transparency in Context Compaction Improves Retention of Facts and Commitments for Lightweight Coding Agents](../2610.20116-transparent-compact/README.md)（`transparent-compact`）：长会话压缩通常依赖模型重写摘要，可能丢失只在对话出现的承诺或悄悄改变其措辞。本方法保留用户与助手原话，将思考和工具输出移出活跃上下文，留下明确删减标记，并提供到完整原始会话的恢复路径。
+
+## 工具使用与多 Agent 协作
+
+### 多 Agent 协作与通信
+
+- [Compute-Aware Submodular Online Learning in Open Multi-Agent Systems](../2611.34211-budgeted-submapl/README.md)（`budgeted-submapl`）：协作覆盖的重叠贡献具有边际递减性，但更新每个agent每个action的收益可能超在线预算。论文在看当前收益之前，只用当前分类策略与查询预算分配包含概率，再用固定基数依赖舍入精确选$Q$个agent-action。
+
+## 评测、安全与可靠性
+
+### 安全与权限边界
+
+- [LLM Agent Authorization Across Context Compaction](../2611.32194-compaction-authorization/README.md)（`compaction-authorization`）：request-derived authorizer假定request slot是用户所说，压缩却可能把模型对用户、工具和注入文本的转述放回user角色。更强的摘要器不能凭字面区分格式一致的真/伪记录。

@@ -303,6 +303,7 @@
 ## Shopee
 - 2026-08 · [KGD](../2608.02738-kgd/README.md)：以 BMTP、冻结知识迁移和正交 ACR 解耦预训练知识与推荐几何，使流式模型可以低成本刷新外部知识。
 - 2026-06 · [OneRank](../2606.16838-onerank/README.md)：用原生统一 Transformer、任务私有通道和梯度隔离执行多任务排序。
+- [ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems](../../recommendation-components/2511.21032-elbo-tds/README.md)：ELBO-TDS假设短期变化围绕相对稳定的用户/商品因素发生。它不只对齐增广表示：固定单位方差的encoder后验经重参数采样，decoder保留个体特征，跨视图prior约束抑制暂态噪声；任务预测只用原始观测的确定性均值。统计特征做分桶邻域扰动，序列随机mask，类别embedding dropout，再用全局特征选择限制增广强度。 本地L1只实现Eq3–7/Algorithm1的小型双encoder/decoder与dot-product预测器、单位高斯重参数采样和slot级增广。输入为调用者给定的分桶ID或已嵌入浮点slot：不读取生产特征或学习真实稳定因素。slot选择、各slot独立mask、MSE的元素均值是显式本地配置；没有完整字段embedding/dropout分组、时序增量trainer、MMoE、私有排序链路或公开benchmark效果比较。
 - 2025-09 · [OnePiece](../2509.18091-onepiece/README.md)：用上下文 token、块级 latent reasoning 和递进多任务训练统一级联排序。
 
 ## Twitch

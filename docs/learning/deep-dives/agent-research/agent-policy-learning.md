@@ -7,7 +7,7 @@ hide:
 
 # 交互学习：统一轨迹之后，信用和教师信息怎样分配
 
-[Agent](../index.md) · 更新 2026-11-24 · 58 篇主题资料 / 11 篇重点对照
+[Agent](../index.md) · 更新 2026-11-27 · 59 篇主题资料 / 12 篇重点对照
 
 Agent Lightning先把执行整理成可训练transition；GiGPO、AdaStep和DepGPO分别利用重复状态、回报方差与命令依赖分配信用；Frontier-OPD和ASTEROID则改变教师数据怎样进入学生学习。记录成轨迹只是入口，训练目标和可见信息才定义算法。
 
@@ -36,6 +36,7 @@ Agent Lightning先把执行整理成可训练transition；GiGPO、AdaStep和DepG
 | [From Acting to Learning: Experience Selection toward Continually Learning Agents](../../../agent-research/2611.27159-acting-to-learning/README.md) · [原始来源](https://arxiv.org/abs/2611.27159v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验 | 论文把成功交互后的经验选择单独隔离：历史池先固定，选择规则决定训练哪些action记录，所有学生使用同一训练预算与部署executor。它不是一个新通用梯度影响公式；打分沿用LESS式优化器感知梯度，贡献是Agent学习中的严格对照，尤其把排序规则和可选择的覆盖空间交叉。完整研究只有一次选择—训练阶段，没有验证多轮持续学习、遗忘或自主修改harness。 | ACE Lens把Accuracy、学习者相对Complexity和Diversity作为数据准入维度；本篇进一步问同样成功的action在当前学生/optimizer状态下，对公开任务family有多大梯度相关性，并把coverage自由度作为对照的一部分。两者都不能把“成功”自动等同于“最值得学”；较低NLL只表示容易预测，不是更高训练收益。ACE旧页的mini-suite也不是本篇ALFWorld训练对照，不能横向比较其满分与本文提升。 |
 | [$R^2$: Recognizing and Reducing Redundant Visual Tool Use](../../../agent-research/2611.27070-r2-tool-redundancy/README.md) · [原始来源](https://arxiv.org/abs/2611.27070v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验 | R²把三个问题分开：CAT描述题目是否可能从工具获益；VFD描述一次返回观察对后续同一段推理文本提供多少额外似然支持；RA-GRPO在答对的轨迹之间比较工具效率，而不是奖励所有少调用的轨迹。CAT标签来自训练侧tool/no-tool rollouts的多次正确性和实际调用，不是根据问题长度或关键词猜测；VFD也不是gold-answer概率或“这次工具有用”的因果证明。 | AdaStep看同锚状态下动作间回报方差相对动作内噪声，调节局部信用可靠性；R²看当前视觉反馈对同一后续推理的依赖，并把成本只在correct集合内相对化。它们都补充终局奖励，但方差解释率不是观察必要性，VFD也不衡量动作内随机回报噪声。不能把AdaStep的权重直接当VFD，或把R²效率项施加给失败轨迹。本地两者都是统计/数值组件，不能比较其Agent能力。 |
 | [Optimistic Online Learning for Coding Agents with Aggregate Feedback](../../../agent-research/2611.30405-ooas/README.md) · [原始来源](https://arxiv.org/abs/2611.30405v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定 | OOAS把activation steering候选选择建模为逐turn多臂bandit。每轮先见所有候选的reward hint，选一个策略；任务结束只见已选序列的加和reward，不见逐轮贡献。它不是猜哪条编辑会通过隐藏测试，而是在聚合反馈粒度下修正累计hint误差。论文理论要求reward向量、hint和任务划分预先固定、独立于学习者随机数；真实编码Agent的状态依赖轨迹不自动满足该假设。 | From Acting to Learning在固定历史池里选SFT action记录，选择后冷启动学生；OOAS在任务执行中选steering臂，并在任务结束后修正hint。前者的梯度相关性不是后者的reward预测，后者的共享noise也不是经验重放的shuffle。两者都必须分开选择信息与最终评测；本地均没有真实Agent能力比较。 |
+| [Compute-Aware Submodular Online Learning in Open Multi-Agent Systems](../../../agent-research/2611.34211-budgeted-submapl/README.md) · [原始来源](https://arxiv.org/abs/2611.34211v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定 | 固定域多agent分类策略在收益未知前分配rho，依赖舍入精确Q后只问所选边际，IPW与KL更新保留实际预算化策略学习。 | OOAS只见aggregate任务回报与逐turn hint，使用共享Exp噪声和整任务同臂概率；本篇可查询反事实坐标。重要性分母、反馈粒度与FTRL/KL更新不可替换。 |
 
 </div>
 
@@ -82,6 +83,12 @@ VFD仅替换当前调用的视觉反馈，保留原图、其他历史与待评�
 分布不是softmax：FTRL同时使用Tsallis项和log barrier。turn t把已完成任务score、当前任务此前hint和本轮hint乘已过turn数相加，再求内点最优分布。每任务只抽一次K个Exp(1)噪声，所有turn共享，以argmin ξ/p选臂。整任务都选同一臂k的概率ρ由各turn概率比的最大值计算，不能用边缘概率相乘；只有该事件发生时才以Z/ρ修正此臂，发生切臂则残差修正全0，但所有臂仍加hint之和。Alg2用可观察potential gap的有符号累积触发严格大于阈值的doubling，重启score与gap，不把负gap裁为0。负控覆盖KKT残差、分布平移不变、共享noise的整任务事件概率不等于独立概率乘积、切臂时无残差归因、每turn的hint倍率、任务长度上限、重复begin/finish拒绝、aggregate越界不丢pending状态、保留负potential gap及重启后score归零。使用分析事件分区核对importance权重，不用少量Monte Carlo冒充无偏证明。
 
 对照来源：[ooas](../../../agent-research/2611.30405-ooas/README.md) · [acting-to-learning](../../../agent-research/2611.27159-acting-to-learning/README.md)
+
+### 预算反馈的无偏性取决于采样事件，不是统一的1/p技巧
+
+SubMAPL的rho是边缘包含概率，固定基数依赖舍入须保E[Z]=rho，query选择不能偷看当前gain或联合action。IPW后在每agent simplex做KL mirror-ascent，sqrt分配最小化二阶矩上界而非保证胜率。OOAS全任务共享noise使同臂事件概率不等于边缘概率乘积，切臂时不归因残差。两者本地都是有限数学核，非LLM Agent。SubMAPL迁移/环境尚未承接且无证据高成本，完整状态保留scope-limited/false full-review，不能制造高成本DONE。
+
+对照来源：[budgeted-submapl](../../../agent-research/2611.34211-budgeted-submapl/README.md) · [ooas](../../../agent-research/2611.30405-ooas/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -167,9 +174,23 @@ VFD仅替换当前调用的视觉反馈，保留原图、其他历史与待评�
 
     对照来源：[ooas](../../../agent-research/2611.30405-ooas/README.md) · [acting-to-learning](../../../agent-research/2611.27159-acting-to-learning/README.md)
 
+### SubMAPL与OOAS的重要性权重可互换吗？ {#cross-cross-nov27-budgeted-submapl}
+
+??? note "展开答案与例子"
+
+    **答案：** 不可。前者观察被查询的反事实边际，按坐标包含概率校正；OOAS只观察任务总反馈，按共享noise产生的整任务同臂事件概率校正hint残差。两者反馈可见性和更新器都不同。
+
+    **教学例子：** 教学例：一任务中切过臂时OOAS残差归因全0；SubMAPL同轮选中的两坐标仍各按自己的rho更新。
+
+    对照来源：[budgeted-submapl](../../../agent-research/2611.34211-budgeted-submapl/README.md) · [ooas](../../../agent-research/2611.30405-ooas/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-27** · 固定active-domain的clipped sqrt包含分配、精确Q依赖舍入、独立joint-action采样、仅所选坐标oracle查询、IPW与log-space KL更新；真归一化子模coverage小函数与评估侧期望控制。无LLM Agent、动态迁移M、完整环境/观察策略表，未伪造高成本终态。 组件范围完成；完整便宜模拟/迁移未承接，not_run_scope_limited，非高成本延期。
+
+涉及：[budgeted-submapl](../../../agent-research/2611.34211-budgeted-submapl/README.md) · [ooas](../../../agent-research/2611.30405-ooas/README.md)
 
 **2026-11-24** · 独立标准库CPU核实际解FTRL的KKT方程：Gk+α/√pk+β/pk为共同乘子，通过平移score与二分求解，而非softmax替身；实现共享Exp采样、ρ、聚合残差、potential和Alg2重启。begin→choose→finish只接受当前hint和最终aggregate，不接受turn reward向量或gold答案/计划。噪声注入只供数学控制。没有LLM、activation probe、TACT干预、代码执行器、真实任务分数或Evolve映射。数值求根是有公差的float64近似，不声称无限精度理论实现。 完整campaign终态不复现，审查DONE。
 
@@ -195,7 +216,7 @@ VFD仅替换当前调用的视觉反馈，保留原图、其他历史与待评�
 
 覆盖 53 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 58 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 59 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -257,6 +278,7 @@ VFD仅替换当前调用的视觉反馈，保留原图、其他历史与待评�
 - [From Acting to Learning: Experience Selection toward Continually Learning Agents](../../../agent-research/2611.27159-acting-to-learning/README.md)
 - [$R^2$: Recognizing and Reducing Redundant Visual Tool Use](../../../agent-research/2611.27070-r2-tool-redundancy/README.md)
 - [Optimistic Online Learning for Coding Agents with Aggregate Feedback](../../../agent-research/2611.30405-ooas/README.md)
+- [Compute-Aware Submodular Online Learning in Open Multi-Agent Systems](../../../agent-research/2611.34211-budgeted-submapl/README.md)
 
 </details>
 

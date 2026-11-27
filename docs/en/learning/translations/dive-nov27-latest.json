@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/context-and-state/comparison/foundation-models:integral-deltanet": {
+      "source_sha256": "342f09fc967afc64fc0038d59140d4daf2e710c92affdbb30e0e18b46613319c",
+      "reviewed": true,
+      "fields": {
+        "position": "Integral DeltaNet retains a fast delta state and a historical integral state, with key-channel integration/readout gates. The integral state does not feed back into the delta update.",
+        "tradeoff": "KRA maintains regression coefficients and posterior covariance, restoring writable uncertainty under forgetting. Integral instead stores a delta state and its weighted history. Covariance is not a memory copy, and integral history does not implement KRA covariance-guided interference correction. Local L1 cannot compare language recall."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/20": {
+      "source_sha256": "c8c937db2ef1494aa8afdc3e3e05fc3795b9dd64eb100afd6165ea8371203677",
+      "reviewed": true,
+      "fields": {
+        "title": "Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration",
+        "body": "KRA maintains regression coefficients and posterior covariance, restoring writable uncertainty under forgetting. Integral instead stores a delta state and its weighted history. Covariance is not a memory copy, and integral history does not implement KRA covariance-guided interference correction. Local L1 cannot compare language recall. The first equation is GDN-2; broadcasting one beta across erase/write gives KDA. Lambda and gamma act on key channels, not value rows or one scalar. Integrate the updated S. The paper uses rank128 gates initialized near lambda=1-gamma=1/1024; the local rank is reduced but the trainable parameterization is retained."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/nov27-integral-deltanet": {
+      "source_sha256": "2b27bc63cb4a1460404452ae087628290ece13873d39fbe1d355dbe09edb1f63",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is KRA covariance P not an integral state?",
+        "answer": "P represents uncertainty and changes writes; X stores weighted S history and only participates in readout. Their semantics and updates differ.",
+        "example": "Illustration:KRA forgetting can restore P without a new value,whereas X remains retained S history,not a write-gain matrix."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-11-27/19": {
+      "source_sha256": "bfb8e16840fdfc400666cdc57b9b68ec0156f07fc316be0293d6163e7bfe2d01",
+      "reviewed": true,
+      "fields": {
+        "summary": "KRA maintains regression coefficients and posterior covariance, restoring writable uncertainty under forgetting. Integral instead stores a delta state and its weighted history. Covariance is not a memory copy, and integral history does not implement KRA covariance-guided interference correction. Local L1 cannot compare language recall. This is Nov24 overlap backfill with CPU L1 only; full experiments are terminally cost-deferred."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:deco-attention": {
+      "source_sha256": "c8426a229cc24d4e929ebb1c1ece80b9460acf946f6a139c34db64390efa5c31",
+      "reviewed": true,
+      "fields": {
+        "position": "DeCo estimates per-head principal subspaces at runtime and appends Q-side/K-side first-order residual projections as extra quantized channels of one expanded dot product.",
+        "tradeoff": "DualQuant fits row/column scales from static weights and rescales activations. DeCo estimates a basis from current Q/K and compensates both rounding residuals. Neither floating simulation is a packed low-bit kernel; A100 floating execution cannot establish native FP4 acceleration."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/analysis/14": {
+      "source_sha256": "f7e3e85e6ccb1659298dff04a1a41ead08c69ff407d5f6c7355846ea99421ead",
+      "reviewed": true,
+      "fields": {
+        "title": "DeCo-Attention: Decompose to Compensate for Low-Precision Attention",
+        "body": "DualQuant fits row/column scales from static weights and rescales activations. DeCo estimates a basis from current Q/K and compensates both rounding residuals. Neither floating simulation is a packed low-bit kernel; A100 floating execution cannot establish native FP4 acceleration. Eq6 uses raw rotated sampled Q/K,not already-rounded operands; normalize each Gram by its own trace. Sample max(N/256,2r),with stratification for mixed text/audio/video. Eq25 uses a power-of-two group scale,unsigned E4M3 block scales per16channels,and E2M1 values,including compensation channels. Divide scores by original sqrt(d),not sqrt(d+2r)."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/question/nov27-deco-attention": {
+      "source_sha256": "ed467aaf78305d551e08e9b7bdefde7faf48a51c42dc750b7b0dc42ab07fff80",
+      "reviewed": true,
+      "fields": {
+        "question": "Can DeCo replace DualQuant's scale solver?",
+        "answer": "No. DualQuant optimizes static-weight row/column reconstruction scales; DeCo corrects dynamic attention Q/K residuals.",
+        "example": "Illustration:two prompts change Q/K and the estimated DeCo basis,while static weight scales can be reused."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/update/2026-11-27/14": {
+      "source_sha256": "86b6141184ffb892000bd930a941d6725c94bf5e571cffb0ca2901d1d8283b6e",
+      "reviewed": true,
+      "fields": {
+        "summary": "DualQuant fits row/column scales from static weights and rescales activations. DeCo estimates a basis from current Q/K and compensates both rounding residuals. Neither floating simulation is a packed low-bit kernel; A100 floating execution cannot establish native FP4 acceleration. This is Nov24 overlap backfill with CPU L1 only; full experiments are terminally cost-deferred."
+      }
+    },
+    "dive/post-training/preference-and-alignment/comparison/post-training:cafa": {
+      "source_sha256": "ca92f58b81fa46b86bbe416ec365e6db9886d6d35b5f7af2c82d9aebc40e9fff",
+      "reviewed": true,
+      "fields": {
+        "position": "Given a fixed/versioned scalar scorer, cancel exact-identity report coefficients before acquisition and separate mean from ordinary-covariance support. Local code is CPU exact arithmetic, not model generation or judging.",
+        "tradeoff": "Probabilistic Autorater targets calibrated preference probabilities and proper rewards. CAFA leaves the scorer unchanged and reduces required scores. Exact recovery does not make a judge correct; fewer inputs do not establish lower total workflow cost."
+      }
+    },
+    "dive/post-training/preference-and-alignment/analysis/10": {
+      "source_sha256": "e0387767fabaa7af7c9c9ac81c98a15104ceeab32bf6baf11a40db5ab72e9254",
+      "reviewed": true,
+      "fields": {
+        "title": "Evaluation-budget optimization must fix both the requested statistic and scorer version",
+        "body": "Re-reading Probabilistic Autorater confirms that numerical proper rewards/parsing are not a generative judge capability. CAFA likewise requires an external scorer, while its defining fixed-bank algorithm can execute exactly. Mean support uses across-draw coefficient sums; ordinary covariance retains any identity with a nonzero draw coefficient. Mirror contrasts can have zero mean but positive variance. Cache keys must separate rubric/deployment versions; semantic identity merging and zero imputation are invalid. Feedback savings do not calibrate a judge, and workflow changes in sampler/draw budgets are not all attributable to fixed-bank cancellation."
+      }
+    },
+    "dive/post-training/preference-and-alignment/question/nov27-cafa-statistic-boundary": {
+      "source_sha256": "f5fe6c79b97b95fb3f8af01165f2ac42955dc19f2fe5ee28d4f49f7d71900287",
+      "reviewed": true,
+      "fields": {
+        "question": "If a bank's mean needs no scores, can its confidence interval also be recovered without scores?",
+        "answer": "No. Ordinary covariance needs per-draw vectors, which may remain variable after mean cancellation. Interpreting intervals additionally requires sampling independence and a coverage procedure, excluding repeated judge noise.",
+        "example": "Teaching example: differences3/-3 have mean zero and sample variance18. Without the scores, mean cancellation is known but that variance is not; zero uncertainty cannot be asserted."
+      }
+    },
+    "dive/post-training/preference-and-alignment/update/2026-11-27/9": {
+      "source_sha256": "ac55fc23d93b56e0b42fe2a7b9bd6488f0276580dd7b850bd4ced2ceb5015668",
+      "reviewed": true,
+      "fields": {
+        "summary": "Re-read Probabilistic Autorater against fixed-v1 CAFA Eqs.2–4/Algorithm2. Added calibration versus acquisition planning, mean/covariance support, versioned caching, non-imputation and fixed-bank versus population-uncertainty boundaries. CAFA is CPU-only; full LLM/judge experiments are high-cost review DONE."
+      }
+    },
+    "dive/post-training/teacher-and-context/comparison/post-training:elpsd": {
+      "source_sha256": "0284d183c859af6acee9514c7cb77a063268b1a9c008a95b03816978d6acfb0b",
+      "reviewed": true,
+      "fields": {
+        "position": "Extrapolate frozen initial early/final distributions of a native looped model and directly distill the standard final loop with exact reverse KL, without external teachers/reference answers. Local scope is supplied-logit math only.",
+        "tradeoff": "LoOPSD searches repeated-layer routes in ordinary models, validates teachers and alternates refresh. ELPSD has no route search and keeps its extrapolated teacher frozen. The separately named LoopOPD is not existing LoOPSD; a shared KL form does not equate teacher construction or sampling."
+      }
+    },
+    "dive/post-training/teacher-and-context/analysis/13": {
+      "source_sha256": "c7056f991a89a8ef67de61de7858eaf7d21567e9cf666a6e9ce1657ef0d17daf",
+      "reviewed": true,
+      "fields": {
+        "title": "Extra-compute views differ between route search, loop readouts and extrapolated targets",
+        "body": "The current LoOPSD README defines a teacher through repeated-interval search/validation while students use the standard path; it is not the separately named LoopOPD in ELPSD. ELPSD reads early/final loops in one frozen forward of a native four-loop model and trains its final loop. Weight zero degenerates at initialization. Idealized refresh with a fixed early loop compounds log-odds by1+w, so LoOPSD's refresh cannot be copied mechanically. Response-balanced gradients and moving-target controls execute no looped model, route selection or on-policy sampler, and do not reopen deferred high-cost work."
+      }
+    },
+    "dive/post-training/teacher-and-context/question/nov27-elpsd-refresh": {
+      "source_sha256": "5133c49ee238d984895312faf8f567d5f2e64cde0de3ecfe33f90d9a6069fd70",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not give ELPSD the alternating teacher refresh used by LoOPSD?",
+        "answer": "Teacher construction differs. LoOPSD re-searches and validates repeated-layer routes. Refreshing ELPSD from its current final loop repeatedly amplifies a direction under the paper's fixed-early-loop exact-fit idealization, removing the fixed target.",
+        "example": "Teaching example: three idealized refreshes atw0.5 multiply relative log-odds by3.375, unlike independently validating a new repeated-layer route."
+      }
+    },
+    "dive/post-training/teacher-and-context/update/2026-11-27/11": {
+      "source_sha256": "8a69a868436b47f044fb2ddc74ec027c7a4a51e5f6adfe18c03ca026715d4da5",
+      "reviewed": true,
+      "fields": {
+        "summary": "Re-read LoOPSD against fixed-v1 ELPSD Section3/AppendixA. Distinguished route search, fixed loop extrapolation and LoOPSD/LoopOPD naming; added zero-weight degeneration, idealized-refresh limits and response-balanced reduction. CPU supplied-logit components only; full8-GPU training is high-cost review DONE, with no reopening of old plans."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/comparison/agent-research:compaction-authorization": {
+      "source_sha256": "1eb6c715423261e4788a3b0892f6b974df6a15ac5b400f58fb16afe63b866413",
+      "reviewed": true,
+      "fields": {
+        "position": "Authenticate original user text before policy synthesis using ingress witnesses, an ordered complete commitment and current count. The agent's summary context supplies no authority.",
+        "tradeoff": "RuntimeTickets checks recipient/object/budget before effects; its audit HMAC chain does not establish prefix completeness. Current-count checks reject omitted cancellations here but supply neither object validators nor semantic policy safety."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/analysis/8": {
+      "source_sha256": "f3133c0cf13b57b0cb84934f85b4c577d072b35cbc8d91c6d4c2274a8a7d9b95",
+      "reviewed": true,
+      "fields": {
+        "title": "Authenticated origins do not replace semantic authorization or effect contracts",
+        "body": "Separate agent summaries from authenticated authorizer input. Occurrence MACs, ordered commitments and current-count/fresh-boundary checks jointly close echo, replay and omission gaps. Persistent-counter tests assume protected keys/state/issuance; SQLite is not agent isolation. RuntimeTickets freezes host-restricting effect contracts, audits before callbacks and avoids retries under uncertainty, but its local chain does not prove complete prefixes. The layers compose without local LLM attack-rate evidence. The full multi-model/live matrix is terminally not reproduced for cost."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/question/cross-nov27-compaction-authorization": {
+      "source_sha256": "131f8b302b6309880510b38251fad14cc6b18919d81995fe66b949251cc8cb0c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does this gate protect the same boundary as RuntimeTickets?",
+        "answer": "No. It protects authorization input before policy synthesis; RuntimeTickets checks frozen recipient/object/budget contracts before effects. Intact originals do not prove correct policy semantics or authenticate summaries through valid sends.",
+        "example": "Teaching example: a generator can still broaden recipients after reading authentic text, requiring effect-level ticket checks rather than treating MACs as semantic understanding."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/update/2026-11-27/7": {
+      "source_sha256": "4a4474fdab423683cb923d7bf57133d01e1c4d769e809f88bad032a1089aef6b",
+      "reviewed": true,
+      "fields": {
+        "summary": "Separate agent summaries from authenticated authorizer input. Occurrence MACs, ordered commitments and current-count/fresh-boundary checks jointly close echo, replay and omission gaps. Persistent-counter tests assume protected keys/state/issuance; SQLite is not agent isolation. RuntimeTickets freezes host-restricting effect contracts, audits before callbacks and avoids retries under uncertainty, but its local chain does not prove complete prefixes. The layers compose without local LLM attack-rate evidence. The full multi-model/live matrix is terminally not reproduced for cost."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/comparison/agent-research:budgeted-submapl": {
+      "source_sha256": "02e76478ddf3e5b90e2a3258b800fe843237061e249b015df22f3464acccf00f",
+      "reviewed": true,
+      "fields": {
+        "position": "Before gains are observed, fixed-domain categorical policies allocate rho, round to exactly Q queries, obtain only selected marginals and execute IPW/KL updates.",
+        "tradeoff": "OOAS sees aggregate task feedback and turn hints under shared exponential noise/whole-task same-arm events. This paper can query counterfactual coordinates; denominators, feedback granularity and FTRL/KL updates are not interchangeable."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/analysis/7": {
+      "source_sha256": "d778075b3cef92b2ad9fff5f0b4e9331201dff65b76b07c647e1ac28fc3aaaca",
+      "reviewed": true,
+      "fields": {
+        "title": "Unbiased budgeted feedback depends on the sampling event, not a generic 1/p trick",
+        "body": "SubMAPL rho denotes inclusion marginals: fixed-cardinality dependent rounding must preserve E[Z]=rho, and querying cannot inspect current gains or sampled joint actions. IPW precedes per-agent KL ascent; square-root allocation optimizes a second-moment bound, not success rates. OOAS shared noise makes whole-task same-arm probability differ from products of marginals and assigns no residual after switching. Both local entries are finite mathematical kernels, not LLM agents. SubMAPL migration/environment are unaccepted without high-cost evidence, so full status remains scope-limited with false full review rather than a fabricated cost-DONE terminal."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/question/cross-nov27-budgeted-submapl": {
+      "source_sha256": "4db60b8a4e975ef460a5a9f02052bce735026d14b268d2e11c38e4a7770986fe",
+      "reviewed": true,
+      "fields": {
+        "question": "Can SubMAPL and OOAS interchange importance weights?",
+        "answer": "No. SubMAPL observes queried counterfactual marginals and corrects coordinate inclusion; OOAS sees task aggregates and corrects hint residuals by a shared-noise whole-task same-arm event. Feedback and updates differ.",
+        "example": "Teaching example: switching arms zeroes OOAS residual attribution, while two queried SubMAPL coordinates still receive their own inclusion-corrected updates."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/update/2026-11-27/6": {
+      "source_sha256": "b502dac80b38ceb26b59ea18d35d8ec87c76de9e12d89a4a2502da7877304dd8",
+      "reviewed": true,
+      "fields": {
+        "summary": "SubMAPL rho denotes inclusion marginals: fixed-cardinality dependent rounding must preserve E[Z]=rho, and querying cannot inspect current gains or sampled joint actions. IPW precedes per-agent KL ascent; square-root allocation optimizes a second-moment bound, not success rates. OOAS shared noise makes whole-task same-arm probability differ from products of marginals and assigns no residual after switching. Both local entries are finite mathematical kernels, not LLM agents. SubMAPL migration/environment are unaccepted without high-cost evidence, so full status remains scope-limited with false full review rather than a fabricated cost-DONE terminal."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/comparison/recommendation:elbo-tds": {
+      "source_sha256": "e3f59b64fde5a7ceb0d2f9c2928fa3099c22c56d075434cbcaee8277bc51d487",
+      "reviewed": true,
+      "fields": {
+        "position": "The L1 component implements a small dual encoder/decoder with dot-product prediction, unit-Gaussian reparameterization and slot-level augmentation for Equations3–7/Algorithm1. Callers provide bucket IDs or embedded floating slots; no production features or true stable factors are read. Slot selection, independent slot masking and element-mean MSE are explicit local choices. Complete field embedding/dropout grouping, chronological incremental training, MMoE, private ranking and public benchmark comparisons are absent.",
+        "tradeoff": "COTTI uses a differentiable CPC gate for regular/promotional-view consistency, history-distance RW weights and serving-time ABA calibration. ELBO-TDS instead constrains stable factors through a multi-view Gaussian prior and input reconstruction, leaving supervised prediction on original observations; it has no ABA-style serving probability correction. Both rely on stable-semantics assumptions. Alignment or reconstruction does not establish causal identifiability, and different production A/B experiments do not establish a head-to-head winner."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/analysis/5": {
+      "source_sha256": "47b743507429e493f9502f2be8813fea0867ae986d5d4ac3aaee72aa4cba0e2c",
+      "reviewed": true,
+      "fields": {
+        "title": "How do ELBO-TDS and COTTI address promotional drift differently?",
+        "body": "COTTI uses a differentiable CPC gate for regular/promotional-view consistency, history-distance RW weights and serving-time ABA calibration. ELBO-TDS instead constrains stable factors through a multi-view Gaussian prior and input reconstruction, leaving supervised prediction on original observations; it has no ABA-style serving probability correction. Both rely on stable-semantics assumptions. Alignment or reconstruction does not establish causal identifiability, and different production A/B experiments do not establish a head-to-head winner."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/question/nov27-elbo-tds": {
+      "source_sha256": "4567c2e4d96d5dba42bb07a3a0fd4bb7de76c9fe0d6b30262c4b4833c9ffc292",
+      "reviewed": true,
+      "fields": {
+        "question": "How do ELBO-TDS and COTTI address promotional drift differently?",
+        "answer": "COTTI uses a differentiable CPC gate for regular/promotional-view consistency, history-distance RW weights and serving-time ABA calibration. ELBO-TDS instead constrains stable factors through a multi-view Gaussian prior and input reconstruction, leaving supervised prediction on original observations; it has no ABA-style serving probability correction. Both rely on stable-semantics assumptions. Alignment or reconstruction does not establish causal identifiability, and different production A/B experiments do not establish a head-to-head winner.",
+        "example": "Teaching example: reconstruction cannot recover regular preferences if every view contains only promotional prices; COTTI's upward calibration also cannot correct overprediction."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/update/2026-11-27/4": {
+      "source_sha256": "ac92f63610db837cabae630b96097a553bb28ad53c4b4d4c99018fcd7c9058e1",
+      "reviewed": true,
+      "fields": {
+        "summary": "ELBO-TDS assumes short-term fluctuations around relatively stable user/item factors. It does more than align augmented representations: unit-variance encoder posteriors are reparameterized, decoders retain individual features, and cross-view priors suppress transient noise. Task prediction uses deterministic means from original observations. Statistical buckets are perturbed locally, sequence inputs masked and categorical embeddings dropped, gated by global feature selection. The L1 component implements a small dual encoder/decoder with dot-product prediction, unit-Gaussian reparameterization and slot-level augmentation for Equations3–7/Algorithm1. Callers provide bucket IDs or embedded floating slots; no production features or true stable factors are read. Slot selection, independent slot masking and element-mean MSE are explicit local choices. Complete field embedding/dropout grouping, chronological incremental training, MMoE, private ranking and public benchmark comparisons are absent."
+      }
+    }
+  }
+}
