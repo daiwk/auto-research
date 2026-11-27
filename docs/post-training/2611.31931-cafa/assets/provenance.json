@@ -1,0 +1,19 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.31931v1",
+  "paper_version": "v1",
+  "page": 2,
+  "figure": "Figure2",
+  "source_pdf_sha256": "d65144a4db07674f19ae40fe29cd84dcdc5dda710884e59d2124a2227715e937",
+  "crop_pdf_points": [
+    60,
+    92,
+    535,
+    316
+  ],
+  "render_scale": 2,
+  "asset_sha256": "6d3f9053997f030966870d817123ac02c0a22fd1f875f15e8e83d7ad13fd7212",
+  "visually_reviewed_on": "2026-11-27",
+  "review": "Original complete visual and caption checked; no scientific content changed. Original table is not mislabeled as a figure.",
+  "copyright": "original authors",
+  "scientific_content_modified": false
+}

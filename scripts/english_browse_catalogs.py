@@ -907,6 +907,20 @@ rollout 预算分配 = Rollout budget allocation
 零数据自博弈 = Zero-data self-play
 高效注意力 = Efficient attention
 高斯 guidance Agent RL = Gaussian-guided agent RL
+长上下文与状态 = Long context and recurrent state
+注意力量化与残差补偿 = Attention quantization and residual compensation
+量化与数值补偿 = Quantization and numerical compensation
+时间漂移与稳健增量训练 = Temporal shift and robust incremental training
+报告驱动反馈采集 = Report-driven feedback acquisition
+评测反馈预算 = Evaluation feedback budgets
+跨loop自蒸馏 = Cross-loop self-distillation
+固定教师与reverse KL = Frozen teachers and reverse KL
+认证请求完整性 = Authenticated-request integrity
+预算化多智能体协调数学核 = Budgeted multi-agent coordination kernels
+Agent策略学习 = Agent policy learning
+评测、安全与可靠性 = Evaluation, safety and reliability
+安全与权限边界 = Safety and authorization boundaries
+工具使用与多 Agent 协作 = Tool use and multi-agent collaboration
 """)
 
 _PROSE = _label_map("""

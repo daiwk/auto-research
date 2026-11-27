@@ -295,6 +295,10 @@
 
 - 2026-11-11 · [DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces](../../foundation-models/2611.15968-duojepa/README.md)（`duojepa`）：每个encoder用LeJEPA保留自己的空间，额外单层translator将其输出映射到另一模态的own space。目标在对方空间计算，不直接比较两个own embedding；但两encoder仍被联合优化，不能把“没有直接对齐损失”说成“完全独立训练”。残差translator会提供接近identity的捷径，论文因此只在translator移除两条残差。[§5](https://arxiv.org/html/2611.15968v1#S5)
 
+## Kim Jaechul Graduate School of AI, KAIST
+
+- 2026-11-24 · [Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration](../../foundation-models/2611.32063-integral-deltanet/README.md)（`integral-deltanet`）：单状态的衰减和定向覆盖会同时压低干扰与有用旧信息。本文保持KDA或GDN-2的fast更新不变，额外积累更新后状态的历史；查询时由输入相关的逐channel门读取两个时间尺度，而不是把所有历史都压进同一读出。常量混合门、额外独立delta state和仅增宽state是论文分别比较的不同设计。
+
 ## Knowledgator
 
 - 2025-08-11 · [GLiClass: Generalist Lightweight Model for Sequence Classification Tasks](../../foundation-models/2508.07662-gliclass/README.md)（`gliclass`）：GLiClass 把文本和运行时给定的候选标签放进同一个分类接口，避免生成式 LLM 的解析不稳定，也避免 cross-encoder 对每个文本—标签对逐次推理。本仓库保留“候选内容参与打分”和“一次归一化得到全候选分布”这两个定义性机制。
@@ -390,6 +394,7 @@
 
 ## NVIDIA
 
+- 2026-11-24 · [DeCo-Attention: Decompose to Compensate for Low-Precision Attention](../../foundation-models/2611.32035-deco-attention/README.md)（`deco-attention`）：FP4 Q/K舍入产生的score误差可能被softmax指数放大。DeCo先以带随机行符号的Hadamard旋转Q/K，从旋转后原始sample的Gram矩阵估计共享principal basis；把量化残差在主方向的两侧一阶项加回。它舍弃二阶残差和未保留方向，不保证逐样本必然比未补偿更好。
 - 2026-11-18 · [NarrowSpec: Draft Hidden Width Need Not Match the Target in Speculative Decoding](../../foundation-models/2611.23835-narrow-spec/README.md)（`narrow-spec`）：把DFlash/EAGLE-3的整个残差宽度设为目标的二分之一或四分之一，并从头训练窄草稿；边界adapter连接目标hidden和共享词表。DFlash输出adapter可与目标head相乘，EAGLE-3输入adapter可折进embedding。head数量和head维度保持不变，因此KV cache不因残差流变窄而自动缩小。 [Fixed-v1 source](https://arxiv.org/pdf/2611.23835v1).
 - 2026-11-10 · [Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding](../../foundation-models/2611.13545-stochastic-rounding/README.md)（`stochastic-rounding`）：FP32 主权重在训练中发生小变化，转为 BF16 后却可能仍落在同一格点，导致 rollout 策略看不到更新。BF16 在一般正规数区间的格距比 FP16 大八倍，因此相似的小步长可表现出不同的有效更新速度。随机舍入按到相邻格点的距离选上下端点，在条件期望上保留主权重变化，而不是强行放大学习率。
 - 2026-07-23 · [Windowed-MTP: Removing the Full-Context Draft-KV Tax at Million-Token Context](../../reproductions/2607.21535-windowed-mtp/README.md)（`windowed-mtp`）：内置 MTP/NEXTN draft 通常每提出一个 token 都读取完整 KV cache；在百万 token 上，即使 target 已使用 GDN/Mamba 等便宜 verifier，draft 的全量 KV read 仍会成为瓶颈。Windowed-MTP 只改变 draft：保留最前面的 attention sink 与最近 $W$ 个 token，同时 target 继续读取完整上下文并验证所有候选。

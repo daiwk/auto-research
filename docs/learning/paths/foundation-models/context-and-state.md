@@ -7,7 +7,7 @@ hide:
 
 # 长上下文：注意力、递归状态与记忆
 
-[基础模型](index.md) / 204 个问题 · 51 篇论文
+[基础模型](index.md) / 208 个问题 · 52 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">204 个问题 · 51 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">208 个问题 · 52 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:rap" data-paper-title="RAP: Radial-Angular Random Projection for Hyperbolic Representations" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="RAP: Radial-Angular Random Projection for Hyperbolic Representations 基础模型 The Chinese University of Hong Kong 2026-11-25 普通空间坐标投影会同时改变径向深度与角相似度。RAP拆开这两者：到所选原点的半径不变，角向量乘一次高斯矩阵后归一化，再提升回目标 Lorentz 双曲面。它不是对原始坐标做普通欧氏 JL；保证仍受半径上界、点间分离和 arcosh 条件数限制。 128个32维随机点压到8维，固定种子共享源点与投影矩阵，仅作机制诊断，和作者每方法独立随机投影协议不同。polar_to_lorentz、lorentz_to_polar、project_rap、pairwise_distance真实执行极坐标分解、Eq11–12及双曲距离；另有原点 tangent 与 spatial 两对照。128个32维随机点压到8维，固定种子共享源点与投影矩阵，仅作机制诊断，和作者每方法独立随机投影协议不同。无WordNet、冻结视觉语言特征或百万点压力测试。  表征压缩与几何 基础模型 长上下文：注意力、递归状态与记忆 保持半径是否表示所有距离都不变？ 不是。半径只固定每点到选定原点的距离，角向随机投影仍改变不同射线间距离。 教学例：两个半径同为1的点可夹角90度；投影后夹角变为60度时，两半径不变而点间距离改变。 2026-11-26">
@@ -80,6 +80,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：把r和Pu直接拼接可能通过shape测试，却无法通过Lorentz约束；本地负控会拒绝非法输入。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、完整实验与成本边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34298v1">原论文</a> · <a href="../../../../foundation-models/2611.34298-rap/">实现解读</a> · <a href="#qa-b57894792f1a531b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:integral-deltanet" data-paper-title="Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration 基础模型 Kim Jaechul Graduate School of AI, KAIST 2026-11-24 单状态的衰减和定向覆盖会同时压低干扰与有用旧信息。本文保持KDA或GDN-2的fast更新不变，额外积累更新后状态的历史；查询时由输入相关的逐channel门读取两个时间尺度，而不是把所有历史都压进同一读出。常量混合门、额外独立delta state和仅增宽state是论文分别比较的不同设计。 成本过高，不复现（审查 DONE）适用于完整矩阵；42/43/44合成诊断只支持L1；recurrent执行channel-wise GDN-2/KDA兼容更新、Eq6积分和Eq7读取；chunkwise独立构造P/H及积分加权prefix算子，核对输出、两state和真实autograd梯度；支持尾部短chunk和携state续接。IntegralGates从调用方归一化hidden计算低秩门。仅CPU双精度小张量，无decoder、tokenizer、FLA/WY/UT融合实现、LM预训练或query-gold选择。显式prefix矩阵是验证参考，不是并行高性能kernel。  长上下文与状态 基础模型 长上下文：注意力、递归状态与记忆 积分state只是另一个独立DeltaNet吗？ 不是。它积累同一个fast state更新后的历史，不独立根据kv擦写。 教学例：第三次覆盖擦掉S中的旧关联，X仍可保留第一时刻S的一部分；第二个独立擦写器没有这一固定历史合同。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-integral-deltanet-e5bad28c" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-ded0f0ae7a61774b">积分state只是另一个独立DeltaNet吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aintegral-deltanet">Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Kim Jaechul Graduate School of AI, KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。它积累同一个fast state更新后的历史，不独立根据kv擦写。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第三次覆盖擦掉S中的旧关联，X仍可保留第一时刻S的一部分；第二个独立擦写器没有这一固定历史合同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32063v1">原论文</a> · <a href="../../../../foundation-models/2611.32063-integral-deltanet/">实现解读</a> · <a href="#qa-ded0f0ae7a61774b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:integral-deltanet" data-paper-title="Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration 基础模型 Kim Jaechul Graduate School of AI, KAIST 2026-11-24 单状态的衰减和定向覆盖会同时压低干扰与有用旧信息。本文保持KDA或GDN-2的fast更新不变，额外积累更新后状态的历史；查询时由输入相关的逐channel门读取两个时间尺度，而不是把所有历史都压进同一读出。常量混合门、额外独立delta state和仅增宽state是论文分别比较的不同设计。 成本过高，不复现（审查 DONE）适用于完整矩阵；42/43/44合成诊断只支持L1；recurrent执行channel-wise GDN-2/KDA兼容更新、Eq6积分和Eq7读取；chunkwise独立构造P/H及积分加权prefix算子，核对输出、两state和真实autograd梯度；支持尾部短chunk和携state续接。IntegralGates从调用方归一化hidden计算低秩门。仅CPU双精度小张量，无decoder、tokenizer、FLA/WY/UT融合实现、LM预训练或query-gold选择。显式prefix矩阵是验证参考，不是并行高性能kernel。  长上下文与状态 基础模型 长上下文：注意力、递归状态与记忆 lambda该乘在哪里、在何时积分？ 沿key列乘在当前更新后的S与旧X上，然后按gamma逐key channel读出；不能先积分旧S。 教学例：lambda全1时X必须等于刚写入的S；若晚一token，当前kv的积分读出会缺失。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-f9b591d06e437b21">lambda该乘在哪里、在何时积分？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aintegral-deltanet">Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Kim Jaechul Graduate School of AI, KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>沿key列乘在当前更新后的S与旧X上，然后按gamma逐key channel读出；不能先积分旧S。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：lambda全1时X必须等于刚写入的S；若晚一token，当前kv的积分读出会缺失。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32063v1">原论文</a> · <a href="../../../../foundation-models/2611.32063-integral-deltanet/">实现解读</a> · <a href="#qa-f9b591d06e437b21">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:integral-deltanet" data-paper-title="Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration 基础模型 Kim Jaechul Graduate School of AI, KAIST 2026-11-24 单状态的衰减和定向覆盖会同时压低干扰与有用旧信息。本文保持KDA或GDN-2的fast更新不变，额外积累更新后状态的历史；查询时由输入相关的逐channel门读取两个时间尺度，而不是把所有历史都压进同一读出。常量混合门、额外独立delta state和仅增宽state是论文分别比较的不同设计。 成本过高，不复现（审查 DONE）适用于完整矩阵；42/43/44合成诊断只支持L1；recurrent执行channel-wise GDN-2/KDA兼容更新、Eq6积分和Eq7读取；chunkwise独立构造P/H及积分加权prefix算子，核对输出、两state和真实autograd梯度；支持尾部短chunk和携state续接。IntegralGates从调用方归一化hidden计算低秩门。仅CPU双精度小张量，无decoder、tokenizer、FLA/WY/UT融合实现、LM预训练或query-gold选择。显式prefix矩阵是验证参考，不是并行高性能kernel。  长上下文与状态 基础模型 长上下文：注意力、递归状态与记忆 为什么不能把KRA的协方差P称为本文积分state？ P描述相关key的后验不确定性并影响写入方向，X保存S的加权历史并只参与读取；语义和更新不同。 教学例：在无新value时KRA遗忘可使P恢复，但X仍只是旧S历史的保留，不会变成写入增益矩阵。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-fa2a087bdcbc76a8">为什么不能把KRA的协方差P称为本文积分state？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aintegral-deltanet">Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Kim Jaechul Graduate School of AI, KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>P描述相关key的后验不确定性并影响写入方向，X保存S的加权历史并只参与读取；语义和更新不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：在无新value时KRA遗忘可使P恢复，但X仍只是旧S历史的保留，不会变成写入增益矩阵。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32063v1">原论文</a> · <a href="../../../../foundation-models/2611.32063-integral-deltanet/">实现解读</a> · <a href="#qa-fa2a087bdcbc76a8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:integral-deltanet" data-paper-title="Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration 基础模型 Kim Jaechul Graduate School of AI, KAIST 2026-11-24 单状态的衰减和定向覆盖会同时压低干扰与有用旧信息。本文保持KDA或GDN-2的fast更新不变，额外积累更新后状态的历史；查询时由输入相关的逐channel门读取两个时间尺度，而不是把所有历史都压进同一读出。常量混合门、额外独立delta state和仅增宽state是论文分别比较的不同设计。 成本过高，不复现（审查 DONE）适用于完整矩阵；42/43/44合成诊断只支持L1；recurrent执行channel-wise GDN-2/KDA兼容更新、Eq6积分和Eq7读取；chunkwise独立构造P/H及积分加权prefix算子，核对输出、两state和真实autograd梯度；支持尾部短chunk和携state续接。IntegralGates从调用方归一化hidden计算低秩门。仅CPU双精度小张量，无decoder、tokenizer、FLA/WY/UT融合实现、LM预训练或query-gold选择。显式prefix矩阵是验证参考，不是并行高性能kernel。  长上下文与状态 基础模型 长上下文：注意力、递归状态与记忆 怎样证明chunk路径没把integral state当作每块清零？ 用非零入state跨块续接，与逐token递推比较输出和两state，另外对q/k/v及所有门核对梯度。 教学例：长度11、chunk4必须处理4/4/3并传递S和X；只比首块不能发现X重置。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-a1ed357637481bef">怎样证明chunk路径没把integral state当作每块清零？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aintegral-deltanet">Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Kim Jaechul Graduate School of AI, KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>用非零入state跨块续接，与逐token递推比较输出和两state，另外对q/k/v及所有门核对梯度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：长度11、chunk4必须处理4/4/3并传递S和X；只比首块不能发现X重置。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32063v1">原论文</a> · <a href="../../../../foundation-models/2611.32063-integral-deltanet/">实现解读</a> · <a href="#qa-a1ed357637481bef">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:thresholded-longce" data-paper-title="Eliciting the Recall Capacity of Linear Attention" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Eliciting the Recall Capacity of Linear Attention 基础模型 ELLIS Institute Tübingen / MPI-IS / Tübingen AI Center / KTH Royal Institute of Technology 2026-11-24 线性注意力的固定状态可以在专门训练的任务中存储大量关联，但标准语言预训练并不一定教会模型从上下文复制。论文分开研究容量、训练诱因和召回提示；目标语料里 qualifying AR-hit 仅约占 1.7%，因此增添句子重复，并用 Thresholded LongCE（TLCE）强化依赖远上下文的 token。两种干预互补，但可能牺牲通用语言建模；不能把“存在容量”写成“任意任务都能召回”。 成本过高，不复现（审查 DONE）。260-token、9词表、4维 GRU 只是短窗接口诊断，不是论文的 KDA、DeltaNet 或 softmax 对照训练。weights / loss 执行 Eq4，接受同形 CPU FP32/FP64 的目标 log-prob、int64 窗内位置和 valid mask。padding 不进入分母，合法目标必须非空、有限且 log-prob 不大于零。context_scores 对外部因果模型实际运行完整前向与分窗无梯度前向；调用者提供已经移位对齐的 tokens/targets，模型每次调用必须重置状态，且不应引入前后不一致的随机性。  长上下文与状态 上下文敏感召回监督 基础模型 长上下文：注意力、递归状态与记忆 TLCE会自动找到所有应该依赖远处信息的token吗？ 不会。权重取决于当前模型的full概率是否已经显著高于short；尚未利用的远处线索不会因为理论上有用就被加权。 教学例：远处有答案但full与short概率同为0.1，差为0，权重仍为1。 2026-11-25">

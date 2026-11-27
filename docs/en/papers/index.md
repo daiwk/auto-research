@@ -4,16 +4,16 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1302 entries from the shared research manifest. English write-ups available: 1302.
+The catalog lists 1309 entries from the shared research manifest. English write-ups available: 1309.
 
 ## Browse by domain
 
-- [Search, ads, recommendation, and LLM applications](recommendation.md): 348 catalog entries, 348 English write-ups
-- [Foundation models](foundation-models.md): 273 catalog entries, 273 English write-ups
+- [Search, ads, recommendation, and LLM applications](recommendation.md): 349 catalog entries, 349 English write-ups
+- [Foundation models](foundation-models.md): 275 catalog entries, 275 English write-ups
 - [Structured decisions / System One](system-one.md): 10 catalog entries, 10 English write-ups
 - [Multimodal models](multimodal-models.md): 33 catalog entries, 33 English write-ups
-- [LLM post-training](post-training.md): 301 catalog entries, 301 English write-ups
-- [Agents](agent-research.md): 337 catalog entries, 337 English write-ups
+- [LLM post-training](post-training.md): 303 catalog entries, 303 English write-ups
+- [Agents](agent-research.md): 339 catalog entries, 339 English write-ups
 
 ## Read in English
 
@@ -25,16 +25,22 @@ The catalog lists 1302 entries from the shared research manifest. English write-
 - [Failure Broadens, Success Sharpens: Continual Adaptation of Tool-Use Agents Across Diverse Tasks with Dual-Polarity Memory](../../agent-research/2611.33612-dualpm/README-en.md)
 - [FEAST: Fair and Efficient Adaptive Sampling for Task-Free On-Policy Learning](../../post-training/2611.33827-feast/README-en.md)
 - [DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers](../../foundation-models/2611.33952-duomi/README-en.md)
+- [Compute-Aware Submodular Online Learning in Open Multi-Agent Systems](../../agent-research/2611.34211-budgeted-submapl/README-en.md)
 - [Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents](../../post-training/2611.34756-care-opd/README-en.md)
 - [BRIAR: Martingale Belief Smoothing on Bifurcation-Guided Reasoning Trees](../../post-training/2611.34746-briar/README-en.md)
 - [Agentic LongLive: Asynchronous Agentic Memory for Long Video Generation](../../multimodal-models/2611.34907-agentic-longlive/README-en.md)
 - [fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration](../../agent-research/2611.31727-agent-kernel/README-en.md)
 - [Weight Scale Rebalancing: Transferable Training Recipes for Transformers](../../foundation-models/2611.32866-udvr/README-en.md)
+- [The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop](../../post-training/2611.32452-elpsd/README-en.md)
+- [Scoring What Matters: Exact Feedback Reduction for Language Model Comparison](../../post-training/2611.31931-cafa/README-en.md)
 - [RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research](../../agent-research/2611.32508-recurscibench/README-en.md)
 - [LazUnirec: Unifying Retrieval and Ranking in Multi-scenario Industrial Recommendation](../../recommendation-components/2611.32590-lazunirec/README-en.md)
+- [LLM Agent Authorization Across Context Compaction](../../agent-research/2611.32194-compaction-authorization/README-en.md)
 - [LARF: Learning-aligned Reasoning Framework for Search Relevance](../../recommendation-components/2611.32125-larf/README-en.md)
+- [Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration](../../foundation-models/2611.32063-integral-deltanet/README-en.md)
 - [Eliciting the Recall Capacity of Linear Attention](../../foundation-models/2611.32969-thresholded-longce/README-en.md)
 - [EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor](../../post-training/2611.32810-epro/README-en.md)
+- [DeCo-Attention: Decompose to Compensate for Low-Precision Attention](../../foundation-models/2611.32035-deco-attention/README-en.md)
 - [CriticJEPA: World Models Are Better Critics Than Optimizers](../../foundation-models/2611.32357-criticjepa/README-en.md)
 - [CAPE: Coordinating Calibration and Search for Tool-Use Policies](../../agent-research/2611.31938-cape/README-en.md)
 - [Verifiable On-Policy Distillation](../../post-training/2611.30325-vopd/README-en.md)
@@ -1138,6 +1144,7 @@ The catalog lists 1302 entries from the shared research manifest. English write-
 - [Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis](../../foundation-models/2512.08819-lidas/README-en.md)
 - [Learning Steerable Clarification Policies with Collaborative Self-play](../../agent-research/2512.04068-clarification-sgp/README-en.md)
 - [Stabilizing RL with LLMs](../../post-training/2512.01374-minirl/README-en.md)
+- [ELBO&#95;TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems](../../recommendation-components/2511.21032-elbo-tds/README-en.md)
 - [Budget-Aware Tool Use Enables Effective Agent Scaling](../../agent-research/2511.17006-bats/README-en.md)
 - [Agent0](../../agent-research/2511.16043-agent0/README-en.md)
 - [Agent-R1](../../agent-research/2511.14460-agent-r1/README-en.md)

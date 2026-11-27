@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "source_url": "https://arxiv.org/pdf/2611.32194v1",
+  "source_sha256": "411d9577d7bbe70b05848b7d55a7d352901330f892e9587d9a0d164940ab8f7a",
+  "asset_sha256": "2704eeb81c5dffa3a735b1de4b9f18c06d8553428a27f710a5c3cd0ec95c9852",
+  "page": 4,
+  "figure": "Figure 2",
+  "crop_pdf_points": [
+    50,
+    76,
+    562,
+    352
+  ],
+  "render_scale": 2,
+  "reviewed_on": "2026-11-27",
+  "visually_reviewed": true,
+  "caption_preserved": true,
+  "modification": "Crop unrelated text/whitespace only; scientific content unchanged.",
+  "copyright": "Original authors"
+}

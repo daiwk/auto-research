@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-27",
+  "implementation_preflight_completed": true,
+  "scope": "Two uncataloged Nov24/25 overlap CPU mechanisms, no today's-first-release/exhaustive coverage claim",
+  "reviews": [
+    {
+      "identity": "agent-research:compaction-authorization",
+      "id": "2611.32194",
+      "published_at": "2026-11-24T08:44:15Z",
+      "announced_on": null,
+      "discovered_on": "2026-11-27",
+      "source_url": "https://arxiv.org/pdf/2611.32194v1",
+      "source_sha256": "411d9577d7bbe70b05848b7d55a7d352901330f892e9587d9a0d164940ab8f7a",
+      "source_revisions": {
+        "agent-research:compaction-authorization": "8e862328844a5879a00c8bbaa7c3ffa9cd8613849f9ec63fe4f8a71b983e2d59",
+        "agent-research:runtime-tickets": "5b00948adf9bb0542e98df053cfe7028c1ab6925099a181503296520a390d8d4"
+      },
+      "scope": "真实HMAC-SHA256 occurrence/sequence分域、精确UTF-8与长度前缀framing、完整有序计数、fresh session/boundary及SQLite持久消费。只释放认证原文，不执行LLM授权语义或真实Agent攻击；可信入口/key/counter隔离是外部前提。1MiB/有符号计数为本地准入，不承诺可用性或生产安全。",
+      "cost_basis": "PDF Table1/§5.6/附录B：319episodes/1472summaries、192ASB pairs、18prompt/11harness、100+1008livecompactions、320frontier summaries×2generators、40+80gate episodes/eight attacks；GPT-4o/mini/frontier API与72B generator等。完整API/live多臂矩阵超单A100/A30或Mac有界预算；仅CPU小报文协议。作者0.25–0.40ms验证时间不是本地实测。",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true
+    },
+    {
+      "identity": "agent-research:budgeted-submapl",
+      "id": "2611.34211",
+      "published_at": "2026-11-25T11:35:43Z",
+      "announced_on": "2026-11-26",
+      "discovered_on": "2026-11-27",
+      "source_url": "https://arxiv.org/pdf/2611.34211v1",
+      "source_sha256": "c8290d0f706e6649b18b77d6ccec45004d5ff93141292351896af70b24be9636",
+      "source_revisions": {
+        "agent-research:budgeted-submapl": "2e329077a822dab0f8c9ca86bc21592d9d03404e4b70d8da2897784222487070",
+        "agent-research:ooas": "e1581613218eb76d573c188ec4f32cbc699cc76915ce56e442e9d71639c4e193"
+      },
+      "scope": "固定active-domain的clipped sqrt包含分配、精确Q依赖舍入、独立joint-action采样、仅所选坐标oracle查询、IPW与log-space KL更新；真归一化子模coverage小函数与评估侧期望控制。无LLM Agent、动态迁移M、完整环境/观察策略表，未伪造高成本终态。",
+      "cost_basis": "PDF§6：30×30 grid、≤5agents/最多45坐标、T200、三权重场/三schedule/20heldoutseeds，多个beta及constantQ3。没有大模型/外部数据/已报告昂贵硬件，无总wall-clock；query数量不是实测速度。完整模拟可能可负担，本轮未承接，迁移映射与5/9action环境差异未消歧，不探跑或硬标高成本。",
+      "full_experiment_status": "not_run_scope_limited",
+      "full_experiment_review_done": false,
+      "review_done": true
+    }
+  ]
+}

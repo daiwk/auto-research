@@ -7,7 +7,7 @@ hide:
 
 # 交互策略学习：把轨迹反馈变成更新
 
-[Agent](index.md) / 232 个问题 · 58 篇论文
+[Agent](index.md) / 236 个问题 · 59 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">232 个问题 · 58 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">236 个问题 · 59 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:budgeted-submapl" data-paper-title="Compute-Aware Submodular Online Learning in Open Multi-Agent Systems" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Compute-Aware Submodular Online Learning in Open Multi-Agent Systems Agent East China University of Science and Technology 2026-11-25 协作覆盖的重叠贡献具有边际递减性，但更新每个agent每个action的收益可能超在线预算。论文在看当前收益之前，只用当前分类策略与查询预算分配包含概率，再用固定基数依赖舍入精确选个agent-action。查询选择与联合action采样独立，对所查反事实边际收益做逆概率校正，再KL mirror-ascent。未被查询的估计为0，不等于真实边际为0。 没有依据标为成本过高。本轮只承接小型CPU数学核，完整模拟/迁移未执行，标not_run_scope_limited、full_experiment_review_done=false；component_only / L1 CPU多智能体协调数学内核；不是LLM Agent或RSI能力复现。完整便宜模拟未承接，不虚构高成本终态：not_run_scope_limited / full_experiment_review_done=false；无Evolve晋级。标准库执行clipped平方根分配、成对依赖舍入、仅Q次oracle查询、IPW与log-space KL更新。两个随机流分别驱动舍入/联合action；  Agent策略学习 预算化多智能体协调数学核 Agent 交互策略学习：把轨迹反馈变成更新 查询预算Q限制的是执行动作还是梯度反馈？ 限制当前轮可评估的agent-action反事实边际数量；所有active agent仍各采样一个执行action。未查询坐标估计为0不是实际收益为0，也不是停止该agent。 教学例：两agent各两action共4坐标，Q=2只问2个边际，但两agent仍各执行一个动作。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<span id="paper-agent-research-budgeted-submapl-d51fdd99" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-77131b4c4bfedc80">查询预算Q限制的是执行动作还是梯度反馈？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Abudgeted-submapl">Compute-Aware Submodular Online Learning in Open Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · East China University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>限制当前轮可评估的agent-action反事实边际数量；所有active agent仍各采样一个执行action。未查询坐标估计为0不是实际收益为0，也不是停止该agent。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两agent各两action共4坐标，Q=2只问2个边际，但两agent仍各执行一个动作。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34211v1">原论文</a> · <a href="../../../../agent-research/2611.34211-budgeted-submapl/">实现解读</a> · <a href="#qa-77131b4c4bfedc80">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:budgeted-submapl" data-paper-title="Compute-Aware Submodular Online Learning in Open Multi-Agent Systems" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Compute-Aware Submodular Online Learning in Open Multi-Agent Systems Agent East China University of Science and Technology 2026-11-25 协作覆盖的重叠贡献具有边际递减性，但更新每个agent每个action的收益可能超在线预算。论文在看当前收益之前，只用当前分类策略与查询预算分配包含概率，再用固定基数依赖舍入精确选个agent-action。查询选择与联合action采样独立，对所查反事实边际收益做逆概率校正，再KL mirror-ascent。未被查询的估计为0，不等于真实边际为0。 没有依据标为成本过高。本轮只承接小型CPU数学核，完整模拟/迁移未执行，标not_run_scope_limited、full_experiment_review_done=false；component_only / L1 CPU多智能体协调数学内核；不是LLM Agent或RSI能力复现。完整便宜模拟未承接，不虚构高成本终态：not_run_scope_limited / full_experiment_review_done=false；无Evolve晋级。标准库执行clipped平方根分配、成对依赖舍入、仅Q次oracle查询、IPW与log-space KL更新。两个随机流分别驱动舍入/联合action；  Agent策略学习 预算化多智能体协调数学核 Agent 交互策略学习：把轨迹反馈变成更新 为什么不能直接按rho做普通加权无放回抽样？ rho是每坐标被包含的边缘概率，不是任意抽样权重。IPW无偏要求E[Z]=rho且总数恰好Q；成对依赖舍入同时保两者，普通加权抽样一般改变边缘概率。 教学例：rho=(0.2,0.8)、Q=1，第一坐标必须恰以0.2概率入选；分母不能随便换成未校准的权重。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-9220227cf2c400e6">为什么不能直接按rho做普通加权无放回抽样？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Abudgeted-submapl">Compute-Aware Submodular Online Learning in Open Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · East China University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>rho是每坐标被包含的边缘概率，不是任意抽样权重。IPW无偏要求E[Z]=rho且总数恰好Q；成对依赖舍入同时保两者，普通加权抽样一般改变边缘概率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：rho=(0.2,0.8)、Q=1，第一坐标必须恰以0.2概率入选；分母不能随便换成未校准的权重。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34211v1">原论文</a> · <a href="../../../../agent-research/2611.34211-budgeted-submapl/">实现解读</a> · <a href="#qa-9220227cf2c400e6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:budgeted-submapl" data-paper-title="Compute-Aware Submodular Online Learning in Open Multi-Agent Systems" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Compute-Aware Submodular Online Learning in Open Multi-Agent Systems Agent East China University of Science and Technology 2026-11-25 协作覆盖的重叠贡献具有边际递减性，但更新每个agent每个action的收益可能超在线预算。论文在看当前收益之前，只用当前分类策略与查询预算分配包含概率，再用固定基数依赖舍入精确选个agent-action。查询选择与联合action采样独立，对所查反事实边际收益做逆概率校正，再KL mirror-ascent。未被查询的估计为0，不等于真实边际为0。 没有依据标为成本过高。本轮只承接小型CPU数学核，完整模拟/迁移未执行，标not_run_scope_limited、full_experiment_review_done=false；component_only / L1 CPU多智能体协调数学内核；不是LLM Agent或RSI能力复现。完整便宜模拟未承接，不虚构高成本终态：not_run_scope_limited / full_experiment_review_done=false；无Evolve晋级。标准库执行clipped平方根分配、成对依赖舍入、仅Q次oracle查询、IPW与log-space KL更新。两个随机流分别驱动舍入/联合action；  Agent策略学习 预算化多智能体协调数学核 Agent 交互策略学习：把轨迹反馈变成更新 SubMAPL与OOAS的重要性权重可互换吗？ 不可。前者观察被查询的反事实边际，按坐标包含概率校正；OOAS只观察任务总反馈，按共享noise产生的整任务同臂事件概率校正hint残差。两者反馈可见性和更新器都不同。 教学例：一任务中切过臂时OOAS残差归因全0；SubMAPL同轮选中的两坐标仍各按自己的rho更新。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-59e6ce5c7aa45778">SubMAPL与OOAS的重要性权重可互换吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Abudgeted-submapl">Compute-Aware Submodular Online Learning in Open Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · East China University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不可。前者观察被查询的反事实边际，按坐标包含概率校正；OOAS只观察任务总反馈，按共享noise产生的整任务同臂事件概率校正hint残差。两者反馈可见性和更新器都不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一任务中切过臂时OOAS残差归因全0；SubMAPL同轮选中的两坐标仍各按自己的rho更新。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34211v1">原论文</a> · <a href="../../../../agent-research/2611.34211-budgeted-submapl/">实现解读</a> · <a href="#qa-59e6ce5c7aa45778">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:budgeted-submapl" data-paper-title="Compute-Aware Submodular Online Learning in Open Multi-Agent Systems" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Compute-Aware Submodular Online Learning in Open Multi-Agent Systems Agent East China University of Science and Technology 2026-11-25 协作覆盖的重叠贡献具有边际递减性，但更新每个agent每个action的收益可能超在线预算。论文在看当前收益之前，只用当前分类策略与查询预算分配包含概率，再用固定基数依赖舍入精确选个agent-action。查询选择与联合action采样独立，对所查反事实边际收益做逆概率校正，再KL mirror-ascent。未被查询的估计为0，不等于真实边际为0。 没有依据标为成本过高。本轮只承接小型CPU数学核，完整模拟/迁移未执行，标not_run_scope_limited、full_experiment_review_done=false；component_only / L1 CPU多智能体协调数学内核；不是LLM Agent或RSI能力复现。完整便宜模拟未承接，不虚构高成本终态：not_run_scope_limited / full_experiment_review_done=false；无Evolve晋级。标准库执行clipped平方根分配、成对依赖舍入、仅Q次oracle查询、IPW与log-space KL更新。两个随机流分别驱动舍入/联合action；  Agent策略学习 预算化多智能体协调数学核 Agent 交互策略学习：把轨迹反馈变成更新 数值内核通过就能说完整open-system模拟完成吗？ 不能。动态迁移M在本篇未给正式定义，完整观察表和环境没实现；原文也不足以把便宜模拟判高成本。应保留scope-limited/false full-review，不补猜或伪造终态。 教学例：固定两agent测试Q精确，不等于重现agent离开再加入时历史logit如何迁移，也不等于20seed覆盖曲线。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-38c8334ffb8129f3">数值内核通过就能说完整open-system模拟完成吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Abudgeted-submapl">Compute-Aware Submodular Online Learning in Open Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · East China University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。动态迁移M在本篇未给正式定义，完整观察表和环境没实现；原文也不足以把便宜模拟判高成本。应保留scope-limited/false full-review，不补猜或伪造终态。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：固定两agent测试Q精确，不等于重现agent离开再加入时历史logit如何迁移，也不等于20seed覆盖曲线。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34211v1">原论文</a> · <a href="../../../../agent-research/2611.34211-budgeted-submapl/">实现解读</a> · <a href="#qa-38c8334ffb8129f3">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ooas" data-paper-title="Optimistic Online Learning for Coding Agents with Aggregate Feedback" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Optimistic Online Learning for Coding Agents with Aggregate Feedback Agent National University of Singapore, School of Computing 2026-11-23 OOAS把activation steering候选选择建模为逐turn多臂bandit。每轮先见所有候选的reward hint，选一个策略；任务结束只见已选序列的加和reward，不见逐轮贡献。它不是猜哪条编辑会通过隐藏测试，而是在聚合反馈粒度下修正累计hint误差。论文理论要求reward向量、hint和任务划分预先固定、独立于学习者随机数；真实编码Agent的状态依赖轨迹不自动满足该假设。分布不是softmax：FTRL同时使用Tsallis项和log barrier。 成本过高，不复现（审查 DONE）；component_only / L1 CPU数学机制诊断，diagnostic_only=true；不是Agent能力复现。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。独立标准库CPU核实际解FTRL的KKT方程：Gk+α/√pk+β/pk为共同乘子，通过平移score与二分求解，而非softmax替身；实现共享Exp采样、ρ、聚合残差、potential和Alg2重启。begin→choose→finish只接受当前hint和最终aggregate，不接受turn reward向量或gold答案/计划。  Agent 策略学习 CPU机制组件 Agent 交互策略学习：把轨迹反馈变成更新 任务完成才有反馈，为什么不能逐轮做普通bandit更新？ 因为只观察一项任务总reward，无法知道每轮被选臂各贡献多少；把总reward复制到每轮会改变估计器。OOAS先用hint，再用整任务事件校正。 教学例：两轮分别选A/B后总reward为1，不能据此断定A和B各得1，也不能任意各分0.5。 2026-11-24">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-ooas-68b26b58" class="ar-learning-paper-anchor"></span>

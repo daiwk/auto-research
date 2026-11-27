@@ -95,6 +95,7 @@
 
 ## Beijing Institute of Technology
 
+- 2026-11-24 · 一作：Hui Zhang · [Scoring What Matters: Exact Feedback Reduction for Language Model Comparison](../2611.31931-cafa/README.md)（`cafa`）：比较checkpoint常只需要分数差，而不需要每个绝对分数。相同回答的共同分数会在contrast中抵消，普通缓存仍可能多买一次不需要的反馈。
 - 2026-05-13 · 一作：Feng Zhang · [ConSPO](../2605.12969-conspo/README.md)（`conspo`）：将同组序列的优劣关系写成长度归一化 InfoNCE，避免 token 求和造成长度和组内尺度偏差。
 
 ## ByteDance Seed
@@ -435,6 +436,10 @@
 ## Northwestern University
 
 - 2026-11-24 · 一作：Yibo Wang · [EPRO: Robust Policy Optimization Through an Imperfect Execution-Policy Predictor](../2611.32810-epro/README.md)（`epro`）：同一权重在BF16训练引擎与低精度rollout引擎中不一定给出相同分布。旧checkpoint时两者可观测，但中间learner更新对应的当前执行分布不可直接读取。
+
+## Not disclosed in fixed v1
+
+- 2026-11-24 · 一作：Linghua Zhang · [The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop](../2611.32452-elpsd/README.md)（`elpsd`）：最后一轮向自己的冻结拷贝蒸馏，在初始化时loss和梯度都为0。ELPSD不换成外部教师或给参考答案，而把冻结初始模型的第一轮和最后一轮读数沿差异方向外推，形成高于最后一轮的target。
 
 ## OpenAI
 

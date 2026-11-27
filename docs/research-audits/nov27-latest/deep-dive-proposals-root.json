@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "proposals": [
+    {
+      "paper": "recommendation:elbo-tds",
+      "target_card": "recommendation/feedback-multitask-causality",
+      "source_revisions": {
+        "recommendation:elbo-tds": "e14f7cb94d9a8623d55a324e6d78c3b43be6937d8947b65ff72237754dc2faab",
+        "recommendation:cotti": "98ca63f3d54543ec2dc479a6fd25bfefadfbe21f01c96dc95ca8bcc2f4b03abc"
+      },
+      "comparison": {
+        "position": "本地L1只实现Eq3–7/Algorithm1的小型双encoder/decoder与dot-product预测器、单位高斯重参数采样和slot级增广。输入为调用者给定的分桶ID或已嵌入浮点slot：不读取生产特征或学习真实稳定因素。slot选择、各slot独立mask、MSE的元素均值是显式本地配置；没有完整字段embedding/dropout分组、时序增量trainer、MMoE、私有排序链路或公开benchmark效果比较。",
+        "tradeoff": "COTTI的CPC用常态/促销两视图的可微门控控制对比一致性，RW对历史距离重加权，ABA在服务logit上作促销校准。ELBO-TDS用多视图高斯prior与输入重建约束稳定因素，并把有标签任务留在原始观测上；没有ABA式上线概率修正。两者都依赖稳定语义假设，不能从对齐或重建直接推断因果可识别，也不能用不同生产A/B宣称彼此胜负。",
+        "sections": [
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "ELBO-TDS和COTTI如何分别应对促销漂移？",
+        "body": "COTTI的CPC用常态/促销两视图的可微门控控制对比一致性，RW对历史距离重加权，ABA在服务logit上作促销校准。ELBO-TDS用多视图高斯prior与输入重建约束稳定因素，并把有标签任务留在原始观测上；没有ABA式上线概率修正。两者都依赖稳定语义假设，不能从对齐或重建直接推断因果可识别，也不能用不同生产A/B宣称彼此胜负。",
+        "papers": [
+          "recommendation:elbo-tds",
+          "recommendation:cotti"
+        ]
+      },
+      "question": {
+        "id": "nov27-elbo-tds",
+        "question": "ELBO-TDS和COTTI如何分别应对促销漂移？",
+        "answer": "COTTI的CPC用常态/促销两视图的可微门控控制对比一致性，RW对历史距离重加权，ABA在服务logit上作促销校准。ELBO-TDS用多视图高斯prior与输入重建约束稳定因素，并把有标签任务留在原始观测上；没有ABA式上线概率修正。两者都依赖稳定语义假设，不能从对齐或重建直接推断因果可识别，也不能用不同生产A/B宣称彼此胜负。",
+        "example": "教学例：当所有视图只保留促销价时，重建不能凭空恢复常态偏好；COTTI的上调校准也不能纠正过预测。",
+        "papers": [
+          "recommendation:elbo-tds",
+          "recommendation:cotti"
+        ]
+      },
+      "update": {
+        "date": "2026-11-27",
+        "papers": [
+          "recommendation:elbo-tds",
+          "recommendation:cotti"
+        ],
+        "summary": "ELBO-TDS假设短期变化围绕相对稳定的用户/商品因素发生。它不只对齐增广表示：固定单位方差的encoder后验经重参数采样，decoder保留个体特征，跨视图prior约束抑制暂态噪声；任务预测只用原始观测的确定性均值。统计特征做分桶邻域扰动，序列随机mask，类别embedding dropout，再用全局特征选择限制增广强度。 本地L1只实现Eq3–7/Algorithm1的小型双encoder/decoder与dot-product预测器、单位高斯重参数采样和slot级增广。输入为调用者给定的分桶ID或已嵌入浮点slot：不读取生产特征或学习真实稳定因素。slot选择、各slot独立mask、MSE的元素均值是显式本地配置；没有完整字段embedding/dropout分组、时序增量trainer、MMoE、私有排序链路或公开benchmark效果比较。"
+      },
+      "english": {
+        "comparison": {
+          "position": "The L1 component implements a small dual encoder/decoder with dot-product prediction, unit-Gaussian reparameterization and slot-level augmentation for Equations3–7/Algorithm1. Callers provide bucket IDs or embedded floating slots; no production features or true stable factors are read. Slot selection, independent slot masking and element-mean MSE are explicit local choices. Complete field embedding/dropout grouping, chronological incremental training, MMoE, private ranking and public benchmark comparisons are absent.",
+          "tradeoff": "COTTI uses a differentiable CPC gate for regular/promotional-view consistency, history-distance RW weights and serving-time ABA calibration. ELBO-TDS instead constrains stable factors through a multi-view Gaussian prior and input reconstruction, leaving supervised prediction on original observations; it has no ABA-style serving probability correction. Both rely on stable-semantics assumptions. Alignment or reconstruction does not establish causal identifiability, and different production A/B experiments do not establish a head-to-head winner."
+        },
+        "analysis": {
+          "title": "How do ELBO-TDS and COTTI address promotional drift differently?",
+          "body": "COTTI uses a differentiable CPC gate for regular/promotional-view consistency, history-distance RW weights and serving-time ABA calibration. ELBO-TDS instead constrains stable factors through a multi-view Gaussian prior and input reconstruction, leaving supervised prediction on original observations; it has no ABA-style serving probability correction. Both rely on stable-semantics assumptions. Alignment or reconstruction does not establish causal identifiability, and different production A/B experiments do not establish a head-to-head winner."
+        },
+        "question": {
+          "question": "How do ELBO-TDS and COTTI address promotional drift differently?",
+          "answer": "COTTI uses a differentiable CPC gate for regular/promotional-view consistency, history-distance RW weights and serving-time ABA calibration. ELBO-TDS instead constrains stable factors through a multi-view Gaussian prior and input reconstruction, leaving supervised prediction on original observations; it has no ABA-style serving probability correction. Both rely on stable-semantics assumptions. Alignment or reconstruction does not establish causal identifiability, and different production A/B experiments do not establish a head-to-head winner.",
+          "example": "Teaching example: reconstruction cannot recover regular preferences if every view contains only promotional prices; COTTI's upward calibration also cannot correct overprediction."
+        },
+        "update": "ELBO-TDS assumes short-term fluctuations around relatively stable user/item factors. It does more than align augmented representations: unit-variance encoder posteriors are reparameterized, decoders retain individual features, and cross-view priors suppress transient noise. Task prediction uses deterministic means from original observations. Statistical buckets are perturbed locally, sequence inputs masked and categorical embeddings dropped, gated by global feature selection. The L1 component implements a small dual encoder/decoder with dot-product prediction, unit-Gaussian reparameterization and slot-level augmentation for Equations3–7/Algorithm1. Callers provide bucket IDs or embedded floating slots; no production features or true stable factors are read. Slot selection, independent slot masking and element-mean MSE are explicit local choices. Complete field embedding/dropout grouping, chronological incremental training, MMoE, private ranking and public benchmark comparisons are absent."
+      }
+    }
+  ]
+}

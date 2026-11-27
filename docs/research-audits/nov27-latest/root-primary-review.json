@@ -1,0 +1,22 @@
+{
+  "reviewed_on": "2026-11-27",
+  "source": "https://arxiv.org/pdf/2511.21032v2",
+  "source_sha256": "07c5ce0ab1bf0a0b7ed9e4e316243cd6a0e13a8131c8ab09963bd17011c7a958",
+  "read_scope": "full fixed-v2 text, derivations/Algorithm1, public and industrial configuration, production A/B",
+  "code_revision": "85358987d35e12ca6e454da2520f6c43e0c99dbb",
+  "original_date_and_revision_distinct": true,
+  "cost_assessment": {
+    "source": "https://arxiv.org/pdf/2511.21032v2",
+    "basis": "Table1的完整Commercial-Main有280亿训练交互、9亿验证和9亿测试；KuaiRand也有530万训练交互，完整实验还比较多种baseline/任务/MLP与MMoE、J和增广/权重网格。AppendixB.5为单V100-16GB/A30-24GB，不能伪称多卡不可行；但Table9在7亿样本Commercial-Small上每batch约999–1611ms、完整多配置多seed及私有生产评测超出本轮短时预算。总GPU小时未报告，以上是配置基础的成本判断，不是本地测量。完整矩阵成本过高，不复现（审查 DONE）；不下载数据、不探跑或重试。小型组件实际成本另记运行产物。",
+    "decision": "成本过高，不复现（审查 DONE）",
+    "local_seconds_per_seed_cap": 30
+  },
+  "industrial_rejections": [
+    {
+      "id": "2611.32855",
+      "source": "https://arxiv.org/html/2611.32855v1",
+      "decision": "not_selected_industrial_online_threshold",
+      "reason": "SIDECAR §5 offline Amazon exact-topK/model-call experiments; no production traffic-split experiment in full methods/results. No named exception requested."
+    }
+  ]
+}

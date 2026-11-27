@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-27",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "agent-research:compaction-authorization",
+      "target_card": "agent-research/tools-and-collaboration",
+      "source_revisions": {
+        "agent-research:compaction-authorization": "8e862328844a5879a00c8bbaa7c3ffa9cd8613849f9ec63fe4f8a71b983e2d59",
+        "agent-research:runtime-tickets": "5b00948adf9bb0542e98df053cfe7028c1ab6925099a181503296520a390d8d4"
+      },
+      "peer_membership_verified_in": "docs/learning/topics/agent-research.json",
+      "comparison": {
+        "position": "在策略生成前，以入口见证、完整有序列表commit和当前计数绑定用户原始授权文本；agent的摘要工作上下文不参与授权归因。",
+        "tradeoff": "RuntimeTickets在副作用前核收件者、对象和预算合同，HMAC审计链不自证前缀完整；本文当前计数拒绝取消省略，却不提供对象validator或安全策略语义。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "论文离线与线上效果",
+          "数据协议与代码映射",
+          "结果、负控与边界",
+          "同主题比较与边界",
+          "完整实验与成本决定"
+        ]
+      },
+      "analysis": {
+        "title": "认证来源不替代语义授权，副作用合同不替代请求完整性",
+        "body": "两条输入必须分开：摘要服务Agent任务，认证原文服务授权器。occurrence MAC、顺序commit、current count/fresh boundary缺一会留echo/replay/omission缝隙。持久counter测试只在keys/state/issuer可信的前提内成立，SQLite不是Agent隔离。RuntimeTickets则冻结host收紧合同并在effect前审计，callback不确定不重发；它本地的审计链不证明被截短前缀完整。两层可组合但没有本地LLM攻击成功率；完整多模型/live矩阵高成本不复现。",
+        "papers": [
+          "agent-research:compaction-authorization",
+          "agent-research:runtime-tickets"
+        ]
+      },
+      "question": {
+        "id": "cross-nov27-compaction-authorization",
+        "question": "该门与RuntimeTickets保护的是同一边界吗？",
+        "answer": "不是。本文保护策略生成前的原始授权输入；RuntimeTickets在真实副作用前核冻结recipient/object/budget合同。原文完整不证明策略语义正确，合法发送也不证明摘要来源真实。",
+        "example": "教学例：认证用户原句后生成器仍可能错误放宽recipient，需要下层ticket核具体交付，而不是把MAC当语义理解。",
+        "papers": [
+          "agent-research:compaction-authorization",
+          "agent-research:runtime-tickets"
+        ]
+      },
+      "update": {
+        "date": "2026-11-27",
+        "papers": [
+          "agent-research:compaction-authorization",
+          "agent-research:runtime-tickets"
+        ],
+        "source_revisions": {
+          "agent-research:compaction-authorization": "8e862328844a5879a00c8bbaa7c3ffa9cd8613849f9ec63fe4f8a71b983e2d59",
+          "agent-research:runtime-tickets": "5b00948adf9bb0542e98df053cfe7028c1ab6925099a181503296520a390d8d4"
+        },
+        "summary": "真实HMAC-SHA256 occurrence/sequence分域、精确UTF-8与长度前缀framing、完整有序计数、fresh session/boundary及SQLite持久消费。只释放认证原文，不执行LLM授权语义或真实Agent攻击；可信入口/key/counter隔离是外部前提。1MiB/有符号计数为本地准入，不承诺可用性或生产安全。 成本过高，不复现（审查 DONE）；仅承接小型CPU认证协议。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Authenticate original user text before policy synthesis using ingress witnesses, an ordered complete commitment and current count. The agent's summary context supplies no authority.",
+          "tradeoff": "RuntimeTickets checks recipient/object/budget before effects; its audit HMAC chain does not establish prefix completeness. Current-count checks reject omitted cancellations here but supply neither object validators nor semantic policy safety."
+        },
+        "analysis": {
+          "title": "Authenticated origins do not replace semantic authorization or effect contracts",
+          "body": "Separate agent summaries from authenticated authorizer input. Occurrence MACs, ordered commitments and current-count/fresh-boundary checks jointly close echo, replay and omission gaps. Persistent-counter tests assume protected keys/state/issuance; SQLite is not agent isolation. RuntimeTickets freezes host-restricting effect contracts, audits before callbacks and avoids retries under uncertainty, but its local chain does not prove complete prefixes. The layers compose without local LLM attack-rate evidence. The full multi-model/live matrix is terminally not reproduced for cost."
+        },
+        "question": {
+          "question": "Does this gate protect the same boundary as RuntimeTickets?",
+          "answer": "No. It protects authorization input before policy synthesis; RuntimeTickets checks frozen recipient/object/budget contracts before effects. Intact originals do not prove correct policy semantics or authenticate summaries through valid sends.",
+          "example": "Teaching example: a generator can still broaden recipients after reading authentic text, requiring effect-level ticket checks rather than treating MACs as semantic understanding."
+        },
+        "update": "Separate agent summaries from authenticated authorizer input. Occurrence MACs, ordered commitments and current-count/fresh-boundary checks jointly close echo, replay and omission gaps. Persistent-counter tests assume protected keys/state/issuance; SQLite is not agent isolation. RuntimeTickets freezes host-restricting effect contracts, audits before callbacks and avoids retries under uncertainty, but its local chain does not prove complete prefixes. The layers compose without local LLM attack-rate evidence. The full multi-model/live matrix is terminally not reproduced for cost."
+      }
+    },
+    {
+      "paper": "agent-research:budgeted-submapl",
+      "target_card": "agent-research/agent-policy-learning",
+      "source_revisions": {
+        "agent-research:budgeted-submapl": "2e329077a822dab0f8c9ca86bc21592d9d03404e4b70d8da2897784222487070",
+        "agent-research:ooas": "e1581613218eb76d573c188ec4f32cbc699cc76915ce56e442e9d71639c4e193"
+      },
+      "peer_membership_verified_in": "docs/learning/topics/agent-research.json",
+      "comparison": {
+        "position": "固定域多agent分类策略在收益未知前分配rho，依赖舍入精确Q后只问所选边际，IPW与KL更新保留实际预算化策略学习。",
+        "tradeoff": "OOAS只见aggregate任务回报与逐turn hint，使用共享Exp噪声和整任务同臂概率；本篇可查询反事实坐标。重要性分母、反馈粒度与FTRL/KL更新不可替换。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "论文离线与线上效果",
+          "数据协议与代码映射",
+          "结果、负控与边界",
+          "同主题比较与边界",
+          "完整实验与成本决定"
+        ]
+      },
+      "analysis": {
+        "title": "预算反馈的无偏性取决于采样事件，不是统一的1/p技巧",
+        "body": "SubMAPL的rho是边缘包含概率，固定基数依赖舍入须保E[Z]=rho，query选择不能偷看当前gain或联合action。IPW后在每agent simplex做KL mirror-ascent，sqrt分配最小化二阶矩上界而非保证胜率。OOAS全任务共享noise使同臂事件概率不等于边缘概率乘积，切臂时不归因残差。两者本地都是有限数学核，非LLM Agent。SubMAPL迁移/环境尚未承接且无证据高成本，完整状态保留scope-limited/false full-review，不能制造高成本DONE。",
+        "papers": [
+          "agent-research:budgeted-submapl",
+          "agent-research:ooas"
+        ]
+      },
+      "question": {
+        "id": "cross-nov27-budgeted-submapl",
+        "question": "SubMAPL与OOAS的重要性权重可互换吗？",
+        "answer": "不可。前者观察被查询的反事实边际，按坐标包含概率校正；OOAS只观察任务总反馈，按共享noise产生的整任务同臂事件概率校正hint残差。两者反馈可见性和更新器都不同。",
+        "example": "教学例：一任务中切过臂时OOAS残差归因全0；SubMAPL同轮选中的两坐标仍各按自己的rho更新。",
+        "papers": [
+          "agent-research:budgeted-submapl",
+          "agent-research:ooas"
+        ]
+      },
+      "update": {
+        "date": "2026-11-27",
+        "papers": [
+          "agent-research:budgeted-submapl",
+          "agent-research:ooas"
+        ],
+        "source_revisions": {
+          "agent-research:budgeted-submapl": "2e329077a822dab0f8c9ca86bc21592d9d03404e4b70d8da2897784222487070",
+          "agent-research:ooas": "e1581613218eb76d573c188ec4f32cbc699cc76915ce56e442e9d71639c4e193"
+        },
+        "summary": "固定active-domain的clipped sqrt包含分配、精确Q依赖舍入、独立joint-action采样、仅所选坐标oracle查询、IPW与log-space KL更新；真归一化子模coverage小函数与评估侧期望控制。无LLM Agent、动态迁移M、完整环境/观察策略表，未伪造高成本终态。 组件范围完成；完整便宜模拟/迁移未承接，not_run_scope_limited，非高成本延期。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Before gains are observed, fixed-domain categorical policies allocate rho, round to exactly Q queries, obtain only selected marginals and execute IPW/KL updates.",
+          "tradeoff": "OOAS sees aggregate task feedback and turn hints under shared exponential noise/whole-task same-arm events. This paper can query counterfactual coordinates; denominators, feedback granularity and FTRL/KL updates are not interchangeable."
+        },
+        "analysis": {
+          "title": "Unbiased budgeted feedback depends on the sampling event, not a generic 1/p trick",
+          "body": "SubMAPL rho denotes inclusion marginals: fixed-cardinality dependent rounding must preserve E[Z]=rho, and querying cannot inspect current gains or sampled joint actions. IPW precedes per-agent KL ascent; square-root allocation optimizes a second-moment bound, not success rates. OOAS shared noise makes whole-task same-arm probability differ from products of marginals and assigns no residual after switching. Both local entries are finite mathematical kernels, not LLM agents. SubMAPL migration/environment are unaccepted without high-cost evidence, so full status remains scope-limited with false full review rather than a fabricated cost-DONE terminal."
+        },
+        "question": {
+          "question": "Can SubMAPL and OOAS interchange importance weights?",
+          "answer": "No. SubMAPL observes queried counterfactual marginals and corrects coordinate inclusion; OOAS sees task aggregates and corrects hint residuals by a shared-noise whole-task same-arm event. Feedback and updates differ.",
+          "example": "Teaching example: switching arms zeroes OOAS residual attribution, while two queried SubMAPL coordinates still receive their own inclusion-corrected updates."
+        },
+        "update": "SubMAPL rho denotes inclusion marginals: fixed-cardinality dependent rounding must preserve E[Z]=rho, and querying cannot inspect current gains or sampled joint actions. IPW precedes per-agent KL ascent; square-root allocation optimizes a second-moment bound, not success rates. OOAS shared noise makes whole-task same-arm probability differ from products of marginals and assigns no residual after switching. Both local entries are finite mathematical kernels, not LLM agents. SubMAPL migration/environment are unaccepted without high-cost evidence, so full status remains scope-limited with false full review rather than a fabricated cost-DONE terminal."
+      }
+    }
+  ]
+}

@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩先找瓶颈：权重、KV 内容与缓存层级
 
-[基础模型](../index.md) · 更新 2026-11-26 · 43 篇主题资料 / 20 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-27 · 44 篇主题资料 / 21 篇重点对照
 
 AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM 管可执行历史视图，Remote KV Tiers 解决跨层级加载。它们可以组合，但不能用一个“压缩率”解释质量、可恢复性和端到端速度。 FoldBias另解决压缩缓存的接口障碍：把静态bias折进同维key，但未来query漂移仍会引入误差。
 
@@ -45,6 +45,7 @@ AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM
 | [LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers](../../../foundation-models/2611.24301-loopcache-interface/README.md) · [原始来源](https://arxiv.org/abs/2611.24301v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 固定深度的draft可能沿过时轨迹继续推进。LoopCache用新候选相对旧候选的logit差控制替换，并清除依赖旧token的所有后代。推测路径轮转读取同一loop cache，独立KV分支再以正确loop缓存重算；浅层差异较大时才单独读取对应loop的cache。 | Spool重建固定记录层输入下的递归状态；LoopCache安排loop-specific KV读取并以exact分支纠正近似推测。前者的摘要精确性与后者的目标解码精确性证明对象不同。 |
 | [FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models](../../../foundation-models/2611.26020-frontier-replay/README.md) · [原始来源](https://arxiv.org/abs/2611.26020v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 混合模型的attention KV可按页复用，但递归状态只在保存过的精确位置恢复。FrontierReplay先根据已观察到的模板稳定尾、已完成turn和分叉点规划检查点；原生prefill不断开，之后只重放短窗递归输入生成精确状态。保留策略优先保护仍在执行的请求锚点和已证明可复用的分叉，而非只看历史频率。 | ReplaySSM主要减少decode/投机时的逐token矩阵状态写回，把输入缓存、output-only读取和接受回滚联动；FrontierReplay主要为下一次prefill的结构边界补造精确检查点，并管理哪些状态值得保留。前者的周期刷新和高低精度anchor不是后者的会话frontier保留策略。本地ReplaySSM已有独立Triton证据，但不能把那份执行回执借给本页的host策略，更不能把两种输入日志视为可互换。 |
 | [DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers](../../../foundation-models/2611.33952-duomi/README.md) · [原始来源](https://arxiv.org/abs/2611.33952v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | DuoMI按相同token在两轮的全部expert软路由计算两种互信息：聚合使用对齐与逐token变化区间，训练时约束共享expert池的实际复用。 | EchoMoE复用跨层激活参考并压缩通信变化量；DuoMI共享expert参数并约束路由。前者的reference不是后者的expert池，减少通信和改变专家复用不是可交换收益；小张量反传不代表语言模型提升。 |
+| [DeCo-Attention: Decompose to Compensate for Low-Precision Attention](../../../foundation-models/2611.32035-deco-attention/README.md) · [原始来源](https://arxiv.org/abs/2611.32035v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | DeCo在runtime逐head估计主子空间，用Q侧和K侧一阶残差投影构造额外通道，让一个扩展QK点积带入两侧补偿；额外通道同样量化。 | DualQuant仅从静态权重拟合row/column尺度并重缩放激活；DeCo每次attention从Q/K本身估计basis，补偿两边量化残差，不训练静态权重尺度。两者的浮点仿真都不等于packed低位CUDA kernel，更不能以A100浮点执行宣称原生FP4加速。 |
 
 </div>
 
@@ -133,6 +134,12 @@ ReplaySSM主要减少decode/投机时的逐token矩阵状态写回，把输入�
 EchoMoE复用跨层激活参考并压缩通信变化量；DuoMI共享expert参数并约束路由。前者的reference不是后者的expert池，减少通信和改变专家复用不是可交换收益；小张量反传不代表语言模型提升。 每组8条序列；先逐group、逐pool计算阈值罚项，再平均。默认tau=1、g_max=.02 bits、D区间[.05,.30] bits、三个权重均.1。D是平均JSD，soft D不是Top-k替换比例；只有均匀硬Top-k分布才有D=1−retention。基础语言、负载均衡与z-loss保持原配置。
 
 对照来源：[duomi](../../../foundation-models/2611.33952-duomi/README.md) · [echomoe](../../../foundation-models/2611.22215-echomoe/README.md)
+
+### DeCo-Attention: Decompose to Compensate for Low-Precision Attention
+
+DualQuant仅从静态权重拟合row/column尺度并重缩放激活；DeCo每次attention从Q/K本身估计basis，补偿两边量化残差，不训练静态权重尺度。两者的浮点仿真都不等于packed低位CUDA kernel，更不能以A100浮点执行宣称原生FP4加速。 Eq6的sample是旋转后尚未量化的Q/K，各Gram独立trace归一化；sample为max(N/256,2r)，混合text/audio/video需分层抽样。Appendix Eq25每组用power-of-two全局scale、每16channel unsigned E4M3 block scale和E2M1值，额外通道不能保持高精度。attention除以原始sqrt(d)，不是扩展维数sqrt(d+2r)。
+
+对照来源：[deco-attention](../../../foundation-models/2611.32035-deco-attention/README.md) · [dualquant](../../../reproductions/2610.13767-dualquant/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -288,9 +295,23 @@ EchoMoE复用跨层激活参考并压缩通信变化量；DuoMI共享expert参�
 
     对照来源：[duomi](../../../foundation-models/2611.33952-duomi/README.md) · [echomoe](../../../foundation-models/2611.22215-echomoe/README.md)
 
+### DeCo能直接替换DualQuant的权重尺度求解器吗？ {#cross-nov27-deco-attention}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。DualQuant优化静态weight重建的row/column尺度，DeCo纠正动态attention Q/K残差；对象和运行时机不同。
+
+    **教学例子：** 教学例：两个prompt产生不同Q/K，DeCo需重估basis；静态weight尺度通常可复用。
+
+    对照来源：[deco-attention](../../../foundation-models/2611.32035-deco-attention/README.md) · [dualquant](../../../reproductions/2610.13767-dualquant/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-27** · DualQuant仅从静态权重拟合row/column尺度并重缩放激活；DeCo每次attention从Q/K本身估计basis，补偿两边量化残差，不训练静态权重尺度。两者的浮点仿真都不等于packed低位CUDA kernel，更不能以A100浮点执行宣称原生FP4加速。 本轮为Nov24补漏CPU L1，完整实验高成本终态。
+
+涉及：[deco-attention](../../../foundation-models/2611.32035-deco-attention/README.md) · [dualquant](../../../reproductions/2610.13767-dualquant/README.md)
 
 **2026-11-26** · EchoMoE复用跨层激活参考并压缩通信变化量；DuoMI共享expert参数并约束路由。前者的reference不是后者的expert池，减少通信和改变专家复用不是可交换收益；小张量反传不代表语言模型提升。 完整矩阵高成本终态，不以L1或审查充当能力证据。
 
@@ -348,7 +369,7 @@ EchoMoE复用跨层激活参考并压缩通信变化量；DuoMI共享expert参�
 
 覆盖 29 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 43 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 44 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -395,6 +416,7 @@ EchoMoE复用跨层激活参考并压缩通信变化量；DuoMI共享expert参�
 - [LoopCache: Accelerating Long-Context Self-Speculative Decoding for Looped Transformers](../../../foundation-models/2611.24301-loopcache-interface/README.md)
 - [FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models](../../../foundation-models/2611.26020-frontier-replay/README.md)
 - [DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers](../../../foundation-models/2611.33952-duomi/README.md)
+- [DeCo-Attention: Decompose to Compensate for Low-Precision Attention](../../../foundation-models/2611.32035-deco-attention/README.md)
 
 </details>
 

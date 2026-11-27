@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-27",
+  "independent_reviews": [
+    {"scope": ["post-training:cafa", "post-training:elpsd"], "review": "Read fixed primary equations/Algorithm2 and ELPSD equations3-5, analytic-gradient appendix. Independent CAFA all-score oracle across56 weighted multivariate cases: maximum absolute error1.78e-15. ELPSD probability-domain recomputation at weights0/.5/2 and differing response masks passed. Retains zero draws, n-1 and w-squared/n covariance; frozen first/last teacher, reverse KL and per-response normalization.", "blocking_findings": []},
+    {"scope": ["recommendation:elbo-tds"], "review": "Independent fixed-v2 PDF equations3-7/Algorithm1 review. Unit noise, undetached within-sample view prior, augmented-input reconstruction and original deterministic supervision match. Slot-level/local MSE and missing embedding/chronological pipeline are explicitly bounded. Production A/B and single-device/full-matrix cost claims checked separately.", "blocking_findings": []},
+    {"scope": ["foundation-models:integral-deltanet", "foundation-models:deco-attention"], "review": "Independent fixed-v1 pages4-6 and3-5/16 review: GDN-2 channel gates, current-S integral update, dual-state/chunk propagation and small gate initialization match. DeCo Eq25 per-group power2/block16 scales, independent trace-normalized rotated Gram, requantized two-sided residual channels and original sqrt(d) match; no second-order/PV/I-ExpCast/native-FP4 speed claim. Fifteen component tests passed in this independent check.", "blocking_findings": []}
+  ],
+  "final_documentation_review": {"blocking_findings": [], "review": "Independent read-only final review: seven CN/EN metadata/fingerprints and original figures;28 four-level QA with real source headings;seven deep peer memberships/current README hashes and28 reviewed English units;CPU7x3 and CUDA onlyELBOx3 raw/receipt/source binding all match. Six full campaigns remain high-cost not-reproduced; SubMAPL remains scope-limited. No append-once author rerun or source changes."},
+  "pre_freeze_repairs": [
+    "DeCo rejects out-of-range input/intermediate quantization scales and nonfinite Gram/matrix computations, rather than silently producing NaN; four numerical-boundary regressions added before source freeze.",
+    "Root authoring switched to raw formatted strings for mathematical backslashes before reviewed English/deep fingerprints; no execution evidence existed or was overwritten."
+  ],
+  "intermediate_check": {"scope": "post/foundation/root tests during concurrent unfinished English authoring", "passed": 37, "failed": 2, "reason": "Two post README-en source fingerprints were still PENDING; algorithm cases passed. Final completed post suite19passed with original assertions retained.", "assertions_weakened": false}
+}

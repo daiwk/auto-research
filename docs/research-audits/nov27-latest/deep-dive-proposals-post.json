@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-27",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "post-training:cafa",
+      "target_card": "post-training/preference-and-alignment",
+      "source_revisions": {
+        "post-training:cafa": "02b0e8e4e25c58ce6ac51b2d8c883b962840cce23355ce15b84f2170a9a004eb",
+        "post-training:probabilistic-autorater": "fe6f7067f554183ee185f524f706a4377ac0b1bd4191c607c03acc6c3acd8057"
+      },
+      "comparison": {
+        "position": "给定fixed/versioned scalar scorer，按精确identity对报告系数做评分前抵消，分开mean与ordinary covariance支持；本地是CPU精确算法，不生成模型或判断文本。",
+        "tradeoff": "Probabilistic Autorater优化评分概率的校准与proper reward；CAFA不改变评分者，只减少请求报告所需的分数。exact恢复不等于judge正确，节省评分输入不等于已测总workflow成本下降。",
+        "sections": [
+          "核心公式",
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "评测预算优化必须同时固定报告统计量与评分者版本",
+        "body": "实际重读Probabilistic Autorater README：proper reward和parser数值核并不构成生成式autorater能力。CAFA同样不能把外部scorer当成本地已实现judge，但它的定义性算法可在固定bank上精确执行。mean支持按跨draw系数和判零，普通covariance支持保留任一draw非零的identity；镜像差值的mean为零不代表variance为零。cache必须区分rubric/deployment版本，identity不做语义合并，缺失反馈不得补0。少买反馈不校准裁判；不同sampler和draw预算的workflow成本也不能全部归给固定bank抵消。",
+        "papers": [
+          "post-training:cafa",
+          "post-training:probabilistic-autorater"
+        ]
+      },
+      "question": {
+        "id": "nov27-cafa-statistic-boundary",
+        "question": "同一bank的均值报告不需要评分，是否表示其置信区间也可以零评分恢复？",
+        "answer": "不表示。普通协方差需要逐draw向量，镜像draw可在均值抵消却仍有非零方差；即使恢复了样本协方差，区间解释还需要抽样独立性与覆盖方法，且不含judge重复噪声。",
+        "example": "教学例：差值3和-3的均值为0，样本方差18。未取得两个score时可以知道均值抵消，却不知道这个方差或任意声称零不确定性。",
+        "papers": [
+          "post-training:cafa",
+          "post-training:probabilistic-autorater"
+        ]
+      },
+      "update": {
+        "date": "2026-11-27",
+        "papers": [
+          "post-training:cafa",
+          "post-training:probabilistic-autorater"
+        ],
+        "summary": "实际重读Probabilistic Autorater并对照CAFA固定v1 Eq2–4/Algorithm2，增加评分者校准与评分需求规划的区分，明确mean/covariance支持、版本缓存、缺失不补0和fixed-bank/总体不确定性的界限。CAFA仅CPU算法；完整LLM/judge矩阵高成本不复现，审查DONE。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Given a fixed/versioned scalar scorer, cancel exact-identity report coefficients before acquisition and separate mean from ordinary-covariance support. Local code is CPU exact arithmetic, not model generation or judging.",
+          "tradeoff": "Probabilistic Autorater targets calibrated preference probabilities and proper rewards. CAFA leaves the scorer unchanged and reduces required scores. Exact recovery does not make a judge correct; fewer inputs do not establish lower total workflow cost."
+        },
+        "analysis": {
+          "title": "Evaluation-budget optimization must fix both the requested statistic and scorer version",
+          "body": "Re-reading Probabilistic Autorater confirms that numerical proper rewards/parsing are not a generative judge capability. CAFA likewise requires an external scorer, while its defining fixed-bank algorithm can execute exactly. Mean support uses across-draw coefficient sums; ordinary covariance retains any identity with a nonzero draw coefficient. Mirror contrasts can have zero mean but positive variance. Cache keys must separate rubric/deployment versions; semantic identity merging and zero imputation are invalid. Feedback savings do not calibrate a judge, and workflow changes in sampler/draw budgets are not all attributable to fixed-bank cancellation."
+        },
+        "question": {
+          "question": "If a bank's mean needs no scores, can its confidence interval also be recovered without scores?",
+          "answer": "No. Ordinary covariance needs per-draw vectors, which may remain variable after mean cancellation. Interpreting intervals additionally requires sampling independence and a coverage procedure, excluding repeated judge noise.",
+          "example": "Teaching example: differences3/-3 have mean zero and sample variance18. Without the scores, mean cancellation is known but that variance is not; zero uncertainty cannot be asserted."
+        },
+        "update": "Re-read Probabilistic Autorater against fixed-v1 CAFA Eqs.2–4/Algorithm2. Added calibration versus acquisition planning, mean/covariance support, versioned caching, non-imputation and fixed-bank versus population-uncertainty boundaries. CAFA is CPU-only; full LLM/judge experiments are high-cost review DONE."
+      }
+    },
+    {
+      "paper": "post-training:elpsd",
+      "target_card": "post-training/teacher-and-context",
+      "source_revisions": {
+        "post-training:elpsd": "f2c16826e48b6659928af1b39ee1fd3f5ff2282ab1e9f5f87bd5f32df64633cc",
+        "post-training:loopsd": "a486a09457247840bf39f700246432d5ff5d873fe8ffa5177de9d483cfec03a5"
+      },
+      "comparison": {
+        "position": "冻结原生looped模型初始第一/最后轮分布并外推，直接以标准最后轮为学生，精确全词表reverse KL，不用参考答案/外部teacher；本地只给定logits数学核。",
+        "tradeoff": "LoOPSD在普通模型中搜索重复层route，经validation挑teacher并交替刷新；ELPSD无route搜索，外推teacher不刷新。论文另名LoopOPD不能与已有LoOPSD混同；共同KL形式不代表teacher机制和采样路径相同。",
+        "sections": [
+          "核心公式",
+          "与已有方法的关系",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "额外计算视角要区分路由搜索、loop读数与外推目标",
+        "body": "实际重读LoOPSD当前README，其教师来自重复连续层区间的搜索与验证，蒸馏学生仍用标准路径；不能把它等同ELPSD文中另一个LoopOPD。ELPSD在原生4loop模型的同一次冻结forward读第一/最后轮，外推分布后训练最后轮。w0与初始化同分布会使KL/梯度退化；理想化刷新且固定第一轮会按1+w复合log-odds，因而不能照搬LoOPSD的teacher刷新。局部response-balanced梯度与移动target负控不执行任何循环模型、路由选择或on-policy采样，也不将旧高成本条目重新放回队列。",
+        "papers": [
+          "post-training:elpsd",
+          "post-training:loopsd"
+        ]
+      },
+      "question": {
+        "id": "nov27-elpsd-refresh",
+        "question": "LoOPSD可交替刷新teacher，为什么不能直接给ELPSD也加相同刷新？",
+        "answer": "两者teacher构造不同。LoOPSD重新搜索/验证重复层路径；ELPSD若由当前最后轮继续向外推，在论文固定第一轮的理想化精确拟合中会反复放大同一方向，失去固定target。",
+        "example": "教学例：w0.5的理想刷新三次将相对第一轮log-odds放大3.375倍；这不是另一次独立validation找到的重复层route。",
+        "papers": [
+          "post-training:elpsd",
+          "post-training:loopsd"
+        ]
+      },
+      "update": {
+        "date": "2026-11-27",
+        "papers": [
+          "post-training:elpsd",
+          "post-training:loopsd"
+        ],
+        "summary": "实际重读LoOPSD README并对照ELPSD固定v1 Section3/AppendixA，新增路由搜索与固定loop外推teacher的界线，明确LoOPSD/LoopOPD名称差异、w0退化、理想化刷新负控及response-balanced归约。只实现CPU logits核，完整8GPU训练成本DONE；不重开旧高成本计划。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Extrapolate frozen initial early/final distributions of a native looped model and directly distill the standard final loop with exact reverse KL, without external teachers/reference answers. Local scope is supplied-logit math only.",
+          "tradeoff": "LoOPSD searches repeated-layer routes in ordinary models, validates teachers and alternates refresh. ELPSD has no route search and keeps its extrapolated teacher frozen. The separately named LoopOPD is not existing LoOPSD; a shared KL form does not equate teacher construction or sampling."
+        },
+        "analysis": {
+          "title": "Extra-compute views differ between route search, loop readouts and extrapolated targets",
+          "body": "The current LoOPSD README defines a teacher through repeated-interval search/validation while students use the standard path; it is not the separately named LoopOPD in ELPSD. ELPSD reads early/final loops in one frozen forward of a native four-loop model and trains its final loop. Weight zero degenerates at initialization. Idealized refresh with a fixed early loop compounds log-odds by1+w, so LoOPSD's refresh cannot be copied mechanically. Response-balanced gradients and moving-target controls execute no looped model, route selection or on-policy sampler, and do not reopen deferred high-cost work."
+        },
+        "question": {
+          "question": "Why not give ELPSD the alternating teacher refresh used by LoOPSD?",
+          "answer": "Teacher construction differs. LoOPSD re-searches and validates repeated-layer routes. Refreshing ELPSD from its current final loop repeatedly amplifies a direction under the paper's fixed-early-loop exact-fit idealization, removing the fixed target.",
+          "example": "Teaching example: three idealized refreshes atw0.5 multiply relative log-odds by3.375, unlike independently validating a new repeated-layer route."
+        },
+        "update": "Re-read LoOPSD against fixed-v1 ELPSD Section3/AppendixA. Distinguished route search, fixed loop extrapolation and LoOPSD/LoopOPD naming; added zero-weight degeneration, idealized-refresh limits and response-balanced reduction. CPU supplied-logit components only; full8-GPU training is high-cost review DONE, with no reopening of old plans."
+      }
+    }
+  ]
+}

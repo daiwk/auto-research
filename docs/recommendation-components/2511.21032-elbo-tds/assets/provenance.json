@@ -1,0 +1,16 @@
+{
+  "source_url": "https://arxiv.org/pdf/2511.21032v2",
+  "figure": "Figure 2(d)",
+  "page": 3,
+  "crop_pdf_points": [
+    385,
+    83,
+    559,
+    202
+  ],
+  "caption": "Architecture of ELBO_TDS: latent-space projection, multi-task learning and reconstruction.",
+  "source_sha256": "07c5ce0ab1bf0a0b7ed9e4e316243cd6a0e13a8131c8ab09963bd17011c7a958",
+  "asset_sha256": "5dd6842d77941dbc399729b5607caa08abb11c4c6feb9f4c36eabe1a74bee290",
+  "extraction": "Original PDF Figure2(d) crop, not a redraw or local result",
+  "reviewed_on": "2026-11-27"
+}

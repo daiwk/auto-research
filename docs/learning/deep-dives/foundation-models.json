@@ -261,6 +261,16 @@
             "核心公式",
             "同主题比较与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:integral-deltanet",
+          "position": "Integral DeltaNet保留fast delta state并新增其历史积分state；按key channel分别控制积分速度和当前/历史读出，积分state不反向改变delta更新。",
+          "tradeoff": "KRA维护回归系数与后验协方差，遗忘时恢复可写不确定性；Integral维护delta与它的指数加权历史。两份state不意味着同一内容：协方差不是记忆副本，积分history也不执行KRA的相关key校正。现有L1不能比较语言召回收益。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -426,6 +436,14 @@
           "papers": [
             "foundation-models:rap",
             "foundation-models:hvmap"
+          ]
+        },
+        {
+          "title": "Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration",
+          "body": "KRA维护回归系数与后验协方差，遗忘时恢复可写不确定性；Integral维护delta与它的指数加权历史。两份state不意味着同一内容：协方差不是记忆副本，积分history也不执行KRA的相关key校正。现有L1不能比较语言召回收益。 第一式为GDN-2，KDA使用相同标量beta广播到erase/write；lambda与gamma均沿key channel，不是value行或一个全局标量。积分使用当前更新后的S。原文门rank128且初始化lambda≈1−gamma≈1/1024；本地缩小rank但保留同一可训练参数化。",
+          "papers": [
+            "foundation-models:integral-deltanet",
+            "foundation-models:kernel-ridge-attention"
           ]
         }
       ],
@@ -641,9 +659,19 @@
             "foundation-models:rap",
             "foundation-models:hvmap"
           ]
+        },
+        {
+          "id": "nov27-integral-deltanet",
+          "question": "为什么不能把KRA的协方差P称为本文积分state？",
+          "answer": "P描述相关key的后验不确定性并影响写入方向，X保存S的加权历史并只参与读取；语义和更新不同。",
+          "example": "教学例：在无新value时KRA遗忘可使P恢复，但X仍只是旧S历史的保留，不会变成写入增益矩阵。",
+          "papers": [
+            "foundation-models:integral-deltanet",
+            "foundation-models:kernel-ridge-attention"
+          ]
         }
       ],
-      "updated": "2026-11-26",
+      "updated": "2026-11-27",
       "reviewed_papers": [
         "foundation-models:alibi",
         "foundation-models:autonomy-heads",
@@ -695,7 +723,8 @@
         "foundation-models:hisa",
         "foundation-models:canon-layers-scale",
         "foundation-models:thresholded-longce",
-        "foundation-models:rap"
+        "foundation-models:rap",
+        "foundation-models:integral-deltanet"
       ],
       "updates": [
         {
@@ -981,6 +1010,18 @@
             "foundation-models:hvmap": "34c0f79eee9d1fe6fbc2b41e76c1c4671ba6a2346e8a290b93efb9b9ae044d9b"
           },
           "summary": "HVMap学习异构编码器空间的配对映射并联合原生/映射分数；RAP不对齐不同编码器，也不能把不同曲率或原点的向量直接混用。二者解决的不是同一检索瓶颈，现有L1不支持语义检索收益比较。 本轮组件范围闭环；完整矩阵未执行且未认定高成本。"
+        },
+        {
+          "date": "2026-11-27",
+          "papers": [
+            "foundation-models:integral-deltanet",
+            "foundation-models:kernel-ridge-attention"
+          ],
+          "source_revisions": {
+            "foundation-models:integral-deltanet": "128902947e331d13d4a0aea969dfced70110840cc06559d127f196b03d4a355f",
+            "foundation-models:kernel-ridge-attention": "44d055261f665849341526b12537423ee07559cebe19cec23e3ef32cbed78006"
+          },
+          "summary": "KRA维护回归系数与后验协方差，遗忘时恢复可写不确定性；Integral维护delta与它的指数加权历史。两份state不意味着同一内容：协方差不是记忆副本，积分history也不执行KRA的相关key校正。现有L1不能比较语言召回收益。 本轮为Nov24补漏CPU L1，完整实验高成本终态。"
         }
       ]
     },
@@ -2132,6 +2173,16 @@
             "核心公式",
             "同主题比较与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:deco-attention",
+          "position": "DeCo在runtime逐head估计主子空间，用Q侧和K侧一阶残差投影构造额外通道，让一个扩展QK点积带入两侧补偿；额外通道同样量化。",
+          "tradeoff": "DualQuant仅从静态权重拟合row/column尺度并重缩放激活；DeCo每次attention从Q/K本身估计basis，补偿两边量化残差，不训练静态权重尺度。两者的浮点仿真都不等于packed低位CUDA kernel，更不能以A100浮点执行宣称原生FP4加速。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -2252,6 +2303,14 @@
           "papers": [
             "foundation-models:duomi",
             "foundation-models:echomoe"
+          ]
+        },
+        {
+          "title": "DeCo-Attention: Decompose to Compensate for Low-Precision Attention",
+          "body": "DualQuant仅从静态权重拟合row/column尺度并重缩放激活；DeCo每次attention从Q/K本身估计basis，补偿两边量化残差，不训练静态权重尺度。两者的浮点仿真都不等于packed低位CUDA kernel，更不能以A100浮点执行宣称原生FP4加速。 Eq6的sample是旋转后尚未量化的Q/K，各Gram独立trace归一化；sample为max(N/256,2r)，混合text/audio/video需分层抽样。Appendix Eq25每组用power-of-two全局scale、每16channel unsigned E4M3 block scale和E2M1值，额外通道不能保持高精度。attention除以原始sqrt(d)，不是扩展维数sqrt(d+2r)。",
+          "papers": [
+            "foundation-models:deco-attention",
+            "foundation-models:dualquant"
           ]
         }
       ],
@@ -2407,9 +2466,19 @@
             "foundation-models:duomi",
             "foundation-models:echomoe"
           ]
+        },
+        {
+          "id": "nov27-deco-attention",
+          "question": "DeCo能直接替换DualQuant的权重尺度求解器吗？",
+          "answer": "不能。DualQuant优化静态weight重建的row/column尺度，DeCo纠正动态attention Q/K残差；对象和运行时机不同。",
+          "example": "教学例：两个prompt产生不同Q/K，DeCo需重估basis；静态weight尺度通常可复用。",
+          "papers": [
+            "foundation-models:deco-attention",
+            "foundation-models:dualquant"
+          ]
         }
       ],
-      "updated": "2026-11-26",
+      "updated": "2026-11-27",
       "reviewed_papers": [
         "foundation-models:agentkv",
         "foundation-models:e-means",
@@ -2453,7 +2522,8 @@
         "foundation-models:beyond-bitwidth",
         "foundation-models:loopcache-interface",
         "foundation-models:frontier-replay",
-        "foundation-models:duomi"
+        "foundation-models:duomi",
+        "foundation-models:deco-attention"
       ],
       "updates": [
         {
@@ -2673,6 +2743,18 @@
             "foundation-models:echomoe": "a939116286b19789b759c661c55b55fd02d367f882fe538d9d11251e867f42b9"
           },
           "summary": "EchoMoE复用跨层激活参考并压缩通信变化量；DuoMI共享expert参数并约束路由。前者的reference不是后者的expert池，减少通信和改变专家复用不是可交换收益；小张量反传不代表语言模型提升。 完整矩阵高成本终态，不以L1或审查充当能力证据。"
+        },
+        {
+          "date": "2026-11-27",
+          "papers": [
+            "foundation-models:deco-attention",
+            "foundation-models:dualquant"
+          ],
+          "source_revisions": {
+            "foundation-models:deco-attention": "f2076f3863195fa17210bcb4f0af885d4d42e816d6a853f333c9a7642bd4c9a1",
+            "foundation-models:dualquant": "88f1833985537599b8a8db50bf43570b1d4dbea3004a4a9fc35dbb4d820e4f29"
+          },
+          "summary": "DualQuant仅从静态权重拟合row/column尺度并重缩放激活；DeCo每次attention从Q/K本身估计basis，补偿两边量化残差，不训练静态权重尺度。两者的浮点仿真都不等于packed低位CUDA kernel，更不能以A100浮点执行宣称原生FP4加速。 本轮为Nov24补漏CPU L1，完整实验高成本终态。"
         }
       ]
     },

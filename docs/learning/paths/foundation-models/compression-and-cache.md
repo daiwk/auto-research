@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩：权重、KV 缓存与服务带宽
 
-[基础模型](index.md) / 172 个问题 · 43 篇论文
+[基础模型](index.md) / 176 个问题 · 44 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">172 个问题 · 43 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">176 个问题 · 44 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:duomi" data-paper-title="DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DuoMI: Dual Mutual Information Regularization for Expert Reuse in Looped Transformers 基础模型 Huawei Foundation Model Lab 2026-11-25 两次调用共享expert FFN，但attention、router与normalization独立。仅看总体expert使用分布会漏掉每个token全部换expert的情况；仅看逐token变化又可能允许两轮偏好不同子池。DuoMI分别限制聚合round–expert依赖和token条件下的round–expert依赖，训练使用全部expert的softmax而非无梯度的硬Top-k集合。 成本过高，不复现（审查 DONE），指完整论文实验矩阵；本地默认诊断为激活下界梯度而显式使用D区间[.5,.8]，不是调参求能力收益；PairedSharedExperts确实用两个独立router/LayerNorm读取连续状态，两轮调用同一GELU FFN expert池，稀疏Top-k派发和原加权不受正则改变。duomi_penalty读取派发前logits，valid token对齐，按8序列分组并真实反传。仅FFN耦合组件，无attention/因果语言模型、全局负载均衡、expert parallel或MindSpeed集成，不能称完整looped Transformer。  条件计算与专家路由 基础模型 推理压缩：权重、KV 缓存与服务带宽 两轮总体expert使用相同，是否每个token都复用expert？ 不一定。不同token的变化可互相抵消，使聚合G=0但逐token D&gt;0。 教学例：第一轮x选A、y选B，第二轮交换；两轮总体各一半A/B，但每个token都换了expert。 2026-11-26">
@@ -80,6 +80,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：独立优化两个logits数组无法证明共享FFN的耦合；本地检查第二轮loss通过第一轮状态回到共享参数。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.33952v1">原论文</a> · <a href="../../../../foundation-models/2611.33952-duomi/">实现解读</a> · <a href="#qa-3045d33257e10b35">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:deco-attention" data-paper-title="DeCo-Attention: Decompose to Compensate for Low-Precision Attention" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DeCo-Attention: Decompose to Compensate for Low-Precision Attention 基础模型 NVIDIA 2026-11-24 FP4 Q/K舍入产生的score误差可能被softmax指数放大。DeCo先以带随机行符号的Hadamard旋转Q/K，从旋转后原始sample的Gram矩阵估计共享principal basis；把量化残差在主方向的两侧一阶项加回。它舍弃二阶残差和未保留方向，不保证逐样本必然比未补偿更好。 成本过高，不复现（审查 DONE）适用于完整矩阵；诊断仅单一token种类。nvfp4_round按Eq25执行E2M1数值与E4M3 block16尺度的nearest-even仿真；prepare执行Hadamard、sample/raw Gram、EVD、两侧残差和再次量化extra groups；compensated_attention用FP64点积/标准softmax读取V。  注意力量化与残差补偿 基础模型 推理压缩：权重、KV 缓存与服务带宽 加回两个一阶残差项是否等于恢复原始QK？ 不等于。低秩截断、补偿通道再量化及二阶deltaQ deltaK项仍有误差。 教学例：即使用full-rank basis且不再量化extra，精确乘积与补偿乘积仍差deltaQ deltaK转置。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-deco-attention-fd4a0d19" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-689e8914c9056e13">加回两个一阶残差项是否等于恢复原始QK？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adeco-attention">DeCo-Attention: Decompose to Compensate for Low-Precision Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不等于。低秩截断、补偿通道再量化及二阶deltaQ deltaK项仍有误差。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：即使用full-rank basis且不再量化extra，精确乘积与补偿乘积仍差deltaQ deltaK转置。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32035v1">原论文</a> · <a href="../../../../foundation-models/2611.32035-deco-attention/">实现解读</a> · <a href="#qa-689e8914c9056e13">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:deco-attention" data-paper-title="DeCo-Attention: Decompose to Compensate for Low-Precision Attention" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DeCo-Attention: Decompose to Compensate for Low-Precision Attention 基础模型 NVIDIA 2026-11-24 FP4 Q/K舍入产生的score误差可能被softmax指数放大。DeCo先以带随机行符号的Hadamard旋转Q/K，从旋转后原始sample的Gram矩阵估计共享principal basis；把量化残差在主方向的两侧一阶项加回。它舍弃二阶残差和未保留方向，不保证逐样本必然比未补偿更好。 成本过高，不复现（审查 DONE）适用于完整矩阵；诊断仅单一token种类。nvfp4_round按Eq25执行E2M1数值与E4M3 block16尺度的nearest-even仿真；prepare执行Hadamard、sample/raw Gram、EVD、两侧残差和再次量化extra groups；compensated_attention用FP64点积/标准softmax读取V。  注意力量化与残差补偿 基础模型 推理压缩：权重、KV 缓存与服务带宽 共享basis为何不是直接相加两个未归一化Gram？ Q/K尺度可能不同；逐Gram除以各自trace让两者同权，sample还要在Hadamard后且量化前取得。 教学例：把Q放大100倍，正确trace归一化basis子空间不变；直接相加会被Q的10000倍能量支配。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-432c3dd8e3a394b7">共享basis为何不是直接相加两个未归一化Gram？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adeco-attention">DeCo-Attention: Decompose to Compensate for Low-Precision Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Q/K尺度可能不同；逐Gram除以各自trace让两者同权，sample还要在Hadamard后且量化前取得。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把Q放大100倍，正确trace归一化basis子空间不变；直接相加会被Q的10000倍能量支配。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32035v1">原论文</a> · <a href="../../../../foundation-models/2611.32035-deco-attention/">实现解读</a> · <a href="#qa-432c3dd8e3a394b7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:deco-attention" data-paper-title="DeCo-Attention: Decompose to Compensate for Low-Precision Attention" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DeCo-Attention: Decompose to Compensate for Low-Precision Attention 基础模型 NVIDIA 2026-11-24 FP4 Q/K舍入产生的score误差可能被softmax指数放大。DeCo先以带随机行符号的Hadamard旋转Q/K，从旋转后原始sample的Gram矩阵估计共享principal basis；把量化残差在主方向的两侧一阶项加回。它舍弃二阶残差和未保留方向，不保证逐样本必然比未补偿更好。 成本过高，不复现（审查 DONE）适用于完整矩阵；诊断仅单一token种类。nvfp4_round按Eq25执行E2M1数值与E4M3 block16尺度的nearest-even仿真；prepare执行Hadamard、sample/raw Gram、EVD、两侧残差和再次量化extra groups；compensated_attention用FP64点积/标准softmax读取V。  注意力量化与残差补偿 基础模型 推理压缩：权重、KV 缓存与服务带宽 DeCo能直接替换DualQuant的权重尺度求解器吗？ 不能。DualQuant优化静态weight重建的row/column尺度，DeCo纠正动态attention Q/K残差；对象和运行时机不同。 教学例：两个prompt产生不同Q/K，DeCo需重估basis；静态weight尺度通常可复用。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-1024235b8681c38d">DeCo能直接替换DualQuant的权重尺度求解器吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adeco-attention">DeCo-Attention: Decompose to Compensate for Low-Precision Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。DualQuant优化静态weight重建的row/column尺度，DeCo纠正动态attention Q/K残差；对象和运行时机不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个prompt产生不同Q/K，DeCo需重估basis；静态weight尺度通常可复用。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32035v1">原论文</a> · <a href="../../../../foundation-models/2611.32035-deco-attention/">实现解读</a> · <a href="#qa-1024235b8681c38d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:deco-attention" data-paper-title="DeCo-Attention: Decompose to Compensate for Low-Precision Attention" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DeCo-Attention: Decompose to Compensate for Low-Precision Attention 基础模型 NVIDIA 2026-11-24 FP4 Q/K舍入产生的score误差可能被softmax指数放大。DeCo先以带随机行符号的Hadamard旋转Q/K，从旋转后原始sample的Gram矩阵估计共享principal basis；把量化残差在主方向的两侧一阶项加回。它舍弃二阶残差和未保留方向，不保证逐样本必然比未补偿更好。 成本过高，不复现（审查 DONE）适用于完整矩阵；诊断仅单一token种类。nvfp4_round按Eq25执行E2M1数值与E4M3 block16尺度的nearest-even仿真；prepare执行Hadamard、sample/raw Gram、EVD、两侧残差和再次量化extra groups；compensated_attention用FP64点积/标准softmax读取V。  注意力量化与残差补偿 基础模型 推理压缩：权重、KV 缓存与服务带宽 CPU解码低位值后做FP64乘法，能报告FP4硬件加速吗？ 不能。它验证舍入与补偿代数，不执行packed FP4 MMA、kernel softmax或访存流水线。 教学例：把native_fp4_kernel_calls记录为0，并用原始d缩放softmax；不能把NumPy矩阵耗时标为GB300 latency。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-6446bd46c5aced1e">CPU解码低位值后做FP64乘法，能报告FP4硬件加速吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adeco-attention">DeCo-Attention: Decompose to Compensate for Low-Precision Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它验证舍入与补偿代数，不执行packed FP4 MMA、kernel softmax或访存流水线。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把native_fp4_kernel_calls记录为0，并用原始d缩放softmax；不能把NumPy矩阵耗时标为GB300 latency。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、同主题比较与边界、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32035v1">原论文</a> · <a href="../../../../foundation-models/2611.32035-deco-attention/">实现解读</a> · <a href="#qa-6446bd46c5aced1e">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:frontier-replay" data-paper-title="FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="FrontierReplay: Split-Free Exact Prefix Caching for Hybrid Language Models 基础模型 Beijing Institute of Technology 2026-11-19 混合模型的attention KV可按页复用，但递归状态只在保存过的精确位置恢复。FrontierReplay先根据已观察到的模板稳定尾、已完成turn和分叉点规划检查点；原生prefill不断开，之后只重放短窗递归输入生成精确状态。保留策略优先保护仍在执行的请求锚点和已证明可复用的分叉，而非只看历史频率。 完整实验：成本过高，不复现（审查 DONE）。源绑定的实际诊断由本批runner单独记录；L1策略/训练连线组件，不是完整论文复现。完整实验：成本过高，不复现（审查 DONE）。实现纯CPU host-policy组件：观察边界规划、显式pending/completion发布、lease、分层准入/驱逐、长前缀保护和每16请求的回收决策。KV驻留、已观察progress、稳定尾与非自身驱逐信号均由调用方显式提供；没有自主观察真实服务或用户日志。状态槽只是合成token前缀元数据，不是模型状态。  推理与系统效率 混合模型前缀缓存与检查点 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么有KV页仍可能无法复用整段混合模型前缀？ 递归状态是覆盖更新的。即使KV页还在，恢复位置也必须有完全对应的递归检查点；不能把较晚状态截短成较早状态。 教学例：KV覆盖到640token，但最近状态只在528；原生服务仍需从528重算到640。 2026-11-21">

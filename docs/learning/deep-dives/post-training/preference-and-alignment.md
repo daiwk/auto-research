@@ -7,7 +7,7 @@ hide:
 
 # 偏好不是一个分数：先确定反馈格式，再选对齐目标
 
-[LLM 后训练](../index.md) · 更新 2026-11-24 · 33 篇主题资料 / 14 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-27 · 34 篇主题资料 / 15 篇重点对照
 
 DPO、KTO、SimPO、ORPO和IPO主要改变“怎样使用反馈”，CleanRM先处理“反馈是否可信”。参考模型、长度归一化、有限间隔和噪声校正是不同设计轴，不能因都在扩大好坏回答差异就当成同一方法。
 
@@ -39,6 +39,7 @@ DPO、KTO、SimPO、ORPO和IPO主要改变“怎样使用反馈”，CleanRM先�
 | [Teaching Language Models to Adapt Answer Granularity to Their Confidence](../../../post-training/2611.21211-confidence-adaptive-granularity/README.md) · [原始来源](https://arxiv.org/abs/2611.21211v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 给定已核验hierarchy上的20采样/16共识规则、recognition的逐层全coarser通过规则与归一化information utility；不拿gold选训练共识。 | 这里按模型展示的可辨识知识自训练粒度，不需要chosen/rejected偏好loss；Granola-EQ另用答案和同层distractor的mean-token-logp识别规则。DPO的pair margin不能替代层级知识探测。 |
 | [Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data](../../../post-training/2611.22210-mpg-dpo/README.md) · [原始来源](https://arxiv.org/abs/2611.22210v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 只收录cone+ridge confidence+非支配trade-off主动选对的完整算法；不将一个pair selector宣称完整个性化DPO。 | 不是，核心在带ridge置信界的主动pair选择及cone在线更新，随后才用标准在线DPO。只调用DPO loss或从固定pair池挑最高差分不能冒充完整MPG-DPO。 |
 | [Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences](../../../post-training/2611.30135-shpo/README.md) · [原始来源](https://arxiv.org/abs/2611.30135v1)<br>章节：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界 | 纯CPU执行response-only mean pool、无bias d×2K投影与L2归一化、antisymmetric plane特征、DPO+curl logistic loss及gamma L1 subgradient；解析返回W/gamma/输入hidden/sequence logp梯度，hidden梯度未detach。zero projection的反向取0及gamma0处subgradient0是显式本地约定。无LLM/QLoRA/GPT judge或完整训练。 | DPO的reference-relative log-ratio保持一维标量势，SHPO在同一logit上加可表示局部循环的反对称残差，并保留对shared hidden的训练梯度。引入更多pairwise容量不意味着生成时直接使用curl head，论文因此把accπ和acc_dpo+c分开报告；本地也不把有环的三点教学例当作真实偏好数据收益。 |
+| [Scoring What Matters: Exact Feedback Reduction for Language Model Comparison](../../../post-training/2611.31931-cafa/README.md) · [原始来源](https://arxiv.org/abs/2611.31931v1)<br>章节：核心公式、与已有方法的关系、结果、负控与边界 | 给定fixed/versioned scalar scorer，按精确identity对报告系数做评分前抵消，分开mean与ordinary covariance支持；本地是CPU精确算法，不生成模型或判断文本。 | Probabilistic Autorater优化评分概率的校准与proper reward；CAFA不改变评分者，只减少请求报告所需的分数。exact恢复不等于judge正确，节省评分输入不等于已测总workflow成本下降。 |
 
 </div>
 
@@ -103,6 +104,12 @@ Vital Persons规则在20个模型回答中找至少16条共享的最细值，只
 DPO的reference-relative log-ratio保持一维标量势，SHPO在同一logit上加可表示局部循环的反对称残差，并保留对shared hidden的训练梯度。引入更多pairwise容量不意味着生成时直接使用curl head，论文因此把accπ和acc_dpo+c分开报告；本地也不把有环的三点教学例当作真实偏好数据收益。 来源：§III-B Eq.3–5、§III-C Eq.6–8、§III-D。当投影为0时论文令v=0；本地在该非光滑点选择零反向导数、γ=0选择零L1次梯度，均标为本地边界约定而非上游实现。Remark3明确该参数head不一定等于固定图的正交Hodge curl投影；论文讨论harmonic-free比较结构，不能把head叫任意全局循环的精确分解器。α/γ可互相吸收，存在L1惩罚时尺度会改变有效正则强度。
 
 对照来源：[shpo](../../../post-training/2611.30135-shpo/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
+
+### 评测预算优化必须同时固定报告统计量与评分者版本
+
+实际重读Probabilistic Autorater README：proper reward和parser数值核并不构成生成式autorater能力。CAFA同样不能把外部scorer当成本地已实现judge，但它的定义性算法可在固定bank上精确执行。mean支持按跨draw系数和判零，普通covariance支持保留任一draw非零的identity；镜像差值的mean为零不代表variance为零。cache必须区分rubric/deployment版本，identity不做语义合并，缺失反馈不得补0。少买反馈不校准裁判；不同sampler和draw预算的workflow成本也不能全部归给固定bank抵消。
+
+对照来源：[cafa](../../../post-training/2611.31931-cafa/README.md) · [probabilistic-autorater](../../../post-training/2510.00263-probabilistic-autorater/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -218,9 +225,23 @@ DPO的reference-relative log-ratio保持一维标量势，SHPO在同一logit上�
 
     对照来源：[shpo](../../../post-training/2611.30135-shpo/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
 
+### 同一bank的均值报告不需要评分，是否表示其置信区间也可以零评分恢复？ {#cross-nov27-cafa-statistic-boundary}
+
+??? note "展开答案与例子"
+
+    **答案：** 不表示。普通协方差需要逐draw向量，镜像draw可在均值抵消却仍有非零方差；即使恢复了样本协方差，区间解释还需要抽样独立性与覆盖方法，且不含judge重复噪声。
+
+    **教学例子：** 教学例：差值3和-3的均值为0，样本方差18。未取得两个score时可以知道均值抵消，却不知道这个方差或任意声称零不确定性。
+
+    对照来源：[cafa](../../../post-training/2611.31931-cafa/README.md) · [probabilistic-autorater](../../../post-training/2510.00263-probabilistic-autorater/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-27** · 实际重读Probabilistic Autorater并对照CAFA固定v1 Eq2–4/Algorithm2，增加评分者校准与评分需求规划的区分，明确mean/covariance支持、版本缓存、缺失不补0和fixed-bank/总体不确定性的界限。CAFA仅CPU算法；完整LLM/judge矩阵高成本不复现，审查DONE。
+
+涉及：[cafa](../../../post-training/2611.31931-cafa/README.md) · [probabilistic-autorater](../../../post-training/2510.00263-probabilistic-autorater/README.md)
 
 **2026-11-24** · DPO的reference-relative log-ratio保持一维标量势，SHPO在同一logit上加可表示局部循环的反对称残差，并保留对shared hidden的训练梯度。引入更多pairwise容量不意味着生成时直接使用curl head，论文因此把accπ和acc_dpo+c分开报告；本地也不把有环的三点教学例当作真实偏好数据收益。 L1核心机制组件，diagnostic only；不是完整LLM训练或能力验证。纯CPU，无CUDA宣传路径，不接Evolve晋级。 完整实验成本过高不复现，审查DONE。
 
@@ -258,7 +279,7 @@ DPO的reference-relative log-ratio保持一维标量势，SHPO在同一logit上�
 
 覆盖 25 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 33 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 34 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -295,6 +316,7 @@ DPO的reference-relative log-ratio保持一维标量势，SHPO在同一logit上�
 - [Teaching Language Models to Adapt Answer Granularity to Their Confidence](../../../post-training/2611.21211-confidence-adaptive-granularity/README.md)
 - [Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data](../../../post-training/2611.22210-mpg-dpo/README.md)
 - [Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences](../../../post-training/2611.30135-shpo/README.md)
+- [Scoring What Matters: Exact Feedback Reduction for Language Model Comparison](../../../post-training/2611.31931-cafa/README.md)
 
 </details>
 

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "verified_on": "2026-11-27",
+  "base_commit": "b9e713dd8fe5f005aee503a5a9e505b6f3e6b2c3",
+  "executed_source_commit": "4a4fe1c502a66ca12d40c5a38a6ee2bc75627f37",
+  "executed_source_files": 11,
+  "actual_runs": {
+    "cpu": {"components": 7, "seeds": [42, 43, 44], "elapsed_seconds": 2.0900100409053266},
+    "cuda": {"components": ["recommendation:elbo-tds"], "seeds": [42, 43, 44], "accelerator": "NVIDIA A100-SXM4-80GB", "elapsed_seconds": 1.4084976986050606},
+    "model_and_training_data_downloads": 0,
+    "model_api_calls": 0,
+    "full_capability_reproductions": 0,
+    "tier": "l1_mechanism",
+    "promotion_eligible": false
+  },
+  "local_checks": [
+    {"suite": "new algorithms, boundary controls and owned documentation", "passed": 66, "failures": 0, "seconds": 4.308},
+    {"suite": "unified intake, metadata, documentation catalog and specs", "passed": 24, "failures": 0, "seconds": 10.298},
+    {"suite": "required documentation workflow suites", "passed": 51, "failures": 0, "seconds": 30.368},
+    {"gate": "strict MkDocs build", "passed": true, "seconds": 76.19},
+    {"gate": "Ruff and compileall", "passed": true},
+    {"gate": "paper specs check/validate", "passed": true},
+    {"gate": "GPU evidence and frozen-source raw admission", "passed": true},
+    {"gate": "complete and base-relative reviewed English coverage", "passed": true},
+    {"gate": "paper-specific questions and same-topic deep-dive overlays", "passed": true},
+    {"gate": "fidelity inventory, discovery reconciliation and platform completion", "passed": true},
+    {"gate": "minimal-install metadata/help/init checks", "passed": true},
+    {"gate": "metric schema migration", "audited": 1283, "would_update": 0},
+    {"gate": "public dashboard generation and diff whitespace", "passed": true}
+  ],
+  "test_counts_are_not_additive": "Commands overlap; do not sum them as unique test cases or capability experiments.",
+  "integration_repairs_before_handoff": [
+    "Added both exact foundation browse-key mappings; initial generation correctly rejected missing coverage.",
+    "Normalized four English author-code field labels and added reviewed new topic labels; no provenance assertion weakened.",
+    "After adding real ELBO GPU links, re-reviewed the unchanged teaching analysis and refreshed its README/deep/English-overlay source fingerprints.",
+    "Corrected new delivery test to call the actual isolated runner validator rather than a nonexistent re-export. Executed algorithm/runner sources and GPU evidence were unchanged. Intermediate error XML is preserved privately.",
+    "A preliminary command named a nonexistent legacy test path and collected no tests; the final command uses actual catalog/spec contracts."
+  ],
+  "independent_review": "cross-review.json",
+  "github_ci": "Checked separately on the final PR head; pending at creation of this record. Final status belongs in PR handoff, not a fabricated pre-push result.",
+  "watermark_advanced": false,
+  "review_watermark_unchanged": "2026-11-15",
+  "protected_paths_unchanged": ["workflows", "uv.lock not recreated", "project readmes", "review watermark JSON", "outer user worktree", "Codex session records"]
+}

@@ -7,7 +7,7 @@ hide:
 
 # 从会调用到能交付：工具接口、可靠性与协作合同
 
-[Agent](../index.md) · 更新 2026-11-25 · 54 篇主题资料 / 11 篇重点对照
+[Agent](../index.md) · 更新 2026-11-27 · 55 篇主题资料 / 12 篇重点对照
 
 Toolformer 学何时调用，SWE-agent 设计动作接口，RATED 处理相关工具的运行可靠性；AutoGen 定义消息程序，MetaGPT 约束角色交付物，World of SWEcraft 再用隐藏下游检验群体产出。每层都可能失败，调用格式正确不是端到端完成的替身。
 
@@ -36,6 +36,7 @@ Toolformer 学何时调用，SWE-agent 设计动作接口，RATED 处理相关�
 | [CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts](../../../agent-research/2611.17115-caplite/README.md) · [原始来源](https://arxiv.org/abs/2611.17115v1)<br>章节：背景与主要改动、核心公式 | 可信schema推导authority，请求精确grounding限制值，读取前提交的写序列限制动作，首次失败停止剩余副作用。 | RuntimeTickets依赖有源obligation、host grant收紧和累计预算；CapLite的信任根是schema及请求。两者都要求所有真实副作用经过可信host，局部callback不是网络隔离保证。 |
 | [fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration](../../../agent-research/2611.31727-agent-kernel/README.md) · [原始来源](https://arxiv.org/abs/2611.31727v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定 | Agent-Kernel将依赖图恢复放到内容编排层：异常使后代不可达，SGR只重试失败子图，保存已完成兄弟，并让子节点继承真实父文本；选择性恢复本身继承分布式系统已有思想，不是新的planner或failure detector。 | RuntimeTickets在外部副作用前冻结并检查权限/obligation，对callback异常不自动重发；Agent-Kernel维护SAB内部依赖/状态，重试可以再次执行有副作用的节点。两层可组合但不互相替代。恢复完成不等于授权合法，更不意味着网络exactly-once。 |
 | [CAPE: Coordinating Calibration and Search for Tool-Use Policies](../../../agent-research/2611.31938-cape/README.md) · [原始来源](https://arxiv.org/abs/2611.31938v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定 | CAPE离线校准可复制parser配置族，持续存可执行策略并按响应scope做local closure；unknown效果的乐观松弛只指引获取和上界，不能作为部署答案。目标先最大化逐配置完成，再最小化调用总量，并保留初始R0。 | CapLite从可信请求/schema冻结authority grounding与写序列；CAPE在已选操作固定后解决其表示在隐藏parser下怎样执行。reference相等的commit不证明用户授权；CAPE的最优证书也不保证CapLite的write-prefix合同。 |
+| [LLM Agent Authorization Across Context Compaction](../../../agent-research/2611.32194-compaction-authorization/README.md) · [原始来源](https://arxiv.org/abs/2611.32194v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、同主题比较与边界、完整实验与成本决定 | 在策略生成前，以入口见证、完整有序列表commit和当前计数绑定用户原始授权文本；agent的摘要工作上下文不参与授权归因。 | RuntimeTickets在副作用前核收件者、对象和预算合同，HMAC审计链不自证前缀完整；本文当前计数拒绝取消省略，却不提供对象validator或安全策略语义。 |
 
 </div>
 
@@ -88,6 +89,12 @@ SGR的保证域是C = V ∖ ({f} ∪ Desc(f))的state与outputs不变。异常�
 CAPE的校准阶段知道候选h，可在隔离测试环境取得f(a,h)=(o,g)；返回policy仅有action和响应分支，部署只读工具观测。closed动作以G∪children组合成功集，以|V|+ΣMchild计算调用mass。未知program乐观立即成功，未知probe乐观每配置独立响应，selected T2只收紧当前动作的两调用续段。witness覆盖R0并在一致新效果后仍可执行，root有效lower=upper才证最优。本地1–8配置/1–4calls、query-count而非wall-clock预算；4配置诊断取得全20格，没有校准节省。独立oracle留在评估侧；随机有限表、中断R0、上下界和V外未知效果负控不等于真实CSV/JSON或LLM胜率。
 
 对照来源：[cape](../../../agent-research/2611.31938-cape/README.md) · [caplite](../../../agent-research/2611.17115-caplite/README.md)
+
+### 认证来源不替代语义授权，副作用合同不替代请求完整性
+
+两条输入必须分开：摘要服务Agent任务，认证原文服务授权器。occurrence MAC、顺序commit、current count/fresh boundary缺一会留echo/replay/omission缝隙。持久counter测试只在keys/state/issuer可信的前提内成立，SQLite不是Agent隔离。RuntimeTickets则冻结host收紧合同并在effect前审计，callback不确定不重发；它本地的审计链不证明被截短前缀完整。两层可组合但没有本地LLM攻击成功率；完整多模型/live矩阵高成本不复现。
+
+对照来源：[compaction-authorization](../../../agent-research/2611.32194-compaction-authorization/README.md) · [runtime-tickets](../../../agent-research/2611.03772-runtime-tickets/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -173,9 +180,23 @@ CAPE的校准阶段知道候选h，可在隔离测试环境取得f(a,h)=(o,g)；
 
     对照来源：[cape](../../../agent-research/2611.31938-cape/README.md) · [caplite](../../../agent-research/2611.17115-caplite/README.md)
 
+### 该门与RuntimeTickets保护的是同一边界吗？ {#cross-cross-nov27-compaction-authorization}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是。本文保护策略生成前的原始授权输入；RuntimeTickets在真实副作用前核冻结recipient/object/budget合同。原文完整不证明策略语义正确，合法发送也不证明摘要来源真实。
+
+    **教学例子：** 教学例：认证用户原句后生成器仍可能错误放宽recipient，需要下层ticket核具体交付，而不是把MAC当语义理解。
+
+    对照来源：[compaction-authorization](../../../agent-research/2611.32194-compaction-authorization/README.md) · [runtime-tickets](../../../agent-research/2611.03772-runtime-tickets/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-27** · 真实HMAC-SHA256 occurrence/sequence分域、精确UTF-8与长度前缀framing、完整有序计数、fresh session/boundary及SQLite持久消费。只释放认证原文，不执行LLM授权语义或真实Agent攻击；可信入口/key/counter隔离是外部前提。1MiB/有符号计数为本地准入，不承诺可用性或生产安全。 成本过高，不复现（审查 DONE）；仅承接小型CPU认证协议。
+
+涉及：[compaction-authorization](../../../agent-research/2611.32194-compaction-authorization/README.md) · [runtime-tickets](../../../agent-research/2611.03772-runtime-tickets/README.md)
 
 **2026-11-25** · 1–8配置、1–4调用的标准库有限编译器保留local closure、持久witness、Eq1–7乐观program/probe松弛、双frontier、三级query获取与selected两调用收紧；完全取得效果时有限递推精确。query-count上限替代wall-clock预算。校准可查询候选h；部署Policy只保存action/响应分支，execute不接活跃h、完整表或gold；独立full-information oracle仅评估侧。教学4配置全20格校准、无校准节省；非DuckDB/pandas真实数据、非LLM工具胜率、非完整性能复现。 完整高成本campaign终态不复现，审查DONE。
 
@@ -205,7 +226,7 @@ CAPE的校准阶段知道候选h，可在隔离测试环境取得f(a,h)=(o,g)；
 
 覆盖 49 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 54 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 55 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -263,6 +284,7 @@ CAPE的校准阶段知道候选h，可在隔离测试环境取得f(a,h)=(o,g)；
 - [CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts](../../../agent-research/2611.17115-caplite/README.md)
 - [fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration](../../../agent-research/2611.31727-agent-kernel/README.md)
 - [CAPE: Coordinating Calibration and Search for Tool-Use Policies](../../../agent-research/2611.31938-cape/README.md)
+- [LLM Agent Authorization Across Context Compaction](../../../agent-research/2611.32194-compaction-authorization/README.md)
 
 </details>
 

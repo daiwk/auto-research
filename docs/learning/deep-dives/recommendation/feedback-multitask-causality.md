@@ -7,7 +7,7 @@ hide:
 
 # 从CTR到满意度与uplift：先定义监督对象，再决定怎样共享
 
-[搜广推](../index.md) · 更新 2026-11-20 · 38 篇主题资料 / 8 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-27 · 39 篇主题资料 / 9 篇重点对照
 
 ESMM约束点击—转化漏斗概率，MMoE和PLE安排不同任务怎样共享专家，FLVM尝试把消费、主动参与和正负方向分开，Incrementality则比较采取与不采取动作的潜在结果。预测更多头、共享更多参数或拆出潜因子，都不自动解决因果识别。
 
@@ -33,6 +33,7 @@ ESMM约束点击—转化漏斗概率，MMoE和PLE安排不同任务怎样共享
 | [KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation](../../../recommendation-components/2610.36973-kl-mopd/README.md) · [原始来源](https://arxiv.org/abs/2610.36973v1)<br>章节：背景与主要改动、核心公式 | 一次校准位置级教师差距，以固定alpha最小化两项student\|\|teacher KL。 | 没有初始/当前学生采样器、推荐骨干或语义ID评测，不继承线上收益。 |
 | [COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift](../../../recommendation-components/2611.22597-cotti/README.md) · [原始来源](https://arxiv.org/abs/2611.22597v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | COTTI把训练时历史偏好连续性和上线时促销概率修正分开。CPC比较同一用户常态/促销双视图并用可微门控调节一致性；RW按相对历史距离重加权但截断其梯度；ABA在冻结预测器的logit上添加事件强度与预测头方差决定的有界修正。 | BAFF按竞价策略干扰过滤日志，COTTI按用户历史距离改变促销样本影响；两种权重/过滤都不自动成为因果无偏估计，COTTI的校准也不能证明A/B日志无污染。 |
 | [Antom 3-in-1 Transformer: A Payment Foundation Model](../../../recommendation-components/2611.25403-antom-3-in-1/README.md) · [原始来源](https://arxiv.org/abs/2611.25403v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | Antom把用户/卡/设备历史、当前交易字段和滚动用户图分开编码，再用任务query、共享注意力与稀疏专家做多任务融合。序列先做prefix-future对比，图先做视图对比及关系计数重建；下游图encoder冻结，图表示离线生成并按交易时间查询，其余主要模块在线打分。 | MMoE通过每任务gate组合共享专家；Antom在多模态编码之后，用任务query聚合共享信息再路由，并额外查离线图表示。多任务路由这一共性不表示两者可等价替换。原文生产对照是XGB/SAINT，不是MMoE；不能捏造两者实测胜负。 |
+| [ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems](../../../recommendation-components/2511.21032-elbo-tds/README.md) · [原始来源](https://arxiv.org/abs/2511.21032v2)<br>章节：与已有方法的关系、结果、负控与边界 | 本地L1只实现Eq3–7/Algorithm1的小型双encoder/decoder与dot-product预测器、单位高斯重参数采样和slot级增广。输入为调用者给定的分桶ID或已嵌入浮点slot：不读取生产特征或学习真实稳定因素。slot选择、各slot独立mask、MSE的元素均值是显式本地配置；没有完整字段embedding/dropout分组、时序增量trainer、MMoE、私有排序链路或公开benchmark效果比较。 | COTTI的CPC用常态/促销两视图的可微门控控制对比一致性，RW对历史距离重加权，ABA在服务logit上作促销校准。ELBO-TDS用多视图高斯prior与输入重建约束稳定因素，并把有标签任务留在原始观测上；没有ABA式上线概率修正。两者都依赖稳定语义假设，不能从对齐或重建直接推断因果可识别，也不能用不同生产A/B宣称彼此胜负。 |
 
 </div>
 
@@ -67,6 +68,12 @@ KL-MOPD把点击/价值的竞争定位到SID位置，而非只合并整物品分
 MMoE通过每任务gate组合共享专家；Antom在多模态编码之后，用任务query聚合共享信息再路由，并额外查离线图表示。多任务路由这一共性不表示两者可等价替换。原文生产对照是XGB/SAINT，不是MMoE；不能捏造两者实测胜负。 这里列的是附录A已公开的固定预算评测口径，不是未公开的完整训练loss或router算法。采样数据使用逆纳入权重；预算边界同分交易可共享分数配额，保证总权重仍等于q倍总体。金额损失率的分母是成功交易金额，不是交易笔数。§2明确未公开详细架构、训练配置和数据构造，不能补写猜测的实现。
 
 对照来源：[antom-3-in-1](../../../recommendation-components/2611.25403-antom-3-in-1/README.md) · [mmoe](../../../reproductions/kdd2018-mmoe-mmoe/README.md)
+
+### ELBO-TDS和COTTI如何分别应对促销漂移？
+
+COTTI的CPC用常态/促销两视图的可微门控控制对比一致性，RW对历史距离重加权，ABA在服务logit上作促销校准。ELBO-TDS用多视图高斯prior与输入重建约束稳定因素，并把有标签任务留在原始观测上；没有ABA式上线概率修正。两者都依赖稳定语义假设，不能从对齐或重建直接推断因果可识别，也不能用不同生产A/B宣称彼此胜负。
+
+对照来源：[elbo-tds](../../../recommendation-components/2511.21032-elbo-tds/README.md) · [cotti](../../../recommendation-components/2611.22597-cotti/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -132,9 +139,23 @@ MMoE通过每任务gate组合共享专家；Antom在多模态编码之后，用�
 
     对照来源：[antom-3-in-1](../../../recommendation-components/2611.25403-antom-3-in-1/README.md) · [mmoe](../../../reproductions/kdd2018-mmoe-mmoe/README.md)
 
+### ELBO-TDS和COTTI如何分别应对促销漂移？ {#cross-nov27-elbo-tds}
+
+??? note "展开答案与例子"
+
+    **答案：** COTTI的CPC用常态/促销两视图的可微门控控制对比一致性，RW对历史距离重加权，ABA在服务logit上作促销校准。ELBO-TDS用多视图高斯prior与输入重建约束稳定因素，并把有标签任务留在原始观测上；没有ABA式上线概率修正。两者都依赖稳定语义假设，不能从对齐或重建直接推断因果可识别，也不能用不同生产A/B宣称彼此胜负。
+
+    **教学例子：** 教学例：当所有视图只保留促销价时，重建不能凭空恢复常态偏好；COTTI的上调校准也不能纠正过预测。
+
+    对照来源：[elbo-tds](../../../recommendation-components/2511.21032-elbo-tds/README.md) · [cotti](../../../recommendation-components/2611.22597-cotti/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-27** · ELBO-TDS假设短期变化围绕相对稳定的用户/商品因素发生。它不只对齐增广表示：固定单位方差的encoder后验经重参数采样，decoder保留个体特征，跨视图prior约束抑制暂态噪声；任务预测只用原始观测的确定性均值。统计特征做分桶邻域扰动，序列随机mask，类别embedding dropout，再用全局特征选择限制增广强度。 本地L1只实现Eq3–7/Algorithm1的小型双encoder/decoder与dot-product预测器、单位高斯重参数采样和slot级增广。输入为调用者给定的分桶ID或已嵌入浮点slot：不读取生产特征或学习真实稳定因素。slot选择、各slot独立mask、MSE的元素均值是显式本地配置；没有完整字段embedding/dropout分组、时序增量trainer、MMoE、私有排序链路或公开benchmark效果比较。
+
+涉及：[elbo-tds](../../../recommendation-components/2511.21032-elbo-tds/README.md) · [cotti](../../../recommendation-components/2611.22597-cotti/README.md)
 
 **2026-11-20** · MMoE通过每任务gate组合共享专家；Antom在多模态编码之后，用任务query聚合共享信息再路由，并额外查离线图表示。多任务路由这一共性不表示两者可等价替换。原文生产对照是XGB/SAINT，不是MMoE；不能捏造两者实测胜负。 本地证据层级与完整实验不复现分别记录。
 
@@ -152,7 +173,7 @@ MMoE通过每任务gate组合共享专家；Antom在多模态编码之后，用�
 
 覆盖 35 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 38 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 39 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -194,6 +215,7 @@ MMoE通过每任务gate组合共享专家；Antom在多模态编码之后，用�
 - [KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation](../../../recommendation-components/2610.36973-kl-mopd/README.md)
 - [COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift](../../../recommendation-components/2611.22597-cotti/README.md)
 - [Antom 3-in-1 Transformer: A Payment Foundation Model](../../../recommendation-components/2611.25403-antom-3-in-1/README.md)
+- [ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems](../../../recommendation-components/2511.21032-elbo-tds/README.md)
 
 </details>
 

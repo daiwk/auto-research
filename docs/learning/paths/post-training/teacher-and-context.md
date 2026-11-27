@@ -7,7 +7,7 @@ hide:
 
 # 教师与纠错：额外信息何时能帮到学生
 
-[LLM 后训练](index.md) / 232 个问题 · 58 篇论文
+[LLM 后训练](index.md) / 236 个问题 · 59 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">232 个问题 · 58 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">236 个问题 · 59 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:care-opd" data-paper-title="Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Collect for Coverage, Replay with Evidence: Adaptive and Efficient On-Policy Distillation for Long-Horizon Agents LLM 后训练 Shanghai Jiao Tong University 2026-11-25 prefix replay让当前学生从已保存历史生成一轮响应，再由教师监督，从训练关键路径中移走长环境交互；但教师独有历史可能漏掉学生造成的状态，且固定早轮偏好会漏掉晚期诊断。CARE-OPD以少量学生roll-in再由教师完成来扩历史，用教师在新学生响应上的置信门过滤更新，并让已完成轨迹中的执行反馈支持回放turn选择。 完整实验成本过高，不复现（审查 DONE）；Review-only。完整实验成本过高，不复现（审查 DONE）；无本地实现、metrics或GPU回执，不自动重试，不接Evolve。无本地实现、运行命令或数据下载；不建立paper metrics或GPU回执。后见反馈仅可供训练时selector，绝不成为被评测Agent输入；若未来实现，应对学生prefix白名单及未来信息移除建立隔离测试。  teacher-and-context 轨迹回放 LLM 后训练 教师与纠错：额外信息何时能帮到学生 prefix replay中的on-policy到底在哪一层成立？ 当前学生从保存prefix生成新响应，所以响应层是on-policy；prefix来自过去固定policy轨迹，因此历史层off-policy。CARE-OPD用学生roll-in扩历史，但不把保存历史变成每次更新的新环境轨迹。 教学例：今天的学生从昨天记录的第20轮观察继续回答；新回答来自今天policy，但前19轮并未按今天policy重新执行。 2026-11-26">
@@ -80,6 +80,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：手工总选前40%turn没有读到后来失败测试，不能替代可能选中后半段关键修复的后见教师；因此本篇保持review-only成本DONE。</p>
 <p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.34756v1">原论文</a> · <a href="../../../../post-training/2611.34756-care-opd/">实现解读</a> · <a href="#qa-5e919a153d654646">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:elpsd" data-paper-title="The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop LLM 后训练 Not disclosed in fixed v1 2026-11-24 最后一轮向自己的冻结拷贝蒸馏，在初始化时loss和梯度都为0。ELPSD不换成外部教师或给参考答案，而把冻结初始模型的第一轮和最后一轮读数沿差异方向外推，形成高于最后一轮的target。学生仍从最后一轮生成，训练后保持标准最后轮解码；teacher在整个训练中不刷新。 完整实验成本过高，不复现（审查 DONE）；CPU L1给定logits数学组件，diagnostic only；没有循环Transformer、on-policy采样或训练。本篇为11月24日首发补漏，不是今日新发。完整实验成本过高，不复现（审查 DONE）；无retry/evolve。extrapolated_teacher固定Eq.3的完整词表target并冻结数组；loss_gradient计算Eq.4/5及解析logit梯度，显式mask排除padding且每响应至少一个有效prefix。refreshed_rounds仅执行Proposition2的有限理想化映射作负控。  跨loop自蒸馏 固定教师与reverse KL LLM 后训练 教师与纠错：额外信息何时能帮到学生 为什么最后轮向自己的冻结拷贝学习会没有初始信号？ 初始化时学生与该teacher同分布，KL和梯度都为0。ELPSD用第一轮到最后轮的log分布差向外推，因此w&gt;0且两轮不同才提供非零初始目标。 教学例：两轮分布不同，用w=0仍以最后轮自身为teacher；改w=0.5后target改变。若两轮本来相同，即使w&gt;0也没有该外推差。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<span id="paper-post-training-elpsd-ef82563d" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a5a6654b729521e3">为什么最后轮向自己的冻结拷贝学习会没有初始信号？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aelpsd">The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Not disclosed in fixed v1</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>初始化时学生与该teacher同分布，KL和梯度都为0。ELPSD用第一轮到最后轮的log分布差向外推，因此w&gt;0且两轮不同才提供非零初始目标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两轮分布不同，用w=0仍以最后轮自身为teacher；改w=0.5后target改变。若两轮本来相同，即使w&gt;0也没有该外推差。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32452v1">原论文</a> · <a href="../../../../post-training/2611.32452-elpsd/">实现解读</a> · <a href="#qa-a5a6654b729521e3">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:elpsd" data-paper-title="The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop LLM 后训练 Not disclosed in fixed v1 2026-11-24 最后一轮向自己的冻结拷贝蒸馏，在初始化时loss和梯度都为0。ELPSD不换成外部教师或给参考答案，而把冻结初始模型的第一轮和最后一轮读数沿差异方向外推，形成高于最后一轮的target。学生仍从最后一轮生成，训练后保持标准最后轮解码；teacher在整个训练中不刷新。 完整实验成本过高，不复现（审查 DONE）；CPU L1给定logits数学组件，diagnostic only；没有循环Transformer、on-policy采样或训练。本篇为11月24日首发补漏，不是今日新发。完整实验成本过高，不复现（审查 DONE）；无retry/evolve。extrapolated_teacher固定Eq.3的完整词表target并冻结数组；loss_gradient计算Eq.4/5及解析logit梯度，显式mask排除padding且每响应至少一个有效prefix。refreshed_rounds仅执行Proposition2的有限理想化映射作负控。  跨loop自蒸馏 固定教师与reverse KL LLM 后训练 教师与纠错：额外信息何时能帮到学生 ELPSD为什么必须冻结teacher，而不是每轮刷新外推目标？ 在论文理想化的精确拟合递推中，若第一轮固定而teacher由当前最后轮外推，跨轮log-odds差每轮放大1+w，最终集中到最大方向token。冻结teacher给KL一个固定驻点；该论证不是实际共享参数训练的全局收敛保证。 教学例：w=0.5，三轮理想刷新将相对第一轮的log-odds差放大1.5³倍；对固定teacher的精确匹配则已到零梯度，不再自我外推。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-a2d627d1877d28cb">ELPSD为什么必须冻结teacher，而不是每轮刷新外推目标？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aelpsd">The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Not disclosed in fixed v1</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>在论文理想化的精确拟合递推中，若第一轮固定而teacher由当前最后轮外推，跨轮log-odds差每轮放大1+w，最终集中到最大方向token。冻结teacher给KL一个固定驻点；该论证不是实际共享参数训练的全局收敛保证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：w=0.5，三轮理想刷新将相对第一轮的log-odds差放大1.5³倍；对固定teacher的精确匹配则已到零梯度，不再自我外推。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32452v1">原论文</a> · <a href="../../../../post-training/2611.32452-elpsd/">实现解读</a> · <a href="#qa-a2d627d1877d28cb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:elpsd" data-paper-title="The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop LLM 后训练 Not disclosed in fixed v1 2026-11-24 最后一轮向自己的冻结拷贝蒸馏，在初始化时loss和梯度都为0。ELPSD不换成外部教师或给参考答案，而把冻结初始模型的第一轮和最后一轮读数沿差异方向外推，形成高于最后一轮的target。学生仍从最后一轮生成，训练后保持标准最后轮解码；teacher在整个训练中不刷新。 完整实验成本过高，不复现（审查 DONE）；CPU L1给定logits数学组件，diagnostic only；没有循环Transformer、on-policy采样或训练。本篇为11月24日首发补漏，不是今日新发。完整实验成本过高，不复现（审查 DONE）；无retry/evolve。extrapolated_teacher固定Eq.3的完整词表target并冻结数组；loss_gradient计算Eq.4/5及解析logit梯度，显式mask排除padding且每响应至少一个有效prefix。refreshed_rounds仅执行Proposition2的有限理想化映射作负控。  跨loop自蒸馏 固定教师与reverse KL LLM 后训练 教师与纠错：额外信息何时能帮到学生 ELPSD与已有LoOPSD是否只是同一个跨loop KL？ 不是。LoOPSD在普通模型中搜索重复层区间，独立验证选teacher后交替刷新；ELPSD在原生looped模型中固定第一/最后轮读数并外推，不搜索route。论文另提LoopOPD，不能因名字相近把它与LoOPSD混为一谈。 教学例：为标准Transformer选重复第5至8层的route属于LoOPSD；对原生4loop模型的loop1/4分布做固定外推属于ELPSD。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e4514d3978e21401">ELPSD与已有LoOPSD是否只是同一个跨loop KL？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aelpsd">The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Not disclosed in fixed v1</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。LoOPSD在普通模型中搜索重复层区间，独立验证选teacher后交替刷新；ELPSD在原生looped模型中固定第一/最后轮读数并外推，不搜索route。论文另提LoopOPD，不能因名字相近把它与LoOPSD混为一谈。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：为标准Transformer选重复第5至8层的route属于LoOPSD；对原生4loop模型的loop1/4分布做固定外推属于ELPSD。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32452v1">原论文</a> · <a href="../../../../post-training/2611.32452-elpsd/">实现解读</a> · <a href="#qa-e4514d3978e21401">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:elpsd" data-paper-title="The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop LLM 后训练 Not disclosed in fixed v1 2026-11-24 最后一轮向自己的冻结拷贝蒸馏，在初始化时loss和梯度都为0。ELPSD不换成外部教师或给参考答案，而把冻结初始模型的第一轮和最后一轮读数沿差异方向外推，形成高于最后一轮的target。学生仍从最后一轮生成，训练后保持标准最后轮解码；teacher在整个训练中不刷新。 完整实验成本过高，不复现（审查 DONE）；CPU L1给定logits数学组件，diagnostic only；没有循环Transformer、on-policy采样或训练。本篇为11月24日首发补漏，不是今日新发。完整实验成本过高，不复现（审查 DONE）；无retry/evolve。extrapolated_teacher固定Eq.3的完整词表target并冻结数组；loss_gradient计算Eq.4/5及解析logit梯度，显式mask排除padding且每响应至少一个有效prefix。refreshed_rounds仅执行Proposition2的有限理想化映射作负控。  跨loop自蒸馏 固定教师与reverse KL LLM 后训练 教师与纠错：额外信息何时能帮到学生 为什么不能把每响应均值改成全batch token均值？ Eq4先在每条响应内按有效prefix均值，再跨响应均值，使每条响应总权重相同。全token均值会让长响应获得更多权重；mask只隔离padding，不负责生成真实on-policy prefix。 教学例：两响应分别有3和1个有效prefix，各响应应占总loss一半；统一四token均值会让长响应占3/4。给定随机logits检验这个归约不等于执行循环模型。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-c92c53cbac4b1310">为什么不能把每响应均值改成全batch token均值？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aelpsd">The Teacher Is Already Inside: Self-Distilling Looped Language Models Beyond Their Last Loop</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Not disclosed in fixed v1</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Eq4先在每条响应内按有效prefix均值，再跨响应均值，使每条响应总权重相同。全token均值会让长响应获得更多权重；mask只隔离padding，不负责生成真实on-policy prefix。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两响应分别有3和1个有效prefix，各响应应占总loss一半；统一四token均值会让长响应占3/4。给定随机logits检验这个归约不等于执行循环模型。</p>
+<p class="ar-learning-sources">依据：核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32452v1">原论文</a> · <a href="../../../../post-training/2611.32452-elpsd/">实现解读</a> · <a href="#qa-c92c53cbac4b1310">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:hint-wam" data-paper-title="HINT-WAM: Hindsight-Informed Training for World Action Models" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="HINT-WAM: Hindsight-Informed Training for World Action Models LLM 后训练 National University of Singapore 2026-11-18 HINT-WAM先SFT动作专家，再冻结同一backbone，只训练hindsight encoder与gated adapters读取示范未来视频。teacher去掉当前帧并保留时间轴，学生与部署策略从来不看未来。最后学生在自身ODE采样轨迹上重新评估少量去噪点，匹配冻结teacher的动作分布。直接velocity MSE可能把学生看不到的多模态未来压成均值。论文用energy score：到teacher单样本的吸引项减去学生样本间排斥项，同时保留behavior-cloning anchor； 完整实验成本过高，不复现（审查 DONE）；仅研究资料，无本地实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录同源hindsight teacher、学生ODE状态上的energy-score与BC anchor、成本和限制。无本地模型/算子/指标，不用静态动作样本替代真实WAM蒸馏。  teacher-and-context 后训练方法资料 LLM 后训练 教师与纠错：额外信息何时能帮到学生 学生部署时为什么不需要未来视频？ 未来视频只通过训练期hindsight encoder/adapters进入冻结teacher；student只看当前帧、指令和本体状态，蒸馏结束丢弃teacher模块。把未来交给student会改变任务。 教学例：示范未来可消解抓取左物体/右物体的歧义，但真实机器人执行时不能读取尚未发生的示范帧。 2026-11-19">

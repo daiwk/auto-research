@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "adapter_key": "elbo-tds",
+  "validated_at": "2026-11-27",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB",
+    "count": 1
+  },
+  "command": [
+    "timeout",
+    "180",
+    "python3",
+    "scripts/run_nov27_latest_components.py",
+    "--device",
+    "cuda",
+    "--source-commit",
+    "4a4fe1c502a66ca12d40c5a38a6ee2bc75627f37",
+    "--output",
+    "raw-cuda.json"
+  ],
+  "dataset": {
+    "id": "synthetic:nov27-overlap-elbo-tds-component-v1",
+    "revision": "sha256:1c9b4efc3be5209cede35e068a93a3803bc504cc0f2e348cca6739d8bc5b4f95",
+    "recipe": "Seeded small tensors or explicit deterministic evaluator/control cases; no pretrained output or public capability measurement",
+    "capability_benchmark": false
+  },
+  "checkpoint": {
+    "public_id": "none-seeded-component-initialization",
+    "revision": "4a4fe1c502a66ca12d40c5a38a6ee2bc75627f37",
+    "pretrained": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "metrics": {
+    "loss": 1.5960133605744629,
+    "prediction": 0.7263278503218986,
+    "prior": 1.173453059892056,
+    "reconstruction": 3.1749744913707656
+  },
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "provenance": {
+    "commit": "4a4fe1c502a66ca12d40c5a38a6ee2bc75627f37",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "artifact_path": "docs/gpu-validations/elbo-tds-a100-20261127-latest.json",
+    "executed_source_sha256": {
+      "scripts/run_nov27_latest_components.py": "e7e624edf90dcfcd5d2e7b5053f0ab5499774901575a686ae5da75c3decf6341",
+      "scripts/run_nov18_latest_components.py": "0fe50e8e554f6663b3c8c179654400d10bfbb557ceb9cefb9880da78f164b7c1",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov27-latest/preflight.json": "192ac116d6757064c690c261b8645311de7a529151ad569d5eafba13d71e98c9",
+      "src/auto_research/foundation_models/integral_deltanet.py": "5c85167a2b42f545f62c7ebd8211058ed01d0474b84e564691310d77426976e9",
+      "src/auto_research/foundation_models/deco_attention.py": "56d074c135e2710e63c0c7d1fab46fcc39dbde5b8bbb2401c971e37090b2a620",
+      "src/auto_research/post_training/cafa.py": "bbbfd13e1b52b6c2816b4cbf6b52899d8ccd5c56d6f8918f921e0e1074a5cccc",
+      "src/auto_research/post_training/elpsd.py": "2d999af3ccfc04bd30a9888ac2d624c0ba3bb0bcb1e21d5324fb06f4394a08f7",
+      "src/auto_research/agent_research/compaction_authorization.py": "bb634d78efe01969f81aa1009423758aac873d3ff820b0fcd8c4f3846fc5d59b",
+      "src/auto_research/agent_research/budgeted_submapl.py": "337528f3b91c7430248dd4397bc4ada001e68967688087e4157c97aaec1d3f1f",
+      "src/auto_research/reproductions/elbo_tds_components.py": "1c9b4efc3be5209cede35e068a93a3803bc504cc0f2e348cca6739d8bc5b4f95"
+    },
+    "dataset_fingerprint": "sha256:e90a18058ee9137cbc7dba24da7e83fadd8ded171cb4d07ea0f546dca6dc4353",
+    "raw_runner_artifact_sha256": "d588f36b42624301f2d9b1b07342720b16154831cb3b4a70d705141ab44dc229",
+    "metric_artifact_path": "docs/recommendation-components/2511.21032-elbo-tds/metrics/component-cuda-seeds42-44.json"
+  }
+}

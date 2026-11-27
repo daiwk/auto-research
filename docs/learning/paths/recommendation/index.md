@@ -30,7 +30,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="feedback-multitask-causality/">学习信号、多任务与反馈偏差</a></h2>
 <p>观察到的点击和转化，究竟能监督哪一个概率或价值？</p>
-<p class="ar-learning-topic-meta">152 个问题 · 38 篇论文</p>
+<p class="ar-learning-topic-meta">156 个问题 · 39 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="slates-business-value/">列表与业务控制：重排、出价和长期价值</a></h2>

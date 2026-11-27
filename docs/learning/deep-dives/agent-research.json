@@ -1442,6 +1442,20 @@
             "同主题比较与边界",
             "完整实验与成本决定"
           ]
+        },
+        {
+          "paper": "agent-research:compaction-authorization",
+          "position": "在策略生成前，以入口见证、完整有序列表commit和当前计数绑定用户原始授权文本；agent的摘要工作上下文不参与授权归因。",
+          "tradeoff": "RuntimeTickets在副作用前核收件者、对象和预算合同，HMAC审计链不自证前缀完整；本文当前计数拒绝取消省略，却不提供对象validator或安全策略语义。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ]
         }
       ],
       "analysis": [
@@ -1510,6 +1524,14 @@
           "papers": [
             "agent-research:cape",
             "agent-research:caplite"
+          ]
+        },
+        {
+          "title": "认证来源不替代语义授权，副作用合同不替代请求完整性",
+          "body": "两条输入必须分开：摘要服务Agent任务，认证原文服务授权器。occurrence MAC、顺序commit、current count/fresh boundary缺一会留echo/replay/omission缝隙。持久counter测试只在keys/state/issuer可信的前提内成立，SQLite不是Agent隔离。RuntimeTickets则冻结host收紧合同并在effect前审计，callback不确定不重发；它本地的审计链不证明被截短前缀完整。两层可组合但没有本地LLM攻击成功率；完整多模型/live矩阵高成本不复现。",
+          "papers": [
+            "agent-research:compaction-authorization",
+            "agent-research:runtime-tickets"
           ]
         }
       ],
@@ -1595,9 +1617,19 @@
             "agent-research:cape",
             "agent-research:caplite"
           ]
+        },
+        {
+          "id": "cross-nov27-compaction-authorization",
+          "question": "该门与RuntimeTickets保护的是同一边界吗？",
+          "answer": "不是。本文保护策略生成前的原始授权输入；RuntimeTickets在真实副作用前核冻结recipient/object/budget合同。原文完整不证明策略语义正确，合法发送也不证明摘要来源真实。",
+          "example": "教学例：认证用户原句后生成器仍可能错误放宽recipient，需要下层ticket核具体交付，而不是把MAC当语义理解。",
+          "papers": [
+            "agent-research:compaction-authorization",
+            "agent-research:runtime-tickets"
+          ]
         }
       ],
-      "updated": "2026-11-25",
+      "updated": "2026-11-27",
       "reviewed_papers": [
         "agent-research:runtime-tickets",
         "agent-research:rpl",
@@ -1652,7 +1684,8 @@
         "agent-research:retrace",
         "agent-research:caplite",
         "agent-research:agent-kernel",
-        "agent-research:cape"
+        "agent-research:cape",
+        "agent-research:compaction-authorization"
       ],
       "updates": [
         {
@@ -1828,6 +1861,18 @@
             "agent-research:caplite": "2c380139ce94eb86eb96b0c23440b0b3896e4450f8c9bb9f69bb7e902a9646d5"
           },
           "summary": "1–8配置、1–4调用的标准库有限编译器保留local closure、持久witness、Eq1–7乐观program/probe松弛、双frontier、三级query获取与selected两调用收紧；完全取得效果时有限递推精确。query-count上限替代wall-clock预算。校准可查询候选h；部署Policy只保存action/响应分支，execute不接活跃h、完整表或gold；独立full-information oracle仅评估侧。教学4配置全20格校准、无校准节省；非DuckDB/pandas真实数据、非LLM工具胜率、非完整性能复现。 完整高成本campaign终态不复现，审查DONE。"
+        },
+        {
+          "date": "2026-11-27",
+          "papers": [
+            "agent-research:compaction-authorization",
+            "agent-research:runtime-tickets"
+          ],
+          "source_revisions": {
+            "agent-research:compaction-authorization": "8e862328844a5879a00c8bbaa7c3ffa9cd8613849f9ec63fe4f8a71b983e2d59",
+            "agent-research:runtime-tickets": "5b00948adf9bb0542e98df053cfe7028c1ab6925099a181503296520a390d8d4"
+          },
+          "summary": "真实HMAC-SHA256 occurrence/sequence分域、精确UTF-8与长度前缀framing、完整有序计数、fresh session/boundary及SQLite持久消费。只释放认证原文，不执行LLM授权语义或真实Agent攻击；可信入口/key/counter隔离是外部前提。1MiB/有符号计数为本地准入，不承诺可用性或生产安全。 成本过高，不复现（审查 DONE）；仅承接小型CPU认证协议。"
         }
       ]
     },
@@ -3828,6 +3873,20 @@
             "同主题比较与边界",
             "完整实验与成本决定"
           ]
+        },
+        {
+          "paper": "agent-research:budgeted-submapl",
+          "position": "固定域多agent分类策略在收益未知前分配rho，依赖舍入精确Q后只问所选边际，IPW与KL更新保留实际预算化策略学习。",
+          "tradeoff": "OOAS只见aggregate任务回报与逐turn hint，使用共享Exp噪声和整任务同臂概率；本篇可查询反事实坐标。重要性分母、反馈粒度与FTRL/KL更新不可替换。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ]
         }
       ],
       "analysis": [
@@ -3887,6 +3946,14 @@
           "papers": [
             "agent-research:ooas",
             "agent-research:acting-to-learning"
+          ]
+        },
+        {
+          "title": "预算反馈的无偏性取决于采样事件，不是统一的1/p技巧",
+          "body": "SubMAPL的rho是边缘包含概率，固定基数依赖舍入须保E[Z]=rho，query选择不能偷看当前gain或联合action。IPW后在每agent simplex做KL mirror-ascent，sqrt分配最小化二阶矩上界而非保证胜率。OOAS全任务共享noise使同臂事件概率不等于边缘概率乘积，切臂时不归因残差。两者本地都是有限数学核，非LLM Agent。SubMAPL迁移/环境尚未承接且无证据高成本，完整状态保留scope-limited/false full-review，不能制造高成本DONE。",
+          "papers": [
+            "agent-research:budgeted-submapl",
+            "agent-research:ooas"
           ]
         }
       ],
@@ -3972,9 +4039,19 @@
             "agent-research:ooas",
             "agent-research:acting-to-learning"
           ]
+        },
+        {
+          "id": "cross-nov27-budgeted-submapl",
+          "question": "SubMAPL与OOAS的重要性权重可互换吗？",
+          "answer": "不可。前者观察被查询的反事实边际，按坐标包含概率校正；OOAS只观察任务总反馈，按共享noise产生的整任务同臂事件概率校正hint残差。两者反馈可见性和更新器都不同。",
+          "example": "教学例：一任务中切过臂时OOAS残差归因全0；SubMAPL同轮选中的两坐标仍各按自己的rho更新。",
+          "papers": [
+            "agent-research:budgeted-submapl",
+            "agent-research:ooas"
+          ]
         }
       ],
-      "updated": "2026-11-24",
+      "updated": "2026-11-27",
       "reviewed_papers": [
         "agent-research:frontier-opd",
         "agent-research:asteroid",
@@ -4033,7 +4110,8 @@
         "agent-research:ace-rl",
         "agent-research:acting-to-learning",
         "agent-research:r2-tool-redundancy",
-        "agent-research:ooas"
+        "agent-research:ooas",
+        "agent-research:budgeted-submapl"
       ],
       "updates": [
         {
@@ -4209,6 +4287,18 @@
             "agent-research:acting-to-learning": "b4facbf5a94d973a84390bb3cdff04b8d454e177645cfae4dddfc3f754e55414"
           },
           "summary": "独立标准库CPU核实际解FTRL的KKT方程：Gk+α/√pk+β/pk为共同乘子，通过平移score与二分求解，而非softmax替身；实现共享Exp采样、ρ、聚合残差、potential和Alg2重启。begin→choose→finish只接受当前hint和最终aggregate，不接受turn reward向量或gold答案/计划。噪声注入只供数学控制。没有LLM、activation probe、TACT干预、代码执行器、真实任务分数或Evolve映射。数值求根是有公差的float64近似，不声称无限精度理论实现。 完整campaign终态不复现，审查DONE。"
+        },
+        {
+          "date": "2026-11-27",
+          "papers": [
+            "agent-research:budgeted-submapl",
+            "agent-research:ooas"
+          ],
+          "source_revisions": {
+            "agent-research:budgeted-submapl": "2e329077a822dab0f8c9ca86bc21592d9d03404e4b70d8da2897784222487070",
+            "agent-research:ooas": "e1581613218eb76d573c188ec4f32cbc699cc76915ce56e442e9d71639c4e193"
+          },
+          "summary": "固定active-domain的clipped sqrt包含分配、精确Q依赖舍入、独立joint-action采样、仅所选坐标oracle查询、IPW与log-space KL更新；真归一化子模coverage小函数与评估侧期望控制。无LLM Agent、动态迁移M、完整环境/观察策略表，未伪造高成本终态。 组件范围完成；完整便宜模拟/迁移未承接，not_run_scope_limited，非高成本延期。"
         }
       ]
     },

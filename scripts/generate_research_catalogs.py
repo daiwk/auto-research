@@ -61,6 +61,8 @@ INVALID_AFFILIATION_MARKERS = (
 # every generated page. Unknown future labels remain visible under “其他”.
 TOPIC_HIERARCHY = {
     "post-training": {
+        "cafa": ("偏好建模与监督", "偏好评测与校准"),
+        "elpsd": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "luce-similarity-audit": ("偏好建模与监督", "偏好评测与校准"),
         "calibrated-judges-protocol": ("偏好建模与监督", "偏好评测与校准"),
         "lgpo": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
@@ -179,6 +181,8 @@ TOPIC_HIERARCHY = {
         "Flow map": ("蒸馏与训练闭环", "生成模型蒸馏"),
     },
     "agent-research": {
+        "compaction-authorization": ("评测、安全与可靠性", "安全与权限边界"),
+        "budgeted-submapl": ("工具使用与多 Agent 协作", "多 Agent 协作与通信"),
         "askalcf-protocol": ("工具调用与环境执行", "检索归因与受控修复"),
         "prodpilot-protocol": ("多 Agent 与软件工程", "独立校验与部署门"),
         "coremem": ("记忆、技能与持续学习", "主动 / 长期记忆"),
@@ -345,6 +349,8 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "integral-deltanet": ("注意力与长上下文", "线性注意力与状态空间"),
+    "deco-attention": ("推理与系统效率", "量化与数值补偿"),
     "rap": ("推理与系统效率", "表征压缩与几何"),
     "duomi": ("网络架构", "MoE 与动态路由"),
     "jepa-eu": ("多模态基础模型", "世界模型与具身控制"),
@@ -930,7 +936,7 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
-        **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in ("rap", "duomi", "jepa-eu")},
+        **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in ("integral-deltanet", "deco-attention", "rap", "duomi", "jepa-eu")},
         **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in ("udvr", "thresholded-longce", "criticjepa")},
         **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in ("deep-cross-attention", "stablekl")},
         **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in ("aimuon", "spot-bench", "disco", "frontier-replay", "mv-jepa", "e-rwsc")},

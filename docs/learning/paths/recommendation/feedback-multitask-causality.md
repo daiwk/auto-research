@@ -7,7 +7,7 @@ hide:
 
 # 学习信号、多任务与反馈偏差
 
-[搜广推](index.md) / 152 个问题 · 38 篇论文
+[搜广推](index.md) / 156 个问题 · 39 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">152 个问题 · 38 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">156 个问题 · 39 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:antom-3-in-1" data-paper-title="Antom 3-in-1 Transformer: A Payment Foundation Model" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Antom 3-in-1 Transformer: A Payment Foundation Model 搜广推与 LLM 应用 Ant International 2026-11-19 Antom把用户/卡/设备历史、当前交易字段和滚动用户图分开编码，再用任务query、共享注意力与稀疏专家做多任务融合。序列先做prefix-future对比，图先做视图对比及关系计数重建；下游图encoder冻结，图表示离线生成并按交易时间查询，其余主要模块在线打分。Fixed-v1 primary source 没有可执行复现. 完整实验：成本过高，不复现（审查 DONE）。仅审查收录；没有可执行复现. 完整实验：成本过高，不复现（审查 DONE）。只收录经核对的生产证据、方法边界、原图和成本；没有本地模型、训练/推理代码、metrics、GPU回执或Evolve operator。公开IBM/图benchmark的存在不补全缺失配置和私有训练链路；不以小型拼接/MLP冒充7B支付基础模型。  内容理解、审核与风险控制 支付交易风险 搜广推 学习信号、多任务与反馈偏差 3-in-1指什么，图encoder也每笔交易重跑吗？ 指交易序列、表格字段和关系图三种模态。图encoder在微调时冻结、离线产出表示，在线只查满足时间条件的图向量。 教学例：新交易在线编码其历史和字段，但不能用交易发生后才形成的关系图作特征。 2026-11-20">
@@ -1723,6 +1723,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>用户听了自然推荐播客，并没有看到其广告，不能因此写广告未点击负例；否则模型会把缺少广告机会误学成广告效果差。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.02306">原论文</a> · <a href="../../../../reproductions/2601.02306-podcast-mtl/">实现解读</a> · <a href="#qa-6cb40b601772ffa9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:elbo-tds" data-paper-title="ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems 搜广推与 LLM 应用 Shopee 2025-11-26 ELBO-TDS假设短期变化围绕相对稳定的用户/商品因素发生。它不只对齐增广表示：固定单位方差的encoder后验经重参数采样，decoder保留个体特征，跨视图prior约束抑制暂态噪声；任务预测只用原始观测的确定性均值。统计特征做分桶邻域扰动，序列随机mask，类别embedding dropout，再用全局特征选择限制增广强度。 完整矩阵成本过高，不复现（审查 DONE）；CUDA同入口，已在真实单A100完成42/43/44三seed诊断（统一runner计时约1.41秒），不代表性能加速或能力提升。L1机制组件，不是完整工业复现；原始首发2025年，2026年11月25日v2带出本次补录，不是今天新发。本地L1只实现Eq3–7/Algorithm1的小型双encoder/decoder与dot-product预测器、单位高斯重参数采样和slot级增广。输入为调用者给定的分桶ID或已嵌入浮点slot：不读取生产特征或学习真实稳定因素。slot选择、各slot独立mask、MSE的元素均值是显式本地配置；  训练目标与决策优化 时间漂移与稳健增量训练 搜广推 学习信号、多任务与反馈偏差 ELBO-TDS要保留什么，又要消除什么？ 保留相对稳定且能预测个体行为的因素，减少短期促销等噪声；重建项避免仅对齐导致个体细节丢失。 教学例：两人都喜欢手机，但一个看重新款、另一个看重低价；不能把二者表示压成相同。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<span id="paper-recommendation-elbo-tds-287ffde7" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-32061d0ffde44a5f">ELBO-TDS要保留什么，又要消除什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aelbo-tds">ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Shopee</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>保留相对稳定且能预测个体行为的因素，减少短期促销等噪声；重建项避免仅对齐导致个体细节丢失。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两人都喜欢手机，但一个看重新款、另一个看重低价；不能把二者表示压成相同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2511.21032v2">原论文</a> · <a href="../../../../recommendation-components/2511.21032-elbo-tds/">实现解读</a> · <a href="#qa-32061d0ffde44a5f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:elbo-tds" data-paper-title="ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems 搜广推与 LLM 应用 Shopee 2025-11-26 ELBO-TDS假设短期变化围绕相对稳定的用户/商品因素发生。它不只对齐增广表示：固定单位方差的encoder后验经重参数采样，decoder保留个体特征，跨视图prior约束抑制暂态噪声；任务预测只用原始观测的确定性均值。统计特征做分桶邻域扰动，序列随机mask，类别embedding dropout，再用全局特征选择限制增广强度。 完整矩阵成本过高，不复现（审查 DONE）；CUDA同入口，已在真实单A100完成42/43/44三seed诊断（统一runner计时约1.41秒），不代表性能加速或能力提升。L1机制组件，不是完整工业复现；原始首发2025年，2026年11月25日v2带出本次补录，不是今天新发。本地L1只实现Eq3–7/Algorithm1的小型双encoder/decoder与dot-product预测器、单位高斯重参数采样和slot级增广。输入为调用者给定的分桶ID或已嵌入浮点slot：不读取生产特征或学习真实稳定因素。slot选择、各slot独立mask、MSE的元素均值是显式本地配置；  训练目标与决策优化 时间漂移与稳健增量训练 搜广推 学习信号、多任务与反馈偏差 prior均值跨哪个维度计算，为什么熵项不训练？ prior对同一样本的J个采样视图求均值而不是混整个batch；后验固定单位方差，熵为常数，梯度为0。 教学例：两个用户各3个视图得到两个中心，不能把6个视图缩向同一个中心。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-05db9116ce7db4ef">prior均值跨哪个维度计算，为什么熵项不训练？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aelbo-tds">ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Shopee</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>prior对同一样本的J个采样视图求均值而不是混整个batch；后验固定单位方差，熵为常数，梯度为0。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个用户各3个视图得到两个中心，不能把6个视图缩向同一个中心。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2511.21032v2">原论文</a> · <a href="../../../../recommendation-components/2511.21032-elbo-tds/">实现解读</a> · <a href="#qa-05db9116ce7db4ef">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:elbo-tds" data-paper-title="ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems 搜广推与 LLM 应用 Shopee 2025-11-26 ELBO-TDS假设短期变化围绕相对稳定的用户/商品因素发生。它不只对齐增广表示：固定单位方差的encoder后验经重参数采样，decoder保留个体特征，跨视图prior约束抑制暂态噪声；任务预测只用原始观测的确定性均值。统计特征做分桶邻域扰动，序列随机mask，类别embedding dropout，再用全局特征选择限制增广强度。 完整矩阵成本过高，不复现（审查 DONE）；CUDA同入口，已在真实单A100完成42/43/44三seed诊断（统一runner计时约1.41秒），不代表性能加速或能力提升。L1机制组件，不是完整工业复现；原始首发2025年，2026年11月25日v2带出本次补录，不是今天新发。本地L1只实现Eq3–7/Algorithm1的小型双encoder/decoder与dot-product预测器、单位高斯重参数采样和slot级增广。输入为调用者给定的分桶ID或已嵌入浮点slot：不读取生产特征或学习真实稳定因素。slot选择、各slot独立mask、MSE的元素均值是显式本地配置；  训练目标与决策优化 时间漂移与稳健增量训练 搜广推 学习信号、多任务与反馈偏差 ELBO-TDS和COTTI如何分别应对促销漂移？ COTTI的CPC用常态/促销两视图的可微门控控制对比一致性，RW对历史距离重加权，ABA在服务logit上作促销校准。ELBO-TDS用多视图高斯prior与输入重建约束稳定因素，并把有标签任务留在原始观测上；没有ABA式上线概率修正。两者都依赖稳定语义假设，不能从对齐或重建直接推断因果可识别，也不能用不同生产A/B宣称彼此胜负。 教学例：当所有视图只保留促销价时，重建不能凭空恢复常态偏好；COTTI的上调校准也不能纠正过预测。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-26c16696188dc84e">ELBO-TDS和COTTI如何分别应对促销漂移？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aelbo-tds">ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Shopee</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>COTTI的CPC用常态/促销两视图的可微门控控制对比一致性，RW对历史距离重加权，ABA在服务logit上作促销校准。ELBO-TDS用多视图高斯prior与输入重建约束稳定因素，并把有标签任务留在原始观测上；没有ABA式上线概率修正。两者都依赖稳定语义假设，不能从对齐或重建直接推断因果可识别，也不能用不同生产A/B宣称彼此胜负。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：当所有视图只保留促销价时，重建不能凭空恢复常态偏好；COTTI的上调校准也不能纠正过预测。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2511.21032v2">原论文</a> · <a href="../../../../recommendation-components/2511.21032-elbo-tds/">实现解读</a> · <a href="#qa-26c16696188dc84e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:elbo-tds" data-paper-title="ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems 搜广推与 LLM 应用 Shopee 2025-11-26 ELBO-TDS假设短期变化围绕相对稳定的用户/商品因素发生。它不只对齐增广表示：固定单位方差的encoder后验经重参数采样，decoder保留个体特征，跨视图prior约束抑制暂态噪声；任务预测只用原始观测的确定性均值。统计特征做分桶邻域扰动，序列随机mask，类别embedding dropout，再用全局特征选择限制增广强度。 完整矩阵成本过高，不复现（审查 DONE）；CUDA同入口，已在真实单A100完成42/43/44三seed诊断（统一runner计时约1.41秒），不代表性能加速或能力提升。L1机制组件，不是完整工业复现；原始首发2025年，2026年11月25日v2带出本次补录，不是今天新发。本地L1只实现Eq3–7/Algorithm1的小型双encoder/decoder与dot-product预测器、单位高斯重参数采样和slot级增广。输入为调用者给定的分桶ID或已嵌入浮点slot：不读取生产特征或学习真实稳定因素。slot选择、各slot独立mask、MSE的元素均值是显式本地配置；  训练目标与决策优化 时间漂移与稳健增量训练 搜广推 学习信号、多任务与反馈偏差 为什么不能把有标签预测也喂给增广采样表示？ Eq6和Algorithm1在原始观测上用确定性encoder均值预测，保持训练/推理一致。SSL的采样与增广是独立分支，改变它们不应改变监督loss。 教学例：固定用户/商品原始输入，只把SSL视图放大5倍；监督loss必须不变，重建和prior可以变。 2026-11-27">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f8ff2b8a2670cf5f">为什么不能把有标签预测也喂给增广采样表示？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aelbo-tds">ELBO_TDS: Temporal Distribution Shift Generalization for Industry-Scale Recommender Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-27 · Shopee</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Eq6和Algorithm1在原始观测上用确定性encoder均值预测，保持训练/推理一致。SSL的采样与增广是独立分支，改变它们不应改变监督loss。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：固定用户/商品原始输入，只把SSL视图放大5倍；监督loss必须不变，重建和prior可以变。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2511.21032v2">原论文</a> · <a href="../../../../recommendation-components/2511.21032-elbo-tds/">实现解读</a> · <a href="#qa-f8ff2b8a2670cf5f">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:click-a-buy-b" data-paper-title="Click A, Buy B: Rethinking Conversion Attribution in E-Commerce Recommendations" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Click A, Buy B: Rethinking Conversion Attribution in E-Commerce Recommendations 搜广推与 LLM 应用 Pinterest 2025-07-20 Last-click attribution 默认点击和购买属于同一商品，忽略用户点 A 后买 B。论文将 Click-A-Buy-A 与 Click-A-Buy-B 分成多任务，并用商品 taxonomy 建模 A/B 的协同归因。 Fidelity: 核心机制复现。实际构造 CABA/CABB 双分支，并按公开 genre taxonomy 学习跨物品协同权重。连续观影不等价于购买；没有真实曝光、归因窗口、广告竞价和 Pinterest taxonomy。本地对照口径：相对 last-click 单物品归因基线，实验组 NDCG@10 +33.70%。  conversion-attribution multi-task-learning taxonomy ads-ranking 搜广推 学习信号、多任务与反馈偏差 Click-A-Buy-B 为什么把点击物品与购买物品视作可能不同的对象？ 用户可通过 A 发现需求，再因价格、规格等转向 B，购买与点击并不总是一对一同物品转化。分别学习 CABA 与 CABB 能保留自身成交和跨商品引导两种路径，taxonomy 提供它们的关系线索。观测协同仍不自动证明 A 对 B 有因果促进。 示意：点开一台相机后买了另一品牌，A 不是自身成交却可能参与决策；把购买只归为 A 的转化会学错商品结果，也丢失跨商品路径。 2026-10-27">

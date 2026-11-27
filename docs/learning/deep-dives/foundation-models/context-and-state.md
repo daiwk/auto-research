@@ -7,7 +7,7 @@ hide:
 
 # 长上下文不是一条轴：位置、读取与状态压缩
 
-[基础模型](../index.md) · 更新 2026-11-26 · 51 篇主题资料 / 25 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-27 · 52 篇主题资料 / 26 篇重点对照
 
 先问历史以什么形式存在，再问当前 token 怎样读它。RoPE 改变相对位置关系，Mamba 把历史写入递归状态，NSA 在多条读取路径间分工，OpenAttention 为未精读部分保留代理，TTR 则为当前输入求一个压缩表示。这些方法不能只按“支持多长”排成一列。 MERLIN在多个压缩状态之外保留routing key矩统计，改变段间读取权重，而不替换每段内部的递归写入。
 
@@ -50,6 +50,7 @@ hide:
 | [Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality](../../../foundation-models/2611.24963-canon-layers-scale/README.md) · [原始来源](https://arxiv.org/abs/2611.24963v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | Canon在层内多个位置加入沿token轴的残差短卷积，显式提供邻近信息。本文把此前小规模合成训练得到的结构判断放到64组1.3B–8B真实语料预训练中检验，并对线性模型使用低秩输出门的GLA5/GDN2。重要贡献还包括对预算、基线调参和可测技能的重新审视。 | Canon的宽4因果残差只提供局部token混合，本身不是长历史状态，也不能独立读取任意远位置；它可插入attention、线性attention或SSM。Mamba除局部卷积外还维护输入选择的递归状态，两者功能不能等同。比较需对齐参数/状态与调参，并另测上下文检索；知识分数更高不推出固定状态已具备attention式远程读取。 |
 | [Eliciting the Recall Capacity of Linear Attention](../../../foundation-models/2611.32969-thresholded-longce/README.md) · [原始来源](https://arxiv.org/abs/2611.32969v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | TLCE不改状态容量，而比较同一目标的full/short log-prob；仅当优势超过1nat且短窗已积累128token时给capped ratio权重，再按总权重归一化。它强调已被模型利用的远上下文信息。 | MERLIN用routing key的一二阶矩改变多状态读取，TLCE改变训练监督分配。更强读取结构不等于已经学会召回；反之损失加权也不能恢复固定状态中未保存的信息。两者需要相同模型/数据预算的独立组合实验，现有小核不支持组合收益。 |
 | [RAP: Radial-Angular Random Projection for Hyperbolic Representations](../../../foundation-models/2611.34298-rap/README.md) · [原始来源](https://arxiv.org/abs/2611.34298v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | RAP在同一双曲空间中压缩维度，保持每点到指定原点的半径，只随机投影并归一化角方向；不拟合数据。 | HVMap学习异构编码器空间的配对映射并联合原生/映射分数；RAP不对齐不同编码器，也不能把不同曲率或原点的向量直接混用。二者解决的不是同一检索瓶颈，现有L1不支持语义检索收益比较。 |
+| [Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration](../../../foundation-models/2611.32063-integral-deltanet/README.md) · [原始来源](https://arxiv.org/abs/2611.32063v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | Integral DeltaNet保留fast delta state并新增其历史积分state；按key channel分别控制积分速度和当前/历史读出，积分state不反向改变delta更新。 | KRA维护回归系数与后验协方差，遗忘时恢复可写不确定性；Integral维护delta与它的指数加权历史。两份state不意味着同一内容：协方差不是记忆副本，积分history也不执行KRA的相关key校正。现有L1不能比较语言召回收益。 |
 
 </div>
 
@@ -174,6 +175,12 @@ MERLIN用routing key的一二阶矩改变多状态读取，TLCE改变训练监�
 HVMap学习异构编码器空间的配对映射并联合原生/映射分数；RAP不对齐不同编码器，也不能把不同曲率或原点的向量直接混用。二者解决的不是同一检索瓶颈，现有L1不支持语义检索收益比较。 对应 Eq11–12。非原点方向若落入投影核则不可归一化，必须拒绝；原点映射为目标原点。同射线距离精确保留；任意角度的距离并非无损。
 
 对照来源：[rap](../../../foundation-models/2611.34298-rap/README.md) · [hvmap](../../../foundation-models/2611.01514-hvmap/README.md)
+
+### Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration
+
+KRA维护回归系数与后验协方差，遗忘时恢复可写不确定性；Integral维护delta与它的指数加权历史。两份state不意味着同一内容：协方差不是记忆副本，积分history也不执行KRA的相关key校正。现有L1不能比较语言召回收益。 第一式为GDN-2，KDA使用相同标量beta广播到erase/write；lambda与gamma均沿key channel，不是value行或一个全局标量。积分使用当前更新后的S。原文门rank128且初始化lambda≈1−gamma≈1/1024；本地缩小rank但保留同一可训练参数化。
+
+对照来源：[integral-deltanet](../../../foundation-models/2611.32063-integral-deltanet/README.md) · [kernel-ridge-attention](../../../foundation-models/2611.23896-kernel-ridge-attention/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -389,9 +396,23 @@ HVMap学习异构编码器空间的配对映射并联合原生/映射分数；RA
 
     对照来源：[rap](../../../foundation-models/2611.34298-rap/README.md) · [hvmap](../../../foundation-models/2611.01514-hvmap/README.md)
 
+### 为什么不能把KRA的协方差P称为本文积分state？ {#cross-nov27-integral-deltanet}
+
+??? note "展开答案与例子"
+
+    **答案：** P描述相关key的后验不确定性并影响写入方向，X保存S的加权历史并只参与读取；语义和更新不同。
+
+    **教学例子：** 教学例：在无新value时KRA遗忘可使P恢复，但X仍只是旧S历史的保留，不会变成写入增益矩阵。
+
+    对照来源：[integral-deltanet](../../../foundation-models/2611.32063-integral-deltanet/README.md) · [kernel-ridge-attention](../../../foundation-models/2611.23896-kernel-ridge-attention/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-27** · KRA维护回归系数与后验协方差，遗忘时恢复可写不确定性；Integral维护delta与它的指数加权历史。两份state不意味着同一内容：协方差不是记忆副本，积分history也不执行KRA的相关key校正。现有L1不能比较语言召回收益。 本轮为Nov24补漏CPU L1，完整实验高成本终态。
+
+涉及：[integral-deltanet](../../../foundation-models/2611.32063-integral-deltanet/README.md) · [kernel-ridge-attention](../../../foundation-models/2611.23896-kernel-ridge-attention/README.md)
 
 **2026-11-26** · HVMap学习异构编码器空间的配对映射并联合原生/映射分数；RAP不对齐不同编码器，也不能把不同曲率或原点的向量直接混用。二者解决的不是同一检索瓶颈，现有L1不支持语义检索收益比较。 本轮组件范围闭环；完整矩阵未执行且未认定高成本。
 
@@ -469,7 +490,7 @@ HVMap学习异构编码器空间的配对映射并联合原生/映射分数；RA
 
 覆盖 31 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 51 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 52 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -524,6 +545,7 @@ HVMap学习异构编码器空间的配对映射并联合原生/映射分数；RA
 - [Physics of Language Models: Part 4.2, Canon Layers at Scale where Synthetic Pretraining Resonates in Reality](../../../foundation-models/2611.24963-canon-layers-scale/README.md)
 - [Eliciting the Recall Capacity of Linear Attention](../../../foundation-models/2611.32969-thresholded-longce/README.md)
 - [RAP: Radial-Angular Random Projection for Hyperbolic Representations](../../../foundation-models/2611.34298-rap/README.md)
+- [Integral DeltaNet: Improved Linear Attention with Adaptive Memory Integration](../../../foundation-models/2611.32063-integral-deltanet/README.md)
 
 </details>
 

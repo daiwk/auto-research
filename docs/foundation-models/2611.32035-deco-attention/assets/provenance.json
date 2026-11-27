@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "paper_url": "https://arxiv.org/abs/2611.32035v1",
+  "source_url": "https://arxiv.org/pdf/2611.32035v1#page=3",
+  "reviewed_version": "v1",
+  "source_sha256": "abfcd2967d55443344d773a5f41b7140b58c3878ec77259b2ce6c80b15ceba81",
+  "source_pdf_sha256": "abfcd2967d55443344d773a5f41b7140b58c3878ec77259b2ce6c80b15ceba81",
+  "image_sha256": "8e20cbd34821074189f6c69bae6349bc8de2667e0a0947937bb855768002b7c0",
+  "asset_sha256": "8e20cbd34821074189f6c69bae6349bc8de2667e0a0947937bb855768002b7c0",
+  "pdf_page": 3,
+  "page": 3,
+  "figure": "Figure 2",
+  "caption": "Complete original figure caption preserved in full-page raster.",
+  "render_dpi": 120,
+  "retrieved_on": "2026-11-27",
+  "visually_reviewed_on": "2026-11-27",
+  "visually_reviewed": true,
+  "scientific_content_modified": false,
+  "extraction": "pdftoppm full original PDF page at120dpi,visually reviewed",
+  "copyright": "Copyright belongs to the original authors."
+}

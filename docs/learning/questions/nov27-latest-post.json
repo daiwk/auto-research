@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "post-training:cafa": {
+      "questions": [
+        {
+          "id": "nov27-basics",
+          "level": "basics",
+          "question": "CAFA为什么能比普通缓存少买反馈？",
+          "answer": "缓存只把同一评分输入的重复调用合成一次；CAFA还检查请求报告中该输入的系数是否完全抵消。若报告只要两个模型之差，共同回答的绝对分数就可能根本不需要。",
+          "example": "教学例：base和update都答A，差值r(A)-r(A)=0；普通缓存仍买一次A，CAFA均值报告可零次。若追加base绝对分数，则A必须恢复。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "id": "nov27-mechanism",
+          "level": "mechanism",
+          "question": "均值支持为空，为什么协方差仍可能需要评分？",
+          "answer": "跨draw抵消只保证平均贡献为零，不保证逐draw差值为零。普通协方差依赖每个draw偏离均值的量，必须保留任一draw系数非零的identity及全部原始draw分母。",
+          "example": "教学例：两draw为(A,B)和(B,A)，均值差0；若r(A)=2、r(B)=5，差值是3和-3，样本方差18，不能把它写成0。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "id": "nov27-comparison",
+          "level": "comparison",
+          "question": "减少评分调用是否解决了Probabilistic Autorater的校准问题？",
+          "answer": "没有。CAFA假设评分函数或其版本固定，在此条件下减少必要输入；Autorater研究评分概率与人类偏好分布是否校准。完全复原一个有偏裁判的报告，仍然是有偏裁判的报告。",
+          "example": "教学例：某judge总偏好长回答，CAFA可以精确复原它的checkpoint分差；省去抵消评分不会消除长度偏置。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "id": "nov27-implementation",
+          "level": "implementation",
+          "question": "identity或缺失评分为什么不能用近似匹配与0填补？",
+          "answer": "identity必须包含精确prompt和decoded text及cache中的scorer版本。归一化或语义合并会把可能不同的score强行设为相同；缺失填0则改变目标。未取得required反馈只能incomplete，或在已声明范围下给均值bounds且不报告协方差。",
+          "example": "教学例：A和a可能被大小写敏感rubric判不同，不能合并；未取得r(A)且范围[0,1]时应保留其系数对应区间，不假定r(A)=0。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-27"
+        }
+      ]
+    },
+    "post-training:elpsd": {
+      "questions": [
+        {
+          "id": "nov27-basics",
+          "level": "basics",
+          "question": "为什么最后轮向自己的冻结拷贝学习会没有初始信号？",
+          "answer": "初始化时学生与该teacher同分布，KL和梯度都为0。ELPSD用第一轮到最后轮的log分布差向外推，因此w>0且两轮不同才提供非零初始目标。",
+          "example": "教学例：两轮分布不同，用w=0仍以最后轮自身为teacher；改w=0.5后target改变。若两轮本来相同，即使w>0也没有该外推差。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "id": "nov27-mechanism",
+          "level": "mechanism",
+          "question": "ELPSD为什么必须冻结teacher，而不是每轮刷新外推目标？",
+          "answer": "在论文理想化的精确拟合递推中，若第一轮固定而teacher由当前最后轮外推，跨轮log-odds差每轮放大1+w，最终集中到最大方向token。冻结teacher给KL一个固定驻点；该论证不是实际共享参数训练的全局收敛保证。",
+          "example": "教学例：w=0.5，三轮理想刷新将相对第一轮的log-odds差放大1.5³倍；对固定teacher的精确匹配则已到零梯度，不再自我外推。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "id": "nov27-comparison",
+          "level": "comparison",
+          "question": "ELPSD与已有LoOPSD是否只是同一个跨loop KL？",
+          "answer": "不是。LoOPSD在普通模型中搜索重复层区间，独立验证选teacher后交替刷新；ELPSD在原生looped模型中固定第一/最后轮读数并外推，不搜索route。论文另提LoopOPD，不能因名字相近把它与LoOPSD混为一谈。",
+          "example": "教学例：为标准Transformer选重复第5至8层的route属于LoOPSD；对原生4loop模型的loop1/4分布做固定外推属于ELPSD。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "id": "nov27-implementation",
+          "level": "implementation",
+          "question": "为什么不能把每响应均值改成全batch token均值？",
+          "answer": "Eq4先在每条响应内按有效prefix均值，再跨响应均值，使每条响应总权重相同。全token均值会让长响应获得更多权重；mask只隔离padding，不负责生成真实on-policy prefix。",
+          "example": "教学例：两响应分别有3和1个有效prefix，各响应应占总loss一半；统一四token均值会让长响应占3/4。给定随机logits检验这个归约不等于执行循环模型。",
+          "source_sections": [
+            "核心公式",
+            "与已有方法的关系",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-27"
+        }
+      ]
+    }
+  }
+}
