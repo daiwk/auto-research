@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-28-priority-source-followup",
+  "seeds": [42, 43, 44],
+  "maximum_run_seconds": 180,
+  "maximum_cuda_devices": 1,
+  "model_and_dataset_downloads": 0,
+  "api_calls": 0,
+  "automatic_retry": false,
+  "full_experiments_executed": false,
+  "cost_basis": "Only CPU cross-fitness, survivor selection and SQ/BD/GC arithmetic on supplied small matrices. No Planner/Mutator, reward-code execution, policy optimization, MuJoCo or model API. AppendixE reports about1hour per Q-learning experiment on8CPU/32GB and2hours per PPO experiment onH100, before four-environment/three-method/three-seed and extension/adaptation campaigns. The full campaign is terminal high-cost not-reproduced/reviewDONE; no probes/downloads.",
+  "components": {
+    "habitats": {"domain": "agent-research", "module": "agent_research/habitats.py", "cuda": false, "evaluation_tier": "l1_mechanism"}
+  }
+}
