@@ -25,7 +25,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="harness-and-self-improvement/">运行流程与自进化：改的是哪一层</a></h2>
 <p>失败之后，是改一次提示、积累经验，还是改变整个任务执行流程？</p>
-<p class="ar-learning-topic-meta">336 个问题 · 84 篇论文</p>
+<p class="ar-learning-topic-meta">340 个问题 · 85 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="agent-policy-learning/">交互策略学习：把轨迹反馈变成更新</a></h2>

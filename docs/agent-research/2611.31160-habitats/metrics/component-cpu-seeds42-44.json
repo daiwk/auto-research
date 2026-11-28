@@ -1,0 +1,143 @@
+{
+  "schema_version": 2,
+  "method": "habitats",
+  "manifest_ref": "agent-research:habitats",
+  "dataset": {
+    "id": "synthetic:nov28-habitats-component-v1",
+    "kind": "explicit_protocol_or_mechanism_fixtures",
+    "revision": "sha256:558b69caa7da429d6b101b5218671a7dbc582b6884951c935335d647aeba6fd5",
+    "public_capability_benchmark": false,
+    "source": "Seeded small tensors or explicit deterministic evaluator/control cases; no pretrained output or public capability measurement"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "device": "cpu",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "checks": {
+        "episode_mean_matches_control": true,
+        "niche_ties_and_random_strictness": true,
+        "constant_column_is_zero": true,
+        "quality_and_diversity_finite": true,
+        "duplicate_profiles_reduce_diversity": true,
+        "constant_population_has_zero_quality_diversity": true,
+        "invalid_rewards_not_grounded": true,
+        "coverage_sums_generation_counts": true,
+        "input_not_mutated": true
+      },
+      "metrics": {
+        "specialist_quality": 0.6666666647222222,
+        "behavioral_diversity": 0.5333333445066665,
+        "grounded_coverage": 3,
+        "survivor_count": 3,
+        "control_mean_max_error": 0.0
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "device": "cpu",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "checks": {
+        "episode_mean_matches_control": true,
+        "niche_ties_and_random_strictness": true,
+        "constant_column_is_zero": true,
+        "quality_and_diversity_finite": true,
+        "duplicate_profiles_reduce_diversity": true,
+        "constant_population_has_zero_quality_diversity": true,
+        "invalid_rewards_not_grounded": true,
+        "coverage_sums_generation_counts": true,
+        "input_not_mutated": true
+      },
+      "metrics": {
+        "specialist_quality": 0.6666666647222222,
+        "behavioral_diversity": 0.5333333445066665,
+        "grounded_coverage": 3,
+        "survivor_count": 3,
+        "control_mean_max_error": 0.0
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "device": "cpu",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "checks": {
+        "episode_mean_matches_control": true,
+        "niche_ties_and_random_strictness": true,
+        "constant_column_is_zero": true,
+        "quality_and_diversity_finite": true,
+        "duplicate_profiles_reduce_diversity": true,
+        "constant_population_has_zero_quality_diversity": true,
+        "invalid_rewards_not_grounded": true,
+        "coverage_sums_generation_counts": true,
+        "input_not_mutated": true
+      },
+      "metrics": {
+        "specialist_quality": 0.6666666647222222,
+        "behavioral_diversity": 0.5333333445066665,
+        "grounded_coverage": 3,
+        "survivor_count": 3,
+        "control_mean_max_error": 0.0
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "behavioral_diversity": 0.5333333445066665,
+    "control_mean_max_error": 0.0,
+    "grounded_coverage": 3.0,
+    "specialist_quality": 0.6666666647222222,
+    "survivor_count": 3.0
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Operator/interface controls only; not a complete model, agent, public benchmark or production comparison"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "7d69c2c8116a03135d29548260b61f3d68493b69",
+    "accelerator": "CPU",
+    "artifact_path": "docs/agent-research/2611.31160-habitats/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_nov28_habitats_component.py": "58b0d49da0bc7b594ae7e44312caf5e61bcf41b15ef2b79f8e9d5d336e53d26b",
+      "scripts/run_nov18_latest_components.py": "0fe50e8e554f6663b3c8c179654400d10bfbb557ceb9cefb9880da78f164b7c1",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov28-latest/preflight.json": "2c6dcb5257f12d1f6d6d4ee3d40261a465722b6e7f55e8516cd001f6543aa918",
+      "src/auto_research/agent_research/habitats.py": "558b69caa7da429d6b101b5218671a7dbc582b6884951c935335d647aeba6fd5"
+    },
+    "dataset_fingerprint": "sha256:04eca0cf5ffea2f4e9448af8d840431f1df6283a6dc963e833da81e81eb1ddcb",
+    "raw_runner_artifact_sha256": "992e9caa255138b8e46be951d0fc7f2cbf7c3dbdd17158dbf3d4703b6ea9470d"
+  }
+}

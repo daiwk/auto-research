@@ -11,7 +11,7 @@ hide:
 
 每个子主题维护一张卡片。新论文进入后，更新对应卡片的比较或结论，并记录这次变化；不必再从头读整批论文。
 
-31 张精读卡片 · 1309 篇主题资料 · 按主题折叠
+31 张精读卡片 · 1310 篇主题资料 · 按主题折叠
 
 <details class="ar-deep-shelf"><summary>搜广推 · 7 张</summary>
 <div class="ar-deep-grid">
@@ -178,7 +178,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="agent-research/harness-and-self-improvement/">自改进先标对象：答案、经验、接口与系统版本</a></h2>
 <p>Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。</p>
-<p class="ar-learning-topic-meta">47 篇重点对照 · 39 个跨论文问答 · 2026-11-26</p>
+<p class="ar-learning-topic-meta">48 篇重点对照 · 40 个跨论文问答 · 2026-11-28</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/agent-policy-learning/">交互学习：统一轨迹之后，信用和教师信息怎样分配</a></h2>

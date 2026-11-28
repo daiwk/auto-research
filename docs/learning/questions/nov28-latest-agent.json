@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "agent-research:habitats": {
+      "questions": [
+        {
+          "id": "evolve-objectives-not-only-policies",
+          "level": "basics",
+          "question": "Habitats进化的是策略参数，还是训练策略所用的目标？",
+          "answer": "进化对象是可执行奖励程序。新奖励配新初始化策略并实际训练；存活的奖励-策略对保留且策略参数冻结。Planner决定探索什么，Mutator实现奖励；不能把随机改奖励文本就当发现新行为。",
+          "example": "教学例：同一纸牌动力学可分别奖励清空手牌和收集偶数牌；两段代码不同仍须用训练后的策略交叉执行，才能知道行为是否真的不同。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "论文与作者源码的区别",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-28"
+        },
+        {
+          "id": "survival-is-not-grounding",
+          "level": "mechanism",
+          "question": "超过随机策略并计入GC，就一定能存活吗？",
+          "answer": "不一定。GC的grounding要求奖励有效且标准化进步L严格大于0.5；生存另要求原始F的自身对角值是该奖励列最高，并严格超过随机均值。GC不要求列最高，生存也不要求L大于0.5。",
+          "example": "教学例：自身回报3、另一策略4、随机均值0/标准差1，L约3可grounded，但自身不是列最高，不能存活；重复grounded profile只计一次GC。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "论文与作者源码的区别",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-28"
+        },
+        {
+          "id": "fixed-evaluator-versus-evolved-reward",
+          "level": "comparison",
+          "question": "Habitats与AlphaEvolve都改代码，为什么不能把它们当同一种自进化？",
+          "answer": "AlphaEvolve由人固定任务和评价合同，进化满足该评价的程序；Habitats固定环境动力学却进化奖励目标，再训练策略，用全策略×全奖励profile评价学到的行为。它们改变的对象与评价坐标不同，不能比较代码数量就断言能力胜负。",
+          "example": "教学例：优化同一个矩阵乘法评价器下的程序是AlphaEvolve式固定目标；在同一纸牌环境发现清手、收牌等不同目标是Habitats式目标发现，两者都还需实际执行验证。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "论文与作者源码的区别",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-28"
+        },
+        {
+          "id": "paper-normalization-and-diagnostic-boundary",
+          "level": "implementation",
+          "question": "直接调用作者normalize_by_columns能复现论文C.2吗，三seed诊断又证明什么？",
+          "answer": "固定作者commit把random纳入min/max、常数列映1且round4；论文只在种群策略内归一化、常数列0并保留epsilon，本地明确按论文核。诊断的正负扰动成对抵消，只核同一矩阵上的公式，不训练策略、不验证Planner或能力提升。",
+          "example": "教学例：两策略某奖励都得5、随机得0，作者归一化会给两策略1；论文列全相同则为0。把这两个SQ混比会制造差异，换三个噪声seed也不能消除口径错误。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "论文与作者源码的区别",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ],
+          "added": "2026-11-28"
+        }
+      ]
+    }
+  }
+}

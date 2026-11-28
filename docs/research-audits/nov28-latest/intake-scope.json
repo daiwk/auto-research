@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-28-priority-source-followup",
+  "reviewed_on": "2026-11-28",
+  "base_commit": "31c72da4dec74ec164fe1e7f9b6bf4c41ba9e289",
+  "accepted_papers": ["agent-research:habitats"],
+  "component_papers": ["agent-research:habitats"],
+  "selected_scope_complete": false,
+  "delivery_status": "implementation_and_verification_in_progress",
+  "selection_policy": "New Google repository citation resolved a historical paper identity; not a new first release today. Unchanged arXiv overlap candidates are not selected merely to fill a batch. Only a bounded CPU mechanism is accepted; full campaigns are not reproduced, no Evolve promotion.",
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "review_watermark_unchanged": "2026-11-15",
+  "full_capability_reproductions": 0
+}

@@ -21,7 +21,7 @@ hide:
 
 <!-- learning-topics:start -->
 
-6 个主题 · 31 个子主题 · 5246 个问题 / 1309 篇论文
+6 个主题 · 31 个子主题 · 5250 个问题 / 1310 篇论文
 
 <div class="ar-learning-topics">
 <article class="ar-learning-topic-tile">
@@ -87,12 +87,12 @@ hide:
 <article class="ar-learning-topic-tile">
 <h2><a href="paths/agent-research/">Agent</a></h2>
 <p>从下一步行动到完整执行流程：依次学习规划、记忆、工具协作、自进化、训练与独立评测。</p>
-<p class="ar-learning-topic-meta">6 个子主题 · 1357 问 / 339 篇</p>
+<p class="ar-learning-topic-meta">6 个子主题 · 1361 问 / 340 篇</p>
 <details><summary>展开子主题问题库</summary><ul>
 <li><a href="paths/agent-research/planning-and-search/">规划与搜索：下一步该做什么</a><span>96 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/planning-and-search/">精读对比</a></span></li>
 <li><a href="paths/agent-research/memory-and-skills/">记忆与技能：让经验可取回、可失效</a><span>268 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/memory-and-skills/">精读对比</a></span></li>
 <li><a href="paths/agent-research/tools-and-collaboration/">工具与协作执行：把计划变成可检查的动作</a><span>221 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/tools-and-collaboration/">精读对比</a></span></li>
-<li><a href="paths/agent-research/harness-and-self-improvement/">运行流程与自进化：改的是哪一层</a><span>336 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/harness-and-self-improvement/">精读对比</a></span></li>
+<li><a href="paths/agent-research/harness-and-self-improvement/">运行流程与自进化：改的是哪一层</a><span>340 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/harness-and-self-improvement/">精读对比</a></span></li>
 <li><a href="paths/agent-research/agent-policy-learning/">交互策略学习：把轨迹反馈变成更新</a><span>236 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/agent-policy-learning/">精读对比</a></span></li>
 <li><a href="paths/agent-research/evaluation-and-reliability/">评测与可靠性：如何知道真的做对了</a><span>200 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/evaluation-and-reliability/">精读对比</a></span></li>
 </ul></details>
@@ -108,14 +108,14 @@ hide:
 <!-- learning-recent:start -->
 
 <div class="ar-learning-recent"><ul>
+<li><a href="all/#qa-58fe789c9e80abee">超过随机策略并计入GC，就一定能存活吗？</a><span>2026-11-28 · habitats</span></li>
+<li><a href="all/#qa-8d8338a6d4041edd">直接调用作者normalize_by_columns能复现论文C.2吗，三seed诊断又证明什么？</a><span>2026-11-28 · habitats</span></li>
+<li><a href="all/#qa-944dfcd7c2bd219c">Habitats与AlphaEvolve都改代码，为什么不能把它们当同一种自进化？</a><span>2026-11-28 · habitats</span></li>
+<li><a href="all/#qa-882d5fc0cdaaf532">Habitats进化的是策略参数，还是训练策略所用的目标？</a><span>2026-11-28 · habitats</span></li>
 <li><a href="all/#qa-38c8334ffb8129f3">数值内核通过就能说完整open-system模拟完成吗？</a><span>2026-11-27 · budgeted-submapl</span></li>
 <li><a href="all/#qa-77131b4c4bfedc80">查询预算Q限制的是执行动作还是梯度反馈？</a><span>2026-11-27 · budgeted-submapl</span></li>
 <li><a href="all/#qa-9220227cf2c400e6">为什么不能直接按rho做普通加权无放回抽样？</a><span>2026-11-27 · budgeted-submapl</span></li>
 <li><a href="all/#qa-59e6ce5c7aa45778">SubMAPL与OOAS的重要性权重可互换吗？</a><span>2026-11-27 · budgeted-submapl</span></li>
-<li><a href="all/#qa-a2d627d1877d28cb">ELPSD为什么必须冻结teacher，而不是每轮刷新外推目标？</a><span>2026-11-27 · elpsd</span></li>
-<li><a href="all/#qa-c92c53cbac4b1310">为什么不能把每响应均值改成全batch token均值？</a><span>2026-11-27 · elpsd</span></li>
-<li><a href="all/#qa-e4514d3978e21401">ELPSD与已有LoOPSD是否只是同一个跨loop KL？</a><span>2026-11-27 · elpsd</span></li>
-<li><a href="all/#qa-a5a6654b729521e3">为什么最后轮向自己的冻结拷贝学习会没有初始信号？</a><span>2026-11-27 · elpsd</span></li>
 </ul></div>
 
 <!-- learning-recent:end -->

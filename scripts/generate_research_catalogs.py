@@ -181,6 +181,7 @@ TOPIC_HIERARCHY = {
         "Flow map": ("蒸馏与训练闭环", "生成模型蒸馏"),
     },
     "agent-research": {
+        "habitats": ("规划、搜索与反思", "Harness 与自我改进"),
         "compaction-authorization": ("评测、安全与可靠性", "安全与权限边界"),
         "budgeted-submapl": ("工具使用与多 Agent 协作", "多 Agent 协作与通信"),
         "askalcf-protocol": ("工具调用与环境执行", "检索归因与受控修复"),

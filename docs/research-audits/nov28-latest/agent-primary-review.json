@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-28",
+  "implementation_preflight_completed": true,
+  "scope": "One Google historical identity backfill from new author citation, not a new November28 paper or exhaustive scan",
+  "reviews": [
+    {
+      "identity": "agent-research:habitats",
+      "id": "2611.31160",
+      "published_at": "2026-11-23T18:23:16Z",
+      "announced_on": "2026-11-24",
+      "source_url": "https://arxiv.org/pdf/2611.31160v1",
+      "source_sha256": "d508f7db9dbdf8dfeb4e159826419f56bef345bb100e124f85e9648c84d94a59",
+      "source_revisions": {
+        "agent-research:habitats": "d3029c119998c3a522fce34094f94c0bb660fbe723c9d0db76f8aba646e541ae",
+        "agent-research:alphaevolve": "26aa215ad685d1a70d49041d3417204d5ba1049d98234341e9607f73abd8ac09"
+      },
+      "upstream_commit": "e25a5de85d5d58d892e874efaf410faa8434c804",
+      "upstream_metrics_capture": ".cache/nov28-latest/habitats-upstream-metrics.py",
+      "upstream_metrics_sha256": "5c9e40b69987c7782dae39996dbd334ca57cc0bdf87555ac9056640192a4962a",
+      "method_sections": [
+        "3",
+        "C"
+      ],
+      "cost_sections": [
+        "E",
+        "F",
+        "H"
+      ],
+      "scope": "Paper-defined CPU matrix/episode-return averaging, raw niche survival, SQ/BD/GC; no LLM Planner/Mutator, executable reward validation, real environment evaluation, policy training, objective discovery or downstream capability. Explicit Appendix-C versus pinned-source normalization difference. Seed controls replay one matrix.",
+      "cost_basis": "Appendix E/Table2: Card20k episodes per new policy, PPO100k environment steps; cross-fitness10 rollouts per policy/reward, horizons100/1000, 15/6 generations. Authors report ~1h per Q-learning experiment on8CPU/32GB and ~2h per PPO experiment onH100, not local measurements or total campaign costs. Four environments×three methods×three seeds plus horizon/backbone ablations and10 downstream tasks×five budgets; Gemini3.5Flash with3.8Flash/4Argon ablations; growing populations and quadratic cross-evaluation. Complete matrix exceeds bounded one-A100/A30-or-Mac scope; exact total unknown.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "source_differences": [
+        "Paper C.2 uses population-only minmax+epsilon, constants zero; pinned author metrics includes random, constants one, round4.",
+        "Paper C.4 adds epsilon to norm product; author code unit-normalizes and clips without that epsilon."
+      ],
+      "openreview_status": "APIv1/APIv2/PDF403; forum200 browser-verification-only; do not infer earlier date/version",
+      "primary_dates_verified_by": "https://arxiv.org/abs/2611.31160v1",
+      "figure_review": {
+        "page": 4,
+        "figure": "Figure 1",
+        "complete_caption_preserved": true,
+        "visually_reviewed": true
+      },
+      "tests": "71 component cases passed; root owns uniform final replay/source freeze."
+    }
+  ]
+}

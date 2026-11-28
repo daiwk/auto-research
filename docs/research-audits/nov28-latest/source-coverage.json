@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-28",
+  "window": {
+    "start": "2026-11-27",
+    "end": "2026-11-28"
+  },
+  "metadata_identities": 923,
+  "announcement_identities": 1157,
+  "baseline": "docs/research-audits/nov27-latest/metadata-index.json",
+  "new_metadata_identities_relative_to_nov27": [],
+  "changed_paper_fact_identities": [],
+  "compared_original_fields": [
+    "title",
+    "abstract",
+    "authors",
+    "published",
+    "updated",
+    "arxiv_id",
+    "url"
+  ],
+  "derived_repository_status_not_a_publication_revision": true,
+  "first_releases_in_requested_window": 0,
+  "latest_original_publication_observed": "2026-11-25T18:59:59Z",
+  "latest_revision_observed": "2026-11-25T18:59:59Z",
+  "announcement_dates_observed": [
+    "2026-11-26"
+  ],
+  "announcement_identity_delta_from_previous_batch": 0,
+  "official_directory_successful_captures": 0,
+  "repository_event_queries": 6,
+  "github_requests_captured": 13,
+  "metadata_coverage_complete_to_overlap_boundary": true,
+  "all_sources_exhaustive": false,
+  "watermark_advanced": false,
+  "review_watermark_unchanged": "2026-11-15",
+  "limits": [
+    "Finite current-source follow-up, not full-source or per-paper selection closure.",
+    "No new original release observed in the captured Nov27–28 window; not a global absence claim.",
+    "Habitats is a Nov23 historical identity resolved by a newly added official citation, not today's new publication.",
+    "4RROW has no verified primary paper/date; archived source exception, no fake algorithm or high-cost paper completion.",
+    "Official directory transports failed; source exceptions do not imply no Google/Meta papers.",
+    "Pushes, source artifacts, metadata pool membership and implementation delivery are distinct."
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-28",
+  "scope": ["agent-research:habitats"],
+  "independent_reviews": [
+    {
+      "role": "fixed-paper and pinned-source mathematics review",
+      "result": "no remaining algorithm blocker",
+      "checked": ["population-only column minmax plus epsilon", "raw own-column maximum with ties and strict random baseline", "zero-norm exclusion and product-plus-epsilon BD", "valid rewards with strict learning-progress threshold", "within-generation rounded-profile GC and sum across generations", "paper versus pinned upstream conventions"],
+      "repairs_before_source_freeze": ["Reject mixed booleans before NumPy promotes them to floats", "Stable hypot norm keeps tiny nonzero profiles from being discarded through squaring underflow"],
+      "not_established": ["Planner/Mutator", "policy training", "actual environment evaluation", "full agent or RSI capability", "Evolve execution"]
+    },
+    {
+      "role": "independent bilingual facts and learning review",
+      "result": "no required correction remaining",
+      "checked": ["fixed-v1 byline and dates", "reported macro SQ/BD and downstream win rate", "exclusion of library-evolution cost", "authors' approximate CPU/H100 timing is not local or total runtime", "four paper-specific question levels and English translations", "same-topic peer and README hashes", "complete original figure/caption", "pinned upstream metrics differences"],
+      "minor_clarifications_applied": ["Define normalized row f_i and number M of nonzero profiles", "State reported plus/minus is the three-seed standard deviation"],
+      "final_root_review": "Added actual CPU artifact links and0.0596s scope statement after independent review; rechecked English/README/deep fingerprints and original unchanged assertions."
+    }
+  ],
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "model_or_training_data_downloads": 0,
+  "model_api_calls": 0,
+  "watermark_advanced": false
+}

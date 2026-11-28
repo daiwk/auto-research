@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "cleaned_on": "2026-11-28",
+  "allowlist": [
+    ".cache/nov28-latest/site"
+  ],
+  "files_removed": 8016,
+  "allocated_bytes_removed": 1104605184,
+  "logical_bytes_removed": 1088046605,
+  "free_space_change_bytes": 1094426624,
+  "protected_files": 126,
+  "protected_aggregate_before": "e5fdc65a549ab70aefb9e94a78b285f37bcdb3c5cf4320ec9a69dd5c7b2c8394",
+  "protected_aggregate_after": "e5fdc65a549ab70aefb9e94a78b285f37bcdb3c5cf4320ec9a69dd5c7b2c8394",
+  "protected_unchanged": true,
+  "preserved": [
+    "source/Git",
+    "original papers/figures",
+    "all results including failures and proofs",
+    "public model/data caches",
+    "Codex records/configuration",
+    "active checkouts"
+  ],
+  "limits": "Only this run's generated site was deleted; not a reusable authorization. APFS and other processes can make free-space change differ from allocated bytes."
+}
