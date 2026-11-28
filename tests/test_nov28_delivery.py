@@ -62,7 +62,10 @@ def test_scope_dates_and_failed_sources_are_not_exhaustiveness():
     assert set(index["identity_ids"]) <= {r["canonical_id"] for r in load(baseline_path)["identities"]}
     assert len(index["identity_ids"]) == coverage["metadata_identities"]
     assert index["added_identity_ids"] == index["changed_original_fact_identity_ids"] == index["added_announcement_identity_ids"] == []
-    assert set(index["baseline_index_fields"]) == set(load(baseline_path)["identities"][0])
+    assert set(index["baseline_index_fields"]) == {"canonical_id", "title", "published", "updated"}
+    assert set(index["baseline_index_fields"] + index["historical_baseline_extra_fields"]) == set(load(baseline_path)["identities"][0])
+    assert {r["canonical_id"] for r in index["derived_repository_status_delta"]} == {"2611.34211", "2511.21032"}
+    assert all(r["previous"] == "new" and r["current"] == "catalogued" for r in index["derived_repository_status_delta"])
     facts = index["raw_paper_fact_comparison"]
     assert facts["all_seven_fields_present_in_public_baseline"] is False
     assert facts["current_common_fields_sha256"] == facts["previous_common_fields_sha256"]

@@ -20,7 +20,7 @@
   ],
   "final_ledger_review": {
     "result": "Scope/ledger/spec/manifest, five frozen sources, per-seed raw-to-metrics, artifact fingerprints and stated review limits agree.",
-    "correction": "The compact index initially described broad paper-fact inheritance from a Nov27 public index that lacks abstracts/authors/arxiv_id/url. Narrowed inheritance to its five actual index fields and announcements; separately bound both private raw pools and matching canonical seven-field fingerprints. Actual comparison was unchanged, provenance description and regression assertions corrected.",
+    "correction": "The compact index initially described broad paper-fact inheritance from a Nov27 public index that lacks abstracts/authors/arxiv_id/url. Narrowed unchanged inheritance to four paper-index facts and identical announcement records; repository_status is historical with two explicit bookkeeping deltas, not a paper revision. Separately bound both private raw pools and matching canonical seven-field fingerprints. Actual comparison was unchanged; provenance description and regression assertions corrected.",
     "source_fingerprint_rechecks": "15 API/announcement captures independently checked; full original facts and1157 announcement identities match. No algorithm/evidence source was changed."
   },
   "full_experiment_status": "not_reproduced_high_cost",

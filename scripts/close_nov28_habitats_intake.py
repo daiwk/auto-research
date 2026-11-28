@@ -39,7 +39,7 @@ def coverage():
     fields = ("title", "abstract", "authors", "published", "updated", "arxiv_id", "url")
     added = [r["canonical_id"] for r in api["papers"] if r["canonical_id"] not in old]
     changed = [r["canonical_id"] for r in api["papers"] if r["canonical_id"] in old and any(r.get(k) != old[r["canonical_id"]].get(k) for k in fields)]
-    if added or changed or set(bulletin["identities"]) != set(previous["announced_identities"]):
+    if added or changed or bulletin["identities"] != previous["announced_identities"]:
         raise ValueError("capture delta changed; compact unchanged-only inventory needs a new review")
     def fact_fingerprint(rows):
         values = [{"canonical_id": r["canonical_id"], **{k: r.get(k) for k in fields}}
@@ -66,6 +66,10 @@ def coverage():
             "reason": "Directory transport stalled; own bounded sweep terminated (exit143). Separate Google monthly blog request timed out after15.010s with zero bytes (exit28). No56-page completion claim.",
             "automatic_retry": False}})
     baseline = ROOT / "docs/research-audits/nov27-latest/metadata-index.json"
+    old_index = {r["canonical_id"]: r for r in previous["identities"]}
+    status_delta = [{"canonical_id": r["canonical_id"], "previous": old_index[r["canonical_id"]].get("repository_status"),
+                     "current": r.get("repository_status")}
+                    for r in api["papers"] if old_index[r["canonical_id"]].get("repository_status") != r.get("repository_status")]
     dump(AUDIT / "metadata-index.json", {"schema_version": 2, "metadata_only": True,
         "captured_at": api["captured_at"], "requested_window": api["requested_window"],
         "overlap_start_utc": api["overlap_start_utc"], "categories": api["categories"],
@@ -76,7 +80,10 @@ def coverage():
         "added_identity_ids": added, "changed_original_fact_identity_ids": changed,
         "announcement_receipts": bulletin["receipts"],
         "added_announcement_identity_ids": sorted(set(bulletin["identities"]) - set(previous["announced_identities"])),
-        "baseline_index_fields": ["canonical_id", "title", "published", "updated", "repository_status"],
+        "baseline_index_fields": ["canonical_id", "title", "published", "updated"],
+        "historical_baseline_extra_fields": ["repository_status"],
+        "derived_repository_status_delta": status_delta,
+        "repository_status_policy": "Baseline statuses are historical, not current publication facts. Apply the explicit derived-status delta for current capture bookkeeping; never infer paper revision from it.",
         "unchanged_index_fields_and_announcements_inherit_baseline": True,
         "raw_paper_fact_comparison": {"fields": list(fields),
             "current_pool": (CACHE / "metadata-pool.json").relative_to(ROOT).as_posix(),
@@ -86,7 +93,7 @@ def coverage():
             "current_common_fields_sha256": current_facts, "previous_common_fields_sha256": previous_facts,
             "raw_captures_retained_privately": True,
             "all_seven_fields_present_in_public_baseline": False},
-        "continuation": "Compact unchanged delta. Only listed index fields and announcements resolve from the SHA-bound Nov27 index. Abstract/authors/arxiv_id/url are NOT stored in that public index; the separate raw-pool SHA bindings and identical canonical seven-field fingerprints support their comparison. Raw captures are privately retained. Derived repository status is not a publication revision."})
+        "continuation": "Compact paper-fact delta. Only four listed index facts and identical announcement records inherit the SHA-bound Nov27 index. Repository status is historical with an explicit current-capture delta. Abstract/authors/arxiv_id/url are NOT stored in that public index; separate raw-pool SHA bindings and identical canonical seven-field fingerprints support their comparison. Raw captures are privately retained. Derived repository status is not a publication revision."})
     values = {"schema_version": 1, "reviewed_on": DATE, "window": api["requested_window"],
         "metadata_identities": len(api["papers"]), "announcement_identities": len(bulletin["identities"]),
         "baseline": "docs/research-audits/nov27-latest/metadata-index.json",

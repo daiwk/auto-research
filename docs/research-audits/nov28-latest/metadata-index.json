@@ -1235,9 +1235,24 @@
     "canonical_id",
     "title",
     "published",
-    "updated",
+    "updated"
+  ],
+  "historical_baseline_extra_fields": [
     "repository_status"
   ],
+  "derived_repository_status_delta": [
+    {
+      "canonical_id": "2611.34211",
+      "previous": "new",
+      "current": "catalogued"
+    },
+    {
+      "canonical_id": "2511.21032",
+      "previous": "new",
+      "current": "catalogued"
+    }
+  ],
+  "repository_status_policy": "Baseline statuses are historical, not current publication facts. Apply the explicit derived-status delta for current capture bookkeeping; never infer paper revision from it.",
   "unchanged_index_fields_and_announcements_inherit_baseline": true,
   "raw_paper_fact_comparison": {
     "fields": [
@@ -1259,5 +1274,5 @@
     "raw_captures_retained_privately": true,
     "all_seven_fields_present_in_public_baseline": false
   },
-  "continuation": "Compact unchanged delta. Only listed index fields and announcements resolve from the SHA-bound Nov27 index. Abstract/authors/arxiv_id/url are NOT stored in that public index; the separate raw-pool SHA bindings and identical canonical seven-field fingerprints support their comparison. Raw captures are privately retained. Derived repository status is not a publication revision."
+  "continuation": "Compact paper-fact delta. Only four listed index facts and identical announcement records inherit the SHA-bound Nov27 index. Repository status is historical with an explicit current-capture delta. Abstract/authors/arxiv_id/url are NOT stored in that public index; separate raw-pool SHA bindings and identical canonical seven-field fingerprints support their comparison. Raw captures are privately retained. Derived repository status is not a publication revision."
 }
