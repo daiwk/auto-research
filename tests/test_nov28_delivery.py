@@ -62,6 +62,12 @@ def test_scope_dates_and_failed_sources_are_not_exhaustiveness():
     assert set(index["identity_ids"]) <= {r["canonical_id"] for r in load(baseline_path)["identities"]}
     assert len(index["identity_ids"]) == coverage["metadata_identities"]
     assert index["added_identity_ids"] == index["changed_original_fact_identity_ids"] == index["added_announcement_identity_ids"] == []
+    assert set(index["baseline_index_fields"]) == set(load(baseline_path)["identities"][0])
+    facts = index["raw_paper_fact_comparison"]
+    assert facts["all_seven_fields_present_in_public_baseline"] is False
+    assert facts["current_common_fields_sha256"] == facts["previous_common_fields_sha256"]
+    assert len(facts["fields"]) == 7
+    assert len(facts["current_pool_sha256"]) == len(facts["previous_pool_sha256"]) == 64
     priority = load(AUDIT / "priority-primary-selection.json")
     arrow = next(r for r in priority["repository_primary_observations"] if r["repository"] == "google-deepmind/arrow")
     assert arrow["paper_arxiv_identity"] is arrow["first_published_at"] is None

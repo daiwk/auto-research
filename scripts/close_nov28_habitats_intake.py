@@ -34,12 +34,21 @@ def proposed():
 def coverage():
     api, bulletin = load(CACHE / "metadata-pool.json"), load(CACHE / "announcement-pool.json")
     previous = load(ROOT / "docs/research-audits/nov27-latest/metadata-index.json")
-    old = {r["canonical_id"]: r for r in load(ROOT / ".cache/nov27-latest/metadata-pool.json")["papers"]}
+    old_pool = ROOT / ".cache/nov27-latest/metadata-pool.json"
+    old = {r["canonical_id"]: r for r in load(old_pool)["papers"]}
     fields = ("title", "abstract", "authors", "published", "updated", "arxiv_id", "url")
     added = [r["canonical_id"] for r in api["papers"] if r["canonical_id"] not in old]
     changed = [r["canonical_id"] for r in api["papers"] if r["canonical_id"] in old and any(r.get(k) != old[r["canonical_id"]].get(k) for k in fields)]
     if added or changed or set(bulletin["identities"]) != set(previous["announced_identities"]):
         raise ValueError("capture delta changed; compact unchanged-only inventory needs a new review")
+    def fact_fingerprint(rows):
+        values = [{"canonical_id": r["canonical_id"], **{k: r.get(k) for k in fields}}
+                  for r in sorted(rows, key=lambda r: r["canonical_id"])]
+        return hashlib.sha256(json.dumps(values, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+    current_facts = fact_fingerprint(api["papers"])
+    previous_facts = fact_fingerprint([old[r["canonical_id"]] for r in api["papers"]])
+    if current_facts != previous_facts:
+        raise ValueError("original paper fact comparison differs")
     github = load(CACHE / "github/receipts.json")
     queries = []
     for receipt in github["receipts"]:
@@ -67,8 +76,17 @@ def coverage():
         "added_identity_ids": added, "changed_original_fact_identity_ids": changed,
         "announcement_receipts": bulletin["receipts"],
         "added_announcement_identity_ids": sorted(set(bulletin["identities"]) - set(previous["announced_identities"])),
-        "unchanged_original_facts_and_announcements_inherit_baseline": True,
-        "continuation": "This is a compact delta, not a full index. Resolve paper facts and announcements against the SHA-bound Nov27 full baseline. Raw captures are retained privately; derived repository statuses are not publication changes."})
+        "baseline_index_fields": ["canonical_id", "title", "published", "updated", "repository_status"],
+        "unchanged_index_fields_and_announcements_inherit_baseline": True,
+        "raw_paper_fact_comparison": {"fields": list(fields),
+            "current_pool": (CACHE / "metadata-pool.json").relative_to(ROOT).as_posix(),
+            "current_pool_sha256": digest(CACHE / "metadata-pool.json"),
+            "previous_pool": old_pool.relative_to(ROOT).as_posix(), "previous_pool_sha256": digest(old_pool),
+            "canonical_serialization": "Sort923 common records by canonical_id, keep canonical_id plus listed fields, JSON ensure_ascii=False/sort_keys=True/separators=(',',':'), then UTF-8 SHA256.",
+            "current_common_fields_sha256": current_facts, "previous_common_fields_sha256": previous_facts,
+            "raw_captures_retained_privately": True,
+            "all_seven_fields_present_in_public_baseline": False},
+        "continuation": "Compact unchanged delta. Only listed index fields and announcements resolve from the SHA-bound Nov27 index. Abstract/authors/arxiv_id/url are NOT stored in that public index; the separate raw-pool SHA bindings and identical canonical seven-field fingerprints support their comparison. Raw captures are privately retained. Derived repository status is not a publication revision."})
     values = {"schema_version": 1, "reviewed_on": DATE, "window": api["requested_window"],
         "metadata_identities": len(api["papers"]), "announcement_identities": len(bulletin["identities"]),
         "baseline": "docs/research-audits/nov27-latest/metadata-index.json",

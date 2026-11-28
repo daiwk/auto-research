@@ -1231,6 +1231,33 @@
     }
   ],
   "added_announcement_identity_ids": [],
-  "unchanged_original_facts_and_announcements_inherit_baseline": true,
-  "continuation": "This is a compact delta, not a full index. Resolve paper facts and announcements against the SHA-bound Nov27 full baseline. Raw captures are retained privately; derived repository statuses are not publication changes."
+  "baseline_index_fields": [
+    "canonical_id",
+    "title",
+    "published",
+    "updated",
+    "repository_status"
+  ],
+  "unchanged_index_fields_and_announcements_inherit_baseline": true,
+  "raw_paper_fact_comparison": {
+    "fields": [
+      "title",
+      "abstract",
+      "authors",
+      "published",
+      "updated",
+      "arxiv_id",
+      "url"
+    ],
+    "current_pool": ".cache/nov28-latest/metadata-pool.json",
+    "current_pool_sha256": "6b45fa74e7f08474f21875ff855c525aecdd53afc723b882a02738f9a4d13abe",
+    "previous_pool": ".cache/nov27-latest/metadata-pool.json",
+    "previous_pool_sha256": "c4a9bfb98b3c2998c31f0faa866af45ede16f09158fd2556e81ca05fb38a3c63",
+    "canonical_serialization": "Sort923 common records by canonical_id, keep canonical_id plus listed fields, JSON ensure_ascii=False/sort_keys=True/separators=(',',':'), then UTF-8 SHA256.",
+    "current_common_fields_sha256": "188ff73b58ec6d4299199681a738e457274b07b6aad33b3e25cb77562076b2d7",
+    "previous_common_fields_sha256": "188ff73b58ec6d4299199681a738e457274b07b6aad33b3e25cb77562076b2d7",
+    "raw_captures_retained_privately": true,
+    "all_seven_fields_present_in_public_baseline": false
+  },
+  "continuation": "Compact unchanged delta. Only listed index fields and announcements resolve from the SHA-bound Nov27 index. Abstract/authors/arxiv_id/url are NOT stored in that public index; the separate raw-pool SHA bindings and identical canonical seven-field fingerprints support their comparison. Raw captures are privately retained. Derived repository status is not a publication revision."
 }
