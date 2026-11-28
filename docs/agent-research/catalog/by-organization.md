@@ -278,6 +278,7 @@
 
 ## Google DeepMind
 
+- 2026-11-23 · 一作：Nicolas Bolouri · [Habitats: A Framework for Open-Ended Evolution of Agent Objectives](../2611.31160-habitats/README.md)（`habitats`）：固定任务通常先由人定义奖励，再训练策略。Habitats同时维护奖励程序与其训练策略，让奖励目标本身成为进化对象。
 - 2026-11-10 · 一作：Swarat Chaudhuri · [AlphaProof Code: Verifying Signal's Security at the Machine-Code Level](../alphaproof-code/README.md)（`alphaproof-code`）：人类与规格编写/审阅 Agent 先定义并批准要证明的安全性质，证明团队再处理实际 Rust 代码经标准编译器生成的 AArch64 程序。Lean 内核检查证明，gatekeeper 还要防止团队偷偷弱化规格或其依赖。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-11-06 · 一作：Sergey Shirobokov · [Discovering formally verified quantum programs with AI](../2611.09822-verified-quantum-wiki/README.md)（`verified-quantum-wiki`）：量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。
 - 2026-10-15 · 一作：Maxence Faldor · [A team of Gemini 4 Argon agents beats Minecraft](../2610.22319-gemini-minecraft/README.md)（`gemini-minecraft`）：四个执行 Agent 通过编写 JavaScript 程序操纵 Mineflayer 角色；Observer 汇总世界状态，聊天和笔记传递进度。研究重点是长期协作、程序化工具与持久状态，而不是新训练目标。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**

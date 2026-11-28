@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "verified_on": "2026-11-28",
+  "base_commit": "31c72da4dec74ec164fe1e7f9b6bf4c41ba9e289",
+  "executed_source_commit": "7d69c2c8116a03135d29548260b61f3d68493b69",
+  "executed_source_files": 5,
+  "actual_runs": {
+    "cpu": {"components": 1, "seeds": [42, 43, 44], "elapsed_seconds": 0.05964387534186244},
+    "cuda": {"components": 0, "executed": false, "reason": "Accepted implementation is CPU-only; no advertised CUDA path or fabricated receipt."},
+    "model_and_training_data_downloads": 0,
+    "model_api_calls": 0,
+    "full_capability_reproductions": 0,
+    "tier": "l1_mechanism",
+    "promotion_eligible": false
+  },
+  "local_checks": [
+    {"suite": "component mathematics, metadata and unified delivery", "tests": 78, "failures": 0, "seconds": 0.311},
+    {"suite": "compact delta regression after inventory optimization", "tests": 4, "failures": 0, "seconds": 0.260},
+    {"suite": "documentation workflow suites", "tests": 51, "failures": 0, "seconds": 28.128},
+    {"suite": "documentation catalog and paper specs contracts", "tests": 12, "failures": 0, "seconds": 8.190},
+    {"gate": "strict MkDocs build", "passed": true, "seconds": 78.76},
+    {"gate": "Ruff and compileall", "passed": true},
+    {"gate": "paper specs check and validate", "passed": true},
+    {"gate": "GPU evidence validation and CPU frozen-source admission", "passed": true},
+    {"gate": "English complete and base-relative coverage", "passed": true},
+    {"gate": "learning questions and deep-dive source overlays", "passed": true},
+    {"gate": "fidelity inventory, discovery reconciliation and platform completion", "passed": true},
+    {"gate": "minimal-install metadata/help/init", "passed": true},
+    {"gate": "metric schema audit", "artifacts": 1284, "would_update": 0},
+    {"gate": "dashboard structured diff", "added_rows": 1, "existing_rows_changed": 0},
+    {"gate": "diff whitespace", "passed": true},
+    {"gate": "compact index field limits and separate raw-pool provenance regression", "tests": 4, "failures": 0, "passed": true}
+  ],
+  "counts_not_additive": "Commands overlap; do not add counts as unique tests or capability experiments.",
+  "intermediate_checks": "An early documentation check overlapped the final artifact-link edit and observed two stale README fingerprints; early XML retained. Waited for writing to finish, refreshed source overlays and reran unchanged assertions successfully. Early English generation also correctly rejected the not-yet-integrated learning topic; completed authored integration before the final complete gate. No executed algorithm source changed or assertions weakened.",
+  "storage": "Unchanged923 identity index fields and1157 announcements reference the SHA-bound Nov27 index. It does NOT contain abstract/authors/arxiv_id/url; seven-field equality is separately bound to both private raw-pool SHA256 and matching canonical923-record fingerprints. Compact delta is about28KB rather than539551bytes; raw source captures remain privately retained.",
+  "independent_review": "cross-review.json",
+  "github_ci": "Checked separately against the final PR head; not yet run when this local record was written. Final handoff reports actual status.",
+  "watermark_advanced": false,
+  "review_watermark_unchanged": "2026-11-15",
+  "protected_paths": ["workflows", "project readmes", "review watermark JSON", "outer user changes", "uv.lock not recreated", "Codex session records"]
+}

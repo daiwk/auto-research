@@ -2400,6 +2400,21 @@
             "同主题比较与边界",
             "完整实验与成本决定"
           ]
+        },
+        {
+          "paper": "agent-research:habitats",
+          "position": "固定环境动力学而进化奖励目标，用受训练策略的全种群交叉适应度区分目标引发的真实行为；本地仅论文数学评价和选择。",
+          "tradeoff": "AlphaEvolve在人固定评价合同下进化候选程序；Habitats改奖励及其评价坐标，跨代profile不可直接当固定基准比较。两者本库无完整发现能力证据。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "论文与作者源码的区别",
+            "同主题比较与边界",
+            "完整实验与成本决定"
+          ]
         }
       ],
       "analysis": [
@@ -2716,6 +2731,14 @@
           "papers": [
             "agent-research:home",
             "agent-research:morse"
+          ]
+        },
+        {
+          "title": "目标发现与固定目标程序搜索的评价坐标不同",
+          "body": "先分清进化对象与评价合同：AlphaEvolve改程序而人固定目标，Habitats在固定动力学中改奖励、从头训练新策略，用策略×奖励交叉矩阵观察mastery/transfer。SQ/BD依赖本代reward坐标，GC先grounding再量化去重、逐代累加，不是跨代唯一技能数。高质量或高多样性数学值不能替代真实Planner/Mutator与RL。作者源码归一化和固定论文不同，本地必须声明选择的口径；完整小时级CPU/H100及多模型矩阵终态不复现，不以CPU公式核重开实验或晋级Evolve。",
+          "papers": [
+            "agent-research:habitats",
+            "agent-research:alphaevolve"
           ]
         }
       ],
@@ -3112,9 +3135,19 @@
             "agent-research:home",
             "agent-research:morse"
           ]
+        },
+        {
+          "id": "cross-nov28-habitats",
+          "question": "Habitats与AlphaEvolve都改代码，为什么不能把它们当同一种自进化？",
+          "answer": "AlphaEvolve由人固定任务和评价合同，进化满足该评价的程序；Habitats固定环境动力学却进化奖励目标，再训练策略，用全策略×全奖励profile评价学到的行为。它们改变的对象与评价坐标不同，不能比较代码数量就断言能力胜负。",
+          "example": "教学例：优化同一个矩阵乘法评价器下的程序是AlphaEvolve式固定目标；在同一纸牌环境发现清手、收牌等不同目标是Habitats式目标发现，两者都还需实际执行验证。",
+          "papers": [
+            "agent-research:habitats",
+            "agent-research:alphaevolve"
+          ]
         }
       ],
-      "updated": "2026-11-26",
+      "updated": "2026-11-28",
       "reviewed_papers": [
         "agent-research:verified-quantum-wiki",
         "agent-research:rsi-opt",
@@ -3199,7 +3232,8 @@
         "agent-research:transport-safe-audit",
         "agent-research:morse",
         "agent-research:recurscibench",
-        "agent-research:home"
+        "agent-research:home",
+        "agent-research:habitats"
       ],
       "updates": [
         {
@@ -3745,6 +3779,18 @@
             "agent-research:morse": "6afb3b7a6f4799968bead7adc93e7de3ad60b47d0c7938c4e36f69c7e1589e87"
           },
           "summary": "纯CPU两级case/query采样、EMA与uniform探索、未复查错误衰减、无放回/fair-share分配、选择时间戳；host批准的构建等价、完整来源指纹、最近完成祖先与一次0.6复用抽签。无LLM诊断、harness编辑、真实问答或能力评价；host验证标量不交给被测policy。 完整高成本campaign终态不复现，审查DONE。"
+        },
+        {
+          "date": "2026-11-28",
+          "papers": [
+            "agent-research:habitats",
+            "agent-research:alphaevolve"
+          ],
+          "source_revisions": {
+            "agent-research:habitats": "d3029c119998c3a522fce34094f94c0bb660fbe723c9d0db76f8aba646e541ae",
+            "agent-research:alphaevolve": "26aa215ad685d1a70d49041d3417204d5ba1049d98234341e9607f73abd8ac09"
+          },
+          "summary": "固定环境动力学而进化奖励目标，用受训练策略的全种群交叉适应度区分目标引发的真实行为；本地仅论文数学评价和选择。 完整实验成本过高，不复现（审查 DONE）；数学核非能力证据。"
         }
       ]
     },

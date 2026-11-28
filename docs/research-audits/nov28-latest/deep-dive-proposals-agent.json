@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-28",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "agent-research:habitats",
+      "target_card": "agent-research/harness-and-self-improvement",
+      "source_revisions": {
+        "agent-research:habitats": "d3029c119998c3a522fce34094f94c0bb660fbe723c9d0db76f8aba646e541ae",
+        "agent-research:alphaevolve": "26aa215ad685d1a70d49041d3417204d5ba1049d98234341e9607f73abd8ac09"
+      },
+      "peer_membership_verified_in": "docs/learning/topics/agent-research.json",
+      "comparison": {
+        "position": "固定环境动力学而进化奖励目标，用受训练策略的全种群交叉适应度区分目标引发的真实行为；本地仅论文数学评价和选择。",
+        "tradeoff": "AlphaEvolve在人固定评价合同下进化候选程序；Habitats改奖励及其评价坐标，跨代profile不可直接当固定基准比较。两者本库无完整发现能力证据。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "论文离线与线上效果",
+          "数据协议与代码映射",
+          "结果、负控与边界",
+          "论文与作者源码的区别",
+          "同主题比较与边界",
+          "完整实验与成本决定"
+        ]
+      },
+      "analysis": {
+        "title": "目标发现与固定目标程序搜索的评价坐标不同",
+        "body": "先分清进化对象与评价合同：AlphaEvolve改程序而人固定目标，Habitats在固定动力学中改奖励、从头训练新策略，用策略×奖励交叉矩阵观察mastery/transfer。SQ/BD依赖本代reward坐标，GC先grounding再量化去重、逐代累加，不是跨代唯一技能数。高质量或高多样性数学值不能替代真实Planner/Mutator与RL。作者源码归一化和固定论文不同，本地必须声明选择的口径；完整小时级CPU/H100及多模型矩阵终态不复现，不以CPU公式核重开实验或晋级Evolve。",
+        "papers": [
+          "agent-research:habitats",
+          "agent-research:alphaevolve"
+        ]
+      },
+      "question": {
+        "id": "cross-nov28-habitats",
+        "question": "Habitats与AlphaEvolve都改代码，为什么不能把它们当同一种自进化？",
+        "answer": "AlphaEvolve由人固定任务和评价合同，进化满足该评价的程序；Habitats固定环境动力学却进化奖励目标，再训练策略，用全策略×全奖励profile评价学到的行为。它们改变的对象与评价坐标不同，不能比较代码数量就断言能力胜负。",
+        "example": "教学例：优化同一个矩阵乘法评价器下的程序是AlphaEvolve式固定目标；在同一纸牌环境发现清手、收牌等不同目标是Habitats式目标发现，两者都还需实际执行验证。",
+        "papers": [
+          "agent-research:habitats",
+          "agent-research:alphaevolve"
+        ]
+      },
+      "update": {
+        "date": "2026-11-28",
+        "papers": [
+          "agent-research:habitats",
+          "agent-research:alphaevolve"
+        ],
+        "source_revisions": {
+          "agent-research:habitats": "d3029c119998c3a522fce34094f94c0bb660fbe723c9d0db76f8aba646e541ae",
+          "agent-research:alphaevolve": "26aa215ad685d1a70d49041d3417204d5ba1049d98234341e9607f73abd8ac09"
+        },
+        "summary": "固定环境动力学而进化奖励目标，用受训练策略的全种群交叉适应度区分目标引发的真实行为；本地仅论文数学评价和选择。 完整实验成本过高，不复现（审查 DONE）；数学核非能力证据。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Evolve reward objectives under fixed dynamics and compare trained-policy cross-fitness profiles; the local scope is paper mathematics and selection only.",
+          "tradeoff": "AlphaEvolve evolves candidate programs under a human-fixed evaluator. Habitats changes rewards and evaluation coordinates; cross-generation profiles are not a fixed benchmark. Neither local entry establishes full discovery capability."
+        },
+        "analysis": {
+          "title": "Objective discovery and fixed-objective program search use different evaluation coordinates",
+          "body": "Separate the evolutionary object from its evaluator. AlphaEvolve changes programs under a fixed human objective; Habitats changes rewards under fixed dynamics and trains new policies, using policy-by-reward profiles for mastery and transfer. SQ/BD use within-generation coordinates. GC grounds, quantizes and deduplicates within each generation before summing, not counting unique skills across time. Numerical quality/diversity does not replace real Planner/Mutator or RL. The pinned source and paper normalize differently, so the chosen convention must be explicit. The hour-scale CPU/H100 and multi-model campaign remains terminally not reproduced; a CPU kernel neither reopens it nor qualifies for Evolve."
+        },
+        "question": {
+          "question": "Why are Habitats and AlphaEvolve different forms of code evolution?",
+          "answer": "AlphaEvolve evolves programs under a human-fixed task and evaluator. Habitats fixes environment dynamics but evolves reward objectives, trains policies and compares policy-by-reward profiles. Their changing objects and evaluation coordinates differ; code counts do not establish a capability winner.",
+          "example": "Teaching example: improving matrix multiplication under one evaluator keeps the objective fixed; discovering clearing-versus-collecting objectives in one card environment changes objectives. Both still require executed validation."
+        },
+        "update": "Historical Google identity completed via a new author citation. Paper-defined CPU mathematics only; the full campaign is not reproduced for cost, review DONE, without capability/Evolve promotion."
+      }
+    }
+  ]
+}

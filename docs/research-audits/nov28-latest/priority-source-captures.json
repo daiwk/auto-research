@@ -1,0 +1,366 @@
+{
+  "schema_version": 1,
+  "public_sources_only": true,
+  "receipts": [
+    {
+      "label": "google-research-created",
+      "endpoint": "https://api.github.com/search/repositories?q=is%3Apublic+org%3Agoogle-research+created%3A2026-11-27..2026-11-28&per_page=100",
+      "retrieved_at": "2026-11-28T05:40:09.417290+00:00",
+      "returncode": 0,
+      "status": "captured",
+      "capture": ".cache/nov28-latest/github/google-research-created.json",
+      "sha256": "4af480b8ee5b87b369a76c49bd22c9a783908272ebffbe97898f8ab0f0772a5f",
+      "bytes": 55
+    },
+    {
+      "label": "google-research-pushed",
+      "endpoint": "https://api.github.com/search/repositories?q=is%3Apublic+org%3Agoogle-research+pushed%3A2026-11-27..2026-11-28&per_page=100",
+      "retrieved_at": "2026-11-28T05:40:09.419229+00:00",
+      "returncode": 0,
+      "status": "captured",
+      "capture": ".cache/nov28-latest/github/google-research-pushed.json",
+      "sha256": "6a02e0c143fe16f9c37aa4238a0aca219a810c4bb893869d53a3794ca4e53510",
+      "bytes": 29486
+    },
+    {
+      "label": "google-deepmind-created",
+      "endpoint": "https://api.github.com/search/repositories?q=is%3Apublic+org%3Agoogle-deepmind+created%3A2026-11-27..2026-11-28&per_page=100",
+      "retrieved_at": "2026-11-28T05:40:09.419325+00:00",
+      "returncode": 0,
+      "status": "captured",
+      "capture": ".cache/nov28-latest/github/google-deepmind-created.json",
+      "sha256": "21cb55c39eb8652109bb5b58d8692e189103e70842939fbb76872f8ef2725dac",
+      "bytes": 5485
+    },
+    {
+      "label": "google-deepmind-pushed",
+      "endpoint": "https://api.github.com/search/repositories?q=is%3Apublic+org%3Agoogle-deepmind+pushed%3A2026-11-27..2026-11-28&per_page=100",
+      "retrieved_at": "2026-11-28T05:40:10.445671+00:00",
+      "returncode": 0,
+      "status": "captured",
+      "capture": ".cache/nov28-latest/github/google-deepmind-pushed.json",
+      "sha256": "1eab5213af379aecdd3d1052229accd55517157a51efd9fc4e42929ced7ac747",
+      "bytes": 69089
+    },
+    {
+      "label": "facebookresearch-created",
+      "endpoint": "https://api.github.com/search/repositories?q=is%3Apublic+org%3Afacebookresearch+created%3A2026-11-27..2026-11-28&per_page=100",
+      "retrieved_at": "2026-11-28T05:40:10.451568+00:00",
+      "returncode": 0,
+      "status": "captured",
+      "capture": ".cache/nov28-latest/github/facebookresearch-created.json",
+      "sha256": "4af480b8ee5b87b369a76c49bd22c9a783908272ebffbe97898f8ab0f0772a5f",
+      "bytes": 55
+    },
+    {
+      "label": "facebookresearch-pushed",
+      "endpoint": "https://api.github.com/search/repositories?q=is%3Apublic+org%3Afacebookresearch+pushed%3A2026-11-27..2026-11-28&per_page=100",
+      "retrieved_at": "2026-11-28T05:40:10.505613+00:00",
+      "returncode": 0,
+      "status": "captured",
+      "capture": ".cache/nov28-latest/github/facebookresearch-pushed.json",
+      "sha256": "1a71732a885c043bfe8c91cf282453e6afc6064a9f0d2d38ecb24c3d7d9f63b6",
+      "bytes": 69943
+    },
+    {
+      "label": "google-deepmind--arrow-readme",
+      "endpoint": "https://api.github.com/repos/google-deepmind/arrow/readme",
+      "retrieved_at": "2026-11-28T05:40:11.559134+00:00",
+      "returncode": 0,
+      "status": "captured",
+      "capture": ".cache/nov28-latest/github/google-deepmind--arrow-readme.md",
+      "sha256": "566568dcf6950b8f2e4bc5c6a72cba9affb93e6593038cb7cde2fa6326d8bd2a",
+      "bytes": 2570
+    },
+    {
+      "label": "google-deepmind--habitats-readme",
+      "endpoint": "https://api.github.com/repos/google-deepmind/habitats/readme",
+      "retrieved_at": "2026-11-28T05:40:11.628269+00:00",
+      "returncode": 0,
+      "status": "captured",
+      "capture": ".cache/nov28-latest/github/google-deepmind--habitats-readme.md",
+      "sha256": "97165c3acde55ae44aa1d0c8803afac24ae62442c0b766bd34c4a98914836dd5",
+      "bytes": 4401
+    },
+    {
+      "label": "google-deepmind--cryptids-readme",
+      "endpoint": "https://api.github.com/repos/google-deepmind/cryptids/readme",
+      "retrieved_at": "2026-11-28T05:40:11.717406+00:00",
+      "returncode": 0,
+      "status": "captured",
+      "capture": ".cache/nov28-latest/github/google-deepmind--cryptids-readme.md",
+      "sha256": "4f5f1f5fc54a5fbd680ad267f93a4c453419f7078c4f3f6d834c187fc81c4360",
+      "bytes": 12991
+    },
+    {
+      "label": "facebookresearch--JEP-AV-readme",
+      "endpoint": "https://api.github.com/repos/facebookresearch/JEP-AV/readme",
+      "retrieved_at": "2026-11-28T05:40:12.277771+00:00",
+      "returncode": 0,
+      "status": "captured",
+      "capture": ".cache/nov28-latest/github/facebookresearch--JEP-AV-readme.md",
+      "sha256": "9d8cb822e042a2552bf141793c2314a4ba4b66b3047f2db84614e1a19340a73c",
+      "bytes": 96
+    },
+    {
+      "label": "facebookresearch--lean_kernel_verify-readme",
+      "endpoint": "https://api.github.com/repos/facebookresearch/lean_kernel_verify/readme",
+      "retrieved_at": "2026-11-28T05:40:12.406841+00:00",
+      "returncode": 0,
+      "status": "captured",
+      "capture": ".cache/nov28-latest/github/facebookresearch--lean_kernel_verify-readme.md",
+      "sha256": "3d0b6ae1644d402c2eb68776885f803f7e03972d794797824ed47d18c60191d9",
+      "bytes": 15244
+    },
+    {
+      "label": "google-monorepo-215d34f3",
+      "endpoint": "https://api.github.com/repos/google-research/google-research/commits/215d34f3e54ac2151a866002fdbe6243a6a04631",
+      "retrieved_at": "2026-11-28T05:40:12.640126+00:00",
+      "returncode": 0,
+      "status": "captured",
+      "capture": ".cache/nov28-latest/github/google-monorepo-215d34f3.json",
+      "sha256": "459b71ec0c4729705cdb063129ba1d5b8c5a3b31bfc630e255bb6aeec6a4f1dc",
+      "bytes": 8898
+    },
+    {
+      "label": "google-monorepo-94773133",
+      "endpoint": "https://api.github.com/repos/google-research/google-research/commits/947731333bf4f4bfdc58f1276b618f357d1c9f70",
+      "retrieved_at": "2026-11-28T05:40:13.022400+00:00",
+      "returncode": 0,
+      "status": "captured",
+      "capture": ".cache/nov28-latest/github/google-monorepo-94773133.json",
+      "sha256": "7487a364d16c01f4d17f9e16e5b58274ed8c5d6f0e10cee29aa936c63f663335",
+      "bytes": 4866
+    }
+  ],
+  "repository_queries": [
+    {
+      "label": "google-research-created",
+      "total_count": 0,
+      "incomplete_results": false,
+      "repositories": []
+    },
+    {
+      "label": "google-research-pushed",
+      "total_count": 5,
+      "incomplete_results": false,
+      "repositories": [
+        {
+          "full_name": "google-research/google-research",
+          "html_url": "https://github.com/google-research/google-research",
+          "created_at": "2018-10-04T18:42:48Z",
+          "pushed_at": "2026-11-27T16:02:30Z"
+        },
+        {
+          "full_name": "google-research/arxiv-latex-cleaner",
+          "html_url": "https://github.com/google-research/arxiv-latex-cleaner",
+          "created_at": "2019-01-08T06:36:00Z",
+          "pushed_at": "2026-11-27T08:00:27Z"
+        },
+        {
+          "full_name": "google-research/weatherbenchX",
+          "html_url": "https://github.com/google-research/weatherbenchX",
+          "created_at": "2024-11-29T11:40:01Z",
+          "pushed_at": "2026-11-27T16:27:06Z"
+        },
+        {
+          "full_name": "google-research/openfst",
+          "html_url": "https://github.com/google-research/openfst",
+          "created_at": "2025-12-11T12:32:06Z",
+          "pushed_at": "2026-11-27T13:04:22Z"
+        },
+        {
+          "full_name": "google-research/connectomics",
+          "html_url": "https://github.com/google-research/connectomics",
+          "created_at": "2022-02-11T23:51:24Z",
+          "pushed_at": "2026-11-27T12:57:55Z"
+        }
+      ]
+    },
+    {
+      "label": "google-deepmind-created",
+      "total_count": 1,
+      "incomplete_results": false,
+      "repositories": [
+        {
+          "full_name": "google-deepmind/arrow",
+          "html_url": "https://github.com/google-deepmind/arrow",
+          "created_at": "2026-11-27T14:05:47Z",
+          "pushed_at": "2026-11-27T14:06:21Z"
+        }
+      ]
+    },
+    {
+      "label": "google-deepmind-pushed",
+      "total_count": 12,
+      "incomplete_results": false,
+      "repositories": [
+        {
+          "full_name": "google-deepmind/mujoco",
+          "html_url": "https://github.com/google-deepmind/mujoco",
+          "created_at": "2021-08-27T12:25:48Z",
+          "pushed_at": "2026-11-27T22:32:51Z"
+        },
+        {
+          "full_name": "google-deepmind/dm_control",
+          "html_url": "https://github.com/google-deepmind/dm_control",
+          "created_at": "2017-12-29T18:13:15Z",
+          "pushed_at": "2026-11-27T21:00:57Z"
+        },
+        {
+          "full_name": "google-deepmind/mujoco_menagerie",
+          "html_url": "https://github.com/google-deepmind/mujoco_menagerie",
+          "created_at": "2022-09-05T10:37:53Z",
+          "pushed_at": "2026-11-27T18:26:55Z"
+        },
+        {
+          "full_name": "google-deepmind/mujoco_playground",
+          "html_url": "https://github.com/google-deepmind/mujoco_playground",
+          "created_at": "2024-12-03T22:39:09Z",
+          "pushed_at": "2026-11-27T11:11:21Z"
+        },
+        {
+          "full_name": "google-deepmind/concordia",
+          "html_url": "https://github.com/google-deepmind/concordia",
+          "created_at": "2023-11-21T13:34:11Z",
+          "pushed_at": "2026-11-27T15:11:26Z"
+        },
+        {
+          "full_name": "google-deepmind/mujoco_warp",
+          "html_url": "https://github.com/google-deepmind/mujoco_warp",
+          "created_at": "2025-03-17T22:35:01Z",
+          "pushed_at": "2026-11-28T02:58:21Z"
+        },
+        {
+          "full_name": "google-deepmind/formal-conjectures",
+          "html_url": "https://github.com/google-deepmind/formal-conjectures",
+          "created_at": "2025-05-12T08:22:05Z",
+          "pushed_at": "2026-11-27T14:26:31Z"
+        },
+        {
+          "full_name": "google-deepmind/torax",
+          "html_url": "https://github.com/google-deepmind/torax",
+          "created_at": "2024-03-05T14:20:02Z",
+          "pushed_at": "2026-11-27T23:41:11Z"
+        },
+        {
+          "full_name": "google-deepmind/cryptids",
+          "html_url": "https://github.com/google-deepmind/cryptids",
+          "created_at": "2026-10-09T10:27:36Z",
+          "pushed_at": "2026-11-28T04:32:37Z"
+        },
+        {
+          "full_name": "google-deepmind/reaf-sim",
+          "html_url": "https://github.com/google-deepmind/reaf-sim",
+          "created_at": "2026-07-28T23:19:02Z",
+          "pushed_at": "2026-11-27T11:11:47Z"
+        },
+        {
+          "full_name": "google-deepmind/habitats",
+          "html_url": "https://github.com/google-deepmind/habitats",
+          "created_at": "2026-11-12T18:36:13Z",
+          "pushed_at": "2026-11-27T21:59:09Z"
+        },
+        {
+          "full_name": "google-deepmind/arrow",
+          "html_url": "https://github.com/google-deepmind/arrow",
+          "created_at": "2026-11-27T14:05:47Z",
+          "pushed_at": "2026-11-27T14:06:21Z"
+        }
+      ]
+    },
+    {
+      "label": "facebookresearch-created",
+      "total_count": 0,
+      "incomplete_results": false,
+      "repositories": []
+    },
+    {
+      "label": "facebookresearch-pushed",
+      "total_count": 12,
+      "incomplete_results": false,
+      "repositories": [
+        {
+          "full_name": "facebookresearch/faiss",
+          "html_url": "https://github.com/facebookresearch/faiss",
+          "created_at": "2017-02-07T16:07:05Z",
+          "pushed_at": "2026-11-27T17:40:11Z"
+        },
+        {
+          "full_name": "facebookresearch/project_superdex",
+          "html_url": "https://github.com/facebookresearch/project_superdex",
+          "created_at": "2026-08-20T02:04:05Z",
+          "pushed_at": "2026-11-28T03:10:40Z"
+        },
+        {
+          "full_name": "facebookresearch/ocean",
+          "html_url": "https://github.com/facebookresearch/ocean",
+          "created_at": "2024-01-06T00:32:59Z",
+          "pushed_at": "2026-11-27T17:20:13Z"
+        },
+        {
+          "full_name": "facebookresearch/spdl",
+          "html_url": "https://github.com/facebookresearch/spdl",
+          "created_at": "2024-06-27T19:57:35Z",
+          "pushed_at": "2026-11-27T20:41:00Z"
+        },
+        {
+          "full_name": "facebookresearch/atlas-lean",
+          "html_url": "https://github.com/facebookresearch/atlas-lean",
+          "created_at": "2026-05-26T22:31:48Z",
+          "pushed_at": "2026-11-28T05:38:51Z"
+        },
+        {
+          "full_name": "facebookresearch/neuroai",
+          "html_url": "https://github.com/facebookresearch/neuroai",
+          "created_at": "2026-04-14T12:59:23Z",
+          "pushed_at": "2026-11-27T15:36:37Z"
+        },
+        {
+          "full_name": "facebookresearch/autoform-bot",
+          "html_url": "https://github.com/facebookresearch/autoform-bot",
+          "created_at": "2026-05-26T22:37:11Z",
+          "pushed_at": "2026-11-28T02:08:52Z"
+        },
+        {
+          "full_name": "facebookresearch/exca",
+          "html_url": "https://github.com/facebookresearch/exca",
+          "created_at": "2024-11-18T14:36:25Z",
+          "pushed_at": "2026-11-27T17:09:01Z"
+        },
+        {
+          "full_name": "facebookresearch/lean_kernel_verify",
+          "html_url": "https://github.com/facebookresearch/lean_kernel_verify",
+          "created_at": "2026-10-20T04:49:48Z",
+          "pushed_at": "2026-11-27T18:43:00Z"
+        },
+        {
+          "full_name": "facebookresearch/metapaired",
+          "html_url": "https://github.com/facebookresearch/metapaired",
+          "created_at": "2023-04-16T10:27:35Z",
+          "pushed_at": "2026-11-27T21:12:50Z"
+        },
+        {
+          "full_name": "facebookresearch/cumbiostats",
+          "html_url": "https://github.com/facebookresearch/cumbiostats",
+          "created_at": "2024-10-04T17:54:41Z",
+          "pushed_at": "2026-11-27T21:19:57Z"
+        },
+        {
+          "full_name": "facebookresearch/metamulti",
+          "html_url": "https://github.com/facebookresearch/metamulti",
+          "created_at": "2021-12-01T23:01:15Z",
+          "pushed_at": "2026-11-27T21:36:58Z"
+        }
+      ]
+    }
+  ],
+  "official_directories": {
+    "planned_pages": 56,
+    "retained_successful_pages": 0,
+    "completed_request_count": null,
+    "status": "source_exception_archived",
+    "reason": "Directory transport stalled; own bounded sweep terminated (exit143). Separate Google monthly blog request timed out after15.010s with zero bytes (exit28). No56-page completion claim.",
+    "automatic_retry": false
+  }
+}

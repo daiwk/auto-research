@@ -1,6 +1,6 @@
 # Recursive self-improvement (RSI)
 
-<!-- source-sha256: b52ed48b2b474e504d777ffba6465528f4be77ac1aa74914005ccf2741bc9568 -->
+<!-- source-sha256: ce0b2a3f7020c4dfbae9b4fe691e0d35ade7568c8cd7e2815843a45b9dc8c5b6 -->
 
 [简体中文](../../evolution/recursive-self-improvement.md)
 
@@ -31,6 +31,12 @@ A model writing a reflection is not enough. **Persist the change**, **inherit it
 ## Papers and evaluation leads
 
 The entries below distinguish local mechanisms from candidates still to review. An external paper is not a local reproduction.
+
+### 2026-11-28: evolving objectives versus programs under a fixed objective
+
+[Habitats](../../agent-research/2611.31160-habitats/README-en.md) keeps environment dynamics fixed while evolving reward programs paired with trained policies. All-policy-by-all-reward cross-fitness distinguishes behavioral diversity. AlphaEvolve instead searches programs under a human-specified evaluation objective. Changing objective text without policy training and external execution does not establish new behavior.
+
+The local implementation is only the paper-defined CPU cross-fitness, niche-survival and SQ/BD/GC arithmetic, with upstream normalization differences documented. There is no Planner/Mutator, policy training or executable Evolve loop. The complete multi-environment/method/seed campaign is not reproduced for high cost, review DONE. First released November23, this historical identity was resolved by a newly added author citation, not a new release today.
 
 ### November23: Experience selection and recursive co-evolution evaluation
 

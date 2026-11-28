@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:habitats/evolve-objectives-not-only-policies": {
+      "source_sha256": "69d681de5bc1a73ac69819610302c7864d2070b1452fc8faf2faf79fab569642",
+      "reviewed": true,
+      "fields": {
+        "question": "Does Habitats evolve policy parameters or the objectives used to train policies?",
+        "answer": "Executable reward programs are the evolutionary objects. New rewards receive newly initialized, actually trained policies; surviving reward-policy pairs retain frozen policy parameters. The Planner chooses exploration and the Mutator implements rewards. Merely changing reward text does not establish new behavior.",
+        "example": "Teaching example: fixed card dynamics can reward clearing the hand or collecting even cards. Different code still requires cross-executing trained policies to establish distinct behavior."
+      }
+    },
+    "qa/agent-research:habitats/survival-is-not-grounding": {
+      "source_sha256": "d69aadabc7ed1b1b8153757ed59467770f396b98fd4cad8213c4efeeada91c94",
+      "reviewed": true,
+      "fields": {
+        "question": "Must a policy survive if it beats random and contributes to GC?",
+        "answer": "No. GC grounding requires valid execution and standardized progress strictly above 0.5. Survival separately requires the raw diagonal to maximize its reward column and strictly exceed the random mean. Grounding need not dominate, and survival need not exceed the grounding threshold.",
+        "example": "Teaching example: self-return three, another policy four and random mean zero/deviation one give grounded progress near three but no niche survival. Repeated grounded profiles count once in GC."
+      }
+    },
+    "qa/agent-research:habitats/fixed-evaluator-versus-evolved-reward": {
+      "source_sha256": "f324e7e147990cc878a748c7342fd98de74c09c62b0284fd9f0fc41732967b72",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are Habitats and AlphaEvolve different forms of code evolution?",
+        "answer": "AlphaEvolve evolves programs under a human-fixed task and evaluator. Habitats fixes environment dynamics but evolves reward objectives, trains policies and compares policy-by-reward profiles. Their changing objects and evaluation coordinates differ; code counts do not establish a capability winner.",
+        "example": "Teaching example: improving matrix multiplication under one evaluator keeps the objective fixed; discovering clearing-versus-collecting objectives in one card environment changes objectives. Both still require executed validation."
+      }
+    },
+    "qa/agent-research:habitats/paper-normalization-and-diagnostic-boundary": {
+      "source_sha256": "6c129395d1d20f66433500f6e9d1ec5557007cc7fc668e7cb1fb237f3f31392f",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the author's normalize_by_columns reproduce Appendix C.2, and what do three diagnostic seeds establish?",
+        "answer": "The pinned source includes random in min/max, maps constants to one and rounds to four decimals. The paper uses population-only normalization, zero constants and epsilon; local mathematics follows the paper explicitly. Paired perturbations cancel around one control matrix, checking formulas without policy training, Planner execution or capability evidence.",
+        "example": "Teaching example: two policies both score five and random scores zero. Source normalization yields one for both; the paper's constant population column yields zero. Comparing those SQ values creates a protocol artifact that three noise seeds cannot repair."
+      }
+    }
+  }
+}

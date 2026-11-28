@@ -4,7 +4,7 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1309 entries from the shared research manifest. English write-ups available: 1309.
+The catalog lists 1310 entries from the shared research manifest. English write-ups available: 1310.
 
 ## Browse by domain
 
@@ -13,7 +13,7 @@ The catalog lists 1309 entries from the shared research manifest. English write-
 - [Structured decisions / System One](system-one.md): 10 catalog entries, 10 English write-ups
 - [Multimodal models](multimodal-models.md): 33 catalog entries, 33 English write-ups
 - [LLM post-training](post-training.md): 303 catalog entries, 303 English write-ups
-- [Agents](agent-research.md): 339 catalog entries, 339 English write-ups
+- [Agents](agent-research.md): 340 catalog entries, 340 English write-ups
 
 ## Read in English
 
@@ -49,6 +49,7 @@ The catalog lists 1309 entries from the shared research manifest. English write-
 - [Sparse Hodge Preference Optimization: Fine-Tuning Language Models toward Alignment beyond Transitive Preferences](../../post-training/2611.30135-shpo/README-en.md)
 - [Optimistic Online Learning for Coding Agents with Aggregate Feedback](../../agent-research/2611.30405-ooas/README-en.md)
 - [MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research](../../agent-research/2611.30011-morse/README-en.md)
+- [Habitats: A Framework for Open-Ended Evolution of Agent Objectives](../../agent-research/2611.31160-habitats/README-en.md)
 - [Weight Coding: Evolving Web-Scale Recommenders through Direct Weight Edits with LLM Agents](../../recommendation-components/2611.29613-weight-coding/README-en.md)
 - [Reliable Behavior Discovery via False Discovery Rate Control](../../foundation-models/2611.27104-disco/README-en.md)
 - [How Far Does Lossless Re-tokenization Move an RLVR Update?](../../post-training/2611.27083-retokenization-update/README-en.md)

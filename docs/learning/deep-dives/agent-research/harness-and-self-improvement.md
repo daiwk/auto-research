@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-11-26 · 84 篇主题资料 / 47 篇重点对照
+[Agent](../index.md) · 更新 2026-11-28 · 85 篇主题资料 / 48 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
@@ -72,6 +72,7 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research](../../../agent-research/2611.30011-morse/README.md) · [原始来源](https://arxiv.org/abs/2611.30011v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、完整实验与成本决定 | 流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。核心是研究—实现—验证的自主Editor与可扩展服务，不是固定候选列表或门控公式本身。 | Harness²固定工具表面，用Propose–Probe–Compose执行对照改当前任务harness，再跨任务保存经验；MORSE在流式记忆设计中把在线文献研究和host批准的感知工具获取纳入搜索，保留当前head迭代。二者不能简化为同一“反思循环”：MORSE的validation概率/成本gate与持续服务扩展有专门契约，Harness²匿名selector也不是其scorer。本地Harness²机制替身与本篇review-only没有可比较Agent分数。 |
 | [RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research](../../../agent-research/2611.32508-recurscibench/README.md) · [原始来源](https://arxiv.org/abs/2611.32508v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验 | RecurSciBench用成对科学建模F/分析A任务作为经验来源，冻结evolved state后在独立G-test评价within-type、cross-type和cross-domain迁移；backbone权重固定，source gain不能代替迁移结论。 | CoEvoBench允许researcher选择权重训练/harness干预，在Visible/Selection/Test中审计开发与选择；RecurSciBench固定权重，测不同系统与经验来源能否迁往新科学任务。前者回答干预选得怎样，后者回答经验在何种条件有效；都要隔离被评policy和gold。 |
 | [HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants](../../../agent-research/2611.34624-home/README.md) · [原始来源](https://arxiv.org/abs/2611.34624v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、同主题比较与边界、完整实验与成本决定 | HoMe把文件记忆构建/检索/回答的失败用session差分追溯到harness，再用结构探索、两级采样和构建复用提高评价效率；本地只执行采样/复用，不执行诊断或优化agent。 | MORSE的Editor可在线研究并经host准入扩展视频感知工具，受accuracy/efficiency阶段合同约束；HoMe固定ReMe运行时，编辑应用harness。二者评价分数与改进对象不可混为一谈。 |
+| [Habitats: A Framework for Open-Ended Evolution of Agent Objectives](../../../agent-research/2611.31160-habitats/README.md) · [原始来源](https://arxiv.org/abs/2611.31160v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、论文与作者源码的区别、同主题比较与边界、完整实验与成本决定 | 固定环境动力学而进化奖励目标，用受训练策略的全种群交叉适应度区分目标引发的真实行为；本地仅论文数学评价和选择。 | AlphaEvolve在人固定评价合同下进化候选程序；Habitats改奖励及其评价坐标，跨代profile不可直接当固定基准比较。两者本库无完整发现能力证据。 |
 
 </div>
 
@@ -304,6 +305,12 @@ RecurSciPipe的F/A联合设计保留科学schema、采样结构与provenance，A
 HoMe的EMA/staleness/count/unresolved-error与uniform项寻找可行动失败，均分不是无偏总体估计。复用须核构建等价、来源指纹和完整快照，只抽一次概率；未知必须重建。MORSE还把文献研究、外部感知服务准入和阶段性质量/延迟gate纳入完整Editor。实现采样或gate都不能替代两篇的语义agent。本地HoMe为L1数值/协议诊断，MORSE仍review-only；完整HoMe10.4h/185.2M token矩阵终态不复现。
 
 对照来源：[home](../../../agent-research/2611.34624-home/README.md) · [morse](../../../agent-research/2611.30011-morse/README.md)
+
+### 目标发现与固定目标程序搜索的评价坐标不同
+
+先分清进化对象与评价合同：AlphaEvolve改程序而人固定目标，Habitats在固定动力学中改奖励、从头训练新策略，用策略×奖励交叉矩阵观察mastery/transfer。SQ/BD依赖本代reward坐标，GC先grounding再量化去重、逐代累加，不是跨代唯一技能数。高质量或高多样性数学值不能替代真实Planner/Mutator与RL。作者源码归一化和固定论文不同，本地必须声明选择的口径；完整小时级CPU/H100及多模型矩阵终态不复现，不以CPU公式核重开实验或晋级Evolve。
+
+对照来源：[habitats](../../../agent-research/2611.31160-habitats/README.md) · [alphaevolve](../../../agent-research/2506.13131-alphaevolve/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -699,9 +706,23 @@ HoMe的EMA/staleness/count/unresolved-error与uniform项寻找可行动失败，
 
     对照来源：[home](../../../agent-research/2611.34624-home/README.md) · [morse](../../../agent-research/2611.30011-morse/README.md)
 
+### Habitats与AlphaEvolve都改代码，为什么不能把它们当同一种自进化？ {#cross-cross-nov28-habitats}
+
+??? note "展开答案与例子"
+
+    **答案：** AlphaEvolve由人固定任务和评价合同，进化满足该评价的程序；Habitats固定环境动力学却进化奖励目标，再训练策略，用全策略×全奖励profile评价学到的行为。它们改变的对象与评价坐标不同，不能比较代码数量就断言能力胜负。
+
+    **教学例子：** 教学例：优化同一个矩阵乘法评价器下的程序是AlphaEvolve式固定目标；在同一纸牌环境发现清手、收牌等不同目标是Habitats式目标发现，两者都还需实际执行验证。
+
+    对照来源：[habitats](../../../agent-research/2611.31160-habitats/README.md) · [alphaevolve](../../../agent-research/2506.13131-alphaevolve/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-28** · 固定环境动力学而进化奖励目标，用受训练策略的全种群交叉适应度区分目标引发的真实行为；本地仅论文数学评价和选择。 完整实验成本过高，不复现（审查 DONE）；数学核非能力证据。
+
+涉及：[habitats](../../../agent-research/2611.31160-habitats/README.md) · [alphaevolve](../../../agent-research/2506.13131-alphaevolve/README.md)
 
 **2026-11-26** · 纯CPU两级case/query采样、EMA与uniform探索、未复查错误衰减、无放回/fair-share分配、选择时间戳；host批准的构建等价、完整来源指纹、最近完成祖先与一次0.6复用抽签。无LLM诊断、harness编辑、真实问答或能力评价；host验证标量不交给被测policy。 完整高成本campaign终态不复现，审查DONE。
 
@@ -855,7 +876,7 @@ HoMe的EMA/staleness/count/unresolved-error与uniform项寻找可行动失败，
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 84 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 85 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -943,6 +964,7 @@ HoMe的EMA/staleness/count/unresolved-error与uniform项寻找可行动失败，
 - [MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research](../../../agent-research/2611.30011-morse/README.md)
 - [RecurSciBench: Benchmarking Recursive Self-Improvement in Data-Driven Scientific Research](../../../agent-research/2611.32508-recurscibench/README.md)
 - [HoMe: Toward Practical Harness Optimization of Memory Systems for AI Assistants](../../../agent-research/2611.34624-home/README.md)
+- [Habitats: A Framework for Open-Ended Evolution of Agent Objectives](../../../agent-research/2611.31160-habitats/README.md)
 
 </details>
 

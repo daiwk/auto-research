@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-28",
+  "all_sources_exhaustive": false,
+  "accepted": ["agent-research:habitats"],
+  "selection_class": "historical identity completed from a new official author citation, not a new first release today",
+  "repository_primary_observations": [
+    {
+      "repository": "google-deepmind/habitats",
+      "source_url": "https://github.com/google-deepmind/habitats",
+      "paper_arxiv_identity": "2611.31160",
+      "first_published_at": "2026-11-23T18:23:16Z",
+      "announced_on": "2026-11-24",
+      "new_evidence": "15 new README citation lines associate the previously source-only framework with a formal paper. The readable fixed arXiv v1 independently establishes method, byline and arXiv date; OpenReview earlier date unresolved.",
+      "decision": "CPU-only paper-defined cross-fitness, survivor and SQ/BD/GC L1 component; complete experiments not reproduced for high cost, review DONE",
+      "read_scope": "fixed v1 methods, evaluation, appendices and pinned upstream metrics source; details in agent-primary-review.json"
+    },
+    {
+      "repository": "google-deepmind/arrow",
+      "source_url": "https://github.com/google-deepmind/arrow",
+      "title": "One 4RROW, Every Target: Unified 4D Reconstruction and Recognition",
+      "repository_created_at": "2026-11-27T14:05:47Z",
+      "paper_arxiv_identity": null,
+      "first_published_at": null,
+      "decision": "source_exception_archived",
+      "read_scope": "official README and static index, not paper full text",
+      "reason": "Official index arXiv link disabled/coming soon; no verified paper/date or released model-training code. Possible OpenReview locator cannot be verified through challenge/403. Repository creation and BibTeX year are not publication evidence. No invented numerical operator or high-cost full-paper DONE claim.",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "media_downloads": 0
+    },
+    {
+      "repository": "google-deepmind/cryptids",
+      "source_url": "https://github.com/google-deepmind/cryptids",
+      "paper_arxiv_identity": "2610.22603",
+      "decision": "already_cataloged_source_artifact_update",
+      "reason": "README changes proof artifacts for Brocard/weak Collatz/Legendre examples, still citing existing October paper. Source update is not a new paper; no expensive campaign reopened.",
+      "baseline_capture": ".cache/nov26-latest/priority-readmes/google-deepmind--cryptids.md",
+      "read_scope": "README diff only; not new theorem correctness verification"
+    },
+    {
+      "repository": "facebookresearch/JEP-AV",
+      "source_url": "https://github.com/facebookresearch/JEP-AV",
+      "paper_arxiv_identity": null,
+      "decision": "source_only_placeholder",
+      "reason": "README still Coming Soon; no verified method, paper identity or date. No duplicate or invented JEPA implementation.",
+      "read_scope": "README identity observation"
+    },
+    {
+      "repository": "facebookresearch/lean_kernel_verify",
+      "source_url": "https://github.com/facebookresearch/lean_kernel_verify",
+      "paper_arxiv_identity": null,
+      "decision": "source_framework_no_new_verified_paper",
+      "reason": "Inspected README documents a verification framework but provides no new paper identity. Did not execute upstream code or claim verification safety.",
+      "read_scope": "README identity observation"
+    }
+  ],
+  "monorepo_commit_patch_review": [
+    {"sha": "215d34f3e54ac2151a866002fdbe6243a6a04631", "date": "2026-11-27T15:57:24Z", "decision": "maintenance_not_new_paper", "reason": "Uboreshaji_Modeli detection class exclusion case/whitespace behavior and tests; no new paper identity."},
+    {"sha": "947731333bf4f4bfdc58f1276b618f357d1c9f70", "date": "2026-11-27T14:39:40Z", "decision": "maintenance_not_new_paper", "reason": "cold_posterior_bnn prior_test tolerance-only change. Not imported into this project, no test assertions weakened."}
+  ],
+  "source_exceptions": [
+    {"source": "official Google/Meta directory sweep", "decision": "source_exception_archived", "retained_successful_pages": 0, "reason": "Transport stalled; own sweep stopped with exit143. Planned56 does not mean56 captured/read. Separate Google monthly blog request timed out after15.010seconds with zero bytes/exit28.", "automatic_retry": false},
+    {"source": "4RROW possible OpenReview locator fEvjFggtvd", "decision": "identity_unresolved", "reason": "Official forum/PDF/API challenge/403; secondary search locator is not verified identity, withdrawal status or publication date.", "automatic_retry": false}
+  ],
+  "watermark_advanced": false,
+  "review_watermark_unchanged": "2026-11-15"
+}

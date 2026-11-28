@@ -69,7 +69,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">5246 个问题 · 1309 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">5250 个问题 · 1310 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:budgeted-submapl" data-paper-title="Compute-Aware Submodular Online Learning in Open Multi-Agent Systems" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Compute-Aware Submodular Online Learning in Open Multi-Agent Systems Agent East China University of Science and Technology 2026-11-25 协作覆盖的重叠贡献具有边际递减性，但更新每个agent每个action的收益可能超在线预算。论文在看当前收益之前，只用当前分类策略与查询预算分配包含概率，再用固定基数依赖舍入精确选个agent-action。查询选择与联合action采样独立，对所查反事实边际收益做逆概率校正，再KL mirror-ascent。未被查询的估计为0，不等于真实边际为0。 没有依据标为成本过高。本轮只承接小型CPU数学核，完整模拟/迁移未执行，标not_run_scope_limited、full_experiment_review_done=false；component_only / L1 CPU多智能体协调数学内核；不是LLM Agent或RSI能力复现。完整便宜模拟未承接，不虚构高成本终态：not_run_scope_limited / full_experiment_review_done=false；无Evolve晋级。标准库执行clipped平方根分配、成对依赖舍入、仅Q次oracle查询、IPW与log-space KL更新。两个随机流分别驱动舍入/联合action；  Agent策略学习 预算化多智能体协调数学核 Agent 交互策略学习：把轨迹反馈变成更新 查询预算Q限制的是执行动作还是梯度反馈？ 限制当前轮可评估的agent-action反事实边际数量；所有active agent仍各采样一个执行action。未查询坐标估计为0不是实际收益为0，也不是停止该agent。 教学例：两agent各两action共4坐标，Q=2只问2个边际，但两agent仍各执行一个动作。 2026-11-27">
@@ -1448,6 +1448,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：裁剪后权重[0.8,1.2,1.2]均值为1.0667；再除均值会改变既定损失，且不再严格保留裁剪下界。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式、与已有方法的关系、结果、负控与边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.32590v1">原论文</a> · <a href="../../recommendation-components/2611.32590-lazunirec/">实现解读</a> · <a href="#qa-c113c8f6cda0b2b6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:habitats" data-paper-title="Habitats: A Framework for Open-Ended Evolution of Agent Objectives" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Habitats: A Framework for Open-Ended Evolution of Agent Objectives Agent Google DeepMind 2026-11-23 固定任务通常先由人定义奖励，再训练策略。Habitats同时维护奖励程序与其训练策略，让奖励目标本身成为进化对象。种群内每个策略在每个奖励下交叉评估，观察学会程度、迁移与行为差异；Planner根据种群健康选父代与变异指令，Mutator将指令实现为可执行奖励。仅新奖励对应的策略从头训练，存活策略冻结保留。奖励代码不同不等于学到的行为不同。 完整实验成本过高，不复现（审查 DONE），不自动重试、不晋级 Evolve。诊断的两个rollout以正负小扰动抵消来核公式；component_only / L1 CPU 交叉适应度与选择数学核；不是完整 Habitats、LLM Planner/Mutator 或 Agent/RSI 能力复现。完整实验成本过高，不复现（审查 DONE），不自动重试、不晋级 Evolve。本地接受显式的 N×N×E episode-return数组或已聚合F，真实执行均值、论文归一化、生存选择和SQ/BD/GC。它不生成回报、训练策略或调用LLM，也没有把固定奖励/金答案交给被评估Agent；本轮根本没有被评估Agent。  自进化 奖励目标进化 交叉适应度数学核 Agent 运行流程与自进化：改的是哪一层 Habitats进化的是策略参数，还是训练策略所用的目标？ 进化对象是可执行奖励程序。新奖励配新初始化策略并实际训练；存活的奖励-策略对保留且策略参数冻结。Planner决定探索什么，Mutator实现奖励；不能把随机改奖励文本就当发现新行为。 教学例：同一纸牌动力学可分别奖励清空手牌和收集偶数牌；两段代码不同仍须用训练后的策略交叉执行，才能知道行为是否真的不同。 2026-11-28">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-habitats-71946be7" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-882d5fc0cdaaf532">Habitats进化的是策略参数，还是训练策略所用的目标？</h2>
+<p class="ar-learning-paper"><a href="./?paper=agent-research%3Ahabitats">Habitats: A Framework for Open-Ended Evolution of Agent Objectives</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-28 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>进化对象是可执行奖励程序。新奖励配新初始化策略并实际训练；存活的奖励-策略对保留且策略参数冻结。Planner决定探索什么，Mutator实现奖励；不能把随机改奖励文本就当发现新行为。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一纸牌动力学可分别奖励清空手牌和收集偶数牌；两段代码不同仍须用训练后的策略交叉执行，才能知道行为是否真的不同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、论文与作者源码的区别、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31160v1">原论文</a> · <a href="../../agent-research/2611.31160-habitats/">实现解读</a> · <a href="#qa-882d5fc0cdaaf532">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:habitats" data-paper-title="Habitats: A Framework for Open-Ended Evolution of Agent Objectives" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Habitats: A Framework for Open-Ended Evolution of Agent Objectives Agent Google DeepMind 2026-11-23 固定任务通常先由人定义奖励，再训练策略。Habitats同时维护奖励程序与其训练策略，让奖励目标本身成为进化对象。种群内每个策略在每个奖励下交叉评估，观察学会程度、迁移与行为差异；Planner根据种群健康选父代与变异指令，Mutator将指令实现为可执行奖励。仅新奖励对应的策略从头训练，存活策略冻结保留。奖励代码不同不等于学到的行为不同。 完整实验成本过高，不复现（审查 DONE），不自动重试、不晋级 Evolve。诊断的两个rollout以正负小扰动抵消来核公式；component_only / L1 CPU 交叉适应度与选择数学核；不是完整 Habitats、LLM Planner/Mutator 或 Agent/RSI 能力复现。完整实验成本过高，不复现（审查 DONE），不自动重试、不晋级 Evolve。本地接受显式的 N×N×E episode-return数组或已聚合F，真实执行均值、论文归一化、生存选择和SQ/BD/GC。它不生成回报、训练策略或调用LLM，也没有把固定奖励/金答案交给被评估Agent；本轮根本没有被评估Agent。  自进化 奖励目标进化 交叉适应度数学核 Agent 运行流程与自进化：改的是哪一层 超过随机策略并计入GC，就一定能存活吗？ 不一定。GC的grounding要求奖励有效且标准化进步L严格大于0.5；生存另要求原始F的自身对角值是该奖励列最高，并严格超过随机均值。GC不要求列最高，生存也不要求L大于0.5。 教学例：自身回报3、另一策略4、随机均值0/标准差1，L约3可grounded，但自身不是列最高，不能存活；重复grounded profile只计一次GC。 2026-11-28">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-58fe789c9e80abee">超过随机策略并计入GC，就一定能存活吗？</h2>
+<p class="ar-learning-paper"><a href="./?paper=agent-research%3Ahabitats">Habitats: A Framework for Open-Ended Evolution of Agent Objectives</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-28 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一定。GC的grounding要求奖励有效且标准化进步L严格大于0.5；生存另要求原始F的自身对角值是该奖励列最高，并严格超过随机均值。GC不要求列最高，生存也不要求L大于0.5。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：自身回报3、另一策略4、随机均值0/标准差1，L约3可grounded，但自身不是列最高，不能存活；重复grounded profile只计一次GC。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、论文与作者源码的区别、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31160v1">原论文</a> · <a href="../../agent-research/2611.31160-habitats/">实现解读</a> · <a href="#qa-58fe789c9e80abee">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:habitats" data-paper-title="Habitats: A Framework for Open-Ended Evolution of Agent Objectives" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Habitats: A Framework for Open-Ended Evolution of Agent Objectives Agent Google DeepMind 2026-11-23 固定任务通常先由人定义奖励，再训练策略。Habitats同时维护奖励程序与其训练策略，让奖励目标本身成为进化对象。种群内每个策略在每个奖励下交叉评估，观察学会程度、迁移与行为差异；Planner根据种群健康选父代与变异指令，Mutator将指令实现为可执行奖励。仅新奖励对应的策略从头训练，存活策略冻结保留。奖励代码不同不等于学到的行为不同。 完整实验成本过高，不复现（审查 DONE），不自动重试、不晋级 Evolve。诊断的两个rollout以正负小扰动抵消来核公式；component_only / L1 CPU 交叉适应度与选择数学核；不是完整 Habitats、LLM Planner/Mutator 或 Agent/RSI 能力复现。完整实验成本过高，不复现（审查 DONE），不自动重试、不晋级 Evolve。本地接受显式的 N×N×E episode-return数组或已聚合F，真实执行均值、论文归一化、生存选择和SQ/BD/GC。它不生成回报、训练策略或调用LLM，也没有把固定奖励/金答案交给被评估Agent；本轮根本没有被评估Agent。  自进化 奖励目标进化 交叉适应度数学核 Agent 运行流程与自进化：改的是哪一层 Habitats与AlphaEvolve都改代码，为什么不能把它们当同一种自进化？ AlphaEvolve由人固定任务和评价合同，进化满足该评价的程序；Habitats固定环境动力学却进化奖励目标，再训练策略，用全策略×全奖励profile评价学到的行为。它们改变的对象与评价坐标不同，不能比较代码数量就断言能力胜负。 教学例：优化同一个矩阵乘法评价器下的程序是AlphaEvolve式固定目标；在同一纸牌环境发现清手、收牌等不同目标是Habitats式目标发现，两者都还需实际执行验证。 2026-11-28">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-944dfcd7c2bd219c">Habitats与AlphaEvolve都改代码，为什么不能把它们当同一种自进化？</h2>
+<p class="ar-learning-paper"><a href="./?paper=agent-research%3Ahabitats">Habitats: A Framework for Open-Ended Evolution of Agent Objectives</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-28 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>AlphaEvolve由人固定任务和评价合同，进化满足该评价的程序；Habitats固定环境动力学却进化奖励目标，再训练策略，用全策略×全奖励profile评价学到的行为。它们改变的对象与评价坐标不同，不能比较代码数量就断言能力胜负。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：优化同一个矩阵乘法评价器下的程序是AlphaEvolve式固定目标；在同一纸牌环境发现清手、收牌等不同目标是Habitats式目标发现，两者都还需实际执行验证。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、论文与作者源码的区别、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31160v1">原论文</a> · <a href="../../agent-research/2611.31160-habitats/">实现解读</a> · <a href="#qa-944dfcd7c2bd219c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:habitats" data-paper-title="Habitats: A Framework for Open-Ended Evolution of Agent Objectives" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Habitats: A Framework for Open-Ended Evolution of Agent Objectives Agent Google DeepMind 2026-11-23 固定任务通常先由人定义奖励，再训练策略。Habitats同时维护奖励程序与其训练策略，让奖励目标本身成为进化对象。种群内每个策略在每个奖励下交叉评估，观察学会程度、迁移与行为差异；Planner根据种群健康选父代与变异指令，Mutator将指令实现为可执行奖励。仅新奖励对应的策略从头训练，存活策略冻结保留。奖励代码不同不等于学到的行为不同。 完整实验成本过高，不复现（审查 DONE），不自动重试、不晋级 Evolve。诊断的两个rollout以正负小扰动抵消来核公式；component_only / L1 CPU 交叉适应度与选择数学核；不是完整 Habitats、LLM Planner/Mutator 或 Agent/RSI 能力复现。完整实验成本过高，不复现（审查 DONE），不自动重试、不晋级 Evolve。本地接受显式的 N×N×E episode-return数组或已聚合F，真实执行均值、论文归一化、生存选择和SQ/BD/GC。它不生成回报、训练策略或调用LLM，也没有把固定奖励/金答案交给被评估Agent；本轮根本没有被评估Agent。  自进化 奖励目标进化 交叉适应度数学核 Agent 运行流程与自进化：改的是哪一层 直接调用作者normalize_by_columns能复现论文C.2吗，三seed诊断又证明什么？ 固定作者commit把random纳入min/max、常数列映1且round4；论文只在种群策略内归一化、常数列0并保留epsilon，本地明确按论文核。诊断的正负扰动成对抵消，只核同一矩阵上的公式，不训练策略、不验证Planner或能力提升。 教学例：两策略某奖励都得5、随机得0，作者归一化会给两策略1；论文列全相同则为0。把这两个SQ混比会制造差异，换三个噪声seed也不能消除口径错误。 2026-11-28">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-8d8338a6d4041edd">直接调用作者normalize_by_columns能复现论文C.2吗，三seed诊断又证明什么？</h2>
+<p class="ar-learning-paper"><a href="./?paper=agent-research%3Ahabitats">Habitats: A Framework for Open-Ended Evolution of Agent Objectives</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-28 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>固定作者commit把random纳入min/max、常数列映1且round4；论文只在种群策略内归一化、常数列0并保留epsilon，本地明确按论文核。诊断的正负扰动成对抵消，只核同一矩阵上的公式，不训练策略、不验证Planner或能力提升。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两策略某奖励都得5、随机得0，作者归一化会给两策略1；论文列全相同则为0。把这两个SQ混比会制造差异，换三个噪声seed也不能消除口径错误。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射、结果、负控与边界、论文与作者源码的区别、同主题比较与边界、完整实验与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.31160v1">原论文</a> · <a href="../../agent-research/2611.31160-habitats/">实现解读</a> · <a href="#qa-8d8338a6d4041edd">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:morse" data-paper-title="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MORSE: Optimizing Streaming Memory Design via Open-World Auto-Research Agent Carnegie Mellon University 2026-11-23 流式视频记忆必须在不知道未来query时单遍决定保留哪些帧。MORSE让冻结VLM外的Editor从训练trace归因反复失败，主动搜索论文、model cards与code，再改write/read harness；缺感知能力可请求新模型，但需host核查license、训练来源和成本后部署。核心是研究—实现—验证的自主Editor与可扩展服务，不是固定候选列表或门控公式本身。20轮accuracy后5轮efficiency。 成本过高，不复现（审查 DONE）；deferred_high_cost / 仅资料收录，未实现、未运行。2026-11-23首发、2026-11-24发现/审查，不称11月24日新首发；不接入Evolve晋级。仅资料收录与成本审查：固定v1、来源/元数据、访问边界、成本和同主题比较。没有本地算法模块、Editor、研究broker、视频服务、harness代码演化、benchmark、GPU试跑或Evolve operator。不能实现几个gate后称已复现MORSE，也不需要给review-only制造三seed指标或GPU receipt。  执行框架与自改进 系统成本审查 Agent 运行流程与自进化：改的是哪一层 MORSE比已有闭环harness自改进多了什么？ Editor不仅靠已有知识想修复，还从反复失败出发在线查论文/模型/code，并能请求host批准的新感知能力；核心不是多写一个反思提示。 教学例：短暂手物交互反复漏记，Editor查到动作分类模型后请求服务，再改记忆的写入和读取方式。 2026-11-24">

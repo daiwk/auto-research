@@ -418,6 +418,7 @@
 
 ### Harness 与自我改进
 
+- [Habitats: A Framework for Open-Ended Evolution of Agent Objectives](../2611.31160-habitats/README.md)（`habitats`）：固定任务通常先由人定义奖励，再训练策略。Habitats同时维护奖励程序与其训练策略，让奖励目标本身成为进化对象。
 - [MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks](../2611.15754-multiloop/README.md)（`multiloop`）：同样的底层模型，提示、工具、子Agent通信和终止策略不同，效果也可能不同。MULTILOOP检验自动coding agent能否从执行轨迹中诊断并修复多Agent系统：优化器读取训练分数、orchestrator／subagent全部轨迹以及既往代码改动，更新harness，重新评估后继续。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement](../2610.36826-ruharness/README.md)（`ruharness`）：Agent解决早期缺陷后，固定rubric可能继续奖励已经会做的事，却遗漏后来出现的行为问题。RuHarness交替进化rubric与harness：从执行轨迹发现可检验的标准，先让看不到任务最终结果的judge判断Satisfied、Violated或N/A，再把这些行为判断与外部任务结果统计关联，找出仍能解释当前失败的标准。
 - [Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?](../2610.37276-evalalloc/README.md)（`evalalloc`）：搜索过程需要便宜但可比较的反馈，最后选冠军则需要更精确的实测确认。EvalAlloc先完整评测少量warmup候选，选出共享信息项并拟合响应模型；搜索时固定item参照，只推断新候选参数，再把真实观测与未观测预测补全。

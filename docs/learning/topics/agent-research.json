@@ -310,7 +310,8 @@
         "agent-research:transport-safe-audit",
         "agent-research:morse",
         "agent-research:recurscibench",
-        "agent-research:home"
+        "agent-research:home",
+        "agent-research:habitats"
       ]
     },
     {

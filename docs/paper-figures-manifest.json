@@ -18010,5 +18010,20 @@
     "score": 0,
     "error": "",
     "asset_sha256": "5dd6842d77941dbc399729b5607caa08abb11c4c6feb9f4c36eabe1a74bee290"
+  },
+  {
+    "page": "docs/agent-research/2611.31160-habitats/README.md",
+    "paper_url": "https://arxiv.org/abs/2611.31160v1",
+    "arxiv_id": "2611.31160",
+    "figure": "Figure1",
+    "original_caption": "",
+    "source_url": "https://arxiv.org/pdf/2611.31160v1",
+    "extraction": "original_source_reviewed",
+    "asset": "docs/agent-research/2611.31160-habitats/assets/paper-figure-01.png",
+    "width": 808,
+    "height": 578,
+    "score": 0,
+    "error": "",
+    "asset_sha256": "5cdf70c3f192d78c6b2246a4aaf7fe4939bd9d2aa1e098cba3a0647482953bf4"
   }
 ]

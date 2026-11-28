@@ -1,0 +1,113 @@
+{
+  "schema_version": 2,
+  "batch": "2026-11-28-priority-source-followup",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "device": "cpu",
+  "accelerator": "CPU",
+  "source_sha256": {
+    "scripts/run_nov28_habitats_component.py": "58b0d49da0bc7b594ae7e44312caf5e61bcf41b15ef2b79f8e9d5d336e53d26b",
+    "scripts/run_nov18_latest_components.py": "0fe50e8e554f6663b3c8c179654400d10bfbb557ceb9cefb9880da78f164b7c1",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "docs/research-audits/nov28-latest/preflight.json": "2c6dcb5257f12d1f6d6d4ee3d40261a465722b6e7f55e8516cd001f6543aa918",
+    "src/auto_research/agent_research/habitats.py": "558b69caa7da429d6b101b5218671a7dbc582b6884951c935335d647aeba6fd5"
+  },
+  "code_commit": "7d69c2c8116a03135d29548260b61f3d68493b69",
+  "components": {
+    "habitats": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "episode_mean_matches_control": true,
+            "niche_ties_and_random_strictness": true,
+            "constant_column_is_zero": true,
+            "quality_and_diversity_finite": true,
+            "duplicate_profiles_reduce_diversity": true,
+            "constant_population_has_zero_quality_diversity": true,
+            "invalid_rewards_not_grounded": true,
+            "coverage_sums_generation_counts": true,
+            "input_not_mutated": true
+          },
+          "metrics": {
+            "specialist_quality": 0.6666666647222222,
+            "behavioral_diversity": 0.5333333445066665,
+            "grounded_coverage": 3,
+            "survivor_count": 3,
+            "control_mean_max_error": 0.0
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "episode_mean_matches_control": true,
+            "niche_ties_and_random_strictness": true,
+            "constant_column_is_zero": true,
+            "quality_and_diversity_finite": true,
+            "duplicate_profiles_reduce_diversity": true,
+            "constant_population_has_zero_quality_diversity": true,
+            "invalid_rewards_not_grounded": true,
+            "coverage_sums_generation_counts": true,
+            "input_not_mutated": true
+          },
+          "metrics": {
+            "specialist_quality": 0.6666666647222222,
+            "behavioral_diversity": 0.5333333445066665,
+            "grounded_coverage": 3,
+            "survivor_count": 3,
+            "control_mean_max_error": 0.0
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "checks": {
+            "episode_mean_matches_control": true,
+            "niche_ties_and_random_strictness": true,
+            "constant_column_is_zero": true,
+            "quality_and_diversity_finite": true,
+            "duplicate_profiles_reduce_diversity": true,
+            "constant_population_has_zero_quality_diversity": true,
+            "invalid_rewards_not_grounded": true,
+            "coverage_sums_generation_counts": true,
+            "input_not_mutated": true
+          },
+          "metrics": {
+            "specialist_quality": 0.6666666647222222,
+            "behavioral_diversity": 0.5333333445066665,
+            "grounded_coverage": 3,
+            "survivor_count": 3,
+            "control_mean_max_error": 0.0
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    }
+  },
+  "elapsed_seconds": 0.05964387534186244,
+  "diagnostic_only": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiments_executed": false,
+  "pretrained_model_calls": 0,
+  "api_calls": 0,
+  "automatic_retry": false
+}

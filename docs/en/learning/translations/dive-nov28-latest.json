@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:habitats": {
+      "source_sha256": "8aff2756ee1d3487977cc1ba99791c77008aa82e55260b576cad69beb31b8a3f",
+      "reviewed": true,
+      "fields": {
+        "position": "Evolve reward objectives under fixed dynamics and compare trained-policy cross-fitness profiles; the local scope is paper mathematics and selection only.",
+        "tradeoff": "AlphaEvolve evolves candidate programs under a human-fixed evaluator. Habitats changes rewards and evaluation coordinates; cross-generation profiles are not a fixed benchmark. Neither local entry establishes full discovery capability."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/38": {
+      "source_sha256": "cb626e3e6711aee23b928a21fd03ef57ba35e954748d7b10fbbde8b805c6d08d",
+      "reviewed": true,
+      "fields": {
+        "title": "Objective discovery and fixed-objective program search use different evaluation coordinates",
+        "body": "Separate the evolutionary object from its evaluator. AlphaEvolve changes programs under a fixed human objective; Habitats changes rewards under fixed dynamics and trains new policies, using policy-by-reward profiles for mastery and transfer. SQ/BD use within-generation coordinates. GC grounds, quantizes and deduplicates within each generation before summing, not counting unique skills across time. Numerical quality/diversity does not replace real Planner/Mutator or RL. The pinned source and paper normalize differently, so the chosen convention must be explicit. The hour-scale CPU/H100 and multi-model campaign remains terminally not reproduced; a CPU kernel neither reopens it nor qualifies for Evolve."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-nov28-habitats": {
+      "source_sha256": "30d1e3a389ffa6b7ef4201ea56b7204a5c0971843a452b6aa40c9d7240bc2dc6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are Habitats and AlphaEvolve different forms of code evolution?",
+        "answer": "AlphaEvolve evolves programs under a human-fixed task and evaluator. Habitats fixes environment dynamics but evolves reward objectives, trains policies and compares policy-by-reward profiles. Their changing objects and evaluation coordinates differ; code counts do not establish a capability winner.",
+        "example": "Teaching example: improving matrix multiplication under one evaluator keeps the objective fixed; discovering clearing-versus-collecting objectives in one card environment changes objectives. Both still require executed validation."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-28/38": {
+      "source_sha256": "49eaa386f69ba4f7d61160dbb1a674998ff1816256cd48bb2c643076081b5e0f",
+      "reviewed": true,
+      "fields": {
+        "summary": "Historical Google identity completed via a new author citation. Paper-defined CPU mathematics only; the full campaign is not reproduced for cost, review DONE, without capability/Evolve promotion."
+      }
+    }
+  }
+}
